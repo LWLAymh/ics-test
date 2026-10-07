@@ -11,12 +11,12 @@
 
 | 材料 | 题数 |
 |---|---|
-| 2017期末-无答案 | 28 |
-| 2025Lab测验-无答案 | 50 |
+| 2017期末 | 28 |
+| 2025Lab测验 | 50 |
 
-## 2017期末-无答案
+## 2017期末
 
-### 2017期末-无答案 · 第一题 2
+### 2017期末 · 第一题 2
 
 - 题型：`single-choice`　模块：`data_representation`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/56.md`
@@ -33,7 +33,7 @@
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第二题 2
+### 2017期末 · 第二题 2
 
 - 题型：`fill`　模块：`data_representation`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/338.md`
@@ -65,7 +65,7 @@
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 1
+### 2017期末 · 第一题 1
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/53.md`
@@ -83,7 +83,7 @@
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 3
+### 2017期末 · 第一题 3
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/59.md`
@@ -101,7 +101,7 @@
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第二题 1
+### 2017期末 · 第二题 1
 
 - 题型：`fill`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/258.md`
@@ -209,7 +209,7 @@ char（`movzbl 16(%rcx), %eax` ⇒ `movsbl`），即 `y = u->b.c`。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 4
+### 2017期末 · 第一题 4
 
 - 题型：`single-choice`　模块：`processor_arch`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/64.md`
@@ -226,7 +226,7 @@ char（`movzbl 16(%rcx), %eax` ⇒ `movsbl`），即 `y = u->b.c`。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第三题
+### 2017期末 · 第三题
 
 - 题型：`fill`　模块：`processor_arch`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/352.md`
@@ -274,7 +274,7 @@ c) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 5
+### 2017期末 · 第一题 5
 
 - 题型：`single-choice`　模块：`memory_hierarchy`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/73.md`
@@ -292,7 +292,7 @@ c) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 6
+### 2017期末 · 第一题 6
 
 - 题型：`single-choice`　模块：`memory_hierarchy`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/79.md`
@@ -315,7 +315,7 @@ c) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 7
+### 2017期末 · 第一题 7
 
 - 题型：`single-choice`　模块：`compilation_linking`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/90.md`
@@ -350,7 +350,7 @@ $ ./a.out
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 8
+### 2017期末 · 第一题 8
 
 - 题型：`single-choice`　模块：`compilation_linking`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/110.md`
@@ -368,7 +368,7 @@ $ ./a.out
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第四题
+### 2017期末 · 第四题
 
 - 题型：`short-answer`　模块：`compilation_linking`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/380.md`
@@ -448,7 +448,7 @@ alloc
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 9
+### 2017期末 · 第一题 9
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/119.md`
@@ -477,7 +477,7 @@ printf("%d\n", ++count);
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 10
+### 2017期末 · 第一题 10
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/134.md`
@@ -494,7 +494,7 @@ printf("%d\n", ++count);
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 14
+### 2017期末 · 第一题 14
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/160.md`
@@ -511,7 +511,7 @@ printf("%d\n", ++count);
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 15
+### 2017期末 · 第一题 15
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/169.md`
@@ -545,7 +545,7 @@ return 0;
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第五题
+### 2017期末 · 第五题
 
 - 题型：`fill`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/439.md`
@@ -665,7 +665,7 @@ handler 再补一次同名信号，最终值：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 11
+### 2017期末 · 第一题 11
 
 - 题型：`single-choice`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/140.md`
@@ -682,7 +682,7 @@ handler 再补一次同名信号，最终值：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 12
+### 2017期末 · 第一题 12
 
 - 题型：`single-choice`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/145.md`
@@ -699,7 +699,7 @@ handler 再补一次同名信号，最终值：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 13
+### 2017期末 · 第一题 13
 
 - 题型：`single-choice`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/155.md`
@@ -716,7 +716,7 @@ handler 再补一次同名信号，最终值：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第六题
+### 2017期末 · 第六题
 
 - 题型：`fill`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/513.md`
@@ -879,7 +879,7 @@ TLB：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 16
+### 2017期末 · 第一题 16
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/195.md`
@@ -899,7 +899,7 @@ TLB：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 17
+### 2017期末 · 第一题 17
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/202.md`
@@ -916,7 +916,7 @@ TLB：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 18
+### 2017期末 · 第一题 18
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/208.md`
@@ -933,7 +933,7 @@ TLB：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第七题
+### 2017期末 · 第七题
 
 - 题型：`multiple-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/596.md`
@@ -979,7 +979,7 @@ close EOF 9
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 19
+### 2017期末 · 第一题 19
 
 - 题型：`single-choice`　模块：`concurrent_programming`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/215.md`
@@ -996,7 +996,7 @@ close EOF 9
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第一题 20
+### 2017期末 · 第一题 20
 
 - 题型：`single-choice`　模块：`concurrent_programming`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/226.md`
@@ -1064,7 +1064,7 @@ printf("%d\n", y);
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2017期末-无答案 · 第八题
+### 2017期末 · 第八题
 
 - 题型：`short-answer`　模块：`concurrent_programming`
 - 数据位置：`question-bank/_curated/期末/2017期末-无答案/638.md`
@@ -1130,9 +1130,9 @@ int main(int argc, char **argv)
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-## 2025Lab测验-无答案
+## 2025Lab测验
 
-### 2025Lab测验-无答案 · Lab 任务 11
+### 2025Lab测验 · Lab 任务 11
 
 - 题型：`single-choice`　模块：`data_representation`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/126.md`
@@ -1170,7 +1170,7 @@ tmax) | (~overflow & raw_result);
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 12
+### 2025Lab测验 · Lab 任务 12
 
 - 题型：`single-choice`　模块：`data_representation`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/155.md`
@@ -1205,7 +1205,7 @@ int bitParity(int x) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 13
+### 2025Lab测验 · Lab 任务 13
 
 - 题型：`single-choice`　模块：`data_representation`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/177.md`
@@ -1248,7 +1248,7 @@ unsigned float_half(unsigned uf) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 14
+### 2025Lab测验 · Lab 任务 14
 
 - 题型：`single-choice`　模块：`data_representation`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/219.md`
@@ -1281,7 +1281,7 @@ int byteSwap(int x, int n, int m) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 15
+### 2025Lab测验 · Lab 任务 15
 
 - 题型：`single-choice`　模块：`data_representation`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/245.md`
@@ -1311,7 +1311,7 @@ int oddBits(void) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 17
+### 2025Lab测验 · Lab 任务 17
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/277.md`
@@ -1329,7 +1329,7 @@ int oddBits(void) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 18
+### 2025Lab测验 · Lab 任务 18
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/286.md`
@@ -1361,7 +1361,7 @@ int oddBits(void) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 19
+### 2025Lab测验 · Lab 任务 19
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/311.md`
@@ -1397,7 +1397,7 @@ int oddBits(void) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 20
+### 2025Lab测验 · Lab 任务 20
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/364.md`
@@ -1435,7 +1435,7 @@ int oddBits(void) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 22
+### 2025Lab测验 · Lab 任务 22
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/496.md`
@@ -1453,7 +1453,7 @@ int oddBits(void) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 23
+### 2025Lab测验 · Lab 任务 23
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/504.md`
@@ -1472,7 +1472,7 @@ int oddBits(void) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 24
+### 2025Lab测验 · Lab 任务 24
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/515.md`
@@ -1501,7 +1501,7 @@ int oddBits(void) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 25
+### 2025Lab测验 · Lab 任务 25
 
 - 题型：`single-choice`　模块：`machine_prog`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/531.md`
@@ -1556,7 +1556,7 @@ void touch3(char *sval)
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 26
+### 2025Lab测验 · Lab 任务 26
 
 - 题型：`single-choice`　模块：`processor_arch`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/598.md`
@@ -1599,7 +1599,7 @@ u8 alufun = [
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 27
+### 2025Lab测验 · Lab 任务 27
 
 - 题型：`single-choice`　模块：`processor_arch`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/632.md`
@@ -1618,7 +1618,7 @@ u8 alufun = [
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 28
+### 2025Lab测验 · Lab 任务 28
 
 - 题型：`single-choice`　模块：`processor_arch`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/638.md`
@@ -1666,7 +1666,7 @@ Skip:
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 29
+### 2025Lab测验 · Lab 任务 29
 
 - 题型：`single-choice`　模块：`processor_arch`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/659.md`
@@ -1685,7 +1685,7 @@ Skip:
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 30
+### 2025Lab测验 · Lab 任务 30
 
 - 题型：`single-choice`　模块：`processor_arch`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/669.md`
@@ -1721,7 +1721,7 @@ pipe_std_dependency_graph.html
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 31
+### 2025Lab测验 · Lab 任务 31
 
 - 题型：`single-choice`　模块：`memory_hierarchy`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/699.md`
@@ -1739,7 +1739,7 @@ pipe_std_dependency_graph.html
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 32
+### 2025Lab测验 · Lab 任务 32
 
 - 题型：`single-choice`　模块：`memory_hierarchy`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/704.md`
@@ -1758,7 +1758,7 @@ pipe_std_dependency_graph.html
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 33
+### 2025Lab测验 · Lab 任务 33
 
 - 题型：`single-choice`　模块：`memory_hierarchy`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/710.md`
@@ -1777,7 +1777,7 @@ pipe_std_dependency_graph.html
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 34
+### 2025Lab测验 · Lab 任务 34
 
 - 题型：`single-choice`　模块：`memory_hierarchy`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/722.md`
@@ -1797,7 +1797,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 7
+### 2025Lab测验 · Lab 任务 7
 
 - 题型：`single-choice`　模块：`compilation_linking`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/96.md`
@@ -1815,7 +1815,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 8
+### 2025Lab测验 · Lab 任务 8
 
 - 题型：`single-choice`　模块：`compilation_linking`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/101.md`
@@ -1833,7 +1833,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 9
+### 2025Lab测验 · Lab 任务 9
 
 - 题型：`single-choice`　模块：`compilation_linking`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/106.md`
@@ -1851,7 +1851,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 10
+### 2025Lab测验 · Lab 任务 10
 
 - 题型：`single-choice`　模块：`compilation_linking`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/114.md`
@@ -1869,7 +1869,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 1
+### 2025Lab测验 · Lab 任务 1
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/52.md`
@@ -1887,7 +1887,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 2
+### 2025Lab测验 · Lab 任务 2
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/57.md`
@@ -1905,7 +1905,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 3
+### 2025Lab测验 · Lab 任务 3
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/66.md`
@@ -1923,7 +1923,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 4
+### 2025Lab测验 · Lab 任务 4
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/71.md`
@@ -1941,7 +1941,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 16
+### 2025Lab测验 · Lab 任务 16
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/269.md`
@@ -1962,7 +1962,7 @@ Blocking (分块) 策略的核心思想是如何解决这个问题的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 21
+### 2025Lab测验 · Lab 任务 21
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/485.md`
@@ -1982,7 +1982,7 @@ hex.txt，下列哪个选项是错误的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 35
+### 2025Lab测验 · Lab 任务 35
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/734.md`
@@ -2001,7 +2001,7 @@ hex.txt，下列哪个选项是错误的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 36
+### 2025Lab测验 · Lab 任务 36
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/747.md`
@@ -2020,7 +2020,7 @@ shell相比，下列哪一项说法是错误的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 37
+### 2025Lab测验 · Lab 任务 37
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/757.md`
@@ -2039,7 +2039,7 @@ shell相比，下列哪一项说法是错误的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 38
+### 2025Lab测验 · Lab 任务 38
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/771.md`
@@ -2058,7 +2058,7 @@ shell相比，下列哪一项说法是错误的？
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 39
+### 2025Lab测验 · Lab 任务 39
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/777.md`
@@ -2093,7 +2093,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 40
+### 2025Lab测验 · Lab 任务 40
 
 - 题型：`single-choice`　模块：`ecf_and_system_io`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/803.md`
@@ -2113,7 +2113,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 41
+### 2025Lab测验 · Lab 任务 41
 
 - 题型：`single-choice`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/844.md`
@@ -2131,7 +2131,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 42
+### 2025Lab测验 · Lab 任务 42
 
 - 题型：`single-choice`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/849.md`
@@ -2149,7 +2149,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 43
+### 2025Lab测验 · Lab 任务 43
 
 - 题型：`single-choice`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/854.md`
@@ -2167,7 +2167,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 44
+### 2025Lab测验 · Lab 任务 44
 
 - 题型：`single-choice`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/866.md`
@@ -2186,7 +2186,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 45
+### 2025Lab测验 · Lab 任务 45
 
 - 题型：`single-choice`　模块：`virtual_memory_and_malloc`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/874.md`
@@ -2205,7 +2205,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 5
+### 2025Lab测验 · Lab 任务 5
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/79.md`
@@ -2224,7 +2224,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 6
+### 2025Lab测验 · Lab 任务 6
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/85.md`
@@ -2244,7 +2244,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 46
+### 2025Lab测验 · Lab 任务 46
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/887.md`
@@ -2262,7 +2262,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 47
+### 2025Lab测验 · Lab 任务 47
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/892.md`
@@ -2280,7 +2280,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 48
+### 2025Lab测验 · Lab 任务 48
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/897.md`
@@ -2298,7 +2298,7 @@ WCONTINUED)) > 0) {
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 49
+### 2025Lab测验 · Lab 任务 49
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/902.md`
@@ -2317,7 +2317,7 @@ IP地址属于：
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 
-### 2025Lab测验-无答案 · Lab 任务 50
+### 2025Lab测验 · Lab 任务 50
 
 - 题型：`single-choice`　模块：`network`
 - 数据位置：`question-bank/_curated/Lab测验/2025Lab测验-无答案/908.md`

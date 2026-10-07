@@ -243,12 +243,17 @@ def main():
     for material in materials:
         if material["kind"] != "questions":
             continue
-        paper_id = short_id("p", material["cat"], material["label"])
+        # paperId 用文件名词干（`stem`）算，不用展示名：这样改试卷显示名不会
+        # 让 paperId 变来变去，也不会因为两份卷子取了同名而被合并成一份。
+        paper_id = short_id("p", material["cat"], material["stem"])
         paper = papers.setdefault(paper_id, {
             "id": paper_id,
             "year": material["year"] or None,
             "examType": material["cat"],
+            # `title` 是下拉里的短名，可以为空（前端会跳过空字段，只显示「年份 · 类别」）；
+            # `displayName` 永远非空，给报告、日志这类需要完整名字的地方用。
             "title": material["label"],
+            "displayName": build_modules.display_name(material),
             "questionIds": [],
             "verifiedAnswerCount": 0,
         })
@@ -314,7 +319,7 @@ def main():
                 "moduleId": module["id"],
                 "year": material["year"] or None,
                 "examType": material["cat"],
-                "exam": material["label"],
+                "exam": build_modules.display_name(material),
                 "questionNo": item.get("qno", ""),
                 "summary": item.get("note", ""),
                 "content": content,

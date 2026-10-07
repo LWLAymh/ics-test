@@ -84,7 +84,13 @@ def load():
         out.append({
             "file": rel, "json": os.path.basename(p), "cat": cat,
             "year": int(ym.group(1)) if ym else 0,
-            "label": stem, "rel": rel,
+            # `stem` 永远是文件名词干 —— paperId 用它算，保证与展示名无关、始终唯一。
+            # `label` 是给人看的名字：`_cls` 里可以用 `title` 覆盖，用来去掉
+            # `-带答案`/`-无答案` 这类只说明来源、不该出现在试卷列表里的后缀。
+            # 覆盖成空串是合法的（前端会跳过空标题，只显示「年份 · 类别」）。
+            "stem": stem,
+            "label": (d.get("title") if d.get("title") is not None else stem),
+            "rel": rel,
             "items": d.get("items") or [],
             "ans": d.get("answer_sections") or [],
             # kind 缺省为 questions；勘误/评分说明类材料没有题目，但可能通过
@@ -93,9 +99,10 @@ def load():
             "applies_to": d.get("applies_to") or [],
             "lines": io.open(src, encoding="utf-8").read().splitlines(),
         })
-    # 先按 (类别, 年份, 名称) 排出稳定顺序，再让指纹相同的卷子只保留一份。
+    # 先按 (类别, 年份, 文件名词干) 排出稳定顺序，再让指纹相同的卷子只保留一份。
+    # 排序用 stem 而不是展示名，改名不会打乱顺序。
     # 年份解析不出来的（如「期末往年题勘误、详解 by Arthals」）排到最后。
-    out.sort(key=lambda d: (CAT_ORDER.get(d["cat"], 9), d["year"] or 9999, d["label"]))
+    out.sort(key=lambda d: (CAT_ORDER.get(d["cat"], 9), d["year"] or 9999, d["stem"]))
     seen = {}
     for d in out:
         h = body_hash(d["lines"])
@@ -109,6 +116,18 @@ def load():
 def ydisplay(d):
     """年份列：解析不出年份时显示破折号，不显示 0。"""
     return str(d["year"]) if d["year"] else "—"
+
+
+def display_name(d):
+    """材料的完整可读名字，**永远非空**。
+
+    `label` 是给试卷下拉用的短名，可以为空（此时下拉只显示「年份 · 类别」）；
+    但题目卡片上的「试卷」字段、模块清单和校验日志都需要一个能认出来的名字，
+    所以这里回退成「年份+类别」，有短名时再括注在后面。
+    """
+    base = "%s%s" % (d["year"] or "", d["cat"])
+    label = (d.get("label") or "").strip()
+    return "%s（%s）" % (base, label) if label else base
 
 
 def slice_of(d, a, b):
@@ -180,7 +199,7 @@ def main():
         L.append("|---|---|---|---|---|")
         for d, it in rows:
             cross[d["rel"]][mname] += 1
-            lab = d["label"]
+            lab = display_name(d)
             if aliases.get(d["rel"]):
                 lab += "（同 %s）" % "、".join(
                     os.path.splitext(os.path.basename(a))[0] for a in aliases[d["rel"]])
@@ -193,7 +212,7 @@ def main():
         # ---- 原文 ----
         L.append("## 二、题目原文\n")
         for d, it in rows:
-            L.append("### %s · %s" % (d["label"], it.get("qno", "")))
+            L.append("### %s · %s" % (display_name(d), it.get("qno", "")))
             L.append("")
             if aliases.get(d["rel"]):
                 L.append("> ⚠️ 同一份卷子也存在于：%s（正文等同，已去重）" % "、".join(
@@ -225,7 +244,7 @@ def main():
                         continue
                     if s < 1 or e > len(d["lines"]):
                         continue
-                    L.append("### %s · %s" % (d["label"], a.get("note", "参考答案")))
+                    L.append("### %s · %s" % (display_name(d), a.get("note", "参考答案")))
                     L.append("")
                     L.append("> 出处：`原文/%s` 第 %d–%d 行" % (d["rel"], s, e))
                     L.append("")
@@ -255,7 +274,7 @@ def main():
         for m in MODULES:
             grand[m[0]] += cross[d["rel"]].get(m[0], 0)
         T.append("| %s | %s | %s | %s | %d |" % (
-            d["label"], d["cat"], ydisplay(d),
+            display_name(d), d["cat"], ydisplay(d),
             " | ".join(str(v) if v else "·" for v in vals), tot))
     T.append("| **合计** | | | " + " | ".join(
         str(grand[m[0]]) for m in MODULES) + " | %d |" % sum(grand.values()))

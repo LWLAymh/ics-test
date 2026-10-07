@@ -76,7 +76,7 @@ def main():
                 continue
             seen_files.add(rel_cur.replace("/", os.sep))
             s, e = it.get("start"), it.get("end")
-            tag = "%s %s [%s,%s]" % (m["label"], it.get("qno"), s, e)
+            tag = "%s %s [%s,%s]" % (bm.display_name(m), it.get("qno"), s, e)
             if dup or m["kind"] != "questions":
                 n_fail += 1
                 fail_files.add(rel_cur)
