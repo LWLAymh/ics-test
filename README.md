@@ -5,6 +5,7 @@ PKU Introduction to Computer Systems 历年题随机测试站点。
 - 在线地址：<https://lwlaymh.github.io/ics-test/>
 - 题库源码：`question-bank/`
 - 页面源码：`site/`
+- Supabase 数据库脚本：`supabase/ics_stats.sql`
 - 自动部署：`.github/workflows/pages.yml`
 
 ## 更新题库
@@ -38,3 +39,6 @@ python -m http.server 4173 --directory _site
 访问 <http://127.0.0.1:4173/>。
 
 Supabase 前端仅使用 publishable key；请勿把 secret key 提交到仓库。
+
+首次创建或重置统计表时，在 Supabase SQL Editor 中执行
+`supabase/ics_stats.sql`。日常修改题目不需要重复执行该脚本。
