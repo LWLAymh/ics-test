@@ -1,0 +1,233 @@
+{
+  "file": "期中/2022期中-带答案.md",
+  "total_lines": 706,
+  "items": [
+    {
+      "start": 49,
+      "end": 57,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "整数运算律：取负、按位取反、除法与右移",
+      "curated": "期中/2022期中-带答案/49.md"
+    },
+    {
+      "start": 58,
+      "end": 65,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "浮点运算律：交换律成立、结合律不成立",
+      "curated": "期中/2022期中-带答案/58.md"
+    },
+    {
+      "start": 66,
+      "end": 86,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "有符号/无符号整型的位级表示与比较",
+      "curated": "期中/2022期中-带答案/66.md"
+    },
+    {
+      "start": 87,
+      "end": 98,
+      "module": "Data Representation",
+      "qno": "第一题 4",
+      "note": "sizeof无符号、移位、浮点位级比较与阶码范围",
+      "curated": "期中/2022期中-带答案/87.md"
+    },
+    {
+      "start": 99,
+      "end": 118,
+      "module": "Data Representation",
+      "qno": "第一题 5",
+      "note": "小端字节序与short/int指针读取（原答案有争议）",
+      "curated": "期中/2022期中-带答案/99.md"
+    },
+    {
+      "start": 119,
+      "end": 124,
+      "module": "Machine Prog",
+      "qno": "第一题 6",
+      "note": "mov指令操作数大小与合法寻址方式",
+      "curated": "期中/2022期中-带答案/119.md"
+    },
+    {
+      "start": 125,
+      "end": 145,
+      "module": "Machine Prog",
+      "qno": "第一题 7",
+      "note": "由lea指令序列反推C表达式",
+      "curated": "期中/2022期中-带答案/125.md"
+    },
+    {
+      "start": 146,
+      "end": 170,
+      "module": "Machine Prog",
+      "qno": "第一题 8",
+      "note": "cmp/set指令后缀与data_t类型匹配",
+      "curated": "期中/2022期中-带答案/146.md"
+    },
+    {
+      "start": 171,
+      "end": 181,
+      "module": "Machine Prog",
+      "qno": "第一题 9",
+      "note": "结构体对齐填充与总大小计算",
+      "curated": "期中/2022期中-带答案/171.md"
+    },
+    {
+      "start": 182,
+      "end": 187,
+      "module": "Machine Prog",
+      "qno": "第一题 10",
+      "note": "缓冲区溢出攻击的防护手段",
+      "curated": "期中/2022期中-带答案/182.md"
+    },
+    {
+      "start": 188,
+      "end": 205,
+      "module": "Processor Arch",
+      "qno": "第一题 11",
+      "note": "RISC/CISC的ISA特征描述",
+      "curated": "期中/2022期中-带答案/188.md"
+    },
+    {
+      "start": 206,
+      "end": 212,
+      "module": "Processor Arch",
+      "qno": "第一题 12",
+      "note": "组合逻辑电路对应的HCL表达式",
+      "curated": "期中/2022期中-带答案/206.md"
+    },
+    {
+      "start": 213,
+      "end": 219,
+      "module": "Processor Arch",
+      "qno": "第一题 13",
+      "note": "三级流水线吞吐量计算",
+      "curated": "期中/2022期中-带答案/213.md"
+    },
+    {
+      "start": 220,
+      "end": 229,
+      "module": "Processor Arch",
+      "qno": "第一题 14",
+      "note": "SEQ新增条件传送立即数指令（行218附图归属存疑）",
+      "curated": "期中/2022期中-带答案/220.md"
+    },
+    {
+      "start": 233,
+      "end": 244,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 15",
+      "note": "循环展开与编译优化的限制",
+      "curated": "期中/2022期中-带答案/233.md"
+    },
+    {
+      "start": 245,
+      "end": 255,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 16",
+      "note": "磁盘/SSD/SRAM易失性等存储器性质",
+      "curated": "期中/2022期中-带答案/245.md"
+    },
+    {
+      "start": 256,
+      "end": 264,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 17",
+      "note": "SDRAM/DRAM/SRAM器件特性",
+      "curated": "期中/2022期中-带答案/256.md"
+    },
+    {
+      "start": 265,
+      "end": 275,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 18",
+      "note": "cache容量参数S/E/B的调整方式",
+      "curated": "期中/2022期中-带答案/265.md"
+    },
+    {
+      "start": 276,
+      "end": 289,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 19",
+      "note": "写回与写分配策略的选择",
+      "curated": "期中/2022期中-带答案/276.md"
+    },
+    {
+      "start": 290,
+      "end": 325,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 20",
+      "note": "saxpy内存带宽计算（含写分配）",
+      "curated": "期中/2022期中-带答案/290.md"
+    },
+    {
+      "start": 331,
+      "end": 347,
+      "module": "Data Representation",
+      "qno": "第二题",
+      "note": "8位IEEE浮点格式：编码、比较、溢出与舍入（1-7小题）",
+      "curated": "期中/2022期中-带答案/331.md"
+    },
+    {
+      "start": 367,
+      "end": 440,
+      "module": "Machine Prog",
+      "qno": "第三题",
+      "note": "switch跳转表汇编还原C代码与结构体",
+      "curated": "期中/2022期中-带答案/367.md"
+    },
+    {
+      "start": 477,
+      "end": 555,
+      "module": "Processor Arch",
+      "qno": "第四题",
+      "note": "Y86-64新增cpopqXX条件POP指令（SEQ/PIPE与冒险）",
+      "curated": "期中/2022期中-带答案/477.md"
+    },
+    {
+      "start": 604,
+      "end": 630,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 1",
+      "note": "二路组相联cache容量、命中判断、LRU与延迟",
+      "curated": "期中/2022期中-带答案/604.md"
+    },
+    {
+      "start": 631,
+      "end": 659,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2",
+      "note": "全相联cache不同写策略下的命中次数统计",
+      "curated": "期中/2022期中-带答案/631.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 45,
+      "end": 48,
+      "note": "第一题选择题答案表"
+    },
+    {
+      "start": 348,
+      "end": 361,
+      "note": "第二题参考答案与评分说明"
+    },
+    {
+      "start": 442,
+      "end": 471,
+      "note": "第三题参考答案与补充说明"
+    },
+    {
+      "start": 556,
+      "end": 597,
+      "note": "第四题参考答案（各阶段操作与周期数解析）"
+    },
+    {
+      "start": 660,
+      "end": 705,
+      "note": "第五题参考答案与解析"
+    }
+  ]
+}

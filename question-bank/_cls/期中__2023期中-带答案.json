@@ -1,0 +1,236 @@
+{
+  "file": "期中/2023期中-带答案.md",
+  "total_lines": 708,
+  "items": [
+    {
+      "start": 49,
+      "end": 67,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "有符号/无符号比较与short截断、符号扩展",
+      "curated": "期中/2023期中-带答案/49.md"
+    },
+    {
+      "start": 68,
+      "end": 86,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "整型运算规则：乘法溢出、右移与lowbit",
+      "curated": "期中/2023期中-带答案/68.md"
+    },
+    {
+      "start": 87,
+      "end": 99,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "浮点位级表示、最小正规格化数与无穷",
+      "curated": "期中/2023期中-带答案/87.md"
+    },
+    {
+      "start": 100,
+      "end": 117,
+      "module": "Machine Prog",
+      "qno": "第一题 4",
+      "note": "x86-64 mov指令操作数与寄存器的合法组合",
+      "curated": "期中/2023期中-带答案/100.md"
+    },
+    {
+      "start": 118,
+      "end": 142,
+      "module": "Machine Prog",
+      "qno": "第一题 5",
+      "note": "数组寻址lea指令与下标反推",
+      "curated": "期中/2023期中-带答案/118.md"
+    },
+    {
+      "start": 143,
+      "end": 157,
+      "module": "Machine Prog",
+      "qno": "第一题 6",
+      "note": "cmp/test/set与条件传送指令语义",
+      "curated": "期中/2023期中-带答案/143.md"
+    },
+    {
+      "start": 158,
+      "end": 164,
+      "module": "Machine Prog",
+      "qno": "第一题 7",
+      "note": "call指令将返回地址压栈",
+      "curated": "期中/2023期中-带答案/158.md"
+    },
+    {
+      "start": 165,
+      "end": 180,
+      "module": "Machine Prog",
+      "qno": "第一题 8",
+      "note": "struct/union对齐与成员偏移",
+      "curated": "期中/2023期中-带答案/165.md"
+    },
+    {
+      "start": 185,
+      "end": 193,
+      "module": "Machine Prog",
+      "qno": "第一题 9",
+      "note": "指针数组声明的sizeof计算",
+      "curated": "期中/2023期中-带答案/185.md"
+    },
+    {
+      "start": 194,
+      "end": 201,
+      "module": "Data Representation",
+      "qno": "第一题 10",
+      "note": "lowbit运算 x & (-x)",
+      "curated": "期中/2023期中-带答案/194.md"
+    },
+    {
+      "start": 202,
+      "end": 219,
+      "module": "Processor Arch",
+      "qno": "第一题 11",
+      "note": "用MUX4实现HCL表达式",
+      "curated": "期中/2023期中-带答案/202.md"
+    },
+    {
+      "start": 220,
+      "end": 254,
+      "module": "Machine Prog",
+      "qno": "第一题 12",
+      "note": "栈帧布局与缓冲区溢出对局部变量的影响",
+      "curated": "期中/2023期中-带答案/220.md"
+    },
+    {
+      "start": 259,
+      "end": 266,
+      "module": "Data Representation",
+      "qno": "第一题 13",
+      "note": "类型转换中的舍入与溢出判断",
+      "curated": "期中/2023期中-带答案/259.md"
+    },
+    {
+      "start": 267,
+      "end": 280,
+      "module": "Data Representation",
+      "qno": "第一题 14",
+      "note": "补码位级值与整型运算结果",
+      "curated": "期中/2023期中-带答案/267.md"
+    },
+    {
+      "start": 281,
+      "end": 293,
+      "module": "Data Representation",
+      "qno": "第一题 15",
+      "note": "sizeof返回无符号数导致的隐式转换",
+      "curated": "期中/2023期中-带答案/281.md"
+    },
+    {
+      "start": 298,
+      "end": 314,
+      "module": "Processor Arch",
+      "qno": "第一题 16",
+      "note": "SEQ中newPC的HCL（ret阶段取valM）",
+      "curated": "期中/2023期中-带答案/298.md"
+    },
+    {
+      "start": 315,
+      "end": 325,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 17",
+      "note": "RAM与NVM（非易失存储器）特性",
+      "curated": "期中/2023期中-带答案/315.md"
+    },
+    {
+      "start": 326,
+      "end": 372,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 18",
+      "note": "磁盘访问时间：寻道、旋转延迟与传送时间",
+      "curated": "期中/2023期中-带答案/326.md"
+    },
+    {
+      "start": 373,
+      "end": 387,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 19",
+      "note": "组相联cache访存序列命中次数模拟",
+      "curated": "期中/2023期中-带答案/373.md"
+    },
+    {
+      "start": 388,
+      "end": 416,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 20",
+      "note": "程序优化：循环展开与编译器优化限制",
+      "curated": "期中/2023期中-带答案/388.md"
+    },
+    {
+      "start": 426,
+      "end": 463,
+      "module": "Data Representation",
+      "qno": "第二题",
+      "note": "FP8 E4M3/E5M2浮点格式：规格化数、溢出舍入、求和顺序",
+      "curated": "期中/2023期中-带答案/426.md"
+    },
+    {
+      "start": 489,
+      "end": 565,
+      "module": "Machine Prog",
+      "qno": "第三题",
+      "note": "递归函数ncr的C与汇编代码补全",
+      "curated": "期中/2023期中-带答案/489.md"
+    },
+    {
+      "start": 591,
+      "end": 649,
+      "module": "Processor Arch",
+      "qno": "第四题",
+      "note": "Y86-64新增Bxx/JxxR指令与PIPE前递、冒险控制",
+      "curated": "期中/2023期中-带答案/591.md"
+    },
+    {
+      "start": 669,
+      "end": 676,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 1",
+      "note": "时间/空间局部性的定义与解释",
+      "curated": "期中/2023期中-带答案/669.md"
+    },
+    {
+      "start": 677,
+      "end": 698,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2",
+      "note": "直接映射cache访存模拟与命中统计",
+      "curated": "期中/2023期中-带答案/677.md"
+    },
+    {
+      "start": 699,
+      "end": 707,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 3",
+      "note": "L1 d-cache地址位域划分与组数计算",
+      "curated": "期中/2023期中-带答案/699.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 45,
+      "end": 48,
+      "note": "第一题选择题答案表"
+    },
+    {
+      "start": 464,
+      "end": 482,
+      "note": "第二题参考答案与评分标准修订"
+    },
+    {
+      "start": 566,
+      "end": 585,
+      "note": "第三题参考答案"
+    },
+    {
+      "start": 650,
+      "end": 663,
+      "note": "第四题参考答案"
+    }
+  ]
+}

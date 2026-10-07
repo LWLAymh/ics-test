@@ -1,0 +1,271 @@
+{
+  "file": "期中/2015期中-带答案.md",
+  "total_lines": 657,
+  "items": [
+    {
+      "start": 48,
+      "end": 58,
+      "module": "Data Representation",
+      "qno": "选择题 1",
+      "note": "单精度浮点表示的最大绝对误差",
+      "curated": "期中/2015期中-带答案/48.md"
+    },
+    {
+      "start": 59,
+      "end": 64,
+      "module": "Data Representation",
+      "qno": "选择题 2",
+      "note": "补码加法溢出与位运算实现逻辑",
+      "curated": "期中/2015期中-带答案/59.md"
+    },
+    {
+      "start": 65,
+      "end": 78,
+      "module": "Data Representation",
+      "qno": "选择题 3",
+      "note": "C90 类型转换顺序与 INT_MIN",
+      "curated": "期中/2015期中-带答案/65.md"
+    },
+    {
+      "start": 79,
+      "end": 90,
+      "module": "Data Representation",
+      "qno": "选择题 4",
+      "note": "浮点运算单调性与精度",
+      "curated": "期中/2015期中-带答案/79.md"
+    },
+    {
+      "start": 91,
+      "end": 110,
+      "module": "Data Representation",
+      "qno": "选择题 5",
+      "note": "Linux/IA32 结构体对齐与最小大小（兼 Machine Prog）",
+      "curated": "期中/2015期中-带答案/91.md"
+    },
+    {
+      "start": 115,
+      "end": 120,
+      "module": "Machine Prog",
+      "qno": "选择题 6",
+      "note": "x86 寻址模式正确性",
+      "curated": "期中/2015期中-带答案/115.md"
+    },
+    {
+      "start": 121,
+      "end": 127,
+      "module": "Data Representation",
+      "qno": "选择题 7",
+      "note": "大端法下 union 的字节解释",
+      "curated": "期中/2015期中-带答案/121.md"
+    },
+    {
+      "start": 128,
+      "end": 146,
+      "module": "Machine Prog",
+      "qno": "选择题 8",
+      "note": "跳转表汇编与标号取值范围",
+      "curated": "期中/2015期中-带答案/128.md"
+    },
+    {
+      "start": 147,
+      "end": 157,
+      "module": "Machine Prog",
+      "qno": "选择题 9",
+      "note": "leal/传参/条件码等汇编细节",
+      "curated": "期中/2015期中-带答案/147.md"
+    },
+    {
+      "start": 158,
+      "end": 164,
+      "module": "Machine Prog",
+      "qno": "选择题 10",
+      "note": "CMP/TEST 与条件码",
+      "curated": "期中/2015期中-带答案/158.md"
+    },
+    {
+      "start": 165,
+      "end": 171,
+      "module": "Processor Arch",
+      "qno": "选择题 11",
+      "note": "RISC/CISC 指令系统设计",
+      "curated": "期中/2015期中-带答案/165.md"
+    },
+    {
+      "start": 172,
+      "end": 181,
+      "module": "Processor Arch",
+      "qno": "选择题 12",
+      "note": "组合逻辑+寄存器的最短延时与吞吐",
+      "curated": "期中/2015期中-带答案/172.md"
+    },
+    {
+      "start": 182,
+      "end": 192,
+      "module": "Processor Arch",
+      "qno": "选择题 13",
+      "note": "流水线冒险与 data forwarding",
+      "curated": "期中/2015期中-带答案/182.md"
+    },
+    {
+      "start": 193,
+      "end": 201,
+      "module": "Processor Arch",
+      "qno": "选择题 14",
+      "note": "Y86 SEQ 的 PC 更新 HCL 数据来源",
+      "curated": "期中/2015期中-带答案/193.md"
+    },
+    {
+      "start": 202,
+      "end": 208,
+      "module": "Memory Hierarchy",
+      "qno": "选择题 15",
+      "note": "SRAM/DRAM/磁盘/SSD 特性",
+      "curated": "期中/2015期中-带答案/202.md"
+    },
+    {
+      "start": 209,
+      "end": 223,
+      "module": "Memory Hierarchy",
+      "qno": "选择题 16",
+      "note": "磁盘扇区平均传送时间",
+      "curated": "期中/2015期中-带答案/209.md"
+    },
+    {
+      "start": 224,
+      "end": 231,
+      "module": "Memory Hierarchy",
+      "qno": "选择题 17",
+      "note": "Cache 地址划分与 tag 位",
+      "curated": "期中/2015期中-带答案/224.md"
+    },
+    {
+      "start": 232,
+      "end": 238,
+      "module": "Memory Hierarchy",
+      "qno": "选择题 18",
+      "note": "Cache 写策略/块大小/相联度",
+      "curated": "期中/2015期中-带答案/232.md"
+    },
+    {
+      "start": 239,
+      "end": 245,
+      "module": "Memory Hierarchy",
+      "qno": "选择题 19",
+      "note": "数组与循环的局部性",
+      "curated": "期中/2015期中-带答案/239.md"
+    },
+    {
+      "start": 246,
+      "end": 271,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "选择题 20",
+      "note": "编译器自动优化变换（别名/精度）",
+      "curated": "期中/2015期中-带答案/246.md"
+    },
+    {
+      "start": 277,
+      "end": 298,
+      "module": "Data Representation",
+      "qno": "第二题 1",
+      "note": "整型/无符号/移位表达式恒成立判断",
+      "curated": "期中/2015期中-带答案/277.md"
+    },
+    {
+      "start": 299,
+      "end": 344,
+      "module": "Data Representation",
+      "qno": "第二题 2",
+      "note": "12-bit IEEE 浮点表示与个数",
+      "curated": "期中/2015期中-带答案/299.md"
+    },
+    {
+      "start": 351,
+      "end": 366,
+      "module": "Data Representation",
+      "qno": "第三题 1",
+      "note": "union 大小与对齐（32 位，兼 Machine Prog）",
+      "curated": "期中/2015期中-带答案/351.md"
+    },
+    {
+      "start": 367,
+      "end": 380,
+      "module": "Machine Prog",
+      "qno": "第三题 2",
+      "note": "由汇编补全结构体成员赋值语句",
+      "curated": "期中/2015期中-带答案/367.md"
+    },
+    {
+      "start": 386,
+      "end": 411,
+      "module": "Machine Prog",
+      "qno": "第三题 3",
+      "note": "X86/Y86 汇编代码错误定位与更正",
+      "curated": "期中/2015期中-带答案/386.md"
+    },
+    {
+      "start": 413,
+      "end": 484,
+      "module": "Machine Prog",
+      "qno": "第三题 4",
+      "note": "二维数组寻址与 lea 偏移（求 A、B，含本大题答案）",
+      "curated": "期中/2015期中-带答案/413.md"
+    },
+    {
+      "start": 491,
+      "end": 516,
+      "module": "Processor Arch",
+      "qno": "第四题 1",
+      "note": "新增 NewJE 指令在 SEQ 各阶段的操作",
+      "curated": "期中/2015期中-带答案/491.md"
+    },
+    {
+      "start": 517,
+      "end": 527,
+      "module": "Processor Arch",
+      "qno": "第四题 2",
+      "note": "PIPE 中跳转条件不满足时错误执行条数",
+      "curated": "期中/2015期中-带答案/517.md"
+    },
+    {
+      "start": 528,
+      "end": 546,
+      "module": "Processor Arch",
+      "qno": "第四题 3",
+      "note": "NewJE 预测错误的判断条件与控制信号",
+      "curated": "期中/2015期中-带答案/528.md"
+    },
+    {
+      "start": 547,
+      "end": 570,
+      "module": "Processor Arch",
+      "qno": "第四题 4",
+      "note": "load-use 与误预测组合冒险的控制信号",
+      "curated": "期中/2015期中-带答案/547.md"
+    },
+    {
+      "start": 571,
+      "end": 589,
+      "module": "Processor Arch",
+      "qno": "第四题 5",
+      "note": "data miss 时的各级流水线控制信号",
+      "curated": "期中/2015期中-带答案/571.md"
+    },
+    {
+      "start": 595,
+      "end": 627,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 1",
+      "note": "组相连 Cache 失效次数与最终状态",
+      "curated": "期中/2015期中-带答案/595.md"
+    },
+    {
+      "start": 633,
+      "end": 655,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2",
+      "note": "全相联 Cache 的 tag/失效次数与状态",
+      "curated": "期中/2015期中-带答案/633.md"
+    }
+  ],
+  "answer_sections": []
+}

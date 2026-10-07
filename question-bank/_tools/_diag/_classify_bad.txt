@@ -1,0 +1,89 @@
+is_bad 命中桶的三分类（全库 758 页）
+
+fp           174
+multi_run    32
+over_merge   174
+
+== 样例: fp ==
+  Lab测验/2025Lab测验-无答案.pdf p5 spread=0.00 fonts=1 sizes=1
+       *   Examples: satMul2(0x30000000) = 0x60000000 
+  Lab测验/2025Lab测验-无答案.pdf p5 spread=0.00 fonts=1 sizes=1
+       *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax) 
+  Lab测验/2025Lab测验-无答案.pdf p5 spread=0.00 fonts=1 sizes=1
+       *             satMul2(0x90000000) = 0x80000000 (saturate to TMin) 
+  Lab测验/2025Lab测验-无答案.pdf p10 spread=0.00 fonts=1 sizes=1
+      00000000000027bc <phase_2>: 
+  Lab测验/2025Lab测验-无答案.pdf p12 spread=0.00 fonts=1 sizes=1
+          187f: b8 00 00 00 00        mov    $0x0,%eax 
+  Lab测验/2025Lab测验-无答案.pdf p13 spread=0.00 fonts=1 sizes=1
+          1889: 05 99 02 00 00        add    $0x299,%eax 
+
+== 样例: multi_run ==
+  Lab测验/2025Lab测验-无答案.pdf p5 spread=0.50 fonts=2 sizes=1
+      置为0xFFFFFFFF，否则为0。下面哪一个选项正确给出了overflow的表达式(提
+  期中/2013期中-带答案.pdf p1 spread=0.00 fonts=2 sizes=1
+      unsigned y = 0x00000001; 
+  期中/2014期中-带答案.pdf p2 spread=0.00 fonts=2 sizes=1
+      unsigned x = 0x00000001; 
+  期中/2014期中-带答案.pdf p13 spread=0.67 fonts=1 sizes=2
+      rsp            0x7fffffffe340 0x7fffffffe350 0x3 
+  期中/2014期中-带答案.pdf p13 spread=0.05 fonts=1 sizes=2
+      rip            0x400520 0x7fffffffe34c 0x0 
+  期中/2019期中-带答案.pdf p13 spread=0.26 fonts=1 sizes=2
+        400747: e8 _ (7) _         callq   400666 <callee>   (7) _1a ff ff ff__ _ 
+
+== 样例: over_merge ==
+  期中/2012期中-带答案.pdf p1 spread=24.96 fonts=3 sizes=1
+      inabt))   Z =FF Yoo;rr   llaarrggee  pneogsiattivivee v vaalulueess o off C COONNSSTTAANNTT ( (ee..g
+  期中/2012期中-带答案.pdf p1 spread=25.43 fonts=2 sizes=1
+      abc)))   uuunnnsssiiigggnnneeeddd   iiinnnttt   abc   ===   a01 x;+ f fbff;f fff; 
+  期中/2012期中-带答案.pdf p1 spread=25.67 fonts=2 sizes=1
+      cd))  II tt  iiss  ssttoorreedd  oonn  tthhee  ssttaacckk  jjuusstt  aabboovvee  tahlle t h(%e eabrg
+  期中/2013期中-带答案.pdf p5 spread=4.26 fonts=2 sizes=2
+      1(-1) x 1.1 x 20 0xBFC00000 
+  期中/2013期中-带答案.pdf p6 spread=12.36 fonts=1 sizes=1
+          44000044ff15::      mmoovv        --00xx180(%(%rbrpbp),)%,%rdrxax  
+  期中/2013期中-带答案.pdf p8 spread=55.20 fonts=1 sizes=1
+                  444444000000000000444444ddcccc58cf35::::::                   ms jmau oob vv         cm  
+
+== 按文件（fp / multi_run / over_merge）==
+  Lab测验/2025Lab测验-无答案.pdf                        fp=22   multi_run=1    over_merge=0   
+  期中/2012期中-带答案.pdf                              fp=6    multi_run=0    over_merge=3   
+  期中/2013期中-带答案.pdf                              fp=1    multi_run=1    over_merge=8   
+  期中/2014期中-带答案.pdf                              fp=39   multi_run=3    over_merge=2   
+  期中/2015期中-带答案.pdf                              fp=3    multi_run=0    over_merge=6   
+  期中/2016期中-带答案.pdf                              fp=2    multi_run=0    over_merge=3   
+  期中/2017期中-带答案.pdf                              fp=0    multi_run=0    over_merge=1   
+  期中/2018期中-带答案.pdf                              fp=1    multi_run=0    over_merge=0   
+  期中/2019期中-带答案.pdf                              fp=3    multi_run=1    over_merge=6   
+  期中/2020期中-带答案.pdf                              fp=13   multi_run=3    over_merge=9   
+  期中/2020期中-无答案.pdf                              fp=4    multi_run=0    over_merge=10  
+  期中/2021期中-带答案.pdf                              fp=10   multi_run=0    over_merge=17  
+  期中/2021期中-无答案.pdf                              fp=8    multi_run=0    over_merge=12  
+  期中/2022期中-带答案.pdf                              fp=0    multi_run=5    over_merge=0   
+  期中/2022期中-无答案.pdf                              fp=0    multi_run=0    over_merge=7   
+  期中/2023期中-带答案.pdf                              fp=4    multi_run=0    over_merge=2   
+  期中/2023期中-无答案.pdf                              fp=4    multi_run=0    over_merge=1   
+  期中/2024期中-带答案.pdf                              fp=2    multi_run=0    over_merge=0   
+  期中/2024期中-无答案.pdf                              fp=1    multi_run=0    over_merge=0   
+  期末/2013期末-带答案.pdf                              fp=0    multi_run=0    over_merge=1   
+  期末/2014期末-带答案.pdf                              fp=3    multi_run=0    over_merge=13  
+  期末/2015期末-20151109-带答案.pdf                     fp=3    multi_run=0    over_merge=6   
+  期末/2015期末-20160104-带答案.pdf                     fp=0    multi_run=4    over_merge=7   
+  期末/2015期末-20160104-无答案.pdf                     fp=0    multi_run=4    over_merge=1   
+  期末/2016期末-带答案.pdf                              fp=3    multi_run=0    over_merge=15  
+  期末/2016期末-无答案.pdf                              fp=3    multi_run=1    over_merge=11  
+  期末/2017期末-无答案.pdf                              fp=1    multi_run=1    over_merge=7   
+  期末/2018期末-带答案.pdf                              fp=23   multi_run=4    over_merge=0   
+  期末/2019、2020期末-答案解析.pdf                        fp=0    multi_run=4    over_merge=0   
+  期末/2019期末-无答案.pdf                              fp=2    multi_run=0    over_merge=4   
+  期末/2020期末-无答案.pdf                              fp=7    multi_run=0    over_merge=4   
+  期末/2021期末-无答案.pdf                              fp=0    multi_run=0    over_merge=4   
+  期末/2024期末-带答案.pdf                              fp=0    multi_run=0    over_merge=1   
+  期末/2024期末-无答案.pdf                              fp=0    multi_run=0    over_merge=2   
+  期末/2025期末-带答案.pdf                              fp=0    multi_run=0    over_merge=1   
+  期末/2025期末-无答案.pdf                              fp=2    multi_run=0    over_merge=2   
+  阶段测验/2025第1次阶段测验-带答案.pdf                       fp=0    multi_run=0    over_merge=3   
+  阶段测验/2025第1次阶段测验-无答案.pdf                       fp=0    multi_run=0    over_merge=5   
+  阶段测验/2025第2次阶段测验-带答案.pdf                       fp=2    multi_run=0    over_merge=0   
+  阶段测验/2025第2次阶段测验-无答案.pdf                       fp=2    multi_run=0    over_merge=0   

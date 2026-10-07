@@ -1,0 +1,199 @@
+{
+  "file": "期末/2018期末-带答案.md",
+  "total_lines": 985,
+  "items": [
+    {
+      "start": 48,
+      "end": 59,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 1",
+      "note": "累加变量与数组的时空局部性辨析",
+      "curated": "期末/2018期末-带答案/48.md"
+    },
+    {
+      "start": 60,
+      "end": 92,
+      "module": "Machine Prog",
+      "qno": "第一题 2",
+      "note": "结构体对齐填充与汇编寻址偏移",
+      "curated": "期末/2018期末-带答案/60.md"
+    },
+    {
+      "start": 93,
+      "end": 101,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 3",
+      "note": "cache 替换策略与 miss 次数下界",
+      "curated": "期末/2018期末-带答案/93.md"
+    },
+    {
+      "start": 102,
+      "end": 119,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 4",
+      "note": "链接、打桩与符号解析与重定位",
+      "curated": "期末/2018期末-带答案/102.md"
+    },
+    {
+      "start": 120,
+      "end": 132,
+      "module": "ECF and System IO",
+      "qno": "第一题 5",
+      "note": "模式位、waitpid、execve 与 signal",
+      "curated": "期末/2018期末-带答案/120.md"
+    },
+    {
+      "start": 133,
+      "end": 149,
+      "module": "ECF and System IO",
+      "qno": "第一题 6",
+      "note": "dup2 链式重定向后的文件引用关系",
+      "curated": "期末/2018期末-带答案/133.md"
+    },
+    {
+      "start": 150,
+      "end": 158,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 7",
+      "note": "页表、抖动与空闲链表释放复杂度",
+      "curated": "期末/2018期末-带答案/150.md"
+    },
+    {
+      "start": 159,
+      "end": 166,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 8",
+      "note": "同一页内两变量的物理地址关系",
+      "curated": "期末/2018期末-带答案/159.md"
+    },
+    {
+      "start": 167,
+      "end": 172,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 9",
+      "note": "多级页表相对单级页表的主要优势",
+      "curated": "期末/2018期末-带答案/167.md"
+    },
+    {
+      "start": 173,
+      "end": 194,
+      "module": "Network",
+      "qno": "第一题 10",
+      "note": "Internet/IP 递送与帧头剥离封装",
+      "curated": "期末/2018期末-带答案/173.md"
+    },
+    {
+      "start": 195,
+      "end": 206,
+      "module": "Network",
+      "qno": "第一题 11",
+      "note": "套接字接口 API 与描述符读写",
+      "curated": "期末/2018期末-带答案/195.md"
+    },
+    {
+      "start": 207,
+      "end": 215,
+      "module": "Network",
+      "qno": "第一题 12",
+      "note": "打开网页所涉及的协议栈层次",
+      "curated": "期末/2018期末-带答案/207.md"
+    },
+    {
+      "start": 220,
+      "end": 225,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 13",
+      "note": "线程安全与可重入的包含关系",
+      "curated": "期末/2018期末-带答案/220.md"
+    },
+    {
+      "start": 226,
+      "end": 231,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 14",
+      "note": "进程与线程的资源共享与上下文切换",
+      "curated": "期末/2018期末-带答案/226.md"
+    },
+    {
+      "start": 232,
+      "end": 253,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 15",
+      "note": "对等线程引用的变量集合判定",
+      "curated": "期末/2018期末-带答案/232.md"
+    },
+    {
+      "start": 259,
+      "end": 286,
+      "module": "Processor Arch",
+      "qno": "第二题",
+      "note": "组合逻辑流水化插寄存器与吞吐率计算",
+      "curated": "期末/2018期末-带答案/259.md"
+    },
+    {
+      "start": 292,
+      "end": 320,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第三题 1",
+      "note": "各符号的 .symtab 条目、类型与所在节",
+      "curated": "期末/2018期末-带答案/292.md"
+    },
+    {
+      "start": 321,
+      "end": 404,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第三题 2",
+      "note": "反汇编中的重定位条目与引用值计算",
+      "curated": "期末/2018期末-带答案/321.md"
+    },
+    {
+      "start": 410,
+      "end": 606,
+      "module": "ECF and System IO",
+      "qno": "第四题",
+      "note": "signal/kill 交替打印与描述符表/v-node 表分析",
+      "curated": "期末/2018期末-带答案/410.md"
+    },
+    {
+      "start": 612,
+      "end": 711,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第五题",
+      "note": "多级页表页数、TLB 地址翻译与页表项改写",
+      "curated": "期末/2018期末-带答案/612.md"
+    },
+    {
+      "start": 717,
+      "end": 752,
+      "module": "Network",
+      "qno": "第六题",
+      "note": "协议分层/面向连接判断与套接字连接流程填空",
+      "curated": "期末/2018期末-带答案/717.md"
+    },
+    {
+      "start": 758,
+      "end": 787,
+      "module": "Machine Prog",
+      "qno": "第七题 1",
+      "note": "i++ 对应的 x86-64 汇编代码",
+      "curated": "期末/2018期末-带答案/758.md"
+    },
+    {
+      "start": 792,
+      "end": 872,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第七题 2-4",
+      "note": "i++/j++ 竞态的输出可能性与信号量死锁",
+      "curated": "期末/2018期末-带答案/792.md"
+    },
+    {
+      "start": 878,
+      "end": 984,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第八题",
+      "note": "pmap 地址空间布局填空与 VSS/RSS/PSS 估算",
+      "curated": "期末/2018期末-带答案/878.md"
+    }
+  ],
+  "answer_sections": []
+}

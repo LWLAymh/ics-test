@@ -1,0 +1,159 @@
+{
+  "file": "期中/2017期中-带答案.md",
+  "total_lines": 477,
+  "items": [
+    {
+      "start": 48,
+      "end": 54,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "大端法下最小负数的字节内容",
+      "curated": "期中/2017期中-带答案/48.md"
+    },
+    {
+      "start": 55,
+      "end": 60,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "补码加法溢出与位运算表示逻辑",
+      "curated": "期中/2017期中-带答案/55.md"
+    },
+    {
+      "start": 61,
+      "end": 73,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "最小规格化正数的表达式",
+      "curated": "期中/2017期中-带答案/61.md"
+    },
+    {
+      "start": 74,
+      "end": 80,
+      "module": "Machine Prog",
+      "qno": "第一题 4",
+      "note": "x86-64 指令书写错误辨析",
+      "curated": "期中/2017期中-带答案/74.md"
+    },
+    {
+      "start": 81,
+      "end": 90,
+      "module": "Machine Prog",
+      "qno": "第一题 5",
+      "note": "条件传送指令的语义与限制",
+      "curated": "期中/2017期中-带答案/81.md"
+    },
+    {
+      "start": 91,
+      "end": 102,
+      "module": "Machine Prog",
+      "qno": "第一题 6",
+      "note": "函数指针的过程调用指令",
+      "curated": "期中/2017期中-带答案/91.md"
+    },
+    {
+      "start": 103,
+      "end": 115,
+      "module": "Machine Prog",
+      "qno": "第一题 7",
+      "note": "二维数组指针运算与地址计算",
+      "curated": "期中/2017期中-带答案/103.md"
+    },
+    {
+      "start": 116,
+      "end": 120,
+      "module": "Data Representation",
+      "qno": "第一题 8",
+      "note": "union 与整数的小端字节序",
+      "curated": "期中/2017期中-带答案/116.md"
+    },
+    {
+      "start": 121,
+      "end": 128,
+      "module": "Processor Arch",
+      "qno": "第一题 9",
+      "note": "RISC 与 CISC 特点辨析",
+      "curated": "期中/2017期中-带答案/121.md"
+    },
+    {
+      "start": 133,
+      "end": 145,
+      "module": "Processor Arch",
+      "qno": "第一题 10",
+      "note": "Y86 SEQ 的 mem_addr HCL 描述",
+      "curated": "期中/2017期中-带答案/133.md"
+    },
+    {
+      "start": 146,
+      "end": 152,
+      "module": "Processor Arch",
+      "qno": "第一题 11",
+      "note": "流水线与数据冒险描述辨析",
+      "curated": "期中/2017期中-带答案/146.md"
+    },
+    {
+      "start": 153,
+      "end": 170,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 12",
+      "note": "编译器不会做的程序优化",
+      "curated": "期中/2017期中-带答案/153.md"
+    },
+    {
+      "start": 175,
+      "end": 178,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 13",
+      "note": "存储器层次结构的组成部件",
+      "curated": "期中/2017期中-带答案/175.md"
+    },
+    {
+      "start": 179,
+      "end": 186,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 14",
+      "note": "局部性（locality）辨析",
+      "curated": "期中/2017期中-带答案/179.md"
+    },
+    {
+      "start": 187,
+      "end": 196,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 15",
+      "note": "全相联与直接映射的结构性能",
+      "curated": "期中/2017期中-带答案/187.md"
+    },
+    {
+      "start": 202,
+      "end": 219,
+      "module": "Data Representation",
+      "qno": "第二题",
+      "note": "9 位浮点格式 A 的字段、最值与精度",
+      "curated": "期中/2017期中-带答案/202.md"
+    },
+    {
+      "start": 225,
+      "end": 345,
+      "module": "Machine Prog",
+      "qno": "第三题",
+      "note": "缓冲区溢出程序的汇编缺失代码补全",
+      "curated": "期中/2017期中-带答案/225.md"
+    },
+    {
+      "start": 352,
+      "end": 445,
+      "module": "Processor Arch",
+      "qno": "第四题",
+      "note": "Y86 条件内存传送指令 crmmovqXX 的 SEQ/PIPE 实现",
+      "curated": "期中/2017期中-带答案/352.md"
+    },
+    {
+      "start": 452,
+      "end": 476,
+      "module": "Memory Hierarchy",
+      "qno": "第五题",
+      "note": "Cache 组相联与预取、块大小对命中数影响",
+      "curated": "期中/2017期中-带答案/452.md"
+    }
+  ],
+  "answer_sections": []
+}

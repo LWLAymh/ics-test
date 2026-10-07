@@ -1,0 +1,263 @@
+{
+  "file": "期末/2020期末-无答案.md",
+  "total_lines": 684,
+  "items": [
+    {
+      "start": 51,
+      "end": 59,
+      "module": "Machine Prog",
+      "qno": "第一题 1",
+      "note": "x86-64/Y86 汇编、栈帧与跳转表",
+      "curated": "期末/2020期末-无答案/51.md"
+    },
+    {
+      "start": 60,
+      "end": 73,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 2",
+      "note": "组索引位位置不同的两个直接映射缓存",
+      "curated": "期末/2020期末-无答案/60.md"
+    },
+    {
+      "start": 78,
+      "end": 87,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "补码与无符号运算的恒等式",
+      "curated": "期末/2020期末-无答案/78.md"
+    },
+    {
+      "start": 88,
+      "end": 89,
+      "module": "Data Representation",
+      "qno": "第一题 4",
+      "note": "类型转换的溢出与舍入",
+      "curated": "期末/2020期末-无答案/88.md"
+    },
+    {
+      "start": 90,
+      "end": 95,
+      "module": "Processor Arch",
+      "qno": "第一题 5",
+      "note": "CISC 与 RISC 指令集特性",
+      "curated": "期末/2020期末-无答案/90.md"
+    },
+    {
+      "start": 96,
+      "end": 98,
+      "module": "Processor Arch",
+      "qno": "第一题 6",
+      "note": "Y86 rmovl 的 SEQ 数据通路",
+      "curated": "期末/2020期末-无答案/96.md"
+    },
+    {
+      "start": 99,
+      "end": 103,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 7",
+      "note": "链接、打桩、共享库与程序入口点",
+      "curated": "期末/2020期末-无答案/99.md"
+    },
+    {
+      "start": 108,
+      "end": 124,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 8",
+      "note": "跨文件符号类型冲突与链接结果",
+      "curated": "期末/2020期末-无答案/108.md"
+    },
+    {
+      "start": 125,
+      "end": 134,
+      "module": "ECF and System IO",
+      "qno": "第一题 9",
+      "note": "fork() && fork() 的进程数与输出",
+      "curated": "期末/2020期末-无答案/125.md"
+    },
+    {
+      "start": 135,
+      "end": 139,
+      "module": "ECF and System IO",
+      "qno": "第一题 10",
+      "note": "网络报文到达触发的异常类型",
+      "curated": "期末/2020期末-无答案/135.md"
+    },
+    {
+      "start": 140,
+      "end": 144,
+      "module": "ECF and System IO",
+      "qno": "第一题 11",
+      "note": "Ctrl+C 的 SIGINT 与前台进程组",
+      "curated": "期末/2020期末-无答案/140.md"
+    },
+    {
+      "start": 149,
+      "end": 153,
+      "module": "ECF and System IO",
+      "qno": "第一题 12",
+      "note": "缺页异常与系统调用的异同",
+      "curated": "期末/2020期末-无答案/149.md"
+    },
+    {
+      "start": 154,
+      "end": 158,
+      "module": "ECF and System IO",
+      "qno": "第一题 13",
+      "note": "并发流、/proc、execve 重定向与信号处理函数（兼 Concurrency）",
+      "curated": "期末/2020期末-无答案/154.md"
+    },
+    {
+      "start": 159,
+      "end": 164,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 14",
+      "note": "页大小 16KB 时四级页表可索引的地址位数",
+      "curated": "期末/2020期末-无答案/159.md"
+    },
+    {
+      "start": 165,
+      "end": 171,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 15",
+      "note": "三级页表映射 1MB 的页表内存开销",
+      "curated": "期末/2020期末-无答案/165.md"
+    },
+    {
+      "start": 172,
+      "end": 174,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 16",
+      "note": "多级页表所需层数",
+      "curated": "期末/2020期末-无答案/172.md"
+    },
+    {
+      "start": 175,
+      "end": 179,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 17",
+      "note": "页表项中由 MMU 设置、软件清除的位",
+      "curated": "期末/2020期末-无答案/175.md"
+    },
+    {
+      "start": 180,
+      "end": 184,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 18",
+      "note": "写时复制的适用场景",
+      "curated": "期末/2020期末-无答案/180.md"
+    },
+    {
+      "start": 189,
+      "end": 193,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 19",
+      "note": "垃圾收集器根节点的来源节",
+      "curated": "期末/2020期末-无答案/189.md"
+    },
+    {
+      "start": 194,
+      "end": 201,
+      "module": "Network",
+      "qno": "第一题 20",
+      "note": "套接字接口函数与迭代 echo 服务器阻塞",
+      "curated": "期末/2020期末-无答案/194.md"
+    },
+    {
+      "start": 202,
+      "end": 206,
+      "module": "Network",
+      "qno": "第一题 21",
+      "note": "IPv4 地址、字节序与主机名命令",
+      "curated": "期末/2020期末-无答案/202.md"
+    },
+    {
+      "start": 207,
+      "end": 212,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 22",
+      "note": "同进程内不同线程共享的资源",
+      "curated": "期末/2020期末-无答案/207.md"
+    },
+    {
+      "start": 213,
+      "end": 218,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 23",
+      "note": "指令重排以消除共享变量竞争",
+      "curated": "期末/2020期末-无答案/213.md"
+    },
+    {
+      "start": 223,
+      "end": 240,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 24",
+      "note": "主线程退出导致对等线程终止",
+      "curated": "期末/2020期末-无答案/223.md"
+    },
+    {
+      "start": 241,
+      "end": 261,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 25",
+      "note": "信号量执行轨迹中的死锁",
+      "curated": "期末/2020期末-无答案/241.md"
+    },
+    {
+      "start": 267,
+      "end": 273,
+      "module": "Processor Arch",
+      "qno": "第二题 1)",
+      "note": "五级流水线时钟周期与寄存器开销",
+      "curated": "期末/2020期末-无答案/267.md"
+    },
+    {
+      "start": 274,
+      "end": 284,
+      "module": "Processor Arch",
+      "qno": "第二题 2)",
+      "note": "Y86-64 代码在前递与分支预测下的周期数",
+      "curated": "期末/2020期末-无答案/274.md"
+    },
+    {
+      "start": 285,
+      "end": 294,
+      "module": "Memory Hierarchy",
+      "qno": "第二题 3)",
+      "note": "I-cache/D-cache 命中次数与总周期数",
+      "curated": "期末/2020期末-无答案/285.md"
+    },
+    {
+      "start": 299,
+      "end": 426,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第三题",
+      "note": "符号表条目、节归属与重定位引用值",
+      "curated": "期末/2020期末-无答案/299.md"
+    },
+    {
+      "start": 431,
+      "end": 470,
+      "module": "ECF and System IO",
+      "qno": "第四题",
+      "note": "signal/fork/dup/open 的输出与 counter",
+      "curated": "期末/2020期末-无答案/431.md"
+    },
+    {
+      "start": 475,
+      "end": 522,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第五题",
+      "note": "循环次序对缺页与 dTLB 失效的影响（兼 Memory Hierarchy）",
+      "curated": "期末/2020期末-无答案/475.md"
+    },
+    {
+      "start": 526,
+      "end": 683,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第六题",
+      "note": "圆桌信号量：死锁、加锁顺序与二元信号量实现",
+      "curated": "期末/2020期末-无答案/526.md"
+    }
+  ],
+  "answer_sections": []
+}

@@ -1,0 +1,181 @@
+{
+  "file": "期末/2022期末-答案.md",
+  "total_lines": 90,
+  "items": [
+    {
+      "start": 10,
+      "end": 10,
+      "module": "Processor Arch",
+      "qno": "第一题 1",
+      "note": "RISC/CISC 指令集设计",
+      "curated": "期末/2022期末-答案/10.md"
+    },
+    {
+      "start": 11,
+      "end": 11,
+      "module": "Processor Arch",
+      "qno": "第一题 2",
+      "note": "存疑：仅给出答案 10，考点不明",
+      "curated": "期末/2022期末-答案/11.md"
+    },
+    {
+      "start": 12,
+      "end": 12,
+      "module": "Machine Prog",
+      "qno": "第一题 3",
+      "note": "rdi/rsi 参数传递寄存器",
+      "curated": "期末/2022期末-答案/12.md"
+    },
+    {
+      "start": 13,
+      "end": 13,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 4",
+      "note": "符号解析与重定位",
+      "curated": "期末/2022期末-答案/13.md"
+    },
+    {
+      "start": 14,
+      "end": 14,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 5",
+      "note": "GOT 与 PLT",
+      "curated": "期末/2022期末-答案/14.md"
+    },
+    {
+      "start": 15,
+      "end": 15,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 6",
+      "note": "静态库链接顺序 gcc 命令行",
+      "curated": "期末/2022期末-答案/15.md"
+    },
+    {
+      "start": 16,
+      "end": 16,
+      "module": "ECF and System IO",
+      "qno": "第一题 7",
+      "note": "异常切内核态与信号处理程序",
+      "curated": "期末/2022期末-答案/16.md"
+    },
+    {
+      "start": 17,
+      "end": 17,
+      "module": "ECF and System IO",
+      "qno": "第一题 8",
+      "note": "fork/execve 进程控制",
+      "curated": "期末/2022期末-答案/17.md"
+    },
+    {
+      "start": 18,
+      "end": 18,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 9",
+      "note": "MMU 与 TLB",
+      "curated": "期末/2022期末-答案/18.md"
+    },
+    {
+      "start": 19,
+      "end": 19,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 10",
+      "note": "虚拟地址 0x5d5 相关计算",
+      "curated": "期末/2022期末-答案/19.md"
+    },
+    {
+      "start": 20,
+      "end": 20,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 11",
+      "note": "内存映射",
+      "curated": "期末/2022期末-答案/20.md"
+    },
+    {
+      "start": 21,
+      "end": 21,
+      "module": "Network",
+      "qno": "第一题 12",
+      "note": "点分十进制 IP 地址",
+      "curated": "期末/2022期末-答案/21.md"
+    },
+    {
+      "start": 22,
+      "end": 22,
+      "module": "Network",
+      "qno": "第一题 13",
+      "note": "bind 绑定套接字",
+      "curated": "期末/2022期末-答案/22.md"
+    },
+    {
+      "start": 23,
+      "end": 23,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 14",
+      "note": "对等线程",
+      "curated": "期末/2022期末-答案/23.md"
+    },
+    {
+      "start": 24,
+      "end": 24,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 15",
+      "note": "互斥锁",
+      "curated": "期末/2022期末-答案/24.md"
+    },
+    {
+      "start": 25,
+      "end": 31,
+      "module": "Processor Arch",
+      "qno": "第二题",
+      "note": "流水线 stall/bubble 与流水线寄存器",
+      "curated": "期末/2022期末-答案/25.md"
+    },
+    {
+      "start": 35,
+      "end": 50,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第三题",
+      "note": "符号表、重定位、.interp 与 PLT",
+      "curated": "期末/2022期末-答案/35.md"
+    },
+    {
+      "start": 51,
+      "end": 63,
+      "module": "ECF and System IO",
+      "qno": "第四题",
+      "note": "信号屏蔽与 sigsuspend 同步",
+      "curated": "期末/2022期末-答案/51.md"
+    },
+    {
+      "start": 64,
+      "end": 71,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第五题",
+      "note": "虚拟内存布局与 malloc 内存错误",
+      "curated": "期末/2022期末-答案/64.md"
+    },
+    {
+      "start": 75,
+      "end": 83,
+      "module": "Network",
+      "qno": "第六题",
+      "note": "SOCK_STR 与客户端 fd 泄漏",
+      "curated": "期末/2022期末-答案/75.md"
+    },
+    {
+      "start": 84,
+      "end": 90,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第七题",
+      "note": "信号量实现读者-写者与互斥",
+      "curated": "期末/2022期末-答案/84.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 1,
+      "end": 90,
+      "note": "全文即 2022 期末参考答案与题解（非完整题干）"
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "file": "期末/2019期末-无答案.md",
+  "total_lines": 636,
+  "items": [
+    {
+      "start": 50,
+      "end": 55,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "浮点加法结合律与舍入、重排表达式",
+      "curated": "期末/2019期末-无答案/50.md"
+    },
+    {
+      "start": 56,
+      "end": 60,
+      "module": "Processor Arch",
+      "qno": "第一题 2",
+      "note": "PIPE 流水线数据冒险的判定",
+      "curated": "期末/2019期末-无答案/56.md"
+    },
+    {
+      "start": 62,
+      "end": 71,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "有符号除法与算术右移的舍入差异",
+      "curated": "期末/2019期末-无答案/62.md"
+    },
+    {
+      "start": 72,
+      "end": 76,
+      "module": "Processor Arch",
+      "qno": "第一题 4",
+      "note": "RISC 与 CISC 指令集特点",
+      "curated": "期末/2019期末-无答案/72.md"
+    },
+    {
+      "start": 77,
+      "end": 86,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 5",
+      "note": "磁盘/DRAM/SSD/SRAM 存储介质特性",
+      "curated": "期末/2019期末-无答案/77.md"
+    },
+    {
+      "start": 87,
+      "end": 92,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 6",
+      "note": "链接时哪些符号需要重定位",
+      "curated": "期末/2019期末-无答案/87.md"
+    },
+    {
+      "start": 93,
+      "end": 97,
+      "module": "ECF and System IO",
+      "qno": "第一题 7",
+      "note": "同步/异步异常与异常返回行为",
+      "curated": "期末/2019期末-无答案/93.md"
+    },
+    {
+      "start": 98,
+      "end": 108,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 8",
+      "note": "进程并发与并行的区别",
+      "curated": "期末/2019期末-无答案/98.md"
+    },
+    {
+      "start": 109,
+      "end": 114,
+      "module": "ECF and System IO",
+      "qno": "第一题 9",
+      "note": "fork/setjmp/longjmp/execve 返回次数",
+      "curated": "期末/2019期末-无答案/109.md"
+    },
+    {
+      "start": 115,
+      "end": 120,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 10",
+      "note": "用户/内核态与进程切换时 TLB、cache 刷新（兼 Memory Hierarchy）",
+      "curated": "期末/2019期末-无答案/115.md"
+    },
+    {
+      "start": 125,
+      "end": 130,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 11",
+      "note": "多级页表层数的计算",
+      "curated": "期末/2019期末-无答案/125.md"
+    },
+    {
+      "start": 131,
+      "end": 152,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 12",
+      "note": "malloc/free 与显式空闲链表、内部碎片",
+      "curated": "期末/2019期末-无答案/131.md"
+    },
+    {
+      "start": 153,
+      "end": 159,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 13",
+      "note": "TLB 与四级页表下访问物理内存次数",
+      "curated": "期末/2019期末-无答案/153.md"
+    },
+    {
+      "start": 160,
+      "end": 170,
+      "module": "Network",
+      "qno": "第一题 14",
+      "note": "迭代 echo 服务器中客户端阻塞位置",
+      "curated": "期末/2019期末-无答案/160.md"
+    },
+    {
+      "start": 171,
+      "end": 175,
+      "module": "Network",
+      "qno": "第一题 15",
+      "note": "IP 地址、套接字地址与网络字节序",
+      "curated": "期末/2019期末-无答案/171.md"
+    },
+    {
+      "start": 176,
+      "end": 183,
+      "module": "Network",
+      "qno": "第一题 16",
+      "note": "Web 服务器 CGI 动态内容",
+      "curated": "期末/2019期末-无答案/176.md"
+    },
+    {
+      "start": 184,
+      "end": 196,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 17",
+      "note": "死锁现象的判定",
+      "curated": "期末/2019期末-无答案/184.md"
+    },
+    {
+      "start": 197,
+      "end": 203,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 18",
+      "note": "线程安全与可重入函数",
+      "curated": "期末/2019期末-无答案/197.md"
+    },
+    {
+      "start": 204,
+      "end": 230,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 19",
+      "note": "多线程 echo 服务器中 connfd 的竞争",
+      "curated": "期末/2019期末-无答案/204.md"
+    },
+    {
+      "start": 232,
+      "end": 239,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 20",
+      "note": "信号量与 P/V 操作语义",
+      "curated": "期末/2019期末-无答案/232.md"
+    },
+    {
+      "start": 245,
+      "end": 261,
+      "module": "Machine Prog",
+      "qno": "第二题 (1)",
+      "note": "由汇编循环推断 C 代码循环次数（含共用汇编段）",
+      "curated": "期末/2019期末-无答案/245.md"
+    },
+    {
+      "start": 263,
+      "end": 265,
+      "module": "Processor Arch",
+      "qno": "第二题 (2)",
+      "note": "SEQ 处理器理想情况下的周期数",
+      "curated": "期末/2019期末-无答案/263.md"
+    },
+    {
+      "start": 266,
+      "end": 271,
+      "module": "Memory Hierarchy",
+      "qno": "第二题 (3)",
+      "note": "直接映射数据缓存未命中与周期数",
+      "curated": "期末/2019期末-无答案/266.md"
+    },
+    {
+      "start": 272,
+      "end": 275,
+      "module": "Processor Arch",
+      "qno": "第二题 (4)",
+      "note": "增加加法器后双发射的周期数",
+      "curated": "期末/2019期末-无答案/272.md"
+    },
+    {
+      "start": 276,
+      "end": 295,
+      "module": "Processor Arch",
+      "qno": "第二题 (5)",
+      "note": "循环展开并重排指令后的最短周期数（兼 Compilation）",
+      "curated": "期末/2019期末-无答案/276.md"
+    },
+    {
+      "start": 301,
+      "end": 415,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第三题",
+      "note": "符号表、强弱符号与重定位引用值",
+      "curated": "期末/2019期末-无答案/301.md"
+    },
+    {
+      "start": 421,
+      "end": 500,
+      "module": "ECF and System IO",
+      "qno": "第四题",
+      "note": "open/dup/fork/waitpid 的文件描述符与文件内容",
+      "curated": "期末/2019期末-无答案/421.md"
+    },
+    {
+      "start": 506,
+      "end": 526,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第五题",
+      "note": "二级页表地址翻译与写时复制（兼 ECF）",
+      "curated": "期末/2019期末-无答案/506.md"
+    },
+    {
+      "start": 532,
+      "end": 581,
+      "module": "Network",
+      "qno": "第六题",
+      "note": "client-server echo 框架与 open_listenfd 补全",
+      "curated": "期末/2019期末-无答案/532.md"
+    },
+    {
+      "start": 589,
+      "end": 635,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第七题",
+      "note": "第一类读者-写者问题的执行流程分析",
+      "curated": "期末/2019期末-无答案/589.md"
+    }
+  ],
+  "answer_sections": []
+}

@@ -1,0 +1,189 @@
+{
+  "file": "期中/2020期中-带答案.md",
+  "total_lines": 542,
+  "items": [
+    {
+      "start": 49,
+      "end": 61,
+      "module": "Machine Prog",
+      "qno": "第一题 1",
+      "note": "二维数组元素访问的寻址方式 addl",
+      "curated": "期中/2020期中-带答案/49.md"
+    },
+    {
+      "start": 62,
+      "end": 68,
+      "module": "Machine Prog",
+      "qno": "第一题 2",
+      "note": "条件码与 set/cmp/test/leaq 指令",
+      "curated": "期中/2020期中-带答案/62.md"
+    },
+    {
+      "start": 69,
+      "end": 83,
+      "module": "Machine Prog",
+      "qno": "第一题 3",
+      "note": "静态数组与指针数组的地址计算",
+      "curated": "期中/2020期中-带答案/69.md"
+    },
+    {
+      "start": 84,
+      "end": 89,
+      "module": "Machine Prog",
+      "qno": "第一题 4",
+      "note": "x86-64 过程调用与栈帧释放",
+      "curated": "期中/2020期中-带答案/84.md"
+    },
+    {
+      "start": 90,
+      "end": 105,
+      "module": "Machine Prog",
+      "qno": "第一题 5",
+      "note": "结构体成员偏移与 movl/leaq 选择",
+      "curated": "期中/2020期中-带答案/90.md"
+    },
+    {
+      "start": 106,
+      "end": 121,
+      "module": "Processor Arch",
+      "qno": "第一题 6",
+      "note": "PIPE 中 mem_addr 的 HCL 描述",
+      "curated": "期中/2020期中-带答案/106.md"
+    },
+    {
+      "start": 122,
+      "end": 129,
+      "module": "Processor Arch",
+      "qno": "第一题 7",
+      "note": "SEQ/PIPE 预测策略、CPI 与流水线划分",
+      "curated": "期中/2020期中-带答案/122.md"
+    },
+    {
+      "start": 130,
+      "end": 156,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 8",
+      "note": "编译器可行优化与别名/副作用限制",
+      "curated": "期中/2020期中-带答案/130.md"
+    },
+    {
+      "start": 160,
+      "end": 165,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 9",
+      "note": "循环代码体现的局部性种类",
+      "curated": "期中/2020期中-带答案/160.md"
+    },
+    {
+      "start": 166,
+      "end": 172,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 10",
+      "note": "SRAM/DRAM/SSD 速度与用途",
+      "curated": "期中/2020期中-带答案/166.md"
+    },
+    {
+      "start": 173,
+      "end": 179,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 11",
+      "note": "cache 替换策略与相联度对命中率影响",
+      "curated": "期中/2020期中-带答案/173.md"
+    },
+    {
+      "start": 180,
+      "end": 184,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 12",
+      "note": "SRAM/DRAM/SDRAM 特性辨析",
+      "curated": "期中/2020期中-带答案/180.md"
+    },
+    {
+      "start": 190,
+      "end": 226,
+      "module": "Data Representation",
+      "qno": "第二题 第一段",
+      "note": "union 中 double 的位模式与 IEEE 浮点解释",
+      "curated": "期中/2020期中-带答案/190.md"
+    },
+    {
+      "start": 227,
+      "end": 239,
+      "module": "Data Representation",
+      "qno": "第二题 第二段",
+      "note": "float 精度、(int) 截断与不可精确表示的数",
+      "curated": "期中/2020期中-带答案/227.md"
+    },
+    {
+      "start": 246,
+      "end": 340,
+      "module": "Machine Prog",
+      "qno": "第三题 1",
+      "note": "C 与 x86-64 汇编填空：递归、参数传递",
+      "curated": "期中/2020期中-带答案/246.md"
+    },
+    {
+      "start": 342,
+      "end": 363,
+      "module": "Machine Prog",
+      "qno": "第三题 2",
+      "note": "断点处栈帧地址与存储值的推断",
+      "curated": "期中/2020期中-带答案/342.md"
+    },
+    {
+      "start": 364,
+      "end": 364,
+      "module": "Machine Prog",
+      "qno": "第三题 3",
+      "note": "递归函数 foo 的功能",
+      "curated": "期中/2020期中-带答案/364.md"
+    },
+    {
+      "start": 416,
+      "end": 441,
+      "module": "Processor Arch",
+      "qno": "第四题 1",
+      "note": "新指令在 SEQ 各阶段的操作补全",
+      "curated": "期中/2020期中-带答案/416.md"
+    },
+    {
+      "start": 446,
+      "end": 463,
+      "module": "Processor Arch",
+      "qno": "第四题 2",
+      "note": "PIPE 新增 enter 指令的硬件改造选项",
+      "curated": "期中/2020期中-带答案/446.md"
+    },
+    {
+      "start": 469,
+      "end": 486,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 1",
+      "note": "非对齐访存对直接映射 cache 的影响",
+      "curated": "期中/2020期中-带答案/469.md"
+    },
+    {
+      "start": 487,
+      "end": 506,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2",
+      "note": "write back + no-write-allocate 下的组状态",
+      "curated": "期中/2020期中-带答案/487.md"
+    },
+    {
+      "start": 507,
+      "end": 541,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 3",
+      "note": "块大小/全相联两方案的 miss 开销与 AMAT",
+      "curated": "期中/2020期中-带答案/507.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 365,
+      "end": 410,
+      "note": "第三题参考答案与考察内容解析"
+    }
+  ]
+}

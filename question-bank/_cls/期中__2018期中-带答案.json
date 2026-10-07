@@ -1,0 +1,175 @@
+{
+  "file": "期中/2018期中-带答案.md",
+  "total_lines": 630,
+  "items": [
+    {
+      "start": 48,
+      "end": 50,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "类型转换的溢出与舍入",
+      "curated": "期中/2018期中-带答案/48.md"
+    },
+    {
+      "start": 51,
+      "end": 63,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "小端存储下字符串转整型与无符号转换",
+      "curated": "期中/2018期中-带答案/51.md"
+    },
+    {
+      "start": 64,
+      "end": 80,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "异或交换的位运算与按值传参",
+      "curated": "期中/2018期中-带答案/64.md"
+    },
+    {
+      "start": 81,
+      "end": 87,
+      "module": "Machine Prog",
+      "qno": "第一题 4",
+      "note": "movl/cltq/movabsq/movswq 语义",
+      "curated": "期中/2018期中-带答案/81.md"
+    },
+    {
+      "start": 88,
+      "end": 108,
+      "module": "Data Representation",
+      "qno": "第一题 5",
+      "note": "union 与 double 位模式的字节拆分",
+      "curated": "期中/2018期中-带答案/88.md"
+    },
+    {
+      "start": 109,
+      "end": 121,
+      "module": "Data Representation",
+      "qno": "第一题 6",
+      "note": "struct/union 成员排列与内存占用",
+      "curated": "期中/2018期中-带答案/109.md"
+    },
+    {
+      "start": 122,
+      "end": 133,
+      "module": "Machine Prog",
+      "qno": "第一题 7",
+      "note": "控制结构的机器码实现（jmp/cmov/跳转表）",
+      "curated": "期中/2018期中-带答案/122.md"
+    },
+    {
+      "start": 134,
+      "end": 147,
+      "module": "Machine Prog",
+      "qno": "第一题 8",
+      "note": "条件码的读写与改变",
+      "curated": "期中/2018期中-带答案/134.md"
+    },
+    {
+      "start": 148,
+      "end": 158,
+      "module": "Processor Arch",
+      "qno": "第一题 9",
+      "note": "编译技术/取指速度对 ISA 选择的影响",
+      "curated": "期中/2018期中-带答案/148.md"
+    },
+    {
+      "start": 159,
+      "end": 172,
+      "module": "Processor Arch",
+      "qno": "第一题 10",
+      "note": "Y86 popl 的 SEQ 实现",
+      "curated": "期中/2018期中-带答案/159.md"
+    },
+    {
+      "start": 173,
+      "end": 193,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 11",
+      "note": "编译器总是可行的优化（别名/副作用）",
+      "curated": "期中/2018期中-带答案/173.md"
+    },
+    {
+      "start": 194,
+      "end": 204,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 12",
+      "note": "直接映射与 2 路组相联的命中次数",
+      "curated": "期中/2018期中-带答案/194.md"
+    },
+    {
+      "start": 209,
+      "end": 223,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 13",
+      "note": "全相联缓存的替换算法对比",
+      "curated": "期中/2018期中-带答案/209.md"
+    },
+    {
+      "start": 224,
+      "end": 237,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 14",
+      "note": "SRAM/DRAM/SSD/磁盘容量与访问时间",
+      "curated": "期中/2018期中-带答案/224.md"
+    },
+    {
+      "start": 238,
+      "end": 262,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 15",
+      "note": "数组访问顺序与 cache 全 miss 判断",
+      "curated": "期中/2018期中-带答案/238.md"
+    },
+    {
+      "start": 268,
+      "end": 352,
+      "module": "Data Representation",
+      "qno": "第二题",
+      "note": "补码/无符号恒等式、nlz 与大小端 strlen",
+      "curated": "期中/2018期中-带答案/268.md"
+    },
+    {
+      "start": 359,
+      "end": 374,
+      "module": "Data Representation",
+      "qno": "第三题 1",
+      "note": "结构体对齐填充与 sizeof 计算",
+      "curated": "期中/2018期中-带答案/359.md"
+    },
+    {
+      "start": 375,
+      "end": 444,
+      "module": "Machine Prog",
+      "qno": "第三题 2、3",
+      "note": "结构体访问汇编填空与汇编反推 C 代码",
+      "curated": "期中/2018期中-带答案/375.md"
+    },
+    {
+      "start": 450,
+      "end": 511,
+      "module": "Processor Arch",
+      "qno": "第四题",
+      "note": "Y86-32 流水线前递 HCL 与 load-use 冒险处理",
+      "curated": "期中/2018期中-带答案/450.md"
+    },
+    {
+      "start": 517,
+      "end": 579,
+      "module": "Memory Hierarchy",
+      "qno": "第五题",
+      "note": "Cache 组相联状态表、AMAT/miss rate 与容量计算",
+      "curated": "期中/2018期中-带答案/517.md"
+    },
+    {
+      "start": 585,
+      "end": 629,
+      "module": "Processor Arch",
+      "qno": "第六题",
+      "note": "PIPE 上循环代码的周期数（冒险/预测/缺失）",
+      "curated": "期中/2018期中-带答案/585.md"
+    }
+  ],
+  "answer_sections": []
+}

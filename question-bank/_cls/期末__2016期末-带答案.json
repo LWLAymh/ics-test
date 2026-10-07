@@ -1,0 +1,223 @@
+{
+  "file": "期末/2016期末-带答案.md",
+  "total_lines": 1001,
+  "items": [
+    {
+      "start": 48,
+      "end": 58,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "int/unsigned 混合比较与类型转换规则",
+      "curated": "期末/2016期末-带答案/48.md"
+    },
+    {
+      "start": 60,
+      "end": 71,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "自定义浮点格式的指数与尾数字段编码",
+      "curated": "期末/2016期末-带答案/60.md"
+    },
+    {
+      "start": 76,
+      "end": 82,
+      "module": "Machine Prog",
+      "qno": "第一题 3",
+      "note": "缓冲区溢出的常见防御手段辨析",
+      "curated": "期末/2016期末-带答案/76.md"
+    },
+    {
+      "start": 83,
+      "end": 87,
+      "module": "Processor Arch",
+      "qno": "第一题 4",
+      "note": "四级流水线操作周期由最长段决定",
+      "curated": "期末/2016期末-带答案/83.md"
+    },
+    {
+      "start": 88,
+      "end": 103,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 5",
+      "note": "strlen 外提优化与程序局部性",
+      "curated": "期末/2016期末-带答案/88.md"
+    },
+    {
+      "start": 104,
+      "end": 122,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 6",
+      "note": "组相联 cache 地址序列命中次数手算",
+      "curated": "期末/2016期末-带答案/104.md"
+    },
+    {
+      "start": 124,
+      "end": 142,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 7",
+      "note": "同名全局变量的符号解析与 extern",
+      "curated": "期末/2016期末-带答案/124.md"
+    },
+    {
+      "start": 143,
+      "end": 169,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 8",
+      "note": ".data/.bss 布局与变量地址顺序",
+      "curated": "期末/2016期末-带答案/143.md"
+    },
+    {
+      "start": 170,
+      "end": 184,
+      "module": "ECF and System IO",
+      "qno": "第一题 9",
+      "note": "fork 父子进程输出交错与 ++/--",
+      "curated": "期末/2016期末-带答案/170.md"
+    },
+    {
+      "start": 185,
+      "end": 190,
+      "module": "ECF and System IO",
+      "qno": "第一题 10",
+      "note": "哪些事件会导致信号发送到进程",
+      "curated": "期末/2016期末-带答案/185.md"
+    },
+    {
+      "start": 191,
+      "end": 197,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 11",
+      "note": "Mark-and-Sweep 垃圾回收的可达性假设",
+      "curated": "期末/2016期末-带答案/191.md"
+    },
+    {
+      "start": 198,
+      "end": 207,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 12",
+      "note": "Core i7 各级页表项的标志位段",
+      "curated": "期末/2016期末-带答案/198.md"
+    },
+    {
+      "start": 208,
+      "end": 213,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 13",
+      "note": "虚拟地址与物理地址的位段划分关系",
+      "curated": "期末/2016期末-带答案/208.md"
+    },
+    {
+      "start": 214,
+      "end": 238,
+      "module": "ECF and System IO",
+      "qno": "第一题 14",
+      "note": "dup2 共享文件偏移导致的内容变化",
+      "curated": "期末/2016期末-带答案/214.md"
+    },
+    {
+      "start": 243,
+      "end": 250,
+      "module": "ECF and System IO",
+      "qno": "第一题 15",
+      "note": "RIO 交叉调用、fd 分配与打开文件表",
+      "curated": "期末/2016期末-带答案/243.md"
+    },
+    {
+      "start": 251,
+      "end": 258,
+      "module": "Network",
+      "qno": "第一题 16",
+      "note": "IP 协议特性与域名到 IP 的映射",
+      "curated": "期末/2016期末-带答案/251.md"
+    },
+    {
+      "start": 259,
+      "end": 266,
+      "module": "Network",
+      "qno": "第一题 17",
+      "note": "HTTP 端口、TCP 可靠性与连接语义",
+      "curated": "期末/2016期末-带答案/259.md"
+    },
+    {
+      "start": 267,
+      "end": 276,
+      "module": "Network",
+      "qno": "第一题 18",
+      "note": "HTTPS 取文件时各层协议的必要性",
+      "curated": "期末/2016期末-带答案/267.md"
+    },
+    {
+      "start": 281,
+      "end": 286,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 19",
+      "note": "基于进程的并发服务器父子资源共享关系",
+      "curated": "期末/2016期末-带答案/281.md"
+    },
+    {
+      "start": 287,
+      "end": 317,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 20",
+      "note": "信号量 PV 下多线程输出的可能性",
+      "curated": "期末/2016期末-带答案/287.md"
+    },
+    {
+      "start": 323,
+      "end": 409,
+      "module": "Machine Prog",
+      "qno": "第二题",
+      "note": "32 位汇编反推 C 函数并计算返回值",
+      "curated": "期末/2016期末-带答案/323.md"
+    },
+    {
+      "start": 415,
+      "end": 437,
+      "module": "Processor Arch",
+      "qno": "第三题",
+      "note": "组合逻辑单元插入寄存器与吞吐率",
+      "curated": "期末/2016期末-带答案/415.md"
+    },
+    {
+      "start": 443,
+      "end": 541,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第四题",
+      "note": "强/弱符号属性表与多文件链接运行输出",
+      "curated": "期末/2016期末-带答案/443.md"
+    },
+    {
+      "start": 547,
+      "end": 667,
+      "module": "ECF and System IO",
+      "qno": "第五题",
+      "note": "fork/exit 输出排列与信号处理程序填空",
+      "curated": "期末/2016期末-带答案/547.md"
+    },
+    {
+      "start": 674,
+      "end": 818,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第六题",
+      "note": "mmap 私有/共享语义、maps 布局、TLB 与页表",
+      "curated": "期末/2016期末-带答案/674.md"
+    },
+    {
+      "start": 824,
+      "end": 902,
+      "module": "Network",
+      "qno": "第七题",
+      "note": "并发 echo server 套接字程序填空",
+      "curated": "期末/2016期末-带答案/824.md"
+    },
+    {
+      "start": 909,
+      "end": 1000,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第八题",
+      "note": "多线程 cnt++ 竞态分析与 PV 实现司机售票员同步",
+      "curated": "期末/2016期末-带答案/909.md"
+    }
+  ],
+  "answer_sections": []
+}

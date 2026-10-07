@@ -1,0 +1,18 @@
+pages: 758
+
+cand          lines      bad   under70    over130
+A_old         20579      380       146          1
+B_plan        22738      282        25          0
+G_bin50       22315      283        40          0
+G_bin60       22159      283        50          0
+H_abs6        22203      273        50          0
+H_abs8        22004      272        57          0
+
+只在「extract_text 干净」的页面上比较（参考行数可信）
+cand         pages      lines  ref_lines      bad   under80
+A_old          665      17661      20337       98       156
+B_plan         665      19572      20337        2        34
+G_bin50        665      19189      20337        2        51
+G_bin60        665      19034      20337        2        62
+H_abs6         665      19081      20337        2        62
+H_abs8         665      18913      20337        2        71

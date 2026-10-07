@@ -1,0 +1,2781 @@
+{
+  "schemaVersion": 2,
+  "module": {
+    "id": "concurrent_programming",
+    "number": 9,
+    "name": "Concurrent Programming and Synchronization",
+    "title": "并发编程与同步"
+  },
+  "questions": [
+    {
+      "id": "q-f1d1c5692678dae1",
+      "moduleId": "concurrent_programming",
+      "year": 2013,
+      "examType": "期末",
+      "exam": "2013期末-带答案",
+      "questionNo": "第一题 19",
+      "summary": "pthread_create 程序输出判断",
+      "content": "19、在Pthread线程包使用中，下列代码输出正确的是：（     ）\n```\nvoid *th_f(void * arg)\n{\n printf(\"Hello World\") ;\n  pthread_exit(0) ;\n}\nint main(void)\n{\n```\n8\n\n<!-- ===== page 9 ===== -->\n\n```\n   pthread_t tid;\n   int st;\n   st = pthread_create(&tid,NULL,th_f,NULL);\n   if(st<0) {\n      printf(\"Oops, I can not create thread\\n\");\n      exit(-1);\n   }\n   sleep(1);\n   exit(0);\n}\nA. Oops, I can not create thread\nB. Hello World\n  Oops, I can not create thread\nC. Hello World\n```\nD. 不输出任何信息\n答案：C",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2013期末-带答案.md",
+        "lines": {
+          "start": 286,
+          "end": 317
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2013期末-带答案/286.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "19、在Pthread线程包使用中，下列代码输出正确的是：（     ）\n```\nvoid *th_f(void * arg)\n{\n printf(\"Hello World\") ;\n  pthread_exit(0) ;\n}\nint main(void)\n{\n```\n8\n\n<!-- ===== page 9 ===== -->\n\n```\n   pthread_t tid;\n   int st;\n   st = pthread_create(&tid,NULL,th_f,NULL);\n   if(st<0) {\n      printf(\"Oops, I can not create thread\\n\");\n      exit(-1);\n   }\n   sleep(1);\n   exit(0);\n}\nA. Oops, I can not create thread\nB. Hello World\n  Oops, I can not create thread\nC. Hello World\n```\nD. 不输出任何信息",
+        "choices": [],
+        "answer": "答案：C"
+      }
+    },
+    {
+      "id": "q-0e2f3a4f91245b7d",
+      "moduleId": "concurrent_programming",
+      "year": 2013,
+      "examType": "期末",
+      "exam": "2013期末-带答案",
+      "questionNo": "第一题 20",
+      "summary": "信号量 PV 序列与死锁判定",
+      "content": "20、有四个信号量，初值分别为：a=1,  b=1,  c=1,  d=1\n线程1：  线程2：  线程3：\n```\n① P(a);   ⑨ P(c);  ⑮ P(d);\n② P(b);  ⑩ P(b);  ⑯ P(a);\n③ P(d);   ⑪ V(c);  ⑰ V(d);\n④ P(c);  ⑫ V(b);  ⑱ P(b);\n⑤ V(d);  ⑬ P(a);  ⑲ V(a);\n⑥ V(a);  ⑭ V(a);  ⑳ V(b);\n⑦ V(b);\n⑧ V(c);\n```\n上面的程序执行时，下列哪些执行轨迹不会产生死锁?\nA. ①②③⑨⑩⑮④\nB. ⑨①②③⑩\nC. ①②⑮⑨③\nD. ⑨①⑮②③\n答案：实际上四个选项都有问题，无正确答案，因此批卷时本题直接算作得分",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2013期末-带答案.md",
+        "lines": {
+          "start": 318,
+          "end": 333
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2013期末-带答案/318.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "20、有四个信号量，初值分别为：a=1,  b=1,  c=1,  d=1\n线程1：  线程2：  线程3：\n```\n① P(a);   ⑨ P(c);  ⑮ P(d);\n② P(b);  ⑩ P(b);  ⑯ P(a);\n③ P(d);   ⑪ V(c);  ⑰ V(d);\n④ P(c);  ⑫ V(b);  ⑱ P(b);\n⑤ V(d);  ⑬ P(a);  ⑲ V(a);\n⑥ V(a);  ⑭ V(a);  ⑳ V(b);\n⑦ V(b);\n⑧ V(c);\n```\n上面的程序执行时，下列哪些执行轨迹不会产生死锁?",
+        "choices": [
+          {
+            "key": "A",
+            "content": "①②③⑨⑩⑮④"
+          },
+          {
+            "key": "B",
+            "content": "⑨①②③⑩"
+          },
+          {
+            "key": "C",
+            "content": "①②⑮⑨③"
+          },
+          {
+            "key": "D",
+            "content": "⑨①⑮②③"
+          }
+        ],
+        "answer": "答案：实际上四个选项都有问题，无正确答案，因此批卷时本题直接算作得分"
+      }
+    },
+    {
+      "id": "q-37f5173360d9f28e",
+      "moduleId": "concurrent_programming",
+      "year": 2013,
+      "examType": "期末",
+      "exam": "2013期末-带答案",
+      "questionNo": "第八题",
+      "summary": "用信号量实现单双号限行（PV 操作填空）",
+      "content": "第八题（10分）\n某个城市为了解决市中心交通拥堵的问题，决定出台一项交通管制措施，对进\n入市中心区的机动车辆实行单双日限制行驶的办法。具体要求是，逢单日，只允许\n车辆牌号号码为单数的机动车进入市中心区；同样，逢双日，只允许车辆牌号号码\n为双数的机动车进入市内中心区。有一个进入市中心区的交通路口，进入该路口的\n道路有一条，离开该路口的道路有两条，其中一条是通往市中心区的道路，而另一\n条是绕过市中心区的环路，在进入路口处设置了自动识别车辆牌号的识别设备与放\n行栅栏控制设备。在单日，遇到单号车辆进入路口车辆号码识别区，号码识别设备\n打开通往市中心区道路的放行栅栏；而遇到双号车辆，则打开绕过市中心区环路的\n放行栅栏。反之亦然。显然，只有在该路口车辆号码识别区中无车时，才允许一辆\n车进入车辆号码识别区。同时为了防止有车辆混过路口，两个放行栅栏平时处于关\n闭状态，只有在车辆号码识别区中的车辆已被识别出单双号之后，放行栅栏才会在\n识别设备的控制下，打开对应的放行栅栏，在车辆通过之后，该放行栅栏自行关闭。\nvehicle_n  int；         /* 车辆号码 */\n检查车辆牌号线程T1：\n  while (1) {\n车辆到达识别区路口；\n①\n车辆进入号码识别区；\nif  (vehicle_n == 奇数)\n```\n{    ②        }\n   else\n{    ③        }\n```\n }；\n市区放行栅栏线程T2：\n  while (1) {\n④\n允许车辆进入市中心区；\n⑤\n }；\n21\n\n<!-- ===== page 22 ===== -->\n\n环路放行栅栏线程T3：\n  while (1) {\n⑥\n允许车辆绕行环路；\n⑦\n}；\n1）请设计若干信号量，给出每一个信号量的作用和初值。（3分）\n参考答案：\nCheck：指示可否在车辆号码识别区中进入一辆汽车，由于只能进入一辆，其\n初值为1。\nOdd：指示汽车号码是否为奇数，其初值为0，表示不是奇数。\nEven：指示汽车号码是否为偶数，其初值为0，表示不是偶数。\n2）请将信号量上对应的PV操作填写在代码中适当位置。（7分）\n  参考答案：\n① P(Check)；\n② V(Odd)；\n③ V(Even)；\n④ P(Odd)；\n⑤ V(Check)；\n⑥ P(Even)；\n⑦ V(Check)；",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2013期末-带答案.md",
+        "lines": {
+          "start": 699,
+          "end": 755
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2013期末-带答案/699.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "第八题（10分）\n某个城市为了解决市中心交通拥堵的问题，决定出台一项交通管制措施，对进\n入市中心区的机动车辆实行单双日限制行驶的办法。具体要求是，逢单日，只允许\n车辆牌号号码为单数的机动车进入市中心区；同样，逢双日，只允许车辆牌号号码\n为双数的机动车进入市内中心区。有一个进入市中心区的交通路口，进入该路口的\n道路有一条，离开该路口的道路有两条，其中一条是通往市中心区的道路，而另一\n条是绕过市中心区的环路，在进入路口处设置了自动识别车辆牌号的识别设备与放\n行栅栏控制设备。在单日，遇到单号车辆进入路口车辆号码识别区，号码识别设备\n打开通往市中心区道路的放行栅栏；而遇到双号车辆，则打开绕过市中心区环路的\n放行栅栏。反之亦然。显然，只有在该路口车辆号码识别区中无车时，才允许一辆\n车进入车辆号码识别区。同时为了防止有车辆混过路口，两个放行栅栏平时处于关\n闭状态，只有在车辆号码识别区中的车辆已被识别出单双号之后，放行栅栏才会在\n识别设备的控制下，打开对应的放行栅栏，在车辆通过之后，该放行栅栏自行关闭。\nvehicle_n  int；         /* 车辆号码 */\n检查车辆牌号线程T1：\n  while (1) {\n车辆到达识别区路口；\n①\n车辆进入号码识别区；\nif  (vehicle_n == 奇数)\n```\n{    ②        }\n   else\n{    ③        }\n```\n }；\n市区放行栅栏线程T2：\n  while (1) {\n④\n允许车辆进入市中心区；\n⑤\n }；\n21\n\n<!-- ===== page 22 ===== -->\n\n环路放行栅栏线程T3：\n  while (1) {\n⑥\n允许车辆绕行环路；\n⑦\n}；\n1）请设计若干信号量，给出每一个信号量的作用和初值。（3分）",
+        "choices": [],
+        "answer": "参考答案：\nCheck：指示可否在车辆号码识别区中进入一辆汽车，由于只能进入一辆，其\n初值为1。\nOdd：指示汽车号码是否为奇数，其初值为0，表示不是奇数。\nEven：指示汽车号码是否为偶数，其初值为0，表示不是偶数。\n2）请将信号量上对应的PV操作填写在代码中适当位置。（7分）\n  参考答案：\n① P(Check)；\n② V(Odd)；\n③ V(Even)；\n④ P(Odd)；\n⑤ V(Check)；\n⑥ P(Even)；\n⑦ V(Check)；"
+      }
+    },
+    {
+      "id": "q-798628eee4c9aa30",
+      "moduleId": "concurrent_programming",
+      "year": 2014,
+      "examType": "期末",
+      "exam": "2014期末-带答案",
+      "questionNo": "第一题 19",
+      "summary": "Pthread_detach 与 Pthread_create 用法",
+      "content": "19. 对于如下C语言程序：\n```\n#include \"csapp.h\"\nvoid *thread (void * arg)\n{\n       printf(\"Hello World\") ;\n       Pthread_detach(pthread_self()) ;\n}\nint main(void)\n{\n```\n8\n\n<!-- ===== page 9 ===== -->\n\n```\n       pthread_t tid;\n       int sta ;\n       sta = Pthread_create(&tid, NULL, thread, NULL);\n       if (sta==0)\n            printf(\"Oops, I can not create thread\\n\");\n       exit(NULL);\n}\n```\n在上述程序中，Pthread_detach函数的作用是(      )\nA．使主线程阻塞以等待线程thread结束\nB．线程thread运行结束后会自动释放所有资源\nC．线程thread运行后主动释放CPU给其他线程\nD．线程thread运行后成为僵尸线程\n【答案】B\n【说明】考查对Posix线程包Pthreads函数功能的理解。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2014期末-带答案.md",
+        "lines": {
+          "start": 282,
+          "end": 312
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2014期末-带答案/282.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "19. 对于如下C语言程序：\n```\n#include \"csapp.h\"\nvoid *thread (void * arg)\n{\n       printf(\"Hello World\") ;\n       Pthread_detach(pthread_self()) ;\n}\nint main(void)\n{\n```\n8\n\n<!-- ===== page 9 ===== -->\n\n```\n       pthread_t tid;\n       int sta ;\n       sta = Pthread_create(&tid, NULL, thread, NULL);\n       if (sta==0)\n            printf(\"Oops, I can not create thread\\n\");\n       exit(NULL);\n}\n```\n在上述程序中，Pthread_detach函数的作用是(      )",
+        "choices": [
+          {
+            "key": "A",
+            "content": "使主线程阻塞以等待线程thread结束"
+          },
+          {
+            "key": "B",
+            "content": "线程thread运行结束后会自动释放所有资源"
+          },
+          {
+            "key": "C",
+            "content": "线程thread运行后主动释放CPU给其他线程"
+          },
+          {
+            "key": "D",
+            "content": "线程thread运行后成为僵尸线程\n【答案】B\n【说明】考查对Posix线程包Pthreads函数功能的理解。"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-69a1bf250f9b6afa",
+      "moduleId": "concurrent_programming",
+      "year": 2014,
+      "examType": "期末",
+      "exam": "2014期末-带答案",
+      "questionNo": "第一题 20",
+      "summary": "并发轨迹线安全/不安全判定",
+      "content": "20. 两个线程中共享如下一段C代码：\n```\n         for (j = 0;  j < N;  j++)\n                count + = 2;\n```\n假设其对应的汇编代码如下：\n```\n    movq  (%rdi), %rcx\n    testq %rcx,%rcx\n    jle   .L2                       Hi\n    movl  $0, %eax\n.L3:\n    movq  count(%rip),%rdx       Li\n    addq  $2, %rdx                 Ui\n    movq  %rdx, count(%rip)      Si\naddq  $1, %rax\n    cmpq  %rcx, %rax              Ti\n    jne   .L3\n.L2:\n```\n请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )\nA. H1，H2，L2，L1，U2，U1，S1，S2，T1，T2\nB. H1，L1，U1，H2，L2，S1，T1，U2，S2，T2\nC. H2，L2，U2，H1，S2，L1，T2，U1，S1，T1\nD. H2，L2，H1，L1，U1，U2，S2，T2，S1，T1\n【答案】Ｃ\n【说明】考查两个并发线程指令执行序列是否会导致不安全轨迹线。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2014期末-带答案.md",
+        "lines": {
+          "start": 313,
+          "end": 339
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2014期末-带答案/313.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "20. 两个线程中共享如下一段C代码：\n```\n         for (j = 0;  j < N;  j++)\n                count + = 2;\n```\n假设其对应的汇编代码如下：\n```\n    movq  (%rdi), %rcx\n    testq %rcx,%rcx\n    jle   .L2                       Hi\n    movl  $0, %eax\n.L3:\n    movq  count(%rip),%rdx       Li\n    addq  $2, %rdx                 Ui\n    movq  %rdx, count(%rip)      Si\naddq  $1, %rax\n    cmpq  %rcx, %rax              Ti\n    jne   .L3\n.L2:\n```\n请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )",
+        "choices": [
+          {
+            "key": "A",
+            "content": "H1，H2，L2，L1，U2，U1，S1，S2，T1，T2"
+          },
+          {
+            "key": "B",
+            "content": "H1，L1，U1，H2，L2，S1，T1，U2，S2，T2"
+          },
+          {
+            "key": "C",
+            "content": "H2，L2，U2，H1，S2，L1，T2，U1，S1，T1"
+          },
+          {
+            "key": "D",
+            "content": "H2，L2，H1，L1，U1，U2，S2，T2，S1，T1\n【答案】Ｃ\n【说明】考查两个并发线程指令执行序列是否会导致不安全轨迹线。"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-423c96723fb1c59c",
+      "moduleId": "concurrent_programming",
+      "year": 2014,
+      "examType": "期末",
+      "exam": "2014期末-带答案",
+      "questionNo": "第九题",
+      "summary": "水果盘问题的信号量设计与 PV 填空",
+      "content": "第九题（10分）并发\n桌子上有一个水果盘，能容纳一个水果。一家四口人：爸爸、妈妈、儿子、女\n儿。爸爸专门往盘子里放苹果，妈妈专门往盘子里放桔子；儿子专等盘子里的苹果\n吃，女儿专等盘子里的桔子吃。\n```\ndad() {\n   while(1) {\n```\n      准备好一个苹果；\n          ①\n      往果盘中放苹果；\n          ②\n```\n   }\n}\nmom() {\n   while(1) {\n```\n      准备好一个桔子；\n          ③\n      往果盘中放桔子；\n          ④\n```\n   }\n}\nboy() {\n   while(1) {\n```\n          ⑤\n      从果盘中拿走苹果；\n          ⑥\n      吃苹果；\n```\n   }\n}\ngirl() {\n   while(1) {\n```\n          ⑦\n      从果盘中拿走桔子；\n          ⑧\n      吃桔子；\n```\n   }\n}\n```\n26\n\n<!-- ===== page 27 ===== -->\n\n1．(2分)请设计若干信号量，给出每一个信号量的作用和初值。\n参考答案（答对两条给2分）：\nplate：互斥信号量，标识能否往果盘中放入水果，其初值为1。\napple：信号量，标识果盘中是否有苹果，其初值为0。\norange：信号量，标识果盘中是否有桔子，其初值为0。\n2．(8分)请将信号量上对应的PV操作填写在代码中适当位置。\n  参考答案：\n①P(plate)；\n②V(apple)；\n③P(plate)；\n④V(orange)；\n⑤P(apple)；\n⑥V(plate)；\n⑦P(orange)；\n⑧V(Plate)；",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2014期末-带答案.md",
+        "lines": {
+          "start": 901,
+          "end": 965
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2014期末-带答案/901.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "第九题（10分）并发\n桌子上有一个水果盘，能容纳一个水果。一家四口人：爸爸、妈妈、儿子、女\n儿。爸爸专门往盘子里放苹果，妈妈专门往盘子里放桔子；儿子专等盘子里的苹果\n吃，女儿专等盘子里的桔子吃。\n```\ndad() {\n   while(1) {\n```\n      准备好一个苹果；\n          ①\n      往果盘中放苹果；\n          ②\n```\n   }\n}\nmom() {\n   while(1) {\n```\n      准备好一个桔子；\n          ③\n      往果盘中放桔子；\n          ④\n```\n   }\n}\nboy() {\n   while(1) {\n```\n          ⑤\n      从果盘中拿走苹果；\n          ⑥\n      吃苹果；\n```\n   }\n}\ngirl() {\n   while(1) {\n```\n          ⑦\n      从果盘中拿走桔子；\n          ⑧\n      吃桔子；\n```\n   }\n}\n```\n26\n\n<!-- ===== page 27 ===== -->\n\n1．(2分)请设计若干信号量，给出每一个信号量的作用和初值。\n参考答案（答对两条给2分）：\nplate：互斥信号量，标识能否往果盘中放入水果，其初值为1。\napple：信号量，标识果盘中是否有苹果，其初值为0。\norange：信号量，标识果盘中是否有桔子，其初值为0。\n2．(8分)请将信号量上对应的PV操作填写在代码中适当位置。",
+        "choices": [],
+        "answer": "  参考答案：\n①P(plate)；\n②V(apple)；\n③P(plate)；\n④V(orange)；\n⑤P(apple)；\n⑥V(plate)；\n⑦P(orange)；\n⑧V(Plate)；"
+      }
+    },
+    {
+      "id": "q-9248c6dbdd450dee",
+      "moduleId": "concurrent_programming",
+      "year": 2015,
+      "examType": "期末",
+      "exam": "2015期末-20160104-带答案",
+      "questionNo": "第一题 19",
+      "summary": "多线程可共享的变量（全局/静态局部）",
+      "content": "19. 有如下代码：\n```\nint counter = 0;\nvoid * thread(void * vargp)\n{\n  intthread_var = ((int *) vargp);\n  staticintthread_counter = 0;\n  thread_internal(thread_var);\n  thread_counter ++;\n```\n8\n\n<!-- ===== page 9 ===== -->\n\n```\n  return NULL;\n}\nint main (intargc, const char ** argv)\n{\n  int tid1, tid2;\n  intvar = atoi(argv[1]);\n  Pthread_create(&tid1, NULL, thread, (void *)var);\n  Pthread_create(&tid2, NULL, thread, (void *)var);\n  Pthread_join(tid1, NULL);\n  Pthread_join(tid2, NULL);\n  return 0;\n}\n```\n则，线程 tid1 与线程 tid2 可以共享的变量是\nA.  counter, var\nB.  counter, thread_counter\nC.  var, thread_counter\nD.  thread_var, thread_counter\n答案：B\n（本题考查对线程中共享变量的概念的理解。因为 counter 是全局变量；\nthread_counter是静态局部变量，所以两个线程可以共享它们）",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2015期末-20160104-带答案.md",
+        "lines": {
+          "start": 281,
+          "end": 316
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2015期末-20160104-带答案/281.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "19. 有如下代码：\n```\nint counter = 0;\nvoid * thread(void * vargp)\n{\n  intthread_var = ((int *) vargp);\n  staticintthread_counter = 0;\n  thread_internal(thread_var);\n  thread_counter ++;\n```\n8\n\n<!-- ===== page 9 ===== -->\n\n```\n  return NULL;\n}\nint main (intargc, const char ** argv)\n{\n  int tid1, tid2;\n  intvar = atoi(argv[1]);\n  Pthread_create(&tid1, NULL, thread, (void *)var);\n  Pthread_create(&tid2, NULL, thread, (void *)var);\n  Pthread_join(tid1, NULL);\n  Pthread_join(tid2, NULL);\n  return 0;\n}\n```\n则，线程 tid1 与线程 tid2 可以共享的变量是",
+        "choices": [
+          {
+            "key": "A",
+            "content": "counter, var"
+          },
+          {
+            "key": "B",
+            "content": "counter, thread_counter"
+          },
+          {
+            "key": "C",
+            "content": "var, thread_counter"
+          },
+          {
+            "key": "D",
+            "content": "thread_var, thread_counter"
+          }
+        ],
+        "answer": "答案：B\n（本题考查对线程中共享变量的概念的理解。因为 counter 是全局变量；\nthread_counter是静态局部变量，所以两个线程可以共享它们）"
+      }
+    },
+    {
+      "id": "q-4d4da7a8daaab375",
+      "moduleId": "concurrent_programming",
+      "year": 2015,
+      "examType": "期末",
+      "exam": "2015期末-20160104-带答案",
+      "questionNo": "第一题 20",
+      "summary": "信号量 PV 序列的死锁判定",
+      "content": "20. 有四个信号量，初值分别为：a=1，b=1，c=1，d=1。\n线程①  线程②  线程③\n```\nP(a);  P(d);  P(d);\nP(d);  P(a);  P(c);\nP(c);  P(c);  P(b);\nP(b);  P(b);  P(a);\nV(c);  V(d);  V(c);\nV(b);  P(d);  V(b);\nV(d);  V(a);  V(a);\n```\n9\n\n<!-- ===== page 10 ===== -->\n\n```\nV(a);  V(b);  V(d);\nV(c);\nV(d);\n```\n下列哪两个线程并发执行时，一定不会发生死锁？\nA.  ①, ②\nB.  ①, ③\nC.  ②, ③\nD.  以上选项均不正确\n答案：D\n（本题考查对死锁概念的理解，本题的情况是任意两个线程并发执行，都会产生死\n锁）",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2015期末-20160104-带答案.md",
+        "lines": {
+          "start": 317,
+          "end": 344
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2015期末-20160104-带答案/317.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "20. 有四个信号量，初值分别为：a=1，b=1，c=1，d=1。\n线程①  线程②  线程③\n```\nP(a);  P(d);  P(d);\nP(d);  P(a);  P(c);\nP(c);  P(c);  P(b);\nP(b);  P(b);  P(a);\nV(c);  V(d);  V(c);\nV(b);  P(d);  V(b);\nV(d);  V(a);  V(a);\n```\n9\n\n<!-- ===== page 10 ===== -->\n\n```\nV(a);  V(b);  V(d);\nV(c);\nV(d);\n```\n下列哪两个线程并发执行时，一定不会发生死锁？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "①, ②"
+          },
+          {
+            "key": "B",
+            "content": "①, ③"
+          },
+          {
+            "key": "C",
+            "content": "②, ③"
+          },
+          {
+            "key": "D",
+            "content": "以上选项均不正确"
+          }
+        ],
+        "answer": "答案：D\n（本题考查对死锁概念的理解，本题的情况是任意两个线程并发执行，都会产生死\n锁）"
+      }
+    },
+    {
+      "id": "q-06903e5136e1ac18",
+      "moduleId": "concurrent_programming",
+      "year": 2015,
+      "examType": "期末",
+      "exam": "2015期末-20160104-带答案",
+      "questionNo": "第八题",
+      "summary": "双缓冲区生产者-消费者信号量设计与 PV 填空",
+      "content": "第八题（10分）并发\n有三个线程 PA、PB、PC 协作工作以解决文件打印问题：PA 将记录从磁盘读\n入内存缓冲区 Buff1，每执行一次读一个记录；PB 将缓冲区 Buff1 的内容复制\n到缓冲区Buff2，每执行一次复制一个记录； PC将缓冲区Buff2的内容打印出\n来，每执行一次打印一个记录。缓冲区 Buff1 可以放 4 个记录；缓冲区 Buff2\n可以放8个记录。请用信号量及P、V操作实现上述三个线程以保证文件的正确打\n印。\n```\nPA() {\nwhile(1)  {\n```\n      ①\n    从磁盘读入一个记录\n      ②\n    将记录放入Buff1\n      ③\n```\n  }\n}\nPB() {\nwhile(1)  {\n```\n      ④\n    从Buff1中取出一个记录\n      ⑤\n    将记录放入Buff2\n      ⑥\n```\n}\n}\nPC() {\nwhile(1)  {\n```\n      ⑦\n    从Buff2中取出一个记录\n      ⑧\n    打印\n```\n}\n}\n```\n1．请设计若干信号量，给出每一个信号量的作用和初值。\n26\n\n<!-- ===== page 27 ===== -->\n\n2．请将信号量上对应的 PV操作填写在代码中适当位置。注意：每一标号处可\n以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧\n答案：（本大题总得分按四舍五入取整数）\n27\n\n<!-- ===== page 28 ===== -->\n\n1．3分，答对1个0.5分\nempty1，初值4；\nfull1，初值0；\nempty2，初值8；\nfull2，初值0；\nmutex1，初值1；\nmutex2，初值2\n2．7分\n标号  对应的操作\n①    X\n```\nP(&empty1);\n②  P(&mutex1);\n```\n注意：顺序不能错，各0.5分\n```\nV(&full1);\n③  V(&mutex1);\n```\n各0.5分\n```\nP(&full1);\n④  P(&mutex1);\n```\n注意：顺序不能错，各0.5分\n```\nP(&empty2);\n⑤  P(&mutex2);\n```\n注意：顺序不能错，各0.5分\n```\nV(&mutex2)\n⑥  V(&full2)\n```\n各0.5分\n```\nP(&full2);\n⑦  P(&mutex2);\n```\n注意：顺序不能错，各0.5分\n```\nV(&mutex2)\n⑧  V(&empty2)\n```\n各0.5分",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2015期末-20160104-带答案.md",
+        "lines": {
+          "start": 814,
+          "end": 920
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2015期末-20160104-带答案/814.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "第八题（10分）并发\n有三个线程 PA、PB、PC 协作工作以解决文件打印问题：PA 将记录从磁盘读\n入内存缓冲区 Buff1，每执行一次读一个记录；PB 将缓冲区 Buff1 的内容复制\n到缓冲区Buff2，每执行一次复制一个记录； PC将缓冲区Buff2的内容打印出\n来，每执行一次打印一个记录。缓冲区 Buff1 可以放 4 个记录；缓冲区 Buff2\n可以放8个记录。请用信号量及P、V操作实现上述三个线程以保证文件的正确打\n印。\n```\nPA() {\nwhile(1)  {\n```\n      ①\n    从磁盘读入一个记录\n      ②\n    将记录放入Buff1\n      ③\n```\n  }\n}\nPB() {\nwhile(1)  {\n```\n      ④\n    从Buff1中取出一个记录\n      ⑤\n    将记录放入Buff2\n      ⑥\n```\n}\n}\nPC() {\nwhile(1)  {\n```\n      ⑦\n    从Buff2中取出一个记录\n      ⑧\n    打印\n```\n}\n}\n```\n1．请设计若干信号量，给出每一个信号量的作用和初值。\n26\n\n<!-- ===== page 27 ===== -->\n\n2．请将信号量上对应的 PV操作填写在代码中适当位置。注意：每一标号处可\n以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧",
+        "choices": [],
+        "answer": "答案：（本大题总得分按四舍五入取整数）\n27\n\n<!-- ===== page 28 ===== -->\n\n1．3分，答对1个0.5分\nempty1，初值4；\nfull1，初值0；\nempty2，初值8；\nfull2，初值0；\nmutex1，初值1；\nmutex2，初值2\n2．7分\n标号  对应的操作\n①    X\n```\nP(&empty1);\n②  P(&mutex1);\n```\n注意：顺序不能错，各0.5分\n```\nV(&full1);\n③  V(&mutex1);\n```\n各0.5分\n```\nP(&full1);\n④  P(&mutex1);\n```\n注意：顺序不能错，各0.5分\n```\nP(&empty2);\n⑤  P(&mutex2);\n```\n注意：顺序不能错，各0.5分\n```\nV(&mutex2)\n⑥  V(&full2)\n```\n各0.5分\n```\nP(&full2);\n⑦  P(&mutex2);\n```\n注意：顺序不能错，各0.5分\n```\nV(&mutex2)\n⑧  V(&empty2)\n```\n各0.5分"
+      }
+    },
+    {
+      "id": "q-8d002275d99d4216",
+      "moduleId": "concurrent_programming",
+      "year": 2016,
+      "examType": "期末",
+      "exam": "2016期末-带答案",
+      "questionNo": "第一题 19",
+      "summary": "基于进程的并发服务器父子资源共享关系",
+      "content": "19. 下列关于“基于进程的并发服务器”的叙述中，哪一个是错误的？\nA. 父子进程共享文件表\nB. 父子进程共享文件描述符\nC. 父子进程不共享用户地址空间\nD. 进程控制和进程间通信开销大\n答案：B（考核对基于进程的并发服务器优缺点的理解）",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2016期末-带答案.md",
+        "lines": {
+          "start": 281,
+          "end": 286
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2016期末-带答案/281.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "19. 下列关于“基于进程的并发服务器”的叙述中，哪一个是错误的？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "父子进程共享文件表"
+          },
+          {
+            "key": "B",
+            "content": "父子进程共享文件描述符"
+          },
+          {
+            "key": "C",
+            "content": "父子进程不共享用户地址空间"
+          },
+          {
+            "key": "D",
+            "content": "进程控制和进程间通信开销大"
+          }
+        ],
+        "answer": "答案：B（考核对基于进程的并发服务器优缺点的理解）"
+      }
+    },
+    {
+      "id": "q-c52156085c76985d",
+      "moduleId": "concurrent_programming",
+      "year": 2016,
+      "examType": "期末",
+      "exam": "2016期末-带答案",
+      "questionNo": "第一题 20",
+      "summary": "信号量 PV 下多线程输出的可能性",
+      "content": "20. 请阅读如下代码：\n```\nsem_t s;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_inti(&s, 0, 1);\nfor (i=0; i <3; i++) {\n    pthread_create(&tids[i], NULL, justdoit, NULL);\n}\nfor (i=0; i <3; i++) {\n    pthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint j=0;\nvoid *justdoit(void *arg)\n{\n    P(&s);\nj = j + 1;\n    V(&s);\nprintf(“%d\\n”, j);\n}\n```\n  下列哪一个输出结果是不可能的？\nA. （1，3，2）\nB. （2，3，2）\nC. （3，3，2）\nD. （2，1，2）\n答案：D（本题考查对多线程、信号量使用的掌握）",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2016期末-带答案.md",
+        "lines": {
+          "start": 287,
+          "end": 317
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2016期末-带答案/287.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "20. 请阅读如下代码：\n```\nsem_t s;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_inti(&s, 0, 1);\nfor (i=0; i <3; i++) {\n    pthread_create(&tids[i], NULL, justdoit, NULL);\n}\nfor (i=0; i <3; i++) {\n    pthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint j=0;\nvoid *justdoit(void *arg)\n{\n    P(&s);\nj = j + 1;\n    V(&s);\nprintf(“%d\\n”, j);\n}\n```\n  下列哪一个输出结果是不可能的？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "（1，3，2）"
+          },
+          {
+            "key": "B",
+            "content": "（2，3，2）"
+          },
+          {
+            "key": "C",
+            "content": "（3，3，2）"
+          },
+          {
+            "key": "D",
+            "content": "（2，1，2）"
+          }
+        ],
+        "answer": "答案：D（本题考查对多线程、信号量使用的掌握）"
+      }
+    },
+    {
+      "id": "q-d00b4881c35e6fec",
+      "moduleId": "concurrent_programming",
+      "year": 2016,
+      "examType": "期末",
+      "exam": "2016期末-带答案",
+      "questionNo": "第八题",
+      "summary": "多线程 cnt++ 竞态分析与 PV 实现司机售票员同步",
+      "content": "第八题（12分）\n1.请阅读下列代码badcnt.c：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n24\n\n<!-- ===== page 25 ===== -->\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n      司机进程：                 售票员进程：\n         while(1) {                 while(1) {\n            ①                          ⑤\n启动车辆；                   关门；\n            ②                          ⑥\n正常行驶；                   报站名或维持秩序；\n            ③                          ⑦\n到站停车；                   到站开门；\n            ④                          ⑧\n         }                            }\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧\n答案：\n25\n\n<!-- ===== page 26 ===== -->\n\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把cnt读\n入寄存器，寄存器加1，在未写回时，若线程2把cnt读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入cnt，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量s1=0、s2=1（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2016期末-带答案.md",
+        "lines": {
+          "start": 909,
+          "end": 1000
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2016期末-带答案/909.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "第八题（12分）\n1.请阅读下列代码badcnt.c：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n24\n\n<!-- ===== page 25 ===== -->\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n      司机进程：                 售票员进程：\n         while(1) {                 while(1) {\n            ①                          ⑤\n启动车辆；                   关门；\n            ②                          ⑥\n正常行驶；                   报站名或维持秩序；\n            ③                          ⑦\n到站停车；                   到站开门；\n            ④                          ⑧\n         }                            }\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧",
+        "choices": [],
+        "answer": "答案：\n25\n\n<!-- ===== page 26 ===== -->\n\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把cnt读\n入寄存器，寄存器加1，在未写回时，若线程2把cnt读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入cnt，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量s1=0、s2=1（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
+      }
+    },
+    {
+      "id": "q-af14851262ed34fa",
+      "moduleId": "concurrent_programming",
+      "year": 2017,
+      "examType": "期末",
+      "exam": "2017期末-无答案",
+      "questionNo": "第一题 19",
+      "summary": "死锁定义、信号量顺序与线程安全",
+      "content": "19. 下列关于死锁的叙述中，不正确的是：\nA. 所谓死锁是指一组线程被阻塞，等待一个永远不会为真的条件\nB. 在用信号量及 PV 操作解决生产者消费者问题（多个缓冲区、多个生产者，多\n个消费者）时，如果先给缓冲区加锁 P(&sp->mutex)，再申请可用的缓冲区槽\nP(&sp->slots)；则可能出现死锁\nC. printf()是线程安全函数\nD. 在信号处理函数中使用printf()不会导致死锁",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2017期末-无答案.md",
+        "lines": {
+          "start": 215,
+          "end": 221
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2017期末-无答案/215.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "19. 下列关于死锁的叙述中，不正确的是：",
+        "choices": [
+          {
+            "key": "A",
+            "content": "所谓死锁是指一组线程被阻塞，等待一个永远不会为真的条件"
+          },
+          {
+            "key": "B",
+            "content": "在用信号量及 PV 操作解决生产者消费者问题（多个缓冲区、多个生产者，多\n个消费者）时，如果先给缓冲区加锁 P(&sp->mutex)，再申请可用的缓冲区槽\nP(&sp->slots)；则可能出现死锁"
+          },
+          {
+            "key": "C",
+            "content": "printf()是线程安全函数"
+          },
+          {
+            "key": "D",
+            "content": "在信号处理函数中使用printf()不会导致死锁"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-273b6d36967b7fec",
+      "moduleId": "concurrent_programming",
+      "year": 2017,
+      "examType": "期末",
+      "exam": "2017期末-无答案",
+      "questionNo": "第一题 20",
+      "summary": "主线程与线程1交错执行的输出种类",
+      "content": "20. 某进程的主线程和对等线程的代码如下所示：\n```\nsem_t sem;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_init(&sem, 0, 1);\nfor (i=0; i<3; i++) {\npthread_create(&tids[i], NULL, thread, NULL);\n}\nfor (i=0; i<3; i++) {\npthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint y = 15;\nvoid *thread (void *arg)\n{\nP(&sem);\ny = y - 3;\nV(&sem);\nprintf(\"%d\\n\", y);\n}\n```\n  执行上述代码后，会产生多少种不同的输出？\nA. 11      B. 12      C. 13      D. 14",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2017期末-无答案.md",
+        "lines": {
+          "start": 226,
+          "end": 252
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2017期末-无答案/226.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "20. 某进程的主线程和对等线程的代码如下所示：\n```\nsem_t sem;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_init(&sem, 0, 1);\nfor (i=0; i<3; i++) {\npthread_create(&tids[i], NULL, thread, NULL);\n}\nfor (i=0; i<3; i++) {\npthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint y = 15;\nvoid *thread (void *arg)\n{\nP(&sem);\ny = y - 3;\nV(&sem);\nprintf(\"%d\\n\", y);\n}\n```\n  执行上述代码后，会产生多少种不同的输出？\nA. 11      B. 12      C. 13      D. 14",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-bf8b1b6a955767c0",
+      "moduleId": "concurrent_programming",
+      "year": 2017,
+      "examType": "期末",
+      "exam": "2017期末-无答案",
+      "questionNo": "第八题",
+      "summary": "并发 echo 服务器 P/T 代码找错与信号量同步",
+      "content": "1.  基于进程的并发Echo服务器代码（简称P代码）和基于线程的并发Echo服\n务器代码（简称T代码）如下所示：\nP代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid sigchld_handler(int sig)\n{\nif (waitpid(-1, 0, WNOHANG) > 0)\n;\nreturn;  }\nint main(int argc, char **argv)\n{  int listenfd, connfd;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd = Accept(listenfd,(SA*)&clientaddr,&clientlen);\n      if (Fork() == 0) {\n echo(connfd);\n Close(connfd);\n exit(0);\n      }\n      Close(connfd);\n   }\n}\n```\n19\n\n<!-- ===== page 20 ===== -->\n\nT代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid *thread(void *vargp);\nint main(int argc, char **argv)\n{  int listenfd, connfd1;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   pthread_t tid;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd1 = Accept(listenfd,(SA*)&clientaddr, &clientlen);\n      Pthread_create(&tid, NULL, thread, connfd1);\n   }\n}\nvoid *thread(void *vargp)\n{\n    int connfd2 = *((int *)vargp);\n    Pthread_detach(pthread_self());\n    echo(connfd2);\n    Close(connfd2);\n    return NULL;\n}\n```\n问：以上 P 代码和 T 代码中存在几处错误，请指出出错的位置（请按照①、②等\n符号标注位置），解释出错的原因并给出修正错误的解决方案。\n20\n\n<!-- ===== page 21 ===== -->\n\n2.  假设有3个线程，代码如下所示。已声明了三个信号量s1、s2和s3，其初\n值分别为1、0、0。请将信号量S1、S2、S3对应的P()和V()操作填写在\n三个线程中的标号处（每空至多填写1个操作），要求三个线程并发执行的结\n果只能是x = 10。\n```\nx = 1;\nvoid thread1()\n{\n```\n①\nx = x * 5;\n②\n```\n}\nvoid thread2()\n{\n```\n③\nx = x + 3;\n④\n```\n}\nvoid thread3()\n{\n```\n  ⑤\nx = x / 2;\n21\n⑥\n}",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2017期末-无答案.md",
+        "lines": {
+          "start": 638,
+          "end": 731
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2017期末-无答案/638.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "1.  基于进程的并发Echo服务器代码（简称P代码）和基于线程的并发Echo服\n务器代码（简称T代码）如下所示：\nP代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid sigchld_handler(int sig)\n{\nif (waitpid(-1, 0, WNOHANG) > 0)\n;\nreturn;  }\nint main(int argc, char **argv)\n{  int listenfd, connfd;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd = Accept(listenfd,(SA*)&clientaddr,&clientlen);\n      if (Fork() == 0) {\n echo(connfd);\n Close(connfd);\n exit(0);\n      }\n      Close(connfd);\n   }\n}\n```\n19\n\n<!-- ===== page 20 ===== -->\n\nT代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid *thread(void *vargp);\nint main(int argc, char **argv)\n{  int listenfd, connfd1;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   pthread_t tid;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd1 = Accept(listenfd,(SA*)&clientaddr, &clientlen);\n      Pthread_create(&tid, NULL, thread, connfd1);\n   }\n}\nvoid *thread(void *vargp)\n{\n    int connfd2 = *((int *)vargp);\n    Pthread_detach(pthread_self());\n    echo(connfd2);\n    Close(connfd2);\n    return NULL;\n}\n```\n问：以上 P 代码和 T 代码中存在几处错误，请指出出错的位置（请按照①、②等\n符号标注位置），解释出错的原因并给出修正错误的解决方案。\n20\n\n<!-- ===== page 21 ===== -->\n\n2.  假设有3个线程，代码如下所示。已声明了三个信号量s1、s2和s3，其初\n值分别为1、0、0。请将信号量S1、S2、S3对应的P()和V()操作填写在\n三个线程中的标号处（每空至多填写1个操作），要求三个线程并发执行的结\n果只能是x = 10。\n```\nx = 1;\nvoid thread1()\n{\n```\n①\nx = x * 5;\n②\n```\n}\nvoid thread2()\n{\n```\n③\nx = x + 3;\n④\n```\n}\nvoid thread3()\n{\n```\n  ⑤\nx = x / 2;\n21\n⑥\n}",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-54abc70704b9c50c",
+      "moduleId": "concurrent_programming",
+      "year": 2018,
+      "examType": "期末",
+      "exam": "2018期末-带答案",
+      "questionNo": "第一题 13",
+      "summary": "线程安全与可重入的包含关系",
+      "content": "13. 下面关于线程安全和可重入的描述中，哪一个是正确的？\nA. 如果一个函数的所有参数都是值传递的且无返回值，该函数一定是可重入的\nB. 函数的可重入版本一定比不可重入版本高效\nC. 可重入函数一定是线程安全的\nD. 以上说法都不正确\n答案：C",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2018期末-带答案.md",
+        "lines": {
+          "start": 220,
+          "end": 225
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2018期末-带答案/220.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "13. 下面关于线程安全和可重入的描述中，哪一个是正确的？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "如果一个函数的所有参数都是值传递的且无返回值，该函数一定是可重入的"
+          },
+          {
+            "key": "B",
+            "content": "函数的可重入版本一定比不可重入版本高效"
+          },
+          {
+            "key": "C",
+            "content": "可重入函数一定是线程安全的"
+          },
+          {
+            "key": "D",
+            "content": "以上说法都不正确"
+          }
+        ],
+        "answer": "答案：C"
+      }
+    },
+    {
+      "id": "q-51b97ab5d9b4706a",
+      "moduleId": "concurrent_programming",
+      "year": 2018,
+      "examType": "期末",
+      "exam": "2018期末-带答案",
+      "questionNo": "第一题 14",
+      "summary": "进程与线程的资源共享与上下文切换",
+      "content": "14. 下列关于进程与线程的描述中，哪一个是不正确的？\nA. 一个进程可以包含多个线程\nB. 进程中的各个线程共享进程的代码、数据、堆和栈\nC. 进程中的各个线程拥有自己的线程上下文\nD. 线程的上下文切换比进程的上下文切换快\n答案：B",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2018期末-带答案.md",
+        "lines": {
+          "start": 226,
+          "end": 231
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2018期末-带答案/226.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "14. 下列关于进程与线程的描述中，哪一个是不正确的？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "一个进程可以包含多个线程"
+          },
+          {
+            "key": "B",
+            "content": "进程中的各个线程共享进程的代码、数据、堆和栈"
+          },
+          {
+            "key": "C",
+            "content": "进程中的各个线程拥有自己的线程上下文"
+          },
+          {
+            "key": "D",
+            "content": "线程的上下文切换比进程的上下文切换快"
+          }
+        ],
+        "answer": "答案：B"
+      }
+    },
+    {
+      "id": "q-9758fb88a663210b",
+      "moduleId": "concurrent_programming",
+      "year": 2018,
+      "examType": "期末",
+      "exam": "2018期末-带答案",
+      "questionNo": "第一题 15",
+      "summary": "对等线程引用的变量集合判定",
+      "content": "15. 给定下列代码片段：\nchar **ptr;  /* global var */\nint main(int main, char *argv[]) {\n  long i;  pthread_t tid;\n  char *msgs[2] = {\" Hello from foo\", \" Hello from bar\" };\n    ptr = msgs;\n    for (i = 0; i < 2; i++)\n        Pthread_create(&tid, NULL, thread,(void *)i);\n    Pthread_exit(NULL);}\nvoid *thread(void *vargp)\n{\n  long myid = (long)vargp;\n  static int cnt = 0;\n  printf(\"[%ld]:  %s (cnt=%d)\\n\", myid, ptr[myid], ++cnt);\n  return NULL;\n}\n下列哪一组变量集合是对等线程1引用的？\nA. ptr，cnt，i.m，msgs.m，myid.p0，myid.p1\nB. ptr，cnt，msgs.m，myid.p0\nC. ptr，cnt，msgs.m，myid.p1\nD. ptr，cnt，i.m，msgs.m，myid.p1\n答案：C",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2018期末-带答案.md",
+        "lines": {
+          "start": 232,
+          "end": 253
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2018期末-带答案/232.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "15. 给定下列代码片段：\nchar **ptr;  /* global var */\nint main(int main, char *argv[]) {\n  long i;  pthread_t tid;\n  char *msgs[2] = {\" Hello from foo\", \" Hello from bar\" };\n    ptr = msgs;\n    for (i = 0; i < 2; i++)\n        Pthread_create(&tid, NULL, thread,(void *)i);\n    Pthread_exit(NULL);}\nvoid *thread(void *vargp)\n{\n  long myid = (long)vargp;\n  static int cnt = 0;\n  printf(\"[%ld]:  %s (cnt=%d)\\n\", myid, ptr[myid], ++cnt);\n  return NULL;\n}\n下列哪一组变量集合是对等线程1引用的？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "ptr，cnt，i.m，msgs.m，myid.p0，myid.p1"
+          },
+          {
+            "key": "B",
+            "content": "ptr，cnt，msgs.m，myid.p0"
+          },
+          {
+            "key": "C",
+            "content": "ptr，cnt，msgs.m，myid.p1"
+          },
+          {
+            "key": "D",
+            "content": "ptr，cnt，i.m，msgs.m，myid.p1"
+          }
+        ],
+        "answer": "答案：C"
+      }
+    },
+    {
+      "id": "q-c36c9b861c58b521",
+      "moduleId": "concurrent_programming",
+      "year": 2018,
+      "examType": "期末",
+      "exam": "2018期末-带答案",
+      "questionNo": "第七题 2-4",
+      "summary": "i++/j++ 竞态的输出可能性与信号量死锁",
+      "content": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n(a) 2000, 2000\n(b) 1500, 1500\n(c) 1000, 1000\n(d) 2, 2\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n8.  int a;\n9.    for (a = 0; a < 1000; a++) {\n10. P(&si);\n11. P(&sj);\n12. i++;\n13. j++;\n14. V(&si);\n15. V(&sj);\n16. }\n17. return NULL;\n18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n20. int a;\n21. for (a = 0; a < 1000; a++) {\n22. P(&sj);\n23. P(&si);\n24. j++;\n25. i++;\n26. V(&si);\n27. V(&sj);\n28. }\n25\n\n<!-- ===== page 26 ===== -->\n\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。\n答案\n1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）\n2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，则i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，则i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n26\n\n<!-- ===== page 27 ===== -->\n\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2018期末-带答案.md",
+        "lines": {
+          "start": 792,
+          "end": 872
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2018期末-带答案/792.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n(a) 2000, 2000\n(b) 1500, 1500\n(c) 1000, 1000\n(d) 2, 2\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n8.  int a;\n9.    for (a = 0; a < 1000; a++) {\n10. P(&si);\n11. P(&sj);\n12. i++;\n13. j++;\n14. V(&si);\n15. V(&sj);\n16. }\n17. return NULL;\n18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n20. int a;\n21. for (a = 0; a < 1000; a++) {\n22. P(&sj);\n23. P(&si);\n24. j++;\n25. i++;\n26. V(&si);\n27. V(&sj);\n28. }\n25\n\n<!-- ===== page 26 ===== -->\n\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。\n答案\n1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）\n2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，则i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，则i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n26\n\n<!-- ===== page 27 ===== -->\n\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-c21102b413249796",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2020 选择题 22",
+      "summary": "线程间共享与私有数据",
+      "content": "22. C。a)是共享的（在数据段），b)也是共享的（栈是私有的），c)是共享的，属于书上原话，或\n者从同一进程的概念中读解出，d)是特别的上下文，是私有的。所以有3个。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 67,
+          "end": 68
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/67.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "22. C。a)是共享的（在数据段），b)也是共享的（栈是私有的），c)是共享的，属于书上原话，或\n者从同一进程的概念中读解出，d)是特别的上下文，是私有的。所以有3个。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-b8379826025582b4",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2020 选择题 23",
+      "summary": "锁/解锁/信号顺序的最优全序",
+      "content": "23. C。此题意义不大。主要的困难在于最终的正确顺序并不是确定的一个全序，所以需要找\n一个“最优”的全序。大概估计一下，𝐿2,𝑈2,𝑆2和𝐿4,𝑈4,𝑆4之间不能有重叠，𝐿1,𝑈1,𝑆1和\n𝐿3,𝑈3,𝑆3之间亦然，所以可能是\n𝐿2,𝐿1,𝑈1,𝑆1,𝐿3,𝑈2,𝑆2,𝐿4,𝑈4,𝑈3,𝑆4,𝑆3.\n数出逆序数为12。实际上，合法的全序只有十几种，可以枚举验证答案正确性。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 73,
+          "end": 77
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/73.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "23. C。此题意义不大。主要的困难在于最终的正确顺序并不是确定的一个全序，所以需要找\n一个“最优”的全序。大概估计一下，𝐿2,𝑈2,𝑆2和𝐿4,𝑈4,𝑆4之间不能有重叠，𝐿1,𝑈1,𝑆1和\n𝐿3,𝑈3,𝑆3之间亦然，所以可能是\n𝐿2,𝐿1,𝑈1,𝑆1,𝐿3,𝑈2,𝑆2,𝐿4,𝑈4,𝑈3,𝑆4,𝑆3.\n数出逆序数为12。实际上，合法的全序只有十几种，可以枚举验证答案正确性。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-336e1e9ee7006d75",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2020 选择题 24",
+      "summary": "pthread_exit 与 exit 的差别",
+      "content": "24. B。注意主线程如果调用诸如pthread_exit的函数退出，是不会引发其他线程退出的，所\n以A为一错误描述。但是如果主线程调用了exit（或者return）,则整个进程都会结束，\n自然其他线程也结束。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 78,
+          "end": 80
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/78.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "24. B。注意主线程如果调用诸如pthread_exit的函数退出，是不会引发其他线程退出的，所\n以A为一错误描述。但是如果主线程调用了exit（或者return）,则整个进程都会结束，\n自然其他线程也结束。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-9f741b9fd16a637b",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2020 选择题 25",
+      "summary": "加锁顺序相反导致的死锁",
+      "content": "25. B。首先1和2分别获得a和c的锁，然后2再获得b的锁，1和3分别等d的锁和a的锁。\n此时如果2释放c和b的锁，1和3无论如何都将出现互相等待（a、d）的情况，因此发生了\n死锁。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 81,
+          "end": 83
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/81.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "25. B。首先1和2分别获得a和c的锁，然后2再获得b的锁，1和3分别等d的锁和a的锁。\n此时如果2释放c和b的锁，1和3无论如何都将出现互相等待（a、d）的情况，因此发生了\n死锁。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-75b2f431f902a529",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2020 解答题五",
+      "summary": "哲学家就餐死锁与信号量实现互斥",
+      "content": "1. 死锁。可以看出，这实际上就是哲学家就餐问题，如果所有的同学同时拿起左边那个同学手\n机P(UP(i))，就发生死锁。\n2. 分别填0和0。观察代码知道Dave的方法每次只有一位同学去找洞主，也就是说26个同学\n轮流去验证。由此知道只需要一个互斥锁即可。\n3. 1 2 2 1。根据1问的例子可以知道依赖关系成环是最大的问题。因此我们可以让除一位同\n学之外的同学正常工作，而那位同学则反过来工作，不难证明这个体系无死锁且无竞争（事\n实上，还有一种方法，即要求单号同学先拿左边的手机，而双号先拿右边的手机）。\n4. 分别填1、0、<、3、2、<=。根据代码容易看出mutex保护结构体，zero是一个“等待\n信号量”，所以计数降到0以下时需要等待，由此发现其初值应该是0。请注意 3、2 不能\n反，否则会造成死锁。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 143,
+          "end": 152
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/143.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "1. 死锁。可以看出，这实际上就是哲学家就餐问题，如果所有的同学同时拿起左边那个同学手\n机P(UP(i))，就发生死锁。\n2. 分别填0和0。观察代码知道Dave的方法每次只有一位同学去找洞主，也就是说26个同学\n轮流去验证。由此知道只需要一个互斥锁即可。\n3. 1 2 2 1。根据1问的例子可以知道依赖关系成环是最大的问题。因此我们可以让除一位同\n学之外的同学正常工作，而那位同学则反过来工作，不难证明这个体系无死锁且无竞争（事\n实上，还有一种方法，即要求单号同学先拿左边的手机，而双号先拿右边的手机）。\n4. 分别填1、0、<、3、2、<=。根据代码容易看出mutex保护结构体，zero是一个“等待\n信号量”，所以计数降到0以下时需要等待，由此发现其初值应该是0。请注意 3、2 不能\n反，否则会造成死锁。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-0c95a232d844344f",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2019 选择题 8",
+      "summary": "并行与并发的关系",
+      "content": "8. 未解之谜，CD。并行一定并发。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 170,
+          "end": 170
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/170.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "8. 未解之谜，CD。并行一定并发。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-ad2ffb2791fceeee",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2019 选择题 18",
+      "summary": "线程安全与可重入函数",
+      "content": "18. B。保持跨越多个调用的状态的函数不是线程安全的，而C项是隐式可重入函数，如果合理\n使用就是线程安全的。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 189,
+          "end": 190
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/189.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "18. B。保持跨越多个调用的状态的函数不是线程安全的，而C项是隐式可重入函数，如果合理\n使用就是线程安全的。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-9304c8b4ffb9a2ae",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2019 选择题 19",
+      "summary": "对等线程赋值与 accept 的竞争",
+      "content": "19. C。否则会在对等线程的赋值和主线程的accept之间引入竞争，如果赋值在accept之后\n完成，描述符值就错了。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 191,
+          "end": 192
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/191.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "19. C。否则会在对等线程的赋值和主线程的accept之间引入竞争，如果赋值在accept之后\n完成，描述符值就错了。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-45c0267d34ad375d",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2019 选择题 20",
+      "summary": "sem 与 pthread_mutex 阻塞范围",
+      "content": "20. D。D是超纲选项，sem型指令会阻塞整个进程，而pthread_mutex型指令只会阻塞相应\n线程，后者的效率更高。A、B、C都是容易看出正确的，所以可以用排除法做出。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 193,
+          "end": 194
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/193.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "20. D。D是超纲选项，sem型指令会阻塞整个进程，而pthread_mutex型指令只会阻塞相应\n线程，后者的效率更高。A、B、C都是容易看出正确的，所以可以用排除法做出。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-62644d4d5a9d1cb3",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019、2020期末-答案解析",
+      "questionNo": "2019 解答题六",
+      "summary": "读者优先读写锁的竞争",
+      "content": "解答题六\n1. 7, 14, 7, 2, 0。这时两个读者都在正常读，因为是读者优先，所以写者在14行阻塞等\n待，写锁的值是0。\n2. 14, 7, 3, 0。完全同理。\n3. 会出现竞争的错误。例如两位读者同时进入，由于readcnt的写不是原子的，可能导致进入\n后readcnt=1，当一位读者离开后，写者就错误进入了。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-9bc78f38ecd83096"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2019、2020期末-答案解析.md",
+        "lines": {
+          "start": 274,
+          "end": 279
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019、2020期末-答案解析/274.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "解答题六\n1. 7, 14, 7, 2, 0。这时两个读者都在正常读，因为是读者优先，所以写者在14行阻塞等\n待，写锁的值是0。\n2. 14, 7, 3, 0。完全同理。\n3. 会出现竞争的错误。例如两位读者同时进入，由于readcnt的写不是原子的，可能导致进入\n后readcnt=1，当一位读者离开后，写者就错误进入了。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-97b54bace394c78a",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019期末-无答案",
+      "questionNo": "第一题 8",
+      "summary": "进程并发与并行的区别",
+      "content": "8.  考虑4个具有如下开始和结束时间并运行在不同处理器上的进程，\n进程  开始时间  结束时间  运行处理器\nA  5  7  P0\nB  2  4  P1\nC  3  6  P0\nD  1  8  P1\n下面那个判断是正确的。\nA. 进程A和B不是并发运行的，但是并行运行的；\nB. 进程A和C是并发运行的，并且是并行运行的；\nC. 进程B和D是并发运行的，但不是并行运行的；\nD. 进程A和D是并发运行的，并且是并行运行的；",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2019期末-无答案.md",
+        "lines": {
+          "start": 98,
+          "end": 108
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019期末-无答案/98.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "8.  考虑4个具有如下开始和结束时间并运行在不同处理器上的进程，\n进程  开始时间  结束时间  运行处理器\nA  5  7  P0\nB  2  4  P1\nC  3  6  P0\nD  1  8  P1\n下面那个判断是正确的。",
+        "choices": [
+          {
+            "key": "A",
+            "content": "进程A和B不是并发运行的，但是并行运行的；"
+          },
+          {
+            "key": "B",
+            "content": "进程A和C是并发运行的，并且是并行运行的；"
+          },
+          {
+            "key": "C",
+            "content": "进程B和D是并发运行的，但不是并行运行的；"
+          },
+          {
+            "key": "D",
+            "content": "进程A和D是并发运行的，并且是并行运行的；"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-f60c4118bf7e504f",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019期末-无答案",
+      "questionNo": "第一题 17",
+      "summary": "死锁现象的判定",
+      "content": "17. 并发程序执行时会遇到下列各种情况：\n①   程序执行结果的正确性依赖于一个线程要在另一个线程到达y点之\n前到达其控制流的x点\n② 程序员使用P和V操作顺序不当\n③ 外部事件和/或系统调度决策阻止了任务进度\n④ 不合理的资源分配策略导致程序难以向前运行\n⑤ 程序的执行结果取决于系统的调度决策\n⑥ 在信号处理函数中调用printf()\n请问下列哪些情况表示可能产生死锁现象？\nA.  ①、②和⑤\nB.  ②、③和④\nC.  ③、④和⑥\nD.  ②、④和⑥",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2019期末-无答案.md",
+        "lines": {
+          "start": 184,
+          "end": 196
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019期末-无答案/184.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "17. 并发程序执行时会遇到下列各种情况：\n①   程序执行结果的正确性依赖于一个线程要在另一个线程到达y点之\n前到达其控制流的x点\n② 程序员使用P和V操作顺序不当\n③ 外部事件和/或系统调度决策阻止了任务进度\n④ 不合理的资源分配策略导致程序难以向前运行\n⑤ 程序的执行结果取决于系统的调度决策\n⑥ 在信号处理函数中调用printf()\n请问下列哪些情况表示可能产生死锁现象？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "①、②和⑤"
+          },
+          {
+            "key": "B",
+            "content": "②、③和④"
+          },
+          {
+            "key": "C",
+            "content": "③、④和⑥"
+          },
+          {
+            "key": "D",
+            "content": "②、④和⑥"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-dcfefd7978752921",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019期末-无答案",
+      "questionNo": "第一题 18",
+      "summary": "线程安全与可重入函数",
+      "content": "18. 称一个函数为线程安全的（thread-safe），当且仅当该函数被多个并\n发线程反复调用时会一直产生正确的结果。下列哪些函数不是线程安全\n的？\nA.  利用P、V操作保护了共享变量的函数\nB.  保持跨越多个调用的状态的函数\nC.  包括了调用者传递存放结果变量的地址的函数\nD.  可重入函数",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2019期末-无答案.md",
+        "lines": {
+          "start": 197,
+          "end": 203
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019期末-无答案/197.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "18. 称一个函数为线程安全的（thread-safe），当且仅当该函数被多个并\n发线程反复调用时会一直产生正确的结果。下列哪些函数不是线程安全\n的？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "利用P、V操作保护了共享变量的函数"
+          },
+          {
+            "key": "B",
+            "content": "保持跨越多个调用的状态的函数"
+          },
+          {
+            "key": "C",
+            "content": "包括了调用者传递存放结果变量的地址的函数"
+          },
+          {
+            "key": "D",
+            "content": "可重入函数"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-2f87a3c061ca7520",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019期末-无答案",
+      "questionNo": "第一题 19",
+      "summary": "多线程 echo 服务器中 connfd 的竞争",
+      "content": "19. 在以下基于线程的并发Echo服务器代码中，哪一个代码片段会潜在引发\n不正确的程序执行结果？\nA.  int main(int argc, char **argv)\n{                              /*假设有配对的”}”\n        int listenfd, connfd;\n5\n\n<!-- ===== page 6 ===== -->\n\n```\n        socklen_t clientlen;\n        struct sockaddr_storage clientaddr;\n        pthread_t tid;\nB. listenfd = Open_listenfd(argv[1]);\nC. while (1) {\n      connfd = Accept(listenfd, (SA *) &clientaddr,\n&clientlen);\n      Pthread_create(&tid, NULL, thread, &connfd);\n    }\nD. void *thread(void *vargp)\n{\n      int connfd = *((int *)vargp);\n      Pthread_detach(pthread_self());\n      echo(connfd);\n      Close(connfd);\n      return NULL;\n}\n```",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2019期末-无答案.md",
+        "lines": {
+          "start": 204,
+          "end": 230
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019期末-无答案/204.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "19. 在以下基于线程的并发Echo服务器代码中，哪一个代码片段会潜在引发\n不正确的程序执行结果？\nA.  int main(int argc, char **argv)\n{                              /*假设有配对的”}”\n        int listenfd, connfd;\n5\n\n<!-- ===== page 6 ===== -->\n\n```\n        socklen_t clientlen;\n        struct sockaddr_storage clientaddr;\n        pthread_t tid;\nB. listenfd = Open_listenfd(argv[1]);\nC. while (1) {\n      connfd = Accept(listenfd, (SA *) &clientaddr,\n&clientlen);\n      Pthread_create(&tid, NULL, thread, &connfd);\n    }\nD. void *thread(void *vargp)\n{\n      int connfd = *((int *)vargp);\n      Pthread_detach(pthread_self());\n      echo(connfd);\n      Close(connfd);\n      return NULL;\n}\n```",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-9a71ecec1819ecdf",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019期末-无答案",
+      "questionNo": "第一题 20",
+      "summary": "信号量与 P/V 操作语义",
+      "content": "20. 下列关于信号量及P、V操作的叙述中，哪一个是不正确的？\nA.  信号量是一个非负整数，对信号量只能执行P操作和V操作\nB.  当信号量的值为0时，调用P操作的线程被挂起\nC.  P(s)的实现代码中语句：while (s == 0)  wait(); s--; 应\n该由内核保证其执行的不可分割性\nD.  在保护临界区的解决方案中使用 sem_wait()和 sem_post()比使\n用 pthread_mutex_lock()和 pthread_mutex_unlock()性能\n好",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2019期末-无答案.md",
+        "lines": {
+          "start": 232,
+          "end": 239
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019期末-无答案/232.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "20. 下列关于信号量及P、V操作的叙述中，哪一个是不正确的？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "信号量是一个非负整数，对信号量只能执行P操作和V操作"
+          },
+          {
+            "key": "B",
+            "content": "当信号量的值为0时，调用P操作的线程被挂起"
+          },
+          {
+            "key": "C",
+            "content": "P(s)的实现代码中语句：while (s == 0)  wait(); s--; 应\n该由内核保证其执行的不可分割性"
+          },
+          {
+            "key": "D",
+            "content": "在保护临界区的解决方案中使用 sem_wait()和 sem_post()比使\n用 pthread_mutex_lock()和 pthread_mutex_unlock()性能\n好"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-7429c141baec19f7",
+      "moduleId": "concurrent_programming",
+      "year": 2019,
+      "examType": "期末",
+      "exam": "2019期末-无答案",
+      "questionNo": "第七题",
+      "summary": "第一类读者-写者问题的执行流程分析",
+      "content": "解决第一类读者-写者问题的代码如下：\n```\nint readcnt;    /* Initially 0 */\nsem_t mutex, w; /* Both initially 1 */\nvoid reader(void)\n{\n(1)    while (1) {\n(2)      P(&mutex);\n(3)      readcnt++;\n(4)      if (readcnt == 1) /* First in */\n(5)        P(&w);\n(6)      V(&mutex);\n(7)         /* Reading happens here, need 7 time unit */\n(8)      P(&mutex);\n(9)      readcnt--;\n(10)     if (readcnt == 0) /* Last out */\n(11)        V(&w);\n(12)     V(&mutex);\n        }\n}\nvoid writer(void)\n{\n(13)  while (1) {\n(14)    P(&w);\n(15)       /* Writing here, need 8 time unit */\n(16)    V(&w);\n      }\n}\n```\n假设有5个读者或写者到来，到达时刻和所需的时间如下：\n线程  到达时刻  读写时间\n```\nR1  0  7\nW1  1  8\nR2  2  7\nW2  4  8\nR3  5  7\n```\n注意，为简单起见，只考虑读写时间，忽略所有其他时间（包括代码中其\n他语句的执行时间、线程切换、调度等等），亦假设没有更多的读者或写者或\n其他线程。\n（1）在时刻3时，R1、W1和R2所处的位置，请标出对应的代码行号。此刻，\nreadcnt和w的值分别是多少？R1: ；W1: ；R2: ；readcnt: ；w: 。\n（2）在时刻6时，W2和R3所处的位置，请标出对应的行号。此刻，readcnt\n和w的值分别是多少？W2: ；R3: ；readcnt: ；w: 。\n（3）如果不使用P(&mutex)和V(&mutex)，程序执行会不会出错？如果出\n错，会出什么错？",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2019期末-无答案.md",
+        "lines": {
+          "start": 589,
+          "end": 635
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2019期末-无答案/589.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "解决第一类读者-写者问题的代码如下：\n```\nint readcnt;    /* Initially 0 */\nsem_t mutex, w; /* Both initially 1 */\nvoid reader(void)\n{\n(1)    while (1) {\n(2)      P(&mutex);\n(3)      readcnt++;\n(4)      if (readcnt == 1) /* First in */\n(5)        P(&w);\n(6)      V(&mutex);\n(7)         /* Reading happens here, need 7 time unit */\n(8)      P(&mutex);\n(9)      readcnt--;\n(10)     if (readcnt == 0) /* Last out */\n(11)        V(&w);\n(12)     V(&mutex);\n        }\n}\nvoid writer(void)\n{\n(13)  while (1) {\n(14)    P(&w);\n(15)       /* Writing here, need 8 time unit */\n(16)    V(&w);\n      }\n}\n```\n假设有5个读者或写者到来，到达时刻和所需的时间如下：\n线程  到达时刻  读写时间\n```\nR1  0  7\nW1  1  8\nR2  2  7\nW2  4  8\nR3  5  7\n```\n注意，为简单起见，只考虑读写时间，忽略所有其他时间（包括代码中其\n他语句的执行时间、线程切换、调度等等），亦假设没有更多的读者或写者或\n其他线程。\n（1）在时刻3时，R1、W1和R2所处的位置，请标出对应的代码行号。此刻，\nreadcnt和w的值分别是多少？R1: ；W1: ；R2: ；readcnt: ；w: 。\n（2）在时刻6时，W2和R3所处的位置，请标出对应的行号。此刻，readcnt\n和w的值分别是多少？W2: ；R3: ；readcnt: ；w: 。\n（3）如果不使用P(&mutex)和V(&mutex)，程序执行会不会出错？如果出\n错，会出什么错？",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-439b586977a9e5ce",
+      "moduleId": "concurrent_programming",
+      "year": 2020,
+      "examType": "期末",
+      "exam": "2020期末-无答案",
+      "questionNo": "第一题 22",
+      "summary": "同进程内不同线程共享的资源",
+      "content": "22.  同一个进程内的不同线程共享以下几项？\na)  函数体内部的静态变量\nb)  堆\nc)  文件描述符表\nd)  条件码\nA.  1\nB. 2\nC. 3\nD. 4",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2020期末-无答案.md",
+        "lines": {
+          "start": 207,
+          "end": 212
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2020期末-无答案/207.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "22.  同一个进程内的不同线程共享以下几项？\na)  函数体内部的静态变量\nb)  堆\nc)  文件描述符表\nd)  条件码\nA.  1\nB. 2\nC. 3\nD. 4",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-9866683d66b6b84b",
+      "moduleId": "concurrent_programming",
+      "year": 2020,
+      "examType": "期末",
+      "exam": "2020期末-无答案",
+      "questionNo": "第一题 23",
+      "summary": "指令重排以消除共享变量竞争",
+      "content": "23.  令 Li表示加载共享变量到寄存器的指令，Ui表示更新寄存器的指令，Si表示将更新值\n存回到共享变量的指令，指令L1、S1、U3、S3操作共享变量cnt，指令L2、S2、L4、S4\n操作共享变量num，假定每次只允许交换相邻的两条指令，则将下列指令序列变为正确\n的至少需要交换多少次：\nL2、L1、U1、L3、L4、U4、U3、S1、U2、S4、S3、S2\nA.10   B.11   C.12   D.13",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2020期末-无答案.md",
+        "lines": {
+          "start": 213,
+          "end": 218
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2020期末-无答案/213.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "23.  令 Li表示加载共享变量到寄存器的指令，Ui表示更新寄存器的指令，Si表示将更新值\n存回到共享变量的指令，指令L1、S1、U3、S3操作共享变量cnt，指令L2、S2、L4、S4\n操作共享变量num，假定每次只允许交换相邻的两条指令，则将下列指令序列变为正确\n的至少需要交换多少次：\nL2、L1、U1、L3、L4、U4、U3、S1、U2、S4、S3、S2\nA.10   B.11   C.12   D.13",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-d79493be4d3d185e",
+      "moduleId": "concurrent_programming",
+      "year": 2020,
+      "examType": "期末",
+      "exam": "2020期末-无答案",
+      "questionNo": "第一题 24",
+      "summary": "主线程退出导致对等线程终止",
+      "content": "24.  以下程序在输出有限行之后就终止了，请问最有可能的原因是（假定所有函数都正常执\n行）\n#include \"csapp.h\"\nvoid *thread(void *dummy){\nwhile (1){\nprintf(\"hello, world!\\n\");\nSleep(1);\n}\n}\nint main(){\npthread_t tid;\nPthread_create(&tid, NULL, thread, NULL);\nSleep(3);\n}\nA.  主线程结束必然引发所有对等线程结束\nB.  主线程结束时调用了_exit导致进程结束\nC.  主线程结束后，内核发送SIGKILL杀死进程\nD.  主线程结束后，内核观察到对等线程运行时间过长，将其杀死",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2020期末-无答案.md",
+        "lines": {
+          "start": 223,
+          "end": 240
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2020期末-无答案/223.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "24.  以下程序在输出有限行之后就终止了，请问最有可能的原因是（假定所有函数都正常执\n行）\n#include \"csapp.h\"\nvoid *thread(void *dummy){\nwhile (1){\nprintf(\"hello, world!\\n\");\nSleep(1);\n}\n}\nint main(){\npthread_t tid;\nPthread_create(&tid, NULL, thread, NULL);\nSleep(3);\n}",
+        "choices": [
+          {
+            "key": "A",
+            "content": "主线程结束必然引发所有对等线程结束"
+          },
+          {
+            "key": "B",
+            "content": "主线程结束时调用了_exit导致进程结束"
+          },
+          {
+            "key": "C",
+            "content": "主线程结束后，内核发送SIGKILL杀死进程"
+          },
+          {
+            "key": "D",
+            "content": "主线程结束后，内核观察到对等线程运行时间过长，将其杀死"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-4fc7a18df82a3d2a",
+      "moduleId": "concurrent_programming",
+      "year": 2020,
+      "examType": "期末",
+      "exam": "2020期末-无答案",
+      "questionNo": "第一题 25",
+      "summary": "信号量执行轨迹中的死锁",
+      "content": "25.  有四个信号量，初值分别为：a=1,  b=1,  c=1,  d=1\n线程1：  线程2：  线程3：\n① P(a);   ⑨ P(c);   P(d);\n② P(b);  ⑩ P(b);   P(a);\n⑮\n③ P(d);    V(c);   V(d);\n④ P(c);   V(b);  ⑯ P(b);\n⑪ ⑰\n⑤ V(d);   P(a);   V(a);\n⑥ V(a);  ⑫ V(a);    ⑱ V(b);\n⑬ ⑲\n⑦ V(b);\n⑧ V(c);  ⑭ ⑳\n上面的程序执行时，下列哪一个执行轨迹执行后已经出现死锁?\nA. ⑨①⑩②\nB. ①⑨⑩②\n⑪⑮\nC.  ①⑨⑩ ②\nD. ①②③④⑮⑨⑯\n⑮ ⑯\n  ⑮",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2020期末-无答案.md",
+        "lines": {
+          "start": 241,
+          "end": 261
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2020期末-无答案/241.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "25.  有四个信号量，初值分别为：a=1,  b=1,  c=1,  d=1\n线程1：  线程2：  线程3：\n① P(a);   ⑨ P(c);   P(d);\n② P(b);  ⑩ P(b);   P(a);\n⑮\n③ P(d);    V(c);   V(d);\n④ P(c);   V(b);  ⑯ P(b);\n⑪ ⑰\n⑤ V(d);   P(a);   V(a);\n⑥ V(a);  ⑫ V(a);    ⑱ V(b);\n⑬ ⑲\n⑦ V(b);\n⑧ V(c);  ⑭ ⑳\n上面的程序执行时，下列哪一个执行轨迹执行后已经出现死锁?",
+        "choices": [
+          {
+            "key": "A",
+            "content": "⑨①⑩②"
+          },
+          {
+            "key": "B",
+            "content": "①⑨⑩②\n⑪⑮"
+          },
+          {
+            "key": "C",
+            "content": "①⑨⑩ ②"
+          },
+          {
+            "key": "D",
+            "content": "①②③④⑮⑨⑯\n⑮ ⑯\n⑮"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-ca36da4b1e755039",
+      "moduleId": "concurrent_programming",
+      "year": 2020,
+      "examType": "期末",
+      "exam": "2020期末-无答案",
+      "questionNo": "第六题",
+      "summary": "圆桌信号量：死锁、加锁顺序与二元信号量实现",
+      "content": "第六题（10分）\n1. 火锅洞洞主终于要请吃火锅啦！由于防疫规定，洞主决定分批邀请，Alice、\nBob、……、Zach这26位同学顺理成章地成为了第一批受到邀请的同学。他们围坐在\n一张圆桌旁，按照首字母顺序排列（即Alice的右边是Bob，Bob的右边是\nCarol，……，Zach的右边是Alice）。吃饭之前，洞主想要验证他们的身份，他提出了\n这样的要求：\n1） 每位同学有一个编号，即字母序号减1，也就是说，Alice是0号，Bob是1\n号，以此类推。\n2） 每位同学需要同时拿着旁边两位同学的手机去找洞主（不必带上自己的手\n机），按照洞主的要求在树洞里发信息以验证身份。\n3） 可以同时有多位同学找洞主验证（也就是说，Alice需要拿着Zach和Bob的\n手机找洞主，并且在同一时间，Bob也可以拿着Alice和Carol的手机找洞\n主。但是，如果Alice还没同时拿到Zach和Bob的手机，就只能坐在座位上\n等待。）\n所幸，在座有多位字母君学过ICS，他们决定采用信号量解决问题。\n1.1 Alice给出了这样的代码，其中thread函数的参数指明了字母君的编号：\n```\n1.  #include \"csapp.h\"\n2.  #define N 26\n3.  #define UP(i) ((i + 1) % N)\n4.  #define DOWN(i) ((i - 1 + N) % N)\n5.  sem_t sem[N];\n```\n6.\n```\n7.  void *thread(void *i){\n8.      int num = (int)i;\n9.      P(&sem[UP(num)]);\n10.     P(&sem[DOWN(num)]);\n```\n11.\n12.     /* verify identity */\n13.\n```\n14.     V(&sem[UP(num)]);\n15.     V(&sem[DOWN(num)]);\n```\n16. }\n```\n17. int main(){\n18.     for (int i = 0; i < N; i++)\n19.         Sem_init(&sem[i], 0, 1);\n20.     pthread_t tid[N];\n21.     for (int i = 0; i < N; i++)\n22.         Pthread_create(&tid[i], NULL, thread, (void *)i);\n23.     Pthread_exit(0);\n```\n24. }\nBob一看，皱起了眉头。请问这段代码可能会发生什么问题（用一个专用名词表\n述即可）？\n14\n\n<!-- ===== page 15 ===== -->\n\n1.2 Carol把thread函数换成了下面这样：\n```\n1.  void *thread(void *i){\n2.      int num = (int)i;\n3.      for (int i = 0; i < N; i++)\n4.          P(&sem[i]);\n5.      /* verify identity */\n6.      for (int i = 0; i < N; i++)\n7.          V(&sem[i]);\n```\n8.  }\nDave指出，这段代码固然正确，但是效率太低了，他认为只要把第3、4行的代\n码换成一个P操作，把第6、7行的代码换成一个V操作，就能实现同样的效果。\n请问Dave的方法是：\n1.2.1 P操作：P(&sem[         ]);\n1.2.2 V操作：V(&sem[         ]);\n1.3 Eve看了Dave的方案还是摇头，这样执行效率太低了，没能利用同时可以有多位\n同学找洞主验证的条件。借助“互斥锁加锁顺序规则”，他给出了自己的代码。你能\n把代码补全吗？\n1.  void *thread(void *i)\n2.  {\n```\n3.      int num = (int)i;\n4.      if (UP(num) < DOWN(num)){\n5.          P(&sem[  A  ]);\n6.          P(&sem[  B  ]);\n```\n7.      }\n```\n8.      else{\n9.          P(&sem[  C  ]);\n10.         P(&sem[  D  ]);\n```\n11.     }\n```\n12.     /* verify identity */\n13.     V(&sem[UP(num)]);\n14.     V(&sem[DOWN(num)]);\n```\n15. }\nA:             B:             C:             D:\n以上4空均填序号：\n①  UP(num)\n②  DOWN(num)\n③  num\n2. Hungary Alice发现自己没吃上第一场的火锅，一怒之下，给上面的26位字母君出了一\n道难题：用二元信号量实现信号量（也就是值可以是任意非负整数的信号量）。精通ICS的\n你自然认为这是小儿科，迅速补全了以下代码。\n15\n\n<!-- ===== page 16 ===== -->\n\n```\n1.  #include \"csapp.h\"\n2.  typedef struct{\n3.      int value;\n4.      sem_t mutex;\n5.      sem_t zero;\n6.  } my_sem_t;\n7.  void my_sem_init(my_sem_t *sem, unsigned int value){\n8.      sem->value = value;\n9.      Sem_init(&sem->mutex, 0,   A  );\n10.     Sem_init(&sem->zero, 0,   B  );\n```\n11. }\n```\n12. void my_P(my_sem_t *sem){\n13.     P(&sem->mutex);\n14.     sem->value--;\n15.     if (sem->value   C   0)\n```\n16.     {\n17.           D  ;\n18.           E  ;\n19.     }\n```\n20.     else\n21.         V(&sem->mutex);\n```\n22. }\n```\n23. void my_V(my_sem_t *sem){\n24.     P(&sem->mutex);\n25.     sem->value++;\n26.     if (sem->value   F   0)\n```\n27.     {\n```\n28.         V(&sem->mutex);\n29.         V(&sem->zero);\n```\n30.     }\n```\n31.     else\n32.         V(&sem->mutex);\n```\n33. }\nA:             B:             C:\nD:             E:             F:\nD和E请填序号：\n①  P(&sem->mutex)\n②  P(&sem->zero)\n③  V(&sem->mutex)\n④  V(&sem->zero)",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2020期末-无答案.md",
+        "lines": {
+          "start": 526,
+          "end": 683
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2020期末-无答案/526.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "第六题（10分）\n1. 火锅洞洞主终于要请吃火锅啦！由于防疫规定，洞主决定分批邀请，Alice、\nBob、……、Zach这26位同学顺理成章地成为了第一批受到邀请的同学。他们围坐在\n一张圆桌旁，按照首字母顺序排列（即Alice的右边是Bob，Bob的右边是\nCarol，……，Zach的右边是Alice）。吃饭之前，洞主想要验证他们的身份，他提出了\n这样的要求：\n1） 每位同学有一个编号，即字母序号减1，也就是说，Alice是0号，Bob是1\n号，以此类推。\n2） 每位同学需要同时拿着旁边两位同学的手机去找洞主（不必带上自己的手\n机），按照洞主的要求在树洞里发信息以验证身份。\n3） 可以同时有多位同学找洞主验证（也就是说，Alice需要拿着Zach和Bob的\n手机找洞主，并且在同一时间，Bob也可以拿着Alice和Carol的手机找洞\n主。但是，如果Alice还没同时拿到Zach和Bob的手机，就只能坐在座位上\n等待。）\n所幸，在座有多位字母君学过ICS，他们决定采用信号量解决问题。\n1.1 Alice给出了这样的代码，其中thread函数的参数指明了字母君的编号：\n```\n1.  #include \"csapp.h\"\n2.  #define N 26\n3.  #define UP(i) ((i + 1) % N)\n4.  #define DOWN(i) ((i - 1 + N) % N)\n5.  sem_t sem[N];\n```\n6.\n```\n7.  void *thread(void *i){\n8.      int num = (int)i;\n9.      P(&sem[UP(num)]);\n10.     P(&sem[DOWN(num)]);\n```\n11.\n12.     /* verify identity */\n13.\n```\n14.     V(&sem[UP(num)]);\n15.     V(&sem[DOWN(num)]);\n```\n16. }\n```\n17. int main(){\n18.     for (int i = 0; i < N; i++)\n19.         Sem_init(&sem[i], 0, 1);\n20.     pthread_t tid[N];\n21.     for (int i = 0; i < N; i++)\n22.         Pthread_create(&tid[i], NULL, thread, (void *)i);\n23.     Pthread_exit(0);\n```\n24. }\nBob一看，皱起了眉头。请问这段代码可能会发生什么问题（用一个专用名词表\n述即可）？\n14\n\n<!-- ===== page 15 ===== -->\n\n1.2 Carol把thread函数换成了下面这样：\n```\n1.  void *thread(void *i){\n2.      int num = (int)i;\n3.      for (int i = 0; i < N; i++)\n4.          P(&sem[i]);\n5.      /* verify identity */\n6.      for (int i = 0; i < N; i++)\n7.          V(&sem[i]);\n```\n8.  }\nDave指出，这段代码固然正确，但是效率太低了，他认为只要把第3、4行的代\n码换成一个P操作，把第6、7行的代码换成一个V操作，就能实现同样的效果。\n请问Dave的方法是：\n1.2.1 P操作：P(&sem[         ]);\n1.2.2 V操作：V(&sem[         ]);\n1.3 Eve看了Dave的方案还是摇头，这样执行效率太低了，没能利用同时可以有多位\n同学找洞主验证的条件。借助“互斥锁加锁顺序规则”，他给出了自己的代码。你能\n把代码补全吗？\n1.  void *thread(void *i)\n2.  {\n```\n3.      int num = (int)i;\n4.      if (UP(num) < DOWN(num)){\n5.          P(&sem[  A  ]);\n6.          P(&sem[  B  ]);\n```\n7.      }\n```\n8.      else{\n9.          P(&sem[  C  ]);\n10.         P(&sem[  D  ]);\n```\n11.     }\n```\n12.     /* verify identity */\n13.     V(&sem[UP(num)]);\n14.     V(&sem[DOWN(num)]);\n```\n15. }\nA:             B:             C:             D:\n以上4空均填序号：\n①  UP(num)\n②  DOWN(num)\n③  num\n2. Hungary Alice发现自己没吃上第一场的火锅，一怒之下，给上面的26位字母君出了一\n道难题：用二元信号量实现信号量（也就是值可以是任意非负整数的信号量）。精通ICS的\n你自然认为这是小儿科，迅速补全了以下代码。\n15\n\n<!-- ===== page 16 ===== -->\n\n```\n1.  #include \"csapp.h\"\n2.  typedef struct{\n3.      int value;\n4.      sem_t mutex;\n5.      sem_t zero;\n6.  } my_sem_t;\n7.  void my_sem_init(my_sem_t *sem, unsigned int value){\n8.      sem->value = value;\n9.      Sem_init(&sem->mutex, 0,   A  );\n10.     Sem_init(&sem->zero, 0,   B  );\n```\n11. }\n```\n12. void my_P(my_sem_t *sem){\n13.     P(&sem->mutex);\n14.     sem->value--;\n15.     if (sem->value   C   0)\n```\n16.     {\n17.           D  ;\n18.           E  ;\n19.     }\n```\n20.     else\n21.         V(&sem->mutex);\n```\n22. }\n```\n23. void my_V(my_sem_t *sem){\n24.     P(&sem->mutex);\n25.     sem->value++;\n26.     if (sem->value   F   0)\n```\n27.     {\n```\n28.         V(&sem->mutex);\n29.         V(&sem->zero);\n```\n30.     }\n```\n31.     else\n32.         V(&sem->mutex);\n```\n33. }\nA:             B:             C:\nD:             E:             F:\nD和E请填序号：\n①  P(&sem->mutex)\n②  P(&sem->zero)\n③  V(&sem->mutex)\n④  V(&sem->zero)",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-4449afa6a33fe770",
+      "moduleId": "concurrent_programming",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "2021期末-无答案",
+      "questionNo": "第一题 20",
+      "summary": "进程与线程的上下文、栈与地址空间",
+      "content": "20.  下列关于C语言中进程模型和线程模型的说法中，错误的是：\nA.每个线程都有它自己独立的线程上下文，包括线程 ID、程序计数器、条\n件码、通用目的寄存器值等\nB.每个线程都有自己独立的线程栈，任何线程都不能访问其他对等线程的栈\n空间\nC.不同进程之间的虚拟地址空间是独立的，但同一个进程的不同线程共享同\n一个虚拟地址空间\nD.一个线程的上下文比一个进程的上下文小得多，因此线程上下文切换要比\n进程上下文切换快得多",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2021期末-无答案.md",
+        "lines": {
+          "start": 289,
+          "end": 297
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2021期末-无答案/289.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "20.  下列关于C语言中进程模型和线程模型的说法中，错误的是：",
+        "choices": [
+          {
+            "key": "A",
+            "content": "每个线程都有它自己独立的线程上下文，包括线程 ID、程序计数器、条\n件码、通用目的寄存器值等"
+          },
+          {
+            "key": "B",
+            "content": "每个线程都有自己独立的线程栈，任何线程都不能访问其他对等线程的栈\n空间"
+          },
+          {
+            "key": "C",
+            "content": "不同进程之间的虚拟地址空间是独立的，但同一个进程的不同线程共享同\n一个虚拟地址空间"
+          },
+          {
+            "key": "D",
+            "content": "一个线程的上下文比一个进程的上下文小得多，因此线程上下文切换要比\n进程上下文切换快得多"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-59acf52820891cfb",
+      "moduleId": "concurrent_programming",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "2021期末-无答案",
+      "questionNo": "第六题",
+      "summary": "生产者-消费者：信号量解法与等待计数解法",
+      "content": "第六题. 请结合教材第十二章“并发编程”的有关知识回答问题(15分)\n“生产者-消费者”问题是并发编程中的经典问题。本题中，考虑如下场景：\na.  所有生产者和所有消费者共享同一个buffer\nb.  生产者、消费者各有NUM_WORKERS个（大于一个）\nc.  buffer的容量为BUF_SIZE，初始情况下buffer为空\nd.  每个生产者向 buffer 中添加一个 item；若 buffer 满，则生产者等待\nbuffer中有空槽时才能添加元素\ne.  每个消费者从 buffer 中取走一个 item；若 buffer 空，则消费者等待\nbuffer中有item时才能取走元素\n1. 阅读以下代码并回答问题（代码阅读提示：主要关注producer和consumer\n两个函数）\n```\n1. /* Producer–Consumer Problem (Solution 1) */\n2.\n3. #include \"csapp.h\"\n4.\n5. #define BUF_SIZE 3\n6. #define NUM_WORKERS 50\n7. #define MAX_SLEEP_SEC 10\n8.\n9. volatile\nstatic int items = 0; /* How many items are there in t\nhe buffer */\n10.\n11.  static sem_t mutex; /* Mutual Exclusion */\n12.  static sem_t empty; /* How many empty slots are there\nin the buffer */\n13.  static sem_t full;  /* How many items are there in the\n buffer */\n14.\n15.  static void sync_var_init() {\n16.      Sem_init(&mutex, 0, 1);\n17.\n18.      /* Initially, there is no item in the buffer */\n19.      Sem_init(&empty, 0, BUF_SIZE);\n20.      Sem_init(&full, 0, 0);\n21.  }\n22.\n23.  static void *producer(void *num) {\n24.      ①;\n25.      ②;\n26.\n27.      /* Critical section begins */\n28.      Sleep(rand() % MAX_SLEEP_SEC);\n29.      items++;\n30.      /* Critical section ends */\n31.\n32.      V(&mutex);\n33.      V(&full);\n```\n  16\n\n<!-- ===== page 17 ===== -->\n\n```\n34.\n35.      return NULL;\n36.  }\n37.\n38.  static void *consumer(void *num) {\n39.      ③;\n40.      ④;\n41.\n42.      /* Critical section begins */\n43.      Sleep(rand() % MAX_SLEEP_SEC);\n44.      items--;\n45.      /* Critical section ends */\n46.\n47.      V(&mutex);\n48.      V(&empty);\n49.\n50.      return NULL;\n51.  }\n52.\n53.  int main() {\n54.      sync_var_init();\n55.\n56.      pthread_t pid_producer[NUM_WORKERS];\n57.      pthread_t pid_consumer[NUM_WORKERS];\n58.\n59.      for (int i = 0; i < NUM_WORKERS; i++) {\n60.          Pthread_create(&pid_producer[i], NULL, produce\nr, (void *)i);\n61.          Pthread_create(&pid_consumer[i], NULL, consume\nr, (void *)i);\n62.      }\n63.\n64.      for (int i = 0; i < NUM_WORKERS; i++) {\n65.          Pthread_join(pid_producer[i], NULL);\n66.          Pthread_join(pid_consumer[i], NULL);\n67.      }\n68.  }\n```\na)  补全代码（请从以下选项中选择，可重复选择，每个1分，共4分）\n①    （24行）\n②    （25行）\n③    （39行）\n④    （40行）\n选项：\nA.  P(&mutex)\nB.  P(&empty)\nC.  P(&full)\nb)  如果交换24行与25行（两个P操作），      （单选，2分）\nA.  有可能死锁\nB.  有可能饥饿\nC.  既不会死锁，也不会饥饿\n  17\n\n<!-- ===== page 18 ===== -->\n\nc)  交换32、33行（两个V操作）是否可能造成同步错误？    （2分）\nA.  可能\nB.  不可能\nd)  rand函数是不是线程安全的？   （1分）\nA.  是\nB.  不是\n28行与43行对rand函数的使用是否会导致竞争？   （1分）\nA.  会\nB.  不会\n已知rand函数的实现如下\n来源：\n```\nhttps://github.com/begriffs/libc/blob/master/stdlib.h\nhttps://github.com/begriffs/libc/blob/master/stdlib.c\n1.  #define RAND_MAX 32767\n2.\n3.  unsigned long _Randomseed = 1;\n4.\n5.  int rand() {\n6.      _Randomseed = _Randomseed * 1103515425 + 12345;\n7.      return (unsigned int)(_Randomseed>>16) & RAND_MAX;\n8.  }\n9.\n10. void srand(unsigned int seed) {\n11.     _Randomseed = seed;\n12. }\n```\n2. 考虑“生产者-消费者”问题的另一种解法（代码阅读提示：12-69 行之外\n均与上一种解法相同）\n```\n1.  /* Producer–Consumer Problem (Solution 2) */\n2.\n3.  #include \"csapp.h\"\n4.\n5.  #define BUF_SIZE 3\n6.  #define NUM_WORKERS 50\n7.  #define MAX_SLEEP_SEC 10\n8.\n9.  volatile\nstatic int items = 0; /* How many items are there in t\nhe buffer */\n10.\n11. static sem_t mutex;                /* Mutual Exclusion */\n12. static sem_t sem_waiting_producer; /* Wait for empty slots *\n/\n13. static sem_t sem_waiting_consumer; /* Wait for available ite\nms */\n14.\n15. volatile static int num_waiting_producer = 0;\n16. volatile static int num_waiting_consumer = 0;\n```\n  18\n\n<!-- ===== page 19 ===== -->\n\n```\n17.\n18. static void sync_var_init() {\n19.     Sem_init(&mutex, 0, 1);\n20.\n21.     Sem_init(&sem_waiting_producer, 0, ①);\n22.     Sem_init(&sem_waiting_consumer, 0, ①);\n23. }\n24.\n25. static void *producer(void *num) {\n26.     P(&mutex);\n27.     while (items == BUF_SIZE) {\n28.         num_waiting_producer++;\n29.         ②;\n30.         ③;\n31.         P(&mutex);\n32.     }\n33.\n34.     /* Critical section begins */\n35.     Sleep(rand() % MAX_SLEEP_SEC);\n36.     items++;\n37.     /* Critical section ends */\n38.\n39.     if (num_waiting_consumer > 0) {\n40.         num_waiting_consumer--;\n41.         V(&sem_waiting_consumer);\n42.     }\n43.     V(&mutex);\n44.\n45.     return NULL;\n46. }\n47.\n48. static void *consumer(void *num) {\n49.     P(&mutex);\n50.     while (items == 0) {\n51.         num_waiting_consumer++;\n52.         ④;\n53.         ⑤;\n54.         P(&mutex);\n55.     }\n56.\n57.     /* Critical section begins */\n58.     Sleep(rand() % MAX_SLEEP_SEC);\n59.     items--;\n60.     /* Critical section ends */\n61.\n62.     if (num_waiting_producer > 0) {\n63.         num_waiting_producer--;\n64.         V(&sem_waiting_producer);\n65.     }\n66.     V(&mutex);\n67.\n68.     return NULL;\n69. }\n70.\n71. int main() {\n72.     sync_var_init();\n73.\n```\n  19\n\n<!-- ===== page 20 ===== -->\n\n```\n74.     pthread_t pid_producer[NUM_WORKERS];\n75.     pthread_t pid_consumer[NUM_WORKERS];\n76.\n77.     for (int i = 0; i < NUM_WORKERS; i++) {\n78.         Pthread_create(&pid_producer[i], NULL, producer, (vo\nid *)i);\n79.         Pthread_create(&pid_consumer[i], NULL, consumer, (vo\nid *)i);\n80.     }\n81.\n82.     for (int i = 0; i < NUM_WORKERS; i++) {\n83.         Pthread_join(pid_producer[i], NULL);\n84.         Pthread_join(pid_consumer[i], NULL);\n85.     }\n86. }\n```\na)  补全代码（请从以下选项中选择，④⑤无需填写，每个 1 分，共 3 分）\n①    （21、22行）\n②    （29行）\n③    （30行）\n选项：\nA.  0\nB.  1\nC.  P(&sem_waiting_producer)\nD.  V(&mutex)\nb)  如果27行和50行的while换成if，是否可能造成同步错误？\n   （2分）\nA.  可能\nB.  不可能",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2021期末-无答案.md",
+        "lines": {
+          "start": 656,
+          "end": 913
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2021期末-无答案/656.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "第六题. 请结合教材第十二章“并发编程”的有关知识回答问题(15分)\n“生产者-消费者”问题是并发编程中的经典问题。本题中，考虑如下场景：\na.  所有生产者和所有消费者共享同一个buffer\nb.  生产者、消费者各有NUM_WORKERS个（大于一个）\nc.  buffer的容量为BUF_SIZE，初始情况下buffer为空\nd.  每个生产者向 buffer 中添加一个 item；若 buffer 满，则生产者等待\nbuffer中有空槽时才能添加元素\ne.  每个消费者从 buffer 中取走一个 item；若 buffer 空，则消费者等待\nbuffer中有item时才能取走元素\n1. 阅读以下代码并回答问题（代码阅读提示：主要关注producer和consumer\n两个函数）\n```\n1. /* Producer–Consumer Problem (Solution 1) */\n2.\n3. #include \"csapp.h\"\n4.\n5. #define BUF_SIZE 3\n6. #define NUM_WORKERS 50\n7. #define MAX_SLEEP_SEC 10\n8.\n9. volatile\nstatic int items = 0; /* How many items are there in t\nhe buffer */\n10.\n11.  static sem_t mutex; /* Mutual Exclusion */\n12.  static sem_t empty; /* How many empty slots are there\nin the buffer */\n13.  static sem_t full;  /* How many items are there in the\n buffer */\n14.\n15.  static void sync_var_init() {\n16.      Sem_init(&mutex, 0, 1);\n17.\n18.      /* Initially, there is no item in the buffer */\n19.      Sem_init(&empty, 0, BUF_SIZE);\n20.      Sem_init(&full, 0, 0);\n21.  }\n22.\n23.  static void *producer(void *num) {\n24.      ①;\n25.      ②;\n26.\n27.      /* Critical section begins */\n28.      Sleep(rand() % MAX_SLEEP_SEC);\n29.      items++;\n30.      /* Critical section ends */\n31.\n32.      V(&mutex);\n33.      V(&full);\n```\n  16\n\n<!-- ===== page 17 ===== -->\n\n```\n34.\n35.      return NULL;\n36.  }\n37.\n38.  static void *consumer(void *num) {\n39.      ③;\n40.      ④;\n41.\n42.      /* Critical section begins */\n43.      Sleep(rand() % MAX_SLEEP_SEC);\n44.      items--;\n45.      /* Critical section ends */\n46.\n47.      V(&mutex);\n48.      V(&empty);\n49.\n50.      return NULL;\n51.  }\n52.\n53.  int main() {\n54.      sync_var_init();\n55.\n56.      pthread_t pid_producer[NUM_WORKERS];\n57.      pthread_t pid_consumer[NUM_WORKERS];\n58.\n59.      for (int i = 0; i < NUM_WORKERS; i++) {\n60.          Pthread_create(&pid_producer[i], NULL, produce\nr, (void *)i);\n61.          Pthread_create(&pid_consumer[i], NULL, consume\nr, (void *)i);\n62.      }\n63.\n64.      for (int i = 0; i < NUM_WORKERS; i++) {\n65.          Pthread_join(pid_producer[i], NULL);\n66.          Pthread_join(pid_consumer[i], NULL);\n67.      }\n68.  }\n```\na)  补全代码（请从以下选项中选择，可重复选择，每个1分，共4分）\n①    （24行）\n②    （25行）\n③    （39行）\n④    （40行）\n选项：\nA.  P(&mutex)\nB.  P(&empty)\nC.  P(&full)\nb)  如果交换24行与25行（两个P操作），      （单选，2分）\nA.  有可能死锁\nB.  有可能饥饿\nC.  既不会死锁，也不会饥饿\n  17\n\n<!-- ===== page 18 ===== -->\n\nc)  交换32、33行（两个V操作）是否可能造成同步错误？    （2分）\nA.  可能\nB.  不可能\nd)  rand函数是不是线程安全的？   （1分）\nA.  是\nB.  不是\n28行与43行对rand函数的使用是否会导致竞争？   （1分）\nA.  会\nB.  不会\n已知rand函数的实现如下\n来源：\n```\nhttps://github.com/begriffs/libc/blob/master/stdlib.h\nhttps://github.com/begriffs/libc/blob/master/stdlib.c\n1.  #define RAND_MAX 32767\n2.\n3.  unsigned long _Randomseed = 1;\n4.\n5.  int rand() {\n6.      _Randomseed = _Randomseed * 1103515425 + 12345;\n7.      return (unsigned int)(_Randomseed>>16) & RAND_MAX;\n8.  }\n9.\n10. void srand(unsigned int seed) {\n11.     _Randomseed = seed;\n12. }\n```\n2. 考虑“生产者-消费者”问题的另一种解法（代码阅读提示：12-69 行之外\n均与上一种解法相同）\n```\n1.  /* Producer–Consumer Problem (Solution 2) */\n2.\n3.  #include \"csapp.h\"\n4.\n5.  #define BUF_SIZE 3\n6.  #define NUM_WORKERS 50\n7.  #define MAX_SLEEP_SEC 10\n8.\n9.  volatile\nstatic int items = 0; /* How many items are there in t\nhe buffer */\n10.\n11. static sem_t mutex;                /* Mutual Exclusion */\n12. static sem_t sem_waiting_producer; /* Wait for empty slots *\n/\n13. static sem_t sem_waiting_consumer; /* Wait for available ite\nms */\n14.\n15. volatile static int num_waiting_producer = 0;\n16. volatile static int num_waiting_consumer = 0;\n```\n  18\n\n<!-- ===== page 19 ===== -->\n\n```\n17.\n18. static void sync_var_init() {\n19.     Sem_init(&mutex, 0, 1);\n20.\n21.     Sem_init(&sem_waiting_producer, 0, ①);\n22.     Sem_init(&sem_waiting_consumer, 0, ①);\n23. }\n24.\n25. static void *producer(void *num) {\n26.     P(&mutex);\n27.     while (items == BUF_SIZE) {\n28.         num_waiting_producer++;\n29.         ②;\n30.         ③;\n31.         P(&mutex);\n32.     }\n33.\n34.     /* Critical section begins */\n35.     Sleep(rand() % MAX_SLEEP_SEC);\n36.     items++;\n37.     /* Critical section ends */\n38.\n39.     if (num_waiting_consumer > 0) {\n40.         num_waiting_consumer--;\n41.         V(&sem_waiting_consumer);\n42.     }\n43.     V(&mutex);\n44.\n45.     return NULL;\n46. }\n47.\n48. static void *consumer(void *num) {\n49.     P(&mutex);\n50.     while (items == 0) {\n51.         num_waiting_consumer++;\n52.         ④;\n53.         ⑤;\n54.         P(&mutex);\n55.     }\n56.\n57.     /* Critical section begins */\n58.     Sleep(rand() % MAX_SLEEP_SEC);\n59.     items--;\n60.     /* Critical section ends */\n61.\n62.     if (num_waiting_producer > 0) {\n63.         num_waiting_producer--;\n64.         V(&sem_waiting_producer);\n65.     }\n66.     V(&mutex);\n67.\n68.     return NULL;\n69. }\n70.\n71. int main() {\n72.     sync_var_init();\n73.\n```\n  19\n\n<!-- ===== page 20 ===== -->\n\n```\n74.     pthread_t pid_producer[NUM_WORKERS];\n75.     pthread_t pid_consumer[NUM_WORKERS];\n76.\n77.     for (int i = 0; i < NUM_WORKERS; i++) {\n78.         Pthread_create(&pid_producer[i], NULL, producer, (vo\nid *)i);\n79.         Pthread_create(&pid_consumer[i], NULL, consumer, (vo\nid *)i);\n80.     }\n81.\n82.     for (int i = 0; i < NUM_WORKERS; i++) {\n83.         Pthread_join(pid_producer[i], NULL);\n84.         Pthread_join(pid_consumer[i], NULL);\n85.     }\n86. }\n```\na)  补全代码（请从以下选项中选择，④⑤无需填写，每个 1 分，共 3 分）\n①    （21、22行）\n②    （29行）\n③    （30行）\n选项：\nA.  0\nB.  1\nC.  P(&sem_waiting_producer)\nD.  V(&mutex)\nb)  如果27行和50行的while换成if，是否可能造成同步错误？\n   （2分）\nA.  可能\nB.  不可能",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-166c9cdff4c74aca",
+      "moduleId": "concurrent_programming",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "chap 11-12 解析",
+      "questionNo": "选择题 1",
+      "summary": "进程与线程模型：上下文、线程栈、地址空间",
+      "content": "1.下列关于C语言中进程模型和线程模型的说法中，错误的是：\nA.每个线程都有它自己独立的线程上下文，包括线程ID、程序计数器、条件码、通用目的寄存器值等\n\nB.每个线程都有自己独立的线程栈，任何线程都不能访问其他对等线程的栈空间\n\nC.不同进程之间的虚拟地址空间是独立的，但同一个进程的不同线程共享同一个虚拟地址空间\n\nD.一个线程的上下文比一个进程的上下文小得多，因此线程上下文切换要比进程上下文切换快得多",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-4542b507db06d55b",
+          "a-e0f237c3f2b884f4",
+          "a-778bfcbb533d7e02",
+          "a-b4b0bbc7ffd582da",
+          "a-f59a4a24c65b821b",
+          "a-3fec562ea2d66101",
+          "a-75a7256753f90781",
+          "a-34872eaa50039395"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 11-12 解析.md",
+        "lines": {
+          "start": 123,
+          "end": 131
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 11-12 解析/123.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "1.下列关于C语言中进程模型和线程模型的说法中，错误的是：",
+        "choices": [
+          {
+            "key": "A",
+            "content": "每个线程都有它自己独立的线程上下文，包括线程ID、程序计数器、条件码、通用目的寄存器值等"
+          },
+          {
+            "key": "B",
+            "content": "每个线程都有自己独立的线程栈，任何线程都不能访问其他对等线程的栈空间"
+          },
+          {
+            "key": "C",
+            "content": "不同进程之间的虚拟地址空间是独立的，但同一个进程的不同线程共享同一个虚拟地址空间"
+          },
+          {
+            "key": "D",
+            "content": "一个线程的上下文比一个进程的上下文小得多，因此线程上下文切换要比进程上下文切换快得多"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-00e948df1d630e34",
+      "moduleId": "concurrent_programming",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "chap 11-12 解析",
+      "questionNo": "大题 小题1",
+      "summary": "生产者-消费者信号量解法1：代码与子问题",
+      "content": "大题\n\n并发编程（15分）\n\n“生产者-消费者”问题是并发编程中的经典问题。本题中，考虑如下场景：\n\n1.  所有生产者和所有消费者**共享同一个buffer**\n\n2.  生产者、消费者各有NUM_WORKERS个（**大于一个**）\n\n3.  buffer的容量为BUF_SIZE，**初始情况下buffer为空**\n\n4.  每个生产者向buffer中添加一个item；若buffer满，则生产者等待buffer中有空槽时才能添加元素\n\n5.  每个消费者从buffer中取走一个item；若buffer空，则消费者等待buffer中有item时才能取走元素\n\n<!-- -->\n\n1.  阅读以下代码并回答问题（**代码阅读提示：主要关注producer和consumer两个函数**）\n\n<!-- -->\n\n1.  */\\* Producer–Consumer Problem (Solution 1) \\*/*\n\n2.  \n\n3.  \\#include \"csapp.h\"\n\n4.  \n\n5.  \\#define BUF_SIZE 3\n\n6.  \\#define NUM_WORKERS 50\n\n7.  \\#define MAX_SLEEP_SEC 10\n\n8.  \n\n9.  volatile static int items = 0; */\\* How many items are there in the buffer \\*/*\n\n10. \n\n11. static sem_t mutex; */\\* Mutual Exclusion \\*/*\n\n12. static sem_t empty; */\\* How many empty slots are there in the buffer \\*/*\n\n13. static sem_t full;  */\\* How many items are there in the buffer \\*/*\n\n14. \n\n15. static void sync_var_init() {\n\n16.     Sem_init(&mutex, 0, 1);\n\n17. \n\n18.     */\\* Initially, there is no item in the buffer \\*/*\n\n19.     Sem_init(&empty, 0, BUF_SIZE);\n\n20.     Sem_init(&full, 0, 0);\n\n21. }\n\n22. \n\n23. static void \\*producer(void \\*num) {\n\n24.     ①;\n\n25.     ②;\n\n26. \n\n27.     */\\* Critical section begins \\*/*\n\n28.     Sleep(rand() % MAX_SLEEP_SEC);\n\n29.     items++;\n\n30.     */\\* Critical section ends \\*/*\n\n31. \n\n32.     V(&mutex);\n\n33.     V(&full);\n\n34. \n\n35.     return NULL;\n\n36. }\n\n37. \n\n38. static void \\*consumer(void \\*num) {\n\n39.     ③;\n\n40.     ④;\n\n41. \n\n42.     */\\* Critical section begins \\*/*\n\n43.     Sleep(rand() % MAX_SLEEP_SEC);\n\n44.     items--;\n\n45.     */\\* Critical section ends \\*/*\n\n46. \n\n47.     V(&mutex);\n\n48.     V(&empty);\n\n49. \n\n50.     return NULL;\n\n51. }\n\n52. \n\n53. int main() {\n\n54.     sync_var_init();\n\n55. \n\n56.     pthread_t pid_producer\\[NUM_WORKERS\\];\n\n57.     pthread_t pid_consumer\\[NUM_WORKERS\\];\n\n58. \n\n59.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n60.         Pthread_create(&pid_producer\\[i\\], NULL, producer, (void \\*)i);\n\n61.         Pthread_create(&pid_consumer\\[i\\], NULL, consumer, (void \\*)i);\n\n62.     }\n\n63. \n\n64.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n65.         Pthread_join(pid_producer\\[i\\], NULL);\n\n66.         Pthread_join(pid_consumer\\[i\\], NULL);\n\n67.     }\n\n68. }\n\n    1)  补全代码（请从以下选项中选择，可重复选择，每个1分，共4分）\n\n① （24行）\n\n> ② （25行）\n>\n> ③ （39行）\n>\n> ④ （40行）\n>\n> 选项：\n\n1.  P(&mutex)\n\n2.  P(&empty)\n\n3.  P(&full)\n\n    1)  如果交换24行与25行（两个P操作）， （单选，2分）\n\n        1.  有可能死锁\n\n        2.  有可能饥饿\n\n        3.  既不会死锁，也不会饥饿\n\n    2)  交换32行与33行（两个V操作）是否可能造成同步错误？ （2分）\n\n        1.  可能\n\n        2.  不可能\n\n    3)  rand函数是不是线程安全的？ （1分）\n\n        1.  是\n\n        2.  不是\n\n> 28行与43行对rand函数的使用是否会导致竞争？ （1分）\n\n1.  会\n\n2.  不会\n\n> 已知rand函数的实现如下（来源：<https://github.com/begriffs/libc/blob/master/stdlib.h> 和<https://github.com/begriffs/libc/blob/master/stdlib.c>）：\n\n1.  \\#define RAND_MAX 32767\n\n2.  \n\n3.  unsigned long \\_Randomseed = 1;\n\n4.  \n\n5.  int rand() {\n\n6.    \\_Randomseed = \\_Randomseed \\* 1103515425 + 12345;\n\n7.    return (unsigned int)(\\_Randomseed \\>\\> 16) & RAND_MAX;\n\n8.  }\n\n9.  \n\n10. void srand(unsigned int seed) {\n\n11.   \\_Randomseed = seed;\n\n12. }",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-4542b507db06d55b",
+          "a-e0f237c3f2b884f4",
+          "a-778bfcbb533d7e02",
+          "a-b4b0bbc7ffd582da",
+          "a-f59a4a24c65b821b",
+          "a-3fec562ea2d66101",
+          "a-75a7256753f90781",
+          "a-34872eaa50039395"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 11-12 解析.md",
+        "lines": {
+          "start": 137,
+          "end": 363
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 11-12 解析/137.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "大题\n\n并发编程（15分）\n\n“生产者-消费者”问题是并发编程中的经典问题。本题中，考虑如下场景：\n\n1.  所有生产者和所有消费者**共享同一个buffer**\n\n2.  生产者、消费者各有NUM_WORKERS个（**大于一个**）\n\n3.  buffer的容量为BUF_SIZE，**初始情况下buffer为空**\n\n4.  每个生产者向buffer中添加一个item；若buffer满，则生产者等待buffer中有空槽时才能添加元素\n\n5.  每个消费者从buffer中取走一个item；若buffer空，则消费者等待buffer中有item时才能取走元素\n\n<!-- -->\n\n1.  阅读以下代码并回答问题（**代码阅读提示：主要关注producer和consumer两个函数**）\n\n<!-- -->\n\n1.  */\\* Producer–Consumer Problem (Solution 1) \\*/*\n\n2.  \n\n3.  \\#include \"csapp.h\"\n\n4.  \n\n5.  \\#define BUF_SIZE 3\n\n6.  \\#define NUM_WORKERS 50\n\n7.  \\#define MAX_SLEEP_SEC 10\n\n8.  \n\n9.  volatile static int items = 0; */\\* How many items are there in the buffer \\*/*\n\n10. \n\n11. static sem_t mutex; */\\* Mutual Exclusion \\*/*\n\n12. static sem_t empty; */\\* How many empty slots are there in the buffer \\*/*\n\n13. static sem_t full;  */\\* How many items are there in the buffer \\*/*\n\n14. \n\n15. static void sync_var_init() {\n\n16.     Sem_init(&mutex, 0, 1);\n\n17. \n\n18.     */\\* Initially, there is no item in the buffer \\*/*\n\n19.     Sem_init(&empty, 0, BUF_SIZE);\n\n20.     Sem_init(&full, 0, 0);\n\n21. }\n\n22. \n\n23. static void \\*producer(void \\*num) {\n\n24.     ①;\n\n25.     ②;\n\n26. \n\n27.     */\\* Critical section begins \\*/*\n\n28.     Sleep(rand() % MAX_SLEEP_SEC);\n\n29.     items++;\n\n30.     */\\* Critical section ends \\*/*\n\n31. \n\n32.     V(&mutex);\n\n33.     V(&full);\n\n34. \n\n35.     return NULL;\n\n36. }\n\n37. \n\n38. static void \\*consumer(void \\*num) {\n\n39.     ③;\n\n40.     ④;\n\n41. \n\n42.     */\\* Critical section begins \\*/*\n\n43.     Sleep(rand() % MAX_SLEEP_SEC);\n\n44.     items--;\n\n45.     */\\* Critical section ends \\*/*\n\n46. \n\n47.     V(&mutex);\n\n48.     V(&empty);\n\n49. \n\n50.     return NULL;\n\n51. }\n\n52. \n\n53. int main() {\n\n54.     sync_var_init();\n\n55. \n\n56.     pthread_t pid_producer\\[NUM_WORKERS\\];\n\n57.     pthread_t pid_consumer\\[NUM_WORKERS\\];\n\n58. \n\n59.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n60.         Pthread_create(&pid_producer\\[i\\], NULL, producer, (void \\*)i);\n\n61.         Pthread_create(&pid_consumer\\[i\\], NULL, consumer, (void \\*)i);\n\n62.     }\n\n63. \n\n64.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n65.         Pthread_join(pid_producer\\[i\\], NULL);\n\n66.         Pthread_join(pid_consumer\\[i\\], NULL);\n\n67.     }\n\n68. }\n\n    1)  补全代码（请从以下选项中选择，可重复选择，每个1分，共4分）\n\n① （24行）\n\n> ② （25行）\n>\n> ③ （39行）\n>\n> ④ （40行）\n>\n> 选项：\n\n1.  P(&mutex)\n\n2.  P(&empty)\n\n3.  P(&full)\n\n    1)  如果交换24行与25行（两个P操作）， （单选，2分）\n\n        1.  有可能死锁\n\n        2.  有可能饥饿\n\n        3.  既不会死锁，也不会饥饿\n\n    2)  交换32行与33行（两个V操作）是否可能造成同步错误？ （2分）\n\n        1.  可能\n\n        2.  不可能\n\n    3)  rand函数是不是线程安全的？ （1分）\n\n        1.  是\n\n        2.  不是\n\n> 28行与43行对rand函数的使用是否会导致竞争？ （1分）\n\n1.  会\n\n2.  不会\n\n> 已知rand函数的实现如下（来源：<https://github.com/begriffs/libc/blob/master/stdlib.h> 和<https://github.com/begriffs/libc/blob/master/stdlib.c>）：\n\n1.  \\#define RAND_MAX 32767\n\n2.  \n\n3.  unsigned long \\_Randomseed = 1;\n\n4.  \n\n5.  int rand() {\n\n6.    \\_Randomseed = \\_Randomseed \\* 1103515425 + 12345;\n\n7.    return (unsigned int)(\\_Randomseed \\>\\> 16) & RAND_MAX;\n\n8.  }\n\n9.  \n\n10. void srand(unsigned int seed) {\n\n11.   \\_Randomseed = seed;\n\n12. }",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-354d0d61f3ae04c2",
+      "moduleId": "concurrent_programming",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "chap 11-12 解析",
+      "questionNo": "大题 小题2",
+      "summary": "信号量模拟条件变量解法2：代码与子问题",
+      "content": "2.  考虑“生产者-消费者”问题的另一种解法（**代码阅读提示：12-69行之外均与上一种解法相同**）\n\n<!-- -->\n\n1.  */\\* Producer–Consumer Problem (Solution 2) \\*/*\n\n2.  \n\n3.  \\#include \"csapp.h\"\n\n4.  \n\n5.  \\#define BUF_SIZE 3\n\n6.  \\#define NUM_WORKERS 50\n\n7.  \\#define MAX_SLEEP_SEC 10\n\n8.  \n\n9.  volatile static int items = 0; */\\* How many items are there in the buffer \\*/*\n\n10. \n\n11. static sem_t mutex;                */\\* Mutual Exclusion \\*/*\n\n12. static sem_t sem_waiting_producer; */\\* Wait for empty slots \\*/*\n\n13. static sem_t sem_waiting_consumer; */\\* Wait for available items \\*/*\n\n14. \n\n15. volatile static int num_waiting_producer = 0;\n\n16. volatile static int num_waiting_consumer = 0;\n\n17. \n\n18. static void sync_var_init() {\n\n19.     Sem_init(&mutex, 0, 1);\n\n20. \n\n21.     Sem_init(&sem_waiting_producer, 0, ①);\n\n22.     Sem_init(&sem_waiting_consumer, 0, ①);\n\n23. }\n\n24. \n\n25. static void \\*producer(void \\*num) {\n\n26.     P(&mutex);\n\n27.     while (items == BUF_SIZE) {\n\n28.         num_waiting_producer++;\n\n29.         ②;\n\n30.         ③;\n\n31.         P(&mutex);\n\n32.     }\n\n33. \n\n34.     */\\* Critical section begins \\*/*\n\n35.     Sleep(rand() % MAX_SLEEP_SEC);\n\n36.     items++;\n\n37.     */\\* Critical section ends \\*/*\n\n38. \n\n39.     if (num_waiting_consumer \\> 0) {\n\n40.         num_waiting_consumer--;\n\n41.         V(&sem_waiting_consumer);\n\n42.     }\n\n43.     V(&mutex);\n\n44. \n\n45.     return NULL;\n\n46. }\n\n47. \n\n48. static void \\*consumer(void \\*num) {\n\n49.     P(&mutex);\n\n50.     while (items == 0) {\n\n51.         num_waiting_consumer++;\n\n52.         ④;\n\n53.         ⑤;\n\n54.         P(&mutex);\n\n55.     }\n\n56. \n\n57.     */\\* Critical section begins \\*/*\n\n58.     Sleep(rand() % MAX_SLEEP_SEC);\n\n59.     items--;\n\n60.     */\\* Critical section ends \\*/*\n\n61. \n\n62.     if (num_waiting_producer \\> 0) {\n\n63.         num_waiting_producer--;\n\n64.         V(&sem_waiting_producer);\n\n65.     }\n\n66.     V(&mutex);\n\n67. \n\n68.     return NULL;\n\n69. }\n\n70. \n\n71. int main() {\n\n72.     sync_var_init();\n\n73. \n\n74.     pthread_t pid_producer\\[NUM_WORKERS\\];\n\n75.     pthread_t pid_consumer\\[NUM_WORKERS\\];\n\n76. \n\n77.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n78.         Pthread_create(&pid_producer\\[i\\], NULL, producer, (void \\*)i);\n\n79.         Pthread_create(&pid_consumer\\[i\\], NULL, consumer, (void \\*)i);\n\n80.     }\n\n81. \n\n82.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n83.         Pthread_join(pid_producer\\[i\\], NULL);\n\n84.         Pthread_join(pid_consumer\\[i\\], NULL);\n\n85.     }\n\n86. }\n\n    1)  补全补全代码（请从以下选项中选择，④⑤无需填写，每个1分，共3分）\n\n> ① （21、22行）\n>\n> ② （29行）\n>\n> ③ （30行）\n>\n> 选项：\n\n1.  0\n\n2.  1\n\n3.  P(&sem_waiting_producer)\n\n4.  V(&mutex)\n\n<!-- -->\n\n2)  如果27行和50行的while换成if，是否可能造成同步错误？ （2分）\n\n    1.  可能\n\n    2.  不可能",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-4542b507db06d55b",
+          "a-e0f237c3f2b884f4",
+          "a-778bfcbb533d7e02",
+          "a-b4b0bbc7ffd582da",
+          "a-f59a4a24c65b821b",
+          "a-3fec562ea2d66101",
+          "a-75a7256753f90781",
+          "a-34872eaa50039395"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 11-12 解析.md",
+        "lines": {
+          "start": 377,
+          "end": 577
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 11-12 解析/377.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "2.  考虑“生产者-消费者”问题的另一种解法（**代码阅读提示：12-69行之外均与上一种解法相同**）\n\n<!-- -->\n\n1.  */\\* Producer–Consumer Problem (Solution 2) \\*/*\n\n2.  \n\n3.  \\#include \"csapp.h\"\n\n4.  \n\n5.  \\#define BUF_SIZE 3\n\n6.  \\#define NUM_WORKERS 50\n\n7.  \\#define MAX_SLEEP_SEC 10\n\n8.  \n\n9.  volatile static int items = 0; */\\* How many items are there in the buffer \\*/*\n\n10. \n\n11. static sem_t mutex;                */\\* Mutual Exclusion \\*/*\n\n12. static sem_t sem_waiting_producer; */\\* Wait for empty slots \\*/*\n\n13. static sem_t sem_waiting_consumer; */\\* Wait for available items \\*/*\n\n14. \n\n15. volatile static int num_waiting_producer = 0;\n\n16. volatile static int num_waiting_consumer = 0;\n\n17. \n\n18. static void sync_var_init() {\n\n19.     Sem_init(&mutex, 0, 1);\n\n20. \n\n21.     Sem_init(&sem_waiting_producer, 0, ①);\n\n22.     Sem_init(&sem_waiting_consumer, 0, ①);\n\n23. }\n\n24. \n\n25. static void \\*producer(void \\*num) {\n\n26.     P(&mutex);\n\n27.     while (items == BUF_SIZE) {\n\n28.         num_waiting_producer++;\n\n29.         ②;\n\n30.         ③;\n\n31.         P(&mutex);\n\n32.     }\n\n33. \n\n34.     */\\* Critical section begins \\*/*\n\n35.     Sleep(rand() % MAX_SLEEP_SEC);\n\n36.     items++;\n\n37.     */\\* Critical section ends \\*/*\n\n38. \n\n39.     if (num_waiting_consumer \\> 0) {\n\n40.         num_waiting_consumer--;\n\n41.         V(&sem_waiting_consumer);\n\n42.     }\n\n43.     V(&mutex);\n\n44. \n\n45.     return NULL;\n\n46. }\n\n47. \n\n48. static void \\*consumer(void \\*num) {\n\n49.     P(&mutex);\n\n50.     while (items == 0) {\n\n51.         num_waiting_consumer++;\n\n52.         ④;\n\n53.         ⑤;\n\n54.         P(&mutex);\n\n55.     }\n\n56. \n\n57.     */\\* Critical section begins \\*/*\n\n58.     Sleep(rand() % MAX_SLEEP_SEC);\n\n59.     items--;\n\n60.     */\\* Critical section ends \\*/*\n\n61. \n\n62.     if (num_waiting_producer \\> 0) {\n\n63.         num_waiting_producer--;\n\n64.         V(&sem_waiting_producer);\n\n65.     }\n\n66.     V(&mutex);\n\n67. \n\n68.     return NULL;\n\n69. }\n\n70. \n\n71. int main() {\n\n72.     sync_var_init();\n\n73. \n\n74.     pthread_t pid_producer\\[NUM_WORKERS\\];\n\n75.     pthread_t pid_consumer\\[NUM_WORKERS\\];\n\n76. \n\n77.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n78.         Pthread_create(&pid_producer\\[i\\], NULL, producer, (void \\*)i);\n\n79.         Pthread_create(&pid_consumer\\[i\\], NULL, consumer, (void \\*)i);\n\n80.     }\n\n81. \n\n82.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n83.         Pthread_join(pid_producer\\[i\\], NULL);\n\n84.         Pthread_join(pid_consumer\\[i\\], NULL);\n\n85.     }\n\n86. }\n\n    1)  补全补全代码（请从以下选项中选择，④⑤无需填写，每个1分，共3分）\n\n> ① （21、22行）\n>\n> ② （29行）\n>\n> ③ （30行）\n>\n> 选项：\n\n1.  0\n\n2.  1\n\n3.  P(&sem_waiting_producer)\n\n4.  V(&mutex)\n\n<!-- -->\n\n2)  如果27行和50行的while换成if，是否可能造成同步错误？ （2分）\n\n    1.  可能\n\n    2.  不可能",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-e641b2a8a8e75c05",
+      "moduleId": "concurrent_programming",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "chap 11-12 题目",
+      "questionNo": "选择题 1",
+      "summary": "进程与线程模型：上下文、线程栈、地址空间",
+      "content": "1.下列关于C语言中进程模型和线程模型的说法中，错误的是：\nA.每个线程都有它自己独立的线程上下文，包括线程ID、程序计数器、条件码、通用目的寄存器值等\n\nB.每个线程都有自己独立的线程栈，任何线程都不能访问其他对等线程的栈空间\n\nC.不同进程之间的虚拟地址空间是独立的，但同一个进程的不同线程共享同一个虚拟地址空间\n\nD.一个线程的上下文比一个进程的上下文小得多，因此线程上下文切换要比进程上下文切换快得多",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 11-12 题目.md",
+        "lines": {
+          "start": 63,
+          "end": 71
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 11-12 题目/63.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "1.下列关于C语言中进程模型和线程模型的说法中，错误的是：",
+        "choices": [
+          {
+            "key": "A",
+            "content": "每个线程都有它自己独立的线程上下文，包括线程ID、程序计数器、条件码、通用目的寄存器值等"
+          },
+          {
+            "key": "B",
+            "content": "每个线程都有自己独立的线程栈，任何线程都不能访问其他对等线程的栈空间"
+          },
+          {
+            "key": "C",
+            "content": "不同进程之间的虚拟地址空间是独立的，但同一个进程的不同线程共享同一个虚拟地址空间"
+          },
+          {
+            "key": "D",
+            "content": "一个线程的上下文比一个进程的上下文小得多，因此线程上下文切换要比进程上下文切换快得多"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-08951d5914ab55c4",
+      "moduleId": "concurrent_programming",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "chap 11-12 题目",
+      "questionNo": "大题 小题1",
+      "summary": "信号量解法1：P/V 顺序、死锁饥饿、rand 线程安全",
+      "content": "“生产者-消费者”问题是并发编程中的经典问题。本题中，考虑如下场景：\n\n1.  所有生产者和所有消费者**共享同一个buffer**\n\n2.  生产者、消费者各有NUM_WORKERS个（**大于一个**）\n\n3.  buffer的容量为BUF_SIZE，**初始情况下buffer为空**\n\n4.  每个生产者向buffer中添加一个item；若buffer满，则生产者等待buffer中有空槽时才能添加元素\n\n5.  每个消费者从buffer中取走一个item；若buffer空，则消费者等待buffer中有item时才能取走元素\n\n<!-- -->\n\n1.  阅读以下代码并回答问题（**代码阅读提示：主要关注producer和consumer两个函数**）\n\n<!-- -->\n\n1.  */\\* Producer–Consumer Problem (Solution 1) \\*/*\n\n2.  \n\n3.  \\#include \"csapp.h\"\n\n4.  \n\n5.  \\#define BUF_SIZE 3\n\n6.  \\#define NUM_WORKERS 50\n\n7.  \\#define MAX_SLEEP_SEC 10\n\n8.  \n\n9.  volatile static int items = 0; */\\* How many items are there in the buffer \\*/*\n\n10. \n\n11. static sem_t mutex; */\\* Mutual Exclusion \\*/*\n\n12. static sem_t empty; */\\* How many empty slots are there in the buffer \\*/*\n\n13. static sem_t full;  */\\* How many items are there in the buffer \\*/*\n\n14. \n\n15. static void sync_var_init() {\n\n16.     Sem_init(&mutex, 0, 1);\n\n17. \n\n18.     */\\* Initially, there is no item in the buffer \\*/*\n\n19.     Sem_init(&empty, 0, BUF_SIZE);\n\n20.     Sem_init(&full, 0, 0);\n\n21. }\n\n22. \n\n23. static void \\*producer(void \\*num) {\n\n24.     ①;\n\n25.     ②;\n\n26. \n\n27.     */\\* Critical section begins \\*/*\n\n28.     Sleep(rand() % MAX_SLEEP_SEC);\n\n29.     items++;\n\n30.     */\\* Critical section ends \\*/*\n\n31. \n\n32.     V(&mutex);\n\n33.     V(&full);\n\n34. \n\n35.     return NULL;\n\n36. }\n\n37. \n\n38. static void \\*consumer(void \\*num) {\n\n39.     ③;\n\n40.     ④;\n\n41. \n\n42.     */\\* Critical section begins \\*/*\n\n43.     Sleep(rand() % MAX_SLEEP_SEC);\n\n44.     items--;\n\n45.     */\\* Critical section ends \\*/*\n\n46. \n\n47.     V(&mutex);\n\n48.     V(&empty);\n\n49. \n\n50.     return NULL;\n\n51. }\n\n52. \n\n53. int main() {\n\n54.     sync_var_init();\n\n55. \n\n56.     pthread_t pid_producer\\[NUM_WORKERS\\];\n\n57.     pthread_t pid_consumer\\[NUM_WORKERS\\];\n\n58. \n\n59.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n60.         Pthread_create(&pid_producer\\[i\\], NULL, producer, (void \\*)i);\n\n61.         Pthread_create(&pid_consumer\\[i\\], NULL, consumer, (void \\*)i);\n\n62.     }\n\n63. \n\n64.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n65.         Pthread_join(pid_producer\\[i\\], NULL);\n\n66.         Pthread_join(pid_consumer\\[i\\], NULL);\n\n67.     }\n\n68. }\n\n    1)  补全代码（请从以下选项中选择，可重复选择，每个1分，共4分）\n\n① （24行）\n\n> ② （25行）\n>\n> ③ （39行）\n>\n> ④ （40行）\n>\n> 选项：\n\n1.  P(&mutex)\n\n2.  P(&empty)\n\n3.  P(&full)\n\n    1)  如果交换24行与25行（两个P操作）， （单选，2分）\n\n        1.  有可能死锁\n\n        2.  有可能饥饿\n\n        3.  既不会死锁，也不会饥饿\n\n    2)  交换32行与33行（两个V操作）是否可能造成同步错误？ （2分）\n\n        1.  可能\n\n        2.  不可能\n\n    3)  rand函数是不是线程安全的？ （1分）\n\n        1.  是\n\n        2.  不是\n\n> 28行与43行对rand函数的使用是否会导致竞争？ （1分）\n\n1.  会\n\n2.  不会\n\n> 已知rand函数的实现如下（来源：<https://github.com/begriffs/libc/blob/master/stdlib.h> 和<https://github.com/begriffs/libc/blob/master/stdlib.c>）：\n\n1.  \\#define RAND_MAX 32767\n\n2.  \n\n3.  unsigned long \\_Randomseed = 1;\n\n4.  \n\n5.  int rand() {\n\n6.    \\_Randomseed = \\_Randomseed \\* 1103515425 + 12345;\n\n7.    return (unsigned int)(\\_Randomseed \\>\\> 16) & RAND_MAX;\n\n8.  }\n\n9.  \n\n10. void srand(unsigned int seed) {\n\n11.   \\_Randomseed = seed;\n\n12. }",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 11-12 题目.md",
+        "lines": {
+          "start": 77,
+          "end": 299
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 11-12 题目/77.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "“生产者-消费者”问题是并发编程中的经典问题。本题中，考虑如下场景：\n\n1.  所有生产者和所有消费者**共享同一个buffer**\n\n2.  生产者、消费者各有NUM_WORKERS个（**大于一个**）\n\n3.  buffer的容量为BUF_SIZE，**初始情况下buffer为空**\n\n4.  每个生产者向buffer中添加一个item；若buffer满，则生产者等待buffer中有空槽时才能添加元素\n\n5.  每个消费者从buffer中取走一个item；若buffer空，则消费者等待buffer中有item时才能取走元素\n\n<!-- -->\n\n1.  阅读以下代码并回答问题（**代码阅读提示：主要关注producer和consumer两个函数**）\n\n<!-- -->\n\n1.  */\\* Producer–Consumer Problem (Solution 1) \\*/*\n\n2.  \n\n3.  \\#include \"csapp.h\"\n\n4.  \n\n5.  \\#define BUF_SIZE 3\n\n6.  \\#define NUM_WORKERS 50\n\n7.  \\#define MAX_SLEEP_SEC 10\n\n8.  \n\n9.  volatile static int items = 0; */\\* How many items are there in the buffer \\*/*\n\n10. \n\n11. static sem_t mutex; */\\* Mutual Exclusion \\*/*\n\n12. static sem_t empty; */\\* How many empty slots are there in the buffer \\*/*\n\n13. static sem_t full;  */\\* How many items are there in the buffer \\*/*\n\n14. \n\n15. static void sync_var_init() {\n\n16.     Sem_init(&mutex, 0, 1);\n\n17. \n\n18.     */\\* Initially, there is no item in the buffer \\*/*\n\n19.     Sem_init(&empty, 0, BUF_SIZE);\n\n20.     Sem_init(&full, 0, 0);\n\n21. }\n\n22. \n\n23. static void \\*producer(void \\*num) {\n\n24.     ①;\n\n25.     ②;\n\n26. \n\n27.     */\\* Critical section begins \\*/*\n\n28.     Sleep(rand() % MAX_SLEEP_SEC);\n\n29.     items++;\n\n30.     */\\* Critical section ends \\*/*\n\n31. \n\n32.     V(&mutex);\n\n33.     V(&full);\n\n34. \n\n35.     return NULL;\n\n36. }\n\n37. \n\n38. static void \\*consumer(void \\*num) {\n\n39.     ③;\n\n40.     ④;\n\n41. \n\n42.     */\\* Critical section begins \\*/*\n\n43.     Sleep(rand() % MAX_SLEEP_SEC);\n\n44.     items--;\n\n45.     */\\* Critical section ends \\*/*\n\n46. \n\n47.     V(&mutex);\n\n48.     V(&empty);\n\n49. \n\n50.     return NULL;\n\n51. }\n\n52. \n\n53. int main() {\n\n54.     sync_var_init();\n\n55. \n\n56.     pthread_t pid_producer\\[NUM_WORKERS\\];\n\n57.     pthread_t pid_consumer\\[NUM_WORKERS\\];\n\n58. \n\n59.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n60.         Pthread_create(&pid_producer\\[i\\], NULL, producer, (void \\*)i);\n\n61.         Pthread_create(&pid_consumer\\[i\\], NULL, consumer, (void \\*)i);\n\n62.     }\n\n63. \n\n64.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n65.         Pthread_join(pid_producer\\[i\\], NULL);\n\n66.         Pthread_join(pid_consumer\\[i\\], NULL);\n\n67.     }\n\n68. }\n\n    1)  补全代码（请从以下选项中选择，可重复选择，每个1分，共4分）\n\n① （24行）\n\n> ② （25行）\n>\n> ③ （39行）\n>\n> ④ （40行）\n>\n> 选项：\n\n1.  P(&mutex)\n\n2.  P(&empty)\n\n3.  P(&full)\n\n    1)  如果交换24行与25行（两个P操作）， （单选，2分）\n\n        1.  有可能死锁\n\n        2.  有可能饥饿\n\n        3.  既不会死锁，也不会饥饿\n\n    2)  交换32行与33行（两个V操作）是否可能造成同步错误？ （2分）\n\n        1.  可能\n\n        2.  不可能\n\n    3)  rand函数是不是线程安全的？ （1分）\n\n        1.  是\n\n        2.  不是\n\n> 28行与43行对rand函数的使用是否会导致竞争？ （1分）\n\n1.  会\n\n2.  不会\n\n> 已知rand函数的实现如下（来源：<https://github.com/begriffs/libc/blob/master/stdlib.h> 和<https://github.com/begriffs/libc/blob/master/stdlib.c>）：\n\n1.  \\#define RAND_MAX 32767\n\n2.  \n\n3.  unsigned long \\_Randomseed = 1;\n\n4.  \n\n5.  int rand() {\n\n6.    \\_Randomseed = \\_Randomseed \\* 1103515425 + 12345;\n\n7.    return (unsigned int)(\\_Randomseed \\>\\> 16) & RAND_MAX;\n\n8.  }\n\n9.  \n\n10. void srand(unsigned int seed) {\n\n11.   \\_Randomseed = seed;\n\n12. }",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-9bda8f7ba04cd7af",
+      "moduleId": "concurrent_programming",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "chap 11-12 题目",
+      "questionNo": "大题 小题2",
+      "summary": "信号量模拟条件变量：while 换 if 的同步错误",
+      "content": "2.  考虑“生产者-消费者”问题的另一种解法（**代码阅读提示：12-69行之外均与上一种解法相同**）\n\n<!-- -->\n\n1.  */\\* Producer–Consumer Problem (Solution 2) \\*/*\n\n2.  \n\n3.  \\#include \"csapp.h\"\n\n4.  \n\n5.  \\#define BUF_SIZE 3\n\n6.  \\#define NUM_WORKERS 50\n\n7.  \\#define MAX_SLEEP_SEC 10\n\n8.  \n\n9.  volatile static int items = 0; */\\* How many items are there in the buffer \\*/*\n\n10. \n\n11. static sem_t mutex;                */\\* Mutual Exclusion \\*/*\n\n12. static sem_t sem_waiting_producer; */\\* Wait for empty slots \\*/*\n\n13. static sem_t sem_waiting_consumer; */\\* Wait for available items \\*/*\n\n14. \n\n15. volatile static int num_waiting_producer = 0;\n\n16. volatile static int num_waiting_consumer = 0;\n\n17. \n\n18. static void sync_var_init() {\n\n19.     Sem_init(&mutex, 0, 1);\n\n20. \n\n21.     Sem_init(&sem_waiting_producer, 0, ①);\n\n22.     Sem_init(&sem_waiting_consumer, 0, ①);\n\n23. }\n\n24. \n\n25. static void \\*producer(void \\*num) {\n\n26.     P(&mutex);\n\n27.     while (items == BUF_SIZE) {\n\n28.         num_waiting_producer++;\n\n29.         ②;\n\n30.         ③;\n\n31.         P(&mutex);\n\n32.     }\n\n33. \n\n34.     */\\* Critical section begins \\*/*\n\n35.     Sleep(rand() % MAX_SLEEP_SEC);\n\n36.     items++;\n\n37.     */\\* Critical section ends \\*/*\n\n38. \n\n39.     if (num_waiting_consumer \\> 0) {\n\n40.         num_waiting_consumer--;\n\n41.         V(&sem_waiting_consumer);\n\n42.     }\n\n43.     V(&mutex);\n\n44. \n\n45.     return NULL;\n\n46. }\n\n47. \n\n48. static void \\*consumer(void \\*num) {\n\n49.     P(&mutex);\n\n50.     while (items == 0) {\n\n51.         num_waiting_consumer++;\n\n52.         ④;\n\n53.         ⑤;\n\n54.         P(&mutex);\n\n55.     }\n\n56. \n\n57.     */\\* Critical section begins \\*/*\n\n58.     Sleep(rand() % MAX_SLEEP_SEC);\n\n59.     items--;\n\n60.     */\\* Critical section ends \\*/*\n\n61. \n\n62.     if (num_waiting_producer \\> 0) {\n\n63.         num_waiting_producer--;\n\n64.         V(&sem_waiting_producer);\n\n65.     }\n\n66.     V(&mutex);\n\n67. \n\n68.     return NULL;\n\n69. }\n\n70. \n\n71. int main() {\n\n72.     sync_var_init();\n\n73. \n\n74.     pthread_t pid_producer\\[NUM_WORKERS\\];\n\n75.     pthread_t pid_consumer\\[NUM_WORKERS\\];\n\n76. \n\n77.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n78.         Pthread_create(&pid_producer\\[i\\], NULL, producer, (void \\*)i);\n\n79.         Pthread_create(&pid_consumer\\[i\\], NULL, consumer, (void \\*)i);\n\n80.     }\n\n81. \n\n82.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n83.         Pthread_join(pid_producer\\[i\\], NULL);\n\n84.         Pthread_join(pid_consumer\\[i\\], NULL);\n\n85.     }\n\n86. }\n\n    1)  补全补全代码（请从以下选项中选择，④⑤无需填写，每个1分，共3分）\n\n> ① （21、22行）\n>\n> ② （29行）\n>\n> ③ （30行）\n>\n> 选项：\n\n1.  0\n\n2.  1\n\n3.  P(&sem_waiting_producer)\n\n4.  V(&mutex)\n\n<!-- -->\n\n2)  如果27行和50行的while换成if，是否可能造成同步错误？ （2分）\n\n    1.  可能\n\n    2.  不可能",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 11-12 题目.md",
+        "lines": {
+          "start": 303,
+          "end": 503
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 11-12 题目/303.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "2.  考虑“生产者-消费者”问题的另一种解法（**代码阅读提示：12-69行之外均与上一种解法相同**）\n\n<!-- -->\n\n1.  */\\* Producer–Consumer Problem (Solution 2) \\*/*\n\n2.  \n\n3.  \\#include \"csapp.h\"\n\n4.  \n\n5.  \\#define BUF_SIZE 3\n\n6.  \\#define NUM_WORKERS 50\n\n7.  \\#define MAX_SLEEP_SEC 10\n\n8.  \n\n9.  volatile static int items = 0; */\\* How many items are there in the buffer \\*/*\n\n10. \n\n11. static sem_t mutex;                */\\* Mutual Exclusion \\*/*\n\n12. static sem_t sem_waiting_producer; */\\* Wait for empty slots \\*/*\n\n13. static sem_t sem_waiting_consumer; */\\* Wait for available items \\*/*\n\n14. \n\n15. volatile static int num_waiting_producer = 0;\n\n16. volatile static int num_waiting_consumer = 0;\n\n17. \n\n18. static void sync_var_init() {\n\n19.     Sem_init(&mutex, 0, 1);\n\n20. \n\n21.     Sem_init(&sem_waiting_producer, 0, ①);\n\n22.     Sem_init(&sem_waiting_consumer, 0, ①);\n\n23. }\n\n24. \n\n25. static void \\*producer(void \\*num) {\n\n26.     P(&mutex);\n\n27.     while (items == BUF_SIZE) {\n\n28.         num_waiting_producer++;\n\n29.         ②;\n\n30.         ③;\n\n31.         P(&mutex);\n\n32.     }\n\n33. \n\n34.     */\\* Critical section begins \\*/*\n\n35.     Sleep(rand() % MAX_SLEEP_SEC);\n\n36.     items++;\n\n37.     */\\* Critical section ends \\*/*\n\n38. \n\n39.     if (num_waiting_consumer \\> 0) {\n\n40.         num_waiting_consumer--;\n\n41.         V(&sem_waiting_consumer);\n\n42.     }\n\n43.     V(&mutex);\n\n44. \n\n45.     return NULL;\n\n46. }\n\n47. \n\n48. static void \\*consumer(void \\*num) {\n\n49.     P(&mutex);\n\n50.     while (items == 0) {\n\n51.         num_waiting_consumer++;\n\n52.         ④;\n\n53.         ⑤;\n\n54.         P(&mutex);\n\n55.     }\n\n56. \n\n57.     */\\* Critical section begins \\*/*\n\n58.     Sleep(rand() % MAX_SLEEP_SEC);\n\n59.     items--;\n\n60.     */\\* Critical section ends \\*/*\n\n61. \n\n62.     if (num_waiting_producer \\> 0) {\n\n63.         num_waiting_producer--;\n\n64.         V(&sem_waiting_producer);\n\n65.     }\n\n66.     V(&mutex);\n\n67. \n\n68.     return NULL;\n\n69. }\n\n70. \n\n71. int main() {\n\n72.     sync_var_init();\n\n73. \n\n74.     pthread_t pid_producer\\[NUM_WORKERS\\];\n\n75.     pthread_t pid_consumer\\[NUM_WORKERS\\];\n\n76. \n\n77.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n78.         Pthread_create(&pid_producer\\[i\\], NULL, producer, (void \\*)i);\n\n79.         Pthread_create(&pid_consumer\\[i\\], NULL, consumer, (void \\*)i);\n\n80.     }\n\n81. \n\n82.     for (int i = 0; i \\< NUM_WORKERS; i++) {\n\n83.         Pthread_join(pid_producer\\[i\\], NULL);\n\n84.         Pthread_join(pid_consumer\\[i\\], NULL);\n\n85.     }\n\n86. }\n\n    1)  补全补全代码（请从以下选项中选择，④⑤无需填写，每个1分，共3分）\n\n> ① （21、22行）\n>\n> ② （29行）\n>\n> ③ （30行）\n>\n> 选项：\n\n1.  0\n\n2.  1\n\n3.  P(&sem_waiting_producer)\n\n4.  V(&mutex)\n\n<!-- -->\n\n2)  如果27行和50行的while换成if，是否可能造成同步错误？ （2分）\n\n    1.  可能\n\n    2.  不可能",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-e834855ad8c927b2",
+      "moduleId": "concurrent_programming",
+      "year": 2022,
+      "examType": "期末",
+      "exam": "2022期末-无答案",
+      "questionNo": "第一题 14",
+      "summary": "主线程创建对等线程后两线程并发运行",
+      "content": "14. 多线程的执行模型在某些方面和进程的执行模型是相似的。每个进程开始生命周期时都是单一进程，这个线程称为主线程（main thread）。在某一时刻，主线程创建一个____________，从这个时间点开始，两个线程就并发地运行。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2022期末-无答案.md",
+        "lines": {
+          "start": 123,
+          "end": 123
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2022期末-无答案/123.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "14. 多线程的执行模型在某些方面和进程的执行模型是相似的。每个进程开始生命周期时都是单一进程，这个线程称为主线程（main thread）。在某一时刻，主线程创建一个____________，从这个时间点开始，两个线程就并发地运行。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-ad12aab7f4702415",
+      "moduleId": "concurrent_programming",
+      "year": 2022,
+      "examType": "期末",
+      "exam": "2022期末-无答案",
+      "questionNo": "第一题 15",
+      "summary": "以互斥为目的的二元信号量即互斥锁",
+      "content": "15. 以提供互斥为目的的二元信号量常常也称为______：",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2022期末-无答案.md",
+        "lines": {
+          "start": 125,
+          "end": 125
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2022期末-无答案/125.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "15. 以提供互斥为目的的二元信号量常常也称为______：",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-51ff2770273733c0",
+      "moduleId": "concurrent_programming",
+      "year": 2022,
+      "examType": "期末",
+      "exam": "2022期末-无答案",
+      "questionNo": "第七题 1",
+      "summary": "第一类读者-写者（读者优先）信号量 P/V 填空",
+      "content": "1、第一类读者-写者问题（读者优先：总是给读者优先权，只要写者当前没有进行写操作，读者就能获得访问权；这种情况存在于读者很多，写者不经常更新的时候使用）\n\n```c\nint readcnt;    /* Initially 0 */\nsem_t mutex, w; /* Both initially 1 */\n\nvoid reader(void)\n{\n  while (1) {\n    /* 1 */\n    readcnt++;\n    if (readcnt == 1) /* First in */\n      /* 2 */\n    /* 3 */\n\n    /* Reading happens here */\n\n    /* 4 */\n    readcnt--;\n    if (readcnt == 0) /* Last out */\n      /* 5 */\n    /* 6 */\n  }\n}\n\nvoid writer(void)\n{\n```\n\n<!-- ===== page 15 ===== -->\n\n```c\n  while (1) {\n    /* 7 */\n\n    /* Writing here */\n\n    /* 8 */\n  }\n}\n```",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2022期末-无答案.md",
+        "lines": {
+          "start": 645,
+          "end": 685
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2022期末-无答案/645.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "1、第一类读者-写者问题（读者优先：总是给读者优先权，只要写者当前没有进行写操作，读者就能获得访问权；这种情况存在于读者很多，写者不经常更新的时候使用）\n\n```c\nint readcnt;    /* Initially 0 */\nsem_t mutex, w; /* Both initially 1 */\n\nvoid reader(void)\n{\n  while (1) {\n    /* 1 */\n    readcnt++;\n    if (readcnt == 1) /* First in */\n      /* 2 */\n    /* 3 */\n\n    /* Reading happens here */\n\n    /* 4 */\n    readcnt--;\n    if (readcnt == 0) /* Last out */\n      /* 5 */\n    /* 6 */\n  }\n}\n\nvoid writer(void)\n{\n```\n\n<!-- ===== page 15 ===== -->\n\n```c\n  while (1) {\n    /* 7 */\n\n    /* Writing here */\n\n    /* 8 */\n  }\n}\n```",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-f83ca79637ff66b3",
+      "moduleId": "concurrent_programming",
+      "year": 2022,
+      "examType": "期末",
+      "exam": "2022期末-无答案",
+      "questionNo": "第七题 2",
+      "summary": "第二类读者-写者（写者优先）信号量 P/V 填空",
+      "content": "2、第二类读者-写者问题（写者优先：写者具有优先权，将后来的读者延迟到所有等待的或活动的写者都完成为止；这种情况存在于经常更新的系统，而读者的目的是获取最新的数据）\n\n```c\nint readcnt, writecnt;      // Initially 0\nsem_t rmutex, wmutex;       // Initially 1\nsem_t r, w;                 // Initially /* 1 */\nvoid reader(void)\n{\n  while (1) {\n    /* 2 */\n    P(&rmutex);\n    readcnt++;\n    /* 3 */\n    V(&rmutex);\n    /* 4 */\n\n    /* Reading happens here */\n\n    P(&rmutex);\n    readcnt--;\n    /* 5 */\n    V(&rmutex);\n  }\n}\n\nvoid writer(void)\n{\n  while (1) {\n    P(&wmutex);\n    writecnt++;\n    /* 6 */\n    V(&wmutex);\n\n    P(&w);\n    /* Writing here */\n    V(&w);\n\n    P(&wmutex);\n    writecnt--;\n    /* 7 */\n    V(&wmutex);\n  }\n}\n```",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2022期末-无答案.md",
+        "lines": {
+          "start": 687,
+          "end": 730
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2022期末-无答案/687.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "2、第二类读者-写者问题（写者优先：写者具有优先权，将后来的读者延迟到所有等待的或活动的写者都完成为止；这种情况存在于经常更新的系统，而读者的目的是获取最新的数据）\n\n```c\nint readcnt, writecnt;      // Initially 0\nsem_t rmutex, wmutex;       // Initially 1\nsem_t r, w;                 // Initially /* 1 */\nvoid reader(void)\n{\n  while (1) {\n    /* 2 */\n    P(&rmutex);\n    readcnt++;\n    /* 3 */\n    V(&rmutex);\n    /* 4 */\n\n    /* Reading happens here */\n\n    P(&rmutex);\n    readcnt--;\n    /* 5 */\n    V(&rmutex);\n  }\n}\n\nvoid writer(void)\n{\n  while (1) {\n    P(&wmutex);\n    writecnt++;\n    /* 6 */\n    V(&wmutex);\n\n    P(&w);\n    /* Writing here */\n    V(&w);\n\n    P(&wmutex);\n    writecnt--;\n    /* 7 */\n    V(&wmutex);\n  }\n}\n```",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-b43dad5549473a9f",
+      "moduleId": "concurrent_programming",
+      "year": 2022,
+      "examType": "期末",
+      "exam": "2022期末-答案",
+      "questionNo": "第一题 14",
+      "summary": "对等线程",
+      "content": "14、对等线程",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-bc6da33280192b2a"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2022期末-答案.md",
+        "lines": {
+          "start": 23,
+          "end": 23
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2022期末-答案/23.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "14、对等线程",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-b3bed683d433d826",
+      "moduleId": "concurrent_programming",
+      "year": 2022,
+      "examType": "期末",
+      "exam": "2022期末-答案",
+      "questionNo": "第一题 15",
+      "summary": "互斥锁",
+      "content": "15、互斥锁",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-bc6da33280192b2a"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2022期末-答案.md",
+        "lines": {
+          "start": 24,
+          "end": 24
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2022期末-答案/24.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "15、互斥锁",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-4dd809d19fc8ecd2",
+      "moduleId": "concurrent_programming",
+      "year": 2022,
+      "examType": "期末",
+      "exam": "2022期末-答案",
+      "questionNo": "第七题",
+      "summary": "信号量实现读者-写者与互斥",
+      "content": "第七题 并发\n第一类:\n1、 P(&mutex);           2、 P(&w);              3、 V(&mutex);           4、 P(&mutex);\n5、 V(&w);                   6、 V(&mutex);      7、 P(&w);                  8、 V(&w);\n第二类:\n1、1               2、 P(&r);               3、 if(readcnt==1) P(&w);   4、 V(&r);\n5、 if(readcnt==0) V(&w);  6、if(writecnt==1) P(&r);   7、if(writecnt==0) V(&r);",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-bc6da33280192b2a"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2022期末-答案.md",
+        "lines": {
+          "start": 84,
+          "end": 90
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2022期末-答案/84.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "第七题 并发\n第一类:\n1、 P(&mutex);           2、 P(&w);              3、 V(&mutex);           4、 P(&mutex);\n5、 V(&w);                   6、 V(&mutex);      7、 P(&w);                  8、 V(&w);\n第二类:\n1、1               2、 P(&r);               3、 if(readcnt==1) P(&w);   4、 V(&r);\n5、 if(readcnt==0) V(&w);  6、if(writecnt==1) P(&r);   7、if(writecnt==0) V(&r);",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-e8e1a174d510c6f9",
+      "moduleId": "concurrent_programming",
+      "year": 2024,
+      "examType": "期末",
+      "exam": "2024期末-带答案",
+      "questionNo": "第一题 13",
+      "summary": "线程栈与 pthread_join/detach",
+      "content": "13. 下列关于进程线程的描述中，错误的是：（多选）\nA. 每个线程有自己的栈，线程运行时不能访问其他线程的栈上的数据。\nB．一个进程的多个线程共享该进程的代码段、数据段和堆。\nC．操作系统的调度程序选择某个线程在处理器上运行。\nD．当主线程正确执行 pthread_create 后，必须使用 pthread_join 或\npthread_detach，对等线程才会运行。\n答案：AD",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": [
+          "a-544cd966469e852a",
+          "a-0f691532afb6eb95",
+          "a-fdb17b8c00c7e81c"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2024期末-带答案.md",
+        "lines": {
+          "start": 354,
+          "end": 360
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2024期末-带答案/354.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "13. 下列关于进程线程的描述中，错误的是：（多选）",
+        "choices": [
+          {
+            "key": "A",
+            "content": "每个线程有自己的栈，线程运行时不能访问其他线程的栈上的数据。"
+          },
+          {
+            "key": "B",
+            "content": "一个进程的多个线程共享该进程的代码段、数据段和堆。"
+          },
+          {
+            "key": "C",
+            "content": "操作系统的调度程序选择某个线程在处理器上运行。"
+          },
+          {
+            "key": "D",
+            "content": "当主线程正确执行 pthread_create 后，必须使用 pthread_join 或\npthread_detach，对等线程才会运行。"
+          }
+        ],
+        "answer": "答案：AD"
+      }
+    },
+    {
+      "id": "q-a01a9f044af56d47",
+      "moduleId": "concurrent_programming",
+      "year": 2024,
+      "examType": "期末",
+      "exam": "2024期末-带答案",
+      "questionNo": "第五题 Part A",
+      "summary": "读者-写者与信号量代码补全、饥饿",
+      "content": "第五题（20分）\nPart A (12分)\n北京大学南门外新开设了一家小型的电影院，由于电影院规模较小，只有两个\n影厅——影厅A与影厅B，并且工作人员只有一名同时充当售票员的经理。这个影\n院有一些奇怪的规定。\nl  每个影厅正在放映的电影是自动续播的，只有当最后一个观众主动离开当前的\n影厅时结束当前影片的放映。\nl  两个影厅同时放映电影，选择观看两个影厅中任意一个正在放映的影片的观众\n买票后可立即进入，且后续不能更换影厅。\nl  两个影厅内的总观众人数不能超过 100 人。购票人数到达上限后，购票通道\n会立即关闭。直到有观众离开影院，后续观众才可以继续购票。\nl  如果有推销商来找经理推销新影片或者高级放映设施，为了能够及时接待推销\n商，经理会立即关闭购票入口，新到来的观众不能购票入场。\nl  每次经理只能与一名推销商会谈，后续到达的推销商需要等待。经理与已经到\n达的所有推销商都会谈过后，电影院才能重新开业接待观众。\n1. 这名可怜的经理希望北京大学的同学能帮他开发出一套系统，实现上面的逻辑，\n从而减轻他的工作量。学过ICS的小A一眼就看出这个问题可以建模为读者-写者\n问题，并且写出了代码。\n1） 补全代码（5分）\n```\n#include “csapp.h”\n#define MaxAudienceCount 100\n```\nint AudienceCount = 0; // 影院的观众数\nint PromoterCount = 0; // 推销商的数量\n信号量 MovieA = 1;\n信号量 MovieB = 1;\n信号量 Promote = 1;\n信号量 MaxAudience = MaxAudienceCount;\n信号量 AudienceMutex = 1;  // 变量AudienceCount的互斥锁\n信号量 PromoterMutex = 1;  // 变量PromoterCount的互斥锁\n```\nAudienceA(){\n    while(1){\n        P([  A  ]);\n        P(MovieA);\n        P([  B  ]);\n        AudienceCount++;\n        if (AudienceCount == 1){\n```\n27\n\n<!-- ===== page 28 ===== -->\n\n```\n            P([  C  ]);\n        }\n        V([  B  ]);\n        V(MovieA);\n        // Watch the movie\n        P(AudienceMutex);\n        AudienceCount--;\n        if (AudienceCount == 0){\n            V(Promote);\n        }\n        V(AudienceMutex);\n        V(MaxAudience);\n    }\n}\nAudienceB(){\n    while(1){\n        P([  A  ]);\n        P([  D  ]);\n        P([  B  ]);\n        AudienceCount++;\n        if (AudienceCount == 1){\n            P([  C  ]);\n        }\n        V([  B  ]);\n        V([  D  ]);\n        // Watch the movie\n        P(AudienceMutex);\n        AudienceCount--;\n        if (AudienceCount == 0){\n            V(Promote);\n        }\n        V(AudienceMutex);\n        V(MaxAudience);\n    }\n}\nPromoter(){\n    while(1){\n        P(PromoterMutex);\n        PromoterCount++;\n        if (PromoterCount == 1){\n```\n28\n\n<!-- ===== page 29 ===== -->\n\n```\n            P(MovieA);\n            P(MovieB);\n        }\n        V(PromoterMutex);\n        P([  E  ]);\n        // Try to promote\n        V([  E  ]);\n        P(PromoterMutex);\n        PromoterCount--;\n        if (PromoterCount == 0){\n            V(movieA);\n            V([  D  ]);\n        }\n        V(PromoterMutex);\n   }\n}\nA:       B:       C:\nD:       E:\n```\n（选择下述编号填入字母表示的空缺内，注意不同字母也可能填入相同的数字编号）\n```\n①  MovieA\n②  MovieB\n③  Promote\n④  MaxAudience\n⑤  AudienceMutex\n```\n2） 在这个实现的逻辑下，观众有可能饥饿吗？   （1分）\nA. 可能\nB. 不可能\n2. 让我们再次回归到最基本的第二类读者-写者问题的另一种解法，如下述代码\n所示。学习了并发之后的你迅速提取出了有效信息并补全了代码。（6分）\nActiveR 表示正在读的读者的数量，WaitingR 表示正在等待的读者的数量；\nActiveW 表示正在写的写者的数量，WaitingW 表示正在等待的写者的数量。\n```\nint ActiveR = 0;\nint WaitingR = 0;\nint ActiveW = 0;\nint WaitingW = 0;\n```\n信号量 mutex = 1;\n信号量 waitingToRead = [  A  ];\n29\n\n<!-- ===== page 30 ===== -->\n\n信号量 waitingToWrite = [  B  ];\n```\nReader() {\n    P(mutex);\n    while ((ActiveW + WaitingW) > 0) {\n        WaitingR++;\n        [  C  ];\n        [  D  ];\n        P(mutex);\n        WaitingR--;\n    }\n    ActiveR++;\n    V(mutex);\n    // Perform actual read-only access\n    P(mutex);\n    ActiveR--;\n    if (ActiveR == 0 && WaitingW > 0) {\n        V(waitingToWrite);\n    }\n    V(mutex);\n}\nWriter () {\n    P(mutex);\n    while (([  E  ]) > 0) {\n        WaitingW++;\n        [  C  ];\n        P(waitingToWrite);\n        P(mutex);\n        WaitingW--;\n    }\n    ActiveW++;\n    V(mutex);\n    // Perform actual write-only access\n    P(mutex);\n    ActiveW--;\n    if (WaitingW > 0) {\n        V(waitingToWrite);\n    } else if (WaitingR > 0) {\n        int n = WaitingR;\n        while (n--) {\n            [  F  ];\n        }\n    }\n    V(mutex);\n}\n```\n30\n\n<!-- ===== page 31 ===== -->\n\n```\nA:       B:       C:\nD:       E:       F:\n```\n（选择下述编号填入字母表示的空缺内，注意不同字母也可能填入相同的数字编号）\n①  0\n②  1\n```\n③  ActiveR + ActiveW\n④  ActiveR + WaitingR\n⑤  ActiveW + WaitingW\n⑥  P(mutex)\n⑦  V(mutex)\n⑧  P(waitingToRead)\n⑨  V(waitingToRead)\n```",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-544cd966469e852a",
+          "a-0f691532afb6eb95",
+          "a-fdb17b8c00c7e81c"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2024期末-带答案.md",
+        "lines": {
+          "start": 837,
+          "end": 1038
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2024期末-带答案/837.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "第五题（20分）\nPart A (12分)\n北京大学南门外新开设了一家小型的电影院，由于电影院规模较小，只有两个\n影厅——影厅A与影厅B，并且工作人员只有一名同时充当售票员的经理。这个影\n院有一些奇怪的规定。\nl  每个影厅正在放映的电影是自动续播的，只有当最后一个观众主动离开当前的\n影厅时结束当前影片的放映。\nl  两个影厅同时放映电影，选择观看两个影厅中任意一个正在放映的影片的观众\n买票后可立即进入，且后续不能更换影厅。\nl  两个影厅内的总观众人数不能超过 100 人。购票人数到达上限后，购票通道\n会立即关闭。直到有观众离开影院，后续观众才可以继续购票。\nl  如果有推销商来找经理推销新影片或者高级放映设施，为了能够及时接待推销\n商，经理会立即关闭购票入口，新到来的观众不能购票入场。\nl  每次经理只能与一名推销商会谈，后续到达的推销商需要等待。经理与已经到\n达的所有推销商都会谈过后，电影院才能重新开业接待观众。\n1. 这名可怜的经理希望北京大学的同学能帮他开发出一套系统，实现上面的逻辑，\n从而减轻他的工作量。学过ICS的小A一眼就看出这个问题可以建模为读者-写者\n问题，并且写出了代码。\n1） 补全代码（5分）\n```\n#include “csapp.h”\n#define MaxAudienceCount 100\n```\nint AudienceCount = 0; // 影院的观众数\nint PromoterCount = 0; // 推销商的数量\n信号量 MovieA = 1;\n信号量 MovieB = 1;\n信号量 Promote = 1;\n信号量 MaxAudience = MaxAudienceCount;\n信号量 AudienceMutex = 1;  // 变量AudienceCount的互斥锁\n信号量 PromoterMutex = 1;  // 变量PromoterCount的互斥锁\n```\nAudienceA(){\n    while(1){\n        P([  A  ]);\n        P(MovieA);\n        P([  B  ]);\n        AudienceCount++;\n        if (AudienceCount == 1){\n```\n27\n\n<!-- ===== page 28 ===== -->\n\n```\n            P([  C  ]);\n        }\n        V([  B  ]);\n        V(MovieA);\n        // Watch the movie\n        P(AudienceMutex);\n        AudienceCount--;\n        if (AudienceCount == 0){\n            V(Promote);\n        }\n        V(AudienceMutex);\n        V(MaxAudience);\n    }\n}\nAudienceB(){\n    while(1){\n        P([  A  ]);\n        P([  D  ]);\n        P([  B  ]);\n        AudienceCount++;\n        if (AudienceCount == 1){\n            P([  C  ]);\n        }\n        V([  B  ]);\n        V([  D  ]);\n        // Watch the movie\n        P(AudienceMutex);\n        AudienceCount--;\n        if (AudienceCount == 0){\n            V(Promote);\n        }\n        V(AudienceMutex);\n        V(MaxAudience);\n    }\n}\nPromoter(){\n    while(1){\n        P(PromoterMutex);\n        PromoterCount++;\n        if (PromoterCount == 1){\n```\n28\n\n<!-- ===== page 29 ===== -->\n\n```\n            P(MovieA);\n            P(MovieB);\n        }\n        V(PromoterMutex);\n        P([  E  ]);\n        // Try to promote\n        V([  E  ]);\n        P(PromoterMutex);\n        PromoterCount--;\n        if (PromoterCount == 0){\n            V(movieA);\n            V([  D  ]);\n        }\n        V(PromoterMutex);\n   }\n}\nA:       B:       C:\nD:       E:\n```\n（选择下述编号填入字母表示的空缺内，注意不同字母也可能填入相同的数字编号）\n```\n①  MovieA\n②  MovieB\n③  Promote\n④  MaxAudience\n⑤  AudienceMutex\n```\n2） 在这个实现的逻辑下，观众有可能饥饿吗？   （1分）\nA. 可能\nB. 不可能\n2. 让我们再次回归到最基本的第二类读者-写者问题的另一种解法，如下述代码\n所示。学习了并发之后的你迅速提取出了有效信息并补全了代码。（6分）\nActiveR 表示正在读的读者的数量，WaitingR 表示正在等待的读者的数量；\nActiveW 表示正在写的写者的数量，WaitingW 表示正在等待的写者的数量。\n```\nint ActiveR = 0;\nint WaitingR = 0;\nint ActiveW = 0;\nint WaitingW = 0;\n```\n信号量 mutex = 1;\n信号量 waitingToRead = [  A  ];\n29\n\n<!-- ===== page 30 ===== -->\n\n信号量 waitingToWrite = [  B  ];\n```\nReader() {\n    P(mutex);\n    while ((ActiveW + WaitingW) > 0) {\n        WaitingR++;\n        [  C  ];\n        [  D  ];\n        P(mutex);\n        WaitingR--;\n    }\n    ActiveR++;\n    V(mutex);\n    // Perform actual read-only access\n    P(mutex);\n    ActiveR--;\n    if (ActiveR == 0 && WaitingW > 0) {\n        V(waitingToWrite);\n    }\n    V(mutex);\n}\nWriter () {\n    P(mutex);\n    while (([  E  ]) > 0) {\n        WaitingW++;\n        [  C  ];\n        P(waitingToWrite);\n        P(mutex);\n        WaitingW--;\n    }\n    ActiveW++;\n    V(mutex);\n    // Perform actual write-only access\n    P(mutex);\n    ActiveW--;\n    if (WaitingW > 0) {\n        V(waitingToWrite);\n    } else if (WaitingR > 0) {\n        int n = WaitingR;\n        while (n--) {\n            [  F  ];\n        }\n    }\n    V(mutex);\n}\n```\n30\n\n<!-- ===== page 31 ===== -->\n\n```\nA:       B:       C:\nD:       E:       F:\n```\n（选择下述编号填入字母表示的空缺内，注意不同字母也可能填入相同的数字编号）\n①  0\n②  1\n```\n③  ActiveR + ActiveW\n④  ActiveR + WaitingR\n⑤  ActiveW + WaitingW\n⑥  P(mutex)\n⑦  V(mutex)\n⑧  P(waitingToRead)\n⑨  V(waitingToRead)\n```",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-c686bf5ca67f4ed8",
+      "moduleId": "concurrent_programming",
+      "year": 2024,
+      "examType": "期末",
+      "exam": "2024期末-带答案",
+      "questionNo": "第五题 Part B",
+      "summary": "线程/信号共享变量、竞态与信号安全",
+      "content": "Part B (8分)\n完全人格，首在体育。小北同学近日遇到了考入某体育强校的李华同学，但二\n者就谁是体育世一大产生了争执，因此决定通过拔河比赛一决胜负。为了确保公平\n性，小北和李华各自找来了自己的学长作为裁判进行比赛计分。作为计算机专业的\n同学，你希望编写一个运行在Linux内核上的C程序模拟这个场景，以分析小北\n是否遥遥领先。\n为了模拟上述场景，我们用进程表示选手团和裁判团，每个进程中又用两个线\n程去模拟两位选手和两位裁判。每个“选手”线程通过信号将自己视角下的比赛情\n况发给对应的“裁判”线程，“裁判”线程将比赛结果记录在文件里以便最后登记\n分数。\n补充说明：\n•  在POSIX语义下，多线程进程接收信号时将随机指定一个线程进行接收\no  但在Linux系统下，通过在主线程中BLOCK某信号、在对等线程中\nUNBLOCK该信号，可以强制指定该对等线程接收该信号\no  本题利用这种方法，使两个线程judger1和judger2分别处理进\n程收到的SIGUSR1和SIGUSR2信号\n•  volatile 修饰关键词要求编译器对于指定的变量的每次读写都必须使\n用内存中的值\n•  register修饰关键词要求编译器必须将指定的变量分配在寄存器上\n•  题目在Ubuntu 24.04.1上使用gcc 13.3.0 (Ubuntu 13.3.0-\n6ubuntu2~24.04)进行编译，编译命令为 gcc input.c csapp.c -o\ninput。题目环境的内核版本5.为15.167.4。解决本题无需课程内容以外知\n识，提供本信息仅为避免你臆想不必要的情况。\n31\n\n<!-- ===== page 32 ===== -->\n\n```\ninput.c\n#include \"csapp.h\"\nvoid signal_handler(int signo) {\n    if (signo == SIGUSR1) printf(\"A\\n\");\n    if (signo == SIGUSR2) printf(\"B\\r\");\n}\nvoid *judger(void *num) {\n    ...\n```\n    //在省略的代码中使用pthread_sigmask分别取消对SIGUSR1和SIGUSR2信号的阻塞\n    //(int)num为1则取消 SIGUSR1的阻塞，(int)num为2则取消SIGUSR2的阻塞\n```\n    for (;;);\n}\nint judger_pid = 0;\nvoid *player(void *arg) {\n    int num = (int)(uint64_t)arg;\n    volatile static int flag = 0;\n    register int val = 0;\n    for (int i = 1; i <= 10; i++) {\n        val = flag; // *2\n        if (num == 1) {\n            if (val <= 0) ++val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val,\n\"_A\"[val > 0]);\n            if (val > 0) kill(judger_pid, SIGUSR1);\n        } else {\n            if (val >= 0) --val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val,\n\"_B\"[val < 0]);\n            if (val < 0) kill(judger_pid, SIGUSR2);\n        }\n    }\n}\nint main() {\n    ...\n```\n    // 在省略的代码中使用pthread_sigmask阻塞SIGUSR1和SIGUSR2信号\n    // 并设置SIGUSR1和SIGUSR2的信号处理函数为signal_handler\n```\n    pid_t player_pid;\n    if (player_pid = fork()) { // *1\n```\n        freopen(\"game.out\", \"wb\", stdout); //题目保证硬盘空间足够\n        setvbuf(stdout, NULL, _IOLBF, 1024);\n        // 裁判团\n32\n\n<!-- ===== page 33 ===== -->\n\n```\n        pthread_t judger1, judger2;\n        pthread_create(&judger1, NULL, judger, (void *)1);\n        pthread_create(&judger2, NULL, judger, (void *)2);\n        waitpid(player_pid, NULL, 0);\n```\n        sleep(1); // 题目保证此时所有pending信号均处理完成\n```\n        _exit(0);\n    } else {\n```\n        sleep(1); // 题目保证此时信号处理程序已按要求生效\n        // 玩家团\n```\n        judger_pid = getppid();\n        pthread_t player1, player2;\n        pthread_create(&player1, NULL, player, (void *)1);\n        pthread_create(&player2, NULL, player, (void *)2);\n        pthread_join(player1, NULL);\n        pthread_join(player2, NULL);\n        return 0;\n    }\n}\n```\n1） 在player函数中，使用了_______个共享变量? (同一个变量多次出现算1\n个) （1分）\n2） 看到代码后，你很快发现：在信号处理程序里使用了不安全的printf函数！\n老师在课堂上讲过著名的“灵魂出窍”死锁案例，而题目的程序同时在main函数\n和信号处理程序都使用了printf。\n题目中的程序_______（会／不会）出现死锁？原因包括：printf _______（是\n／不是）异步信号安全的；printf _______（是／不是）线程安全的；在题目的\n程序中， signal_handler 中的printf_______（可能/不会）被打断。（4\n分）\n3） 下面是上面代码某次运行时输出的结果：\n```\nstdout\nPlayer 1:  1   A\nPlayer 1:  1   A\nPlayer 1:  1   A\nPlayer 1:  1   A  game.out\nPlayer 1:  1   A  A\nPlayer 1:  1   A  A\nPlayer 1:  1   A  A\nPlayer 1:  1   A  A\nPlayer 2:  0   _  B\nPlayer 2:  0   _  A\nPlayer 2: -1  B\nPlayer 1:  1   A\nPlayer 1: 0  _\nPlayer 2: -1  B\n```\n33\n\n<!-- ===== page 34 ===== -->\n\n```\nPlayer 2: -1  B\nPlayer 2: -1  B\nPlayer 2: -1  B\nPlayer 2: -1  B\nPlayer 2: -1  B\nPlayer 2: -1  B\n```\n① 下列哪一项不是导致本题程序多次运行的结果不同的原因？_______（1分）\nA. 操作系统调度进程具有不确定性\nB. 操作系统调度线程具有不确定性\nC. 操作系统下发信号的时机具有不确定性\nD. 操作系统处理系统调用具有不确定性\n② 下列哪一选项会导致上面的运行结果中，game.out 的 A 比 stdout 的少？\n_______ （1分）\n除此之外，还有哪一选项会导致上面的运行结果中，game.out的B比stdout的\n少？_______（1分）\nA. 多个到达的信号可能只被处理一次\nB. 后面的字符可能在缓冲区内覆盖前面的字符\nC. 缓冲区内的字符没有刷新到文件，程序就退出了\nD. 多次相同的kill可能只有一次进入内核\nE. 父进程中的两个线程产生race Condition\nF. 子进程中的两个线程产生race Condition\nG. 由于磁盘太慢等原因，产生写不足",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-544cd966469e852a",
+          "a-0f691532afb6eb95",
+          "a-fdb17b8c00c7e81c"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2024期末-带答案.md",
+        "lines": {
+          "start": 1040,
+          "end": 1198
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2024期末-带答案/1040.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "Part B (8分)\n完全人格，首在体育。小北同学近日遇到了考入某体育强校的李华同学，但二\n者就谁是体育世一大产生了争执，因此决定通过拔河比赛一决胜负。为了确保公平\n性，小北和李华各自找来了自己的学长作为裁判进行比赛计分。作为计算机专业的\n同学，你希望编写一个运行在Linux内核上的C程序模拟这个场景，以分析小北\n是否遥遥领先。\n为了模拟上述场景，我们用进程表示选手团和裁判团，每个进程中又用两个线\n程去模拟两位选手和两位裁判。每个“选手”线程通过信号将自己视角下的比赛情\n况发给对应的“裁判”线程，“裁判”线程将比赛结果记录在文件里以便最后登记\n分数。\n补充说明：\n•  在POSIX语义下，多线程进程接收信号时将随机指定一个线程进行接收\no  但在Linux系统下，通过在主线程中BLOCK某信号、在对等线程中\nUNBLOCK该信号，可以强制指定该对等线程接收该信号\no  本题利用这种方法，使两个线程judger1和judger2分别处理进\n程收到的SIGUSR1和SIGUSR2信号\n•  volatile 修饰关键词要求编译器对于指定的变量的每次读写都必须使\n用内存中的值\n•  register修饰关键词要求编译器必须将指定的变量分配在寄存器上\n•  题目在Ubuntu 24.04.1上使用gcc 13.3.0 (Ubuntu 13.3.0-\n6ubuntu2~24.04)进行编译，编译命令为 gcc input.c csapp.c -o\ninput。题目环境的内核版本5.为15.167.4。解决本题无需课程内容以外知\n识，提供本信息仅为避免你臆想不必要的情况。\n31\n\n<!-- ===== page 32 ===== -->\n\n```\ninput.c\n#include \"csapp.h\"\nvoid signal_handler(int signo) {\n    if (signo == SIGUSR1) printf(\"A\\n\");\n    if (signo == SIGUSR2) printf(\"B\\r\");\n}\nvoid *judger(void *num) {\n    ...\n```\n    //在省略的代码中使用pthread_sigmask分别取消对SIGUSR1和SIGUSR2信号的阻塞\n    //(int)num为1则取消 SIGUSR1的阻塞，(int)num为2则取消SIGUSR2的阻塞\n```\n    for (;;);\n}\nint judger_pid = 0;\nvoid *player(void *arg) {\n    int num = (int)(uint64_t)arg;\n    volatile static int flag = 0;\n    register int val = 0;\n    for (int i = 1; i <= 10; i++) {\n        val = flag; // *2\n        if (num == 1) {\n            if (val <= 0) ++val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val,\n\"_A\"[val > 0]);\n            if (val > 0) kill(judger_pid, SIGUSR1);\n        } else {\n            if (val >= 0) --val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val,\n\"_B\"[val < 0]);\n            if (val < 0) kill(judger_pid, SIGUSR2);\n        }\n    }\n}\nint main() {\n    ...\n```\n    // 在省略的代码中使用pthread_sigmask阻塞SIGUSR1和SIGUSR2信号\n    // 并设置SIGUSR1和SIGUSR2的信号处理函数为signal_handler\n```\n    pid_t player_pid;\n    if (player_pid = fork()) { // *1\n```\n        freopen(\"game.out\", \"wb\", stdout); //题目保证硬盘空间足够\n        setvbuf(stdout, NULL, _IOLBF, 1024);\n        // 裁判团\n32\n\n<!-- ===== page 33 ===== -->\n\n```\n        pthread_t judger1, judger2;\n        pthread_create(&judger1, NULL, judger, (void *)1);\n        pthread_create(&judger2, NULL, judger, (void *)2);\n        waitpid(player_pid, NULL, 0);\n```\n        sleep(1); // 题目保证此时所有pending信号均处理完成\n```\n        _exit(0);\n    } else {\n```\n        sleep(1); // 题目保证此时信号处理程序已按要求生效\n        // 玩家团\n```\n        judger_pid = getppid();\n        pthread_t player1, player2;\n        pthread_create(&player1, NULL, player, (void *)1);\n        pthread_create(&player2, NULL, player, (void *)2);\n        pthread_join(player1, NULL);\n        pthread_join(player2, NULL);\n        return 0;\n    }\n}\n```\n1） 在player函数中，使用了_______个共享变量? (同一个变量多次出现算1\n个) （1分）\n2） 看到代码后，你很快发现：在信号处理程序里使用了不安全的printf函数！\n老师在课堂上讲过著名的“灵魂出窍”死锁案例，而题目的程序同时在main函数\n和信号处理程序都使用了printf。\n题目中的程序_______（会／不会）出现死锁？原因包括：printf _______（是\n／不是）异步信号安全的；printf _______（是／不是）线程安全的；在题目的\n程序中， signal_handler 中的printf_______（可能/不会）被打断。（4\n分）\n3） 下面是上面代码某次运行时输出的结果：\n```\nstdout\nPlayer 1:  1   A\nPlayer 1:  1   A\nPlayer 1:  1   A\nPlayer 1:  1   A  game.out\nPlayer 1:  1   A  A\nPlayer 1:  1   A  A\nPlayer 1:  1   A  A\nPlayer 1:  1   A  A\nPlayer 2:  0   _  B\nPlayer 2:  0   _  A\nPlayer 2: -1  B\nPlayer 1:  1   A\nPlayer 1: 0  _\nPlayer 2: -1  B\n```\n33\n\n<!-- ===== page 34 ===== -->\n\n```\nPlayer 2: -1  B\nPlayer 2: -1  B\nPlayer 2: -1  B\nPlayer 2: -1  B\nPlayer 2: -1  B\nPlayer 2: -1  B\n```\n① 下列哪一项不是导致本题程序多次运行的结果不同的原因？_______（1分）\nA. 操作系统调度进程具有不确定性\nB. 操作系统调度线程具有不确定性\nC. 操作系统下发信号的时机具有不确定性\nD. 操作系统处理系统调用具有不确定性\n② 下列哪一选项会导致上面的运行结果中，game.out 的 A 比 stdout 的少？\n_______ （1分）\n除此之外，还有哪一选项会导致上面的运行结果中，game.out的B比stdout的\n少？_______（1分）\nA. 多个到达的信号可能只被处理一次\nB. 后面的字符可能在缓冲区内覆盖前面的字符\nC. 缓冲区内的字符没有刷新到文件，程序就退出了\nD. 多次相同的kill可能只有一次进入内核\nE. 父进程中的两个线程产生race Condition\nF. 子进程中的两个线程产生race Condition\nG. 由于磁盘太慢等原因，产生写不足",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-a2e00c811e17660e",
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末-带答案",
+      "questionNo": "二 25",
+      "summary": "进程与线程资源共享与寄存器独立",
+      "content": "25.关于进程(processes) 和线程 (threads) 的描述，下列说法哪些正确？\n答案：ABCD\n解析：线程切换会保存CPU的寄存器，E错误",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-带答案.md",
+        "lines": {
+          "start": 144,
+          "end": 146
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-带答案/144.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "25.关于进程(processes) 和线程 (threads) 的描述，下列说法哪些正确？",
+        "choices": [],
+        "answer": "答案：ABCD\n解析：线程切换会保存CPU的寄存器，E错误"
+      }
+    },
+    {
+      "id": "q-a84a52ca10e39ac7",
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末-带答案",
+      "questionNo": "四 1",
+      "summary": "共享变量识别及参考答案",
+      "content": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr，哪几个是共享变量？\n答：\n答案：static_local；cnt；shared_array；dynamic_ptr（每个1分）",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-带答案.md",
+        "lines": {
+          "start": 176,
+          "end": 181
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-带答案/176.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr，哪几个是共享变量？\n答：",
+        "choices": [],
+        "answer": "答案：static_local；cnt；shared_array；dynamic_ptr（每个1分）"
+      }
+    },
+    {
+      "id": "q-84b4945864fa71b5",
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末-带答案",
+      "questionNo": "四 2",
+      "summary": "Lightswitch 读者-写者两问及答案",
+      "content": "2.（3分）\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n答案：否（1分）\n（2）在本题的reader和writer实现基础上，……\n答：（ ）\nA. (9),(8),(4),(2),(11)\nB. (11),(8),(3),(3),(8)\nC. (11),(11),(3),(2),(8)\nD. (9),(11),(4),(3),(11)\n答案：C（2分）",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-带答案.md",
+        "lines": {
+          "start": 182,
+          "end": 192
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-带答案/182.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "2.（3分）\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]",
+        "choices": [],
+        "answer": "答案：否（1分）\n（2）在本题的reader和writer实现基础上，……\n答：（ ）\nA. (9),(8),(4),(2),(11)\nB. (11),(8),(3),(3),(8)\nC. (11),(11),(3),(2),(8)\nD. (9),(11),(4),(3),(11)\n答案：C（2分）"
+      }
+    },
+    {
+      "id": "q-1e24e8308ba529c5",
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末-带答案",
+      "questionNo": "四 3",
+      "summary": "生产者-消费者订单缓冲区空白答案",
+      "content": "3.（8分）在现代餐饮行业中，……答案（每项1分）：\n```\n(1) 1\n(2) BUF_SIZE\n(3) P(&buffer.empty)\n(4) P(&buffer.mutex)\n(5) V(&buffer.full)\n(6) P(&buffer.full)\n(7) P(&buffer.mutex)\n(8) V(&buffer.empty)\n```",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-带答案.md",
+        "lines": {
+          "start": 193,
+          "end": 202
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-带答案/193.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "3.（8分）在现代餐饮行业中，……答案（每项1分）：\n```\n(1) 1\n(2) BUF_SIZE\n(3) P(&buffer.empty)\n(4) P(&buffer.mutex)\n(5) V(&buffer.full)\n(6) P(&buffer.full)\n(7) P(&buffer.mutex)\n(8) V(&buffer.empty)\n```",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-d334458ae32ec316",
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末-无答案",
+      "questionNo": "二 25",
+      "summary": "进程与线程的资源共享与切换开销",
+      "content": "25.关于进程(processes) 和线程 (threads) 的描述，下列说法哪些正确？\nA. 同一进程内的多个线程通常共享同一虚拟地址空间（代码/全局数据/堆）\nB. 同一进程内的不同线程通常有各自独立的栈（stack）\nC. 进程切换往往比同进程的线程切换工作量大、耗费时间长\nD. 线程之间共享文件描述符表，一个线程 close(fd) 可能影响其他线程\nE. 线程之间共享寄存器状态，一个线程改 %rax 会影响另一个线程",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-无答案.md",
+        "lines": {
+          "start": 358,
+          "end": 363
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-无答案/358.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "25.关于进程(processes) 和线程 (threads) 的描述，下列说法哪些正确？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "同一进程内的多个线程通常共享同一虚拟地址空间（代码/全局数据/堆）"
+          },
+          {
+            "key": "B",
+            "content": "同一进程内的不同线程通常有各自独立的栈（stack）"
+          },
+          {
+            "key": "C",
+            "content": "进程切换往往比同进程的线程切换工作量大、耗费时间长"
+          },
+          {
+            "key": "D",
+            "content": "线程之间共享文件描述符表，一个线程 close(fd) 可能影响其他线程"
+          },
+          {
+            "key": "E",
+            "content": "线程之间共享寄存器状态，一个线程改 %rax 会影响另一个线程"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-c5a45b9c928fb3ce",
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末-无答案",
+      "questionNo": "四 1",
+      "summary": "多线程代码中的共享变量识别",
+      "content": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr。哪几个是共享变量？\n答：\n```\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\nlong niters;\npthread_t tid1, tid2;\nint local_main = 0;\nif(argc!=2) {\nprintf(\"usage: %s <niters>\\n\", argv[0]);\nexit(0);\n}\nniters = atoi(argv[1]);\ndynamic_ptr = (int*)malloc(N * sizeof(int));\nif(dynamic_ptr == NULL) {\nprintf(\"Memory allocation failed\\n\");\nexit(1);\n}\nfor(int i = 0; i < N; i++) {\nshared_array[i] = i;\n}\nint thread_arg = niters;\npthread_create(&tid1, NULL, thread, &thread_arg);\npthread_create(&tid2, NULL, thread, &thread_arg);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nif (cnt != 2 * niters) {\nprintf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n} else {\nprintf(\"OK cnt = %ld\\n\", cnt);\n}\nfree(dynamic_ptr);\nexit(0);\n```\n10\n\n<!-- ===== page 11 ===== -->\n\n```\n}\nvoid* thread(void *arg) {\nlong i;\nint niters = *(int *)arg;\nint local_thread = 0;\nstatic int static_local = 0;\nfor(i = 0; i < niters; i++) {\ncnt++;\nint index = i % N;\nshared_array[index]++;\ndynamic_ptr[index]++;\nstatic_local++;\nlocal_thread++;\n}\nprintf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\nlocal_thread, static_local);\nreturn NULL;\n}\n```",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-无答案.md",
+        "lines": {
+          "start": 434,
+          "end": 497
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-无答案/434.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr。哪几个是共享变量？\n答：\n```\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\nlong niters;\npthread_t tid1, tid2;\nint local_main = 0;\nif(argc!=2) {\nprintf(\"usage: %s <niters>\\n\", argv[0]);\nexit(0);\n}\nniters = atoi(argv[1]);\ndynamic_ptr = (int*)malloc(N * sizeof(int));\nif(dynamic_ptr == NULL) {\nprintf(\"Memory allocation failed\\n\");\nexit(1);\n}\nfor(int i = 0; i < N; i++) {\nshared_array[i] = i;\n}\nint thread_arg = niters;\npthread_create(&tid1, NULL, thread, &thread_arg);\npthread_create(&tid2, NULL, thread, &thread_arg);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nif (cnt != 2 * niters) {\nprintf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n} else {\nprintf(\"OK cnt = %ld\\n\", cnt);\n}\nfree(dynamic_ptr);\nexit(0);\n```\n10\n\n<!-- ===== page 11 ===== -->\n\n```\n}\nvoid* thread(void *arg) {\nlong i;\nint niters = *(int *)arg;\nint local_thread = 0;\nstatic int static_local = 0;\nfor(i = 0; i < niters; i++) {\ncnt++;\nint index = i % N;\nshared_array[index]++;\ndynamic_ptr[index]++;\nstatic_local++;\nlocal_thread++;\n}\nprintf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\nlocal_thread, static_local);\nreturn NULL;\n}\n```",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-467405a40a38dee6",
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末-无答案",
+      "questionNo": "四 2",
+      "summary": "Lightswitch 读者-写者与到达时刻状态分析",
+      "content": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其\n中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有\n读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提\n示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和\n2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者\n执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2,\nW2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：\n答：（ ）\nA. (9),(8),(4),(2),(11)\nB. (11),(8),(3),(3),(8)\nC. (11),(11),(3),(2),(8)\nD. (9),(11),(4),(3),(11)\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时\n间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\n```\n11\n\n<!-- ===== page 12 ===== -->\n\n```\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\n```\n12\n\n<!-- ===== page 13 ===== -->\n\n```\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-无答案.md",
+        "lines": {
+          "start": 499,
+          "end": 601
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-无答案/499.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "stem": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其\n中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有\n读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提\n示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和\n2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者\n执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2,\nW2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：\n答：（ ）",
+        "choices": [
+          {
+            "key": "A",
+            "content": "(9),(8),(4),(2),(11)"
+          },
+          {
+            "key": "B",
+            "content": "(11),(8),(3),(3),(8)"
+          },
+          {
+            "key": "C",
+            "content": "(11),(11),(3),(2),(8)"
+          },
+          {
+            "key": "D",
+            "content": "(9),(11),(4),(3),(11)\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时\n间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\n```\n11\n<!-- ===== page 12 ===== -->\n```\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\n```\n12\n<!-- ===== page 13 ===== -->\n```\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```"
+          }
+        ],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-20fcc7293246e535",
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末-无答案",
+      "questionNo": "四 3",
+      "summary": "服务员-厨师订单缓冲区的生产者-消费者",
+      "content": "3.（8分）在现代餐饮行业中，高效的订单处理系统至关重要。小红设计了一个模拟在线餐\n厅的订单处理流程，其中服务员接收顾客订单，厨师处理这些订单。为最大化效率，餐厅雇\n佣了多个服务员和厨师同时工作，他们通过一个共享的订单缓冲区进行协作。该场景遵循以\n下规则：\n 服务员有NUM_WAITERS名，厨师有NUM_COOKS名（NUM_WAITERS和NUM_COOKS\n都大于1），服务员和厨师使用同一个共享订单缓冲区；\n 每个服务员独立工作，每次将接收到的一个顾客订单放入共享的订单缓冲区内，当缓冲\n区满时，服务员必须等待，直到有空闲位置才能放入新订单；\n 每个厨师独立工作，每次从共享订单缓冲区内取出一个订单进行烹饪处理，当缓冲区为\n空时，厨师必须等待，直到有新的订单被放入；\n 订单缓冲区的容量为BUF_SIZE（BUF_SIZE大于0），用于存放待处理的订单，且初\n始情况下订单缓冲区为空。\n下面代码中，waiter函数为服务员线程，cook函数为厨师线程，init_buffer函\n数为初始化函数，会在系统启动时调用一次，略去其他部分代码和无关逻辑。\n请填写程序中对应空白处的代码：\n#define NUM_WAITERS 4 // 服务员数量\n#define NUM_COOKS 2 // 厨师数量\n#define BUF_SIZE 5 // 订单缓冲区容量\n```\ntypedef struct {\nchar* orders[BUF_SIZE];\nint in;\nint out;\nsem_t mutex;\nsem_t empty;\nsem_t full;\n} Buffer;\nBuffer buffer;\nvoid init_buffer() {\nbuffer.in = 0;\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\nbuffer.out = 0;\nsem_init(&buffer.mutex, 0, ______(1)_______);\nsem_init(&buffer.empty, 0, _______(2)_______);\nsem_init(&buffer.full, 0, 0);\n}\nvoid* waiter(void* arg) {\nwhile(1) {\n```\n// 接单逻辑\nchar* order = xxxx;\n// 将订单放入缓冲区\n```\n______(3)______;\n______(4)______;\nbuffer.orders[buffer.in] = order;\nbuffer.in = (buffer.in+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(5)______;\n```\n// 其他逻辑略去\n```\n}\n}\nvoid* cook(void* arg) {\nwhile(1) {\n```\n// 从缓冲区取出订单\n```\n______(6)______;\n______(7)______;\nchar* order = buffer.orders[buffer.out];\nbuffer.out = (buffer.out+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(8)______;\n```\n// 其他逻辑略去\n```\n}\n}\n```",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-无答案.md",
+        "lines": {
+          "start": 603,
+          "end": 677
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-无答案/603.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "3.（8分）在现代餐饮行业中，高效的订单处理系统至关重要。小红设计了一个模拟在线餐\n厅的订单处理流程，其中服务员接收顾客订单，厨师处理这些订单。为最大化效率，餐厅雇\n佣了多个服务员和厨师同时工作，他们通过一个共享的订单缓冲区进行协作。该场景遵循以\n下规则：\n 服务员有NUM_WAITERS名，厨师有NUM_COOKS名（NUM_WAITERS和NUM_COOKS\n都大于1），服务员和厨师使用同一个共享订单缓冲区；\n 每个服务员独立工作，每次将接收到的一个顾客订单放入共享的订单缓冲区内，当缓冲\n区满时，服务员必须等待，直到有空闲位置才能放入新订单；\n 每个厨师独立工作，每次从共享订单缓冲区内取出一个订单进行烹饪处理，当缓冲区为\n空时，厨师必须等待，直到有新的订单被放入；\n 订单缓冲区的容量为BUF_SIZE（BUF_SIZE大于0），用于存放待处理的订单，且初\n始情况下订单缓冲区为空。\n下面代码中，waiter函数为服务员线程，cook函数为厨师线程，init_buffer函\n数为初始化函数，会在系统启动时调用一次，略去其他部分代码和无关逻辑。\n请填写程序中对应空白处的代码：\n#define NUM_WAITERS 4 // 服务员数量\n#define NUM_COOKS 2 // 厨师数量\n#define BUF_SIZE 5 // 订单缓冲区容量\n```\ntypedef struct {\nchar* orders[BUF_SIZE];\nint in;\nint out;\nsem_t mutex;\nsem_t empty;\nsem_t full;\n} Buffer;\nBuffer buffer;\nvoid init_buffer() {\nbuffer.in = 0;\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\nbuffer.out = 0;\nsem_init(&buffer.mutex, 0, ______(1)_______);\nsem_init(&buffer.empty, 0, _______(2)_______);\nsem_init(&buffer.full, 0, 0);\n}\nvoid* waiter(void* arg) {\nwhile(1) {\n```\n// 接单逻辑\nchar* order = xxxx;\n// 将订单放入缓冲区\n```\n______(3)______;\n______(4)______;\nbuffer.orders[buffer.in] = order;\nbuffer.in = (buffer.in+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(5)______;\n```\n// 其他逻辑略去\n```\n}\n}\nvoid* cook(void* arg) {\nwhile(1) {\n```\n// 从缓冲区取出订单\n```\n______(6)______;\n______(7)______;\nchar* order = buffer.orders[buffer.out];\nbuffer.out = (buffer.out+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(8)______;\n```\n// 其他逻辑略去\n```\n}\n}\n```",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-d8617c7de929b12f",
+      "moduleId": "concurrent_programming",
+      "year": null,
+      "examType": "期末",
+      "exam": "期末往年题勘误、详解 by Arthals",
+      "questionNo": "2015 第八题",
+      "summary": "两 mutex 初值应为 1 与 PB 代码订正",
+      "content": "### 第八题\n\n答案有误，两个 mutex 信号量的初值应当都为 1，且 PB 应当如下：\n\n```cpp\nPB() {\n    while(1) {\n        P(&full1); // full1--\n        P(&mutex1);\n        // 从 Buff1 中取出一个记录\n      \t// V 操作可以挪到最后，因为此时持有 mutex1 保证不会有 PA 来竞争\n        V(&mutex1);\n      \tV(&empty1) // empty1++\n        // ---- ///\n        P(&empty2); // empty2--\n        P(&mutex2);\n        // 将记录放入 Buff2\n        // 这里顺序无所谓，V 操作不阻塞\n        V(&mutex2);\n        V(&full2); // full2++\n    }\n}\n```\n\n可以看做是两个队列问题，因为题目说明了只有 PA PB PC 三个线程，不存在 PB 和 PB 之间的竞争。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-3edc01064ad8cdd7"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/期末往年题勘误、详解 by Arthals.md",
+        "lines": {
+          "start": 35,
+          "end": 59
+        },
+        "aliases": [],
+        "curated": "_curated/期末/期末往年题勘误、详解 by Arthals/35.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "stem": "### 第八题\n\n答案有误，两个 mutex 信号量的初值应当都为 1，且 PB 应当如下：\n\n```cpp\nPB() {\n    while(1) {\n        P(&full1); // full1--\n        P(&mutex1);\n        // 从 Buff1 中取出一个记录\n      \t// V 操作可以挪到最后，因为此时持有 mutex1 保证不会有 PA 来竞争\n        V(&mutex1);\n      \tV(&empty1) // empty1++\n        // ---- ///\n        P(&empty2); // empty2--\n        P(&mutex2);\n        // 将记录放入 Buff2\n        // 这里顺序无所谓，V 操作不阻塞\n        V(&mutex2);\n        V(&full2); // full2++\n    }\n}\n```\n\n可以看做是两个队列问题，因为题目说明了只有 PA PB PC 三个线程，不存在 PB 和 PB 之间的竞争。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-7cb44d83583a33c7",
+      "moduleId": "concurrent_programming",
+      "year": null,
+      "examType": "期末",
+      "exam": "期末往年题勘误、详解 by Arthals",
+      "questionNo": "2016 第一题 第20问",
+      "summary": "非 volatile 变量的寄存器缓存与加锁",
+      "content": "第 20 问，关键点在于，printf 的时候因为这个 j 没有 volatile 定义，所以你考虑汇编的时候，这里肯定就是一个寄存器了，上面读完是啥就是啥，而寄存器是个线程上下文里的东西，所以你 V(&s) 之后到 printf 之间哪怕被切走，切回来的时候也是会恢复的，所以不会因为在别的线程里加了 j，我这里 printf 就会知道哦原来这个 j 变了，而是依旧恢复成切走的时候的 j（寄存器版本）。所以这题前三个都是可能的，只有 D，因为线程锁保证了这个 j 一定会加到 3，而对应的线程的打印一定能打出 3，所以 D 是错的。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-3edc01064ad8cdd7"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/期末往年题勘误、详解 by Arthals.md",
+        "lines": {
+          "start": 71,
+          "end": 71
+        },
+        "aliases": [],
+        "curated": "_curated/期末/期末往年题勘误、详解 by Arthals/71.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "第 20 问，关键点在于，printf 的时候因为这个 j 没有 volatile 定义，所以你考虑汇编的时候，这里肯定就是一个寄存器了，上面读完是啥就是啥，而寄存器是个线程上下文里的东西，所以你 V(&s) 之后到 printf 之间哪怕被切走，切回来的时候也是会恢复的，所以不会因为在别的线程里加了 j，我这里 printf 就会知道哦原来这个 j 变了，而是依旧恢复成切走的时候的 j（寄存器版本）。所以这题前三个都是可能的，只有 D，因为线程锁保证了这个 j 一定会加到 3，而对应的线程的打印一定能打出 3，所以 D 是错的。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-3b3f6647fafcb153",
+      "moduleId": "concurrent_programming",
+      "year": null,
+      "examType": "期末",
+      "exam": "期末往年题勘误、详解 by Arthals",
+      "questionNo": "2018 第一题 第13问",
+      "summary": "使用全局变量导致线程不安全",
+      "content": "第 13 问，A 选项，可能使用了全局变量。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-3edc01064ad8cdd7"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/期末往年题勘误、详解 by Arthals.md",
+        "lines": {
+          "start": 97,
+          "end": 97
+        },
+        "aliases": [],
+        "curated": "_curated/期末/期末往年题勘误、详解 by Arthals/97.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "第 13 问，A 选项，可能使用了全局变量。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-988261ff9bf14102",
+      "moduleId": "concurrent_programming",
+      "year": null,
+      "examType": "期末",
+      "exam": "期末往年题勘误、详解 by Arthals",
+      "questionNo": "2018 第七题 第4问",
+      "summary": "信号量初值≥2 时锁失效",
+      "content": "### 第七题\n\n第 4 问，信号量也可以等于 2，本质上是大于等于 2 的时候这个锁就失效了，相当于只有剩下的一个互斥锁（",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-3edc01064ad8cdd7"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/期末往年题勘误、详解 by Arthals.md",
+        "lines": {
+          "start": 140,
+          "end": 142
+        },
+        "aliases": [],
+        "curated": "_curated/期末/期末往年题勘误、详解 by Arthals/140.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "### 第七题\n\n第 4 问，信号量也可以等于 2，本质上是大于等于 2 的时候这个锁就失效了，相当于只有剩下的一个互斥锁（",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-2869b5969c6dea18",
+      "moduleId": "concurrent_programming",
+      "year": null,
+      "examType": "期末",
+      "exam": "期末往年题勘误、详解 by Arthals",
+      "questionNo": "2019 第七题",
+      "summary": "读者-写者 while 循环的竞争含义",
+      "content": "### 第七题\n\n为什么读写问题要一直 while？原因是要通过两个 while 每次循环之间的竞争来模拟读者一直读写者一直写。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-3edc01064ad8cdd7"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/期末往年题勘误、详解 by Arthals.md",
+        "lines": {
+          "start": 180,
+          "end": 182
+        },
+        "aliases": [],
+        "curated": "_curated/期末/期末往年题勘误、详解 by Arthals/180.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "### 第七题\n\n为什么读写问题要一直 while？原因是要通过两个 while 每次循环之间的竞争来模拟读者一直读写者一直写。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-6c0c06036f8757cb",
+      "moduleId": "concurrent_programming",
+      "year": null,
+      "examType": "期末",
+      "exam": "期末往年题勘误、详解 by Arthals",
+      "questionNo": "2020 第一题 第25问",
+      "summary": "a、d 加锁顺序相反导致死锁",
+      "content": "第 25 问，选项除 D 外均会死锁。因为线程 1 和线程 3 的 a，d 锁的获得顺序刚好相反。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-3edc01064ad8cdd7"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/期末往年题勘误、详解 by Arthals.md",
+        "lines": {
+          "start": 192,
+          "end": 192
+        },
+        "aliases": [],
+        "curated": "_curated/期末/期末往年题勘误、详解 by Arthals/192.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "第 25 问，选项除 D 外均会死锁。因为线程 1 和线程 3 的 a，d 锁的获得顺序刚好相反。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-7adfb8906ac03917",
+      "moduleId": "concurrent_programming",
+      "year": null,
+      "examType": "期末",
+      "exam": "期末往年题勘误、详解 by Arthals",
+      "questionNo": "2020 第六题",
+      "summary": "哲学家就餐加锁顺序与 sem 的 value/zero",
+      "content": "### 第六题\n\n第 1 问：首先你需要知道为什么会死锁？要是所有人都同时获得了 UP 的锁，那么 DOWN 的就一个都获取不到，就寄了。\n\n然后如何保证不会发生这种情况？就需要规定获得锁的顺序，必须先获得大的，再获得小的（你可以自己思考一下正确性的原因）。所以答案是 1221 或者 2112.\n\n第 2 问：实际上是用 value 存储你模拟的 sem 的值，用 mutex 保护 value，用 zero 实现等待。如果 value<0 了那么 P 操作就必须等待，所以 C 应该是<.\n\n对于 F，如果 value 本来就<0，那么就需要唤醒一个 P 阻塞的线程。自增后<条件变为<=，故也填写<=.\n\n具体的条件判断可以使用边界值判断法，就是考虑 value 为-1,0,1 三种特殊值就可以了。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-3edc01064ad8cdd7"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/期末往年题勘误、详解 by Arthals.md",
+        "lines": {
+          "start": 198,
+          "end": 208
+        },
+        "aliases": [],
+        "curated": "_curated/期末/期末往年题勘误、详解 by Arthals/198.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "### 第六题\n\n第 1 问：首先你需要知道为什么会死锁？要是所有人都同时获得了 UP 的锁，那么 DOWN 的就一个都获取不到，就寄了。\n\n然后如何保证不会发生这种情况？就需要规定获得锁的顺序，必须先获得大的，再获得小的（你可以自己思考一下正确性的原因）。所以答案是 1221 或者 2112.\n\n第 2 问：实际上是用 value 存储你模拟的 sem 的值，用 mutex 保护 value，用 zero 实现等待。如果 value<0 了那么 P 操作就必须等待，所以 C 应该是<.\n\n对于 F，如果 value 本来就<0，那么就需要唤醒一个 P 阻塞的线程。自增后<条件变为<=，故也填写<=.\n\n具体的条件判断可以使用边界值判断法，就是考虑 value 为-1,0,1 三种特殊值就可以了。",
+        "choices": [],
+        "answer": ""
+      }
+    },
+    {
+      "id": "q-c80d98708dd9ddae",
+      "moduleId": "concurrent_programming",
+      "year": null,
+      "examType": "期末",
+      "exam": "期末往年题勘误、详解 by Arthals",
+      "questionNo": "2021 第六题 2.b",
+      "summary": "生产者-消费者中 if 与 while 的区别",
+      "content": "### 第六题\n\n2.b，如果是 if，有：\n\n```c\nP(&mutex);\nif (items == BUF_SIZE) {\n    num_waiting_producer++;\n    V(&mutex);\n    P(&sem_waiting_producer);\n    P(&mutex);\n}\n```\n\n本质是第 30 行 P(&sem_waiting_producer); 和 31 行 P(&mutex); 之间可能被其他进程捷足先登。\n\n而不是你出了 while 循环之后的问题，出了 while 循环时你已经持有锁 mutex 了。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": false,
+        "relatedBlockIds": [
+          "a-3edc01064ad8cdd7"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/期末往年题勘误、详解 by Arthals.md",
+        "lines": {
+          "start": 224,
+          "end": 240
+        },
+        "aliases": [],
+        "curated": "_curated/期末/期末往年题勘误、详解 by Arthals/224.md"
+      },
+      "layout": {
+        "mode": "short",
+        "stem": "### 第六题\n\n2.b，如果是 if，有：\n\n```c\nP(&mutex);\nif (items == BUF_SIZE) {\n    num_waiting_producer++;\n    V(&mutex);\n    P(&sem_waiting_producer);\n    P(&mutex);\n}\n```\n\n本质是第 30 行 P(&sem_waiting_producer); 和 31 行 P(&mutex); 之间可能被其他进程捷足先登。\n\n而不是你出了 while 循环之后的问题，出了 while 循环时你已经持有锁 mutex 了。",
+        "choices": [],
+        "answer": ""
+      }
+    }
+  ]
+}

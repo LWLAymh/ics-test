@@ -1,0 +1,407 @@
+{
+  "file": "Lab测验/2025Lab测验-无答案.md",
+  "total_lines": 914,
+  "items": [
+    {
+      "start": 52,
+      "end": 56,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 1",
+      "note": "ls -a 显示隐藏文件（L0 命令行）",
+      "curated": "Lab测验/2025Lab测验-无答案/52.md"
+    },
+    {
+      "start": 57,
+      "end": 61,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 2",
+      "note": "cd 的 - 参数表示上次所在目录",
+      "curated": "Lab测验/2025Lab测验-无答案/57.md"
+    },
+    {
+      "start": 66,
+      "end": 70,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 3",
+      "note": "chmod 755 的文件权限位",
+      "curated": "Lab测验/2025Lab测验-无答案/66.md"
+    },
+    {
+      "start": 71,
+      "end": 78,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 4",
+      "note": "tar/gcc/rm/rmdir/grep 命令用法辨误",
+      "curated": "Lab测验/2025Lab测验-无答案/71.md"
+    },
+    {
+      "start": 79,
+      "end": 84,
+      "module": "Network",
+      "qno": "Lab 任务 5",
+      "note": "ssh-keygen 公钥/私钥的存放位置（兼 Unix 工具）",
+      "curated": "Lab测验/2025Lab测验-无答案/79.md"
+    },
+    {
+      "start": 85,
+      "end": 91,
+      "module": "Network",
+      "qno": "Lab 任务 6",
+      "note": "scp 指定端口复制文件到远程主机",
+      "curated": "Lab测验/2025Lab测验-无答案/85.md"
+    },
+    {
+      "start": 96,
+      "end": 100,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "Lab 任务 7",
+      "note": "Makefile 模式规则 %.o: %.c",
+      "curated": "Lab测验/2025Lab测验-无答案/96.md"
+    },
+    {
+      "start": 101,
+      "end": 105,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "Lab 任务 8",
+      "note": "make 默认目标与执行过程",
+      "curated": "Lab测验/2025Lab测验-无答案/101.md"
+    },
+    {
+      "start": 106,
+      "end": 113,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "Lab 任务 9",
+      "note": "gcc -c 生成目标文件与 objdump -d 反汇编（兼 Machine Prog）",
+      "curated": "Lab测验/2025Lab测验-无答案/106.md"
+    },
+    {
+      "start": 114,
+      "end": 118,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "Lab 任务 10",
+      "note": "binutils 中 ldd 查看共享库依赖",
+      "curated": "Lab测验/2025Lab测验-无答案/114.md"
+    },
+    {
+      "start": 126,
+      "end": 149,
+      "module": "Data Representation",
+      "qno": "Lab 任务 11",
+      "note": "satMul2 溢出判断表达式（补码运算）",
+      "curated": "Lab测验/2025Lab测验-无答案/126.md"
+    },
+    {
+      "start": 155,
+      "end": 175,
+      "module": "Data Representation",
+      "qno": "Lab 任务 12",
+      "note": "bitParity 奇偶校验的位运算求值",
+      "curated": "Lab测验/2025Lab测验-无答案/155.md"
+    },
+    {
+      "start": 177,
+      "end": 217,
+      "module": "Data Representation",
+      "qno": "Lab 任务 13",
+      "note": "float_half 浮点位模式减半与舍入",
+      "curated": "Lab测验/2025Lab测验-无答案/177.md"
+    },
+    {
+      "start": 219,
+      "end": 243,
+      "module": "Data Representation",
+      "qno": "Lab 任务 14",
+      "note": "byteSwap 字节交换的移位与掩码",
+      "curated": "Lab测验/2025Lab测验-无答案/219.md"
+    },
+    {
+      "start": 245,
+      "end": 260,
+      "module": "Data Representation",
+      "qno": "Lab 任务 15",
+      "note": "oddBits 奇数位全 1 的常量构造",
+      "curated": "Lab测验/2025Lab测验-无答案/245.md"
+    },
+    {
+      "start": 269,
+      "end": 276,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 16",
+      "note": "GDB 断点通过 INT3 触发陷阱实现",
+      "curated": "Lab测验/2025Lab测验-无答案/269.md"
+    },
+    {
+      "start": 277,
+      "end": 285,
+      "module": "Machine Prog",
+      "qno": "Lab 任务 17",
+      "note": "GDB 常用命令（break/info registers/ni/si/p）辨误",
+      "curated": "Lab测验/2025Lab测验-无答案/277.md"
+    },
+    {
+      "start": 286,
+      "end": 309,
+      "module": "Machine Prog",
+      "qno": "Lab 任务 18",
+      "note": "BombLab phase_1 反汇编分析",
+      "curated": "Lab测验/2025Lab测验-无答案/286.md"
+    },
+    {
+      "start": 311,
+      "end": 358,
+      "module": "Machine Prog",
+      "qno": "Lab 任务 19",
+      "note": "BombLab phase_2 反汇编（数列递推）分析",
+      "curated": "Lab测验/2025Lab测验-无答案/311.md"
+    },
+    {
+      "start": 364,
+      "end": 476,
+      "module": "Machine Prog",
+      "qno": "Lab 任务 20",
+      "note": "BombLab phase_3 跳转表与断点处寄存器分析",
+      "curated": "Lab测验/2025Lab测验-无答案/364.md"
+    },
+    {
+      "start": 485,
+      "end": 495,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 21",
+      "note": "hex2raw 用法与 shell 管道/输入输出重定向",
+      "curated": "Lab测验/2025Lab测验-无答案/485.md"
+    },
+    {
+      "start": 496,
+      "end": 503,
+      "module": "Machine Prog",
+      "qno": "Lab 任务 22",
+      "note": "缓冲区溢出漏洞、ASLR、金丝雀与 ROP 说法判断",
+      "curated": "Lab测验/2025Lab测验-无答案/496.md"
+    },
+    {
+      "start": 504,
+      "end": 510,
+      "module": "Machine Prog",
+      "qno": "Lab 任务 23",
+      "note": "gdb 调试 ctarget 的命令用法",
+      "curated": "Lab测验/2025Lab测验-无答案/504.md"
+    },
+    {
+      "start": 515,
+      "end": 529,
+      "module": "Machine Prog",
+      "qno": "Lab 任务 24",
+      "note": "getbuf 函数栈帧大小计算",
+      "curated": "Lab测验/2025Lab测验-无答案/515.md"
+    },
+    {
+      "start": 531,
+      "end": 589,
+      "module": "Machine Prog",
+      "qno": "Lab 任务 25",
+      "note": "AttackLab phase3 栈布局与 ROP 题解判断",
+      "curated": "Lab测验/2025Lab测验-无答案/531.md"
+    },
+    {
+      "start": 598,
+      "end": 626,
+      "module": "Processor Arch",
+      "qno": "Lab 任务 26",
+      "note": "SEQ 中新增 iopq 指令需改动的 HCL 位置",
+      "curated": "Lab测验/2025Lab测验-无答案/598.md"
+    },
+    {
+      "start": 632,
+      "end": 637,
+      "module": "Processor Arch",
+      "qno": "Lab 任务 27",
+      "note": "SEQ 到 pipe_std 五级流水线演进与冒险",
+      "curated": "Lab测验/2025Lab测验-无答案/632.md"
+    },
+    {
+      "start": 638,
+      "end": 657,
+      "module": "Processor Arch",
+      "qno": "Lab 任务 28",
+      "note": "ncopy.ys 两段循环代码的流水线性能对比",
+      "curated": "Lab测验/2025Lab测验-无答案/638.md"
+    },
+    {
+      "start": 659,
+      "end": 664,
+      "module": "Processor Arch",
+      "qno": "Lab 任务 29",
+      "note": "评分 c=cpe+2*ac 下代码与架构的优化权衡",
+      "curated": "Lab测验/2025Lab测验-无答案/659.md"
+    },
+    {
+      "start": 669,
+      "end": 690,
+      "module": "Processor Arch",
+      "qno": "Lab 任务 30",
+      "note": "pipe_std 关键路径/传播顺序与降低 ac 的优化",
+      "curated": "Lab测验/2025Lab测验-无答案/669.md"
+    },
+    {
+      "start": 699,
+      "end": 703,
+      "module": "Memory Hierarchy",
+      "qno": "Lab 任务 31",
+      "note": "CacheLab 中 valgrind 生成内存访问 trace",
+      "curated": "Lab测验/2025Lab测验-无答案/699.md"
+    },
+    {
+      "start": 704,
+      "end": 709,
+      "module": "Memory Hierarchy",
+      "qno": "Lab 任务 32",
+      "note": "trace 中 I（指令加载）操作应被忽略",
+      "curated": "Lab测验/2025Lab测验-无答案/704.md"
+    },
+    {
+      "start": 710,
+      "end": 717,
+      "module": "Memory Hierarchy",
+      "qno": "Lab 任务 33",
+      "note": "csim 解析 M 操作时按 L+S 处理",
+      "curated": "Lab测验/2025Lab测验-无答案/710.md"
+    },
+    {
+      "start": 722,
+      "end": 733,
+      "module": "Memory Hierarchy",
+      "qno": "Lab 任务 34",
+      "note": "矩阵转置 blocking 分块改善空间局部性",
+      "curated": "Lab测验/2025Lab测验-无答案/722.md"
+    },
+    {
+      "start": 734,
+      "end": 739,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 35",
+      "note": "getopt 解析命令行参数（Unix API，CacheLab 语境）",
+      "curated": "Lab测验/2025Lab测验-无答案/734.md"
+    },
+    {
+      "start": 747,
+      "end": 756,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 36",
+      "note": "ShellLab tsh 与真实 shell 的功能对比",
+      "curated": "Lab测验/2025Lab测验-无答案/747.md"
+    },
+    {
+      "start": 757,
+      "end": 766,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 37",
+      "note": "为避免竞态的信号屏蔽与解除时机",
+      "curated": "Lab测验/2025Lab测验-无答案/757.md"
+    },
+    {
+      "start": 771,
+      "end": 776,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 38",
+      "note": "ShellLab 内建命令 jobs/bg/kill/nohup",
+      "curated": "Lab测验/2025Lab测验-无答案/771.md"
+    },
+    {
+      "start": 777,
+      "end": 797,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 39",
+      "note": "sigchld_handler 中 WIFSTOPPED/WIFCONTINUED 判断",
+      "curated": "Lab测验/2025Lab测验-无答案/777.md"
+    },
+    {
+      "start": 803,
+      "end": 835,
+      "module": "ECF and System IO",
+      "qno": "Lab 任务 40",
+      "note": "waitfg 前台等待的正确实现（sigsuspend）",
+      "curated": "Lab测验/2025Lab测验-无答案/803.md"
+    },
+    {
+      "start": 844,
+      "end": 848,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "Lab 任务 41",
+      "note": "MallocLab 分配器返回指针的对齐要求",
+      "curated": "Lab测验/2025Lab测验-无答案/844.md"
+    },
+    {
+      "start": 849,
+      "end": 853,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "Lab 任务 42",
+      "note": "用 mem_sbrk 扩展堆，禁用 libc malloc/mmap",
+      "curated": "Lab测验/2025Lab测验-无答案/849.md"
+    },
+    {
+      "start": 854,
+      "end": 861,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "Lab 任务 43",
+      "note": "free/realloc/calloc 的行为辨析",
+      "curated": "Lab测验/2025Lab测验-无答案/854.md"
+    },
+    {
+      "start": 866,
+      "end": 873,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "Lab 任务 44",
+      "note": "空闲链表查找策略与空间利用率/吞吐量权衡",
+      "curated": "Lab测验/2025Lab测验-无答案/866.md"
+    },
+    {
+      "start": 874,
+      "end": 879,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "Lab 任务 45",
+      "note": "堆大小限制及其带来的优化思路",
+      "curated": "Lab测验/2025Lab测验-无答案/874.md"
+    },
+    {
+      "start": 887,
+      "end": 891,
+      "module": "Network",
+      "qno": "Lab 任务 46",
+      "note": "IPv4/IPv6 地址长度",
+      "curated": "Lab测验/2025Lab测验-无答案/887.md"
+    },
+    {
+      "start": 892,
+      "end": 896,
+      "module": "Network",
+      "qno": "Lab 任务 47",
+      "note": "TCP 与 UDP 的区别",
+      "curated": "Lab测验/2025Lab测验-无答案/892.md"
+    },
+    {
+      "start": 897,
+      "end": 901,
+      "module": "Network",
+      "qno": "Lab 任务 48",
+      "note": "/24 子网可用主机地址数量",
+      "curated": "Lab测验/2025Lab测验-无答案/897.md"
+    },
+    {
+      "start": 902,
+      "end": 907,
+      "module": "Network",
+      "qno": "Lab 任务 49",
+      "note": "10.7.74.125 的地址类别与私有地址",
+      "curated": "Lab测验/2025Lab测验-无答案/902.md"
+    },
+    {
+      "start": 908,
+      "end": 913,
+      "module": "Network",
+      "qno": "Lab 任务 50",
+      "note": "域名映射、IP 可靠性与 getaddrinfo/freeaddrinfo",
+      "curated": "Lab测验/2025Lab测验-无答案/908.md"
+    }
+  ],
+  "answer_sections": []
+}

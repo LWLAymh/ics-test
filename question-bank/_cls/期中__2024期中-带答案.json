@@ -1,0 +1,215 @@
+{
+  "file": "期中/2024期中-带答案.md",
+  "total_lines": 742,
+  "items": [
+    {
+      "start": 49,
+      "end": 55,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "32位有符号整数位运算表达式的恒真判断",
+      "curated": "期中/2024期中-带答案/49.md"
+    },
+    {
+      "start": 56,
+      "end": 68,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "字符数组指针读取、字节序与ASCII码",
+      "curated": "期中/2024期中-带答案/56.md"
+    },
+    {
+      "start": 69,
+      "end": 82,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "float阶码/小数位位数与可表示实数数量",
+      "curated": "期中/2024期中-带答案/69.md"
+    },
+    {
+      "start": 83,
+      "end": 128,
+      "module": "Machine Prog",
+      "qno": "第一题 4",
+      "note": "结构体对齐与指针数组声明的sizeof/指针差",
+      "curated": "期中/2024期中-带答案/83.md"
+    },
+    {
+      "start": 129,
+      "end": 141,
+      "module": "Machine Prog",
+      "qno": "第一题 5",
+      "note": "x86-64栈结构与参数构造区",
+      "curated": "期中/2024期中-带答案/129.md"
+    },
+    {
+      "start": 142,
+      "end": 154,
+      "module": "Machine Prog",
+      "qno": "第一题 6",
+      "note": "缓冲区溢出防护与金丝雀值检测",
+      "curated": "期中/2024期中-带答案/142.md"
+    },
+    {
+      "start": 155,
+      "end": 162,
+      "module": "Machine Prog",
+      "qno": "第一题 7",
+      "note": "结构体参数与返回值经栈/寄存器传递",
+      "curated": "期中/2024期中-带答案/155.md"
+    },
+    {
+      "start": 163,
+      "end": 182,
+      "module": "Machine Prog",
+      "qno": "第一题 8",
+      "note": "条件传送cmove与分支实现对比",
+      "curated": "期中/2024期中-带答案/163.md"
+    },
+    {
+      "start": 183,
+      "end": 214,
+      "module": "Processor Arch",
+      "qno": "第一题 9",
+      "note": "PIPE中数据前递次数统计",
+      "curated": "期中/2024期中-带答案/183.md"
+    },
+    {
+      "start": 215,
+      "end": 224,
+      "module": "Processor Arch",
+      "qno": "第一题 10",
+      "note": "RISC与CISC的对比",
+      "curated": "期中/2024期中-带答案/215.md"
+    },
+    {
+      "start": 225,
+      "end": 243,
+      "module": "Processor Arch",
+      "qno": "第一题 11",
+      "note": "SEQ中mem_addr/mem_data的HCL补全",
+      "curated": "期中/2024期中-带答案/225.md"
+    },
+    {
+      "start": 244,
+      "end": 254,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 12",
+      "note": "SRAM/DRAM/SSD/旋转磁盘特性比较",
+      "curated": "期中/2024期中-带答案/244.md"
+    },
+    {
+      "start": 255,
+      "end": 275,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 13",
+      "note": "磁盘容量与平均访问时间估算",
+      "curated": "期中/2024期中-带答案/255.md"
+    },
+    {
+      "start": 276,
+      "end": 287,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 14",
+      "note": "cache相联度、块大小与写策略",
+      "curated": "期中/2024期中-带答案/276.md"
+    },
+    {
+      "start": 288,
+      "end": 314,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 15",
+      "note": "代码优化等价性判断（别名、副作用、strlen）",
+      "curated": "期中/2024期中-带答案/288.md"
+    },
+    {
+      "start": 320,
+      "end": 346,
+      "module": "Data Representation",
+      "qno": "第二题 1",
+      "note": "内联汇编vmovss读浮点：x86-64限定与小端",
+      "curated": "期中/2024期中-带答案/320.md"
+    },
+    {
+      "start": 347,
+      "end": 353,
+      "module": "Data Representation",
+      "qno": "第二题 2",
+      "note": "自定义8位浮点格式：最大负非规格化数与NaN个数",
+      "curated": "期中/2024期中-带答案/347.md"
+    },
+    {
+      "start": 358,
+      "end": 375,
+      "module": "Data Representation",
+      "qno": "第二题 3",
+      "note": "union类型转换与float转int的舍入/溢出",
+      "curated": "期中/2024期中-带答案/358.md"
+    },
+    {
+      "start": 409,
+      "end": 517,
+      "module": "Machine Prog",
+      "qno": "第三题",
+      "note": "递归函数foo的C与汇编代码补全",
+      "curated": "期中/2024期中-带答案/409.md"
+    },
+    {
+      "start": 597,
+      "end": 657,
+      "module": "Processor Arch",
+      "qno": "第四题",
+      "note": "PIPE前递HCL补全、Load/Use冒险与新数据通路",
+      "curated": "期中/2024期中-带答案/597.md"
+    },
+    {
+      "start": 699,
+      "end": 705,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 1",
+      "note": "cache扩容方式的选择",
+      "curated": "期中/2024期中-带答案/699.md"
+    },
+    {
+      "start": 706,
+      "end": 709,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2",
+      "note": "由命中率反推cache block大小",
+      "curated": "期中/2024期中-带答案/706.md"
+    },
+    {
+      "start": 710,
+      "end": 725,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 3",
+      "note": "二路组相联cache访存模拟与命中次数",
+      "curated": "期中/2024期中-带答案/710.md"
+    },
+    {
+      "start": 730,
+      "end": 741,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 4",
+      "note": "带排除规则的cache模拟与命中次数",
+      "curated": "期中/2024期中-带答案/730.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 376,
+      "end": 403,
+      "note": "第二题参考答案与解析"
+    },
+    {
+      "start": 518,
+      "end": 591,
+      "note": "第三题参考答案与完整汇编"
+    },
+    {
+      "start": 663,
+      "end": 693,
+      "note": "第四题参考答案与评分标准"
+    }
+  ]
+}

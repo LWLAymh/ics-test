@@ -1,0 +1,223 @@
+{
+  "file": "期末/2015期末-20160104-带答案.md",
+  "total_lines": 921,
+  "items": [
+    {
+      "start": 48,
+      "end": 55,
+      "module": "Machine Prog",
+      "qno": "第一题 1",
+      "note": "哪条指令不改变 esp",
+      "curated": "期末/2015期末-20160104-带答案/48.md"
+    },
+    {
+      "start": 56,
+      "end": 62,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "单精度浮点数 27.5 的内存十六进制表示",
+      "curated": "期末/2015期末-20160104-带答案/56.md"
+    },
+    {
+      "start": 63,
+      "end": 70,
+      "module": "Machine Prog",
+      "qno": "第一题 3",
+      "note": "x86 寻址方式合法性",
+      "curated": "期末/2015期末-20160104-带答案/63.md"
+    },
+    {
+      "start": 75,
+      "end": 82,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 4",
+      "note": "静态库链接的规则与命令行顺序",
+      "curated": "期末/2015期末-20160104-带答案/75.md"
+    },
+    {
+      "start": 83,
+      "end": 96,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 5",
+      "note": "字符串常量被放入哪个 ELF 节",
+      "curated": "期末/2015期末-20160104-带答案/83.md"
+    },
+    {
+      "start": 97,
+      "end": 104,
+      "module": "ECF and System IO",
+      "qno": "第一题 6",
+      "note": "阻塞信号与待处理信号只处理一次",
+      "curated": "期末/2015期末-20160104-带答案/97.md"
+    },
+    {
+      "start": 105,
+      "end": 115,
+      "module": "ECF and System IO",
+      "qno": "第一题 7",
+      "note": "异常的定义与同步/异步性质",
+      "curated": "期末/2015期末-20160104-带答案/105.md"
+    },
+    {
+      "start": 116,
+      "end": 124,
+      "module": "ECF and System IO",
+      "qno": "第一题 8",
+      "note": "信号捕获/忽略、SIGCONT、系统调用中断",
+      "curated": "期末/2015期末-20160104-带答案/116.md"
+    },
+    {
+      "start": 125,
+      "end": 151,
+      "module": "ECF and System IO",
+      "qno": "第一题 9",
+      "note": "嵌套 fork 的输出可能",
+      "curated": "期末/2015期末-20160104-带答案/125.md"
+    },
+    {
+      "start": 152,
+      "end": 164,
+      "module": "ECF and System IO",
+      "qno": "第一题 10",
+      "note": "Unix I/O：文件偏移、read、dup2/close",
+      "curated": "期末/2015期末-20160104-带答案/152.md"
+    },
+    {
+      "start": 165,
+      "end": 200,
+      "module": "ECF and System IO",
+      "qno": "第一题 11",
+      "note": "printf 缓冲与 write 无缓冲的输出顺序",
+      "curated": "期末/2015期末-20160104-带答案/165.md"
+    },
+    {
+      "start": 201,
+      "end": 207,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 12",
+      "note": "编译器安全优化策略",
+      "curated": "期末/2015期末-20160104-带答案/201.md"
+    },
+    {
+      "start": 208,
+      "end": 214,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 13",
+      "note": "最佳适配算法的空闲块组织方式",
+      "curated": "期末/2015期末-20160104-带答案/208.md"
+    },
+    {
+      "start": 215,
+      "end": 224,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 14",
+      "note": "虚拟内存可行性依赖程序局部性（兼 Memory Hierarchy）",
+      "curated": "期末/2015期末-20160104-带答案/215.md"
+    },
+    {
+      "start": 225,
+      "end": 249,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 15",
+      "note": "IA32 二级页表地址翻译计算",
+      "curated": "期末/2015期末-20160104-带答案/225.md"
+    },
+    {
+      "start": 250,
+      "end": 263,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 16",
+      "note": "多级分页策略的层数推导",
+      "curated": "期末/2015期末-20160104-带答案/250.md"
+    },
+    {
+      "start": 264,
+      "end": 270,
+      "module": "Network",
+      "qno": "第一题 17",
+      "note": "HTTP 命令与静态/动态内容",
+      "curated": "期末/2015期末-20160104-带答案/264.md"
+    },
+    {
+      "start": 271,
+      "end": 280,
+      "module": "Network",
+      "qno": "第一题 18",
+      "note": "HUB/帧头/IP 地址分类与动态分配",
+      "curated": "期末/2015期末-20160104-带答案/271.md"
+    },
+    {
+      "start": 281,
+      "end": 316,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 19",
+      "note": "多线程可共享的变量（全局/静态局部）",
+      "curated": "期末/2015期末-20160104-带答案/281.md"
+    },
+    {
+      "start": 317,
+      "end": 344,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 20",
+      "note": "信号量 PV 序列的死锁判定",
+      "curated": "期末/2015期末-20160104-带答案/317.md"
+    },
+    {
+      "start": 350,
+      "end": 482,
+      "module": "Machine Prog",
+      "qno": "第二题",
+      "note": "由汇编/输出结果补全 C 代码与汇编填空",
+      "curated": "期末/2015期末-20160104-带答案/350.md"
+    },
+    {
+      "start": 489,
+      "end": 514,
+      "module": "Processor Arch",
+      "qno": "第三题",
+      "note": "含 F 模块的组合逻辑流水化与吞吐率",
+      "curated": "期末/2015期末-20160104-带答案/489.md"
+    },
+    {
+      "start": 519,
+      "end": 611,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第四题",
+      "note": "符号强弱属性、类型声明冲突与数据布局",
+      "curated": "期末/2015期末-20160104-带答案/519.md"
+    },
+    {
+      "start": 617,
+      "end": 664,
+      "module": "ECF and System IO",
+      "qno": "第五题",
+      "note": "fork/signal/sigprocmask/管道中信号处理的输出",
+      "curated": "期末/2015期末-20160104-带答案/617.md"
+    },
+    {
+      "start": 671,
+      "end": 767,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第六题",
+      "note": "大页TLB与两级页表地址转换、TLB miss/page fault",
+      "curated": "期末/2015期末-20160104-带答案/671.md"
+    },
+    {
+      "start": 773,
+      "end": 808,
+      "module": "Network",
+      "qno": "第七题",
+      "note": "协议栈数据包类型与软件实现、互联网概念",
+      "curated": "期末/2015期末-20160104-带答案/773.md"
+    },
+    {
+      "start": 814,
+      "end": 920,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第八题",
+      "note": "双缓冲区生产者-消费者信号量设计与 PV 填空",
+      "curated": "期末/2015期末-20160104-带答案/814.md"
+    }
+  ],
+  "answer_sections": []
+}

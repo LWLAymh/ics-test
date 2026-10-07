@@ -1,0 +1,247 @@
+{
+  "file": "期末/2014期末-带答案.md",
+  "total_lines": 966,
+  "items": [
+    {
+      "start": 43,
+      "end": 51,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "IEEE浮点位数分配与表示个数/范围",
+      "curated": "期末/2014期末-带答案/43.md"
+    },
+    {
+      "start": 52,
+      "end": 62,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "算术右移与除法舍入的等价性",
+      "curated": "期末/2014期末-带答案/52.md"
+    },
+    {
+      "start": 63,
+      "end": 83,
+      "module": "Machine Prog",
+      "qno": "第一题 3",
+      "note": "由汇编 lea/cmov 反推 C 表达式",
+      "curated": "期末/2014期末-带答案/63.md"
+    },
+    {
+      "start": 84,
+      "end": 92,
+      "module": "Machine Prog",
+      "qno": "第一题 4",
+      "note": "结构体数据对齐与 sizeof 比较",
+      "curated": "期末/2014期末-带答案/84.md"
+    },
+    {
+      "start": 93,
+      "end": 100,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 5",
+      "note": "编译器安全优化策略",
+      "curated": "期末/2014期末-带答案/93.md"
+    },
+    {
+      "start": 101,
+      "end": 107,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 6",
+      "note": "高速缓存设计原理与局部性",
+      "curated": "期末/2014期末-带答案/101.md"
+    },
+    {
+      "start": 112,
+      "end": 127,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 7",
+      "note": "sumvec 的局部性分析",
+      "curated": "期末/2014期末-带答案/112.md"
+    },
+    {
+      "start": 128,
+      "end": 134,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 8",
+      "note": "静态库链接与命令行顺序",
+      "curated": "期末/2014期末-带答案/128.md"
+    },
+    {
+      "start": 135,
+      "end": 150,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 9",
+      "note": "static 全局变量影响的 ELF 节",
+      "curated": "期末/2014期末-带答案/135.md"
+    },
+    {
+      "start": 151,
+      "end": 170,
+      "module": "ECF and System IO",
+      "qno": "第一题 10",
+      "note": "fork 次数与 hello 输出个数",
+      "curated": "期末/2014期末-带答案/151.md"
+    },
+    {
+      "start": 171,
+      "end": 177,
+      "module": "ECF and System IO",
+      "qno": "第一题 11",
+      "note": "中断/异常/故障/陷阱的同步异步性质",
+      "curated": "期末/2014期末-带答案/171.md"
+    },
+    {
+      "start": 182,
+      "end": 203,
+      "module": "ECF and System IO",
+      "qno": "第一题 12",
+      "note": "SIGCHLD 处理程序与输出顺序",
+      "curated": "期末/2014期末-带答案/182.md"
+    },
+    {
+      "start": 204,
+      "end": 210,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 13",
+      "note": "TLB/Cache/Page 命中的不可能组合",
+      "curated": "期末/2014期末-带答案/204.md"
+    },
+    {
+      "start": 211,
+      "end": 229,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 14",
+      "note": "malloc 堆分配与栈数组的区别",
+      "curated": "期末/2014期末-带答案/211.md"
+    },
+    {
+      "start": 230,
+      "end": 253,
+      "module": "ECF and System IO",
+      "qno": "第一题 15",
+      "note": "open/dup/read/write 与文件长度",
+      "curated": "期末/2014期末-带答案/230.md"
+    },
+    {
+      "start": 254,
+      "end": 266,
+      "module": "ECF and System IO",
+      "qno": "第一题 16",
+      "note": "标准I/O、RIO 与缓冲区",
+      "curated": "期末/2014期末-带答案/254.md"
+    },
+    {
+      "start": 267,
+      "end": 274,
+      "module": "Network",
+      "qno": "第一题 17",
+      "note": "不同协议局域网互连设备",
+      "curated": "期末/2014期末-带答案/267.md"
+    },
+    {
+      "start": 275,
+      "end": 281,
+      "module": "Network",
+      "qno": "第一题 18",
+      "note": "TCP/UDP/HTTP 基础概念",
+      "curated": "期末/2014期末-带答案/275.md"
+    },
+    {
+      "start": 282,
+      "end": 312,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 19",
+      "note": "Pthread_detach 与 Pthread_create 用法",
+      "curated": "期末/2014期末-带答案/282.md"
+    },
+    {
+      "start": 313,
+      "end": 339,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 20",
+      "note": "并发轨迹线安全/不安全判定",
+      "curated": "期末/2014期末-带答案/313.md"
+    },
+    {
+      "start": 345,
+      "end": 409,
+      "module": "Data Representation",
+      "qno": "第二题 1",
+      "note": "字节置换与位运算的信息表示（含共用代码）",
+      "curated": "期末/2014期末-带答案/345.md"
+    },
+    {
+      "start": 410,
+      "end": 460,
+      "module": "Machine Prog",
+      "qno": "第二题 2",
+      "note": "反汇编填空（movzbl/shl/push/pop 等）",
+      "curated": "期末/2014期末-带答案/410.md"
+    },
+    {
+      "start": 466,
+      "end": 493,
+      "module": "Processor Arch",
+      "qno": "第三题",
+      "note": "组合逻辑流水化级数与吞吐率计算",
+      "curated": "期末/2014期末-带答案/466.md"
+    },
+    {
+      "start": 499,
+      "end": 602,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第四题",
+      "note": "符号强弱属性、静态库链接顺序与重定位",
+      "curated": "期末/2014期末-带答案/499.md"
+    },
+    {
+      "start": 608,
+      "end": 676,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第五题",
+      "note": "IA32 二级页表 + TLB 地址翻译全过程",
+      "curated": "期末/2014期末-带答案/608.md"
+    },
+    {
+      "start": 682,
+      "end": 730,
+      "module": "ECF and System IO",
+      "qno": "第六题 1",
+      "note": "fork/dup2/read/write 后文件内容与输出",
+      "curated": "期末/2014期末-带答案/682.md"
+    },
+    {
+      "start": 731,
+      "end": 761,
+      "module": "ECF and System IO",
+      "qno": "第六题 2",
+      "note": "用 signal/alarm/pause 实现 sleep 的缺陷",
+      "curated": "期末/2014期末-带答案/731.md"
+    },
+    {
+      "start": 767,
+      "end": 823,
+      "module": "ECF and System IO",
+      "qno": "第七题",
+      "note": "描述符表/打开文件表/v-node 表与 dup2",
+      "curated": "期末/2014期末-带答案/767.md"
+    },
+    {
+      "start": 829,
+      "end": 895,
+      "module": "Network",
+      "qno": "第八题",
+      "note": "socket 数量、Connection socket pair、Echo/Tiny Server",
+      "curated": "期末/2014期末-带答案/829.md"
+    },
+    {
+      "start": 901,
+      "end": 965,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第九题",
+      "note": "水果盘问题的信号量设计与 PV 填空",
+      "curated": "期末/2014期末-带答案/901.md"
+    }
+  ],
+  "answer_sections": []
+}

@@ -1,0 +1,231 @@
+{
+  "file": "期末/2021期末-无答案.md",
+  "total_lines": 914,
+  "items": [
+    {
+      "start": 54,
+      "end": 64,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "整数/浮点乘法的结合律与分配律",
+      "curated": "期末/2021期末-无答案/54.md"
+    },
+    {
+      "start": 65,
+      "end": 70,
+      "module": "Machine Prog",
+      "qno": "第一题 2",
+      "note": "合法的 x86-64 汇编指令与寻址方式",
+      "curated": "期末/2021期末-无答案/65.md"
+    },
+    {
+      "start": 72,
+      "end": 78,
+      "module": "Processor Arch",
+      "qno": "第一题 3",
+      "note": "RISC 与 CISC 指令集特点",
+      "curated": "期末/2021期末-无答案/72.md"
+    },
+    {
+      "start": 79,
+      "end": 101,
+      "module": "Processor Arch",
+      "qno": "第一题 4",
+      "note": "PIPE 中无前递时的数据冒险判定",
+      "curated": "期末/2021期末-无答案/79.md"
+    },
+    {
+      "start": 102,
+      "end": 108,
+      "module": "Processor Arch",
+      "qno": "第一题 5",
+      "note": "流水线延迟、吞吐率与插入寄存器",
+      "curated": "期末/2021期末-无答案/102.md"
+    },
+    {
+      "start": 109,
+      "end": 114,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 6",
+      "note": "循环展开、累积变量与浮点合并顺序",
+      "curated": "期末/2021期末-无答案/109.md"
+    },
+    {
+      "start": 115,
+      "end": 123,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 7",
+      "note": "磁盘容量、SRAM/DRAM 与存储层次/局部性",
+      "curated": "期末/2021期末-无答案/115.md"
+    },
+    {
+      "start": 128,
+      "end": 133,
+      "module": "Processor Arch",
+      "qno": "第一题 8",
+      "note": "芯片布局算法的优化目标（存疑，属 VLSI/CAD，兼时序）",
+      "curated": "期末/2021期末-无答案/128.md"
+    },
+    {
+      "start": 134,
+      "end": 139,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 9",
+      "note": "objdump/readelf/gdb 等可执行文件工具（兼 Machine Prog）",
+      "curated": "期末/2021期末-无答案/134.md"
+    },
+    {
+      "start": 140,
+      "end": 155,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 10",
+      "note": "静态局部符号与 COMMON 伪节",
+      "curated": "期末/2021期末-无答案/140.md"
+    },
+    {
+      "start": 156,
+      "end": 189,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 11",
+      "note": "动态链接、PLT/GOT 与 -ldl",
+      "curated": "期末/2021期末-无答案/156.md"
+    },
+    {
+      "start": 190,
+      "end": 198,
+      "module": "ECF and System IO",
+      "qno": "第一题 12",
+      "note": "waitpid、信号与用户态/内核态转换",
+      "curated": "期末/2021期末-无答案/190.md"
+    },
+    {
+      "start": 199,
+      "end": 209,
+      "module": "ECF and System IO",
+      "qno": "第一题 13",
+      "note": "Unix I/O、文件描述符与 RIO",
+      "curated": "期末/2021期末-无答案/199.md"
+    },
+    {
+      "start": 210,
+      "end": 230,
+      "module": "ECF and System IO",
+      "qno": "第一题 14",
+      "note": "open 标志与 O_APPEND 对文件内容的影响",
+      "curated": "期末/2021期末-无答案/210.md"
+    },
+    {
+      "start": 231,
+      "end": 235,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 15",
+      "note": "TLB/缓存索引与进程、线程切换（兼 Memory Hierarchy）",
+      "curated": "期末/2021期末-无答案/231.md"
+    },
+    {
+      "start": 236,
+      "end": 262,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 16",
+      "note": "mmap 私有映射与 fork 写时复制的输出",
+      "curated": "期末/2021期末-无答案/236.md"
+    },
+    {
+      "start": 267,
+      "end": 270,
+      "module": "Network",
+      "qno": "第一题 17",
+      "note": "TCP 协议的可靠传输与全双工特性",
+      "curated": "期末/2021期末-无答案/267.md"
+    },
+    {
+      "start": 271,
+      "end": 279,
+      "module": "Network",
+      "qno": "第一题 18",
+      "note": "TCP 套接字接口函数语义",
+      "curated": "期末/2021期末-无答案/271.md"
+    },
+    {
+      "start": 280,
+      "end": 288,
+      "module": "Network",
+      "qno": "第一题 19",
+      "note": "Web 服务、URL 与 HTTP 状态码",
+      "curated": "期末/2021期末-无答案/280.md"
+    },
+    {
+      "start": 289,
+      "end": 297,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 20",
+      "note": "进程与线程的上下文、栈与地址空间",
+      "curated": "期末/2021期末-无答案/289.md"
+    },
+    {
+      "start": 303,
+      "end": 341,
+      "module": "Memory Hierarchy",
+      "qno": "第二题",
+      "note": "FIFO 替换与用驱逐法测量 L1 d-cache 相联度",
+      "curated": "期末/2021期末-无答案/303.md"
+    },
+    {
+      "start": 347,
+      "end": 445,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第三题",
+      "note": "符号表节归属、重定位与程序入口点（Part C 兼 ECF）",
+      "curated": "期末/2021期末-无答案/347.md"
+    },
+    {
+      "start": 451,
+      "end": 552,
+      "module": "ECF and System IO",
+      "qno": "第四题",
+      "note": "fork/信号/waitpid 的顺序输出与信号处理",
+      "curated": "期末/2021期末-无答案/451.md"
+    },
+    {
+      "start": 559,
+      "end": 598,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第五题 1",
+      "note": "TLB 命中时的访存次数与页权限（含题干页表信息）",
+      "curated": "期末/2021期末-无答案/559.md"
+    },
+    {
+      "start": 599,
+      "end": 603,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第五题 2",
+      "note": "TLB 不命中时的页表遍历与地址翻译",
+      "curated": "期末/2021期末-无答案/599.md"
+    },
+    {
+      "start": 608,
+      "end": 638,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第五题 3",
+      "note": "malloc 未初始化与非法参数导致的段错误",
+      "curated": "期末/2021期末-无答案/608.md"
+    },
+    {
+      "start": 639,
+      "end": 650,
+      "module": "ECF and System IO",
+      "qno": "第五题 4",
+      "note": "double fault 异常的成因（不定项）",
+      "curated": "期末/2021期末-无答案/639.md"
+    },
+    {
+      "start": 656,
+      "end": 913,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第六题",
+      "note": "生产者-消费者：信号量解法与等待计数解法",
+      "curated": "期末/2021期末-无答案/656.md"
+    }
+  ],
+  "answer_sections": []
+}

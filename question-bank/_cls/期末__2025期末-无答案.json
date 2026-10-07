@@ -1,0 +1,255 @@
+{
+  "file": "期末/2025期末-无答案.md",
+  "total_lines": 679,
+  "items": [
+    {
+      "start": 47,
+      "end": 59,
+      "module": "Data Representation",
+      "qno": "一 1",
+      "note": "有符号/无符号转换、模回绕与比较",
+      "curated": "期末/2025期末-无答案/47.md"
+    },
+    {
+      "start": 60,
+      "end": 71,
+      "module": "Data Representation",
+      "qno": "一 2",
+      "note": "int↔float 转换精度与舍入",
+      "curated": "期末/2025期末-无答案/60.md"
+    },
+    {
+      "start": 72,
+      "end": 79,
+      "module": "Data Representation",
+      "qno": "一 3",
+      "note": "右移左移清零低 5 位",
+      "curated": "期末/2025期末-无答案/72.md"
+    },
+    {
+      "start": 84,
+      "end": 99,
+      "module": "Data Representation",
+      "qno": "一 4",
+      "note": "结构体对齐、offsetof 与 sizeof",
+      "curated": "期末/2025期末-无答案/84.md"
+    },
+    {
+      "start": 100,
+      "end": 111,
+      "module": "Machine Prog",
+      "qno": "一 5",
+      "note": "addl 执行结果与 CF/ZF/OF 标志",
+      "curated": "期末/2025期末-无答案/100.md"
+    },
+    {
+      "start": 112,
+      "end": 129,
+      "module": "Machine Prog",
+      "qno": "一 6",
+      "note": "栈帧布局、%rsp 对齐与 leave 语义",
+      "curated": "期末/2025期末-无答案/112.md"
+    },
+    {
+      "start": 130,
+      "end": 153,
+      "module": "Machine Prog",
+      "qno": "一 7",
+      "note": "8 个 long 参数的寄存器/栈传递与 ABI",
+      "curated": "期末/2025期末-无答案/130.md"
+    },
+    {
+      "start": 154,
+      "end": 161,
+      "module": "Processor Arch",
+      "qno": "一 8",
+      "note": "Y86-64 指令编码 regids 与 valC 字段",
+      "curated": "期末/2025期末-无答案/154.md"
+    },
+    {
+      "start": 163,
+      "end": 169,
+      "module": "Processor Arch",
+      "qno": "一 9",
+      "note": "ret 在 PIPE 中的控制冒险与 bubble",
+      "curated": "期末/2025期末-无答案/163.md"
+    },
+    {
+      "start": 170,
+      "end": 175,
+      "module": "Memory Hierarchy",
+      "qno": "一 10",
+      "note": "局部性（locality）与遍历方式",
+      "curated": "期末/2025期末-无答案/170.md"
+    },
+    {
+      "start": 176,
+      "end": 181,
+      "module": "Memory Hierarchy",
+      "qno": "一 11",
+      "note": "cache 写策略 write-back/through 与写分配",
+      "curated": "期末/2025期末-无答案/176.md"
+    },
+    {
+      "start": 186,
+      "end": 199,
+      "module": "Memory Hierarchy",
+      "qno": "一 12",
+      "note": "两级 cache 的 AMAT 与 miss rate 计算",
+      "curated": "期末/2025期末-无答案/186.md"
+    },
+    {
+      "start": 200,
+      "end": 206,
+      "module": "Memory Hierarchy",
+      "qno": "一 13",
+      "note": "memory mountain 与 stride/工作集",
+      "curated": "期末/2025期末-无答案/200.md"
+    },
+    {
+      "start": 207,
+      "end": 218,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "二 14",
+      "note": "全局符号强/弱定义与重复定义",
+      "curated": "期末/2025期末-无答案/207.md"
+    },
+    {
+      "start": 219,
+      "end": 224,
+      "module": "ECF and System IO",
+      "qno": "二 15",
+      "note": "异常四分类与返回行为",
+      "curated": "期末/2025期末-无答案/219.md"
+    },
+    {
+      "start": 229,
+      "end": 234,
+      "module": "ECF and System IO",
+      "qno": "二 16",
+      "note": "进程上下文切换的时机与寄存器保存",
+      "curated": "期末/2025期末-无答案/229.md"
+    },
+    {
+      "start": 235,
+      "end": 248,
+      "module": "ECF and System IO",
+      "qno": "二 17",
+      "note": "fork 后共享文件偏移下的 read 结果",
+      "curated": "期末/2025期末-无答案/235.md"
+    },
+    {
+      "start": 249,
+      "end": 269,
+      "module": "ECF and System IO",
+      "qno": "二 18",
+      "note": "SIGCHLD 不排队、waitpid 回收与 zombie",
+      "curated": "期末/2025期末-无答案/249.md"
+    },
+    {
+      "start": 270,
+      "end": 299,
+      "module": "ECF and System IO",
+      "qno": "二 19",
+      "note": "阻塞信号 pending 不排队与 sigprocmask",
+      "curated": "期末/2025期末-无答案/270.md"
+    },
+    {
+      "start": 300,
+      "end": 306,
+      "module": "ECF and System IO",
+      "qno": "二 20",
+      "note": "execve 成功后的语义与 fd 保持",
+      "curated": "期末/2025期末-无答案/300.md"
+    },
+    {
+      "start": 307,
+      "end": 321,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "二 21",
+      "note": "fork 后地址空间与 COW 缺页（兼 fork 语义）",
+      "curated": "期末/2025期末-无答案/307.md"
+    },
+    {
+      "start": 322,
+      "end": 331,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "二 22",
+      "note": "TLB 作用、上下文切换与 page fault 关系",
+      "curated": "期末/2025期末-无答案/322.md"
+    },
+    {
+      "start": 332,
+      "end": 339,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "二 23",
+      "note": "隐式/显式空闲链表与内外部碎片",
+      "curated": "期末/2025期末-无答案/332.md"
+    },
+    {
+      "start": 340,
+      "end": 357,
+      "module": "Network",
+      "qno": "二 24",
+      "note": "并发网络服务器 listenfd/connfd 与 SIGCHLD",
+      "curated": "期末/2025期末-无答案/340.md"
+    },
+    {
+      "start": 358,
+      "end": 363,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "二 25",
+      "note": "进程与线程的资源共享与切换开销",
+      "curated": "期末/2025期末-无答案/358.md"
+    },
+    {
+      "start": 368,
+      "end": 397,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "三 1",
+      "note": "main.o 的 .symtab 符号表条目与所在节",
+      "curated": "期末/2025期末-无答案/368.md"
+    },
+    {
+      "start": 399,
+      "end": 423,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "三 2",
+      "note": "重定位条目与 32 位小端机器码",
+      "curated": "期末/2025期末-无答案/399.md"
+    },
+    {
+      "start": 428,
+      "end": 433,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "三 3",
+      "note": "链接顺序对可执行文件的影响",
+      "curated": "期末/2025期末-无答案/428.md"
+    },
+    {
+      "start": 434,
+      "end": 497,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "四 1",
+      "note": "多线程代码中的共享变量识别",
+      "curated": "期末/2025期末-无答案/434.md"
+    },
+    {
+      "start": 499,
+      "end": 601,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "四 2",
+      "note": "Lightswitch 读者-写者与到达时刻状态分析",
+      "curated": "期末/2025期末-无答案/499.md"
+    },
+    {
+      "start": 603,
+      "end": 677,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "四 3",
+      "note": "服务员-厨师订单缓冲区的生产者-消费者",
+      "curated": "期末/2025期末-无答案/603.md"
+    }
+  ],
+  "answer_sections": []
+}

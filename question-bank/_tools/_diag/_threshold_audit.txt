@@ -1,0 +1,38 @@
+cand         lines    split     wide
+F8.0         22004        0     1210
+S0.9c8       22031        1     1207
+S1.0c8       22024        0     1205
+F7.0         22092       15     1333
+F9.0         21967        0     1118
+
+== F8.0 下行数 < 0.8*参考 的页（按比例升序，前 30）==
+  ratio=0.51 new=38   ref=74   medSize=10.45  期末/2025期末-无答案.pdf p5
+  ratio=0.52 new=25   ref=48   medSize=10.56  期中/2020期中-带答案.pdf p15
+  ratio=0.53 new=35   ref=66   medSize=10.45  期末/2025期末-带答案.pdf p3
+  ratio=0.54 new=36   ref=67   medSize=10.45  期末/2025期末-带答案.pdf p2
+  ratio=0.55 new=6    ref=11   medSize=10.50  期中/2023期中-无答案.pdf p16
+  ratio=0.55 new=18   ref=33   medSize=10.56  期中/2019期中-带答案.pdf p20
+  ratio=0.56 new=15   ref=27   medSize=10.56  期中/2019期中-带答案.pdf p22
+  ratio=0.56 new=23   ref=41   medSize=10.56  期中/2020期中-无答案.pdf p5
+  ratio=0.56 new=24   ref=43   medSize=10.50  期中/2023期中-无答案.pdf p10
+  ratio=0.57 new=13   ref=23   medSize=10.56  期中/2020期中-无答案.pdf p12
+  ratio=0.57 new=13   ref=23   medSize=10.50  期中/2023期中-无答案.pdf p11
+  ratio=0.57 new=32   ref=56   medSize=10.45  阶段测验/2025第2次阶段测验-带答案.pdf p8
+  ratio=0.58 new=7    ref=12   medSize=10.50  期中/2023期中-无答案.pdf p18
+  ratio=0.58 new=14   ref=24   medSize=10.56  期中/2019期中-带答案.pdf p7
+  ratio=0.58 new=30   ref=52   medSize=10.56  期中/2019期中-带答案.pdf p6
+  ratio=0.59 new=10   ref=17   medSize=10.45  阶段测验/2025第2次阶段测验-无答案.pdf p3
+  ratio=0.59 new=17   ref=29   medSize=10.56  期中/2020期中-无答案.pdf p13
+  ratio=0.60 new=9    ref=15   medSize=10.56  期中/2020期中-无答案.pdf p14
+  ratio=0.60 new=33   ref=55   medSize=10.50  期中/2023期中-无答案.pdf p6
+  ratio=0.60 new=36   ref=60   medSize=10.45  期末/2025期末-带答案.pdf p4
+  ratio=0.61 new=33   ref=54   medSize=10.45  期末/2025期末-无答案.pdf p8
+  ratio=0.61 new=35   ref=57   medSize=10.45  期末/2025期末-带答案.pdf p1
+  ratio=0.62 new=16   ref=26   medSize=10.50  期中/2023期中-无答案.pdf p14
+  ratio=0.62 new=31   ref=50   medSize=10.45  阶段测验/2025第1次阶段测验-无答案.pdf p2
+  ratio=0.62 new=32   ref=52   medSize=10.56  期中/2019期中-带答案.pdf p16
+  ratio=0.62 new=40   ref=64   medSize=10.45  期末/2025期末-带答案.pdf p5
+  ratio=0.63 new=32   ref=51   medSize=10.45  阶段测验/2025第2次阶段测验-带答案.pdf p7
+  ratio=0.63 new=36   ref=57   medSize=10.56  期中/2019期中-带答案.pdf p5
+  ratio=0.63 new=40   ref=63   medSize=10.45  期末/2025期末-无答案.pdf p7
+  ratio=0.63 new=42   ref=67   medSize=10.45  期末/2025期末-无答案.pdf p4

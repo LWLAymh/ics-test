@@ -1,0 +1,9 @@
+{
+  "name": "ics-test",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build-site.js",
+    "check": "node --check site/ics-test.js && node --check site/standalone.js && node --check scripts/build-site.js"
+  }
+}

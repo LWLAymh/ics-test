@@ -1,0 +1,324 @@
+{
+  "file": "期中/2021期中-带答案.md",
+  "total_lines": 876,
+  "items": [
+    {
+      "start": 49,
+      "end": 70,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "union 中 char 数组与指针、大小端解释",
+      "curated": "期中/2021期中-带答案/49.md"
+    },
+    {
+      "start": 75,
+      "end": 92,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "float 位模式重解释为整数后的序关系",
+      "curated": "期中/2021期中-带答案/75.md"
+    },
+    {
+      "start": 93,
+      "end": 105,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "按位异或循环的规律（位运算）",
+      "curated": "期中/2021期中-带答案/93.md"
+    },
+    {
+      "start": 106,
+      "end": 122,
+      "module": "Data Representation",
+      "qno": "第一题 4",
+      "note": "除以 2 向零取整 vs 算术右移向下取整",
+      "curated": "期中/2021期中-带答案/106.md"
+    },
+    {
+      "start": 123,
+      "end": 128,
+      "module": "Machine Prog",
+      "qno": "第一题 5",
+      "note": "栈的增长方向、参数对齐与金丝雀",
+      "curated": "期中/2021期中-带答案/123.md"
+    },
+    {
+      "start": 129,
+      "end": 136,
+      "module": "Machine Prog",
+      "qno": "第一题 6",
+      "note": "movabsq/INC/popq/call 指令语义辨析",
+      "curated": "期中/2021期中-带答案/129.md"
+    },
+    {
+      "start": 141,
+      "end": 159,
+      "module": "Machine Prog",
+      "qno": "第一题 7",
+      "note": "由 leaq/addq 汇编反推二维数组维数",
+      "curated": "期中/2021期中-带答案/141.md"
+    },
+    {
+      "start": 160,
+      "end": 181,
+      "module": "Processor Arch",
+      "qno": "第一题 8",
+      "note": "组合逻辑延迟、流水线级数与吞吐率",
+      "curated": "期中/2021期中-带答案/160.md"
+    },
+    {
+      "start": 182,
+      "end": 204,
+      "module": "Processor Arch",
+      "qno": "第一题 9",
+      "note": "PIPE 上代码片段的数据转发次数",
+      "curated": "期中/2021期中-带答案/182.md"
+    },
+    {
+      "start": 206,
+      "end": 218,
+      "module": "Processor Arch",
+      "qno": "第一题 10",
+      "note": "SEQ 现有信号通路能否实现新指令",
+      "curated": "期中/2021期中-带答案/206.md"
+    },
+    {
+      "start": 219,
+      "end": 234,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 11",
+      "note": "DMA、磁盘扇区布局、SSD 磨损与 SRAM 易失性",
+      "curated": "期中/2021期中-带答案/219.md"
+    },
+    {
+      "start": 238,
+      "end": 252,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 12",
+      "note": "磁盘访问时间、SSD 页写入特性",
+      "curated": "期中/2021期中-带答案/238.md"
+    },
+    {
+      "start": 253,
+      "end": 266,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 13",
+      "note": "循环代码的局部性判断",
+      "curated": "期中/2021期中-带答案/253.md"
+    },
+    {
+      "start": 267,
+      "end": 289,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 14",
+      "note": "编译器总能进行的优化与别名/副作用/浮点",
+      "curated": "期中/2021期中-带答案/267.md"
+    },
+    {
+      "start": 294,
+      "end": 328,
+      "module": "Processor Arch",
+      "qno": "第一题 15",
+      "note": "Y86-64 PIPE 上片段总周期数与结果",
+      "curated": "期中/2021期中-带答案/294.md"
+    },
+    {
+      "start": 335,
+      "end": 341,
+      "module": "Data Representation",
+      "qno": "第二题 1",
+      "note": "short 的小端存放、补码与绝对值",
+      "curated": "期中/2021期中-带答案/335.md"
+    },
+    {
+      "start": 342,
+      "end": 344,
+      "module": "Data Representation",
+      "qno": "第二题 2",
+      "note": "补码比较与无符号表达式求值",
+      "curated": "期中/2021期中-带答案/342.md"
+    },
+    {
+      "start": 345,
+      "end": 352,
+      "module": "Data Representation",
+      "qno": "第二题 3",
+      "note": "自定义 IEEE 浮点格式的最大规格化数与舍入",
+      "curated": "期中/2021期中-带答案/345.md"
+    },
+    {
+      "start": 353,
+      "end": 376,
+      "module": "Data Representation",
+      "qno": "第二题 4",
+      "note": "非规格化/规格化浮点相邻间隔与精度",
+      "curated": "期中/2021期中-带答案/353.md"
+    },
+    {
+      "start": 403,
+      "end": 492,
+      "module": "Machine Prog",
+      "qno": "第三题 1",
+      "note": "C 与 x86-64 汇编填空：递归、除法与移位",
+      "curated": "期中/2021期中-带答案/403.md"
+    },
+    {
+      "start": 498,
+      "end": 518,
+      "module": "Machine Prog",
+      "qno": "第三题 2",
+      "note": "断点处栈内容与栈帧布局",
+      "curated": "期中/2021期中-带答案/498.md"
+    },
+    {
+      "start": 520,
+      "end": 520,
+      "module": "Machine Prog",
+      "qno": "第三题 3",
+      "note": "递归函数 f(7,6) 的返回值",
+      "curated": "期中/2021期中-带答案/520.md"
+    },
+    {
+      "start": 542,
+      "end": 559,
+      "module": "Processor Arch",
+      "qno": "第四题 1",
+      "note": "间接跳转指令 jxx *rB 的 SEQ 阶段补全",
+      "curated": "期中/2021期中-带答案/542.md"
+    },
+    {
+      "start": 565,
+      "end": 588,
+      "module": "Processor Arch",
+      "qno": "第四题 2",
+      "note": "PIPE 预测下一条 PC 的旁路与 HCL 修改",
+      "curated": "期中/2021期中-带答案/565.md"
+    },
+    {
+      "start": 593,
+      "end": 597,
+      "module": "Processor Arch",
+      "qno": "第四题 3",
+      "note": "预测错误触发条件与流水线控制逻辑",
+      "curated": "期中/2021期中-带答案/593.md"
+    },
+    {
+      "start": 598,
+      "end": 633,
+      "module": "Processor Arch",
+      "qno": "第四题 4",
+      "note": "改造后 PIPE 上 foo 的周期数（分支/load-use）",
+      "curated": "期中/2021期中-带答案/598.md"
+    },
+    {
+      "start": 687,
+      "end": 698,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 1",
+      "note": "SRAM 与 DRAM 特性对比选择",
+      "curated": "期中/2021期中-带答案/687.md"
+    },
+    {
+      "start": 699,
+      "end": 711,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2(1)",
+      "note": "直接映射 cache 的 tag 位宽计算",
+      "curated": "期中/2021期中-带答案/699.md"
+    },
+    {
+      "start": 716,
+      "end": 740,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2(2)",
+      "note": "命中次数计算与组相联/块大小的影响",
+      "curated": "期中/2021期中-带答案/716.md"
+    },
+    {
+      "start": 745,
+      "end": 776,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2(3)",
+      "note": "数据对齐对总延迟的影响（AMAT）",
+      "curated": "期中/2021期中-带答案/745.md"
+    },
+    {
+      "start": 782,
+      "end": 801,
+      "module": "Machine Prog",
+      "qno": "第六题 1",
+      "note": "struct/union 的大小与末尾 padding",
+      "curated": "期中/2021期中-带答案/782.md"
+    },
+    {
+      "start": 802,
+      "end": 802,
+      "module": "Machine Prog",
+      "qno": "第六题 2",
+      "note": "链表求和函数的功能",
+      "curated": "期中/2021期中-带答案/802.md"
+    },
+    {
+      "start": 803,
+      "end": 811,
+      "module": "Machine Prog",
+      "qno": "第六题 3",
+      "note": "补全链表遍历汇编，含结构体对齐",
+      "curated": "期中/2021期中-带答案/803.md"
+    },
+    {
+      "start": 817,
+      "end": 838,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第六题 4",
+      "note": "2x2 循环展开的两个累积变量改写",
+      "curated": "期中/2021期中-带答案/817.md"
+    },
+    {
+      "start": 840,
+      "end": 841,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第六题 5",
+      "note": "浮点加法不满足结合律导致的错误",
+      "curated": "期中/2021期中-带答案/840.md"
+    },
+    {
+      "start": 842,
+      "end": 843,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第六题 6",
+      "note": "k*k 展开中 k 过大导致寄存器溢出",
+      "curated": "期中/2021期中-带答案/842.md"
+    },
+    {
+      "start": 844,
+      "end": 854,
+      "module": "Data Representation",
+      "qno": "第六题 7",
+      "note": "大端机上 float 位模式与指针之差输出",
+      "curated": "期中/2021期中-带答案/844.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 377,
+      "end": 397,
+      "note": "第二题参考答案与解析（数据表示）"
+    },
+    {
+      "start": 521,
+      "end": 540,
+      "note": "第三题参考答案（机器级编程）"
+    },
+    {
+      "start": 635,
+      "end": 681,
+      "note": "第四题参考答案（Y86-64 间接跳转）"
+    },
+    {
+      "start": 860,
+      "end": 875,
+      "note": "第六题参考答案与考察点"
+    }
+  ]
+}

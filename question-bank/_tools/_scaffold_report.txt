@@ -1,0 +1,19 @@
+生成 1009 条，涉及 40 个 cls 文件（已写回）
+  mode:choice            401
+  mode:fill              227
+  mode:short             381
+  reflow                 29
+  verbatim               980
+  回退:多小题聚簇               29
+  回退:未找到围栏外的选项段          579
+  行内答案已切出                13
+ok   2012期中-带答案                     Problem A 1 [13,17] choice reflow   选项4
+ok   2012期中-带答案                     Problem A 2 [19,31] choice verbatim 选项5
+ok   2012期中-带答案                     Problem A 3 [33,45] choice verbatim 选项4
+ok   2012期中-带答案                     Problem A 4 [47,52] choice reflow   选项5
+ok   2012期中-带答案                     Problem A 5 [54,58] choice reflow   选项4
+ok   2012期中-带答案                     Problem A 6 [60,67] choice reflow   选项4
+ok   2012期中-带答案                     Problem A 7 [69,73] choice reflow   选项4
+ok   2012期中-带答案                     Problem A 8 [75,79] choice reflow   选项4
+ok   2012期中-带答案                     Problem A 9 [81,85] choice reflow   选项4
+ok   2012期中-带答案                     Problem A 10 [87,92] choice reflow   选项4

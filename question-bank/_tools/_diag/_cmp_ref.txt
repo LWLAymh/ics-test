@@ -1,0 +1,392 @@
+pages with any bad line or line-count mismatch: 353
+old bad & ref clean  (clustering-only defect): 53
+old bad & ref bad too(text-level overlap)    : 89  (其中坏行数相同 80)
+ref bad but old clean                        : 4
+
+== old bad & ref clean ==
+期中/2013期中-带答案.pdf                          p6    badOld=1   badRef=0 linesOld=30   linesRef=48   diff=0.949
+期中/2013期中-带答案.pdf                          p8    badOld=5   badRef=0 linesOld=11   linesRef=53   diff=1.000
+期中/2013期中-带答案.pdf                          p9    badOld=1   badRef=0 linesOld=16   linesRef=33   diff=0.959
+期中/2015期中-带答案.pdf                          p4    badOld=2   badRef=0 linesOld=23   linesRef=34   diff=0.754
+期中/2015期中-带答案.pdf                          p11   badOld=2   badRef=0 linesOld=21   linesRef=29   diff=0.680
+期中/2015期中-带答案.pdf                          p13   badOld=2   badRef=0 linesOld=18   linesRef=29   diff=0.872
+期中/2016期中-带答案.pdf                          p10   badOld=1   badRef=0 linesOld=32   linesRef=50   diff=0.561
+期中/2017期中-带答案.pdf                          p8    badOld=1   badRef=0 linesOld=29   linesRef=52   diff=0.877
+期中/2019期中-带答案.pdf                          p8    badOld=1   badRef=0 linesOld=24   linesRef=44   diff=0.853
+期中/2020期中-带答案.pdf                          p7    badOld=1   badRef=0 linesOld=12   linesRef=14   diff=0.692
+期中/2020期中-带答案.pdf                          p12   badOld=1   badRef=0 linesOld=21   linesRef=30   diff=0.804
+期中/2020期中-带答案.pdf                          p15   badOld=2   badRef=0 linesOld=25   linesRef=48   diff=0.534
+期中/2020期中-无答案.pdf                          p7    badOld=1   badRef=0 linesOld=7    linesRef=16   diff=0.913
+期中/2021期中-带答案.pdf                          p13   badOld=2   badRef=0 linesOld=15   linesRef=36   diff=0.922
+期中/2021期中-带答案.pdf                          p18   badOld=2   badRef=0 linesOld=20   linesRef=32   diff=0.885
+期中/2021期中-无答案.pdf                          p10   badOld=1   badRef=0 linesOld=21   linesRef=35   diff=0.786
+期中/2021期中-无答案.pdf                          p15   badOld=2   badRef=0 linesOld=20   linesRef=32   diff=0.885
+期中/2022期中-无答案.pdf                          p2    badOld=3   badRef=0 linesOld=15   linesRef=28   diff=0.860
+期中/2022期中-无答案.pdf                          p9    badOld=2   badRef=0 linesOld=4    linesRef=36   diff=1.000
+期中/2023期中-带答案.pdf                          p19   badOld=1   badRef=0 linesOld=13   linesRef=16   diff=0.655
+期中/2023期中-无答案.pdf                          p14   badOld=1   badRef=0 linesOld=13   linesRef=26   diff=0.846
+期末/2013期末-带答案.pdf                          p12   badOld=1   badRef=0 linesOld=20   linesRef=34   diff=0.889
+期末/2014期末-带答案.pdf                          p10   badOld=11  badRef=0 linesOld=19   linesRef=35   diff=0.963
+期末/2014期末-带答案.pdf                          p19   badOld=2   badRef=0 linesOld=24   linesRef=37   diff=0.869
+期末/2015期末-20151109-带答案.pdf                 p4    badOld=2   badRef=0 linesOld=23   linesRef=34   diff=0.754
+期末/2015期末-20151109-带答案.pdf                 p11   badOld=2   badRef=0 linesOld=21   linesRef=29   diff=0.680
+期末/2015期末-20151109-带答案.pdf                 p13   badOld=2   badRef=0 linesOld=18   linesRef=29   diff=0.872
+期末/2015期末-20160104-带答案.pdf                 p2    badOld=2   badRef=0 linesOld=18   linesRef=27   diff=0.778
+期末/2015期末-20160104-带答案.pdf                 p16   badOld=1   badRef=0 linesOld=18   linesRef=28   diff=0.957
+期末/2015期末-20160104-带答案.pdf                 p19   badOld=1   badRef=0 linesOld=19   linesRef=27   diff=0.826
+期末/2015期末-20160104-带答案.pdf                 p20   badOld=1   badRef=0 linesOld=10   linesRef=15   diff=0.760
+期末/2015期末-20160104-无答案.pdf                 p7    badOld=1   badRef=0 linesOld=2    linesRef=26   diff=1.000
+期末/2016期末-带答案.pdf                          p4    badOld=4   badRef=0 linesOld=27   linesRef=39   diff=0.818
+期末/2016期末-带答案.pdf                          p15   badOld=1   badRef=0 linesOld=17   linesRef=41   diff=0.966
+期末/2016期末-带答案.pdf                          p18   badOld=5   badRef=0 linesOld=17   linesRef=41   diff=0.966
+期末/2016期末-带答案.pdf                          p24   badOld=1   badRef=0 linesOld=17   linesRef=38   diff=0.927
+期末/2016期末-无答案.pdf                          p7    badOld=3   badRef=0 linesOld=17   linesRef=44   diff=0.967
+期末/2016期末-无答案.pdf                          p12   badOld=2   badRef=0 linesOld=16   linesRef=35   diff=0.922
+期末/2016期末-无答案.pdf                          p13   badOld=2   badRef=0 linesOld=20   linesRef=33   diff=0.811
+期末/2016期末-无答案.pdf                          p15   badOld=3   badRef=0 linesOld=23   linesRef=42   diff=0.938
+期末/2016期末-无答案.pdf                          p21   badOld=1   badRef=0 linesOld=16   linesRef=37   diff=0.962
+期末/2017期末-无答案.pdf                          p8    badOld=1   badRef=0 linesOld=24   linesRef=34   diff=0.793
+期末/2017期末-无答案.pdf                          p11   badOld=2   badRef=0 linesOld=18   linesRef=29   diff=0.915
+期末/2017期末-无答案.pdf                          p13   badOld=3   badRef=0 linesOld=19   linesRef=29   diff=0.917
+期末/2017期末-无答案.pdf                          p17   badOld=1   badRef=0 linesOld=4    linesRef=11   diff=0.867
+期末/2021期末-无答案.pdf                          p13   badOld=1   badRef=0 linesOld=25   linesRef=39   diff=0.750
+期末/2024期末-无答案.pdf                          p24   badOld=1   badRef=0 linesOld=28   linesRef=44   diff=0.833
+期末/2025期末-无答案.pdf                          p14   badOld=1   badRef=0 linesOld=8    linesRef=32   diff=0.950
+阶段测验/2025第1次阶段测验-带答案.pdf                   p4    badOld=1   badRef=0 linesOld=23   linesRef=43   diff=0.818
+阶段测验/2025第1次阶段测验-带答案.pdf                   p5    badOld=1   badRef=0 linesOld=7    linesRef=40   diff=0.957
+阶段测验/2025第1次阶段测验-无答案.pdf                   p4    badOld=1   badRef=0 linesOld=21   linesRef=40   diff=0.803
+阶段测验/2025第1次阶段测验-无答案.pdf                   p5    badOld=1   badRef=0 linesOld=5    linesRef=37   diff=1.000
+阶段测验/2025第1次阶段测验-无答案.pdf                   p9    badOld=1   badRef=0 linesOld=17   linesRef=41   diff=0.931
+
+== old bad & ref bad (聚类修不掉) ==
+Lab测验/2025Lab测验-无答案.pdf                    p5    badOld=4   badRef=4   linesOld=27   linesRef=27   diff=0.444
+Lab测验/2025Lab测验-无答案.pdf                    p10   badOld=1   badRef=1   linesOld=33   linesRef=33   diff=0.788
+Lab测验/2025Lab测验-无答案.pdf                    p12   badOld=1   badRef=1   linesOld=35   linesRef=35   diff=0.714
+Lab测验/2025Lab测验-无答案.pdf                    p13   badOld=8   badRef=8   linesOld=37   linesRef=37   diff=1.000
+Lab测验/2025Lab测验-无答案.pdf                    p14   badOld=8   badRef=8   linesOld=31   linesRef=31   diff=0.935
+Lab测验/2025Lab测验-无答案.pdf                    p16   badOld=1   badRef=1   linesOld=32   linesRef=32   diff=0.438
+期中/2012期中-带答案.pdf                          p1    badOld=3   badRef=1   linesOld=19   linesRef=42   diff=0.934
+期中/2012期中-带答案.pdf                          p10   badOld=6   badRef=6   linesOld=41   linesRef=41   diff=0.854
+期中/2013期中-带答案.pdf                          p1    badOld=1   badRef=1   linesOld=41   linesRef=44   diff=0.529
+期中/2013期中-带答案.pdf                          p5    badOld=1   badRef=1   linesOld=30   linesRef=32   diff=0.452
+期中/2013期中-带答案.pdf                          p7    badOld=1   badRef=1   linesOld=50   linesRef=50   diff=0.900
+期中/2014期中-带答案.pdf                          p2    badOld=3   badRef=3   linesOld=33   linesRef=33   diff=0.152
+期中/2014期中-带答案.pdf                          p11   badOld=9   badRef=9   linesOld=35   linesRef=35   diff=0.543
+期中/2014期中-带答案.pdf                          p12   badOld=14  badRef=14  linesOld=20   linesRef=20   diff=0.750
+期中/2014期中-带答案.pdf                          p13   badOld=18  badRef=13  linesOld=47   linesRef=36   diff=0.880
+期中/2015期中-带答案.pdf                          p19   badOld=2   badRef=2   linesOld=32   linesRef=32   diff=0.688
+期中/2015期中-带答案.pdf                          p20   badOld=1   badRef=1   linesOld=23   linesRef=23   diff=0.783
+期中/2016期中-带答案.pdf                          p5    badOld=2   badRef=2   linesOld=33   linesRef=33   diff=0.182
+期中/2016期中-带答案.pdf                          p11   badOld=2   badRef=2   linesOld=25   linesRef=25   diff=0.160
+期中/2018期中-带答案.pdf                          p12   badOld=1   badRef=1   linesOld=29   linesRef=29   diff=0.379
+期中/2019期中-带答案.pdf                          p2    badOld=5   badRef=5   linesOld=33   linesRef=47   diff=0.800
+期中/2019期中-带答案.pdf                          p10   badOld=1   badRef=1   linesOld=36   linesRef=39   diff=0.893
+期中/2019期中-带答案.pdf                          p12   badOld=1   badRef=1   linesOld=34   linesRef=34   diff=0.676
+期中/2019期中-带答案.pdf                          p13   badOld=1   badRef=1   linesOld=38   linesRef=38   diff=0.974
+期中/2019期中-带答案.pdf                          p14   badOld=1   badRef=1   linesOld=32   linesRef=32   diff=0.750
+期中/2020期中-带答案.pdf                          p6    badOld=1   badRef=1   linesOld=31   linesRef=31   diff=0.484
+期中/2020期中-带答案.pdf                          p9    badOld=2   badRef=2   linesOld=12   linesRef=33   diff=0.956
+期中/2020期中-带答案.pdf                          p10   badOld=16  badRef=16  linesOld=35   linesRef=35   diff=0.543
+期中/2020期中-带答案.pdf                          p11   badOld=2   badRef=2   linesOld=28   linesRef=28   diff=0.500
+期中/2020期中-无答案.pdf                          p6    badOld=1   badRef=1   linesOld=28   linesRef=33   diff=0.574
+期中/2020期中-无答案.pdf                          p9    badOld=3   badRef=2   linesOld=12   linesRef=40   diff=0.962
+期中/2020期中-无答案.pdf                          p10   badOld=9   badRef=15  linesOld=14   linesRef=25   diff=0.897
+期中/2021期中-带答案.pdf                          p11   badOld=1   badRef=1   linesOld=31   linesRef=34   diff=0.169
+期中/2021期中-带答案.pdf                          p12   badOld=2   badRef=2   linesOld=23   linesRef=25   diff=0.250
+期中/2021期中-带答案.pdf                          p14   badOld=5   badRef=1   linesOld=7    linesRef=30   diff=0.946
+期中/2021期中-带答案.pdf                          p15   badOld=14  badRef=14  linesOld=32   linesRef=32   diff=0.406
+期中/2021期中-带答案.pdf                          p24   badOld=1   badRef=1   linesOld=29   linesRef=29   diff=0.448
+期中/2021期中-无答案.pdf                          p9    badOld=1   badRef=1   linesOld=30   linesRef=33   diff=0.175
+期中/2021期中-无答案.pdf                          p11   badOld=3   badRef=1   linesOld=8    linesRef=34   diff=0.952
+期中/2021期中-无答案.pdf                          p12   badOld=13  badRef=13  linesOld=17   linesRef=18   diff=0.829
+期中/2022期中-带答案.pdf                          p2    badOld=1   badRef=1   linesOld=30   linesRef=30   diff=0.133
+期中/2022期中-带答案.pdf                          p3    badOld=2   badRef=2   linesOld=36   linesRef=37   diff=0.068
+期中/2022期中-带答案.pdf                          p10   badOld=1   badRef=1   linesOld=33   linesRef=36   diff=0.652
+期中/2022期中-带答案.pdf                          p18   badOld=1   badRef=1   linesOld=33   linesRef=33   diff=0.303
+期中/2022期中-无答案.pdf                          p8    badOld=1   badRef=1   linesOld=19   linesRef=19   diff=0.684
+期中/2022期中-无答案.pdf                          p14   badOld=1   badRef=1   linesOld=33   linesRef=33   diff=0.333
+期中/2023期中-带答案.pdf                          p2    badOld=1   badRef=1   linesOld=31   linesRef=31   diff=0.129
+期中/2023期中-带答案.pdf                          p8    badOld=1   badRef=1   linesOld=34   linesRef=34   diff=0.059
+期中/2023期中-带答案.pdf                          p16   badOld=1   badRef=1   linesOld=22   linesRef=33   diff=0.927
+期中/2023期中-带答案.pdf                          p17   badOld=2   badRef=2   linesOld=33   linesRef=33   diff=0.727
+期中/2023期中-无答案.pdf                          p2    badOld=1   badRef=1   linesOld=28   linesRef=42   diff=0.600
+期中/2023期中-无答案.pdf                          p7    badOld=1   badRef=1   linesOld=34   linesRef=44   diff=0.385
+期中/2023期中-无答案.pdf                          p12   badOld=1   badRef=1   linesOld=29   linesRef=40   diff=0.826
+期中/2023期中-无答案.pdf                          p13   badOld=1   badRef=2   linesOld=19   linesRef=34   diff=0.962
+期中/2024期中-带答案.pdf                          p14   badOld=1   badRef=1   linesOld=38   linesRef=38   diff=0.842
+期中/2024期中-带答案.pdf                          p16   badOld=1   badRef=1   linesOld=38   linesRef=38   diff=0.974
+期中/2024期中-无答案.pdf                          p11   badOld=1   badRef=1   linesOld=38   linesRef=38   diff=0.842
+期末/2014期末-带答案.pdf                          p17   badOld=3   badRef=3   linesOld=27   linesRef=27   diff=0.889
+期末/2015期末-20151109-带答案.pdf                 p19   badOld=2   badRef=2   linesOld=32   linesRef=32   diff=0.688
+期末/2015期末-20151109-带答案.pdf                 p20   badOld=1   badRef=1   linesOld=23   linesRef=23   diff=0.783
+期末/2015期末-20160104-带答案.pdf                 p6    badOld=4   badRef=4   linesOld=32   linesRef=32   diff=0.594
+期末/2015期末-20160104-带答案.pdf                 p7    badOld=2   badRef=2   linesOld=31   linesRef=31   diff=0.516
+期末/2015期末-20160104-无答案.pdf                 p5    badOld=4   badRef=4   linesOld=34   linesRef=34   diff=0.824
+期末/2016期末-带答案.pdf                          p6    badOld=4   badRef=1   linesOld=29   linesRef=35   diff=0.625
+期末/2016期末-带答案.pdf                          p20   badOld=3   badRef=3   linesOld=34   linesRef=34   diff=0.559
+期末/2016期末-无答案.pdf                          p5    badOld=1   badRef=1   linesOld=38   linesRef=38   diff=0.842
+期末/2016期末-无答案.pdf                          p17   badOld=3   badRef=3   linesOld=34   linesRef=34   diff=0.500
+期末/2017期末-无答案.pdf                          p9    badOld=1   badRef=1   linesOld=36   linesRef=36   diff=0.694
+期末/2017期末-无答案.pdf                          p16   badOld=1   badRef=1   linesOld=28   linesRef=28   diff=0.250
+期末/2018期末-带答案.pdf                          p10   badOld=3   badRef=3   linesOld=35   linesRef=35   diff=0.486
+期末/2018期末-带答案.pdf                          p11   badOld=5   badRef=5   linesOld=51   linesRef=50   diff=0.802
+期末/2018期末-带答案.pdf                          p19   badOld=3   badRef=3   linesOld=28   linesRef=28   diff=0.821
+期末/2018期末-带答案.pdf                          p28   badOld=13  badRef=13  linesOld=33   linesRef=33   diff=0.758
+期末/2018期末-带答案.pdf                          p29   badOld=3   badRef=3   linesOld=30   linesRef=30   diff=0.367
+期末/2019、2020期末-答案解析.pdf                    p4    badOld=3   badRef=3   linesOld=34   linesRef=35   diff=0.188
+期末/2019、2020期末-答案解析.pdf                    p7    badOld=1   badRef=1   linesOld=32   linesRef=32   diff=0.031
+期末/2019期末-无答案.pdf                          p10   badOld=6   badRef=6   linesOld=44   linesRef=71   diff=0.930
+期末/2020期末-无答案.pdf                          p10   badOld=11  badRef=11  linesOld=58   linesRef=83   diff=0.887
+期末/2021期末-无答案.pdf                          p11   badOld=3   badRef=5   linesOld=32   linesRef=40   diff=0.556
+期末/2024期末-带答案.pdf                          p2    badOld=1   badRef=1   linesOld=36   linesRef=36   diff=0.417
+期末/2024期末-无答案.pdf                          p2    badOld=1   badRef=1   linesOld=36   linesRef=36   diff=0.417
+期末/2025期末-带答案.pdf                          p1    badOld=1   badRef=1   linesOld=35   linesRef=57   diff=0.739
+期末/2025期末-无答案.pdf                          p2    badOld=1   badRef=1   linesOld=39   linesRef=56   diff=0.579
+期末/2025期末-无答案.pdf                          p3    badOld=2   badRef=2   linesOld=44   linesRef=60   diff=0.462
+阶段测验/2025第1次阶段测验-带答案.pdf                   p2    badOld=1   badRef=1   linesOld=31   linesRef=48   diff=0.671
+阶段测验/2025第1次阶段测验-无答案.pdf                   p2    badOld=1   badRef=1   linesOld=31   linesRef=50   diff=0.728
+阶段测验/2025第1次阶段测验-无答案.pdf                   p6    badOld=1   badRef=1   linesOld=33   linesRef=57   diff=0.756
+阶段测验/2025第2次阶段测验-带答案.pdf                   p9    badOld=2   badRef=2   linesOld=37   linesRef=41   diff=0.154
+阶段测验/2025第2次阶段测验-无答案.pdf                   p8    badOld=2   badRef=2   linesOld=27   linesRef=34   diff=0.344
+
+== 样例对照：old 与 ref 前若干行 ==
+
+### Lab测验/2025Lab测验-无答案.pdf p5  badOld=4 badRef=4
+!! OLD| 实验L1（10分）得分：
+!! REF| 实验 L1（10 分）得分：
+!! OLD| 题号  11  12  13  14  15
+!! REF| 题号 11 12 13 14 15
+   OLD| 解答
+   REF| 解答
+   OLD| 11. （2分）下面给出了satMul2函数的代码，其中变量overflow在结果溢出时会被设
+   REF| 11. （2分）下面给出了satMul2函数的代码，其中变量overflow在结果溢出时会被设
+   OLD| 置为 0xFFFFFFFF，否则为 0。下面哪一个选项正确给出了 overflow 的表达式(提
+   REF| 置为 0xFFFFFFFF，否则为 0。下面哪一个选项正确给出了 overflow 的表达式(提
+   OLD| 示：可根据x和2 * x的符号位来判断是否溢出)：
+   REF| 示：可根据x和2 * x的符号位来判断是否溢出)：
+   OLD| A. (x ^ (x + 1)) >> 31;
+   REF| A. (x ^ (x + 1)) >> 31;
+   OLD| B. (x ^ (x + ~0)) >> 31;
+   REF| B. (x ^ (x + ~0)) >> 31;
+   OLD| C. (x ^ (x << 1)) >> 31;
+   REF| C. (x ^ (x << 1)) >> 31;
+   OLD| D. (x ^ (x >> 1)) >> 31;
+   REF| D. (x ^ (x >> 1)) >> 31;
+   OLD| /*
+   REF| /*
+!! OLD|  * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow
+!! REF| * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow
+!! OLD|  *   Examples: satMul2(0x30000000) = 0x60000000
+!! REF| * Examples: satMul2(0x30000000) = 0x60000000
+!! OLD|  *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)
+!! REF| * satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)
+
+### Lab测验/2025Lab测验-无答案.pdf p10  badOld=1 badRef=1
+   OLD| 0000000000002798 <phase_1>:
+   REF| 0000000000002798 <phase_1>:
+!! OLD|     2798:  f3 0f 1e fa            endbr64
+!! REF| 2798: f3 0f 1e fa endbr64
+!! OLD|     279c:  48 83 ec 08            sub    $0x8,%rsp
+!! REF| 279c: 48 83 ec 08 sub $0x8,%rsp
+!! OLD| 27a0:  48 8d 35 a1 1b 00 00  lea    0x1ba1(%rip),%rsi
+!! REF| 27a0: 48 8d 35 a1 1b 00 00 lea 0x1ba1(%rip),%rsi
+!! OLD|       # 4348 <_IO_stdin_used+0x348>
+!! REF| # 4348 <_IO_stdin_used+0x348>
+!! OLD|     27a7:  e8 a6 05 00 00        call   2d52 <strings_not_equal>
+!! REF| 27a7: e8 a6 05 00 00 call 2d52 <strings_not_equal>
+!! OLD|     27ac:  85 c0                  test   %eax,%eax
+!! REF| 27ac: 85 c0 test %eax,%eax
+!! OLD|     27ae:  75 05                  jne    27b5 <phase_1+0x1d>
+!! REF| 27ae: 75 05 jne 27b5 <phase_1+0x1d>
+!! OLD|     27b0:  48 83 c4 08            add    $0x8,%rsp
+!! REF| 27b0: 48 83 c4 08 add $0x8,%rsp
+!! OLD|     27b4:  c3                     ret
+!! REF| 27b4: c3 ret
+!! OLD|     27b5:  e8 c7 06 00 00        call   2e81 <explode_bomb>
+!! REF| 27b5: e8 c7 06 00 00 call 2e81 <explode_bomb>
+!! OLD|     27ba:  eb f4                  jmp    27b0 <phase_1+0x18>
+!! REF| 27ba: eb f4 jmp 27b0 <phase_1+0x18>
+   OLD| 19. （2分）下面是phase_2函数的反汇编代码。下列哪个输入使 bomb 爆炸？
+   REF| 19. （2分）下面是phase_2函数的反汇编代码。下列哪个输入使 bomb 爆炸？
+   OLD| A. 0 1 1 2 3 5
+   REF| A. 0 1 1 2 3 5
+
+### Lab测验/2025Lab测验-无答案.pdf p12  badOld=1 badRef=1
+   OLD| 20. （2分）某同学在使用 GDB 调试BombLab phase_3 时，在 *phase_3 + 0x84
+   REF| 20. （2分）某同学在使用 GDB 调试BombLab phase_3 时，在 *phase_3 + 0x84
+   OLD| 处设置了断点。然后该同学在 phase_3 中输入了0 0，触发了断点，并在断点处输
+   REF| 处设置了断点。然后该同学在 phase_3 中输入了0 0，触发了断点，并在断点处输
+   OLD| 入了 info registers，获得寄存器信息。下面是phase_3的反汇编信息和断点处
+   REF| 入了 info registers，获得寄存器信息。下面是phase_3的反汇编信息和断点处
+   OLD| 的寄存器信息。下列哪个 phase_3 的输入不会使 bomb 爆炸？
+   REF| 的寄存器信息。下列哪个 phase_3 的输入不会使 bomb 爆炸？
+   OLD| A. 0 -197
+   REF| A. 0 -197
+   OLD| B. 1 -901
+   REF| B. 1 -901
+   OLD| C. 6 0
+   REF| C. 6 0
+   OLD| D. 7 -772
+   REF| D. 7 -772
+   OLD| # objdump -d bomb
+   REF| # objdump -d bomb
+   OLD| 0000000000001829 <phase_3>:
+   REF| 0000000000001829 <phase_3>:
+!! OLD|     1829:  f3 0f 1e fa            endbr64
+!! REF| 1829: f3 0f 1e fa endbr64
+!! OLD|     182d:  48 83 ec 18            sub    $0x18,%rsp
+!! REF| 182d: 48 83 ec 18 sub $0x18,%rsp
+!! OLD|     1831:  64 48 8b 04 25 28 00  mov    %fs:0x28,%rax
+!! REF| 1831: 64 48 8b 04 25 28 00 mov %fs:0x28,%rax
+!! OLD|     1838:  00 00
+!! REF| 1838: 00 00
+
+### Lab测验/2025Lab测验-无答案.pdf p13  badOld=8 badRef=8
+!! OLD|     1884:  2d 1a 03 00 00        sub    $0x31a,%eax
+!! REF| 1884: 2d 1a 03 00 00 sub $0x31a,%eax
+!! OLD|     1889:  05 99 02 00 00        add    $0x299,%eax
+!! REF| 1889: 05 99 02 00 00 add $0x299,%eax
+!! OLD|     188e:  2d 04 03 00 00        sub    $0x304,%eax
+!! REF| 188e: 2d 04 03 00 00 sub $0x304,%eax
+!! OLD|     1893:  05 04 03 00 00        add    $0x304,%eax
+!! REF| 1893: 05 04 03 00 00 add $0x304,%eax
+!! OLD|     1898:  2d 04 03 00 00        sub    $0x304,%eax
+!! REF| 1898: 2d 04 03 00 00 sub $0x304,%eax
+!! OLD|     189d:  05 04 03 00 00        add    $0x304,%eax
+!! REF| 189d: 05 04 03 00 00 add $0x304,%eax
+!! OLD|     18a2:  2d 04 03 00 00        sub    $0x304,%eax
+!! REF| 18a2: 2d 04 03 00 00 sub $0x304,%eax
+!! OLD|     18a7:  83 3c 24 05            cmpl   $0x5,(%rsp)
+!! REF| 18a7: 83 3c 24 05 cmpl $0x5,(%rsp)
+!! OLD|     18ab:  7f 06                  jg     18b3 <phase_3+0x8a>
+!! REF| 18ab: 7f 06 jg 18b3 <phase_3+0x8a>
+!! OLD|     18ad:  39 44 24 04            cmp    %eax,0x4(%rsp)
+!! REF| 18ad: 39 44 24 04 cmp %eax,0x4(%rsp)
+!! OLD|     18b1:  74 05                  je     18b8 <phase_3+0x8f>
+!! REF| 18b1: 74 05 je 18b8 <phase_3+0x8f>
+!! OLD|     18b3:  e8 cc 07 00 00        call   2084 <explode_bomb>
+!! REF| 18b3: e8 cc 07 00 00 call 2084 <explode_bomb>
+!! OLD|     18b8:  48 8b 44 24 08        mov    0x8(%rsp),%rax
+!! REF| 18b8: 48 8b 44 24 08 mov 0x8(%rsp),%rax
+!! OLD|     18bd:  64 48 2b 04 25 28 00  sub    %fs:0x28,%rax
+!! REF| 18bd: 64 48 2b 04 25 28 00 sub %fs:0x28,%rax
+
+### Lab测验/2025Lab测验-无答案.pdf p14  badOld=8 badRef=8
+   OLD| # objdump -s -j .rodata bomb
+   REF| # objdump -s -j .rodata bomb
+!! OLD| 4320 add5ffff 5fd5ffff b4d5ffff bbd5ffff  ...._...........
+!! REF| 4320 add5ffff 5fd5ffff b4d5ffff bbd5ffff ...._...........
+!! OLD| 4330 c2d5ffff c9d5ffff d0d5ffff d7d5ffff  ................
+!! REF| 4330 c2d5ffff c9d5ffff d0d5ffff d7d5ffff ................
+   OLD| (gdb) info registers
+   REF| (gdb) info registers
+!! OLD| rax            0xffffff3a         4294967098
+!! REF| rax 0xffffff3a 4294967098
+!! OLD| rbx            0x55555555e6a0    93824992274080
+!! REF| rbx 0x55555555e6a0 93824992274080
+!! OLD| rcx            0x0                 0
+!! REF| rcx 0x0 0
+!! OLD| rdx            0x555555558320    93824992248608
+!! REF| rdx 0x555555558320 93824992248608
+!! OLD| rsi            0x0                 0
+!! REF| rsi 0x0 0
+!! OLD| rdi            0x7fffffffd3c0    140737488344000
+!! REF| rdi 0x7fffffffd3c0 140737488344000
+!! OLD| rbp            0x7fffffffdae0    0x7fffffffdae0
+!! REF| rbp 0x7fffffffdae0 0x7fffffffdae0
+!! OLD| rsp            0x7fffffffda20    0x7fffffffda20
+!! REF| rsp 0x7fffffffda20 0x7fffffffda20
+!! OLD| r8             0xffffffff         4294967295
+!! REF| r8 0xffffffff 4294967295
+!! OLD| r9             0x0                 0
+!! REF| r9 0x0 0
+
+### Lab测验/2025Lab测验-无答案.pdf p16  badOld=1 badRef=1
+!! OLD| 24. （2分）下面给出了AttackLab中ctarget目标程序的getbuf函数的汇编代码；
+!! REF| 24. （2 分）下面给出了 AttackLab 中 ctarget 目标程序的 getbuf 函数的汇编代码；
+   OLD| 在call指令执行完成后，getbuf的栈帧大小为；
+   REF| 在call指令执行完成后，getbuf的栈帧大小为；
+   OLD| A. 0x38字节
+   REF| A. 0x38字节
+   OLD| B. 0x3C字节
+   REF| B. 0x3C字节
+   OLD| C. 0x40字节
+   REF| C. 0x40字节
+   OLD| D. 0x44字节
+   REF| D. 0x44字节
+   OLD| 0000000000401cb2 <getbuf>:
+   REF| 0000000000401cb2 <getbuf>:
+!! OLD|   401cb2:  f3 0f 1e fa            endbr64
+!! REF| 401cb2: f3 0f 1e fa endbr64
+!! OLD|   401cb6:  48 83 ec 38            sub    $0x38,%rsp
+!! REF| 401cb6: 48 83 ec 38 sub $0x38,%rsp
+!! OLD|   401cba:  48 89 e7               mov    %rsp,%rdi
+!! REF| 401cba: 48 89 e7 mov %rsp,%rdi
+!! OLD|   401cbd:  e8 57 03 00 00        call   402019 <Gets>
+!! REF| 401cbd: e8 57 03 00 00 call 402019 <Gets>
+!! OLD|   401cc2:  b8 01 00 00 00        mov    $0x1,%eax
+!! REF| 401cc2: b8 01 00 00 00 mov $0x1,%eax
+!! OLD|   401cc7:  48 83 c4 38            add    $0x38,%rsp
+!! REF| 401cc7: 48 83 c4 38 add $0x38,%rsp
+!! OLD|   401ccb:  c3                     ret
+!! REF| 401ccb: c3 ret
+
+### 期中/2012期中-带答案.pdf p1  badOld=3 badRef=1
+   OLD| 北京大学信息科学技术学院 计算机系统导论 期中考试 2012
+   REF| 北京大学信息科学技术学院 计算机系统导论 期中考试 2012
+!! OLD| 计算机系统导论期中考试   2012年11月7日
+!! REF| 计算机系统导论期中考试 2012 年 11 月 7 日
+!! OLD| 姓名：    学号：    成绩：
+!! REF| 姓名： 学号： 成绩：
+   OLD| Problem A -- Multiple Choice (18 pts, 1pt or 2pts each)
+   REF| Problem A -- Multiple Choice (18 pts, 1pt or 2pts each)
+!! OLD| 1.  Labe))t   intxx   x==   =−− 34−3,,  yy1  /==8  −− a34n  d int y = −31 >> 3. What are the values of x and y
+!! REF| 1. Let int x = −31/8 and int y = −31 >> 3. What are the values of x and y? (m-f10-a 1-5) C
+!! OLD|  cd))   xx  ==  −−34,,  yy  ==  −−43
+!! REF| a) x = −3, y = −3
+!! OLD| 2.  Fifnlootra X wt  =Yh  Ci=cO hXN ;v SaTluAeNsT c; a  n X not be equal to Z in the code below (circle all th
+!! REF| b) x = −4, y = −4
+!! OLD| inabt))   Z =FF Yoo;rr   llaarrggee  pneogsiattivivee v vaalulueess o off C COONNSSTTAANNTT ( (ee..gg.,.>,>1-,
+!! REF| c) x = −3, y = −4
+!! OLD| cde)))    FFNooorrn  ssemm oaafll llt  hpneoe gsaiabttiovivevee v  va(ail.uleue.e,s sX o =of=f C ZCO OinNN aSS
+!! REF| d) x = −4, y = −3
+!! OLD| 3.  Cinotn xs =id  0exr 1t5h2e1 f3oFll1o0w >in>g 4 c;o de, what is the output of the printf? (m-f10-a 1-1) B
+!! REF| 2. For which values can X not be equal to Z in the code below (circle all that apply) (f-f09 1-B) A&D
+!! OLD| cuphnriasnirtg fyn( "e=%d (d cch,h a%arru)  "zx, ; = y ,( uz)n; signed char) x;
+!! REF| int X = CONSTANT;
+!! OLD| abc)))     ---122544,11 2,,  421145 1
+!! REF| float Y = X;
+!! OLD| 4.  Adf)t er e- 1x5e,c 1u5ti ng the following code, which of the variables are equal to 0? (m-f11 1-3) CD or C
+!! REF| int Z = Y;
+!! OLD| abc)))    uuunnnsssiiigggnnneeeddd   iiinnnttt   abc   ===   a01 x;+ f fbff;f fff;
+!! REF| a) For large positive values of CONSTANT (e.g.,>1,000,000,000)
+
+### 期中/2012期中-带答案.pdf p10  badOld=6 badRef=6
+   OLD| 北京大学信息科学技术学院 计算机系统导论 期中考试 2012
+   REF| 北京大学信息科学技术学院 计算机系统导论 期中考试 2012
+!! OLD|     +--------------------------------+
+!! REF| +--------------------------------+
+!! OLD|     |            unknown             |  0xffff0ff0
+!! REF| | unknown | 0xffff0ff0
+!! OLD|     +--------------------------------+
+!! REF| +--------------------------------+
+!! OLD|     |               15               |  0xffff0fec
+!! REF| | 15 | 0xffff0fec
+!! OLD|     +--------------------------------+
+!! REF| +--------------------------------+
+!! OLD|     |               18               |  0xffff0fe8
+!! REF| | 18 | 0xffff0fe8
+!! OLD|     +--------------------------------+
+!! REF| +--------------------------------+
+!! OLD|     |           0x080483b7           |  0xffff0fe4
+!! REF| | 0x080483b7 | 0xffff0fe4
+!! OLD|     +--------------------------------+
+!! REF| +--------------------------------+
+!! OLD|     |           0xffff0ff8           |  0xffff0fe0
+!! REF| | 0xffff0ff8 | 0xffff0fe0
+!! OLD|     +--------------------------------+
+!! REF| +--------------------------------+
+!! OLD|     |            unknown             |  0xffff0fdc
+!! REF| | unknown | 0xffff0fdc
+!! OLD|     +--------------------------------+
+!! REF| +--------------------------------+

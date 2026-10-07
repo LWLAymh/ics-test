@@ -1,0 +1,231 @@
+{
+  "file": "期末/2017期末-无答案.md",
+  "total_lines": 731,
+  "items": [
+    {
+      "start": 53,
+      "end": 55,
+      "module": "Machine Prog",
+      "qno": "第一题 1",
+      "note": "gdb 单步进入被调函数（si/ni）",
+      "curated": "期末/2017期末-无答案/53.md"
+    },
+    {
+      "start": 56,
+      "end": 58,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "浮点阶码不采用补码的原因",
+      "curated": "期末/2017期末-无答案/56.md"
+    },
+    {
+      "start": 59,
+      "end": 63,
+      "module": "Machine Prog",
+      "qno": "第一题 3",
+      "note": "指令长度、test 与 cmp 等价、跳转表",
+      "curated": "期末/2017期末-无答案/59.md"
+    },
+    {
+      "start": 64,
+      "end": 68,
+      "module": "Processor Arch",
+      "qno": "第一题 4",
+      "note": "由执行步骤识别 Y86 指令",
+      "curated": "期末/2017期末-无答案/64.md"
+    },
+    {
+      "start": 73,
+      "end": 78,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 5",
+      "note": "四路组相联 cache 每路的行数推导",
+      "curated": "期末/2017期末-无答案/73.md"
+    },
+    {
+      "start": 79,
+      "end": 88,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 6",
+      "note": "由磁盘几何参数计算标称容量",
+      "curated": "期末/2017期末-无答案/79.md"
+    },
+    {
+      "start": 90,
+      "end": 108,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 7",
+      "note": "跨文件符号类型不一致的链接结果",
+      "curated": "期末/2017期末-无答案/90.md"
+    },
+    {
+      "start": 110,
+      "end": 114,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 8",
+      "note": "符号解析规则与静态库链接",
+      "curated": "期末/2017期末-无答案/110.md"
+    },
+    {
+      "start": 119,
+      "end": 132,
+      "module": "ECF and System IO",
+      "qno": "第一题 9",
+      "note": "嵌套 fork 的输出顺序可能性",
+      "curated": "期末/2017期末-无答案/119.md"
+    },
+    {
+      "start": 134,
+      "end": 139,
+      "module": "ECF and System IO",
+      "qno": "第一题 10",
+      "note": "信号语义、signal 与 SIGSTOP/SIGKILL",
+      "curated": "期末/2017期末-无答案/134.md"
+    },
+    {
+      "start": 140,
+      "end": 144,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 11",
+      "note": "显式/隐式分配器的能力与效率",
+      "curated": "期末/2017期末-无答案/140.md"
+    },
+    {
+      "start": 145,
+      "end": 150,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 12",
+      "note": "空闲链表搜索与合并策略、二叉树结构",
+      "curated": "期末/2017期末-无答案/145.md"
+    },
+    {
+      "start": 155,
+      "end": 159,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 13",
+      "note": "虚拟内存缺页代价、fork 与地址空间隔离",
+      "curated": "期末/2017期末-无答案/155.md"
+    },
+    {
+      "start": 160,
+      "end": 168,
+      "module": "ECF and System IO",
+      "qno": "第一题 14",
+      "note": "dup/RIO/fork 与打开文件表的关系",
+      "curated": "期末/2017期末-无答案/160.md"
+    },
+    {
+      "start": 169,
+      "end": 189,
+      "module": "ECF and System IO",
+      "qno": "第一题 15",
+      "note": "dup/dup2/O_APPEND 组合后的文件内容",
+      "curated": "期末/2017期末-无答案/169.md"
+    },
+    {
+      "start": 195,
+      "end": 201,
+      "module": "Network",
+      "qno": "第一题 16",
+      "note": "本地端口、私有 IP 与服务器端口",
+      "curated": "期末/2017期末-无答案/195.md"
+    },
+    {
+      "start": 202,
+      "end": 207,
+      "module": "Network",
+      "qno": "第一题 17",
+      "note": "交换机/HUB、UDP 实时音视频、校验",
+      "curated": "期末/2017期末-无答案/202.md"
+    },
+    {
+      "start": 208,
+      "end": 214,
+      "module": "Network",
+      "qno": "第一题 18",
+      "note": "localhost、套接字地址与 IPv4/IPv6",
+      "curated": "期末/2017期末-无答案/208.md"
+    },
+    {
+      "start": 215,
+      "end": 221,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 19",
+      "note": "死锁定义、信号量顺序与线程安全",
+      "curated": "期末/2017期末-无答案/215.md"
+    },
+    {
+      "start": 226,
+      "end": 252,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 20",
+      "note": "主线程与线程1交错执行的输出种类",
+      "curated": "期末/2017期末-无答案/226.md"
+    },
+    {
+      "start": 258,
+      "end": 337,
+      "module": "Machine Prog",
+      "qno": "第二题 1",
+      "note": "结构体偏移与浮点汇编代码填空",
+      "curated": "期末/2017期末-无答案/258.md"
+    },
+    {
+      "start": 338,
+      "end": 346,
+      "module": "Data Representation",
+      "qno": "第二题 2",
+      "note": "浮点位模式、对齐与比较运算的七行输出",
+      "curated": "期末/2017期末-无答案/338.md"
+    },
+    {
+      "start": 352,
+      "end": 374,
+      "module": "Processor Arch",
+      "qno": "第三题",
+      "note": "两级/三级流水线插入寄存器与最大吞吐率",
+      "curated": "期末/2017期末-无答案/352.md"
+    },
+    {
+      "start": 380,
+      "end": 433,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第四题",
+      "note": "强弱符号多重定义与链接成功原因（兼 GC 根指针）",
+      "curated": "期末/2017期末-无答案/380.md"
+    },
+    {
+      "start": 439,
+      "end": 507,
+      "module": "ECF and System IO",
+      "qno": "第五题",
+      "note": "fork/信号/sleep 与文件读取的输出行数及内容",
+      "curated": "期末/2017期末-无答案/439.md"
+    },
+    {
+      "start": 513,
+      "end": 590,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第六题",
+      "note": "TLB 与页表一致性、invlpg、TLB miss 与缺页",
+      "curated": "期末/2017期末-无答案/513.md"
+    },
+    {
+      "start": 596,
+      "end": 631,
+      "module": "Network",
+      "qno": "第七题",
+      "note": "Echo 客户端/服务器流程填空与协议判断",
+      "curated": "期末/2017期末-无答案/596.md"
+    },
+    {
+      "start": 638,
+      "end": 731,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第八题",
+      "note": "并发 echo 服务器 P/T 代码找错与信号量同步",
+      "curated": "期末/2017期末-无答案/638.md"
+    }
+  ],
+  "answer_sections": []
+}

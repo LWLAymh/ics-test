@@ -1,0 +1,247 @@
+{
+  "file": "期中/2013期中-带答案.md",
+  "total_lines": 570,
+  "items": [
+    {
+      "start": 9,
+      "end": 22,
+      "module": "Data Representation",
+      "qno": "选择题 1",
+      "note": "大小端字节序：x86 小端 / Sun 大端",
+      "curated": "期中/2013期中-带答案/9.md"
+    },
+    {
+      "start": 23,
+      "end": 36,
+      "module": "Data Representation",
+      "qno": "选择题 2",
+      "note": "补码/无符号比较、移位与类型转换",
+      "curated": "期中/2013期中-带答案/23.md"
+    },
+    {
+      "start": 37,
+      "end": 44,
+      "module": "Data Representation",
+      "qno": "选择题 3",
+      "note": "浮点数就近偶数舍入到小数点后两位",
+      "curated": "期中/2013期中-带答案/37.md"
+    },
+    {
+      "start": 45,
+      "end": 54,
+      "module": "Machine Prog",
+      "qno": "选择题 4",
+      "note": "gdb 断点与运行命令（Bomb Lab）",
+      "curated": "期中/2013期中-带答案/45.md"
+    },
+    {
+      "start": 55,
+      "end": 63,
+      "module": "Machine Prog",
+      "qno": "选择题 5",
+      "note": "lea 乘法指令识别（n*10）",
+      "curated": "期中/2013期中-带答案/55.md"
+    },
+    {
+      "start": 64,
+      "end": 71,
+      "module": "Data Representation",
+      "qno": "选择题 6",
+      "note": "结构体对齐与内存布局（Windows 规则，兼 Machine Prog）",
+      "curated": "期中/2013期中-带答案/64.md"
+    },
+    {
+      "start": 72,
+      "end": 81,
+      "module": "Machine Prog",
+      "qno": "选择题 7",
+      "note": "x86 寻址方式与指令合法性",
+      "curated": "期中/2013期中-带答案/72.md"
+    },
+    {
+      "start": 82,
+      "end": 87,
+      "module": "Machine Prog",
+      "qno": "选择题 8",
+      "note": "leal 用途、传参、寄存器保存与条件码",
+      "curated": "期中/2013期中-带答案/82.md"
+    },
+    {
+      "start": 88,
+      "end": 100,
+      "module": "Processor Arch",
+      "qno": "选择题 9",
+      "note": "RISC 与 CISC 指令集对比",
+      "curated": "期中/2013期中-带答案/88.md"
+    },
+    {
+      "start": 101,
+      "end": 106,
+      "module": "Processor Arch",
+      "qno": "选择题 10",
+      "note": "流水线吞吐率与数据冒险",
+      "curated": "期中/2013期中-带答案/101.md"
+    },
+    {
+      "start": 107,
+      "end": 134,
+      "module": "Processor Arch",
+      "qno": "选择题 11-13",
+      "note": "Y86 PIPE 数据冒险/转发信号判断",
+      "curated": "期中/2013期中-带答案/107.md"
+    },
+    {
+      "start": 135,
+      "end": 145,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "选择题 14",
+      "note": "程序优化与分支预测的正确性",
+      "curated": "期中/2013期中-带答案/135.md"
+    },
+    {
+      "start": 146,
+      "end": 161,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "选择题 15",
+      "note": "编译器可自动进行的优化变换",
+      "curated": "期中/2013期中-带答案/146.md"
+    },
+    {
+      "start": 162,
+      "end": 165,
+      "module": "Memory Hierarchy",
+      "qno": "选择题 16",
+      "note": "直接映射 Cache 的组内行数",
+      "curated": "期中/2013期中-带答案/162.md"
+    },
+    {
+      "start": 166,
+      "end": 171,
+      "module": "Memory Hierarchy",
+      "qno": "选择题 17",
+      "note": "数组/循环的局部性判断",
+      "curated": "期中/2013期中-带答案/166.md"
+    },
+    {
+      "start": 176,
+      "end": 190,
+      "module": "Data Representation",
+      "qno": "第二题 1)",
+      "note": "有符号/无符号比较与运算溢出判断",
+      "curated": "期中/2013期中-带答案/176.md"
+    },
+    {
+      "start": 191,
+      "end": 204,
+      "module": "Data Representation",
+      "qno": "第二题 2)",
+      "note": "单精度 IEEE 浮点表达式与十六进制",
+      "curated": "期中/2013期中-带答案/191.md"
+    },
+    {
+      "start": 209,
+      "end": 240,
+      "module": "Machine Prog",
+      "qno": "第三题 1)",
+      "note": "64 位机器 long 的位数（int_sqrt 题干代码）",
+      "curated": "期中/2013期中-带答案/209.md"
+    },
+    {
+      "start": 241,
+      "end": 313,
+      "module": "Machine Prog",
+      "qno": "第三题 2)",
+      "note": "反汇编填空：int_sqrt 整数平方根（含答案）",
+      "curated": "期中/2013期中-带答案/241.md"
+    },
+    {
+      "start": 319,
+      "end": 408,
+      "module": "Machine Prog",
+      "qno": "第四题",
+      "note": "结构体 sizeof 与递归函数汇编/运行结果",
+      "curated": "期中/2013期中-带答案/319.md"
+    },
+    {
+      "start": 413,
+      "end": 417,
+      "module": "Processor Arch",
+      "qno": "第五题 1)",
+      "note": "流水线吞吐率计算",
+      "curated": "期中/2013期中-带答案/413.md"
+    },
+    {
+      "start": 418,
+      "end": 418,
+      "module": "Processor Arch",
+      "qno": "第五题 2)",
+      "note": "SEQ 单周期处理器吞吐率",
+      "curated": "期中/2013期中-带答案/418.md"
+    },
+    {
+      "start": 419,
+      "end": 432,
+      "module": "Processor Arch",
+      "qno": "第五题 3)",
+      "note": "Y86 程序段的数据相关与冒险",
+      "curated": "期中/2013期中-带答案/419.md"
+    },
+    {
+      "start": 434,
+      "end": 459,
+      "module": "Processor Arch",
+      "qno": "第五题 4)",
+      "note": "转发通路解决方案（含答案与流水线结构图）",
+      "curated": "期中/2013期中-带答案/434.md"
+    },
+    {
+      "start": 463,
+      "end": 488,
+      "module": "Processor Arch",
+      "qno": "第六题",
+      "note": "Y86 SEQ 各阶段操作（cmovXX/call/decl）",
+      "curated": "期中/2013期中-带答案/463.md"
+    },
+    {
+      "start": 493,
+      "end": 515,
+      "module": "Machine Prog",
+      "qno": "第七题 1)",
+      "note": "由汇编还原 transform 的 C 代码",
+      "curated": "期中/2013期中-带答案/493.md"
+    },
+    {
+      "start": 516,
+      "end": 540,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第七题 2)3)",
+      "note": "CPE 下限与循环展开优化填空",
+      "curated": "期中/2013期中-带答案/516.md"
+    },
+    {
+      "start": 545,
+      "end": 558,
+      "module": "Memory Hierarchy",
+      "qno": "第八题 1)",
+      "note": "直接映射 Cache 访问后状态填写",
+      "curated": "期中/2013期中-带答案/545.md"
+    },
+    {
+      "start": 559,
+      "end": 564,
+      "module": "Memory Hierarchy",
+      "qno": "第八题 2)",
+      "note": "两路组相联 Cache 状态与 Miss 次数",
+      "curated": "期中/2013期中-带答案/559.md"
+    },
+    {
+      "start": 565,
+      "end": 569,
+      "module": "Memory Hierarchy",
+      "qno": "第八题 3)",
+      "note": "全相联（S=1,E=4）最终驻留数据",
+      "curated": "期中/2013期中-带答案/565.md"
+    }
+  ],
+  "answer_sections": []
+}

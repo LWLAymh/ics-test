@@ -1,0 +1,501 @@
+{
+  "file": "期末/2019、2020期末-答案解析.md",
+  "total_lines": 280,
+  "items": [
+    {
+      "start": 13,
+      "end": 14,
+      "module": "Machine Prog",
+      "qno": "2020 选择题 1",
+      "note": "栈帧与帧指针（可变栈帧）",
+      "curated": "期末/2019、2020期末-答案解析/13.md"
+    },
+    {
+      "start": 15,
+      "end": 21,
+      "module": "Memory Hierarchy",
+      "qno": "2020 选择题 2",
+      "note": "cache 组相联容量、替换与局部性",
+      "curated": "期末/2019、2020期末-答案解析/15.md"
+    },
+    {
+      "start": 22,
+      "end": 23,
+      "module": "Data Representation",
+      "qno": "2020 选择题 3",
+      "note": "补码运算与算术右移舍入",
+      "curated": "期末/2019、2020期末-答案解析/22.md"
+    },
+    {
+      "start": 24,
+      "end": 24,
+      "module": "Data Representation",
+      "qno": "2020 选择题 4",
+      "note": "float 精确表示范围",
+      "curated": "期末/2019、2020期末-答案解析/24.md"
+    },
+    {
+      "start": 25,
+      "end": 25,
+      "module": "Processor Arch",
+      "qno": "2020 选择题 5",
+      "note": "RISC 寄存器更多",
+      "curated": "期末/2019、2020期末-答案解析/25.md"
+    },
+    {
+      "start": 26,
+      "end": 26,
+      "module": "Machine Prog",
+      "qno": "2020 选择题 6",
+      "note": "指令长度与基址加偏移寻址",
+      "curated": "期末/2019、2020期末-答案解析/26.md"
+    },
+    {
+      "start": 27,
+      "end": 29,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "2020 选择题 7",
+      "note": "编译期打桩、ABS 节与 -fPIC",
+      "curated": "期末/2019、2020期末-答案解析/27.md"
+    },
+    {
+      "start": 30,
+      "end": 32,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "2020 选择题 8",
+      "note": "跨模块同名符号类型不一致",
+      "curated": "期末/2019、2020期末-答案解析/30.md"
+    },
+    {
+      "start": 37,
+      "end": 40,
+      "module": "ECF and System IO",
+      "qno": "2020 选择题 9",
+      "note": "fork 次数与 printf 行缓冲",
+      "curated": "期末/2019、2020期末-答案解析/37.md"
+    },
+    {
+      "start": 41,
+      "end": 41,
+      "module": "ECF and System IO",
+      "qno": "2020 选择题 10",
+      "note": "外部 I/O 触发中断",
+      "curated": "期末/2019、2020期末-答案解析/41.md"
+    },
+    {
+      "start": 42,
+      "end": 42,
+      "module": "Machine Prog",
+      "qno": "2020 选择题 11",
+      "note": "存疑：仅注“书上原话”，考点不明",
+      "curated": "期末/2019、2020期末-答案解析/42.md"
+    },
+    {
+      "start": 43,
+      "end": 44,
+      "module": "ECF and System IO",
+      "qno": "2020 选择题 12",
+      "note": "缺页故障与系统调用陷阱",
+      "curated": "期末/2019、2020期末-答案解析/43.md"
+    },
+    {
+      "start": 45,
+      "end": 48,
+      "module": "ECF and System IO",
+      "qno": "2020 选择题 13",
+      "note": "信号处理程序中 printf 死锁与重定向",
+      "curated": "期末/2019、2020期末-答案解析/45.md"
+    },
+    {
+      "start": 49,
+      "end": 50,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2020 选择题 14",
+      "note": "多级页表 VPN 位数",
+      "curated": "期末/2019、2020期末-答案解析/49.md"
+    },
+    {
+      "start": 51,
+      "end": 56,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2020 选择题 15",
+      "note": "VPO/VPN 与页表页数最坏情况",
+      "curated": "期末/2019、2020期末-答案解析/51.md"
+    },
+    {
+      "start": 57,
+      "end": 57,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2020 选择题 16",
+      "note": "VPN 位数与页表级数",
+      "curated": "期末/2019、2020期末-答案解析/57.md"
+    },
+    {
+      "start": 58,
+      "end": 58,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2020 选择题 17",
+      "note": "PTE 的 A 位与 D 位",
+      "curated": "期末/2019、2020期末-答案解析/58.md"
+    },
+    {
+      "start": 59,
+      "end": 62,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2020 选择题 18",
+      "note": "MAP_SHARED 与 COW",
+      "curated": "期末/2019、2020期末-答案解析/59.md"
+    },
+    {
+      "start": 63,
+      "end": 63,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2020 选择题 19",
+      "note": "哪些段需要指针的内存管理（GC）",
+      "curated": "期末/2019、2020期末-答案解析/63.md"
+    },
+    {
+      "start": 64,
+      "end": 64,
+      "module": "Network",
+      "qno": "2020 选择题 20",
+      "note": "accept 建立连接与 read 阻塞",
+      "curated": "期末/2019、2020期末-答案解析/64.md"
+    },
+    {
+      "start": 65,
+      "end": 66,
+      "module": "Network",
+      "qno": "2020 选择题 21",
+      "note": "主机名解析与网络字节序",
+      "curated": "期末/2019、2020期末-答案解析/65.md"
+    },
+    {
+      "start": 67,
+      "end": 68,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2020 选择题 22",
+      "note": "线程间共享与私有数据",
+      "curated": "期末/2019、2020期末-答案解析/67.md"
+    },
+    {
+      "start": 73,
+      "end": 77,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2020 选择题 23",
+      "note": "锁/解锁/信号顺序的最优全序",
+      "curated": "期末/2019、2020期末-答案解析/73.md"
+    },
+    {
+      "start": 78,
+      "end": 80,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2020 选择题 24",
+      "note": "pthread_exit 与 exit 的差别",
+      "curated": "期末/2019、2020期末-答案解析/78.md"
+    },
+    {
+      "start": 81,
+      "end": 83,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2020 选择题 25",
+      "note": "加锁顺序相反导致的死锁",
+      "curated": "期末/2019、2020期末-答案解析/81.md"
+    },
+    {
+      "start": 85,
+      "end": 85,
+      "module": "Processor Arch",
+      "qno": "2020 解答题一 1",
+      "note": "延迟 10ns",
+      "curated": "期末/2019、2020期末-答案解析/85.md"
+    },
+    {
+      "start": 86,
+      "end": 88,
+      "module": "Processor Arch",
+      "qno": "2020 解答题一 2",
+      "note": "数据冒险与分支预测惩罚周期数",
+      "curated": "期末/2019、2020期末-答案解析/86.md"
+    },
+    {
+      "start": 89,
+      "end": 92,
+      "module": "Memory Hierarchy",
+      "qno": "2020 解答题一 3",
+      "note": "指令/数据 cache 未命中与惩罚",
+      "curated": "期末/2019、2020期末-答案解析/89.md"
+    },
+    {
+      "start": 93,
+      "end": 101,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "2020 解答题二 1",
+      "note": "符号表与各符号所属节",
+      "curated": "期末/2019、2020期末-答案解析/93.md"
+    },
+    {
+      "start": 106,
+      "end": 112,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "2020 解答题二 2",
+      "note": "重定位地址计算与小端立即数",
+      "curated": "期末/2019、2020期末-答案解析/106.md"
+    },
+    {
+      "start": 113,
+      "end": 121,
+      "module": "ECF and System IO",
+      "qno": "2020 解答题三",
+      "note": "fork/open/dup/wait 与文件指针",
+      "curated": "期末/2019、2020期末-答案解析/113.md"
+    },
+    {
+      "start": 122,
+      "end": 137,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2020 解答题四",
+      "note": "TLB 失效率与缺页次数",
+      "curated": "期末/2019、2020期末-答案解析/122.md"
+    },
+    {
+      "start": 143,
+      "end": 152,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2020 解答题五",
+      "note": "哲学家就餐死锁与信号量实现互斥",
+      "curated": "期末/2019、2020期末-答案解析/143.md"
+    },
+    {
+      "start": 155,
+      "end": 155,
+      "module": "Data Representation",
+      "qno": "2019 选择题 1",
+      "note": "整数加法结合性与溢出",
+      "curated": "期末/2019、2020期末-答案解析/155.md"
+    },
+    {
+      "start": 156,
+      "end": 156,
+      "module": "Processor Arch",
+      "qno": "2019 选择题 2",
+      "note": "数据冒险的定义",
+      "curated": "期末/2019、2020期末-答案解析/156.md"
+    },
+    {
+      "start": 157,
+      "end": 158,
+      "module": "Data Representation",
+      "qno": "2019 选择题 3",
+      "note": "除法向零取整与移位向下取整",
+      "curated": "期末/2019、2020期末-答案解析/157.md"
+    },
+    {
+      "start": 159,
+      "end": 160,
+      "module": "Processor Arch",
+      "qno": "2019 选择题 4",
+      "note": "CISC 变长指令与 ARM/RISC",
+      "curated": "期末/2019、2020期末-答案解析/159.md"
+    },
+    {
+      "start": 161,
+      "end": 163,
+      "module": "Memory Hierarchy",
+      "qno": "2019 选择题 5",
+      "note": "DRAM/SSD/SRAM 特性与密度",
+      "curated": "期末/2019、2020期末-答案解析/161.md"
+    },
+    {
+      "start": 164,
+      "end": 166,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "2019 选择题 6",
+      "note": "对引用而非符号谈重定位",
+      "curated": "期末/2019、2020期末-答案解析/164.md"
+    },
+    {
+      "start": 167,
+      "end": 169,
+      "module": "ECF and System IO",
+      "qno": "2019 选择题 7",
+      "note": "故障/中断/异常的同步异步分类",
+      "curated": "期末/2019、2020期末-答案解析/167.md"
+    },
+    {
+      "start": 170,
+      "end": 170,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2019 选择题 8",
+      "note": "并行与并发的关系",
+      "curated": "期末/2019、2020期末-答案解析/170.md"
+    },
+    {
+      "start": 171,
+      "end": 171,
+      "module": "ECF and System IO",
+      "qno": "2019 选择题 9",
+      "note": "fork/setjmp/longjmp/execve 返回次数",
+      "curated": "期末/2019、2020期末-答案解析/171.md"
+    },
+    {
+      "start": 172,
+      "end": 173,
+      "module": "Memory Hierarchy",
+      "qno": "2019 选择题 10",
+      "note": "cache 物理寻址与 TLB 刷新（兼 VM）",
+      "curated": "期末/2019、2020期末-答案解析/172.md"
+    },
+    {
+      "start": 178,
+      "end": 179,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2019 选择题 11",
+      "note": "VPO/VPN 位数与页表级数",
+      "curated": "期末/2019、2020期末-答案解析/178.md"
+    },
+    {
+      "start": 180,
+      "end": 180,
+      "module": "Machine Prog",
+      "qno": "2019 选择题 12",
+      "note": "存疑：仅注“直接模拟”，考点不明",
+      "curated": "期末/2019、2020期末-答案解析/180.md"
+    },
+    {
+      "start": 181,
+      "end": 182,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2019 选择题 13",
+      "note": "cache/TLB 命中与页表访问次数",
+      "curated": "期末/2019、2020期末-答案解析/181.md"
+    },
+    {
+      "start": 183,
+      "end": 183,
+      "module": "Network",
+      "qno": "2019 选择题 14",
+      "note": "迭代服务器 read 阻塞",
+      "curated": "期末/2019、2020期末-答案解析/183.md"
+    },
+    {
+      "start": 184,
+      "end": 184,
+      "module": "Network",
+      "qno": "2019 选择题 15",
+      "note": "网络字节序即大端",
+      "curated": "期末/2019、2020期末-答案解析/184.md"
+    },
+    {
+      "start": 185,
+      "end": 185,
+      "module": "Network",
+      "qno": "2019 选择题 16",
+      "note": "CGI 文件名与参数用 ? 分隔",
+      "curated": "期末/2019、2020期末-答案解析/185.md"
+    },
+    {
+      "start": 186,
+      "end": 188,
+      "module": "ECF and System IO",
+      "qno": "2019 选择题 17",
+      "note": "信号处理程序中 printf 死锁",
+      "curated": "期末/2019、2020期末-答案解析/186.md"
+    },
+    {
+      "start": 189,
+      "end": 190,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2019 选择题 18",
+      "note": "线程安全与可重入函数",
+      "curated": "期末/2019、2020期末-答案解析/189.md"
+    },
+    {
+      "start": 191,
+      "end": 192,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2019 选择题 19",
+      "note": "对等线程赋值与 accept 的竞争",
+      "curated": "期末/2019、2020期末-答案解析/191.md"
+    },
+    {
+      "start": 193,
+      "end": 194,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2019 选择题 20",
+      "note": "sem 与 pthread_mutex 阻塞范围",
+      "curated": "期末/2019、2020期末-答案解析/193.md"
+    },
+    {
+      "start": 196,
+      "end": 197,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "2019 解答题一 1-2",
+      "note": "CPE 与循环执行周期数",
+      "curated": "期末/2019、2020期末-答案解析/196.md"
+    },
+    {
+      "start": 198,
+      "end": 199,
+      "module": "Memory Hierarchy",
+      "qno": "2019 解答题一 3",
+      "note": "cache 块大小与未对齐导致的 miss",
+      "curated": "期末/2019、2020期末-答案解析/198.md"
+    },
+    {
+      "start": 200,
+      "end": 219,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "2019 解答题一 4-5",
+      "note": "循环展开与指令重排降低周期",
+      "curated": "期末/2019、2020期末-答案解析/200.md"
+    },
+    {
+      "start": 220,
+      "end": 236,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "2019 解答题二",
+      "note": "符号表、强弱符号与重定位计算",
+      "curated": "期末/2019、2020期末-答案解析/220.md"
+    },
+    {
+      "start": 237,
+      "end": 247,
+      "module": "ECF and System IO",
+      "qno": "2019 解答题三",
+      "note": "文件描述符分配、dup 与文件指针",
+      "curated": "期末/2019、2020期末-答案解析/237.md"
+    },
+    {
+      "start": 252,
+      "end": 269,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "2019 解答题四",
+      "note": "页表遍历、COW 与虚拟地址拼接",
+      "curated": "期末/2019、2020期末-答案解析/252.md"
+    },
+    {
+      "start": 270,
+      "end": 273,
+      "module": "Network",
+      "qno": "2019 解答题五",
+      "note": "RIO/套接字 API 调用顺序",
+      "curated": "期末/2019、2020期末-答案解析/270.md"
+    },
+    {
+      "start": 274,
+      "end": 279,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "2019 解答题六",
+      "note": "读者优先读写锁的竞争",
+      "curated": "期末/2019、2020期末-答案解析/274.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 1,
+      "end": 280,
+      "note": "全文即 2019、2020 期末答案解析（非完整题干）"
+    }
+  ]
+}

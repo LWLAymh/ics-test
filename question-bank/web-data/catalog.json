@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 2,
+  "title": "PKU ICS 历年题题库",
+  "contentFormat": "Markdown",
+  "assetBase": "../",
+  "modules": [
+    {
+      "id": "data_representation",
+      "number": 1,
+      "name": "Data Representation",
+      "title": "数据的表示",
+      "questionCount": 131,
+      "paperCount": 30,
+      "questionFile": "questions/1-Data-Representation.json"
+    },
+    {
+      "id": "machine_prog",
+      "number": 2,
+      "name": "Machine Prog",
+      "title": "程序的机器级表示",
+      "questionCount": 156,
+      "paperCount": 31,
+      "questionFile": "questions/2-Machine-Prog.json"
+    },
+    {
+      "id": "processor_arch",
+      "number": 3,
+      "name": "Processor Arch",
+      "title": "处理器体系结构",
+      "questionCount": 132,
+      "paperCount": 32,
+      "questionFile": "questions/3-Processor-Arch.json"
+    },
+    {
+      "id": "memory_hierarchy",
+      "number": 4,
+      "name": "Memory Hierarchy",
+      "title": "存储层次",
+      "questionCount": 121,
+      "paperCount": 29,
+      "questionFile": "questions/4-Memory-Hierarchy.json"
+    },
+    {
+      "id": "compilation_linking",
+      "number": 5,
+      "name": "Compilation (Program optimization and linking)",
+      "title": "编译系统（程序优化与链接）",
+      "questionCount": 105,
+      "paperCount": 33,
+      "questionFile": "questions/5-Compilation-Linking.json"
+    },
+    {
+      "id": "ecf_and_system_io",
+      "number": 6,
+      "name": "ECF and System IO",
+      "title": "异常控制流与系统级 I/O",
+      "questionCount": 110,
+      "paperCount": 23,
+      "questionFile": "questions/6-ECF-and-System-IO.json"
+    },
+    {
+      "id": "virtual_memory_and_malloc",
+      "number": 7,
+      "name": "Virtual Memory and Dynamic Memory Allocation",
+      "title": "虚拟内存与动态内存分配",
+      "questionCount": 105,
+      "paperCount": 19,
+      "questionFile": "questions/7-Virtual-Memory-and-Malloc.json"
+    },
+    {
+      "id": "network",
+      "number": 8,
+      "name": "Network",
+      "title": "网络编程",
+      "questionCount": 75,
+      "paperCount": 19,
+      "questionFile": "questions/8-Network.json"
+    },
+    {
+      "id": "concurrent_programming",
+      "number": 9,
+      "name": "Concurrent Programming and Synchronization",
+      "title": "并发编程与同步",
+      "questionCount": 74,
+      "paperCount": 18,
+      "questionFile": "questions/9-Concurrent-Programming.json"
+    }
+  ],
+  "filters": {
+    "examTypes": [
+      "期中",
+      "期末",
+      "阶段测验",
+      "Lab测验"
+    ],
+    "years": [
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ]
+  },
+  "stats": {
+    "questions": 1009,
+    "papers": 40,
+    "answerBlocks": 53
+  },
+  "answerBlocksFile": "answer-blocks.json"
+}

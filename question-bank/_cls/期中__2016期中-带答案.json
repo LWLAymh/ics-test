@@ -1,0 +1,231 @@
+{
+  "file": "期中/2016期中-带答案.md",
+  "total_lines": 505,
+  "items": [
+    {
+      "start": 48,
+      "end": 52,
+      "module": "Machine Prog",
+      "qno": "第一题 1",
+      "note": "会改变条件码 CF 的指令辨析",
+      "curated": "期中/2016期中-带答案/48.md"
+    },
+    {
+      "start": 53,
+      "end": 56,
+      "module": "Machine Prog",
+      "qno": "第一题 2",
+      "note": "CMP 指令不区分有无符号",
+      "curated": "期中/2016期中-带答案/53.md"
+    },
+    {
+      "start": 57,
+      "end": 63,
+      "module": "Machine Prog",
+      "qno": "第一题 3",
+      "note": "je 相对跳转目标地址计算",
+      "curated": "期中/2016期中-带答案/57.md"
+    },
+    {
+      "start": 64,
+      "end": 67,
+      "module": "Machine Prog",
+      "qno": "第一题 4",
+      "note": "C 条件表达式对应的条件转移条数",
+      "curated": "期中/2016期中-带答案/64.md"
+    },
+    {
+      "start": 68,
+      "end": 73,
+      "module": "Machine Prog",
+      "qno": "第一题 5",
+      "note": "寄存器清零指令辨析",
+      "curated": "期中/2016期中-带答案/68.md"
+    },
+    {
+      "start": 78,
+      "end": 89,
+      "module": "Machine Prog",
+      "qno": "第一题 6",
+      "note": "switch 跳转表与未出现的标号",
+      "curated": "期中/2016期中-带答案/78.md"
+    },
+    {
+      "start": 90,
+      "end": 94,
+      "module": "Machine Prog",
+      "qno": "第一题 7",
+      "note": "lea 求数组元素地址",
+      "curated": "期中/2016期中-带答案/90.md"
+    },
+    {
+      "start": 95,
+      "end": 104,
+      "module": "Processor Arch",
+      "qno": "第一题 8",
+      "note": "CISC 与 RISC 指令系统对比",
+      "curated": "期中/2016期中-带答案/95.md"
+    },
+    {
+      "start": 105,
+      "end": 116,
+      "module": "Processor Arch",
+      "qno": "第一题 9",
+      "note": "流水线技术描述辨析",
+      "curated": "期中/2016期中-带答案/105.md"
+    },
+    {
+      "start": 117,
+      "end": 122,
+      "module": "Processor Arch",
+      "qno": "第一题 10",
+      "note": "组合电路 HCL 表达式",
+      "curated": "期中/2016期中-带答案/117.md"
+    },
+    {
+      "start": 123,
+      "end": 130,
+      "module": "Processor Arch",
+      "qno": "第一题 11",
+      "note": "转移预测错误的判断与恢复信号",
+      "curated": "期中/2016期中-带答案/123.md"
+    },
+    {
+      "start": 131,
+      "end": 141,
+      "module": "Processor Arch",
+      "qno": "第一题 12",
+      "note": "三级流水线执行时间计算",
+      "curated": "期中/2016期中-带答案/131.md"
+    },
+    {
+      "start": 142,
+      "end": 148,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 13",
+      "note": "存储层次与存取延时",
+      "curated": "期中/2016期中-带答案/142.md"
+    },
+    {
+      "start": 149,
+      "end": 155,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 14",
+      "note": "局部性（locality）辨析",
+      "curated": "期中/2016期中-带答案/149.md"
+    },
+    {
+      "start": 156,
+      "end": 162,
+      "module": "Data Representation",
+      "qno": "第一题 15",
+      "note": "unsigned short 转 int 零扩展",
+      "curated": "期中/2016期中-带答案/156.md"
+    },
+    {
+      "start": 163,
+      "end": 171,
+      "module": "Data Representation",
+      "qno": "第一题 16",
+      "note": "short 与 int 运算的符号扩展",
+      "curated": "期中/2016期中-带答案/163.md"
+    },
+    {
+      "start": 172,
+      "end": 185,
+      "module": "Data Representation",
+      "qno": "第一题 17",
+      "note": "IEEE 单精度表示 -8.25",
+      "curated": "期中/2016期中-带答案/172.md"
+    },
+    {
+      "start": 186,
+      "end": 193,
+      "module": "Data Representation",
+      "qno": "第一题 18",
+      "note": "非规格化最大正数表达式",
+      "curated": "期中/2016期中-带答案/186.md"
+    },
+    {
+      "start": 194,
+      "end": 196,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 19",
+      "note": "直接映射 cache 每组行数",
+      "curated": "期中/2016期中-带答案/194.md"
+    },
+    {
+      "start": 197,
+      "end": 200,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 20",
+      "note": "直接映射 cache 每路行数",
+      "curated": "期中/2016期中-带答案/197.md"
+    },
+    {
+      "start": 206,
+      "end": 241,
+      "module": "Data Representation",
+      "qno": "第二题 1",
+      "note": "补码/无符号/浮点表达式恒成立判断",
+      "curated": "期中/2016期中-带答案/206.md"
+    },
+    {
+      "start": 243,
+      "end": 266,
+      "module": "Data Representation",
+      "qno": "第二题 2",
+      "note": "12 位浮点格式的极值与舍入溢出",
+      "curated": "期中/2016期中-带答案/243.md"
+    },
+    {
+      "start": 272,
+      "end": 329,
+      "module": "Machine Prog",
+      "qno": "第三题 (1)",
+      "note": "switch 跳转表与 gdb 内存检查输出",
+      "curated": "期中/2016期中-带答案/272.md"
+    },
+    {
+      "start": 330,
+      "end": 380,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第三题 (2)",
+      "note": "链表循环 CPE 与关键路径，填 C 代码",
+      "curated": "期中/2016期中-带答案/330.md"
+    },
+    {
+      "start": 381,
+      "end": 385,
+      "module": "Machine Prog",
+      "qno": "第三题 (1) 答案",
+      "note": "gdb x/6g 输出参考答案",
+      "curated": "期中/2016期中-带答案/381.md"
+    },
+    {
+      "start": 386,
+      "end": 395,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第三题 (2) 答案",
+      "note": "CPE 与关键路径参考答案",
+      "curated": "期中/2016期中-带答案/386.md"
+    },
+    {
+      "start": 402,
+      "end": 461,
+      "module": "Processor Arch",
+      "qno": "第四题",
+      "note": "Y86 新增条件返回指令 cretXX 的 SEQ/PIPE 设计",
+      "curated": "期中/2016期中-带答案/402.md"
+    },
+    {
+      "start": 468,
+      "end": 504,
+      "module": "Memory Hierarchy",
+      "qno": "第五题",
+      "note": "Cache LRU/MRU、替换规则与预取命中数",
+      "curated": "期中/2016期中-带答案/468.md"
+    }
+  ],
+  "answer_sections": []
+}

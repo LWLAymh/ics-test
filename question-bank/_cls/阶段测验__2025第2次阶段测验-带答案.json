@@ -1,0 +1,199 @@
+{
+  "file": "阶段测验/2025第2次阶段测验-带答案.md",
+  "total_lines": 362,
+  "items": [
+    {
+      "start": 53,
+      "end": 60,
+      "module": "Processor Arch",
+      "qno": "第9讲 1",
+      "note": "不定项：哪些描述属于 ISA 规定的内容",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/53.md"
+    },
+    {
+      "start": 61,
+      "end": 68,
+      "module": "Processor Arch",
+      "qno": "第9讲 2",
+      "note": "Y86-64 mrmovq 为何不写成 D(rA),rB（指令编码设计）",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/61.md"
+    },
+    {
+      "start": 69,
+      "end": 77,
+      "module": "Processor Arch",
+      "qno": "第9讲 3",
+      "note": "由 HCL 布尔表达式补全组合逻辑电路图",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/69.md"
+    },
+    {
+      "start": 78,
+      "end": 80,
+      "module": "Processor Arch",
+      "qno": "第9讲 4",
+      "note": "根据电路图补全时序图中 Out 信号值",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/78.md"
+    },
+    {
+      "start": 82,
+      "end": 96,
+      "module": "Processor Arch",
+      "qno": "第10讲 5",
+      "note": "Y86-64 popq 指令编码格式与操作步骤补全",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/82.md"
+    },
+    {
+      "start": 97,
+      "end": 116,
+      "module": "Processor Arch",
+      "qno": "第10讲 6",
+      "note": "SEQ 中 aluA 信号生成逻辑的 HCL 补全",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/97.md"
+    },
+    {
+      "start": 125,
+      "end": 128,
+      "module": "Processor Arch",
+      "qno": "第11讲 7",
+      "note": "三级流水线的延迟与吞吐（细分流水级计算）",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/125.md"
+    },
+    {
+      "start": 129,
+      "end": 138,
+      "module": "Processor Arch",
+      "qno": "第11讲 8",
+      "note": "PIPE 上 addq 的数据冒险检测与数据前递",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/129.md"
+    },
+    {
+      "start": 139,
+      "end": 150,
+      "module": "Processor Arch",
+      "qno": "第11讲 9",
+      "note": "写 Load-use 相关代码并说明前递能否解决",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/139.md"
+    },
+    {
+      "start": 151,
+      "end": 158,
+      "module": "Processor Arch",
+      "qno": "第11讲 10",
+      "note": "写 Load-use 与 ret 组合的 Y86-64 代码",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/151.md"
+    },
+    {
+      "start": 166,
+      "end": 166,
+      "module": "Memory Hierarchy",
+      "qno": "第12讲 11",
+      "note": "SRAM 与 DRAM 的功耗与价格对比",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/166.md"
+    },
+    {
+      "start": 167,
+      "end": 168,
+      "module": "Memory Hierarchy",
+      "qno": "第12讲 12",
+      "note": "ROM 只读、非易失性说法判断",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/167.md"
+    },
+    {
+      "start": 169,
+      "end": 175,
+      "module": "Memory Hierarchy",
+      "qno": "第12讲 13",
+      "note": "DDR3 内存条数据位宽与 64 位数在芯片间分散",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/169.md"
+    },
+    {
+      "start": 176,
+      "end": 183,
+      "module": "Memory Hierarchy",
+      "qno": "第12讲 14",
+      "note": "不定项：机械硬盘与 SSD 特点对比",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/176.md"
+    },
+    {
+      "start": 184,
+      "end": 197,
+      "module": "Memory Hierarchy",
+      "qno": "第12讲 15",
+      "note": "数组求和代码中的时间/空间局部性分析",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/184.md"
+    },
+    {
+      "start": 205,
+      "end": 210,
+      "module": "Memory Hierarchy",
+      "qno": "第13讲 16",
+      "note": "Cache 三种未命中（冷/容量/冲突）及场景",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/205.md"
+    },
+    {
+      "start": 211,
+      "end": 224,
+      "module": "Memory Hierarchy",
+      "qno": "第13讲 17",
+      "note": "直接映射 Cache 写分配写返回下的状态更新与命中统计",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/211.md"
+    },
+    {
+      "start": 225,
+      "end": 226,
+      "module": "Memory Hierarchy",
+      "qno": "第13讲 18",
+      "note": "i7 CPU 的 L2 Cache 容量估算",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/225.md"
+    },
+    {
+      "start": 228,
+      "end": 235,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第14/15讲 19",
+      "note": "编译优化的过程调用限制与存储器别名限制",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/228.md"
+    },
+    {
+      "start": 236,
+      "end": 252,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第14/15讲 20",
+      "note": "不定项：链接器需要解析的符号",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/236.md"
+    },
+    {
+      "start": 254,
+      "end": 294,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第14/15讲 21",
+      "note": "目标文件反汇编中 0 填充与重定位、callq 偏移",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/254.md"
+    },
+    {
+      "start": 296,
+      "end": 301,
+      "module": "ECF and System IO",
+      "qno": "第16/17讲 22",
+      "note": "除 0 异常属 Faults 能否在处理器中修正后继续",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/296.md"
+    },
+    {
+      "start": 302,
+      "end": 326,
+      "module": "ECF and System IO",
+      "qno": "第16/17讲 23",
+      "note": "fork 程序的输出次数与输出顺序判断",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/302.md"
+    },
+    {
+      "start": 327,
+      "end": 361,
+      "module": "ECF and System IO",
+      "qno": "第16/17讲 24",
+      "note": "含 fork/wait/sleep 的程序进程数与输出行数",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/327.md"
+    }
+  ],
+  "answer_sections": []
+}

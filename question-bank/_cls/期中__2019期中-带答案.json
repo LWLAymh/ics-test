@@ -1,0 +1,218 @@
+{
+  "file": "期中/2019期中-带答案.md",
+  "total_lines": 740,
+  "items": [
+    {
+      "start": 50,
+      "end": 72,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "IPv4 地址的大端存放与掩码、字节序",
+      "curated": "期中/2019期中-带答案/50.md"
+    },
+    {
+      "start": 73,
+      "end": 88,
+      "module": "Data Representation",
+      "qno": "第一题 2",
+      "note": "移位与按位运算结果的补码大小比较",
+      "curated": "期中/2019期中-带答案/73.md"
+    },
+    {
+      "start": 89,
+      "end": 109,
+      "module": "Data Representation",
+      "qno": "第一题 3",
+      "note": "IEEE float 尾数精度，f+1-f 的舍入",
+      "curated": "期中/2019期中-带答案/89.md"
+    },
+    {
+      "start": 110,
+      "end": 130,
+      "module": "Machine Prog",
+      "qno": "第一题 4",
+      "note": "x86-64 指令 idivq/jmp/shr/leaq 辨析",
+      "curated": "期中/2019期中-带答案/110.md"
+    },
+    {
+      "start": 131,
+      "end": 140,
+      "module": "Machine Prog",
+      "qno": "第一题 5",
+      "note": "call 后栈上第 k 个参数的地址",
+      "curated": "期中/2019期中-带答案/131.md"
+    },
+    {
+      "start": 141,
+      "end": 153,
+      "module": "Machine Prog",
+      "qno": "第一题 6",
+      "note": "cmpq 后 jg 跳转的条件码表达式",
+      "curated": "期中/2019期中-带答案/141.md"
+    },
+    {
+      "start": 154,
+      "end": 168,
+      "module": "Machine Prog",
+      "qno": "第一题 7",
+      "note": "函数指针数组的 sizeof",
+      "curated": "期中/2019期中-带答案/154.md"
+    },
+    {
+      "start": 169,
+      "end": 179,
+      "module": "Machine Prog",
+      "qno": "第一题 8",
+      "note": "栈帧定长、编译时确定大小",
+      "curated": "期中/2019期中-带答案/169.md"
+    },
+    {
+      "start": 180,
+      "end": 189,
+      "module": "Machine Prog",
+      "qno": "第一题 9",
+      "note": "pushq %rbp 的等价指令序列",
+      "curated": "期中/2019期中-带答案/180.md"
+    },
+    {
+      "start": 190,
+      "end": 201,
+      "module": "Processor Arch",
+      "qno": "第一题 10",
+      "note": "RISC/CISC 指令集设计特征辨识",
+      "curated": "期中/2019期中-带答案/190.md"
+    },
+    {
+      "start": 206,
+      "end": 212,
+      "module": "Processor Arch",
+      "qno": "第一题 11",
+      "note": "插入流水线寄存器后的最大吞吐率",
+      "curated": "期中/2019期中-带答案/206.md"
+    },
+    {
+      "start": 213,
+      "end": 224,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 12",
+      "note": "程序优化相关陈述的正误",
+      "curated": "期中/2019期中-带答案/213.md"
+    },
+    {
+      "start": 225,
+      "end": 239,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 13",
+      "note": "loop unrolling 的原理与代价",
+      "curated": "期中/2019期中-带答案/225.md"
+    },
+    {
+      "start": 240,
+      "end": 245,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 14",
+      "note": "不含数组的循环体现哪种局部性",
+      "curated": "期中/2019期中-带答案/240.md"
+    },
+    {
+      "start": 246,
+      "end": 251,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 15",
+      "note": "SRAM/DRAM/SDRAM/SSD 特性",
+      "curated": "期中/2019期中-带答案/246.md"
+    },
+    {
+      "start": 257,
+      "end": 262,
+      "module": "Data Representation",
+      "qno": "第二题 1",
+      "note": "8 位整数最大值溢出与补码/无符号加法",
+      "curated": "期中/2019期中-带答案/257.md"
+    },
+    {
+      "start": 263,
+      "end": 274,
+      "module": "Data Representation",
+      "qno": "第二题 2",
+      "note": "IEEE 754 值的换算与浮点结合性",
+      "curated": "期中/2019期中-带答案/263.md"
+    },
+    {
+      "start": 313,
+      "end": 424,
+      "module": "Machine Prog",
+      "qno": "第三题",
+      "note": "C 与 x86-64 汇编填空：栈帧、strcpy、结构体",
+      "curated": "期中/2019期中-带答案/313.md"
+    },
+    {
+      "start": 547,
+      "end": 571,
+      "module": "Processor Arch",
+      "qno": "第四题 1",
+      "note": "irOpq 指令在 SEQ 各阶段的实现",
+      "curated": "期中/2019期中-带答案/547.md"
+    },
+    {
+      "start": 573,
+      "end": 618,
+      "module": "Processor Arch",
+      "qno": "第四题 2(1)",
+      "note": "数据前递与 E_valA 的 HCL 描述",
+      "curated": "期中/2019期中-带答案/573.md"
+    },
+    {
+      "start": 620,
+      "end": 622,
+      "module": "Processor Arch",
+      "qno": "第四题 2(2)",
+      "note": "load/use 冒险检测的 HCL 表达",
+      "curated": "期中/2019期中-带答案/620.md"
+    },
+    {
+      "start": 623,
+      "end": 627,
+      "module": "Processor Arch",
+      "qno": "第四题 2(3)",
+      "note": "PIPE 上片段周期数与新指令优化收益",
+      "curated": "期中/2019期中-带答案/623.md"
+    },
+    {
+      "start": 633,
+      "end": 652,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 1)",
+      "note": "直接映射 cache 的 Tag Ram 变化与命中",
+      "curated": "期中/2019期中-带答案/633.md"
+    },
+    {
+      "start": 653,
+      "end": 686,
+      "module": "Memory Hierarchy",
+      "qno": "第五题 2)",
+      "note": "Victim Cache 的 Tag 变化与命中率",
+      "curated": "期中/2019期中-带答案/653.md"
+    },
+    {
+      "start": 692,
+      "end": 739,
+      "module": "Memory Hierarchy",
+      "qno": "第六题",
+      "note": "存储系统性能评测：局部性与 cache 层次",
+      "curated": "期中/2019期中-带答案/692.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 276,
+      "end": 308,
+      "note": "第二题（整数、浮点数）参考答案"
+    },
+    {
+      "start": 425,
+      "end": 541,
+      "note": "第三题（机器级编程）参考答案，含已填答案的题目重排"
+    }
+  ]
+}

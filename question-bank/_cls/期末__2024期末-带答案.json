@@ -1,0 +1,207 @@
+{
+  "file": "期末/2024期末-带答案.md",
+  "total_lines": 1209,
+  "items": [
+    {
+      "start": 49,
+      "end": 107,
+      "module": "Data Representation",
+      "qno": "第一题 1",
+      "note": "半字节 int4/float4 的表示与 f2b/f2i 转换",
+      "curated": "期末/2024期末-带答案/49.md"
+    },
+    {
+      "start": 109,
+      "end": 128,
+      "module": "Processor Arch",
+      "qno": "第一题 2",
+      "note": "RISC/CISC、流水线转发优先级与异常",
+      "curated": "期末/2024期末-带答案/109.md"
+    },
+    {
+      "start": 129,
+      "end": 139,
+      "module": "Processor Arch",
+      "qno": "第一题 3",
+      "note": "组合逻辑延迟与流水线寄存器插位/吞吐率",
+      "curated": "期末/2024期末-带答案/129.md"
+    },
+    {
+      "start": 140,
+      "end": 154,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 4",
+      "note": "SRAM/DRAM/ROM/SSD 特性与抖动",
+      "curated": "期末/2024期末-带答案/140.md"
+    },
+    {
+      "start": 155,
+      "end": 196,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 5",
+      "note": "gcc 编译链接过程、ld 报错与重定位",
+      "curated": "期末/2024期末-带答案/155.md"
+    },
+    {
+      "start": 197,
+      "end": 244,
+      "module": "Compilation (Program optimization and linking)",
+      "qno": "第一题 6",
+      "note": "符号表条目与 .data/.bss/UND 节",
+      "curated": "期末/2024期末-带答案/197.md"
+    },
+    {
+      "start": 245,
+      "end": 259,
+      "module": "ECF and System IO",
+      "qno": "第一题 7",
+      "note": "进程调度/fork/异常返回/信号辨析",
+      "curated": "期末/2024期末-带答案/245.md"
+    },
+    {
+      "start": 260,
+      "end": 282,
+      "module": "ECF and System IO",
+      "qno": "第一题 8",
+      "note": "stdio 缓冲区、SIGKILL 与 fork 缓冲区",
+      "curated": "期末/2024期末-带答案/260.md"
+    },
+    {
+      "start": 283,
+      "end": 298,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 9",
+      "note": "页表/TLB/CR3 与大页下的多级页表",
+      "curated": "期末/2024期末-带答案/283.md"
+    },
+    {
+      "start": 299,
+      "end": 323,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第一题 10",
+      "note": "COW、mmap/munmap 与交换空间",
+      "curated": "期末/2024期末-带答案/299.md"
+    },
+    {
+      "start": 324,
+      "end": 329,
+      "module": "Network",
+      "qno": "第一题 11",
+      "note": "IP 递送机制、TCP 与域名映射",
+      "curated": "期末/2024期末-带答案/324.md"
+    },
+    {
+      "start": 330,
+      "end": 353,
+      "module": "Network",
+      "qno": "第一题 12",
+      "note": "套接字接口 bind/listen/connect",
+      "curated": "期末/2024期末-带答案/330.md"
+    },
+    {
+      "start": 354,
+      "end": 360,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第一题 13",
+      "note": "线程栈与 pthread_join/detach",
+      "curated": "期末/2024期末-带答案/354.md"
+    },
+    {
+      "start": 361,
+      "end": 377,
+      "module": "Processor Arch",
+      "qno": "第一题 14",
+      "note": "摩尔定律/登纳德缩放与多核趋势（存疑）",
+      "curated": "期末/2024期末-带答案/361.md"
+    },
+    {
+      "start": 378,
+      "end": 385,
+      "module": "Memory Hierarchy",
+      "qno": "第一题 15",
+      "note": "数据密集型 vs 计算密集型（存疑）",
+      "curated": "期末/2024期末-带答案/378.md"
+    },
+    {
+      "start": 391,
+      "end": 463,
+      "module": "Processor Arch",
+      "qno": "第二题",
+      "note": "Y86-64 SEQ/PIPE 新增 cdeclXX 与周期数",
+      "curated": "期末/2024期末-带答案/391.md"
+    },
+    {
+      "start": 470,
+      "end": 498,
+      "module": "ECF and System IO",
+      "qno": "第三题 Part A",
+      "note": "open/dup2/fork/write 与文件偏移",
+      "curated": "期末/2024期末-带答案/470.md"
+    },
+    {
+      "start": 499,
+      "end": 572,
+      "module": "ECF and System IO",
+      "qno": "第三题 Part B",
+      "note": "信号处理函数注册、kill 与 sigprocmask",
+      "curated": "期末/2024期末-带答案/499.md"
+    },
+    {
+      "start": 574,
+      "end": 621,
+      "module": "ECF and System IO",
+      "qno": "第三题 Part C",
+      "note": "fork 父子进程 buffer 与文件写结果",
+      "curated": "期末/2024期末-带答案/574.md"
+    },
+    {
+      "start": 690,
+      "end": 723,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第四题 Part A",
+      "note": "TLB/一级与多级页表地址翻译",
+      "curated": "期末/2024期末-带答案/690.md"
+    },
+    {
+      "start": 724,
+      "end": 772,
+      "module": "Virtual Memory and Dynamic Memory Allocation",
+      "qno": "第四题 Part B",
+      "note": "隐式空闲链表、合并复杂度与利用率",
+      "curated": "期末/2024期末-带答案/724.md"
+    },
+    {
+      "start": 837,
+      "end": 1038,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第五题 Part A",
+      "note": "读者-写者与信号量代码补全、饥饿",
+      "curated": "期末/2024期末-带答案/837.md"
+    },
+    {
+      "start": 1040,
+      "end": 1198,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第五题 Part B",
+      "note": "线程/信号共享变量、竞态与信号安全",
+      "curated": "期末/2024期末-带答案/1040.md"
+    }
+  ],
+  "answer_sections": [
+    {
+      "start": 622,
+      "end": 684,
+      "note": "第三题参考答案与解析"
+    },
+    {
+      "start": 773,
+      "end": 827,
+      "note": "第四题答案与解析"
+    },
+    {
+      "start": 1199,
+      "end": 1207,
+      "note": "第五题答案"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+cand          split     loss
+A_old            11      234
+B_plan          485      379
+G_bin50         202      203
+G_bin60          75      134
+H_abs6           44      301
+H_abs8            0        0
+
+== A_old 中文/拉丁层被劈开的页（前 8）==
+  split=1   期中/2019期中-带答案.pdf p1
+  split=1   期中/2020期中-无答案.pdf p1
+  split=1   期中/2023期中-无答案.pdf p1
+  split=1   期末/2014期末-带答案.pdf p23
+  split=2   期末/2018期末-带答案.pdf p18
+  split=5   期末/2020期末-无答案.pdf p11
+
+== B_plan 中文/拉丁层被劈开的页（前 8）==
+  split=1   期中/2016期中-带答案.pdf p1
+  split=1   期中/2019期中-带答案.pdf p1
+  split=11  期中/2019期中-带答案.pdf p2
+  split=21  期中/2019期中-带答案.pdf p3
+  split=27  期中/2019期中-带答案.pdf p4
+  split=22  期中/2019期中-带答案.pdf p5
+  split=24  期中/2019期中-带答案.pdf p6
+  split=16  期中/2019期中-带答案.pdf p7
+
+== G_bin50 中文/拉丁层被劈开的页（前 8）==
+  split=1   期中/2019期中-带答案.pdf p1
+  split=1   期中/2019期中-带答案.pdf p5
+  split=24  期中/2019期中-带答案.pdf p6
+  split=16  期中/2019期中-带答案.pdf p7
+  split=10  期中/2019期中-带答案.pdf p16
+  split=21  期中/2019期中-带答案.pdf p19
+  split=1   期中/2019期中-带答案.pdf p21
+  split=1   期中/2020期中-无答案.pdf p1
+
+== G_bin60 中文/拉丁层被劈开的页（前 8）==
+  split=1   期中/2019期中-带答案.pdf p1
+  split=16  期中/2019期中-带答案.pdf p7
+  split=21  期中/2019期中-带答案.pdf p19
+  split=1   期中/2020期中-无答案.pdf p5
+  split=10  期中/2023期中-无答案.pdf p14
+  split=5   期中/2023期中-无答案.pdf p16
+  split=4   期末/2013期末-带答案.pdf p15
+  split=6   期末/2020期末-无答案.pdf p11
+
+== H_abs6 中文/拉丁层被劈开的页（前 8）==
+  split=1   期中/2017期中-带答案.pdf p7
+  split=1   期中/2019期中-带答案.pdf p1
+  split=1   期中/2019期中-带答案.pdf p5
+  split=2   期中/2019期中-带答案.pdf p8
+  split=1   期中/2019期中-带答案.pdf p19
+  split=1   期中/2019期中-带答案.pdf p20
+  split=3   期中/2020期中-带答案.pdf p5
+  split=3   期中/2020期中-带答案.pdf p12
+
+== H_abs8 中文/拉丁层被劈开的页（前 8）==

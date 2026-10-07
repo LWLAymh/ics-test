@@ -1,0 +1,76 @@
+== ① 过滤后的上下标可恢复量 ==
+可用脚本段（字号 0.5-0.85×主体、|dy| <= 1.2×主体字号、紧贴左邻主体字符、无 (cid:) 占位）: 80 段
+
+== ② 等宽/疑似等宽字体（前 40）==
+  ABCDEE+Courier New                           43395  <== MONO
+  AAAAAJ+CourierNewPSMT                        36542  <== MONO
+  BCDFEE+CourierNewPSMT                        34319  <== MONO
+  BCDGEE+SimSun                                23075
+  VIJHYA+CourierNewPSMT                        20298  <== MONO
+  ABCDEE+宋体                                    20285
+  ITFPAN+SimSun                                19166
+  JNEGFJ+HYShuSongErKW                         17916
+  CIDFont+F3                                   16489
+  ABCDEE+CourierNewPSMT                        15953  <== MONO
+  AAAABB+CourierNewPSMT                        14815  <== MONO
+  CQIBMS+CourierNewPSMT                        12379  <== MONO
+  DQUVSP+SimSun                                12279
+  BCDIEE+CourierNewPSMT                        11780  <== MONO
+  AAAAAL+CourierNewPSMT                        10944  <== MONO
+  AAAAAS+SimSun                                10494
+  AAAAAU+SimSun                                 9631
+  ABCDEE+SimSun                                 9167
+  TDPAUZ+CourierNewPSMT                         7765  <== MONO
+  UBJEHY+CourierNewPSMT                         7398  <== MONO
+  BCDHEE+CourierNewPSMT                         7272  <== MONO
+  AMOOAY+Calibri-Light                          6917
+  CVLCIK+CourierNewPSMT                         6757  <== MONO
+  AAAAAT+SimSun                                 6668
+  CPWQOE+CourierNewPSMT                         6353  <== MONO
+  YKGZSI+SimSun                                 6276
+  VJIIQQ+CourierNewPSMT                         6134  <== MONO
+  AAAAAV+SimSun                                 6036
+  MXRNCP+CourierNewPSMT                         5891  <== MONO
+  NVBVPY+CourierNewPSMT                         5878  <== MONO
+  IAIYVN+SimSun                                 5737
+  FSEMBZ+SimSun                                 5685
+  CourierNewPSMT                                5402  <== MONO
+  GXHHJV+FZSSJW--GB1-0                          4902
+  PQUTCU+SimSun                                 4668
+  TimesNewRomanPSMT                             4667
+  BCDFEE+SimSun                                 4138
+  RZSHRL+SimSun                                 4011
+  PZXCIK+SimSun                                 3790
+  CIDFont+F4                                    3641
+
+== ③ 含 (cid:N) 未映射字形的文件 ==
+涉及 3 页 / 3 个文件
+  期中/2013期中-带答案.pdf                              1 页
+  期末/2017期末-无答案.pdf                              1 页
+  期末/2018期末-带答案.pdf                              1 页
+
+== 样例 ==
+  期中/2013期中-带答案.pdf p11  M_{111}
+      整行: Fetch icode:ifun ← M1[PC] icode:ifun ← M1[PC] icode:ifun ← M1[PC] 
+  期中/2013期中-带答案.pdf p11  M_{11}
+      整行: rA:rB ← M1[PC+1]  rA:rB ← M1[PC+1] 
+  期中/2013期中-带答案.pdf p11  M_{4}
+      整行:  valC ← M4[PC+1]  
+  期中/2013期中-带答案.pdf p11  M_{4}
+      整行: Memory none M4[valE] ← valP none 
+  期中/2015期中-带答案.pdf p2  2^{230}
+      整行: C. 2230 
+  期中/2015期中-带答案.pdf p2  2^{231}
+      整行: D. 2231 
+  期中/2015期中-带答案.pdf p3  2^{31}
+      整行: 231=2147483648 
+  期中/2015期中-带答案.pdf p15  M_{1}
+      整行: icode:ifun  M1[PC] 
+  期中/2015期中-带答案.pdf p15  M_{1}
+      整行: Fetch rA:rB  M1[PC+1] 
+  期中/2015期中-带答案.pdf p15  M_{4}
+      整行: valC  M4[PC+2] 
+  期中/2016期中-带答案.pdf p6  2^{3}
+      整行: 解析： 8.25(1)*23*(11) 
+  期中/2016期中-带答案.pdf p6  2^{k1}
+      整行: n2k12
