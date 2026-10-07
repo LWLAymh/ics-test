@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "module": {
     "id": "ecf_and_system_io",
     "number": 6,
@@ -9,6 +9,8 @@
   "questions": [
     {
       "id": "q-b36754705d0dccdc",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 9,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -20,6 +22,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -33,6 +36,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "9、关于信号的描述，以下不正确的是哪一个？答：（        ）",
         "choices": [
           {
@@ -53,10 +57,42 @@
           }
         ],
         "answer": "答案：C\n说明：考察信号的基本了解，C应该为“SIGKILL和SIGSTOP信号既不能被捕获，\n也不能被忽略”"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "在任何时刻，一种类型至多只会有一个待处理信号"
+          },
+          {
+            "id": "B",
+            "content": "信号既可以发送给一个进程，也可以发送给一个进程组"
+          },
+          {
+            "id": "C",
+            "content": "SIGTERM和SIGKILL信号既不能被捕获，也不能被忽略"
+          },
+          {
+            "id": "D",
+            "content": "当进程在前台运行时，键入Ctrl-C，内核就会发送一个SIGINT信号给\n这个前台进程"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "9、关于信号的描述，以下不正确的是哪一个？答：（        ）",
+        "answer": "答案：C\n说明：考察信号的基本了解，C应该为“SIGKILL和SIGSTOP信号既不能被捕获，\n也不能被忽略”"
       }
     },
     {
       "id": "q-7e030ca4847f5c97",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 10,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -68,6 +104,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -81,6 +118,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "10、下面关于非局部跳转的描述，正确的是（        ）",
         "choices": [
           {
@@ -101,10 +139,42 @@
           }
         ],
         "answer": "答案：D\n说明：考察非局部跳转的基本了解；D选项：可以采用不同的jmp_buf"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "setjmp可以和siglongjmp使用同一个jmp_buf变量"
+          },
+          {
+            "id": "B",
+            "content": "setjmp必须放在main()函数中调用"
+          },
+          {
+            "id": "C",
+            "content": "虽然longjmp通常不会出错，但仍然需要对其返回值进行出错判断\n4\n<!-- ===== page 5 ===== -->"
+          },
+          {
+            "id": "D",
+            "content": "在同一个函数中既可以出现setjmp，也可以出现longjmp"
+          }
+        ],
+        "correctChoiceIds": [
+          "D"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "10、下面关于非局部跳转的描述，正确的是（        ）",
+        "answer": "答案：D\n说明：考察非局部跳转的基本了解；D选项：可以采用不同的jmp_buf"
       }
     },
     {
       "id": "q-c13a84ea6f371a05",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 15,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -116,6 +186,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -129,13 +200,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "15、考虑如下代码，假设result.txt的初始内容是“123”。\n```\nint main(int argc, char** argv)\n{\nint fd1 = open(\"result.txt\", O_RDWR);\nchar str[] = \"abc\";\nchar c;\nwrite(fd1, str, 1);\nread(fd1, &c, 1);\nwrite(fd1, &c, 1);\nreturn 0;\n}\n```\n在这段代码执行完毕之后，result.txt 的内容是什么？（假设所有的系\n统调用都会成功）答：（      ）\nA．a22     B．a21     C．a13     D．abb",
         "choices": [],
+        "answer": "答案：A。考察文件操作过程中指针的移动情况。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "15、考虑如下代码，假设result.txt的初始内容是“123”。\n```\nint main(int argc, char** argv)\n{\nint fd1 = open(\"result.txt\", O_RDWR);\nchar str[] = \"abc\";\nchar c;\nwrite(fd1, str, 1);\nread(fd1, &c, 1);\nwrite(fd1, &c, 1);\nreturn 0;\n}\n```\n在这段代码执行完毕之后，result.txt 的内容是什么？（假设所有的系\n统调用都会成功）答：（      ）\nA．a22     B．a21     C．a13     D．abb",
         "answer": "答案：A。考察文件操作过程中指针的移动情况。"
       }
     },
     {
       "id": "q-9b2f8dcfd7a389fd",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 16,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -147,6 +230,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -160,13 +244,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "16、已知如下代码段\n```\nwrite(fd1, str1, strlen(str1));\nwrite(fd2, str2, strlen(str2));\n```\n可以在原本为空的文件ICS.txt中写下字符串 I love ICS!\n对于下面这些对于变量fd1, fd2, str1, str2的定义：\n```\n(1)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = open(\"ICS.txt\", O_RDWR);\nchar *str1 = \"I love \";\nchar *str2 = \"ICS!\";\n(2)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\n```\n6\n\n<!-- ===== page 7 ===== -->\n\n```\nchar *str1 = \"I love \";\nchar *str2 = \"ICS!\";\n(3)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = open(\"ICS.txt\", O_RDWR);\nchar *str1 = \"I love \";\nchar *str2 = \"I love ICS!\";\n(4)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\nchar *str1 = \"I love \";\nchar *str2 = \"I love ICS!\";\n```\n下面哪一个组合是正确的：（       ）\nA．(1)(4)       B．(2)(3)       C．(1)(2)(3)(4)    D．都不正确",
         "choices": [],
+        "answer": "答案：B\n说明：考察两种不同文件描述符指向同一文件v的不同，一种是指向了同一的open\nfile table，一种是指向了同一的v-node table。"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16、已知如下代码段\n```\nwrite(fd1, str1, strlen(str1));\nwrite(fd2, str2, strlen(str2));\n```\n可以在原本为空的文件ICS.txt中写下字符串 I love ICS!\n对于下面这些对于变量fd1, fd2, str1, str2的定义：\n```\n(1)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = open(\"ICS.txt\", O_RDWR);\nchar *str1 = \"I love \";\nchar *str2 = \"ICS!\";\n(2)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\n```\n6\n\n<!-- ===== page 7 ===== -->\n\n```\nchar *str1 = \"I love \";\nchar *str2 = \"ICS!\";\n(3)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = open(\"ICS.txt\", O_RDWR);\nchar *str1 = \"I love \";\nchar *str2 = \"I love ICS!\";\n(4)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\nchar *str1 = \"I love \";\nchar *str2 = \"I love ICS!\";\n```\n下面哪一个组合是正确的：（       ）\nA．(1)(4)       B．(2)(3)       C．(1)(2)(3)(4)    D．都不正确",
         "answer": "答案：B\n说明：考察两种不同文件描述符指向同一文件v的不同，一种是指向了同一的open\nfile table，一种是指向了同一的v-node table。"
       }
     },
     {
       "id": "q-f53b15929aeee7a3",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 24,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -178,6 +274,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -191,13 +288,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行）：\n```\nint main() {\n  printf(\"A\\n\");\n  if (fork() == 0) {\n    printf(\"B\\n\");\n  }\n  else {\n    printf(\"C\\n\");\n    A\n  }\n  printf(“D\\n\");\n  exit(0);\n}\n```\n（1）如果程序中的A位置的代码为空，列出所有可能的输出结果：（1分）\n4个：分别是ABDCD ABCDD ACBDD ACDBD（错一个扣半分，多了也扣半分，最\n多扣1分）\n（2）如果程序中的A位置的代码为：\nwaitpid(-1, NULL, 0);\n列出所有可能的输出结果：（2分）\n3个：分别是ABDCD ABCDD ACBDD（每个半分，多了扣一分，最多扣2分）\n（3）如果程序中的A位置的代码为：\nprintf(“E\\n”);\n列出所有可能的输出结果：（2分）\n7个：分别是ABDCED ABCEDD ACEBDD ACEDBD ACBEDD ACBDED ABCDED（错\n一个扣半分，多了扣一分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行）：\n```\nint main() {\n  printf(\"A\\n\");\n  if (fork() == 0) {\n    printf(\"B\\n\");\n  }\n  else {\n    printf(\"C\\n\");\n    A\n  }\n  printf(“D\\n\");\n  exit(0);\n}\n```\n（1）如果程序中的A位置的代码为空，列出所有可能的输出结果：（1分）\n4个：分别是ABDCD ABCDD ACBDD ACDBD（错一个扣半分，多了也扣半分，最\n多扣1分）\n（2）如果程序中的A位置的代码为：\nwaitpid(-1, NULL, 0);\n列出所有可能的输出结果：（2分）\n3个：分别是ABDCD ABCDD ACBDD（每个半分，多了扣一分，最多扣2分）\n（3）如果程序中的A位置的代码为：\nprintf(“E\\n”);\n列出所有可能的输出结果：（2分）\n7个：分别是ABDCED ABCEDD ACEBDD ACEDBD ACBEDD ACBDED ABCDED（错\n一个扣半分，多了扣一分）",
         "answer": ""
       }
     },
     {
       "id": "q-6dd4034787785d68",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 25,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -209,6 +318,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -222,13 +332,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "Part II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\npid_t pid;  1). 完成程序，使得程序在输出前20个\nint even = 0;  斐波那契(Fibonacci)数列，即 F0=0,\nint counter1 = 0;  F1=1, …, Fn=Fn-1+Fn-2。（如果存在对本\nint counter2 = 1;  次程序执行结果没有影响的语句，请在相\nvoid handler1(int sig) {\n  if (even % 2 == 0) {  应位置填写“无关”）（3分）\n```\n  printf(“%d\\n”,\ncounter1);    A: ___counter1 + counter2__\n    counter1 =      A       ;\n    } else {    B: ___counter1 + counter2__\n  printf(“%d\\n”,\ncounter2);    C: ___even + 1____________\n    counter2 =      B      ;\n```\n    }    D: ____无关__________\n```\n    even =      C      ;\n}    E: ___SIGUSR1___________\nvoid handler2(int sig) {\n    if (_____D_____) {    F: ___SIGUSR1___________\n    counter1 = even * even;\n```\n    } else {  2). 完成程序，其中A, B处保持不变，\n    counter2 = even * even;  使得程序可以分别输出前几个奇数或偶\n    }  数的平方和。（如果存在对本次程序执行\n}  结果没有影响的语句，请在相应位置填写\nint main() {\nsignal(SIGUSR1, handler1);  “无关”）（2分）\nsignal(SIGUSR2, handler2);  其中：\nif ((pid = fork()) == 0) {    若要输出奇数的平方和：even的初\nwhile (1) {};  始值为3；\n    }    若要输出偶数的平方和，even的初\n    while (even < 20) {  始值为2。\n```\n      kill(pid,     E   );\n      sleep(1);    C: ____even + 2__________\n      kill(pid,     F   );\n      sleep(1);    D: ____even % 2 == 1______\n      even += 2;\n    }    E: ____SIGUSR2__________\nkill(pid, SIGKILL);\nexit(0);    F: ____SIGUSR1__________\n}\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "Part II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\npid_t pid;  1). 完成程序，使得程序在输出前20个\nint even = 0;  斐波那契(Fibonacci)数列，即 F0=0,\nint counter1 = 0;  F1=1, …, Fn=Fn-1+Fn-2。（如果存在对本\nint counter2 = 1;  次程序执行结果没有影响的语句，请在相\nvoid handler1(int sig) {\n  if (even % 2 == 0) {  应位置填写“无关”）（3分）\n```\n  printf(“%d\\n”,\ncounter1);    A: ___counter1 + counter2__\n    counter1 =      A       ;\n    } else {    B: ___counter1 + counter2__\n  printf(“%d\\n”,\ncounter2);    C: ___even + 1____________\n    counter2 =      B      ;\n```\n    }    D: ____无关__________\n```\n    even =      C      ;\n}    E: ___SIGUSR1___________\nvoid handler2(int sig) {\n    if (_____D_____) {    F: ___SIGUSR1___________\n    counter1 = even * even;\n```\n    } else {  2). 完成程序，其中A, B处保持不变，\n    counter2 = even * even;  使得程序可以分别输出前几个奇数或偶\n    }  数的平方和。（如果存在对本次程序执行\n}  结果没有影响的语句，请在相应位置填写\nint main() {\nsignal(SIGUSR1, handler1);  “无关”）（2分）\nsignal(SIGUSR2, handler2);  其中：\nif ((pid = fork()) == 0) {    若要输出奇数的平方和：even的初\nwhile (1) {};  始值为3；\n    }    若要输出偶数的平方和，even的初\n    while (even < 20) {  始值为2。\n```\n      kill(pid,     E   );\n      sleep(1);    C: ____even + 2__________\n      kill(pid,     F   );\n      sleep(1);    D: ____even % 2 == 1______\n      even += 2;\n    }    E: ____SIGUSR2__________\nkill(pid, SIGKILL);\nexit(0);    F: ____SIGUSR1__________\n}\n```",
         "answer": ""
       }
     },
     {
       "id": "q-7308772e56e61cf0",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 10,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
@@ -240,6 +362,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -253,13 +376,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "10. 在系统调用成功的情况下，下列代码会输出几个hello？(      )\n```\nvoid doit()\n{\nif ( fork() == 0 ) {\n        printf(\"hello\\n\");\n        fork();\n    }\n    return ;\n}\nint main()\n{\n    doit();\n    printf(\"hello\\n\");\n    exit(0) ;\n}\nA. 3    B. 4    C. 5    D. 6\n```\n【答案】B\n【说明】考查学生对fork执行机制的理解和掌握。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "10. 在系统调用成功的情况下，下列代码会输出几个hello？(      )\n```\nvoid doit()\n{\nif ( fork() == 0 ) {\n        printf(\"hello\\n\");\n        fork();\n    }\n    return ;\n}\nint main()\n{\n    doit();\n    printf(\"hello\\n\");\n    exit(0) ;\n}\nA. 3    B. 4    C. 5    D. 6\n```\n【答案】B\n【说明】考查学生对fork执行机制的理解和掌握。",
         "answer": ""
       }
     },
     {
       "id": "q-d3604fe93a7fa57d",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 11,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
@@ -271,6 +406,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -284,6 +420,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "11. 下列说法中哪一个是错误的？(      )",
         "choices": [
           {
@@ -304,10 +441,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "中断一定是异步发生的"
+          },
+          {
+            "id": "B",
+            "content": "异常处理程序一定运行在内核模式下"
+          },
+          {
+            "id": "C",
+            "content": "故障处理一定返回到当前指令"
+          },
+          {
+            "id": "D",
+            "content": "陷阱一定是同步发生的\n【答案】C\n【说明】"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "11. 下列说法中哪一个是错误的？(      )",
+        "answer": ""
       }
     },
     {
       "id": "q-4a1c07d45e612b98",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 12,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
@@ -319,6 +485,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -332,13 +499,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "12. 下列这段代码的输出不可能是(      )\n```\nvoid handler()\n{\n    printf(\"h\");\n}\nint main()\n{\n    signal(SIGCHLD, handler) ;\n    if ( fork() == 0 ) {\n        printf(\"a\") ;\n    } else {\n        printf(\"b\") ;\n    }\n    printf(\"c\") ;\n    exit(0) ;\n}\nA. abcc   B. abch    C. bcach    D. bchac\n```\n【答案】Ｄ\n【说明】SIGCHLD信号只有在fork的子进程结束时产生，因此h只会出现在ac\n之后。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "12. 下列这段代码的输出不可能是(      )\n```\nvoid handler()\n{\n    printf(\"h\");\n}\nint main()\n{\n    signal(SIGCHLD, handler) ;\n    if ( fork() == 0 ) {\n        printf(\"a\") ;\n    } else {\n        printf(\"b\") ;\n    }\n    printf(\"c\") ;\n    exit(0) ;\n}\nA. abcc   B. abch    C. bcach    D. bchac\n```\n【答案】Ｄ\n【说明】SIGCHLD信号只有在fork的子进程结束时产生，因此h只会出现在ac\n之后。",
         "answer": ""
       }
     },
     {
       "id": "q-a81fb67083c094a8",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 15,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
@@ -350,6 +529,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -363,13 +543,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "15. ICS.txt中包含3000个字符，考虑如下代码段：\n```\nint main(int argc, char** argv) {\nint fd = open(\"ICS.txt\", O_CREAT | O_RDWR, S_IRUSR |\nS_IWUSR);\nwrite(fd, \"ICS\", 3);\nchar buf[128];\nint i;\nfor (i = 0; i < 10; i++) {\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\nint cnt = read(fd1, buf, 128);\nwrite(fd2, buf, cnt);\n}\nreturn 0;\n}\n```\n上述代码执行完后，ICS.txt 中包含多少个字符（假设所有系统调用都成功）？\n（     ）\nA．3        B．256          C．3000        D．3072\n【答案】Ｃ\n【说明】主要考查open函数的用法。open不像fopen，不设置O_TRUNC并不\n会清空文件。所以只会反复把文件中字符1-128写到字符129-256，字符数不变。\n几个干扰项分别考查dup的作用以及buf大小对于程序功能的影响。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "15. ICS.txt中包含3000个字符，考虑如下代码段：\n```\nint main(int argc, char** argv) {\nint fd = open(\"ICS.txt\", O_CREAT | O_RDWR, S_IRUSR |\nS_IWUSR);\nwrite(fd, \"ICS\", 3);\nchar buf[128];\nint i;\nfor (i = 0; i < 10; i++) {\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\nint cnt = read(fd1, buf, 128);\nwrite(fd2, buf, cnt);\n}\nreturn 0;\n}\n```\n上述代码执行完后，ICS.txt 中包含多少个字符（假设所有系统调用都成功）？\n（     ）\nA．3        B．256          C．3000        D．3072\n【答案】Ｃ\n【说明】主要考查open函数的用法。open不像fopen，不设置O_TRUNC并不\n会清空文件。所以只会反复把文件中字符1-128写到字符129-256，字符数不变。\n几个干扰项分别考查dup的作用以及buf大小对于程序功能的影响。",
         "answer": ""
       }
     },
     {
       "id": "q-56c0c0dc48cd339e",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 16,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
@@ -381,6 +573,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -394,6 +587,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "16. 下列系统I/O的说法中，正确的是(      )\n7\n\n<!-- ===== page 8 ===== -->",
         "choices": [
           {
@@ -414,10 +608,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "C语言中的标准I/O函数在不同操作系统中的实现代码一样"
+          },
+          {
+            "id": "B",
+            "content": "对于同一个文件描述符，混用RIO包中的rio_readnb和rio_readn两个\n函数不会造成问题"
+          },
+          {
+            "id": "C",
+            "content": "C语言中的标准I/O函数是异步线程安全的"
+          },
+          {
+            "id": "D",
+            "content": "使用I/O缓冲区可以减少系统调用的次数，从而加快I/O的速度\n【答案】D\n【说明】A中在不同操作系统需要用到不同系统调用。B中两个函数一个从buffer\n读一个直接读，混用会造成错误。C不是线程安全的。D正确。"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16. 下列系统I/O的说法中，正确的是(      )\n7\n\n<!-- ===== page 8 ===== -->",
+        "answer": ""
       }
     },
     {
       "id": "q-ca7c15d1d3855afc",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 26,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
@@ -429,6 +652,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -442,13 +666,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第六题（10分）ECF\n1.（5 分）以下程序运行时系统调用全部正确执行，buffer.txt 文件的内容为\npekinguniv。请给出代码运行后打印输出的结果，并给出程序运行结束后\nbuffer.txt文件的内容。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <fcntl.h>\n#include <unistd.h>\nint main() {\n    char c;\n    int file1 = open(\"buffer.txt\", O_RDWR);\n    int file2;\n    read(file1, &c, 1);\n    file2 = dup(file1);\n    write(file2, &c, 1);\n    printf(\"1 = %c\\n\", c);\n    int pid = fork() ;\n    if (pid == 0) {\n        read(file1, &c, 1);\n        write(file2, &c, 1);\n        printf(\"2 = %c\\n\", c);\n        read(file1, &c, 1);\n        printf(\"3 = %c\\n\", c);\n        close(file1);\n        exit(0);\n    } else {\n        waitpid(pid, NULL, 0);\n        close(file2);\n        dup2(file1, file2);\n        read(file2, &c, 1);\n        write(file2, &c, 1);\n        printf(\"4 = %c\\n\", c);\n    }\n    return 0;\n}\n```\n19\n\n<!-- ===== page 20 ===== -->",
         "choices": [],
+        "answer": "答案：\n```\n1 = p\n2 = k\n3 = n\n4 = g\n```\nbuffer.txt文件内容为ppkknggniv"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第六题（10分）ECF\n1.（5 分）以下程序运行时系统调用全部正确执行，buffer.txt 文件的内容为\npekinguniv。请给出代码运行后打印输出的结果，并给出程序运行结束后\nbuffer.txt文件的内容。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <fcntl.h>\n#include <unistd.h>\nint main() {\n    char c;\n    int file1 = open(\"buffer.txt\", O_RDWR);\n    int file2;\n    read(file1, &c, 1);\n    file2 = dup(file1);\n    write(file2, &c, 1);\n    printf(\"1 = %c\\n\", c);\n    int pid = fork() ;\n    if (pid == 0) {\n        read(file1, &c, 1);\n        write(file2, &c, 1);\n        printf(\"2 = %c\\n\", c);\n        read(file1, &c, 1);\n        printf(\"3 = %c\\n\", c);\n        close(file1);\n        exit(0);\n    } else {\n        waitpid(pid, NULL, 0);\n        close(file2);\n        dup2(file1, file2);\n        read(file2, &c, 1);\n        write(file2, &c, 1);\n        printf(\"4 = %c\\n\", c);\n    }\n    return 0;\n}\n```\n19\n\n<!-- ===== page 20 ===== -->",
         "answer": "答案：\n```\n1 = p\n2 = k\n3 = n\n4 = g\n```\nbuffer.txt文件内容为ppkknggniv"
       }
     },
     {
       "id": "q-e0aacd0c843b23b9",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 27,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
@@ -460,6 +696,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -473,13 +710,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "2.（5分）某程序员实现了一个课程实验用的操作系统ICSNIX，其系统函数sleep\n用以下代码实现。请分析该代码存在哪些问题。\n```\n1 #include    <signal.h>\n2 #include    <unistd.h>\n3 static void sig_alrm(int signo)\n4 {\n5    /* nothing to do, just return to wake up the pause */\n6 }\n7\n8 unsigned int sleep(unsigned int seconds)\n9 {\n10    if (signal(SIGALRM, sig_alrm) == SIG_ERR)\n11       return(seconds);\n12\n13    alarm(seconds); /* start the timer */\n14    pause(); /* next caught signal wakes us up */\n15    return(alarm(0)); /* turn off timer, return unslept time */\n16}\n```",
         "choices": [],
+        "answer": "答案：（三个问题若只回答了1个或2个则每个2分，全部回答了得5分）\n问题1) 由于操作系统调度的原因，alarm信号触发时，pause可能还未执行，\n导致sleep调用永不会返回。\n问题 2) 如果应用程序在调用 sleep 之前已经调用了 alarm，则 sleep 中的\nalarm 调用会取消之前设置的 alarm 闹钟。（若用户调用 alarm(5);\nsleep(10); 则第 5 秒 sleep 就应该唤醒；若用户调用 alarm(20);\nsleep(10); 则 sleep 在 10 秒返回后，再过 10 秒应继续产生一个 SIGALRM\n信号。）\n问题 3) sleep的signal调用改变了整个程序的SIGALRM信号处理方式。因\n此sleep应该保留signal的返回值（旧的SIGALRM信号处理程序），并在返回\n前恢复该值。"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2.（5分）某程序员实现了一个课程实验用的操作系统ICSNIX，其系统函数sleep\n用以下代码实现。请分析该代码存在哪些问题。\n```\n1 #include    <signal.h>\n2 #include    <unistd.h>\n3 static void sig_alrm(int signo)\n4 {\n5    /* nothing to do, just return to wake up the pause */\n6 }\n7\n8 unsigned int sleep(unsigned int seconds)\n9 {\n10    if (signal(SIGALRM, sig_alrm) == SIG_ERR)\n11       return(seconds);\n12\n13    alarm(seconds); /* start the timer */\n14    pause(); /* next caught signal wakes us up */\n15    return(alarm(0)); /* turn off timer, return unslept time */\n16}\n```",
         "answer": "答案：（三个问题若只回答了1个或2个则每个2分，全部回答了得5分）\n问题1) 由于操作系统调度的原因，alarm信号触发时，pause可能还未执行，\n导致sleep调用永不会返回。\n问题 2) 如果应用程序在调用 sleep 之前已经调用了 alarm，则 sleep 中的\nalarm 调用会取消之前设置的 alarm 闹钟。（若用户调用 alarm(5);\nsleep(10); 则第 5 秒 sleep 就应该唤醒；若用户调用 alarm(20);\nsleep(10); 则 sleep 在 10 秒返回后，再过 10 秒应继续产生一个 SIGALRM\n信号。）\n问题 3) sleep的signal调用改变了整个程序的SIGALRM信号处理方式。因\n此sleep应该保留signal的返回值（旧的SIGALRM信号处理程序），并在返回\n前恢复该值。"
       }
     },
     {
       "id": "q-36fa689016e6c33e",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 28,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
@@ -491,6 +740,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -504,13 +754,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "第七题（10分）系统I/O\n（用作试卷题目时，请把红字和红色箭头全部删去）\n请阅读下面的代码：\n```\n1:  int main(int argc, char** argv) {\n2:  int  fd1  =  open(\"ICS.txt\",  O_CREAT|O_RDWR,\n3:  S_IRUSR|S_IWUSR);\n4:  write(fd1, \"abc\", 3);\n5:\n6:      int fd2 = fd1;\n7:      int fd3 = dup(fd2);\n8:      int fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\n9:      write(fd2, \"defghi\", 6);\n10:      write(fd4, \"xyz\", 3);\n11:\n12:      int fd5 = fd4;\n13:      dup2(fd3, fd5);\n14:      write(fd4, \"pqr\", 3);\n15:\n16:      close(fd1);\n17:\n18:      return 0;\n19:  }\n```\n1.请填写在第16行代码刚刚执行完之后，下面的打开文件表和v-node表中表项\n的部分值，并画出表项之间的指向关系。（6分）\n初始时，ICS.txt文件不存在。程序执行时，所有的系统调用均会成功，所有\n表项均会从上到下依次分配，描述符表一开始被占用掉前3个表项。对于已经释放\n的打开文件表表项，请填写释放前那一刻的值和指向的v-node表表项。\n对于多余的表项，请直接忽略。\n21\n\n<!-- ===== page 22 ===== -->\n\n描述符表  打开文件表    v-node表\nDescriptor table  Open file table  v-node table\n...    pos  refcnt  释放？    文件名\n```\n3  12  2  N  ICS.txt\n4  12  0  Y\n5\n6\n7\n```\n说明：考查三层表结构的基本概念，以及Unix I/O的基本用法。因为第8章\n出题会融合第10章内容，所以没涉及到第8章内容。\n错一空或者多/少填一空，扣1分。多画/少画一个箭头扣1分。扣完为止。\n2.请填写在第16行代码刚刚执行完之后，下列变量的值（2分）\n```\nfd1  fd2  fd3  fd4  fd5\n3  3  4  5  5\n```\n  说明：错1空扣1分，扣完为止。\n3.请写出程序执行完之后，ICS.txt文件中的内容（2分）\nabcdefghipqr\n说明：写成abcxyzghipqr给1分，出现此错误是因为不熟悉O_APPEND用\n法。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第七题（10分）系统I/O\n（用作试卷题目时，请把红字和红色箭头全部删去）\n请阅读下面的代码：\n```\n1:  int main(int argc, char** argv) {\n2:  int  fd1  =  open(\"ICS.txt\",  O_CREAT|O_RDWR,\n3:  S_IRUSR|S_IWUSR);\n4:  write(fd1, \"abc\", 3);\n5:\n6:      int fd2 = fd1;\n7:      int fd3 = dup(fd2);\n8:      int fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\n9:      write(fd2, \"defghi\", 6);\n10:      write(fd4, \"xyz\", 3);\n11:\n12:      int fd5 = fd4;\n13:      dup2(fd3, fd5);\n14:      write(fd4, \"pqr\", 3);\n15:\n16:      close(fd1);\n17:\n18:      return 0;\n19:  }\n```\n1.请填写在第16行代码刚刚执行完之后，下面的打开文件表和v-node表中表项\n的部分值，并画出表项之间的指向关系。（6分）\n初始时，ICS.txt文件不存在。程序执行时，所有的系统调用均会成功，所有\n表项均会从上到下依次分配，描述符表一开始被占用掉前3个表项。对于已经释放\n的打开文件表表项，请填写释放前那一刻的值和指向的v-node表表项。\n对于多余的表项，请直接忽略。\n21\n\n<!-- ===== page 22 ===== -->\n\n描述符表  打开文件表    v-node表\nDescriptor table  Open file table  v-node table\n...    pos  refcnt  释放？    文件名\n```\n3  12  2  N  ICS.txt\n4  12  0  Y\n5\n6\n7\n```\n说明：考查三层表结构的基本概念，以及Unix I/O的基本用法。因为第8章\n出题会融合第10章内容，所以没涉及到第8章内容。\n错一空或者多/少填一空，扣1分。多画/少画一个箭头扣1分。扣完为止。\n2.请填写在第16行代码刚刚执行完之后，下列变量的值（2分）\n```\nfd1  fd2  fd3  fd4  fd5\n3  3  4  5  5\n```\n  说明：错1空扣1分，扣完为止。\n3.请写出程序执行完之后，ICS.txt文件中的内容（2分）\nabcdefghipqr\n说明：写成abcxyzghipqr给1分，出现此错误是因为不熟悉O_APPEND用\n法。",
         "answer": ""
       }
     },
     {
       "id": "q-8520c7eab4ae3c0d",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 6,
       "moduleId": "ecf_and_system_io",
       "year": 2015,
       "examType": "期末",
@@ -522,6 +784,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -535,6 +798,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "6.  一段程序中阻塞了SIGCHLD和SIGUSR1信号。接下来，向它按顺序发送\nSIGCHLD，SIGUSR1，SIGCHLD信号，当程序取消阻塞继续执行时，将处理\n这三个信号中的哪几个？",
         "choices": [
           {
@@ -555,10 +819,42 @@
           }
         ],
         "answer": "答案：C。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "都不处理"
+          },
+          {
+            "id": "B",
+            "content": "处理一次SIGCHLD"
+          },
+          {
+            "id": "C",
+            "content": "处理一次SIGCHLD，一次SIGUSR1"
+          },
+          {
+            "id": "D",
+            "content": "处理所有三个信号"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "6.  一段程序中阻塞了SIGCHLD和SIGUSR1信号。接下来，向它按顺序发送\nSIGCHLD，SIGUSR1，SIGCHLD信号，当程序取消阻塞继续执行时，将处理\n这三个信号中的哪几个？",
+        "answer": "答案：C。"
       }
     },
     {
       "id": "q-7c654fa3ac3ace6f",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 7,
       "moduleId": "ecf_and_system_io",
       "year": 2015,
       "examType": "期末",
@@ -570,6 +866,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -583,6 +880,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "7.  学完本课程后，几位同学聚在一起讨论有关异常的话题，请问你认为他们中谁\n学习的结果有错误？\n3\n\n<!-- ===== page 4 ===== -->",
         "choices": [
           {
@@ -603,10 +901,42 @@
           }
         ],
         "answer": "答案：C。异常不一定是不可恢复的，也可能是可恢复的、甚至是有意产生的。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "发生异常和异常处理意味着控制流的突变。"
+          },
+          {
+            "id": "B",
+            "content": "与异常相关的处理是由硬件和操作系统共同完成的。"
+          },
+          {
+            "id": "C",
+            "content": "异常是由于计算机系统发生了不可恢复的错误导致的。"
+          },
+          {
+            "id": "D",
+            "content": "异常的发生可能是异步的，也可能是同步的。"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "7.  学完本课程后，几位同学聚在一起讨论有关异常的话题，请问你认为他们中谁\n学习的结果有错误？\n3\n\n<!-- ===== page 4 ===== -->",
+        "answer": "答案：C。异常不一定是不可恢复的，也可能是可恢复的、甚至是有意产生的。"
       }
     },
     {
       "id": "q-f575bd9933002e01",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 8,
       "moduleId": "ecf_and_system_io",
       "year": 2015,
       "examType": "期末",
@@ -618,6 +948,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -631,6 +962,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "8.  下列说法正确的是：",
         "choices": [
           {
@@ -651,10 +983,42 @@
           }
         ],
         "answer": "答案：B\nA：SIGTSTP可以被忽略；既不能被捕获又不能被忽略的是SIGKILL和SIGSTOP\nC：系统调用可以被中断，如read这样的慢速系统调用\nD：可以通过kill(0, …)给整个组的进程发送信号"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "SIGTSTP信号既不能被捕获，也不能被忽略"
+          },
+          {
+            "id": "B",
+            "content": "存在信号的默认处理行为是进程停止直到被SIGCONT信号重启"
+          },
+          {
+            "id": "C",
+            "content": "系统调用不能被中断，因为那是操作系统的工作"
+          },
+          {
+            "id": "D",
+            "content": "子进程能给父进程发送信号，但不能发送给兄弟进程"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "8.  下列说法正确的是：",
+        "answer": "答案：B\nA：SIGTSTP可以被忽略；既不能被捕获又不能被忽略的是SIGKILL和SIGSTOP\nC：系统调用可以被中断，如read这样的慢速系统调用\nD：可以通过kill(0, …)给整个组的进程发送信号"
       }
     },
     {
       "id": "q-1b40855c0852dd42",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 9,
       "moduleId": "ecf_and_system_io",
       "year": 2015,
       "examType": "期末",
@@ -666,6 +1030,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -679,13 +1044,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "9.  在系统调用成功的情况下，下面哪个输出是可能的？\n```\nint main() {\n  intpid = fork();\n  if (pid == 0) {\n    printf(\"A\");\n  } else {\n    pid = fork();\n    if (pid == 0) {\n      printf(\"A\");\n    } else {\n      printf(\"B\");\n    }\n  }\n  exit(0);\n}\nA. AAB\nB. AAA\nC. AABB\nD. AA\n```\n4\n\n<!-- ===== page 5 ===== -->",
         "choices": [],
+        "answer": "答案：A\n总共产生3个子进程，共输出2个A和1个B"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "9.  在系统调用成功的情况下，下面哪个输出是可能的？\n```\nint main() {\n  intpid = fork();\n  if (pid == 0) {\n    printf(\"A\");\n  } else {\n    pid = fork();\n    if (pid == 0) {\n      printf(\"A\");\n    } else {\n      printf(\"B\");\n    }\n  }\n  exit(0);\n}\nA. AAB\nB. AAA\nC. AABB\nD. AA\n```\n4\n\n<!-- ===== page 5 ===== -->",
         "answer": "答案：A\n总共产生3个子进程，共输出2个A和1个B"
       }
     },
     {
       "id": "q-34c644cfbd1d75f5",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 10,
       "moduleId": "ecf_and_system_io",
       "year": 2015,
       "examType": "期末",
@@ -697,6 +1074,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -710,6 +1088,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "10. 以下四句都是关于Unix I/O的说法。其中正确的是：",
         "choices": [
           {
@@ -730,10 +1109,42 @@
           }
         ],
         "answer": "答案：A。\n说明：B. 并没有两个指针，读写操作是共用一个指针的；C. read 操作不会追\n加‘\\0’字符；D. close(4)后1号描述符仍然可用。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "从网络套接字（socket）读取内容时，可以通过反复读的方式处理不足值\n问题，直到读完所需要的数量或遇到EOF为止。"
+          },
+          {
+            "id": "B",
+            "content": "以O_RDWR方式打开文件后，文件会有两个指针，分别记录读文件的当前位\n置和写文件的当前位置。"
+          },
+          {
+            "id": "C",
+            "content": "用read函数直接读取控制台输入的文本行，会自动在行末追加‘\\0’字符。"
+          },
+          {
+            "id": "D",
+            "content": "使用 dup2(4, 1)成功进行重定向后执行 close(4)，会导致 1号文件描\n述符也不可用。\n参考信息：O_RDWR表示文件可读可写；dup2(oldfd, newfd)表示将oldfd\n重定向给newfd。"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "10. 以下四句都是关于Unix I/O的说法。其中正确的是：",
+        "answer": "答案：A。\n说明：B. 并没有两个指针，读写操作是共用一个指针的；C. read 操作不会追\n加‘\\0’字符；D. close(4)后1号描述符仍然可用。"
       }
     },
     {
       "id": "q-245214791ef0ff4e",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 11,
       "moduleId": "ecf_and_system_io",
       "year": 2015,
       "examType": "期末",
@@ -745,6 +1156,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -758,6 +1170,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "11. 下面是一段C程序代码：\n```\n#include <stdio.h>\n#include \"csapp.h\"\nint main()\n{\n  printf(\"2\");\n  if (Fork())\n  {\n    printf(\"33\");\n    Write(STDOUT_FILENO, \"lol\", 3);\n  }\n  else\n  {\n    Sleep(1);\n    printf(\"233\");\n    Write(STDOUT_FILENO, \"hhhh\", 4);\n```\n5\n\n<!-- ===== page 6 ===== -->\n\n```\n  }\n  fflush(stdout);\n  return 0;\n}\n```\n编译后运行程序，程序正常退出。那么程序的输出是：",
         "choices": [
           {
@@ -778,10 +1191,42 @@
           }
         ],
         "answer": "答案：B。\n说明：printf 所属的标准 IO 是有缓冲区的，直到关闭文件、遇到换行符或者\nfflush时才会输出；write则没有缓冲区立刻输出。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "233lol233hhhh"
+          },
+          {
+            "id": "B",
+            "content": "lol233hhhh2233"
+          },
+          {
+            "id": "C",
+            "content": "233lol2233hhhh"
+          },
+          {
+            "id": "D",
+            "content": "2lol33hhhh233"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "11. 下面是一段C程序代码：\n```\n#include <stdio.h>\n#include \"csapp.h\"\nint main()\n{\n  printf(\"2\");\n  if (Fork())\n  {\n    printf(\"33\");\n    Write(STDOUT_FILENO, \"lol\", 3);\n  }\n  else\n  {\n    Sleep(1);\n    printf(\"233\");\n    Write(STDOUT_FILENO, \"hhhh\", 4);\n```\n5\n\n<!-- ===== page 6 ===== -->\n\n```\n  }\n  fflush(stdout);\n  return 0;\n}\n```\n编译后运行程序，程序正常退出。那么程序的输出是：",
+        "answer": "答案：B。\n说明：printf 所属的标准 IO 是有缓冲区的，直到关闭文件、遇到换行符或者\nfflush时才会输出；write则没有缓冲区立刻输出。"
       }
     },
     {
       "id": "q-6b1e571b4c1911ef",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 24,
       "moduleId": "ecf_and_system_io",
       "year": 2015,
       "examType": "期末",
@@ -793,6 +1238,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -806,13 +1252,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第五题（10分）异常\n以下程序运行时系统调用全部正确执行，且每个信号都被处理到。请给出代码运行\n后所有可能的输出结果。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <signal.h>\nint c = 1;\nvoid handler1(int sig) {\n  c++;\n  printf(\"%d\", c);\n}\nint main() {\n  signal(SIGUSR1, handler1);\n  sigset_t s;\n  sigemptyset(&s);\n  sigaddset(&s, SIGUSR1);\n  sigprocmask(SIG_BLOCK, &s, 0);\n  intpid = fork()?fork():fork();\n  if (pid == 0) {\nkill(getppid(), SIGUSR1);\n    printf(\"S\");\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    exit(0);\n  } else {\n```\n19\n\n<!-- ===== page 20 ===== -->\n\n```\n    while (waitpid(-1, NULL, 0) != -1);\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    printf(\"P\");\n  }\n  return 0;\n}\n```\n答：",
         "choices": [],
+        "answer": "答案：\n共5种：\n```\nS2PS2P\nSS2P2P\nS2S2PP\nS2SP2P\nSS22PP\n```"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第五题（10分）异常\n以下程序运行时系统调用全部正确执行，且每个信号都被处理到。请给出代码运行\n后所有可能的输出结果。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <signal.h>\nint c = 1;\nvoid handler1(int sig) {\n  c++;\n  printf(\"%d\", c);\n}\nint main() {\n  signal(SIGUSR1, handler1);\n  sigset_t s;\n  sigemptyset(&s);\n  sigaddset(&s, SIGUSR1);\n  sigprocmask(SIG_BLOCK, &s, 0);\n  intpid = fork()?fork():fork();\n  if (pid == 0) {\nkill(getppid(), SIGUSR1);\n    printf(\"S\");\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    exit(0);\n  } else {\n```\n19\n\n<!-- ===== page 20 ===== -->\n\n```\n    while (waitpid(-1, NULL, 0) != -1);\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    printf(\"P\");\n  }\n  return 0;\n}\n```\n答：",
         "answer": "答案：\n共5种：\n```\nS2PS2P\nSS2P2P\nS2S2PP\nS2SP2P\nSS22PP\n```"
       }
     },
     {
       "id": "q-0143599602c43bee",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 9,
       "moduleId": "ecf_and_system_io",
       "year": 2016,
       "examType": "期末",
@@ -824,6 +1282,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -837,13 +1296,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "9.  对于以下一段代码，可能的输出为：\n```\n   int count = 0;\n    int pid = fork();\n    if (pid == 0){\n        printf(\"count = %d\\n\",--count);\n    }\n    else{\n        printf(\"count = %d\\n\",++count);\n    }\n    printf(\"count = %d\\n\",++count);\nA.1 2 -1 0       B.0 0 -1 1\nC.1 -1 0 0       D.0 -1 1 2\n```",
         "choices": [],
+        "answer": "答案:A(printf从后向前处理，注意fork出的子进程与父进程执行顺序不确定)"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "9.  对于以下一段代码，可能的输出为：\n```\n   int count = 0;\n    int pid = fork();\n    if (pid == 0){\n        printf(\"count = %d\\n\",--count);\n    }\n    else{\n        printf(\"count = %d\\n\",++count);\n    }\n    printf(\"count = %d\\n\",++count);\nA.1 2 -1 0       B.0 0 -1 1\nC.1 -1 0 0       D.0 -1 1 2\n```",
         "answer": "答案:A(printf从后向前处理，注意fork出的子进程与父进程执行顺序不确定)"
       }
     },
     {
       "id": "q-bd62fc1d79bc1009",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 10,
       "moduleId": "ecf_and_system_io",
       "year": 2016,
       "examType": "期末",
@@ -855,6 +1326,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -868,6 +1340,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "10. 下列哪一事件不会导致信号被发送到进程？",
         "choices": [
           {
@@ -888,10 +1361,42 @@
           }
         ],
         "answer": "答案:A(考察对各种情况的理解)"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "新连接到达监听端口"
+          },
+          {
+            "id": "B",
+            "content": "进程访问非法地址"
+          },
+          {
+            "id": "C",
+            "content": "除零"
+          },
+          {
+            "id": "D",
+            "content": "上述情况都不对"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "10. 下列哪一事件不会导致信号被发送到进程？",
+        "answer": "答案:A(考察对各种情况的理解)"
       }
     },
     {
       "id": "q-7678402ff3b794b1",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 14,
       "moduleId": "ecf_and_system_io",
       "year": 2016,
       "examType": "期末",
@@ -903,6 +1408,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -916,6 +1422,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "14. 考虑以下代码，假设result.txt中的初始内容为“666666”\n```\n  char *str1 = \"6666\";\n  char *str2 = \"2333\";\n  char *str3 = \"hhhh\";\n  int fd1, fd2, fd3, i;\n  fd1 = open(\"result.txt\", O_RDWR);\n  fd2 = open(\"result.txt\", O_RDWR);\n  dup2(fd1, fd2);\n  for (i = 0; i < 5; ++i) {\n    fd3 = open(\"result.txt\", O_RDWR);\n    write(fd1, str1, 4);\n    write(fd2, str2, 4);\n    write(fd3, str3, 4);\n    close(fd3);\n  }\n  close(fd1); close(fd2);\n```\n  假设所有系统调用均成功，则这段代码执行结束后，result.txt 的内容中\n有（）个“6”",
         "choices": [
           {
@@ -936,10 +1443,42 @@
           }
         ],
         "answer": "答案：B (考察文件读写位置的理解)"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "6"
+          },
+          {
+            "id": "B",
+            "content": "16"
+          },
+          {
+            "id": "C",
+            "content": "20"
+          },
+          {
+            "id": "D",
+            "content": "22"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "14. 考虑以下代码，假设result.txt中的初始内容为“666666”\n```\n  char *str1 = \"6666\";\n  char *str2 = \"2333\";\n  char *str3 = \"hhhh\";\n  int fd1, fd2, fd3, i;\n  fd1 = open(\"result.txt\", O_RDWR);\n  fd2 = open(\"result.txt\", O_RDWR);\n  dup2(fd1, fd2);\n  for (i = 0; i < 5; ++i) {\n    fd3 = open(\"result.txt\", O_RDWR);\n    write(fd1, str1, 4);\n    write(fd2, str2, 4);\n    write(fd3, str3, 4);\n    close(fd3);\n  }\n  close(fd1); close(fd2);\n```\n  假设所有系统调用均成功，则这段代码执行结束后，result.txt 的内容中\n有（）个“6”",
+        "answer": "答案：B (考察文件读写位置的理解)"
       }
     },
     {
       "id": "q-5674640e7908552d",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 15,
       "moduleId": "ecf_and_system_io",
       "year": 2016,
       "examType": "期末",
@@ -951,6 +1490,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -964,6 +1504,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "15. 关于IO操作，以下说法中正确的是（）",
         "choices": [
           {
@@ -984,10 +1525,42 @@
           }
         ],
         "answer": "答案：C  (RIO中带缓冲的函数不应与无缓冲的函数交叉调用，A错误。若标准输\n入、标准输出或标准错误被关闭，则会返回一个小于3的文件描述符，B错误。打\n开文件表是所有进程共享的，D错误)"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "由于RIO包的健壮性，所以RIO中的函数都可以交叉调用"
+          },
+          {
+            "id": "B",
+            "content": "成功调用open函数后，返回一个不小于3的文件描述符"
+          },
+          {
+            "id": "C",
+            "content": "调用Unix I/O开销较大，标准I/O库使用缓冲区来加快I/O的速度"
+          },
+          {
+            "id": "D",
+            "content": "和描述符表一样，每个进程拥有独立的打开文件表"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "15. 关于IO操作，以下说法中正确的是（）",
+        "answer": "答案：C  (RIO中带缓冲的函数不应与无缓冲的函数交叉调用，A错误。若标准输\n入、标准输出或标准错误被关闭，则会返回一个小于3的文件描述符，B错误。打\n开文件表是所有进程共享的，D错误)"
       }
     },
     {
       "id": "q-bd20070420641526",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 24,
       "moduleId": "ecf_and_system_io",
       "year": 2016,
       "examType": "期末",
@@ -999,6 +1572,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1012,13 +1586,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n15\n\n<!-- ===== page 16 ===== -->\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\nPart II\n```\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n```\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（若某个位置中的程序内容，对本次程序执行结果没有影响，请在相应位置填写“无\n关”）\n（7分）7个，对1个给1分\n```\n  A:                          counter1+1\n  B:                         counter2*2\n  C:                              1\n```\n  D:                             无关\n```\n  E:                         SIGUSR1\n  F:                         SIGUSR1\n  G:                              2\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n15\n\n<!-- ===== page 16 ===== -->\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\nPart II\n```\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n```\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（若某个位置中的程序内容，对本次程序执行结果没有影响，请在相应位置填写“无\n关”）\n（7分）7个，对1个给1分\n```\n  A:                          counter1+1\n  B:                         counter2*2\n  C:                              1\n```\n  D:                             无关\n```\n  E:                         SIGUSR1\n  F:                         SIGUSR1\n  G:                              2\n```",
         "answer": ""
       }
     },
     {
       "id": "q-d37533e91cc6e21d",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 9,
       "moduleId": "ecf_and_system_io",
       "year": 2017,
       "examType": "期末",
@@ -1030,6 +1616,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1043,13 +1630,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "9.  下列程序输出的数字顺序可能是：\n```\nint count = 1;\nif (fork() == 0) {\n  if (fork() == 0) {\n    printf(\"%d\\n\", ++count);\n  }\n  else {\n    printf(\"%d\\n\", --count);\n  }\n}\nprintf(\"%d\\n\", ++count);\nA. 0 1 3 2 2     B. 0 3 2 2 1\nC. 2 0 1 3 2     D. 2 1 0 2 3\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "9.  下列程序输出的数字顺序可能是：\n```\nint count = 1;\nif (fork() == 0) {\n  if (fork() == 0) {\n    printf(\"%d\\n\", ++count);\n  }\n  else {\n    printf(\"%d\\n\", --count);\n  }\n}\nprintf(\"%d\\n\", ++count);\nA. 0 1 3 2 2     B. 0 3 2 2 1\nC. 2 0 1 3 2     D. 2 1 0 2 3\n```",
         "answer": ""
       }
     },
     {
       "id": "q-f8d5e6d4db99937f",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 10,
       "moduleId": "ecf_and_system_io",
       "year": 2017,
       "examType": "期末",
@@ -1061,6 +1660,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1074,6 +1674,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "10. 下列关于信号的说法不正确的是：",
         "choices": [
           {
@@ -1094,10 +1695,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "在键盘上输入Ctrl-C会导致内核发送一个SIGINT信号到前台进程组中的每\n个进程"
+          },
+          {
+            "id": "B",
+            "content": "每种类型最多只能有一个未处理的信号"
+          },
+          {
+            "id": "C",
+            "content": "SIGINT的处理函数不能被另一个SIGINT信号中断"
+          },
+          {
+            "id": "D",
+            "content": "进程可以通过使用signal函数修改和SIGSTOP相关联的默认行为"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "10. 下列关于信号的说法不正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-4fb258eee298f529",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 14,
       "moduleId": "ecf_and_system_io",
       "year": 2017,
       "examType": "期末",
@@ -1109,6 +1739,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1122,6 +1753,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "14. 以下关于文件I/O的说法中，正确的是：",
         "choices": [
           {
@@ -1142,10 +1774,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "文件重定向（dup 和 dup2）操作仅仅改变了文件描述符的指向，不会改变打\n开文件表中的内容"
+          },
+          {
+            "id": "B",
+            "content": "进程调用fork()时，可能对文件描述符表和打开文件表采用写时拷贝（Copy\non Write）机制"
+          },
+          {
+            "id": "C",
+            "content": "对同一描述符，rio_readlineb 和 rio_readnb 可以任意交叉使用，\nrio_readn和rio_writen也可以任意交叉使用"
+          },
+          {
+            "id": "D",
+            "content": "RIO中包括无缓冲的输入输出函数和带缓冲的输入输出函数，使用带缓冲的输\n入输出函数时，要先声明一个rio_t类型变量并调用rio_readinitb函数"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "14. 以下关于文件I/O的说法中，正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-bb3ab91f13deeb5d",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 15,
       "moduleId": "ecf_and_system_io",
       "year": 2017,
       "examType": "期末",
@@ -1157,6 +1818,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1170,13 +1832,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\nint fd1 = open(\"ICS.txt\", O_CREAT|O_RDWR,\n S_IRUSR|S_IWUSR);\nwrite(fd1, \"ics \", 4);\nint fd2 = fd1;\nint fd3 = dup(fd2);\nint fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\nwrite(fd2, \"segmentation fault \", 19);\nwrite(fd4, \"tao\", 3);\nint fd5 = fd4;\ndup2(fd3, fd5);\nwrite(fd4, \"lab\", 3);\nclose(fd1);\nreturn 0;\n}\nA. ics segmentation fault tao\nB. ics segmentation fault lab\nC. ics taomentation fault lab\nD. tao segmentation fault lab\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\nint fd1 = open(\"ICS.txt\", O_CREAT|O_RDWR,\n S_IRUSR|S_IWUSR);\nwrite(fd1, \"ics \", 4);\nint fd2 = fd1;\nint fd3 = dup(fd2);\nint fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\nwrite(fd2, \"segmentation fault \", 19);\nwrite(fd4, \"tao\", 3);\nint fd5 = fd4;\ndup2(fd3, fd5);\nwrite(fd4, \"lab\", 3);\nclose(fd1);\nreturn 0;\n}\nA. ics segmentation fault tao\nB. ics segmentation fault lab\nC. ics taomentation fault lab\nD. tao segmentation fault lab\n```",
         "answer": ""
       }
     },
     {
       "id": "q-46374f8a549b7cd5",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 25,
       "moduleId": "ecf_and_system_io",
       "year": 2017,
       "examType": "期末",
@@ -1188,6 +1862,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1201,13 +1876,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为",
         "answer": ""
       }
     },
     {
       "id": "q-e84cddd717f7f671",
+      "paperId": "p-e3f869956fc29bd8",
+      "paperOrder": 5,
       "moduleId": "ecf_and_system_io",
       "year": 2018,
       "examType": "期末",
@@ -1219,6 +1906,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -1232,6 +1920,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "5.  关于进程，以下说法正确的是：",
         "choices": [
           {
@@ -1252,10 +1941,42 @@
           }
         ],
         "answer": "答案：C\n说明：C 正确见 P521。A 不正确 见 P510。B 中 option 参数应使用 | 运算结合\n（P517）。D中SIGKILL不是唯一的例外，例外共有两个SIGKILL、SIGSTOP（P531）。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "没有设置模式位时，进程运行在用户模式中，允许执行特权指令，例如发起\nI/O操作。"
+          },
+          {
+            "id": "B",
+            "content": "调用waitpid(-1, NULL, WNOHANG & WUNTRACED)会立即返回：如果调用进程\n的所有子进程都没有被停止或终止，则返回0；如果有停止或终止的子进程，则\n返回其中一个的ID。"
+          },
+          {
+            "id": "C",
+            "content": "execve函数的第三个参数envp指向一个以null结尾的指针数组，其中每一\n个指针指向一个形如”name=value”的环境变量字符串。"
+          },
+          {
+            "id": "D",
+            "content": "进程可以通过使用signal函数修改和信号相关联的默认行为，唯一的例外是\nSIGKILL，它的默认行为是不能修改的。"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "5.  关于进程，以下说法正确的是：",
+        "answer": "答案：C\n说明：C 正确见 P521。A 不正确 见 P510。B 中 option 参数应使用 | 运算结合\n（P517）。D中SIGKILL不是唯一的例外，例外共有两个SIGKILL、SIGSTOP（P531）。"
       }
     },
     {
       "id": "q-af342c9ccb98e2cf",
+      "paperId": "p-e3f869956fc29bd8",
+      "paperOrder": 6,
       "moduleId": "ecf_and_system_io",
       "year": 2018,
       "examType": "期末",
@@ -1267,6 +1988,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -1280,6 +2002,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "6.  假设某进程有且仅有五个已打开的文件描述符：0~4，分别引用了五个不同的文\n件，尝试运行以下代码：\ndup2(3,2); dup2(0,3); dup2(1,10); dup2(10,4); dup2(4,0);\n关于得到的结果，说法正确的是：",
         "choices": [
           {
@@ -1300,10 +2023,42 @@
           }
         ],
         "answer": "答案：A\n说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述\n符(0,1,2,3,4,10)对应(B,B,D,A,B,B)，A正确，B应该为引用三个不同文件。教材\n4\n\n<!-- ===== page 5 ===== -->\n\n637页说明过可以向未打开的描述符进行复制，因此D错误；虽然教材未提及从未\n打开的描述符进行复制的后果，但执行过程中并没有发生这种情况，因此C错误。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "运行正常完成，现在有四个描述符引用同一个文件"
+          },
+          {
+            "id": "B",
+            "content": "运行正常完成，现在进程共引用四个不同的文件"
+          },
+          {
+            "id": "C",
+            "content": "由于试图从一个未打开的描述符进行复制，发生错误"
+          },
+          {
+            "id": "D",
+            "content": "由于试图向一个未打开的描述符进行复制，发生错误"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "6.  假设某进程有且仅有五个已打开的文件描述符：0~4，分别引用了五个不同的文\n件，尝试运行以下代码：\ndup2(3,2); dup2(0,3); dup2(1,10); dup2(10,4); dup2(4,0);\n关于得到的结果，说法正确的是：",
+        "answer": "答案：A\n说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述\n符(0,1,2,3,4,10)对应(B,B,D,A,B,B)，A正确，B应该为引用三个不同文件。教材\n4\n\n<!-- ===== page 5 ===== -->\n\n637页说明过可以向未打开的描述符进行复制，因此D错误；虽然教材未提及从未\n打开的描述符进行复制的后果，但执行过程中并没有发生这种情况，因此C错误。"
       }
     },
     {
       "id": "q-54e55a2556b716c4",
+      "paperId": "p-e3f869956fc29bd8",
+      "paperOrder": 19,
       "moduleId": "ecf_and_system_io",
       "year": 2018,
       "examType": "期末",
@@ -1315,6 +2070,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1328,13 +2084,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第四题（10分）\nBob是一名刚刚学完异常的同学，他希望通过配合kill和signal的使用，能让\n两个进程向同一个文件中交替地打印出字符。可惜他的tshlab做得不过关，导致\n他写的这个程序有各种BUG。你能帮帮他吗？\n```\n1  #include \"csapp.h\"\n2  #define MAXN 6\n3  int parentPID = 0;\n4  int childPID = 0;\n5  int count = 1;\n6  int fd1 = 1;\n7  void handler1() {\n8    if (count > MAXN)\n9      return;\n10      for (int i = 0; i < count; i++)\n11          write(fd1, \"+\", 1);\n12                  X\n13      kill(parentPID, SIGUSR2);\n14  }\n15  void handler2() {\n16    if (count > MAXN)\n17      return;\n18      for (int i = 0; i < count; i++)\n19          write(fd1, \"-\", 1);\n20                  Y\n21      kill(childPID, SIGUSR1);\n22  }\n23\n24  int main() {\n25      signal(SIGUSR1, handler1);\n26      signal(SIGUSR2, handler2);\n27      parentPID = getpid();\n28      childPID = fork();\n29      fd1 = open(\"file.txt\",  O_RDWR);\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n30      if (childPID) {\n31                      Z\n32          kill(childPID, SIGUSR1);\n33      }\n34      exit(0);\n35  }\n```\n注意: 假设程序能在任意时刻被系统打断、调度，并且调度的时间切片大小是不确\n定的，可以足够地长。在每次程序执行前，file.txt 是一个已经存在的空文件。\nPart A. (1分) 此时，X处语句和Y处语句都是count++;，Z处语句是空语\n句。Alice测试该代码，发现有时file.txt中没有任何输出！请解释原因。（提\n示：考虑28行语句fork以后，下一次被调度的进程，并从这个角度回答本题。\n不需要给出解决方案）\nPart B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\nfile.txt中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在file.txt中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前fd1的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n  描述符表    打开文件表    v-node表\n  Descriptor    Open    V-node\n14\n\n<!-- ===== page 15 ===== -->\n\n```\nFile\n  (     ) 0     refcnt\n```\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析2. 当程序第一次在file.txt中输出+的瞬间，仿照上题要求完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析3. 如果要产生Bob预期的输出，三级表的关系应当是什么？仿照上题要求\n完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\nPart C. (2分) Bob很高兴，他知道Part B的代码是怎么错的了！不过Alice\n仍然想考考 Bob。对于 Part B 的错误代码，如果终端上输出的是+++，那么\n15\n\n<!-- ===== page 16 ===== -->\n\nfile.txt中的内容是什么？请在下框中写出答案。\nPart D. (1分) Bob修复了Part B的问题，使得代码能够产生预期的输出。\n现在，Bob 又希望自己的代码最终输出的是+--+++----+++++------，为此，\n他对X、Y、Z处做了如下的修改。X、Y处语句已做如下填写，请帮助Bob补上Z\n处语句。\nX处填写为：count += 2;\nY处填写为：count += 2;\nZ处填写为：\n【答案】Part A. 如果28行fork执行过后，子进程先被调度了，并且执行完\n所有代码并退出，那么父进程的kill操作就无效了。\nPart B.\n分析1\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (  √ ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (     ) 3\n```\n分析2\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n  (     ) 0\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  1  )\n  (  √ ) 3\n```\n分析3\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  2  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (  √ ) 3\n```\nPart C. ++++++-+++--+++------（6个+、1个-、3个+、2个-、3个+、\n6个-）\nPart D. count = 2;（或count++;等，只要让count最终的值是2就可以\n了）\n【评分标准】\nPart A. 意思对即可，1分。\nPart B. 打开文件表的两个条目可上下颠倒。每个分析2分：勾选对父进程的\nfd1，0.5分；勾对子进程的fd1，0.5分；两个refcnt各0.5分。由于箭头\n可以被refcnt确定，因此对箭头的连接不赋分。\nPart C. 答案正确的2分。写对前8个字符的得1分，作为“辛苦分”，因为能\n写对前 8 个字符表明理解这道题是怎么回事了，但是由于粗心而导致后面的模拟\n出错。\nPart D. 1分。漏分号的不扣分。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第四题（10分）\nBob是一名刚刚学完异常的同学，他希望通过配合kill和signal的使用，能让\n两个进程向同一个文件中交替地打印出字符。可惜他的tshlab做得不过关，导致\n他写的这个程序有各种BUG。你能帮帮他吗？\n```\n1  #include \"csapp.h\"\n2  #define MAXN 6\n3  int parentPID = 0;\n4  int childPID = 0;\n5  int count = 1;\n6  int fd1 = 1;\n7  void handler1() {\n8    if (count > MAXN)\n9      return;\n10      for (int i = 0; i < count; i++)\n11          write(fd1, \"+\", 1);\n12                  X\n13      kill(parentPID, SIGUSR2);\n14  }\n15  void handler2() {\n16    if (count > MAXN)\n17      return;\n18      for (int i = 0; i < count; i++)\n19          write(fd1, \"-\", 1);\n20                  Y\n21      kill(childPID, SIGUSR1);\n22  }\n23\n24  int main() {\n25      signal(SIGUSR1, handler1);\n26      signal(SIGUSR2, handler2);\n27      parentPID = getpid();\n28      childPID = fork();\n29      fd1 = open(\"file.txt\",  O_RDWR);\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n30      if (childPID) {\n31                      Z\n32          kill(childPID, SIGUSR1);\n33      }\n34      exit(0);\n35  }\n```\n注意: 假设程序能在任意时刻被系统打断、调度，并且调度的时间切片大小是不确\n定的，可以足够地长。在每次程序执行前，file.txt 是一个已经存在的空文件。\nPart A. (1分) 此时，X处语句和Y处语句都是count++;，Z处语句是空语\n句。Alice测试该代码，发现有时file.txt中没有任何输出！请解释原因。（提\n示：考虑28行语句fork以后，下一次被调度的进程，并从这个角度回答本题。\n不需要给出解决方案）\nPart B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\nfile.txt中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在file.txt中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前fd1的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n  描述符表    打开文件表    v-node表\n  Descriptor    Open    V-node\n14\n\n<!-- ===== page 15 ===== -->\n\n```\nFile\n  (     ) 0     refcnt\n```\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析2. 当程序第一次在file.txt中输出+的瞬间，仿照上题要求完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析3. 如果要产生Bob预期的输出，三级表的关系应当是什么？仿照上题要求\n完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\nPart C. (2分) Bob很高兴，他知道Part B的代码是怎么错的了！不过Alice\n仍然想考考 Bob。对于 Part B 的错误代码，如果终端上输出的是+++，那么\n15\n\n<!-- ===== page 16 ===== -->\n\nfile.txt中的内容是什么？请在下框中写出答案。\nPart D. (1分) Bob修复了Part B的问题，使得代码能够产生预期的输出。\n现在，Bob 又希望自己的代码最终输出的是+--+++----+++++------，为此，\n他对X、Y、Z处做了如下的修改。X、Y处语句已做如下填写，请帮助Bob补上Z\n处语句。\nX处填写为：count += 2;\nY处填写为：count += 2;\nZ处填写为：\n【答案】Part A. 如果28行fork执行过后，子进程先被调度了，并且执行完\n所有代码并退出，那么父进程的kill操作就无效了。\nPart B.\n分析1\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (  √ ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (     ) 3\n```\n分析2\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n  (     ) 0\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  1  )\n  (  √ ) 3\n```\n分析3\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  2  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (  √ ) 3\n```\nPart C. ++++++-+++--+++------（6个+、1个-、3个+、2个-、3个+、\n6个-）\nPart D. count = 2;（或count++;等，只要让count最终的值是2就可以\n了）\n【评分标准】\nPart A. 意思对即可，1分。\nPart B. 打开文件表的两个条目可上下颠倒。每个分析2分：勾选对父进程的\nfd1，0.5分；勾对子进程的fd1，0.5分；两个refcnt各0.5分。由于箭头\n可以被refcnt确定，因此对箭头的连接不赋分。\nPart C. 答案正确的2分。写对前8个字符的得1分，作为“辛苦分”，因为能\n写对前 8 个字符表明理解这道题是怎么回事了，但是由于粗心而导致后面的模拟\n出错。\nPart D. 1分。漏分号的不扣分。",
         "answer": ""
       }
     },
     {
       "id": "q-8404bb1814c9934a",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 9,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1346,6 +2114,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1361,13 +2130,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "9. B。注意printf是行缓冲，缓冲区会被复制，最后都一次性输出。另外fork() && fork()\n是父进程再fork()，子进程不fork()，而fork() || fork()则是子进程再fork()，\n父进程不fork()。故实质上一次产生3个进程，所以答案为32×2=18。（如果不考虑缓冲\n区则要去掉第二次产生的6个净拷贝，答案应为12。）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "9. B。注意printf是行缓冲，缓冲区会被复制，最后都一次性输出。另外fork() && fork()\n是父进程再fork()，子进程不fork()，而fork() || fork()则是子进程再fork()，\n父进程不fork()。故实质上一次产生3个进程，所以答案为32×2=18。（如果不考虑缓冲\n区则要去掉第二次产生的6个净拷贝，答案应为12。）",
         "answer": ""
       }
     },
     {
       "id": "q-07b071d1b75cae0f",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 10,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1379,6 +2160,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1394,13 +2176,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "10. C。送分题，外部I/O会触发中断，CPU执行完当前指令之后可能会去处理该中断。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "10. C。送分题，外部I/O会触发中断，CPU执行完当前指令之后可能会去处理该中断。",
         "answer": ""
       }
     },
     {
       "id": "q-b35643d0dcb0856e",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 12,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1412,6 +2206,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1427,13 +2222,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "12. D。缺页是故障，这种故障需要重新执行引发故障的指令；系统调用是陷阱。二者都是同步的\n异常，而且处理完毕是从内核态回到用户态，会处理信号。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "12. D。缺页是故障，这种故障需要重新执行引发故障的指令；系统调用是陷阱。二者都是同步的\n异常，而且处理完毕是从内核态回到用户态，会处理信号。",
         "answer": ""
       }
     },
     {
       "id": "q-76bb70da7e5febe9",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 13,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1445,6 +2252,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1460,13 +2268,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "13. B。A显然是正确的。B我们实验过，一般这种读取对于用户来说是允许的，参看书P511。C\n一般同学不会实验过，需要推理一下，因为参数列表和环境变量实际上是程序自己处理的，\n而且shelllab中重定向是shell帮忙完成的，故推测C正确。D是陆老师著名的“灵魂出窍”\n例子，即printf在信号处理程序中可能导致死锁。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "13. B。A显然是正确的。B我们实验过，一般这种读取对于用户来说是允许的，参看书P511。C\n一般同学不会实验过，需要推理一下，因为参数列表和环境变量实际上是程序自己处理的，\n而且shelllab中重定向是shell帮忙完成的，故推测C正确。D是陆老师著名的“灵魂出窍”\n例子，即printf在信号处理程序中可能导致死锁。",
         "answer": ""
       }
     },
     {
       "id": "q-7525709dabe067f5",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 31,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1478,6 +2298,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1493,13 +2314,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "解答题三 4行，内容为\na b c 0\na b a 1\na a b 1\na a a 2\n此题直接画进程树，在结点旁边标注父进程和子进程，并写出状态变化就可以。考点为每次父进程\nopen时，指针都重新回到文件开头；dup则保持文件指针为同一个；count四个进程相互独立。\n注意（相对的）父进程总是用wait(NULL)等待子进程，所以输出的顺序一定是子子、子父、父\n子、父父。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "解答题三 4行，内容为\na b c 0\na b a 1\na a b 1\na a a 2\n此题直接画进程树，在结点旁边标注父进程和子进程，并写出状态变化就可以。考点为每次父进程\nopen时，指针都重新回到文件开头；dup则保持文件指针为同一个；count四个进程相互独立。\n注意（相对的）父进程总是用wait(NULL)等待子进程，所以输出的顺序一定是子子、子父、父\n子、父父。",
         "answer": ""
       }
     },
     {
       "id": "q-938fa9c4da2fb8bd",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 40,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1511,6 +2344,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1526,13 +2360,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "7. C。除法错误是不可恢复故障，是同步的；I/O中断是异步的，一般会执行完当前指令，再去\n处理，返回就不需要再处理了；缺页异常当然需要重新执行遇到问题的访存指令；时间片到\n中断属于时钟中断，属于异步异常。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "7. C。除法错误是不可恢复故障，是同步的；I/O中断是异步的，一般会执行完当前指令，再去\n处理，返回就不需要再处理了；缺页异常当然需要重新执行遇到问题的访存指令；时间片到\n中断属于时钟中断，属于异步异常。",
         "answer": ""
       }
     },
     {
       "id": "q-40ccaa200e0b3310",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 42,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1544,6 +2390,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1559,13 +2406,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "9. C。fork返回两次，setjmp可返回多次，longjmp和execve不返回。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "9. C。fork返回两次，setjmp可返回多次，longjmp和execve不返回。",
         "answer": ""
       }
     },
     {
       "id": "q-2dc6fe83ee7de870",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 50,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1577,6 +2436,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1592,13 +2452,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "17. D。2和4都是很明显的，6仍然是陆老师著名的“灵魂出窍”例子，即printf在信号处理\n程序中可能导致死锁（加锁后打断，在信号处理程序再调用即死锁，因为需要信号处理程序\n返回后才能解锁）。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17. D。2和4都是很明显的，6仍然是陆老师著名的“灵魂出窍”例子，即printf在信号处理\n程序中可能导致死锁（加锁后打断，在信号处理程序再调用即死锁，因为需要信号处理程序\n返回后才能解锁）。",
         "answer": ""
       }
     },
     {
       "id": "q-758e4e689bce7356",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 58,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1610,6 +2482,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1625,13 +2498,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "解答题三\n1. 3, 4。注意0, 1, 2是标准I/O流占用的。\n2. 4, 5。因为fd2已经被关闭，其描述符可复用；另外fd3, fd4虽然指针相同，但是描述\n符的号码是不同的。\n3. 0, 1, 2, 3。父进程等待子进程结束，所以子进程先输出，另外父子进程的count当然是\n独立的。\n4. 2019PKUCS。对f1.txt的写有三处，其中20、21行是独立的，得到2019PKU，最后只有\n子进程再次写文件，此时fd1的指针在最后，即2019PKUCS。\n5. PKUICS2019。鉴于dup产生fd4，而父子进程的文件描述符指向同样的打开文件表条目，\n所以对f2.txt的写本质上只有一个指针，因为父进程等待子进程结束，所以先输出PKUICS\n再输出2019。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "解答题三\n1. 3, 4。注意0, 1, 2是标准I/O流占用的。\n2. 4, 5。因为fd2已经被关闭，其描述符可复用；另外fd3, fd4虽然指针相同，但是描述\n符的号码是不同的。\n3. 0, 1, 2, 3。父进程等待子进程结束，所以子进程先输出，另外父子进程的count当然是\n独立的。\n4. 2019PKUCS。对f1.txt的写有三处，其中20、21行是独立的，得到2019PKU，最后只有\n子进程再次写文件，此时fd1的指针在最后，即2019PKUCS。\n5. PKUICS2019。鉴于dup产生fd4，而父子进程的文件描述符指向同样的打开文件表条目，\n所以对f2.txt的写本质上只有一个指针，因为父进程等待子进程结束，所以先输出PKUICS\n再输出2019。",
         "answer": ""
       }
     },
     {
       "id": "q-1896c6bc4ca0644b",
+      "paperId": "p-98acf19964247e22",
+      "paperOrder": 7,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1643,6 +2528,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1656,6 +2542,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "7.  关于x86-64系统中的异常，下面那个判断是正确的：",
         "choices": [
           {
@@ -1676,10 +2563,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "除法错误是异步异常，Unix会终止程序；"
+          },
+          {
+            "id": "B",
+            "content": "键盘输入中断是异步异常，异常服务后会返回当前指令执行；"
+          },
+          {
+            "id": "C",
+            "content": "缺页是同步异常，异常服务后会返回当前指令执行；"
+          },
+          {
+            "id": "D",
+            "content": "时间片到时中断是同步异常，异常服务后会返回下一条指令执行；"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "7.  关于x86-64系统中的异常，下面那个判断是正确的：",
+        "answer": ""
       }
     },
     {
       "id": "q-8370b4f9bdb8db0c",
+      "paperId": "p-98acf19964247e22",
+      "paperOrder": 9,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1691,6 +2607,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1704,6 +2621,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "9.  进程管理相关函数的调用和返回行为，下列那些函数都是可能返回多于一\n次的？",
         "choices": [
           {
@@ -1724,10 +2642,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "longjmp和fork"
+          },
+          {
+            "id": "B",
+            "content": "execve和longjmp"
+          },
+          {
+            "id": "C",
+            "content": "fork和setjmp"
+          },
+          {
+            "id": "D",
+            "content": "setjmp和execve"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "9.  进程管理相关函数的调用和返回行为，下列那些函数都是可能返回多于一\n次的？",
+        "answer": ""
       }
     },
     {
       "id": "q-3f14235fd87550aa",
+      "paperId": "p-98acf19964247e22",
+      "paperOrder": 27,
       "moduleId": "ecf_and_system_io",
       "year": 2019,
       "examType": "期末",
@@ -1739,6 +2686,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1752,13 +2700,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第四题（10分）\n分析以下C程序，其中f1.txt和f2.txt为已有用户有读写的文件，初始文\n件内容为空。\n```\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n```\n9.\n10. int main()\n11. {\n```\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n```\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n```\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n```\n22.\n23.   close(fd2);\n24.\n```\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n```\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n```\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n```\n36.   }\n```\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n```\n11\n\n<!-- ===== page 12 ===== -->\n\n```\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n```\n44.   }\n45.\n```\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n```\n51. }\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1=   ①    ，fd2=    ②   ；\n（2）  程序第28行：fd3=   ①    ，fd4=    ②   ；\n（3）  程序第35、43、50行输出c的值依次分别为：                     ；\n（4）  文件f1.txt中的内容为：                ；\n（5）  文件f2.txt中的内容为：                 。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第四题（10分）\n分析以下C程序，其中f1.txt和f2.txt为已有用户有读写的文件，初始文\n件内容为空。\n```\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n```\n9.\n10. int main()\n11. {\n```\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n```\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n```\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n```\n22.\n23.   close(fd2);\n24.\n```\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n```\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n```\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n```\n36.   }\n```\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n```\n11\n\n<!-- ===== page 12 ===== -->\n\n```\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n```\n44.   }\n45.\n```\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n```\n51. }\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1=   ①    ，fd2=    ②   ；\n（2）  程序第28行：fd3=   ①    ，fd4=    ②   ；\n（3）  程序第35、43、50行输出c的值依次分别为：                     ；\n（4）  文件f1.txt中的内容为：                ；\n（5）  文件f2.txt中的内容为：                 。",
         "answer": ""
       }
     },
     {
       "id": "q-2a1dc7266b92b628",
+      "paperId": "p-f99ca20e1a729e32",
+      "paperOrder": 9,
       "moduleId": "ecf_and_system_io",
       "year": 2020,
       "examType": "期末",
@@ -1770,6 +2730,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1783,6 +2744,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "9.  C语言中的代码如下：\nfork() && fork();\nprintf(“-“);\nfork() || fork();\nprintf(“-“);\n这段代码一共输出（ ）个“-”字符。",
         "choices": [
           {
@@ -1803,10 +2765,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "12"
+          },
+          {
+            "id": "B",
+            "content": "18"
+          },
+          {
+            "id": "C",
+            "content": "20"
+          },
+          {
+            "id": "D",
+            "content": "32"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "9.  C语言中的代码如下：\nfork() && fork();\nprintf(“-“);\nfork() || fork();\nprintf(“-“);\n这段代码一共输出（ ）个“-”字符。",
+        "answer": ""
       }
     },
     {
       "id": "q-4d1c1b18cca27637",
+      "paperId": "p-f99ca20e1a729e32",
+      "paperOrder": 10,
       "moduleId": "ecf_and_system_io",
       "year": 2020,
       "examType": "期末",
@@ -1818,6 +2809,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1831,6 +2823,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "10.  当一个网络数据包到达一台主机时，会触发以下哪种异常：",
         "choices": [
           {
@@ -1851,10 +2844,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "系统调用"
+          },
+          {
+            "id": "B",
+            "content": "信号"
+          },
+          {
+            "id": "C",
+            "content": "中断"
+          },
+          {
+            "id": "D",
+            "content": "缺页异常"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "10.  当一个网络数据包到达一台主机时，会触发以下哪种异常：",
+        "answer": ""
       }
     },
     {
       "id": "q-d476fa89c01aa623",
+      "paperId": "p-f99ca20e1a729e32",
+      "paperOrder": 11,
       "moduleId": "ecf_and_system_io",
       "year": 2020,
       "examType": "期末",
@@ -1866,6 +2888,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1879,6 +2902,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "11.  在键盘上输入Ctrl+C会导致内核发送一个（  ）信号到（  ）进程组中的每个进程",
         "choices": [
           {
@@ -1899,10 +2923,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "SIGINT，前台"
+          },
+          {
+            "id": "B",
+            "content": "SIGTSTP，前台"
+          },
+          {
+            "id": "C",
+            "content": "SIGINT，后台"
+          },
+          {
+            "id": "D",
+            "content": "SIGTSTP，后台"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "11.  在键盘上输入Ctrl+C会导致内核发送一个（  ）信号到（  ）进程组中的每个进程",
+        "answer": ""
       }
     },
     {
       "id": "q-49542f3395a8988e",
+      "paperId": "p-f99ca20e1a729e32",
+      "paperOrder": 12,
       "moduleId": "ecf_and_system_io",
       "year": 2020,
       "examType": "期末",
@@ -1914,6 +2967,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1927,6 +2981,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "12.  以下关于缺页异常和系统调用的描述，不正确的是：",
         "choices": [
           {
@@ -1947,10 +3002,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "两个异常都是同步异常"
+          },
+          {
+            "id": "B",
+            "content": "两个异常的触发都是由于执行某一条指令"
+          },
+          {
+            "id": "C",
+            "content": "两个异常在正常退出时，都需要判断是否有非阻塞的待处理信号"
+          },
+          {
+            "id": "D",
+            "content": "两个异常在正常退出后，都需要重新执行触发异常的指令"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "12.  以下关于缺页异常和系统调用的描述，不正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-1a6356e12474c994",
+      "paperId": "p-f99ca20e1a729e32",
+      "paperOrder": 13,
       "moduleId": "ecf_and_system_io",
       "year": 2020,
       "examType": "期末",
@@ -1962,6 +3046,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1975,6 +3060,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "13.  对于Linux系统，下列说法错误的是：",
         "choices": [
           {
@@ -1995,10 +3081,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "在单核CPU上，所有看似并行的逻辑流实际上是并发的。"
+          },
+          {
+            "id": "B",
+            "content": "用户模式不可访问/proc文件系统中包含的内核数据结构的内容。"
+          },
+          {
+            "id": "C",
+            "content": "在execve函数参数的argv数组加入”> 1.txt”，不能自动实现IO重定向。"
+          },
+          {
+            "id": "D",
+            "content": "即便在信号处理程序中调用printf前阻塞所有信号，也不一定安全。"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "13.  对于Linux系统，下列说法错误的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-5d574996f3b93516",
+      "paperId": "p-f99ca20e1a729e32",
+      "paperOrder": 30,
       "moduleId": "ecf_and_system_io",
       "year": 2020,
       "examType": "期末",
@@ -2010,6 +3125,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2023,13 +3139,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "第四题（10分）\nC语言中的代码如下：\n```\nint counter = 0;\nvoid handler(int sig) {\n        counter++;\n}\nint main(int argc, char *argv[])\n{\n        int fd1, fd2, fd3;\n        char c1, c2, c3;\n        char *fname = argv[1];\n        int parent;\n        signal(SIGUSR1, handler);\n        fd1 = open(fname, O_RDONLY);\n        read(fd1, &c1, 1);\n        parent = getpid();\n        if (fork()) {\n                wait();\n                fd2 = open(fname, O_RDONLY);\n        } else {\n                kill(parent, SIGUSR1);\n                fd2 = dup(fd1);\n        }\n        read(fd2, &c2, 1);\n        parent = getpid();\n        if (fork()) {\n                wait();\n                fd3 = open(fname, O_RDONLY);\n        } else {\n                kill(parent, SIGUSR1);\n                fd3 = dup(fd2);\n        }\n        read(fd3, &c3, 1);\n        printf(\"%c %c %c %d\\n\", c1, c2, c3, counter);\n        return 0;\n}\n```\n当fname文件内容为abcde时，这段代码的打印结果为    行，输出结果如下：（不考虑出\n错的情况）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第四题（10分）\nC语言中的代码如下：\n```\nint counter = 0;\nvoid handler(int sig) {\n        counter++;\n}\nint main(int argc, char *argv[])\n{\n        int fd1, fd2, fd3;\n        char c1, c2, c3;\n        char *fname = argv[1];\n        int parent;\n        signal(SIGUSR1, handler);\n        fd1 = open(fname, O_RDONLY);\n        read(fd1, &c1, 1);\n        parent = getpid();\n        if (fork()) {\n                wait();\n                fd2 = open(fname, O_RDONLY);\n        } else {\n                kill(parent, SIGUSR1);\n                fd2 = dup(fd1);\n        }\n        read(fd2, &c2, 1);\n        parent = getpid();\n        if (fork()) {\n                wait();\n                fd3 = open(fname, O_RDONLY);\n        } else {\n                kill(parent, SIGUSR1);\n                fd3 = dup(fd2);\n        }\n        read(fd3, &c3, 1);\n        printf(\"%c %c %c %d\\n\", c1, c2, c3, counter);\n        return 0;\n}\n```\n当fname文件内容为abcde时，这段代码的打印结果为    行，输出结果如下：（不考虑出\n错的情况）",
         "answer": ""
       }
     },
     {
       "id": "q-731aeab6280be0ce",
+      "paperId": "p-2c2b56c4452255b1",
+      "paperOrder": 12,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2041,6 +3169,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2054,13 +3183,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "12.  关于进程和异常控制流，以下说法正确的是：\nA. 调用waitpid (-1, NULL, WNOHANG & WUNTRACED) 会立即返回：\n如果调用进程的所有子进程都没有被停止或终止，则返回 0；如果有停止或\n终止的子进程，则返回其中一个的ID。\nB 进程可以通过使用signal函数修改和信号相关联的默认行为，唯一的例\n外是SIGKILL，它的默认行为是不能修改的。\nC 从内核态转换到用户态有多种方法，例如设置程序状态字；从用户态转换\n到内核态的唯一途径是通过中断/异常/陷入机制。\nD 中断一定是异步发生的，陷阱可能是同步发生的，也可能是异步发生的。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "12.  关于进程和异常控制流，以下说法正确的是：\nA. 调用waitpid (-1, NULL, WNOHANG & WUNTRACED) 会立即返回：\n如果调用进程的所有子进程都没有被停止或终止，则返回 0；如果有停止或\n终止的子进程，则返回其中一个的ID。\nB 进程可以通过使用signal函数修改和信号相关联的默认行为，唯一的例\n外是SIGKILL，它的默认行为是不能修改的。\nC 从内核态转换到用户态有多种方法，例如设置程序状态字；从用户态转换\n到内核态的唯一途径是通过中断/异常/陷入机制。\nD 中断一定是异步发生的，陷阱可能是同步发生的，也可能是异步发生的。",
         "answer": ""
       }
     },
     {
       "id": "q-634feeecd6ec4fe0",
+      "paperId": "p-2c2b56c4452255b1",
+      "paperOrder": 13,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2072,6 +3213,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2085,6 +3227,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "13.  下列关于系统I/O的说法中，正确的是：",
         "choices": [
           {
@@ -2105,10 +3248,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "Linux shell创建的每个进程开始时都有三个打开的文件：标准输入\n（文件描述符为0）、标准输出（文件描述符为1）、标准错误（文件描述符\n为2），这使得程序始终不能使用保留的描述符0、1、2读写其他文件。"
+          },
+          {
+            "id": "B",
+            "content": "Unix I/O的read/write函数是异步信号安全的，故可以在信号处\n理函数中使用。"
+          },
+          {
+            "id": "C",
+            "content": "RIO函数包的健壮性保证了对于同一个文件描述符，任意顺序调用\nRIO包中的任意函数不会造成问题。"
+          },
+          {
+            "id": "D",
+            "content": "使用int fd1 = open(“ICS.txt”, O_RDWR); 打开ICS.txt文\n件后，再用int fd2 = open(“ICS.txt”, O_RDWR); 再次打开文\n件，会使得fd1对应的打开文件表中的引用计数refcnt加一。"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "13.  下列关于系统I/O的说法中，正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-ca639165db8443e7",
+      "paperId": "p-2c2b56c4452255b1",
+      "paperOrder": 14,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2120,6 +3292,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2133,6 +3306,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "14.  考虑以下代码，假设ICS.txt中的初始内容为\"ICS!!!ics!!!\"。\n```\nint fd = open(\"ICS.txt\", O_RDWR | O_CREAT | O_TRUNC,\nS_IRUSR | S_IWUSR);\nfor (int i = 0; i < 2; ++i){\n    int fd1 = open(\"ICS.txt\", O_RDWR | O_APPEND);\n    int fd2 = open(\"ICS.txt\", O_RDWR);\n    write(fd2, \"!!!!!!\", 6);\n    write(fd1, \"ICS\", 3);\n    write(fd, \"ics\", 3);\n}\n```\n  6\n\n<!-- ===== page 7 ===== -->\n\n假设所有系统调用均成功，则这段代码执行结束后，ICS.txt的内容为：",
         "choices": [
           {
@@ -2153,10 +3327,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "ICSics"
+          },
+          {
+            "id": "B",
+            "content": "!!!icsICS"
+          },
+          {
+            "id": "C",
+            "content": "!!!icsics!!!ICSICS"
+          },
+          {
+            "id": "D",
+            "content": "!!!icsICSICS"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "14.  考虑以下代码，假设ICS.txt中的初始内容为\"ICS!!!ics!!!\"。\n```\nint fd = open(\"ICS.txt\", O_RDWR | O_CREAT | O_TRUNC,\nS_IRUSR | S_IWUSR);\nfor (int i = 0; i < 2; ++i){\n    int fd1 = open(\"ICS.txt\", O_RDWR | O_APPEND);\n    int fd2 = open(\"ICS.txt\", O_RDWR);\n    write(fd2, \"!!!!!!\", 6);\n    write(fd1, \"ICS\", 3);\n    write(fd, \"ics\", 3);\n}\n```\n  6\n\n<!-- ===== page 7 ===== -->\n\n假设所有系统调用均成功，则这段代码执行结束后，ICS.txt的内容为：",
+        "answer": ""
       }
     },
     {
       "id": "q-aef3c997509d203e",
+      "paperId": "p-2c2b56c4452255b1",
+      "paperOrder": 23,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2168,6 +3371,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2181,13 +3385,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 pid 是\n相邻的。\nint N;\nint nxt; //表示该子进程下一个需要输出的数\nint pid_1 = 0; //第一次fork出的子进程pid\nint pid_2 = 0; //第二次fork出的子进程pid\n```\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n```\n    ________A________ // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n```\n}\nint main(int argc, char* argv[]) {\n```\n  ________B________ //将handler1绑定到SIGUSR1上\n```\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n```\n    ________C_______;  // 设置nxt的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  //跳转并等待子进程结束\n```\n    }\n  }\n```\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n```\n  wait_til_end:\n  int status;\n```\n  while (_______D_______)  // 用waitpid等待子进程结束，注意\n```\nstatus\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n  12\n\n<!-- ===== page 13 ===== -->\n\nPART B. 阅读如下 C 代码，回答问题\n```\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n________（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到n个相同信号，那么\n进程实际会处理几个信号？________（1分）\nA.1\nB.1到n之间的随机数值\nC.n\n3.如果N=2，所有可能的输出为：________\n（全部选对得2分，部分选对得1分，选错不得分）\nA.CC\nB.CC1\nC.CC12\nD. C1C2\n4.如果 N=2，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n________\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\nB.CC1\nC.CC1R2\nD.C1RC2\nE.C1CR2",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 pid 是\n相邻的。\nint N;\nint nxt; //表示该子进程下一个需要输出的数\nint pid_1 = 0; //第一次fork出的子进程pid\nint pid_2 = 0; //第二次fork出的子进程pid\n```\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n```\n    ________A________ // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n```\n}\nint main(int argc, char* argv[]) {\n```\n  ________B________ //将handler1绑定到SIGUSR1上\n```\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n```\n    ________C_______;  // 设置nxt的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  //跳转并等待子进程结束\n```\n    }\n  }\n```\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n```\n  wait_til_end:\n  int status;\n```\n  while (_______D_______)  // 用waitpid等待子进程结束，注意\n```\nstatus\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n  12\n\n<!-- ===== page 13 ===== -->\n\nPART B. 阅读如下 C 代码，回答问题\n```\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n________（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到n个相同信号，那么\n进程实际会处理几个信号？________（1分）\nA.1\nB.1到n之间的随机数值\nC.n\n3.如果N=2，所有可能的输出为：________\n（全部选对得2分，部分选对得1分，选错不得分）\nA.CC\nB.CC1\nC.CC12\nD. C1C2\n4.如果 N=2，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n________\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\nB.CC1\nC.CC1R2\nD.C1RC2\nE.C1CR2",
         "answer": ""
       }
     },
     {
       "id": "q-c470de9f3073d787",
+      "paperId": "p-2c2b56c4452255b1",
+      "paperOrder": 27,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2199,6 +3415,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2212,13 +3429,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "4. Double fault：Intel 处理器中有一种特殊的异常，被称为 double\nfault。此异常发生表明调用某个故障（fault）A的处理程序后又触发了另一\n个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B\n和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依\n然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺\n页异常处理程序外，其他异常处理程序都不会产生新的故障。如果在某次缺页故\n障时产生了double fault，其原因可能是__________（不定项选择，都选\n对才得分，1分）\n① 运行缺页故障处理程序时， CPU上的权限位是内核态，但所执行代码段\nU/S=0\n② 运行缺页故障处理程序时，CPU接收到了键盘发送的Ctrl + C信号\n③ 缺页故障处理程序没有加载到主存中",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4. Double fault：Intel 处理器中有一种特殊的异常，被称为 double\nfault。此异常发生表明调用某个故障（fault）A的处理程序后又触发了另一\n个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B\n和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依\n然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺\n页异常处理程序外，其他异常处理程序都不会产生新的故障。如果在某次缺页故\n障时产生了double fault，其原因可能是__________（不定项选择，都选\n对才得分，1分）\n① 运行缺页故障处理程序时， CPU上的权限位是内核态，但所执行代码段\nU/S=0\n② 运行缺页故障处理程序时，CPU接收到了键盘发送的Ctrl + C信号\n③ 缺页故障处理程序没有加载到主存中",
         "answer": ""
       }
     },
     {
       "id": "q-e69a51c0690351dd",
+      "paperId": "p-90f0f7d79163d16b",
+      "paperOrder": 1,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2230,6 +3459,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-fdfebd744cf025f1",
           "a-3f55495f3659177b"
@@ -2246,6 +3476,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "1\\. 下列关于系统I/O的说法中，正确的是（）：",
         "choices": [
           {
@@ -2266,10 +3497,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "Linux shell创建的每个进程开始时都有三个打开的文件：标准输入（描述符为0），标准输出（描述符为1），标准错误（描述符为2），这使得程序始终不能使用保留的描述符0,1,2读写其他文件。"
+          },
+          {
+            "id": "B",
+            "content": "Unix I/O的read/write函数是异步信号安全的，故可以在信号处理函数中使用。"
+          },
+          {
+            "id": "C",
+            "content": "RIO函数包的健壮性保证了对于同一个文件描述符，任意顺序调用RIO包中的任意函数不会造成问题。"
+          },
+          {
+            "id": "D",
+            "content": "使用int fd1 = open(“ICS.txt”, O_RDWR); 打开ICS.txt文件后，再用int fd2 = open(“ICS.txt”, O_RDWR); 再次打开文件，会使得fd1对应的打开文件表中的引用计数refcnt加一。"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "1\\. 下列关于系统I/O的说法中，正确的是（）：",
+        "answer": ""
       }
     },
     {
       "id": "q-3d80e4ee388aebd2",
+      "paperId": "p-90f0f7d79163d16b",
+      "paperOrder": 2,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2281,6 +3541,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-fdfebd744cf025f1",
           "a-3f55495f3659177b"
@@ -2297,6 +3558,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "2\\. 考虑以下代码，假设ICS.txt中的初始内容为\"ICS!!!ics!!!\"：\n\nint fd = open(\"ICS.txt\", O_RDWR \\| O_CREAT \\| O_TRUNC, S_IRUSR \\| S_IWUSR);\n\nfor (int i = 0; i \\< 2; ++i){\n\nint fd1 = open(\"ICS.txt\", O_RDWR \\| O_APPEND);\n\nint fd2 = open(\"ICS.txt\", O_RDWR);\n\nwrite(fd2, \"!!!!!!\", 6);\n\nwrite(fd1, \"ICS\", 3);\n\nwrite(fd, \"ics\", 3);\n\n}\n\n假设所有系统调用均成功，则这段代码执行结束后，ICS.txt的内容为（）：",
         "choices": [
           {
@@ -2317,10 +3579,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "ICSics"
+          },
+          {
+            "id": "B",
+            "content": "!!!icsICS"
+          },
+          {
+            "id": "C",
+            "content": "!!!icsics!!!ICSICS"
+          },
+          {
+            "id": "D",
+            "content": "!!!icsICSICS"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2\\. 考虑以下代码，假设ICS.txt中的初始内容为\"ICS!!!ics!!!\"：\n\nint fd = open(\"ICS.txt\", O_RDWR \\| O_CREAT \\| O_TRUNC, S_IRUSR \\| S_IWUSR);\n\nfor (int i = 0; i \\< 2; ++i){\n\nint fd1 = open(\"ICS.txt\", O_RDWR \\| O_APPEND);\n\nint fd2 = open(\"ICS.txt\", O_RDWR);\n\nwrite(fd2, \"!!!!!!\", 6);\n\nwrite(fd1, \"ICS\", 3);\n\nwrite(fd, \"ics\", 3);\n\n}\n\n假设所有系统调用均成功，则这段代码执行结束后，ICS.txt的内容为（）：",
+        "answer": ""
       }
     },
     {
       "id": "q-58e76213788bb4aa",
+      "paperId": "p-4bc14487feca1b60",
+      "paperOrder": 6,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2332,6 +3623,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-8d57eb05a1423ff8",
           "a-5780fa97dc094023",
@@ -2350,13 +3642,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "Part C. **(每空1分，共2分)** 使用execve加载a.out并执行时，其中第一个被执行的语句默认是\\_\\_\\_\\_\\_\\_\\_(单选) 函数的开头。已知 gcc -e 可以修改该默认行为到一个程序指定的函数，据此你推断该函数执行在\\_\\_\\_\\_\\_\\_\\_态下(填 用户/内核)。\n\n1.  \\_init     B.main     C.\\_\\_libc_start_main    D.\\_start",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "Part C. **(每空1分，共2分)** 使用execve加载a.out并执行时，其中第一个被执行的语句默认是\\_\\_\\_\\_\\_\\_\\_(单选) 函数的开头。已知 gcc -e 可以修改该默认行为到一个程序指定的函数，据此你推断该函数执行在\\_\\_\\_\\_\\_\\_\\_态下(填 用户/内核)。\n\n1.  \\_init     B.main     C.\\_\\_libc_start_main    D.\\_start",
         "answer": ""
       }
     },
     {
       "id": "q-fc0c224bcfe52ebc",
+      "paperId": "p-e5f44fa32922fc59",
+      "paperOrder": 1,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2368,6 +3672,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-e2bad4b12688fdec",
           "a-0ef4415524ead07c",
@@ -2385,13 +3690,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "1.  关于进程和异常控制流，以下说法正确的是：\n\n<!-- -->\n\n1.  调用waitpid (-1, NULL, WNOHANG & WUNTRACED) 会立即返回：如果调用进程的所有子进程都没有被停止或终止，则返回0；如果有停止或终止的子进程，则返回其中一个的ID。\n\n2.  进程可以通过使用signal函数修改和信号相关联的默认行为，唯一的例外是SIGKILL，它的默认行为是不能修改的。\n\n3.  从内核态转换到用户态有多种方法，例如设置程序状态字；从用户态转换到内核态的唯一途径是通过中断/异常/陷入机制。\n\n4.  中断一定是异步发生的，陷阱可能是同步发生的，也可能是异步发生的。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "1.  关于进程和异常控制流，以下说法正确的是：\n\n<!-- -->\n\n1.  调用waitpid (-1, NULL, WNOHANG & WUNTRACED) 会立即返回：如果调用进程的所有子进程都没有被停止或终止，则返回0；如果有停止或终止的子进程，则返回其中一个的ID。\n\n2.  进程可以通过使用signal函数修改和信号相关联的默认行为，唯一的例外是SIGKILL，它的默认行为是不能修改的。\n\n3.  从内核态转换到用户态有多种方法，例如设置程序状态字；从用户态转换到内核态的唯一途径是通过中断/异常/陷入机制。\n\n4.  中断一定是异步发生的，陷阱可能是同步发生的，也可能是异步发生的。",
         "answer": ""
       }
     },
     {
       "id": "q-73814029a8033fce",
+      "paperId": "p-e5f44fa32922fc59",
+      "paperOrder": 2,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2403,6 +3720,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-e2bad4b12688fdec",
           "a-0ef4415524ead07c",
@@ -2420,6 +3738,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "2、异常可以分为四类：中断、陷阱、故障、终止。以下都属于中断的是：",
         "choices": [
           {
@@ -2440,10 +3759,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "I/O请求完成、系统定时器的信号"
+          },
+          {
+            "id": "B",
+            "content": "除零、缺页"
+          },
+          {
+            "id": "C",
+            "content": "系统调用、非法指令"
+          },
+          {
+            "id": "D",
+            "content": "键盘Ctrl+C、机器检查"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2、异常可以分为四类：中断、陷阱、故障、终止。以下都属于中断的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-bc5bd7a7600545af",
+      "paperId": "p-e5f44fa32922fc59",
+      "paperOrder": 3,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2455,6 +3803,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-e2bad4b12688fdec",
           "a-0ef4415524ead07c",
@@ -2472,13 +3821,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "> 一. 异常控制流\n>\n> **PART A.** Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输出 1,2,…,N。请严格按照注释描述的功能填写代码，**<u>假设兄弟进程的 pid 是相邻的</u>**。\n>\n> （4分, 每空1分）\n>\n> （难度：简单）A.\n>\n> （难度：简单）B.\n>\n> （难度：简单）C.\n>\n> （难度：简单）D.",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "> 一. 异常控制流\n>\n> **PART A.** Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输出 1,2,…,N。请严格按照注释描述的功能填写代码，**<u>假设兄弟进程的 pid 是相邻的</u>**。\n>\n> （4分, 每空1分）\n>\n> （难度：简单）A.\n>\n> （难度：简单）B.\n>\n> （难度：简单）C.\n>\n> （难度：简单）D.",
         "answer": ""
       }
     },
     {
       "id": "q-6d88ff602b10bbb2",
+      "paperId": "p-e5f44fa32922fc59",
+      "paperOrder": 4,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2490,6 +3851,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-e2bad4b12688fdec",
           "a-0ef4415524ead07c",
@@ -2507,13 +3869,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "> **PART B.** 阅读如下 C 代码，回答问题\n>\n> 1.（难度：简单）进程在何时检查待处理信号，并调用相应的signal handler处理信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n>\n> 2.（难度：简单）在两次检查并处理信号量的时间间隙中，如果进程接收到n个**<u>相同</u>**信号，那么进程实际会处理几个信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.1\nB.1到n之间的随机数值\nC.n\n>\n> 3.（难度：中等）如果N=2，所有可能的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A.CC\nB.CC1\nC. CC12\nD. C1C2\n>\n> 4.（难度：难）如果 N=2，并且取消hanlder1中的注释（第7行），所有**<u>不可能</u>**的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A. CC\nB. CC1\nC. CC1R2\nD. C1RC2\nE. C1CR2",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "> **PART B.** 阅读如下 C 代码，回答问题\n>\n> 1.（难度：简单）进程在何时检查待处理信号，并调用相应的signal handler处理信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n>\n> 2.（难度：简单）在两次检查并处理信号量的时间间隙中，如果进程接收到n个**<u>相同</u>**信号，那么进程实际会处理几个信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.1\nB.1到n之间的随机数值\nC.n\n>\n> 3.（难度：中等）如果N=2，所有可能的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A.CC\nB.CC1\nC. CC12\nD. C1C2\n>\n> 4.（难度：难）如果 N=2，并且取消hanlder1中的注释（第7行），所有**<u>不可能</u>**的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A. CC\nB. CC1\nC. CC1R2\nD. C1RC2\nE. C1CR2",
         "answer": ""
       }
     },
     {
       "id": "q-b738a4a779989435",
+      "paperId": "p-9a0857f56f0ecb8b",
+      "paperOrder": 6,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2525,6 +3899,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-da9d503fa7a927aa",
           "a-fd3aa60347f16e19",
@@ -2546,13 +3921,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "4.  Double fault：Intel处理器中有一种特殊的异常，被称为double fault。此异常发生表明调用某个**故障（fault）**A的处理程序后又触发了另一个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺页异常处理程序外，其他异常处理程序**都不会产生新的故障**。如果在某次**缺页故障**时产生了double fault，其原因可能是\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_（不定项选择，都选对才得分，1分）\n\n> ① 运行缺页故障处理程序时， CPU上的权限位是内核态，但所执行代码段 U/S=0\n>\n> ② 运行缺页故障处理程序时，CPU接收到了键盘发送的Ctrl + C信号\n>\n> ③ 缺页故障处理程序没有加载到主存中",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4.  Double fault：Intel处理器中有一种特殊的异常，被称为double fault。此异常发生表明调用某个**故障（fault）**A的处理程序后又触发了另一个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺页异常处理程序外，其他异常处理程序**都不会产生新的故障**。如果在某次**缺页故障**时产生了double fault，其原因可能是\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_（不定项选择，都选对才得分，1分）\n\n> ① 运行缺页故障处理程序时， CPU上的权限位是内核态，但所执行代码段 U/S=0\n>\n> ② 运行缺页故障处理程序时，CPU接收到了键盘发送的Ctrl + C信号\n>\n> ③ 缺页故障处理程序没有加载到主存中",
         "answer": ""
       }
     },
     {
       "id": "q-b4e5029fae72d16f",
+      "paperId": "p-47ee7c7966791249",
+      "paperOrder": 7,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
@@ -2564,6 +3951,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2577,13 +3965,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "4.  Double fault：Intel处理器中有一种特殊的异常，被称为double fault。此异常发生表明调用某个**故障（fault）**A的处理程序后又触发了另一个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺页异常处理程序外，其他异常处理程序**都不会产生新的故障**。如果在某次**缺页故障**时产生了double fault，其原因可能是\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_（不定项选择，都选对才得分，1分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4.  Double fault：Intel处理器中有一种特殊的异常，被称为double fault。此异常发生表明调用某个**故障（fault）**A的处理程序后又触发了另一个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺页异常处理程序外，其他异常处理程序**都不会产生新的故障**。如果在某次**缺页故障**时产生了double fault，其原因可能是\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_（不定项选择，都选对才得分，1分）",
         "answer": ""
       }
     },
     {
       "id": "q-71e2271cf5cdd47d",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 7,
       "moduleId": "ecf_and_system_io",
       "year": 2022,
       "examType": "期末",
@@ -2597,6 +3997,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2610,13 +4011,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "7. 请根据下图所示流程完成填空。\n\n   ① 处发生了什么？________________________________________________。\n\n   ② 执行的代码是什么？________________________________________________。\n\n   ![图](assets/期末/2022期末-无答案/page-02.png)\n\n   图为进程切换流程示意：左右两栏分别为\"进程 A\"与\"进程 B\"的代码执行时序，由\"用户代码\"\"内核代码\"色块交替组成，右侧两处括注\"上下文切换\"；左上角文字\"有信号发送给进程 A\"，①、② 分别指向内核代码中的两个位置。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "7. 请根据下图所示流程完成填空。\n\n   ① 处发生了什么？________________________________________________。\n\n   ② 执行的代码是什么？________________________________________________。\n\n   ![图](assets/期末/2022期末-无答案/page-02.png)\n\n   图为进程切换流程示意：左右两栏分别为\"进程 A\"与\"进程 B\"的代码执行时序，由\"用户代码\"\"内核代码\"色块交替组成，右侧两处括注\"上下文切换\"；左上角文字\"有信号发送给进程 A\"，①、② 分别指向内核代码中的两个位置。",
         "answer": ""
       }
     },
     {
       "id": "q-bf6cf419556f4423",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 8,
       "moduleId": "ecf_and_system_io",
       "year": 2022,
       "examType": "期末",
@@ -2628,6 +4041,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2641,13 +4055,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "8. 实现 Shell 程序时，在解析了命令行后，会检查第一个命令行参数是否是一个内置 Shell 命令。如果不是，则 Shell 程序会调用______①______和______②______函数完成命令行命令。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "8. 实现 Shell 程序时，在解析了命令行后，会检查第一个命令行参数是否是一个内置 Shell 命令。如果不是，则 Shell 程序会调用______①______和______②______函数完成命令行命令。",
         "answer": ""
       }
     },
     {
       "id": "q-9bc46cc82b1120f4",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 26,
       "moduleId": "ecf_and_system_io",
       "year": 2022,
       "examType": "期末",
@@ -2659,6 +4085,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2672,6 +4099,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "信号是实现进程间通信的一种重要方式。以下程序中，父进程借助信号把一个随机数传给子进程。\n\n```c\n 1. #include \"csapp.h\"\n 2. volatile int acc = 0;\n 3. volatile int count = 0;\n 4. void sigusr1_handler(int sig) {\n 5.         ______________G______________\n 6.     acc = acc * 2 + __A__;\n 7.     Kill(getppid(), SIGCONT);\n 8. }\n 9. void sigusr2_handler(int sig) {\n10.         ______________H______________\n11.     acc = acc * 2 + __B__;\n12.     Kill(getppid(), SIGCONT);\n13. }\n14. void sigcont_handler(int sig) {}\n15. int main() {\n16.     sigset_t mask_all, mask_father, mask_child;\n17.     Sigfillset(&mask_all);\n18.     Sigfillset(&mask_father);\n19.     Sigfillset(&mask_child);\n20.     Sigdelset(&mask_father, SIGCONT);\n21.     Sigdelset(&mask_child, SIGUSR1);\n22.     Sigdelset(&mask_child, SIGUSR2);\n23.     Signal(SIGUSR1, sigusr1_handler);\n24.     Signal(SIGUSR2, sigusr2_handler);\n25.     Signal(SIGCONT, sigcont_handler);\n26.     __C__(SIG_SETMASK, __D__, NULL);\n27.\n28.     pid_t pid = Fork();\n```\n\n<!-- ===== page 08 ===== -->\n\n```c\n29.     if (pid == 0) {\n30.         for (int i = 0; i < sizeof(int) * 8; i++)\n31.             __E__(&mask_child);\n32.         printf(\"child:0x%x\\n\", acc);\n33.     }\n34.     else {\n35.         srand(time(NULL));\n36.         int r = rand();\n37.         printf(\"father:0x%x\\n\", r);\n38.         for (int i = 0; i < sizeof(int) * 8; i++) {\n39.             if (r & (__F__ << 31 - i))\n40.                 Kill(pid, SIGUSR2);\n41.             else\n42.                 Kill(pid, SIGUSR1);\n43.             __E__(&mask_father);\n44.         }\n45.         Wait(NULL);\n46.     }\n47. }\n```\n\n1. 假设 G. H 处都为空，该程序需要使得父进程和子进程的输出相同。（共 6 分，每空 1 分）\n\n   (1) 程序填空：",
         "choices": [
           {
@@ -2700,10 +4128,47 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "________________________________"
+          },
+          {
+            "id": "B",
+            "content": "________________________________"
+          },
+          {
+            "id": "C",
+            "content": "________________________________"
+          },
+          {
+            "id": "D",
+            "content": "________________________________"
+          },
+          {
+            "id": "E",
+            "content": "________________________________"
+          },
+          {
+            "id": "F",
+            "content": "________________________________"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "信号是实现进程间通信的一种重要方式。以下程序中，父进程借助信号把一个随机数传给子进程。\n\n```c\n 1. #include \"csapp.h\"\n 2. volatile int acc = 0;\n 3. volatile int count = 0;\n 4. void sigusr1_handler(int sig) {\n 5.         ______________G______________\n 6.     acc = acc * 2 + __A__;\n 7.     Kill(getppid(), SIGCONT);\n 8. }\n 9. void sigusr2_handler(int sig) {\n10.         ______________H______________\n11.     acc = acc * 2 + __B__;\n12.     Kill(getppid(), SIGCONT);\n13. }\n14. void sigcont_handler(int sig) {}\n15. int main() {\n16.     sigset_t mask_all, mask_father, mask_child;\n17.     Sigfillset(&mask_all);\n18.     Sigfillset(&mask_father);\n19.     Sigfillset(&mask_child);\n20.     Sigdelset(&mask_father, SIGCONT);\n21.     Sigdelset(&mask_child, SIGUSR1);\n22.     Sigdelset(&mask_child, SIGUSR2);\n23.     Signal(SIGUSR1, sigusr1_handler);\n24.     Signal(SIGUSR2, sigusr2_handler);\n25.     Signal(SIGCONT, sigcont_handler);\n26.     __C__(SIG_SETMASK, __D__, NULL);\n27.\n28.     pid_t pid = Fork();\n```\n\n<!-- ===== page 08 ===== -->\n\n```c\n29.     if (pid == 0) {\n30.         for (int i = 0; i < sizeof(int) * 8; i++)\n31.             __E__(&mask_child);\n32.         printf(\"child:0x%x\\n\", acc);\n33.     }\n34.     else {\n35.         srand(time(NULL));\n36.         int r = rand();\n37.         printf(\"father:0x%x\\n\", r);\n38.         for (int i = 0; i < sizeof(int) * 8; i++) {\n39.             if (r & (__F__ << 31 - i))\n40.                 Kill(pid, SIGUSR2);\n41.             else\n42.                 Kill(pid, SIGUSR1);\n43.             __E__(&mask_father);\n44.         }\n45.         Wait(NULL);\n46.     }\n47. }\n```\n\n1. 假设 G. H 处都为空，该程序需要使得父进程和子进程的输出相同。（共 6 分，每空 1 分）\n\n   (1) 程序填空：",
+        "answer": ""
       }
     },
     {
       "id": "q-42ff4c55dfbfaeab",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 27,
       "moduleId": "ecf_and_system_io",
       "year": 2022,
       "examType": "期末",
@@ -2715,6 +4180,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2728,13 +4194,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "   (2) 第 43 行的代码是必须的吗？如果\"是\"，请用一句话描述去掉了这一行代码会发生什么。（2 分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "   (2) 第 43 行的代码是必须的吗？如果\"是\"，请用一句话描述去掉了这一行代码会发生什么。（2 分）",
         "answer": ""
       }
     },
     {
       "id": "q-ad848f471879e035",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 28,
       "moduleId": "ecf_and_system_io",
       "year": 2022,
       "examType": "期末",
@@ -2746,6 +4224,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2759,13 +4238,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "2. 假设 G 处填写 if (count % 3 == 0) return; 在 H 处填写 count++;\n\n   如果第 36 行生成的随机数是 0xaaaaaaaa，则子进程的输出是 child:0x____________ （1 分），简要说明理由。（1 分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2. 假设 G 处填写 if (count % 3 == 0) return; 在 H 处填写 count++;\n\n   如果第 36 行生成的随机数是 0xaaaaaaaa，则子进程的输出是 child:0x____________ （1 分），简要说明理由。（1 分）",
         "answer": ""
       }
     },
     {
       "id": "q-e27de69c93c6ae02",
+      "paperId": "p-370abd8502c12e99",
+      "paperOrder": 7,
       "moduleId": "ecf_and_system_io",
       "year": 2022,
       "examType": "期末",
@@ -2777,6 +4268,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-bc6da33280192b2a"
         ]
@@ -2792,13 +4284,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "7、①发生异常，从用户态切换到内核态 ②进程A的信号处理程序",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "7、①发生异常，从用户态切换到内核态 ②进程A的信号处理程序",
         "answer": ""
       }
     },
     {
       "id": "q-8335b3d1de3c4eb6",
+      "paperId": "p-370abd8502c12e99",
+      "paperOrder": 8,
       "moduleId": "ecf_and_system_io",
       "year": 2022,
       "examType": "期末",
@@ -2810,6 +4314,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-bc6da33280192b2a"
         ]
@@ -2825,13 +4330,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "8、fork execve",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "8、fork execve",
         "answer": ""
       }
     },
     {
       "id": "q-beddffe5510cad21",
+      "paperId": "p-370abd8502c12e99",
+      "paperOrder": 18,
       "moduleId": "ecf_and_system_io",
       "year": 2022,
       "examType": "期末",
@@ -2843,6 +4360,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-bc6da33280192b2a"
         ]
@@ -2858,13 +4376,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第四题\n1. (1)  A: 0\n          B:  1\n          C: Sigprocmask\n          D: &mask_all\n          E: Sigsuspend\n          F: 1\n(2)  是\n否则可能会 1) 父进程向子进程发送多个同类信号，而子进程只接受到1个，子进程死循环。2)\n子进程处理SIGUSR1和SIGUSR2的顺序与父进程发信号的顺序不一致。两个情况都会导致出错\n2. （这个小题应该是出错了，如果按照原题目的话：）不会输出。在sigusr_handler中，如果G为真，\n执行return，那么就不会发送 SIGCONT给父进程，父进程阻塞在Sigsuspend，所以子进程也会阻塞，\n导致没有输出。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第四题\n1. (1)  A: 0\n          B:  1\n          C: Sigprocmask\n          D: &mask_all\n          E: Sigsuspend\n          F: 1\n(2)  是\n否则可能会 1) 父进程向子进程发送多个同类信号，而子进程只接受到1个，子进程死循环。2)\n子进程处理SIGUSR1和SIGUSR2的顺序与父进程发信号的顺序不一致。两个情况都会导致出错\n2. （这个小题应该是出错了，如果按照原题目的话：）不会输出。在sigusr_handler中，如果G为真，\n执行return，那么就不会发送 SIGCONT给父进程，父进程阻塞在Sigsuspend，所以子进程也会阻塞，\n导致没有输出。",
         "answer": ""
       }
     },
     {
       "id": "q-62ab16de5f04decf",
+      "paperId": "p-ae9ab20d09974cf3",
+      "paperOrder": 7,
       "moduleId": "ecf_and_system_io",
       "year": 2024,
       "examType": "期末",
@@ -2876,6 +4406,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": [
           "a-544cd966469e852a",
           "a-0f691532afb6eb95",
@@ -2893,13 +4424,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "7. 下列陈述中，错误陈述的数量为：\n①进程调度的实现在一定程度上依赖于定时器中断（timer interrupts）。\n②execv()函数成功调用后不会返回。\n③使用fork()创建的子进程与父进程对内存的修改是共享的。\n④在X86-64 Linux中，访存缺页异常属于故障。\n⑤异常处理的返回行为包括：返回当前指令、返回下一条指令和终止(abort)。\n⑥如果处理得当（如设置SIGFPE的信号处理函数），除以零引发的除法错误不会\n导致终止(abort)。\n⑦单核处理器上，可以通过不断地上下文切换交替运行并发的程序，给用户呈现一\n种并发的程序在同时运行的感觉。\n⑧进入信号处理函数时会创建新的进程。\nA. 0个   B. 1个   C. 2个   D. 3个",
         "choices": [],
+        "answer": "答案：C， ③⑧错误。使用 fork 创建的子进程和父进程在 初始阶段 的内存内\n容是相同的，但它们并不是直接共享内存。父子进程初期的内存内容是相同的，但\n它们对内存的修改是 独立的，并不共享。进入信号处理函数并不会创建新的进程。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "7. 下列陈述中，错误陈述的数量为：\n①进程调度的实现在一定程度上依赖于定时器中断（timer interrupts）。\n②execv()函数成功调用后不会返回。\n③使用fork()创建的子进程与父进程对内存的修改是共享的。\n④在X86-64 Linux中，访存缺页异常属于故障。\n⑤异常处理的返回行为包括：返回当前指令、返回下一条指令和终止(abort)。\n⑥如果处理得当（如设置SIGFPE的信号处理函数），除以零引发的除法错误不会\n导致终止(abort)。\n⑦单核处理器上，可以通过不断地上下文切换交替运行并发的程序，给用户呈现一\n种并发的程序在同时运行的感觉。\n⑧进入信号处理函数时会创建新的进程。\nA. 0个   B. 1个   C. 2个   D. 3个",
         "answer": "答案：C， ③⑧错误。使用 fork 创建的子进程和父进程在 初始阶段 的内存内\n容是相同的，但它们并不是直接共享内存。父子进程初期的内存内容是相同的，但\n它们对内存的修改是 独立的，并不共享。进入信号处理函数并不会创建新的进程。"
       }
     },
     {
       "id": "q-6e546bb16a72a196",
+      "paperId": "p-ae9ab20d09974cf3",
+      "paperOrder": 8,
       "moduleId": "ecf_and_system_io",
       "year": 2024,
       "examType": "期末",
@@ -2911,6 +4454,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": [
           "a-544cd966469e852a",
           "a-0f691532afb6eb95",
@@ -2928,6 +4472,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "8. 在Ubuntu Linux 24.04环境中，关于系统级IO，下列说法正确的是：",
         "choices": [
           {
@@ -2948,10 +4493,42 @@
           }
         ],
         "answer": "答案：C\nA. SIGKILL会直接终止进程，此时，仍留存在用户态缓冲区的内容尚未被写入\n磁盘。这里要求“未进行特殊设置和额外操作”保证了缓冲区存在且不被清空。\nB. fprintf是线程安全的，内部有同步机制，不会导致程序崩溃。一个特殊情况\n是如果两个竞争的fprintf调用操作同一个FILE*对象，那么文件内容的最终顺\n序是不确定的。但也不会导致程序崩溃。\nC. 正确\nD. fork() 创建的子进程的标准 I/O 缓冲区不总是空的，它会复制父进程的标\n准 I/O 缓冲区的内容。注意——COW并不会立即复制父进程的缓冲区，而是在子\n进程或父进程尝试修改缓冲区时才会复制。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "在未进行特殊设置和额外操作的情况下，某进程先调用了fprintf()函数向某\n文件写入数据，且返回值恰为传入数据字节数。若向该进程发送SIGKILL信号终\n止进程，再打开该文件，一定能看到该进程写入的内容。"
+          },
+          {
+            "id": "B",
+            "content": "同一进程内的多个线程不加同步地调用fprintf()会导致程序崩溃。"
+          },
+          {
+            "id": "C",
+            "content": "由于慢速系统调用read()和write()会潜在地阻塞进程一段较长时间，高级\nI/O函数使用缓冲区来减少对read()和write()的调用。"
+          },
+          {
+            "id": "D",
+            "content": "无论父进程的标准I/O缓冲区——例如printf()函数的缓冲区是否为空，执\n7\n<!-- ===== page 8 ===== -->\n行fork()创建的子进程的缓冲区总是为空。"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "8. 在Ubuntu Linux 24.04环境中，关于系统级IO，下列说法正确的是：",
+        "answer": "答案：C\nA. SIGKILL会直接终止进程，此时，仍留存在用户态缓冲区的内容尚未被写入\n磁盘。这里要求“未进行特殊设置和额外操作”保证了缓冲区存在且不被清空。\nB. fprintf是线程安全的，内部有同步机制，不会导致程序崩溃。一个特殊情况\n是如果两个竞争的fprintf调用操作同一个FILE*对象，那么文件内容的最终顺\n序是不确定的。但也不会导致程序崩溃。\nC. 正确\nD. fork() 创建的子进程的标准 I/O 缓冲区不总是空的，它会复制父进程的标\n准 I/O 缓冲区的内容。注意——COW并不会立即复制父进程的缓冲区，而是在子\n进程或父进程尝试修改缓冲区时才会复制。"
       }
     },
     {
       "id": "q-db07f3829cfe0e66",
+      "paperId": "p-ae9ab20d09974cf3",
+      "paperOrder": 17,
       "moduleId": "ecf_and_system_io",
       "year": 2024,
       "examType": "期末",
@@ -2963,6 +4540,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-544cd966469e852a",
           "a-0f691532afb6eb95",
@@ -2980,13 +4558,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第三题（15分）\nPart A: 分析下面这段代码的行为，假设file.txt文件存在，且不需要考虑\nopen()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main(){\n    int fd[3];\n    fd[0] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\n    fd[1] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\nwrite(fd[0], \"Harry\", 5);\nif (fork() == 0) {\n    dup2(fd[0], fd[1]);\n    write(fd[1], \"Voldemort\", 9);\n    fd[2] = open(\"./file.txt\", O_RDWR, 0);\n    printf(\"%d\\n\", fd[2]);\n    exit(0);\n}\nwait(NULL);\nfd[1] = dup(fd[0]);\nwrite(fd[0], \"Hermione\", 8);\nwrite(fd[1], \"Ron\", 3);\nfd[2] = open(\"./file.txt\", O_RDWR, 0);\nprintf(\"%d\\n\", fd[2]);\n}\n```\n1） 运行这段代码，在终端上可以看到两行输出，第一行的内容为          ，\n第二行的内容为          。(每空1分)\n2） 运行这段代码后，file.txt文件的内容为                             。\n（3分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第三题（15分）\nPart A: 分析下面这段代码的行为，假设file.txt文件存在，且不需要考虑\nopen()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main(){\n    int fd[3];\n    fd[0] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\n    fd[1] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\nwrite(fd[0], \"Harry\", 5);\nif (fork() == 0) {\n    dup2(fd[0], fd[1]);\n    write(fd[1], \"Voldemort\", 9);\n    fd[2] = open(\"./file.txt\", O_RDWR, 0);\n    printf(\"%d\\n\", fd[2]);\n    exit(0);\n}\nwait(NULL);\nfd[1] = dup(fd[0]);\nwrite(fd[0], \"Hermione\", 8);\nwrite(fd[1], \"Ron\", 3);\nfd[2] = open(\"./file.txt\", O_RDWR, 0);\nprintf(\"%d\\n\", fd[2]);\n}\n```\n1） 运行这段代码，在终端上可以看到两行输出，第一行的内容为          ，\n第二行的内容为          。(每空1分)\n2） 运行这段代码后，file.txt文件的内容为                             。\n（3分）",
         "answer": ""
       }
     },
     {
       "id": "q-5c38fe1cccec5866",
+      "paperId": "p-ae9ab20d09974cf3",
+      "paperOrder": 18,
       "moduleId": "ecf_and_system_io",
       "year": 2024,
       "examType": "期末",
@@ -2998,6 +4588,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-544cd966469e852a",
           "a-0f691532afb6eb95",
@@ -3015,13 +4606,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "Part B:分析下列代码的行为，其功能是利用信号处理函数输出数列内容。\n```\n#include <csapp.h>\n#define N 10\nint flag = 0;\nvoid handler1() {\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n```\n15\n\n<!-- ===== page 16 ===== -->\n\n```\n    }\n    flag++;\n}\nvoid handler2() {\n    for (int i = 1; i < N; i += 2){\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\nint main() {\n    pid_t pid = fork();\n    if (pid == 0) {\n        signal(SIGUSR1, handler1);\n        signal(SIGUSR2, handler2);\n        while (flag < 2)\n            sleep(1);\n    }\nelse{\n    kill(pid, SIGUSR1);\n        kill(pid, SIGUSR2);\n        wait(NULL);\n    }\n    return 0;\n}\n```\n1） 运行这段代码后，发现程序没有输出，且陷入死循环。请简要指出其原因，并\n给出解决方案。（2分）\n2） 在解决上述问题之后，第一次运行得到“1\t3\t5\t7\t9\t0\t2\t4\t6\t8”；但再次运行得到\n的却是“1\t3\t0\t2\t4\t6\t8\t5\t7\t9”，与期望不符。请结合“编写信号处理函数”的知识，补\n全handler1()函数中缺失的代码，以保证运行结果的正确性。（3分）\n```\nvoid handler1(){\nsigset_t mask, prev_mask;\n      A      (       B       );\n      C      (       D      , &mask, &prev_mask);\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n}\nflag++;\n      E      (       F      , &prev_mask);\n}\n```\n基于下列选项选择序号填写：\n16\n\n<!-- ===== page 17 ===== -->\n\n```\n① Sigfillset;   ② Sigpromask;   ③ Sigemptyset;\n④ SIG_BLOCK;    ⑤ SIG_UNBLOCK;   ⑥ SIG_SETMASK;\n⑦ &mask;         ⑧ &prev_mask;    ⑨ NULL;\nA:\nB:\nC:\nD:\nE:\nF:\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "Part B:分析下列代码的行为，其功能是利用信号处理函数输出数列内容。\n```\n#include <csapp.h>\n#define N 10\nint flag = 0;\nvoid handler1() {\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n```\n15\n\n<!-- ===== page 16 ===== -->\n\n```\n    }\n    flag++;\n}\nvoid handler2() {\n    for (int i = 1; i < N; i += 2){\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\nint main() {\n    pid_t pid = fork();\n    if (pid == 0) {\n        signal(SIGUSR1, handler1);\n        signal(SIGUSR2, handler2);\n        while (flag < 2)\n            sleep(1);\n    }\nelse{\n    kill(pid, SIGUSR1);\n        kill(pid, SIGUSR2);\n        wait(NULL);\n    }\n    return 0;\n}\n```\n1） 运行这段代码后，发现程序没有输出，且陷入死循环。请简要指出其原因，并\n给出解决方案。（2分）\n2） 在解决上述问题之后，第一次运行得到“1\t3\t5\t7\t9\t0\t2\t4\t6\t8”；但再次运行得到\n的却是“1\t3\t0\t2\t4\t6\t8\t5\t7\t9”，与期望不符。请结合“编写信号处理函数”的知识，补\n全handler1()函数中缺失的代码，以保证运行结果的正确性。（3分）\n```\nvoid handler1(){\nsigset_t mask, prev_mask;\n      A      (       B       );\n      C      (       D      , &mask, &prev_mask);\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n}\nflag++;\n      E      (       F      , &prev_mask);\n}\n```\n基于下列选项选择序号填写：\n16\n\n<!-- ===== page 17 ===== -->\n\n```\n① Sigfillset;   ② Sigpromask;   ③ Sigemptyset;\n④ SIG_BLOCK;    ⑤ SIG_UNBLOCK;   ⑥ SIG_SETMASK;\n⑦ &mask;         ⑧ &prev_mask;    ⑨ NULL;\nA:\nB:\nC:\nD:\nE:\nF:\n```",
         "answer": ""
       }
     },
     {
       "id": "q-f106961e4b86af22",
+      "paperId": "p-ae9ab20d09974cf3",
+      "paperOrder": 19,
       "moduleId": "ecf_and_system_io",
       "year": 2024,
       "examType": "期末",
@@ -3033,6 +4636,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-544cd966469e852a",
           "a-0f691532afb6eb95",
@@ -3050,13 +4654,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "Part C: 分析下面这段代码的行为，假设file.txt文件存在且初始内容为空，\n并且不需要考虑open()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main() {\nchar *numbers = \"0123456789\";\nchar buffer[100];\nbuffer[0] = '\\0';\npid_t father_pid = getpid();\nfor (int i = 0; i < 10; ++i){\nif (fork() != 0) {\nstrncat(buffer, numbers + i, 1);\n}\n}\nint fd = open(\"./file.txt\", O_RDWR , 0);\nwrite(fd, buffer, strlen(buffer));\nwhile(wait(NULL) != -1){}\nif (getpid() == father_pid) {\nclose(fd);\nfd = open(\"./file.txt\", O_RDONLY, 0);\nchar content[100];\nread(fd, content, 100);\nprintf(\"%c\\n\", content[3]);\nprintf(\"%c\\n\", content[6]);\n}\nexit(0);\n}\n```\n17\n\n<!-- ===== page 18 ===== -->\n\n如果你不清楚string.h中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\ndest，一个源字符串src和最大追加的字符数n。在src的长度至少为n时，这个函数将\nsrc的前n个字符拼接到dest字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为            ，\n第二行的内容可能为            。（ 你 需 要 列 出所有可能出现的 输 出， 每种 可能\n性用逗号隔开，每空1分）\n2） 在运行这段代码之后，file.txt中的内容有            种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "Part C: 分析下面这段代码的行为，假设file.txt文件存在且初始内容为空，\n并且不需要考虑open()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main() {\nchar *numbers = \"0123456789\";\nchar buffer[100];\nbuffer[0] = '\\0';\npid_t father_pid = getpid();\nfor (int i = 0; i < 10; ++i){\nif (fork() != 0) {\nstrncat(buffer, numbers + i, 1);\n}\n}\nint fd = open(\"./file.txt\", O_RDWR , 0);\nwrite(fd, buffer, strlen(buffer));\nwhile(wait(NULL) != -1){}\nif (getpid() == father_pid) {\nclose(fd);\nfd = open(\"./file.txt\", O_RDONLY, 0);\nchar content[100];\nread(fd, content, 100);\nprintf(\"%c\\n\", content[3]);\nprintf(\"%c\\n\", content[6]);\n}\nexit(0);\n}\n```\n17\n\n<!-- ===== page 18 ===== -->\n\n如果你不清楚string.h中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\ndest，一个源字符串src和最大追加的字符数n。在src的长度至少为n时，这个函数将\nsrc的前n个字符拼接到dest字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为            ，\n第二行的内容可能为            。（ 你 需 要 列 出所有可能出现的 输 出， 每种 可能\n性用逗号隔开，每空1分）\n2） 在运行这段代码之后，file.txt中的内容有            种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）",
         "answer": ""
       }
     },
     {
       "id": "q-57f02c06a6382d33",
+      "paperId": "p-5ee6f6e8778f358e",
+      "paperOrder": 15,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3068,6 +4684,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3081,13 +4698,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "15.关于异常（exception）的细分类型，下列说法哪些正确？",
         "choices": [],
+        "answer": "答案：ABD\n解析： trap 常见于系统调用，返回到下一条；fault 典型会重启当前指令（例如页故障\n修好后重新执行触发缺页的那条访存指令），因此 C 错；page fault是 fault，不是\ntrap（E 错）。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "15.关于异常（exception）的细分类型，下列说法哪些正确？",
         "answer": "答案：ABD\n解析： trap 常见于系统调用，返回到下一条；fault 典型会重启当前指令（例如页故障\n修好后重新执行触发缺页的那条访存指令），因此 C 错；page fault是 fault，不是\ntrap（E 错）。"
       }
     },
     {
       "id": "q-40d6bbb04610d275",
+      "paperId": "p-5ee6f6e8778f358e",
+      "paperOrder": 16,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3099,6 +4728,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3112,13 +4742,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "16.关于“进程上下文切换（context switch）”，下列说法哪些正确？",
         "choices": [],
+        "answer": "答案：ACD\n解析： B 错（不一定，有可能还在当前进程）；E 错（切换进程通常意味着切换到另一个\n地址空间/页表）。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16.关于“进程上下文切换（context switch）”，下列说法哪些正确？",
         "answer": "答案：ACD\n解析： B 错（不一定，有可能还在当前进程）；E 错（切换进程通常意味着切换到另一个\n地址空间/页表）。"
       }
     },
     {
       "id": "q-e232b8d0d805682e",
+      "paperId": "p-5ee6f6e8778f358e",
+      "paperOrder": 17,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3130,6 +4772,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3143,13 +4786,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "17.文件t.txt的内容恰好是4字节：abcd（示意）",
         "choices": [],
+        "answer": "答案：ABE\n解析： 父子进程共享同一个 open file description，因此 4 次 read 总体按顺序\n消耗 a,b,c,d。某个进程读到的两字节一定是“先后顺序递增”的组合（如\nab/ac/bd/cd/...），但不可能倒序（ca）或重复（aa）。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17.文件t.txt的内容恰好是4字节：abcd（示意）",
         "answer": "答案：ABE\n解析： 父子进程共享同一个 open file description，因此 4 次 read 总体按顺序\n消耗 a,b,c,d。某个进程读到的两字节一定是“先后顺序递增”的组合（如\nab/ac/bd/cd/...），但不可能倒序（ca）或重复（aa）。"
       }
     },
     {
       "id": "q-38fe1a2c683ed497",
+      "paperId": "p-5ee6f6e8778f358e",
+      "paperOrder": 18,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3161,6 +4816,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3174,13 +4830,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "18.观察下面的C程序代码",
         "choices": [],
+        "answer": "答案：AB\n解析： SIGCHLD 可能合并递送；一次进入 handler 用 while(waitpid...) 可回收\n多个已退出子进程，因此 A 对。reap==2 意味着两个子都已被回收，通常不会有 zombie\n（B 对）。C/D/E 都不成立。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "18.观察下面的C程序代码",
         "answer": "答案：AB\n解析： SIGCHLD 可能合并递送；一次进入 handler 用 while(waitpid...) 可回收\n多个已退出子进程，因此 A 对。reap==2 意味着两个子都已被回收，通常不会有 zombie\n（B 对）。C/D/E 都不成立。"
       }
     },
     {
       "id": "q-5b49e82696d6e69a",
+      "paperId": "p-5ee6f6e8778f358e",
+      "paperOrder": 19,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3192,6 +4860,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3205,13 +4874,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "19.观察下面的C程序代码：",
         "choices": [],
+        "answer": "答案：B\n解析： 普通信号（非实时信号）通常不排队：阻塞期间同种信号 pending 只记一次，因\n此解除阻塞后 handler 只会跑一次（B/E 对），解除阻塞前不会递送（D 错）。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "19.观察下面的C程序代码：",
         "answer": "答案：B\n解析： 普通信号（非实时信号）通常不排队：阻塞期间同种信号 pending 只记一次，因\n此解除阻塞后 handler 只会跑一次（B/E 对），解除阻塞前不会递送（D 错）。"
       }
     },
     {
       "id": "q-daaaba27ab72275a",
+      "paperId": "p-5ee6f6e8778f358e",
+      "paperOrder": 20,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3223,6 +4904,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3236,13 +4918,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "20.关于 execve()成功执行后的语义，下列说法哪些正确？\n3\n\n<!-- ===== page 4 ===== -->",
         "choices": [],
+        "answer": "答案：ABD\n解析： exec 是“在同一进程里换程序”，PID 不变（C 错），也不会创建新进程（E 错）"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "20.关于 execve()成功执行后的语义，下列说法哪些正确？\n3\n\n<!-- ===== page 4 ===== -->",
         "answer": "答案：ABD\n解析： exec 是“在同一进程里换程序”，PID 不变（C 错），也不会创建新进程（E 错）"
       }
     },
     {
       "id": "q-9567ccfd72ea1c2f",
+      "paperId": "p-e8f40973e2cc056e",
+      "paperOrder": 15,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3254,6 +4948,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3267,6 +4962,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "15.关于异常（exception）的细分类型，下列说法哪些正确？",
         "choices": [
           {
@@ -3291,10 +4987,43 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "Interrupt 通常由外部设备异步触发，处理后回到“下一条指令”"
+          },
+          {
+            "id": "B",
+            "content": "Trap 通常在CPU内部由执行指令触发，处理后回到“下一条指令”"
+          },
+          {
+            "id": "C",
+            "content": "Fault 通常表示可以恢复的错误，处理后回到“下一条指令”"
+          },
+          {
+            "id": "D",
+            "content": "Abort 通常表示不可恢复的错误，程序一般不会继续执行"
+          },
+          {
+            "id": "E",
+            "content": "执行访存指令引发的缺页异常，属于Trap"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "15.关于异常（exception）的细分类型，下列说法哪些正确？",
+        "answer": ""
       }
     },
     {
       "id": "q-e6e9e076ae21c4ba",
+      "paperId": "p-e8f40973e2cc056e",
+      "paperOrder": 16,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3306,6 +5035,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3319,6 +5049,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "16.关于“进程上下文切换（context switch）”，下列说法哪些正确？",
         "choices": [
           {
@@ -3343,10 +5074,43 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "进程切换通常发生在内核态，由调度器决定下一个运行的进程"
+          },
+          {
+            "id": "B",
+            "content": "显式调用 fork() 就会发生进程切换"
+          },
+          {
+            "id": "C",
+            "content": "定时器中断（timer interrupt）可能触发调度，从而导致进程切换"
+          },
+          {
+            "id": "D",
+            "content": "切换进程时需要保存当前进程的寄存器状态，并恢复另一个进程的寄存器状态"
+          },
+          {
+            "id": "E",
+            "content": "上下文切换不会改变当前进程的虚拟地址空间映射（页表等）"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16.关于“进程上下文切换（context switch）”，下列说法哪些正确？",
+        "answer": ""
       }
     },
     {
       "id": "q-c7b4244913beba0a",
+      "paperId": "p-e8f40973e2cc056e",
+      "paperOrder": 17,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3358,6 +5122,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3371,13 +5136,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n```\nint main(void){\nint fd = open(\"t.txt\", O_RDONLY);\nchar x, y;\nfork();\nread(fd, &x, 1);\nread(fd, &y, 1);\nprintf(\"%c%c\\n\", x, y);\nreturn 0;\n}\n```\n下列哪些可能作为某一次 printf 打印出的那一行内容出现？\nA. ab B. bd C. ca D. aa E. cd",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n```\nint main(void){\nint fd = open(\"t.txt\", O_RDONLY);\nchar x, y;\nfork();\nread(fd, &x, 1);\nread(fd, &y, 1);\nprintf(\"%c%c\\n\", x, y);\nreturn 0;\n}\n```\n下列哪些可能作为某一次 printf 打印出的那一行内容出现？\nA. ab B. bd C. ca D. aa E. cd",
         "answer": ""
       }
     },
     {
       "id": "q-6a3eb36fbdb2f308",
+      "paperId": "p-e8f40973e2cc056e",
+      "paperOrder": 18,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3389,6 +5166,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3402,6 +5180,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "18.观察下面的C程序代码\n```\nvolatile sig_atomic_t reap = 0;\nvoid handler(int sig){\nwhile (waitpid(-1, NULL, WNOHANG) > 0)\nreap++;\n}\nint main(void){\nSignal(SIGCHLD, handler);\nfor (int i = 0; i < 2; i++)\nif (fork() == 0) _exit(0);\nwhile (reap < 2) ;\nprintf(\"OK\\n\");\n}\n```\n下列说法哪些正确？",
         "choices": [
           {
@@ -3426,10 +5205,43 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "handler 可能只被调用 1 次，但 reap 最终仍可能变为 2"
+          },
+          {
+            "id": "B",
+            "content": "程序打印 OK 时，通常不会残留 zombie 子进程"
+          },
+          {
+            "id": "C",
+            "content": "因为 SIGCHLD 不排队，reap 最大只能到 1"
+          },
+          {
+            "id": "D",
+            "content": "若把 handler 里的 while 改为只调用一次 waitpid，则一定不会留下 zombie"
+          },
+          {
+            "id": "E",
+            "content": "OK 可能在任意时刻打印（包括在子进程尚未退出时）"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "18.观察下面的C程序代码\n```\nvolatile sig_atomic_t reap = 0;\nvoid handler(int sig){\nwhile (waitpid(-1, NULL, WNOHANG) > 0)\nreap++;\n}\nint main(void){\nSignal(SIGCHLD, handler);\nfor (int i = 0; i < 2; i++)\nif (fork() == 0) _exit(0);\nwhile (reap < 2) ;\nprintf(\"OK\\n\");\n}\n```\n下列说法哪些正确？",
+        "answer": ""
       }
     },
     {
       "id": "q-d93464cdf19a98b4",
+      "paperId": "p-e8f40973e2cc056e",
+      "paperOrder": 19,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3441,6 +5253,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3454,6 +5267,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\n```\n6\n\n<!-- ===== page 7 ===== -->\n\n```\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\n```\nraise(SIGINT);// raise()用于向当前进程发出指定信号\n```\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
         "choices": [
           {
@@ -3478,10 +5292,43 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "count 一定为 0"
+          },
+          {
+            "id": "B",
+            "content": "count 一定为 1"
+          },
+          {
+            "id": "C",
+            "content": "count 可能为 2"
+          },
+          {
+            "id": "D",
+            "content": "在解除阻塞之前，handler可能会运行"
+          },
+          {
+            "id": "E",
+            "content": "在设置阻塞之前，handler可能会运行"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\n```\n6\n\n<!-- ===== page 7 ===== -->\n\n```\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\n```\nraise(SIGINT);// raise()用于向当前进程发出指定信号\n```\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
+        "answer": ""
       }
     },
     {
       "id": "q-6a8e7a78b9e5507d",
+      "paperId": "p-e8f40973e2cc056e",
+      "paperOrder": 20,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "期末",
@@ -3493,6 +5340,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3506,6 +5354,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "20.关于 execve()成功执行后的语义，下列说法哪些正确？",
         "choices": [
           {
@@ -3530,10 +5379,43 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "成功的 execve() 不会返回到调用点（除非失败）"
+          },
+          {
+            "id": "B",
+            "content": "execve() 会用新程序的代码/数据替换当前进程的用户态地址空间"
+          },
+          {
+            "id": "C",
+            "content": "execve() 成功后，进程 PID 会改变（变成新程序的 PID）"
+          },
+          {
+            "id": "D",
+            "content": "execve() 成功后，默认情况下已打开的文件描述符仍然保持打开（除非设置\nclose-on-exec）"
+          },
+          {
+            "id": "E",
+            "content": "execve() 会创建一个新进程，因此父子关系会改变"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "20.关于 execve()成功执行后的语义，下列说法哪些正确？",
+        "answer": ""
       }
     },
     {
       "id": "q-bd24018adab0ca37",
+      "paperId": "p-b2c127ada86acac1",
+      "paperOrder": 8,
       "moduleId": "ecf_and_system_io",
       "year": null,
       "examType": "期末",
@@ -3545,6 +5427,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -3560,13 +5443,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "第 10 问，A 是不会有信号的。在网络那一章中，只有链接异常断开会导致 SIGPIPE。A 中描述的“新连接到达监听端口”不会导致操作系统发送信号给进程，而是通过网络编程接口（如 POSIX 的 socket API）提醒应用程序有新的连接。这通常是通过 I/O 多路复用（如 select、poll、epoll 等系统调用）来实现的，其中应用程序会监控一个或多个网络端口的状态，当有新连接到来时，操作系统会唤醒正在等待的程序，而不是发送信号。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第 10 问，A 是不会有信号的。在网络那一章中，只有链接异常断开会导致 SIGPIPE。A 中描述的“新连接到达监听端口”不会导致操作系统发送信号给进程，而是通过网络编程接口（如 POSIX 的 socket API）提醒应用程序有新的连接。这通常是通过 I/O 多路复用（如 select、poll、epoll 等系统调用）来实现的，其中应用程序会监控一个或多个网络端口的状态，当有新连接到来时，操作系统会唤醒正在等待的程序，而不是发送信号。",
         "answer": ""
       }
     },
     {
       "id": "q-1926454fba34640a",
+      "paperId": "p-b2c127ada86acac1",
+      "paperOrder": 14,
       "moduleId": "ecf_and_system_io",
       "year": null,
       "examType": "期末",
@@ -3578,6 +5473,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -3593,13 +5489,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "第 6 问，执行过程中没有发生从未打开的描述符进行复制，所以错。实际测试：可以向一个未打开的描述符进行复制、从一个未打开的描述符复制（即未打开的描述符是 dup2 的第一个参数）都是合法的（但是后者一旦开始写就会报错）。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第 6 问，执行过程中没有发生从未打开的描述符进行复制，所以错。实际测试：可以向一个未打开的描述符进行复制、从一个未打开的描述符复制（即未打开的描述符是 dup2 的第一个参数）都是合法的（但是后者一旦开始写就会报错）。",
         "answer": ""
       }
     },
     {
       "id": "q-ed2e5357d100a9bf",
+      "paperId": "p-b2c127ada86acac1",
+      "paperOrder": 19,
       "moduleId": "ecf_and_system_io",
       "year": null,
       "examType": "期末",
@@ -3611,6 +5519,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -3626,13 +5535,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "### 第四题\n\n为什么 PartB 产生了 +-+--+..这样的结果？\n\n父子进程是分叉后单独打开的文件，由于并发，所以父进程给子进程发信号的时候子进程可能还没把 fd1 改掉，所以打印第一个+，然后：\n\n```text\n-\n++\n --\n  +++\n   ----\n     ++++\n...\n=======\n+-+--+---\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "### 第四题\n\n为什么 PartB 产生了 +-+--+..这样的结果？\n\n父子进程是分叉后单独打开的文件，由于并发，所以父进程给子进程发信号的时候子进程可能还没把 fd1 改掉，所以打印第一个+，然后：\n\n```text\n-\n++\n --\n  +++\n   ----\n     ++++\n...\n=======\n+-+--+---\n```",
         "answer": ""
       }
     },
     {
       "id": "q-fbf573a7da3eb507",
+      "paperId": "p-b2c127ada86acac1",
+      "paperOrder": 33,
       "moduleId": "ecf_and_system_io",
       "year": null,
       "examType": "期末",
@@ -3644,6 +5565,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -3659,13 +5581,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "Part C，既然这个函数是可以被换成自己指定的代码段的，那么肯定运行在用户态下。否则就构成越权了。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "Part C，既然这个函数是可以被换成自己指定的代码段的，那么肯定运行在用户态下。否则就构成越权了。",
         "answer": ""
       }
     },
     {
       "id": "q-18521c5015bccc53",
+      "paperId": "p-0439188e8c4bdac1",
+      "paperOrder": 22,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "阶段测验",
@@ -3676,7 +5610,8 @@
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3690,24 +5625,37 @@
       },
       "layout": {
         "mode": "short",
-        "stem": "22.（3分）整数运算中有可能会出现“除0异常”，如果这是属于Faults类型的异常，\n是否可以在异常处理程序中，将结果修改成某个特殊值，例如全为1的二进制数，然\n后继续执行该程序（指整数运算那个程序）后续指令？\n答：不可以（1分）。Faults类型的异常，从异常处理程序返回后，要重新执行这条\n“除0”指令，导致再次发生异常。所以只能终止该进程。（2分）注：如果一开始的结论\n就不对，后面如何解读都不得分。",
+        "selection": null,
+        "stem": "22.（3分）整数运算中有可能会出现“除0异常”，如果这是属于Faults类型的异常，\n是否可以在异常处理程序中，将结果修改成某个特殊值，例如全为1的二进制数，然\n后继续执行该程序（指整数运算那个程序）后续指令？",
         "choices": [],
-        "answer": ""
+        "answer": "答：不可以（1分）。Faults类型的异常，从异常处理程序返回后，要重新执行这条\n“除0”指令，导致再次发生异常。所以只能终止该进程。（2分）注：如果一开始的结论\n就不对，后面如何解读都不得分。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "22.（3分）整数运算中有可能会出现“除0异常”，如果这是属于Faults类型的异常，\n是否可以在异常处理程序中，将结果修改成某个特殊值，例如全为1的二进制数，然\n后继续执行该程序（指整数运算那个程序）后续指令？",
+        "answer": "答：不可以（1分）。Faults类型的异常，从异常处理程序返回后，要重新执行这条\n“除0”指令，导致再次发生异常。所以只能终止该进程。（2分）注：如果一开始的结论\n就不对，后面如何解读都不得分。"
       }
     },
     {
       "id": "q-33c792b0b109d321",
+      "paperId": "p-0439188e8c4bdac1",
+      "paperOrder": 23,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025第2次阶段测验-带答案",
       "questionNo": "第16/17讲 23",
       "summary": "fork 程序的输出次数与输出顺序判断",
-      "content": "23.（3分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\nint main() {\nprintf(\"A\\n\");\npid_t pid = fork();\nif (pid == 0) {\nprintf(\"B\\n\");\n} else {\nprintf(\"C\\n\");\nfork();\n}\nprintf(\"D\\n\");\nreturn 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：3 次\n10\n\n<!-- ===== page 11 ===== -->\n\n（2）B和C哪个先输出：不确定\n（3）ACDBDD这个输出序列是否可能：是（√）否（ ）",
+      "content": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\nprintf(\"A\\n\");\npid_t pid = fork();\nif (pid == 0) {\nprintf(\"B\\n\");\n} else {\nprintf(\"C\\n\");\nfork();\n}\nprintf(\"D\\n\");\nreturn 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：____ 次\n\n（2）B 和 C 哪个先输出：____\n\n（3）`ACDBDD` 这个输出序列是否可能：____\n第 1 空：3；第 2 空：不确定；第 3 空：是。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3721,24 +5669,37 @@
       },
       "layout": {
         "mode": "fill",
-        "stem": "23.（3分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\nint main() {\nprintf(\"A\\n\");\npid_t pid = fork();\nif (pid == 0) {\nprintf(\"B\\n\");\n} else {\nprintf(\"C\\n\");\nfork();\n}\nprintf(\"D\\n\");\nreturn 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：3 次\n10\n\n<!-- ===== page 11 ===== -->\n\n（2）B和C哪个先输出：不确定\n（3）ACDBDD这个输出序列是否可能：是（√）否（ ）",
+        "selection": null,
+        "stem": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\nprintf(\"A\\n\");\npid_t pid = fork();\nif (pid == 0) {\nprintf(\"B\\n\");\n} else {\nprintf(\"C\\n\");\nfork();\n}\nprintf(\"D\\n\");\nreturn 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：____ 次\n\n（2）B 和 C 哪个先输出：____\n\n（3）`ACDBDD` 这个输出序列是否可能：____",
         "choices": [],
-        "answer": ""
+        "answer": "第 1 空：3；第 2 空：不确定；第 3 空：是。"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\nprintf(\"A\\n\");\npid_t pid = fork();\nif (pid == 0) {\nprintf(\"B\\n\");\n} else {\nprintf(\"C\\n\");\nfork();\n}\nprintf(\"D\\n\");\nreturn 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：____ 次\n\n（2）B 和 C 哪个先输出：____\n\n（3）`ACDBDD` 这个输出序列是否可能：____",
+        "answer": "第 1 空：3；第 2 空：不确定；第 3 空：是。"
       }
     },
     {
       "id": "q-0f1a987b675f2222",
+      "paperId": "p-0439188e8c4bdac1",
+      "paperOrder": 24,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025第2次阶段测验-带答案",
       "questionNo": "第16/17讲 24",
       "summary": "含 fork/wait/sleep 的程序进程数与输出行数",
-      "content": "24.（6分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\nprintf(\"start: x = %d\\n\", x);\npid_t pid1 = fork();\nif (pid1 == 0) {\nx += 1;\nprintf(\"x = %d\\n\", x);\nsleep(1);\npid_t pid2 = fork();\nif (pid2 == 0) {\nx += 2;\nprintf(\"x = %d\\n\", x);\n} else {\nx += 3;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\n}\n} else {\nx += 4;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\nprintf(\"x = %d\\n\", x);\n}\nreturn 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（ 3 ）\n（2）（2分）总共会输出多少行？（ 6 ）\n（3）（2分）最后一行输出是：D\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定",
+      "content": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\nprintf(\"start: x = %d\\n\", x);\npid_t pid1 = fork();\nif (pid1 == 0) {\nx += 1;\nprintf(\"x = %d\\n\", x);\nsleep(1);\npid_t pid2 = fork();\nif (pid2 == 0) {\nx += 2;\nprintf(\"x = %d\\n\", x);\n} else {\nx += 3;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\n}\n} else {\nx += 4;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\nprintf(\"x = %d\\n\", x);\n}\nreturn 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？____\n\n（2）（2分）总共会输出多少行？____\n\n（3）（2分）最后一行输出对应选项：____\n\nA. `x=2`　B. `x=3`　C. `x=4`　D. `x=5`　E. `x=6`　F. 不确定\n第 1 空：3；第 2 空：6；第 3 空：D（`x=5`）。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -3752,13 +5713,25 @@
       },
       "layout": {
         "mode": "fill",
-        "stem": "24.（6分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\nprintf(\"start: x = %d\\n\", x);\npid_t pid1 = fork();\nif (pid1 == 0) {\nx += 1;\nprintf(\"x = %d\\n\", x);\nsleep(1);\npid_t pid2 = fork();\nif (pid2 == 0) {\nx += 2;\nprintf(\"x = %d\\n\", x);\n} else {\nx += 3;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\n}\n} else {\nx += 4;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\nprintf(\"x = %d\\n\", x);\n}\nreturn 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（ 3 ）\n（2）（2分）总共会输出多少行？（ 6 ）\n（3）（2分）最后一行输出是：D\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定",
+        "selection": null,
+        "stem": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\nprintf(\"start: x = %d\\n\", x);\npid_t pid1 = fork();\nif (pid1 == 0) {\nx += 1;\nprintf(\"x = %d\\n\", x);\nsleep(1);\npid_t pid2 = fork();\nif (pid2 == 0) {\nx += 2;\nprintf(\"x = %d\\n\", x);\n} else {\nx += 3;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\n}\n} else {\nx += 4;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\nprintf(\"x = %d\\n\", x);\n}\nreturn 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？____\n\n（2）（2分）总共会输出多少行？____\n\n（3）（2分）最后一行输出对应选项：____\n\nA. `x=2`　B. `x=3`　C. `x=4`　D. `x=5`　E. `x=6`　F. 不确定",
         "choices": [],
-        "answer": ""
+        "answer": "第 1 空：3；第 2 空：6；第 3 空：D（`x=5`）。"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\nprintf(\"start: x = %d\\n\", x);\npid_t pid1 = fork();\nif (pid1 == 0) {\nx += 1;\nprintf(\"x = %d\\n\", x);\nsleep(1);\npid_t pid2 = fork();\nif (pid2 == 0) {\nx += 2;\nprintf(\"x = %d\\n\", x);\n} else {\nx += 3;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\n}\n} else {\nx += 4;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\nprintf(\"x = %d\\n\", x);\n}\nreturn 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？____\n\n（2）（2分）总共会输出多少行？____\n\n（3）（2分）最后一行输出对应选项：____\n\nA. `x=2`　B. `x=3`　C. `x=4`　D. `x=5`　E. `x=6`　F. 不确定",
+        "answer": "第 1 空：3；第 2 空：6；第 3 空：D（`x=5`）。"
       }
     },
     {
       "id": "q-5cf6817ce4f8db9c",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 1,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -3770,6 +5743,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3783,6 +5757,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "1.  （2分）以下哪个ls命令选项用于显示所有文件（包括隐藏文件，以.开头的文件）",
         "choices": [
           {
@@ -3803,10 +5778,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "ls -l"
+          },
+          {
+            "id": "B",
+            "content": "ls -a"
+          },
+          {
+            "id": "C",
+            "content": "ls -h"
+          },
+          {
+            "id": "D",
+            "content": "ls -t"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "1.  （2分）以下哪个ls命令选项用于显示所有文件（包括隐藏文件，以.开头的文件）",
+        "answer": ""
       }
     },
     {
       "id": "q-8948287db87fa2ef",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 2,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -3818,6 +5822,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3831,6 +5836,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "2.  （2分）使用cd命令时，哪个参数表示“上一次所在目录”",
         "choices": [
           {
@@ -3851,10 +5857,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "~（波浪符）"
+          },
+          {
+            "id": "B",
+            "content": "..（两个点）"
+          },
+          {
+            "id": "C",
+            "content": "-（减号）"
+          },
+          {
+            "id": "D",
+            "content": "/（斜杠）"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2.  （2分）使用cd命令时，哪个参数表示“上一次所在目录”",
+        "answer": ""
       }
     },
     {
       "id": "q-152d955e0755cc67",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 3,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -3866,6 +5901,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3879,6 +5915,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "3.  （2分）执行 chmod 755 file.py 后，文件 file.py 的权限是：",
         "choices": [
           {
@@ -3899,10 +5936,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "所有者：读写执行（rwx），组和其他：读和执行（r-x）"
+          },
+          {
+            "id": "B",
+            "content": "所有者：读写（rw-），组和其他：读（r--）"
+          },
+          {
+            "id": "C",
+            "content": "所有者：读和执行（r-x），组和其他：读写（rw-）"
+          },
+          {
+            "id": "D",
+            "content": "所有者：读写执行（rwx），组和其他：读写（rw-）"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "3.  （2分）执行 chmod 755 file.py 后，文件 file.py 的权限是：",
+        "answer": ""
       }
     },
     {
       "id": "q-6cf840e29aedb34c",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 4,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -3914,6 +5980,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3927,6 +5994,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "4.  （2分）下列关于 Linux 命令和命令行的使用，说法错误的一项是：",
         "choices": [
           {
@@ -3947,10 +6015,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "在Windows中解压tar文件可能导致权限位丢失和文件名大小写问题，因此最好\n在 Linux 中使用tar命令解压"
+          },
+          {
+            "id": "B",
+            "content": "gcc命令可用于编译 C 语言代码，其中 -o 选项用来指定输出的文件，-O 选项\n用来指定优化级别"
+          },
+          {
+            "id": "C",
+            "content": "rm命令用于删除单个文件或多个文件，如果要删除空目录只能用rmdir命令"
+          },
+          {
+            "id": "D",
+            "content": "grep命令中，-i选项的含义是“忽略大小写”，如grep -i \"hello\" file.txt\n可匹配Hello、HELLO等"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4.  （2分）下列关于 Linux 命令和命令行的使用，说法错误的一项是：",
+        "answer": ""
       }
     },
     {
       "id": "q-ce84bad024e67186",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 16,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -3962,6 +6059,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -3975,6 +6073,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "16. （2分）GDB 中断点功能的一种实现方式是：GDB 修改目标程序断点处的机器代码，\n让 CPU 执行到该位置时将控制权交给 GDB；之后 GDB 会恢复现场，包括将原指令\n写回、调整 %rip 回到断点指令处等，以使程序可以继续执行。基于这一机制，下列\n哪一项最符合实际情况？",
         "choices": [
           {
@@ -3995,10 +6094,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "GDB 将断点处指令修改为 NOP，CPU 执行后不做任何操作，程序会暂停并等待"
+          },
+          {
+            "id": "B",
+            "content": "GDB 将断点处指令修改为 INT3，CPU 执行后触发陷阱，陷入内核"
+          },
+          {
+            "id": "C",
+            "content": "GDB 将断点处指令修改为 sysenter，CPU 执行后陷入内核"
+          },
+          {
+            "id": "D",
+            "content": "GDB 将断点处指令修改为一条非法指令，类似于系统调用，CPU执行后会陷入内核"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16. （2分）GDB 中断点功能的一种实现方式是：GDB 修改目标程序断点处的机器代码，\n让 CPU 执行到该位置时将控制权交给 GDB；之后 GDB 会恢复现场，包括将原指令\n写回、调整 %rip 回到断点指令处等，以使程序可以继续执行。基于这一机制，下列\n哪一项最符合实际情况？",
+        "answer": ""
       }
     },
     {
       "id": "q-c6cfa5470e4c4a78",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 21,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -4010,6 +6138,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -4023,6 +6152,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "21. （2分）在AttackLab中，hex2raw工具用于将表示十六进制的字符串转换为字节\n序列，以便将攻击代码注入到目标程序中。假设现在有一个包含十六进制字符串的文件\nhex.txt，下列哪个选项是错误的？",
         "choices": [
           {
@@ -4043,10 +6173,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "可以使用命令cat hex.txt | hex2raw > raw.bin将hex.txt中的内容转\n换为字节序列并保存到raw.bin文件中"
+          },
+          {
+            "id": "B",
+            "content": "可以使用命令hex2raw < hex.txt > raw.bin将hex.txt中的内容转换为\n字节序列并保存到raw.bin文件中"
+          },
+          {
+            "id": "C",
+            "content": "在得到文件raw.bin后，可以使用命令./ctarget < raw.bin将raw.bin作\n为输入传递给目标程序ctarget"
+          },
+          {
+            "id": "D",
+            "content": "如果修改了hex.txt文件的内容，必须重新编译hex2raw工具才能正确转换新的\n内容"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "21. （2分）在AttackLab中，hex2raw工具用于将表示十六进制的字符串转换为字节\n序列，以便将攻击代码注入到目标程序中。假设现在有一个包含十六进制字符串的文件\nhex.txt，下列哪个选项是错误的？",
+        "answer": ""
       }
     },
     {
       "id": "q-c05e0e96d6563d80",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 35,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -4058,6 +6217,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -4071,6 +6231,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "35. （2分）在 CacheLab Part A 编写缓存模拟器 (csim.c) 时，推荐使用哪个 C\n语言函数来解析命令行参数（如-s, -E, -b等）？",
         "choices": [
           {
@@ -4091,10 +6252,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "scanf"
+          },
+          {
+            "id": "B",
+            "content": "getopt"
+          },
+          {
+            "id": "C",
+            "content": "mmap"
+          },
+          {
+            "id": "D",
+            "content": "fopen"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "35. （2分）在 CacheLab Part A 编写缓存模拟器 (csim.c) 时，推荐使用哪个 C\n语言函数来解析命令行参数（如-s, -E, -b等）？",
+        "answer": ""
       }
     },
     {
       "id": "q-f9a06f7e2d9d3ac3",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 36,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -4106,6 +6296,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -4119,6 +6310,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "36. （2分）在ShellLab中，我们实现了一个简单的shell程序tsh。和真实的Linux\nshell相比，下列哪一项说法是错误的？",
         "choices": [
           {
@@ -4139,10 +6331,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "tsh中不支持变量，也不支持搜索路径，无法直接运行系统程序如cat，需要输入\n完整路径/bin/cat"
+          },
+          {
+            "id": "B",
+            "content": "tsh中不支持管道（|），但支持I/O重定向（<, >），且可以在一条命令里同时\n进行输入、输出重定向"
+          },
+          {
+            "id": "C",
+            "content": "tsh和真实的shell一样，需要捕获SIGINT和SIGTSTP信号，然后再将这些信\n号发送给前台进程组"
+          },
+          {
+            "id": "D",
+            "content": "tsh和真实的shell一样，支持通过&设置程序在后台执行，也支持通过fg命令\n将后台任务转移到前台"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "36. （2分）在ShellLab中，我们实现了一个简单的shell程序tsh。和真实的Linux\nshell相比，下列哪一项说法是错误的？",
+        "answer": ""
       }
     },
     {
       "id": "q-f4b60ac22ab20e1a",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 37,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -4154,6 +6375,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -4167,6 +6389,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "37. （2分）在ShellLab中，为了避免出现竞争（race），需要在特定的操作前屏蔽一\n些信号。下列关于屏蔽信号与解除屏蔽的时机，说法错误的一项是？",
         "choices": [
           {
@@ -4187,10 +6410,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "sigint_handler中不需要屏蔽信号，因为只需要读取全局数据结构job_list，\n而无需对其进行修改"
+          },
+          {
+            "id": "B",
+            "content": "sigchld_handler中需要屏蔽信号，因为需要修改全局数据结构job_list，更\n新job的状态等相关信息"
+          },
+          {
+            "id": "C",
+            "content": "eval 中需要屏蔽信号，因为需要修改全局数据结构 job_list，在创建新任务时\n添加新创建的job信息"
+          },
+          {
+            "id": "D",
+            "content": "fork之后需要解除屏蔽信号，解除的时机可以在执行setpgid之前，也可以在执\n行setpgid 之后"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "37. （2分）在ShellLab中，为了避免出现竞争（race），需要在特定的操作前屏蔽一\n些信号。下列关于屏蔽信号与解除屏蔽的时机，说法错误的一项是？",
+        "answer": ""
       }
     },
     {
       "id": "q-6b0dbcd4444ea9b3",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 38,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -4202,6 +6454,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -4215,6 +6468,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "38. （2 分）在 ShellLab 中，我们需要实现一系列内建命令。下列关于内建命令的说法\n正确的是？",
         "choices": [
           {
@@ -4235,10 +6489,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "jobs命令中我们需要列出所有任务，且需要先屏蔽所有相关信号，避免竞争"
+          },
+          {
+            "id": "B",
+            "content": "bg命令中我们需要将当前运行在前台的任务变为后台运行，且不使任务停止"
+          },
+          {
+            "id": "C",
+            "content": "kill命令中我们需要向指定的进程或进程组发送SIGKILL信号以将其终止"
+          },
+          {
+            "id": "D",
+            "content": "nohup命令中我们需要在创建子进程后阻塞SIGHUP信号或设置忽略该信号"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "38. （2 分）在 ShellLab 中，我们需要实现一系列内建命令。下列关于内建命令的说法\n正确的是？",
+        "answer": ""
       }
     },
     {
       "id": "q-03cf22a3a3a37d1b",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 39,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -4250,6 +6533,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -4263,13 +6547,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "39. （2分）下面是ShellLab中sigchld_handler的一个正确实现中的部分代码（省\n略了部分检查与输出）。则代码中(1)和(2)应该分别为？\n```\nA. (1) WIFSTOPPED (2) WIFCONTINUED\nB. (1) WIFSTOPPED (2) WIFSIGNALED\nC. (1) WIFEXITED  (2) WIFCONTINUED\nD. (1) WIFEXITED  (2) WIFSIGNALED\nwhile  ((child_pid  =  waitpid(-1,  &status,  WNOHANG  |  WUNTRACED  |\nWCONTINUED)) > 0) {\n    if (_____(1)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        j->state = ST;\n    }\n    else if (_____(2)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        if(!(j->state == FG)) {\n            j->state = BG;\n        }\n    }\n    // ...\n}\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "39. （2分）下面是ShellLab中sigchld_handler的一个正确实现中的部分代码（省\n略了部分检查与输出）。则代码中(1)和(2)应该分别为？\n```\nA. (1) WIFSTOPPED (2) WIFCONTINUED\nB. (1) WIFSTOPPED (2) WIFSIGNALED\nC. (1) WIFEXITED  (2) WIFCONTINUED\nD. (1) WIFEXITED  (2) WIFSIGNALED\nwhile  ((child_pid  =  waitpid(-1,  &status,  WNOHANG  |  WUNTRACED  |\nWCONTINUED)) > 0) {\n    if (_____(1)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        j->state = ST;\n    }\n    else if (_____(2)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        if(!(j->state == FG)) {\n            j->state = BG;\n        }\n    }\n    // ...\n}\n```",
         "answer": ""
       }
     },
     {
       "id": "q-567f8ff9a8ad70be",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 40,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "Lab测验",
@@ -4281,6 +6577,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -4294,8 +6591,18 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "40. （2分）在ShellLab中，我们在sigchld_handler中使用waitpid来回收子进\n程，同时我们定义了waitfg函数用来等待特定pid的前台任务结束。下面waitfg\n函数的实现，正确的一项是？\n```\nA.  void waitfg(pid_t pid) {\n    int timeout = 0;\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        if (++timeout > MAX_TIME) {\n            break;\n        }\n    }\n}\nB.  void waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        sleep(1);\n    }\n}\nC.  sigset_t oldmask;\nvoid waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        sigsuspend(&oldmask);\n    }\n}\nD.  int status;\nvoid waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        waitpid(pid, &status, 0);\n    }\n}\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "40. （2分）在ShellLab中，我们在sigchld_handler中使用waitpid来回收子进\n程，同时我们定义了waitfg函数用来等待特定pid的前台任务结束。下面waitfg\n函数的实现，正确的一项是？\n```\nA.  void waitfg(pid_t pid) {\n    int timeout = 0;\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        if (++timeout > MAX_TIME) {\n            break;\n        }\n    }\n}\nB.  void waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        sleep(1);\n    }\n}\nC.  sigset_t oldmask;\nvoid waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        sigsuspend(&oldmask);\n    }\n}\nD.  int status;\nvoid waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        waitpid(pid, &status, 0);\n    }\n}\n```",
         "answer": ""
       }
     }

@@ -43,7 +43,7 @@
 }
 
 .ics-panel[hidden] { display: none; }
-.ics-field[hidden], .ics-module-fieldset[hidden], .ics-live-stats[hidden] { display: none; }
+.ics-shell [hidden] { display: none !important; }
 .ics-panel-head, .ics-progress-row, .ics-options, .ics-answer-actions, .ics-result-actions {
   display: flex;
   align-items: center;
@@ -94,6 +94,8 @@
 
 .ics-options { flex-wrap: wrap; padding-top: .2rem; }
 .ics-field { display: grid; min-width: 150px; gap: .3rem; color: var(--text-muted); font-size: .86rem; font-weight: 650; }
+.ics-paper-field { flex: 1 1 360px; }
+.ics-paper-field small { max-width: 54rem; color: var(--text-muted); font-weight: 500; line-height: 1.45; }
 .ics-field select, #ics-answer {
   width: 100%;
   border: 1px solid var(--border);
@@ -160,7 +162,7 @@
 .ics-answer-heading { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; margin-bottom: .7rem; }
 .ics-answer-label { font-weight: 750; }
 .ics-answer-hint { color: var(--text-muted); font-size: .84rem; }
-#ics-answer-form[data-mode="short"] {
+#ics-answer-form[data-mode="short"], #ics-answer-form[data-mode="unavailable"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -170,8 +172,10 @@
   border-radius: 14px;
   background: var(--bg-soft);
 }
-#ics-answer-form[data-mode="short"] .ics-answer-heading { display: grid; gap: .12rem; margin: 0; }
-#ics-answer-form[data-mode="short"] .ics-answer-actions { margin: 0; flex: 0 0 auto; }
+#ics-answer-form[data-mode="short"] .ics-answer-heading,
+#ics-answer-form[data-mode="unavailable"] .ics-answer-heading { display: grid; gap: .12rem; margin: 0; }
+#ics-answer-form[data-mode="short"] .ics-answer-actions,
+#ics-answer-form[data-mode="unavailable"] .ics-answer-actions { margin: 0; flex: 0 0 auto; }
 .ics-choice-list { display: grid; gap: .65rem; }
 .ics-choice-list[hidden] { display: none; }
 .ics-choice {

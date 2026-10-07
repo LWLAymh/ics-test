@@ -30,8 +30,9 @@ SECTION = re.compile(r"^%%%\s*(stem|choices|answer)\s*$")
 SETTING = re.compile(r"^%%%\s*([A-Za-z_]+)\s*:\s*(.*)$")
 # 选项行：`A. ` / `B、` / `C) ` / `D．`（也接受全角）
 CHOICE = re.compile(r"^\s*([A-Ha-h])\s*[.、)．:：]\s*(.*)$")
-MODES = ("choice", "fill", "short")
+MODES = ("choice", "fill", "short", "composite")
 PROVENANCE = ("verbatim", "reflow", "rewritten")
+SELECTIONS = ("single", "multiple")
 
 
 class CuratedError(Exception):
@@ -46,6 +47,7 @@ def parse(text):
     拼接就会把答案挪到选项后面，投影立刻不等。
     """
     mode = None
+    selection = None
     provenance = "verbatim"
     cur = None
     order = []
@@ -69,6 +71,10 @@ def parse(text):
                 provenance = val
                 if val not in PROVENANCE:
                     problems.append("provenance 非法: %r" % val)
+            elif key == "selection":
+                selection = val
+                if val not in SELECTIONS:
+                    problems.append("selection 非法: %r" % val)
             else:
                 problems.append("未知控制项: %s" % key)
             continue
@@ -105,7 +111,7 @@ def parse(text):
         c["content"] = c["content"].strip()
         c.pop("lines", None)
 
-    return {"mode": mode, "provenance": provenance,
+    return {"mode": mode, "selection": selection, "provenance": provenance,
             "stem": stem, "choices": choices, "answer": answer,
             "choices_text": choices_text,
             "order": order or ["stem", "choices", "answer"],
@@ -128,6 +134,7 @@ def build_layout(p):
     """结构化 layout，供前端零猜测渲染。"""
     return {
         "mode": p["mode"],
+        "selection": p.get("selection"),
         "stem": p["stem"],
         "choices": [{"key": c["key"], "content": c["content"]}
                     for c in p["choices"]],
@@ -146,6 +153,8 @@ def check_assertions(p):
             expect = [chr(ord("A") + i) for i in range(len(keys))]
             if keys != expect:
                 errs.append("choice 的 key 必须是连续的 A,B,C…，实际 %r" % (keys,))
+    elif p.get("selection"):
+        errs.append("只有 mode=choice 可以设置 selection")
     for field in ("stem", "answer", "choices_text"):
         for ln in (p[field] or "").splitlines():
             if ln.lstrip().startswith("%%%"):

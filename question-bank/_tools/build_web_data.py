@@ -25,10 +25,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.dirname(HERE)
 OUT = os.path.join(BASE, "web-data")
 QUESTIONS_OUT = os.path.join(OUT, "questions")
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 IMAGE = re.compile(r"(!\[[^\]]*\]\()([^\s)]+)([^)]*\))")
-INLINE_ANSWER = re.compile(r"(?:答案|参考答案|Answer)\s*[：:]", re.IGNORECASE)
+INLINE_ANSWER = re.compile(
+    r"(?:^|\n)\s*(?:参考答案|答案|答|Answer)\s*[：:]", re.IGNORECASE)
 
 MODULE_META = []
 for number, (name, file_slug, title) in enumerate(build_modules.MODULES, 1):
@@ -86,6 +87,67 @@ def asset_paths(markdown):
     return paths
 
 
+def meaningful_answer(markdown):
+    """答案不能只剩“答案：”标签；图片答案也算有效。"""
+    text = re.sub(r"(?:参考答案|答案|答|Answer)\s*[：:]", "", markdown or "", flags=re.IGNORECASE)
+    text = re.sub(r"<!--\s*=+\s*page\s+\d+\s*=+\s*-->", "", text, flags=re.IGNORECASE)
+    if asset_paths(text):
+        return True
+    return bool(text.strip())
+
+
+def answer_status(markdown):
+    """只发布明确可用的答案；可疑拆分必须进入人工复核。"""
+    if not meaningful_answer(markdown):
+        return "missing"
+    markers = len(INLINE_ANSWER.findall(markdown or ""))
+    if markers > 1:
+        return "needs-review"
+    return "verified"
+
+
+def inline_answer_fragment(markdown):
+    match = INLINE_ANSWER.search(markdown or "")
+    if not match:
+        return ""
+    start = match.start() + (1 if (markdown or "")[match.start():].startswith("\n") else 0)
+    return (markdown or "")[start:]
+
+
+def split_inline_answer(markdown):
+    match = INLINE_ANSWER.search(markdown or "")
+    if not match:
+        return (markdown or "", "")
+    start = match.start() + (1 if (markdown or "")[match.start():].startswith("\n") else 0)
+    return ((markdown or "")[:match.start()].strip(), (markdown or "")[start:].strip())
+
+
+def interaction_for(layout):
+    if not layout:
+        return {"kind": "legacy", "declared": False}
+    mode = layout.get("mode")
+    if mode == "choice":
+        selection = layout.get("selection")
+        interaction = {
+            "kind": (selection + "-choice") if selection else "choice",
+            "declared": bool(selection),
+            "choices": [
+                {"id": choice["key"], "content": choice["content"]}
+                for choice in layout.get("choices", [])
+            ],
+        }
+        answer_match = re.search(r"(?:答案|答)\s*[：:]\s*([A-H]+)",
+                                 layout.get("answer", ""), re.IGNORECASE)
+        if answer_match:
+            interaction["correctChoiceIds"] = list(answer_match.group(1).upper())
+        return interaction
+    return {"kind": {
+        "fill": "fill",
+        "short": "short-answer",
+        "composite": "composite",
+    }.get(mode, "legacy"), "declared": True}
+
+
 def main():
     os.makedirs(QUESTIONS_OUT, exist_ok=True)
     all_materials = build_modules.load()
@@ -134,13 +196,23 @@ def main():
             supplemental_answer_ids[target].extend(ids)
 
     questions_by_module = collections.defaultdict(list)
+    papers = collections.OrderedDict()
     ids_seen = set()
     missing_assets = []
 
     for material in materials:
         if material["kind"] != "questions":
             continue
-        for item in material["items"]:
+        paper_id = short_id("p", material["cat"], material["label"])
+        paper = papers.setdefault(paper_id, {
+            "id": paper_id,
+            "year": material["year"] or None,
+            "examType": material["cat"],
+            "title": material["label"],
+            "questionIds": [],
+            "verifiedAnswerCount": 0,
+        })
+        for paper_order, item in enumerate(material["items"], 1):
             module = MODULE_BY_NAME.get(item.get("module"))
             start, end = item.get("start"), item.get("end")
             if not module or not isinstance(start, int) or not isinstance(end, int):
@@ -172,12 +244,21 @@ def main():
                 formatted = True
                 # answer.inline：显式 answer 段优先；没有该段时退回原有「正文含答案标记」
                 # 判定，保证与旧路径的池子语义完全一致（否则会悄无声息地少一批题）。
-                inline = (bool(cur["answer"].strip())
-                          or bool(INLINE_ANSWER.search(content)))
+                answer_source = cur["answer"]
+                if not meaningful_answer(answer_source) and INLINE_ANSWER.search(content):
+                    answer_source = inline_answer_fragment(content)
+                status = answer_status(answer_source)
+                if status == "verified" and not meaningful_answer(cur["answer"]):
+                    split_prompt, split_answer = split_inline_answer(content)
+                    layout = dict(layout)
+                    layout["stem"] = split_prompt
+                    layout["answer"] = split_answer
+                inline = status == "verified"
             else:
                 content = normalize_markdown_assets(
                     build_modules.slice_of(material, start, end), material["rel"])
-                inline = bool(INLINE_ANSWER.search(content))
+                status = answer_status(inline_answer_fragment(content)) if INLINE_ANSWER.search(content) else "missing"
+                inline = status == "verified"
 
             assets = asset_paths(content)
             for asset in assets:
@@ -188,6 +269,8 @@ def main():
             related_answers.extend(supplemental_answer_ids.get(material["rel"], []))
             question = {
                 "id": question_id,
+                "paperId": paper_id,
+                "paperOrder": paper_order,
                 "moduleId": module["id"],
                 "year": material["year"] or None,
                 "examType": material["cat"],
@@ -199,6 +282,7 @@ def main():
                 "formatted": formatted,
                 "answer": {
                     "inline": inline,
+                    "status": status,
                     "relatedBlockIds": list(dict.fromkeys(related_answers)),
                 },
                 "source": {
@@ -209,8 +293,19 @@ def main():
             }
             if formatted:
                 question["layout"] = layout
+                question["interaction"] = interaction_for(layout)
+                question["contentV3"] = {
+                    "format": "markdown",
+                    "prompt": layout.get("stem", ""),
+                    "answer": layout.get("answer", ""),
+                }
                 question["source"]["curated"] = posixpath.join("_curated", curated_rel)
+            else:
+                question["interaction"] = interaction_for(None)
             questions_by_module[module["id"]].append(question)
+            paper["questionIds"].append(question_id)
+            if status == "verified":
+                paper["verifiedAnswerCount"] += 1
 
     if missing_assets:
         preview = ", ".join("%s: %s" % x for x in missing_assets[:5])
@@ -249,6 +344,17 @@ def main():
         "schemaVersion": SCHEMA_VERSION,
         "answerBlocks": answer_blocks,
     })
+    paper_entries = []
+    for paper in papers.values():
+        paper["questionCount"] = len(paper["questionIds"])
+        paper["complete"] = paper["verifiedAnswerCount"] == paper["questionCount"]
+        paper_entries.append(paper)
+    paper_entries.sort(key=lambda p: (
+        -(p["year"] or 0), build_modules.CAT_ORDER.get(p["examType"], 99), p["title"]))
+    write_json(os.path.join(OUT, "papers.json"), {
+        "schemaVersion": SCHEMA_VERSION,
+        "papers": paper_entries,
+    })
     write_json(os.path.join(OUT, "catalog.json"), {
         "schemaVersion": SCHEMA_VERSION,
         "title": "PKU ICS 历年题题库",
@@ -265,6 +371,7 @@ def main():
             "answerBlocks": len(answer_blocks),
         },
         "answerBlocksFile": "answer-blocks.json",
+        "papersFile": "papers.json",
     })
 
     # 防止删除模块后旧 JSON 悄悄残留。

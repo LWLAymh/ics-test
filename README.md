@@ -7,6 +7,7 @@ PKU Introduction to Computer Systems 历年题随机测试站点。
 - 页面源码：`site/`
 - Supabase 数据库脚本：`supabase/ics_stats.sql`
 - 自动部署：`.github/workflows/pages.yml`
+- 题目数据接口：[docs/QUESTION_FORMAT.md](docs/QUESTION_FORMAT.md)
 
 ## 更新题库
 
@@ -20,12 +21,24 @@ python _tools/validate_cls.py
 python _tools/verify_verbatim.py
 python _tools/verify_curated.py
 python _tools/build_web_data.py
+python _tools/validate_web_data.py
 cd ..
 npm run check
 npm run build
 ```
 
 推送到 `main` 后，GitHub Actions 会重复执行校验并自动发布 GitHub Pages。
+
+## 题库结构与质量状态
+
+发布数据使用 v3 接口：每道题显式关联所属试卷、卷内顺序、交互类型、Markdown 内容、
+图片资源、答案状态和原始出处。单选与多选分别声明，整卷通过 `papers.json` 精确选择，
+不再仅按“年份 + 考试类型”混合多份试卷。
+
+图片统一存放在 `question-bank/assets/`；公式使用 `$...$` / `$$...$$`；代码使用带语言名的
+Markdown 围栏。答案尚未校对的题仍会按原卷顺序显示，但明确标记为“待校对”且不计分，
+不会再从整卷中静默消失。完整接口、复合小题约定和校验规则见
+[题目数据接口（v3）](docs/QUESTION_FORMAT.md)。
 
 ## 本地预览
 

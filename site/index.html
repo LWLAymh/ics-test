@@ -61,7 +61,7 @@ window.MathJax = {
       <div class="ics-mode-grid" id="ics-mode-picker">
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="random" checked><span><strong>模块随机</strong><small>从一个或多个模块随机抽题</small></span></label>
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="module-all"><span><strong>模块全练</strong><small>完成一个模块的全部可用题目</small></span></label>
-        <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="exam"><span><strong>整卷练习</strong><small>选择年份和考试类型，跨模块汇总</small></span></label>
+        <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="exam"><span><strong>整卷练习</strong><small>选择一份具体试卷，按原顺序作答</small></span></label>
       </div>
     </fieldset>
     <fieldset class="ics-module-fieldset" id="ics-module-fieldset">
@@ -84,6 +84,10 @@ window.MathJax = {
       </label>
       <label class="ics-field" id="ics-exam-type-field">考试类型
         <select id="ics-exam-type"><option value="">全部类型</option></select>
+      </label>
+      <label class="ics-field ics-paper-field" id="ics-paper-field" hidden>具体试卷
+        <select id="ics-paper"><option value="">请选择试卷</option></select>
+        <small id="ics-paper-status"></small>
       </label>
       <button class="ics-primary" id="ics-start" type="button" disabled>开始测试</button>
     </div>

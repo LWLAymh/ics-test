@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "module": {
     "id": "network",
     "number": 8,
@@ -9,6 +9,8 @@
   "questions": [
     {
       "id": "q-74ce55f602b96943",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 17,
       "moduleId": "network",
       "year": 2013,
       "examType": "期末",
@@ -20,6 +22,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -33,6 +36,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "17、下列关于计算机网络概念的说法中，哪一项是正确的？答：（     ）",
         "choices": [
           {
@@ -53,10 +57,42 @@
           }
         ],
         "answer": "答案：B\n解释：考察第一部分\nA. IP只是计算机网络众多协议中的一种；IP是具有代表性的一种协议；但还有\n其他很多协议。\nC. 端口号是可以修改的，默认端口号只是为了方便\nD. 一个域名可以对应多个IP；一个IP也可以对应多个域名。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "全球最大的计算机网络是互联网 Internet，所以计算机网络协议是\nInternet Protocol即IP协议。"
+          },
+          {
+            "id": "B",
+            "content": "计算机之间的网络通信是一个机器上的一个 process (如 client\nprocess) 与另一个机器上的 process (如 server process) 之间\n的通信。"
+          },
+          {
+            "id": "C",
+            "content": "网络应用程序有默认的端口号，大部分应用的端口号可以修改，而少部分\n知名应用如Web服务程序的端口号80是无法修改的。"
+          },
+          {
+            "id": "D",
+            "content": "一个域名只能对应一个IP地址；而一个IP地址可以对应多个域名。"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17、下列关于计算机网络概念的说法中，哪一项是正确的？答：（     ）",
+        "answer": "答案：B\n解释：考察第一部分\nA. IP只是计算机网络众多协议中的一种；IP是具有代表性的一种协议；但还有\n其他很多协议。\nC. 端口号是可以修改的，默认端口号只是为了方便\nD. 一个域名可以对应多个IP；一个IP也可以对应多个域名。"
       }
     },
     {
       "id": "q-d9d9b65f12990fcc",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 18,
       "moduleId": "network",
       "year": 2013,
       "examType": "期末",
@@ -68,6 +104,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -81,13 +118,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "18、在 client-server 模型中，一个连接（connection）可以由 IP 地址，\n7\n\n<!-- ===== page 8 ===== -->\n\n端口号的组合来表示。假设一个访问网页服务器的应用，客户端 IP 地址为\n128.2.194.242，目标服务器端 IP 地址为 208.216.181.15，用户设置的代\n理服务器 IP 地址为 155.232.108.39。目标服务器同时提供网页服务（默认端\n口80），和邮件服务（默认端口25）。当客户端向目标服务器发送访问网页的请求\n时，下面connection socket pairs 正确的一组是？答：（       ）\n  客户端请求  代理请求\n```\n(128.2.194.242:25,  (128.2.194.242:51213,\nA  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:51213,  (128.2.194.242:12306,\nB  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:25,  (155.232.108.39:51213,\nC  208.216.181.15:80)  208.216.181.15:80)\nD  (128.2.194.242:51213,  (155.232.108.39:12306,\n208.216.181.15:80)  208.216.181.15:80)\n```",
         "choices": [],
+        "answer": "答案：D\n解释：考察所有三部分内容\n（客户端请求）这一段，客户端发送的请求，源地址是客户自己地址\n128.2.194.242，端口号是临时端口号；目标地址仍是服务器地址\n208.216.181.15:80默认端口80\n（代理请求）这一段，代理发送的请求，源地址是代理自己地址155.232.108.39，\n端口号是临时端口号；目标地址仍是服务器地址208.216.181.15:80默认端口\n80。\n所以，选项D正确。\n（选项A/B中，目标地址不是代理的地址，而是目标服务器的地址。）\n（选项C中，端口号25属于电子邮件应用默认端口号，不作为客户端的临时端口\n号。）"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "18、在 client-server 模型中，一个连接（connection）可以由 IP 地址，\n7\n\n<!-- ===== page 8 ===== -->\n\n端口号的组合来表示。假设一个访问网页服务器的应用，客户端 IP 地址为\n128.2.194.242，目标服务器端 IP 地址为 208.216.181.15，用户设置的代\n理服务器 IP 地址为 155.232.108.39。目标服务器同时提供网页服务（默认端\n口80），和邮件服务（默认端口25）。当客户端向目标服务器发送访问网页的请求\n时，下面connection socket pairs 正确的一组是？答：（       ）\n  客户端请求  代理请求\n```\n(128.2.194.242:25,  (128.2.194.242:51213,\nA  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:51213,  (128.2.194.242:12306,\nB  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:25,  (155.232.108.39:51213,\nC  208.216.181.15:80)  208.216.181.15:80)\nD  (128.2.194.242:51213,  (155.232.108.39:12306,\n208.216.181.15:80)  208.216.181.15:80)\n```",
         "answer": "答案：D\n解释：考察所有三部分内容\n（客户端请求）这一段，客户端发送的请求，源地址是客户自己地址\n128.2.194.242，端口号是临时端口号；目标地址仍是服务器地址\n208.216.181.15:80默认端口80\n（代理请求）这一段，代理发送的请求，源地址是代理自己地址155.232.108.39，\n端口号是临时端口号；目标地址仍是服务器地址208.216.181.15:80默认端口\n80。\n所以，选项D正确。\n（选项A/B中，目标地址不是代理的地址，而是目标服务器的地址。）\n（选项C中，端口号25属于电子邮件应用默认端口号，不作为客户端的临时端口\n号。）"
       }
     },
     {
       "id": "q-fa6afdda8f92ace2",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 27,
       "moduleId": "network",
       "year": 2013,
       "examType": "期末",
@@ -98,7 +147,8 @@
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": true,
+        "inline": false,
+        "status": "needs-review",
         "relatedBlockIds": []
       },
       "source": {
@@ -112,13 +162,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第七题（10分）\n（1） 一个服务器拥有两个独立的固定IP地址，那么它在web应用端口80上最\n多可以监听多少个独立的 socket 连接？（2分）",
         "choices": [],
+        "answer": "答案：2*248\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*232+16\n任 意 16 位   port\nnumber\n（2） 该服务器在所有有web应用端口上最多可以监听多少个独立的 socket 连\n接？（2分）\n答案：2*264\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*216+32+16\n任意16位port number  任 意 16 位   port\nnumber\n（3） 在下图中连线上填入正确的目标服务器的socket 标识符（2分）\n19\n\n<!-- ===== page 20 ===== -->\n\n答案：\n```\n128.2.194.242:80\n128.2.194.242:7\n```\n4) 在Echo server 范例中，server端通过accept函数接受了一个 client\n的连接请求，从而将网络描述符与该网络连接、socket绑定，然后进行网络数据\n传输。在下面的空格处填写正确的网络描述符，每个空填写listenfd 或connfd\n（共4分，每空1分）。\n```\nint main(int argc, char **argv) {\nint listenfd, connfd, port, clientlen;\nstruct sockaddr_in clientaddr;\nstruct hostent *hp;\nchar *haddrp;\nunsigned short client_port;\n…………\nwhile (1) {\nclientlen = sizeof(clientaddr);\n_________ = Accept(_________, (SA *)&clientaddr,\n&clientlen);\nhp = Gethostbyaddr((const char*)\n&clientaddr.sin_addr.s_addr,\nsizeof(clientaddr.sin_addr.s_addr), AF_INET);\nhaddrp = inet_ntoa(clientaddr.sin_addr);\nclient_port = ntohs(clientaddr.sin_port);\nprintf(\"server connected to %s (%s), port %u\\n\",\nhp->h_name, haddrp, client_port);\necho(_________);\nClose(_________);\n    }\n}\n```\n答案：connfd, listenfd, connfd, connfd\naccept 之后把参数里的listenfd 转交给 connfd\nserver 无法支持多个 connections，因为只有一个文件描述符（listenfd）\n考察学生对 网络文件描述符、listenfd、connfd的理解。"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第七题（10分）\n（1） 一个服务器拥有两个独立的固定IP地址，那么它在web应用端口80上最\n多可以监听多少个独立的 socket 连接？（2分）",
         "answer": "答案：2*248\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*232+16\n任 意 16 位   port\nnumber\n（2） 该服务器在所有有web应用端口上最多可以监听多少个独立的 socket 连\n接？（2分）\n答案：2*264\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*216+32+16\n任意16位port number  任 意 16 位   port\nnumber\n（3） 在下图中连线上填入正确的目标服务器的socket 标识符（2分）\n19\n\n<!-- ===== page 20 ===== -->\n\n答案：\n```\n128.2.194.242:80\n128.2.194.242:7\n```\n4) 在Echo server 范例中，server端通过accept函数接受了一个 client\n的连接请求，从而将网络描述符与该网络连接、socket绑定，然后进行网络数据\n传输。在下面的空格处填写正确的网络描述符，每个空填写listenfd 或connfd\n（共4分，每空1分）。\n```\nint main(int argc, char **argv) {\nint listenfd, connfd, port, clientlen;\nstruct sockaddr_in clientaddr;\nstruct hostent *hp;\nchar *haddrp;\nunsigned short client_port;\n…………\nwhile (1) {\nclientlen = sizeof(clientaddr);\n_________ = Accept(_________, (SA *)&clientaddr,\n&clientlen);\nhp = Gethostbyaddr((const char*)\n&clientaddr.sin_addr.s_addr,\nsizeof(clientaddr.sin_addr.s_addr), AF_INET);\nhaddrp = inet_ntoa(clientaddr.sin_addr);\nclient_port = ntohs(clientaddr.sin_port);\nprintf(\"server connected to %s (%s), port %u\\n\",\nhp->h_name, haddrp, client_port);\necho(_________);\nClose(_________);\n    }\n}\n```\n答案：connfd, listenfd, connfd, connfd\naccept 之后把参数里的listenfd 转交给 connfd\nserver 无法支持多个 connections，因为只有一个文件描述符（listenfd）\n考察学生对 网络文件描述符、listenfd、connfd的理解。"
       }
     },
     {
       "id": "q-a7e7d2984076c296",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 17,
       "moduleId": "network",
       "year": 2014,
       "examType": "期末",
@@ -130,6 +192,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -143,6 +206,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "17. 如果两个局域网高层分别采用TCP/IP协议和SPX/IPX协议，那么可以选择\n的互连设备应是(      )",
         "choices": [
           {
@@ -163,10 +227,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "网桥"
+          },
+          {
+            "id": "B",
+            "content": "集线器"
+          },
+          {
+            "id": "C",
+            "content": "路由器"
+          },
+          {
+            "id": "D",
+            "content": "交换机\n【答案】Ｃ\n【说明】"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17. 如果两个局域网高层分别采用TCP/IP协议和SPX/IPX协议，那么可以选择\n的互连设备应是(      )",
+        "answer": ""
       }
     },
     {
       "id": "q-005346f534f14bb8",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 18,
       "moduleId": "network",
       "year": 2014,
       "examType": "期末",
@@ -178,6 +271,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -191,6 +285,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "18. 下面说法正确的是（     ）",
         "choices": [
           {
@@ -211,10 +306,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "TCP是一种可靠的无连接协议"
+          },
+          {
+            "id": "B",
+            "content": "UDP是一种不可靠的无连接协议"
+          },
+          {
+            "id": "C",
+            "content": "Web浏览器与web服务器通信采用的协议是HTML"
+          },
+          {
+            "id": "D",
+            "content": "数字数据只能通过数字信号传输\n【答案】B\n【说明】Ａ应该是连接协议，Ｃ应该是HTTP，Ｄ应该还包括模拟信号"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "18. 下面说法正确的是（     ）",
+        "answer": ""
       }
     },
     {
       "id": "q-00a8b5c318a16492",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 29,
       "moduleId": "network",
       "year": 2014,
       "examType": "期末",
@@ -225,7 +349,8 @@
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": true,
+        "inline": false,
+        "status": "needs-review",
         "relatedBlockIds": []
       },
       "source": {
@@ -239,13 +364,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听______个来自一个客户端独\n立的 socket 连接（客户端只有一个固定IP地址）。",
         "choices": [],
+        "answer": "答案： 4*216 – 4\n服务器端  客户端  结果\n4个独立固定IP  一个32位固定IP  （4*216 – 4），因为80端口本\n任意16位 port number  身已用于监听端口\n或者\n（4*216 – 4*well-known 端\n口数）\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。HTTP服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n答案：\n192.168.100.121不对，原因：不能用内网IP；\n25应该是80，原因：网页浏览器应用的默认监听端口是80端口。\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（Server）\n通过 socket进行一系列的命令和数据交互。\n23\n\n<!-- ===== page 24 ===== -->\n\n注意：客户端Connect命令包含在其Open_clientfd命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给Server端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 Server 端相\n应代码行画一条单向箭头。\n答案：\n```\nclientfd = Open_clientfd(host, port); --------à\nconnfd=Accept(listenfd, (SA*)&clientaddr, &clientlen);\nRio_writen(clientfd, buf, strlen(buf)); --------à\nwhile((n=Rio_readlineb(&rio,buf, MAXLINE)) != 0)\nRio_readlineb(&rio, buf, MAXLINE); ß-----------\nRio_writen(connfd, buf, n);\nClose(clientfd); -----------à Close(connfd);\n```\n24\n\n<!-- ===== page 25 ===== -->\n\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```\n答案\na. filename\nb. 动态，因为调用了exec函数启动新的程序（execve执行文件），而非静态\nfile name\nc. 可以通过多进程、多线程或IO多路复用进行更改"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听______个来自一个客户端独\n立的 socket 连接（客户端只有一个固定IP地址）。",
         "answer": "答案： 4*216 – 4\n服务器端  客户端  结果\n4个独立固定IP  一个32位固定IP  （4*216 – 4），因为80端口本\n任意16位 port number  身已用于监听端口\n或者\n（4*216 – 4*well-known 端\n口数）\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。HTTP服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n答案：\n192.168.100.121不对，原因：不能用内网IP；\n25应该是80，原因：网页浏览器应用的默认监听端口是80端口。\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（Server）\n通过 socket进行一系列的命令和数据交互。\n23\n\n<!-- ===== page 24 ===== -->\n\n注意：客户端Connect命令包含在其Open_clientfd命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给Server端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 Server 端相\n应代码行画一条单向箭头。\n答案：\n```\nclientfd = Open_clientfd(host, port); --------à\nconnfd=Accept(listenfd, (SA*)&clientaddr, &clientlen);\nRio_writen(clientfd, buf, strlen(buf)); --------à\nwhile((n=Rio_readlineb(&rio,buf, MAXLINE)) != 0)\nRio_readlineb(&rio, buf, MAXLINE); ß-----------\nRio_writen(connfd, buf, n);\nClose(clientfd); -----------à Close(connfd);\n```\n24\n\n<!-- ===== page 25 ===== -->\n\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```\n答案\na. filename\nb. 动态，因为调用了exec函数启动新的程序（execve执行文件），而非静态\nfile name\nc. 可以通过多进程、多线程或IO多路复用进行更改"
       }
     },
     {
       "id": "q-03d0ee597ef22217",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 17,
       "moduleId": "network",
       "year": 2015,
       "examType": "期末",
@@ -257,6 +394,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -270,6 +408,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "17. HTTP协议中，哪个命令可以用来获取动态内容？",
         "choices": [
           {
@@ -290,10 +429,42 @@
           }
         ],
         "answer": "答案：B或C都正确\n说明：POST只能用于获得静态内容"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "HEAD"
+          },
+          {
+            "id": "B",
+            "content": "GET"
+          },
+          {
+            "id": "C",
+            "content": "POST"
+          },
+          {
+            "id": "D",
+            "content": "PUT"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17. HTTP协议中，哪个命令可以用来获取动态内容？",
+        "answer": "答案：B或C都正确\n说明：POST只能用于获得静态内容"
       }
     },
     {
       "id": "q-55ceac1946a95058",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 18,
       "moduleId": "network",
       "year": 2015,
       "examType": "期末",
@@ -305,6 +476,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -318,6 +490,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "18. 下列关于计算机网络概念的说法中，哪一项是正确的？",
         "choices": [
           {
@@ -338,10 +511,42 @@
           }
         ],
         "answer": "答案：C\n说明：HUB会广播它任意端口上接收到的帧；LAN frame header的目的地地址\n在经历的不同的LAN中会不断调整；动态分配地址和主机地址没有唯一映射关系"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "HUB会把它任意端口上接收到的帧只转发到它的目的地去"
+          },
+          {
+            "id": "B",
+            "content": "当在不同的LAN中的主机A和主机B通信的过程中，他们的数据包中的\nLAN frame header不会变化"
+          },
+          {
+            "id": "C",
+            "content": "162.105.0.0是一个B类地址"
+          },
+          {
+            "id": "D",
+            "content": "同一台主机每次进入相同的网络，通过动态地址分配的到的IP地址总是\n相同的"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "18. 下列关于计算机网络概念的说法中，哪一项是正确的？",
+        "answer": "答案：C\n说明：HUB会广播它任意端口上接收到的帧；LAN frame header的目的地地址\n在经历的不同的LAN中会不断调整；动态分配地址和主机地址没有唯一映射关系"
       }
     },
     {
       "id": "q-c42dbf66f5c328f4",
+      "paperId": "p-08e665c0f6e47348",
+      "paperOrder": 26,
       "moduleId": "network",
       "year": 2015,
       "examType": "期末",
@@ -352,7 +557,8 @@
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": true,
+        "inline": false,
+        "status": "needs-review",
         "relatedBlockIds": []
       },
       "source": {
@@ -366,13 +572,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "第七题（10分）网络\n1. 请根据 web 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP, K\nernel code, User code\n```\n协议  数据包类型  软件实现\nHTTP",
         "choices": [],
+        "answer": "答案：（每空1分，共8分）\n协议  数据包类型  软件实现\n```\nHTTP  Web content  User code\nTCP  Streams  Kernel code\nIP  Datagrams  Kernel code\n```\n2. 以下关于互联网的说法中哪些是正确的？并简要说明原因\nA. 在client-server模型中，server通常使用监听套接字listenfd和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n答：\n答案：B, C, F（全对得2分，有错得0分，部分对得1分）\n说明的原因供评分时参考\n24\n\n<!-- ===== page 25 ===== -->\n\n说明：server会为每一个client单独创建一个套接字进行通信；Web是一种基\n于HTTP协议的互联网应用；一个域名可以对应多个IP地址，一个IP地址也可\n以对应多个域名"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第七题（10分）网络\n1. 请根据 web 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP, K\nernel code, User code\n```\n协议  数据包类型  软件实现\nHTTP",
         "answer": "答案：（每空1分，共8分）\n协议  数据包类型  软件实现\n```\nHTTP  Web content  User code\nTCP  Streams  Kernel code\nIP  Datagrams  Kernel code\n```\n2. 以下关于互联网的说法中哪些是正确的？并简要说明原因\nA. 在client-server模型中，server通常使用监听套接字listenfd和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n答：\n答案：B, C, F（全对得2分，有错得0分，部分对得1分）\n说明的原因供评分时参考\n24\n\n<!-- ===== page 25 ===== -->\n\n说明：server会为每一个client单独创建一个套接字进行通信；Web是一种基\n于HTTP协议的互联网应用；一个域名可以对应多个IP地址，一个IP地址也可\n以对应多个域名"
       }
     },
     {
       "id": "q-18da66c788205db3",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 16,
       "moduleId": "network",
       "year": 2016,
       "examType": "期末",
@@ -384,6 +602,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -397,6 +616,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "16. 关于IP，以下说法正确的是：",
         "choices": [
           {
@@ -417,10 +637,42 @@
           }
         ],
         "answer": "答案：D\nA错误，不可信赖；B错误，如IPv6地址就是128位的；C错误，存在多个域名\n映射到一个IP的情况"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "IP协议提供了可信赖的主机与主机之间的数据包传输能力"
+          },
+          {
+            "id": "B",
+            "content": "IP地址的长度固定为32位"
+          },
+          {
+            "id": "C",
+            "content": "一个域名可以映射到多个IP，但一个IP不能被多个域名映射"
+          },
+          {
+            "id": "D",
+            "content": "一个域名可以不映射到任何IP"
+          }
+        ],
+        "correctChoiceIds": [
+          "D"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16. 关于IP，以下说法正确的是：",
+        "answer": "答案：D\nA错误，不可信赖；B错误，如IPv6地址就是128位的；C错误，存在多个域名\n映射到一个IP的情况"
       }
     },
     {
       "id": "q-141fab738d56d3b5",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 17,
       "moduleId": "network",
       "year": 2016,
       "examType": "期末",
@@ -432,6 +684,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -445,6 +698,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "17. 关于以下说法，以下说法正确的是：",
         "choices": [
           {
@@ -465,10 +719,42 @@
           }
         ],
         "answer": "答案：B\nA错误，80是默认端口而非必须；C错误，IP协议本身不基于连接，传输层中的\nUDP协议便不基于连接；D错误，可以通过网卡驱动接口直接收发数据。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "HTTP协议规定服务器端使用80端口提供服务"
+          },
+          {
+            "id": "B",
+            "content": "使用TCP来实现数据传输一定是可靠的"
+          },
+          {
+            "id": "C",
+            "content": "Internet上的两台的主机要通信必须先建立端到端连接"
+          },
+          {
+            "id": "D",
+            "content": "在Linux中只能通过Socket接口进行网络编程"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17. 关于以下说法，以下说法正确的是：",
+        "answer": "答案：B\nA错误，80是默认端口而非必须；C错误，IP协议本身不基于连接，传输层中的\nUDP协议便不基于连接；D错误，可以通过网卡驱动接口直接收发数据。"
       }
     },
     {
       "id": "q-869a8d72f4c9926c",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 18,
       "moduleId": "network",
       "year": 2016,
       "examType": "期末",
@@ -480,6 +766,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -493,6 +780,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "18. 假设有一个 HTTPS（基于 HTTP 的一种安全的应用层协议）客户端程序想要\n通过一个 URL 连接一个电子商务网络服务器获取一个文件，并且这个服务器\nURL的IP地址是已知的，以下哪种协议是一定不需要的？",
         "choices": [
           {
@@ -513,10 +801,42 @@
           }
         ],
         "answer": "答案：C\nDNS的作用是返回URL对应的IP地址，因为已知，所以不需要。其他协议都是必\n须的，因为HTTPS是基于HTTP，SSL以及TCP一种协议。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "HTTP"
+          },
+          {
+            "id": "B",
+            "content": "TCP"
+          },
+          {
+            "id": "C",
+            "content": "DNS"
+          },
+          {
+            "id": "D",
+            "content": "SSL/TLS"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "18. 假设有一个 HTTPS（基于 HTTP 的一种安全的应用层协议）客户端程序想要\n通过一个 URL 连接一个电子商务网络服务器获取一个文件，并且这个服务器\nURL的IP地址是已知的，以下哪种协议是一定不需要的？",
+        "answer": "答案：C\nDNS的作用是返回URL对应的IP地址，因为已知，所以不需要。其他协议都是必\n须的，因为HTTPS是基于HTTP，SSL以及TCP一种协议。"
       }
     },
     {
       "id": "q-496d550407168984",
+      "paperId": "p-bc69f9ea3beff7ee",
+      "paperOrder": 26,
       "moduleId": "network",
       "year": 2016,
       "examType": "期末",
@@ -528,6 +848,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -541,13 +862,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第七题（12分）\n下面是一个基于进程的并发echo server的主要代码（省略了与本题无关的部分），\n每段代码都注释了相应的功能，请补充空缺的代码（可能是0行或多行）。请确保\n任何由你打开的文件描述符都被显式地关闭。\n```\nint open_listenfd(char *port) {\n  struct addrinfo hints, *listp, *p;\n  int listenfd, optval = 1;\n  /* Get a list of potential server addresses */\n  memset(&hints, 0, sizeof(struct addrinfo));\n  hints.ai_socktype = SOCK_STREAM;\n  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\n  hints.ai_flags |= AI_NUMERICSERV;\n  Getaddrinfo(NULL, port, &hints, &listp);\n  /* Walk the list for one that we can bind to */\n  for (p = listp; p; p = p->ai_next) {\n    /* Create a socket descriptor. If failed, try the next */\n    if ((listenfd = socket(p->ai_family,\n      p->ai_socktype, p->ai_protocol)) < 0)\n          (1)\n    /* Eliminates error from bind */\n    Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\n      (const void *)&optval, sizeof(int));\n    /* Bind the descriptor to the address */\n    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)\n          (2)     else /* Success, use the current one */\n          (3)          /* Bind failed, try the next */\n  }\n      (4)\n  if (!p) return -1; /* No address worked */\n  /* Make it a listening socket*/\n  if (listen(listenfd, LISTENQ) < 0) {\n        (5)\n    return -1;\n  }\n  return listenfd;\n}\n```\n22\n\n<!-- ===== page 23 ===== -->\n\n```\nvoid echo(int fd); /* service a client via fd */\nvoid handler(int sig) {\n  while (waitpid(-1, 0, WNOHANG) > 0);\n  return;\n}\nint main(int argc, char **argv) {\n  int listenfd, connfd;\n  socklen_t clientlen;\n  struct sockaddr_storage clientaddr;\n  Signal(    (10)    , handler);\n  listenfd = Open_listenfd(argv[1]);\n  while (1) {\n    clientlen = sizeof(struct sockaddr_storage)\n      (6)   = Accept(  (7)  , (SA *)&clientaddr, &clientlen);\n    if (Fork() == 0) {\n      /* Child services client and close fd */\n          (8)\n      exit(0); /* Child exits */\n    }\n        (9)\n  }\n}\n```\n（第(9)空3分，其余每空1分; 共12分）",
         "choices": [],
+        "answer": "答案：\n```\n(1)  continue;\n(2)  break;\n(3)  Close(listenfd);\n(4)  Freeaddrinfo(listp);\n(5)  Close(listenfd);\n(6)  connfd\n(7)  listenfd\n(8)  Close(listenfd); echo(connfd); Close(connfd);\n(9)  Close(connfd);\n(10)  SIGCHLD\n```"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第七题（12分）\n下面是一个基于进程的并发echo server的主要代码（省略了与本题无关的部分），\n每段代码都注释了相应的功能，请补充空缺的代码（可能是0行或多行）。请确保\n任何由你打开的文件描述符都被显式地关闭。\n```\nint open_listenfd(char *port) {\n  struct addrinfo hints, *listp, *p;\n  int listenfd, optval = 1;\n  /* Get a list of potential server addresses */\n  memset(&hints, 0, sizeof(struct addrinfo));\n  hints.ai_socktype = SOCK_STREAM;\n  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\n  hints.ai_flags |= AI_NUMERICSERV;\n  Getaddrinfo(NULL, port, &hints, &listp);\n  /* Walk the list for one that we can bind to */\n  for (p = listp; p; p = p->ai_next) {\n    /* Create a socket descriptor. If failed, try the next */\n    if ((listenfd = socket(p->ai_family,\n      p->ai_socktype, p->ai_protocol)) < 0)\n          (1)\n    /* Eliminates error from bind */\n    Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\n      (const void *)&optval, sizeof(int));\n    /* Bind the descriptor to the address */\n    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)\n          (2)     else /* Success, use the current one */\n          (3)          /* Bind failed, try the next */\n  }\n      (4)\n  if (!p) return -1; /* No address worked */\n  /* Make it a listening socket*/\n  if (listen(listenfd, LISTENQ) < 0) {\n        (5)\n    return -1;\n  }\n  return listenfd;\n}\n```\n22\n\n<!-- ===== page 23 ===== -->\n\n```\nvoid echo(int fd); /* service a client via fd */\nvoid handler(int sig) {\n  while (waitpid(-1, 0, WNOHANG) > 0);\n  return;\n}\nint main(int argc, char **argv) {\n  int listenfd, connfd;\n  socklen_t clientlen;\n  struct sockaddr_storage clientaddr;\n  Signal(    (10)    , handler);\n  listenfd = Open_listenfd(argv[1]);\n  while (1) {\n    clientlen = sizeof(struct sockaddr_storage)\n      (6)   = Accept(  (7)  , (SA *)&clientaddr, &clientlen);\n    if (Fork() == 0) {\n      /* Child services client and close fd */\n          (8)\n      exit(0); /* Child exits */\n    }\n        (9)\n  }\n}\n```\n（第(9)空3分，其余每空1分; 共12分）",
         "answer": "答案：\n```\n(1)  continue;\n(2)  break;\n(3)  Close(listenfd);\n(4)  Freeaddrinfo(listp);\n(5)  Close(listenfd);\n(6)  connfd\n(7)  listenfd\n(8)  Close(listenfd); echo(connfd); Close(connfd);\n(9)  Close(connfd);\n(10)  SIGCHLD\n```"
       }
     },
     {
       "id": "q-818aba7f99c7eb6f",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 16,
       "moduleId": "network",
       "year": 2017,
       "examType": "期末",
@@ -559,6 +892,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -572,6 +906,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "16. 一台处于校园网内的笔记本电脑访问一台处于公网上的服务器上的网页服务。\n网页服务使用默认的80端口。以下答案有三项一定不正确，可能正确的那一\n项是：",
         "choices": [
           {
@@ -592,10 +927,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "笔记本在通信过程中，本地使用的端口号是80"
+          },
+          {
+            "id": "B",
+            "content": "笔记本的IP地址是192.168.1.101"
+          },
+          {
+            "id": "C",
+            "content": "服务器向笔记本传送网页内容时，使用的服务器端口号是80"
+          },
+          {
+            "id": "D",
+            "content": "服务器的IP地址是192.168.1.102"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16. 一台处于校园网内的笔记本电脑访问一台处于公网上的服务器上的网页服务。\n网页服务使用默认的80端口。以下答案有三项一定不正确，可能正确的那一\n项是：",
+        "answer": ""
       }
     },
     {
       "id": "q-82be456c3b6ba58c",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 17,
       "moduleId": "network",
       "year": 2017,
       "examType": "期末",
@@ -607,6 +971,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -620,6 +985,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "17. 下列关于计算机网络概念的说法中，正确的是：",
         "choices": [
           {
@@ -640,10 +1006,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "HUB与交换机都会转发从任意端口上收到的帧，区别在于交换机转发速度更快"
+          },
+          {
+            "id": "B",
+            "content": "UDP是无连接的协议，而实时音视频一般需要先呼叫对方建立连接，因此这些\n应用不能基于UDP传输音视频数据"
+          },
+          {
+            "id": "C",
+            "content": "处于数据链路层的以太网协议和处于传输层的TCP协议都对数据进行了校验"
+          },
+          {
+            "id": "D",
+            "content": "HTML是互联网上应用最为广泛的超文本传输协议"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17. 下列关于计算机网络概念的说法中，正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-ca7f9653fe94b2de",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 18,
       "moduleId": "network",
       "year": 2017,
       "examType": "期末",
@@ -655,6 +1050,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -668,6 +1064,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "18. 下列关于计算机网络的说法中，错误的是：",
         "choices": [
           {
@@ -688,10 +1085,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "在Linux系统中，每台主机都有本地定义的域名localhost，这个域名总是\n被映射为IP地址127.0.0.1"
+          },
+          {
+            "id": "B",
+            "content": "在套接字编程中，既可以用网卡地址作为地址，也可以用IP地址作为地址"
+          },
+          {
+            "id": "C",
+            "content": "Web客户端和服务器间的交互采用的是基于文本的无连接协议"
+          },
+          {
+            "id": "D",
+            "content": "IPv4中的IP地址是一个32位无符号整数，IPv6中的IP地址是一个128\n位无符号整数"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "18. 下列关于计算机网络的说法中，错误的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-639715cb9285f961",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 27,
       "moduleId": "network",
       "year": 2017,
       "examType": "期末",
@@ -703,6 +1129,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -716,6 +1143,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "第七题（12分）\n1. 请根据Echo server/client应用的标准程序填空。\n2.(cid:9)Start(cid:9)client 1.(cid:9)Start(cid:9)server\nClient Server\n1 2 Sockets(cid:9)\nInterface\n```\nsocket socket\nopen_listenfd\nopen_clientfd 3\n4\n```\nConnection\n5 request 6\n3.(cid:9)Exchange\nClient(cid:9)/(cid:9) 7 8 data\nServer\nSession rio_readlineb rio_writen Arewqauiet(cid:9)scto(cid:9)fnrnoemction\nnext(cid:9)client\nclose EOF 9\n5.(cid:9)Drop(cid:9)client\n4.(cid:9)Disconnect(cid:9)client close\n```\n1. ______________  2. ______________  3. ______________\n4. ______________  5. ______________  6. ______________\n7. ______________  8. ______________  9. ______________\n```\n2. 不定项选择题（全对得分，有错得0分）",
         "choices": [
           {
@@ -744,10 +1172,47 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "TCP是一种实现在用户态的端到端可靠数据传输协议"
+          },
+          {
+            "id": "B",
+            "content": "每一个连接在网络上的主机都会被分配一个固定的IP地址"
+          },
+          {
+            "id": "C",
+            "content": "IP包在网际互联时通过其帧头（LAN frame header）和包头（Internet\npacket header）信息共同决定路由"
+          },
+          {
+            "id": "D",
+            "content": "HTTP1.0支持在同一个连接里进行多个transaction"
+          },
+          {
+            "id": "E",
+            "content": "Web代理作为网络缓存功能的时候对用户是显式存在的"
+          },
+          {
+            "id": "F",
+            "content": "10.0.0.0/12和172.16.0.0/16和192.168.0.0/20属于私有地址字段\n上述正确的有：_________________"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第七题（12分）\n1. 请根据Echo server/client应用的标准程序填空。\n2.(cid:9)Start(cid:9)client 1.(cid:9)Start(cid:9)server\nClient Server\n1 2 Sockets(cid:9)\nInterface\n```\nsocket socket\nopen_listenfd\nopen_clientfd 3\n4\n```\nConnection\n5 request 6\n3.(cid:9)Exchange\nClient(cid:9)/(cid:9) 7 8 data\nServer\nSession rio_readlineb rio_writen Arewqauiet(cid:9)scto(cid:9)fnrnoemction\nnext(cid:9)client\nclose EOF 9\n5.(cid:9)Drop(cid:9)client\n4.(cid:9)Disconnect(cid:9)client close\n```\n1. ______________  2. ______________  3. ______________\n4. ______________  5. ______________  6. ______________\n7. ______________  8. ______________  9. ______________\n```\n2. 不定项选择题（全对得分，有错得0分）",
+        "answer": ""
       }
     },
     {
       "id": "q-1c82e5ac9ed0d899",
+      "paperId": "p-e3f869956fc29bd8",
+      "paperOrder": 10,
       "moduleId": "network",
       "year": 2018,
       "examType": "期末",
@@ -759,6 +1224,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -772,6 +1238,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "10. 下面有关计算机网络概念的叙述中，正确的是",
         "choices": [
           {
@@ -792,10 +1259,42 @@
           }
         ],
         "answer": "答案：C\n  A选项出自书本645页，考察互联网的基本概念。internet应该是描述一般概\n念，Internet应该是特指一个具体实现\n  B选项出自书本 643-644页，考察 Ethernet协议的概念和实现形式。早期的\nEthernet协议使用Hub来连接网络主机，所有的帧传送都是广播形式。\n  C选项出自书本647页，考察IP协议在网络协议栈中的角色。\n  D选项出自书本645-646页，考察网络协议的基本概念。在通过路由器将数据\n从一个局域网传送到另一个局域网的过程中，原来的局域网帧头会被剥离，然后附\n加新的局域网帧头"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "大写字母的Internet用来描述互联网的一般概念，而小写字母的internet用\n来描述一种具体的实现，也就是全球IP互联网。"
+          },
+          {
+            "id": "B",
+            "content": "在一个基于集线器(hub)的以太网(Ethernet)中，如果往一台主机发送一段数\n据帧(frame)，那么其他主机无法看到这个帧。"
+          },
+          {
+            "id": "C",
+            "content": "IP协议提供基本的命名方法和递送机制，因此我们能够借助IP协议，从一台\n主机往另一台主机发送包，即使两台主机不在同一个LAN内。"
+          },
+          {
+            "id": "D",
+            "content": "当一段数据通过路由器，从LAN1被发送到LAN2时，附加的互联网络包头和局\n5\n<!-- ===== page 6 ===== -->\n域网帧头保持不变。"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "10. 下面有关计算机网络概念的叙述中，正确的是",
+        "answer": "答案：C\n  A选项出自书本645页，考察互联网的基本概念。internet应该是描述一般概\n念，Internet应该是特指一个具体实现\n  B选项出自书本 643-644页，考察 Ethernet协议的概念和实现形式。早期的\nEthernet协议使用Hub来连接网络主机，所有的帧传送都是广播形式。\n  C选项出自书本647页，考察IP协议在网络协议栈中的角色。\n  D选项出自书本645-646页，考察网络协议的基本概念。在通过路由器将数据\n从一个局域网传送到另一个局域网的过程中，原来的局域网帧头会被剥离，然后附\n加新的局域网帧头"
       }
     },
     {
       "id": "q-cfd32ddc5cabb105",
+      "paperId": "p-e3f869956fc29bd8",
+      "paperOrder": 11,
       "moduleId": "network",
       "year": 2018,
       "examType": "期末",
@@ -807,6 +1306,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -820,6 +1320,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "11. 下面有关套接字接口(Socket API)的叙述中，错误的是",
         "choices": [
           {
@@ -840,10 +1341,42 @@
           }
         ],
         "answer": "答案：B\n  A选项是套接字的基本概念\n  B选项出自书本652页，考察对套接字接口的理解。几乎所有的现代操作系统\n都实现了套接字接口。\n  C选项出自书本656页，考察套接字接口中协议无关的设计思想。\n  D选项考察对Socket API和Linux文件描述符的基本理解"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "套接字接口常常被用来创建网络应用"
+          },
+          {
+            "id": "B",
+            "content": "Windows 10系统没有实现套接字接口"
+          },
+          {
+            "id": "C",
+            "content": "getaddrinfo()和getnameinfo()可以被用于编写独立于特定版本的IP协议的\n程序"
+          },
+          {
+            "id": "D",
+            "content": "socket()函数返回的描述符，可以使用标准Unix I/O函数进行读写"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "11. 下面有关套接字接口(Socket API)的叙述中，错误的是",
+        "answer": "答案：B\n  A选项是套接字的基本概念\n  B选项出自书本652页，考察对套接字接口的理解。几乎所有的现代操作系统\n都实现了套接字接口。\n  C选项出自书本656页，考察套接字接口中协议无关的设计思想。\n  D选项考察对Socket API和Linux文件描述符的基本理解"
       }
     },
     {
       "id": "q-7b70a2008c8f8f4d",
+      "paperId": "p-e3f869956fc29bd8",
+      "paperOrder": 12,
       "moduleId": "network",
       "year": 2018,
       "examType": "期末",
@@ -855,6 +1388,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -868,13 +1402,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "12. 使用浏览器打开网页www.pku.edu.cn的过程中，下列网络协议中，可能会被用\n到的网络协议有___个\n①  DNS  ② TCP  ③ IP  ④ HTTP\nA.   1    B.  2    C.  3    D.  4",
         "choices": [],
+        "answer": "答案：D\n  考察对于网络的整体理解。按照书上涉及的内容，要解析域名必须用到DNS协\n议，要传输网页必须用到HTTP协议，HTTP协议构建于TCP/IP协议之上，因此，所\n有的协议都可能会被用到。因为存在诸如HTTPS，QUIC等其他传输网页的协议，故\n加了可能两字。"
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "12. 使用浏览器打开网页www.pku.edu.cn的过程中，下列网络协议中，可能会被用\n到的网络协议有___个\n①  DNS  ② TCP  ③ IP  ④ HTTP\nA.   1    B.  2    C.  3    D.  4",
         "answer": "答案：D\n  考察对于网络的整体理解。按照书上涉及的内容，要解析域名必须用到DNS协\n议，要传输网页必须用到HTTP协议，HTTP协议构建于TCP/IP协议之上，因此，所\n有的协议都可能会被用到。因为存在诸如HTTPS，QUIC等其他传输网页的协议，故\n加了可能两字。"
       }
     },
     {
       "id": "q-b72158b8a694d842",
+      "paperId": "p-e3f869956fc29bd8",
+      "paperOrder": 21,
       "moduleId": "network",
       "year": 2018,
       "examType": "期末",
@@ -885,7 +1431,8 @@
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": true,
+        "inline": false,
+        "status": "needs-review",
         "relatedBlockIds": []
       },
       "source": {
@@ -899,13 +1446,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "第六题（10分）\n1.  请在以下的表格中填入相应的内容，每个空格仅需填一项。其中第1列可填\n选项包括：网络层、传输层、应用层；第2列可填选项IP、UDP、TCP、HTT\nP；第3列可填选项包括：是、否。\n（说明：面向连接的协议保障数据按照发送时的顺序被接收）\n协议层次  协议名称  是面向连接的吗？\n网络层\n  HTTP\n  TCP",
         "choices": [],
+        "answer": "答案：（每空1分，共6分）\n协议层次  协议名称  是面向连接的吗？\n网络层  IP  否\n应用层  HTTP  否\n传输层  TCP  是\n2.  下图描述了客户端与服务器套接字连接和通信的过程，请在空格处补充相关\n步骤。\n22\n\n<!-- ===== page 23 ===== -->\n\n(cid:23)(cid:19)(cid:12)(cid:16)(cid:14)(cid:24) (cid:23)(cid:19)(cid:12)(cid:16)(cid:14)(cid:24)\n(cid:1)\n(cid:2)\n(cid:5)(cid:19)(cid:18)(cid:18)(cid:14)(cid:12)(cid:24)(cid:15)(cid:19)(cid:18)\n(cid:22)(cid:14)(cid:21)(cid:25)(cid:14)(cid:23)(cid:24)\n(cid:3) (cid:10)(cid:12)(cid:12)(cid:14)(cid:20)(cid:24)\n(cid:22)(cid:15)(cid:19)(cid:9)(cid:26)(cid:22)(cid:15)(cid:24)(cid:14)(cid:18) (cid:22)(cid:15)(cid:19)(cid:9)(cid:22)(cid:14)(cid:10)(cid:13)(cid:17)(cid:15)(cid:18)(cid:14)(cid:11)\n(cid:22)(cid:15)(cid:19)(cid:9)(cid:22)(cid:14)(cid:10)(cid:13)(cid:17)(cid:15)(cid:18)(cid:14)(cid:11) (cid:22)(cid:15)(cid:19)(cid:9)(cid:26)(cid:22)(cid:15)(cid:24)(cid:14)(cid:18)\n(cid:6)(cid:8)(cid:7)\n(cid:12)(cid:17)(cid:19)(cid:23)(cid:14) (cid:4)\n(cid:12)(cid:17)(cid:19)(cid:23)(cid:14)\n答案：（每空1分，共4分）\n1：   bind\n2：   listen\n3：   connect\n4：   rio_readlineb"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第六题（10分）\n1.  请在以下的表格中填入相应的内容，每个空格仅需填一项。其中第1列可填\n选项包括：网络层、传输层、应用层；第2列可填选项IP、UDP、TCP、HTT\nP；第3列可填选项包括：是、否。\n（说明：面向连接的协议保障数据按照发送时的顺序被接收）\n协议层次  协议名称  是面向连接的吗？\n网络层\n  HTTP\n  TCP",
         "answer": "答案：（每空1分，共6分）\n协议层次  协议名称  是面向连接的吗？\n网络层  IP  否\n应用层  HTTP  否\n传输层  TCP  是\n2.  下图描述了客户端与服务器套接字连接和通信的过程，请在空格处补充相关\n步骤。\n22\n\n<!-- ===== page 23 ===== -->\n\n(cid:23)(cid:19)(cid:12)(cid:16)(cid:14)(cid:24) (cid:23)(cid:19)(cid:12)(cid:16)(cid:14)(cid:24)\n(cid:1)\n(cid:2)\n(cid:5)(cid:19)(cid:18)(cid:18)(cid:14)(cid:12)(cid:24)(cid:15)(cid:19)(cid:18)\n(cid:22)(cid:14)(cid:21)(cid:25)(cid:14)(cid:23)(cid:24)\n(cid:3) (cid:10)(cid:12)(cid:12)(cid:14)(cid:20)(cid:24)\n(cid:22)(cid:15)(cid:19)(cid:9)(cid:26)(cid:22)(cid:15)(cid:24)(cid:14)(cid:18) (cid:22)(cid:15)(cid:19)(cid:9)(cid:22)(cid:14)(cid:10)(cid:13)(cid:17)(cid:15)(cid:18)(cid:14)(cid:11)\n(cid:22)(cid:15)(cid:19)(cid:9)(cid:22)(cid:14)(cid:10)(cid:13)(cid:17)(cid:15)(cid:18)(cid:14)(cid:11) (cid:22)(cid:15)(cid:19)(cid:9)(cid:26)(cid:22)(cid:15)(cid:24)(cid:14)(cid:18)\n(cid:6)(cid:8)(cid:7)\n(cid:12)(cid:17)(cid:19)(cid:23)(cid:14) (cid:4)\n(cid:12)(cid:17)(cid:19)(cid:23)(cid:14)\n答案：（每空1分，共4分）\n1：   bind\n2：   listen\n3：   connect\n4：   rio_readlineb"
       }
     },
     {
       "id": "q-018ecb2e4d2b8822",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 20,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -917,6 +1476,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -932,13 +1492,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "20. C。服务器端的进程通过accept来建立已连接套接字。D应阻塞在read，参看课程投影片。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "20. C。服务器端的进程通过accept来建立已连接套接字。D应阻塞在read，参看课程投影片。",
         "answer": ""
       }
     },
     {
       "id": "q-37c75fe3f530f09c",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 21,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -950,6 +1522,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -965,13 +1538,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "21. D。送分题，根据这个命令的字面意思也能看出获得的是主机名，参数-i表示返回点分十进\n制的IP地址。网络字节顺序和大端法是一回事。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "21. D。送分题，根据这个命令的字面意思也能看出获得的是主机名，参数-i表示返回点分十进\n制的IP地址。网络字节顺序和大端法是一回事。",
         "answer": ""
       }
     },
     {
       "id": "q-4bf281a711ab7618",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 47,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -983,6 +1568,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -998,13 +1584,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "14. B。参看课程投影片，迭代服务器的第二个客户端会在read阻塞。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "14. B。参看课程投影片，迭代服务器的第二个客户端会在read阻塞。",
         "answer": ""
       }
     },
     {
       "id": "q-e3b9e18ee17edacd",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 48,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -1016,6 +1614,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1031,13 +1630,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "15. C。网络字节序规定为大端序，在不同的主机中可能需要转换。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "15. C。网络字节序规定为大端序，在不同的主机中可能需要转换。",
         "answer": ""
       }
     },
     {
       "id": "q-0dcbe94e42aec866",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 49,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -1049,6 +1660,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1064,13 +1676,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "16. A。文件名和参数应该用?分隔。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16. A。文件名和参数应该用?分隔。",
         "answer": ""
       }
     },
     {
       "id": "q-c53d4836894a4ce5",
+      "paperId": "p-5b6e88b9bae85831",
+      "paperOrder": 60,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -1082,6 +1706,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-9bc78f38ecd83096"
         ]
@@ -1097,13 +1722,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "解答题五\n1. bind, connect, accept, writen, readlineb, readlineb, writen。容易读解，\n但注意RIO包的API名称不能记错。\n2. bind, listp, listenfd。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "解答题五\n1. bind, connect, accept, writen, readlineb, readlineb, writen。容易读解，\n但注意RIO包的API名称不能记错。\n2. bind, listp, listenfd。",
         "answer": ""
       }
     },
     {
       "id": "q-8b2c129355c93545",
+      "paperId": "p-98acf19964247e22",
+      "paperOrder": 14,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -1115,6 +1752,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1128,6 +1766,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "14. 采用迭代的Echo 服务器服务多个客户端，假设client1 先完成连接，\n并且没有结束，那么 client2 向服务器发出连接请求后，会被阻塞在下\n列哪个函数上？",
         "choices": [
           {
@@ -1148,10 +1787,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "connect\n4\n<!-- ===== page 5 ===== -->"
+          },
+          {
+            "id": "B",
+            "content": "read"
+          },
+          {
+            "id": "C",
+            "content": "write"
+          },
+          {
+            "id": "D",
+            "content": "socket"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "14. 采用迭代的Echo 服务器服务多个客户端，假设client1 先完成连接，\n并且没有结束，那么 client2 向服务器发出连接请求后，会被阻塞在下\n列哪个函数上？",
+        "answer": ""
       }
     },
     {
       "id": "q-652a3adb9696ff8d",
+      "paperId": "p-98acf19964247e22",
+      "paperOrder": 15,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -1163,6 +1831,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1176,6 +1845,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "15. 下列关于全球IP因特网的各种概念叙述中，哪一个是错误的？",
         "choices": [
           {
@@ -1196,10 +1866,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "一个套接字是连接的一个端点，对应了一个套接字地址"
+          },
+          {
+            "id": "B",
+            "content": "IPv4的因特网中，一个IP地址是一个32位无符号整数"
+          },
+          {
+            "id": "C",
+            "content": "因特网主机的字节顺序与TCP/IP定义的网络字节顺序是一致的"
+          },
+          {
+            "id": "D",
+            "content": "IP协议提供了一种不可靠的从一台主机向其他主机的递送机制"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "15. 下列关于全球IP因特网的各种概念叙述中，哪一个是错误的？",
+        "answer": ""
       }
     },
     {
       "id": "q-33fc6c386730e095",
+      "paperId": "p-98acf19964247e22",
+      "paperOrder": 16,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -1211,6 +1910,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1224,6 +1924,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "16. 下列关于Web服务器向客户端提供动态内容（遵从CGI标准）的叙述\n中，哪一个是错误的？",
         "choices": [
           {
@@ -1244,10 +1945,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "客户端提出的GET请求的参数在URI中传递，并用“&”字符分隔文\n件名和多个参数"
+          },
+          {
+            "id": "B",
+            "content": "接到客户端的请求，Web 服务器创建一个子进程执行相应的 CGI 程\n序"
+          },
+          {
+            "id": "C",
+            "content": "通过设置环境变量，Web服务器将URI中传递的参数传递给子进程"
+          },
+          {
+            "id": "D",
+            "content": "CGI程序将动态内容重定向到与客户端关联的已连接描述符connfd"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "16. 下列关于Web服务器向客户端提供动态内容（遵从CGI标准）的叙述\n中，哪一个是错误的？",
+        "answer": ""
       }
     },
     {
       "id": "q-2b4c6c474fcda60d",
+      "paperId": "p-98acf19964247e22",
+      "paperOrder": 29,
       "moduleId": "network",
       "year": 2019,
       "examType": "期末",
@@ -1261,6 +1991,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1274,13 +2005,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第六题（10分）\n下图是一个基于echo服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n（2）  请补全下面server端open_listenfd函数中缺失的操作（Line 21, Line\n26和Line 34）\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\n```\n14\n\n![图](assets/期末/2019期末-无答案/p14-img1.jpg)\n\n<!-- ===== page 15 ===== -->\n\n```\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if (_⑧_(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo(___⑨___);\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return __⑩___;\nLine 35:  }\n```",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第六题（10分）\n下图是一个基于echo服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n（2）  请补全下面server端open_listenfd函数中缺失的操作（Line 21, Line\n26和Line 34）\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\n```\n14\n\n![图](assets/期末/2019期末-无答案/p14-img1.jpg)\n\n<!-- ===== page 15 ===== -->\n\n```\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if (_⑧_(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo(___⑨___);\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return __⑩___;\nLine 35:  }\n```",
         "answer": ""
       }
     },
     {
       "id": "q-db2d4bf775b8e912",
+      "paperId": "p-f99ca20e1a729e32",
+      "paperOrder": 20,
       "moduleId": "network",
       "year": 2020,
       "examType": "期末",
@@ -1292,6 +2035,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1305,6 +2049,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "20.  按照课程中的描述，套接字socket接口是一组函数，它们与UNIX I/O函数一起使用可\n以构建网络应用。下列关于socket的描述中，哪一个是错误的？",
         "choices": [
           {
@@ -1325,10 +2070,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "因特网的套接字地址存放在socketaddr_in结构中"
+          },
+          {
+            "id": "B",
+            "content": "在使用套接字接口函数时，要将对应协议的特定结构指针转换成通用结构sockaddr"
+          },
+          {
+            "id": "C",
+            "content": "当客户端通过connect()发起连接请求时，由服务器端的服务进程通过listen()捕获该请\n求并建立监听套接字listenfd"
+          },
+          {
+            "id": "D",
+            "content": "对于迭代 echo 服务器，当client1 连接到该服务器且尚未断开连接时，client2 若想要\n连接该服务器会阻塞在从服务器读结果的操作上"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "20.  按照课程中的描述，套接字socket接口是一组函数，它们与UNIX I/O函数一起使用可\n以构建网络应用。下列关于socket的描述中，哪一个是错误的？",
+        "answer": ""
       }
     },
     {
       "id": "q-9d490502269e77f1",
+      "paperId": "p-f99ca20e1a729e32",
+      "paperOrder": 21,
       "moduleId": "network",
       "year": 2020,
       "examType": "期末",
@@ -1340,6 +2114,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1353,6 +2128,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "21.  下列关于全球IP因特网的描述中，哪一个是不正确的？",
         "choices": [
           {
@@ -1373,10 +2149,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "IPV4协议中，一个IP地址是一个32位无符号整数"
+          },
+          {
+            "id": "B",
+            "content": "IP地址结构中存放的地址总是以大端法存放的"
+          },
+          {
+            "id": "C",
+            "content": "网络字节顺序是采用大端法的"
+          },
+          {
+            "id": "D",
+            "content": "在Linux系统上，用hostname -i命令可以确定自己主机的域名"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "21.  下列关于全球IP因特网的描述中，哪一个是不正确的？",
+        "answer": ""
       }
     },
     {
       "id": "q-f35e33e6651aa53d",
+      "paperId": "p-2c2b56c4452255b1",
+      "paperOrder": 17,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1388,6 +2193,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1401,13 +2207,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "17.  以下符合对TCP协议描述的是\n①可靠传输         ②在主机间传输     ③可以基于IP协议\n④全双工           ⑤可以基于DNS\nA. ①②④    B. ③④⑤    C. ①③④    D. ②④",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "17.  以下符合对TCP协议描述的是\n①可靠传输         ②在主机间传输     ③可以基于IP协议\n④全双工           ⑤可以基于DNS\nA. ①②④    B. ③④⑤    C. ①③④    D. ②④",
         "answer": ""
       }
     },
     {
       "id": "q-b049af2168ba96eb",
+      "paperId": "p-2c2b56c4452255b1",
+      "paperOrder": 18,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1419,6 +2237,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1432,6 +2251,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "18.  对于建立客户端与服务器的TCP连接，以下关于套接字接口，正确的是：",
         "choices": [
           {
@@ -1452,10 +2272,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "对于TCP连接而言，其可以由连接双方的套接字对四元组（双方的IP\n地址和端口号）唯一确定。"
+          },
+          {
+            "id": "B",
+            "content": "connect函数用于客户端建立与服务器的连接，其参数中的套接字地址\n结构需要指明本客户端使用的端口号"
+          },
+          {
+            "id": "C",
+            "content": "socket函数返回的套接字描述符，可以立即使用标准 Unix I/O 函\n数进行读写"
+          },
+          {
+            "id": "D",
+            "content": "bind 函数用于将用于客户端的主动套接字转化为用于服务器的监听套\n接字"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "18.  对于建立客户端与服务器的TCP连接，以下关于套接字接口，正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-d72dec72c3307432",
+      "paperId": "p-2c2b56c4452255b1",
+      "paperOrder": 19,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1467,6 +2316,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1480,6 +2330,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "19.  下列有关Web服务错误的是：",
         "choices": [
           {
@@ -1500,10 +2351,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "Web服务使用客户端-服务器模型，使用了HTTP协议，可以传输文本，\nHTML页面，二进制文件等多种内容"
+          },
+          {
+            "id": "B",
+            "content": "HTTP响应会返回状态码，它指示了对响应的处理状态"
+          },
+          {
+            "id": "C",
+            "content": "Web服务使用URL来标明资源，这提供了一层抽象，使得客户端仿佛在\n访问远端的文件目录，而服务器处理了URL资源和具体文件/动态内容的映\n射关系"
+          },
+          {
+            "id": "D",
+            "content": "多个域名可以映射到同一个IP地址，但一个域名不可以映射到多个IP\n地址"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "19.  下列有关Web服务错误的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-8d2f122aa7370b2b",
+      "paperId": "p-f40f2a28cd0814c7",
+      "paperOrder": 1,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1515,6 +2395,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-4542b507db06d55b",
           "a-e0f237c3f2b884f4",
@@ -1537,13 +2418,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "1.  以下符合对TCP协议描述的是\n\n①可靠传输 ②在主机间传输 ③可以基于IP协议\n\n④全双工 ⑤可以基于DNS\n\n1.  ①②④ B. ③④⑤ C. ①③④ D. ②④",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "1.  以下符合对TCP协议描述的是\n\n①可靠传输 ②在主机间传输 ③可以基于IP协议\n\n④全双工 ⑤可以基于DNS\n\n1.  ①②④ B. ③④⑤ C. ①③④ D. ②④",
         "answer": ""
       }
     },
     {
       "id": "q-14a19705b9b31553",
+      "paperId": "p-f40f2a28cd0814c7",
+      "paperOrder": 2,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1555,6 +2448,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-4542b507db06d55b",
           "a-e0f237c3f2b884f4",
@@ -1577,6 +2471,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "2\\. 对于建立客户端与服务器的TCP连接，以下关于套接字接口，正确的是：",
         "choices": [
           {
@@ -1597,10 +2492,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "对于TCP连接而言，其可以由连接双方的套接字对四元组（双方的IP地址和端口号）唯一确定。"
+          },
+          {
+            "id": "B",
+            "content": "connect函数用于客户端建立与服务器的连接，其参数中的套接字地址结构需要指明本客户端使用的端口号"
+          },
+          {
+            "id": "C",
+            "content": "socket函数返回的套接字描述符，可以立即使用标准 Unix I/O 函数进行读写"
+          },
+          {
+            "id": "D",
+            "content": "bind 函数用于将用于客户端的主动套接字转化为用于服务器的监听套接字"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2\\. 对于建立客户端与服务器的TCP连接，以下关于套接字接口，正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-aabf28b3c6b52e06",
+      "paperId": "p-f40f2a28cd0814c7",
+      "paperOrder": 3,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1612,6 +2536,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-4542b507db06d55b",
           "a-e0f237c3f2b884f4",
@@ -1634,6 +2559,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "3\\. 下列有关Web服务错误的是",
         "choices": [
           {
@@ -1654,10 +2580,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "Web服务使用客户端-服务器模型，使用了HTTP协议，可以传输文本，HTML页面，二进制文件等多种内容"
+          },
+          {
+            "id": "B",
+            "content": "HTTP响应会返回状态码，它指示了对响应的处理状态"
+          },
+          {
+            "id": "C",
+            "content": "Web服务使用URL来标明资源，这提供了一层抽象，使得客户端仿佛在访问远端的文件目录，而服务器处理了URL资源和具体文件/动态内容的映射关系"
+          },
+          {
+            "id": "D",
+            "content": "多个域名可以映射到同一个IP地址，但一个域名不可以映射到多个IP地址"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "3\\. 下列有关Web服务错误的是",
+        "answer": ""
       }
     },
     {
       "id": "q-fa4cd3988469adb5",
+      "paperId": "p-f40f2a28cd0814c7",
+      "paperOrder": 4,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1669,6 +2624,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-4542b507db06d55b",
           "a-e0f237c3f2b884f4",
@@ -1691,13 +2647,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "4.  下列关于全球IP因特网的说法中，正确的是\n\n<!-- -->\n\n1.  TCP/IP协议规定网络字节顺序取决于不同主机的字节顺序，从而方便主机和网络之间收发数据\n\n2.  域名集合和IP地址集合的映射关系目前由http来维护\n\n3.  多个域名可以映射到同一个IP地址，但一个域名不可以映射到多个IP地址\n\n4.  从内核的角度来看，套接字是通信的一个端点；从用户程序的角度来看，套接字是一个有相应描述符的打开文件",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4.  下列关于全球IP因特网的说法中，正确的是\n\n<!-- -->\n\n1.  TCP/IP协议规定网络字节顺序取决于不同主机的字节顺序，从而方便主机和网络之间收发数据\n\n2.  域名集合和IP地址集合的映射关系目前由http来维护\n\n3.  多个域名可以映射到同一个IP地址，但一个域名不可以映射到多个IP地址\n\n4.  从内核的角度来看，套接字是通信的一个端点；从用户程序的角度来看，套接字是一个有相应描述符的打开文件",
         "answer": ""
       }
     },
     {
       "id": "q-e1535936baffad90",
+      "paperId": "p-f40f2a28cd0814c7",
+      "paperOrder": 5,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1709,6 +2677,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-4542b507db06d55b",
           "a-e0f237c3f2b884f4",
@@ -1731,13 +2700,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "5.  下列关于网络的说法中，错误的是\n\n<!-- -->\n\n1.  在TCP连接中，客户端和服务器都是指主机\n\n2.  网络按照覆盖范围的大小可以分成局域网和广域网，其中一种流行的局域网技术是以太网\n\n3.  网络可以被主机认为是一种I/O设备，是数据源和数据接收方\n\n4.  路由器可以把多个不兼容的网络连接起来组成一个互联网络",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "5.  下列关于网络的说法中，错误的是\n\n<!-- -->\n\n1.  在TCP连接中，客户端和服务器都是指主机\n\n2.  网络按照覆盖范围的大小可以分成局域网和广域网，其中一种流行的局域网技术是以太网\n\n3.  网络可以被主机认为是一种I/O设备，是数据源和数据接收方\n\n4.  路由器可以把多个不兼容的网络连接起来组成一个互联网络",
         "answer": ""
       }
     },
     {
       "id": "q-f5b5630d2d1864d6",
+      "paperId": "p-856d8a970ff8db32",
+      "paperOrder": 1,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1749,6 +2730,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1762,13 +2744,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "1.  以下符合对TCP协议描述的是\n\n①可靠传输 ②在主机间传输 ③可以基于IP协议\n\n④全双工 ⑤可以基于DNS\n\n1.  ①②④ B. ③④⑤ C. ①③④ D. ②④",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "1.  以下符合对TCP协议描述的是\n\n①可靠传输 ②在主机间传输 ③可以基于IP协议\n\n④全双工 ⑤可以基于DNS\n\n1.  ①②④ B. ③④⑤ C. ①③④ D. ②④",
         "answer": ""
       }
     },
     {
       "id": "q-15f6881a37f39758",
+      "paperId": "p-856d8a970ff8db32",
+      "paperOrder": 2,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1780,6 +2774,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1793,6 +2788,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "2\\. 对于建立客户端与服务器的TCP连接，以下关于套接字接口，正确的是：",
         "choices": [
           {
@@ -1813,10 +2809,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "对于TCP连接而言，其可以由连接双方的套接字对四元组（双方的IP地址和端口号）唯一确定。"
+          },
+          {
+            "id": "B",
+            "content": "connect函数用于客户端建立与服务器的连接，其参数中的套接字地址结构需要指明本客户端使用的端口号"
+          },
+          {
+            "id": "C",
+            "content": "socket函数返回的套接字描述符，可以立即使用标准 Unix I/O 函数进行读写"
+          },
+          {
+            "id": "D",
+            "content": "bind 函数用于将用于客户端的主动套接字转化为用于服务器的监听套接字"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2\\. 对于建立客户端与服务器的TCP连接，以下关于套接字接口，正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-deba4de6becc5bf5",
+      "paperId": "p-856d8a970ff8db32",
+      "paperOrder": 3,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1828,6 +2853,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1841,6 +2867,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "3\\. 下列有关Web服务错误的是",
         "choices": [
           {
@@ -1861,10 +2888,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "Web服务使用客户端-服务器模型，使用了HTTP协议，可以传输文本，HTML页面，二进制文件等多种内容"
+          },
+          {
+            "id": "B",
+            "content": "HTTP响应会返回状态码，它指示了对响应的处理状态"
+          },
+          {
+            "id": "C",
+            "content": "Web服务使用URL来标明资源，这提供了一层抽象，使得客户端仿佛在访问远端的文件目录，而服务器处理了URL资源和具体文件/动态内容的映射关系"
+          },
+          {
+            "id": "D",
+            "content": "多个域名可以映射到同一个IP地址，但一个域名不可以映射到多个IP地址"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "3\\. 下列有关Web服务错误的是",
+        "answer": ""
       }
     },
     {
       "id": "q-1639587f017ccb0b",
+      "paperId": "p-856d8a970ff8db32",
+      "paperOrder": 4,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1876,6 +2932,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1889,13 +2946,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "4.  下列关于全球IP因特网的说法中，正确的是\n\n<!-- -->\n\n1.  TCP/IP协议规定网络字节顺序取决于不同主机的字节顺序，从而方便主机和网络之间收发数据\n\n2.  域名集合和IP地址集合的映射关系目前由http来维护\n\n3.  多个域名可以映射到同一个IP地址，但一个域名不可以映射到多个IP地址\n\n4.  从内核的角度来看，套接字是通信的一个端点；从用户程序的角度来看，套接字是一个有相应描述符的打开文件",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4.  下列关于全球IP因特网的说法中，正确的是\n\n<!-- -->\n\n1.  TCP/IP协议规定网络字节顺序取决于不同主机的字节顺序，从而方便主机和网络之间收发数据\n\n2.  域名集合和IP地址集合的映射关系目前由http来维护\n\n3.  多个域名可以映射到同一个IP地址，但一个域名不可以映射到多个IP地址\n\n4.  从内核的角度来看，套接字是通信的一个端点；从用户程序的角度来看，套接字是一个有相应描述符的打开文件",
         "answer": ""
       }
     },
     {
       "id": "q-58bc8ac66edffeea",
+      "paperId": "p-856d8a970ff8db32",
+      "paperOrder": 5,
       "moduleId": "network",
       "year": 2021,
       "examType": "期末",
@@ -1907,6 +2976,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1920,13 +2990,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "5.  下列关于网络的说法中，错误的是\n\n<!-- -->\n\n1.  在TCP连接中，客户端和服务器都是指主机\n\n2.  网络按照覆盖范围的大小可以分成局域网和广域网，其中一种流行的局域网技术是以太网\n\n3.  网络可以被主机认为是一种I/O设备，是数据源和数据接收方\n\n4.  路由器可以把多个不兼容的网络连接起来组成一个互联网络",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "5.  下列关于网络的说法中，错误的是\n\n<!-- -->\n\n1.  在TCP连接中，客户端和服务器都是指主机\n\n2.  网络按照覆盖范围的大小可以分成局域网和广域网，其中一种流行的局域网技术是以太网\n\n3.  网络可以被主机认为是一种I/O设备，是数据源和数据接收方\n\n4.  路由器可以把多个不兼容的网络连接起来组成一个互联网络",
         "answer": ""
       }
     },
     {
       "id": "q-1dfdad28c97b66ac",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 12,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -1938,6 +3020,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1951,13 +3034,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "12. IP 地址可以用十六进制表示，也可以用点分十进制表示。请写出 IPv4 地址`0x24982c5f`的点分十进制表示：________________________。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "12. IP 地址可以用十六进制表示，也可以用点分十进制表示。请写出 IPv4 地址`0x24982c5f`的点分十进制表示：________________________。",
         "answer": ""
       }
     },
     {
       "id": "q-923088b4fef4799c",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 13,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -1971,6 +3066,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -1984,13 +3080,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "13. 下图给出了一个典型的客户端-服务器套接字交互流程。应当填在空(2)处的函数名称是：______（accept / bind / listen / socket）。\n\n    ![图](assets/期末/2022期末-无答案/page-03.png)\n\n    图左为客户端流程（自上而下：getaddrinfo → socket → connect → rio_written → rio_readlineb → close），图右为服务器流程（自上而下：getaddrinfo → (1) → (2) → (3) → (4) → rio_readlineb → rio_written → rio_readlineb → close），客户端与服务器之间由\"连接请求\"与 EOF 箭头相连；右侧括注有\"open_clientfd\"\"open_listenfd\"以及\"等待来自下一个客户端的连接请求\"。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "13. 下图给出了一个典型的客户端-服务器套接字交互流程。应当填在空(2)处的函数名称是：______（accept / bind / listen / socket）。\n\n    ![图](assets/期末/2022期末-无答案/page-03.png)\n\n    图左为客户端流程（自上而下：getaddrinfo → socket → connect → rio_written → rio_readlineb → close），图右为服务器流程（自上而下：getaddrinfo → (1) → (2) → (3) → (4) → rio_readlineb → rio_written → rio_readlineb → close），客户端与服务器之间由\"连接请求\"与 EOF 箭头相连；右侧括注有\"open_clientfd\"\"open_listenfd\"以及\"等待来自下一个客户端的连接请求\"。",
         "answer": ""
       }
     },
     {
       "id": "q-35b31dd6c25ebe73",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 32,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2002,6 +3110,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2015,13 +3124,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "学完《网络编程》一章，小明迫不及待地想搭建自己的游戏服务器。他根据课本上代码写出的《网络乒乓》服务器代码如下。他在 Class Machine 上运行代码，TCP 等协议都采用默认设置。请你根据代码回答问题。\n\n```c\n 1  #include \"csapp.h\"\n 2  #include \"stdlib.h\"\n 3  #include \"stdio.h\"\n 4  #define GOAL 100\n 5\n 6  int main(int argc, char **argv)\n 7  {\n 8      int listenfd, connfd;\n 9      socklen_t clientlen;\n10      struct sockaddr_storage clientaddr;\n11      char client_hostname[MAXLINE], client_port[MAXLINE], buf[MAXLINE];\n12      if (argc != 2) {\n13          fprintf(stderr, \"usage: %s <port>\\n\", argv[0]);\n14          exit(0);\n15      }\n16      listenfd = Open_listenfd(argv[1]); // Open listen socket\n17      int ball_cnt = 0;\n18      while (1){\n19          clientlen = sizeof(struct sockaddr_storage);\n20          connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); // Accept connection\n21          Getnameinfo((SA *)&clientaddr, clientlen, client_hostname, MAXLINE,\n22                      client_port, MAXLINE, 0);\n23          printf(\"Connected to (%s, %s)\\n\", client_hostname, client_port);\n24\n25          rio_t rio;\n26          Rio_readinitb(&rio, connfd);\n27          Rio_readlineb(&rio, buf, MAXLINE);\n28          int recv_num = atoi(buf);\n29          if (recv_num == ball_cnt){\n30              if (ball_cnt == GOAL){\n31                  sprintf(buf, \"You win!\\n\");\n32                  Rio_writen(connfd, buf, strlen(buf));\n33                  ball_cnt = 0;\n34              }\n35              else {\n36                  sprintf(buf, \"%d\\n\", ball_cnt+1);\n37                  Rio_writen(connfd, buf, strlen(buf));\n38                  ball_cnt += 2;\n39              }\n40          }\n41          Close(connfd); // Close the connection\n42      }\n43      exit(0);\n44  }\n```\n\n<!-- ===== page 12 ===== -->\n\n1. 函数 Open_listenfd 要建立的是可靠的TCP连接。因此，里面有一行代码设置了 hints.ai_socktype = ______；（SOCK_STREAM / SOCK_DGRAM）。（1分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "学完《网络编程》一章，小明迫不及待地想搭建自己的游戏服务器。他根据课本上代码写出的《网络乒乓》服务器代码如下。他在 Class Machine 上运行代码，TCP 等协议都采用默认设置。请你根据代码回答问题。\n\n```c\n 1  #include \"csapp.h\"\n 2  #include \"stdlib.h\"\n 3  #include \"stdio.h\"\n 4  #define GOAL 100\n 5\n 6  int main(int argc, char **argv)\n 7  {\n 8      int listenfd, connfd;\n 9      socklen_t clientlen;\n10      struct sockaddr_storage clientaddr;\n11      char client_hostname[MAXLINE], client_port[MAXLINE], buf[MAXLINE];\n12      if (argc != 2) {\n13          fprintf(stderr, \"usage: %s <port>\\n\", argv[0]);\n14          exit(0);\n15      }\n16      listenfd = Open_listenfd(argv[1]); // Open listen socket\n17      int ball_cnt = 0;\n18      while (1){\n19          clientlen = sizeof(struct sockaddr_storage);\n20          connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); // Accept connection\n21          Getnameinfo((SA *)&clientaddr, clientlen, client_hostname, MAXLINE,\n22                      client_port, MAXLINE, 0);\n23          printf(\"Connected to (%s, %s)\\n\", client_hostname, client_port);\n24\n25          rio_t rio;\n26          Rio_readinitb(&rio, connfd);\n27          Rio_readlineb(&rio, buf, MAXLINE);\n28          int recv_num = atoi(buf);\n29          if (recv_num == ball_cnt){\n30              if (ball_cnt == GOAL){\n31                  sprintf(buf, \"You win!\\n\");\n32                  Rio_writen(connfd, buf, strlen(buf));\n33                  ball_cnt = 0;\n34              }\n35              else {\n36                  sprintf(buf, \"%d\\n\", ball_cnt+1);\n37                  Rio_writen(connfd, buf, strlen(buf));\n38                  ball_cnt += 2;\n39              }\n40          }\n41          Close(connfd); // Close the connection\n42      }\n43      exit(0);\n44  }\n```\n\n<!-- ===== page 12 ===== -->\n\n1. 函数 Open_listenfd 要建立的是可靠的TCP连接。因此，里面有一行代码设置了 hints.ai_socktype = ______；（SOCK_STREAM / SOCK_DGRAM）。（1分）",
         "answer": ""
       }
     },
     {
       "id": "q-9839dd0d198535d7",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 33,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2033,6 +3154,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2046,13 +3168,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "2. 函数 Getnameinfo 的用途是查询输入的______（主机名对应的IP地址 / IP地址对应的主机名）。（1分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2. 函数 Getnameinfo 的用途是查询输入的______（主机名对应的IP地址 / IP地址对应的主机名）。（1分）",
         "answer": ""
       }
     },
     {
       "id": "q-8ef75472241f3c98",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 34,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2064,6 +3198,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2077,13 +3212,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "3. 小明的朋友们对他的游戏都不感兴趣，小明只好自己写了一个客户端来玩自己的游戏。他的客户端代码如下：\n\n```c\n 1  #include \"csapp.h\"\n 2  #define GOAL 100\n 3\n 4  int main(int argc, char **argv){\n 5      int clientfd;\n 6      char *host, *port, buf[MAXLINE];\n 7      rio_t rio;\n 8\n 9      if (argc != 3){\n10          fprintf(stderr, \"usage: %s <host> <port>\\n\", argv[0]);\n11          exit(0);\n12      }\n13      host = argv[1];\n14      port = argv[2];\n15\n16      for (int ball_cnt=0; ball_cnt<=GOAL; ball_cnt+=2){\n17          clientfd = Open_clientfd(host, port);\n18          Rio_readinitb(&rio, clientfd);\n19          sprintf(buf, \"%d\\n\", ball_cnt);\n20          Rio_writen(clientfd, buf, strlen(buf));\n21          Rio_readlineb(&rio, buf, MAXLINE);\n22          Fputs(buf, stdout);\n23      }\n24      exit(0);\n25  }\n```\n\n他在同一台主机上运行服务器和客户端。他的操作流程是：\n\n```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是 Connected to (localhost, 33580)。请填入小明操作流程中缺失的两处信息。（2分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "3. 小明的朋友们对他的游戏都不感兴趣，小明只好自己写了一个客户端来玩自己的游戏。他的客户端代码如下：\n\n```c\n 1  #include \"csapp.h\"\n 2  #define GOAL 100\n 3\n 4  int main(int argc, char **argv){\n 5      int clientfd;\n 6      char *host, *port, buf[MAXLINE];\n 7      rio_t rio;\n 8\n 9      if (argc != 3){\n10          fprintf(stderr, \"usage: %s <host> <port>\\n\", argv[0]);\n11          exit(0);\n12      }\n13      host = argv[1];\n14      port = argv[2];\n15\n16      for (int ball_cnt=0; ball_cnt<=GOAL; ball_cnt+=2){\n17          clientfd = Open_clientfd(host, port);\n18          Rio_readinitb(&rio, clientfd);\n19          sprintf(buf, \"%d\\n\", ball_cnt);\n20          Rio_writen(clientfd, buf, strlen(buf));\n21          Rio_readlineb(&rio, buf, MAXLINE);\n22          Fputs(buf, stdout);\n23      }\n24      exit(0);\n25  }\n```\n\n他在同一台主机上运行服务器和客户端。他的操作流程是：\n\n```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是 Connected to (localhost, 33580)。请填入小明操作流程中缺失的两处信息。（2分）",
         "answer": ""
       }
     },
     {
       "id": "q-d1c53aa2285305a2",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 35,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2095,6 +3242,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2108,13 +3256,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "4. 小明认为设置 #define GOAL 100 难度太低了，于是将服务器与客户端中的代码都改成了 #define GOAL 100000。他像之前一样运行服务器与客户端，结果发现客户端开始报错，并且始终没有输出\"You win\"。请你解释为什么修改成 100000 会让程序不能正常运行。（2分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4. 小明认为设置 #define GOAL 100 难度太低了，于是将服务器与客户端中的代码都改成了 #define GOAL 100000。他像之前一样运行服务器与客户端，结果发现客户端开始报错，并且始终没有输出\"You win\"。请你解释为什么修改成 100000 会让程序不能正常运行。（2分）",
         "answer": ""
       }
     },
     {
       "id": "q-9173da3272ca94be",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 36,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2126,6 +3286,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2139,13 +3300,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "5. 请在客户端中添加一行代码，使得 #define GOAL 100000 时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "5. 请在客户端中添加一行代码，使得 #define GOAL 100000 时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）",
         "answer": ""
       }
     },
     {
       "id": "q-2caa71db00b101fa",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 37,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2157,6 +3330,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2170,13 +3344,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "6. 小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（ ）（2分）\n\n- A. 有且只有一个人的屏幕上会出现\"You win!\"。\n- B. 两个人的屏幕上都不会出现\"You win!\"。\n- C. 两个人的屏幕上都会出现\"You win!\"。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "6. 小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（ ）（2分）\n\n- A. 有且只有一个人的屏幕上会出现\"You win!\"。\n- B. 两个人的屏幕上都不会出现\"You win!\"。\n- C. 两个人的屏幕上都会出现\"You win!\"。",
         "answer": ""
       }
     },
     {
       "id": "q-18e6c3bb20600af5",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 38,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2188,6 +3374,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2201,13 +3388,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是`Connected to (localhost, 33580)`。请填入小明操作流程中缺失的两处信息。（2分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是`Connected to (localhost, 33580)`。请填入小明操作流程中缺失的两处信息。（2分）",
         "answer": ""
       }
     },
     {
       "id": "q-fac6c4e88dd85fd7",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 39,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2219,6 +3418,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2232,13 +3432,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "4、小明认为设置 #define GOAL 100 难度太低了，于是将服务器与客户端中的代码都改成了`#define GOAL 100000`。他像之前一样运行服务器与客户端，结果发现客户端开始报错，并且始终没有输出\"You win\"。请你解释为什么修改成 100000 会让程序不能正常运行。（2分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4、小明认为设置 #define GOAL 100 难度太低了，于是将服务器与客户端中的代码都改成了`#define GOAL 100000`。他像之前一样运行服务器与客户端，结果发现客户端开始报错，并且始终没有输出\"You win\"。请你解释为什么修改成 100000 会让程序不能正常运行。（2分）",
         "answer": ""
       }
     },
     {
       "id": "q-9137059a87a2553e",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 40,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2250,6 +3462,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2263,13 +3476,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "5、请在客户端中添加一行代码，使得`#define GOAL 100000`时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "5、请在客户端中添加一行代码，使得`#define GOAL 100000`时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）",
         "answer": ""
       }
     },
     {
       "id": "q-36b29c7e9d07d58b",
+      "paperId": "p-7016510094998ec2",
+      "paperOrder": 41,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2281,6 +3506,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2294,13 +3520,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "6、小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（ ）（2分）\n\n- A. 有且只有一个人的屏幕上会出现\"You win!\"。\n- B. 两个人的屏幕上都不会出现\"You win!\"。\n- C. 两个人的屏幕上都会出现\"You win!\"。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "6、小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（ ）（2分）\n\n- A. 有且只有一个人的屏幕上会出现\"You win!\"。\n- B. 两个人的屏幕上都不会出现\"You win!\"。\n- C. 两个人的屏幕上都会出现\"You win!\"。",
         "answer": ""
       }
     },
     {
       "id": "q-3910a21809778a98",
+      "paperId": "p-370abd8502c12e99",
+      "paperOrder": 12,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2312,6 +3550,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-bc6da33280192b2a"
         ]
@@ -2327,13 +3566,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "12、36.152.44.95",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "12、36.152.44.95",
         "answer": ""
       }
     },
     {
       "id": "q-71c335ab80d9d850",
+      "paperId": "p-370abd8502c12e99",
+      "paperOrder": 13,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2345,6 +3596,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-bc6da33280192b2a"
         ]
@@ -2360,13 +3612,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "13、bind",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "13、bind",
         "answer": ""
       }
     },
     {
       "id": "q-c432b09ea5f977b5",
+      "paperId": "p-370abd8502c12e99",
+      "paperOrder": 20,
       "moduleId": "network",
       "year": 2022,
       "examType": "期末",
@@ -2378,6 +3642,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-bc6da33280192b2a"
         ]
@@ -2393,13 +3658,25 @@
       },
       "layout": {
         "mode": "fill",
+        "selection": null,
         "stem": "第六题 网络编程\n(1) SOCK_STREAM\n(2) IP地址对应的主机名\n(3) localhost 50000\n(4) 每次循环都打开了一个新的clientfd而没有关闭，导致文件数量过多，耗尽系统资源\n(5) 22 Close(clientfd);\n(6) A 小明的服务器在迭代处理两个客户端时，bal_cnt只会在某一次与其中一个客户端连\n接时等于goal，之后便会设为0，而另一个客户端已经超过0，因此只会发送一次“You\nwin!”",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第六题 网络编程\n(1) SOCK_STREAM\n(2) IP地址对应的主机名\n(3) localhost 50000\n(4) 每次循环都打开了一个新的clientfd而没有关闭，导致文件数量过多，耗尽系统资源\n(5) 22 Close(clientfd);\n(6) A 小明的服务器在迭代处理两个客户端时，bal_cnt只会在某一次与其中一个客户端连\n接时等于goal，之后便会设为0，而另一个客户端已经超过0，因此只会发送一次“You\nwin!”",
         "answer": ""
       }
     },
     {
       "id": "q-0ab716279bda03ff",
+      "paperId": "p-ae9ab20d09974cf3",
+      "paperOrder": 11,
       "moduleId": "network",
       "year": 2024,
       "examType": "期末",
@@ -2411,6 +3688,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-544cd966469e852a",
           "a-0f691532afb6eb95",
@@ -2428,6 +3706,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "11. 下列关于全球 IP 因特网的描述中正确的是：",
         "choices": [
           {
@@ -2448,10 +3727,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "IP协议提供了一种从进程到进程的递送机制。"
+          },
+          {
+            "id": "B",
+            "content": "TCP协议提供了进程间可靠的全双工连接。"
+          },
+          {
+            "id": "C",
+            "content": "IP地址结构中地址的字节顺序是大端法还是小端法，要根据主机字节顺序来\n确定。"
+          },
+          {
+            "id": "D",
+            "content": "多个域名不可能被映射为同一个IP地址。"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "11. 下列关于全球 IP 因特网的描述中正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-c458f21295891750",
+      "paperId": "p-ae9ab20d09974cf3",
+      "paperOrder": 12,
       "moduleId": "network",
       "year": 2024,
       "examType": "期末",
@@ -2463,6 +3771,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": [
           "a-544cd966469e852a",
           "a-0f691532afb6eb95",
@@ -2480,6 +3789,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "12. 套接字接口结合Unix I/O函数，可以创建网络应用。下列相关描述中，错\n误的是：",
         "choices": [
           {
@@ -2500,10 +3810,42 @@
           }
         ],
         "answer": "答案： C\nA. socket()函数创建一个新的套接字，并返回一个文件描述符，这个套接字只\n是被创建出来，并不是立即可用于读写数据。要进行读写操作，需要额外的步骤，\n如调用 bind() 绑定地址、 listen() 启动监听（对于服务器端），或者\nconnect()建立连接（对于客户端）。\nB. TCP 连接是通过四元组唯一标识的，这个四元组包括：客户端的 IP 地址、\n客户端的端口号、服务器的 IP 地址、服务器的端口号。这四个信息组合在一起\n能唯一确定一个 TCP 连接。\nC. 错误，应为listen函数。 bind() 函数只是绑定套接字到特定的地址和端\n口，套接字是否监听则是通过 listen() 来实现的。\nD. connect() 函数用于建立与服务器的连接。对于客户端而言，connect()\n是一个阻塞调用，直到连接成功建立或者出现错误（例如服务器不可达）时才会返\n回。"
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "socket函数成功返回描述符以后，还不能直接用于读写。\n9\n<!-- ===== page 10 ===== -->"
+          },
+          {
+            "id": "B",
+            "content": "TCP连接可以由连接双方的套接字对四元组（双方的IP地址和端口号）唯一\n确定。"
+          },
+          {
+            "id": "C",
+            "content": "bind函数用于将服务端的主动套接字转化为监听套接字。"
+          },
+          {
+            "id": "D",
+            "content": "connect函数会阻塞，直到连接成功建立或者发生错误。"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "12. 套接字接口结合Unix I/O函数，可以创建网络应用。下列相关描述中，错\n误的是：",
+        "answer": "答案： C\nA. socket()函数创建一个新的套接字，并返回一个文件描述符，这个套接字只\n是被创建出来，并不是立即可用于读写数据。要进行读写操作，需要额外的步骤，\n如调用 bind() 绑定地址、 listen() 启动监听（对于服务器端），或者\nconnect()建立连接（对于客户端）。\nB. TCP 连接是通过四元组唯一标识的，这个四元组包括：客户端的 IP 地址、\n客户端的端口号、服务器的 IP 地址、服务器的端口号。这四个信息组合在一起\n能唯一确定一个 TCP 连接。\nC. 错误，应为listen函数。 bind() 函数只是绑定套接字到特定的地址和端\n口，套接字是否监听则是通过 listen() 来实现的。\nD. connect() 函数用于建立与服务器的连接。对于客户端而言，connect()\n是一个阻塞调用，直到连接成功建立或者出现错误（例如服务器不可达）时才会返\n回。"
       }
     },
     {
       "id": "q-f5e93c163454841e",
+      "paperId": "p-5ee6f6e8778f358e",
+      "paperOrder": 24,
       "moduleId": "network",
       "year": 2025,
       "examType": "期末",
@@ -2515,6 +3857,7 @@
       "formatted": true,
       "answer": {
         "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -2528,13 +3871,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "24.并发网络服务器的这段程序代码：",
         "choices": [],
+        "answer": "答案：AC\n解析： fork 后两边都持有 listenfd/connfd，子进程应关 listenfd 防泄漏；父进\n程应回收子进程避免僵尸。父进程关 connfd 不影响子进程持有的 connfd（D 错）。E\n错误，网络服务要一直运行。"
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "24.并发网络服务器的这段程序代码：",
         "answer": "答案：AC\n解析： fork 后两边都持有 listenfd/connfd，子进程应关 listenfd 防泄漏；父进\n程应回收子进程避免僵尸。父进程关 connfd 不影响子进程持有的 connfd（D 错）。E\n错误，网络服务要一直运行。"
       }
     },
     {
       "id": "q-f83fe8e69923ea0e",
+      "paperId": "p-e8f40973e2cc056e",
+      "paperOrder": 24,
       "moduleId": "network",
       "year": 2025,
       "examType": "期末",
@@ -2546,6 +3901,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2559,6 +3915,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "24.并发网络服务器的这段程序代码：\n```\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\nint connfd = accept(listenfd, NULL, NULL);\nif (fork() == 0) {\necho(connfd);\nexit(0);\n}\nclose(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？",
         "choices": [
           {
@@ -2583,10 +3940,43 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "子进程在 echo(connfd) 前应 close(listenfd)"
+          },
+          {
+            "id": "B",
+            "content": "父进程在 fork 后应 close(listenfd)"
+          },
+          {
+            "id": "C",
+            "content": "父进程应处理 SIGCHLD（或循环 waitpid）以回收子进程，避免 zombie"
+          },
+          {
+            "id": "D",
+            "content": "父进程不应 close(connfd)，否则子进程会立即断开"
+          },
+          {
+            "id": "E",
+            "content": "while循环的判断条件应该加上连接出错时跳出循环"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "24.并发网络服务器的这段程序代码：\n```\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\nint connfd = accept(listenfd, NULL, NULL);\nif (fork() == 0) {\necho(connfd);\nexit(0);\n}\nclose(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？",
+        "answer": ""
       }
     },
     {
       "id": "q-25502bbbc25731dd",
+      "paperId": "p-b2c127ada86acac1",
+      "paperOrder": 1,
       "moduleId": "network",
       "year": null,
       "examType": "期末",
@@ -2598,6 +3988,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -2613,13 +4004,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "### 第一题\n\n第 17 问，废题，现代 Web 中 GET/POST/PUT 等都可以用于获得动态内容。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "### 第一题\n\n第 17 问，废题，现代 Web 中 GET/POST/PUT 等都可以用于获得动态内容。",
         "answer": ""
       }
     },
     {
       "id": "q-d10fdb31d73e78f4",
+      "paperId": "p-b2c127ada86acac1",
+      "paperOrder": 16,
       "moduleId": "network",
       "year": null,
       "examType": "期末",
@@ -2631,6 +4034,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -2646,13 +4050,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "第 11 问，D 选项。题目里的意思应该是，用 socket 创建的 fd 在连接后是可以用 unix 标准 io 读写的。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第 11 问，D 选项。题目里的意思应该是，用 socket 创建的 fd 在连接后是可以用 unix 标准 io 读写的。",
         "answer": ""
       }
     },
     {
       "id": "q-359eed6a934cc349",
+      "paperId": "p-b2c127ada86acac1",
+      "paperOrder": 23,
       "moduleId": "network",
       "year": null,
       "examType": "期末",
@@ -2664,6 +4080,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -2679,13 +4096,25 @@
       },
       "layout": {
         "mode": "short",
+        "selection": null,
         "stem": "### 第一题\n\n第 14 问，为什么阻塞在 `read` 而不是 `connect`？请注意，`connect` 并不是在 `accept` 之后才返回的。\n\n连接成功意味着客户端发起的连接请求已经被服务端接受，此时 TCP 三次握手过程已经完成。在编程层面，客户端的 connect 函数会在连接成功时返回 0。所以只要服务端使用了 `listen`、当前连接数没超过 `listen` 的 backlog、网络畅通，那么客户端的 connect 就一定会返回 0。\n\n服务端的 accept 函数用于**从监听队列中接受一个新的连接请求**。一旦客户端的 connect 请求到达服务器，服务器的操作系统会处理这个连接请求，完成三次握手过程，并将这个连接放入等待服务端 accept 的队列中。当服务器调用 accept 函数时，它会返回一个新的套接字描述符，这个描述符代表了与特定客户端的连接。\n\n因此，从客户端的角度看，connect 返回 0 就表示连接成功。而服务端需要调用 accept 来正式接受这个连接，然后才能开始通过这个新的套接字与客户端进行通信。",
         "choices": [],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "### 第一题\n\n第 14 问，为什么阻塞在 `read` 而不是 `connect`？请注意，`connect` 并不是在 `accept` 之后才返回的。\n\n连接成功意味着客户端发起的连接请求已经被服务端接受，此时 TCP 三次握手过程已经完成。在编程层面，客户端的 connect 函数会在连接成功时返回 0。所以只要服务端使用了 `listen`、当前连接数没超过 `listen` 的 backlog、网络畅通，那么客户端的 connect 就一定会返回 0。\n\n服务端的 accept 函数用于**从监听队列中接受一个新的连接请求**。一旦客户端的 connect 请求到达服务器，服务器的操作系统会处理这个连接请求，完成三次握手过程，并将这个连接放入等待服务端 accept 的队列中。当服务器调用 accept 函数时，它会返回一个新的套接字描述符，这个描述符代表了与特定客户端的连接。\n\n因此，从客户端的角度看，connect 返回 0 就表示连接成功。而服务端需要调用 accept 来正式接受这个连接，然后才能开始通过这个新的套接字与客户端进行通信。",
         "answer": ""
       }
     },
     {
       "id": "q-1d0faf42a8c296cf",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 5,
       "moduleId": "network",
       "year": 2025,
       "examType": "Lab测验",
@@ -2697,6 +4126,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2710,6 +4140,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "5.  （2分）使用 ssh-keygen 命令可以生成用于 SSH 登录的密钥。该命令通常生成两\n个文件：公钥 key.pub 和私钥 key。这两个文件应存放在：",
         "choices": [
           {
@@ -2730,10 +4161,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "公钥留存在本地；私钥留存在本地"
+          },
+          {
+            "id": "B",
+            "content": "公钥留存在本地；私钥上传到服务器"
+          },
+          {
+            "id": "C",
+            "content": "公钥上传到服务器；私钥留存在本地"
+          },
+          {
+            "id": "D",
+            "content": "公钥上传到服务器；私钥上传到服务器"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "5.  （2分）使用 ssh-keygen 命令可以生成用于 SSH 登录的密钥。该命令通常生成两\n个文件：公钥 key.pub 和私钥 key。这两个文件应存放在：",
+        "answer": ""
       }
     },
     {
       "id": "q-d4cd3349de1eb843",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 6,
       "moduleId": "network",
       "year": 2025,
       "examType": "Lab测验",
@@ -2745,6 +4205,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2758,6 +4219,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "6.  （2分）远程主机 10.0.0.5的 SSH 服务端口为 2222（非默认 22 端口），若要\n将本地文件 data.tar.gz 复制到该主机 ubuntu 用户的 ~/backup/目录，正确\n的 scp命令是：",
         "choices": [
           {
@@ -2778,10 +4240,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "scp -p 2222 ubuntu@10.0.0.5:~/backup/ data.tar.gz"
+          },
+          {
+            "id": "B",
+            "content": "scp -P 2222 data.tar.gz ubuntu@10.0.0.5:~/backup/"
+          },
+          {
+            "id": "C",
+            "content": "scp ubuntu@10.0.0.5:2222:~/backup/ data.tar.gz"
+          },
+          {
+            "id": "D",
+            "content": "scp data.tar.gz ubuntu:2222@10.0.0.5:/backup/"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "6.  （2分）远程主机 10.0.0.5的 SSH 服务端口为 2222（非默认 22 端口），若要\n将本地文件 data.tar.gz 复制到该主机 ubuntu 用户的 ~/backup/目录，正确\n的 scp命令是：",
+        "answer": ""
       }
     },
     {
       "id": "q-a055294f6e1a4ab6",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 46,
       "moduleId": "network",
       "year": 2025,
       "examType": "Lab测验",
@@ -2793,6 +4284,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2806,6 +4298,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "46. （2分）IPv4和IPv6的地址长度是多少位？",
         "choices": [
           {
@@ -2826,10 +4319,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "32位，64位"
+          },
+          {
+            "id": "B",
+            "content": "32位，128位"
+          },
+          {
+            "id": "C",
+            "content": "64位，128位"
+          },
+          {
+            "id": "D",
+            "content": "64位，256位"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "46. （2分）IPv4和IPv6的地址长度是多少位？",
+        "answer": ""
       }
     },
     {
       "id": "q-0ec29f09a853abd6",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 47,
       "moduleId": "network",
       "year": 2025,
       "examType": "Lab测验",
@@ -2841,6 +4363,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2854,6 +4377,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "47. （2分）关于TCP和UDP协议的区别，以下说法正确的是：",
         "choices": [
           {
@@ -2874,10 +4398,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "TCP是面向连接的，UDP是无连接的"
+          },
+          {
+            "id": "B",
+            "content": "TCP不保证可靠性，UDP保证可靠性"
+          },
+          {
+            "id": "C",
+            "content": "TCP传输速度比UDP快"
+          },
+          {
+            "id": "D",
+            "content": "TCP支持广播，UDP不支持广播"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "47. （2分）关于TCP和UDP协议的区别，以下说法正确的是：",
+        "answer": ""
       }
     },
     {
       "id": "q-1eb3753f6b077866",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 48,
       "moduleId": "network",
       "year": 2025,
       "examType": "Lab测验",
@@ -2889,6 +4442,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2902,6 +4456,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "48. （2分）IP地址192.168.1.100/24所在的子网中，可用的主机地址数量是：",
         "choices": [
           {
@@ -2922,10 +4477,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "24"
+          },
+          {
+            "id": "B",
+            "content": "254"
+          },
+          {
+            "id": "C",
+            "content": "256"
+          },
+          {
+            "id": "D",
+            "content": "$2^24$"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "48. （2分）IP地址192.168.1.100/24所在的子网中，可用的主机地址数量是：",
+        "answer": ""
       }
     },
     {
       "id": "q-5e2b5c6f170c5ce6",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 49,
       "moduleId": "network",
       "year": 2025,
       "examType": "Lab测验",
@@ -2937,6 +4521,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2950,6 +4535,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "49. （2分）用个人笔记本连接北大无线网，可能获得的IP地址是10.7.74.125，这个\nIP地址属于：",
         "choices": [
           {
@@ -2970,10 +4556,39 @@
           }
         ],
         "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "A类地址（0开头，加7位Net ID）"
+          },
+          {
+            "id": "B",
+            "content": "B类地址（10开头，加14位Net ID）"
+          },
+          {
+            "id": "C",
+            "content": "C类地址（110开头，加21位Net ID）"
+          },
+          {
+            "id": "D",
+            "content": "私有地址（Unrouted IP addresses）"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "49. （2分）用个人笔记本连接北大无线网，可能获得的IP地址是10.7.74.125，这个\nIP地址属于：",
+        "answer": ""
       }
     },
     {
       "id": "q-68003f0197c16d34",
+      "paperId": "p-9c11139ca386240d",
+      "paperOrder": 50,
       "moduleId": "network",
       "year": 2025,
       "examType": "Lab测验",
@@ -2985,6 +4600,7 @@
       "formatted": true,
       "answer": {
         "inline": false,
+        "status": "missing",
         "relatedBlockIds": []
       },
       "source": {
@@ -2998,6 +4614,7 @@
       },
       "layout": {
         "mode": "choice",
+        "selection": null,
         "stem": "50. （2分）以下说法正确的是：",
         "choices": [
           {
@@ -3017,6 +4634,33 @@
             "content": "为了防止内存泄漏，使用 getaddrinfo 函数获得的 addrinfo 链表只能调用\nfreeaddrinfo函数释放"
           }
         ],
+        "answer": ""
+      },
+      "interaction": {
+        "kind": "choice",
+        "declared": false,
+        "choices": [
+          {
+            "id": "A",
+            "content": "建立套接字连接的客户端和服务器端的IP地址不能相同"
+          },
+          {
+            "id": "B",
+            "content": "IP协议提供了可靠的主机与主机之间的数据包传输能力"
+          },
+          {
+            "id": "C",
+            "content": "一个域名可以映射到多个IP，也可以不映射到任何IP"
+          },
+          {
+            "id": "D",
+            "content": "为了防止内存泄漏，使用 getaddrinfo 函数获得的 addrinfo 链表只能调用\nfreeaddrinfo函数释放"
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "50. （2分）以下说法正确的是：",
         "answer": ""
       }
     }

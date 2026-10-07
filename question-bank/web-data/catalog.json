@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "title": "PKU ICS 历年题题库",
   "contentFormat": "Markdown",
   "assetBase": "../",
@@ -115,5 +115,6 @@
     "papers": 40,
     "answerBlocks": 53
   },
-  "answerBlocksFile": "answer-blocks.json"
+  "answerBlocksFile": "answer-blocks.json",
+  "papersFile": "papers.json"
 }

@@ -26,7 +26,7 @@ fs.cpSync(assets, path.join(output, 'web-data', 'assets'), { recursive: true });
 fs.writeFileSync(path.join(output, '.nojekyll'), '');
 
 const catalog = JSON.parse(fs.readFileSync(path.join(output, 'web-data', 'catalog.json'), 'utf8'));
-if (catalog.schemaVersion !== 2) fail(`Unsupported question schema: ${catalog.schemaVersion}`);
+if (catalog.schemaVersion !== 3) fail(`Unsupported question schema: ${catalog.schemaVersion}`);
 
 let questionCount = 0;
 let formattedCount = 0;
@@ -44,7 +44,7 @@ for (const module of catalog.modules || []) {
 
 const missingAssets = [...referencedAssets].filter((asset) => !fs.existsSync(path.join(output, 'web-data', asset)));
 if (missingAssets.length) fail(`Missing question assets:\n${missingAssets.join('\n')}`);
-if (questionCount !== 1009 || formattedCount !== questionCount) {
+if (questionCount !== catalog.stats.questions || formattedCount !== questionCount) {
   fail(`Unexpected question data: ${questionCount} total, ${formattedCount} formatted`);
 }
 

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lwlaymh.github.io/ics-test/schema/question.schema.json",
+  "title": "ICS Test Question v3",
+  "type": "object",
+  "required": ["id", "paperId", "paperOrder", "moduleId", "interaction", "answer", "source"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^q-[a-f0-9]{16}$"},
+    "paperId": {"type": "string", "pattern": "^p-[a-f0-9]{16}$"},
+    "paperOrder": {"type": "integer", "minimum": 1},
+    "moduleId": {"type": "string", "minLength": 1},
+    "questionNo": {"type": "string"},
+    "summary": {"type": "string"},
+    "interaction": {
+      "type": "object",
+      "required": ["kind", "declared"],
+      "properties": {
+        "kind": {
+          "enum": ["single-choice", "multiple-choice", "fill", "short-answer", "composite", "choice", "legacy"]
+        },
+        "declared": {"type": "boolean"}
+        ,"choices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "content"],
+            "properties": {"id": {"type": "string"}, "content": {"type": "string"}},
+            "additionalProperties": false
+          }
+        },
+        "correctChoiceIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "additionalProperties": true
+    },
+    "contentV3": {
+      "type": "object",
+      "required": ["format", "prompt", "answer"],
+      "properties": {
+        "format": {"const": "markdown"},
+        "prompt": {"type": "string"},
+        "answer": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "assets": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^assets/"},
+      "uniqueItems": true
+    },
+    "answer": {
+      "type": "object",
+      "required": ["status", "inline", "relatedBlockIds"],
+      "properties": {
+        "status": {"enum": ["verified", "missing", "needs-review"]},
+        "inline": {"type": "boolean"},
+        "relatedBlockIds": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "source": {"type": "object"}
+  },
+  "additionalProperties": true
+}

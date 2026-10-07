@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lwlaymh.github.io/ics-test/schema/paper.schema.json",
+  "title": "ICS Test Paper v3",
+  "type": "object",
+  "required": ["id", "examType", "title", "questionIds", "questionCount", "verifiedAnswerCount", "complete"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^p-[a-f0-9]{16}$"},
+    "year": {"type": ["integer", "null"]},
+    "examType": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "questionIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "questionCount": {"type": "integer", "minimum": 1},
+    "verifiedAnswerCount": {"type": "integer", "minimum": 0},
+    "complete": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}
