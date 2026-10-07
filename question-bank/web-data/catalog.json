@@ -9,8 +9,8 @@
       "number": 1,
       "name": "Data Representation",
       "title": "数据的表示",
-      "questionCount": 131,
-      "paperCount": 30,
+      "questionCount": 125,
+      "paperCount": 28,
       "questionFile": "questions/1-Data-Representation.json"
     },
     {
@@ -18,8 +18,8 @@
       "number": 2,
       "name": "Machine Prog",
       "title": "程序的机器级表示",
-      "questionCount": 156,
-      "paperCount": 31,
+      "questionCount": 149,
+      "paperCount": 28,
       "questionFile": "questions/2-Machine-Prog.json"
     },
     {
@@ -27,8 +27,8 @@
       "number": 3,
       "name": "Processor Arch",
       "title": "处理器体系结构",
-      "questionCount": 132,
-      "paperCount": 32,
+      "questionCount": 122,
+      "paperCount": 29,
       "questionFile": "questions/3-Processor-Arch.json"
     },
     {
@@ -36,8 +36,8 @@
       "number": 4,
       "name": "Memory Hierarchy",
       "title": "存储层次",
-      "questionCount": 121,
-      "paperCount": 29,
+      "questionCount": 115,
+      "paperCount": 27,
       "questionFile": "questions/4-Memory-Hierarchy.json"
     },
     {
@@ -45,8 +45,8 @@
       "number": 5,
       "name": "Compilation (Program optimization and linking)",
       "title": "编译系统（程序优化与链接）",
-      "questionCount": 105,
-      "paperCount": 33,
+      "questionCount": 85,
+      "paperCount": 30,
       "questionFile": "questions/5-Compilation-Linking.json"
     },
     {
@@ -54,8 +54,8 @@
       "number": 6,
       "name": "ECF and System IO",
       "title": "异常控制流与系统级 I/O",
-      "questionCount": 110,
-      "paperCount": 23,
+      "questionCount": 93,
+      "paperCount": 19,
       "questionFile": "questions/6-ECF-and-System-IO.json"
     },
     {
@@ -63,8 +63,8 @@
       "number": 7,
       "name": "Virtual Memory and Dynamic Memory Allocation",
       "title": "虚拟内存与动态内存分配",
-      "questionCount": 105,
-      "paperCount": 19,
+      "questionCount": 74,
+      "paperCount": 15,
       "questionFile": "questions/7-Virtual-Memory-and-Malloc.json"
     },
     {
@@ -72,8 +72,8 @@
       "number": 8,
       "name": "Network",
       "title": "网络编程",
-      "questionCount": 75,
-      "paperCount": 19,
+      "questionCount": 58,
+      "paperCount": 15,
       "questionFile": "questions/8-Network.json"
     },
     {
@@ -81,8 +81,8 @@
       "number": 9,
       "name": "Concurrent Programming and Synchronization",
       "title": "并发编程与同步",
-      "questionCount": 74,
-      "paperCount": 18,
+      "questionCount": 50,
+      "paperCount": 14,
       "questionFile": "questions/9-Concurrent-Programming.json"
     }
   ],
@@ -111,9 +111,9 @@
     ]
   },
   "stats": {
-    "questions": 1009,
-    "papers": 40,
-    "answerBlocks": 53
+    "questions": 871,
+    "papers": 35,
+    "answerBlocks": 55
   },
   "answerBlocksFile": "answer-blocks.json",
   "papersFile": "papers.json"

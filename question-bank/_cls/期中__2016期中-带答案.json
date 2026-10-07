@@ -195,22 +195,6 @@
       "curated": "期中/2016期中-带答案/330.md"
     },
     {
-      "start": 381,
-      "end": 385,
-      "module": "Machine Prog",
-      "qno": "第三题 (1) 答案",
-      "note": "gdb x/6g 输出参考答案",
-      "curated": "期中/2016期中-带答案/381.md"
-    },
-    {
-      "start": 386,
-      "end": 395,
-      "module": "Compilation (Program optimization and linking)",
-      "qno": "第三题 (2) 答案",
-      "note": "CPE 与关键路径参考答案",
-      "curated": "期中/2016期中-带答案/386.md"
-    },
-    {
       "start": 402,
       "end": 461,
       "module": "Processor Arch",
@@ -227,5 +211,16 @@
       "curated": "期中/2016期中-带答案/468.md"
     }
   ],
-  "answer_sections": []
+  "answer_sections": [
+    {
+      "start": 381,
+      "end": 385,
+      "note": "第三题 (1) 答案（原被拆成独立题目的答案段）"
+    },
+    {
+      "start": 386,
+      "end": 395,
+      "note": "第三题 (2) 答案（原被拆成独立题目的答案段）"
+    }
+  ]
 }

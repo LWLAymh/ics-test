@@ -15,6 +15,32 @@
       }
     },
     {
+      "id": "a-5a7119bcb5135d29",
+      "label": "第三题 (1) 答案（原被拆成独立题目的答案段）",
+      "content": "答案：\n(1)每空1分\n0x400690:   0x00000000004004d1      0x00000000004004b8\n0x4006a0:   0x00000000004004bb      0x00000000004004c0\n0x4006b0:   0x00000000004004d4      0x00000000004004c3",
+      "assets": [],
+      "source": {
+        "document": "原文/期中/2016期中-带答案.md",
+        "lines": {
+          "start": 381,
+          "end": 385
+        }
+      }
+    },
+    {
+      "id": "a-120386a536d4fc01",
+      "label": "第三题 (2) 答案（原被拆成独立题目的答案段）",
+      "content": "(2) ○5空2分，其他3分\n○1p != 0 && p->next != 0\n○2r * (p->value * p->next->value) 注意：答案中运算可以交换，但不可\n结合\n○3p->next->next\n○4r * p->value\n○5imull （因为每次处理两个元素，所以关键路径的时间周期为 8。关键路径要\n么为两次访存和两次 mov，要么为○5处的运算。前者不可能达到 8，所以只能是\nimull。）\n给分说明：如果○2○4的答案和○5一致，但是○5答错了就○2○4各给2分。",
+      "assets": [],
+      "source": {
+        "document": "原文/期中/2016期中-带答案.md",
+        "lines": {
+          "start": 386,
+          "end": 395
+        }
+      }
+    },
+    {
       "id": "a-85ca683467254b59",
       "label": "第二题（整数、浮点数）参考答案",
       "content": "答案：\n1.\n类型  最大的整数+1  39+(-127)  39+(-127)是否溢出?\nUnsigned   二进制：0000  十进制：168  是\n0000\nTwo’s Complement  二进制：1000  十进制：-88  否\n```\n0000\n2.\n```\n浮点数  Decimal\n```\nvalues\n0x80000000  -0\n0x41180000  +9.5\n```\n表达式  是否正确\n8\n\n<!-- ===== page 9 ===== -->\n\n(2 + 250) –250  !=  是\n2 + (250 –250)\n225 + 1 + 1 + 1 + 1  否\n```\n== 225 + 4\nAssociative: Only 23 bits of mantissa (M), so 2 + 250 = 250\n(2 gets rounded off). So LHS = 0, RHS = 2.\nCumulative: 1 is 25 powers of 2 away from 225, so 225 + 1 =\n225, but 4 is 23 powers of 2 away from 225, so\nit doesn’t get rounded off.\n```\n9",

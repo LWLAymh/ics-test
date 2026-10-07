@@ -4,26 +4,26 @@
   "items": [
     {
       "start": 1,
-      "end": 13,
+      "end": 25,
       "module": "Compilation (Program optimization and linking)",
       "qno": "第 1 题",
-      "note": "objdump/readelf/ls/gdb 处理目标文件与可执行文件的作用",
+      "note": "Linux 工具链：objdump/readelf/ls/gdb 辨析（含答案与解析）",
       "curated": "期末/chap 7 解析/1.md"
     },
     {
       "start": 27,
-      "end": 63,
+      "end": 73,
       "module": "Compilation (Program optimization and linking)",
       "qno": "第 2 题",
-      "note": "静态链接：未初始化全局变量在 COM/.bss 的归属与地址偏移",
+      "note": "静态链接：符号 a 所在节与 a.out 输出可复现性（含答案与解析）",
       "curated": "期末/chap 7 解析/27.md"
     },
     {
       "start": 75,
-      "end": 111,
+      "end": 131,
       "module": "Compilation (Program optimization and linking)",
       "qno": "第 3 题",
-      "note": "动态链接：dlopen 与 PLT/GOT、库的符号解析顺序",
+      "note": "动态链接：dlopen 与 PLT/GOT、库的符号解析顺序（含答案与解析）",
       "curated": "期末/chap 7 解析/75.md"
     },
     {

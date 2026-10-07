@@ -4,7 +4,7 @@
   "items": [
     {
       "start": 1,
-      "end": 11,
+      "end": 13,
       "module": "ECF and System IO",
       "qno": "第 1 题",
       "note": "waitpid 选项组合、signal 例外、用户态与内核态切换、中断同步性",
@@ -12,7 +12,7 @@
     },
     {
       "start": 19,
-      "end": 27,
+      "end": 29,
       "module": "ECF and System IO",
       "qno": "第 2 题",
       "note": "异常四分类：中断/陷阱/故障/终止的判别",

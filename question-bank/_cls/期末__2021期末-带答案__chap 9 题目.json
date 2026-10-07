@@ -52,10 +52,10 @@
     },
     {
       "start": 199,
-      "end": 199,
+      "end": 205,
       "module": "ECF and System IO",
       "qno": "大题 4",
-      "note": "double fault：缺页处理程序再次触发故障",
+      "note": "double fault：缺页处理程序再次触发故障（选项为原文的 ①/②/③）",
       "curated": "期末/chap 9 题目/199.md"
     },
     {

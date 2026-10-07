@@ -122,6 +122,46 @@ def split_inline_answer(markdown):
     return ((markdown or "")[:match.start()].strip(), (markdown or "")[start:].strip())
 
 
+CHOICE_ANSWER = re.compile(
+    # 标签形态：答案：C / 答案：选C / 答案为C / 答案是C / 正确答案：C
+    r"(?:参考|正确)?答案\s*(?:[:：]\s*(?:选|为)?|(?:为|是)\s*)\s*"
+    # 带分隔符的多选（A、B / A&B）优先；否则取同一行内连续的字母串。
+    # 必须用 [ \t] 而不是 \s：`答案：D` 后面紧跟的解析行常以 `A...` 开头，
+    # 用 \s 会把它吞进答案，字母串变成 `DA` 而被误判为乱序。
+    r"([A-H](?![A-Z0-9])(?:[ \t]*(?:[、,，/&+]|和|及)[ \t]*[A-H](?![A-Z0-9]))+"
+    r"|[A-H]+(?![A-Z0-9]))",
+    re.IGNORECASE)
+BARE_ANSWER = re.compile(r"^\s*(?:选)?\s*([A-H]{1,8})\s*[。．.!！]?\s*$", re.IGNORECASE)
+
+
+def answer_letters(answer, choice_ids):
+    """正确选项字母，按选项顺序归一。
+
+    原文里答案有四种写法，都要认（前端 simpleExpected 是同一套口径，这里必须一致，
+    否则会出现「前端判分能对上、correctChoiceIds 却是空」的静默错位）：
+      答案：C / 答案：选C / 答案为C / 正确答案：C，……      —— 带标签
+      c                                                     —— 小写字母
+      B                                                     —— 只有字母、没有标签
+    连写多选（ABD）按字母序判定为多选题答案；乱序的（如 FFFA）不是答案，丢弃。
+    """
+    text = (answer or "").strip()
+    match = CHOICE_ANSWER.search(text) or BARE_ANSWER.match(text)
+    if not match:
+        return []
+    raw = match.group(1)
+    letters = re.sub(r"[^A-H]", "", raw.upper())
+    if not letters:
+        return []
+    # 连写多选（无分隔符）通常按字母序；乱序的（如 FFFA、FBAC）不是选项答案，丢弃。
+    # 带分隔符的写法（A、B 或 A&D）已经表达了边界，直接接受并排序。
+    has_separator = bool(re.search(r"[、,，/&+]|和|及", raw))
+    if len(letters) > 1 and not has_separator and "".join(sorted(set(letters))) != letters:
+        return []
+    if any(c not in choice_ids for c in letters):
+        return []
+    return sorted(set(letters))
+
+
 def interaction_for(layout):
     if not layout:
         return {"kind": "legacy", "declared": False}
@@ -136,10 +176,10 @@ def interaction_for(layout):
                 for choice in layout.get("choices", [])
             ],
         }
-        answer_match = re.search(r"(?:答案|答)\s*[：:]\s*([A-H]+)",
-                                 layout.get("answer", ""), re.IGNORECASE)
+        answer_match = answer_letters(layout.get("answer", ""), 
+                                      [c["key"] for c in layout.get("choices", [])])
         if answer_match:
-            interaction["correctChoiceIds"] = list(answer_match.group(1).upper())
+            interaction["correctChoiceIds"] = list(answer_match)
         return interaction
     return {"kind": {
         "fill": "fill",

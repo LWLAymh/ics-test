@@ -4,7 +4,7 @@
   "items": [
     {
       "start": 3,
-      "end": 11,
+      "end": 13,
       "module": "ECF and System IO",
       "qno": "选择题 1",
       "note": "Unix I/O：RIO、描述符重定向、open file table",
@@ -12,7 +12,7 @@
     },
     {
       "start": 23,
-      "end": 49,
+      "end": 51,
       "module": "ECF and System IO",
       "qno": "选择题 2",
       "note": "O_APPEND 与共享文件偏移下的写入顺序结果",

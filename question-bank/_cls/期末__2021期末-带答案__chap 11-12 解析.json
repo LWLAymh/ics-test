@@ -1,72 +1,7 @@
 {
   "file": "期末/2021期末-带答案/chap 11-12 解析.md",
   "total_lines": 593,
-  "items": [
-    {
-      "start": 5,
-      "end": 11,
-      "module": "Network",
-      "qno": "选择题 1",
-      "note": "TCP 协议特性判断",
-      "curated": "期末/chap 11-12 解析/5.md"
-    },
-    {
-      "start": 29,
-      "end": 37,
-      "module": "Network",
-      "qno": "选择题 2",
-      "note": "TCP 套接字接口 connect/bind/listen 辨析",
-      "curated": "期末/chap 11-12 解析/29.md"
-    },
-    {
-      "start": 53,
-      "end": 61,
-      "module": "Network",
-      "qno": "选择题 3",
-      "note": "Web 服务、HTTP 状态码与域名映射",
-      "curated": "期末/chap 11-12 解析/53.md"
-    },
-    {
-      "start": 79,
-      "end": 89,
-      "module": "Network",
-      "qno": "备选题 4",
-      "note": "全球 IP 因特网：字节序/DNS/套接字说法正误",
-      "curated": "期末/chap 11-12 解析/79.md"
-    },
-    {
-      "start": 101,
-      "end": 111,
-      "module": "Network",
-      "qno": "备选题 5",
-      "note": "网络基本概念说法正误",
-      "curated": "期末/chap 11-12 解析/101.md"
-    },
-    {
-      "start": 123,
-      "end": 131,
-      "module": "Concurrent Programming and Synchronization",
-      "qno": "选择题 1",
-      "note": "进程与线程模型：上下文、线程栈、地址空间",
-      "curated": "期末/chap 11-12 解析/123.md"
-    },
-    {
-      "start": 137,
-      "end": 363,
-      "module": "Concurrent Programming and Synchronization",
-      "qno": "大题 小题1",
-      "note": "生产者-消费者信号量解法1：代码与子问题",
-      "curated": "期末/chap 11-12 解析/137.md"
-    },
-    {
-      "start": 377,
-      "end": 577,
-      "module": "Concurrent Programming and Synchronization",
-      "qno": "大题 小题2",
-      "note": "信号量模拟条件变量解法2：代码与子问题",
-      "curated": "期末/chap 11-12 解析/377.md"
-    }
-  ],
+  "items": [],
   "answer_sections": [
     {
       "start": 13,
@@ -108,5 +43,10 @@
       "end": 593,
       "note": "大题小题2 解析（a ADC; b A，while 与条件变量）"
     }
-  ]
+  ],
+  "kind": "answers",
+  "applies_to": [
+    "期末/2021期末-带答案/chap 11-12 题目.md"
+  ],
+  "_note": "本文件是答案/解析材料，不是试卷；原 8 条 items 已移除。"
 }
