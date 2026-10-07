@@ -145,14 +145,14 @@
       "exam": "2012期中-带答案",
       "questionNo": "Problem E B",
       "summary": "行优先遍历 int 数组的冷缺失与 miss rate",
-      "content": "<!-- ===== page 12 ===== -->\n\n```c\nint i;\n\nint j;\n\nint table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n for (i = 0; i < 4; i++) {\n\n table [i] [j] = i + j;\n\n table[j][i]?\n\n }\n\n}\n```\n\n**B.** This problem refers to code sample above. In the table below write down in each space whether\nthat element’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n![图](assets/期中/2012期中-带答案/page-12.png)\n\n> 上图为本页的 Cache 命中/缺失状态表（红色为\nWhat is the miss rate of this code sample?\n答案：第 0 列全为 M，第 1–7 列全为 H）。\n答案：B. 第 0 列全为 M，第 1–7 列全为 H（原卷红色参考答案）：\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = 1/8",
+      "content": "**B.** This problem refers to code sample above. In the table below write down in each space whether\nthat element’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n![图](assets/期中/2012期中-带答案/page-12.png)\n\n> 原卷 Problem E 的公共配置（见原卷第 11 页）：32 位 Linux 系统，2 路组相联（2-way associative）cache，容量 128 字节，块大小 32 字节；`long long` 为 8 字节；`table` 起始地址为 0x0。\n>\n> 本题（code sample above）的代码如下：\n```c\nint i;\n\nint j;\n\nint table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n for (i = 0; i < 4; i++) {\n\n table [i] [j] = i + j;\n\n table[j][i]?\n\n }\n\n}\n```\n\nWhat is the miss rate of this code sample?\n答案：B 的 4×8 命中/缺失表 —— 第 0 列全为 M，第 1–7 列全为 H。\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = **1/8**（32 次访问中 4 次缺失）\n\n解析：\n\n1. 先把 cache 参数换算清楚：容量 128 B ÷ 块大小 32 B = 4 个块；2 路组相联 ⇒ 4 ÷ 2 = **2 组**（Set 0 / Set 1）。于是「块号的奇偶」就是组索引（组索引 = 块号 mod 2），块内偏移占低 5 位，剩下的高位是标记。\n2. 本题的样例是 `int table[4][8]`（元素 4 字节）：一行 8 个 int = 32 字节，**正好等于一个 cache block**。所以整个数组 128 字节 = 4 个块，元素 `table[i][j]` 落在**块 i** 上；组索引 = `i mod 2`：第 0、2 行 → Set 0，第 1、3 行 → Set 1。每组只需要放 2 个块，恰好用满 2 路 —— 整个数组都能常驻 cache（这正是本题 C 部分所说「the entire array fits in the cache」）。\n3. 访问次序是 j 外层、i 内层（列优先遍历），每次访问 `table[i][j]`：\n   - j=0：依次访问 (0,0)(1,0)(2,0)(3,0)，落在块 0、1、2、3，cache 初始为空 ⇒ 4 次冷启动不命中，第 0 列 4 个格子全为 M；\n   - j=1…7：每个 (i,j) 仍然落在块 i，而这些块在 j=0 时已经被取进 cache，且期间没有任何访问会把它们挤出（每组只用到 2 个块、2 路）⇒ 第 1–7 列全部为 H。\n4. 缺失率 = 4 次缺失 ÷ 32 次访问 = 1/8。\n\n> 对照 code sample 1（上一小题）：那时 `table` 是 `long long`，一行 64 字节 = 2 个块，`table[i][j]` 落在块 `2i + (j≥4 ? 1 : 0)`，于是 Set 0 要容纳块 0、2、4、6（4 个块）、Set 1 要容纳块 1、3、5、7（4 个块），而每组只有 2 路 ⇒ 每次访问都把上一个块冲突挤出，32 次访问**全部缺失**，缺失率 1。所以 C 部分说第二个样例更好：它只有冷启动不命中。\n\n> 📌 答案有官方来源：原卷红色参考答案（见 `_audit/pages/期中/2012期中-带答案/page-12.png`，红色表格即第 0 列全 M、其余全 H，miss rate 1/8）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [
         "assets/期中/2012期中-带答案/page-12.png"
       ],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "needs-review",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -167,9 +167,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "<!-- ===== page 12 ===== -->\n\n```c\nint i;\n\nint j;\n\nint table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n for (i = 0; i < 4; i++) {\n\n table [i] [j] = i + j;\n\n table[j][i]?\n\n }\n\n}\n```\n\n**B.** This problem refers to code sample above. In the table below write down in each space whether\nthat element’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n![图](assets/期中/2012期中-带答案/page-12.png)\n\n> 上图为本页的 Cache 命中/缺失状态表（红色为\nWhat is the miss rate of this code sample?",
+        "stem": "**B.** This problem refers to code sample above. In the table below write down in each space whether\nthat element’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n![图](assets/期中/2012期中-带答案/page-12.png)\n\n> 原卷 Problem E 的公共配置（见原卷第 11 页）：32 位 Linux 系统，2 路组相联（2-way associative）cache，容量 128 字节，块大小 32 字节；`long long` 为 8 字节；`table` 起始地址为 0x0。\n>\n> 本题（code sample above）的代码如下：\n```c\nint i;\n\nint j;\n\nint table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n for (i = 0; i < 4; i++) {\n\n table [i] [j] = i + j;\n\n table[j][i]?\n\n }\n\n}\n```\n\nWhat is the miss rate of this code sample?",
         "choices": [],
-        "answer": "答案：第 0 列全为 M，第 1–7 列全为 H）。\n答案：B. 第 0 列全为 M，第 1–7 列全为 H（原卷红色参考答案）：\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = 1/8"
+        "answer": "答案：B 的 4×8 命中/缺失表 —— 第 0 列全为 M，第 1–7 列全为 H。\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = **1/8**（32 次访问中 4 次缺失）\n\n解析：\n\n1. 先把 cache 参数换算清楚：容量 128 B ÷ 块大小 32 B = 4 个块；2 路组相联 ⇒ 4 ÷ 2 = **2 组**（Set 0 / Set 1）。于是「块号的奇偶」就是组索引（组索引 = 块号 mod 2），块内偏移占低 5 位，剩下的高位是标记。\n2. 本题的样例是 `int table[4][8]`（元素 4 字节）：一行 8 个 int = 32 字节，**正好等于一个 cache block**。所以整个数组 128 字节 = 4 个块，元素 `table[i][j]` 落在**块 i** 上；组索引 = `i mod 2`：第 0、2 行 → Set 0，第 1、3 行 → Set 1。每组只需要放 2 个块，恰好用满 2 路 —— 整个数组都能常驻 cache（这正是本题 C 部分所说「the entire array fits in the cache」）。\n3. 访问次序是 j 外层、i 内层（列优先遍历），每次访问 `table[i][j]`：\n   - j=0：依次访问 (0,0)(1,0)(2,0)(3,0)，落在块 0、1、2、3，cache 初始为空 ⇒ 4 次冷启动不命中，第 0 列 4 个格子全为 M；\n   - j=1…7：每个 (i,j) 仍然落在块 i，而这些块在 j=0 时已经被取进 cache，且期间没有任何访问会把它们挤出（每组只用到 2 个块、2 路）⇒ 第 1–7 列全部为 H。\n4. 缺失率 = 4 次缺失 ÷ 32 次访问 = 1/8。\n\n> 对照 code sample 1（上一小题）：那时 `table` 是 `long long`，一行 64 字节 = 2 个块，`table[i][j]` 落在块 `2i + (j≥4 ? 1 : 0)`，于是 Set 0 要容纳块 0、2、4、6（4 个块）、Set 1 要容纳块 1、3、5、7（4 个块），而每组只有 2 路 ⇒ 每次访问都把上一个块冲突挤出，32 次访问**全部缺失**，缺失率 1。所以 C 部分说第二个样例更好：它只有冷启动不命中。\n\n> 📌 答案有官方来源：原卷红色参考答案（见 `_audit/pages/期中/2012期中-带答案/page-12.png`，红色表格即第 0 列全 M、其余全 H，miss rate 1/8）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "short-answer",
@@ -177,8 +177,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "<!-- ===== page 12 ===== -->\n\n```c\nint i;\n\nint j;\n\nint table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n for (i = 0; i < 4; i++) {\n\n table [i] [j] = i + j;\n\n table[j][i]?\n\n }\n\n}\n```\n\n**B.** This problem refers to code sample above. In the table below write down in each space whether\nthat element’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n![图](assets/期中/2012期中-带答案/page-12.png)\n\n> 上图为本页的 Cache 命中/缺失状态表（红色为\nWhat is the miss rate of this code sample?",
-        "answer": "答案：第 0 列全为 M，第 1–7 列全为 H）。\n答案：B. 第 0 列全为 M，第 1–7 列全为 H（原卷红色参考答案）：\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = 1/8"
+        "prompt": "**B.** This problem refers to code sample above. In the table below write down in each space whether\nthat element’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n![图](assets/期中/2012期中-带答案/page-12.png)\n\n> 原卷 Problem E 的公共配置（见原卷第 11 页）：32 位 Linux 系统，2 路组相联（2-way associative）cache，容量 128 字节，块大小 32 字节；`long long` 为 8 字节；`table` 起始地址为 0x0。\n>\n> 本题（code sample above）的代码如下：\n```c\nint i;\n\nint j;\n\nint table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n for (i = 0; i < 4; i++) {\n\n table [i] [j] = i + j;\n\n table[j][i]?\n\n }\n\n}\n```\n\nWhat is the miss rate of this code sample?",
+        "answer": "答案：B 的 4×8 命中/缺失表 —— 第 0 列全为 M，第 1–7 列全为 H。\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = **1/8**（32 次访问中 4 次缺失）\n\n解析：\n\n1. 先把 cache 参数换算清楚：容量 128 B ÷ 块大小 32 B = 4 个块；2 路组相联 ⇒ 4 ÷ 2 = **2 组**（Set 0 / Set 1）。于是「块号的奇偶」就是组索引（组索引 = 块号 mod 2），块内偏移占低 5 位，剩下的高位是标记。\n2. 本题的样例是 `int table[4][8]`（元素 4 字节）：一行 8 个 int = 32 字节，**正好等于一个 cache block**。所以整个数组 128 字节 = 4 个块，元素 `table[i][j]` 落在**块 i** 上；组索引 = `i mod 2`：第 0、2 行 → Set 0，第 1、3 行 → Set 1。每组只需要放 2 个块，恰好用满 2 路 —— 整个数组都能常驻 cache（这正是本题 C 部分所说「the entire array fits in the cache」）。\n3. 访问次序是 j 外层、i 内层（列优先遍历），每次访问 `table[i][j]`：\n   - j=0：依次访问 (0,0)(1,0)(2,0)(3,0)，落在块 0、1、2、3，cache 初始为空 ⇒ 4 次冷启动不命中，第 0 列 4 个格子全为 M；\n   - j=1…7：每个 (i,j) 仍然落在块 i，而这些块在 j=0 时已经被取进 cache，且期间没有任何访问会把它们挤出（每组只用到 2 个块、2 路）⇒ 第 1–7 列全部为 H。\n4. 缺失率 = 4 次缺失 ÷ 32 次访问 = 1/8。\n\n> 对照 code sample 1（上一小题）：那时 `table` 是 `long long`，一行 64 字节 = 2 个块，`table[i][j]` 落在块 `2i + (j≥4 ? 1 : 0)`，于是 Set 0 要容纳块 0、2、4、6（4 个块）、Set 1 要容纳块 1、3、5、7（4 个块），而每组只有 2 路 ⇒ 每次访问都把上一个块冲突挤出，32 次访问**全部缺失**，缺失率 1。所以 C 部分说第二个样例更好：它只有冷启动不命中。\n\n> 📌 答案有官方来源：原卷红色参考答案（见 `_audit/pages/期中/2012期中-带答案/page-12.png`，红色表格即第 0 列全 M、其余全 H，miss rate 1/8）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       }
     },
     {
@@ -3029,12 +3029,12 @@
       "exam": "2020期中-带答案",
       "questionNo": "第五题 2",
       "summary": "write back + no-write-allocate 下的组状态",
-      "content": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。（2分，v是0即给2分）\n14\n\n<!-- ===== page 15 ===== -->\n\nR     0 [0000002],  v Tag Block\nR     1 [0000012],\nW    7 [0001112],   Set 1 0110 01? MM[[?08--19]]\nR     12 [0011002],\nR     9 [0010012]\n考察内容：\n本题考察no-write-allocate，写操作（W 7）不会将数据填写到 Set 1中\n下面分两套答案\n*********************第一套****************************\n本次访存序列，共发生____1__次高速缓存命中(hit)?  （给2分）\n考察内容：\n考虑到数据对齐和非对齐的访存，仅发生1次命中",
+      "content": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。\n\n| 访问 | 地址 | Set 1：v | Tag | Block |\n| --- | --- | --- | --- | --- |\n| R | 0 [000000₂] |  |  |  |\n| R | 1 [000001₂] |  |  |  |\n| W | 7 [000111₂] |  |  |  |\n| R | 12 [001100₂] |  |  |  |\n| R | 9 [001001₂] |  |  |  |\n\n本次访存序列，共发生 _______ 次高速缓存命中（hit）？\n\n> 接上题的条件：直接映射（Direct-mapped）的高速缓存，总容量 16 字节，每个高速缓存块 4 字节（B=4Byte/block），Cache 初始状态为空。\n答案：\n- 空①（Set 1 的状态）：**v = 0**，Tag、Block 均无数值（留空）—— 即 Set 1 始终没有被填入。\n- 空②（命中次数）：**1** 次。\n\n解析：\n\n1. 配置换算：16 B ÷ 4 B = 4 个块，直接映射 ⇒ 4 组（Set 0–3）。地址划分（每次访问 2 字节，字节地址）：\n   - 块内偏移 = 地址第 [1:0] 位；\n   - 组索引 = 块号 mod 4 = 地址第 **[3:2]** 位；\n   - Tag = 地址第 [5:4] 位。\n2. 一次 2 字节访存可能跨两个块（题目提示过），逐条分析：\n\n| 访问 | 涉及的字节 | 所在块（组） | 结果 |\n| --- | --- | --- | --- |\n| R 0 | 0–1 | 块 0–3（Set 0） | 冷启动不命中 → 装入 Set 0：v=1, Tag=00, M[0-3] |\n| R 1 | 1–2 | 块 0–3（Set 0） | **命中**（数据已在 Set 0） |\n| W 7 | 7–8 | 块 4–7（Set 1）+ 块 8–11（Set 2） | 写不命中；no-write-allocate ⇒ **不分配**，Set 1、Set 2 都不变 |\n| R 12 | 12–13 | 块 12–15（Set 3） | 不命中 → 装入 Set 3：v=1, Tag=00, M[12-15] |\n| R 9 | 9–10 | 块 8–11（Set 2） | 不命中 → 装入 Set 2：v=1, Tag=00, M[8-11] |\n\n3. 唯一涉及 Set 1 的访存是 W 7（它覆盖字节 7–8，其中字节 7 属于 Set 1 的块 4–7）。写不命中 + **no-write-allocate**（写不分配）⇒ 该块不会进入 cache，所以 Set 1 保持初始的无效状态：**v = 0，Tag 与 Block 不填**。原卷评分说明也写着「v 是 0 即给 2 分」。反过来，如果策略是 write-allocate，Set 1 会被填成 `v=1, Tag=00, Block=M[4-7]`——这正是本题设的陷阱。\n4. 命中次数：5 条访存中只有 R 1 命中（R 0 冷启动不命中、W 7 写不命中且不分配、R 12 与 R 9 也都是冷启动不命中）⇒ **共 1 次命中**。（官方评分材料另列了一套「第二套」计法得 5 次命中，并注明那套只给一半分；应以上面的 1 次为准。）\n5. 注意 W 7 的另一半落在 Set 2：它同样因为 no-write-allocate 而不分配；随后 R 9 访问 Set 2 时才以「冷启动不命中」把它填上（Tag=00, M[8-11]），与 W 7 是否发生无关。\n\n> 📌 答案有官方来源：原卷红色参考答案 + 批注（见 `_audit/pages/期中/2020期中-带答案/page-15.png`：Set 1 的 v 填红色 0、Tag/Block 留空；批注为「本题考察 no-write-allocate，写操作（W 7）不会将数据填写到 Set 1 中」，命中次数 1 次出自「第一套」答案）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "missing",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": [
           "a-f1301cee7c935308"
         ]
@@ -3051,9 +3051,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。（2分，v是0即给2分）\n14\n\n<!-- ===== page 15 ===== -->\n\nR     0 [0000002],  v Tag Block\nR     1 [0000012],\nW    7 [0001112],   Set 1 0110 01? MM[[?08--19]]\nR     12 [0011002],\nR     9 [0010012]\n考察内容：\n本题考察no-write-allocate，写操作（W 7）不会将数据填写到 Set 1中\n下面分两套答案\n*********************第一套****************************\n本次访存序列，共发生____1__次高速缓存命中(hit)?  （给2分）\n考察内容：\n考虑到数据对齐和非对齐的访存，仅发生1次命中",
+        "stem": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。\n\n| 访问 | 地址 | Set 1：v | Tag | Block |\n| --- | --- | --- | --- | --- |\n| R | 0 [000000₂] |  |  |  |\n| R | 1 [000001₂] |  |  |  |\n| W | 7 [000111₂] |  |  |  |\n| R | 12 [001100₂] |  |  |  |\n| R | 9 [001001₂] |  |  |  |\n\n本次访存序列，共发生 _______ 次高速缓存命中（hit）？\n\n> 接上题的条件：直接映射（Direct-mapped）的高速缓存，总容量 16 字节，每个高速缓存块 4 字节（B=4Byte/block），Cache 初始状态为空。",
         "choices": [],
-        "answer": ""
+        "answer": "答案：\n- 空①（Set 1 的状态）：**v = 0**，Tag、Block 均无数值（留空）—— 即 Set 1 始终没有被填入。\n- 空②（命中次数）：**1** 次。\n\n解析：\n\n1. 配置换算：16 B ÷ 4 B = 4 个块，直接映射 ⇒ 4 组（Set 0–3）。地址划分（每次访问 2 字节，字节地址）：\n   - 块内偏移 = 地址第 [1:0] 位；\n   - 组索引 = 块号 mod 4 = 地址第 **[3:2]** 位；\n   - Tag = 地址第 [5:4] 位。\n2. 一次 2 字节访存可能跨两个块（题目提示过），逐条分析：\n\n| 访问 | 涉及的字节 | 所在块（组） | 结果 |\n| --- | --- | --- | --- |\n| R 0 | 0–1 | 块 0–3（Set 0） | 冷启动不命中 → 装入 Set 0：v=1, Tag=00, M[0-3] |\n| R 1 | 1–2 | 块 0–3（Set 0） | **命中**（数据已在 Set 0） |\n| W 7 | 7–8 | 块 4–7（Set 1）+ 块 8–11（Set 2） | 写不命中；no-write-allocate ⇒ **不分配**，Set 1、Set 2 都不变 |\n| R 12 | 12–13 | 块 12–15（Set 3） | 不命中 → 装入 Set 3：v=1, Tag=00, M[12-15] |\n| R 9 | 9–10 | 块 8–11（Set 2） | 不命中 → 装入 Set 2：v=1, Tag=00, M[8-11] |\n\n3. 唯一涉及 Set 1 的访存是 W 7（它覆盖字节 7–8，其中字节 7 属于 Set 1 的块 4–7）。写不命中 + **no-write-allocate**（写不分配）⇒ 该块不会进入 cache，所以 Set 1 保持初始的无效状态：**v = 0，Tag 与 Block 不填**。原卷评分说明也写着「v 是 0 即给 2 分」。反过来，如果策略是 write-allocate，Set 1 会被填成 `v=1, Tag=00, Block=M[4-7]`——这正是本题设的陷阱。\n4. 命中次数：5 条访存中只有 R 1 命中（R 0 冷启动不命中、W 7 写不命中且不分配、R 12 与 R 9 也都是冷启动不命中）⇒ **共 1 次命中**。（官方评分材料另列了一套「第二套」计法得 5 次命中，并注明那套只给一半分；应以上面的 1 次为准。）\n5. 注意 W 7 的另一半落在 Set 2：它同样因为 no-write-allocate 而不分配；随后 R 9 访问 Set 2 时才以「冷启动不命中」把它填上（Tag=00, M[8-11]），与 W 7 是否发生无关。\n\n> 📌 答案有官方来源：原卷红色参考答案 + 批注（见 `_audit/pages/期中/2020期中-带答案/page-15.png`：Set 1 的 v 填红色 0、Tag/Block 留空；批注为「本题考察 no-write-allocate，写操作（W 7）不会将数据填写到 Set 1 中」，命中次数 1 次出自「第一套」答案）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "fill",
@@ -3061,8 +3061,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。（2分，v是0即给2分）\n14\n\n<!-- ===== page 15 ===== -->\n\nR     0 [0000002],  v Tag Block\nR     1 [0000012],\nW    7 [0001112],   Set 1 0110 01? MM[[?08--19]]\nR     12 [0011002],\nR     9 [0010012]\n考察内容：\n本题考察no-write-allocate，写操作（W 7）不会将数据填写到 Set 1中\n下面分两套答案\n*********************第一套****************************\n本次访存序列，共发生____1__次高速缓存命中(hit)?  （给2分）\n考察内容：\n考虑到数据对齐和非对齐的访存，仅发生1次命中",
-        "answer": ""
+        "prompt": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。\n\n| 访问 | 地址 | Set 1：v | Tag | Block |\n| --- | --- | --- | --- | --- |\n| R | 0 [000000₂] |  |  |  |\n| R | 1 [000001₂] |  |  |  |\n| W | 7 [000111₂] |  |  |  |\n| R | 12 [001100₂] |  |  |  |\n| R | 9 [001001₂] |  |  |  |\n\n本次访存序列，共发生 _______ 次高速缓存命中（hit）？\n\n> 接上题的条件：直接映射（Direct-mapped）的高速缓存，总容量 16 字节，每个高速缓存块 4 字节（B=4Byte/block），Cache 初始状态为空。",
+        "answer": "答案：\n- 空①（Set 1 的状态）：**v = 0**，Tag、Block 均无数值（留空）—— 即 Set 1 始终没有被填入。\n- 空②（命中次数）：**1** 次。\n\n解析：\n\n1. 配置换算：16 B ÷ 4 B = 4 个块，直接映射 ⇒ 4 组（Set 0–3）。地址划分（每次访问 2 字节，字节地址）：\n   - 块内偏移 = 地址第 [1:0] 位；\n   - 组索引 = 块号 mod 4 = 地址第 **[3:2]** 位；\n   - Tag = 地址第 [5:4] 位。\n2. 一次 2 字节访存可能跨两个块（题目提示过），逐条分析：\n\n| 访问 | 涉及的字节 | 所在块（组） | 结果 |\n| --- | --- | --- | --- |\n| R 0 | 0–1 | 块 0–3（Set 0） | 冷启动不命中 → 装入 Set 0：v=1, Tag=00, M[0-3] |\n| R 1 | 1–2 | 块 0–3（Set 0） | **命中**（数据已在 Set 0） |\n| W 7 | 7–8 | 块 4–7（Set 1）+ 块 8–11（Set 2） | 写不命中；no-write-allocate ⇒ **不分配**，Set 1、Set 2 都不变 |\n| R 12 | 12–13 | 块 12–15（Set 3） | 不命中 → 装入 Set 3：v=1, Tag=00, M[12-15] |\n| R 9 | 9–10 | 块 8–11（Set 2） | 不命中 → 装入 Set 2：v=1, Tag=00, M[8-11] |\n\n3. 唯一涉及 Set 1 的访存是 W 7（它覆盖字节 7–8，其中字节 7 属于 Set 1 的块 4–7）。写不命中 + **no-write-allocate**（写不分配）⇒ 该块不会进入 cache，所以 Set 1 保持初始的无效状态：**v = 0，Tag 与 Block 不填**。原卷评分说明也写着「v 是 0 即给 2 分」。反过来，如果策略是 write-allocate，Set 1 会被填成 `v=1, Tag=00, Block=M[4-7]`——这正是本题设的陷阱。\n4. 命中次数：5 条访存中只有 R 1 命中（R 0 冷启动不命中、W 7 写不命中且不分配、R 12 与 R 9 也都是冷启动不命中）⇒ **共 1 次命中**。（官方评分材料另列了一套「第二套」计法得 5 次命中，并注明那套只给一半分；应以上面的 1 次为准。）\n5. 注意 W 7 的另一半落在 Set 2：它同样因为 no-write-allocate 而不分配；随后 R 9 访问 Set 2 时才以「冷启动不命中」把它填上（Tag=00, M[8-11]），与 W 7 是否发生无关。\n\n> 📌 答案有官方来源：原卷红色参考答案 + 批注（见 `_audit/pages/期中/2020期中-带答案/page-15.png`：Set 1 的 v 填红色 0、Tag/Block 留空；批注为「本题考察 no-write-allocate，写操作（W 7）不会将数据填写到 Set 1 中」，命中次数 1 次出自「第一套」答案）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       }
     },
     {
@@ -4417,12 +4417,12 @@
       "exam": "2023期中-带答案",
       "questionNo": "第五题 1",
       "summary": "时间/空间局部性的定义与解释",
-      "content": "第五题（15分）\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n（1） 时间 局部性：如果程序中的某条指令或者数据被访问，不久以后会再次被\n访问。\n（2） 空间 局部性：一旦程序访问了某个存储单元数据，在不久之后，其附近存\n储单元的数据也将被访问。",
+      "content": "第五题（15分）\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n（1） ____ 局部性：\n（2）_____ 局部性：\n答案：\n（1）**时间**局部性；解释：如果程序中的某条指令或者数据被访问，不久以后会再次被访问。\n（2）**空间**局部性；解释：一旦程序访问了某个存储单元的数据，在不久之后，其附近存储单元的数据也将被访问。\n\n解析：\n\n1. 局部性原理（principle of locality）指程序倾向于使用最近用过的指令和数据、或与它们邻近的指令和数据，它是存储层次（寄存器—cache—内存—磁盘）能够奏效的根本原因。\n2. （1）时间局部性（temporal locality）：被访问过一次的指令/数据，在不久的将来很可能被再次访问。典型来源是**循环**——循环体里的指令每轮都重复执行，循环里用到的变量（如 `sum`、循环变量 `i`）也被反复读写。cache 因此可以把刚取来的块留在原处重复命中。\n3. （2）空间局部性（spatial locality）：被访问的存储单元附近的单元，在不久的将来很可能被访问。典型来源是**顺序执行指令**（相邻地址的指令依次取出）和**数组的顺序访问**（`a[i][j]` 按行连续存放、依次读取）。cache 因此按「块（block）」为单位取数据，一次把附近若干字节一起搬进 cache，从而把后续访问变成命中。\n4. 答题要点（评分：「名词各 1 分，解释各 1 分」）：名称写「时间/空间」两字即可；解释要写出「再次被访问」（时间）与「附近的存储单元也被访问」（空间）这两个特征。也可以各举一个例子（重复执行的循环指令 → 时间局部性；数组按地址顺序访问 / 顺序取指 → 空间局部性）。\n\n> 📌 答案有官方来源：原卷带答案版在题面中直接给出「（1）时间 局部性：…（2）空间 局部性：…」（原文/期中/2023期中-带答案.md 第 673–676 行），题面的空格形式取自无答案版（原文/期中/2023期中-无答案.md 第 517–518 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "missing",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": [
           "a-99b98f99edd04d31",
           "a-77b3ed6ab32b2a0b",
@@ -4442,9 +4442,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第五题（15分）\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n（1） 时间 局部性：如果程序中的某条指令或者数据被访问，不久以后会再次被\n访问。\n（2） 空间 局部性：一旦程序访问了某个存储单元数据，在不久之后，其附近存\n储单元的数据也将被访问。",
+        "stem": "第五题（15分）\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n（1） ____ 局部性：\n（2）_____ 局部性：",
         "choices": [],
-        "answer": ""
+        "answer": "答案：\n（1）**时间**局部性；解释：如果程序中的某条指令或者数据被访问，不久以后会再次被访问。\n（2）**空间**局部性；解释：一旦程序访问了某个存储单元的数据，在不久之后，其附近存储单元的数据也将被访问。\n\n解析：\n\n1. 局部性原理（principle of locality）指程序倾向于使用最近用过的指令和数据、或与它们邻近的指令和数据，它是存储层次（寄存器—cache—内存—磁盘）能够奏效的根本原因。\n2. （1）时间局部性（temporal locality）：被访问过一次的指令/数据，在不久的将来很可能被再次访问。典型来源是**循环**——循环体里的指令每轮都重复执行，循环里用到的变量（如 `sum`、循环变量 `i`）也被反复读写。cache 因此可以把刚取来的块留在原处重复命中。\n3. （2）空间局部性（spatial locality）：被访问的存储单元附近的单元，在不久的将来很可能被访问。典型来源是**顺序执行指令**（相邻地址的指令依次取出）和**数组的顺序访问**（`a[i][j]` 按行连续存放、依次读取）。cache 因此按「块（block）」为单位取数据，一次把附近若干字节一起搬进 cache，从而把后续访问变成命中。\n4. 答题要点（评分：「名词各 1 分，解释各 1 分」）：名称写「时间/空间」两字即可；解释要写出「再次被访问」（时间）与「附近的存储单元也被访问」（空间）这两个特征。也可以各举一个例子（重复执行的循环指令 → 时间局部性；数组按地址顺序访问 / 顺序取指 → 空间局部性）。\n\n> 📌 答案有官方来源：原卷带答案版在题面中直接给出「（1）时间 局部性：…（2）空间 局部性：…」（原文/期中/2023期中-带答案.md 第 673–676 行），题面的空格形式取自无答案版（原文/期中/2023期中-无答案.md 第 517–518 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "fill",
@@ -4452,8 +4452,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（15分）\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n（1） 时间 局部性：如果程序中的某条指令或者数据被访问，不久以后会再次被\n访问。\n（2） 空间 局部性：一旦程序访问了某个存储单元数据，在不久之后，其附近存\n储单元的数据也将被访问。",
-        "answer": ""
+        "prompt": "第五题（15分）\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n（1） ____ 局部性：\n（2）_____ 局部性：",
+        "answer": "答案：\n（1）**时间**局部性；解释：如果程序中的某条指令或者数据被访问，不久以后会再次被访问。\n（2）**空间**局部性；解释：一旦程序访问了某个存储单元的数据，在不久之后，其附近存储单元的数据也将被访问。\n\n解析：\n\n1. 局部性原理（principle of locality）指程序倾向于使用最近用过的指令和数据、或与它们邻近的指令和数据，它是存储层次（寄存器—cache—内存—磁盘）能够奏效的根本原因。\n2. （1）时间局部性（temporal locality）：被访问过一次的指令/数据，在不久的将来很可能被再次访问。典型来源是**循环**——循环体里的指令每轮都重复执行，循环里用到的变量（如 `sum`、循环变量 `i`）也被反复读写。cache 因此可以把刚取来的块留在原处重复命中。\n3. （2）空间局部性（spatial locality）：被访问的存储单元附近的单元，在不久的将来很可能被访问。典型来源是**顺序执行指令**（相邻地址的指令依次取出）和**数组的顺序访问**（`a[i][j]` 按行连续存放、依次读取）。cache 因此按「块（block）」为单位取数据，一次把附近若干字节一起搬进 cache，从而把后续访问变成命中。\n4. 答题要点（评分：「名词各 1 分，解释各 1 分」）：名称写「时间/空间」两字即可；解释要写出「再次被访问」（时间）与「附近的存储单元也被访问」（空间）这两个特征。也可以各举一个例子（重复执行的循环指令 → 时间局部性；数组按地址顺序访问 / 顺序取指 → 空间局部性）。\n\n> 📌 答案有官方来源：原卷带答案版在题面中直接给出「（1）时间 局部性：…（2）空间 局部性：…」（原文/期中/2023期中-带答案.md 第 673–676 行），题面的空格形式取自无答案版（原文/期中/2023期中-无答案.md 第 517–518 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       }
     },
     {
@@ -5509,7 +5509,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第一题 5",
       "summary": "四路组相联 cache 每路的行数推导",
-      "content": "5.  如果四路组相联的高速缓存大小是32KB，并且块（block）大小为32字节，\n那么它每路（way）有多少行（line）？\nA. 32\nB. 64\nC. 128\nD. 256\n答案：D（AI 推导，未与官方答案核对）\n解析：32KB / 32B = 1024 块，4 路组相联 → 256 组，每路 256 行。",
+      "content": "5.  如果四路组相联的高速缓存大小是32KB，并且块（block）大小为32字节，\n那么它每路（way）有多少行（line）？\nA. 32\nB. 64\nC. 128\nD. 256\n答案：D\n解析：32KB / 32B = 1024 块，4 路组相联 → 256 组，每路 256 行。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5548,7 +5548,7 @@
             "content": "256"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：32KB / 32B = 1024 块，4 路组相联 → 256 组，每路 256 行。"
+        "answer": "答案：D\n解析：32KB / 32B = 1024 块，4 路组相联 → 256 组，每路 256 行。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5578,7 +5578,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "5.  如果四路组相联的高速缓存大小是32KB，并且块（block）大小为32字节，\n那么它每路（way）有多少行（line）？",
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：32KB / 32B = 1024 块，4 路组相联 → 256 组，每路 256 行。"
+        "answer": "答案：D\n解析：32KB / 32B = 1024 块，4 路组相联 → 256 组，每路 256 行。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -5591,7 +5591,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第一题 6",
       "summary": "由磁盘几何参数计算标称容量",
-      "content": "6.  某个机械硬盘的部分指标数据如下，则该硬盘标称的容量最有可能是多少？\n```\n◦  1024 bytes/sector\n◦  400 sectors/track (on average)\n◦  20000 tracks/surface\n◦  5 platters/disk\n```\nA. 80 GB\nB. 76 GB\nC. 40 GB\nD. 38 GB\n答案：A（AI 推导，未与官方答案核对）\n解析：1024B/sector × 400 sector/track × 20000 track/surface × 2 surface/platter × 5 platter ≈ 81.9 GB，标称容量取 80 GB。",
+      "content": "6.  某个机械硬盘的部分指标数据如下，则该硬盘标称的容量最有可能是多少？\n```\n◦  1024 bytes/sector\n◦  400 sectors/track (on average)\n◦  20000 tracks/surface\n◦  5 platters/disk\n```\nA. 80 GB\nB. 76 GB\nC. 40 GB\nD. 38 GB\n答案：A\n解析：1024B/sector × 400 sector/track × 20000 track/surface × 2 surface/platter × 5 platter ≈ 81.9 GB，标称容量取 80 GB。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5630,7 +5630,7 @@
             "content": "38 GB"
           }
         ],
-        "answer": "答案：A（AI 推导，未与官方答案核对）\n解析：1024B/sector × 400 sector/track × 20000 track/surface × 2 surface/platter × 5 platter ≈ 81.9 GB，标称容量取 80 GB。"
+        "answer": "答案：A\n解析：1024B/sector × 400 sector/track × 20000 track/surface × 2 surface/platter × 5 platter ≈ 81.9 GB，标称容量取 80 GB。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5660,7 +5660,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "6.  某个机械硬盘的部分指标数据如下，则该硬盘标称的容量最有可能是多少？\n```\n◦  1024 bytes/sector\n◦  400 sectors/track (on average)\n◦  20000 tracks/surface\n◦  5 platters/disk\n```",
-        "answer": "答案：A（AI 推导，未与官方答案核对）\n解析：1024B/sector × 400 sector/track × 20000 track/surface × 2 surface/platter × 5 platter ≈ 81.9 GB，标称容量取 80 GB。"
+        "answer": "答案：A\n解析：1024B/sector × 400 sector/track × 20000 track/surface × 2 surface/platter × 5 platter ≈ 81.9 GB，标称容量取 80 GB。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -7539,7 +7539,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 31",
       "summary": "CacheLab 中 valgrind 生成内存访问 trace",
-      "content": "31. （2分）在CacheLab实验中，valgrind 工具的主要用途是什么？\nA. 作为参考缓存模拟器 (csim-ref) 来检查输出结果\nB. 编译 csim.c 和 trans.c 文件\nC. 生成程序运行时的内存访问轨迹 (trace files)\nD. 自动评估 Part B 矩阵转置的性能得分\n答案：C（AI 推导，未与官方答案核对）",
+      "content": "31. （2分）在CacheLab实验中，valgrind 工具的主要用途是什么？\nA. 作为参考缓存模拟器 (csim-ref) 来检查输出结果\nB. 编译 csim.c 和 trans.c 文件\nC. 生成程序运行时的内存访问轨迹 (trace files)\nD. 自动评估 Part B 矩阵转置的性能得分\n答案：C\n\n解析：CacheLab 用 `valgrind --tool=lackey --trace-mem=yes` 把程序的内存访问记录成 trace 文件，csim.c 再回放它，故 C 对。csim-ref 是课程提供的参考模拟器，编译由 make/gcc 完成，成绩由 driver 与自动评测给出，都与 valgrind 无关。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7578,7 +7578,7 @@
             "content": "自动评估 Part B 矩阵转置的性能得分"
           }
         ],
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：CacheLab 用 `valgrind --tool=lackey --trace-mem=yes` 把程序的内存访问记录成 trace 文件，csim.c 再回放它，故 C 对。csim-ref 是课程提供的参考模拟器，编译由 make/gcc 完成，成绩由 driver 与自动评测给出，都与 valgrind 无关。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -7608,7 +7608,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "31. （2分）在CacheLab实验中，valgrind 工具的主要用途是什么？",
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：CacheLab 用 `valgrind --tool=lackey --trace-mem=yes` 把程序的内存访问记录成 trace 文件，csim.c 再回放它，故 C 对。csim-ref 是课程提供的参考模拟器，编译由 make/gcc 完成，成绩由 driver 与自动评测给出，都与 valgrind 无关。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -7621,7 +7621,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 32",
       "summary": "trace 中 I（指令加载）操作应被忽略",
-      "content": "32. （2分）在CacheLab Part A (csim.c) 中，模拟器需要解析轨迹文件中的内存\n访问操作。根据writeup，下列哪个操作类型应该被忽略？\nA. M (数据修改)\nB. L (数据加载)\nC. S (数据存储)\nD. I (指令加载)\n答案：D（AI 推导，未与官方答案核对）",
+      "content": "32. （2分）在CacheLab Part A (csim.c) 中，模拟器需要解析轨迹文件中的内存\n访问操作。根据writeup，下列哪个操作类型应该被忽略？\nA. M (数据修改)\nB. L (数据加载)\nC. S (数据存储)\nD. I (指令加载)\n答案：D\n\n解析：writeup 明确说本实验只关心数据缓存，要求模拟器忽略所有以 I 开头的指令取指（instruction load）记录，故 D 对；L（数据加载）、S（数据存储）、M（数据修改）都必须处理。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7660,7 +7660,7 @@
             "content": "I (指令加载)"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：writeup 明确说本实验只关心数据缓存，要求模拟器忽略所有以 I 开头的指令取指（instruction load）记录，故 D 对；L（数据加载）、S（数据存储）、M（数据修改）都必须处理。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -7690,7 +7690,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "32. （2分）在CacheLab Part A (csim.c) 中，模拟器需要解析轨迹文件中的内存\n访问操作。根据writeup，下列哪个操作类型应该被忽略？",
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：writeup 明确说本实验只关心数据缓存，要求模拟器忽略所有以 I 开头的指令取指（instruction load）记录，故 D 对；L（数据加载）、S（数据存储）、M（数据修改）都必须处理。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -7703,7 +7703,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 33",
       "summary": "csim 解析 M 操作时按 L+S 处理",
-      "content": "33. （2分）根据CacheLab Part A 的编程规则和提示，当缓存模拟器 (csim.c) 解\n析到一行 M（数据修改）操作时，它应该如何处理？\nA. 将其视为单次内存访问，最多导致一次缓存未命中 (miss) 和一次可能的淘汰\n(eviction)\nB. 将其视为一次数据加载 (L) 和紧随其后的一次数据存储 (S) 。这可能导致两次\n命中，或者一次未命中和一次命中（可能伴随淘汰）\nC. 忽略此操作，因为实验只关心数据加载 (L) 和数据存储 (S) 操作\nD. 只将其视为一次数据存储 (S) 操作，因为数据最终被修改了\n答案：B（AI 推导，未与官方答案核对）",
+      "content": "33. （2分）根据CacheLab Part A 的编程规则和提示，当缓存模拟器 (csim.c) 解\n析到一行 M（数据修改）操作时，它应该如何处理？\nA. 将其视为单次内存访问，最多导致一次缓存未命中 (miss) 和一次可能的淘汰\n(eviction)\nB. 将其视为一次数据加载 (L) 和紧随其后的一次数据存储 (S) 。这可能导致两次\n命中，或者一次未命中和一次命中（可能伴随淘汰）\nC. 忽略此操作，因为实验只关心数据加载 (L) 和数据存储 (S) 操作\nD. 只将其视为一次数据存储 (S) 操作，因为数据最终被修改了\n答案：B\n\n解析：trace 格式里 M 表示 data modify，即\"一次数据加载 L 紧跟一次数据存储 S\"，所以要按两次访问处理：两次都可能命中，也可能第一次未命中（伴随一次可能的淘汰）而第二次命中，故 B 对。A 把它当单次访问、C 直接忽略、D 只看成 S，都不符合 writeup。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7742,7 +7742,7 @@
             "content": "只将其视为一次数据存储 (S) 操作，因为数据最终被修改了"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：trace 格式里 M 表示 data modify，即\"一次数据加载 L 紧跟一次数据存储 S\"，所以要按两次访问处理：两次都可能命中，也可能第一次未命中（伴随一次可能的淘汰）而第二次命中，故 B 对。A 把它当单次访问、C 直接忽略、D 只看成 S，都不符合 writeup。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -7772,7 +7772,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "33. （2分）根据CacheLab Part A 的编程规则和提示，当缓存模拟器 (csim.c) 解\n析到一行 M（数据修改）操作时，它应该如何处理？",
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：trace 格式里 M 表示 data modify，即\"一次数据加载 L 紧跟一次数据存储 S\"，所以要按两次访问处理：两次都可能命中，也可能第一次未命中（伴随一次可能的淘汰）而第二次命中，故 B 对。A 把它当单次访问、C 直接忽略、D 只看成 S，都不符合 writeup。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -7785,7 +7785,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 34",
       "summary": "矩阵转置 blocking 分块改善空间局部性",
-      "content": "34. （2分）针对CacheLab Part B中朴素的逐行扫描转置 (for i... for j...\nB[j][i] = A[i][j]) 性能不佳，因为它在写入矩阵 B 时具有很差的空间局部性。\nBlocking (分块) 策略的核心思想是如何解决这个问题的？\nA. 交换 i 和 j 循环的顺序改为逐列扫描，这样 A 的访问变差，但 B 的访问具有\n良好的空间局部性\nB. 一次只处理一个对角线元素，使用局部变量来存储它，以避免冲突不命中，然后再\n处理非对角线元素\nC. 将大矩阵划分为适合装入缓存的、小的子矩阵（块）。通过一次只对一个块进行转\n置，可以最大化局部性，即重复使用刚从A读入缓存的数据，同时也改善了对B对应块写\n入的局部性\nD. 利用 12 个局部变量，一次性从 A 读取 12 个元素，转置后，再将这 12 个元素\n写入 B 的不同行中\n答案：C（AI 推导，未与官方答案核对）",
+      "content": "34. （2分）针对CacheLab Part B中朴素的逐行扫描转置 (for i... for j...\nB[j][i] = A[i][j]) 性能不佳，因为它在写入矩阵 B 时具有很差的空间局部性。\nBlocking (分块) 策略的核心思想是如何解决这个问题的？\nA. 交换 i 和 j 循环的顺序改为逐列扫描，这样 A 的访问变差，但 B 的访问具有\n良好的空间局部性\nB. 一次只处理一个对角线元素，使用局部变量来存储它，以避免冲突不命中，然后再\n处理非对角线元素\nC. 将大矩阵划分为适合装入缓存的、小的子矩阵（块）。通过一次只对一个块进行转\n置，可以最大化局部性，即重复使用刚从A读入缓存的数据，同时也改善了对B对应块写\n入的局部性\nD. 利用 12 个局部变量，一次性从 A 读取 12 个元素，转置后，再将这 12 个元素\n写入 B 的不同行中\n答案：C\n\n解析：分块（blocking）把矩阵切成能装进缓存的子矩阵，一次只转置一个块：刚从 A 读入的数据在块内被反复使用（时间局部性），B 的对应块也能整块写入（空间局部性），故 C 对。A 只是交换 i、j 循环顺序（牺牲 A 的局部性换 B 的局部性），B、D 分别是处理对角块的局部变量技巧与一次展开 12 个元素的具体手法，都不是分块的核心思想。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7824,7 +7824,7 @@
             "content": "利用 12 个局部变量，一次性从 A 读取 12 个元素，转置后，再将这 12 个元素\n写入 B 的不同行中"
           }
         ],
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：分块（blocking）把矩阵切成能装进缓存的子矩阵，一次只转置一个块：刚从 A 读入的数据在块内被反复使用（时间局部性），B 的对应块也能整块写入（空间局部性），故 C 对。A 只是交换 i、j 循环顺序（牺牲 A 的局部性换 B 的局部性），B、D 分别是处理对角块的局部变量技巧与一次展开 12 个元素的具体手法，都不是分块的核心思想。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -7854,7 +7854,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "34. （2分）针对CacheLab Part B中朴素的逐行扫描转置 (for i... for j...\nB[j][i] = A[i][j]) 性能不佳，因为它在写入矩阵 B 时具有很差的空间局部性。\nBlocking (分块) 策略的核心思想是如何解决这个问题的？",
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：分块（blocking）把矩阵切成能装进缓存的子矩阵，一次只转置一个块：刚从 A 读入的数据在块内被反复使用（时间局部性），B 的对应块也能整块写入（空间局部性），故 C 对。A 只是交换 i、j 循环顺序（牺牲 A 的局部性换 B 的局部性），B、D 分别是处理对角块的局部变量技巧与一次展开 12 个元素的具体手法，都不是分块的核心思想。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     }
   ]

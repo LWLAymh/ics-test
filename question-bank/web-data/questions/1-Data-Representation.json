@@ -6289,12 +6289,12 @@
       "exam": "2014期末-带答案",
       "questionNo": "第二题 1",
       "summary": "字节置换与位运算的信息表示（含共用代码）",
-      "content": "第二题（10分）汇编\n阅读下面的C代码：\n```\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n```\n10\n\n<!-- ===== page 11 ===== -->\n\n```\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，下面的结果是：\n```\nc(b(a(1))) =     (1)\na(b(c(1))) =     (2)\n```\n答案（每项1分）：\n（1）0x800000\n（2）0\n说明：考察信息表示和程序理解",
+      "content": "第二题（10分）汇编\n阅读下面的C代码：\n```\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n```\n10\n\n<!-- ===== page 11 ===== -->\n\n```\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，下面的结果是：\n```\nc(b(a(1))) =     (1)\na(b(c(1))) =     (2)\n```\n答案：\n（1）`c(b(a(1))) = 0x800000`\n（2）`a(b(c(1))) = 0`\n\n解析（原卷自带答案，此处补全推导）：\n`d[256]` 就是**8 位比特反转表**：`d[x]` 把 x 的 8 个比特整个反过来\n（`d[1] = 0x80`、`d[0x80] = 1`、`d[0x0F] = 0xF0` …）。\n三个函数都是**按字节/半字/字做整数的比特反转**：\n- `a(x) = d[x]`：8 位内反转比特；\n- `b(x) = (a(x & 0xff) << 8) | a(x >> 8)`：把低字节与高字节交换、各自再反转比特\n  ⇒ 16 位整数的比特反转；\n- `c(x) = (b(x & 0xffff) << 16) | b(x >> 16)`：两个半字交换、各自再做 16 位反转\n  ⇒ 32 位整数的比特反转。\n\n（1）逐步算：\n- `a(1) = d[1] = 0x80`\n- `b(0x0080)`：低字节 0x80、高字节 0x00 ⇒ `(a(0x80) << 8) | a(0x00)`\n  `= (0x01 << 8) | 0x00 = 0x0100`\n- `c(0x00000100)`：低半字 0x0100、高半字 0x0000 ⇒ `(b(0x0100) << 16) | b(0x0000)`\n  `= (0x0080 << 16) | 0x0000 = 0x800000`\n⇒ **`c(b(a(1))) = 0x800000`**，与原卷答案一致。\n\n（2）逐步算：\n- `c(1)`：低半字 0x0001、高半字 0x0000\n  ⇒ `(b(0x0001) << 16) | b(0x0000)`，其中 `b(0x0001) = (a(0x01) << 8) | a(0x00) = 0x0100`\n  ⇒ `c(1) = 0x0100 << 16 = 0x01000000`\n- `b(0x01000000)`（unsigned short 形参，取低 16 位 0x0000 与高 16 位 0x0100）\n  ⇒ `(a(0x00) << 8) | a(0x0100)`；`a` 的形参是 unsigned char，0x0100 截断为 0x00\n  ⇒ `0x00 | d[0x00] = 0`\n- `a(0) = d[0] = 0`\n⇒ **`a(b(c(1))) = 0`**，与原卷答案一致。\n\n> 备注：`b`/`c` 的语义就是「对本宽度的整数做完整比特反转」（字节序交换 + 逐字节\n> 反转比特）。第（1）问把 1 放在 32 位里反转落在 bit24（= 0x800000），第（2）问\n> 反转后被 `a` 截到低 8 位，结果为 0。\n\n> 说明：原卷把答案（1）0x800000、（2）0 直接印在题面之后；本文件把答案移入\n> `%%% answer` 段，字符内容与原卷完全一致。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "missing",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -6309,9 +6309,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二题（10分）汇编\n阅读下面的C代码：\n```\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n```\n10\n\n<!-- ===== page 11 ===== -->\n\n```\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，下面的结果是：\n```\nc(b(a(1))) =     (1)\na(b(c(1))) =     (2)\n```\n答案（每项1分）：\n（1）0x800000\n（2）0\n说明：考察信息表示和程序理解",
+        "stem": "第二题（10分）汇编\n阅读下面的C代码：\n```\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n```\n10\n\n<!-- ===== page 11 ===== -->\n\n```\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，下面的结果是：\n```\nc(b(a(1))) =     (1)\na(b(c(1))) =     (2)\n```",
         "choices": [],
-        "answer": ""
+        "answer": "答案：\n（1）`c(b(a(1))) = 0x800000`\n（2）`a(b(c(1))) = 0`\n\n解析（原卷自带答案，此处补全推导）：\n`d[256]` 就是**8 位比特反转表**：`d[x]` 把 x 的 8 个比特整个反过来\n（`d[1] = 0x80`、`d[0x80] = 1`、`d[0x0F] = 0xF0` …）。\n三个函数都是**按字节/半字/字做整数的比特反转**：\n- `a(x) = d[x]`：8 位内反转比特；\n- `b(x) = (a(x & 0xff) << 8) | a(x >> 8)`：把低字节与高字节交换、各自再反转比特\n  ⇒ 16 位整数的比特反转；\n- `c(x) = (b(x & 0xffff) << 16) | b(x >> 16)`：两个半字交换、各自再做 16 位反转\n  ⇒ 32 位整数的比特反转。\n\n（1）逐步算：\n- `a(1) = d[1] = 0x80`\n- `b(0x0080)`：低字节 0x80、高字节 0x00 ⇒ `(a(0x80) << 8) | a(0x00)`\n  `= (0x01 << 8) | 0x00 = 0x0100`\n- `c(0x00000100)`：低半字 0x0100、高半字 0x0000 ⇒ `(b(0x0100) << 16) | b(0x0000)`\n  `= (0x0080 << 16) | 0x0000 = 0x800000`\n⇒ **`c(b(a(1))) = 0x800000`**，与原卷答案一致。\n\n（2）逐步算：\n- `c(1)`：低半字 0x0001、高半字 0x0000\n  ⇒ `(b(0x0001) << 16) | b(0x0000)`，其中 `b(0x0001) = (a(0x01) << 8) | a(0x00) = 0x0100`\n  ⇒ `c(1) = 0x0100 << 16 = 0x01000000`\n- `b(0x01000000)`（unsigned short 形参，取低 16 位 0x0000 与高 16 位 0x0100）\n  ⇒ `(a(0x00) << 8) | a(0x0100)`；`a` 的形参是 unsigned char，0x0100 截断为 0x00\n  ⇒ `0x00 | d[0x00] = 0`\n- `a(0) = d[0] = 0`\n⇒ **`a(b(c(1))) = 0`**，与原卷答案一致。\n\n> 备注：`b`/`c` 的语义就是「对本宽度的整数做完整比特反转」（字节序交换 + 逐字节\n> 反转比特）。第（1）问把 1 放在 32 位里反转落在 bit24（= 0x800000），第（2）问\n> 反转后被 `a` 截到低 8 位，结果为 0。\n\n> 说明：原卷把答案（1）0x800000、（2）0 直接印在题面之后；本文件把答案移入\n> `%%% answer` 段，字符内容与原卷完全一致。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "fill",
@@ -6319,8 +6319,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（10分）汇编\n阅读下面的C代码：\n```\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n```\n10\n\n<!-- ===== page 11 ===== -->\n\n```\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，下面的结果是：\n```\nc(b(a(1))) =     (1)\na(b(c(1))) =     (2)\n```\n答案（每项1分）：\n（1）0x800000\n（2）0\n说明：考察信息表示和程序理解",
-        "answer": ""
+        "prompt": "第二题（10分）汇编\n阅读下面的C代码：\n```\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n```\n10\n\n<!-- ===== page 11 ===== -->\n\n```\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，下面的结果是：\n```\nc(b(a(1))) =     (1)\na(b(c(1))) =     (2)\n```",
+        "answer": "答案：\n（1）`c(b(a(1))) = 0x800000`\n（2）`a(b(c(1))) = 0`\n\n解析（原卷自带答案，此处补全推导）：\n`d[256]` 就是**8 位比特反转表**：`d[x]` 把 x 的 8 个比特整个反过来\n（`d[1] = 0x80`、`d[0x80] = 1`、`d[0x0F] = 0xF0` …）。\n三个函数都是**按字节/半字/字做整数的比特反转**：\n- `a(x) = d[x]`：8 位内反转比特；\n- `b(x) = (a(x & 0xff) << 8) | a(x >> 8)`：把低字节与高字节交换、各自再反转比特\n  ⇒ 16 位整数的比特反转；\n- `c(x) = (b(x & 0xffff) << 16) | b(x >> 16)`：两个半字交换、各自再做 16 位反转\n  ⇒ 32 位整数的比特反转。\n\n（1）逐步算：\n- `a(1) = d[1] = 0x80`\n- `b(0x0080)`：低字节 0x80、高字节 0x00 ⇒ `(a(0x80) << 8) | a(0x00)`\n  `= (0x01 << 8) | 0x00 = 0x0100`\n- `c(0x00000100)`：低半字 0x0100、高半字 0x0000 ⇒ `(b(0x0100) << 16) | b(0x0000)`\n  `= (0x0080 << 16) | 0x0000 = 0x800000`\n⇒ **`c(b(a(1))) = 0x800000`**，与原卷答案一致。\n\n（2）逐步算：\n- `c(1)`：低半字 0x0001、高半字 0x0000\n  ⇒ `(b(0x0001) << 16) | b(0x0000)`，其中 `b(0x0001) = (a(0x01) << 8) | a(0x00) = 0x0100`\n  ⇒ `c(1) = 0x0100 << 16 = 0x01000000`\n- `b(0x01000000)`（unsigned short 形参，取低 16 位 0x0000 与高 16 位 0x0100）\n  ⇒ `(a(0x00) << 8) | a(0x0100)`；`a` 的形参是 unsigned char，0x0100 截断为 0x00\n  ⇒ `0x00 | d[0x00] = 0`\n- `a(0) = d[0] = 0`\n⇒ **`a(b(c(1))) = 0`**，与原卷答案一致。\n\n> 备注：`b`/`c` 的语义就是「对本宽度的整数做完整比特反转」（字节序交换 + 逐字节\n> 反转比特）。第（1）问把 1 放在 32 位里反转落在 bit24（= 0x800000），第（2）问\n> 反转后被 `a` 截到低 8 位，结果为 0。\n\n> 说明：原卷把答案（1）0x800000、（2）0 直接印在题面之后；本文件把答案移入\n> `%%% answer` 段，字符内容与原卷完全一致。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       }
     },
     {
@@ -6585,7 +6585,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第一题 2",
       "summary": "浮点阶码不采用补码的原因",
-      "content": "2.  浮点数的阶码没有设计成补码的形式的原因是：\nA. 为了加快四则运算\nB. 为了方便排序\nC. 为了保存更多数值\nD. 为了表示特殊值\n答案：B（AI 推导，未与官方答案核对）\n解析：阶码采用移码（偏置）表示，使得浮点数可以按无符号整数直接比较大小，便于排序与比较；同时也让全 0/全 1 的阶码留给 0、非规格化数、无穷与 NaN。",
+      "content": "2.  浮点数的阶码没有设计成补码的形式的原因是：\nA. 为了加快四则运算\nB. 为了方便排序\nC. 为了保存更多数值\nD. 为了表示特殊值\n答案：B\n解析：阶码采用移码（偏置）表示，使得浮点数可以按无符号整数直接比较大小，便于排序与比较；同时也让全 0/全 1 的阶码留给 0、非规格化数、无穷与 NaN。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6624,7 +6624,7 @@
             "content": "为了表示特殊值"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）\n解析：阶码采用移码（偏置）表示，使得浮点数可以按无符号整数直接比较大小，便于排序与比较；同时也让全 0/全 1 的阶码留给 0、非规格化数、无穷与 NaN。"
+        "answer": "答案：B\n解析：阶码采用移码（偏置）表示，使得浮点数可以按无符号整数直接比较大小，便于排序与比较；同时也让全 0/全 1 的阶码留给 0、非规格化数、无穷与 NaN。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6654,7 +6654,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "2.  浮点数的阶码没有设计成补码的形式的原因是：",
-        "answer": "答案：B（AI 推导，未与官方答案核对）\n解析：阶码采用移码（偏置）表示，使得浮点数可以按无符号整数直接比较大小，便于排序与比较；同时也让全 0/全 1 的阶码留给 0、非规格化数、无穷与 NaN。"
+        "answer": "答案：B\n解析：阶码采用移码（偏置）表示，使得浮点数可以按无符号整数直接比较大小，便于排序与比较；同时也让全 0/全 1 的阶码留给 0、非规格化数、无穷与 NaN。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -6667,7 +6667,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第二题 2",
       "summary": "浮点位模式、对齐与比较运算的七行输出",
-      "content": "2. 程序执行会产生7行输出。请写出每一行所有可能的输出值，不同可能性之间\n逗号分隔\n第一行：_____________________________________________________\n第二行：_____________________________________________________\n第三行：_____________________________________________________\n第四行：_____________________________________________________\n第五行：_____________________________________________________\n第六行：_____________________________________________________\n第七行：_____________________________________________________\n答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1（AI 推导，未与官方答案核对）\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）",
+      "content": "2. 程序执行会产生7行输出。请写出每一行所有可能的输出值，不同可能性之间\n逗号分隔\n第一行：_____________________________________________________\n第二行：_____________________________________________________\n第三行：_____________________________________________________\n第四行：_____________________________________________________\n第五行：_____________________________________________________\n第六行：_____________________________________________________\n第七行：_____________________________________________________\n答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6689,7 +6689,7 @@
         "selection": null,
         "stem": "2. 程序执行会产生7行输出。请写出每一行所有可能的输出值，不同可能性之间\n逗号分隔\n第一行：_____________________________________________________\n第二行：_____________________________________________________\n第三行：_____________________________________________________\n第四行：_____________________________________________________\n第五行：_____________________________________________________\n第六行：_____________________________________________________\n第七行：_____________________________________________________",
         "choices": [],
-        "answer": "答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1（AI 推导，未与官方答案核对）\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）"
+        "answer": "答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "fill",
@@ -6698,7 +6698,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "2. 程序执行会产生7行输出。请写出每一行所有可能的输出值，不同可能性之间\n逗号分隔\n第一行：_____________________________________________________\n第二行：_____________________________________________________\n第三行：_____________________________________________________\n第四行：_____________________________________________________\n第五行：_____________________________________________________\n第六行：_____________________________________________________\n第七行：_____________________________________________________",
-        "answer": "答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1（AI 推导，未与官方答案核对）\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）"
+        "answer": "答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -8328,7 +8328,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 11",
       "summary": "satMul2 溢出判断表达式（补码运算）",
-      "content": "11. （2分）下面给出了satMul2函数的代码，其中变量overflow在结果溢出时会被设\n置为 0xFFFFFFFF，否则为 0。下面哪一个选项正确给出了 overflow 的表达式(提\n示：可根据x和2 * x的符号位来判断是否溢出)：\n```\n/*\n * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow\n *   Examples: satMul2(0x30000000) = 0x60000000\n *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)\n *             satMul2(0x90000000) = 0x80000000 (saturate to TMin)\n*/\nint satMul2(int x) {\nint overflow, negative_x, raw_result, tmin, tmax;\n    overflow = ____________________\n    negative_x = x >> 31;\n    raw_result = x << 1;\n    tmin = 1 << 31;\ntmax = tmin + ~0;\n    return (overflow & negative_x & tmin) | (overflow & ~negative_x &\ntmax) | (~overflow & raw_result);\n}\n```\nA. (x ^ (x + 1)) >> 31;\nB. (x ^ (x + ~0)) >> 31;\nC. (x ^ (x << 1)) >> 31;\nD. (x ^ (x >> 1)) >> 31;\n答案：C（AI 推导，未与官方答案核对）",
+      "content": "11. （2分）下面给出了satMul2函数的代码，其中变量overflow在结果溢出时会被设\n置为 0xFFFFFFFF，否则为 0。下面哪一个选项正确给出了 overflow 的表达式(提\n示：可根据x和2 * x的符号位来判断是否溢出)：\n```\n/*\n * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow\n *   Examples: satMul2(0x30000000) = 0x60000000\n *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)\n *             satMul2(0x90000000) = 0x80000000 (saturate to TMin)\n*/\nint satMul2(int x) {\nint overflow, negative_x, raw_result, tmin, tmax;\n    overflow = ____________________\n    negative_x = x >> 31;\n    raw_result = x << 1;\n    tmin = 1 << 31;\ntmax = tmin + ~0;\n    return (overflow & negative_x & tmin) | (overflow & ~negative_x &\ntmax) | (~overflow & raw_result);\n}\n```\nA. (x ^ (x + 1)) >> 31;\nB. (x ^ (x + ~0)) >> 31;\nC. (x ^ (x << 1)) >> 31;\nD. (x ^ (x >> 1)) >> 31;\n答案：C\n\n解析：溢出的判据是 x 与 2x 的符号位不同，而 (x << 1) 的最高位正是 2x 的符号位，所以 `x ^ (x << 1)` 的最高位为 1 时溢出，算术右移 31 位即得全 1（溢出）或全 0，故 C 对。A 用 x+1、B 用 x-1、D 用 x>>1 都取不到\"2x 的符号位\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8367,7 +8367,7 @@
             "content": "(x ^ (x >> 1)) >> 31;"
           }
         ],
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：溢出的判据是 x 与 2x 的符号位不同，而 (x << 1) 的最高位正是 2x 的符号位，所以 `x ^ (x << 1)` 的最高位为 1 时溢出，算术右移 31 位即得全 1（溢出）或全 0，故 C 对。A 用 x+1、B 用 x-1、D 用 x>>1 都取不到\"2x 的符号位\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -8397,7 +8397,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "11. （2分）下面给出了satMul2函数的代码，其中变量overflow在结果溢出时会被设\n置为 0xFFFFFFFF，否则为 0。下面哪一个选项正确给出了 overflow 的表达式(提\n示：可根据x和2 * x的符号位来判断是否溢出)：\n```\n/*\n * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow\n *   Examples: satMul2(0x30000000) = 0x60000000\n *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)\n *             satMul2(0x90000000) = 0x80000000 (saturate to TMin)\n*/\nint satMul2(int x) {\nint overflow, negative_x, raw_result, tmin, tmax;\n    overflow = ____________________\n    negative_x = x >> 31;\n    raw_result = x << 1;\n    tmin = 1 << 31;\ntmax = tmin + ~0;\n    return (overflow & negative_x & tmin) | (overflow & ~negative_x &\ntmax) | (~overflow & raw_result);\n}\n```",
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：溢出的判据是 x 与 2x 的符号位不同，而 (x << 1) 的最高位正是 2x 的符号位，所以 `x ^ (x << 1)` 的最高位为 1 时溢出，算术右移 31 位即得全 1（溢出）或全 0，故 C 对。A 用 x+1、B 用 x-1、D 用 x>>1 都取不到\"2x 的符号位\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -8410,7 +8410,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 12",
       "summary": "bitParity 奇偶校验的位运算求值",
-      "content": "12. （2分）下面给出了bitParity函数的代码，该函数用于判断整数x的二进制表示中\n0的个数是否为奇数。设整数x的二进制表示为x[31]x[30]...x[1]x[0]，则x1[15]\n的值可表示为：\n```\n/*\n * bitParity - returns 1 if x contains an odd number of 0's\n *   Examples: bitParity(5) = 0, bitParity(7) = 1\n*/\nint bitParity(int x) {\n    int x1, x2, x3, x4, x5;\n    x1 = x ^ (x >> 16);\n    x2 = x1 ^ (x1 >> 8);\n    x3 = x2 ^ (x2 >> 4);\n    x4 = x3 ^ (x3 >> 2);\n    x5 = x4 ^ (x4 >> 1);\n    return x5 & 1;\n}\n```\nA. x[31] ^ x[15]\nB. x[31] ^ x[16]\nC. x[30] ^ x[15]\nD. x[30] ^ x[16]\n答案：A（AI 推导，未与官方答案核对）",
+      "content": "12. （2分）下面给出了bitParity函数的代码，该函数用于判断整数x的二进制表示中\n0的个数是否为奇数。设整数x的二进制表示为x[31]x[30]...x[1]x[0]，则x1[15]\n的值可表示为：\n```\n/*\n * bitParity - returns 1 if x contains an odd number of 0's\n *   Examples: bitParity(5) = 0, bitParity(7) = 1\n*/\nint bitParity(int x) {\n    int x1, x2, x3, x4, x5;\n    x1 = x ^ (x >> 16);\n    x2 = x1 ^ (x1 >> 8);\n    x3 = x2 ^ (x2 >> 4);\n    x4 = x3 ^ (x3 >> 2);\n    x5 = x4 ^ (x4 >> 1);\n    return x5 & 1;\n}\n```\nA. x[31] ^ x[15]\nB. x[31] ^ x[16]\nC. x[30] ^ x[15]\nD. x[30] ^ x[16]\n答案：A\n\n解析：x1 = x ^ (x >> 16)，所以 x1 的第 i 位 = x[i] ^ x[i+16]；取 i = 15 得 x1[15] = x[15] ^ x[31]。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8449,7 +8449,7 @@
             "content": "x[30] ^ x[16]"
           }
         ],
-        "answer": "答案：A（AI 推导，未与官方答案核对）"
+        "answer": "答案：A\n\n解析：x1 = x ^ (x >> 16)，所以 x1 的第 i 位 = x[i] ^ x[i+16]；取 i = 15 得 x1[15] = x[15] ^ x[31]。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -8479,7 +8479,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "12. （2分）下面给出了bitParity函数的代码，该函数用于判断整数x的二进制表示中\n0的个数是否为奇数。设整数x的二进制表示为x[31]x[30]...x[1]x[0]，则x1[15]\n的值可表示为：\n```\n/*\n * bitParity - returns 1 if x contains an odd number of 0's\n *   Examples: bitParity(5) = 0, bitParity(7) = 1\n*/\nint bitParity(int x) {\n    int x1, x2, x3, x4, x5;\n    x1 = x ^ (x >> 16);\n    x2 = x1 ^ (x1 >> 8);\n    x3 = x2 ^ (x2 >> 4);\n    x4 = x3 ^ (x3 >> 2);\n    x5 = x4 ^ (x4 >> 1);\n    return x5 & 1;\n}\n```",
-        "answer": "答案：A（AI 推导，未与官方答案核对）"
+        "answer": "答案：A\n\n解析：x1 = x ^ (x >> 16)，所以 x1 的第 i 位 = x[i] ^ x[i+16]；取 i = 15 得 x1[15] = x[15] ^ x[31]。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -8492,7 +8492,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 13",
       "summary": "float_half 浮点位模式减半与舍入",
-      "content": "13. （2分）下面给出了float_half函数的代码，该函数给出单精度浮点数f的一半（即\n0.5 * f）的位模式。下面哪一个选项正确给出了(1)和(2)处应当填写的值？\n```\n/*\n * float_half - Return bit-level equivalent of expression 0.5*f for\n *   floating point argument f.\n *   Both the argument and result are passed as unsigned int's, but\n *   they are to be interpreted as the bit-level representation of\n *   single-precision floating point values.\n *   When argument is NaN, return argument\n*/\nunsigned float_half(unsigned uf) {\n  unsigned sign = uf >> 31;\n  unsigned exp = (uf >> 23) & 0xFF;\n  unsigned frac = uf & 0x7FFFFF;\n  /* Only roundup case will be when rounding to even */\n  unsigned roundup = (frac & 0x3) == 3;\n  if (exp == 0) {\n    /* Denormalized. Must halve fraction */\n    frac = (frac >> 1) + roundup;\n  } else if (exp < 0xFF) {\n    /* Normalized. Decrease exponent */\n    exp--;\n    if (exp == 0) {\n      /* Denormalize adding back leading one */\n      frac = (frac >> 1) + roundup + _____(1)_____;\n    }\n  }\n  /* NaN Infinity do not require any changes */\n  return (sign << 31) | (exp << _____(2)_____) | frac;\n}\n```\nA. (1) 0x800000 (2) 8\nB. (1) 0x800000 (2) 23\nC. (1) 0x400000 (2) 8\nD. (1) 0x400000 (2) 23\n答案：D（AI 推导，未与官方答案核对）",
+      "content": "13. （2分）下面给出了float_half函数的代码，该函数给出单精度浮点数f的一半（即\n0.5 * f）的位模式。下面哪一个选项正确给出了(1)和(2)处应当填写的值？\n```\n/*\n * float_half - Return bit-level equivalent of expression 0.5*f for\n *   floating point argument f.\n *   Both the argument and result are passed as unsigned int's, but\n *   they are to be interpreted as the bit-level representation of\n *   single-precision floating point values.\n *   When argument is NaN, return argument\n*/\nunsigned float_half(unsigned uf) {\n  unsigned sign = uf >> 31;\n  unsigned exp = (uf >> 23) & 0xFF;\n  unsigned frac = uf & 0x7FFFFF;\n  /* Only roundup case will be when rounding to even */\n  unsigned roundup = (frac & 0x3) == 3;\n  if (exp == 0) {\n    /* Denormalized. Must halve fraction */\n    frac = (frac >> 1) + roundup;\n  } else if (exp < 0xFF) {\n    /* Normalized. Decrease exponent */\n    exp--;\n    if (exp == 0) {\n      /* Denormalize adding back leading one */\n      frac = (frac >> 1) + roundup + _____(1)_____;\n    }\n  }\n  /* NaN Infinity do not require any changes */\n  return (sign << 31) | (exp << _____(2)_____) | frac;\n}\n```\nA. (1) 0x800000 (2) 8\nB. (1) 0x800000 (2) 23\nC. (1) 0x400000 (2) 8\nD. (1) 0x400000 (2) 23\n答案：D\n\n解析：(2) 处要把 exp 放回第 23~30 位，移位量是 23；(1) 处是 exp 减到 0 变成非规格化数时，必须把隐含的前导 1 补进小数域最高位（第 22 位，即 0x400000），而 0x800000 是符号位的位置。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8531,7 +8531,7 @@
             "content": "(1) 0x400000 (2) 23"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：(2) 处要把 exp 放回第 23~30 位，移位量是 23；(1) 处是 exp 减到 0 变成非规格化数时，必须把隐含的前导 1 补进小数域最高位（第 22 位，即 0x400000），而 0x800000 是符号位的位置。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -8561,7 +8561,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "13. （2分）下面给出了float_half函数的代码，该函数给出单精度浮点数f的一半（即\n0.5 * f）的位模式。下面哪一个选项正确给出了(1)和(2)处应当填写的值？\n```\n/*\n * float_half - Return bit-level equivalent of expression 0.5*f for\n *   floating point argument f.\n *   Both the argument and result are passed as unsigned int's, but\n *   they are to be interpreted as the bit-level representation of\n *   single-precision floating point values.\n *   When argument is NaN, return argument\n*/\nunsigned float_half(unsigned uf) {\n  unsigned sign = uf >> 31;\n  unsigned exp = (uf >> 23) & 0xFF;\n  unsigned frac = uf & 0x7FFFFF;\n  /* Only roundup case will be when rounding to even */\n  unsigned roundup = (frac & 0x3) == 3;\n  if (exp == 0) {\n    /* Denormalized. Must halve fraction */\n    frac = (frac >> 1) + roundup;\n  } else if (exp < 0xFF) {\n    /* Normalized. Decrease exponent */\n    exp--;\n    if (exp == 0) {\n      /* Denormalize adding back leading one */\n      frac = (frac >> 1) + roundup + _____(1)_____;\n    }\n  }\n  /* NaN Infinity do not require any changes */\n  return (sign << 31) | (exp << _____(2)_____) | frac;\n}\n```",
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：(2) 处要把 exp 放回第 23~30 位，移位量是 23；(1) 处是 exp 减到 0 变成非规格化数时，必须把隐含的前导 1 补进小数域最高位（第 22 位，即 0x400000），而 0x800000 是符号位的位置。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -8574,7 +8574,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 14",
       "summary": "byteSwap 字节交换的移位与掩码",
-      "content": "14. （2 分）下面给出了 byteSwap 函数的代码，该函数交换后两个参数所指定的两个字\n节的数据。下面哪一个选项正确给出了(1)和(2)处应当填写的内容？\n```\n/*\n * byteSwap - swaps the nth byte and the mth byte\n *  Examples: byteSwap(0x12345678, 1, 3) = 0x56341278\n *              byteSwap(0xDEADBEEF, 0, 2) = 0xDEEFBEAD\n *  You may assume that 0 <= n <= 3, 0 <= m <= 3\n*/\nint byteSwap(int x, int n, int m) {\n    int n8 = n << ___(1)___;\n    int m8 = m << ___(1)___;\n    int swap_byte = ((x >> m8) __(2)__ (x >> n8)) & 0xff;\n    return x ^ (swap_byte << n8) __(2)__ (swap_byte << m8);\n}\n```\nA. (1) 3 (2) ^\nB. (1) 8 (2) ^\nC. (1) 3 (2) |\nD. (1) 8 (2) |\n答案：A（AI 推导，未与官方答案核对）",
+      "content": "14. （2 分）下面给出了 byteSwap 函数的代码，该函数交换后两个参数所指定的两个字\n节的数据。下面哪一个选项正确给出了(1)和(2)处应当填写的内容？\n```\n/*\n * byteSwap - swaps the nth byte and the mth byte\n *  Examples: byteSwap(0x12345678, 1, 3) = 0x56341278\n *              byteSwap(0xDEADBEEF, 0, 2) = 0xDEEFBEAD\n *  You may assume that 0 <= n <= 3, 0 <= m <= 3\n*/\nint byteSwap(int x, int n, int m) {\n    int n8 = n << ___(1)___;\n    int m8 = m << ___(1)___;\n    int swap_byte = ((x >> m8) __(2)__ (x >> n8)) & 0xff;\n    return x ^ (swap_byte << n8) __(2)__ (swap_byte << m8);\n}\n```\nA. (1) 3 (2) ^\nB. (1) 8 (2) ^\nC. (1) 3 (2) |\nD. (1) 8 (2) |\n答案：A\n\n解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 (1) = 3；两个字节的差异用异或取出（swap_byte = byte_m ^ byte_n），再在 n、m 两个位置各异或一次就完成了交换，故 (2) = ^。若用 |，两处字节会被\"或\"成同一个值而不是互换。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8613,7 +8613,7 @@
             "content": "(1) 8 (2) |"
           }
         ],
-        "answer": "答案：A（AI 推导，未与官方答案核对）"
+        "answer": "答案：A\n\n解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 (1) = 3；两个字节的差异用异或取出（swap_byte = byte_m ^ byte_n），再在 n、m 两个位置各异或一次就完成了交换，故 (2) = ^。若用 |，两处字节会被\"或\"成同一个值而不是互换。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -8643,7 +8643,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "14. （2 分）下面给出了 byteSwap 函数的代码，该函数交换后两个参数所指定的两个字\n节的数据。下面哪一个选项正确给出了(1)和(2)处应当填写的内容？\n```\n/*\n * byteSwap - swaps the nth byte and the mth byte\n *  Examples: byteSwap(0x12345678, 1, 3) = 0x56341278\n *              byteSwap(0xDEADBEEF, 0, 2) = 0xDEEFBEAD\n *  You may assume that 0 <= n <= 3, 0 <= m <= 3\n*/\nint byteSwap(int x, int n, int m) {\n    int n8 = n << ___(1)___;\n    int m8 = m << ___(1)___;\n    int swap_byte = ((x >> m8) __(2)__ (x >> n8)) & 0xff;\n    return x ^ (swap_byte << n8) __(2)__ (swap_byte << m8);\n}\n```",
-        "answer": "答案：A（AI 推导，未与官方答案核对）"
+        "answer": "答案：A\n\n解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 (1) = 3；两个字节的差异用异或取出（swap_byte = byte_m ^ byte_n），再在 n、m 两个位置各异或一次就完成了交换，故 (2) = ^。若用 |，两处字节会被\"或\"成同一个值而不是互换。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -8656,7 +8656,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 15",
       "summary": "oddBits 奇数位全 1 的常量构造",
-      "content": "15. （2分）下面给出了oddBits函数的代码，该函数将所有奇数位设置为1（设整数x\n的二进制表示为x[31]x[30]...x[1]x[0]，奇数位是指j 为奇数的所有x[j]）。\n下面哪个选项给出了byte的正确设置：\n```\n/*\n * oddBits - return word with all odd-numbered bits set to 1\n*/\nint oddBits(void) {\n  int byte = ________;\n  int word = byte | byte<<8;\n  return word | word<<16;\n}\n```\nA. 0x55\nB. 0xAA\nC. 0x11\nD. 0xff\n答案：B（AI 推导，未与官方答案核对）",
+      "content": "15. （2分）下面给出了oddBits函数的代码，该函数将所有奇数位设置为1（设整数x\n的二进制表示为x[31]x[30]...x[1]x[0]，奇数位是指j 为奇数的所有x[j]）。\n下面哪个选项给出了byte的正确设置：\n```\n/*\n * oddBits - return word with all odd-numbered bits set to 1\n*/\nint oddBits(void) {\n  int byte = ________;\n  int word = byte | byte<<8;\n  return word | word<<16;\n}\n```\nA. 0x55\nB. 0xAA\nC. 0x11\nD. 0xff\n答案：B\n\n解析：目标是奇数位全 1、偶数位全 0 的 0xAAAAAAAA：byte | byte<<8 得 0xAAAA，再 word | word<<16 得 0xAAAAAAAA，所以 byte 应取 0xAA。0x55 会得到 0x55555555（偶数位全 1），0x11、0xff 也不符。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8695,7 +8695,7 @@
             "content": "0xff"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：目标是奇数位全 1、偶数位全 0 的 0xAAAAAAAA：byte | byte<<8 得 0xAAAA，再 word | word<<16 得 0xAAAAAAAA，所以 byte 应取 0xAA。0x55 会得到 0x55555555（偶数位全 1），0x11、0xff 也不符。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -8725,7 +8725,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "15. （2分）下面给出了oddBits函数的代码，该函数将所有奇数位设置为1（设整数x\n的二进制表示为x[31]x[30]...x[1]x[0]，奇数位是指j 为奇数的所有x[j]）。\n下面哪个选项给出了byte的正确设置：\n```\n/*\n * oddBits - return word with all odd-numbered bits set to 1\n*/\nint oddBits(void) {\n  int byte = ________;\n  int word = byte | byte<<8;\n  return word | word<<16;\n}\n```",
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：目标是奇数位全 1、偶数位全 0 的 0xAAAAAAAA：byte | byte<<8 得 0xAAAA，再 word | word<<16 得 0xAAAAAAAA，所以 byte 应取 0xAA。0x55 会得到 0x55555555（偶数位全 1），0x11、0xff 也不符。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     }
   ]

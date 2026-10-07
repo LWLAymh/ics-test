@@ -4925,7 +4925,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第一题 4",
       "summary": "由执行步骤识别 Y86 指令",
-      "content": "4.  分析下图的指令执行步骤，请问这是Y86指令系统的哪条指令？\nA. call\nB. ret\nC. pushl\nD. popl\n答案：B（AI 推导，未与官方答案核对）\n解析：执行步骤为 Decode: valA←R[%esp]、valB←R[%esp]；Execute: valE←valB+4；Memory: valM←M4[valA]；Write back: R[%esp]←valE；PC update: PC←valM，这正是 ret 的 SEQ 实现。",
+      "content": "4.  分析下图的指令执行步骤，请问这是Y86指令系统的哪条指令？\nA. call\nB. ret\nC. pushl\nD. popl\n答案：B\n解析：执行步骤为 Decode: valA←R[%esp]、valB←R[%esp]；Execute: valE←valB+4；Memory: valM←M4[valA]；Write back: R[%esp]←valE；PC update: PC←valM，这正是 ret 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4964,7 +4964,7 @@
             "content": "popl"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）\n解析：执行步骤为 Decode: valA←R[%esp]、valB←R[%esp]；Execute: valE←valB+4；Memory: valM←M4[valA]；Write back: R[%esp]←valE；PC update: PC←valM，这正是 ret 的 SEQ 实现。"
+        "answer": "答案：B\n解析：执行步骤为 Decode: valA←R[%esp]、valB←R[%esp]；Execute: valE←valB+4；Memory: valM←M4[valA]；Write back: R[%esp]←valE；PC update: PC←valM，这正是 ret 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -4994,7 +4994,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "4.  分析下图的指令执行步骤，请问这是Y86指令系统的哪条指令？",
-        "answer": "答案：B（AI 推导，未与官方答案核对）\n解析：执行步骤为 Decode: valA←R[%esp]、valB←R[%esp]；Execute: valE←valB+4；Memory: valM←M4[valA]；Write back: R[%esp]←valE；PC update: PC←valM，这正是 ret 的 SEQ 实现。"
+        "answer": "答案：B\n解析：执行步骤为 Decode: valA←R[%esp]、valB←R[%esp]；Execute: valE←valB+4；Memory: valM←M4[valA]；Write back: R[%esp]←valE；PC update: PC←valM，这正是 ret 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -5007,7 +5007,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第三题",
       "summary": "两级/三级流水线插入寄存器与最大吞吐率",
-      "content": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\nR\nA  B  C  D  E\nG\n60ps  30ps  30ps  40ps  10ps\nR\nE  F  G  H  E\nG\n20ps  60ps  40ps  30ps  10ps\n1. 如果改造为一个二级流水线，为获得最大的吞吐率：\na) 需要在_______模块之间和_______模块之间插入寄存器；\nb) 插入寄存器改造后二级流水线的最长延时路径为_____，最长延时为____\nc) 流水线最大吞吐率为：____________________________________\n（用分数表示，约分到最简形式，并写明单位）\n2. 如果改造为一个三级流水线，为获得最大的吞吐率：\na) 需要在________________________________________________\n模块之间插入寄存器；\nb) 插入寄存器改造后三级流水线的最长路径延时为:__________；\nc) 流水线最大吞吐率为：____________________________________\n（用分数表示，约分到最简形式，并写明单位）\n答案：二级流水线在 B 与 C 之间、F 与 G 之间插入寄存器（最长延时 100ps，最大吞吐率 1/100ps）；三级流水线在 A|B、B|C、E|F、F|G 之间插入寄存器（最长延时 80ps，最大吞吐率 1/80ps）。（AI 推导，未与官方答案核对）\n模块延迟：A 60、B 30、C 30、D 40、E 20、F 60、G 40、H 30 ps，寄存器 10ps；跨链依赖为 A→F、C→H，故最长路径是 A→F→G→H→REG = 200ps。\n1. 二级流水线：\na) 在 **B 与 C 之间**、**F 与 G 之间**插入寄存器；\nb) 第一级为 A→B（90ps，E→F 只有 80ps），第二级为 C→D→REG 与 G→H→REG（各 70ps）；\n   最长延时路径为 A→B（90ps），含流水线寄存器的最长延时为 100ps；\nc) 最大吞吐率 = 1/100ps = 1/(10⁻¹⁰ s) = 10¹⁰ 条/秒。\n2. 三级流水线：\na) 在 A 与 B 之间、B 与 C 之间，以及 E 与 F 之间、F 与 G 之间插入寄存器；\nb) 最长路径延时为 80ps（第三级 G→H→REG 或 C→D→REG 均为 40+30+10 = 80ps）；\nc) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。",
+      "content": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\nR\nA  B  C  D  E\nG\n60ps  30ps  30ps  40ps  10ps\nR\nE  F  G  H  E\nG\n20ps  60ps  40ps  30ps  10ps\n1. 如果改造为一个二级流水线，为获得最大的吞吐率：\na) 需要在_______模块之间和_______模块之间插入寄存器；\nb) 插入寄存器改造后二级流水线的最长延时路径为_____，最长延时为____\nc) 流水线最大吞吐率为：____________________________________\n（用分数表示，约分到最简形式，并写明单位）\n2. 如果改造为一个三级流水线，为获得最大的吞吐率：\na) 需要在________________________________________________\n模块之间插入寄存器；\nb) 插入寄存器改造后三级流水线的最长路径延时为:__________；\nc) 流水线最大吞吐率为：____________________________________\n（用分数表示，约分到最简形式，并写明单位）\n答案：二级流水线在 B 与 C 之间、F 与 G 之间插入寄存器（最长延时 100ps，最大吞吐率 1/100ps）；三级流水线在 A|B、B|C、E|F、F|G 之间插入寄存器（最长延时 80ps，最大吞吐率 1/80ps）。\n模块延迟：A 60、B 30、C 30、D 40、E 20、F 60、G 40、H 30 ps，寄存器 10ps；跨链依赖为 A→F、C→H，故最长路径是 A→F→G→H→REG = 200ps。\n1. 二级流水线：\na) 在 **B 与 C 之间**、**F 与 G 之间**插入寄存器；\nb) 第一级为 A→B（90ps，E→F 只有 80ps），第二级为 C→D→REG 与 G→H→REG（各 70ps）；\n   最长延时路径为 A→B（90ps），含流水线寄存器的最长延时为 100ps；\nc) 最大吞吐率 = 1/100ps = 1/(10⁻¹⁰ s) = 10¹⁰ 条/秒。\n2. 三级流水线：\na) 在 A 与 B 之间、B 与 C 之间，以及 E 与 F 之间、F 与 G 之间插入寄存器；\nb) 最长路径延时为 80ps（第三级 G→H→REG 或 C→D→REG 均为 40+30+10 = 80ps）；\nc) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5029,7 +5029,7 @@
         "selection": null,
         "stem": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\nR\nA  B  C  D  E\nG\n60ps  30ps  30ps  40ps  10ps\nR\nE  F  G  H  E\nG\n20ps  60ps  40ps  30ps  10ps\n1. 如果改造为一个二级流水线，为获得最大的吞吐率：\na) 需要在_______模块之间和_______模块之间插入寄存器；\nb) 插入寄存器改造后二级流水线的最长延时路径为_____，最长延时为____\nc) 流水线最大吞吐率为：____________________________________\n（用分数表示，约分到最简形式，并写明单位）\n2. 如果改造为一个三级流水线，为获得最大的吞吐率：\na) 需要在________________________________________________\n模块之间插入寄存器；\nb) 插入寄存器改造后三级流水线的最长路径延时为:__________；\nc) 流水线最大吞吐率为：____________________________________\n（用分数表示，约分到最简形式，并写明单位）",
         "choices": [],
-        "answer": "答案：二级流水线在 B 与 C 之间、F 与 G 之间插入寄存器（最长延时 100ps，最大吞吐率 1/100ps）；三级流水线在 A|B、B|C、E|F、F|G 之间插入寄存器（最长延时 80ps，最大吞吐率 1/80ps）。（AI 推导，未与官方答案核对）\n模块延迟：A 60、B 30、C 30、D 40、E 20、F 60、G 40、H 30 ps，寄存器 10ps；跨链依赖为 A→F、C→H，故最长路径是 A→F→G→H→REG = 200ps。\n1. 二级流水线：\na) 在 **B 与 C 之间**、**F 与 G 之间**插入寄存器；\nb) 第一级为 A→B（90ps，E→F 只有 80ps），第二级为 C→D→REG 与 G→H→REG（各 70ps）；\n   最长延时路径为 A→B（90ps），含流水线寄存器的最长延时为 100ps；\nc) 最大吞吐率 = 1/100ps = 1/(10⁻¹⁰ s) = 10¹⁰ 条/秒。\n2. 三级流水线：\na) 在 A 与 B 之间、B 与 C 之间，以及 E 与 F 之间、F 与 G 之间插入寄存器；\nb) 最长路径延时为 80ps（第三级 G→H→REG 或 C→D→REG 均为 40+30+10 = 80ps）；\nc) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。"
+        "answer": "答案：二级流水线在 B 与 C 之间、F 与 G 之间插入寄存器（最长延时 100ps，最大吞吐率 1/100ps）；三级流水线在 A|B、B|C、E|F、F|G 之间插入寄存器（最长延时 80ps，最大吞吐率 1/80ps）。\n模块延迟：A 60、B 30、C 30、D 40、E 20、F 60、G 40、H 30 ps，寄存器 10ps；跨链依赖为 A→F、C→H，故最长路径是 A→F→G→H→REG = 200ps。\n1. 二级流水线：\na) 在 **B 与 C 之间**、**F 与 G 之间**插入寄存器；\nb) 第一级为 A→B（90ps，E→F 只有 80ps），第二级为 C→D→REG 与 G→H→REG（各 70ps）；\n   最长延时路径为 A→B（90ps），含流水线寄存器的最长延时为 100ps；\nc) 最大吞吐率 = 1/100ps = 1/(10⁻¹⁰ s) = 10¹⁰ 条/秒。\n2. 三级流水线：\na) 在 A 与 B 之间、B 与 C 之间，以及 E 与 F 之间、F 与 G 之间插入寄存器；\nb) 最长路径延时为 80ps（第三级 G→H→REG 或 C→D→REG 均为 40+30+10 = 80ps）；\nc) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "fill",
@@ -5038,7 +5038,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\nR\nA  B  C  D  E\nG\n60ps  30ps  30ps  40ps  10ps\nR\nE  F  G  H  E\nG\n20ps  60ps  40ps  30ps  10ps\n1. 如果改造为一个二级流水线，为获得最大的吞吐率：\na) 需要在_______模块之间和_______模块之间插入寄存器；\nb) 插入寄存器改造后二级流水线的最长延时路径为_____，最长延时为____\nc) 流水线最大吞吐率为：____________________________________\n（用分数表示，约分到最简形式，并写明单位）\n2. 如果改造为一个三级流水线，为获得最大的吞吐率：\na) 需要在________________________________________________\n模块之间插入寄存器；\nb) 插入寄存器改造后三级流水线的最长路径延时为:__________；\nc) 流水线最大吞吐率为：____________________________________\n（用分数表示，约分到最简形式，并写明单位）",
-        "answer": "答案：二级流水线在 B 与 C 之间、F 与 G 之间插入寄存器（最长延时 100ps，最大吞吐率 1/100ps）；三级流水线在 A|B、B|C、E|F、F|G 之间插入寄存器（最长延时 80ps，最大吞吐率 1/80ps）。（AI 推导，未与官方答案核对）\n模块延迟：A 60、B 30、C 30、D 40、E 20、F 60、G 40、H 30 ps，寄存器 10ps；跨链依赖为 A→F、C→H，故最长路径是 A→F→G→H→REG = 200ps。\n1. 二级流水线：\na) 在 **B 与 C 之间**、**F 与 G 之间**插入寄存器；\nb) 第一级为 A→B（90ps，E→F 只有 80ps），第二级为 C→D→REG 与 G→H→REG（各 70ps）；\n   最长延时路径为 A→B（90ps），含流水线寄存器的最长延时为 100ps；\nc) 最大吞吐率 = 1/100ps = 1/(10⁻¹⁰ s) = 10¹⁰ 条/秒。\n2. 三级流水线：\na) 在 A 与 B 之间、B 与 C 之间，以及 E 与 F 之间、F 与 G 之间插入寄存器；\nb) 最长路径延时为 80ps（第三级 G→H→REG 或 C→D→REG 均为 40+30+10 = 80ps）；\nc) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。"
+        "answer": "答案：二级流水线在 B 与 C 之间、F 与 G 之间插入寄存器（最长延时 100ps，最大吞吐率 1/100ps）；三级流水线在 A|B、B|C、E|F、F|G 之间插入寄存器（最长延时 80ps，最大吞吐率 1/80ps）。\n模块延迟：A 60、B 30、C 30、D 40、E 20、F 60、G 40、H 30 ps，寄存器 10ps；跨链依赖为 A→F、C→H，故最长路径是 A→F→G→H→REG = 200ps。\n1. 二级流水线：\na) 在 **B 与 C 之间**、**F 与 G 之间**插入寄存器；\nb) 第一级为 A→B（90ps，E→F 只有 80ps），第二级为 C→D→REG 与 G→H→REG（各 70ps）；\n   最长延时路径为 A→B（90ps），含流水线寄存器的最长延时为 100ps；\nc) 最大吞吐率 = 1/100ps = 1/(10⁻¹⁰ s) = 10¹⁰ 条/秒。\n2. 三级流水线：\na) 在 A 与 B 之间、B 与 C 之间，以及 E 与 F 之间、F 与 G 之间插入寄存器；\nb) 最长路径延时为 80ps（第三级 G→H→REG 或 C→D→REG 均为 40+30+10 = 80ps）；\nc) 最大吞吐率 = 1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰ 条/秒。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -7364,12 +7364,12 @@
       "exam": "2025第2次阶段测验-带答案",
       "questionNo": "第9讲 3",
       "summary": "由 HCL 布尔表达式补全组合逻辑电路图",
-      "content": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n2\n\n<!-- ===== page 3 ===== -->\n\n(2)bool out = (s&&a)||(!s&&b)\n答案：\n答案：",
+      "content": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n<!-- ===== page 3 ===== -->\n\n(2)bool out = (s&&a)||(!s&&b)\n答案：\n（1）`eq = (a&&b)||(!a&&!b)`：用 **2 个与门 + 1 个或门**（a、b 各取反后进与门）实现。\n　　a 分两路：一路直接接第一个与门的输入，另一路经**非门**得到 `!a` 接第二个与门的输入；b 分两路：一路直接接第一个与门的另一个输入，另一路经**非门**得到 `!b` 接第二个与门的另一个输入。两个与门的输出接同一个**或门**，或门的输出就是 `eq`。\n（2）`out = (s&&a)||(!s&&b)`：用 **2 个与门 + 1 个或门 + 1 个非门** 实现。\n　　s 分两路：一路经**非门**得到 `!s`，接上面那个与门的输入；另一路直接接下面那个与门的输入。`a` 接下面与门的另一个输入，`b` 接上面与门的另一个输入。两个与门的输出接**或门**，或门输出即 `out`（图上两个与门一上一下、或门在右侧）。它就是一个 2 选 1 的多路选择器：s=1 时 out=a，s=0 时 out=b。\n\n解析：\n\n1. HCL 与门电路的对应关系：`&&` = 与门（AND），`||` = 或门（OR），`!` = 非门（NOT，三角形加小圆圈）；信号线上的黑点表示把同一信号分支接到多个门的输入。原卷答案就是按这个对应关系把表达式「翻译」成门级电路。\n2. 第（1）问：表达式是两个乘积项 `(a&&b)` 与 `(!a&&!b)` 的或，所以需要两个与门加一个或门；`!a`、`!b` 各需要一个非门（原卷图里 a 用独立的非门符号，b 用的是一条带小圆圈的取反缓冲）。真值表：a=b=1 → 1，a=b=0 → 1，其余为 0，也就是「a 与 b 相等时输出 1」，对应教材图 4.10 的 **Bit equal**（一位相等比较器）。\n3. 第（2）问：展开两项可知 s=1 时 `s&&a` 这一项生效（此时 `!s&&b`=0）→ out=a；s=0 时 `(!s&&b)` 生效 → out=b。所以它就是受 s 控制的多路选择器，对应教材图 4.11 的 **Bit MUX**。注意两条数据通路的接法不能颠倒（把 a、b 对调就变成「s=1 选 b」）；`!s` 也可以画成第二个与门输入端的取反小圆圈，只要逻辑等价即可。\n4. 画图检查清单：输入信号名（a、b、s）在左、输出（eq/out）在右；与门/或门/非门的符号方向一致；每个门的每个输入都有信号线接入（不能悬空）；分支点画黑点；门数分别为 (1) 2 与门+1 或门+2 非门、(2) 2 与门+1 或门+1 非门。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 3 页上的两幅红字电路图（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-03.png`：上图为第 (1) 问的 Bit equal，下图为第 (2) 问的 Bit MUX；原卷文字层的「答案：」是空的，答案只以红图形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "missing",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -7384,9 +7384,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n2\n\n<!-- ===== page 3 ===== -->\n\n(2)bool out = (s&&a)||(!s&&b)",
+        "stem": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n<!-- ===== page 3 ===== -->\n\n(2)bool out = (s&&a)||(!s&&b)",
         "choices": [],
-        "answer": "答案：\n答案："
+        "answer": "答案：\n（1）`eq = (a&&b)||(!a&&!b)`：用 **2 个与门 + 1 个或门**（a、b 各取反后进与门）实现。\n　　a 分两路：一路直接接第一个与门的输入，另一路经**非门**得到 `!a` 接第二个与门的输入；b 分两路：一路直接接第一个与门的另一个输入，另一路经**非门**得到 `!b` 接第二个与门的另一个输入。两个与门的输出接同一个**或门**，或门的输出就是 `eq`。\n（2）`out = (s&&a)||(!s&&b)`：用 **2 个与门 + 1 个或门 + 1 个非门** 实现。\n　　s 分两路：一路经**非门**得到 `!s`，接上面那个与门的输入；另一路直接接下面那个与门的输入。`a` 接下面与门的另一个输入，`b` 接上面与门的另一个输入。两个与门的输出接**或门**，或门输出即 `out`（图上两个与门一上一下、或门在右侧）。它就是一个 2 选 1 的多路选择器：s=1 时 out=a，s=0 时 out=b。\n\n解析：\n\n1. HCL 与门电路的对应关系：`&&` = 与门（AND），`||` = 或门（OR），`!` = 非门（NOT，三角形加小圆圈）；信号线上的黑点表示把同一信号分支接到多个门的输入。原卷答案就是按这个对应关系把表达式「翻译」成门级电路。\n2. 第（1）问：表达式是两个乘积项 `(a&&b)` 与 `(!a&&!b)` 的或，所以需要两个与门加一个或门；`!a`、`!b` 各需要一个非门（原卷图里 a 用独立的非门符号，b 用的是一条带小圆圈的取反缓冲）。真值表：a=b=1 → 1，a=b=0 → 1，其余为 0，也就是「a 与 b 相等时输出 1」，对应教材图 4.10 的 **Bit equal**（一位相等比较器）。\n3. 第（2）问：展开两项可知 s=1 时 `s&&a` 这一项生效（此时 `!s&&b`=0）→ out=a；s=0 时 `(!s&&b)` 生效 → out=b。所以它就是受 s 控制的多路选择器，对应教材图 4.11 的 **Bit MUX**。注意两条数据通路的接法不能颠倒（把 a、b 对调就变成「s=1 选 b」）；`!s` 也可以画成第二个与门输入端的取反小圆圈，只要逻辑等价即可。\n4. 画图检查清单：输入信号名（a、b、s）在左、输出（eq/out）在右；与门/或门/非门的符号方向一致；每个门的每个输入都有信号线接入（不能悬空）；分支点画黑点；门数分别为 (1) 2 与门+1 或门+2 非门、(2) 2 与门+1 或门+1 非门。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 3 页上的两幅红字电路图（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-03.png`：上图为第 (1) 问的 Bit equal，下图为第 (2) 问的 Bit MUX；原卷文字层的「答案：」是空的，答案只以红图形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "fill",
@@ -7394,8 +7394,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n2\n\n<!-- ===== page 3 ===== -->\n\n(2)bool out = (s&&a)||(!s&&b)",
-        "answer": "答案：\n答案："
+        "prompt": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n<!-- ===== page 3 ===== -->\n\n(2)bool out = (s&&a)||(!s&&b)",
+        "answer": "答案：\n（1）`eq = (a&&b)||(!a&&!b)`：用 **2 个与门 + 1 个或门**（a、b 各取反后进与门）实现。\n　　a 分两路：一路直接接第一个与门的输入，另一路经**非门**得到 `!a` 接第二个与门的输入；b 分两路：一路直接接第一个与门的另一个输入，另一路经**非门**得到 `!b` 接第二个与门的另一个输入。两个与门的输出接同一个**或门**，或门的输出就是 `eq`。\n（2）`out = (s&&a)||(!s&&b)`：用 **2 个与门 + 1 个或门 + 1 个非门** 实现。\n　　s 分两路：一路经**非门**得到 `!s`，接上面那个与门的输入；另一路直接接下面那个与门的输入。`a` 接下面与门的另一个输入，`b` 接上面与门的另一个输入。两个与门的输出接**或门**，或门输出即 `out`（图上两个与门一上一下、或门在右侧）。它就是一个 2 选 1 的多路选择器：s=1 时 out=a，s=0 时 out=b。\n\n解析：\n\n1. HCL 与门电路的对应关系：`&&` = 与门（AND），`||` = 或门（OR），`!` = 非门（NOT，三角形加小圆圈）；信号线上的黑点表示把同一信号分支接到多个门的输入。原卷答案就是按这个对应关系把表达式「翻译」成门级电路。\n2. 第（1）问：表达式是两个乘积项 `(a&&b)` 与 `(!a&&!b)` 的或，所以需要两个与门加一个或门；`!a`、`!b` 各需要一个非门（原卷图里 a 用独立的非门符号，b 用的是一条带小圆圈的取反缓冲）。真值表：a=b=1 → 1，a=b=0 → 1，其余为 0，也就是「a 与 b 相等时输出 1」，对应教材图 4.10 的 **Bit equal**（一位相等比较器）。\n3. 第（2）问：展开两项可知 s=1 时 `s&&a` 这一项生效（此时 `!s&&b`=0）→ out=a；s=0 时 `(!s&&b)` 生效 → out=b。所以它就是受 s 控制的多路选择器，对应教材图 4.11 的 **Bit MUX**。注意两条数据通路的接法不能颠倒（把 a、b 对调就变成「s=1 选 b」）；`!s` 也可以画成第二个与门输入端的取反小圆圈，只要逻辑等价即可。\n4. 画图检查清单：输入信号名（a、b、s）在左、输出（eq/out）在右；与门/或门/非门的符号方向一致；每个门的每个输入都有信号线接入（不能悬空）；分支点画黑点；门数分别为 (1) 2 与门+1 或门+2 非门、(2) 2 与门+1 或门+1 非门。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 3 页上的两幅红字电路图（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-03.png`：上图为第 (1) 问的 Bit equal，下图为第 (2) 问的 Bit MUX；原卷文字层的「答案：」是空的，答案只以红图形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       }
     },
     {
@@ -7452,7 +7452,7 @@
       "exam": "2025第2次阶段测验-带答案",
       "questionNo": "第10讲 5",
       "summary": "Y86-64 popq 指令编码格式与操作步骤补全",
-      "content": "5. （8分）Y86-64的popq指令编码格式如下：\n3\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img1.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img2.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img3.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img4.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img5.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img6.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img7.jpg)\n\n<!-- ===== page 4 ===== -->\n\n根据popq指令的操作，补全下表（共需填8行9空）\n答案：",
+      "content": "5. （8分）Y86-64的popq指令编码格式如下：\n3\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img1.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img2.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img3.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img4.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img5.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img6.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img7.jpg)\n\n<!-- ===== page 4 ===== -->\n\n根据popq指令的操作，补全下表（共需填8行9空）\n答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [
         "assets/阶段测验/2025第2次阶段测验-带答案/p3-img1.jpg",
         "assets/阶段测验/2025第2次阶段测验-带答案/p3-img2.jpg",
@@ -7464,8 +7464,8 @@
       ],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "missing",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -7482,7 +7482,7 @@
         "selection": null,
         "stem": "5. （8分）Y86-64的popq指令编码格式如下：\n3\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img1.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img2.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img3.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img4.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img5.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img6.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img7.jpg)\n\n<!-- ===== page 4 ===== -->\n\n根据popq指令的操作，补全下表（共需填8行9空）",
         "choices": [],
-        "answer": "答案："
+        "answer": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "short-answer",
@@ -7491,7 +7491,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "5. （8分）Y86-64的popq指令编码格式如下：\n3\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img1.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img2.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img3.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img4.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img5.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img6.jpg)\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p3-img7.jpg)\n\n<!-- ===== page 4 ===== -->\n\n根据popq指令的操作，补全下表（共需填8行9空）",
-        "answer": "答案："
+        "answer": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       }
     },
     {
@@ -7724,7 +7724,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 26",
       "summary": "SEQ 中新增 iopq 指令需改动的 HCL 位置",
-      "content": "26. （2分）在ArchLab Part B中，我们需要在SEQ架构的基础上实现iopq指令。该\n指令的定义如下：iopq V, rB：计算rB op V，并将结果存入寄存器rB。下面是\nSEQ架构中的部分HCL-rs定义，其中哪些位置需要添加IOPQ？\n```\nu8 srcA = [\n    icode in { CMOVX, RMMOVQ, OPQ, PUSHQ  } : ialign.rA;  // (1)\n    icode in { POPQ, RET } : RSP;\n    true : RNONE;\n];\nu8 dstE = [\n    icode in { CMOVX } && cnd : ialign.rB;\n    icode in { IRMOVQ, OPQ } : ialign.rB;                   // (2)\n    icode in { PUSHQ, POPQ, CALL, RET } : RSP;\n    true : RNONE;\n];\nu64 aluA = [\n    icode in { CMOVX, OPQ } : reg_read.valA;               // (3)\n    icode in { IRMOVQ, RMMOVQ, MRMOVQ } : ialign.valC;   // (4)\n    icode in { CALL, PUSHQ } : NEG_8;\n    icode in { RET, POPQ } : 8;\n];\nu8 alufun = [\n    icode == OPQ : ifun;                                        // (5)\n    true : ADD;\n];\n```\nA. (1)(2)(3)\nB. (1)(3)(5)\nC. (2)(3)(5)\nD. (2)(4)(5)\n答案：D（AI 推导，未与官方答案核对）\n解析：iopq V, rB 的立即数走 valC，所以 aluA 的 (4) 处要加 IOPQ；结果写回 rB，所以 dstE 的 (2) 处要加；alufun 取 ifun 的 (5) 处也要加；操作数不含 rA，故 (1)(3) 不加。",
+      "content": "26. （2分）在ArchLab Part B中，我们需要在SEQ架构的基础上实现iopq指令。该\n指令的定义如下：iopq V, rB：计算rB op V，并将结果存入寄存器rB。下面是\nSEQ架构中的部分HCL-rs定义，其中哪些位置需要添加IOPQ？\n```\nu8 srcA = [\n    icode in { CMOVX, RMMOVQ, OPQ, PUSHQ  } : ialign.rA;  // (1)\n    icode in { POPQ, RET } : RSP;\n    true : RNONE;\n];\nu8 dstE = [\n    icode in { CMOVX } && cnd : ialign.rB;\n    icode in { IRMOVQ, OPQ } : ialign.rB;                   // (2)\n    icode in { PUSHQ, POPQ, CALL, RET } : RSP;\n    true : RNONE;\n];\nu64 aluA = [\n    icode in { CMOVX, OPQ } : reg_read.valA;               // (3)\n    icode in { IRMOVQ, RMMOVQ, MRMOVQ } : ialign.valC;   // (4)\n    icode in { CALL, PUSHQ } : NEG_8;\n    icode in { RET, POPQ } : 8;\n];\nu8 alufun = [\n    icode == OPQ : ifun;                                        // (5)\n    true : ADD;\n];\n```\nA. (1)(2)(3)\nB. (1)(3)(5)\nC. (2)(3)(5)\nD. (2)(4)(5)\n答案：D\n\n解析：iopq V, rB 是\"立即数 V 与寄存器 rB 运算后写回 rB\"，编码格式与 irmovq 相同（立即数走 valC）。因此 dstE 要取 rB，即 (2) 处加 IOPQ；ALU 的 A 端应取立即数 valC 而不是寄存器 valA，(4) 处加而 (3) 处不加；alufun 要用 ifun 区分 add/sub/and/xor，(5) 处加。srcA 用不到 rA，(1) 处不加。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7763,7 +7763,7 @@
             "content": "(2)(4)(5)"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：iopq V, rB 的立即数走 valC，所以 aluA 的 (4) 处要加 IOPQ；结果写回 rB，所以 dstE 的 (2) 处要加；alufun 取 ifun 的 (5) 处也要加；操作数不含 rA，故 (1)(3) 不加。"
+        "answer": "答案：D\n\n解析：iopq V, rB 是\"立即数 V 与寄存器 rB 运算后写回 rB\"，编码格式与 irmovq 相同（立即数走 valC）。因此 dstE 要取 rB，即 (2) 处加 IOPQ；ALU 的 A 端应取立即数 valC 而不是寄存器 valA，(4) 处加而 (3) 处不加；alufun 要用 ifun 区分 add/sub/and/xor，(5) 处加。srcA 用不到 rA，(1) 处不加。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -7793,7 +7793,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "26. （2分）在ArchLab Part B中，我们需要在SEQ架构的基础上实现iopq指令。该\n指令的定义如下：iopq V, rB：计算rB op V，并将结果存入寄存器rB。下面是\nSEQ架构中的部分HCL-rs定义，其中哪些位置需要添加IOPQ？\n```\nu8 srcA = [\n    icode in { CMOVX, RMMOVQ, OPQ, PUSHQ  } : ialign.rA;  // (1)\n    icode in { POPQ, RET } : RSP;\n    true : RNONE;\n];\nu8 dstE = [\n    icode in { CMOVX } && cnd : ialign.rB;\n    icode in { IRMOVQ, OPQ } : ialign.rB;                   // (2)\n    icode in { PUSHQ, POPQ, CALL, RET } : RSP;\n    true : RNONE;\n];\nu64 aluA = [\n    icode in { CMOVX, OPQ } : reg_read.valA;               // (3)\n    icode in { IRMOVQ, RMMOVQ, MRMOVQ } : ialign.valC;   // (4)\n    icode in { CALL, PUSHQ } : NEG_8;\n    icode in { RET, POPQ } : 8;\n];\nu8 alufun = [\n    icode == OPQ : ifun;                                        // (5)\n    true : ADD;\n];\n```",
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：iopq V, rB 的立即数走 valC，所以 aluA 的 (4) 处要加 IOPQ；结果写回 rB，所以 dstE 的 (2) 处要加；alufun 取 ifun 的 (5) 处也要加；操作数不含 rA，故 (1)(3) 不加。"
+        "answer": "答案：D\n\n解析：iopq V, rB 是\"立即数 V 与寄存器 rB 运算后写回 rB\"，编码格式与 irmovq 相同（立即数走 valC）。因此 dstE 要取 rB，即 (2) 处加 IOPQ；ALU 的 A 端应取立即数 valC 而不是寄存器 valA，(4) 处加而 (3) 处不加；alufun 要用 ifun 区分 add/sub/and/xor，(5) 处加。srcA 用不到 rA，(1) 处不加。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -7806,7 +7806,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 27",
       "summary": "SEQ 到 pipe_std 五级流水线演进与冒险",
-      "content": "27. （2分）在ArchLab Part B中，我们将架构从SEQ一步步改进到pipe_std这个\n标准的五级流水线架构。下列说法中错误的一项是？\nA. 随着架构的一步步改进，关键路径的长度逐渐变短，时钟频率可以逐渐提高\nB. 从pipe_s2演化到pipe_s3a的过程中引入了数据冒险，可通过增加寄存器解决\nC. pipe_s4a将架构中的执行阶段分离出来，使内存访问和ALU计算可以并行执行\nD. 标准的五级流水线pipe_std具有分支预测，可能发生分支预测错误\n答案：B（AI 推导，未与官方答案核对）\n解析：数据冒险要靠转发或暂停解决，“增加寄存器”解决不了；其余三项与逐步细分流水线阶段的事实一致。",
+      "content": "27. （2分）在ArchLab Part B中，我们将架构从SEQ一步步改进到pipe_std这个\n标准的五级流水线架构。下列说法中错误的一项是？\nA. 随着架构的一步步改进，关键路径的长度逐渐变短，时钟频率可以逐渐提高\nB. 从pipe_s2演化到pipe_s3a的过程中引入了数据冒险，可通过增加寄存器解决\nC. pipe_s4a将架构中的执行阶段分离出来，使内存访问和ALU计算可以并行执行\nD. 标准的五级流水线pipe_std具有分支预测，可能发生分支预测错误\n答案：B\n\n解析：数据冒险的解决办法是转发（forwarding）或在译码阶段暂停（stall），\"增加寄存器\"并不能消除冒险（它只是把各级状态隔开的流水线寄存器），故 B 是错误项。其余三项与逐步细分流水线的事实相符：级数变多、每级关键路径变短、时钟频率可以提高（A）；访存与 ALU 落到不同级后可以并行进行（C）；标准五级流水线默认用 valP 预测下一条 PC，遇到跳转会有预测错误（D）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7845,7 +7845,7 @@
             "content": "标准的五级流水线pipe_std具有分支预测，可能发生分支预测错误"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）\n解析：数据冒险要靠转发或暂停解决，“增加寄存器”解决不了；其余三项与逐步细分流水线阶段的事实一致。"
+        "answer": "答案：B\n\n解析：数据冒险的解决办法是转发（forwarding）或在译码阶段暂停（stall），\"增加寄存器\"并不能消除冒险（它只是把各级状态隔开的流水线寄存器），故 B 是错误项。其余三项与逐步细分流水线的事实相符：级数变多、每级关键路径变短、时钟频率可以提高（A）；访存与 ALU 落到不同级后可以并行进行（C）；标准五级流水线默认用 valP 预测下一条 PC，遇到跳转会有预测错误（D）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -7875,7 +7875,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "27. （2分）在ArchLab Part B中，我们将架构从SEQ一步步改进到pipe_std这个\n标准的五级流水线架构。下列说法中错误的一项是？",
-        "answer": "答案：B（AI 推导，未与官方答案核对）\n解析：数据冒险要靠转发或暂停解决，“增加寄存器”解决不了；其余三项与逐步细分流水线阶段的事实一致。"
+        "answer": "答案：B\n\n解析：数据冒险的解决办法是转发（forwarding）或在译码阶段暂停（stall），\"增加寄存器\"并不能消除冒险（它只是把各级状态隔开的流水线寄存器），故 B 是错误项。其余三项与逐步细分流水线的事实相符：级数变多、每级关键路径变短、时钟频率可以提高（A）；访存与 ALU 落到不同级后可以并行进行（C）；标准五级流水线默认用 valP 预测下一条 PC，遇到跳转会有预测错误（D）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -7888,7 +7888,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 28",
       "summary": "ncopy.ys 两段循环代码的流水线性能对比",
-      "content": "28. （2分）ArchLab Part C 中，我们需要优化ncopy.ys代码。下面两个代码片段\n截取自某两个同学的ncopy.ys，它们均使用标准的五级流水线架构。下列关于这两段\n代码性能的说法，正确的一项是？\n**代码 S**\n```\nLoop:\n    mrmovq (%rdi), %r10\n    rmmovq %r10, (%rsi)\n    andq %r10, %r10\n    jle Skip\n    iaddq $1, %rax\nSkip:\n    iaddq $8, %rdi\n    iaddq $8, %rsi\n    iaddq $-1, %rdx\n    jg Loop\n```\n**代码 T**\n```\nLoop:\n    mrmovq (%rdi), %r10\n    iaddq $8, %rdi\n    rmmovq %r10, (%rsi)\n    iaddq $8, %rsi\n    andq %r10, %r10\n    jle Skip\n    iaddq $1, %rax\nSkip:\n    iaddq $-1, %rdx\n    jg Loop\n```\nA. 代码S性能更优，因为将访问内存的指令集中在了一起，可以有效增加缓存命中率\nB. 代码S性能更优，因为将功能相似的指令如iaddq集中在一起，便于流水线优化\nC. 代码T性能更优，因为将部分公共指令提前执行，使每个循环中平均指令数量变少\nD. 代码T性能更优，因为将iaddq指令插入到了前面，避免了加载/使用冒险的发生\n答案：D（AI 推导，未与官方答案核对）",
+      "content": "28. （2分）ArchLab Part C 中，我们需要优化ncopy.ys代码。下面两个代码片段\n截取自某两个同学的ncopy.ys，它们均使用标准的五级流水线架构。下列关于这两段\n代码性能的说法，正确的一项是？\n**代码 S**\n```\nLoop:\n    mrmovq (%rdi), %r10\n    rmmovq %r10, (%rsi)\n    andq %r10, %r10\n    jle Skip\n    iaddq $1, %rax\nSkip:\n    iaddq $8, %rdi\n    iaddq $8, %rsi\n    iaddq $-1, %rdx\n    jg Loop\n```\n**代码 T**\n```\nLoop:\n    mrmovq (%rdi), %r10\n    iaddq $8, %rdi\n    rmmovq %r10, (%rsi)\n    iaddq $8, %rsi\n    andq %r10, %r10\n    jle Skip\n    iaddq $1, %rax\nSkip:\n    iaddq $-1, %rdx\n    jg Loop\n```\nA. 代码S性能更优，因为将访问内存的指令集中在了一起，可以有效增加缓存命中率\nB. 代码S性能更优，因为将功能相似的指令如iaddq集中在一起，便于流水线优化\nC. 代码T性能更优，因为将部分公共指令提前执行，使每个循环中平均指令数量变少\nD. 代码T性能更优，因为将iaddq指令插入到了前面，避免了加载/使用冒险的发生\n答案：D\n\n解析：代码 S 中 `mrmovq (%rdi),%r10` 的下一条就是使用 %r10 的 `rmmovq`，构成加载/使用冒险，即使有转发也要在译码阶段停一个周期；代码 T 把不相关的 `iaddq $8,%rdi` 插在两者之间，破坏了这个\"相邻依赖\"，等 rmmovq 需要 %r10 时加载结果已可转发，每轮循环少一个气泡，cpe 更小，故 D 对。两段代码的指令条数相同（非跳过路径都是 9 条），C 的\"平均指令数量变少\"不成立；A、B 的\"缓存命中率/便于流水线优化\"没有依据。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7927,7 +7927,7 @@
             "content": "代码T性能更优，因为将iaddq指令插入到了前面，避免了加载/使用冒险的发生"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：代码 S 中 `mrmovq (%rdi),%r10` 的下一条就是使用 %r10 的 `rmmovq`，构成加载/使用冒险，即使有转发也要在译码阶段停一个周期；代码 T 把不相关的 `iaddq $8,%rdi` 插在两者之间，破坏了这个\"相邻依赖\"，等 rmmovq 需要 %r10 时加载结果已可转发，每轮循环少一个气泡，cpe 更小，故 D 对。两段代码的指令条数相同（非跳过路径都是 9 条），C 的\"平均指令数量变少\"不成立；A、B 的\"缓存命中率/便于流水线优化\"没有依据。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -7957,7 +7957,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "28. （2分）ArchLab Part C 中，我们需要优化ncopy.ys代码。下面两个代码片段\n截取自某两个同学的ncopy.ys，它们均使用标准的五级流水线架构。下列关于这两段\n代码性能的说法，正确的一项是？\n**代码 S**\n```\nLoop:\n    mrmovq (%rdi), %r10\n    rmmovq %r10, (%rsi)\n    andq %r10, %r10\n    jle Skip\n    iaddq $1, %rax\nSkip:\n    iaddq $8, %rdi\n    iaddq $8, %rsi\n    iaddq $-1, %rdx\n    jg Loop\n```\n**代码 T**\n```\nLoop:\n    mrmovq (%rdi), %r10\n    iaddq $8, %rdi\n    rmmovq %r10, (%rsi)\n    iaddq $8, %rsi\n    andq %r10, %r10\n    jle Skip\n    iaddq $1, %rax\nSkip:\n    iaddq $-1, %rdx\n    jg Loop\n```",
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：代码 S 中 `mrmovq (%rdi),%r10` 的下一条就是使用 %r10 的 `rmmovq`，构成加载/使用冒险，即使有转发也要在译码阶段停一个周期；代码 T 把不相关的 `iaddq $8,%rdi` 插在两者之间，破坏了这个\"相邻依赖\"，等 rmmovq 需要 %r10 时加载结果已可转发，每轮循环少一个气泡，cpe 更小，故 D 对。两段代码的指令条数相同（非跳过路径都是 9 条），C 的\"平均指令数量变少\"不成立；A、B 的\"缓存命中率/便于流水线优化\"没有依据。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -7970,7 +7970,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 29",
       "summary": "评分 c=cpe+2*ac 下代码与架构的优化权衡",
-      "content": "29. （2分）在ArchLab Part C中，我们需要同时优化代码ncopy.ys和架构ncopy.rs，\n评分标准基于c=cpe+2*ac。关于这一部分的优化策略，下列说法中正确的一项是？\nA. 应该优先优化cpe，因为ac的权重不大，且cpe不依赖于架构的设计\nB. 应该优先优化ac，因为这样可以提高时钟频率，降低执行与调试的时间\nC. cpe和ac相互独立，优化cpe不会影响ac，优化ac也不会影响cpe\nD. 在ncopy.rs中添加更多的流水线阶段可以降低ac，但可能使cpe增加\n答案：D（AI 推导，未与官方答案核对）",
+      "content": "29. （2分）在ArchLab Part C中，我们需要同时优化代码ncopy.ys和架构ncopy.rs，\n评分标准基于c=cpe+2*ac。关于这一部分的优化策略，下列说法中正确的一项是？\nA. 应该优先优化cpe，因为ac的权重不大，且cpe不依赖于架构的设计\nB. 应该优先优化ac，因为这样可以提高时钟频率，降低执行与调试的时间\nC. cpe和ac相互独立，优化cpe不会影响ac，优化ac也不会影响cpe\nD. 在ncopy.rs中添加更多的流水线阶段可以降低ac，但可能使cpe增加\n答案：D\n\n解析：评分 c = cpe + 2*ac 中 ac 的权重是 cpe 的两倍，而且 cpe 与架构设计直接相关（停顿、转发都由 HCL 决定），所以 A、B 都错；cpe 与 ac 也不互相独立——例如把流水线切得更细能缩短每级关键路径（降 ac），却会带来更多冒险与气泡（升 cpe），故 C 错、D 对。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8009,7 +8009,7 @@
             "content": "在ncopy.rs中添加更多的流水线阶段可以降低ac，但可能使cpe增加"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：评分 c = cpe + 2*ac 中 ac 的权重是 cpe 的两倍，而且 cpe 与架构设计直接相关（停顿、转发都由 HCL 决定），所以 A、B 都错；cpe 与 ac 也不互相独立——例如把流水线切得更细能缩短每级关键路径（降 ac），却会带来更多冒险与气泡（升 cpe），故 C 错、D 对。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -8039,7 +8039,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "29. （2分）在ArchLab Part C中，我们需要同时优化代码ncopy.ys和架构ncopy.rs，\n评分标准基于c=cpe+2*ac。关于这一部分的优化策略，下列说法中正确的一项是？",
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：评分 c = cpe + 2*ac 中 ac 的权重是 cpe 的两倍，而且 cpe 与架构设计直接相关（停顿、转发都由 HCL 决定），所以 A、B 都错；cpe 与 ac 也不互相独立——例如把流水线切得更细能缩短每级关键路径（降 ac），却会带来更多冒险与气泡（升 cpe），故 C 错、D 对。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -8052,7 +8052,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 30",
       "summary": "pipe_std 关键路径/传播顺序与降低 ac 的优化",
-      "content": "30. （2分）在 ArchLab Part C中，某同学准备在标准的五级流水线架构pipe_std\n的基础上进一步优化。该同学输入命令./target/debug/ysim --arch pipe_std\n-I，得到了下面的结果。该同学进行下列哪一项优化，可以在降低ac的同时，不使cpe\n显著增加？\n```\npropagate order:\nlv.1: w_stall m_icode d_dstM m_dstM prog_stat mem_write d_srcB e_dstM\nm_stall m_valE d_dstE w_dstM e_ifun e_stat e_icode d_stat f_pc aluB\nmem_read e_valA m_dstE alufun w_bubble d_icode w_valE e_stall aluA\nmem_data f_bubble d_srcA mem_addr d_valC d_ifun w_dstE w_valM prog_term\nd_stall f_stall\nlv.2: imem alu dmem reg_file f_align f_icode f_ifun e_valE m_valM\nm_stat  d_rvalA  d_rvalB  instr_valid  need_regids  need_valC  m_bubble\nset_cc f_stat\nlv.3: ialign pc_inc reg_cc f_rA f_rB f_valC f_valP cc f_pred_pc\nlv.4: cond e_cnd d_bubble e_bubble e_dstE d_valA d_valB\ndependency  graph  visualization  is  generated  at:\npipe_std_dependency_graph.html\n```\nA. 在架构中增加iopq指令，提高部分指令的执行效率\nB. 在架构中缩短e_cnd, d_bubble等信号的路径长度\nC. 在架构中执行和访存阶段中间增加“设置条件码”阶段\nD. 在架构中将设置条件码从执行阶段改到访存阶段进行\n答案：B（AI 推导，未与官方答案核对）\n解析：ac 反映关键路径，lv.4 的 e_cnd、d_bubble 等处在关键路径末端，缩短它们的路径能直接降低 ac，且不改变指令条数与冒险情况，cpe 基本不变。",
+      "content": "30. （2分）在 ArchLab Part C中，某同学准备在标准的五级流水线架构pipe_std\n的基础上进一步优化。该同学输入命令./target/debug/ysim --arch pipe_std\n-I，得到了下面的结果。该同学进行下列哪一项优化，可以在降低ac的同时，不使cpe\n显著增加？\n```\npropagate order:\nlv.1: w_stall m_icode d_dstM m_dstM prog_stat mem_write d_srcB e_dstM\nm_stall m_valE d_dstE w_dstM e_ifun e_stat e_icode d_stat f_pc aluB\nmem_read e_valA m_dstE alufun w_bubble d_icode w_valE e_stall aluA\nmem_data f_bubble d_srcA mem_addr d_valC d_ifun w_dstE w_valM prog_term\nd_stall f_stall\nlv.2: imem alu dmem reg_file f_align f_icode f_ifun e_valE m_valM\nm_stat  d_rvalA  d_rvalB  instr_valid  need_regids  need_valC  m_bubble\nset_cc f_stat\nlv.3: ialign pc_inc reg_cc f_rA f_rB f_valC f_valP cc f_pred_pc\nlv.4: cond e_cnd d_bubble e_bubble e_dstE d_valA d_valB\ndependency  graph  visualization  is  generated  at:\npipe_std_dependency_graph.html\n```\nA. 在架构中增加iopq指令，提高部分指令的执行效率\nB. 在架构中缩短e_cnd, d_bubble等信号的路径长度\nC. 在架构中执行和访存阶段中间增加“设置条件码”阶段\nD. 在架构中将设置条件码从执行阶段改到访存阶段进行\n答案：B\n\n解析：ysim -I 给出的 propagate order 中，lv.4 的 e_cnd、d_bubble 等信号处在传播层次的最深处，属于关键路径末端；直接缩短它们的路径长度就能降低 ac，而这类改动不改变指令条数与冒险情况，cpe 基本不变，故 B 对。增加 iopq 是 Part B 的指令扩展，对关键路径没有帮助（A 错）；新增\"设置条件码\"阶段、或把设置条件码推迟到访存阶段，都会引入新的冒险或让条件码更晚可用，cpe（甚至 ac）反而变差（C、D 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8091,7 +8091,7 @@
             "content": "在架构中将设置条件码从执行阶段改到访存阶段进行"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）\n解析：ac 反映关键路径，lv.4 的 e_cnd、d_bubble 等处在关键路径末端，缩短它们的路径能直接降低 ac，且不改变指令条数与冒险情况，cpe 基本不变。"
+        "answer": "答案：B\n\n解析：ysim -I 给出的 propagate order 中，lv.4 的 e_cnd、d_bubble 等信号处在传播层次的最深处，属于关键路径末端；直接缩短它们的路径长度就能降低 ac，而这类改动不改变指令条数与冒险情况，cpe 基本不变，故 B 对。增加 iopq 是 Part B 的指令扩展，对关键路径没有帮助（A 错）；新增\"设置条件码\"阶段、或把设置条件码推迟到访存阶段，都会引入新的冒险或让条件码更晚可用，cpe（甚至 ac）反而变差（C、D 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -8121,7 +8121,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "30. （2分）在 ArchLab Part C中，某同学准备在标准的五级流水线架构pipe_std\n的基础上进一步优化。该同学输入命令./target/debug/ysim --arch pipe_std\n-I，得到了下面的结果。该同学进行下列哪一项优化，可以在降低ac的同时，不使cpe\n显著增加？\n```\npropagate order:\nlv.1: w_stall m_icode d_dstM m_dstM prog_stat mem_write d_srcB e_dstM\nm_stall m_valE d_dstE w_dstM e_ifun e_stat e_icode d_stat f_pc aluB\nmem_read e_valA m_dstE alufun w_bubble d_icode w_valE e_stall aluA\nmem_data f_bubble d_srcA mem_addr d_valC d_ifun w_dstE w_valM prog_term\nd_stall f_stall\nlv.2: imem alu dmem reg_file f_align f_icode f_ifun e_valE m_valM\nm_stat  d_rvalA  d_rvalB  instr_valid  need_regids  need_valC  m_bubble\nset_cc f_stat\nlv.3: ialign pc_inc reg_cc f_rA f_rB f_valC f_valP cc f_pred_pc\nlv.4: cond e_cnd d_bubble e_bubble e_dstE d_valA d_valB\ndependency  graph  visualization  is  generated  at:\npipe_std_dependency_graph.html\n```",
-        "answer": "答案：B（AI 推导，未与官方答案核对）\n解析：ac 反映关键路径，lv.4 的 e_cnd、d_bubble 等处在关键路径末端，缩短它们的路径能直接降低 ac，且不改变指令条数与冒险情况，cpe 基本不变。"
+        "answer": "答案：B\n\n解析：ysim -I 给出的 propagate order 中，lv.4 的 e_cnd、d_bubble 等信号处在传播层次的最深处，属于关键路径末端；直接缩短它们的路径长度就能降低 ac，而这类改动不改变指令条数与冒险情况，cpe 基本不变，故 B 对。增加 iopq 是 Part B 的指令扩展，对关键路径没有帮助（A 错）；新增\"设置条件码\"阶段、或把设置条件码推迟到访存阶段，都会引入新的冒险或让条件码更晚可用，cpe（甚至 ac）反而变差（C、D 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     }
   ]

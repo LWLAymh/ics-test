@@ -116,9 +116,9 @@
         "q-6cf7fdea35ca7215",
         "q-fb0c6fbc0e9f5b44"
       ],
-      "verifiedAnswerCount": 23,
+      "verifiedAnswerCount": 24,
       "questionCount": 24,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-0439188e8c4bdac1",
@@ -151,9 +151,9 @@
         "q-33c792b0b109d321",
         "q-0f1a987b675f2222"
       ],
-      "verifiedAnswerCount": 21,
+      "verifiedAnswerCount": 24,
       "questionCount": 24,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-9c11139ca386240d",
@@ -212,9 +212,9 @@
         "q-5e2b5c6f170c5ce6",
         "q-68003f0197c16d34"
       ],
-      "verifiedAnswerCount": 48,
+      "verifiedAnswerCount": 50,
       "questionCount": 50,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-0fe6817c7f881573",
@@ -281,9 +281,9 @@
         "q-a01a9f044af56d47",
         "q-c686bf5ca67f4ed8"
       ],
-      "verifiedAnswerCount": 21,
+      "verifiedAnswerCount": 23,
       "questionCount": 23,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-bed4802d7c36448b",
@@ -318,9 +318,9 @@
         "q-1a8cc69307ec0038",
         "q-fc5832aa452d9480"
       ],
-      "verifiedAnswerCount": 25,
+      "verifiedAnswerCount": 26,
       "questionCount": 26,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-12950876262955d9",
@@ -456,9 +456,9 @@
         "q-a18d830efa0ca402",
         "q-793aaab0d5e579d8"
       ],
-      "verifiedAnswerCount": 35,
+      "verifiedAnswerCount": 37,
       "questionCount": 37,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-2c2b56c4452255b1",
@@ -637,9 +637,9 @@
         "q-93065bcb1bef9ed1",
         "q-be2aa45e9dbbafe7"
       ],
-      "verifiedAnswerCount": 21,
+      "verifiedAnswerCount": 22,
       "questionCount": 22,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-f99ca20e1a729e32",
@@ -824,9 +824,9 @@
         "q-c36c9b861c58b521",
         "q-116083ef80b5731e"
       ],
-      "verifiedAnswerCount": 22,
+      "verifiedAnswerCount": 24,
       "questionCount": 24,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-5e37064fe519258d",
@@ -893,9 +893,9 @@
         "q-639715cb9285f961",
         "q-bf8b1b6a955767c0"
       ],
-      "verifiedAnswerCount": 24,
+      "verifiedAnswerCount": 28,
       "questionCount": 28,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-662d741f28b2bed0",
@@ -968,9 +968,9 @@
         "q-496d550407168984",
         "q-d00b4881c35e6fec"
       ],
-      "verifiedAnswerCount": 26,
+      "verifiedAnswerCount": 27,
       "questionCount": 27,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-89e8b793519e36c6",
@@ -1050,9 +1050,9 @@
         "q-c42dbf66f5c328f4",
         "q-06903e5136e1ac18"
       ],
-      "verifiedAnswerCount": 26,
+      "verifiedAnswerCount": 27,
       "questionCount": 27,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-4486554924f4e320",
@@ -1133,9 +1133,9 @@
         "q-00a8b5c318a16492",
         "q-423c96723fb1c59c"
       ],
-      "verifiedAnswerCount": 27,
+      "verifiedAnswerCount": 30,
       "questionCount": 30,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-d0ae6162300a90de",
@@ -1213,9 +1213,9 @@
         "q-fa6afdda8f92ace2",
         "q-37f5173360d9f28e"
       ],
-      "verifiedAnswerCount": 26,
+      "verifiedAnswerCount": 28,
       "questionCount": 28,
-      "complete": false
+      "complete": true
     },
     {
       "id": "p-ea869cda0eb89689",
@@ -1253,9 +1253,9 @@
         "q-5e663c7d74390b87",
         "q-42af73d55bf9c63b"
       ],
-      "verifiedAnswerCount": 28,
+      "verifiedAnswerCount": 29,
       "questionCount": 29,
-      "complete": false
+      "complete": true
     }
   ]
 }

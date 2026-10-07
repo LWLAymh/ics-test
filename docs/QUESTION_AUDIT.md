@@ -7,11 +7,11 @@
 | 指标 | 校对前 | 校对后 |
 |---|---|---|
 | 题库总题数 | 1009 | 871 |
-| 显示「本题答案尚未完成结构化校对」 | 670 | 26 |
-| 已校对答案 (status=verified) | 339 | 845 |
+| 显示「本题答案尚未完成结构化校对」 | 670 | 0 |
+| 已校对答案 (status=verified) | 339 | 871 |
 | 显式声明单选/多选的题 | 5 | 438 |
 | 仍是「未声明交互类型」的题 | 399 | 67 |
-| 改动的 curated 文件 | — | 917 |
+| 改动的 curated 文件 | — | 931 |
 
 题数从 1009 降到 871，不是删题，而是**把 138 条并不存在的「题目」退回了它们
 本来的身份**：它们来自答案/解析材料，被当成了试卷逐段或逐块收进题库。
@@ -50,35 +50,35 @@
 
 | 试卷 | 题数 | 待校对 | 单选/多选 | 未声明 |
 |---|---|---|---|---|
-| 2017期末-无答案 | 28 | 4 | 21 | 0 |
-| 2014期末-带答案 | 30 | 3 | 7 | 13 |
-| 2025第2次阶段测验-带答案 | 24 | 3 | 2 | 0 |
-| 2013期末-带答案 | 28 | 2 | 10 | 8 |
-| 2018期末-带答案 | 24 | 2 | 12 | 3 |
-| 2021期中-带答案 | 37 | 2 | 4 | 11 |
-| 2024期末-带答案 | 23 | 2 | 8 | 7 |
-| 2025Lab测验-无答案 | 50 | 2 | 50 | 0 |
-| 2012期中-带答案 | 29 | 1 | 15 | 0 |
-| 2015期末-20160104-带答案 | 27 | 1 | 15 | 4 |
-| 2016期末-带答案 | 27 | 1 | 14 | 6 |
-| 2020期中-带答案 | 22 | 1 | 3 | 8 |
-| 2023期中-带答案 | 26 | 1 | 20 | 0 |
-| 2025第1次阶段测验-带答案 | 24 | 1 | 0 | 1 |
+| 2012期中-带答案 | 29 | 0 | 15 | 0 |
 | 2013期中-带答案 | 30 | 0 | 13 | 0 |
+| 2013期末-带答案 | 28 | 0 | 10 | 8 |
 | 2014期中-带答案 | 31 | 0 | 15 | 0 |
+| 2014期末-带答案 | 30 | 0 | 7 | 13 |
 | 2015期中-带答案 | 33 | 0 | 20 | 0 |
+| 2015期末-20160104-带答案 | 27 | 0 | 15 | 4 |
 | 2016期中-带答案 | 26 | 0 | 14 | 0 |
+| 2016期末-带答案 | 27 | 0 | 14 | 6 |
 | 2017期中-带答案 | 19 | 0 | 15 | 0 |
+| 2017期末-无答案 | 28 | 0 | 21 | 0 |
 | 2018期中-带答案 | 21 | 0 | 14 | 0 |
+| 2018期末-带答案 | 24 | 0 | 12 | 3 |
 | 2019期中-带答案 | 25 | 0 | 15 | 0 |
 | 2019期末-无答案 | 30 | 0 | 20 | 0 |
+| 2020期中-带答案 | 22 | 0 | 3 | 8 |
 | 2020期末-无答案 | 32 | 0 | 25 | 0 |
+| 2021期中-带答案 | 37 | 0 | 4 | 11 |
 | 2021期末-无答案 | 28 | 0 | 20 | 0 |
 | 2022期中-带答案 | 25 | 0 | 17 | 2 |
 | 2022期末-无答案 | 43 | 0 | 3 | 0 |
+| 2023期中-带答案 | 26 | 0 | 20 | 0 |
 | 2024期中-带答案 | 24 | 0 | 12 | 4 |
+| 2024期末-带答案 | 23 | 0 | 8 | 7 |
+| 2025Lab测验-无答案 | 50 | 0 | 50 | 0 |
 | 2025期末-带答案 | 31 | 0 | 2 | 0 |
 | 2025期末-无答案 | 31 | 0 | 27 | 0 |
+| 2025第1次阶段测验-带答案 | 24 | 0 | 0 | 1 |
+| 2025第2次阶段测验-带答案 | 24 | 0 | 2 | 0 |
 | chap 10 解析 | 2 | 0 | 2 | 0 |
 | chap 11-12 题目 | 8 | 0 | 6 | 0 |
 | chap 2-6 解析 | 12 | 0 | 10 | 0 |
@@ -100,26 +100,23 @@
 
 这 12 道之外，`fix_mode.py` 已无可安全改判的对象（`converted 0`）。
 
-## 五、仍然待校对的原因
+## 五、AI 推导的答案（全部带署名）
 
-这些题**没有可靠的官方答案来源**，按「宁可显示待校对，也不要猜答案」保留。
-其中 2025Lab测验 的 48 题是明确标注 `（AI 推导，未与官方答案核对）` 的推导答案，
-另有 2 题因题面本身有歧义（三个选项都成立 / 两个选项都成立）故意留白。
+有 78 道题的原卷与仓库内所有配套材料都**没有**官方答案，它们的答案与解析由 AI 推导，
+并在答案区逐题署名为 **deepseek v4.1 flash · 大肥鱼小姐**，读者一眼能区分官方答案与推导：
 
-- 2017期末-无答案：4 题
-- 2014期末-带答案：3 题
-- 2025第2次阶段测验-带答案：3 题
-- 2025Lab测验-无答案：2 题
-- 2021期中-带答案：2 题
-- 2018期末-带答案：2 题
-- 2024期末-带答案：2 题
-- 2013期末-带答案：2 题
-- 2025第1次阶段测验-带答案：1 题
-- 2012期中-带答案：1 题
-- 2020期中-带答案：1 题
-- 2023期中-带答案：1 题
-- 2016期末-带答案：1 题
-- 2015期末-20160104-带答案：1 题
+- `2025Lab测验-无答案` 50 道（全卷无答案）
+- `2017期末-无答案` 28 道（该卷无答案，Arthals 详解也没有 2017 一节）
+
+逐题答案与解析汇总见 **[AI_DERIVED_ANSWERS.md](AI_DERIVED_ANSWERS.md)**。
+另有 10 道题最初被误标为「无官方答案」，实际上带答案版/PDF 红字里有答案，
+已改标为「答案来自原卷，解析由 AI 整理」；`2013期末 第一题 20` 原卷自己注明
+「四个选项都有问题，无正确答案」，单独标注。
+
+## 六、仍然待校对的原因
+
+**已归零**：871 道题全部有结构化答案。
+
 
 ## 五、逐题清单
 
@@ -151,7 +148,7 @@
 | 2012期中-带答案 | Problem D A | short-answer | verified |
 | 2012期中-带答案 | Problem D B | short-answer | verified |
 | 2012期中-带答案 | Problem E A | short-answer | verified |
-| 2012期中-带答案 | Problem E B | short-answer | needs-review |
+| 2012期中-带答案 | Problem E B | short-answer | verified |
 | 2012期中-带答案 | Problem E C | short-answer | verified |
 | 2012期中-带答案 | Problem F A | short-answer | verified |
 | 2013期中-带答案 | 选择题 1 | short-answer | verified |
@@ -203,7 +200,7 @@
 | 2013期末-带答案 | 第一题 17 | single-choice | verified |
 | 2013期末-带答案 | 第一题 18 | short-answer | verified |
 | 2013期末-带答案 | 第一题 19 | single-choice | verified |
-| 2013期末-带答案 | 第一题 20 | choice | missing |
+| 2013期末-带答案 | 第一题 20 | choice | verified |
 | 2013期末-带答案 | 第二题 | short-answer | verified |
 | 2013期末-带答案 | 第三题 | short-answer | verified |
 | 2013期末-带答案 | 第四题 | fill | verified |
@@ -211,7 +208,7 @@
 | 2013期末-带答案 | 第五题 Part II | fill | verified |
 | 2013期末-带答案 | 第六题 | fill | verified |
 | 2013期末-带答案 | 第七题 | fill | verified |
-| 2013期末-带答案 | 第八题 | fill | needs-review |
+| 2013期末-带答案 | 第八题 | fill | verified |
 | 2014期中-带答案 | 第一题 1 | single-choice | verified |
 | 2014期中-带答案 | 第一题 2 | single-choice | verified |
 | 2014期中-带答案 | 第一题 3 | single-choice | verified |
@@ -263,15 +260,15 @@
 | 2014期末-带答案 | 第一题 18 | choice | verified |
 | 2014期末-带答案 | 第一题 19 | choice | verified |
 | 2014期末-带答案 | 第一题 20 | choice | verified |
-| 2014期末-带答案 | 第二题 1 | fill | missing |
-| 2014期末-带答案 | 第二题 2 | fill | missing |
+| 2014期末-带答案 | 第二题 1 | fill | verified |
+| 2014期末-带答案 | 第二题 2 | fill | verified |
 | 2014期末-带答案 | 第三题 | short-answer | verified |
 | 2014期末-带答案 | 第四题 | fill | verified |
 | 2014期末-带答案 | 第五题 | fill | verified |
 | 2014期末-带答案 | 第六题 1 | fill | verified |
 | 2014期末-带答案 | 第六题 2 | fill | verified |
 | 2014期末-带答案 | 第七题 | short-answer | verified |
-| 2014期末-带答案 | 第八题 | fill | needs-review |
+| 2014期末-带答案 | 第八题 | fill | verified |
 | 2014期末-带答案 | 第九题 | fill | verified |
 | 2015期中-带答案 | 选择题 1 | single-choice | verified |
 | 2015期中-带答案 | 选择题 2 | single-choice | verified |
@@ -331,7 +328,7 @@
 | 2015期末-20160104-带答案 | 第四题 | fill | verified |
 | 2015期末-20160104-带答案 | 第五题 | fill | verified |
 | 2015期末-20160104-带答案 | 第六题 | fill | verified |
-| 2015期末-20160104-带答案 | 第七题 | short-answer | needs-review |
+| 2015期末-20160104-带答案 | 第七题 | short-answer | verified |
 | 2015期末-20160104-带答案 | 第八题 | fill | verified |
 | 2016期中-带答案 | 第一题 1 | single-choice | verified |
 | 2016期中-带答案 | 第一题 2 | single-choice | verified |
@@ -383,7 +380,7 @@
 | 2016期末-带答案 | 第三题 | short-answer | verified |
 | 2016期末-带答案 | 第四题 | fill | verified |
 | 2016期末-带答案 | 第五题 | fill | verified |
-| 2016期末-带答案 | 第六题 | short-answer | needs-review |
+| 2016期末-带答案 | 第六题 | short-answer | verified |
 | 2016期末-带答案 | 第七题 | fill | verified |
 | 2016期末-带答案 | 第八题 | fill | verified |
 | 2017期中-带答案 | 第一题 1 | single-choice | verified |
@@ -424,13 +421,13 @@
 | 2017期末-无答案 | 第一题 17 | single-choice | verified |
 | 2017期末-无答案 | 第一题 18 | single-choice | verified |
 | 2017期末-无答案 | 第一题 19 | single-choice | verified |
-| 2017期末-无答案 | 第一题 20 | single-choice | missing |
-| 2017期末-无答案 | 第二题 1 | fill | missing |
+| 2017期末-无答案 | 第一题 20 | single-choice | verified |
+| 2017期末-无答案 | 第二题 1 | fill | verified |
 | 2017期末-无答案 | 第二题 2 | fill | verified |
 | 2017期末-无答案 | 第三题 | fill | verified |
 | 2017期末-无答案 | 第四题 | short-answer | verified |
-| 2017期末-无答案 | 第五题 | fill | missing |
-| 2017期末-无答案 | 第六题 | fill | missing |
+| 2017期末-无答案 | 第五题 | fill | verified |
+| 2017期末-无答案 | 第六题 | fill | verified |
 | 2017期末-无答案 | 第七题 | multiple-choice | verified |
 | 2017期末-无答案 | 第八题 | short-answer | verified |
 | 2018期中-带答案 | 第一题 1 | single-choice | verified |
@@ -472,9 +469,9 @@
 | 2018期末-带答案 | 第二题 | short-answer | verified |
 | 2018期末-带答案 | 第三题 1 | short-answer | verified |
 | 2018期末-带答案 | 第三题 2 | short-answer | verified |
-| 2018期末-带答案 | 第四题 | fill | missing |
+| 2018期末-带答案 | 第四题 | fill | verified |
 | 2018期末-带答案 | 第五题 | short-answer | verified |
-| 2018期末-带答案 | 第六题 | short-answer | needs-review |
+| 2018期末-带答案 | 第六题 | short-answer | verified |
 | 2018期末-带答案 | 第七题 1 | fill | verified |
 | 2018期末-带答案 | 第七题 2-4 | fill | verified |
 | 2018期末-带答案 | 第八题 | fill | verified |
@@ -553,7 +550,7 @@
 | 2020期中-带答案 | 第四题 1 | fill | verified |
 | 2020期中-带答案 | 第四题 2 | fill | verified |
 | 2020期中-带答案 | 第五题 1 | fill | verified |
-| 2020期中-带答案 | 第五题 2 | fill | missing |
+| 2020期中-带答案 | 第五题 2 | fill | verified |
 | 2020期中-带答案 | 第五题 3 | fill | verified |
 | 2020期末-无答案 | 第一题 1 | single-choice | verified |
 | 2020期末-无答案 | 第一题 2 | single-choice | verified |
@@ -620,8 +617,8 @@
 | 2021期中-带答案 | 第六题 1 | fill | verified |
 | 2021期中-带答案 | 第六题 2 | short-answer | verified |
 | 2021期中-带答案 | 第六题 3 | fill | verified |
-| 2021期中-带答案 | 第六题 4 | fill | missing |
-| 2021期中-带答案 | 第六题 5 | fill | missing |
+| 2021期中-带答案 | 第六题 4 | fill | verified |
+| 2021期中-带答案 | 第六题 5 | fill | verified |
 | 2021期中-带答案 | 第六题 6 | fill | verified |
 | 2021期中-带答案 | 第六题 7 | fill | verified |
 | 2021期末-无答案 | 第一题 1 | single-choice | verified |
@@ -743,7 +740,7 @@
 | 2023期中-带答案 | 第二题 | fill | verified |
 | 2023期中-带答案 | 第三题 | fill | verified |
 | 2023期中-带答案 | 第四题 | fill | verified |
-| 2023期中-带答案 | 第五题 1 | fill | missing |
+| 2023期中-带答案 | 第五题 1 | fill | verified |
 | 2023期中-带答案 | 第五题 2 | short-answer | verified |
 | 2023期中-带答案 | 第五题 3 | short-answer | verified |
 | 2024期中-带答案 | 第一题 1 | single-choice | verified |
@@ -780,13 +777,13 @@
 | 2024期末-带答案 | 第一题 8 | choice | verified |
 | 2024期末-带答案 | 第一题 9 | choice | verified |
 | 2024期末-带答案 | 第一题 10 | choice | verified |
-| 2024期末-带答案 | 第一题 11 | choice | missing |
+| 2024期末-带答案 | 第一题 11 | choice | verified |
 | 2024期末-带答案 | 第一题 12 | choice | verified |
 | 2024期末-带答案 | 第一题 13 | multiple-choice | verified |
 | 2024期末-带答案 | 第一题 14 | single-choice | verified |
 | 2024期末-带答案 | 第一题 15 | single-choice | verified |
 | 2024期末-带答案 | 第二题 | fill | verified |
-| 2024期末-带答案 | 第三题 Part A | fill | missing |
+| 2024期末-带答案 | 第三题 Part A | fill | verified |
 | 2024期末-带答案 | 第三题 Part B | fill | verified |
 | 2024期末-带答案 | 第三题 Part C | fill | verified |
 | 2024期末-带答案 | 第四题 Part A | short-answer | verified |
@@ -811,7 +808,7 @@
 | 2025Lab测验-无答案 | Lab 任务 16 | single-choice | verified |
 | 2025Lab测验-无答案 | Lab 任务 17 | single-choice | verified |
 | 2025Lab测验-无答案 | Lab 任务 18 | single-choice | verified |
-| 2025Lab测验-无答案 | Lab 任务 19 | single-choice | missing |
+| 2025Lab测验-无答案 | Lab 任务 19 | single-choice | verified |
 | 2025Lab测验-无答案 | Lab 任务 20 | single-choice | verified |
 | 2025Lab测验-无答案 | Lab 任务 21 | single-choice | verified |
 | 2025Lab测验-无答案 | Lab 任务 22 | single-choice | verified |
@@ -842,7 +839,7 @@
 | 2025Lab测验-无答案 | Lab 任务 47 | single-choice | verified |
 | 2025Lab测验-无答案 | Lab 任务 48 | single-choice | verified |
 | 2025Lab测验-无答案 | Lab 任务 49 | single-choice | verified |
-| 2025Lab测验-无答案 | Lab 任务 50 | single-choice | missing |
+| 2025Lab测验-无答案 | Lab 任务 50 | single-choice | verified |
 | 2025期末-带答案 | 一 1 | short-answer | verified |
 | 2025期末-带答案 | 一 2 | short-answer | verified |
 | 2025期末-带答案 | 一 3 | short-answer | verified |
@@ -923,7 +920,7 @@
 | 2025第1次阶段测验-带答案 | 第6讲 16 | fill | verified |
 | 2025第1次阶段测验-带答案 | 第6讲 17 | short-answer | verified |
 | 2025第1次阶段测验-带答案 | 第7讲 18 | short-answer | verified |
-| 2025第1次阶段测验-带答案 | 第7讲 19 | short-answer | missing |
+| 2025第1次阶段测验-带答案 | 第7讲 19 | short-answer | verified |
 | 2025第1次阶段测验-带答案 | 第7讲 20 | short-answer | verified |
 | 2025第1次阶段测验-带答案 | 第7讲 21 | short-answer | verified |
 | 2025第1次阶段测验-带答案 | 第7讲 22 | short-answer | verified |
@@ -931,9 +928,9 @@
 | 2025第1次阶段测验-带答案 | 第8讲 24 | short-answer | verified |
 | 2025第2次阶段测验-带答案 | 第9讲 1 | multiple-choice | verified |
 | 2025第2次阶段测验-带答案 | 第9讲 2 | short-answer | verified |
-| 2025第2次阶段测验-带答案 | 第9讲 3 | fill | missing |
+| 2025第2次阶段测验-带答案 | 第9讲 3 | fill | verified |
 | 2025第2次阶段测验-带答案 | 第9讲 4 | short-answer | verified |
-| 2025第2次阶段测验-带答案 | 第10讲 5 | short-answer | missing |
+| 2025第2次阶段测验-带答案 | 第10讲 5 | short-answer | verified |
 | 2025第2次阶段测验-带答案 | 第10讲 6 | short-answer | verified |
 | 2025第2次阶段测验-带答案 | 第11讲 7 | short-answer | verified |
 | 2025第2次阶段测验-带答案 | 第11讲 8 | short-answer | verified |
@@ -949,7 +946,7 @@
 | 2025第2次阶段测验-带答案 | 第13讲 18 | short-answer | verified |
 | 2025第2次阶段测验-带答案 | 第14/15讲 19 | fill | verified |
 | 2025第2次阶段测验-带答案 | 第14/15讲 20 | short-answer | verified |
-| 2025第2次阶段测验-带答案 | 第14/15讲 21 | fill | needs-review |
+| 2025第2次阶段测验-带答案 | 第14/15讲 21 | fill | verified |
 | 2025第2次阶段测验-带答案 | 第16/17讲 22 | short-answer | verified |
 | 2025第2次阶段测验-带答案 | 第16/17讲 23 | fill | verified |
 | 2025第2次阶段测验-带答案 | 第16/17讲 24 | fill | verified |

@@ -1936,7 +1936,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第一题 9",
       "summary": "嵌套 fork 的输出顺序可能性",
-      "content": "9.  下列程序输出的数字顺序可能是：\n```\nint count = 1;\nif (fork() == 0) {\n  if (fork() == 0) {\n    printf(\"%d\\n\", ++count);\n  }\n  else {\n    printf(\"%d\\n\", --count);\n  }\n}\nprintf(\"%d\\n\", ++count);\n```\nA. 0 1 3 2 2\nB. 0 3 2 2 1\nC. 2 0 1 3 2\nD. 2 1 0 2 3\n答案：C（AI 推导，未与官方答案核对）\n解析：三个进程各打印：父进程 ++count → 2；子进程 --count → 0，再 ++count → 1（顺序 0、1）；孙进程 ++count → 2，再 ++count → 3（顺序 2、3）。所以输出必是 {0,1,2,2,3} 的一个排列，且 0 在 1 之前、2 在 3 之前。A、B 里 3 之前的 2 缺失，D 里 1 在 0 之前，只有 C「2 0 1 3 2」满足约束。",
+      "content": "9.  下列程序输出的数字顺序可能是：\n```\nint count = 1;\nif (fork() == 0) {\n  if (fork() == 0) {\n    printf(\"%d\\n\", ++count);\n  }\n  else {\n    printf(\"%d\\n\", --count);\n  }\n}\nprintf(\"%d\\n\", ++count);\n```\nA. 0 1 3 2 2\nB. 0 3 2 2 1\nC. 2 0 1 3 2\nD. 2 1 0 2 3\n答案：C\n解析：三个进程各打印：父进程 ++count → 2；子进程 --count → 0，再 ++count → 1（顺序 0、1）；孙进程 ++count → 2，再 ++count → 3（顺序 2、3）。所以输出必是 {0,1,2,2,3} 的一个排列，且 0 在 1 之前、2 在 3 之前。A、B 里 3 之前的 2 缺失，D 里 1 在 0 之前，只有 C「2 0 1 3 2」满足约束。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1975,7 +1975,7 @@
             "content": "2 1 0 2 3"
           }
         ],
-        "answer": "答案：C（AI 推导，未与官方答案核对）\n解析：三个进程各打印：父进程 ++count → 2；子进程 --count → 0，再 ++count → 1（顺序 0、1）；孙进程 ++count → 2，再 ++count → 3（顺序 2、3）。所以输出必是 {0,1,2,2,3} 的一个排列，且 0 在 1 之前、2 在 3 之前。A、B 里 3 之前的 2 缺失，D 里 1 在 0 之前，只有 C「2 0 1 3 2」满足约束。"
+        "answer": "答案：C\n解析：三个进程各打印：父进程 ++count → 2；子进程 --count → 0，再 ++count → 1（顺序 0、1）；孙进程 ++count → 2，再 ++count → 3（顺序 2、3）。所以输出必是 {0,1,2,2,3} 的一个排列，且 0 在 1 之前、2 在 3 之前。A、B 里 3 之前的 2 缺失，D 里 1 在 0 之前，只有 C「2 0 1 3 2」满足约束。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -2005,7 +2005,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "9.  下列程序输出的数字顺序可能是：\n```\nint count = 1;\nif (fork() == 0) {\n  if (fork() == 0) {\n    printf(\"%d\\n\", ++count);\n  }\n  else {\n    printf(\"%d\\n\", --count);\n  }\n}\nprintf(\"%d\\n\", ++count);\n```",
-        "answer": "答案：C（AI 推导，未与官方答案核对）\n解析：三个进程各打印：父进程 ++count → 2；子进程 --count → 0，再 ++count → 1（顺序 0、1）；孙进程 ++count → 2，再 ++count → 3（顺序 2、3）。所以输出必是 {0,1,2,2,3} 的一个排列，且 0 在 1 之前、2 在 3 之前。A、B 里 3 之前的 2 缺失，D 里 1 在 0 之前，只有 C「2 0 1 3 2」满足约束。"
+        "answer": "答案：C\n解析：三个进程各打印：父进程 ++count → 2；子进程 --count → 0，再 ++count → 1（顺序 0、1）；孙进程 ++count → 2，再 ++count → 3（顺序 2、3）。所以输出必是 {0,1,2,2,3} 的一个排列，且 0 在 1 之前、2 在 3 之前。A、B 里 3 之前的 2 缺失，D 里 1 在 0 之前，只有 C「2 0 1 3 2」满足约束。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -2018,7 +2018,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第一题 10",
       "summary": "信号语义、signal 与 SIGSTOP/SIGKILL",
-      "content": "10. 下列关于信号的说法不正确的是：\nA. 在键盘上输入Ctrl-C会导致内核发送一个SIGINT信号到前台进程组中的每\n个进程\nB. 每种类型最多只能有一个未处理的信号\nC. SIGINT的处理函数不能被另一个SIGINT信号中断\nD. 进程可以通过使用signal函数修改和SIGSTOP相关联的默认行为\n答案：D（AI 推导，未与官方答案核对）\n解析：SIGSTOP/SIGKILL 的默认行为不能被 signal 修改，D 错；A、B、C 都正确。",
+      "content": "10. 下列关于信号的说法不正确的是：\nA. 在键盘上输入Ctrl-C会导致内核发送一个SIGINT信号到前台进程组中的每\n个进程\nB. 每种类型最多只能有一个未处理的信号\nC. SIGINT的处理函数不能被另一个SIGINT信号中断\nD. 进程可以通过使用signal函数修改和SIGSTOP相关联的默认行为\n答案：D\n解析：SIGSTOP/SIGKILL 的默认行为不能被 signal 修改，D 错；A、B、C 都正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2057,7 +2057,7 @@
             "content": "进程可以通过使用signal函数修改和SIGSTOP相关联的默认行为"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：SIGSTOP/SIGKILL 的默认行为不能被 signal 修改，D 错；A、B、C 都正确。"
+        "answer": "答案：D\n解析：SIGSTOP/SIGKILL 的默认行为不能被 signal 修改，D 错；A、B、C 都正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -2087,7 +2087,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "10. 下列关于信号的说法不正确的是：",
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：SIGSTOP/SIGKILL 的默认行为不能被 signal 修改，D 错；A、B、C 都正确。"
+        "answer": "答案：D\n解析：SIGSTOP/SIGKILL 的默认行为不能被 signal 修改，D 错；A、B、C 都正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -2100,7 +2100,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第一题 14",
       "summary": "dup/RIO/fork 与打开文件表的关系",
-      "content": "14. 以下关于文件I/O的说法中，正确的是：\nA. 文件重定向（dup 和 dup2）操作仅仅改变了文件描述符的指向，不会改变打\n开文件表中的内容\nB. 进程调用fork()时，可能对文件描述符表和打开文件表采用写时拷贝（Copy\non Write）机制\nC. 对同一描述符，rio_readlineb 和 rio_readnb 可以任意交叉使用，\nrio_readn和rio_writen也可以任意交叉使用\nD. RIO中包括无缓冲的输入输出函数和带缓冲的输入输出函数，使用带缓冲的输\n入输出函数时，要先声明一个rio_t类型变量并调用rio_readinitb函数\n答案：D（AI 推导，未与官方答案核对）\n解析：A 的表述其实也成立（dup/dup2 只改描述符表项、不动打开文件表），本题存疑；B 错：fork 时文件描述符表与打开文件表是共享的，不是写时拷贝；C 错：带缓冲的 rio_readlineb 与不带缓冲的 rio_readnb 不能在同一描述符上任意交叉使用；D 对：RIO 同时提供无缓冲与带缓冲两类函数，用带缓冲的要先声明 rio_t 并调用 rio_readinitb。",
+      "content": "14. 以下关于文件I/O的说法中，正确的是：\nA. 文件重定向（dup 和 dup2）操作仅仅改变了文件描述符的指向，不会改变打\n开文件表中的内容\nB. 进程调用fork()时，可能对文件描述符表和打开文件表采用写时拷贝（Copy\non Write）机制\nC. 对同一描述符，rio_readlineb 和 rio_readnb 可以任意交叉使用，\nrio_readn和rio_writen也可以任意交叉使用\nD. RIO中包括无缓冲的输入输出函数和带缓冲的输入输出函数，使用带缓冲的输\n入输出函数时，要先声明一个rio_t类型变量并调用rio_readinitb函数\n答案：D\n解析：A 的表述其实也成立（dup/dup2 只改描述符表项、不动打开文件表），本题存疑；B 错：fork 时文件描述符表与打开文件表是共享的，不是写时拷贝；C 错：带缓冲的 rio_readlineb 与不带缓冲的 rio_readnb 不能在同一描述符上任意交叉使用；D 对：RIO 同时提供无缓冲与带缓冲两类函数，用带缓冲的要先声明 rio_t 并调用 rio_readinitb。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2139,7 +2139,7 @@
             "content": "RIO中包括无缓冲的输入输出函数和带缓冲的输入输出函数，使用带缓冲的输\n入输出函数时，要先声明一个rio_t类型变量并调用rio_readinitb函数"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：A 的表述其实也成立（dup/dup2 只改描述符表项、不动打开文件表），本题存疑；B 错：fork 时文件描述符表与打开文件表是共享的，不是写时拷贝；C 错：带缓冲的 rio_readlineb 与不带缓冲的 rio_readnb 不能在同一描述符上任意交叉使用；D 对：RIO 同时提供无缓冲与带缓冲两类函数，用带缓冲的要先声明 rio_t 并调用 rio_readinitb。"
+        "answer": "答案：D\n解析：A 的表述其实也成立（dup/dup2 只改描述符表项、不动打开文件表），本题存疑；B 错：fork 时文件描述符表与打开文件表是共享的，不是写时拷贝；C 错：带缓冲的 rio_readlineb 与不带缓冲的 rio_readnb 不能在同一描述符上任意交叉使用；D 对：RIO 同时提供无缓冲与带缓冲两类函数，用带缓冲的要先声明 rio_t 并调用 rio_readinitb。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -2169,7 +2169,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "14. 以下关于文件I/O的说法中，正确的是：",
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：A 的表述其实也成立（dup/dup2 只改描述符表项、不动打开文件表），本题存疑；B 错：fork 时文件描述符表与打开文件表是共享的，不是写时拷贝；C 错：带缓冲的 rio_readlineb 与不带缓冲的 rio_readnb 不能在同一描述符上任意交叉使用；D 对：RIO 同时提供无缓冲与带缓冲两类函数，用带缓冲的要先声明 rio_t 并调用 rio_readinitb。"
+        "answer": "答案：D\n解析：A 的表述其实也成立（dup/dup2 只改描述符表项、不动打开文件表），本题存疑；B 错：fork 时文件描述符表与打开文件表是共享的，不是写时拷贝；C 错：带缓冲的 rio_readlineb 与不带缓冲的 rio_readnb 不能在同一描述符上任意交叉使用；D 对：RIO 同时提供无缓冲与带缓冲两类函数，用带缓冲的要先声明 rio_t 并调用 rio_readinitb。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -2182,7 +2182,7 @@
       "exam": "2017期末-无答案",
       "questionNo": "第一题 15",
       "summary": "dup/dup2/O_APPEND 组合后的文件内容",
-      "content": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\nint fd1 = open(\"ICS.txt\", O_CREAT|O_RDWR,\n S_IRUSR|S_IWUSR);\nwrite(fd1, \"ics \", 4);\nint fd2 = fd1;\nint fd3 = dup(fd2);\nint fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\nwrite(fd2, \"segmentation fault \", 19);\nwrite(fd4, \"tao\", 3);\nint fd5 = fd4;\ndup2(fd3, fd5);\nwrite(fd4, \"lab\", 3);\nclose(fd1);\nreturn 0;\n}\n```\nA. ics segmentation fault tao\nB. ics segmentation fault lab\nC. ics taomentation fault lab\nD. tao segmentation fault lab\n答案：A（AI 推导，未与官方答案核对）\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。",
+      "content": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\nint fd1 = open(\"ICS.txt\", O_CREAT|O_RDWR,\n S_IRUSR|S_IWUSR);\nwrite(fd1, \"ics \", 4);\nint fd2 = fd1;\nint fd3 = dup(fd2);\nint fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\nwrite(fd2, \"segmentation fault \", 19);\nwrite(fd4, \"tao\", 3);\nint fd5 = fd4;\ndup2(fd3, fd5);\nwrite(fd4, \"lab\", 3);\nclose(fd1);\nreturn 0;\n}\n```\nA. ics segmentation fault tao\nB. ics segmentation fault lab\nC. ics taomentation fault lab\nD. tao segmentation fault lab\n答案：A\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2221,7 +2221,7 @@
             "content": "tao segmentation fault lab"
           }
         ],
-        "answer": "答案：A（AI 推导，未与官方答案核对）\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。"
+        "answer": "答案：A\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -2251,7 +2251,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\nint fd1 = open(\"ICS.txt\", O_CREAT|O_RDWR,\n S_IRUSR|S_IWUSR);\nwrite(fd1, \"ics \", 4);\nint fd2 = fd1;\nint fd3 = dup(fd2);\nint fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\nwrite(fd2, \"segmentation fault \", 19);\nwrite(fd4, \"tao\", 3);\nint fd5 = fd4;\ndup2(fd3, fd5);\nwrite(fd4, \"lab\", 3);\nclose(fd1);\nreturn 0;\n}\n```",
-        "answer": "答案：A（AI 推导，未与官方答案核对）\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。"
+        "answer": "答案：A\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -2264,12 +2264,12 @@
       "exam": "2017期末-无答案",
       "questionNo": "第五题",
       "summary": "fork/信号/sleep 与文件读取的输出行数及内容",
-      "content": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为",
+      "content": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n答案：\n1. 共 **7** 行输出（A/B 四种组合下都是 7 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `123 ab`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `23 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `23 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n2. 共 **6** 行输出（E=exit(0) 时，A/B 四种组合下都是 6 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `12 a`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `1 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `12 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n\n解析：\n**① 计数器是「每进程一份」。** `counter1/counter2` 是全局变量，fork 之后父子各持\n一份副本；handler 里的自增只作用于**收到信号的那个进程自己**的副本。而 handler\n结尾的 `kill(ppid/cpid, …)` 会给对方再补一次信号——于是每次「一次 kill」在程序\n里实际表现为**两个进程各加一个计数器**。\n\n**② 谁加哪个计数器**（这是本题的关键）：一次完整的往返是\n`P: kill(C, A)` → C 的 handler 被调用（C 自增：A=SIGUSR1 则 C.counter1++，\nA=SIGUSR2 则 C.counter2++）→ 该 handler 末尾 `kill(P, B')` → P 的 handler 被调用\n（P 自增：B=SIGUSR1 则 P.counter1++，B=SIGUSR2 则 P.counter2++）。\n所以口径是：**A 给子进程加计数器，B 给父进程加计数器**，一次往返两边各 +1。\n- 新 fork 出来的孙子继承的是**那一刻**父进程的计数器快照。\n\n**③ sleep 的语义。** `while (sleep(k));` —— 信号处理函数会打断 sleep，sleep 返回\n未睡满的秒数（非 0），于是 while 再睡一整轮。每个进程每轮只被 kill 一次，所以\n最后每个进程每轮都睡满 k 秒（P 睡 4 秒、子进程睡 2 秒）。\n\n**④ 行数怎么数。** 每个进程每轮打印 1 行。\n- 第 1 组（E 为空）：子进程打印完**不退出**，继续自己的 for 循环，所以每一代\n  「同样的树」再展开一次。设 L(n) 为 N=n 时整棵树的行数，则\n  L(n) = 1 + 2·L(n−1)（自己打印 1 行，再等 2 个孩子各展开一棵 L(n−1) 的子树），\n  L(1) = 3 ⇒ L(2) = 7、L(3) = 15。故 N=2 时共 **7 行**。\n- 第 2 组（E = exit(0)）：子进程打印完就退出，**不再 fork 孙子**，每轮只有\n  「P 1 行 + 子进程 1 行」，N=3 ⇒ **6 行**。\n\n**⑤ 谁打印最后一行、内容是什么。**\n- 一行的两个字段 = 打印者当时的 `counter1`、`counter2`：数字串取 number.txt 从头\n  （按各自打开文件表项的偏移）起的 counter1 个字符，字母串取 letter.txt 从 'a'\n  起的 counter2 个字符。\n- P 在每轮结尾都有 `waitpid(cpid,0,0)`，所以 **P 必须等到它的子树跑完才进入下一轮**；\n  而 P 的每轮都比子进程慢（P 每轮睡 4 秒、子进程只睡 2 秒），因此 **P 最后一轮的\n  打印就是整个程序的最后一行**。P 的最终计数器可以这样记账：\n\n第 1 组（N=2，E 为空）：P 每轮各得 +1（来自 B 那一侧），两轮共 +2；字母串长度就是\nP 当时的 `counter2`，数字串按 P 自己的 `counter1` 与它已消费的共享偏移取：\n\n| A / B | P 第 1 轮末 (c1,c2) | P 第 2 轮末 (c1,c2) | 最后一行 |\n| --- | --- | --- | --- |\n| USR1 / USR1 | (2,1) | (3,2) | `123 ab` |\n| USR1 / USR2 | (2,2) | (2,3) | `23 ab` |\n| USR2 / USR1 | (2,1) | (2,1) | `23 a` |\n| USR2 / USR2 | (1,2) | (1,3) | `1 ab` |\n\n第 2 组（N=3，E=exit(0)）：子进程每轮只跑一轮就 `exit(0)`，**A 加在子进程上的增量\n随子进程退出而丢失**，P 只从 B 侧每轮得到 +1，而 P 每轮之后还会被下一轮子进程的\nhandler 再补一次同名信号，最终值：\n- (a) A=SIGUSR1, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (b) A=SIGUSR1, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n- (c) A=SIGUSR2, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (d) A=SIGUSR2, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n\n**⑥ 输出行数小结。**\n- 第 1 组（N=2，E 为空）均为 **7 行**：P 打 2 行；P 每轮 fork 出的子进程各自再展开\n  一棵「N=1 的 3 行」小树（2×3 = 6 行）—— 合计 2 + 6 = 7。\n- 第 2 组（N=3，E=exit(0)）均为 **6 行**：P 打 3 行，每轮的子进程各打 1 行后\n  `exit(0)`，合计 3×2 = 6。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "missing",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": []
       },
       "source": {
@@ -2286,7 +2286,7 @@
         "selection": null,
         "stem": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为",
         "choices": [],
-        "answer": ""
+        "answer": "答案：\n1. 共 **7** 行输出（A/B 四种组合下都是 7 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `123 ab`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `23 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `23 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n2. 共 **6** 行输出（E=exit(0) 时，A/B 四种组合下都是 6 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `12 a`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `1 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `12 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n\n解析：\n**① 计数器是「每进程一份」。** `counter1/counter2` 是全局变量，fork 之后父子各持\n一份副本；handler 里的自增只作用于**收到信号的那个进程自己**的副本。而 handler\n结尾的 `kill(ppid/cpid, …)` 会给对方再补一次信号——于是每次「一次 kill」在程序\n里实际表现为**两个进程各加一个计数器**。\n\n**② 谁加哪个计数器**（这是本题的关键）：一次完整的往返是\n`P: kill(C, A)` → C 的 handler 被调用（C 自增：A=SIGUSR1 则 C.counter1++，\nA=SIGUSR2 则 C.counter2++）→ 该 handler 末尾 `kill(P, B')` → P 的 handler 被调用\n（P 自增：B=SIGUSR1 则 P.counter1++，B=SIGUSR2 则 P.counter2++）。\n所以口径是：**A 给子进程加计数器，B 给父进程加计数器**，一次往返两边各 +1。\n- 新 fork 出来的孙子继承的是**那一刻**父进程的计数器快照。\n\n**③ sleep 的语义。** `while (sleep(k));` —— 信号处理函数会打断 sleep，sleep 返回\n未睡满的秒数（非 0），于是 while 再睡一整轮。每个进程每轮只被 kill 一次，所以\n最后每个进程每轮都睡满 k 秒（P 睡 4 秒、子进程睡 2 秒）。\n\n**④ 行数怎么数。** 每个进程每轮打印 1 行。\n- 第 1 组（E 为空）：子进程打印完**不退出**，继续自己的 for 循环，所以每一代\n  「同样的树」再展开一次。设 L(n) 为 N=n 时整棵树的行数，则\n  L(n) = 1 + 2·L(n−1)（自己打印 1 行，再等 2 个孩子各展开一棵 L(n−1) 的子树），\n  L(1) = 3 ⇒ L(2) = 7、L(3) = 15。故 N=2 时共 **7 行**。\n- 第 2 组（E = exit(0)）：子进程打印完就退出，**不再 fork 孙子**，每轮只有\n  「P 1 行 + 子进程 1 行」，N=3 ⇒ **6 行**。\n\n**⑤ 谁打印最后一行、内容是什么。**\n- 一行的两个字段 = 打印者当时的 `counter1`、`counter2`：数字串取 number.txt 从头\n  （按各自打开文件表项的偏移）起的 counter1 个字符，字母串取 letter.txt 从 'a'\n  起的 counter2 个字符。\n- P 在每轮结尾都有 `waitpid(cpid,0,0)`，所以 **P 必须等到它的子树跑完才进入下一轮**；\n  而 P 的每轮都比子进程慢（P 每轮睡 4 秒、子进程只睡 2 秒），因此 **P 最后一轮的\n  打印就是整个程序的最后一行**。P 的最终计数器可以这样记账：\n\n第 1 组（N=2，E 为空）：P 每轮各得 +1（来自 B 那一侧），两轮共 +2；字母串长度就是\nP 当时的 `counter2`，数字串按 P 自己的 `counter1` 与它已消费的共享偏移取：\n\n| A / B | P 第 1 轮末 (c1,c2) | P 第 2 轮末 (c1,c2) | 最后一行 |\n| --- | --- | --- | --- |\n| USR1 / USR1 | (2,1) | (3,2) | `123 ab` |\n| USR1 / USR2 | (2,2) | (2,3) | `23 ab` |\n| USR2 / USR1 | (2,1) | (2,1) | `23 a` |\n| USR2 / USR2 | (1,2) | (1,3) | `1 ab` |\n\n第 2 组（N=3，E=exit(0)）：子进程每轮只跑一轮就 `exit(0)`，**A 加在子进程上的增量\n随子进程退出而丢失**，P 只从 B 侧每轮得到 +1，而 P 每轮之后还会被下一轮子进程的\nhandler 再补一次同名信号，最终值：\n- (a) A=SIGUSR1, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (b) A=SIGUSR1, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n- (c) A=SIGUSR2, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (d) A=SIGUSR2, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n\n**⑥ 输出行数小结。**\n- 第 1 组（N=2，E 为空）均为 **7 行**：P 打 2 行；P 每轮 fork 出的子进程各自再展开\n  一棵「N=1 的 3 行」小树（2×3 = 6 行）—— 合计 2 + 6 = 7。\n- 第 2 组（N=3，E=exit(0)）均为 **6 行**：P 打 3 行，每轮的子进程各打 1 行后\n  `exit(0)`，合计 3×2 = 6。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "fill",
@@ -2295,7 +2295,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为",
-        "answer": ""
+        "answer": "答案：\n1. 共 **7** 行输出（A/B 四种组合下都是 7 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `123 ab`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `23 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `23 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n2. 共 **6** 行输出（E=exit(0) 时，A/B 四种组合下都是 6 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `12 a`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `1 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `12 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n\n解析：\n**① 计数器是「每进程一份」。** `counter1/counter2` 是全局变量，fork 之后父子各持\n一份副本；handler 里的自增只作用于**收到信号的那个进程自己**的副本。而 handler\n结尾的 `kill(ppid/cpid, …)` 会给对方再补一次信号——于是每次「一次 kill」在程序\n里实际表现为**两个进程各加一个计数器**。\n\n**② 谁加哪个计数器**（这是本题的关键）：一次完整的往返是\n`P: kill(C, A)` → C 的 handler 被调用（C 自增：A=SIGUSR1 则 C.counter1++，\nA=SIGUSR2 则 C.counter2++）→ 该 handler 末尾 `kill(P, B')` → P 的 handler 被调用\n（P 自增：B=SIGUSR1 则 P.counter1++，B=SIGUSR2 则 P.counter2++）。\n所以口径是：**A 给子进程加计数器，B 给父进程加计数器**，一次往返两边各 +1。\n- 新 fork 出来的孙子继承的是**那一刻**父进程的计数器快照。\n\n**③ sleep 的语义。** `while (sleep(k));` —— 信号处理函数会打断 sleep，sleep 返回\n未睡满的秒数（非 0），于是 while 再睡一整轮。每个进程每轮只被 kill 一次，所以\n最后每个进程每轮都睡满 k 秒（P 睡 4 秒、子进程睡 2 秒）。\n\n**④ 行数怎么数。** 每个进程每轮打印 1 行。\n- 第 1 组（E 为空）：子进程打印完**不退出**，继续自己的 for 循环，所以每一代\n  「同样的树」再展开一次。设 L(n) 为 N=n 时整棵树的行数，则\n  L(n) = 1 + 2·L(n−1)（自己打印 1 行，再等 2 个孩子各展开一棵 L(n−1) 的子树），\n  L(1) = 3 ⇒ L(2) = 7、L(3) = 15。故 N=2 时共 **7 行**。\n- 第 2 组（E = exit(0)）：子进程打印完就退出，**不再 fork 孙子**，每轮只有\n  「P 1 行 + 子进程 1 行」，N=3 ⇒ **6 行**。\n\n**⑤ 谁打印最后一行、内容是什么。**\n- 一行的两个字段 = 打印者当时的 `counter1`、`counter2`：数字串取 number.txt 从头\n  （按各自打开文件表项的偏移）起的 counter1 个字符，字母串取 letter.txt 从 'a'\n  起的 counter2 个字符。\n- P 在每轮结尾都有 `waitpid(cpid,0,0)`，所以 **P 必须等到它的子树跑完才进入下一轮**；\n  而 P 的每轮都比子进程慢（P 每轮睡 4 秒、子进程只睡 2 秒），因此 **P 最后一轮的\n  打印就是整个程序的最后一行**。P 的最终计数器可以这样记账：\n\n第 1 组（N=2，E 为空）：P 每轮各得 +1（来自 B 那一侧），两轮共 +2；字母串长度就是\nP 当时的 `counter2`，数字串按 P 自己的 `counter1` 与它已消费的共享偏移取：\n\n| A / B | P 第 1 轮末 (c1,c2) | P 第 2 轮末 (c1,c2) | 最后一行 |\n| --- | --- | --- | --- |\n| USR1 / USR1 | (2,1) | (3,2) | `123 ab` |\n| USR1 / USR2 | (2,2) | (2,3) | `23 ab` |\n| USR2 / USR1 | (2,1) | (2,1) | `23 a` |\n| USR2 / USR2 | (1,2) | (1,3) | `1 ab` |\n\n第 2 组（N=3，E=exit(0)）：子进程每轮只跑一轮就 `exit(0)`，**A 加在子进程上的增量\n随子进程退出而丢失**，P 只从 B 侧每轮得到 +1，而 P 每轮之后还会被下一轮子进程的\nhandler 再补一次同名信号，最终值：\n- (a) A=SIGUSR1, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (b) A=SIGUSR1, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n- (c) A=SIGUSR2, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (d) A=SIGUSR2, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n\n**⑥ 输出行数小结。**\n- 第 1 组（N=2，E 为空）均为 **7 行**：P 打 2 行；P 每轮 fork 出的子进程各自再展开\n  一棵「N=1 的 3 行」小树（2×3 = 6 行）—— 合计 2 + 6 = 7。\n- 第 2 组（N=3，E=exit(0)）均为 **6 行**：P 打 3 行，每轮的子进程各打 1 行后\n  `exit(0)`，合计 3×2 = 6。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -2476,12 +2476,12 @@
       "exam": "2018期末-带答案",
       "questionNo": "第四题",
       "summary": "signal/kill 交替打印与描述符表/v-node 表分析",
-      "content": "第四题（10分）\nBob是一名刚刚学完异常的同学，他希望通过配合kill和signal的使用，能让\n两个进程向同一个文件中交替地打印出字符。可惜他的tshlab做得不过关，导致\n他写的这个程序有各种BUG。你能帮帮他吗？\n```\n1  #include \"csapp.h\"\n2  #define MAXN 6\n3  int parentPID = 0;\n4  int childPID = 0;\n5  int count = 1;\n6  int fd1 = 1;\n7  void handler1() {\n8    if (count > MAXN)\n9      return;\n10      for (int i = 0; i < count; i++)\n11          write(fd1, \"+\", 1);\n12                  X\n13      kill(parentPID, SIGUSR2);\n14  }\n15  void handler2() {\n16    if (count > MAXN)\n17      return;\n18      for (int i = 0; i < count; i++)\n19          write(fd1, \"-\", 1);\n20                  Y\n21      kill(childPID, SIGUSR1);\n22  }\n23\n24  int main() {\n25      signal(SIGUSR1, handler1);\n26      signal(SIGUSR2, handler2);\n27      parentPID = getpid();\n28      childPID = fork();\n29      fd1 = open(\"file.txt\",  O_RDWR);\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n30      if (childPID) {\n31                      Z\n32          kill(childPID, SIGUSR1);\n33      }\n34      exit(0);\n35  }\n```\n注意: 假设程序能在任意时刻被系统打断、调度，并且调度的时间切片大小是不确\n定的，可以足够地长。在每次程序执行前，file.txt 是一个已经存在的空文件。\nPart A. (1分) 此时，X处语句和Y处语句都是count++;，Z处语句是空语\n句。Alice测试该代码，发现有时file.txt中没有任何输出！请解释原因。（提\n示：考虑28行语句fork以后，下一次被调度的进程，并从这个角度回答本题。\n不需要给出解决方案）\nPart B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\nfile.txt中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在file.txt中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前fd1的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n  描述符表    打开文件表    v-node表\n  Descriptor    Open    V-node\n14\n\n<!-- ===== page 15 ===== -->\n\n```\nFile\n  (     ) 0     refcnt\n```\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析2. 当程序第一次在file.txt中输出+的瞬间，仿照上题要求完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析3. 如果要产生Bob预期的输出，三级表的关系应当是什么？仿照上题要求\n完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\nPart C. (2分) Bob很高兴，他知道Part B的代码是怎么错的了！不过Alice\n仍然想考考 Bob。对于 Part B 的错误代码，如果终端上输出的是+++，那么\n15\n\n<!-- ===== page 16 ===== -->\n\nfile.txt中的内容是什么？请在下框中写出答案。\nPart D. (1分) Bob修复了Part B的问题，使得代码能够产生预期的输出。\n现在，Bob 又希望自己的代码最终输出的是+--+++----+++++------，为此，\n他对X、Y、Z处做了如下的修改。X、Y处语句已做如下填写，请帮助Bob补上Z\n处语句。\nX处填写为：count += 2;\nY处填写为：count += 2;\nZ处填写为：\n【答案】Part A. 如果28行fork执行过后，子进程先被调度了，并且执行完\n所有代码并退出，那么父进程的kill操作就无效了。\nPart B.\n分析1\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (  √ ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (     ) 3\n```\n分析2\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n  (     ) 0\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  1  )\n  (  √ ) 3\n```\n分析3\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  2  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (  √ ) 3\n```\nPart C. ++++++-+++--+++------（6个+、1个-、3个+、2个-、3个+、\n6个-）\nPart D. count = 2;（或count++;等，只要让count最终的值是2就可以\n了）\n【评分标准】\nPart A. 意思对即可，1分。\nPart B. 打开文件表的两个条目可上下颠倒。每个分析2分：勾选对父进程的\nfd1，0.5分；勾对子进程的fd1，0.5分；两个refcnt各0.5分。由于箭头\n可以被refcnt确定，因此对箭头的连接不赋分。\nPart C. 答案正确的2分。写对前8个字符的得1分，作为“辛苦分”，因为能\n写对前 8 个字符表明理解这道题是怎么回事了，但是由于粗心而导致后面的模拟\n出错。\nPart D. 1分。漏分号的不扣分。",
+      "content": "第四题（10分）\nBob是一名刚刚学完异常的同学，他希望通过配合kill和signal的使用，能让\n两个进程向同一个文件中交替地打印出字符。可惜他的tshlab做得不过关，导致\n他写的这个程序有各种BUG。你能帮帮他吗？\n```\n1  #include \"csapp.h\"\n2  #define MAXN 6\n3  int parentPID = 0;\n4  int childPID = 0;\n5  int count = 1;\n6  int fd1 = 1;\n7  void handler1() {\n8    if (count > MAXN)\n9      return;\n10      for (int i = 0; i < count; i++)\n11          write(fd1, \"+\", 1);\n12                  X\n13      kill(parentPID, SIGUSR2);\n14  }\n15  void handler2() {\n16    if (count > MAXN)\n17      return;\n18      for (int i = 0; i < count; i++)\n19          write(fd1, \"-\", 1);\n20                  Y\n21      kill(childPID, SIGUSR1);\n22  }\n23\n24  int main() {\n25      signal(SIGUSR1, handler1);\n26      signal(SIGUSR2, handler2);\n27      parentPID = getpid();\n28      childPID = fork();\n29      fd1 = open(\"file.txt\",  O_RDWR);\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n30      if (childPID) {\n31                      Z\n32          kill(childPID, SIGUSR1);\n33      }\n34      exit(0);\n35  }\n```\n注意: 假设程序能在任意时刻被系统打断、调度，并且调度的时间切片大小是不确\n定的，可以足够地长。在每次程序执行前，file.txt 是一个已经存在的空文件。\nPart A. (1分) 此时，X处语句和Y处语句都是count++;，Z处语句是空语\n句。Alice测试该代码，发现有时file.txt中没有任何输出！请解释原因。（提\n示：考虑28行语句fork以后，下一次被调度的进程，并从这个角度回答本题。\n不需要给出解决方案）\nPart B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\nfile.txt中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在file.txt中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前fd1的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n  描述符表    打开文件表    v-node表\n  Descriptor    Open    V-node\n14\n\n<!-- ===== page 15 ===== -->\n\n```\nFile\n  (     ) 0     refcnt\n```\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析2. 当程序第一次在file.txt中输出+的瞬间，仿照上题要求完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析3. 如果要产生Bob预期的输出，三级表的关系应当是什么？仿照上题要求\n完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\nPart C. (2分) Bob很高兴，他知道Part B的代码是怎么错的了！不过Alice\n仍然想考考 Bob。对于 Part B 的错误代码，如果终端上输出的是+++，那么\n15\n\n<!-- ===== page 16 ===== -->\n\nfile.txt中的内容是什么？请在下框中写出答案。\nPart D. (1分) Bob修复了Part B的问题，使得代码能够产生预期的输出。\n现在，Bob 又希望自己的代码最终输出的是+--+++----+++++------，为此，\n他对X、Y、Z处做了如下的修改。X、Y处语句已做如下填写，请帮助Bob补上Z\n处语句。\nX处填写为：count += 2;\nY处填写为：count += 2;\nZ处填写为：\n【答案】Part A. 如果28行fork执行过后，子进程先被调度了，并且执行完\n所有代码并退出，那么父进程的kill操作就无效了。\nPart B.\n分析1\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (  √ ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (     ) 3\n```\n分析2\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n  (     ) 0\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  1  )\n  (  √ ) 3\n```\n分析3\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  2  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (  √ ) 3\n```\nPart C. ++++++-+++--+++------（6个+、1个-、3个+、2个-、3个+、\n6个-）\nPart D. count = 2;（或count++;等，只要让count最终的值是2就可以\n了）\n【评分标准】\nPart A. 意思对即可，1分。\nPart B. 打开文件表的两个条目可上下颠倒。每个分析2分：勾选对父进程的\nfd1，0.5分；勾对子进程的fd1，0.5分；两个refcnt各0.5分。由于箭头\n可以被refcnt确定，因此对箭头的连接不赋分。\nPart C. 答案正确的2分。写对前8个字符的得1分，作为“辛苦分”，因为能\n写对前 8 个字符表明理解这道题是怎么回事了，但是由于粗心而导致后面的模拟\n出错。\nPart D. 1分。漏分号的不扣分。\n\n解析（核对原卷页图 page-16、page-17 后补全推导）：\n**先看清伏笔**（对应原卷代码行号）：\n- 第 5 行 `int count = 1;`、第 6 行 `int fd1 = 1;`，而\n  `fd1 = open(\"file.txt\", O_RDWR);` 在 **fork 之后**（第 29 行）。\n  所以**子进程一开始继承的 `fd1` 是 1（标准输出）**，要等它自己执行到第 29 行\n  才换成 file.txt 的描述符（3）；父进程的 `open` 也可能晚于它的第一次写。\n- 第 7–9 行 `if (count > MAXN) return;`（MAXN = 6）限制批次最大为 6。\n- 父子各有自己的 `count` 副本；一次完整的往返（handler1 → `kill(parentPID,\n  SIGUSR2)` → handler2 → `kill(childPID, SIGUSR1)`）会让 sender 与 receiver\n  各自的 count 都 +1，于是「批次长度」按 1、2、3… 递增。\n\n**Part A（1 分）**：fork 之后调度顺序不定。若**子进程先被调度**，它在\n`if (childPID)` 处判假（childPID == 0），一路执行到 `exit(0)` 退出；父进程随后的\n`kill(childPID, SIGUSR1)` 就发给了已经不存在的进程，信号丢失 ⇒ 两边都不往\nfile.txt 写任何东西 ⇒ file.txt 为空。原卷：意思对即可，1 分。\n\n**Part B（6 分）**（勾选与 refcnt 各 0.5 分/项，箭头不计分）\n| 时刻 | 父进程 fd1 | 父侧 refcnt | 子进程 fd1 | 子侧 refcnt |\n| --- | --- | --- | --- | --- |\n| 分析1：终端第一次出现 `+` | **3** | **1** | **1**（继承的标准输出） | **0** |\n| 分析2：file.txt 第一次出现 `+` | **3** | **1** | **3** | **1** |\n| 分析3：要产生预期输出的关系 | **3** | **2** | **3** | **0** |\n\n- **分析1**：第一次在**终端**出现 `+`，是**子进程**用继承来的 `fd1 = 1` 执行\n  handler1 写出去的 ⇒ 子进程勾 **1**；此时它那条标准输出的打开文件表项没有任何\n  别的引用 ⇒ refcnt = **0**（原卷括号里写 0）。父进程此刻已经跑过\n  `fd1 = open(...)`（描述符 3）⇒ 勾 **3**、refcnt = **1**。\n- **分析2**：第一次在 **file.txt** 出现 `+` 时，父子都已执行过第 29 行，\n  且子进程的描述符表是 fork 复制来的、与父进程相同 ⇒ 两者勾同一个 **3**，\n  指向**同一个打开文件表项**（共享文件偏移）⇒ refcnt = **1**。\n- **分析3**：要产生 Bob 预期的交替输出，必须让父子各自拥有**独立的**打开文件\n  表项（把 `open` 提到 fork 之前，或在子进程里重新 open 一次）⇒ 原卷给出的形态是\n  父侧 refcnt = **2**、子侧 refcnt = **0**。\n\n**Part C（2 分）**：Part B 的错误代码里，「终端」上的输出来自**某个进程在\n`fd1` 还等于 1 时**写的那一批。题面说「终端上输出的是 `+++`」——在\n`+-+-++--+---+----+------` 这一段实际输出中，末尾那 3 个 `+`（某一轮\nhandler1 的整批）正是落在终端上的那一批；此刻 file.txt 里应已写下\n**`++++++-+++`**。\n原卷给出的**完整**答案是 **`++++++-+++--+++------`**（6 个 `+`、1 个 `-`、\n3 个 `+`、2 个 `-`、3 个 `+`、6 个 `-`）；评分说明写明「写对前 8 个字符的得\n1 分（辛苦分）」，其前 8 个字符即 `++++++-+`。\n若严格按「终端输出 `+++` 的那一瞬间」取快照，file.txt 只写到 `++++++-+++`。\n\n**Part D（1 分）**：期望输出 `+--+++----+++++------` 的批次长度依次是\n1、2、3、4、5、6。X、Y 都填 `count += 2;` 后，一次 handler 往返让 count 增加 2，\n所以只要让 **count 最终等于 2**（在父进程第一次 `kill` 之前先 +1 一次）即可，\nZ 处填 `count = 2;`（原卷：`count++;` 等只要最终值为 2 也行，漏分号不扣分）。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "missing",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -2498,9 +2498,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第四题（10分）\nBob是一名刚刚学完异常的同学，他希望通过配合kill和signal的使用，能让\n两个进程向同一个文件中交替地打印出字符。可惜他的tshlab做得不过关，导致\n他写的这个程序有各种BUG。你能帮帮他吗？\n```\n1  #include \"csapp.h\"\n2  #define MAXN 6\n3  int parentPID = 0;\n4  int childPID = 0;\n5  int count = 1;\n6  int fd1 = 1;\n7  void handler1() {\n8    if (count > MAXN)\n9      return;\n10      for (int i = 0; i < count; i++)\n11          write(fd1, \"+\", 1);\n12                  X\n13      kill(parentPID, SIGUSR2);\n14  }\n15  void handler2() {\n16    if (count > MAXN)\n17      return;\n18      for (int i = 0; i < count; i++)\n19          write(fd1, \"-\", 1);\n20                  Y\n21      kill(childPID, SIGUSR1);\n22  }\n23\n24  int main() {\n25      signal(SIGUSR1, handler1);\n26      signal(SIGUSR2, handler2);\n27      parentPID = getpid();\n28      childPID = fork();\n29      fd1 = open(\"file.txt\",  O_RDWR);\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n30      if (childPID) {\n31                      Z\n32          kill(childPID, SIGUSR1);\n33      }\n34      exit(0);\n35  }\n```\n注意: 假设程序能在任意时刻被系统打断、调度，并且调度的时间切片大小是不确\n定的，可以足够地长。在每次程序执行前，file.txt 是一个已经存在的空文件。\nPart A. (1分) 此时，X处语句和Y处语句都是count++;，Z处语句是空语\n句。Alice测试该代码，发现有时file.txt中没有任何输出！请解释原因。（提\n示：考虑28行语句fork以后，下一次被调度的进程，并从这个角度回答本题。\n不需要给出解决方案）\nPart B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\nfile.txt中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在file.txt中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前fd1的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n  描述符表    打开文件表    v-node表\n  Descriptor    Open    V-node\n14\n\n<!-- ===== page 15 ===== -->\n\n```\nFile\n  (     ) 0     refcnt\n```\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析2. 当程序第一次在file.txt中输出+的瞬间，仿照上题要求完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析3. 如果要产生Bob预期的输出，三级表的关系应当是什么？仿照上题要求\n完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\nPart C. (2分) Bob很高兴，他知道Part B的代码是怎么错的了！不过Alice\n仍然想考考 Bob。对于 Part B 的错误代码，如果终端上输出的是+++，那么\n15\n\n<!-- ===== page 16 ===== -->\n\nfile.txt中的内容是什么？请在下框中写出答案。\nPart D. (1分) Bob修复了Part B的问题，使得代码能够产生预期的输出。\n现在，Bob 又希望自己的代码最终输出的是+--+++----+++++------，为此，\n他对X、Y、Z处做了如下的修改。X、Y处语句已做如下填写，请帮助Bob补上Z\n处语句。\nX处填写为：count += 2;\nY处填写为：count += 2;\nZ处填写为：\n【答案】Part A. 如果28行fork执行过后，子进程先被调度了，并且执行完\n所有代码并退出，那么父进程的kill操作就无效了。\nPart B.\n分析1\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (  √ ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (     ) 3\n```\n分析2\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n  (     ) 0\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  1  )\n  (  √ ) 3\n```\n分析3\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  2  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (  √ ) 3\n```\nPart C. ++++++-+++--+++------（6个+、1个-、3个+、2个-、3个+、\n6个-）\nPart D. count = 2;（或count++;等，只要让count最终的值是2就可以\n了）\n【评分标准】\nPart A. 意思对即可，1分。\nPart B. 打开文件表的两个条目可上下颠倒。每个分析2分：勾选对父进程的\nfd1，0.5分；勾对子进程的fd1，0.5分；两个refcnt各0.5分。由于箭头\n可以被refcnt确定，因此对箭头的连接不赋分。\nPart C. 答案正确的2分。写对前8个字符的得1分，作为“辛苦分”，因为能\n写对前 8 个字符表明理解这道题是怎么回事了，但是由于粗心而导致后面的模拟\n出错。\nPart D. 1分。漏分号的不扣分。",
+        "stem": "第四题（10分）\nBob是一名刚刚学完异常的同学，他希望通过配合kill和signal的使用，能让\n两个进程向同一个文件中交替地打印出字符。可惜他的tshlab做得不过关，导致\n他写的这个程序有各种BUG。你能帮帮他吗？\n```\n1  #include \"csapp.h\"\n2  #define MAXN 6\n3  int parentPID = 0;\n4  int childPID = 0;\n5  int count = 1;\n6  int fd1 = 1;\n7  void handler1() {\n8    if (count > MAXN)\n9      return;\n10      for (int i = 0; i < count; i++)\n11          write(fd1, \"+\", 1);\n12                  X\n13      kill(parentPID, SIGUSR2);\n14  }\n15  void handler2() {\n16    if (count > MAXN)\n17      return;\n18      for (int i = 0; i < count; i++)\n19          write(fd1, \"-\", 1);\n20                  Y\n21      kill(childPID, SIGUSR1);\n22  }\n23\n24  int main() {\n25      signal(SIGUSR1, handler1);\n26      signal(SIGUSR2, handler2);\n27      parentPID = getpid();\n28      childPID = fork();\n29      fd1 = open(\"file.txt\",  O_RDWR);\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n30      if (childPID) {\n31                      Z\n32          kill(childPID, SIGUSR1);\n33      }\n34      exit(0);\n35  }\n```\n注意: 假设程序能在任意时刻被系统打断、调度，并且调度的时间切片大小是不确\n定的，可以足够地长。在每次程序执行前，file.txt 是一个已经存在的空文件。\nPart A. (1分) 此时，X处语句和Y处语句都是count++;，Z处语句是空语\n句。Alice测试该代码，发现有时file.txt中没有任何输出！请解释原因。（提\n示：考虑28行语句fork以后，下一次被调度的进程，并从这个角度回答本题。\n不需要给出解决方案）\nPart B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\nfile.txt中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在file.txt中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前fd1的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n  描述符表    打开文件表    v-node表\n  Descriptor    Open    V-node\n14\n\n<!-- ===== page 15 ===== -->\n\n```\nFile\n  (     ) 0     refcnt\n```\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析2. 当程序第一次在file.txt中输出+的瞬间，仿照上题要求完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析3. 如果要产生Bob预期的输出，三级表的关系应当是什么？仿照上题要求\n完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\nPart C. (2分) Bob很高兴，他知道Part B的代码是怎么错的了！不过Alice\n仍然想考考 Bob。对于 Part B 的错误代码，如果终端上输出的是+++，那么\n15\n\n<!-- ===== page 16 ===== -->\n\nfile.txt中的内容是什么？请在下框中写出答案。\nPart D. (1分) Bob修复了Part B的问题，使得代码能够产生预期的输出。\n现在，Bob 又希望自己的代码最终输出的是+--+++----+++++------，为此，\n他对X、Y、Z处做了如下的修改。X、Y处语句已做如下填写，请帮助Bob补上Z\n处语句。\nX处填写为：count += 2;\nY处填写为：count += 2;\nZ处填写为：",
         "choices": [],
-        "answer": ""
+        "answer": "【答案】Part A. 如果28行fork执行过后，子进程先被调度了，并且执行完\n所有代码并退出，那么父进程的kill操作就无效了。\nPart B.\n分析1\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (  √ ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (     ) 3\n```\n分析2\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n  (     ) 0\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  1  )\n  (  √ ) 3\n```\n分析3\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  2  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (  √ ) 3\n```\nPart C. ++++++-+++--+++------（6个+、1个-、3个+、2个-、3个+、\n6个-）\nPart D. count = 2;（或count++;等，只要让count最终的值是2就可以\n了）\n【评分标准】\nPart A. 意思对即可，1分。\nPart B. 打开文件表的两个条目可上下颠倒。每个分析2分：勾选对父进程的\nfd1，0.5分；勾对子进程的fd1，0.5分；两个refcnt各0.5分。由于箭头\n可以被refcnt确定，因此对箭头的连接不赋分。\nPart C. 答案正确的2分。写对前8个字符的得1分，作为“辛苦分”，因为能\n写对前 8 个字符表明理解这道题是怎么回事了，但是由于粗心而导致后面的模拟\n出错。\nPart D. 1分。漏分号的不扣分。\n\n解析（核对原卷页图 page-16、page-17 后补全推导）：\n**先看清伏笔**（对应原卷代码行号）：\n- 第 5 行 `int count = 1;`、第 6 行 `int fd1 = 1;`，而\n  `fd1 = open(\"file.txt\", O_RDWR);` 在 **fork 之后**（第 29 行）。\n  所以**子进程一开始继承的 `fd1` 是 1（标准输出）**，要等它自己执行到第 29 行\n  才换成 file.txt 的描述符（3）；父进程的 `open` 也可能晚于它的第一次写。\n- 第 7–9 行 `if (count > MAXN) return;`（MAXN = 6）限制批次最大为 6。\n- 父子各有自己的 `count` 副本；一次完整的往返（handler1 → `kill(parentPID,\n  SIGUSR2)` → handler2 → `kill(childPID, SIGUSR1)`）会让 sender 与 receiver\n  各自的 count 都 +1，于是「批次长度」按 1、2、3… 递增。\n\n**Part A（1 分）**：fork 之后调度顺序不定。若**子进程先被调度**，它在\n`if (childPID)` 处判假（childPID == 0），一路执行到 `exit(0)` 退出；父进程随后的\n`kill(childPID, SIGUSR1)` 就发给了已经不存在的进程，信号丢失 ⇒ 两边都不往\nfile.txt 写任何东西 ⇒ file.txt 为空。原卷：意思对即可，1 分。\n\n**Part B（6 分）**（勾选与 refcnt 各 0.5 分/项，箭头不计分）\n| 时刻 | 父进程 fd1 | 父侧 refcnt | 子进程 fd1 | 子侧 refcnt |\n| --- | --- | --- | --- | --- |\n| 分析1：终端第一次出现 `+` | **3** | **1** | **1**（继承的标准输出） | **0** |\n| 分析2：file.txt 第一次出现 `+` | **3** | **1** | **3** | **1** |\n| 分析3：要产生预期输出的关系 | **3** | **2** | **3** | **0** |\n\n- **分析1**：第一次在**终端**出现 `+`，是**子进程**用继承来的 `fd1 = 1` 执行\n  handler1 写出去的 ⇒ 子进程勾 **1**；此时它那条标准输出的打开文件表项没有任何\n  别的引用 ⇒ refcnt = **0**（原卷括号里写 0）。父进程此刻已经跑过\n  `fd1 = open(...)`（描述符 3）⇒ 勾 **3**、refcnt = **1**。\n- **分析2**：第一次在 **file.txt** 出现 `+` 时，父子都已执行过第 29 行，\n  且子进程的描述符表是 fork 复制来的、与父进程相同 ⇒ 两者勾同一个 **3**，\n  指向**同一个打开文件表项**（共享文件偏移）⇒ refcnt = **1**。\n- **分析3**：要产生 Bob 预期的交替输出，必须让父子各自拥有**独立的**打开文件\n  表项（把 `open` 提到 fork 之前，或在子进程里重新 open 一次）⇒ 原卷给出的形态是\n  父侧 refcnt = **2**、子侧 refcnt = **0**。\n\n**Part C（2 分）**：Part B 的错误代码里，「终端」上的输出来自**某个进程在\n`fd1` 还等于 1 时**写的那一批。题面说「终端上输出的是 `+++`」——在\n`+-+-++--+---+----+------` 这一段实际输出中，末尾那 3 个 `+`（某一轮\nhandler1 的整批）正是落在终端上的那一批；此刻 file.txt 里应已写下\n**`++++++-+++`**。\n原卷给出的**完整**答案是 **`++++++-+++--+++------`**（6 个 `+`、1 个 `-`、\n3 个 `+`、2 个 `-`、3 个 `+`、6 个 `-`）；评分说明写明「写对前 8 个字符的得\n1 分（辛苦分）」，其前 8 个字符即 `++++++-+`。\n若严格按「终端输出 `+++` 的那一瞬间」取快照，file.txt 只写到 `++++++-+++`。\n\n**Part D（1 分）**：期望输出 `+--+++----+++++------` 的批次长度依次是\n1、2、3、4、5、6。X、Y 都填 `count += 2;` 后，一次 handler 往返让 count 增加 2，\n所以只要让 **count 最终等于 2**（在父进程第一次 `kill` 之前先 +1 一次）即可，\nZ 处填 `count = 2;`（原卷：`count++;` 等只要最终值为 2 也行，漏分号不扣分）。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "fill",
@@ -2508,8 +2508,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题（10分）\nBob是一名刚刚学完异常的同学，他希望通过配合kill和signal的使用，能让\n两个进程向同一个文件中交替地打印出字符。可惜他的tshlab做得不过关，导致\n他写的这个程序有各种BUG。你能帮帮他吗？\n```\n1  #include \"csapp.h\"\n2  #define MAXN 6\n3  int parentPID = 0;\n4  int childPID = 0;\n5  int count = 1;\n6  int fd1 = 1;\n7  void handler1() {\n8    if (count > MAXN)\n9      return;\n10      for (int i = 0; i < count; i++)\n11          write(fd1, \"+\", 1);\n12                  X\n13      kill(parentPID, SIGUSR2);\n14  }\n15  void handler2() {\n16    if (count > MAXN)\n17      return;\n18      for (int i = 0; i < count; i++)\n19          write(fd1, \"-\", 1);\n20                  Y\n21      kill(childPID, SIGUSR1);\n22  }\n23\n24  int main() {\n25      signal(SIGUSR1, handler1);\n26      signal(SIGUSR2, handler2);\n27      parentPID = getpid();\n28      childPID = fork();\n29      fd1 = open(\"file.txt\",  O_RDWR);\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n30      if (childPID) {\n31                      Z\n32          kill(childPID, SIGUSR1);\n33      }\n34      exit(0);\n35  }\n```\n注意: 假设程序能在任意时刻被系统打断、调度，并且调度的时间切片大小是不确\n定的，可以足够地长。在每次程序执行前，file.txt 是一个已经存在的空文件。\nPart A. (1分) 此时，X处语句和Y处语句都是count++;，Z处语句是空语\n句。Alice测试该代码，发现有时file.txt中没有任何输出！请解释原因。（提\n示：考虑28行语句fork以后，下一次被调度的进程，并从这个角度回答本题。\n不需要给出解决方案）\nPart B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\nfile.txt中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在file.txt中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前fd1的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n  描述符表    打开文件表    v-node表\n  Descriptor    Open    V-node\n14\n\n<!-- ===== page 15 ===== -->\n\n```\nFile\n  (     ) 0     refcnt\n```\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析2. 当程序第一次在file.txt中输出+的瞬间，仿照上题要求完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析3. 如果要产生Bob预期的输出，三级表的关系应当是什么？仿照上题要求\n完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\nPart C. (2分) Bob很高兴，他知道Part B的代码是怎么错的了！不过Alice\n仍然想考考 Bob。对于 Part B 的错误代码，如果终端上输出的是+++，那么\n15\n\n<!-- ===== page 16 ===== -->\n\nfile.txt中的内容是什么？请在下框中写出答案。\nPart D. (1分) Bob修复了Part B的问题，使得代码能够产生预期的输出。\n现在，Bob 又希望自己的代码最终输出的是+--+++----+++++------，为此，\n他对X、Y、Z处做了如下的修改。X、Y处语句已做如下填写，请帮助Bob补上Z\n处语句。\nX处填写为：count += 2;\nY处填写为：count += 2;\nZ处填写为：\n【答案】Part A. 如果28行fork执行过后，子进程先被调度了，并且执行完\n所有代码并退出，那么父进程的kill操作就无效了。\nPart B.\n分析1\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (  √ ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (     ) 3\n```\n分析2\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n  (     ) 0\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  1  )\n  (  √ ) 3\n```\n分析3\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  2  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (  √ ) 3\n```\nPart C. ++++++-+++--+++------（6个+、1个-、3个+、2个-、3个+、\n6个-）\nPart D. count = 2;（或count++;等，只要让count最终的值是2就可以\n了）\n【评分标准】\nPart A. 意思对即可，1分。\nPart B. 打开文件表的两个条目可上下颠倒。每个分析2分：勾选对父进程的\nfd1，0.5分；勾对子进程的fd1，0.5分；两个refcnt各0.5分。由于箭头\n可以被refcnt确定，因此对箭头的连接不赋分。\nPart C. 答案正确的2分。写对前8个字符的得1分，作为“辛苦分”，因为能\n写对前 8 个字符表明理解这道题是怎么回事了，但是由于粗心而导致后面的模拟\n出错。\nPart D. 1分。漏分号的不扣分。",
-        "answer": ""
+        "prompt": "第四题（10分）\nBob是一名刚刚学完异常的同学，他希望通过配合kill和signal的使用，能让\n两个进程向同一个文件中交替地打印出字符。可惜他的tshlab做得不过关，导致\n他写的这个程序有各种BUG。你能帮帮他吗？\n```\n1  #include \"csapp.h\"\n2  #define MAXN 6\n3  int parentPID = 0;\n4  int childPID = 0;\n5  int count = 1;\n6  int fd1 = 1;\n7  void handler1() {\n8    if (count > MAXN)\n9      return;\n10      for (int i = 0; i < count; i++)\n11          write(fd1, \"+\", 1);\n12                  X\n13      kill(parentPID, SIGUSR2);\n14  }\n15  void handler2() {\n16    if (count > MAXN)\n17      return;\n18      for (int i = 0; i < count; i++)\n19          write(fd1, \"-\", 1);\n20                  Y\n21      kill(childPID, SIGUSR1);\n22  }\n23\n24  int main() {\n25      signal(SIGUSR1, handler1);\n26      signal(SIGUSR2, handler2);\n27      parentPID = getpid();\n28      childPID = fork();\n29      fd1 = open(\"file.txt\",  O_RDWR);\n```\n13\n\n<!-- ===== page 14 ===== -->\n\n```\n30      if (childPID) {\n31                      Z\n32          kill(childPID, SIGUSR1);\n33      }\n34      exit(0);\n35  }\n```\n注意: 假设程序能在任意时刻被系统打断、调度，并且调度的时间切片大小是不确\n定的，可以足够地长。在每次程序执行前，file.txt 是一个已经存在的空文件。\nPart A. (1分) 此时，X处语句和Y处语句都是count++;，Z处语句是空语\n句。Alice测试该代码，发现有时file.txt中没有任何输出！请解释原因。（提\n示：考虑28行语句fork以后，下一次被调度的进程，并从这个角度回答本题。\n不需要给出解决方案）\nPart B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\nfile.txt中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在file.txt中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前fd1的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n  描述符表    打开文件表    v-node表\n  Descriptor    Open    V-node\n14\n\n<!-- ===== page 15 ===== -->\n\n```\nFile\n  (     ) 0     refcnt\n```\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析2. 当程序第一次在file.txt中输出+的瞬间，仿照上题要求完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\n分析3. 如果要产生Bob预期的输出，三级表的关系应当是什么？仿照上题要求\n完成下表：\n  (     ) 0     refcnt\n父进程  (     ) 1     = (     )\n```\nParent  (     ) 2\n  (     ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (     )\n  (     ) 3\n```\nPart C. (2分) Bob很高兴，他知道Part B的代码是怎么错的了！不过Alice\n仍然想考考 Bob。对于 Part B 的错误代码，如果终端上输出的是+++，那么\n15\n\n<!-- ===== page 16 ===== -->\n\nfile.txt中的内容是什么？请在下框中写出答案。\nPart D. (1分) Bob修复了Part B的问题，使得代码能够产生预期的输出。\n现在，Bob 又希望自己的代码最终输出的是+--+++----+++++------，为此，\n他对X、Y、Z处做了如下的修改。X、Y处语句已做如下填写，请帮助Bob补上Z\n处语句。\nX处填写为：count += 2;\nY处填写为：count += 2;\nZ处填写为：",
+        "answer": "【答案】Part A. 如果28行fork执行过后，子进程先被调度了，并且执行完\n所有代码并退出，那么父进程的kill操作就无效了。\nPart B.\n分析1\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (  √ ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (     ) 3\n```\n分析2\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  1  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n```\n16\n\n<!-- ===== page 17 ===== -->\n\n  (     ) 0\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  1  )\n  (  √ ) 3\n```\n分析3\n  (     ) 0     refcnt\n父进程  (     ) 1     = (  2  )\n```\nParent  (     ) 2\n  (  √ ) 3\n          file.txt\n  (     ) 0\n```\n子进程  (     ) 1     refcnt\n```\nChild  (     ) 2     = (  0  )\n  (  √ ) 3\n```\nPart C. ++++++-+++--+++------（6个+、1个-、3个+、2个-、3个+、\n6个-）\nPart D. count = 2;（或count++;等，只要让count最终的值是2就可以\n了）\n【评分标准】\nPart A. 意思对即可，1分。\nPart B. 打开文件表的两个条目可上下颠倒。每个分析2分：勾选对父进程的\nfd1，0.5分；勾对子进程的fd1，0.5分；两个refcnt各0.5分。由于箭头\n可以被refcnt确定，因此对箭头的连接不赋分。\nPart C. 答案正确的2分。写对前8个字符的得1分，作为“辛苦分”，因为能\n写对前 8 个字符表明理解这道题是怎么回事了，但是由于粗心而导致后面的模拟\n出错。\nPart D. 1分。漏分号的不扣分。\n\n解析（核对原卷页图 page-16、page-17 后补全推导）：\n**先看清伏笔**（对应原卷代码行号）：\n- 第 5 行 `int count = 1;`、第 6 行 `int fd1 = 1;`，而\n  `fd1 = open(\"file.txt\", O_RDWR);` 在 **fork 之后**（第 29 行）。\n  所以**子进程一开始继承的 `fd1` 是 1（标准输出）**，要等它自己执行到第 29 行\n  才换成 file.txt 的描述符（3）；父进程的 `open` 也可能晚于它的第一次写。\n- 第 7–9 行 `if (count > MAXN) return;`（MAXN = 6）限制批次最大为 6。\n- 父子各有自己的 `count` 副本；一次完整的往返（handler1 → `kill(parentPID,\n  SIGUSR2)` → handler2 → `kill(childPID, SIGUSR1)`）会让 sender 与 receiver\n  各自的 count 都 +1，于是「批次长度」按 1、2、3… 递增。\n\n**Part A（1 分）**：fork 之后调度顺序不定。若**子进程先被调度**，它在\n`if (childPID)` 处判假（childPID == 0），一路执行到 `exit(0)` 退出；父进程随后的\n`kill(childPID, SIGUSR1)` 就发给了已经不存在的进程，信号丢失 ⇒ 两边都不往\nfile.txt 写任何东西 ⇒ file.txt 为空。原卷：意思对即可，1 分。\n\n**Part B（6 分）**（勾选与 refcnt 各 0.5 分/项，箭头不计分）\n| 时刻 | 父进程 fd1 | 父侧 refcnt | 子进程 fd1 | 子侧 refcnt |\n| --- | --- | --- | --- | --- |\n| 分析1：终端第一次出现 `+` | **3** | **1** | **1**（继承的标准输出） | **0** |\n| 分析2：file.txt 第一次出现 `+` | **3** | **1** | **3** | **1** |\n| 分析3：要产生预期输出的关系 | **3** | **2** | **3** | **0** |\n\n- **分析1**：第一次在**终端**出现 `+`，是**子进程**用继承来的 `fd1 = 1` 执行\n  handler1 写出去的 ⇒ 子进程勾 **1**；此时它那条标准输出的打开文件表项没有任何\n  别的引用 ⇒ refcnt = **0**（原卷括号里写 0）。父进程此刻已经跑过\n  `fd1 = open(...)`（描述符 3）⇒ 勾 **3**、refcnt = **1**。\n- **分析2**：第一次在 **file.txt** 出现 `+` 时，父子都已执行过第 29 行，\n  且子进程的描述符表是 fork 复制来的、与父进程相同 ⇒ 两者勾同一个 **3**，\n  指向**同一个打开文件表项**（共享文件偏移）⇒ refcnt = **1**。\n- **分析3**：要产生 Bob 预期的交替输出，必须让父子各自拥有**独立的**打开文件\n  表项（把 `open` 提到 fork 之前，或在子进程里重新 open 一次）⇒ 原卷给出的形态是\n  父侧 refcnt = **2**、子侧 refcnt = **0**。\n\n**Part C（2 分）**：Part B 的错误代码里，「终端」上的输出来自**某个进程在\n`fd1` 还等于 1 时**写的那一批。题面说「终端上输出的是 `+++`」——在\n`+-+-++--+---+----+------` 这一段实际输出中，末尾那 3 个 `+`（某一轮\nhandler1 的整批）正是落在终端上的那一批；此刻 file.txt 里应已写下\n**`++++++-+++`**。\n原卷给出的**完整**答案是 **`++++++-+++--+++------`**（6 个 `+`、1 个 `-`、\n3 个 `+`、2 个 `-`、3 个 `+`、6 个 `-`）；评分说明写明「写对前 8 个字符的得\n1 分（辛苦分）」，其前 8 个字符即 `++++++-+`。\n若严格按「终端输出 `+++` 的那一瞬间」取快照，file.txt 只写到 `++++++-+++`。\n\n**Part D（1 分）**：期望输出 `+--+++----+++++------` 的批次长度依次是\n1、2、3、4、5、6。X、Y 都填 `count += 2;` 后，一次 handler 往返让 count 增加 2，\n所以只要让 **count 最终等于 2**（在父进程第一次 `kill` 之前先 +1 一次）即可，\nZ 处填 `count = 2;`（原卷：`count++;` 等只要最终值为 2 也行，漏分号不扣分）。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       }
     },
     {
@@ -4465,12 +4465,12 @@
       "exam": "2024期末-带答案",
       "questionNo": "第三题 Part A",
       "summary": "open/dup2/fork/write 与文件偏移",
-      "content": "第三题（15分）\nPart A: 分析下面这段代码的行为，假设file.txt文件存在，且不需要考虑\nopen()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main(){\n    int fd[3];\n    fd[0] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\n    fd[1] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\nwrite(fd[0], \"Harry\", 5);\nif (fork() == 0) {\n    dup2(fd[0], fd[1]);\n    write(fd[1], \"Voldemort\", 9);\n    fd[2] = open(\"./file.txt\", O_RDWR, 0);\n    printf(\"%d\\n\", fd[2]);\n    exit(0);\n}\nwait(NULL);\nfd[1] = dup(fd[0]);\nwrite(fd[0], \"Hermione\", 8);\nwrite(fd[1], \"Ron\", 3);\nfd[2] = open(\"./file.txt\", O_RDWR, 0);\nprintf(\"%d\\n\", fd[2]);\n}\n```\n1） 运行这段代码，在终端上可以看到两行输出，第一行的内容为          ，\n第二行的内容为          。(每空1分)\n2） 运行这段代码后，file.txt文件的内容为                             。\n（3分）",
+      "content": "第三题（15分）\nPart A: 分析下面这段代码的行为，假设file.txt文件存在，且不需要考虑\nopen()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main(){\n    int fd[3];\n    fd[0] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\n    fd[1] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\nwrite(fd[0], \"Harry\", 5);\nif (fork() == 0) {\n    dup2(fd[0], fd[1]);\n    write(fd[1], \"Voldemort\", 9);\n    fd[2] = open(\"./file.txt\", O_RDWR, 0);\n    printf(\"%d\\n\", fd[2]);\n    exit(0);\n}\nwait(NULL);\nfd[1] = dup(fd[0]);\nwrite(fd[0], \"Hermione\", 8);\nwrite(fd[1], \"Ron\", 3);\nfd[2] = open(\"./file.txt\", O_RDWR, 0);\nprintf(\"%d\\n\", fd[2]);\n}\n```\n1） 运行这段代码，在终端上可以看到两行输出，第一行的内容为          ，\n第二行的内容为          。(每空1分)\n2） 运行这段代码后，file.txt文件的内容为                             。\n（3分）\n答案（原卷自带参考答案，见本卷「参考答案 Part A」）：\n1）第一行：`5`；第二行：`6`\n2）file.txt 的内容为：`HarryVoldemortHermioneRon`\n\n解析：\n**1）两行输出都是 `open()` 返回的描述符编号**（`printf(\"%d\\n\", fd[2])`）。\n进程启动时描述符 0/1/2 已被占用，所以：\n- 父进程：`fd[0] = open(...)` ⇒ 3；`fd[1] = open(...)` ⇒ 4。\n  子进程里 `dup2(fd[0], fd[1])` 把 fd[1]（= 4）重新指向 fd[0] 所指的打开文件，\n  **不占用新的描述符**，所以随后 `fd[2] = open(...)` 拿到 **5** ⇒ 第一行 `5`。\n- 父进程 `wait(NULL)` 之后执行 `fd[1] = dup(fd[0])`：`dup` 返回**当前最小可用\n  描述符**。此时 3 被 fd[0] 占用、4 仍然被原来的 fd[1]（未被关闭）占用，\n  所以 dup 返回 **5**，fd[1] 变成 5；接着 `fd[2] = open(...)` 只能拿到 **6**\n  ⇒ 第二行 `6`。\n\n**2）文件内容：`HarryVoldemortHermioneRon`。**\n关键点：`fork`、`dup`、`dup2` **都不会创建新文件**，所有写操作最终都落到同一个\n`file.txt` 上，因此内容就是各次写按发生顺序拼接：\n- 父进程先 `write(fd[0], \"Harry\", 5)`；\n- 子进程 `dup2(fd[0], fd[1])` 后 `write(fd[1], \"Voldemort\", 9)` —— 由于 fd[1]\n  与 fd[0] 指向**同一个打开文件表项**（由 `dup2` 造成），文件偏移是共享的，\n  所以 `Voldemort` 紧接在 `Harry` 之后；\n- 子进程 `exit(0)` 后父进程的 `wait(NULL)` 返回，父进程写 `Hermione`、再写 `Ron`，\n  二者也共享同一个打开文件表项（`dup` 的结果），顺序拼接。\n⇒ `Harry` + `Voldemort` + `Hermione` + `Ron` = `HarryVoldemortHermioneRon`。\n（评分说明：本空 3 分，完全一致才得满分。）\n\n> 说明：本题答案在原卷「参考答案 Part A」中（`原文` 第 622–636 行），本文件按\n> 该参考答案整理，并补全推导。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": false,
-        "status": "missing",
+        "inline": true,
+        "status": "verified",
         "relatedBlockIds": [
           "a-544cd966469e852a",
           "a-0f691532afb6eb95",
@@ -4491,7 +4491,7 @@
         "selection": null,
         "stem": "第三题（15分）\nPart A: 分析下面这段代码的行为，假设file.txt文件存在，且不需要考虑\nopen()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main(){\n    int fd[3];\n    fd[0] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\n    fd[1] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\nwrite(fd[0], \"Harry\", 5);\nif (fork() == 0) {\n    dup2(fd[0], fd[1]);\n    write(fd[1], \"Voldemort\", 9);\n    fd[2] = open(\"./file.txt\", O_RDWR, 0);\n    printf(\"%d\\n\", fd[2]);\n    exit(0);\n}\nwait(NULL);\nfd[1] = dup(fd[0]);\nwrite(fd[0], \"Hermione\", 8);\nwrite(fd[1], \"Ron\", 3);\nfd[2] = open(\"./file.txt\", O_RDWR, 0);\nprintf(\"%d\\n\", fd[2]);\n}\n```\n1） 运行这段代码，在终端上可以看到两行输出，第一行的内容为          ，\n第二行的内容为          。(每空1分)\n2） 运行这段代码后，file.txt文件的内容为                             。\n（3分）",
         "choices": [],
-        "answer": ""
+        "answer": "答案（原卷自带参考答案，见本卷「参考答案 Part A」）：\n1）第一行：`5`；第二行：`6`\n2）file.txt 的内容为：`HarryVoldemortHermioneRon`\n\n解析：\n**1）两行输出都是 `open()` 返回的描述符编号**（`printf(\"%d\\n\", fd[2])`）。\n进程启动时描述符 0/1/2 已被占用，所以：\n- 父进程：`fd[0] = open(...)` ⇒ 3；`fd[1] = open(...)` ⇒ 4。\n  子进程里 `dup2(fd[0], fd[1])` 把 fd[1]（= 4）重新指向 fd[0] 所指的打开文件，\n  **不占用新的描述符**，所以随后 `fd[2] = open(...)` 拿到 **5** ⇒ 第一行 `5`。\n- 父进程 `wait(NULL)` 之后执行 `fd[1] = dup(fd[0])`：`dup` 返回**当前最小可用\n  描述符**。此时 3 被 fd[0] 占用、4 仍然被原来的 fd[1]（未被关闭）占用，\n  所以 dup 返回 **5**，fd[1] 变成 5；接着 `fd[2] = open(...)` 只能拿到 **6**\n  ⇒ 第二行 `6`。\n\n**2）文件内容：`HarryVoldemortHermioneRon`。**\n关键点：`fork`、`dup`、`dup2` **都不会创建新文件**，所有写操作最终都落到同一个\n`file.txt` 上，因此内容就是各次写按发生顺序拼接：\n- 父进程先 `write(fd[0], \"Harry\", 5)`；\n- 子进程 `dup2(fd[0], fd[1])` 后 `write(fd[1], \"Voldemort\", 9)` —— 由于 fd[1]\n  与 fd[0] 指向**同一个打开文件表项**（由 `dup2` 造成），文件偏移是共享的，\n  所以 `Voldemort` 紧接在 `Harry` 之后；\n- 子进程 `exit(0)` 后父进程的 `wait(NULL)` 返回，父进程写 `Hermione`、再写 `Ron`，\n  二者也共享同一个打开文件表项（`dup` 的结果），顺序拼接。\n⇒ `Harry` + `Voldemort` + `Hermione` + `Ron` = `HarryVoldemortHermioneRon`。\n（评分说明：本空 3 分，完全一致才得满分。）\n\n> 说明：本题答案在原卷「参考答案 Part A」中（`原文` 第 622–636 行），本文件按\n> 该参考答案整理，并补全推导。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "fill",
@@ -4500,7 +4500,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "第三题（15分）\nPart A: 分析下面这段代码的行为，假设file.txt文件存在，且不需要考虑\nopen()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main(){\n    int fd[3];\n    fd[0] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\n    fd[1] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\nwrite(fd[0], \"Harry\", 5);\nif (fork() == 0) {\n    dup2(fd[0], fd[1]);\n    write(fd[1], \"Voldemort\", 9);\n    fd[2] = open(\"./file.txt\", O_RDWR, 0);\n    printf(\"%d\\n\", fd[2]);\n    exit(0);\n}\nwait(NULL);\nfd[1] = dup(fd[0]);\nwrite(fd[0], \"Hermione\", 8);\nwrite(fd[1], \"Ron\", 3);\nfd[2] = open(\"./file.txt\", O_RDWR, 0);\nprintf(\"%d\\n\", fd[2]);\n}\n```\n1） 运行这段代码，在终端上可以看到两行输出，第一行的内容为          ，\n第二行的内容为          。(每空1分)\n2） 运行这段代码后，file.txt文件的内容为                             。\n（3分）",
-        "answer": ""
+        "answer": "答案（原卷自带参考答案，见本卷「参考答案 Part A」）：\n1）第一行：`5`；第二行：`6`\n2）file.txt 的内容为：`HarryVoldemortHermioneRon`\n\n解析：\n**1）两行输出都是 `open()` 返回的描述符编号**（`printf(\"%d\\n\", fd[2])`）。\n进程启动时描述符 0/1/2 已被占用，所以：\n- 父进程：`fd[0] = open(...)` ⇒ 3；`fd[1] = open(...)` ⇒ 4。\n  子进程里 `dup2(fd[0], fd[1])` 把 fd[1]（= 4）重新指向 fd[0] 所指的打开文件，\n  **不占用新的描述符**，所以随后 `fd[2] = open(...)` 拿到 **5** ⇒ 第一行 `5`。\n- 父进程 `wait(NULL)` 之后执行 `fd[1] = dup(fd[0])`：`dup` 返回**当前最小可用\n  描述符**。此时 3 被 fd[0] 占用、4 仍然被原来的 fd[1]（未被关闭）占用，\n  所以 dup 返回 **5**，fd[1] 变成 5；接着 `fd[2] = open(...)` 只能拿到 **6**\n  ⇒ 第二行 `6`。\n\n**2）文件内容：`HarryVoldemortHermioneRon`。**\n关键点：`fork`、`dup`、`dup2` **都不会创建新文件**，所有写操作最终都落到同一个\n`file.txt` 上，因此内容就是各次写按发生顺序拼接：\n- 父进程先 `write(fd[0], \"Harry\", 5)`；\n- 子进程 `dup2(fd[0], fd[1])` 后 `write(fd[1], \"Voldemort\", 9)` —— 由于 fd[1]\n  与 fd[0] 指向**同一个打开文件表项**（由 `dup2` 造成），文件偏移是共享的，\n  所以 `Voldemort` 紧接在 `Harry` 之后；\n- 子进程 `exit(0)` 后父进程的 `wait(NULL)` 返回，父进程写 `Hermione`、再写 `Ron`，\n  二者也共享同一个打开文件表项（`dup` 的结果），顺序拼接。\n⇒ `Harry` + `Voldemort` + `Hermione` + `Ron` = `HarryVoldemortHermioneRon`。\n（评分说明：本空 3 分，完全一致才得满分。）\n\n> 说明：本题答案在原卷「参考答案 Part A」中（`原文` 第 622–636 行），本文件按\n> 该参考答案整理，并补全推导。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       }
     },
     {
@@ -5554,7 +5554,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 1",
       "summary": "ls -a 显示隐藏文件（L0 命令行）",
-      "content": "1.  （2分）以下哪个ls命令选项用于显示所有文件（包括隐藏文件，以.开头的文件）\nA. ls -l\nB. ls -a\nC. ls -h\nD. ls -t\n答案：B（AI 推导，未与官方答案核对）",
+      "content": "1.  （2分）以下哪个ls命令选项用于显示所有文件（包括隐藏文件，以.开头的文件）\nA. ls -l\nB. ls -a\nC. ls -h\nD. ls -t\n答案：B\n\n解析：`ls` 的 -a（--all）列出目录下所有条目，包括以 . 开头的隐藏文件；-l 是长格式、-h 是配合 -l 的人类可读大小、-t 是按修改时间排序，都与隐藏文件无关。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5593,7 +5593,7 @@
             "content": "ls -t"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：`ls` 的 -a（--all）列出目录下所有条目，包括以 . 开头的隐藏文件；-l 是长格式、-h 是配合 -l 的人类可读大小、-t 是按修改时间排序，都与隐藏文件无关。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5623,7 +5623,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "1.  （2分）以下哪个ls命令选项用于显示所有文件（包括隐藏文件，以.开头的文件）",
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：`ls` 的 -a（--all）列出目录下所有条目，包括以 . 开头的隐藏文件；-l 是长格式、-h 是配合 -l 的人类可读大小、-t 是按修改时间排序，都与隐藏文件无关。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -5636,7 +5636,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 2",
       "summary": "cd 的 - 参数表示上次所在目录",
-      "content": "2.  （2分）使用cd命令时，哪个参数表示“上一次所在目录”\nA. ~（波浪符）\nB. ..（两个点）\nC. -（减号）\nD. /（斜杠）\n答案：C（AI 推导，未与官方答案核对）",
+      "content": "2.  （2分）使用cd命令时，哪个参数表示“上一次所在目录”\nA. ~（波浪符）\nB. ..（两个点）\nC. -（减号）\nD. /（斜杠）\n答案：C\n\n解析：`cd -` 会切换回上一次所在的目录（shell 用 $OLDPWD 记录）；~ 是家目录、.. 是上一级目录、/ 是根目录。故选 C。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5675,7 +5675,7 @@
             "content": "/（斜杠）"
           }
         ],
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：`cd -` 会切换回上一次所在的目录（shell 用 $OLDPWD 记录）；~ 是家目录、.. 是上一级目录、/ 是根目录。故选 C。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5705,7 +5705,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "2.  （2分）使用cd命令时，哪个参数表示“上一次所在目录”",
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：`cd -` 会切换回上一次所在的目录（shell 用 $OLDPWD 记录）；~ 是家目录、.. 是上一级目录、/ 是根目录。故选 C。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -5718,7 +5718,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 3",
       "summary": "chmod 755 的文件权限位",
-      "content": "3.  （2分）执行 chmod 755 file.py 后，文件 file.py 的权限是：\nA. 所有者：读写执行（rwx），组和其他：读和执行（r-x）\nB. 所有者：读写（rw-），组和其他：读（r--）\nC. 所有者：读和执行（r-x），组和其他：读写（rw-）\nD. 所有者：读写执行（rwx），组和其他：读写（rw-）\n答案：A（AI 推导，未与官方答案核对）",
+      "content": "3.  （2分）执行 chmod 755 file.py 后，文件 file.py 的权限是：\nA. 所有者：读写执行（rwx），组和其他：读和执行（r-x）\nB. 所有者：读写（rw-），组和其他：读（r--）\nC. 所有者：读和执行（r-x），组和其他：读写（rw-）\nD. 所有者：读写执行（rwx），组和其他：读写（rw-）\n答案：A\n\n解析：755 是三位八进制权限：7 = 4+2+1 = rwx 给所有者，5 = 4+1 = r-x 给组和其他，即 rwxr-xr-x；B 对应 644，C、D 的组/其他权限也与 5 不符。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5757,7 +5757,7 @@
             "content": "所有者：读写执行（rwx），组和其他：读写（rw-）"
           }
         ],
-        "answer": "答案：A（AI 推导，未与官方答案核对）"
+        "answer": "答案：A\n\n解析：755 是三位八进制权限：7 = 4+2+1 = rwx 给所有者，5 = 4+1 = r-x 给组和其他，即 rwxr-xr-x；B 对应 644，C、D 的组/其他权限也与 5 不符。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5787,7 +5787,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "3.  （2分）执行 chmod 755 file.py 后，文件 file.py 的权限是：",
-        "answer": "答案：A（AI 推导，未与官方答案核对）"
+        "answer": "答案：A\n\n解析：755 是三位八进制权限：7 = 4+2+1 = rwx 给所有者，5 = 4+1 = r-x 给组和其他，即 rwxr-xr-x；B 对应 644，C、D 的组/其他权限也与 5 不符。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -5800,7 +5800,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 4",
       "summary": "tar/gcc/rm/rmdir/grep 命令用法辨误",
-      "content": "4.  （2分）下列关于 Linux 命令和命令行的使用，说法错误的一项是：\nA. 在Windows中解压tar文件可能导致权限位丢失和文件名大小写问题，因此最好\n在 Linux 中使用tar命令解压\nB. gcc命令可用于编译 C 语言代码，其中 -o 选项用来指定输出的文件，-O 选项\n用来指定优化级别\nC. rm命令用于删除单个文件或多个文件，如果要删除空目录只能用rmdir命令\nD. grep命令中，-i选项的含义是“忽略大小写”，如grep -i \"hello\" file.txt\n可匹配Hello、HELLO等\n答案：C（AI 推导，未与官方答案核对）",
+      "content": "4.  （2分）下列关于 Linux 命令和命令行的使用，说法错误的一项是：\nA. 在Windows中解压tar文件可能导致权限位丢失和文件名大小写问题，因此最好\n在 Linux 中使用tar命令解压\nB. gcc命令可用于编译 C 语言代码，其中 -o 选项用来指定输出的文件，-O 选项\n用来指定优化级别\nC. rm命令用于删除单个文件或多个文件，如果要删除空目录只能用rmdir命令\nD. grep命令中，-i选项的含义是“忽略大小写”，如grep -i \"hello\" file.txt\n可匹配Hello、HELLO等\n答案：C\n\n解析：`rm -d 空目录`（或 `rm -r`）同样可以删除目录，\"删除空目录只能用 rmdir\" 不成立，故 C 是错误项。A 讲 Windows 解压 tar 的权限位/大小写问题、B 讲 gcc 的 -o 与 -O、D 讲 grep -i 忽略大小写，都正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5839,7 +5839,7 @@
             "content": "grep命令中，-i选项的含义是“忽略大小写”，如grep -i \"hello\" file.txt\n可匹配Hello、HELLO等"
           }
         ],
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：`rm -d 空目录`（或 `rm -r`）同样可以删除目录，\"删除空目录只能用 rmdir\" 不成立，故 C 是错误项。A 讲 Windows 解压 tar 的权限位/大小写问题、B 讲 gcc 的 -o 与 -O、D 讲 grep -i 忽略大小写，都正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5869,7 +5869,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "4.  （2分）下列关于 Linux 命令和命令行的使用，说法错误的一项是：",
-        "answer": "答案：C（AI 推导，未与官方答案核对）"
+        "answer": "答案：C\n\n解析：`rm -d 空目录`（或 `rm -r`）同样可以删除目录，\"删除空目录只能用 rmdir\" 不成立，故 C 是错误项。A 讲 Windows 解压 tar 的权限位/大小写问题、B 讲 gcc 的 -o 与 -O、D 讲 grep -i 忽略大小写，都正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -5882,7 +5882,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 16",
       "summary": "GDB 断点通过 INT3 触发陷阱实现",
-      "content": "16. （2分）GDB 中断点功能的一种实现方式是：GDB 修改目标程序断点处的机器代码，\n让 CPU 执行到该位置时将控制权交给 GDB；之后 GDB 会恢复现场，包括将原指令\n写回、调整 %rip 回到断点指令处等，以使程序可以继续执行。基于这一机制，下列\n哪一项最符合实际情况？\nA. GDB 将断点处指令修改为 NOP，CPU 执行后不做任何操作，程序会暂停并等待\nB. GDB 将断点处指令修改为 INT3，CPU 执行后触发陷阱，陷入内核\nC. GDB 将断点处指令修改为 sysenter，CPU 执行后陷入内核\nD. GDB 将断点处指令修改为一条非法指令，类似于系统调用，CPU执行后会陷入内核\n答案：B（AI 推导，未与官方答案核对）",
+      "content": "16. （2分）GDB 中断点功能的一种实现方式是：GDB 修改目标程序断点处的机器代码，\n让 CPU 执行到该位置时将控制权交给 GDB；之后 GDB 会恢复现场，包括将原指令\n写回、调整 %rip 回到断点指令处等，以使程序可以继续执行。基于这一机制，下列\n哪一项最符合实际情况？\nA. GDB 将断点处指令修改为 NOP，CPU 执行后不做任何操作，程序会暂停并等待\nB. GDB 将断点处指令修改为 INT3，CPU 执行后触发陷阱，陷入内核\nC. GDB 将断点处指令修改为 sysenter，CPU 执行后陷入内核\nD. GDB 将断点处指令修改为一条非法指令，类似于系统调用，CPU执行后会陷入内核\n答案：B\n\n解析：GDB 把断点处指令的首字节替换成单字节的 INT3（0xCC），CPU 执行到该字节时执行 int 3 陷入内核，内核再把控制权交给调试器，这正是\"陷阱\"。NOP 不会中断（A 错）；sysenter 是快速系统调用入口、非法指令走 SIGILL 而不是可控断点（C、D 错）。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5921,7 +5921,7 @@
             "content": "GDB 将断点处指令修改为一条非法指令，类似于系统调用，CPU执行后会陷入内核"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：GDB 把断点处指令的首字节替换成单字节的 INT3（0xCC），CPU 执行到该字节时执行 int 3 陷入内核，内核再把控制权交给调试器，这正是\"陷阱\"。NOP 不会中断（A 错）；sysenter 是快速系统调用入口、非法指令走 SIGILL 而不是可控断点（C、D 错）。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5951,7 +5951,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "16. （2分）GDB 中断点功能的一种实现方式是：GDB 修改目标程序断点处的机器代码，\n让 CPU 执行到该位置时将控制权交给 GDB；之后 GDB 会恢复现场，包括将原指令\n写回、调整 %rip 回到断点指令处等，以使程序可以继续执行。基于这一机制，下列\n哪一项最符合实际情况？",
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：GDB 把断点处指令的首字节替换成单字节的 INT3（0xCC），CPU 执行到该字节时执行 int 3 陷入内核，内核再把控制权交给调试器，这正是\"陷阱\"。NOP 不会中断（A 错）；sysenter 是快速系统调用入口、非法指令走 SIGILL 而不是可控断点（C、D 错）。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -5964,7 +5964,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 21",
       "summary": "hex2raw 用法与 shell 管道/输入输出重定向",
-      "content": "21. （2分）在AttackLab中，hex2raw工具用于将表示十六进制的字符串转换为字节\n序列，以便将攻击代码注入到目标程序中。假设现在有一个包含十六进制字符串的文件\nhex.txt，下列哪个选项是错误的？\nA. 可以使用命令cat hex.txt | hex2raw > raw.bin将hex.txt中的内容转\n换为字节序列并保存到raw.bin文件中\nB. 可以使用命令hex2raw < hex.txt > raw.bin将hex.txt中的内容转换为\n字节序列并保存到raw.bin文件中\nC. 在得到文件raw.bin后，可以使用命令./ctarget < raw.bin将raw.bin作\n为输入传递给目标程序ctarget\nD. 如果修改了hex.txt文件的内容，必须重新编译hex2raw工具才能正确转换新的\n内容\n答案：D（AI 推导，未与官方答案核对）",
+      "content": "21. （2分）在AttackLab中，hex2raw工具用于将表示十六进制的字符串转换为字节\n序列，以便将攻击代码注入到目标程序中。假设现在有一个包含十六进制字符串的文件\nhex.txt，下列哪个选项是错误的？\nA. 可以使用命令cat hex.txt | hex2raw > raw.bin将hex.txt中的内容转\n换为字节序列并保存到raw.bin文件中\nB. 可以使用命令hex2raw < hex.txt > raw.bin将hex.txt中的内容转换为\n字节序列并保存到raw.bin文件中\nC. 在得到文件raw.bin后，可以使用命令./ctarget < raw.bin将raw.bin作\n为输入传递给目标程序ctarget\nD. 如果修改了hex.txt文件的内容，必须重新编译hex2raw工具才能正确转换新的\n内容\n答案：D\n\n解析：hex2raw 是运行时读取十六进制文本再转成字节的可执行文件，改了 hex.txt 的内容不需要重新编译它，故 D 是错误项。A 的 `cat … | hex2raw >`、B 的 `hex2raw < … >`、C 的 `./ctarget < raw.bin` 三种管道/重定向用法都成立。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6003,7 +6003,7 @@
             "content": "如果修改了hex.txt文件的内容，必须重新编译hex2raw工具才能正确转换新的\n内容"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：hex2raw 是运行时读取十六进制文本再转成字节的可执行文件，改了 hex.txt 的内容不需要重新编译它，故 D 是错误项。A 的 `cat … | hex2raw >`、B 的 `hex2raw < … >`、C 的 `./ctarget < raw.bin` 三种管道/重定向用法都成立。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6033,7 +6033,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "21. （2分）在AttackLab中，hex2raw工具用于将表示十六进制的字符串转换为字节\n序列，以便将攻击代码注入到目标程序中。假设现在有一个包含十六进制字符串的文件\nhex.txt，下列哪个选项是错误的？",
-        "answer": "答案：D（AI 推导，未与官方答案核对）"
+        "answer": "答案：D\n\n解析：hex2raw 是运行时读取十六进制文本再转成字节的可执行文件，改了 hex.txt 的内容不需要重新编译它，故 D 是错误项。A 的 `cat … | hex2raw >`、B 的 `hex2raw < … >`、C 的 `./ctarget < raw.bin` 三种管道/重定向用法都成立。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -6046,7 +6046,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 35",
       "summary": "getopt 解析命令行参数（Unix API，CacheLab 语境）",
-      "content": "35. （2分）在 CacheLab Part A 编写缓存模拟器 (csim.c) 时，推荐使用哪个 C\n语言函数来解析命令行参数（如-s, -E, -b等）？\nA. scanf\nB. getopt\nC. mmap\nD. fopen\n答案：B（AI 推导，未与官方答案核对）",
+      "content": "35. （2分）在 CacheLab Part A 编写缓存模拟器 (csim.c) 时，推荐使用哪个 C\n语言函数来解析命令行参数（如-s, -E, -b等）？\nA. scanf\nB. getopt\nC. mmap\nD. fopen\n答案：B\n\n解析：writeup 建议使用 getopt（配合 <getopt.h>）解析 -s -E -b -t 这类命令行选项，故 B 对。scanf 面向标准输入、fopen 面向文件、mmap 是内存映射，都不能解析命令行选项。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6085,7 +6085,7 @@
             "content": "fopen"
           }
         ],
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：writeup 建议使用 getopt（配合 <getopt.h>）解析 -s -E -b -t 这类命令行选项，故 B 对。scanf 面向标准输入、fopen 面向文件、mmap 是内存映射，都不能解析命令行选项。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6115,7 +6115,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "35. （2分）在 CacheLab Part A 编写缓存模拟器 (csim.c) 时，推荐使用哪个 C\n语言函数来解析命令行参数（如-s, -E, -b等）？",
-        "answer": "答案：B（AI 推导，未与官方答案核对）"
+        "answer": "答案：B\n\n解析：writeup 建议使用 getopt（配合 <getopt.h>）解析 -s -E -b -t 这类命令行选项，故 B 对。scanf 面向标准输入、fopen 面向文件、mmap 是内存映射，都不能解析命令行选项。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -6128,7 +6128,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 36",
       "summary": "ShellLab tsh 与真实 shell 的功能对比",
-      "content": "36. （2分）在ShellLab中，我们实现了一个简单的shell程序tsh。和真实的Linux\nshell相比，下列哪一项说法是错误的？\nA. tsh中不支持变量，也不支持搜索路径，无法直接运行系统程序如cat，需要输入\n完整路径/bin/cat\nB. tsh中不支持管道（|），但支持I/O重定向（<, >），且可以在一条命令里同时\n进行输入、输出重定向\nC. tsh和真实的shell一样，需要捕获SIGINT和SIGTSTP信号，然后再将这些信\n号发送给前台进程组\nD. tsh和真实的shell一样，支持通过&设置程序在后台执行，也支持通过fg命令\n将后台任务转移到前台\n答案：C（AI 推导，未与官方答案核对）\n解析：writeup 明确要求同一条命令同时支持 < 和 > 重定向、捕获并转发 SIGINT/SIGTSTP、支持 & 与 fg；而真实 shell 靠 tcsetpgrp 把前台进程组交给终端，自身无需“捕获再转发”，故 C 的类比不成立。",
+      "content": "36. （2分）在ShellLab中，我们实现了一个简单的shell程序tsh。和真实的Linux\nshell相比，下列哪一项说法是错误的？\nA. tsh中不支持变量，也不支持搜索路径，无法直接运行系统程序如cat，需要输入\n完整路径/bin/cat\nB. tsh中不支持管道（|），但支持I/O重定向（<, >），且可以在一条命令里同时\n进行输入、输出重定向\nC. tsh和真实的shell一样，需要捕获SIGINT和SIGTSTP信号，然后再将这些信\n号发送给前台进程组\nD. tsh和真实的shell一样，支持通过&设置程序在后台执行，也支持通过fg命令\n将后台任务转移到前台\n答案：C\n\n解析：tsh 之所以要捕获 SIGINT/SIGTSTP 再转发给前台进程组，是因为它没有终端控制权；真实 shell 用 tcsetpgrp 把前台进程组交给终端，内核直接把 ctrl-c/ctrl-z 送给该组，shell 自身并不需要\"捕获再转发\"（tshlab writeup 的脚注明确指出这是对真实 shell 的简化），故 C 的类比不成立。A（不支持变量与搜索路径、运行系统程序要写 /bin/cat）、B（不支持管道但必须支持 < 和 >，且同一条命令可同时重定向）、D（& 后台执行 + fg 内建命令）都与 writeup 一致。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6167,7 +6167,7 @@
             "content": "tsh和真实的shell一样，支持通过&设置程序在后台执行，也支持通过fg命令\n将后台任务转移到前台"
           }
         ],
-        "answer": "答案：C（AI 推导，未与官方答案核对）\n解析：writeup 明确要求同一条命令同时支持 < 和 > 重定向、捕获并转发 SIGINT/SIGTSTP、支持 & 与 fg；而真实 shell 靠 tcsetpgrp 把前台进程组交给终端，自身无需“捕获再转发”，故 C 的类比不成立。"
+        "answer": "答案：C\n\n解析：tsh 之所以要捕获 SIGINT/SIGTSTP 再转发给前台进程组，是因为它没有终端控制权；真实 shell 用 tcsetpgrp 把前台进程组交给终端，内核直接把 ctrl-c/ctrl-z 送给该组，shell 自身并不需要\"捕获再转发\"（tshlab writeup 的脚注明确指出这是对真实 shell 的简化），故 C 的类比不成立。A（不支持变量与搜索路径、运行系统程序要写 /bin/cat）、B（不支持管道但必须支持 < 和 >，且同一条命令可同时重定向）、D（& 后台执行 + fg 内建命令）都与 writeup 一致。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6197,7 +6197,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "36. （2分）在ShellLab中，我们实现了一个简单的shell程序tsh。和真实的Linux\nshell相比，下列哪一项说法是错误的？",
-        "answer": "答案：C（AI 推导，未与官方答案核对）\n解析：writeup 明确要求同一条命令同时支持 < 和 > 重定向、捕获并转发 SIGINT/SIGTSTP、支持 & 与 fg；而真实 shell 靠 tcsetpgrp 把前台进程组交给终端，自身无需“捕获再转发”，故 C 的类比不成立。"
+        "answer": "答案：C\n\n解析：tsh 之所以要捕获 SIGINT/SIGTSTP 再转发给前台进程组，是因为它没有终端控制权；真实 shell 用 tcsetpgrp 把前台进程组交给终端，内核直接把 ctrl-c/ctrl-z 送给该组，shell 自身并不需要\"捕获再转发\"（tshlab writeup 的脚注明确指出这是对真实 shell 的简化），故 C 的类比不成立。A（不支持变量与搜索路径、运行系统程序要写 /bin/cat）、B（不支持管道但必须支持 < 和 >，且同一条命令可同时重定向）、D（& 后台执行 + fg 内建命令）都与 writeup 一致。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -6210,7 +6210,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 37",
       "summary": "为避免竞态的信号屏蔽与解除时机",
-      "content": "37. （2分）在ShellLab中，为了避免出现竞争（race），需要在特定的操作前屏蔽一\n些信号。下列关于屏蔽信号与解除屏蔽的时机，说法错误的一项是？\nA. sigint_handler中不需要屏蔽信号，因为只需要读取全局数据结构job_list，\n而无需对其进行修改\nB. sigchld_handler中需要屏蔽信号，因为需要修改全局数据结构job_list，更\n新job的状态等相关信息\nC. eval 中需要屏蔽信号，因为需要修改全局数据结构 job_list，在创建新任务时\n添加新创建的job信息\nD. fork之后需要解除屏蔽信号，解除的时机可以在执行setpgid之前，也可以在执\n行setpgid 之后\n答案：D（AI 推导，未与官方答案核对）\n解析：子进程必须先 setpgid 进入自己的进程组，再解除屏蔽；若在 setpgid 之前解除，此刻它仍在 shell 的前台进程组里，Ctrl-C/Ctrl-Z 会直接打到它。",
+      "content": "37. （2分）在ShellLab中，为了避免出现竞争（race），需要在特定的操作前屏蔽一\n些信号。下列关于屏蔽信号与解除屏蔽的时机，说法错误的一项是？\nA. sigint_handler中不需要屏蔽信号，因为只需要读取全局数据结构job_list，\n而无需对其进行修改\nB. sigchld_handler中需要屏蔽信号，因为需要修改全局数据结构job_list，更\n新job的状态等相关信息\nC. eval 中需要屏蔽信号，因为需要修改全局数据结构 job_list，在创建新任务时\n添加新创建的job信息\nD. fork之后需要解除屏蔽信号，解除的时机可以在执行setpgid之前，也可以在执\n行setpgid 之后\n答案：D\n\n解析：子进程会继承父进程屏蔽的信号，正确顺序是：子进程先 `setpgid(0,0)` 进入自己的进程组，再解除屏蔽，最后 execve。若在 setpgid 之前就解除屏蔽，这段窗口里子进程仍属于 shell 所在的前台进程组，用户此时按 Ctrl-C/Ctrl-Z 会直接打到它（而 shell 的转发又依赖它已经独立成组），故 D 是错误项。A 对（sigint_handler 只读 job_list 并发信号，不修改共享数据）；B、C 对（handler 和 eval 修改 job_list 时都必须先屏蔽信号，既保护数据结构，也避免子进程已被回收、父进程才 addjob 的竞争）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6249,7 +6249,7 @@
             "content": "fork之后需要解除屏蔽信号，解除的时机可以在执行setpgid之前，也可以在执\n行setpgid 之后"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：子进程必须先 setpgid 进入自己的进程组，再解除屏蔽；若在 setpgid 之前解除，此刻它仍在 shell 的前台进程组里，Ctrl-C/Ctrl-Z 会直接打到它。"
+        "answer": "答案：D\n\n解析：子进程会继承父进程屏蔽的信号，正确顺序是：子进程先 `setpgid(0,0)` 进入自己的进程组，再解除屏蔽，最后 execve。若在 setpgid 之前就解除屏蔽，这段窗口里子进程仍属于 shell 所在的前台进程组，用户此时按 Ctrl-C/Ctrl-Z 会直接打到它（而 shell 的转发又依赖它已经独立成组），故 D 是错误项。A 对（sigint_handler 只读 job_list 并发信号，不修改共享数据）；B、C 对（handler 和 eval 修改 job_list 时都必须先屏蔽信号，既保护数据结构，也避免子进程已被回收、父进程才 addjob 的竞争）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6279,7 +6279,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "37. （2分）在ShellLab中，为了避免出现竞争（race），需要在特定的操作前屏蔽一\n些信号。下列关于屏蔽信号与解除屏蔽的时机，说法错误的一项是？",
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：子进程必须先 setpgid 进入自己的进程组，再解除屏蔽；若在 setpgid 之前解除，此刻它仍在 shell 的前台进程组里，Ctrl-C/Ctrl-Z 会直接打到它。"
+        "answer": "答案：D\n\n解析：子进程会继承父进程屏蔽的信号，正确顺序是：子进程先 `setpgid(0,0)` 进入自己的进程组，再解除屏蔽，最后 execve。若在 setpgid 之前就解除屏蔽，这段窗口里子进程仍属于 shell 所在的前台进程组，用户此时按 Ctrl-C/Ctrl-Z 会直接打到它（而 shell 的转发又依赖它已经独立成组），故 D 是错误项。A 对（sigint_handler 只读 job_list 并发信号，不修改共享数据）；B、C 对（handler 和 eval 修改 job_list 时都必须先屏蔽信号，既保护数据结构，也避免子进程已被回收、父进程才 addjob 的竞争）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -6292,7 +6292,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 38",
       "summary": "ShellLab 内建命令 jobs/bg/kill/nohup",
-      "content": "38. （2 分）在 ShellLab 中，我们需要实现一系列内建命令。下列关于内建命令的说法\n正确的是？\nA. jobs命令中我们需要列出所有任务，且需要先屏蔽所有相关信号，避免竞争\nB. bg命令中我们需要将当前运行在前台的任务变为后台运行，且不使任务停止\nC. kill命令中我们需要向指定的进程或进程组发送SIGKILL信号以将其终止\nD. nohup命令中我们需要在创建子进程后阻塞SIGHUP信号或设置忽略该信号\n答案：D（AI 推导，未与官方答案核对）\n解析：jobs 直接调用 listjobs 输出，无需屏蔽信号；bg 是给已停止的后台任务发 SIGCONT；kill 发的是 SIGTERM；nohup 让后续命令忽略（屏蔽）SIGHUP。",
+      "content": "38. （2 分）在 ShellLab 中，我们需要实现一系列内建命令。下列关于内建命令的说法\n正确的是？\nA. jobs命令中我们需要列出所有任务，且需要先屏蔽所有相关信号，避免竞争\nB. bg命令中我们需要将当前运行在前台的任务变为后台运行，且不使任务停止\nC. kill命令中我们需要向指定的进程或进程组发送SIGKILL信号以将其终止\nD. nohup命令中我们需要在创建子进程后阻塞SIGHUP信号或设置忽略该信号\n答案：D\n\n解析：writeup 规定 `nohup [command]` 要让后续命令阻塞/忽略 SIGHUP（参考实现先阻塞 SIGHUP 再执行命令，子进程继承该信号屏蔽），故 D 对。jobs 直接调用 listjobs 输出即可，不需要先屏蔽信号（A 错）；bg 是给已停止的后台任务发 SIGCONT 让它继续在后台运行，而不是把前台运行的任务转后台（B 错）；kill 内建命令按 writeup 发送的是 SIGTERM 而不是 SIGKILL（C 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6331,7 +6331,7 @@
             "content": "nohup命令中我们需要在创建子进程后阻塞SIGHUP信号或设置忽略该信号"
           }
         ],
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：jobs 直接调用 listjobs 输出，无需屏蔽信号；bg 是给已停止的后台任务发 SIGCONT；kill 发的是 SIGTERM；nohup 让后续命令忽略（屏蔽）SIGHUP。"
+        "answer": "答案：D\n\n解析：writeup 规定 `nohup [command]` 要让后续命令阻塞/忽略 SIGHUP（参考实现先阻塞 SIGHUP 再执行命令，子进程继承该信号屏蔽），故 D 对。jobs 直接调用 listjobs 输出即可，不需要先屏蔽信号（A 错）；bg 是给已停止的后台任务发 SIGCONT 让它继续在后台运行，而不是把前台运行的任务转后台（B 错）；kill 内建命令按 writeup 发送的是 SIGTERM 而不是 SIGKILL（C 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6361,7 +6361,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "38. （2 分）在 ShellLab 中，我们需要实现一系列内建命令。下列关于内建命令的说法\n正确的是？",
-        "answer": "答案：D（AI 推导，未与官方答案核对）\n解析：jobs 直接调用 listjobs 输出，无需屏蔽信号；bg 是给已停止的后台任务发 SIGCONT；kill 发的是 SIGTERM；nohup 让后续命令忽略（屏蔽）SIGHUP。"
+        "answer": "答案：D\n\n解析：writeup 规定 `nohup [command]` 要让后续命令阻塞/忽略 SIGHUP（参考实现先阻塞 SIGHUP 再执行命令，子进程继承该信号屏蔽），故 D 对。jobs 直接调用 listjobs 输出即可，不需要先屏蔽信号（A 错）；bg 是给已停止的后台任务发 SIGCONT 让它继续在后台运行，而不是把前台运行的任务转后台（B 错）；kill 内建命令按 writeup 发送的是 SIGTERM 而不是 SIGKILL（C 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -6374,7 +6374,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 39",
       "summary": "sigchld_handler 中 WIFSTOPPED/WIFCONTINUED 判断",
-      "content": "39. （2分）下面是ShellLab中sigchld_handler的一个正确实现中的部分代码（省\n略了部分检查与输出）。则代码中(1)和(2)应该分别为？\n```\nwhile  ((child_pid  =  waitpid(-1,  &status,  WNOHANG  |  WUNTRACED  |\nWCONTINUED)) > 0) {\n    if (_____(1)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        j->state = ST;\n    }\n    else if (_____(2)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        if(!(j->state == FG)) {\n            j->state = BG;\n        }\n    }\n    // ...\n}\n```\nA. (1) WIFSTOPPED (2) WIFCONTINUED\nB. (1) WIFSTOPPED (2) WIFSIGNALED\nC. (1) WIFEXITED  (2) WIFCONTINUED\nD. (1) WIFEXITED  (2) WIFSIGNALED\n答案：A（AI 推导，未与官方答案核对）",
+      "content": "39. （2分）下面是ShellLab中sigchld_handler的一个正确实现中的部分代码（省\n略了部分检查与输出）。则代码中(1)和(2)应该分别为？\n```\nwhile  ((child_pid  =  waitpid(-1,  &status,  WNOHANG  |  WUNTRACED  |\nWCONTINUED)) > 0) {\n    if (_____(1)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        j->state = ST;\n    }\n    else if (_____(2)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        if(!(j->state == FG)) {\n            j->state = BG;\n        }\n    }\n    // ...\n}\n```\nA. (1) WIFSTOPPED (2) WIFCONTINUED\nB. (1) WIFSTOPPED (2) WIFSIGNALED\nC. (1) WIFEXITED  (2) WIFCONTINUED\nD. (1) WIFEXITED  (2) WIFSIGNALED\n答案：A\n\n解析：waitpid 带 WUNTRACED|WCONTINUED 时：WIFSTOPPED(status) 为真说明子进程刚被暂停（如 Ctrl-Z），应把 job 状态置为 ST；WIFCONTINUED(status) 为真说明子进程被 SIGCONT 唤醒，若它不是前台任务就置回 BG，正好对应 (1)(2)，故 A 对。WIFEXITED/WIFSIGNALED 属于\"正常退出/被信号杀死\"的分支，那里应当 deletejob，而不是把状态改成 ST/BG。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6413,7 +6413,7 @@
             "content": "(1) WIFEXITED  (2) WIFSIGNALED"
           }
         ],
-        "answer": "答案：A（AI 推导，未与官方答案核对）"
+        "answer": "答案：A\n\n解析：waitpid 带 WUNTRACED|WCONTINUED 时：WIFSTOPPED(status) 为真说明子进程刚被暂停（如 Ctrl-Z），应把 job 状态置为 ST；WIFCONTINUED(status) 为真说明子进程被 SIGCONT 唤醒，若它不是前台任务就置回 BG，正好对应 (1)(2)，故 A 对。WIFEXITED/WIFSIGNALED 属于\"正常退出/被信号杀死\"的分支，那里应当 deletejob，而不是把状态改成 ST/BG。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6443,7 +6443,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "39. （2分）下面是ShellLab中sigchld_handler的一个正确实现中的部分代码（省\n略了部分检查与输出）。则代码中(1)和(2)应该分别为？\n```\nwhile  ((child_pid  =  waitpid(-1,  &status,  WNOHANG  |  WUNTRACED  |\nWCONTINUED)) > 0) {\n    if (_____(1)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        j->state = ST;\n    }\n    else if (_____(2)_____(status)) {\n        struct job_t *j = getjobpid(job_list, child_pid);\n        if(!(j->state == FG)) {\n            j->state = BG;\n        }\n    }\n    // ...\n}\n```",
-        "answer": "答案：A（AI 推导，未与官方答案核对）"
+        "answer": "答案：A\n\n解析：waitpid 带 WUNTRACED|WCONTINUED 时：WIFSTOPPED(status) 为真说明子进程刚被暂停（如 Ctrl-Z），应把 job 状态置为 ST；WIFCONTINUED(status) 为真说明子进程被 SIGCONT 唤醒，若它不是前台任务就置回 BG，正好对应 (1)(2)，故 A 对。WIFEXITED/WIFSIGNALED 属于\"正常退出/被信号杀死\"的分支，那里应当 deletejob，而不是把状态改成 ST/BG。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     },
     {
@@ -6456,7 +6456,7 @@
       "exam": "2025Lab测验-无答案",
       "questionNo": "Lab 任务 40",
       "summary": "waitfg 前台等待的正确实现（sigsuspend）",
-      "content": "40. （2分）在ShellLab中，我们在sigchld_handler中使用waitpid来回收子进\n程，同时我们定义了waitfg函数用来等待特定pid的前台任务结束。下面waitfg\n函数的实现，正确的一项是？\nA.  void waitfg(pid_t pid) {\n    int timeout = 0;\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        if (++timeout > MAX_TIME) {\n            break;\n        }\n    }\n}\nB.  void waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        sleep(1);\n    }\n}\nC.  sigset_t oldmask;\nvoid waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        sigsuspend(&oldmask);\n    }\n}\nD.  int status;\nvoid waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        waitpid(pid, &status, 0);\n    }\n}\n答案：C（AI 推导，未与官方答案核对）\n解析：writeup 禁止忙等与 sleep 轮询，要求用 sigsuspend；D 用 waitpid 会和 sigchld_handler 抢夺回收同一个子进程，且任务被暂停时会永久阻塞。",
+      "content": "40. （2分）在ShellLab中，我们在sigchld_handler中使用waitpid来回收子进\n程，同时我们定义了waitfg函数用来等待特定pid的前台任务结束。下面waitfg\n函数的实现，正确的一项是？\nA.  void waitfg(pid_t pid) {\n    int timeout = 0;\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        if (++timeout > MAX_TIME) {\n            break;\n        }\n    }\n}\nB.  void waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        sleep(1);\n    }\n}\nC.  sigset_t oldmask;\nvoid waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        sigsuspend(&oldmask);\n    }\n}\nD.  int status;\nvoid waitfg(pid_t pid) {\n    struct job_t *j = getjobpid(job_list, pid);\n    while (j->pid == pid && j->state == FG) {\n        waitpid(pid, &status, 0);\n    }\n}\n答案：C\n\n解析：writeup 明令禁止忙等（如 while(1);）和用 sleep 轮询，要求用 sigsuspend 把父进程挂起，让 sigchld_handler 去回收子进程并更新 job 状态，故 C（配合 while 反复判断前台任务是否还在）是正确写法；A 是纯忙等、B 用 sleep 轮询，都会被扣分。D 用 waitpid 会和 sigchld_handler 抢着回收同一个子进程，而且前台任务被暂停（尚未退出）时会永久阻塞。注：选项里 oldmask 未初始化，实际写法应先用 sigprocmask 取出原屏蔽字再传给 sigsuspend。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6495,7 +6495,7 @@
             "content": "int status;\nvoid waitfg(pid_t pid) {\nstruct job_t *j = getjobpid(job_list, pid);\nwhile (j->pid == pid && j->state == FG) {\nwaitpid(pid, &status, 0);\n}\n}"
           }
         ],
-        "answer": "答案：C（AI 推导，未与官方答案核对）\n解析：writeup 禁止忙等与 sleep 轮询，要求用 sigsuspend；D 用 waitpid 会和 sigchld_handler 抢夺回收同一个子进程，且任务被暂停时会永久阻塞。"
+        "answer": "答案：C\n\n解析：writeup 明令禁止忙等（如 while(1);）和用 sleep 轮询，要求用 sigsuspend 把父进程挂起，让 sigchld_handler 去回收子进程并更新 job 状态，故 C（配合 while 反复判断前台任务是否还在）是正确写法；A 是纯忙等、B 用 sleep 轮询，都会被扣分。D 用 waitpid 会和 sigchld_handler 抢着回收同一个子进程，而且前台任务被暂停（尚未退出）时会永久阻塞。注：选项里 oldmask 未初始化，实际写法应先用 sigprocmask 取出原屏蔽字再传给 sigsuspend。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6525,7 +6525,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "40. （2分）在ShellLab中，我们在sigchld_handler中使用waitpid来回收子进\n程，同时我们定义了waitfg函数用来等待特定pid的前台任务结束。下面waitfg\n函数的实现，正确的一项是？",
-        "answer": "答案：C（AI 推导，未与官方答案核对）\n解析：writeup 禁止忙等与 sleep 轮询，要求用 sigsuspend；D 用 waitpid 会和 sigchld_handler 抢夺回收同一个子进程，且任务被暂停时会永久阻塞。"
+        "answer": "答案：C\n\n解析：writeup 明令禁止忙等（如 while(1);）和用 sleep 轮询，要求用 sigsuspend 把父进程挂起，让 sigchld_handler 去回收子进程并更新 job 状态，故 C（配合 while 反复判断前台任务是否还在）是正确写法；A 是纯忙等、B 用 sleep 轮询，都会被扣分。D 用 waitpid 会和 sigchld_handler 抢着回收同一个子进程，而且前台任务被暂停（尚未退出）时会永久阻塞。注：选项里 oldmask 未初始化，实际写法应先用 sigprocmask 取出原屏蔽字再传给 sigsuspend。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       }
     }
   ]
