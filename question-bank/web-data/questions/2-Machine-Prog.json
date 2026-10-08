@@ -4848,14 +4848,25 @@
         "choices": [],
         "answer": "（"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "请分析下面的C语言程序和对应的x86-64汇编代码。\n1.其中，有一部分缺失的代码（用标号标出），请在标号对应的横线上填写缺失的\n内容。注:汇编与机器码中的数字用 16 进制数填写。\n（1-11每空1分，共11分）\nC语言代码如下：\n```\ntypedef struct _parameters {\n    int n;\n    int product;\n} parameters;\nint bar(parameters *params, int x) {\n    params->product *= x;\n}\nvoid foo (parameters *params) {\n    if (params->n <= 1)\n```\n        ___（1）___                        （1）____________\n    bar(params,    （2）   );             （2）____________\n```\n    params->n--;\n    foo(params);\n}\n```\nx86-64汇编代码如下（为简单起见，函数内指令地址只给出后四位，需要时可补\n全）：\n0x0000555555555189 <bar>：\n```\n    5189: f3 0f 1e fa    endbr64\n    518d: 55            push   %rbp\n    518e: 48 89 e5       mov    %rsp,%rbp\n    5191: 48 89 7d f8   mov    _（3）_,-0x8(%rbp)  （3）_________\n    5195: 89 75 f4       mov    %esi,-0xc(%rbp)\n    5198: 48 8b 45 f8   mov    -0x8(%rbp),%rax\n    519c: 8b 40 04        mov    0x4(%rax),%eax\n    519f: 0f af 45 f4   imul   _（4）_(%rbp),%eax  （4）_________\n    51a3: 89 c2           mov    %eax,%edx\n    51a5: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n\n    51a9: 89 50 04       mov    %edx,0x4(%rax)\n    51ac: 90              nop\n    51ad: 5d              pop    _（5）_            （5）_________\n    51ae: c3              retq\n```\n00005555555551af <foo>:\n```\n    51af: f3 0f 1e fa  endbr64\n    51b3: 55               push   %rbp\n    51b4: 48 89 e5        mov    %rsp,%rbp\n51b7: 48 83 ec 10    _（6）_  $0x10,%rsp        （6）_________\n51bb: 48 89 7d f8   mov    %rdi,-0x8(%rbp)\n    51bf: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51c3: 8b 00           mov    (%rax),%eax\n    51c5: 83 f8 01        cmp    $0x1,%eax\n    51c8: 7e 31           _（7）_ 51fb <foo+0x4c>   （7）_________\n    51ca: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51ce: 8b 10           mov    (%rax),%edx\n    51d0: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51d4: 89 d6           mov    %edx,%esi\n    51d6: 48 89 c7        mov    %rax,%rdi\n    51d9: e8 ab ff ff ff  callq  0x0000555555555189 <bar>\n    51de: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51e2: 8b 00           mov    (%rax),%eax\n    51e4: 8d 50 ff        lea  -0x1(_（8）_),%edx    （8）_________\n    51e7: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51eb: 89 10          mov   _（9）_,(%rax)       （9）__________\n    51ed: 48 8b 45 f8   mov  _（10）_ ,%rax       （10）_________\n    51f1: 48 89 c7       mov    %rax,%rdi\n    51f4: e8 b6 ff ff ff    callq   _（11）_       （11）_________\n    51f9: eb 01           jmp    51fc <foo+0x4d>\n    51fb: 90               nop\n    51fc: c9               leaveq\n    51fd: c3               retq\n```",
         "answer": "（"
+      },
+      "group": {
+        "id": "p-d72f88c4198cf267:2020-mid-q3",
+        "questionId": "q-e79fe5b33df52e8d",
+        "title": "第三题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -4898,14 +4909,25 @@
         "choices": [],
         "answer": "（每空2分，共6分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2.在程序执行到0x000055555555518e时（该指令还未执行），此时的栈帧如下，\n请填写空格中对应的值。\n地址  值\n```\n0x7fffffffe308  0xffffe340\n0x7fffffffe304  0x00000000\n0x7fffffffe300  0x00000000\n0x7fffffffe2fc  0x00005555\n```\n0x7fffffffe2f8  （12）_________\n```\n0x7fffffffe2f4  0x00007fff\n0x7fffffffe2f0  0xffffe310\n0x7fffffffe2ec  0x00007fff\n0x7fffffffe2e8  0xffffe340\n0x7fffffffe2e4  0x00000004\n0x7fffffffe2e0  0xffffe350\n0x7fffffffe2dc  0x00005555\n```\n0x7fffffffe2d8  （13）_________\n0x7fffffffe2d4  0x00007fff\n0x7fffffffe2d0  （14）_________",
         "answer": "（每空2分，共6分）"
+      },
+      "group": {
+        "id": "p-d72f88c4198cf267:2020-mid-q3",
+        "questionId": "q-e79fe5b33df52e8d",
+        "title": "第三题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -4948,14 +4970,25 @@
         "choices": [],
         "answer": "（3分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3.当params={n,1}时，foo(&params)函数的功能是什么？",
         "answer": "（3分）"
+      },
+      "group": {
+        "id": "p-d72f88c4198cf267:2020-mid-q3",
+        "questionId": "q-e79fe5b33df52e8d",
+        "title": "第三题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",

@@ -37,6 +37,8 @@ const referencedAssets = new Set();
 const referencedAnswerBlocks = new Set();
 const publishedQuestionIds = new Set();
 const verifiedQuestionIds = new Set();
+const quizKeyByQuestionId = new Map();
+const publishedQuizKeys = new Set();
 
 for (const module of catalog.modules || []) {
   const modulePath = path.join(output, 'web-data', module.questionFile);
@@ -46,10 +48,15 @@ for (const module of catalog.modules || []) {
     question.presentation && question.presentation.status === 'ready');
   module.questionCount = data.questions.length;
   module.publishedQuestionCount = data.questions.length;
+  module.quizQuestionCount = new Set(data.questions.map((question) =>
+    (question.group && question.group.questionId) || question.id)).size;
   fs.writeFileSync(modulePath, `${JSON.stringify(data, null, 2)}\n`);
   for (const question of data.questions) {
     questionCount += 1;
     publishedQuestionIds.add(question.id);
+    const quizKey = (question.group && question.group.questionId) || question.id;
+    quizKeyByQuestionId.set(question.id, quizKey);
+    publishedQuizKeys.add(quizKey);
     if (question.answer && question.answer.status === 'verified') verifiedQuestionIds.add(question.id);
     if (question.formatted && question.layout) formattedCount += 1;
     for (const asset of question.assets || []) referencedAssets.add(asset);
@@ -63,6 +70,7 @@ const sourceQuestionCount = catalog.stats.questions;
 catalog.stats.sourceQuestions = sourceQuestionCount;
 catalog.stats.questions = questionCount;
 catalog.stats.publishedQuestions = questionCount;
+catalog.stats.quizQuestions = publishedQuizKeys.size;
 fs.writeFileSync(path.join(output, 'web-data', 'catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`);
 
 const papersPath = path.join(output, 'web-data', catalog.papersFile);
@@ -71,6 +79,7 @@ papersPayload.papers = (papersPayload.papers || []).map((paper) => {
   paper.questionIds = (paper.questionIds || []).filter((id) => publishedQuestionIds.has(id));
   paper.questionCount = paper.questionIds.length;
   paper.publishedQuestionCount = paper.questionIds.length;
+  paper.quizQuestionCount = new Set(paper.questionIds.map((id) => quizKeyByQuestionId.get(id) || id)).size;
   paper.verifiedAnswerCount = paper.questionIds.filter((id) => verifiedQuestionIds.has(id)).length;
   paper.complete = paper.verifiedAnswerCount === paper.questionCount;
   return paper;

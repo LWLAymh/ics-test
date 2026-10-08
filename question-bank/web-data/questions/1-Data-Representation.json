@@ -3985,14 +3985,25 @@
         "choices": [],
         "answer": "NaN   _（2分）， _    1  ___（2分）\n8___。（2分）\n（4分，\n全对才得分,否则0分）\n01  00  00  00  00  00  00  80\n此时\n1______（2分）\n-2147483648 (-2**31)___（2分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第二题（20分）\n分析两段在x86-64 CPU上运行的程序代码，回答相关问题。\n第一段代码：\n```\n#include<stdio.h>\ntypedef struct\n{\n  int x;\n  int y;\n}struct_e;\ntypedef union\n{\n  struct_e s;\n  double d;\n}union_e;\nint main () {\n  union_e test;\n  test.s.x = 0;\n  test.s.y = -1;\n  printf(\"%lf\\n\", test.d);\n  test.s.y = 0x3ff00000;\n  printf(\"%lf\\n\", test.d);\n}\n```\n（1）以上程序的两次输出分别是 ___\n。\n（2） sizeof(union_e) = _\n（3）如果某次程序输出的 test.d 是最大的负非规格化数，则\n   此时从test的起始地址开始的8个字节（用16进制表示）依次是:\n6\n\n\ntest.s.x = ______\ntest.s.y = ___",
         "answer": "NaN   _（2分）， _    1  ___（2分）\n8___。（2分）\n（4分，\n全对才得分,否则0分）\n01  00  00  00  00  00  00  80\n此时\n1______（2分）\n-2147483648 (-2**31)___（2分）"
+      },
+      "group": {
+        "id": "p-d72f88c4198cf267:2020-mid-q2",
+        "questionId": "q-dfb1408ac4bafee7",
+        "title": "第二题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -4035,14 +4046,25 @@
         "choices": [],
         "answer": "_ -2，1，0，-1，2_________ __（3分，全对才得分）\n2**24+1\n（3分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第二段代码：\n```\nint a = 33554442; // 2^25+10\nint b = a + 5;\nfor (; a < b; a++) {\n  float f = a;\n  printf(\"%d \", (int)f - a);\n}\n```\n（1） 这段代码的运行输出结果是（若有多个输出结果，用逗号分隔表示）：\n_ __________\n（2）进一步分析，float类型不可以精确表示的最小正整数是 ___\n___。",
         "answer": "_ -2，1，0，-1，2_________ __（3分，全对才得分）\n2**24+1\n（3分）"
+      },
+      "group": {
+        "id": "p-d72f88c4198cf267:2020-mid-q2",
+        "questionId": "q-dfb1408ac4bafee7",
+        "title": "第二题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",

@@ -36,21 +36,31 @@
   const PUBLISHED_QUESTION_KINDS = new Set([
     'single-choice', 'multiple-choice', 'fill', 'short-answer', 'composite',
   ]);
-  const md = window.markdownit ? window.markdownit({ html: false, linkify: true, breaks: false }) : null;
-  if (md) {
-    const defaultImage = md.renderer.rules.image || function (tokens, index, options, env, renderer) {
+  function createMarkdownRenderer(breaks) {
+    if (!window.markdownit) return null;
+    const rendererInstance = window.markdownit({ html: false, linkify: true, breaks: breaks });
+    const defaultImage = rendererInstance.renderer.rules.image || function (tokens, index, options, env, renderer) {
       return renderer.renderToken(tokens, index, options);
     };
-    md.renderer.rules.image = function (tokens, index, options, env, renderer) {
+    rendererInstance.renderer.rules.image = function (tokens, index, options, env, renderer) {
       const token = tokens[index];
       const source = String(token.attrGet('src') || '').replace(/\\/g, '/');
       const assetIndex = source.indexOf('assets/');
       if (assetIndex >= 0) token.attrSet('src', './web-data/assets/' + source.slice(assetIndex + 7));
-      token.attrSet('loading', 'lazy');
+      // 页面同时只展示一道题，题面图片应立即加载；lazy + content-visibility 会让
+      // 部分浏览器长时间保留空白占位。
+      token.attrSet('loading', 'eager');
       token.attrSet('decoding', 'async');
+      token.attrSet('fetchpriority', 'high');
+      token.attrSet('data-ics-question-image', '');
       return defaultImage(tokens, index, options, env, renderer);
     };
+    return rendererInstance;
   }
+  const md = createMarkdownRenderer(false);
+  // `_curated/*.md` 是人工排版后的最终题面，换行必须逐字忠实呈现，不能再按
+  // PDF 折行启发式合并。旧数据兜底路径仍使用 breaks=false。
+  const formattedMd = createMarkdownRenderer(true);
 
   function escapeHtml(value) {
     return String(value == null ? '' : value)
@@ -134,13 +144,13 @@
   // 注意：这两个函数必须留在 ics-check.js 抽取的片段内（escapeHtml..secureShuffle），
   // 否则体检脚本里的 Function 构造会报 not defined。
   function renderLayoutStem(text) {
-    const clean = normalizeText(text);
-    return md ? md.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';
+    const clean = String(text || '').replace(/\r\n?/g, '\n');
+    return formattedMd ? formattedMd.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';
   }
 
   function renderLayoutChoice(text) {
-    const clean = normalizeText(text).trim();
-    return md ? md.renderInline(clean) : escapeHtml(clean);
+    const clean = String(text || '').replace(/\r\n?/g, '\n').trim();
+    return formattedMd ? formattedMd.renderInline(clean) : escapeHtml(clean);
   }
 
   function typeset(element) {
@@ -235,12 +245,19 @@
     }));
     payloads.forEach(function (payload) {
       payload.questions.forEach(function (question) {
-        state.issueQuestionIndex.set(question.id, {
+        const meta = {
           kind: question.interaction && question.interaction.kind,
           moduleTitle: payload.module.title,
           exam: question.exam,
           questionNo: question.questionNo,
-        });
+        };
+        state.issueQuestionIndex.set(question.id, meta);
+        if (question.group && question.group.questionId) {
+          state.issueQuestionIndex.set(question.group.questionId, {
+            kind: 'composite', moduleTitle: payload.module.title,
+            exam: question.exam, questionNo: question.group.title,
+          });
+        }
       });
     });
     state.issueIndexLoaded = true;
@@ -513,6 +530,76 @@
     });
   }
 
+  function combineQuestionGroup(members) {
+    const ordered = members.slice().sort(function (a, b) {
+      return Number(a.group.order || 0) - Number(b.group.order || 0);
+    });
+    const first = ordered[0];
+    const group = first.group;
+    const prompt = ordered.map(function (question) {
+      let part = String(question.prompt || '').trim();
+      const explicitChoices = question.layout && Array.isArray(question.layout.choices)
+        ? question.layout.choices : [];
+      if (explicitChoices.length) {
+        part += '\n\n' + explicitChoices.map(function (choice) {
+          return '**' + choice.key + '.**\n\n' + String(choice.content || '').trim();
+        }).join('\n\n');
+      }
+      return part;
+    }).filter(Boolean).join('\n\n---\n\n');
+    const directAnswer = ordered.map(function (question) {
+      const heading = String(question.questionNo || '').trim();
+      const answer = String(question.directAnswer || '').trim() || '本部分答案尚未完成校对。';
+      return (heading ? '### ' + heading + '\n\n' : '') + answer;
+    }).join('\n\n---\n\n');
+    const answerAvailable = ordered.every(function (question) { return question.answerAvailable; });
+    const assets = [];
+    ordered.forEach(function (question) {
+      (question.assets || []).forEach(function (asset) {
+        if (!assets.includes(asset)) assets.push(asset);
+      });
+    });
+    return Object.assign({}, first, {
+      id: group.questionId,
+      questionNo: group.title,
+      paperOrder: Math.min.apply(null, ordered.map(function (question) {
+        return Number(question.paperOrder || 0);
+      })),
+      prompt: prompt,
+      directAnswer: directAnswer,
+      answerStatus: answerAvailable ? 'verified' : 'needs-review',
+      answerAvailable: answerAvailable,
+      formatted: true,
+      layout: { mode: 'composite', selection: null, stem: prompt, choices: [], answer: directAnswer },
+      interaction: { kind: 'composite', declared: true },
+      layoutChoices: null,
+      assets: assets,
+      groupMembers: ordered.map(function (question) { return question.id; }),
+    });
+  }
+
+  function collapseQuestionGroups(pool) {
+    const groups = new Map();
+    pool.forEach(function (question) {
+      if (!question.group || !question.group.questionId) return;
+      if (!groups.has(question.group.questionId)) groups.set(question.group.questionId, []);
+      groups.get(question.group.questionId).push(question);
+    });
+    const emitted = new Set();
+    const collapsed = [];
+    pool.forEach(function (question) {
+      if (!question.group || !question.group.questionId) {
+        collapsed.push(question);
+        return;
+      }
+      const groupId = question.group.questionId;
+      if (emitted.has(groupId)) return;
+      emitted.add(groupId);
+      collapsed.push(combineQuestionGroup(groups.get(groupId)));
+    });
+    return collapsed;
+  }
+
   function simpleExpected(answer) {
     const text = String(answer || '').replace(/\*+/g, '').trim();
     const upperText = text.toUpperCase();
@@ -610,8 +697,8 @@
     return gapCount ? { markdown: markdown, count: gapCount } : null;
   }
 
-  function renderFillQuestion(fillQuestion) {
-    let html = renderMarkdown(fillQuestion.markdown);
+  function renderFillQuestion(fillQuestion, formatted) {
+    let html = formatted ? renderLayoutStem(fillQuestion.markdown) : renderMarkdown(fillQuestion.markdown);
     for (let i = 0; i < fillQuestion.count; i += 1) {
       const input = '<span class="ics-inline-blank"><span class="ics-blank-number">' + (i + 1) + '</span>' +
         '<input class="ics-blank-input" name="blank-' + i + '" data-gap="' + i + '" ' +
@@ -671,10 +758,12 @@
   function updatePaperStatus() {
     const paper = state.papers.find(function (item) { return item.id === ui.paper.value; });
     if (!paper) { ui.paperStatus.textContent = ''; return; }
-    ui.paperStatus.textContent = paper.publishedQuestionCount + ' 道题 · 单选 ' +
+    const quizCount = Number(paper.quizQuestionCount || paper.publishedQuestionCount || 0);
+    ui.paperStatus.textContent = quizCount + ' 道测试题（' + paper.publishedQuestionCount + ' 个题目片段） · 单选 ' +
       paper.singleChoiceCount + ' · 多选 ' + paper.multipleChoiceCount +
       ' · 填空 ' + Number(paper.fillCount || 0) +
-      ' · 简答 ' + Number(paper.shortAnswerCount || 0);
+      ' · 简答 ' + Number(paper.shortAnswerCount || 0) +
+      ' · 组合片段 ' + Number(paper.compositeCount || 0);
   }
 
   async function init() {
@@ -684,15 +773,15 @@
       state.papers = (paperPayload.papers || []).filter(function (paper) {
         return Number(paper.publishedQuestionCount || 0) > 0;
       });
-      ui.bankSummary.textContent = state.catalog.stats.publishedQuestions +
-        ' 道题已上线（含选择、填空与简答） · ' + state.catalog.stats.withheldQuestions +
+      ui.bankSummary.textContent = Number(state.catalog.stats.quizQuestions || state.catalog.stats.publishedQuestions) +
+        ' 道题已上线（含选择、填空、简答与综合题） · ' + state.catalog.stats.withheldQuestions +
         ' 道排版待复核题暂缓开放';
       ui.modules.innerHTML = state.catalog.modules.filter(function (module) {
         return Number(module.publishedQuestionCount || 0) > 0;
       }).map(function (module) {
         return '<label class="ics-module-card"><input type="checkbox" value="' + escapeHtml(module.id) + '" checked>' +
           '<span><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
-          '<small>' + escapeHtml(module.name) + ' · ' + module.publishedQuestionCount + ' 道题</small></span></label>';
+          '<small>' + escapeHtml(module.name) + ' · ' + Number(module.quizQuestionCount || module.publishedQuestionCount) + ' 道题</small></span></label>';
       }).join('');
       (state.catalog.filters.examTypes || []).forEach(function (type) {
         const option = document.createElement('option'); option.value = type; option.textContent = type; ui.examType.appendChild(option);
@@ -704,7 +793,7 @@
         const option = document.createElement('option');
         option.value = paper.id;
         option.textContent = [paper.year, paper.examType, paper.title].filter(Boolean).join(' · ') +
-          '（' + paper.publishedQuestionCount + ' 题）';
+          '（' + Number(paper.quizQuestionCount || paper.publishedQuestionCount) + ' 题）';
         ui.paper.appendChild(option);
       });
       initSupabase();
@@ -757,6 +846,7 @@
           if (prepared) pool.push(prepared);
         });
       });
+      pool = collapseQuestionGroups(pool);
       if (!pool.length) throw new Error('当前筛选条件下没有可用题目');
 
       const count = mode === 'random' ? Math.min(Number(ui.count.value), pool.length) : pool.length;
@@ -800,12 +890,14 @@
       choiceQuestion = parseChoiceQuestion(q.prompt, expected);
       fillQuestion = choiceQuestion ? null : parseFillQuestion(q.prompt);
     }
+    const compositeQuestion = q.interaction && q.interaction.kind === 'composite';
     state.currentMode = !q.answerAvailable ? 'unavailable' : choiceQuestion ? 'choice'
-      : fillQuestion ? 'fill' : 'short';
+      : fillQuestion ? 'fill' : compositeQuestion ? 'composite' : 'short';
     const modeLabel = state.currentMode === 'unavailable' ? '待校对'
       : state.currentMode === 'choice'
       ? (choiceQuestion.multiple ? '多选题' : '单选题')
-      : state.currentMode === 'fill' ? '填空题' : '简答题';
+      : state.currentMode === 'fill' ? '填空题'
+        : state.currentMode === 'composite' ? '综合题' : '简答题';
     ui.progressText.textContent = '第 ' + number + ' / ' + state.questions.length + ' 题';
     ui.scoreText.textContent = '当前 ' + state.score + ' 分';
     ui.progressBar.style.width = ((state.index / state.questions.length) * 100) + '%';
@@ -814,7 +906,7 @@
         .filter(Boolean).map(function (item) { return '<span>' + escapeHtml(item) + '</span>'; }).join('');
     ui.questionContent.innerHTML = choiceQuestion
       ? (q.formatted ? renderLayoutStem(choiceQuestion.stem) : renderMarkdown(choiceQuestion.stem))
-      : fillQuestion ? renderFillQuestion(fillQuestion)
+      : fillQuestion ? renderFillQuestion(fillQuestion, q.formatted)
         : (q.formatted ? renderLayoutStem(q.prompt) : renderMarkdown(q.prompt));
     ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false; ui.skip.disabled = false;
     const alreadyReported = state.reportedThisSession.has(q.id);
@@ -828,14 +920,20 @@
       ? '本题答案尚未完成结构化校对'
       : state.currentMode === 'choice'
       ? '选择答案'
-      : state.currentMode === 'fill' ? '填写答案' : '思考完成后查看参考答案';
+      : state.currentMode === 'fill' ? '填写答案'
+        : state.currentMode === 'composite' ? '整道大题完成后查看参考答案'
+          : '思考完成后查看参考答案';
     ui.answerHint.textContent = state.currentMode === 'unavailable'
       ? '题目仍按原卷顺序展示，本题不会计入成绩'
       : state.currentMode === 'choice'
       ? (choiceQuestion.multiple ? '可选择多个选项' : '点击一个选项')
-      : state.currentMode === 'fill' ? '每个空格单独填写' : '本题查看答案后自评';
+      : state.currentMode === 'fill' ? '每个空格单独填写'
+        : state.currentMode === 'composite' ? '各小题共享题面与上下文，统一查看答案后自评'
+          : '本题查看答案后自评';
     ui.submit.textContent = state.currentMode === 'unavailable' ? '跳过并继续'
-      : state.currentMode === 'short' ? '显示参考答案' : '提交答案';
+      : (state.currentMode === 'short' || state.currentMode === 'composite')
+        ? (state.currentMode === 'composite' ? '显示整题参考答案' : '显示参考答案')
+        : '提交答案';
     if (choiceQuestion) {
       ui.choiceList.dataset.multiple = choiceQuestion.multiple ? 'true' : 'false';
       ui.choiceList.innerHTML = choiceQuestion.choices.map(function (choice) {
@@ -897,7 +995,7 @@
         input.disabled = true;
         return '第 ' + (index + 1) + ' 空：' + input.value.trim();
       }).join('；');
-    } else if (state.currentMode === 'short') {
+    } else if (state.currentMode === 'short' || state.currentMode === 'composite') {
       ui.answer.value = '查看参考答案后自评';
     }
     ui.skip.disabled = true;
@@ -906,7 +1004,9 @@
     const result = state.currentMode === 'choice' ? autoGrade(ui.answer.value, expected) : null;
     ui.answer.disabled = true; ui.submit.disabled = true; ui.feedback.hidden = false;
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
-    ui.reference.innerHTML = renderMarkdown(referenceFor(q));
+    ui.reference.innerHTML = q.formatted
+      ? renderLayoutStem(referenceFor(q))
+      : renderMarkdown(referenceFor(q));
     typeset(ui.reference);
 
     if (result === true) {
@@ -918,7 +1018,9 @@
     } else {
       ui.verdict.textContent = state.currentMode === 'fill'
         ? '已显示各空的参考内容，请核对后完成自评。'
-        : '已显示参考答案 / 解析，请根据关键点完成自评。';
+        : state.currentMode === 'composite'
+          ? '已显示整道大题的参考答案 / 解析，请整体完成自评。'
+          : '已显示参考答案 / 解析，请根据关键点完成自评。';
       ui.selfGrade.hidden = false;
     }
   }

@@ -17,6 +17,7 @@
 要点：
 - `%%% mode: choice|fill|short` 是**显式题型**，取代运行时的猜测；
 - `%%% provenance: verbatim|reflow|rewritten` 决定校验强度；
+- `%%% group` / `group_title` / `group_order` 显式声明同一大题的多个片段；
 - `%%% answer` 段**保留 `答案：` 字面前缀**（前端 `simpleExpected()` 的正则依赖它）；
   没有该段 = 本题无内联答案 -> `answer.inline = false`；
 - `build_content()` 按 stem+choices+answer **原样**拼接（用解析出的原始段文本，
@@ -49,6 +50,9 @@ def parse(text):
     mode = None
     selection = None
     provenance = "verbatim"
+    group = None
+    group_title = None
+    group_order = None
     cur = None
     order = []
     sections = {"stem": [], "choices": [], "answer": []}
@@ -75,6 +79,21 @@ def parse(text):
                 selection = val
                 if val not in SELECTIONS:
                     problems.append("selection 非法: %r" % val)
+            elif key == "group":
+                group = val
+                if not re.match(r"^[a-z0-9][a-z0-9-]{0,63}$", val):
+                    problems.append("group 必须是小写字母、数字和连字符: %r" % val)
+            elif key == "group_title":
+                group_title = val
+                if not val:
+                    problems.append("group_title 不能为空")
+            elif key == "group_order":
+                try:
+                    group_order = int(val)
+                    if group_order < 1:
+                        raise ValueError
+                except ValueError:
+                    problems.append("group_order 必须是正整数: %r" % val)
             else:
                 problems.append("未知控制项: %s" % key)
             continue
@@ -89,6 +108,9 @@ def parse(text):
 
     if mode is None:
         problems.append("缺 %%% mode")
+    group_fields = (group, group_title, group_order)
+    if any(value is not None for value in group_fields) and not all(value is not None for value in group_fields):
+        problems.append("组合题必须同时设置 group、group_title、group_order")
 
     stem = "\n".join(sections["stem"]).strip("\n")
     choices_text = "\n".join(sections["choices"]).strip("\n")
@@ -112,6 +134,7 @@ def parse(text):
         c.pop("lines", None)
 
     return {"mode": mode, "selection": selection, "provenance": provenance,
+            "group": group, "group_title": group_title, "group_order": group_order,
             "stem": stem, "choices": choices, "answer": answer,
             "choices_text": choices_text,
             "order": order or ["stem", "choices", "answer"],

@@ -3218,14 +3218,25 @@
         "choices": [],
         "answer": "取指：`icode:ifun ← M1[PC]`；`valP ← PC + 1`（题面已给出）\n译码（每行操作2分，一行全对才得分。共2行，合计4分）：`valA ← R[%rbp]`；`valB ← R[%rbp]`\n执行（4分，一行全对才得分）：`valE ← valB + 8`\n访存（4分，一行全对才得分）：`valM ← M8[valA]`\n写回（每行操作2分，一行全对才得分。共2行，合计4分）：`R[%rsp] ← ValE`；`R[%rbp] ← ValM`\n更新PC：`PC ← valP`（题面已给出）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第四题（20分）\n基于教材所描述的Y86-64 ISA和SEQ、PIPE处理器结构，完成下列问题。\n（1）拟新加入指令leave。其语义相当于\n```\nrrmovq  %rbp, %rsp\npopq   %rbp\n```\n请按下表补全SEQ处理器每个阶段的操作。需说明的信号可能会包括：icode,\nifun, rA, rB, valA, valB, valC, valE, valP, Cnd；寄存器堆R[],\n存储器M[], 程序计数器PC, 条件码CC。其中对存储器的引用必须标明字节数。\n（合计16分，详见下表内）\n\n| 阶段 | 操作 |\n| --- | --- |\n| 取指 | `icode:ifun ← M1[PC]`；`valP ← PC + 1` |\n| 译码 |  |\n| 执行 |  |\n| 访存 |  |\n| 写回 |  |\n| 更新PC | `PC ← valP` |\n\n每个空内的语句顺序无所谓",
         "answer": "取指：`icode:ifun ← M1[PC]`；`valP ← PC + 1`（题面已给出）\n译码（每行操作2分，一行全对才得分。共2行，合计4分）：`valA ← R[%rbp]`；`valB ← R[%rbp]`\n执行（4分，一行全对才得分）：`valE ← valB + 8`\n访存（4分，一行全对才得分）：`valM ← M8[valA]`\n写回（每行操作2分，一行全对才得分。共2行，合计4分）：`R[%rsp] ← ValE`；`R[%rbp] ← ValM`\n更新PC：`PC ← valP`（题面已给出）"
+      },
+      "group": {
+        "id": "p-d72f88c4198cf267:2020-mid-q4",
+        "questionId": "q-13c961451563b43b",
+        "title": "第四题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -3262,8 +3273,8 @@
         "curated": "_curated/期中/2020期中-带答案/446.md"
       },
       "layout": {
-        "mode": "fill",
-        "selection": null,
+        "mode": "choice",
+        "selection": "multiple",
         "stem": "（2）类似的，如果尝试新加入指令enter。其语义相当于\n```\npushq    %rbp\nrrmovq    %rsp, %rbp\n```\n为执行拟新增的指令，你尝试改进PIPE处理器，最终完成的工作为（可多\n（4分，完全正确才得分，多选、少选都不得分）",
         "choices": [
           {
@@ -3297,14 +3308,55 @@
         ],
         "answer": "答案：选）:\n含有C但不含A不含B的组合，或单选G          。\n补充说明：选G是常规思路；但是，含C的选项并试图维持可能的流水控制信号的\n设计也可以算对。流水线处理器中里面的寄存器堆在常规情况下只安排了 2 个\n写口。含C选项相当于安排 3 个写口，虽然不是常规设计但仍可以实现。"
       },
+      "partInteraction": {
+        "kind": "multiple-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "增加了一个计算栈帧调整±8的ALU单元；"
+          },
+          {
+            "id": "B",
+            "content": "为寄存器堆增加了一个读口；"
+          },
+          {
+            "id": "C",
+            "content": "为寄存器堆增加了一个写口；"
+          },
+          {
+            "id": "D",
+            "content": "在执行（E：Execution）阶段引入寄存器以保持新增的流水线信号；"
+          },
+          {
+            "id": "E",
+            "content": "在访存（M：Memory Access）阶段引入寄存器以保持新增的流水线信号；"
+          },
+          {
+            "id": "F",
+            "content": "在回写（W：Write Back）阶段引入寄存器以保持新增的流水线信号；"
+          },
+          {
+            "id": "G",
+            "content": "认为现有框架无法有效支持这一改造。"
+          }
+        ]
+      },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "multiple-choice"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "（2）类似的，如果尝试新加入指令enter。其语义相当于\n```\npushq    %rbp\nrrmovq    %rsp, %rbp\n```\n为执行拟新增的指令，你尝试改进PIPE处理器，最终完成的工作为（可多\n（4分，完全正确才得分，多选、少选都不得分）",
         "answer": "答案：选）:\n含有C但不含A不含B的组合，或单选G          。\n补充说明：选G是常规思路；但是，含C的选项并试图维持可能的流水控制信号的\n设计也可以算对。流水线处理器中里面的寄存器堆在常规情况下只安排了 2 个\n写口。含C选项相当于安排 3 个写口，虽然不是常规设计但仍可以实现。"
+      },
+      "group": {
+        "id": "p-d72f88c4198cf267:2020-mid-q4",
+        "questionId": "q-13c961451563b43b",
+        "title": "第四题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",

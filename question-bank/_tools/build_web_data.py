@@ -280,6 +280,7 @@ def main():
     questions_by_module = collections.defaultdict(list)
     papers = collections.OrderedDict()
     ids_seen = set()
+    group_registry = collections.defaultdict(lambda: {"title": None, "orders": set(), "members": []})
     missing_assets = []
 
     for material in materials:
@@ -321,6 +322,7 @@ def main():
             curated_rel = item.get("curated")
             layout = None
             formatted = False
+            question_group = None
             if curated_rel:
                 cpath = os.path.join(BASE, "_curated", *curated_rel.split("/"))
                 if not os.path.isfile(cpath):
@@ -334,6 +336,23 @@ def main():
                 content = curated.build_content(cur)
                 layout = curated.build_layout(cur)
                 formatted = True
+                if cur.get("group"):
+                    question_group = {
+                        "id": "%s:%s" % (paper_id, cur["group"]),
+                        "questionId": short_id("q", paper_id, "group", cur["group"]),
+                        "title": cur["group_title"],
+                        "order": cur["group_order"],
+                    }
+                    group_key = (paper_id, cur["group"])
+                    registered = group_registry[group_key]
+                    if registered["title"] not in (None, cur["group_title"]):
+                        raise ValueError("同一组合题的 group_title 不一致: %s" % (group_key,))
+                    if cur["group_order"] in registered["orders"]:
+                        raise ValueError("同一组合题的 group_order 重复: %s order=%s" % (
+                            group_key, cur["group_order"]))
+                    registered["title"] = cur["group_title"]
+                    registered["orders"].add(cur["group_order"])
+                    registered["members"].append(question_id)
                 # answer.inline：显式 answer 段优先；没有该段时退回原有「正文含答案标记」
                 # 判定，保证与旧路径的池子语义完全一致（否则会悄无声息地少一批题）。
                 answer_source = cur["answer"]
@@ -385,7 +404,19 @@ def main():
             }
             if formatted:
                 question["layout"] = layout
-                question["interaction"] = interaction_for(layout)
+                declared_interaction = interaction_for(layout)
+                if question_group:
+                    # 分组片段不是独立作答单元。保留片段原始题型供维护和后续
+                    # v4 迁移使用，但发布接口把它声明为组合题的一部分，避免对
+                    # 单个片段做错误的自动判分或统计。
+                    question["partInteraction"] = declared_interaction
+                    question["interaction"] = {
+                        "kind": "composite",
+                        "declared": True,
+                        "partKind": declared_interaction.get("kind"),
+                    }
+                else:
+                    question["interaction"] = declared_interaction
                 question["contentV3"] = {
                     "format": "markdown",
                     "prompt": layout.get("stem", ""),
@@ -394,6 +425,8 @@ def main():
                 question["source"]["curated"] = posixpath.join("_curated", curated_rel)
             else:
                 question["interaction"] = interaction_for(None)
+            if question_group:
+                question["group"] = question_group
             question["presentation"] = presentation_for(layout, question["interaction"])
             questions_by_module[module["id"]].append(question)
             paper["questionIds"].append(question_id)
@@ -410,6 +443,15 @@ def main():
                 paper["compositeCount"] += 1
             if status == "verified":
                 paper["verifiedAnswerCount"] += 1
+
+    for group_key, registered in group_registry.items():
+        member_count = len(registered["members"])
+        if member_count < 2:
+            raise ValueError("组合题至少需要两个片段: %s" % (group_key,))
+        expected_orders = set(range(1, member_count + 1))
+        if registered["orders"] != expected_orders:
+            raise ValueError("组合题 group_order 必须从 1 连续编号: %s orders=%s" % (
+                group_key, sorted(registered["orders"])))
 
     if missing_assets:
         preview = ", ".join("%s: %s" % x for x in missing_assets[:5])

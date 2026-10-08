@@ -767,9 +767,9 @@
       "verifiedAnswerCount": 21,
       "singleChoiceCount": 4,
       "multipleChoiceCount": 0,
-      "fillCount": 9,
-      "shortAnswerCount": 1,
-      "compositeCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 0,
+      "compositeCount": 10,
       "questionCount": 22,
       "publishedQuestionCount": 14,
       "complete": false
