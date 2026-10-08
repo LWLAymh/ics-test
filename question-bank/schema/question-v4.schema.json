@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lwlaymh.github.io/ics-test/schema/question-v4.schema.json",
+  "title": "ICS Test Question v4 (design draft)",
+  "type": "object",
+  "required": ["schemaVersion", "id", "paperId", "paperOrder", "questionNumber", "classification", "type", "stem", "solution", "source"],
+  "properties": {
+    "schemaVersion": {"const": 4},
+    "id": {"type": "string", "pattern": "^q-[a-f0-9]{16}$"},
+    "paperId": {"type": "string", "pattern": "^p-[a-f0-9]{16}$"},
+    "paperOrder": {"type": "integer", "minimum": 1},
+    "questionNumber": {
+      "type": "object",
+      "required": ["display", "major", "minor", "parts"],
+      "properties": {
+        "display": {"type": "string", "minLength": 1},
+        "major": {"$ref": "#/$defs/numberPart"},
+        "minor": {"oneOf": [{"$ref": "#/$defs/numberPart"}, {"type": "null"}]},
+        "parts": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": false
+    },
+    "classification": {
+      "type": "object",
+      "required": ["primaryModuleId", "moduleIds", "tags"],
+      "properties": {
+        "primaryModuleId": {"type": "string", "minLength": 1},
+        "moduleIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "tags": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      },
+      "additionalProperties": false
+    },
+    "type": {"enum": ["single-choice", "multiple-choice", "fill", "short-answer"]},
+    "title": {"type": "string"},
+    "stem": {"$ref": "#/$defs/content"},
+    "options": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/option"}},
+    "solution": {"$ref": "#/$defs/solution"},
+    "source": {"$ref": "#/$defs/source"}
+  },
+  "$defs": {
+    "numberPart": {
+      "type": "object",
+      "required": ["display", "value"],
+      "properties": {
+        "display": {"type": "string", "minLength": 1},
+        "value": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "markdownBlock": {
+      "type": "object",
+      "required": ["type", "content"],
+      "properties": {"type": {"const": "markdown"}, "content": {"type": "string", "minLength": 1}},
+      "additionalProperties": false
+    },
+    "imageBlock": {
+      "type": "object",
+      "required": ["type", "src", "alt"],
+      "properties": {
+        "type": {"const": "image"},
+        "src": {"type": "string", "pattern": "^assets/"},
+        "alt": {"type": "string", "minLength": 1},
+        "caption": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "blankBlock": {
+      "type": "object",
+      "required": ["type", "id", "width"],
+      "properties": {
+        "type": {"const": "blank"},
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+        "label": {"type": "string"},
+        "placeholder": {"type": "string"},
+        "width": {"enum": ["short", "medium", "long"]}
+      },
+      "additionalProperties": false
+    },
+    "contentBlock": {"oneOf": [{"$ref": "#/$defs/markdownBlock"}, {"$ref": "#/$defs/imageBlock"}, {"$ref": "#/$defs/blankBlock"}]},
+    "content": {
+      "type": "object",
+      "required": ["blocks"],
+      "properties": {"blocks": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/contentBlock"}}},
+      "additionalProperties": false
+    },
+    "option": {
+      "type": "object",
+      "required": ["id", "content"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]*$"},
+        "content": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"oneOf": [{"$ref": "#/$defs/markdownBlock"}, {"$ref": "#/$defs/imageBlock"}]}
+        }
+      },
+      "additionalProperties": false
+    },
+    "blankAnswer": {
+      "type": "object",
+      "required": ["blankId", "acceptedAnswers", "caseSensitive", "trimWhitespace"],
+      "properties": {
+        "blankId": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+        "acceptedAnswers": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "caseSensitive": {"type": "boolean"},
+        "trimWhitespace": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "referenceAnswer": {
+      "type": "object",
+      "required": ["blocks"],
+      "properties": {
+        "blocks": {
+          "type": "array",
+          "items": {"oneOf": [{"$ref": "#/$defs/markdownBlock"}, {"$ref": "#/$defs/imageBlock"}]}
+        }
+      },
+      "additionalProperties": false
+    },
+    "solution": {
+      "type": "object",
+      "required": ["status", "correctOptionIds", "blankAnswers", "referenceAnswer"],
+      "properties": {
+        "status": {"enum": ["verified", "missing", "needs-review"]},
+        "correctOptionIds": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "blankAnswers": {"type": "array", "items": {"$ref": "#/$defs/blankAnswer"}},
+        "referenceAnswer": {"$ref": "#/$defs/referenceAnswer"}
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["document"],
+      "properties": {
+        "document": {"type": "string", "minLength": 1},
+        "lines": {
+          "type": "object",
+          "required": ["start", "end"],
+          "properties": {"start": {"type": "integer", "minimum": 1}, "end": {"type": "integer", "minimum": 1}},
+          "additionalProperties": false
+        },
+        "pages": {"type": "array", "uniqueItems": true, "items": {"type": "integer", "minimum": 1}},
+        "curated": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice"]}}},
+      "then": {"required": ["options"]}
+    },
+    {
+      "if": {"properties": {"type": {"enum": ["fill", "short-answer"]}}},
+      "then": {"not": {"required": ["options"]}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "fill"}}},
+      "then": {
+        "properties": {
+          "stem": {
+            "properties": {
+              "blocks": {"contains": {"$ref": "#/$defs/blankBlock"}}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice", "short-answer"]}}},
+      "then": {
+        "properties": {
+          "stem": {
+            "properties": {
+              "blocks": {"not": {"contains": {"$ref": "#/$defs/blankBlock"}}}
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}
