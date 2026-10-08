@@ -14,7 +14,7 @@
     start: $('ics-start'), setupError: $('ics-setup-error'), quiz: $('ics-quiz'),
     abandon: $('ics-abandon'), progressText: $('ics-progress-text'), scoreText: $('ics-score-text'),
     progressBar: $('ics-progress-bar'), questionMeta: $('ics-question-meta'),
-    questionTitle: $('ics-question-title'), questionContent: $('ics-question-content'),
+    questionContent: $('ics-question-content'),
     answerForm: $('ics-answer-form'), answerLabel: $('ics-answer-label'), answerHint: $('ics-answer-hint'),
     choiceList: $('ics-choice-list'), answer: $('ics-answer'), submit: $('ics-submit'),
     feedback: $('ics-feedback'), verdict: $('ics-verdict'), reference: $('ics-reference'),
@@ -52,7 +52,8 @@
   }
 
   function isPublishedQuestion(question) {
-    return PUBLISHED_QUESTION_KINDS.has(question && question.interaction && question.interaction.kind);
+    return PUBLISHED_QUESTION_KINDS.has(question && question.interaction && question.interaction.kind) &&
+      question.presentation && question.presentation.status === 'ready';
   }
 
   function withoutPrintedLineNumber(line) {
@@ -548,7 +549,8 @@
         return Number(paper.publishedQuestionCount || 0) > 0;
       });
       ui.bankSummary.textContent = state.catalog.stats.publishedChoiceQuestions +
-        ' 道单选/多选题已上线 · 填空与简答题暂缓开放';
+        ' 道单选/多选题已上线 · ' + state.catalog.stats.withheldChoiceQuestions +
+        ' 道排版待复核题暂缓开放';
       ui.modules.innerHTML = state.catalog.modules.filter(function (module) {
         return Number(module.publishedQuestionCount || 0) > 0;
       }).map(function (module) {
@@ -672,7 +674,6 @@
     ui.questionMeta.innerHTML = '<span class="ics-mode-badge">' + modeLabel + '</span>' +
       [q.moduleTitle, q.year, q.examType, q.questionNo, q.exam]
         .filter(Boolean).map(function (item) { return '<span>' + escapeHtml(item) + '</span>'; }).join('');
-    ui.questionTitle.textContent = q.summary || q.questionNo || '题目 ' + number;
     ui.questionContent.innerHTML = choiceQuestion
       ? (q.formatted ? renderLayoutStem(choiceQuestion.stem) : renderMarkdown(choiceQuestion.stem))
       : fillQuestion ? renderFillQuestion(fillQuestion)
@@ -789,8 +790,10 @@
     ui.reviewList.hidden = true; ui.reviewToggle.textContent = '查看答题记录';
     ui.reviewList.innerHTML = state.records.map(function (record, index) {
       const score = typeof record.points === 'number' ? record.points + ' 分' : '未计分';
+      const originalNumber = record.question.questionNo
+        ? ' · 原题号 ' + escapeHtml(record.question.questionNo) : '';
       return '<div class="ics-review-item"><span class="ics-review-score">' + score + '</span>' +
-        '<strong>' + (index + 1) + '. ' + escapeHtml(record.question.summary || record.question.questionNo) + '</strong>' +
+        '<strong>第 ' + (index + 1) + ' 题' + originalNumber + '</strong>' +
         '<p>你的回答：' + escapeHtml(record.answer) + '</p></div>';
     }).join('');
     window.scrollTo({ top: ui.result.offsetTop - 90, behavior: 'smooth' });

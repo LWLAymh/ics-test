@@ -27,6 +27,13 @@ OUT = os.path.join(BASE, "web-data")
 QUESTIONS_OUT = os.path.join(OUT, "questions")
 SCHEMA_VERSION = 3
 PUBLISHED_CHOICE_KINDS = ("single-choice", "multiple-choice")
+CODE_DECLARATION = re.compile(
+    r"\b(?:int|char|short|long|float|double|void|struct|union)\s+[*A-Za-z_]",
+    re.IGNORECASE)
+ASSEMBLY_LINE = re.compile(
+    r"(?m)^\s*(?:mov|lea|push|pop|call|ret|jmp|cmp|add|sub|xor)[a-z]*\b",
+    re.IGNORECASE)
+PAGE_ARTIFACT = re.compile(r"<!--\s*=+\s*page\s+\d+\s*=+\s*-->", re.IGNORECASE)
 
 IMAGE = re.compile(r"(!\[[^\]]*\]\()([^\s)]+)([^)]*\))")
 INLINE_ANSWER = re.compile(
@@ -187,6 +194,32 @@ def interaction_for(layout):
         "short": "short-answer",
         "composite": "composite",
     }.get(mode, "legacy"), "declared": True}
+
+
+def presentation_for(layout, interaction):
+    """发布前的保守排版门禁；可疑题保留在源题库，但不进入线上题池。"""
+    if not layout:
+        return {"status": "needs-review", "issues": ["not-structured"]}
+    stem = layout.get("stem", "")
+    issues = []
+    if PAGE_ARTIFACT.search(stem):
+        issues.append("page-artifact-in-stem")
+    if re.search(r"<img\b", stem, re.IGNORECASE):
+        issues.append("raw-html-image")
+    if interaction.get("kind") in PUBLISHED_CHOICE_KINDS and "```" not in stem:
+        score = min(stem.count(";"), 3)
+        score += 2 if "{" in stem or "}" in stem else 0
+        score += 2 if ASSEMBLY_LINE.search(stem) else 0
+        score += 1 if CODE_DECLARATION.search(stem) else 0
+        score += 1 if re.search(r"(?m)^\s{2,}\S", stem) else 0
+        if score >= 3:
+            issues.append("code-like-content-without-fence")
+    return {"status": "needs-review" if issues else "ready", "issues": issues}
+
+
+def is_published_choice(question):
+    return (question.get("interaction", {}).get("kind") in PUBLISHED_CHOICE_KINDS
+            and question.get("presentation", {}).get("status") == "ready")
 
 
 def main():
@@ -350,12 +383,13 @@ def main():
                 question["source"]["curated"] = posixpath.join("_curated", curated_rel)
             else:
                 question["interaction"] = interaction_for(None)
+            question["presentation"] = presentation_for(layout, question["interaction"])
             questions_by_module[module["id"]].append(question)
             paper["questionIds"].append(question_id)
             kind = question.get("interaction", {}).get("kind")
-            if kind == "single-choice":
+            if is_published_choice(question) and kind == "single-choice":
                 paper["singleChoiceCount"] += 1
-            elif kind == "multiple-choice":
+            elif is_published_choice(question) and kind == "multiple-choice":
                 paper["multipleChoiceCount"] += 1
             if status == "verified":
                 paper["verifiedAnswerCount"] += 1
@@ -382,9 +416,11 @@ def main():
         entry = {k: module[k] for k in ("id", "number", "name", "title")}
         entry.update({
             "questionCount": len(questions),
-            "publishedQuestionCount": sum(
+            "choiceQuestionCount": sum(
                 1 for q in questions
                 if q.get("interaction", {}).get("kind") in PUBLISHED_CHOICE_KINDS),
+            "publishedQuestionCount": sum(
+                1 for q in questions if is_published_choice(q)),
             "paperCount": paper_count,
             "questionFile": "questions/" + filename,
         })
@@ -427,6 +463,9 @@ def main():
             "questions": total_questions,
             "publishedChoiceQuestions": sum(
                 module["publishedQuestionCount"] for module in module_entries),
+            "withheldChoiceQuestions": sum(
+                module["choiceQuestionCount"] - module["publishedQuestionCount"]
+                for module in module_entries),
             "papers": len(paper_keys),
             "answerBlocks": len(answer_blocks),
         },

@@ -25,9 +25,11 @@ def main():
 
     questions = {}
     published_total = 0
+    withheld_total = 0
     for module in catalog.get("modules", []):
         payload = load(module["questionFile"])
         module_published = 0
+        module_choices = 0
         for q in payload.get("questions", []):
             qid = q.get("id")
             if not qid or qid in questions:
@@ -41,11 +43,18 @@ def main():
                 errors.append("%s 标记 verified 但没有结构化答案" % qid)
             kind = (q.get("interaction") or {}).get("kind")
             interaction = q.get("interaction") or {}
+            presentation = q.get("presentation") or {}
+            if presentation.get("status") not in ("ready", "needs-review"):
+                errors.append("%s 缺少合法 presentation.status" % qid)
             if kind in ("choice", "legacy"):
                 warnings.append("%s 尚未显式声明交互类型" % qid)
             if kind in ("single-choice", "multiple-choice"):
-                module_published += 1
-                published_total += 1
+                module_choices += 1
+                if presentation.get("status") == "ready":
+                    module_published += 1
+                    published_total += 1
+                else:
+                    withheld_total += 1
                 choice_ids = [c.get("id") for c in interaction.get("choices", [])]
                 correct_ids = interaction.get("correctChoiceIds", [])
                 if len(choice_ids) < 2 or len(choice_ids) != len(set(choice_ids)):
@@ -63,9 +72,13 @@ def main():
                     errors.append("%s 资源不存在: %s" % (qid, asset))
         if module_published != module.get("publishedQuestionCount"):
             errors.append("%s publishedQuestionCount 不准确" % module.get("id"))
+        if module_choices != module.get("choiceQuestionCount"):
+            errors.append("%s choiceQuestionCount 不准确" % module.get("id"))
 
     if published_total != (catalog.get("stats") or {}).get("publishedChoiceQuestions"):
         errors.append("catalog.stats.publishedChoiceQuestions 不准确")
+    if withheld_total != (catalog.get("stats") or {}).get("withheldChoiceQuestions"):
+        errors.append("catalog.stats.withheldChoiceQuestions 不准确")
 
     papers_payload = load(catalog.get("papersFile", "papers.json"))
     seen_paper_questions = set()
@@ -90,9 +103,10 @@ def main():
             if (q.get("answer") or {}).get("status") == "verified":
                 verified += 1
             kind = (q.get("interaction") or {}).get("kind")
-            if kind == "single-choice":
+            ready = (q.get("presentation") or {}).get("status") == "ready"
+            if ready and kind == "single-choice":
                 single_choices += 1
-            elif kind == "multiple-choice":
+            elif ready and kind == "multiple-choice":
                 multiple_choices += 1
             seen_paper_questions.add(qid)
         if len(orders) != len(set(orders)):

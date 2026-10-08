@@ -14,7 +14,7 @@ PKU Introduction to Computer Systems 历年题测试站点。
 
 ### 当前线上范围
 
-线上练习池暂时只包含 `interaction.kind` 已明确标为 `single-choice` 或 `multiple-choice` 的题目。填空题、简答题以及仍为 `choice` / `legacy` 的未完全结构化题目继续保留在源题库和源试卷清单中，但 GitHub Pages 构建会从公开 JSON 中移除它们，它们不会进入组卷、判分或统计。各模块和试卷显示的可用题数均按这一发布范围单独计算。
+线上练习池暂时只包含 `interaction.kind` 已明确标为 `single-choice` 或 `multiple-choice`，并且通过题面排版门禁的题目。填空题、简答题、仍为 `choice` / `legacy` 的题目，以及含疑似未分块代码、PDF 页码残留或原始 HTML 图片的可疑题继续保留在源题库和源试卷清单中，但 GitHub Pages 构建会从公开 JSON 中移除它们。各模块和试卷显示的可用题数均按这一发布范围单独计算。
 
 这是迁移期间的临时发布策略，不是删除题目。完成 v4 迁移和逐卷视觉回归后，再恢复填空与简答题。
 
@@ -33,7 +33,8 @@ PKU Introduction to Computer Systems 历年题测试站点。
 3. **选项是独立结构。** 每个选项有稳定 ID，并且自身也能包含 Markdown、代码、公式或图片。
 4. **试卷身份与题号结构化。** “哪场考试、第几大题、第几小题、卷内第几道、属于哪个模块”不能从文件名或题面猜。
 5. **答案与题面分离。** 题面绝不夹带答案；答案缺失或待复核时必须如实标记，不能静默删题。
-6. **ID 稳定。** 修正文案、排版或标题不能改变 question ID、paper ID、选项 ID 或填空 ID，否则统计数据会断裂。
+6. **ID 稳定。** 修正题面排版或试卷标题不能改变 question ID、paper ID、选项 ID 或填空 ID，否则统计数据会断裂。
+7. **不为题目自拟标题。** 作答页只展示原卷题号与原始题面；维护用摘要不得进入答题页或答题记录，避免摘要概括时泄露答案。
 
 ## 数据入口
 
@@ -109,7 +110,6 @@ web-data/
     "tags": ["结构体对齐"]
   },
   "type": "single-choice",
-  "title": "结构体对齐与总大小计算",
   "stem": {
     "blocks": [{"type": "markdown", "content": "下列说法中正确的是："}]
   },

@@ -125,7 +125,6 @@
 .ics-progress-track span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--accent); transition: width .25s ease; }
 .ics-question-meta { display: flex; flex-wrap: wrap; gap: .45rem; }
 .ics-question-meta span { padding: .12rem .55rem; border-radius: 99px; background: var(--chip-bg); color: var(--text-muted); font-size: .78rem; }
-.ics-question h2 { margin: .8rem 0 1.2rem; font: 700 clamp(1.2rem, 3vw, 1.55rem)/1.45 var(--font-display); }
 .ics-question-content { min-width: 0; overflow-wrap: anywhere; }
 .ics-question-content table, .ics-reference table { display: block; max-width: 100%; overflow-x: auto; }
 .ics-question-content pre, .ics-choice-content pre, .ics-reference pre {

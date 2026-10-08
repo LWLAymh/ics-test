@@ -40,7 +40,8 @@ for (const module of catalog.modules || []) {
   const modulePath = path.join(output, 'web-data', module.questionFile);
   const data = JSON.parse(fs.readFileSync(modulePath, 'utf8'));
   data.questions = (data.questions || []).filter((question) =>
-    publishedKinds.has(question && question.interaction && question.interaction.kind));
+    publishedKinds.has(question && question.interaction && question.interaction.kind) &&
+    question.presentation && question.presentation.status === 'ready');
   module.questionCount = data.questions.length;
   module.publishedQuestionCount = data.questions.length;
   fs.writeFileSync(modulePath, `${JSON.stringify(data, null, 2)}\n`);

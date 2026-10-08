@@ -87,6 +87,10 @@
         "format": "markdown",
         "prompt": "15. A system uses a two-way set-associative cache with 16 sets and 64-byte blocks. Which set does\n    the byte with the address 0xdeadbeef map to? **(2pts) (e2-f10)**",
         "answer": "**答案：B**"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -133,6 +137,10 @@
         "format": "markdown",
         "prompt": "**Problem E -- The Hit or Miss Question (15 pts)**\n\nGiven a 32-bit Linux system that has a 2-way associative cache of size 128 bytes with 32 bytes\nper block. Long longs are 8 bytes. For all parts, assume that table starts at address 0x0.\n\n```c\nint i;\n\nint j;\n\nlong long table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n    for (i = 0; i < 4; i++) {\n\n        table[i][j] = i + j;\n\n    }\n\n}\n```\n\n**A.** This problem refers to code sample 1. In the table below write down in each space whether that\nelement’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n![图](assets/期中/2012期中-带答案/page-11.png)\n\n> 上图为本页的 Cache 命中/缺失状态表（红色为参考答案，全部为 M）。\n\n\nWhat is the miss rate of this code sample?",
         "answer": "答案：A. 表中每次访问都是 miss（原卷红色参考答案全部为 M）：\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | M | M | M | M | M | M | M |\n| 1 | M | M | M | M | M | M | M | M |\n| 2 | M | M | M | M | M | M | M | M |\n| 3 | M | M | M | M | M | M | M | M |\n\nmiss rate = 1（100%）"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -179,6 +187,10 @@
         "format": "markdown",
         "prompt": "**B.** This problem refers to code sample above. In the table below write down in each space whether\nthat element’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n![图](assets/期中/2012期中-带答案/page-12.png)\n\n> 原卷 Problem E 的公共配置（见原卷第 11 页）：32 位 Linux 系统，2 路组相联（2-way associative）cache，容量 128 字节，块大小 32 字节；`long long` 为 8 字节；`table` 起始地址为 0x0。\n>\n> 本题（code sample above）的代码如下：\n```c\nint i;\n\nint j;\n\nint table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n for (i = 0; i < 4; i++) {\n\n table [i] [j] = i + j;\n\n table[j][i]?\n\n }\n\n}\n```\n\nWhat is the miss rate of this code sample?",
         "answer": "答案：B 的 4×8 命中/缺失表 —— 第 0 列全为 M，第 1–7 列全为 H。\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = **1/8**（32 次访问中 4 次缺失）\n\n解析：\n\n1. 先把 cache 参数换算清楚：容量 128 B ÷ 块大小 32 B = 4 个块；2 路组相联 ⇒ 4 ÷ 2 = **2 组**（Set 0 / Set 1）。于是「块号的奇偶」就是组索引（组索引 = 块号 mod 2），块内偏移占低 5 位，剩下的高位是标记。\n2. 本题的样例是 `int table[4][8]`（元素 4 字节）：一行 8 个 int = 32 字节，**正好等于一个 cache block**。所以整个数组 128 字节 = 4 个块，元素 `table[i][j]` 落在**块 i** 上；组索引 = `i mod 2`：第 0、2 行 → Set 0，第 1、3 行 → Set 1。每组只需要放 2 个块，恰好用满 2 路 —— 整个数组都能常驻 cache（这正是本题 C 部分所说「the entire array fits in the cache」）。\n3. 访问次序是 j 外层、i 内层（列优先遍历），每次访问 `table[i][j]`：\n   - j=0：依次访问 (0,0)(1,0)(2,0)(3,0)，落在块 0、1、2、3，cache 初始为空 ⇒ 4 次冷启动不命中，第 0 列 4 个格子全为 M；\n   - j=1…7：每个 (i,j) 仍然落在块 i，而这些块在 j=0 时已经被取进 cache，且期间没有任何访问会把它们挤出（每组只用到 2 个块、2 路）⇒ 第 1–7 列全部为 H。\n4. 缺失率 = 4 次缺失 ÷ 32 次访问 = 1/8。\n\n> 对照 code sample 1（上一小题）：那时 `table` 是 `long long`，一行 64 字节 = 2 个块，`table[i][j]` 落在块 `2i + (j≥4 ? 1 : 0)`，于是 Set 0 要容纳块 0、2、4、6（4 个块）、Set 1 要容纳块 1、3、5、7（4 个块），而每组只有 2 路 ⇒ 每次访问都把上一个块冲突挤出，32 次访问**全部缺失**，缺失率 1。所以 C 部分说第二个样例更好：它只有冷启动不命中。\n\n> 📌 答案有官方来源：原卷红色参考答案（见 `_audit/pages/期中/2012期中-带答案/page-12.png`，红色表格即第 0 列全 M、其余全 H，miss rate 1/8）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -223,6 +235,10 @@
         "format": "markdown",
         "prompt": "**C.** One code sample performs better than the other. Why is this?",
         "answer": "答案：The second sample performs better than the first because it makes better use of the cache. In the first, heavy conflict results in a large number of evictions. In the second, the entire array fits in the cache, and the only misses are cold misses."
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -305,6 +321,10 @@
         "format": "markdown",
         "prompt": "16、如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，请问它每组（set）\n有多少行（line）？答：（      ）",
         "answer": "答案：D"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -387,6 +407,10 @@
         "format": "markdown",
         "prompt": "17、关于局部性（locality）的描述，不正确的是：（      ）",
         "answer": "答案：A"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -431,6 +455,10 @@
         "format": "markdown",
         "prompt": "第八题（9分）\n假设存在一个能够存储四个数据的Cache，每一个line的长度（B）为2字节。假设内存空\n间的地址一共是32字节，既内存空间地址长度一共是5个比特：从0（00000）到31（11111），\n一共有8个数据读取操作，每个操作的地址按顺序如下所示（单位是字节），数据替换采用\nLRU（least recently used）策略。\n                 数据访问地址： 1 -> 4 -> 17 –> 2 –> 8 -> 16 –> 9->0\n1） 如果Cache的结构是directed mapped（S=4， E=1），如下图所示，请在下图空白处填\n入，访问上述数据序列访问后Cache的状态。（注：TAG使用二进制格式，V=1代表数据有\n效，用[A-B]表示地址A到B之间对应的数据）（4分）\nV  TAG  DATA",
         "answer": "答案：访问上述数据序列后 Cache 的状态（directed mapped，S=4，E=1）：\n\n| V | TAG | DATA |\n| --- | --- | --- |\n| 1 | 00 | M[0-1] |\n| 1 | 00 | M[2-3] |\n| 1 | 00 | M[4-5] |\n| 0 | | |"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -475,6 +503,10 @@
         "format": "markdown",
         "prompt": "2） 如果cache的结构如下图所示既(S = 2, E = 2)， 请填入访问后的状态 （2分）\nV  TAG  DATA  V  TAG  DATA\n   在这种情况下，数据访问一共产生了多少次Miss __________ （1分）",
         "answer": "答案：Cache 最终状态（S=2, E=2）：\n\n| V | TAG | DATA | V | TAG | DATA |\n| --- | --- | --- | --- | --- | --- |\n| 1 | 000 | M[0-1] | 1 | 010 | M[8-9] |\n| 1 | 000 | M[2-3] | 0 | | |\n\n这种情况下数据访问一共产生 6 次 Miss。\n\n（原卷标注顺序：M → M → M → M → M → H → H → M）"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -519,6 +551,10 @@
         "format": "markdown",
         "prompt": " 3）如果cache的结构变成 （S=1， E=4），最终存储在Cache里面的数据有那些（注：只\n需要填写数据部分，顺序不限）？\n__________,   ___________ ,  ___________,   _____________ （2分）",
         "answer": "答案：M[0-1]、M[8-9]、M[16-17]、M[2-3]（顺序不限，2分）\n\n说明：访问序列 1 -> 4 -> 17 -> 2 -> 8 -> 16 -> 9 -> 0 的后四个不重复数据。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -603,6 +639,10 @@
         "format": "markdown",
         "prompt": "15、以下关于存储结构的讨论，那个是正确的",
         "answer": "答案：D"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -687,6 +727,10 @@
         "format": "markdown",
         "prompt": "16、关于 cache 的 miss rate，下面那种说法是错误的。",
         "answer": "答案：C\n\n<!-- ===== page 8 ===== -->\n\n注：实际答案 B 的说法也是有错误的。例如：保持总容量和 B 不变，提高 E，就意味着以前的两组可能并成一组。假设 A 和 B 组并成了新的一组。现在假设有一个访问序列 b1, b2, a1, a2, a3, ..., an, b1, b2。其中 bi 是会被放到 B 组的块，ai 是会被放到 A 组的块。n 足够大使得可以把合并后的组中的所有块都换出去。那么按合并后的情况全部都不命中，而按合并前的情况最后两次访问 b1, b2 仍然能命中。\n\n因此，选 C 或 B 都算正确。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -735,6 +779,10 @@
         "format": "markdown",
         "prompt": "第八题（10 分）\n\n假设存在一个能够存储四个 Block 的 Cache，每一个 Block 的长度为 2Byte。假设内存空间大小共是 16Byte，即内存空间地址长度一共是 4bit，可访问地址为(0~15)，数据访问地址序列如下所示，访问数据单位是 Byte，默认替换策略是 LRU。\n\n2　3　10　9　6　8\n\n1）如果 Cache 的结构是下图所示（S=2， E=2），请在下图空白处填入访问上述六次数据访问后 Cache 的状态。注：用[0-1]表示地址 0 至 1 上对应的数据 （4 分）\n\n![图](assets/期中/2014期中-带答案/page-18.png)\n\n（图：第1小题 Cache 状态填写表，两行分别为 set0、set1，每行含两组（V、TAG、Block））",
         "answer": "答案：访问上述六次数据后 Cache 的状态（S=2, E=2, LRU）：\n\n|  | V | TAG | Block | V | TAG | Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 10 | [8-9] | 0 |  |  |\n| set1 | 1 | 01 | [6-7] | 1 | 10 | [10-11] |"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -781,6 +829,10 @@
         "format": "markdown",
         "prompt": "2）这六次数据访问一共产生了多少次 Miss ______　（2 分）",
         "answer": "答案：4"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -829,6 +881,10 @@
         "format": "markdown",
         "prompt": "3）如果 Cache 的替换策略改成 MRU（即，最近使用的数据被替换出去），请在下图空白处填入访问上述六次数据访问后 Cache 的状态（2 分）。\n\n![图](assets/期中/2014期中-带答案/page-18.png)\n\n（图：第3小题 Cache 状态填写表，两行分别为 set0、set1，每行含两组（V、TAG、Block））",
         "answer": "答案：替换策略改成 MRU 后 Cache 的状态：\n\n|  | V | TAG | Block | V | TAG | Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 10 | [8-9] | 0 |  |  |\n| set1 | 1 | 00 | [2-3] | 1 | 01 | [6-7] |"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -875,6 +931,10 @@
         "format": "markdown",
         "prompt": "4）这六次数据访问一共产生了多少次 Miss ______　（2 分）",
         "answer": "答案：4"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -959,6 +1019,10 @@
         "format": "markdown",
         "prompt": "15. 下面关于存储器的说法，错误的是____",
         "answer": "答案：D\n说明：本题考查学生对内存、硬盘基本特性的掌握。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1045,6 +1109,10 @@
         "format": "markdown",
         "prompt": "16. 某磁盘的旋转速率为 7200 RPM，每条磁道平均有400扇区，则一个扇区的\n平均传送时间为____",
         "answer": "答案：A\n说明：60 / 7200 RPM × 1 / 400 sectors/track × 1000 ms/sec\n≈ 0.02 ms"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1129,6 +1197,10 @@
         "format": "markdown",
         "prompt": "17. 某高速缓存 （E=2, B=4, S=16），地址宽度14，当引用地址0x9D28处的\n1个字节时，tag位应为：",
         "answer": "答案：A\n说明：0x9D28=1001110100101000"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1213,6 +1285,10 @@
         "format": "markdown",
         "prompt": "18. 关于高速缓存的说法正确的是 _____",
         "answer": "答案：D\n说明：本题考查学生对高速缓存基本性质和实现机制的理解。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1297,6 +1373,10 @@
         "format": "markdown",
         "prompt": "19. 关于局部性（locality）的描述，不正确的是：",
         "answer": "答案：C\n数组本身只能体现出空间局部性"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1343,6 +1423,10 @@
         "format": "markdown",
         "prompt": "第五题（20分）\n (每个填空和选择1分，表格每相邻两格1分)\n1.仔细阅读下面的程序，根据条件回答下列各题（10分）\n  地址宽度为7，数组的起始地址为0x1000000\n  Block Size = 4 Byte，Set = 4，两路组相连.\n  替换算法位LRU（最近最少使用）\n```\n#define LENGTH 8\nvoid clear4x4 ( char array[LENGTH][LENGTH] )  {\n  int row, col ;\n  for ( col = 0 ; col < 4; col++ ) {\n    for ( row = 0; row < 4 ; row++ ) {\n      array[ row] [ col] = 0;\n    }\n  }\n}\n```\n1)  以上程序执行会引起多少次失效？\n______\n2)  如果LENGTH改为16，会引起多少次失效？\n______\n3)  如果LENGTH变为17，与2)相比，下面描述正确的是：______，会引起 ______ 次\n失效。\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n4)  请画出3）运行后cache中set0和set1的最终状态。\n（3）运行后 cache 中 set0 和 set1 的最终状态见答案）",
         "answer": "答案：1) 4 次失效\n2) 16 次失效\n3) A；会引起 14 次失效\n4) 3) 运行后 cache 的最终状态：\n\n|  | V | Tag | Data | V | Tag | Data |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 101 | Array[1][0]~Array[1][3] | 1 | 100 | Array[0][0]~Array[0][3] |\n| set1 | 1 | 110 | Array[2][0]~Array[2][3] | 1 | 111 | Array[3][0]~Array[3][3] |"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1389,6 +1473,10 @@
         "format": "markdown",
         "prompt": "2.改变假设条件，回答下列各题（10分）\n  地址宽度为8，数组的起始地址为0x10000000\n  Cache容量为16 Byte，Block Size = 4 Byte，全相联Cache\n  替换算法位LRU（最近最少使用）\n1)  Tag的位数为 ______\n2)  如果执行上述程序，当LENGTH=8时，会引起多少次失效？\n______\n3)  如果LENGTH改为16，会引起多少次失效？\n______\n4)  如果LENGTH变为17，与3)相比，下面描述正确的是：______\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n5)  请画出4）执行后cache的最终状态\n（4）执行后 cache 的最终状态见答案）",
         "answer": "答案：1) Tag 的位数为 6\n2) LENGTH=8 时，会引起 4 次失效\n3) LENGTH 改为 16 时，会引起 4 次失效\n4) C（16×16 比 17×17 产生更少的失效次数）\n5) 4) 执行后 cache 的最终状态：\n\n| | V | Tag | Data |\n| --- | --- | --- | --- |\n| | 1 | 100000 | Array[0][0]~Array[0][3] |\n| | 1 | 100101 | Array[1][0]~Array[1][3] |\n| | 1 | 101001 | Array[2][0]~Array[2][3] |\n| | 1 | 101101 | Array[3][0]~Array[3][3] |"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1474,6 +1562,10 @@
         "format": "markdown",
         "prompt": "13. 以下关于存储结构的讨论，那个是正确的",
         "answer": "答案: D"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1559,6 +1651,10 @@
         "format": "markdown",
         "prompt": "14. 关于局部性（locality）的描述，不正确的是：",
         "answer": "答案：C\n数组本身只能体现出空间局部性"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1606,6 +1702,10 @@
         "format": "markdown",
         "prompt": "19. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每组（set）有          行（line）。",
         "answer": "答案：1。这是直接映射高速缓存的基本特征，和容量无关"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1653,6 +1753,10 @@
         "format": "markdown",
         "prompt": "20. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每路（way）有          行（line）。",
         "answer": "答案：128，容量=路容量*路数=cache 行大小*Set 数*路数->set 数\n=4KB/32B=27=128"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1700,6 +1804,10 @@
         "format": "markdown",
         "prompt": "（孙广宇，陆俊林）\n现有一个能够存储4个Block的Cache，每一个Cache Block的长度为2\nByte（既 B = 2）。内存空间的大小是32Byte，既内存空间地址范围如\n下：\n010  (000002) -- 3110 (111112)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n 210  2310  1010  910  910  1110  310\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略\nLRU。请在下图空白处填入上述数据访问后Cache的状态。\n（TAG使用二进制格式；Data Block使用10进制格式，例：M[6-7]表示\n地址610-710对应的数据）\n（第 1 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: ______ (2pts)\n2. 如果Cache的替换策略改成MRU（即Most Recently Used, 最近使\n用的数据被替换出去），请在下图空白处填入访问上述数据访问后Cache\n的状态。\n（第 2 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit：______ (2pts)\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit ______ (2pts)\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n______ (2pts)",
         "answer": "答案：\n1. 最终 Cache 状态（S=2, E=2, LRU）：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  010  M[10-11]\n   1  000  M[2-3]\n```\n上述数据访问一共产生了 2 次 Hit。\n2. 替换策略改为 MRU 后的 Cache 状态：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  000  M[2-3]\n   1  010  M[10-11]\n```\n上述数据访问一共产生了 3 次 Hit。\n3. 2 次 Hit。\n4. 3 次 Hit。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1782,6 +1890,10 @@
         "format": "markdown",
         "prompt": "13. 以下计算机部件中，通常不用于存储器层次结构（Memory Hierarchy）的\n是：",
         "answer": "答案：D"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1864,6 +1976,10 @@
         "format": "markdown",
         "prompt": "14. 关于局部性（locality）的描述，正确的是：",
         "answer": "答案：B\n注：B 选项有笔误（“数据空间局部性”应为“指令空间局部性”），所以所有答案\n都不对。按任何选项都对计分。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1946,6 +2062,10 @@
         "format": "markdown",
         "prompt": "15. 在高速缓存存储器中，关于全相联和直接映射结构，以下论述正确的是：",
         "answer": "答案：C"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -1990,6 +2110,10 @@
         "format": "markdown",
         "prompt": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即B = 2）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n010  (000002) -- 3110 (111112)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n010  310  410  710  1610   1910   2110  2210  810  1010  1310  1410  2410  2610   2910  3010\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：M[6-7]表示地址\n610-710对应的数据）\n（Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: ______ (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 M[0-1]\n访问发生miss，则把M[0-1]和M[2-3]都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit ：______ (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\nB = 4，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit ：\n______ (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit ：________ (2分)",
         "answer": "答案：\n1. 16 次访问后 Cache 的最终状态（S=2，E=2，LRU）：\n\n| | V | TAG | Data Block | V | TAG | Data Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 110 | M[24-25] | 1 | 111 | M[28-29] |\n| set1 | 1 | 110 | M[26-27] | 1 | 111 | M[30-31] |\n\n   上述数据访问一共产生了 0 次 Hit。\n2. 8 次 Hit。\n3. 8 次 Hit。\n4. 12 次 Hit。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2072,6 +2196,10 @@
         "format": "markdown",
         "prompt": "12. 设一种缓存共包含4个缓存块，每个缓存块32字节，采用LRU替换算法。设\n缓存初始状态为空，对其进行下列char类型内存地址序列访存，0x5a7, 0x5b7,\n0x6a6, 0x5b8, 0x7a5, 0x5b9。对于直接映射缓存和2路组相联缓存，分别能\n产生几次命中？",
         "answer": "答案： A\n考核地址中TAG位域/组索引位域/缓存块内偏移位域在直接映射和组相联的定\n义，LRU替换算法的概念和过程。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2154,6 +2282,10 @@
         "format": "markdown",
         "prompt": "13. 设一种全相联缓存共包含4个缓存块，如果循环地顺序访问5个不同的缓存块，\n下列哪种替换算法会产生最多的命中？",
         "answer": "答案：A\n考核替换算法的概念和过程\n答案修订：CD均正确。\n  A LRU命中率0%；\n  B FIFO命中率0%；\n  C Random每次新来一个块，随机换出的块会导致之后第1,2,3,4次访存有一\n次miss（等概率），每次miss平均2.5次访存，每次访存miss率40%，因此命中\n率60%；\n  D LIFO命中率60%，最后两个块交替发生miss。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2236,6 +2368,10 @@
         "format": "markdown",
         "prompt": "14. 以下关于存储的描述中，正确的是（  ）",
         "answer": "答案：B\nA选项中SRAM和DRAM位置反了。\nC选项中，硬盘容量1GB=$10^9$ Byte，因此容量应该为8.192GB。\nD选项中，平均旋转延迟为0.5*(60s/6000RPM)=5ms，平均访问时间为14ms。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2318,6 +2454,13 @@
         "format": "markdown",
         "prompt": "15. 某计算机地址空间12位，L1 cache大小为256字节，组数S=4，路数E=2，\n现在在地址0x0处开始有一个N行M列的int类型的数组int A[N][M]，有如\n下C代码：\nint ans=0;\nfor(int j=0;j<M;++j)\n    for(int i=0;i<N;++i)\n        ans+=A[i][j];\n不考虑并行、编译优化等等会影响访问A数组元素顺序的因素，则如下(N,M)\n对中会导致全部Cache Miss的有（  ）\n7\n\n<!-- ===== page 8 ===== -->\n\n(N,M)= (64,4), (32,8), (16,16), (2,128)",
         "answer": "答案：C\n每个缓存块可以存放256/S/E/4=8个int类型的数据\n1、(N,M)=(64,4)时，访问数组第一行元素会将第一、二行元素都放入缓存，因此\n在访问数组第二行元素A[1][0]时不会Cache Miss\n2、(N,M)=(32,8)时，可以验证全部Cache Miss\n3、(N,M)=(16,16)时，可以验证全部Cache Miss\n4、(N,M)=(2,128)时，访问A[0][1]时不会Cache Miss"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem",
+          "code-like-content-without-fence"
+        ]
       }
     },
     {
@@ -2362,6 +2505,10 @@
         "format": "markdown",
         "prompt": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（S=2, E=2），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：M[6-7]表示地址6和7对\n应的数据)\n  V  Tag  Data  V  TAG  Data\nSET 0  1    1\nSET 1  1    1\n共命中______次（1分），分别访问地址______________（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及miss\nrate）\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用________Bytes. (datasize + (valid bit size + tag\nsize) * blocks)",
         "answer": "答案：\n  V  Tag  Data  V  TAG  Data\nSET 0  1  101101  1  001011\nM[180-181]  M[44-45]\nSET 1  1  000011  1  101111\nM[14-15]  M[190-191]\n共命中3次\n（表格上每空格1分，tag和data都正确才得分；）\n命中次数回答正确得1分；\n分别为访问地址2、190、181（三个地址完全正确得2分，答对两个得1分）\n2) 解答：\nAddress  Binary address  C1 hit/miss  C2 hit/Miss\n3  000000 11  M  M\n180  101101 00  M  M\n43  001010 11  M  M\n2  000000 10  M  M\n191  101111 11  M  M\n88  010110 00  M  M\n190  101111 10  H  H\n14  000011 10  M  M\n181  101101 01  H  M\n44  001011 00  M  M\nC1更好。（1分）\nC1: miss rate = 8/10 = 80%,（0.5分） total cycles = 8 * 25 + 10 * 3 = 230 （1分）\nC2: miss rate = 9/10 = 90%, （0.5分） total cycles = 9 * 25 + 10 * 5 = 275 （1分）\n3) 解答：\ncache block为8 bytes，所以b=3；\ncache block 一共32*1024 / 8 = 4096个，又因为是直接映射，所以s=12；于是\ntag位一共t = 32 – s – b = 17。所以总大小为：\ntotalsize = datasize + (valid bit size + tag size) * blocks\n         = 32 * 1024 + (1 + 17) * 4096 / 8 = 41984 (bytes)"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2447,6 +2594,10 @@
         "format": "markdown",
         "prompt": "14. 一个不含数组和指针访问的循环通常不能体现以下哪种局部性？",
         "answer": "答案：B，见书418页和419页"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2532,6 +2683,10 @@
         "format": "markdown",
         "prompt": "15. 以下关于存储器的说法中，正确的是",
         "answer": "答案：A，见书401页、402页、404页、414页。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2579,6 +2734,10 @@
         "format": "markdown",
         "prompt": "第五题（15分）\n1）不同的Cache组织结构对访存性能有很大的影响。以直接映射Cache为例，\nL1 Cache的容量为128字节，block size为16个字节。为简化起见，使用\n8位地址访问该Cache，地址如下图所示：\n对于如下访问序列，请填写 中 的变化，其中 对应  个\nCache Tag Ram B0 ~ B7 8\nCache Block，表项中填写对应的Tag。（6分）\n访问地址序列  L1 Cache (Tag Ram)\n是否命中\n```\n  B0  B1  B2  B3  B4  B5  B6  B7  (Y / N)\nA0\n20\nA2\n0\n80\n4\n```\n按行得分，每行1分。\n填写变化，若空白处填写错误，该行不得分。",
         "answer": "答案：每行 1 分（按行得分；空白处填写错误，该行不得分）：\n\n| 访问地址序列 | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | 是否命中 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| A0 | | | 1 | | | | | | N |\n| 20 | | | 0 | | | | | | N |\n| A2 | | | 1 | | | | | | N |\n| 0 | 0 | | | | | | | | N |\n| 80 | 1 | | | | | | | | N |\n| 4 | 0 | | | | | | | | N |"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2626,6 +2785,12 @@
         "format": "markdown",
         "prompt": "2）由1）可见，直接映射结构的Cache失效率高。为改善性能，N.  Jouppi提\n出Victim Cache结构，即在L1 Cache之外接入一个很小的全相联Cache来\n为替换出L1 Cache的数据做备份，具体结构如下图，工作原理如下所述。\na）如果L1 Cache命中，则数据由L1 Cache传给CPU；\nb）如果L1 Cache失效，则访问Victim Cache。如果在Victim Cache中命\n中，则数据由Victim Cache传给CPU，并写回L1 Cache，否则访问下一级存\n储；\nc）如果L1 Cache发生替换，替换出去的数据放入全相联结构的Victim Cache\n中；\nd）Victim Cache采用FIFO（先进先出）替换算法，从Victim Cache中替\n换出去的数据，如果发生修改，直接写回下一级存储。\n19\n\n<!-- ===== page 20 ===== -->\n\n在题1）的基础上，为其添加一个32字节的全相联Victim Cache，仍然使用题\n1）中的访问序列，请填写Victim Cache中的Tag Ram变化，并计算命中率。\n（9分）\n访问地址序列  Victim Cache (Tag Ram)\n是否命中\n```\n  B0  B1  (Y / N)\nA0\n20\nA2\n0\n80\n4\n```\n按行得分，每行1分。若空白处填写错误，该行不得分。\nB0和B1互换，也算正确。\n若首行填写内容，本表格不得分。tag应为二进制，否则本表格不得分。填写的tag\n位数错误，本表格不得分。\n命中率为2/6 = 1/3或33.3%（3分）",
         "answer": "答案：每行 1 分（若空白处填写错误，该行不得分；B0 和 B1 互换也算正确；若首行填写内容，本表格不得分；tag 应为二进制，否则本表格不得分；填写的 tag 位数错误，本表格不得分）：\n\n| 访问地址序列 | B0 | B1 | 是否命中 |\n| --- | --- | --- | --- |\n| A0 | | | N |\n| 20 | 1010 | | N |\n| A2 | | 0010 | Y |\n| 0 | | | N |\n| 80 | 0000 | | N |\n| 4 | | 1000 | Y |\n\n命中率为 2/6 = 1/3 或 33.3%（3分）"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -2673,6 +2838,12 @@
         "format": "markdown",
         "prompt": "第六题（15分）\n下面这段代码可以用于评测计算机系统的存储系统性能。在某款现代的个人计算机\n上，采用该评测程序的不同的配置参数（数据集大小和访问步长），得到了如下图\n所示的性能表现。\n```\nlong data[MAXELEMS];  /* Global array to traverse */\n/* test - Iterate over first \"elems\" elements of\n *        array “data” with stride of \"stride\", using\n *        using 4x4 loop unrolling.\n */\nint test(int elems, int stride) {\n    long i, sx2=stride*2, sx3=stride*3, sx4=stride*4;\n    long acc0 = 0, acc1 = 0, acc2 = 0, acc3 = 0;\n    long length = elems, limit = length - sx4;\n    /* Combine 4 elements at a time */\n    for (i = 0; i < limit; i += sx4) {\n        acc0 = acc0 + data[i];\n        acc1 = acc1 + data[i+stride];\n        acc2 = acc2 + data[i+sx2];\n        acc3 = acc3 + data[i+sx3];\n    }\n    /* Finish any remaining elements */\n    for (; i < length; i++) {\n        acc0 = acc0 + data[i];\n    }\n    return ((acc0 + acc1) + (acc2 + acc3));\n}\n```\n（ ）图中 这几个点有一些较为平缓的“平台”，这主要体 现了访存行为的\n1 A1-D1\n21\n\n<!-- ===== page 22 ===== -->\n\n什么特性？ ______（2分）\n（2）如果图中D1体现了内存的性能，那A1、B1、C1分别体现存储层次结构中\n的什么部件的性能：A1：______、B1: ______、C1: ______。\n(每空1分)\n其中，B1所体现的部件，容量可能是多大？ ______（2分）\n  a. 32KB  b. 256KB    c.1MB    d.8MB\nC1所体现的部件，容量可能是多大？ ______（2分）\n  a. 32KB  b. 256KB    c.1MB    d.8MB\n（3）图中B2和B1、C2和C1之间的“斜坡”，这主要是由于访存行为的什么特\n性导致的？ ______（2分）\n（4）图中B2和C2的性能指标差别不大，不像B1和C1之间的差距那么大，主\n要是什么原因导致的？ ______（2分）\n（5）实际评测时，需要把 test()函数先运行一遍，然后再运行一次获取评测数\n据，这是为了避免什么现象的影响？ ______(2分)",
         "answer": "答案：(1) 时间局部性（2分）\n(2) A1：L1 Cache；B1：L2 Cache；C1：L3 Cache（每空 1 分）。B1 所体现的部件容量可能是 b. 256KB（2分）；C1 所体现的部件容量可能是 d. 8MB（2分）。\n(3) 空间局部性（2分）\n(4) 高速缓存的预取功能（2分）\n(5) 高速缓存的 cold miss（2分）"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -2719,6 +2890,10 @@
         "format": "markdown",
         "prompt": "9、 下面代码中不能体现以下哪种局部性:\nfor(i=0; i<100; i++){\n间局部性  a[0]=a[0]+i;\n}\n间局部性",
         "answer": "A. 数据的时间局部性\nB. 数据的空\nC. 指令的时间局部性\nD. 指令的空\n答案为B, 只访问同一个数据a[0]，没有数据空间局部性"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2803,6 +2978,10 @@
         "format": "markdown",
         "prompt": "10、以下关于存储器的说法中，正确的是:",
         "answer": "答案：A\n答案为A, DRAM不做缓存、DRAM单元比SRAM单元慢、固态硬盘写的速度比\n较慢"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2887,6 +3066,10 @@
         "format": "markdown",
         "prompt": "11、以下关于缓存的说法中，正确的是:",
         "answer": "答案：D\n答案为D，LRU有可能比MRU更差；先入先出可能比随机差；保持缓存容量、缓\n存块大小（B）不变，增加路数（E），命中率可能下降"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -2971,6 +3154,10 @@
         "format": "markdown",
         "prompt": "12、以下关于存储器的说法中，正确的是：",
         "answer": "B"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3017,6 +3204,10 @@
         "format": "markdown",
         "prompt": "第五题（16分）\n现有一个直接映射（Direct-mapped）的高速缓存（cache），其总容量为16字\n节，每个高速缓存块（cache block）为\n初始状态为空。\n（1）经过如下地址访问序列后，请填写cache第2组（即Set 2，注：从0开\n始编号）的状态。数据块用10进制表示，举例：M[4-7]表示地址4-7的数据。\n地址序列全部为读访存, 每次读取2个字节，地址单位为字节。\n（提示：一次访存可能访问多个高速缓存块。）\n（6分，v/Tag/Block ，每空2分）\n本次访存序列，共发生____\n（提示：一次访存可能引发多次高速缓存缺失。）\n考察内容：\n本题考察当访问数据和 cache block 不对齐时，对缓存的影响。每次访问是 2\n个字节，当数据对齐（即首地址是偶数），并且2字节数据都在同一个缓存块时，\n仅一次缓存的访问即可返回数据。如果数据未对齐，并且跨越了两个缓存块时，会\n发生两次缓存访问。例如上图（R 7），需要访问数据 M[7-8]，其中M[7]和M[8]\n分别在两个缓存块，则发生了两次缓存操作（缺失），并且会将缓存Set 2中的数\n据块填满。",
         "answer": "4 字节（B=4Byte/block）。Cache\n的\n3___次高速缓存缺失(miss)? （2分）"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3063,6 +3254,10 @@
         "format": "markdown",
         "prompt": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。\n\n| 访问 | 地址 | Set 1：v | Tag | Block |\n| --- | --- | --- | --- | --- |\n| R | 0 [000000₂] |  |  |  |\n| R | 1 [000001₂] |  |  |  |\n| W | 7 [000111₂] |  |  |  |\n| R | 12 [001100₂] |  |  |  |\n| R | 9 [001001₂] |  |  |  |\n\n本次访存序列，共发生 _______ 次高速缓存命中（hit）？\n\n> 接上题的条件：直接映射（Direct-mapped）的高速缓存，总容量 16 字节，每个高速缓存块 4 字节（B=4Byte/block），Cache 初始状态为空。",
         "answer": "答案：\n- 空①（Set 1 的状态）：**v = 0**，Tag、Block 均无数值（留空）—— 即 Set 1 始终没有被填入。\n- 空②（命中次数）：**1** 次。\n\n解析：\n\n1. 配置换算：16 B ÷ 4 B = 4 个块，直接映射 ⇒ 4 组（Set 0–3）。地址划分（每次访问 2 字节，字节地址）：\n   - 块内偏移 = 地址第 [1:0] 位；\n   - 组索引 = 块号 mod 4 = 地址第 **[3:2]** 位；\n   - Tag = 地址第 [5:4] 位。\n2. 一次 2 字节访存可能跨两个块（题目提示过），逐条分析：\n\n| 访问 | 涉及的字节 | 所在块（组） | 结果 |\n| --- | --- | --- | --- |\n| R 0 | 0–1 | 块 0–3（Set 0） | 冷启动不命中 → 装入 Set 0：v=1, Tag=00, M[0-3] |\n| R 1 | 1–2 | 块 0–3（Set 0） | **命中**（数据已在 Set 0） |\n| W 7 | 7–8 | 块 4–7（Set 1）+ 块 8–11（Set 2） | 写不命中；no-write-allocate ⇒ **不分配**，Set 1、Set 2 都不变 |\n| R 12 | 12–13 | 块 12–15（Set 3） | 不命中 → 装入 Set 3：v=1, Tag=00, M[12-15] |\n| R 9 | 9–10 | 块 8–11（Set 2） | 不命中 → 装入 Set 2：v=1, Tag=00, M[8-11] |\n\n3. 唯一涉及 Set 1 的访存是 W 7（它覆盖字节 7–8，其中字节 7 属于 Set 1 的块 4–7）。写不命中 + **no-write-allocate**（写不分配）⇒ 该块不会进入 cache，所以 Set 1 保持初始的无效状态：**v = 0，Tag 与 Block 不填**。原卷评分说明也写着「v 是 0 即给 2 分」。反过来，如果策略是 write-allocate，Set 1 会被填成 `v=1, Tag=00, Block=M[4-7]`——这正是本题设的陷阱。\n4. 命中次数：5 条访存中只有 R 1 命中（R 0 冷启动不命中、W 7 写不命中且不分配、R 12 与 R 9 也都是冷启动不命中）⇒ **共 1 次命中**。（官方评分材料另列了一套「第二套」计法得 5 次命中，并注明那套只给一半分；应以上面的 1 次为准。）\n5. 注意 W 7 的另一半落在 Set 2：它同样因为 no-write-allocate 而不分配；随后 R 9 访问 Set 2 时才以「冷启动不命中」把它填上（Tag=00, M[8-11]），与 W 7 是否发生无关。\n\n> 📌 答案有官方来源：原卷红色参考答案 + 批注（见 `_audit/pages/期中/2020期中-带答案/page-15.png`：Set 1 的 v 填红色 0、Tag/Block 留空；批注为「本题考察 no-write-allocate，写操作（W 7）不会将数据填写到 Set 1 中」，命中次数 1 次出自「第一套」答案）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3109,6 +3304,12 @@
         "format": "markdown",
         "prompt": "（3）为了提升高速缓存的效率，设计师提出两种修改方案\na)  将高速缓存块增大到 8 字节（B=8Byte/block），其他配置不变，每次\n访存命中（hit）的时间开销为4个时钟周期；\nb)  将高速缓存变为全相连（fully-associative，即S=1），其他配置不\n变，每次访存命中（hit）的时间开销为2个时钟周期；\n对于如下访问序列，分别采用两种修改方案的访存时间总开销相等，请问每次\n高速缓存缺失（miss）的时间开销是____10 或者 12___时钟周期？（给 4\n分）\n提示：修改高速缓存配置不会影响高速缓存缺失的时间开销\n考察内容：\na) 方案发生2次缺失，四次命中;\nb) 方案发生3次缺失，3次命中\n1\n\n<!-- ===== page 16 ===== -->\n\n假设缺失开销是m，有方程 2m + 4*4 = 3m + 2*3， 则m = 10\n有同学考虑每次缺失还要额外计算一次命中，即\na) 方案发生2次缺失，6次命中;\nb) 方案发生3次缺失，6次命中\n有方程 2m + 4*6 = 3m + 2*6， 则m = 12",
         "answer": "答案：10 或者 12\n假设缺失开销是m，有方程 2m + 4*4 = 3m + 2*3， 则m = 10\n有同学考虑每次缺失还要额外计算一次命中，即\na) 方案发生2次缺失，6次命中;\nb) 方案发生3次缺失，6次命中\n有方程 2m + 4*6 = 3m + 2*6， 则m = 12\n*********************第二套****************************\n本次访存序列，共发生____5__次高速缓存命中(hit)?  （给1分）\n有同学误以为每次访问两字节都会引起两次缓存操作，因此得出另一套答案，\n只给一半分。\n注意：必须两个答案匹配才有分。\n（3）为了提升高速缓存的效率，设计师提出两种修改方案\na)  将高速缓存块增大到 8 字节（B=8Byte/block），其他配置不变，每次\n访存命中（hit）的时间开销为4个时钟周期；\nb)  将高速缓存变为全相连（fully-associative，即S=1），其他配置不\n变，每次访存命中（hit）的时间开销为2个时钟周期；\n对于如下访问序列，分别采用两种修改方案的访存时间总开销相等，请问每次\n高速缓存缺失（miss）的时间开销是____18 或者 20___时钟周期？（给 2\n分）\n提示：修改高速缓存配置不会影响高速缓存缺失的时间开销"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -3196,6 +3397,10 @@
         "format": "markdown",
         "prompt": "11. 下列有关存储器的说法中，正确的是：\n直接将磁盘数据通过总线传送到寄存器中，以提升效率\n一逻辑块的扇区均匀分布在不同磁道上，以减少读取一个逻辑块的时间\n以提高SSD的寿命\n需要周期性地刷新状态，断电后信息将消失",
         "answer": "答案：C\n解析：\nA. 错误。DMA技术是将磁盘的内容直接传送到主存，而不是寄存器。\nB. 错误。为了减少读取一个逻辑块的时间，最好让属于同一逻辑块的扇区分布在\n同一个磁道上，以减少寻道时间。\nC. 正确。见教材415页。\nD. 错误。SRAM属于易失性存储器，断电后不会保存信息。\n7"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3283,6 +3488,10 @@
         "format": "markdown",
         "prompt": "12. 下列有关存储器的说法中，错误的是：\n间\n复杂性，同时也有利于对损坏的扇区进行管理\n内存延迟的差距，频繁地使用高速缓存\n否包含数据（是否全为1）无关\nA. 正确。见教材409页。\nB. 正确。见教材410页。\nC. 正确。见教材417页。\nD. 错误。见教材415页，如果写操作试图修改一个包含已经有数据的页时，那么\n这个块中所有带有数据的页都必须被复制到一个新（擦除过的）块，然后才能进行\n对该页的写。因此，写入页的时间与该页是否包含数据有关。",
         "answer": "答案：D"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3370,6 +3579,10 @@
         "format": "markdown",
         "prompt": "13. 分析下面的C程序，以下关于局部性(locality)说法错误的是：\n```\nint i = 0, a = 1, b = 1;\nfor (;i < 100; i++)  {\na = a + b;\nb = a + b;\n}\n```",
         "answer": "答案：D\n解析：对于有意义的循环操作，均体现了指令的时间空间局部性。该段程序对a b\n的循环访问也体现了数据的时间局部性。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3419,6 +3632,10 @@
         "format": "markdown",
         "prompt": "第五题（15分）说明：本题的cache都是写分配的\n1． 请从SRAM和DRAM中，选出更符合描述的一项，并在表格里打✔\n  SRAM  DRAM\n常用于当代个人电脑\nCPU中的高速缓存\n在 10-100 毫秒内会失\n去电荷，因此需要周期性\n地刷新\n单位容量价格更高",
         "answer": "（每行1分，\n共3分）\n✔\n✔\n✔\n解析：考察教材6.1.1中的“1.静态RAM”和“2.动态RAM”的区别\n评论：该题都是基本概念，较为简单"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3468,6 +3685,10 @@
         "format": "markdown",
         "prompt": "2． 在一个16-bit地址空间的机器上，有一个总大小为16 Bytes的cache，\n替换策略为LRU，回答如下问题（本题不考虑编译优化）\n：\n（1）若每个block的大小为4 Bytes，采用直接映射的方式组织，则tag段长\n度为\n```\n```",
         "answer": "（共12分）\n12   bits。（3分）\n解析：考察6.4.1“通用的高速缓存存储器组织结构”\n地址长度m=16 bits\nE=1\nB=4 Bytes, b=2 bits\nS=C/(E*B)=4，s=2 bits\n故tag长度为m-s-b=12 bits\n评论：该题考查基本概念，计算量小，较为简单"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3517,6 +3738,10 @@
         "format": "markdown",
         "prompt": "（2）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问\n：\n```\n# define N 4\nchar x[N];\nshort y[N];\nint main() {\nfor (int i = 0; i < N; i++) {\nx[i] = i;\ny[i] = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组x、y的起始地址分别为 0x0000、0x0008，cache block大小为2\nBytes，组相联度为2，则命中次数为",
         "answer": "（共5分）\n2    次。（3分）\n② 若数组x、y的起始地址与①相同，cache block大小为4 Bytes，则无论\n采取何种方式组织cache、且无论如何增大cache的大小，命中次数至多为   5\n次。（2分）\n解析：考察6.4.3“组相联高速缓存”\n（1）中，仅有对x[1]和x[3]的访问会命中\n（2）中，只需要考虑访问序列分散在几个block中（block大小为4 Byte），\n因此去掉地址的后2个bit，分析还有多少不重复的元素即可\n评论：这两空是较为基础的计算，如果按照朴素的方法计算，有一定的计算量，难\n度适中；如果能够找到规律，计算其实较为简单"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3579,6 +3804,10 @@
         "format": "markdown",
         "prompt": "（3）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问，假定：\n为190周期；\n存不能并行）。\n（共4分）\n```\n# define N 4\ntypedef struct {\nchar x;\nshort y;\n} node;\nnode p[N];\nint main() {\nfor (int i = 0; i < N; i++) {\np[i].x = i;\np[i].y = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组p的起始地址为0x0000，cache block大小为8 Bytes，采用直接\n映射，则cache访问的总延迟为\n② 若结构体不采用数据对齐（即(void *)&p[i] – (void *)&p[0] == 3\n* i），则上 述代码 ①在中的条件下，则cache访问的总延迟为\n周期。",
         "answer": "460   周期（注意结构体数据对齐）。（2分）\n470\n（2分）\n解析：考察点与2.2相同，探索了数据对齐的作用（现代cache允许并行访问，\n但是本题仍不失为一种启发）\n②比①多10个周期的原因在于②中对p[2].y的访问跨两个缓存块\n评论：（3）难度与（2）相比并无明显提升，仍是一道难度适中的题目。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3667,6 +3896,10 @@
         "format": "markdown",
         "prompt": "16．以下关于存储器的说法中，错误的是：",
         "answer": "答案：D。SRAM和DRAM都是易失性存储。\n难度：简单"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3755,6 +3988,10 @@
         "format": "markdown",
         "prompt": "17．以下关于存储器的说法中，错误的是：",
         "answer": "答案：A。SDRAM的“S”是指Synchronous。SRAM的“S”是指Static。\n难度：中等。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -3843,6 +4080,12 @@
         "format": "markdown",
         "prompt": "18. 如果我们希望将原来4MB的cache调整为6MB，可以采取的做法是（     ）。\n7\n\n<!-- ===== page 8 ===== -->",
         "answer": "答案：B\n此题源于Intel Core2 Duo T9300的设计。S和B需要是2的n次方，但E不需要。"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -3931,6 +4174,10 @@
         "format": "markdown",
         "prompt": "19．如果一个系统中访问下一级存储器的传输时间远大于cache的处理速度，我\n们尝试引入cache来改善一个局部性良好的程序的IO时，应当使用的写策略是\n①  写回(write-back)     ②直写(write-through)\n③ 写分配(write-allocate)   ④非写分配(no-write-allocate)",
         "answer": "答案：A\n难度：易\n题目描述希望尽量减少总线流量，因此我们选择写回（一般搭配写分配），这里特\n意强调了局部性良好的程序，是为了消除写分配的 disadvantage that every miss\nresults in a block transfer from the next lower level to the cache，因此这里选择写回+\n写分配的理由充分。大约需要0.5～1分钟。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -4019,6 +4266,12 @@
         "format": "markdown",
         "prompt": "20. 执行以下函数，消耗的内存带宽约为（）。\n已知：\n1.  Write miss发生时采用写分配（write-allocate）\n2.  X、Y、result三个数组在函数执行前均不存在于CPU cache中，函数\n执行完毕后均写入内存中\n3.  不考虑SIMD指令，不考虑编译优化（包括循环展开等）\n4.  Cache line size为64 Bytes，内存到cache的传输以cache line\n为单位\n```\nvoid saxpy(int N,\nfloat scale,\nconst float X[],\nconst float Y[],\nfloat result[]) {\nfor (int i = 0; i < N; i++) {\nresult[i] = scale * X[i] + Y[i];\n```\n8\n\n<!-- ===== page 9 ===== -->\n\n```\n}\n}\n```\n（提示：1. 只需考虑对 X、Y、result 三个数组的读写；2. 消耗的内存带宽=\n从内存中读取的字节数+写入内存的字节数）",
         "answer": "答案：D\n难度：难\n解析：本题容易误选为C。因为写分配，CPU会把result数组也读入cache中。具\n体而言，假定result数组的起始地址64字节对齐，那么写入result[0]的时候，cache\n里会为 result[0..15]分配空间，因而 result[1..15]都需要读入 cache；再考虑内存到\ncache传输的最小单位是cache line，那么result[0]也要读入\n背景：本题是性能分析中的常见误区。内存带宽计算是性能瓶颈分析的重要一环（在\n并行计算中尤其如此），忘记考虑write-allocate是一大失误。"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -4069,6 +4322,10 @@
         "format": "markdown",
         "prompt": "1.在一个8-bit地址空间的机器上，考虑如下的高速缓存：此高速缓存共有4组\n（S=4），为二路组相联（E=2），Tag段的大小为3-bit（t=3），替换策略为LRU。\n初始状态下各组的有效位（V）和Tag位如下表所示：\n```\n  V  Tag  V  Tag\nSET 0  1  000  0  001\nSET 1  0  001  1  110\nSET 2  0  110  1  101\nSET 3  1  010  0  001\n```\n（1）此cache所能存储的数据总容量为C = ___   _____ Bytes\n（2）现要读取地址空间0xd2处的数据，此访存是否命中cache？_____  _____\n（填“是”或“否”）。\n）\n```\n  V  Tag  V  Tag\nSET 0\nSET 1\nSET 2\nSET 3\n```\n（3）在（2）进行访存的基础上，考虑如下的访存序列：0xc8, 0x16, 0x01,\n（均为读取一个字节的数据）。这四次数据访问的命中率(hit rate) 为_\n_____",
         "answer": ". （3分）\n（2分）请在下表中写出经过此次访存后，更新后的cache\n的有效位（V）和 Tag 位。（仅写出有修改的部分即可，如果你认为没有修改，此\n表可以为空）（2分\n0xb5\n。（2分）假设此cache的命中时间(hit time) 为10个周期，不命中处\n罚(miss penalty) 为190个周期，则这四次数据访问的总延迟为_________周\n期。（2分）"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -4119,6 +4376,12 @@
         "format": "markdown",
         "prompt": "2.下面我们将考虑实际程序中发生的访存行为。考虑一个 32-bit 地址空间的机\n器，并有如下的高速缓存：总大小为16 Bytes，每个cache block的大小为4\nBytes，组织结构为全相联（S=1），替换策略为LRU。\n在此机器上运行如下C语言代码。假设初始时cache为空，只考虑读写数据引起\n的cache访问，不考虑编译优化，临时变量a, b, c, i均储存在寄存器中，\n数据类型的大小为4 Bytes，f数组的起始地址为0x10000000。回答下列问题：\n1: # define N 20\n1\n\n<!-- ===== page 19 ===== -->\n\n```\n2: int f[N + 2];\n3: f[0] = 1;\n4: f[1] = 1;\n5: for(int i = 0; i < N; i++) {\n6:    int a = f[i];\n7:    int b = f[i + 1];\n8:    int c = a + b;\n9:    f[i + 2] = c;\n10: }\n```\n（1）假设cache在写命中时采用直写(write-through) 策略，在写不命中时\n采用非写分配(not-write-allocate) 策略，则当程序第一次运行到第6行时，\n所发生的访存是否命中cache？__________（填“是”或“否”）。\n（2）假设cache在写命中时采用写回(write-back) 策略，在写不命中时采用\n写分配(write-allocate) 策略，整个程序的执行过程共命中 cache\n___________次。",
         "answer": "int\n8\n（2分）整个\n程序的执行过程共命中cache __________次。（1分）\n（1分）"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -4223,6 +4486,10 @@
         "format": "markdown",
         "prompt": "17.关于RAM（Random-access memory）和NVM (Non-volatile memory)\n表述正确的是:",
         "answer": "答案：AD\n正确答案：D，A 中 NVM 支持随机访问，B 中 eDRAM 被用于 L3/L4 缓存，C 中\nOptane DC PMM可以被用于主存，E中Optane支持in-place update，F中\n磁盘包含32MB-128MB DRAM作为缓存。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -4318,6 +4585,12 @@
         "format": "markdown",
         "prompt": "18.假设一块32MB缓存、1TB容量的磁盘有如下配置：\n```\nRotation rate = 7200 RPM,\nAverage seek time = 9 ms,\nAverage # sectors/track = 400\n```\n现磁头处在（Sector 0，Track 0）位置，请问访问（Sector 16，Track 1），\n（Sector 48，Track 2），（Sector 32，Track 1），（Sector 16，Track\n9\n\n<!-- ===== page 10 ===== -->\n\n1）最短需要花多长时间？（Track 0、1、2在一个zone内）\n```\n```\n（修订：本题不计分、所有人都给分）\n```\n```",
         "answer": "答案：A\n正确答案：A\nTransfer time of a sector costs 60 / 7200 x 1 / 400 x 1000\nms/sec = 0.02 ms\nRotation time of a sector costs 1 / 400 x (60 / 7200) x 1000\nms/sec = 0.02 ms\n完成最短的访问时间，需要依次访问：（Sector 16，Track 1）（Sector 32，\nTrack 1）（Sector 48，Track 2），seek time x 2 + rotation time\nx (16+16+16) + transfer time x 3 = 18 ms + 0.96 ms + 0.06 ms\n= 19.02 ms。\n错误答案：B 随便编了一个很小的数，11.3ms。\n错误答案：C\n依次访问：（Sector 16，Track 1）（Sector 48，Track 2）（Sector 32，\nTrack 1）（Sector 16，Track 1），seek time x 3 + rotation time\nx (16 + 48 + 32 + 16) + transfer time x 3 = 27ms + 2.24ms +\n0.06ms = 29.3ms。\n错误答案：D\n依次访问：（Sector 16，Track 1）（Sector 48，Track 2）（Sector 32，\nTrack 1）（Sector 16，Track 1），seek time x 3 + rotation time\nx (400 + 400 + 16) + transfer time x 3 = 27ms + 16.32ms +\n0.06ms = 43.38ms。\n错误答案：E\n依次访问：（Sector 16，Track 1）（Sector 48，Track 2）（Sector 32，\nTrack 1），seek time x 3 + rotation time x (400 + 32) + transfer\ntime x 3 = 27ms + 8.64ms + 0.06ms = 35.7ms。"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -4405,6 +4678,12 @@
         "format": "markdown",
         "prompt": "19.某计算机地址空间 12 位，cache被分为S个组，每组E个cacheline，一\n个cacheline长度2b字节。cache的参数为：S=4,E=1,b=4，现在依次访问\n4-14-84-114-514-124-84-4(以字节为单位,十进制)，请问cache一共命中\n10\n\n<!-- ===== page 11 ===== -->\n\n了次:",
         "answer": "答案： D\n访问的块：0-0-5-7-32-7-5-0\n模拟一下得到14,124,第二个84是命中的"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -4454,6 +4733,10 @@
         "format": "markdown",
         "prompt": "第五题（15分）\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n（1） ____ 局部性：\n（2）_____ 局部性：",
         "answer": "答案：\n（1）**时间**局部性；解释：如果程序中的某条指令或者数据被访问，不久以后会再次被访问。\n（2）**空间**局部性；解释：一旦程序访问了某个存储单元的数据，在不久之后，其附近存储单元的数据也将被访问。\n\n解析：\n\n1. 局部性原理（principle of locality）指程序倾向于使用最近用过的指令和数据、或与它们邻近的指令和数据，它是存储层次（寄存器—cache—内存—磁盘）能够奏效的根本原因。\n2. （1）时间局部性（temporal locality）：被访问过一次的指令/数据，在不久的将来很可能被再次访问。典型来源是**循环**——循环体里的指令每轮都重复执行，循环里用到的变量（如 `sum`、循环变量 `i`）也被反复读写。cache 因此可以把刚取来的块留在原处重复命中。\n3. （2）空间局部性（spatial locality）：被访问的存储单元附近的单元，在不久的将来很可能被访问。典型来源是**顺序执行指令**（相邻地址的指令依次取出）和**数组的顺序访问**（`a[i][j]` 按行连续存放、依次读取）。cache 因此按「块（block）」为单位取数据，一次把附近若干字节一起搬进 cache，从而把后续访问变成命中。\n4. 答题要点（评分：「名词各 1 分，解释各 1 分」）：名称写「时间/空间」两字即可；解释要写出「再次被访问」（时间）与「附近的存储单元也被访问」（空间）这两个特征。也可以各举一个例子（重复执行的循环指令 → 时间局部性；数组按地址顺序访问 / 顺序取指 → 空间局部性）。\n\n> 📌 答案有官方来源：原卷带答案版在题面中直接给出「（1）时间 局部性：…（2）空间 局部性：…」（原文/期中/2023期中-带答案.md 第 673–676 行），题面的空格形式取自无答案版（原文/期中/2023期中-无答案.md 第 517–518 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -4503,6 +4786,12 @@
         "format": "markdown",
         "prompt": "2、假想一个存储系统（特性与教材中的示例类似），地址宽度是4位（内存总容量\n为16个字节）。高速缓存（cache）采用直接映射（Direct-mapped）的形式，\n其总容量为8个字节，每个高速缓存块（cache block）为2字节。高速缓存的\n初始状态为空。高速缓存的结构示意如下表所示：\n```\nSet  Valid  Tag  Block\n0\n1\n2\n3\n```\n如果此时有如下的访存地址序列（十进制形式）：5、10、15、6、11、4、13。每\n次访存读一个字节。这段序列完成后，高速缓存中的内容是什么样的？请填在上面\n的表格里。Valid和Tag都用二进制表示，block内容用M[0-1]、M[2-3]、……\n的形式表示，初始状态未改变的行保持为空即可。（每行1分，包括空行，共4分）\n在这个访存地址序列中，高速缓存发生了\n次不命中\n（miss）。（每空1分，共2分）\n\n<!-- ===== page 23 ===== -->\n\n（修订：本小题不计分、所有人都给分）",
         "answer": "1  1  M[10-11]\n1  1  M[12-13]\n1  0  M[6-7]\n2  次命中（hit）,  5\n22"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -4552,6 +4841,10 @@
         "format": "markdown",
         "prompt": "3、在Intel Core i7中，一级数据高速缓存（L1 Data Cahe）的容量为32k\n字节，每个高速缓存块为64字节，地址宽度为47位。由此推算，地址划分成Tag、\nSet Index和Block offset三个域分别为多少位？将回答填在下表中，用十\n进制表示。（每空1分，共3分）\n```\nTag  Set Index  Block offset\n35  6  6\n```\n该高速缓存有_\n个line。（每空1分，共2分）",
         "answer": "64 个Set，每个Set中有  8"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -4639,6 +4932,10 @@
         "format": "markdown",
         "prompt": "12.以下关于存储设备的说法正确的是：",
         "answer": "答案：C\nA. SRAM是易失性存储器，非易失性存储器指断电后仍然能保存数据，\nB. DRAM速度一般比SRAM慢\nC. 正确\nD. 旋转磁盘相比SSD仍然有价格便宜，不会磨损等优点"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -4726,6 +5023,12 @@
         "format": "markdown",
         "prompt": "13.考虑一个有x个盘片，每个扇区y字节，每个面z条磁道，每条磁道平均w个\n7\n\n<!-- ===== page 8 ===== -->\n\n扇区，旋转速率a RPM，平均寻道时间b ms 的磁盘。则下列说法正确的是：",
         "answer": "答案：D\nA.  磁盘容量为2wxyz / $10^9$ GB\nB.  访问一个磁盘扇区内容的平均时间为 (60/a * 1/2 * 1000 + 60/a / w * 1000 + b)\nms\nC.  访问一个磁盘扇区中512个字节的时间主要是寻道时间和旋转延迟。访问扇\n区中的 第一个字节用了很长时间，但是访问剩下的字节几乎不用时间。\nD.  假设旋转速率未知，在通常情况下我们可以简单估计 a = 60/b * 1/2 * 1000\nRPM（书上提到可以用寻道时间的两倍来估计访问时间，故可以用寻道时间估\n计旋转延迟）"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -4813,6 +5116,10 @@
         "format": "markdown",
         "prompt": "14.考虑通用的高速缓存存储器，下列说法错误的是",
         "answer": "答案：B\n大的块有利有弊。较大的块能利用程序中可能存在的空间局部性，帮助提高命中率。\n然而大的块对不命中处罚也有负面影响。（较大的块并不能利用时间局部性）"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -4900,6 +5207,10 @@
         "format": "markdown",
         "prompt": "第五题（20分）\n某一计算机的内存空间的大小是32 Bytes，即内存空间的地址范围如下：\n010 (000002) -- 3110 (111112)\n1.  （4分）假设Cache容量大小是8 Bytes，初始状态为空。由于容量过\n小，需要扩容。若为充分利用原有硬件设计，不希望大幅度修改cache\n地址解析逻辑，那么最适宜采用的扩容方式是",
         "answer": "C"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -4987,6 +5298,10 @@
         "format": "markdown",
         "prompt": "2.  （4分）在前题基础上，将Cache容量扩大为16 Bytes。假设对于访\n问内存地址序列 010,210,410,810,1210,1410，其命中率为33.3%，\n那么请问该Cache的block大小是\n？",
         "answer": "B"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5036,6 +5351,10 @@
         "format": "markdown",
         "prompt": "3.  在前题基础上，假设每个Cache Block的大小为4 Bytes（即 B =\n4），Cache的结构如下图所示（S=2，E=2），且替换策略为LRU。\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n210  2310  1310  910  2010   1510   1310   1010\n请在下图空白处填入访问上述数据后Cache的状态。（4分）\n（TAG使用二进制格式；Data Block使用十进制格式，例：M[4-7]表示\n地址410-710对应的数据）（注：同Set内不同Line的顺序可颠倒）\n```\n  V  TAG  Data Block\nset0  1  00  M[0-3]\n      1  01  M[8-11]\n  V  TAG  Data Block\nset1  1  10  M[20-23]\n   1  01  M[12-15]\n```\n上述数据访问一共产生了多少次Hit（2分）:",
         "answer": "4"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5085,6 +5404,10 @@
         "format": "markdown",
         "prompt": "4. 在前题基础上，增加一条新规则：地址区间包含10倍数的block将不\n会被缓存。假设仍旧使用LRU替换策略，请在下图空白处填入访问上述数据\n后Cache的状态（4分）。（注：同Set内不同Line的顺序可颠倒\n```\n  V  TAG  Data Block\nset0  1  00  M[0-3]\n      0\n  V  TAG  Data Block\nset1  1  01  M[12-15]\n   0\n```\n上述数据访问一共产生了多少次Hit(2分)：",
         "answer": "）\n2"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5167,6 +5490,10 @@
         "format": "markdown",
         "prompt": "（5~6） 如果直接映射高速缓存（Cache）的大小是4KB，并且块大小（block）\n大小为32字节。\n5、请问它每路（way）有多少行（line）？ 答：（      ）",
         "answer": "答案：选 A，容量=路容量*路数=cache 行大小*Set 数*路数->set 数\n=4KB/32B=27=128"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5249,6 +5576,10 @@
         "format": "markdown",
         "prompt": "6、如果数据访问的地址序列为 0->4->16->132->232->4096->160（以字节\n为单位），请问一共发生多少次替换？答：（     ）",
         "answer": "答案：选B，连续访问set数相同的数据会发生替换，set号有地址5~11位\n决定，等于地址A mod(128*32)，只有0与4096位于同一cache行"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5331,6 +5662,10 @@
         "format": "markdown",
         "prompt": "6.  通常情况下，下面的哪些表述是正确的？（     ）",
         "answer": "答案：B\n（第六章）考察高速缓存设计原理的理解"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5413,6 +5748,10 @@
         "format": "markdown",
         "prompt": "7.  在代码中，变量sum具有的特性是：（     ）\n```\nint sumvec(int v[N])\n{\n  int i, sum = 0;\n  for (i = 0; i < N; i ++)\n    sum += v[i];\n  return sum;\n}\n```",
         "answer": "答案：A\n（第六章）考察对局部性的认识"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5497,6 +5836,10 @@
         "format": "markdown",
         "prompt": "6.  某机器内存为8位地址，cache设计参数为E=2,t=2,s=2,b=4，cache块\n大小为16字节。cache为空的初始状态下，数据访问的地址序列为0->4->34\n->162->128->192->2（以字节为单位），请问一共发生多少次cache命中？\n答：（     ）",
         "answer": "答案：B\n00 00 0000 miss\n3\n\n<!-- ===== page 4 ===== -->\n\n```\n00 00 0100 hit\n00 10 0010 miss\n10 10 0010 miss\n10 00 0000 miss\n11 00 0000 miss\n01 00 0000 miss\n00 00 0010 miss\n```"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5579,6 +5922,10 @@
         "format": "markdown",
         "prompt": "5.  如果四路组相联的高速缓存大小是32KB，并且块（block）大小为32字节，\n那么它每路（way）有多少行（line）？",
         "answer": "答案：D\n解析：32KB / 32B = 1024 块，4 路组相联 → 256 组，每路 256 行。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5661,6 +6008,10 @@
         "format": "markdown",
         "prompt": "6.  某个机械硬盘的部分指标数据如下，则该硬盘标称的容量最有可能是多少？\n```\n◦  1024 bytes/sector\n◦  400 sectors/track (on average)\n◦  20000 tracks/surface\n◦  5 platters/disk\n```",
         "answer": "答案：A\n解析：1024B/sector × 400 sector/track × 20000 track/surface × 2 surface/platter × 5 platter ≈ 81.9 GB，标称容量取 80 GB。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5745,6 +6096,12 @@
         "format": "markdown",
         "prompt": "1.  在如下的代码中，下列关于局部性的说法正确的是：\nint add (int *a, int n){\n  int sum = 0;\n  for (int i = 0; i < n; ++i)\n    sum += a[i];\n  return sum;\n}",
         "answer": "答案：B."
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "code-like-content-without-fence"
+        ]
       }
     },
     {
@@ -5829,6 +6186,10 @@
         "format": "markdown",
         "prompt": "3.  下面关于缓存替换策略的说法哪个是正确的(N为cache的大小)",
         "answer": "答案：C\n (至少有N+2个不同的输入，第一次一定miss，后N次一定与第一次换入的不同，\n至少也有一次miss)"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -5914,6 +6275,12 @@
         "format": "markdown",
         "prompt": "5.  下述关于各类存储介质的讨论，哪个是错误的？\n2\n\n<!-- ===== page 3 ===== -->",
         "answer": "答案：B（来源：2019、2020期末-答案解析）\n解析：DRAM 按行组织，整行访问效率更高，连续访问与随机访问的延时并不相同；SSD 擦除远慢于读取；SRAM 晶体管多、存储密度最低。"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "page-artifact-in-stem"
+        ]
       }
     },
     {
@@ -5961,6 +6328,10 @@
         "format": "markdown",
         "prompt": "（3）  现在考虑数据缓存（data cache）对该处理器的影响。\n该处理器配置了一个简单的直接映射（direct-mapped，E=1）数据缓存，\n总容量32KB，每个缓存块的大小是64Byte。对于movq指令，如果被访问\n的数据在该缓存中，则1个周期可以处理完成。否则，则需要2个周期才能完\n成。在运行上述汇编代码之前，数据缓存初始状态为空，其他设置同上一问。\n请再次计算：完成上述汇编代码段一共需要多少周期？",
         "answer": "答案：50 个周期（来源：2019、2020期末-答案解析）\n解析：直接映射数据缓存块 64B，可放 8 个长整数；起始地址 0x8008 不是 64 字节对齐，所以 8 次访存中有 2 次不命中，额外付 2×(2-1)=2 个周期 → 48+2 = 50。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6046,6 +6417,10 @@
         "format": "markdown",
         "prompt": "2.  假设内存空间为64字节，考虑两个高速缓存系统A与B。它们均有s=E=b=2，但高速\n缓存A要求组索引位在地址中间，而高速缓存B要求组索引位在地址的最高位，如图。\n设替换策略均采用 LRU，现用考虑如下访存序列(10\n进制)：\n1, 7, 8, 3, 4\n则下列说法中正．确．的个数为：\n①高速缓存A的容量为32字节，但Tag与Valid位的存在使得其实际占用的字节数是容量\n的1.5倍。\n②若初始时缓存均为空，用该序列分别访存，其在高速缓存A中的hit次数多于B。\n③对于高速缓存A，两个地址相邻的缓存块在相同的组中；而对于高速缓存B，则在不同的\n组中。\n④实际的缓存系统通常采用 A 的格式而不采用 B，是因为空间局部性较差时其能更好地利\n用缓存。",
         "answer": "答案：B（来源：2019、2020期末-答案解析）\n解析：该缓存 4 组、每组 2 行 4 字节 → 容量 32 字节；①中「实际占用 1.5 倍」不成立，③说反了（B 的格式使相邻块进同一组），④也错；只有②成立（A 命中更多），故正确的个数为 1。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6093,6 +6468,10 @@
         "format": "markdown",
         "prompt": "3） 现需要考虑实际执行时，存储层次对于流水线执行时间的影响：\n  该处理器包含一个L1指令缓存（I-cache）和一个L1数据缓存（D-cache）；\n  I-cache是一个直接映射（direct-mapped，E=1）缓存，总容量32KB，每个缓存块\n的大小是32Byte，代码执行前I-cache全部为空；\n  D-cache也是一个直接映射（direct-mapped，E=1）缓存，总容量32KB，每个缓\n存块的大小是32Byte，代码执行前D-cache全部为空；\n  取指（F）阶段，如果指令在I-cache中，则需要1个周期，否则需要10个周期；\n  访存（M）阶段，如果数据在D-cache中，则需要1个周期，否则需要10个周期；\n请问执行上述代码I-cache缓存命中____次、D-cache缓存命中_______次?\n在存储层次的影响下，执行完代码需要 ______ 个时钟周期？",
         "answer": "答案：I-cache 命中 47 次、D-cache 命中 5 次，共需 96 个时钟周期（来源：2019、2020期末-答案解析）\n解析：两个缓存都是块 32B → 5 位偏移、10 位组索引；取指共 48 次，只有 1 次冷不命中 → 命中 47 次；数据缓存每块放 4 个长整数，且起始地址不是 32 字节对齐 → 8 次访存中 3 次不命中 → 命中 5 次；4 次不命中每次额外 9 个周期，60+36 = 96 个周期。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6177,6 +6556,10 @@
         "format": "markdown",
         "prompt": "7. 以下关于存储设备与存储器层次结构的说法，正确的是：",
         "answer": "答案：A"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6223,6 +6606,10 @@
         "format": "markdown",
         "prompt": "第二题. 请结合教材第六章“存储器层次结构”的有关知识回答问题(10分)\n1. (2 分)高速缓存(cache)的先进先出替换策略(FIFO)指的是在发生缓存不\n命中时,最先进入高速缓存的行(cache line)将最先被替换出.考虑两种\n遵循先进先出替换策略且块大小(block size)相同的全相联高速缓存 C1\n和C2.其中C1是3路全相联的,C2是4路全相联的.假设初始情况下C1,C2\n所有行的有效位都为0.则让它们分别连续访问标记(tag)为0, 1, 2, 3,\n0, 1, 4, 0, 1, 2, 3, 4 的行之后, C1 发生的缓存不命中次数\n(1)________C2发生的缓存不命中次数(填“>”“=”或“<”).\n2. 已知某单核处理器有 L1,L2,L3 三级高速缓存且遵循先进先出替换策略,你\n希望通过触发行驱逐(cache line eviction)的方法测量该处理器的L1\n数据缓存(L1 d-cache)的相联度,实验前已知 L1 d-cache 的容量在\n16KiB到64KiB之间(含16KiB和64KiB)且字节数为2的幂,且已知高速\n缓存块的字节数小于1KiB.你的实验步骤如下：\nStep #1: 开辟一块足够大(如8MiB)的内存空间.\nStep #2: 逐步调整访问的步长S(S依次取1KiB, 2KiB, 4KiB, …,\n32KiB,64KiB)和访问的元素数量N(N依次取1, 2, 3, …, 127, 128).\n对于给定的S和N,连续两次从所开辟内存的起始位置开始,以S为步长顺序\n访问N个内存地址.记录第二次访问时平均一个内存地址的访问时间T.\nStep #3: 多次实验取平均值以减小误差.作图并分析实验结果.\n这里是给定S和N后访问内存的一个例子：当S=64KiB,N=6时,先按顺序\n访问一遍所开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB,\n320KiB 处的一个字节的值.清空寄存器,接着计时并第二遍按顺序访问所\n开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB, 320KiB\n处的一个字节的值.访问完成后立即停止计时,并记录T = (结束计时的时\n刻 - 开始计时的时刻) ÷ 6.0.\n(a)  (2分)Step #2中,给定S和N后第一遍访问N个内存地址的过程\n被称为暖身(warm up),这是为了避免(2)________不命中带来的影响\n(填“冷/强制性”“冲突”或“容量”).\n(b)  (4 分)假设访问内存的过程都在高速缓\n存中顺次进行,且不考虑预取(prefetch)机制\n的影响.你选取了步长为S1, S2时的部分实验结\n果如图所示(此图为示意图).你注意到访存速度\n越快,则访问单个元素的时间越短.因此从图中\n可 以 看 出 T3 最 接 近 (3)________( 填\n“L1”“L2” 或 “L3”) 级 缓 存 的 访 存 时\n间,S1(4)________S2(填“>”“=”或“<”).\n(c) (2分)在(b)的条件下, 进一步推理可知该处理器的L1 d-cache的\n容量(capacity)为(5)________(用代数式表示,S1, S2, N0为已知量,\n下同.注意计算容量时不考虑有效位和标记位),相联度为(6)_______.",
         "answer": "答案：\n(1) ＜\n(2) 冷/强制性\n(3) L3\n(4) ＞\n(5) 2·N0·S2\n(6) N0"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6308,6 +6695,10 @@
         "format": "markdown",
         "prompt": "9.以下关于存储设备与存储器层次结构的说法，正确的是：",
         "answer": "答案：A。答案：A。B中DRAM掉电后也会丢失，C中上层存储的内容可以独立于下层，例如加载到寄存器中的值不一定在内存中存在。D缓存利用了空间局部性，会把访问元素在同一块内的元素全部取到缓存里。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6355,6 +6746,10 @@
         "format": "markdown",
         "prompt": "**第二题** 请结合教材第六章”存储器层次结构”的有关知识回答问题**(10分)**.\n\n1.  **(2分)**高速缓存(cache)的先进先出替换策略(FIFO)指的是在发生缓存不命中时,最先进入高速缓存的行(cache line)将最先被替换出.考虑两种遵循先进先出替换策略且块大小(block size)相同的全相联高速缓存C1和C2.其中C1是3路全相联的,C2是4路全相联的.假设初始情况下C1,C2所有行的有效位都为0.则让它们分别连续访问标记(tag)为0, 1, 2, 3, 0, 1, 4, 0, 1, 2, 3, 4的行之后, C1发生的缓存不命中次数**(1)**\\_\\_\\_\\_\\_\\_\\_\\_C2发生的缓存不命中次数**(填“\\>”“=”或“\\<”)**.",
         "answer": "答案：(1) ＜\n\n**标准答案(每空2分)：** **(1) ＜**\n\n**评分标准:** 写“小于”的酌情扣1分,回答其他答案（如≤）的不得分.\n\n**解析:** 考察高速缓存替换模拟,属简单题,预测正确率90%.应当注意FIFO和LRU替换机制的区别."
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6402,6 +6797,12 @@
         "format": "markdown",
         "prompt": "2.  **((2)(3)(4)每空2分,(5)(6)每空1分)**已知某单核处理器有L1,L2,L3三级高速缓存且遵循先进先出替换策略,你希望通过触发行驱逐(cache line eviction)的方法测量该处理器的L1数据缓存(L1 d-cache)的相联度,实验前已知L1 d-cache的容量在16KiB到64KiB之间(含16KiB和64KiB)且字节数为2的幂,且已知高速缓存块的字节数小于1KiB.你的实验步骤如下：\n\n> **Step \\#1:** 开辟一块足够大(如8MiB)的内存空间.\n>\n> **Step \\#2:** 逐步调整访问的步长S(S依次取1KiB, 2KiB, 4KiB, …, 32KiB,64KiB)和访问的元素数量N(N依次取1, 2, 3, …, 127, 128).对于给定的S和N,连续两次从所开辟内存的起始位置开始,以S为步长顺序访问N个内存地址.记录第二次访问时平均一个内存地址的访问时间T.\n>\n> **Step \\#3:** 多次实验取平均值以减小误差.作图并分析实验结果.\n>\n> 这里是给定S和N后访问内存的一个例子：当S=64KiB,N=6时,先按顺序访问一遍所开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB, 320KiB处的一个字节的值.清空寄存器,接着计时并第二遍按顺序访问所开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB, 320KiB处的一个字节的值.访问完成后立即停止计时,并记录T = (结束计时的时刻 - 开始计时的时刻) ÷ 6.0.\n\n1)  **Step \\#2**中,给定S和N后第一遍访问N个内存地址的过程被称为暖身(warm up),这是为了避免教材中所提到的三种缓存不命中之一的**(2)\\_\\_\\_\\_\\_\\_\\_\\_**不命中带来的影响.\n\n> <img src=\"media/media/image2.png\" style=\"width:2.04444in;height:2.05139in\" alt=\"C:\\Users\\86133\\Desktop\\图片1.png\" />\n\n2)  假设访问内存的过程都在高速缓存中顺次进行,且不考虑预取(prefetch)机制的影响.你选取了步长为S<sub>1</sub>, S<sub>2</sub>时的部分实验结果如图所示(此图为示意图).你注意到访存速度越快,则访问单个元素的时间越短.因此从图中可以看出T<sub>3</sub>最接近**(3)\\_\\_\\_\\_\\_\\_\\_\\_(填“L1”“L2”或“L3”)**级缓存的访存时间,S<sub>1</sub>**(4)\\_\\_\\_\\_\\_\\_\\_\\_**S<sub>2</sub>**(填“\\>”“=”或“\\<”).**\n\n3)  在**(b)**的条件下, 进一步推理可知该处理器的L1 d-cache的容量(capacity)为**(5)**\\_\\_\\_\\_\\_\\_\\_\\_**(用代数式表示,S<sub>1</sub>, S<sub>2</sub>, N<sub>0</sub>为已知量,下同.注意计算容量时不考虑有效位和标记位)**,相联度为**(6)**\\_\\_\\_\\_\\_\\_\\_**.**",
         "answer": "答案：(2) 冷/强制性　(3) L3　(4) ＞　(5) 2·N<sub>0</sub>·S<sub>2</sub>　(6) N<sub>0</sub>\n\n**标准答案(每空2分)：** **(2) 冷/强制性** **(3) L3** **(4) ＞** **(5) 2·N<sub>0</sub>·S<sub>2</sub>** **(6) N<sub>0</sub>**\n\n**评分标准:** 写“冷”“强制性”也正确.写英文也正确.字写错或有拼写错误的,若不影响意思表示不额外扣分.写“L<sub>3</sub>”也正确,写“三级”的酌情扣一分.写“大于”的酌情扣1分.角标书写不规范,如写成“2·N0·S2”,若不影响意思表示不额外扣分.角标书写不规范,如写成“N0”,若不影响意思表示不额外扣分.\n\n**解析:本题设简单题8分,难题2分.预测平均分7.5分.**\n2)  ***考察缓存不命中的类型,属简单题,预测正确率90%.****\n3)  ***考察读图分析数据的能力,属简单题,预测正确率90%.因为L3高速缓存访存速度最慢,因此平均访问时间最长.****\n4)  ***考察读图分析数据的能力,属简单题,预测正确率80%.由于N=2N<sub>0</sub>时S<sub>1</sub>发生了L2到L3高速缓存的访存切换,S<sub>2</sub>发生了L1到L2高速缓存的访存切换,故有S<sub>1</sub>＞S<sub>2</sub>.****\n5)  ***考察对多路组相联高速缓存替换原理的理解,属难题,预测正确率25%.****\n6)  ***考察多路组相联高速缓存相联度的性质,属难题,预测正确率25%.如果高速缓存是直接映射的,那么步长每增加一倍,则访存时间T的转折点横坐标应该变为原来的1/2,但如果高速缓存的相联度不为1,那么转折点横坐标在到达相联度的时候就不会再减小.从图中可以看出,步长S<sub>1</sub>至少是S<sub>2</sub>的4倍（因为S=S<sub>2</sub>,N=4N<sub>0</sub>时,平均访存时间T没有发生剧烈变化）.但S<sub>1</sub>的从T<sub>1</sub>到T<sub>2</sub>的转折点横坐标只是S<sub>2</sub>转折点横坐标的1/2.这说明L1 d-cache的相联度为N<sub>0</sub>.****"
+      },
+      "presentation": {
+        "status": "needs-review",
+        "issues": [
+          "raw-html-image"
+        ]
       }
     },
     {
@@ -6488,6 +6889,10 @@
         "format": "markdown",
         "prompt": "4. 下列关于存储设备的说法，正确的是：",
         "answer": "答案：C。\nA. SDRAM是同步DRAM，而不是SRAM与DRAM的统称。\nB. 只读存储器是一个历史遗留的称呼，并非所有ROM都只能被写一次。ROM和\nNVM也不是相同的概念。\nC. 正确，参见中文版课本P415。\nD. 相比组相联高速缓存，直接映射高速缓存更容易发生抖动问题。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6574,6 +6979,10 @@
         "format": "markdown",
         "prompt": "15. 下列不属于数据密集型（data-intensive） 的任务是：",
         "answer": "答案：C\n使用超算进行数值模拟是计算密集型任务（Compute-Intensive）。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6618,6 +7027,10 @@
         "format": "markdown",
         "prompt": "10.关于“局部性（locality）”，下列说法哪些正确？",
         "answer": "答案：ABC\n解析：A/B/C 都是教材强调的经典现象；D 反了（行优先按行更连续）；E 错在 block 变\n大主要就是利用空间局部性（一次带回相邻数据）。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6662,6 +7075,10 @@
         "format": "markdown",
         "prompt": "11.关于高速缓存的写策略，下列说法哪些正确？",
         "answer": "答案：AB\n解析： C/D/E 都是把概念说反或忽略现实代价：write-allocate 是“写 miss 先装\n入再写”；write-back需要管理不同情况，控制更复杂；write-through 往往更需要\nwrite buffer 以免写操作拖慢流水。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6706,6 +7123,10 @@
         "format": "markdown",
         "prompt": "12.在一个有两级高速缓存（cache）的计算机系统里，设：",
         "answer": "答案：ABCE\n解析： D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存\n时间"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6750,6 +7171,10 @@
         "format": "markdown",
         "prompt": "13.关于教材里的 memory mountain（吞吐/带宽随工作集大小与 stride 变化）的解\n释，下列说法哪些正确？",
         "answer": "答案：ABD\n2\n\n<!-- ===== page 3 ===== -->\n\n解析： stride=1 的主要收益是空间局部性而不是“反复访问同一元素”（C 错）；E 明显\n错误。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6842,6 +7267,10 @@
         "format": "markdown",
         "prompt": "10.关于“局部性（locality）”，下列说法哪些正确？",
         "answer": "答案：ABC\n解析：A/B/C 都是教材强调的经典现象；D 反了（行优先按行更连续）；E 错在 block 变大主要就是利用空间局部性（一次带回相邻数据）。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -6933,6 +7362,10 @@
         "format": "markdown",
         "prompt": "11.关于高速缓存的写策略，下列说法哪些正确？",
         "answer": "答案：AB\n解析：C/D/E 都是把概念说反或忽略现实代价：write-allocate 是“写 miss 先装入再写”；write-back 需要管理不同情况，控制更复杂；write-through 往往更需要 write buffer 以免写操作拖慢流水。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7026,6 +7459,10 @@
         "format": "markdown",
         "prompt": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n L1 hit time = 1 cycle，\n```\n L1 miss rate = 5%\n L2 hit time = 10 cycles\n```\n L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？",
         "answer": "答案：ABCE\n解析：D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存时间。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7118,6 +7555,10 @@
         "format": "markdown",
         "prompt": "13.关于教材里的 memory mountain（吞吐/带宽随工作集大小与 stride 变化）的解\n释，下列说法哪些正确？",
         "answer": "答案：ABD\n解析：stride=1 的主要收益是空间局部性而不是“反复访问同一元素”（C 错）；E 明显错误。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7162,6 +7603,10 @@
         "format": "markdown",
         "prompt": "11.（2分）对比同样容量的SRAM和DRAM，功耗更高是\n。",
         "answer": "SRAM ，价格更低是 DRAM"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7206,6 +7651,10 @@
         "format": "markdown",
         "prompt": "12.（判断对错，2分）ROM是只读存储器的简称，是非易失性存储器，掉电不会丢失数据，\n只能读不能写。对还是错：（\n）",
         "answer": "错"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7250,6 +7699,10 @@
         "format": "markdown",
         "prompt": "13.（4分）下图是一根DDR3SDRAM内存条，数据位宽是64-bit，总容量为2GB，由8\n颗内存芯片构成。如果一个计算机系统只有这根内存条作为全部内存，那往地址\n0x01001000写一个64-bit数0x12345678，这个数会放在内存条上从左向右数第\n几颗（或哪几颗）内存芯片中？并解释这样存放的原因。",
         "answer": "答：这个64-bit数分散在全部8颗内存芯片，每个芯片存8-bit（2分）。因为每\n颗芯片数据位宽有限（8-bit），这样存放读取速度更快（2分）。注意：关键点是“分散”，\n如果写成分散到从左往右的1~4颗或者5~8颗，并说明每颗芯片位宽16-bit，也算对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7351,6 +7804,10 @@
         "format": "markdown",
         "prompt": "14.（不定项选择，2分）机械硬盘和固态硬盘（SSD）对比，在主流产品形态下，下列属\n于后者特点的是：",
         "answer": "答案：ABCD\nABCD"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7395,6 +7852,10 @@
         "format": "markdown",
         "prompt": "15.（4分）下面这段代码哪些地方体现了局部性原理？分别体现了什么类型的局部性。\n```\nint sum_array_rows(int a[M][N])\n{\nint i, j, sum = 0;\nfor (i = 0; i < M; i++)\nfor (j = 0; j < N; j++)\nsum += a[i][j];\nreturn sum;\n}\n```",
         "answer": "答：共四种情况：指令、数据；空间、时间局部性。各1分:1）顺序执行的指令序列，\n体现空间局部性；2）循环内部指令会反复执行，体现时间局部性；3）sum等变量反复被\n读写，体现时间局部性；4）数组a中的数据按地址依次被读取，体现空间局部性。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7439,6 +7900,10 @@
         "format": "markdown",
         "prompt": "16.（6分）高速缓存（Cache）的三种未命中（Miss）是什么，分别说明出现的场景。",
         "answer": "答：三种名称各1分（中英文回答一种即可），把命中称为失效，也算对\n（1）冷启不命中（义务不命中），Cold(compulsory) miss\n（2）容量不命中，Capacity miss\n（3）冲突不命中，Conflict miss\n三种对应场景各1分（简要描述即可），详见第13讲课件第8页。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7483,6 +7948,10 @@
         "format": "markdown",
         "prompt": "17.（8分）有一个计算机系统，存储地址空间为64字节；采用直接映射（Direct-mapped）\n的数据高速缓存（cache），其容量为16字节；每个高速缓存块（cache block）\n为 4 字节（B=4Byte/block）；采用写分配（write-allocate）、写返回\n（write-back）策略。Cache的当前状态如下表。\n```\nv Tag Block\nset0\nset1 1 0\nMem[4-7]\nset2\nset3\n```\n经过如下地址访问序列后（十进制表示，每次访问1个字节）：18 40 50 16 43 48，\n在上表中更新Cache的状态。这个序列过程中，该高速缓存发生\n次Miss。",
         "answer": "1 11 Mem[48-51]\n0\n1 10 Mem[40-43]\n2 次Hit和 4\n（注：表格每行2分，一行全对才得分；填空每空2分）"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7527,6 +7996,10 @@
         "format": "markdown",
         "prompt": "18.（2分）Intel Core i7 CPU的L2 Cache容量，最有可能是下面哪种：（\n）",
         "answer": "C\nA.4kB B.32kB C.256kB D.8MB"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7609,6 +8082,10 @@
         "format": "markdown",
         "prompt": "31. （2分）在CacheLab实验中，valgrind 工具的主要用途是什么？",
         "answer": "答案：C\n\n解析：CacheLab 用 `valgrind --tool=lackey --trace-mem=yes` 把程序的内存访问记录成 trace 文件，csim.c 再回放它，故 C 对。csim-ref 是课程提供的参考模拟器，编译由 make/gcc 完成，成绩由 driver 与自动评测给出，都与 valgrind 无关。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7691,6 +8168,10 @@
         "format": "markdown",
         "prompt": "32. （2分）在CacheLab Part A (csim.c) 中，模拟器需要解析轨迹文件中的内存\n访问操作。根据writeup，下列哪个操作类型应该被忽略？",
         "answer": "答案：D\n\n解析：writeup 明确说本实验只关心数据缓存，要求模拟器忽略所有以 I 开头的指令取指（instruction load）记录，故 D 对；L（数据加载）、S（数据存储）、M（数据修改）都必须处理。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7773,6 +8254,10 @@
         "format": "markdown",
         "prompt": "33. （2分）根据CacheLab Part A 的编程规则和提示，当缓存模拟器 (csim.c) 解\n析到一行 M（数据修改）操作时，它应该如何处理？",
         "answer": "答案：B\n\n解析：trace 格式里 M 表示 data modify，即\"一次数据加载 L 紧跟一次数据存储 S\"，所以要按两次访问处理：两次都可能命中，也可能第一次未命中（伴随一次可能的淘汰）而第二次命中，故 B 对。A 把它当单次访问、C 直接忽略、D 只看成 S，都不符合 writeup。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     },
     {
@@ -7855,6 +8340,10 @@
         "format": "markdown",
         "prompt": "34. （2分）针对CacheLab Part B中朴素的逐行扫描转置 (for i... for j...\nB[j][i] = A[i][j]) 性能不佳，因为它在写入矩阵 B 时具有很差的空间局部性。\nBlocking (分块) 策略的核心思想是如何解决这个问题的？",
         "answer": "答案：C\n\n解析：分块（blocking）把矩阵切成能装进缓存的子矩阵，一次只转置一个块：刚从 A 读入的数据在块内被反复使用（时间局部性），B 的对应块也能整块写入（空间局部性），故 C 对。A 只是交换 i、j 循环顺序（牺牲 A 的局部性换 B 的局部性），B、D 分别是处理对角块的局部变量技巧与一次展开 12 个元素的具体手法，都不是分块的核心思想。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
       }
     }
   ]

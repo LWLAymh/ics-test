@@ -31,7 +31,6 @@
       "additionalProperties": false
     },
     "type": {"enum": ["single-choice", "multiple-choice", "fill", "short-answer"]},
-    "title": {"type": "string"},
     "stem": {"$ref": "#/$defs/content"},
     "options": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/option"}},
     "solution": {"$ref": "#/$defs/solution"},
