@@ -24,8 +24,10 @@ def main():
         errors.append("catalog schemaVersion 必须为 3")
 
     questions = {}
+    published_total = 0
     for module in catalog.get("modules", []):
         payload = load(module["questionFile"])
+        module_published = 0
         for q in payload.get("questions", []):
             qid = q.get("id")
             if not qid or qid in questions:
@@ -42,6 +44,8 @@ def main():
             if kind in ("choice", "legacy"):
                 warnings.append("%s 尚未显式声明交互类型" % qid)
             if kind in ("single-choice", "multiple-choice"):
+                module_published += 1
+                published_total += 1
                 choice_ids = [c.get("id") for c in interaction.get("choices", [])]
                 correct_ids = interaction.get("correctChoiceIds", [])
                 if len(choice_ids) < 2 or len(choice_ids) != len(set(choice_ids)):
@@ -57,6 +61,11 @@ def main():
                     errors.append("%s 资源路径越界: %s" % (qid, asset))
                 elif not os.path.isfile(os.path.join(BASE, *asset.split("/"))):
                     errors.append("%s 资源不存在: %s" % (qid, asset))
+        if module_published != module.get("publishedQuestionCount"):
+            errors.append("%s publishedQuestionCount 不准确" % module.get("id"))
+
+    if published_total != (catalog.get("stats") or {}).get("publishedChoiceQuestions"):
+        errors.append("catalog.stats.publishedChoiceQuestions 不准确")
 
     papers_payload = load(catalog.get("papersFile", "papers.json"))
     seen_paper_questions = set()
@@ -67,6 +76,8 @@ def main():
         if len(ids) != len(set(ids)):
             errors.append("%s 内有重复题目 ID" % paper.get("id"))
         verified = 0
+        single_choices = 0
+        multiple_choices = 0
         orders = []
         for qid in ids:
             q = questions.get(qid)
@@ -78,6 +89,11 @@ def main():
             orders.append(q.get("paperOrder"))
             if (q.get("answer") or {}).get("status") == "verified":
                 verified += 1
+            kind = (q.get("interaction") or {}).get("kind")
+            if kind == "single-choice":
+                single_choices += 1
+            elif kind == "multiple-choice":
+                multiple_choices += 1
             seen_paper_questions.add(qid)
         if len(orders) != len(set(orders)):
             errors.append("%s 内 paperOrder 重复" % paper.get("id"))
@@ -85,6 +101,12 @@ def main():
             errors.append("%s verifiedAnswerCount 不准确" % paper.get("id"))
         if bool(verified == len(ids)) != bool(paper.get("complete")):
             errors.append("%s complete 状态不准确" % paper.get("id"))
+        if single_choices != paper.get("singleChoiceCount"):
+            errors.append("%s singleChoiceCount 不准确" % paper.get("id"))
+        if multiple_choices != paper.get("multipleChoiceCount"):
+            errors.append("%s multipleChoiceCount 不准确" % paper.get("id"))
+        if single_choices + multiple_choices != paper.get("publishedQuestionCount"):
+            errors.append("%s publishedQuestionCount 不准确" % paper.get("id"))
 
     missing = sorted(set(questions) - seen_paper_questions)
     if missing:

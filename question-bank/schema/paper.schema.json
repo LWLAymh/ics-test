@@ -3,7 +3,7 @@
   "$id": "https://lwlaymh.github.io/ics-test/schema/paper.schema.json",
   "title": "ICS Test Paper v3",
   "type": "object",
-  "required": ["id", "examType", "title", "questionIds", "questionCount", "verifiedAnswerCount", "complete"],
+  "required": ["id", "examType", "title", "questionIds", "questionCount", "verifiedAnswerCount", "singleChoiceCount", "multipleChoiceCount", "publishedQuestionCount", "complete"],
   "properties": {
     "id": {"type": "string", "pattern": "^p-[a-f0-9]{16}$"},
     "year": {"type": ["integer", "null"]},
@@ -12,6 +12,9 @@
     "questionIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
     "questionCount": {"type": "integer", "minimum": 1},
     "verifiedAnswerCount": {"type": "integer", "minimum": 0},
+    "singleChoiceCount": {"type": "integer", "minimum": 0},
+    "multipleChoiceCount": {"type": "integer", "minimum": 0},
+    "publishedQuestionCount": {"type": "integer", "minimum": 0},
     "complete": {"type": "boolean"}
   },
   "additionalProperties": false

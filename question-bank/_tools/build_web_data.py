@@ -26,6 +26,7 @@ BASE = os.path.dirname(HERE)
 OUT = os.path.join(BASE, "web-data")
 QUESTIONS_OUT = os.path.join(OUT, "questions")
 SCHEMA_VERSION = 3
+PUBLISHED_CHOICE_KINDS = ("single-choice", "multiple-choice")
 
 IMAGE = re.compile(r"(!\[[^\]]*\]\()([^\s)]+)([^)]*\))")
 INLINE_ANSWER = re.compile(
@@ -256,6 +257,8 @@ def main():
             "displayName": build_modules.display_name(material),
             "questionIds": [],
             "verifiedAnswerCount": 0,
+            "singleChoiceCount": 0,
+            "multipleChoiceCount": 0,
         })
         for paper_order, item in enumerate(material["items"], 1):
             module = MODULE_BY_NAME.get(item.get("module"))
@@ -349,6 +352,11 @@ def main():
                 question["interaction"] = interaction_for(None)
             questions_by_module[module["id"]].append(question)
             paper["questionIds"].append(question_id)
+            kind = question.get("interaction", {}).get("kind")
+            if kind == "single-choice":
+                paper["singleChoiceCount"] += 1
+            elif kind == "multiple-choice":
+                paper["multipleChoiceCount"] += 1
             if status == "verified":
                 paper["verifiedAnswerCount"] += 1
 
@@ -374,6 +382,9 @@ def main():
         entry = {k: module[k] for k in ("id", "number", "name", "title")}
         entry.update({
             "questionCount": len(questions),
+            "publishedQuestionCount": sum(
+                1 for q in questions
+                if q.get("interaction", {}).get("kind") in PUBLISHED_CHOICE_KINDS),
             "paperCount": paper_count,
             "questionFile": "questions/" + filename,
         })
@@ -392,6 +403,8 @@ def main():
     paper_entries = []
     for paper in papers.values():
         paper["questionCount"] = len(paper["questionIds"])
+        paper["publishedQuestionCount"] = (
+            paper["singleChoiceCount"] + paper["multipleChoiceCount"])
         paper["complete"] = paper["verifiedAnswerCount"] == paper["questionCount"]
         paper_entries.append(paper)
     paper_entries.sort(key=lambda p: (
@@ -412,6 +425,8 @@ def main():
         },
         "stats": {
             "questions": total_questions,
+            "publishedChoiceQuestions": sum(
+                module["publishedQuestionCount"] for module in module_entries),
             "papers": len(paper_keys),
             "answerBlocks": len(answer_blocks),
         },

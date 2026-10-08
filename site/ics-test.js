@@ -28,6 +28,7 @@
     catalog: null, papers: [], questions: [], index: 0, score: 0, records: [], answerBlocks: new Map(), currentMode: '',
     supabase: null, statsChannel: null, currentStats: null, statsQuestionId: '', statsRevealed: false,
   };
+  const PUBLISHED_QUESTION_KINDS = new Set(['single-choice', 'multiple-choice']);
   const md = window.markdownit ? window.markdownit({ html: false, linkify: true, breaks: false }) : null;
   if (md) {
     const defaultImage = md.renderer.rules.image || function (tokens, index, options, env, renderer) {
@@ -48,6 +49,10 @@
     return String(value == null ? '' : value)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function isPublishedQuestion(question) {
+    return PUBLISHED_QUESTION_KINDS.has(question && question.interaction && question.interaction.kind);
   }
 
   function withoutPrintedLineNumber(line) {
@@ -531,21 +536,25 @@
   function updatePaperStatus() {
     const paper = state.papers.find(function (item) { return item.id === ui.paper.value; });
     if (!paper) { ui.paperStatus.textContent = ''; return; }
-    const missing = paper.questionCount - paper.verifiedAnswerCount;
-    ui.paperStatus.textContent = paper.questionCount + ' 题 · ' + paper.verifiedAnswerCount + ' 题答案已校对' +
-      (missing ? ' · ' + missing + ' 题待补录（仍会显示但不计分）' : ' · 答案完整');
+    ui.paperStatus.textContent = paper.publishedQuestionCount + ' 道选择题 · 单选 ' +
+      paper.singleChoiceCount + ' · 多选 ' + paper.multipleChoiceCount;
   }
 
   async function init() {
     try {
       state.catalog = await fetchJson(app.dataset.catalog);
       const paperPayload = await fetchJson('./web-data/' + state.catalog.papersFile);
-      state.papers = paperPayload.papers || [];
-      ui.bankSummary.textContent = state.catalog.stats.questions + ' 道历年题 · ' + state.catalog.modules.length + ' 个知识模块';
-      ui.modules.innerHTML = state.catalog.modules.map(function (module) {
+      state.papers = (paperPayload.papers || []).filter(function (paper) {
+        return Number(paper.publishedQuestionCount || 0) > 0;
+      });
+      ui.bankSummary.textContent = state.catalog.stats.publishedChoiceQuestions +
+        ' 道单选/多选题已上线 · 填空与简答题暂缓开放';
+      ui.modules.innerHTML = state.catalog.modules.filter(function (module) {
+        return Number(module.publishedQuestionCount || 0) > 0;
+      }).map(function (module) {
         return '<label class="ics-module-card"><input type="checkbox" value="' + escapeHtml(module.id) + '" checked>' +
           '<span><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
-          '<small>' + escapeHtml(module.name) + ' · ' + module.questionCount + ' 题</small></span></label>';
+          '<small>' + escapeHtml(module.name) + ' · ' + module.publishedQuestionCount + ' 道选择题</small></span></label>';
       }).join('');
       (state.catalog.filters.examTypes || []).forEach(function (type) {
         const option = document.createElement('option'); option.value = type; option.textContent = type; ui.examType.appendChild(option);
@@ -556,7 +565,8 @@
       state.papers.forEach(function (paper) {
         const option = document.createElement('option');
         option.value = paper.id;
-        option.textContent = [paper.year, paper.examType, paper.title].filter(Boolean).join(' · ');
+        option.textContent = [paper.year, paper.examType, paper.title].filter(Boolean).join(' · ') +
+          '（' + paper.publishedQuestionCount + ' 题）';
         ui.paper.appendChild(option);
       });
       initSupabase();
@@ -598,6 +608,7 @@
           if (!previous || candidate.content.length > previous.content.length) companions.set(key, candidate);
         });
         payload.questions.forEach(function (raw) {
+          if (!isPublishedQuestion(raw)) return;
           if (examType && raw.examType !== examType) return;
           if (selectedPaper && raw.paperId !== selectedPaper.id) return;
           const prepared = prepareQuestion(raw, payload.module, companions.get(questionIdentity(raw)), {
@@ -606,7 +617,7 @@
           if (prepared) pool.push(prepared);
         });
       });
-      if (!pool.length) throw new Error('当前筛选条件下没有带答案或解析的题目');
+      if (!pool.length) throw new Error('当前筛选条件下没有可用的单选或多选题');
 
       const count = mode === 'random' ? Math.min(Number(ui.count.value), pool.length) : pool.length;
       state.questions = mode === 'exam'

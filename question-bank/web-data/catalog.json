@@ -10,6 +10,7 @@
       "name": "Data Representation",
       "title": "数据的表示",
       "questionCount": 125,
+      "publishedQuestionCount": 71,
       "paperCount": 28,
       "questionFile": "questions/1-Data-Representation.json"
     },
@@ -19,6 +20,7 @@
       "name": "Machine Prog",
       "title": "程序的机器级表示",
       "questionCount": 149,
+      "publishedQuestionCount": 76,
       "paperCount": 28,
       "questionFile": "questions/2-Machine-Prog.json"
     },
@@ -28,6 +30,7 @@
       "name": "Processor Arch",
       "title": "处理器体系结构",
       "questionCount": 122,
+      "publishedQuestionCount": 54,
       "paperCount": 29,
       "questionFile": "questions/3-Processor-Arch.json"
     },
@@ -37,6 +40,7 @@
       "name": "Memory Hierarchy",
       "title": "存储层次",
       "questionCount": 115,
+      "publishedQuestionCount": 55,
       "paperCount": 27,
       "questionFile": "questions/4-Memory-Hierarchy.json"
     },
@@ -46,6 +50,7 @@
       "name": "Compilation (Program optimization and linking)",
       "title": "编译系统（程序优化与链接）",
       "questionCount": 85,
+      "publishedQuestionCount": 35,
       "paperCount": 30,
       "questionFile": "questions/5-Compilation-Linking.json"
     },
@@ -55,6 +60,7 @@
       "name": "ECF and System IO",
       "title": "异常控制流与系统级 I/O",
       "questionCount": 93,
+      "publishedQuestionCount": 50,
       "paperCount": 19,
       "questionFile": "questions/6-ECF-and-System-IO.json"
     },
@@ -64,6 +70,7 @@
       "name": "Virtual Memory and Dynamic Memory Allocation",
       "title": "虚拟内存与动态内存分配",
       "questionCount": 74,
+      "publishedQuestionCount": 40,
       "paperCount": 15,
       "questionFile": "questions/7-Virtual-Memory-and-Malloc.json"
     },
@@ -73,6 +80,7 @@
       "name": "Network",
       "title": "网络编程",
       "questionCount": 58,
+      "publishedQuestionCount": 34,
       "paperCount": 15,
       "questionFile": "questions/8-Network.json"
     },
@@ -82,6 +90,7 @@
       "name": "Concurrent Programming and Synchronization",
       "title": "并发编程与同步",
       "questionCount": 50,
+      "publishedQuestionCount": 23,
       "paperCount": 14,
       "questionFile": "questions/9-Concurrent-Programming.json"
     }
@@ -112,6 +121,7 @@
   },
   "stats": {
     "questions": 871,
+    "publishedChoiceQuestions": 438,
     "papers": 35,
     "answerBlocks": 55
   },
