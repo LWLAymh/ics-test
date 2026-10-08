@@ -16,7 +16,7 @@
     progressBar: $('ics-progress-bar'), questionMeta: $('ics-question-meta'),
     questionContent: $('ics-question-content'),
     answerForm: $('ics-answer-form'), answerLabel: $('ics-answer-label'), answerHint: $('ics-answer-hint'),
-    choiceList: $('ics-choice-list'), answer: $('ics-answer'), submit: $('ics-submit'),
+    choiceList: $('ics-choice-list'), answer: $('ics-answer'), submit: $('ics-submit'), skip: $('ics-skip'),
     reportIssue: $('ics-report-issue'), reportStatus: $('ics-report-status'),
     feedback: $('ics-feedback'), verdict: $('ics-verdict'), reference: $('ics-reference'),
     liveStats: $('ics-live-stats'), statsSummary: $('ics-stats-summary'), statsOptions: $('ics-stats-options'), statsNote: $('ics-stats-note'), liveDot: $('ics-live-dot'),
@@ -296,14 +296,18 @@
       p_visitor_id: visitorId(),
     });
     if (result.error) {
-      ui.reportIssue.disabled = false;
-      ui.reportIssue.textContent = '您认为此题有误';
-      ui.reportStatus.textContent = '提交失败：' + result.error.message;
+      if (state.questions[state.index] && state.questions[state.index].id === question.id) {
+        ui.reportIssue.disabled = false;
+        ui.reportIssue.textContent = '您认为此题有误';
+        ui.reportStatus.textContent = '提交失败：' + result.error.message;
+      }
       return;
     }
     state.reportedThisSession.add(question.id);
-    ui.reportIssue.textContent = '已报告，感谢反馈';
-    ui.reportStatus.textContent = '题目 ID：' + question.id;
+    if (state.questions[state.index] && state.questions[state.index].id === question.id) {
+      ui.reportIssue.textContent = '已报告，感谢反馈';
+      ui.reportStatus.textContent = '题目 ID：' + question.id;
+    }
     await loadReportedIssues();
   }
 
@@ -812,7 +816,7 @@
       ? (q.formatted ? renderLayoutStem(choiceQuestion.stem) : renderMarkdown(choiceQuestion.stem))
       : fillQuestion ? renderFillQuestion(fillQuestion)
         : (q.formatted ? renderLayoutStem(q.prompt) : renderMarkdown(q.prompt));
-    ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false;
+    ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false; ui.skip.disabled = false;
     const alreadyReported = state.reportedThisSession.has(q.id);
     ui.reportIssue.disabled = alreadyReported;
     ui.reportIssue.textContent = alreadyReported ? '已报告，感谢反馈' : '您认为此题有误';
@@ -873,7 +877,7 @@
     event.preventDefault();
     if (state.currentMode === 'unavailable') {
       ui.answer.value = '答案待校对，本题未计分';
-      ui.submit.disabled = true;
+      ui.submit.disabled = true; ui.skip.disabled = true;
       ui.feedback.hidden = false;
       ui.reference.innerHTML = '<p>这道题尚未建立可靠的题目—答案映射。为避免展示错位答案，系统没有自动猜测。</p>';
       ui.verdict.className = 'ics-verdict';
@@ -896,6 +900,7 @@
     } else if (state.currentMode === 'short') {
       ui.answer.value = '查看参考答案后自评';
     }
+    ui.skip.disabled = true;
     const q = state.questions[state.index];
     const expected = simpleExpected(q.directAnswer);
     const result = state.currentMode === 'choice' ? autoGrade(ui.answer.value, expected) : null;
@@ -918,21 +923,38 @@
     }
   }
 
+  function advanceQuestion() {
+    if (state.index >= state.questions.length - 1) finishQuiz();
+    else { state.index += 1; renderQuestion(); }
+  }
+
+  function skipCurrentQuestion() {
+    const q = state.questions[state.index];
+    if (!q) return;
+    state.records.push({ question: q, answer: '已跳过', points: null, mode: 'skipped' });
+    advanceQuestion();
+  }
+
   function finishQuiz() {
+    stopStatsSubscription();
     ui.quiz.hidden = true; ui.result.hidden = false;
     const total = state.questions.length;
     const graded = state.records.filter(function (record) { return typeof record.points === 'number'; }).length;
+    const skipped = state.records.filter(function (record) { return record.mode === 'skipped'; }).length;
     const percent = graded ? Math.round((state.score / graded) * 100) : 0;
     ui.finalScore.textContent = graded ? percent + '%' : '—';
-    ui.finalSummary.textContent = '共浏览 ' + total + ' 题，其中 ' + graded + ' 题计分，得到 ' + state.score + ' / ' + graded + ' 分。';
+    ui.finalSummary.textContent = graded
+      ? '共浏览 ' + total + ' 题，其中 ' + graded + ' 题计分、' + skipped + ' 题跳过，得到 ' + state.score + ' / ' + graded + ' 分。'
+      : '共浏览 ' + total + ' 题，其中 ' + skipped + ' 题跳过；本次没有计分题。';
     ui.reviewList.hidden = true; ui.reviewToggle.textContent = '查看答题记录';
     ui.reviewList.innerHTML = state.records.map(function (record, index) {
-      const score = typeof record.points === 'number' ? record.points + ' 分' : '未计分';
+      const score = record.mode === 'skipped' ? '已跳过'
+        : typeof record.points === 'number' ? record.points + ' 分' : '未计分';
       const originalNumber = record.question.questionNo
         ? ' · 原题号 ' + escapeHtml(record.question.questionNo) : '';
       return '<div class="ics-review-item"><span class="ics-review-score">' + score + '</span>' +
         '<strong>第 ' + (index + 1) + ' 题' + originalNumber + '</strong>' +
-        '<p>你的回答：' + escapeHtml(record.answer) + '</p></div>';
+        '<p>' + (record.mode === 'skipped' ? '本题未作答' : '你的回答：' + escapeHtml(record.answer)) + '</p></div>';
     }).join('');
     window.scrollTo({ top: ui.result.offsetTop - 90, behavior: 'smooth' });
   }
@@ -1004,10 +1026,8 @@
     ui.verdict.textContent = '已自评：本题 ' + points + ' 分。';
     recordGrade(points, 'self');
   });
-  ui.next.addEventListener('click', function () {
-    if (state.index >= state.questions.length - 1) finishQuiz();
-    else { state.index += 1; renderQuestion(); }
-  });
+  ui.next.addEventListener('click', advanceQuestion);
+  ui.skip.addEventListener('click', skipCurrentQuestion);
   ui.abandon.addEventListener('click', resetToSetup);
   ui.retry.addEventListener('click', resetToSetup);
   ui.reviewToggle.addEventListener('click', function () {

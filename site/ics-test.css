@@ -129,6 +129,7 @@
 .ics-report-button:hover { background: color-mix(in srgb, var(--ics-danger) 14%, var(--bg)); transform: translateY(-1px); }
 .ics-report-button:disabled { cursor: default; opacity: .68; transform: none; }
 .ics-report-status { min-height: 1.2em; color: var(--text-muted); font-size: .82rem; }
+.ics-skip-button { white-space: nowrap; }
 .ics-answer-actions .ics-primary { margin-left: auto; }
 
 .ics-progress-row { justify-content: space-between; color: var(--text-muted); font-size: .9rem; }
@@ -394,7 +395,7 @@
   .ics-blank-input { width: min(12rem, 68vw); }
   .ics-stats-row { grid-template-columns: 1.3rem minmax(50px, 1fr) auto; gap: .45rem; }
   .ics-answer-actions { align-items: stretch; flex-direction: column; }
-  .ics-answer-actions .ics-primary { width: 100%; margin-left: 0; }
+  .ics-answer-actions .ics-primary, .ics-answer-actions .ics-skip-button { width: 100%; margin-left: 0; }
   .ics-report-status { text-align: center; }
   .ics-issue-item { grid-template-columns: 1fr; }
   .ics-issue-item-stats, .ics-issue-copy { justify-self: start; }
