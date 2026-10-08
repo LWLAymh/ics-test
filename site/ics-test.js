@@ -539,8 +539,10 @@
   function updatePaperStatus() {
     const paper = state.papers.find(function (item) { return item.id === ui.paper.value; });
     if (!paper) { ui.paperStatus.textContent = ''; return; }
-    ui.paperStatus.textContent = paper.publishedQuestionCount + ' 道选择题 · 单选 ' +
-      paper.singleChoiceCount + ' · 多选 ' + paper.multipleChoiceCount;
+    ui.paperStatus.textContent = paper.publishedQuestionCount + ' 道题 · 单选 ' +
+      paper.singleChoiceCount + ' · 多选 ' + paper.multipleChoiceCount +
+      ' · 填空 ' + Number(paper.fillCount || 0) +
+      ' · 简答 ' + Number(paper.shortAnswerCount || 0);
   }
 
   async function init() {
