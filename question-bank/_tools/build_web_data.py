@@ -209,11 +209,17 @@ def presentation_for(layout, interaction):
     if re.search(r"<img\b", stem, re.IGNORECASE):
         issues.append("raw-html-image")
     if interaction.get("kind") in PUBLISHED_CHOICE_KINDS and "```" not in stem:
-        score = min(stem.count(";"), 3)
-        score += 2 if "{" in stem or "}" in stem else 0
-        score += 2 if ASSEMBLY_LINE.search(stem) else 0
-        score += 1 if CODE_DECLARATION.search(stem) else 0
-        score += 1 if re.search(r"(?m)^\s{2,}\S", stem) else 0
+        # 打分前先剥掉**已经是显式结构**的部分：
+        #   * Markdown 表格行（`| … |`）—— 表格本身保留了行列结构，不是「丢了围栏的代码」；
+        #   * 行内代码 `` `…` `` —— 已经显式标出来了。
+        # 否则「信号量 P/V 表」这类题会因为表格单元格里的 `;` 被误判成未围栏代码。
+        scored = re.sub(r"(?m)^\s*\|.*$", "", stem)
+        scored = re.sub(r"`[^`\n]*`", "", scored)
+        score = min(scored.count(";"), 3)
+        score += 2 if "{" in scored or "}" in scored else 0
+        score += 2 if ASSEMBLY_LINE.search(scored) else 0
+        score += 1 if CODE_DECLARATION.search(scored) else 0
+        score += 1 if re.search(r"(?m)^\s{2,}\S", scored) else 0
         if score >= 3:
             issues.append("code-like-content-without-fence")
     return {"status": "needs-review" if issues else "ready", "issues": issues}
