@@ -1,4 +1,6 @@
 _site/
 node_modules/
 tmp-*.json
+.venv-review-pdf/
+output/pdf/question-review/
 

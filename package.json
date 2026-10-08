@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build-site.js",
-    "check": "node --check site/ics-test.js && node --check site/standalone.js && node --check scripts/build-site.js && python question-bank/_tools/validate_web_data.py"
+    "check": "node --check site/ics-test.js && node --check site/standalone.js && node --check scripts/build-site.js && python question-bank/_tools/validate_web_data.py",
+    "review-pdfs": "powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1"
   }
 }

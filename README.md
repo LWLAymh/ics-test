@@ -8,6 +8,50 @@ PKU Introduction to Computer Systems 历年题测试站点。
 - Supabase 数据库脚本：`supabase/ics_stats.sql`
 - 自动部署：`.github/workflows/pages.yml`
 
+## 一键导出题面审阅 PDF
+
+在 Windows PowerShell 中运行：
+
+```powershell
+npm run review-pdfs
+```
+
+也可以直接运行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1
+```
+
+脚本默认按知识模块生成 9 个可搜索 PDF，并同时生成 `manifest.csv` 与 `manifest.json`：
+
+```text
+output/pdf/question-review/
+├─ 01-data_representation.pdf
+├─ 02-machine_prog.pdf
+├─ ...
+├─ manifest.csv
+└─ manifest.json
+```
+
+每道题都会显示：
+
+- 稳定 `question ID`；
+- 当前识别的题型及原始接口值，例如 `填空题（fill）`；
+- 试卷、卷内顺序、原卷题号和 `paper ID`；
+- 知识模块、源文件和人工 Markdown 路径；
+- 题干、图片与全部选项；
+- 不主动附加答案或解析字段；如果答案本身被错误写进题面，PDF 会原样显示，以便审阅时发现泄题问题。
+
+发现问题时，直接把 PDF 中的 `question ID` 交给修题 agent。`manifest.csv` 可以由 ID 反查 PDF、页码和源文件。导出器只读取现有 `web-data`，不会修改题库，不会识别“像代码的文字”，也不会自动修正 Markdown 或题型。
+
+只导出指定模块：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1 -Module machine_prog
+```
+
+如果本机没有可用的 PDF 依赖，包装脚本会在 `.venv-review-pdf/` 创建独立环境并安装 `scripts/review-pdf-requirements.txt`。中文字体会优先使用 Windows 自带的 Noto Sans SC 或微软雅黑，也可通过 `-Font` 显式指定。
+
 ## 当前状态与下一步
 
 站点目前使用 v3 发布数据。v3 已经能显式区分题型和试卷，但题面、图片、选项与填空位仍有一部分依赖旧的兼容逻辑，复杂题目仍可能显示错误。
