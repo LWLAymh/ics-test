@@ -107,7 +107,7 @@
 .ics-field select { min-height: 43px; padding: 0 .75rem; }
 .ics-options .ics-primary { margin-left: auto; align-self: end; }
 
-.ics-primary, .ics-secondary, .ics-text-button, .ics-grade-buttons button {
+.ics-primary, .ics-secondary, .ics-text-button, .ics-grade-buttons button, .ics-report-button, .ics-issue-copy {
   border: 0;
   border-radius: 10px;
   font: 650 .94rem/1 var(--font-ui);
@@ -119,6 +119,17 @@
 .ics-text-button { padding: .55rem .2rem; background: transparent; color: var(--accent); }
 .ics-primary:hover, .ics-secondary:hover, .ics-grade-buttons button:hover { filter: brightness(1.07); transform: translateY(-1px); }
 .ics-primary:disabled { cursor: wait; opacity: .55; transform: none; }
+.ics-report-button {
+  min-height: 43px;
+  padding: .75rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--ics-danger) 55%, var(--border));
+  background: color-mix(in srgb, var(--ics-danger) 8%, var(--bg));
+  color: var(--ics-danger);
+}
+.ics-report-button:hover { background: color-mix(in srgb, var(--ics-danger) 14%, var(--bg)); transform: translateY(-1px); }
+.ics-report-button:disabled { cursor: default; opacity: .68; transform: none; }
+.ics-report-status { min-height: 1.2em; color: var(--text-muted); font-size: .82rem; }
+.ics-answer-actions .ics-primary { margin-left: auto; }
 
 .ics-progress-row { justify-content: space-between; color: var(--text-muted); font-size: .9rem; }
 .ics-progress-track { height: 6px; margin: .75rem 0 1.5rem; overflow: hidden; border-radius: 99px; background: var(--bg-soft); }
@@ -282,6 +293,43 @@
 .ics-grade-buttons button { padding: .72rem .9rem; background: var(--bg-soft); color: var(--text); }
 #ics-next { display: block; margin: 1rem 0 0 auto; }
 
+.ics-issue-board-panel { padding: 0; overflow: hidden; }
+.ics-issue-board > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem clamp(1.1rem, 3vw, 2rem);
+  cursor: pointer;
+  list-style: none;
+}
+.ics-issue-board > summary::-webkit-details-marker { display: none; }
+.ics-issue-board > summary::before {
+  content: '›';
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 1.45rem;
+  transform: rotate(0deg);
+  transition: transform .15s ease;
+}
+.ics-issue-board[open] > summary::before { transform: rotate(90deg); }
+.ics-issue-board > summary > span:first-of-type { flex: 1; }
+.ics-issue-board > summary strong, .ics-issue-board > summary small { display: block; }
+.ics-issue-board > summary small { margin-top: .2rem; color: var(--text-muted); font-weight: 400; }
+.ics-issue-count { padding: .3rem .65rem; border-radius: 99px; background: var(--accent-soft); color: var(--accent); font-size: .8rem; font-weight: 750; white-space: nowrap; }
+.ics-issue-board-body { padding: 0 clamp(1.1rem, 3vw, 2rem) 1.5rem; border-top: 1px solid var(--border); }
+.ics-issue-board-note, .ics-issue-board-status { color: var(--text-muted); font-size: .86rem; line-height: 1.6; }
+.ics-issue-board-note { margin: 1rem 0 .35rem; }
+.ics-issue-board-status { margin: .35rem 0; }
+.ics-issue-list { display: grid; gap: .7rem; margin-top: 1rem; }
+.ics-issue-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .6rem 1rem; padding: .9rem 1rem; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); }
+.ics-issue-item-main { min-width: 0; }
+.ics-issue-item-head { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .65rem; }
+.ics-issue-item code { overflow-wrap: anywhere; color: var(--accent); font-size: .78rem; }
+.ics-issue-item-meta { margin: .4rem 0 0; color: var(--text-muted); font-size: .84rem; line-height: 1.55; }
+.ics-issue-item-stats { align-self: center; color: var(--ics-danger); font-size: .82rem; font-weight: 750; white-space: nowrap; }
+.ics-issue-copy { align-self: center; padding: .48rem .65rem; background: var(--bg-soft); color: var(--accent); font-size: .78rem; }
+
 .ics-result { text-align: center; }
 .ics-score-ring { display: grid; place-items: center; width: 150px; aspect-ratio: 1; margin: 1.3rem auto; border: 10px solid var(--accent-soft); border-radius: 50%; color: var(--accent); font: 750 2rem/1 var(--font-display); }
 .ics-result-actions { justify-content: center; flex-wrap: wrap; }
@@ -344,6 +392,11 @@
   #ics-answer-form[data-mode="short"] .ics-primary { width: 100%; }
   .ics-blank-input { width: min(12rem, 68vw); }
   .ics-stats-row { grid-template-columns: 1.3rem minmax(50px, 1fr) auto; gap: .45rem; }
+  .ics-answer-actions { align-items: stretch; flex-direction: column; }
+  .ics-answer-actions .ics-primary { width: 100%; margin-left: 0; }
+  .ics-report-status { text-align: center; }
+  .ics-issue-item { grid-template-columns: 1fr; }
+  .ics-issue-item-stats, .ics-issue-copy { justify-self: start; }
   .ics-contact-actions { grid-template-columns: 1fr; }
   .ics-contact-link { min-width: 0; width: 100%; }
 }

@@ -113,6 +113,8 @@ window.MathJax = {
       <div class="ics-choice-list" id="ics-choice-list" role="group" aria-labelledby="ics-answer-label" hidden></div>
       <input id="ics-answer" type="hidden" value="">
       <div class="ics-answer-actions">
+        <button class="ics-report-button" id="ics-report-issue" type="button">您认为此题有误</button>
+        <span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span>
         <button class="ics-primary" id="ics-submit" type="submit">提交答案</button>
       </div>
     </form>
@@ -140,6 +142,20 @@ window.MathJax = {
       </div>
       <button class="ics-primary" id="ics-next" type="button" hidden>下一题</button>
     </section>
+  </section>
+
+  <section class="ics-panel ics-issue-board-panel">
+    <details class="ics-issue-board" id="ics-issue-board">
+      <summary>
+        <span><strong>大家认为可能有误的题目</strong><small>实时更新 · 默认折叠</small></span>
+        <span class="ics-issue-count" id="ics-issue-count">正在读取…</span>
+      </summary>
+      <div class="ics-issue-board-body">
+        <p class="ics-issue-board-note">这里汇总同学主动报告的题目，仅表示“建议复核”，不等同于题目一定有误。</p>
+        <p class="ics-issue-board-status" id="ics-issue-board-status" role="status"></p>
+        <div class="ics-issue-list" id="ics-issue-list"></div>
+      </div>
+    </details>
   </section>
 
   <section class="ics-panel ics-result" id="ics-result" hidden>

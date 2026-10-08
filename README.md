@@ -6,7 +6,45 @@ PKU Introduction to Computer Systems 历年题测试站点。
 - 题库源码：`question-bank/`
 - 页面源码：`site/`
 - Supabase 数据库脚本：`supabase/ics_stats.sql`
+- 题目问题上报脚本：`supabase/ics_issue_reports.sql`
 - 自动部署：`.github/workflows/pages.yml`
+
+## 题目问题上报与处理
+
+页面中每道题都有“您认为此题有误”按钮。报告会写入 Supabase，首页默认折叠的“大家认为可能有误的题目”区域会实时显示：
+
+- 被报告的稳定 question ID；
+- 当前题型、模块、试卷和原题号；
+- 报告人数与最近报告时间。
+
+同一浏览器对同一题只能贡献一次计数。公开页面只能提交报告和读取聚合列表，不能删除记录，也不能读取逐浏览器回执。
+
+首次启用时，在 Supabase Dashboard 的 SQL Editor 中完整执行：
+
+```text
+supabase/ics_issue_reports.sql
+```
+
+### 修复后从列表中移除
+
+维护者本地设置 `SUPABASE_URL` 和 `SUPABASE_SECRET_KEY` 环境变量，然后运行：
+
+```powershell
+npm run resolve-issue -- -QuestionId q-0123456789abcdef
+```
+
+该命令调用只允许 `service_role` 使用的 RPC，同时删除聚合记录和该题的防重复回执。首页会通过 Realtime 自动移除该题；如果修复后的题目仍有问题，任何人都可以重新报告。
+
+不要把 `SUPABASE_SECRET_KEY` 写入仓库、网页、命令参数或截图。维护脚本只从进程环境变量读取它，也不会打印密钥。
+
+也可以直接在 Supabase SQL Editor 中执行以下维护语句：
+
+```sql
+begin;
+delete from public.ics_question_issue_receipts where question_id = 'q-0123456789abcdef';
+delete from public.ics_question_issue_reports where question_id = 'q-0123456789abcdef';
+commit;
+```
 
 ## 一键导出题面审阅 PDF
 
