@@ -26,6 +26,8 @@ BASE = os.path.dirname(HERE)
 OUT = os.path.join(BASE, "web-data")
 QUESTIONS_OUT = os.path.join(OUT, "questions")
 SCHEMA_VERSION = 3
+PUBLISHED_KINDS = (
+    "single-choice", "multiple-choice", "fill", "short-answer", "composite")
 PUBLISHED_CHOICE_KINDS = ("single-choice", "multiple-choice")
 CODE_DECLARATION = re.compile(
     r"\b(?:int|char|short|long|float|double|void|struct|union)\s+[*A-Za-z_]",
@@ -217,8 +219,8 @@ def presentation_for(layout, interaction):
     return {"status": "needs-review" if issues else "ready", "issues": issues}
 
 
-def is_published_choice(question):
-    return (question.get("interaction", {}).get("kind") in PUBLISHED_CHOICE_KINDS
+def is_published_question(question):
+    return (question.get("interaction", {}).get("kind") in PUBLISHED_KINDS
             and question.get("presentation", {}).get("status") == "ready")
 
 
@@ -292,6 +294,9 @@ def main():
             "verifiedAnswerCount": 0,
             "singleChoiceCount": 0,
             "multipleChoiceCount": 0,
+            "fillCount": 0,
+            "shortAnswerCount": 0,
+            "compositeCount": 0,
         })
         for paper_order, item in enumerate(material["items"], 1):
             module = MODULE_BY_NAME.get(item.get("module"))
@@ -387,10 +392,16 @@ def main():
             questions_by_module[module["id"]].append(question)
             paper["questionIds"].append(question_id)
             kind = question.get("interaction", {}).get("kind")
-            if is_published_choice(question) and kind == "single-choice":
+            if is_published_question(question) and kind == "single-choice":
                 paper["singleChoiceCount"] += 1
-            elif is_published_choice(question) and kind == "multiple-choice":
+            elif is_published_question(question) and kind == "multiple-choice":
                 paper["multipleChoiceCount"] += 1
+            elif is_published_question(question) and kind == "fill":
+                paper["fillCount"] += 1
+            elif is_published_question(question) and kind == "short-answer":
+                paper["shortAnswerCount"] += 1
+            elif is_published_question(question) and kind == "composite":
+                paper["compositeCount"] += 1
             if status == "verified":
                 paper["verifiedAnswerCount"] += 1
 
@@ -419,8 +430,11 @@ def main():
             "choiceQuestionCount": sum(
                 1 for q in questions
                 if q.get("interaction", {}).get("kind") in PUBLISHED_CHOICE_KINDS),
+            "declaredQuestionCount": sum(
+                1 for q in questions
+                if q.get("interaction", {}).get("kind") in PUBLISHED_KINDS),
             "publishedQuestionCount": sum(
-                1 for q in questions if is_published_choice(q)),
+                1 for q in questions if is_published_question(q)),
             "paperCount": paper_count,
             "questionFile": "questions/" + filename,
         })
@@ -439,8 +453,10 @@ def main():
     paper_entries = []
     for paper in papers.values():
         paper["questionCount"] = len(paper["questionIds"])
-        paper["publishedQuestionCount"] = (
-            paper["singleChoiceCount"] + paper["multipleChoiceCount"])
+        paper["publishedQuestionCount"] = sum(
+            paper[name] for name in (
+                "singleChoiceCount", "multipleChoiceCount", "fillCount",
+                "shortAnswerCount", "compositeCount"))
         paper["complete"] = paper["verifiedAnswerCount"] == paper["questionCount"]
         paper_entries.append(paper)
     paper_entries.sort(key=lambda p: (
@@ -462,9 +478,19 @@ def main():
         "stats": {
             "questions": total_questions,
             "publishedChoiceQuestions": sum(
-                module["publishedQuestionCount"] for module in module_entries),
+                sum(1 for q in questions_by_module[module["id"]]
+                    if is_published_question(q)
+                    and q.get("interaction", {}).get("kind") in PUBLISHED_CHOICE_KINDS)
+                for module in module_entries),
             "withheldChoiceQuestions": sum(
-                module["choiceQuestionCount"] - module["publishedQuestionCount"]
+                sum(1 for q in questions_by_module[module["id"]]
+                    if q.get("interaction", {}).get("kind") in PUBLISHED_CHOICE_KINDS
+                    and not is_published_question(q))
+                for module in module_entries),
+            "publishedQuestions": sum(
+                module["publishedQuestionCount"] for module in module_entries),
+            "withheldQuestions": sum(
+                module["declaredQuestionCount"] - module["publishedQuestionCount"]
                 for module in module_entries),
             "papers": len(paper_keys),
             "answerBlocks": len(answer_blocks),

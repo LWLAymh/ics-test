@@ -1,12 +1,22 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lwlaymh.github.io/ics-test/schema/question-v4.schema.json",
-  "title": "ICS Test Question v4 (design draft)",
+  "title": "ICS Test Question v4",
   "type": "object",
-  "required": ["schemaVersion", "id", "paperId", "paperOrder", "questionNumber", "classification", "type", "stem", "solution", "source"],
+  "required": ["schemaVersion", "id", "publication", "paperId", "paperOrder", "questionNumber", "classification", "type", "stem", "solution", "source"],
   "properties": {
     "schemaVersion": {"const": 4},
     "id": {"type": "string", "pattern": "^q-[a-f0-9]{16}$"},
+    "publication": {
+      "type": "object",
+      "required": ["status", "reviewedBy", "reviewedAt"],
+      "properties": {
+        "status": {"enum": ["draft", "review", "published"]},
+        "reviewedBy": {"type": ["string", "null"]},
+        "reviewedAt": {"type": ["string", "null"], "format": "date"}
+      },
+      "additionalProperties": false
+    },
     "paperId": {"type": "string", "pattern": "^p-[a-f0-9]{16}$"},
     "paperOrder": {"type": "integer", "minimum": 1},
     "questionNumber": {
@@ -146,6 +156,19 @@
     }
   },
   "allOf": [
+    {
+      "if": {"properties": {"publication": {"properties": {"status": {"const": "published"}}}}},
+      "then": {
+        "properties": {
+          "publication": {
+            "properties": {
+              "reviewedBy": {"type": "string", "minLength": 1},
+              "reviewedAt": {"type": "string", "format": "date"}
+            }
+          }
+        }
+      }
+    },
     {
       "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice"]}}},
       "then": {"required": ["options"]}

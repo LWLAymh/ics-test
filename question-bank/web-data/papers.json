@@ -43,8 +43,11 @@
       "verifiedAnswerCount": 31,
       "singleChoiceCount": 2,
       "multipleChoiceCount": 22,
+      "fillCount": 1,
+      "shortAnswerCount": 1,
+      "compositeCount": 0,
       "questionCount": 31,
-      "publishedQuestionCount": 24,
+      "publishedQuestionCount": 26,
       "complete": true
     },
     {
@@ -89,8 +92,11 @@
       "verifiedAnswerCount": 31,
       "singleChoiceCount": 2,
       "multipleChoiceCount": 0,
+      "fillCount": 1,
+      "shortAnswerCount": 26,
+      "compositeCount": 0,
       "questionCount": 31,
-      "publishedQuestionCount": 2,
+      "publishedQuestionCount": 29,
       "complete": true
     },
     {
@@ -128,8 +134,11 @@
       "verifiedAnswerCount": 24,
       "singleChoiceCount": 0,
       "multipleChoiceCount": 0,
+      "fillCount": 4,
+      "shortAnswerCount": 14,
+      "compositeCount": 0,
       "questionCount": 24,
-      "publishedQuestionCount": 0,
+      "publishedQuestionCount": 18,
       "complete": true
     },
     {
@@ -167,8 +176,11 @@
       "verifiedAnswerCount": 24,
       "singleChoiceCount": 0,
       "multipleChoiceCount": 2,
+      "fillCount": 2,
+      "shortAnswerCount": 14,
+      "compositeCount": 0,
       "questionCount": 24,
-      "publishedQuestionCount": 2,
+      "publishedQuestionCount": 18,
       "complete": true
     },
     {
@@ -232,6 +244,9 @@
       "verifiedAnswerCount": 50,
       "singleChoiceCount": 50,
       "multipleChoiceCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 0,
+      "compositeCount": 0,
       "questionCount": 50,
       "publishedQuestionCount": 50,
       "complete": true
@@ -271,8 +286,11 @@
       "verifiedAnswerCount": 24,
       "singleChoiceCount": 11,
       "multipleChoiceCount": 0,
+      "fillCount": 3,
+      "shortAnswerCount": 2,
+      "compositeCount": 0,
       "questionCount": 24,
-      "publishedQuestionCount": 11,
+      "publishedQuestionCount": 16,
       "complete": true
     },
     {
@@ -309,8 +327,11 @@
       "verifiedAnswerCount": 23,
       "singleChoiceCount": 4,
       "multipleChoiceCount": 1,
+      "fillCount": 1,
+      "shortAnswerCount": 0,
+      "compositeCount": 0,
       "questionCount": 23,
-      "publishedQuestionCount": 5,
+      "publishedQuestionCount": 6,
       "complete": true
     },
     {
@@ -350,8 +371,11 @@
       "verifiedAnswerCount": 26,
       "singleChoiceCount": 15,
       "multipleChoiceCount": 1,
+      "fillCount": 1,
+      "shortAnswerCount": 1,
+      "compositeCount": 0,
       "questionCount": 26,
-      "publishedQuestionCount": 16,
+      "publishedQuestionCount": 18,
       "complete": true
     },
     {
@@ -390,8 +414,11 @@
       "verifiedAnswerCount": 25,
       "singleChoiceCount": 14,
       "multipleChoiceCount": 0,
+      "fillCount": 1,
+      "shortAnswerCount": 1,
+      "compositeCount": 0,
       "questionCount": 25,
-      "publishedQuestionCount": 14,
+      "publishedQuestionCount": 16,
       "complete": true
     },
     {
@@ -448,8 +475,11 @@
       "verifiedAnswerCount": 43,
       "singleChoiceCount": 3,
       "multipleChoiceCount": 0,
+      "fillCount": 31,
+      "shortAnswerCount": 3,
+      "compositeCount": 0,
       "questionCount": 43,
-      "publishedQuestionCount": 3,
+      "publishedQuestionCount": 37,
       "complete": true
     },
     {
@@ -500,8 +530,11 @@
       "verifiedAnswerCount": 37,
       "singleChoiceCount": 3,
       "multipleChoiceCount": 0,
+      "fillCount": 17,
+      "shortAnswerCount": 2,
+      "compositeCount": 0,
       "questionCount": 37,
-      "publishedQuestionCount": 3,
+      "publishedQuestionCount": 22,
       "complete": true
     },
     {
@@ -543,8 +576,11 @@
       "verifiedAnswerCount": 28,
       "singleChoiceCount": 18,
       "multipleChoiceCount": 0,
+      "fillCount": 5,
+      "shortAnswerCount": 0,
+      "compositeCount": 0,
       "questionCount": 28,
-      "publishedQuestionCount": 18,
+      "publishedQuestionCount": 23,
       "complete": true
     },
     {
@@ -560,6 +596,9 @@
       "verifiedAnswerCount": 2,
       "singleChoiceCount": 1,
       "multipleChoiceCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 0,
+      "compositeCount": 0,
       "questionCount": 2,
       "publishedQuestionCount": 1,
       "complete": true
@@ -583,8 +622,11 @@
       "verifiedAnswerCount": 8,
       "singleChoiceCount": 6,
       "multipleChoiceCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 2,
+      "compositeCount": 0,
       "questionCount": 8,
-      "publishedQuestionCount": 6,
+      "publishedQuestionCount": 8,
       "complete": true
     },
     {
@@ -610,8 +652,11 @@
       "verifiedAnswerCount": 12,
       "singleChoiceCount": 6,
       "multipleChoiceCount": 0,
+      "fillCount": 1,
+      "shortAnswerCount": 0,
+      "compositeCount": 0,
       "questionCount": 12,
-      "publishedQuestionCount": 6,
+      "publishedQuestionCount": 7,
       "complete": true
     },
     {
@@ -631,8 +676,11 @@
       "verifiedAnswerCount": 6,
       "singleChoiceCount": 0,
       "multipleChoiceCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 6,
+      "compositeCount": 0,
       "questionCount": 6,
-      "publishedQuestionCount": 0,
+      "publishedQuestionCount": 6,
       "complete": true
     },
     {
@@ -650,8 +698,11 @@
       "verifiedAnswerCount": 4,
       "singleChoiceCount": 1,
       "multipleChoiceCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 3,
+      "compositeCount": 0,
       "questionCount": 4,
-      "publishedQuestionCount": 1,
+      "publishedQuestionCount": 4,
       "complete": true
     },
     {
@@ -676,8 +727,11 @@
       "verifiedAnswerCount": 11,
       "singleChoiceCount": 5,
       "multipleChoiceCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 5,
+      "compositeCount": 0,
       "questionCount": 11,
-      "publishedQuestionCount": 5,
+      "publishedQuestionCount": 10,
       "complete": true
     },
     {
@@ -713,8 +767,11 @@
       "verifiedAnswerCount": 22,
       "singleChoiceCount": 3,
       "multipleChoiceCount": 0,
+      "fillCount": 6,
+      "shortAnswerCount": 2,
+      "compositeCount": 0,
       "questionCount": 22,
-      "publishedQuestionCount": 3,
+      "publishedQuestionCount": 11,
       "complete": true
     },
     {
@@ -760,8 +817,11 @@
       "verifiedAnswerCount": 32,
       "singleChoiceCount": 20,
       "multipleChoiceCount": 0,
+      "fillCount": 3,
+      "shortAnswerCount": 2,
+      "compositeCount": 0,
       "questionCount": 32,
-      "publishedQuestionCount": 20,
+      "publishedQuestionCount": 25,
       "complete": true
     },
     {
@@ -800,8 +860,11 @@
       "verifiedAnswerCount": 25,
       "singleChoiceCount": 14,
       "multipleChoiceCount": 0,
+      "fillCount": 2,
+      "shortAnswerCount": 4,
+      "compositeCount": 0,
       "questionCount": 25,
-      "publishedQuestionCount": 14,
+      "publishedQuestionCount": 20,
       "complete": true
     },
     {
@@ -845,8 +908,11 @@
       "verifiedAnswerCount": 30,
       "singleChoiceCount": 17,
       "multipleChoiceCount": 1,
+      "fillCount": 4,
+      "shortAnswerCount": 2,
+      "compositeCount": 0,
       "questionCount": 30,
-      "publishedQuestionCount": 18,
+      "publishedQuestionCount": 24,
       "complete": true
     },
     {
@@ -881,8 +947,11 @@
       "verifiedAnswerCount": 21,
       "singleChoiceCount": 10,
       "multipleChoiceCount": 0,
+      "fillCount": 2,
+      "shortAnswerCount": 1,
+      "compositeCount": 0,
       "questionCount": 21,
-      "publishedQuestionCount": 10,
+      "publishedQuestionCount": 13,
       "complete": true
     },
     {
@@ -920,8 +989,11 @@
       "verifiedAnswerCount": 24,
       "singleChoiceCount": 9,
       "multipleChoiceCount": 0,
+      "fillCount": 1,
+      "shortAnswerCount": 1,
+      "compositeCount": 0,
       "questionCount": 24,
-      "publishedQuestionCount": 9,
+      "publishedQuestionCount": 11,
       "complete": true
     },
     {
@@ -954,8 +1026,11 @@
       "verifiedAnswerCount": 19,
       "singleChoiceCount": 12,
       "multipleChoiceCount": 1,
+      "fillCount": 1,
+      "shortAnswerCount": 1,
+      "compositeCount": 0,
       "questionCount": 19,
-      "publishedQuestionCount": 13,
+      "publishedQuestionCount": 15,
       "complete": true
     },
     {
@@ -997,8 +1072,11 @@
       "verifiedAnswerCount": 28,
       "singleChoiceCount": 20,
       "multipleChoiceCount": 1,
+      "fillCount": 2,
+      "shortAnswerCount": 0,
+      "compositeCount": 0,
       "questionCount": 28,
-      "publishedQuestionCount": 21,
+      "publishedQuestionCount": 23,
       "complete": true
     },
     {
@@ -1038,8 +1116,11 @@
       "verifiedAnswerCount": 26,
       "singleChoiceCount": 13,
       "multipleChoiceCount": 0,
+      "fillCount": 5,
+      "shortAnswerCount": 3,
+      "compositeCount": 0,
       "questionCount": 26,
-      "publishedQuestionCount": 13,
+      "publishedQuestionCount": 21,
       "complete": true
     },
     {
@@ -1080,8 +1161,11 @@
       "verifiedAnswerCount": 27,
       "singleChoiceCount": 13,
       "multipleChoiceCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 1,
+      "compositeCount": 0,
       "questionCount": 27,
-      "publishedQuestionCount": 13,
+      "publishedQuestionCount": 14,
       "complete": true
     },
     {
@@ -1128,8 +1212,11 @@
       "verifiedAnswerCount": 33,
       "singleChoiceCount": 18,
       "multipleChoiceCount": 0,
+      "fillCount": 3,
+      "shortAnswerCount": 5,
+      "compositeCount": 0,
       "questionCount": 33,
-      "publishedQuestionCount": 18,
+      "publishedQuestionCount": 26,
       "complete": true
     },
     {
@@ -1170,8 +1257,11 @@
       "verifiedAnswerCount": 27,
       "singleChoiceCount": 10,
       "multipleChoiceCount": 0,
+      "fillCount": 0,
+      "shortAnswerCount": 2,
+      "compositeCount": 0,
       "questionCount": 27,
-      "publishedQuestionCount": 10,
+      "publishedQuestionCount": 12,
       "complete": true
     },
     {
@@ -1216,8 +1306,11 @@
       "verifiedAnswerCount": 31,
       "singleChoiceCount": 14,
       "multipleChoiceCount": 0,
+      "fillCount": 2,
+      "shortAnswerCount": 11,
+      "compositeCount": 0,
       "questionCount": 31,
-      "publishedQuestionCount": 14,
+      "publishedQuestionCount": 27,
       "complete": true
     },
     {
@@ -1261,8 +1354,11 @@
       "verifiedAnswerCount": 30,
       "singleChoiceCount": 6,
       "multipleChoiceCount": 0,
+      "fillCount": 1,
+      "shortAnswerCount": 1,
+      "compositeCount": 0,
       "questionCount": 30,
-      "publishedQuestionCount": 6,
+      "publishedQuestionCount": 8,
       "complete": true
     },
     {
@@ -1306,8 +1402,11 @@
       "verifiedAnswerCount": 30,
       "singleChoiceCount": 5,
       "multipleChoiceCount": 6,
+      "fillCount": 4,
+      "shortAnswerCount": 11,
+      "compositeCount": 0,
       "questionCount": 30,
-      "publishedQuestionCount": 11,
+      "publishedQuestionCount": 26,
       "complete": true
     },
     {
@@ -1349,8 +1448,11 @@
       "verifiedAnswerCount": 28,
       "singleChoiceCount": 8,
       "multipleChoiceCount": 0,
+      "fillCount": 2,
+      "shortAnswerCount": 2,
+      "compositeCount": 0,
       "questionCount": 28,
-      "publishedQuestionCount": 8,
+      "publishedQuestionCount": 12,
       "complete": true
     },
     {
@@ -1393,8 +1495,11 @@
       "verifiedAnswerCount": 29,
       "singleChoiceCount": 12,
       "multipleChoiceCount": 2,
+      "fillCount": 1,
+      "shortAnswerCount": 9,
+      "compositeCount": 0,
       "questionCount": 29,
-      "publishedQuestionCount": 14,
+      "publishedQuestionCount": 24,
       "complete": true
     }
   ]

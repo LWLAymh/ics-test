@@ -11,7 +11,8 @@
       "title": "数据的表示",
       "questionCount": 125,
       "choiceQuestionCount": 71,
-      "publishedQuestionCount": 56,
+      "declaredQuestionCount": 120,
+      "publishedQuestionCount": 96,
       "paperCount": 28,
       "questionFile": "questions/1-Data-Representation.json"
     },
@@ -22,7 +23,8 @@
       "title": "程序的机器级表示",
       "questionCount": 149,
       "choiceQuestionCount": 76,
-      "publishedQuestionCount": 68,
+      "declaredQuestionCount": 138,
+      "publishedQuestionCount": 105,
       "paperCount": 28,
       "questionFile": "questions/2-Machine-Prog.json"
     },
@@ -33,7 +35,8 @@
       "title": "处理器体系结构",
       "questionCount": 122,
       "choiceQuestionCount": 54,
-      "publishedQuestionCount": 52,
+      "declaredQuestionCount": 114,
+      "publishedQuestionCount": 93,
       "paperCount": 29,
       "questionFile": "questions/3-Processor-Arch.json"
     },
@@ -44,7 +47,8 @@
       "title": "存储层次",
       "questionCount": 115,
       "choiceQuestionCount": 55,
-      "publishedQuestionCount": 48,
+      "declaredQuestionCount": 106,
+      "publishedQuestionCount": 93,
       "paperCount": 27,
       "questionFile": "questions/4-Memory-Hierarchy.json"
     },
@@ -55,7 +59,8 @@
       "title": "编译系统（程序优化与链接）",
       "questionCount": 85,
       "choiceQuestionCount": 35,
-      "publishedQuestionCount": 28,
+      "declaredQuestionCount": 76,
+      "publishedQuestionCount": 53,
       "paperCount": 30,
       "questionFile": "questions/5-Compilation-Linking.json"
     },
@@ -66,7 +71,8 @@
       "title": "异常控制流与系统级 I/O",
       "questionCount": 93,
       "choiceQuestionCount": 50,
-      "publishedQuestionCount": 41,
+      "declaredQuestionCount": 85,
+      "publishedQuestionCount": 63,
       "paperCount": 19,
       "questionFile": "questions/6-ECF-and-System-IO.json"
     },
@@ -77,7 +83,8 @@
       "title": "虚拟内存与动态内存分配",
       "questionCount": 74,
       "choiceQuestionCount": 40,
-      "publishedQuestionCount": 38,
+      "declaredQuestionCount": 68,
+      "publishedQuestionCount": 55,
       "paperCount": 15,
       "questionFile": "questions/7-Virtual-Memory-and-Malloc.json"
     },
@@ -88,7 +95,8 @@
       "title": "网络编程",
       "questionCount": 58,
       "choiceQuestionCount": 34,
-      "publishedQuestionCount": 34,
+      "declaredQuestionCount": 52,
+      "publishedQuestionCount": 44,
       "paperCount": 15,
       "questionFile": "questions/8-Network.json"
     },
@@ -99,7 +107,8 @@
       "title": "并发编程与同步",
       "questionCount": 50,
       "choiceQuestionCount": 23,
-      "publishedQuestionCount": 17,
+      "declaredQuestionCount": 45,
+      "publishedQuestionCount": 25,
       "paperCount": 14,
       "questionFile": "questions/9-Concurrent-Programming.json"
     }
@@ -132,6 +141,8 @@
     "questions": 871,
     "publishedChoiceQuestions": 382,
     "withheldChoiceQuestions": 56,
+    "publishedQuestions": 627,
+    "withheldQuestions": 177,
     "papers": 35,
     "answerBlocks": 55
   },

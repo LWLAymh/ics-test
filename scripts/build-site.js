@@ -9,7 +9,9 @@ const bank = path.join(root, 'question-bank');
 const output = path.join(root, '_site');
 const webData = path.join(bank, 'web-data');
 const assets = path.join(bank, 'assets');
-const publishedKinds = new Set(['single-choice', 'multiple-choice']);
+const publishedKinds = new Set([
+  'single-choice', 'multiple-choice', 'fill', 'short-answer', 'composite',
+]);
 
 function fail(message) {
   console.error(message);
@@ -60,7 +62,7 @@ for (const module of catalog.modules || []) {
 const sourceQuestionCount = catalog.stats.questions;
 catalog.stats.sourceQuestions = sourceQuestionCount;
 catalog.stats.questions = questionCount;
-catalog.stats.publishedChoiceQuestions = questionCount;
+catalog.stats.publishedQuestions = questionCount;
 fs.writeFileSync(path.join(output, 'web-data', 'catalog.json'), `${JSON.stringify(catalog, null, 2)}\n`);
 
 const papersPath = path.join(output, 'web-data', catalog.papersFile);
@@ -68,6 +70,7 @@ const papersPayload = JSON.parse(fs.readFileSync(papersPath, 'utf8'));
 papersPayload.papers = (papersPayload.papers || []).map((paper) => {
   paper.questionIds = (paper.questionIds || []).filter((id) => publishedQuestionIds.has(id));
   paper.questionCount = paper.questionIds.length;
+  paper.publishedQuestionCount = paper.questionIds.length;
   paper.verifiedAnswerCount = paper.questionIds.filter((id) => verifiedQuestionIds.has(id)).length;
   paper.complete = paper.verifiedAnswerCount === paper.questionCount;
   return paper;
@@ -82,8 +85,8 @@ fs.writeFileSync(answerBlocksPath, `${JSON.stringify(answerBlocksPayload, null, 
 
 const missingAssets = [...referencedAssets].filter((asset) => !fs.existsSync(path.join(output, 'web-data', asset)));
 if (missingAssets.length) fail(`Missing question assets:\n${missingAssets.join('\n')}`);
-if (questionCount !== catalog.stats.publishedChoiceQuestions || formattedCount !== questionCount) {
+if (questionCount !== catalog.stats.publishedQuestions || formattedCount !== questionCount) {
   fail(`Unexpected question data: ${questionCount} total, ${formattedCount} formatted`);
 }
 
-console.log(`Built ${questionCount} published choice questions from ${sourceQuestionCount} source questions; ${referencedAssets.size} referenced assets; 0 missing.`);
+console.log(`Built ${questionCount} published questions from ${sourceQuestionCount} source questions; ${referencedAssets.size} referenced assets; 0 missing.`);

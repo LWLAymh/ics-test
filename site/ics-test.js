@@ -28,7 +28,9 @@
     catalog: null, papers: [], questions: [], index: 0, score: 0, records: [], answerBlocks: new Map(), currentMode: '',
     supabase: null, statsChannel: null, currentStats: null, statsQuestionId: '', statsRevealed: false,
   };
-  const PUBLISHED_QUESTION_KINDS = new Set(['single-choice', 'multiple-choice']);
+  const PUBLISHED_QUESTION_KINDS = new Set([
+    'single-choice', 'multiple-choice', 'fill', 'short-answer', 'composite',
+  ]);
   const md = window.markdownit ? window.markdownit({ html: false, linkify: true, breaks: false }) : null;
   if (md) {
     const defaultImage = md.renderer.rules.image || function (tokens, index, options, env, renderer) {
@@ -548,15 +550,15 @@
       state.papers = (paperPayload.papers || []).filter(function (paper) {
         return Number(paper.publishedQuestionCount || 0) > 0;
       });
-      ui.bankSummary.textContent = state.catalog.stats.publishedChoiceQuestions +
-        ' 道单选/多选题已上线 · ' + state.catalog.stats.withheldChoiceQuestions +
+      ui.bankSummary.textContent = state.catalog.stats.publishedQuestions +
+        ' 道题已上线（含选择、填空与简答） · ' + state.catalog.stats.withheldQuestions +
         ' 道排版待复核题暂缓开放';
       ui.modules.innerHTML = state.catalog.modules.filter(function (module) {
         return Number(module.publishedQuestionCount || 0) > 0;
       }).map(function (module) {
         return '<label class="ics-module-card"><input type="checkbox" value="' + escapeHtml(module.id) + '" checked>' +
           '<span><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
-          '<small>' + escapeHtml(module.name) + ' · ' + module.publishedQuestionCount + ' 道选择题</small></span></label>';
+          '<small>' + escapeHtml(module.name) + ' · ' + module.publishedQuestionCount + ' 道题</small></span></label>';
       }).join('');
       (state.catalog.filters.examTypes || []).forEach(function (type) {
         const option = document.createElement('option'); option.value = type; option.textContent = type; ui.examType.appendChild(option);
@@ -619,7 +621,7 @@
           if (prepared) pool.push(prepared);
         });
       });
-      if (!pool.length) throw new Error('当前筛选条件下没有可用的单选或多选题');
+      if (!pool.length) throw new Error('当前筛选条件下没有可用题目');
 
       const count = mode === 'random' ? Math.min(Number(ui.count.value), pool.length) : pool.length;
       state.questions = mode === 'exam'
@@ -646,16 +648,16 @@
       choiceQuestion = null;
       fillQuestion = null;
     } else if (q.formatted) {
-      // 结构化选项直接用，不再做任何启发式判断
-      if (q.layoutChoices && q.layoutChoices.length >= 2) {
+      // 结构化数据只按显式 interaction.kind 分流，不从题面猜题型。
+      const declaredKind = q.interaction && q.interaction.kind;
+      if ((declaredKind === 'single-choice' || declaredKind === 'multiple-choice') &&
+          q.layoutChoices && q.layoutChoices.length >= 2) {
         choiceQuestion = {
           stem: q.prompt,
           choices: q.layoutChoices,
-          multiple: q.interaction && q.interaction.kind === 'multiple-choice'
-            ? true : q.interaction && q.interaction.kind === 'single-choice'
-              ? false : !!(expected && expected.value && expected.value.length > 1),
+          multiple: declaredKind === 'multiple-choice',
         };
-      } else {
+      } else if (declaredKind === 'fill') {
         fillQuestion = parseFillQuestion(q.prompt);
       }
     } else {

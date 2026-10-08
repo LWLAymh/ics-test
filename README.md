@@ -10,21 +10,25 @@ PKU Introduction to Computer Systems 历年题测试站点。
 
 ## 当前状态与下一步
 
-站点目前使用 v3 发布数据。v3 已经能显式区分题型和试卷，但题面、图片、选项与填空位仍有一部分依赖 Markdown 字符串和兼容逻辑，复杂题目仍可能显示错误。
+站点目前使用 v3 发布数据。v3 已经能显式区分题型和试卷，但题面、图片、选项与填空位仍有一部分依赖旧的兼容逻辑，复杂题目仍可能显示错误。
+
+下一阶段不再用脚本批量“清洗”题面。每道题将由维护者按照 [人工题目 Markdown 接口（v4）](docs/QUESTION_AUTHORING_V4.md) 逐题录入和审核。空白模板位于 `question-bank/templates/question-v4.md`，单文件解析器位于 `question-bank/_tools/authoring_v4.py`。解析器不会遍历、改写或迁移现有题库。
 
 ### 当前线上范围
 
-线上练习池暂时只包含 `interaction.kind` 已明确标为 `single-choice` 或 `multiple-choice`，并且通过题面排版门禁的题目。填空题、简答题、仍为 `choice` / `legacy` 的题目，以及含疑似未分块代码、PDF 页码残留或原始 HTML 图片的可疑题继续保留在源题库和源试卷清单中，但 GitHub Pages 构建会从公开 JSON 中移除它们。各模块和试卷显示的可用题数均按这一发布范围单独计算。
+线上练习池重新包含已经显式声明的单选、多选、填空、简答和复合题。仍为 `choice` / `legacy` 的题目，以及未通过现行排版门禁的可疑题继续保留在源题库和源试卷清单中，但 GitHub Pages 构建会从公开 JSON 中移除它们。各模块和试卷显示的可用题数均按这一发布范围单独计算。
 
-这是迁移期间的临时发布策略，不是删除题目。完成 v4 迁移和逐卷视觉回归后，再恢复填空与简答题。
+这不是删除题目。现有 v3 内容继续用于过渡；人工完成一题 v4 Markdown 并将其审核状态标记为 `published` 后，才允许由新接口接管该题。
 
 下面定义的 **v4 是下一轮题库迁移与前端重构的唯一目标接口**。在 v4 完成前：
 
 - 不再新增依靠正则从题面猜测题型、选项或填空的逻辑；
+- 不允许脚本批量为旧题添加公式标记、代码围栏、换行或发布状态；
+- v4 的题面、每个选项和解析都必须由维护者手工写入 Markdown；
 - v3 文件仍可维护和构建，但不得把 v4 文档误认为已经部署；
 - v4 生成器、校验器与前端全部完成后，再把 `schemaVersion` 切换为 `4`。
 
-机器可读草案见 `question-bank/schema/question-v4.schema.json` 与 `question-bank/schema/paper-v4.schema.json`。现行 v3 说明保留在 `docs/QUESTION_FORMAT.md`，只用于迁移和追溯。
+人工录入规范见 `docs/QUESTION_AUTHORING_V4.md`；机器可读发布接口见 `question-bank/schema/question-v4.schema.json` 与 `question-bank/schema/paper-v4.schema.json`。现行 v3 说明保留在 `docs/QUESTION_FORMAT.md`，只用于迁移和追溯。
 
 ## v4 的核心原则
 
@@ -35,6 +39,8 @@ PKU Introduction to Computer Systems 历年题测试站点。
 5. **答案与题面分离。** 题面绝不夹带答案；答案缺失或待复核时必须如实标记，不能静默删题。
 6. **ID 稳定。** 修正题面排版或试卷标题不能改变 question ID、paper ID、选项 ID 或填空 ID，否则统计数据会断裂。
 7. **不为题目自拟标题。** 作答页只展示原卷题号与原始题面；维护用摘要不得进入答题页或答题记录，避免摘要概括时泄露答案。
+8. **人工 Markdown 是唯一内容源。** 构建器只解析显式字段并原样复制内容，不猜代码、公式、选项、空格或答案。
+9. **人工审核后才能发布。** v4 题目只有 `publication.status = published` 且记录审核人和日期时才进入线上题池。
 
 ## 数据入口
 

@@ -9,6 +9,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.dirname(HERE)
 WEB = os.path.join(BASE, "web-data")
+PUBLISHED_KINDS = ("single-choice", "multiple-choice", "fill", "short-answer", "composite")
 
 
 def load(rel):
@@ -48,13 +49,14 @@ def main():
                 errors.append("%s 缺少合法 presentation.status" % qid)
             if kind in ("choice", "legacy"):
                 warnings.append("%s 尚未显式声明交互类型" % qid)
-            if kind in ("single-choice", "multiple-choice"):
-                module_choices += 1
+            if kind in PUBLISHED_KINDS:
                 if presentation.get("status") == "ready":
                     module_published += 1
                     published_total += 1
                 else:
                     withheld_total += 1
+            if kind in ("single-choice", "multiple-choice"):
+                module_choices += 1
                 choice_ids = [c.get("id") for c in interaction.get("choices", [])]
                 correct_ids = interaction.get("correctChoiceIds", [])
                 if len(choice_ids) < 2 or len(choice_ids) != len(set(choice_ids)):
@@ -75,10 +77,10 @@ def main():
         if module_choices != module.get("choiceQuestionCount"):
             errors.append("%s choiceQuestionCount 不准确" % module.get("id"))
 
-    if published_total != (catalog.get("stats") or {}).get("publishedChoiceQuestions"):
-        errors.append("catalog.stats.publishedChoiceQuestions 不准确")
-    if withheld_total != (catalog.get("stats") or {}).get("withheldChoiceQuestions"):
-        errors.append("catalog.stats.withheldChoiceQuestions 不准确")
+    if published_total != (catalog.get("stats") or {}).get("publishedQuestions"):
+        errors.append("catalog.stats.publishedQuestions 不准确")
+    if withheld_total != (catalog.get("stats") or {}).get("withheldQuestions"):
+        errors.append("catalog.stats.withheldQuestions 不准确")
 
     papers_payload = load(catalog.get("papersFile", "papers.json"))
     seen_paper_questions = set()
@@ -91,6 +93,9 @@ def main():
         verified = 0
         single_choices = 0
         multiple_choices = 0
+        fill_questions = 0
+        short_answers = 0
+        composites = 0
         orders = []
         for qid in ids:
             q = questions.get(qid)
@@ -108,6 +113,12 @@ def main():
                 single_choices += 1
             elif ready and kind == "multiple-choice":
                 multiple_choices += 1
+            elif ready and kind == "fill":
+                fill_questions += 1
+            elif ready and kind == "short-answer":
+                short_answers += 1
+            elif ready and kind == "composite":
+                composites += 1
             seen_paper_questions.add(qid)
         if len(orders) != len(set(orders)):
             errors.append("%s 内 paperOrder 重复" % paper.get("id"))
@@ -119,7 +130,14 @@ def main():
             errors.append("%s singleChoiceCount 不准确" % paper.get("id"))
         if multiple_choices != paper.get("multipleChoiceCount"):
             errors.append("%s multipleChoiceCount 不准确" % paper.get("id"))
-        if single_choices + multiple_choices != paper.get("publishedQuestionCount"):
+        if fill_questions != paper.get("fillCount"):
+            errors.append("%s fillCount 不准确" % paper.get("id"))
+        if short_answers != paper.get("shortAnswerCount"):
+            errors.append("%s shortAnswerCount 不准确" % paper.get("id"))
+        if composites != paper.get("compositeCount"):
+            errors.append("%s compositeCount 不准确" % paper.get("id"))
+        if (single_choices + multiple_choices + fill_questions + short_answers + composites
+                != paper.get("publishedQuestionCount")):
             errors.append("%s publishedQuestionCount 不准确" % paper.get("id"))
 
     missing = sorted(set(questions) - seen_paper_questions)
