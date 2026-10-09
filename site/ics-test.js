@@ -143,15 +143,10 @@
   // 中文 PDF 折行则不应凭空插入空格；围栏代码与显式硬换行保持原样。
   function normalizeLayoutMarkdown(source) {
     return String(source || '').replace(/\r\n?/g, '\n')
-      // 代码围栏、行内代码和显式数学公式都已有自己的语法，不能在其中转义。
-      .split(/(```+[\s\S]*?```+|~~~+[\s\S]*?~~~+|`[^`\n]*`|\$\$[\s\S]*?\$\$|\$[^$\n]+\$)/g)
+      .split(/(```+[\s\S]*?```+|~~~+[\s\S]*?~~~+)/g)
       .map(function (part, index) {
         if (index % 2 === 1) return part;
-        return part
-          .replace(/([\u3000-\u303f\u3400-\u9fff\uff00-\uff65])\n(?=[\u3000-\u303f\u3400-\u9fff\uff00-\uff65])/g, '$1')
-          // Markdown 会把 3*2*4 中的 *2* 当作斜体，导致乘号消失。
-          // 紧邻数字的星号在普通文本里只可能是乘号，先转义后再交给 markdown-it。
-          .replace(/(?<=\d)\*(?=\d)/g, '\\*');
+        return part.replace(/([\u3000-\u303f\u3400-\u9fff\uff00-\uff65])\n(?=[\u3000-\u303f\u3400-\u9fff\uff00-\uff65])/g, '$1');
       }).join('');
   }
 
