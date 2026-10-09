@@ -37,8 +37,8 @@ ok   期末__2015期末-20151109-带答案.json                         items=24
 ok   期末__2015期末-20160104-带答案.json                         items=27   System IO=7, Dynamic Memory=5, Compilation=4, Machine Prog=3, Network=3, Synchronizatio=3, Data Represent=1, Processor Arch=1
       （curated 27 条）
 ok   期末__2016期末-带答案.json                                  items=27   System IO=5, Compilation=4, Dynamic Memory=4, Network=4, Synchronizatio=3, Data Represent=2, Machine Prog=2, Processor Arch=2, Memory Hierarc=1
-      （curated 28 条）
-ok   期末__2017期末-无答案.json                                  items=28   System IO=5, Dynamic Memory=4, Network=4, Machine Prog=3, Compilation=3, Synchronizatio=3, Data Represent=2, Processor Arch=2, Memory Hierarc=2
+      （curated 30 条）
+ok   期末__2017期末-无答案.json                                  items=30   System IO=5, Network=5, Dynamic Memory=4, Synchronizatio=4, Machine Prog=3, Compilation=3, Data Represent=2, Processor Arch=2, Memory Hierarc=2
       （curated 24 条）
 ok   期末__2018期末-带答案.json                                  items=24   Dynamic Memory=5, Network=4, Synchronizatio=4, Compilation=3, System IO=3, Memory Hierarc=2, Machine Prog=2, Processor Arch=1
 skip 期末__2019、2020期末-答案解析.json                            items=0    
@@ -83,4 +83,4 @@ ok   阶段测验__2025第1次阶段测验-带答案.json                       
       （curated 24 条）
 ok   阶段测验__2025第2次阶段测验-带答案.json                           items=24   Processor Arch=10, Memory Hierarc=8, Compilation=3, System IO=3
 
-共 42 个文件，0 个不合格；curated 指针 886 个，孤儿 0 个
+共 42 个文件，0 个不合格；curated 指针 888 个，孤儿 0 个

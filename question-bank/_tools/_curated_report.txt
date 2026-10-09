@@ -1,3 +1,3 @@
 curated 校验
-检查 886 条；失败 0 条；涉及 0 个 curated 文件；孤儿 0 个
-provenance 分布: reflow=4, rewritten=731, verbatim=151
+检查 888 条；失败 0 条；涉及 0 个 curated 文件；孤儿 0 个
+provenance 分布: reflow=2, rewritten=755, verbatim=131

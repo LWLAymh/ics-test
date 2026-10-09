@@ -1842,7 +1842,7 @@
       "exam": "2016期末",
       "questionNo": "第一题 9",
       "summary": "fork 父子进程输出交错与 ++/--",
-      "content": "9.  对于以下一段代码，可能的输出为：\n```\n   int count = 0;\n    int pid = fork();\n    if (pid == 0){\n        printf(\"count = %d\\n\",--count);\n    }\n    else{\n        printf(\"count = %d\\n\",++count);\n    }\n    printf(\"count = %d\\n\",++count);\n```\nA. A.1 2 -1 0\nB. B.0 0 -1 1\nC. C.1 -1 0 0\nD. D.0 -1 1 2\n答案:A(printf从后向前处理，注意fork出的子进程与父进程执行顺序不确定)",
+      "content": "9.  对于以下一段代码，可能的输出为：\n```\n   int count = 0;\n    int pid = fork();\n    if (pid == 0){\n        printf(\"count = %d\\n\",--count);\n    }\n    else{\n        printf(\"count = %d\\n\",++count);\n    }\n    printf(\"count = %d\\n\",++count);\n```\nA. 1 2 -1 0\nB. 0 0 -1 1\nC. 1 -1 0 0\nD. 0 -1 1 2\n答案:A(printf从后向前处理，注意fork出的子进程与父进程执行顺序不确定)",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1868,19 +1868,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "A.1 2 -1 0"
+            "content": "1 2 -1 0"
           },
           {
             "key": "B",
-            "content": "B.0 0 -1 1"
+            "content": "0 0 -1 1"
           },
           {
             "key": "C",
-            "content": "C.1 -1 0 0"
+            "content": "1 -1 0 0"
           },
           {
             "key": "D",
-            "content": "D.0 -1 1 2"
+            "content": "0 -1 1 2"
           }
         ],
         "answer": "答案:A(printf从后向前处理，注意fork出的子进程与父进程执行顺序不确定)"
@@ -1891,19 +1891,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "A.1 2 -1 0"
+            "content": "1 2 -1 0"
           },
           {
             "id": "B",
-            "content": "B.0 0 -1 1"
+            "content": "0 0 -1 1"
           },
           {
             "id": "C",
-            "content": "C.1 -1 0 0"
+            "content": "1 -1 0 0"
           },
           {
             "id": "D",
-            "content": "D.0 -1 1 2"
+            "content": "0 -1 1 2"
           }
         ],
         "correctChoiceIds": [
@@ -2194,7 +2194,7 @@
       "exam": "2016期末",
       "questionNo": "第五题",
       "summary": "fork/exit 输出排列与信号处理程序填空",
-      "content": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\nPart II\n```\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n```\n\n\n```\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（\n关”）\n```\n```\n```\n```\nA:                          counter1+1\nB:                         counter2*2\nC:                              1\nD:                             无关\nE:                         SIGUSR1\nF:                         SIGUSR1\nG:                              2\n若某个位置中的程序内容，对本次程序执行结果没有影响，请在相应位置填写“无\n（7分）7个，对1个给1分",
+      "content": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\n```\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（\n关”）\nA:                          counter1+1\nB:                         counter2*2\nC:                              1\nD:                             无关\nE:                         SIGUSR1\nF:                         SIGUSR1\nG:                              2\n若某个位置中的程序内容，对本次程序执行结果没有影响，请在相应位置填写“无\n（7分）7个，对1个给1分",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2216,7 +2216,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\nPart II\n```\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n```\n\n\n```\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（\n关”）\n```\n```\n```\n```",
+        "stem": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\n```\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（\n关”）",
         "choices": [
           {
             "key": "A",
@@ -2255,7 +2255,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\nPart II\n```\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n```\n\n\n```\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（\n关”）\n```\n```\n```\n```",
+        "prompt": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\n```\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（\n关”）",
         "answer": "若某个位置中的程序内容，对本次程序执行结果没有影响，请在相应位置填写“无\n（7分）7个，对1个给1分"
       },
       "presentation": {
@@ -2531,7 +2531,7 @@
       "exam": "2017期末",
       "questionNo": "第一题 15",
       "summary": "dup/dup2/O_APPEND 组合后的文件内容",
-      "content": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\nint fd1 = open(\"ICS.txt\", O_CREAT|O_RDWR,\n S_IRUSR|S_IWUSR);\nwrite(fd1, \"ics \", 4);\nint fd2 = fd1;\nint fd3 = dup(fd2);\nint fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\nwrite(fd2, \"segmentation fault \", 19);\nwrite(fd4, \"tao\", 3);\nint fd5 = fd4;\ndup2(fd3, fd5);\nwrite(fd4, \"lab\", 3);\nclose(fd1);\nreturn 0;\n}\n```\nA. ics segmentation fault tao\nB. ics segmentation fault lab\nC. ics taomentation fault lab\nD. tao segmentation fault lab\n答案：A\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\n    int fd1 = open(\"ICS.txt\", O_CREAT | O_RDWR,\n                   S_IRUSR | S_IWUSR);\n    write(fd1, \"ics \", 4);\n    int fd2 = fd1;\n    int fd3 = dup(fd2);\n    int fd4 = open(\"ICS.txt\", O_APPEND | O_RDWR);\n    write(fd2, \"segmentation fault \", 19);\n    write(fd4, \"tao\", 3);\n    int fd5 = fd4;\n    dup2(fd3, fd5);\n    write(fd4, \"lab\", 3);\n    close(fd1);\n    return 0;\n}\n```\nA. ics segmentation fault tao\nB. ics segmentation fault lab\nC. ics taomentation fault lab\nD. tao segmentation fault lab\n答案：A\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2551,7 +2551,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\nint fd1 = open(\"ICS.txt\", O_CREAT|O_RDWR,\n S_IRUSR|S_IWUSR);\nwrite(fd1, \"ics \", 4);\nint fd2 = fd1;\nint fd3 = dup(fd2);\nint fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\nwrite(fd2, \"segmentation fault \", 19);\nwrite(fd4, \"tao\", 3);\nint fd5 = fd4;\ndup2(fd3, fd5);\nwrite(fd4, \"lab\", 3);\nclose(fd1);\nreturn 0;\n}\n```",
+        "stem": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\n    int fd1 = open(\"ICS.txt\", O_CREAT | O_RDWR,\n                   S_IRUSR | S_IWUSR);\n    write(fd1, \"ics \", 4);\n    int fd2 = fd1;\n    int fd3 = dup(fd2);\n    int fd4 = open(\"ICS.txt\", O_APPEND | O_RDWR);\n    write(fd2, \"segmentation fault \", 19);\n    write(fd4, \"tao\", 3);\n    int fd5 = fd4;\n    dup2(fd3, fd5);\n    write(fd4, \"lab\", 3);\n    close(fd1);\n    return 0;\n}\n```",
         "choices": [
           {
             "key": "A",
@@ -2599,7 +2599,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\nint fd1 = open(\"ICS.txt\", O_CREAT|O_RDWR,\n S_IRUSR|S_IWUSR);\nwrite(fd1, \"ics \", 4);\nint fd2 = fd1;\nint fd3 = dup(fd2);\nint fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\nwrite(fd2, \"segmentation fault \", 19);\nwrite(fd4, \"tao\", 3);\nint fd5 = fd4;\ndup2(fd3, fd5);\nwrite(fd4, \"lab\", 3);\nclose(fd1);\nreturn 0;\n}\n```",
+        "prompt": "15. 以下程序执行完成后，ICS.txt文件中的内容是：\n```\nint main(int argc, char** argv) {\n    int fd1 = open(\"ICS.txt\", O_CREAT | O_RDWR,\n                   S_IRUSR | S_IWUSR);\n    write(fd1, \"ics \", 4);\n    int fd2 = fd1;\n    int fd3 = dup(fd2);\n    int fd4 = open(\"ICS.txt\", O_APPEND | O_RDWR);\n    write(fd2, \"segmentation fault \", 19);\n    write(fd4, \"tao\", 3);\n    int fd5 = fd4;\n    dup2(fd3, fd5);\n    write(fd4, \"lab\", 3);\n    close(fd1);\n    return 0;\n}\n```",
         "answer": "答案：A\n解析：fd1 写入 \"ics \" 后偏移为 4；fd2=fd1、fd3=dup(fd2) 共享同一打开文件表项，fd4 以 O_APPEND 打开（每次写前定位到文件末尾）。fd2 写 \"segmentation fault \" 追加到 4；fd4 写 \"tao\" 追加到末尾；dup2(fd3, fd5) 让 fd4 也指向 fd1/fd3 的打开文件表项，此后 write(fd4,\"lab\") 写在偏移 23 处，覆盖掉 \"tao\"，最终文件为 \"ics segmentation fault lab\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
@@ -2617,7 +2617,7 @@
       "exam": "2017期末",
       "questionNo": "第五题",
       "summary": "fork/信号/sleep 与文件读取的输出行数及内容",
-      "content": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n答案：\n1. 共 **7** 行输出（A/B 四种组合下都是 7 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `123 ab`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `23 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `23 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n2. 共 **6** 行输出（E=exit(0) 时，A/B 四种组合下都是 6 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `12 a`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `1 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `12 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n\n解析：\n**① 计数器是「每进程一份」。** `counter1/counter2` 是全局变量，fork 之后父子各持\n一份副本；handler 里的自增只作用于**收到信号的那个进程自己**的副本。而 handler\n结尾的 `kill(ppid/cpid, …)` 会给对方再补一次信号——于是每次「一次 kill」在程序\n里实际表现为**两个进程各加一个计数器**。\n\n**② 谁加哪个计数器**（这是本题的关键）：一次完整的往返是\n`P: kill(C, A)` → C 的 handler 被调用（C 自增：A=SIGUSR1 则 C.counter1++，\nA=SIGUSR2 则 C.counter2++）→ 该 handler 末尾 `kill(P, B')` → P 的 handler 被调用\n（P 自增：B=SIGUSR1 则 P.counter1++，B=SIGUSR2 则 P.counter2++）。\n所以口径是：**A 给子进程加计数器，B 给父进程加计数器**，一次往返两边各 +1。\n- 新 fork 出来的孙子继承的是**那一刻**父进程的计数器快照。\n\n**③ sleep 的语义。** `while (sleep(k));` —— 信号处理函数会打断 sleep，sleep 返回\n未睡满的秒数（非 0），于是 while 再睡一整轮。每个进程每轮只被 kill 一次，所以\n最后每个进程每轮都睡满 k 秒（P 睡 4 秒、子进程睡 2 秒）。\n\n**④ 行数怎么数。** 每个进程每轮打印 1 行。\n- 第 1 组（E 为空）：子进程打印完**不退出**，继续自己的 for 循环，所以每一代\n  「同样的树」再展开一次。设 L(n) 为 N=n 时整棵树的行数，则\n  L(n) = 1 + 2·L(n−1)（自己打印 1 行，再等 2 个孩子各展开一棵 L(n−1) 的子树），\n  L(1) = 3 ⇒ L(2) = 7、L(3) = 15。故 N=2 时共 **7 行**。\n- 第 2 组（E = exit(0)）：子进程打印完就退出，**不再 fork 孙子**，每轮只有\n  「P 1 行 + 子进程 1 行」，N=3 ⇒ **6 行**。\n\n**⑤ 谁打印最后一行、内容是什么。**\n- 一行的两个字段 = 打印者当时的 `counter1`、`counter2`：数字串取 number.txt 从头\n  （按各自打开文件表项的偏移）起的 counter1 个字符，字母串取 letter.txt 从 'a'\n  起的 counter2 个字符。\n- P 在每轮结尾都有 `waitpid(cpid,0,0)`，所以 **P 必须等到它的子树跑完才进入下一轮**；\n  而 P 的每轮都比子进程慢（P 每轮睡 4 秒、子进程只睡 2 秒），因此 **P 最后一轮的\n  打印就是整个程序的最后一行**。P 的最终计数器可以这样记账：\n\n第 1 组（N=2，E 为空）：P 每轮各得 +1（来自 B 那一侧），两轮共 +2；字母串长度就是\nP 当时的 `counter2`，数字串按 P 自己的 `counter1` 与它已消费的共享偏移取：\n\n| A / B | P 第 1 轮末 (c1,c2) | P 第 2 轮末 (c1,c2) | 最后一行 |\n| --- | --- | --- | --- |\n| USR1 / USR1 | (2,1) | (3,2) | `123 ab` |\n| USR1 / USR2 | (2,2) | (2,3) | `23 ab` |\n| USR2 / USR1 | (2,1) | (2,1) | `23 a` |\n| USR2 / USR2 | (1,2) | (1,3) | `1 ab` |\n\n第 2 组（N=3，E=exit(0)）：子进程每轮只跑一轮就 `exit(0)`，**A 加在子进程上的增量\n随子进程退出而丢失**，P 只从 B 侧每轮得到 +1，而 P 每轮之后还会被下一轮子进程的\nhandler 再补一次同名信号，最终值：\n- (a) A=SIGUSR1, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (b) A=SIGUSR1, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n- (c) A=SIGUSR2, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (d) A=SIGUSR2, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n\n**⑥ 输出行数小结。**\n- 第 1 组（N=2，E 为空）均为 **7 行**：P 打 2 行；P 每轮 fork 出的子进程各自再展开\n  一棵「N=1 的 3 行」小树（2×3 = 6 行）—— 合计 2 + 6 = 7。\n- 第 2 组（N=3，E=exit(0)）均为 **6 行**：P 打 3 行，每轮的子进程各打 1 行后\n  `exit(0)`，合计 3×2 = 6。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n    if (sig == SIGUSR1) counter1++;\n    if (sig == SIGUSR2) counter2++;\n}\nint main(int argc, char **argv) {\n    int i;\n    pid_t ppid, cpid;\n    int fd1, fd2;\n    unsigned char buf1[64], buf2[64];\n    signal(SIGUSR1, handler);\n    signal(SIGUSR2, handler);\n    fd1 = open(\"number.txt\", O_RDWR);\n    for (i = 0; i < N; i++) {\n        ppid = getpid();\n        cpid = fork();\n        if (cpid) {\n            kill(cpid, A);\n            while (sleep(4)) ;\n        } else {\n            kill(ppid, B);\n            while (sleep(2)) ;\n        }\n        fd2 = open(\"letter.txt\", O_RDWR);\n        read(fd1, buf1, counter1);\n        read(fd2, buf2, counter2);\n        buf1[counter1] = '\\0';\n        buf2[counter2] = '\\0';\n        printf(\"%s %s\\n\", buf1, buf2);\n        if (cpid) {\n            waitpid(cpid, 0, 0);\n        } else {\n            E;\n        }\n    }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当 N=2，A/B 为 SIGUSR1 或 SIGUSR2，E 为空时，共有 {{blank:n2-lines}} 行输出。\na) A 为 SIGUSR1、B 为 SIGUSR1 时，最后一行输出为 {{blank:n2-aa}}\nb) A 为 SIGUSR1、B 为 SIGUSR2 时，最后一行输出为 {{blank:n2-ab}}\nc) A 为 SIGUSR2、B 为 SIGUSR1 时，最后一行输出为 {{blank:n2-ba}}\nd) A 为 SIGUSR2、B 为 SIGUSR2 时，最后一行输出为 {{blank:n2-bb}}\n2. 当 N=3 时，A/B 为 SIGUSR1 或 SIGUSR2，E 为 exit(0) 时，共有 {{blank:n3-lines}} 行输出。\na) A 为 SIGUSR1、B 为 SIGUSR1 时，最后一行输出为 {{blank:n3-aa}}\nb) A 为 SIGUSR1、B 为 SIGUSR2 时，最后一行输出为 {{blank:n3-ab}}\nc) A 为 SIGUSR2、B 为 SIGUSR1 时，最后一行输出为 {{blank:n3-ba}}\nd) A 为 SIGUSR2、B 为 SIGUSR2 时，最后一行输出为 {{blank:n3-bb}}\n答案：\n1. 程序不终止，输出行数无穷多，因此不存在“最后一行”。A/B 的信号类型不改变这一点。\n2. 共 6 行（父进程每轮输出一行，子进程每轮输出一行后由 `exit(0)` 结束）。最后一行不能由题面唯一确定：父进程在 `waitpid` 之前先打印；父子进程也共享 `fd1` 的打开文件描述及文件偏移，读取先后受调度影响。\n\n解析：`handler` 只递增本进程的 `counter1` 或 `counter2`，没有再次调用 `kill`。`A` 是父进程发给子进程的信号，`B` 是子进程发给父进程的信号。第一问中 `E` 为空，子进程不会退出；它继续执行循环，并在每次循环再次 `fork`，因此进程树不断扩展，题目要求的有限行数和最后一行都不存在。第二问中子进程执行 `exit(0)` 后每轮只留下父、子各一行，但 `waitpid` 位于父进程打印之后，且 `fd1` 的偏移由共享描述符上的读操作共同推进，无法保证一个唯一的末行内容。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2637,18 +2637,202 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为",
+        "stem": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n    if (sig == SIGUSR1) counter1++;\n    if (sig == SIGUSR2) counter2++;\n}\nint main(int argc, char **argv) {\n    int i;\n    pid_t ppid, cpid;\n    int fd1, fd2;\n    unsigned char buf1[64], buf2[64];\n    signal(SIGUSR1, handler);\n    signal(SIGUSR2, handler);\n    fd1 = open(\"number.txt\", O_RDWR);\n    for (i = 0; i < N; i++) {\n        ppid = getpid();\n        cpid = fork();\n        if (cpid) {\n            kill(cpid, A);\n            while (sleep(4)) ;\n        } else {\n            kill(ppid, B);\n            while (sleep(2)) ;\n        }\n        fd2 = open(\"letter.txt\", O_RDWR);\n        read(fd1, buf1, counter1);\n        read(fd2, buf2, counter2);\n        buf1[counter1] = '\\0';\n        buf2[counter2] = '\\0';\n        printf(\"%s %s\\n\", buf1, buf2);\n        if (cpid) {\n            waitpid(cpid, 0, 0);\n        } else {\n            E;\n        }\n    }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当 N=2，A/B 为 SIGUSR1 或 SIGUSR2，E 为空时，共有 {{blank:n2-lines}} 行输出。\na) A 为 SIGUSR1、B 为 SIGUSR1 时，最后一行输出为 {{blank:n2-aa}}\nb) A 为 SIGUSR1、B 为 SIGUSR2 时，最后一行输出为 {{blank:n2-ab}}\nc) A 为 SIGUSR2、B 为 SIGUSR1 时，最后一行输出为 {{blank:n2-ba}}\nd) A 为 SIGUSR2、B 为 SIGUSR2 时，最后一行输出为 {{blank:n2-bb}}\n2. 当 N=3 时，A/B 为 SIGUSR1 或 SIGUSR2，E 为 exit(0) 时，共有 {{blank:n3-lines}} 行输出。\na) A 为 SIGUSR1、B 为 SIGUSR1 时，最后一行输出为 {{blank:n3-aa}}\nb) A 为 SIGUSR1、B 为 SIGUSR2 时，最后一行输出为 {{blank:n3-ab}}\nc) A 为 SIGUSR2、B 为 SIGUSR1 时，最后一行输出为 {{blank:n3-ba}}\nd) A 为 SIGUSR2、B 为 SIGUSR2 时，最后一行输出为 {{blank:n3-bb}}",
         "choices": [],
-        "answer": "答案：\n1. 共 **7** 行输出（A/B 四种组合下都是 7 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `123 ab`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `23 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `23 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n2. 共 **6** 行输出（E=exit(0) 时，A/B 四种组合下都是 6 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `12 a`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `1 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `12 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n\n解析：\n**① 计数器是「每进程一份」。** `counter1/counter2` 是全局变量，fork 之后父子各持\n一份副本；handler 里的自增只作用于**收到信号的那个进程自己**的副本。而 handler\n结尾的 `kill(ppid/cpid, …)` 会给对方再补一次信号——于是每次「一次 kill」在程序\n里实际表现为**两个进程各加一个计数器**。\n\n**② 谁加哪个计数器**（这是本题的关键）：一次完整的往返是\n`P: kill(C, A)` → C 的 handler 被调用（C 自增：A=SIGUSR1 则 C.counter1++，\nA=SIGUSR2 则 C.counter2++）→ 该 handler 末尾 `kill(P, B')` → P 的 handler 被调用\n（P 自增：B=SIGUSR1 则 P.counter1++，B=SIGUSR2 则 P.counter2++）。\n所以口径是：**A 给子进程加计数器，B 给父进程加计数器**，一次往返两边各 +1。\n- 新 fork 出来的孙子继承的是**那一刻**父进程的计数器快照。\n\n**③ sleep 的语义。** `while (sleep(k));` —— 信号处理函数会打断 sleep，sleep 返回\n未睡满的秒数（非 0），于是 while 再睡一整轮。每个进程每轮只被 kill 一次，所以\n最后每个进程每轮都睡满 k 秒（P 睡 4 秒、子进程睡 2 秒）。\n\n**④ 行数怎么数。** 每个进程每轮打印 1 行。\n- 第 1 组（E 为空）：子进程打印完**不退出**，继续自己的 for 循环，所以每一代\n  「同样的树」再展开一次。设 L(n) 为 N=n 时整棵树的行数，则\n  L(n) = 1 + 2·L(n−1)（自己打印 1 行，再等 2 个孩子各展开一棵 L(n−1) 的子树），\n  L(1) = 3 ⇒ L(2) = 7、L(3) = 15。故 N=2 时共 **7 行**。\n- 第 2 组（E = exit(0)）：子进程打印完就退出，**不再 fork 孙子**，每轮只有\n  「P 1 行 + 子进程 1 行」，N=3 ⇒ **6 行**。\n\n**⑤ 谁打印最后一行、内容是什么。**\n- 一行的两个字段 = 打印者当时的 `counter1`、`counter2`：数字串取 number.txt 从头\n  （按各自打开文件表项的偏移）起的 counter1 个字符，字母串取 letter.txt 从 'a'\n  起的 counter2 个字符。\n- P 在每轮结尾都有 `waitpid(cpid,0,0)`，所以 **P 必须等到它的子树跑完才进入下一轮**；\n  而 P 的每轮都比子进程慢（P 每轮睡 4 秒、子进程只睡 2 秒），因此 **P 最后一轮的\n  打印就是整个程序的最后一行**。P 的最终计数器可以这样记账：\n\n第 1 组（N=2，E 为空）：P 每轮各得 +1（来自 B 那一侧），两轮共 +2；字母串长度就是\nP 当时的 `counter2`，数字串按 P 自己的 `counter1` 与它已消费的共享偏移取：\n\n| A / B | P 第 1 轮末 (c1,c2) | P 第 2 轮末 (c1,c2) | 最后一行 |\n| --- | --- | --- | --- |\n| USR1 / USR1 | (2,1) | (3,2) | `123 ab` |\n| USR1 / USR2 | (2,2) | (2,3) | `23 ab` |\n| USR2 / USR1 | (2,1) | (2,1) | `23 a` |\n| USR2 / USR2 | (1,2) | (1,3) | `1 ab` |\n\n第 2 组（N=3，E=exit(0)）：子进程每轮只跑一轮就 `exit(0)`，**A 加在子进程上的增量\n随子进程退出而丢失**，P 只从 B 侧每轮得到 +1，而 P 每轮之后还会被下一轮子进程的\nhandler 再补一次同名信号，最终值：\n- (a) A=SIGUSR1, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (b) A=SIGUSR1, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n- (c) A=SIGUSR2, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (d) A=SIGUSR2, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n\n**⑥ 输出行数小结。**\n- 第 1 组（N=2，E 为空）均为 **7 行**：P 打 2 行；P 每轮 fork 出的子进程各自再展开\n  一棵「N=1 的 3 行」小树（2×3 = 6 行）—— 合计 2 + 6 = 7。\n- 第 2 组（N=3，E=exit(0)）均为 **6 行**：P 打 3 行，每轮的子进程各打 1 行后\n  `exit(0)`，合计 3×2 = 6。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：\n1. 程序不终止，输出行数无穷多，因此不存在“最后一行”。A/B 的信号类型不改变这一点。\n2. 共 6 行（父进程每轮输出一行，子进程每轮输出一行后由 `exit(0)` 结束）。最后一行不能由题面唯一确定：父进程在 `waitpid` 之前先打印；父子进程也共享 `fd1` 的打开文件描述及文件偏移，读取先后受调度影响。\n\n解析：`handler` 只递增本进程的 `counter1` 或 `counter2`，没有再次调用 `kill`。`A` 是父进程发给子进程的信号，`B` 是子进程发给父进程的信号。第一问中 `E` 为空，子进程不会退出；它继续执行循环，并在每次循环再次 `fork`，因此进程树不断扩展，题目要求的有限行数和最后一行都不存在。第二问中子进程执行 `exit(0)` 后每轮只留下父、子各一行，但 `waitpid` 位于父进程打印之后，且 `fd1` 的偏移由共享描述符上的读操作共同推进，无法保证一个唯一的末行内容。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+        "blankAnswers": [
+          {
+            "id": "n2-lines",
+            "acceptedAnswers": [
+              "无限，不终止",
+              "无限",
+              "不终止"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n2-aa",
+            "acceptedAnswers": [
+              "不存在",
+              "无最后一行"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n2-ab",
+            "acceptedAnswers": [
+              "不存在",
+              "无最后一行"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n2-ba",
+            "acceptedAnswers": [
+              "不存在",
+              "无最后一行"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n2-bb",
+            "acceptedAnswers": [
+              "不存在",
+              "无最后一行"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-lines",
+            "acceptedAnswers": [
+              "6"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-aa",
+            "acceptedAnswers": [
+              "无法唯一确定",
+              "调度相关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-ab",
+            "acceptedAnswers": [
+              "无法唯一确定",
+              "调度相关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-ba",
+            "acceptedAnswers": [
+              "无法唯一确定",
+              "调度相关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-bb",
+            "acceptedAnswers": [
+              "无法唯一确定",
+              "调度相关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "n2-lines",
+            "acceptedAnswers": [
+              "无限，不终止",
+              "无限",
+              "不终止"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n2-aa",
+            "acceptedAnswers": [
+              "不存在",
+              "无最后一行"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n2-ab",
+            "acceptedAnswers": [
+              "不存在",
+              "无最后一行"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n2-ba",
+            "acceptedAnswers": [
+              "不存在",
+              "无最后一行"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n2-bb",
+            "acceptedAnswers": [
+              "不存在",
+              "无最后一行"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-lines",
+            "acceptedAnswers": [
+              "6"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-aa",
+            "acceptedAnswers": [
+              "无法唯一确定",
+              "调度相关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-ab",
+            "acceptedAnswers": [
+              "无法唯一确定",
+              "调度相关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-ba",
+            "acceptedAnswers": [
+              "无法唯一确定",
+              "调度相关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3-bb",
+            "acceptedAnswers": [
+              "无法唯一确定",
+              "调度相关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n        if (sig == SIGUSR1)     counter1++;\n        if (sig == SIGUSR2)     counter2++;\n}\nint main(int argc, char **argv)\n{\n        int i;\n        pid_t ppid, cpid;\n        int fd1, fd2;\n        unsigned char buf1[64], buf2[64];\n        signal(SIGUSR1, handler);\n        signal(SIGUSR2, handler);\n        fd1 = open(\"number.txt\", O_RDWR);\n        for (i = 0; i <   N   ; i++) {\n                ppid = getpid();\n                cpid = fork();\n                if (cpid) {\n```\n\n\n```\n                        kill(cpid,     A       );\n                        while (sleep(4)) ;\n                } else {\n                        kill(ppid,     B       );\n                        while (sleep(2)) ;\n                }\n                fd2 = open(\"letter.txt\", O_RDWR);\n                read(fd1, buf1, counter1);\n                read(fd2, buf2, counter2);\n                buf1[counter1] = '\\0';\n                buf2[counter2] = '\\0';\n                printf(\"%s %s\\n\", buf1, buf2);\n                if (cpid) {\n                        waitpid(cpid, 0, 0);\n                } else {\n                                  E            ;\n                }\n        }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当N=2，A/B为SIGUSR1或SIGUSR2，E为空时，共有________行输出\na)  A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb)  A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc)  A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd)  A为SIGUSR2，B为SIGUSR2时，最后一行输出为\n2. 当N=3时，A/B为SIGUSR1或SIGUSR2，E为exit(0)时，共有________\n行输出\na) A为SIGUSR1，B为SIGUSR1时，最后一行输出为\nb) A为SIGUSR1，B为SIGUSR2时，最后一行输出为\nc) A为SIGUSR2，B为SIGUSR1时，最后一行输出为\nd) A为SIGUSR2，B为SIGUSR2时，最后一行输出为",
-        "answer": "答案：\n1. 共 **7** 行输出（A/B 四种组合下都是 7 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `123 ab`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `23 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `23 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n2. 共 **6** 行输出（E=exit(0) 时，A/B 四种组合下都是 6 行）\n   a) A=SIGUSR1, B=SIGUSR1 → 最后一行 `12 a`\n   b) A=SIGUSR1, B=SIGUSR2 → 最后一行 `1 ab`\n   c) A=SIGUSR2, B=SIGUSR1 → 最后一行 `12 a`\n   d) A=SIGUSR2, B=SIGUSR2 → 最后一行 `1 ab`\n\n解析：\n**① 计数器是「每进程一份」。** `counter1/counter2` 是全局变量，fork 之后父子各持\n一份副本；handler 里的自增只作用于**收到信号的那个进程自己**的副本。而 handler\n结尾的 `kill(ppid/cpid, …)` 会给对方再补一次信号——于是每次「一次 kill」在程序\n里实际表现为**两个进程各加一个计数器**。\n\n**② 谁加哪个计数器**（这是本题的关键）：一次完整的往返是\n`P: kill(C, A)` → C 的 handler 被调用（C 自增：A=SIGUSR1 则 C.counter1++，\nA=SIGUSR2 则 C.counter2++）→ 该 handler 末尾 `kill(P, B')` → P 的 handler 被调用\n（P 自增：B=SIGUSR1 则 P.counter1++，B=SIGUSR2 则 P.counter2++）。\n所以口径是：**A 给子进程加计数器，B 给父进程加计数器**，一次往返两边各 +1。\n- 新 fork 出来的孙子继承的是**那一刻**父进程的计数器快照。\n\n**③ sleep 的语义。** `while (sleep(k));` —— 信号处理函数会打断 sleep，sleep 返回\n未睡满的秒数（非 0），于是 while 再睡一整轮。每个进程每轮只被 kill 一次，所以\n最后每个进程每轮都睡满 k 秒（P 睡 4 秒、子进程睡 2 秒）。\n\n**④ 行数怎么数。** 每个进程每轮打印 1 行。\n- 第 1 组（E 为空）：子进程打印完**不退出**，继续自己的 for 循环，所以每一代\n  「同样的树」再展开一次。设 L(n) 为 N=n 时整棵树的行数，则\n  L(n) = 1 + 2·L(n−1)（自己打印 1 行，再等 2 个孩子各展开一棵 L(n−1) 的子树），\n  L(1) = 3 ⇒ L(2) = 7、L(3) = 15。故 N=2 时共 **7 行**。\n- 第 2 组（E = exit(0)）：子进程打印完就退出，**不再 fork 孙子**，每轮只有\n  「P 1 行 + 子进程 1 行」，N=3 ⇒ **6 行**。\n\n**⑤ 谁打印最后一行、内容是什么。**\n- 一行的两个字段 = 打印者当时的 `counter1`、`counter2`：数字串取 number.txt 从头\n  （按各自打开文件表项的偏移）起的 counter1 个字符，字母串取 letter.txt 从 'a'\n  起的 counter2 个字符。\n- P 在每轮结尾都有 `waitpid(cpid,0,0)`，所以 **P 必须等到它的子树跑完才进入下一轮**；\n  而 P 的每轮都比子进程慢（P 每轮睡 4 秒、子进程只睡 2 秒），因此 **P 最后一轮的\n  打印就是整个程序的最后一行**。P 的最终计数器可以这样记账：\n\n第 1 组（N=2，E 为空）：P 每轮各得 +1（来自 B 那一侧），两轮共 +2；字母串长度就是\nP 当时的 `counter2`，数字串按 P 自己的 `counter1` 与它已消费的共享偏移取：\n\n| A / B | P 第 1 轮末 (c1,c2) | P 第 2 轮末 (c1,c2) | 最后一行 |\n| --- | --- | --- | --- |\n| USR1 / USR1 | (2,1) | (3,2) | `123 ab` |\n| USR1 / USR2 | (2,2) | (2,3) | `23 ab` |\n| USR2 / USR1 | (2,1) | (2,1) | `23 a` |\n| USR2 / USR2 | (1,2) | (1,3) | `1 ab` |\n\n第 2 组（N=3，E=exit(0)）：子进程每轮只跑一轮就 `exit(0)`，**A 加在子进程上的增量\n随子进程退出而丢失**，P 只从 B 侧每轮得到 +1，而 P 每轮之后还会被下一轮子进程的\nhandler 再补一次同名信号，最终值：\n- (a) A=SIGUSR1, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (b) A=SIGUSR1, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n- (c) A=SIGUSR2, B=SIGUSR1：P.c1 = 2，c2 = 1 ⇒ 最后一行 `12 a`\n- (d) A=SIGUSR2, B=SIGUSR2：P.c1 = 1，c2 = 2 ⇒ 最后一行 `1 ab`\n\n**⑥ 输出行数小结。**\n- 第 1 组（N=2，E 为空）均为 **7 行**：P 打 2 行；P 每轮 fork 出的子进程各自再展开\n  一棵「N=1 的 3 行」小树（2×3 = 6 行）—— 合计 2 + 6 = 7。\n- 第 2 组（N=3，E=exit(0)）均为 **6 行**：P 打 3 行，每轮的子进程各打 1 行后\n  `exit(0)`，合计 3×2 = 6。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "prompt": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n    if (sig == SIGUSR1) counter1++;\n    if (sig == SIGUSR2) counter2++;\n}\nint main(int argc, char **argv) {\n    int i;\n    pid_t ppid, cpid;\n    int fd1, fd2;\n    unsigned char buf1[64], buf2[64];\n    signal(SIGUSR1, handler);\n    signal(SIGUSR2, handler);\n    fd1 = open(\"number.txt\", O_RDWR);\n    for (i = 0; i < N; i++) {\n        ppid = getpid();\n        cpid = fork();\n        if (cpid) {\n            kill(cpid, A);\n            while (sleep(4)) ;\n        } else {\n            kill(ppid, B);\n            while (sleep(2)) ;\n        }\n        fd2 = open(\"letter.txt\", O_RDWR);\n        read(fd1, buf1, counter1);\n        read(fd2, buf2, counter2);\n        buf1[counter1] = '\\0';\n        buf2[counter2] = '\\0';\n        printf(\"%s %s\\n\", buf1, buf2);\n        if (cpid) {\n            waitpid(cpid, 0, 0);\n        } else {\n            E;\n        }\n    }\n}\n```\n其中，number.txt文件内容为：\n123456789012345678901234567890\n其中，letter.txt文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当 N=2，A/B 为 SIGUSR1 或 SIGUSR2，E 为空时，共有 {{blank:n2-lines}} 行输出。\na) A 为 SIGUSR1、B 为 SIGUSR1 时，最后一行输出为 {{blank:n2-aa}}\nb) A 为 SIGUSR1、B 为 SIGUSR2 时，最后一行输出为 {{blank:n2-ab}}\nc) A 为 SIGUSR2、B 为 SIGUSR1 时，最后一行输出为 {{blank:n2-ba}}\nd) A 为 SIGUSR2、B 为 SIGUSR2 时，最后一行输出为 {{blank:n2-bb}}\n2. 当 N=3 时，A/B 为 SIGUSR1 或 SIGUSR2，E 为 exit(0) 时，共有 {{blank:n3-lines}} 行输出。\na) A 为 SIGUSR1、B 为 SIGUSR1 时，最后一行输出为 {{blank:n3-aa}}\nb) A 为 SIGUSR1、B 为 SIGUSR2 时，最后一行输出为 {{blank:n3-ab}}\nc) A 为 SIGUSR2、B 为 SIGUSR1 时，最后一行输出为 {{blank:n3-ba}}\nd) A 为 SIGUSR2、B 为 SIGUSR2 时，最后一行输出为 {{blank:n3-bb}}",
+        "answer": "答案：\n1. 程序不终止，输出行数无穷多，因此不存在“最后一行”。A/B 的信号类型不改变这一点。\n2. 共 6 行（父进程每轮输出一行，子进程每轮输出一行后由 `exit(0)` 结束）。最后一行不能由题面唯一确定：父进程在 `waitpid` 之前先打印；父子进程也共享 `fd1` 的打开文件描述及文件偏移，读取先后受调度影响。\n\n解析：`handler` 只递增本进程的 `counter1` 或 `counter2`，没有再次调用 `kill`。`A` 是父进程发给子进程的信号，`B` 是子进程发给父进程的信号。第一问中 `E` 为空，子进程不会退出；它继续执行循环，并在每次循环再次 `fork`，因此进程树不断扩展，题目要求的有限行数和最后一行都不存在。第二问中子进程执行 `exit(0)` 后每轮只留下父、子各一行，但 `waitpid` 位于父进程打印之后，且 `fd1` 的偏移由共享描述符上的读操作共同推进，无法保证一个唯一的末行内容。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
@@ -2753,7 +2937,7 @@
       "exam": "2018期末",
       "questionNo": "第一题 6",
       "summary": "dup2 链式重定向后的文件引用关系",
-      "content": "6.  假设某进程有且仅有五个已打开的文件描述符：0~4，分别引用了五个不同的文\n件，尝试运行以下代码：\n\n```c\ndup2(3,2); dup2(0,3); dup2(1,10); dup2(10,4); dup2(4,0);\n```\n\n关于得到的结果，说法正确的是：\nA. 运行正常完成，现在有四个描述符引用同一个文件\nB. 运行正常完成，现在进程共引用四个不同的文件\nC. 由于试图从一个未打开的描述符进行复制，发生错误\nD. 由于试图向一个未打开的描述符进行复制，发生错误\n答案：A\n说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述\n符(0,1,2,3,4,10)对应(B,B,D,A,B,B)，A正确，B应该为引用三个不同文件。教材\n4\n\n\n637页说明过可以向未打开的描述符进行复制，因此D错误；虽然教材未提及从未\n打开的描述符进行复制的后果，但执行过程中并没有发生这种情况，因此C错误。",
+      "content": "6.  假设某进程有且仅有五个已打开的文件描述符：0~4，分别引用了五个不同的文\n件，尝试运行以下代码：\n\n```c\ndup2(3,2); dup2(0,3); dup2(1,10); dup2(10,4); dup2(4,0);\n```\n\n关于得到的结果，说法正确的是：\nA. 运行正常完成，现在有四个描述符引用同一个文件\nB. 运行正常完成，现在进程共引用四个不同的文件\nC. 由于试图从一个未打开的描述符进行复制，发生错误\nD. 由于试图向一个未打开的描述符进行复制，发生错误\n答案：A\n说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述\n符(0,1,2,3,4,10)对应(B,B,D,A,B,B)，A正确，B应该为引用三个不同文件。教材\n637页说明过可以向未打开的描述符进行复制，因此D错误；虽然教材未提及从未\n打开的描述符进行复制的后果，但执行过程中并没有发生这种情况，因此C错误。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2794,7 +2978,7 @@
             "content": "由于试图向一个未打开的描述符进行复制，发生错误"
           }
         ],
-        "answer": "答案：A\n说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述\n符(0,1,2,3,4,10)对应(B,B,D,A,B,B)，A正确，B应该为引用三个不同文件。教材\n4\n\n\n637页说明过可以向未打开的描述符进行复制，因此D错误；虽然教材未提及从未\n打开的描述符进行复制的后果，但执行过程中并没有发生这种情况，因此C错误。"
+        "answer": "答案：A\n说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述\n符(0,1,2,3,4,10)对应(B,B,D,A,B,B)，A正确，B应该为引用三个不同文件。教材\n637页说明过可以向未打开的描述符进行复制，因此D错误；虽然教材未提及从未\n打开的描述符进行复制的后果，但执行过程中并没有发生这种情况，因此C错误。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -2824,7 +3008,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "6.  假设某进程有且仅有五个已打开的文件描述符：0~4，分别引用了五个不同的文\n件，尝试运行以下代码：\n\n```c\ndup2(3,2); dup2(0,3); dup2(1,10); dup2(10,4); dup2(4,0);\n```\n\n关于得到的结果，说法正确的是：",
-        "answer": "答案：A\n说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述\n符(0,1,2,3,4,10)对应(B,B,D,A,B,B)，A正确，B应该为引用三个不同文件。教材\n4\n\n\n637页说明过可以向未打开的描述符进行复制，因此D错误；虽然教材未提及从未\n打开的描述符进行复制的后果，但执行过程中并没有发生这种情况，因此C错误。"
+        "answer": "答案：A\n说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述\n符(0,1,2,3,4,10)对应(B,B,D,A,B,B)，A正确，B应该为引用三个不同文件。教材\n637页说明过可以向未打开的描述符进行复制，因此D错误；虽然教材未提及从未\n打开的描述符进行复制的后果，但执行过程中并没有发生这种情况，因此C错误。"
       },
       "presentation": {
         "status": "ready",
@@ -3069,7 +3253,7 @@
       "exam": "2019期末",
       "questionNo": "第四题",
       "summary": "open/dup/fork/waitpid 的文件描述符与文件内容",
-      "content": "第四题（10分）\n分析以下C程序，其中f1.txt和f2.txt为已有用户有读写的文件，初始文\n件内容为空。\n```\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n```\n9.\n10. int main()\n11. {\n```\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n```\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n```\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n```\n22.\n23.   close(fd2);\n24.\n```\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n```\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n```\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n```\n36.   }\n```\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n```\n\n\n```\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n```\n44.   }\n45.\n```\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n```\n51. }\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1=   ①    ，fd2=    ②   ；\n（2）  程序第28行：fd3=   ①    ，fd4=    ②   ；\n（3）  程序第35、43、50行输出c的值依次分别为：                     ；\n（4）  文件f1.txt中的内容为：                ；\n（5）  文件f2.txt中的内容为：                 。\n答案：（1）fd1=3，fd2=4；（2）fd3=4，fd4=5；\n（3）程序第 35、43、50 行输出的 c 依次为 0、1、2、3；\n（4）f1.txt 的内容为 `2019PKUCS`；（5）f2.txt 的内容为 `PKUICS2019`。\n解析：0/1/2 被标准 I/O 占用，fd2 关闭后描述符 4 被 fd3 复用、dup 得到 5；父进程 waitpid 等待子进程先输出，父子进程的 c 相互独立；\nf1.txt 的三处写（20、21 行独立，最后只有子进程再写 CS）得到 2019PKUCS；f2.txt 中 fd3/fd4 共享同一打开文件表项（同一偏移），父进程等子进程先写完 PKUICS 再写 2019。\n（来源：2019、2020期末-答案解析）",
+      "content": "第四题（10分）\n分析以下C程序，其中f1.txt和f2.txt为已有用户有读写的文件，初始文\n件内容为空。\n```\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n```\n9.\n10. int main()\n11. {\n```\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n```\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n```\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n```\n22.\n23.   close(fd2);\n24.\n```\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n```\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n```\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n```\n36.   }\n```\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n```\n\n\n```\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n```\n44.   }\n45.\n```\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n```\n51. }\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1={{blank:fd1}}，fd2={{blank:fd2}}；\n（2）  程序第28行：fd3={{blank:fd3}}，fd4={{blank:fd4}}；\n（3）  程序第35、43、50行输出c的值依次分别为：{{blank:c-values}}；\n（4）  文件f1.txt中的内容为：{{blank:f1-content}}；\n（5）  文件f2.txt中的内容为：{{blank:f2-content}}。\n答案：（1）fd1=3，fd2=4；（2）fd3=4，fd4=5；\n（3）程序第 35、43、50 行输出的 c 依次为 0、1、2、3；\n（4）f1.txt 的内容为 `2019PKUCS`；（5）f2.txt 的内容为 `PKUICS2019`。\n解析：0/1/2 被标准 I/O 占用，fd2 关闭后描述符 4 被 fd3 复用、dup 得到 5；父进程 waitpid 等待子进程先输出，父子进程的 c 相互独立；\nf1.txt 的三处写（20、21 行独立，最后只有子进程再写 CS）得到 2019PKUCS；f2.txt 中 fd3/fd4 共享同一打开文件表项（同一偏移），父进程等子进程先写完 PKUICS 再写 2019。\n（来源：2019、2020期末-答案解析）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3090,19 +3274,137 @@
         "curated": "_curated/期末/2019期末-无答案/421.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第四题（10分）\n分析以下C程序，其中f1.txt和f2.txt为已有用户有读写的文件，初始文\n件内容为空。\n```\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n```\n9.\n10. int main()\n11. {\n```\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n```\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n```\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n```\n22.\n23.   close(fd2);\n24.\n```\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n```\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n```\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n```\n36.   }\n```\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n```\n\n\n```\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n```\n44.   }\n45.\n```\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n```\n51. }\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1=   ①    ，fd2=    ②   ；\n（2）  程序第28行：fd3=   ①    ，fd4=    ②   ；\n（3）  程序第35、43、50行输出c的值依次分别为：                     ；\n（4）  文件f1.txt中的内容为：                ；\n（5）  文件f2.txt中的内容为：                 。",
+        "stem": "第四题（10分）\n分析以下C程序，其中f1.txt和f2.txt为已有用户有读写的文件，初始文\n件内容为空。\n```\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n```\n9.\n10. int main()\n11. {\n```\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n```\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n```\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n```\n22.\n23.   close(fd2);\n24.\n```\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n```\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n```\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n```\n36.   }\n```\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n```\n\n\n```\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n```\n44.   }\n45.\n```\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n```\n51. }\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1={{blank:fd1}}，fd2={{blank:fd2}}；\n（2）  程序第28行：fd3={{blank:fd3}}，fd4={{blank:fd4}}；\n（3）  程序第35、43、50行输出c的值依次分别为：{{blank:c-values}}；\n（4）  文件f1.txt中的内容为：{{blank:f1-content}}；\n（5）  文件f2.txt中的内容为：{{blank:f2-content}}。",
         "choices": [],
-        "answer": "答案：（1）fd1=3，fd2=4；（2）fd3=4，fd4=5；\n（3）程序第 35、43、50 行输出的 c 依次为 0、1、2、3；\n（4）f1.txt 的内容为 `2019PKUCS`；（5）f2.txt 的内容为 `PKUICS2019`。\n解析：0/1/2 被标准 I/O 占用，fd2 关闭后描述符 4 被 fd3 复用、dup 得到 5；父进程 waitpid 等待子进程先输出，父子进程的 c 相互独立；\nf1.txt 的三处写（20、21 行独立，最后只有子进程再写 CS）得到 2019PKUCS；f2.txt 中 fd3/fd4 共享同一打开文件表项（同一偏移），父进程等子进程先写完 PKUICS 再写 2019。\n（来源：2019、2020期末-答案解析）"
+        "answer": "答案：（1）fd1=3，fd2=4；（2）fd3=4，fd4=5；\n（3）程序第 35、43、50 行输出的 c 依次为 0、1、2、3；\n（4）f1.txt 的内容为 `2019PKUCS`；（5）f2.txt 的内容为 `PKUICS2019`。\n解析：0/1/2 被标准 I/O 占用，fd2 关闭后描述符 4 被 fd3 复用、dup 得到 5；父进程 waitpid 等待子进程先输出，父子进程的 c 相互独立；\nf1.txt 的三处写（20、21 行独立，最后只有子进程再写 CS）得到 2019PKUCS；f2.txt 中 fd3/fd4 共享同一打开文件表项（同一偏移），父进程等子进程先写完 PKUICS 再写 2019。\n（来源：2019、2020期末-答案解析）",
+        "blankAnswers": [
+          {
+            "id": "fd1",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd2",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd3",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd4",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c-values",
+            "acceptedAnswers": [
+              "0、1、2、3",
+              "0, 1, 2, 3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "f1-content",
+            "acceptedAnswers": [
+              "2019PKUCS"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "f2-content",
+            "acceptedAnswers": [
+              "PKUICS2019"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "fd1",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd2",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd3",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd4",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c-values",
+            "acceptedAnswers": [
+              "0、1、2、3",
+              "0, 1, 2, 3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "f1-content",
+            "acceptedAnswers": [
+              "2019PKUCS"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "f2-content",
+            "acceptedAnswers": [
+              "PKUICS2019"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题（10分）\n分析以下C程序，其中f1.txt和f2.txt为已有用户有读写的文件，初始文\n件内容为空。\n```\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n```\n9.\n10. int main()\n11. {\n```\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n```\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n```\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n```\n22.\n23.   close(fd2);\n24.\n```\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n```\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n```\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n```\n36.   }\n```\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n```\n\n\n```\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n```\n44.   }\n45.\n```\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n```\n51. }\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1=   ①    ，fd2=    ②   ；\n（2）  程序第28行：fd3=   ①    ，fd4=    ②   ；\n（3）  程序第35、43、50行输出c的值依次分别为：                     ；\n（4）  文件f1.txt中的内容为：                ；\n（5）  文件f2.txt中的内容为：                 。",
+        "prompt": "第四题（10分）\n分析以下C程序，其中f1.txt和f2.txt为已有用户有读写的文件，初始文\n件内容为空。\n```\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n```\n9.\n10. int main()\n11. {\n```\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n```\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n```\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n```\n22.\n23.   close(fd2);\n24.\n```\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n```\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n```\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n```\n36.   }\n```\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n```\n\n\n```\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n```\n44.   }\n45.\n```\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n```\n51. }\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1={{blank:fd1}}，fd2={{blank:fd2}}；\n（2）  程序第28行：fd3={{blank:fd3}}，fd4={{blank:fd4}}；\n（3）  程序第35、43、50行输出c的值依次分别为：{{blank:c-values}}；\n（4）  文件f1.txt中的内容为：{{blank:f1-content}}；\n（5）  文件f2.txt中的内容为：{{blank:f2-content}}。",
         "answer": "答案：（1）fd1=3，fd2=4；（2）fd3=4，fd4=5；\n（3）程序第 35、43、50 行输出的 c 依次为 0、1、2、3；\n（4）f1.txt 的内容为 `2019PKUCS`；（5）f2.txt 的内容为 `PKUICS2019`。\n解析：0/1/2 被标准 I/O 占用，fd2 关闭后描述符 4 被 fd3 复用、dup 得到 5；父进程 waitpid 等待子进程先输出，父子进程的 c 相互独立；\nf1.txt 的三处写（20、21 行独立，最后只有子进程再写 CS）得到 2019PKUCS；f2.txt 中 fd3/fd4 共享同一打开文件表项（同一偏移），父进程等子进程先写完 PKUICS 再写 2019。\n（来源：2019、2020期末-答案解析）"
       },
       "presentation": {

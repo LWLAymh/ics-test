@@ -1661,7 +1661,7 @@
       "exam": "2016期中",
       "questionNo": "第一题 19",
       "summary": "直接映射 cache 每组行数",
-      "content": "19. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每组（set）有          行（line）。\n答案：1。这是直接映射高速缓存的基本特征，和容量无关",
+      "content": "19. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每组（set）有 {{blank:lines-per-set}} 行（line）。\n答案：1。这是直接映射高速缓存的基本特征，和容量无关",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1682,19 +1682,39 @@
         "curated": "_curated/期中/2016期中-带答案/194.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "19. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每组（set）有          行（line）。",
+        "stem": "19. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每组（set）有 {{blank:lines-per-set}} 行（line）。",
         "choices": [],
-        "answer": "答案：1。这是直接映射高速缓存的基本特征，和容量无关"
+        "answer": "答案：1。这是直接映射高速缓存的基本特征，和容量无关",
+        "blankAnswers": [
+          {
+            "id": "lines-per-set",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "lines-per-set",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "19. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每组（set）有          行（line）。",
+        "prompt": "19. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每组（set）有 {{blank:lines-per-set}} 行（line）。",
         "answer": "答案：1。这是直接映射高速缓存的基本特征，和容量无关"
       },
       "presentation": {
@@ -1712,7 +1732,7 @@
       "exam": "2016期中",
       "questionNo": "第一题 20",
       "summary": "直接映射 cache 每路行数",
-      "content": "20. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每路（way）有          行（line）。\n答案：128，容量=路容量*路数=cache 行大小*Set 数*路数->set 数\n=4KB/32B=27=128",
+      "content": "20. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每路（way）有 {{blank:lines-per-way}} 行（line）。\n答案：128，容量=路容量*路数=cache 行大小*Set 数*路数->set 数\n=4KB/32B=27=128",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1733,19 +1753,39 @@
         "curated": "_curated/期中/2016期中-带答案/197.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "20. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每路（way）有          行（line）。",
+        "stem": "20. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每路（way）有 {{blank:lines-per-way}} 行（line）。",
         "choices": [],
-        "answer": "答案：128，容量=路容量*路数=cache 行大小*Set 数*路数->set 数\n=4KB/32B=27=128"
+        "answer": "答案：128，容量=路容量*路数=cache 行大小*Set 数*路数->set 数\n=4KB/32B=27=128",
+        "blankAnswers": [
+          {
+            "id": "lines-per-way",
+            "acceptedAnswers": [
+              "128"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "lines-per-way",
+            "acceptedAnswers": [
+              "128"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "20. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每路（way）有          行（line）。",
+        "prompt": "20. 如果直接映射高速缓存大小是4KB，并且块（block）大小为32字节，那么\n它每路（way）有 {{blank:lines-per-way}} 行（line）。",
         "answer": "答案：128，容量=路容量*路数=cache 行大小*Set 数*路数->set 数\n=4KB/32B=27=128"
       },
       "presentation": {
@@ -1763,7 +1803,7 @@
       "exam": "2016期中",
       "questionNo": "第五题",
       "summary": "Cache LRU/MRU、替换规则与预取命中数",
-      "content": "（孙广宇，陆俊林）\n现有一个能够存储4个Block的Cache，每一个Cache Block的长度为2\nByte（既 B = 2）。内存空间的大小是32Byte，既内存空间地址范围如\n下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n $2_{10}$  $23_{10}$  $10_{10}$  $9_{10}$  $9_{10}$  $11_{10}$  $3_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略\nLRU。请在下图空白处填入上述数据访问后Cache的状态。\n（TAG使用二进制格式；Data Block使用10进制格式，例：M[6-7]表示\n地址$6_{10}$-$7_{10}$对应的数据）\n（第 1 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: ______ (2pts)\n2. 如果Cache的替换策略改成MRU（即Most Recently Used, 最近使\n用的数据被替换出去），请在下图空白处填入访问上述数据访问后Cache\n的状态。\n（第 2 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit：______ (2pts)\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit ______ (2pts)\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n______ (2pts)\n答案：\n1. 最终 Cache 状态（S=2, E=2, LRU）：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  010  M[10-11]\n   1  000  M[2-3]\n```\n上述数据访问一共产生了 2 次 Hit。\n2. 替换策略改为 MRU 后的 Cache 状态：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  000  M[2-3]\n   1  010  M[10-11]\n```\n上述数据访问一共产生了 3 次 Hit。\n3. 2 次 Hit。\n4. 3 次 Hit。",
+      "content": "（孙广宇，陆俊林）\n现有一个能够存储4个Block的Cache，每一个Cache Block的长度为2\nByte（既 B = 2）。内存空间的大小是32Byte，既内存空间地址范围如\n下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n $2_{10}$  $23_{10}$  $10_{10}$  $9_{10}$  $9_{10}$  $11_{10}$  $3_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略\nLRU。请在下图空白处填入上述数据访问后Cache的状态。\n（TAG使用二进制格式；Data Block使用10进制格式，例：M[6-7]表示\n地址$6_{10}$-$7_{10}$对应的数据）\n（第 1 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: {{blank:hits-lru}}（2 分）\n2. 如果Cache的替换策略改成MRU（即Most Recently Used, 最近使\n用的数据被替换出去），请在下图空白处填入访问上述数据访问后Cache\n的状态。\n（第 2 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit：{{blank:hits-mru}}（2 分）\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit {{blank:hits-no-cache}}（2 分）\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n{{blank:hits-prefetch}}（2 分）\n答案：\n1. 最终 Cache 状态（S=2, E=2, LRU）：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  010  M[10-11]\n   1  000  M[2-3]\n```\n上述数据访问一共产生了 2 次 Hit。\n2. 替换策略改为 MRU 后的 Cache 状态：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  000  M[2-3]\n   1  010  M[10-11]\n```\n上述数据访问一共产生了 3 次 Hit。\n3. 2 次 Hit。\n4. 3 次 Hit。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1786,17 +1826,85 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "（孙广宇，陆俊林）\n现有一个能够存储4个Block的Cache，每一个Cache Block的长度为2\nByte（既 B = 2）。内存空间的大小是32Byte，既内存空间地址范围如\n下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n $2_{10}$  $23_{10}$  $10_{10}$  $9_{10}$  $9_{10}$  $11_{10}$  $3_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略\nLRU。请在下图空白处填入上述数据访问后Cache的状态。\n（TAG使用二进制格式；Data Block使用10进制格式，例：M[6-7]表示\n地址$6_{10}$-$7_{10}$对应的数据）\n（第 1 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: ______ (2pts)\n2. 如果Cache的替换策略改成MRU（即Most Recently Used, 最近使\n用的数据被替换出去），请在下图空白处填入访问上述数据访问后Cache\n的状态。\n（第 2 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit：______ (2pts)\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit ______ (2pts)\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n______ (2pts)",
+        "stem": "（孙广宇，陆俊林）\n现有一个能够存储4个Block的Cache，每一个Cache Block的长度为2\nByte（既 B = 2）。内存空间的大小是32Byte，既内存空间地址范围如\n下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n $2_{10}$  $23_{10}$  $10_{10}$  $9_{10}$  $9_{10}$  $11_{10}$  $3_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略\nLRU。请在下图空白处填入上述数据访问后Cache的状态。\n（TAG使用二进制格式；Data Block使用10进制格式，例：M[6-7]表示\n地址$6_{10}$-$7_{10}$对应的数据）\n（第 1 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: {{blank:hits-lru}}（2 分）\n2. 如果Cache的替换策略改成MRU（即Most Recently Used, 最近使\n用的数据被替换出去），请在下图空白处填入访问上述数据访问后Cache\n的状态。\n（第 2 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit：{{blank:hits-mru}}（2 分）\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit {{blank:hits-no-cache}}（2 分）\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n{{blank:hits-prefetch}}（2 分）",
         "choices": [],
-        "answer": "答案：\n1. 最终 Cache 状态（S=2, E=2, LRU）：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  010  M[10-11]\n   1  000  M[2-3]\n```\n上述数据访问一共产生了 2 次 Hit。\n2. 替换策略改为 MRU 后的 Cache 状态：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  000  M[2-3]\n   1  010  M[10-11]\n```\n上述数据访问一共产生了 3 次 Hit。\n3. 2 次 Hit。\n4. 3 次 Hit。"
+        "answer": "答案：\n1. 最终 Cache 状态（S=2, E=2, LRU）：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  010  M[10-11]\n   1  000  M[2-3]\n```\n上述数据访问一共产生了 2 次 Hit。\n2. 替换策略改为 MRU 后的 Cache 状态：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  000  M[2-3]\n   1  010  M[10-11]\n```\n上述数据访问一共产生了 3 次 Hit。\n3. 2 次 Hit。\n4. 3 次 Hit。",
+        "blankAnswers": [
+          {
+            "id": "hits-lru",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-mru",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-no-cache",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-prefetch",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "hits-lru",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-mru",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-no-cache",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-prefetch",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "（孙广宇，陆俊林）\n现有一个能够存储4个Block的Cache，每一个Cache Block的长度为2\nByte（既 B = 2）。内存空间的大小是32Byte，既内存空间地址范围如\n下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n $2_{10}$  $23_{10}$  $10_{10}$  $9_{10}$  $9_{10}$  $11_{10}$  $3_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略\nLRU。请在下图空白处填入上述数据访问后Cache的状态。\n（TAG使用二进制格式；Data Block使用10进制格式，例：M[6-7]表示\n地址$6_{10}$-$7_{10}$对应的数据）\n（第 1 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: ______ (2pts)\n2. 如果Cache的替换策略改成MRU（即Most Recently Used, 最近使\n用的数据被替换出去），请在下图空白处填入访问上述数据访问后Cache\n的状态。\n（第 2 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit：______ (2pts)\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit ______ (2pts)\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n______ (2pts)",
+        "prompt": "（孙广宇，陆俊林）\n现有一个能够存储4个Block的Cache，每一个Cache Block的长度为2\nByte（既 B = 2）。内存空间的大小是32Byte，既内存空间地址范围如\n下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n $2_{10}$  $23_{10}$  $10_{10}$  $9_{10}$  $9_{10}$  $11_{10}$  $3_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略\nLRU。请在下图空白处填入上述数据访问后Cache的状态。\n（TAG使用二进制格式；Data Block使用10进制格式，例：M[6-7]表示\n地址$6_{10}$-$7_{10}$对应的数据）\n（第 1 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: {{blank:hits-lru}}（2 分）\n2. 如果Cache的替换策略改成MRU（即Most Recently Used, 最近使\n用的数据被替换出去），请在下图空白处填入访问上述数据访问后Cache\n的状态。\n（第 2 小题的 Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit：{{blank:hits-mru}}（2 分）\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit {{blank:hits-no-cache}}（2 分）\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n{{blank:hits-prefetch}}（2 分）",
         "answer": "答案：\n1. 最终 Cache 状态（S=2, E=2, LRU）：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  010  M[10-11]\n   1  000  M[2-3]\n```\n上述数据访问一共产生了 2 次 Hit。\n2. 替换策略改为 MRU 后的 Cache 状态：\n```\n  V  TAG  Data Block\nset0  1  010  M[8-9]\n      0\n  V  TAG  Block\nset1  1  000  M[2-3]\n   1  010  M[10-11]\n```\n上述数据访问一共产生了 3 次 Hit。\n3. 2 次 Hit。\n4. 3 次 Hit。"
       },
       "presentation": {
@@ -2072,7 +2180,7 @@
       "exam": "2017期中",
       "questionNo": "第五题",
       "summary": "Cache 组相联与预取、块大小对命中数影响",
-      "content": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即B = 2）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n$0_{10}$  $3_{10}$  $4_{10}$  $7_{10}$  $16_{10}$   $19_{10}$   $21_{10}$  $22_{10}$  $8_{10}$  $10_{10}$  $13_{10}$  $14_{10}$  $24_{10}$  $26_{10}$   $29_{10}$  $30_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：M[6-7]表示地址\n$6_{10}$-$7_{10}$对应的数据）\n（Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: ______ (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 M[0-1]\n访问发生miss，则把M[0-1]和M[2-3]都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit ：______ (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\nB = 4，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit ：\n______ (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit ：________ (2分)\n答案：\n1. 16 次访问后 Cache 的最终状态（S=2，E=2，LRU）：\n\n| | V | TAG | Data Block | V | TAG | Data Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 110 | M[24-25] | 1 | 111 | M[28-29] |\n| set1 | 1 | 110 | M[26-27] | 1 | 111 | M[30-31] |\n\n   上述数据访问一共产生了 0 次 Hit。\n2. 8 次 Hit。\n3. 8 次 Hit。\n4. 12 次 Hit。",
+      "content": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即B = 2）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n$0_{10}$  $3_{10}$  $4_{10}$  $7_{10}$  $16_{10}$   $19_{10}$   $21_{10}$  $22_{10}$  $8_{10}$  $10_{10}$  $13_{10}$  $14_{10}$  $24_{10}$  $26_{10}$   $29_{10}$  $30_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：M[6-7]表示地址\n$6_{10}$-$7_{10}$对应的数据）\n| 组 | 路 | V | TAG | Data Block |\n| --- | --- | --- | --- | --- |\n| set0 | way0 | {{blank:set0-way0-v}} | {{blank:set0-way0-tag}} | {{blank:set0-way0-data}} |\n| set0 | way1 | {{blank:set0-way1-v}} | {{blank:set0-way1-tag}} | {{blank:set0-way1-data}} |\n| set1 | way0 | {{blank:set1-way0-v}} | {{blank:set1-way0-tag}} | {{blank:set1-way0-data}} |\n| set1 | way1 | {{blank:set1-way1-v}} | {{blank:set1-way1-tag}} | {{blank:set1-way1-data}} |\n上述数据访问一共产生了多少次Hit: {{blank:hits-basic}} (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 M[0-1]\n访问发生miss，则把M[0-1]和M[2-3]都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit ：{{blank:hits-prefetch}} (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\nB = 4，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit ：\n{{blank:hits-block4}} (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit ：{{blank:hits-block4-prefetch}} (2分)\n答案：\n1. 16 次访问后 Cache 的最终状态（S=2，E=2，LRU）：\n\n| | V | TAG | Data Block | V | TAG | Data Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 110 | M[24-25] | 1 | 111 | M[28-29] |\n| set1 | 1 | 110 | M[26-27] | 1 | 111 | M[30-31] |\n\n   上述数据访问一共产生了 0 次 Hit。\n2. 8 次 Hit。\n3. 8 次 Hit。\n4. 12 次 Hit。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2092,17 +2200,277 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即B = 2）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n$0_{10}$  $3_{10}$  $4_{10}$  $7_{10}$  $16_{10}$   $19_{10}$   $21_{10}$  $22_{10}$  $8_{10}$  $10_{10}$  $13_{10}$  $14_{10}$  $24_{10}$  $26_{10}$   $29_{10}$  $30_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：M[6-7]表示地址\n$6_{10}$-$7_{10}$对应的数据）\n（Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: ______ (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 M[0-1]\n访问发生miss，则把M[0-1]和M[2-3]都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit ：______ (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\nB = 4，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit ：\n______ (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit ：________ (2分)",
+        "stem": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即B = 2）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n$0_{10}$  $3_{10}$  $4_{10}$  $7_{10}$  $16_{10}$   $19_{10}$   $21_{10}$  $22_{10}$  $8_{10}$  $10_{10}$  $13_{10}$  $14_{10}$  $24_{10}$  $26_{10}$   $29_{10}$  $30_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：M[6-7]表示地址\n$6_{10}$-$7_{10}$对应的数据）\n| 组 | 路 | V | TAG | Data Block |\n| --- | --- | --- | --- | --- |\n| set0 | way0 | {{blank:set0-way0-v}} | {{blank:set0-way0-tag}} | {{blank:set0-way0-data}} |\n| set0 | way1 | {{blank:set0-way1-v}} | {{blank:set0-way1-tag}} | {{blank:set0-way1-data}} |\n| set1 | way0 | {{blank:set1-way0-v}} | {{blank:set1-way0-tag}} | {{blank:set1-way0-data}} |\n| set1 | way1 | {{blank:set1-way1-v}} | {{blank:set1-way1-tag}} | {{blank:set1-way1-data}} |\n上述数据访问一共产生了多少次Hit: {{blank:hits-basic}} (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 M[0-1]\n访问发生miss，则把M[0-1]和M[2-3]都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit ：{{blank:hits-prefetch}} (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\nB = 4，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit ：\n{{blank:hits-block4}} (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit ：{{blank:hits-block4-prefetch}} (2分)",
         "choices": [],
-        "answer": "答案：\n1. 16 次访问后 Cache 的最终状态（S=2，E=2，LRU）：\n\n| | V | TAG | Data Block | V | TAG | Data Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 110 | M[24-25] | 1 | 111 | M[28-29] |\n| set1 | 1 | 110 | M[26-27] | 1 | 111 | M[30-31] |\n\n   上述数据访问一共产生了 0 次 Hit。\n2. 8 次 Hit。\n3. 8 次 Hit。\n4. 12 次 Hit。"
+        "answer": "答案：\n1. 16 次访问后 Cache 的最终状态（S=2，E=2，LRU）：\n\n| | V | TAG | Data Block | V | TAG | Data Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 110 | M[24-25] | 1 | 111 | M[28-29] |\n| set1 | 1 | 110 | M[26-27] | 1 | 111 | M[30-31] |\n\n   上述数据访问一共产生了 0 次 Hit。\n2. 8 次 Hit。\n3. 8 次 Hit。\n4. 12 次 Hit。",
+        "blankAnswers": [
+          {
+            "id": "set0-way0-v",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way0-tag",
+            "acceptedAnswers": [
+              "110"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way0-data",
+            "acceptedAnswers": [
+              "M[24-25]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way1-v",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way1-tag",
+            "acceptedAnswers": [
+              "111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way1-data",
+            "acceptedAnswers": [
+              "M[28-29]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way0-v",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way0-tag",
+            "acceptedAnswers": [
+              "110"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way0-data",
+            "acceptedAnswers": [
+              "M[26-27]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way1-v",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way1-tag",
+            "acceptedAnswers": [
+              "111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way1-data",
+            "acceptedAnswers": [
+              "M[30-31]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-basic",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-prefetch",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-block4",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-block4-prefetch",
+            "acceptedAnswers": [
+              "12"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "set0-way0-v",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way0-tag",
+            "acceptedAnswers": [
+              "110"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way0-data",
+            "acceptedAnswers": [
+              "M[24-25]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way1-v",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way1-tag",
+            "acceptedAnswers": [
+              "111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-way1-data",
+            "acceptedAnswers": [
+              "M[28-29]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way0-v",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way0-tag",
+            "acceptedAnswers": [
+              "110"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way0-data",
+            "acceptedAnswers": [
+              "M[26-27]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way1-v",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way1-tag",
+            "acceptedAnswers": [
+              "111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set1-way1-data",
+            "acceptedAnswers": [
+              "M[30-31]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-basic",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-prefetch",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-block4",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits-block4-prefetch",
+            "acceptedAnswers": [
+              "12"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即B = 2）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n$0_{10}$  $3_{10}$  $4_{10}$  $7_{10}$  $16_{10}$   $19_{10}$   $21_{10}$  $22_{10}$  $8_{10}$  $10_{10}$  $13_{10}$  $14_{10}$  $24_{10}$  $26_{10}$   $29_{10}$  $30_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：M[6-7]表示地址\n$6_{10}$-$7_{10}$对应的数据）\n（Cache 状态表见答案）\n上述数据访问一共产生了多少次Hit: ______ (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 M[0-1]\n访问发生miss，则把M[0-1]和M[2-3]都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit ：______ (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\nB = 4，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit ：\n______ (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit ：________ (2分)",
+        "prompt": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即B = 2）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n$0_{10}$  $3_{10}$  $4_{10}$  $7_{10}$  $16_{10}$   $19_{10}$   $21_{10}$  $22_{10}$  $8_{10}$  $10_{10}$  $13_{10}$  $14_{10}$  $24_{10}$  $26_{10}$   $29_{10}$  $30_{10}$\n1. Cache的结构如下图所示（S=2， E=2），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：M[6-7]表示地址\n$6_{10}$-$7_{10}$对应的数据）\n| 组 | 路 | V | TAG | Data Block |\n| --- | --- | --- | --- | --- |\n| set0 | way0 | {{blank:set0-way0-v}} | {{blank:set0-way0-tag}} | {{blank:set0-way0-data}} |\n| set0 | way1 | {{blank:set0-way1-v}} | {{blank:set0-way1-tag}} | {{blank:set0-way1-data}} |\n| set1 | way0 | {{blank:set1-way0-v}} | {{blank:set1-way0-tag}} | {{blank:set1-way0-data}} |\n| set1 | way1 | {{blank:set1-way1-v}} | {{blank:set1-way1-tag}} | {{blank:set1-way1-data}} |\n上述数据访问一共产生了多少次Hit: {{blank:hits-basic}} (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 M[0-1]\n访问发生miss，则把M[0-1]和M[2-3]都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit ：{{blank:hits-prefetch}} (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\nB = 4，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit ：\n{{blank:hits-block4}} (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit ：{{blank:hits-block4-prefetch}} (2分)",
         "answer": "答案：\n1. 16 次访问后 Cache 的最终状态（S=2，E=2，LRU）：\n\n| | V | TAG | Data Block | V | TAG | Data Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 110 | M[24-25] | 1 | 111 | M[28-29] |\n| set1 | 1 | 110 | M[26-27] | 1 | 111 | M[30-31] |\n\n   上述数据访问一共产生了 0 次 Hit。\n2. 8 次 Hit。\n3. 8 次 Hit。\n4. 12 次 Hit。"
       },
       "presentation": {
@@ -2120,7 +2488,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 12",
       "summary": "直接映射与 2 路组相联的命中次数",
-      "content": "12. 设一种缓存共包含4个缓存块，每个缓存块32字节，采用LRU替换算法。设\n缓存初始状态为空，对其进行下列char类型内存地址序列访存，0x5a7, 0x5b7,\n0x6a6, 0x5b8, 0x7a5, 0x5b9。对于直接映射缓存和2路组相联缓存，分别能\n产生几次命中？\nA) 1, 3\nB) 1, 4\nC) 2, 3\nD) 2, 4\n答案： A\n考核地址中TAG位域/组索引位域/缓存块内偏移位域在直接映射和组相联的定\n义，LRU替换算法的概念和过程。",
+      "content": "12. 设一种缓存共包含4个缓存块，每个缓存块32字节，采用LRU替换算法。设\n缓存初始状态为空，对其进行下列char类型内存地址序列访存，0x5a7, 0x5b7,\n0x6a6, 0x5b8, 0x7a5, 0x5b9。对于直接映射缓存和2路组相联缓存，分别能\n产生几次命中？\nA. 1, 3\nB. 1, 4\nC. 2, 3\nD. 2, 4\n答案： A\n考核地址中TAG位域/组索引位域/缓存块内偏移位域在直接映射和组相联的定\n义，LRU替换算法的概念和过程。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2206,7 +2574,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 13",
       "summary": "全相联缓存的替换算法对比",
-      "content": "13. 设一种全相联缓存共包含4个缓存块，如果循环地顺序访问5个不同的缓存块，\n下列哪种替换算法会产生最多的命中？\nA) 最近最少使用替换策略LRU\nB) 先入先出替换策略FIFO\nC) 随机替换策略Random\nD) 后入先出替换策略LIFO\n答案：A\n考核替换算法的概念和过程\n答案修订：CD均正确。\n  A LRU命中率0%；\n  B FIFO命中率0%；\n  C Random每次新来一个块，随机换出的块会导致之后第1,2,3,4次访存有一\n次miss（等概率），每次miss平均2.5次访存，每次访存miss率40%，因此命中\n率60%；\n  D LIFO命中率60%，最后两个块交替发生miss。",
+      "content": "13. 设一种全相联缓存共包含4个缓存块，如果循环地顺序访问5个不同的缓存块，\n下列哪种替换算法会产生最多的命中？\nA. 最近最少使用替换策略LRU\nB. 先入先出替换策略FIFO\nC. 随机替换策略Random\nD. 后入先出替换策略LIFO\n答案：CD。\n\n修订说明：C、D 均正确。LRU 和 FIFO 循环访问 5 个块时命中率为 0%；Random 与 LIFO 的命中率均为 60%。\n  A LRU命中率0%；\n  B FIFO命中率0%；\n  C Random每次新来一个块，随机换出的块会导致之后第1,2,3,4次访存有一\n次miss（等概率），每次miss平均2.5次访存，每次访存miss率40%，因此命中\n率60%；\n  D LIFO命中率60%，最后两个块交替发生miss。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2225,7 +2593,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": "single",
+        "selection": "multiple",
         "stem": "13. 设一种全相联缓存共包含4个缓存块，如果循环地顺序访问5个不同的缓存块，\n下列哪种替换算法会产生最多的命中？",
         "choices": [
           {
@@ -2245,10 +2613,10 @@
             "content": "后入先出替换策略LIFO"
           }
         ],
-        "answer": "答案：A\n考核替换算法的概念和过程\n答案修订：CD均正确。\n  A LRU命中率0%；\n  B FIFO命中率0%；\n  C Random每次新来一个块，随机换出的块会导致之后第1,2,3,4次访存有一\n次miss（等概率），每次miss平均2.5次访存，每次访存miss率40%，因此命中\n率60%；\n  D LIFO命中率60%，最后两个块交替发生miss。"
+        "answer": "答案：CD。\n\n修订说明：C、D 均正确。LRU 和 FIFO 循环访问 5 个块时命中率为 0%；Random 与 LIFO 的命中率均为 60%。\n  A LRU命中率0%；\n  B FIFO命中率0%；\n  C Random每次新来一个块，随机换出的块会导致之后第1,2,3,4次访存有一\n次miss（等概率），每次miss平均2.5次访存，每次访存miss率40%，因此命中\n率60%；\n  D LIFO命中率60%，最后两个块交替发生miss。"
       },
       "interaction": {
-        "kind": "single-choice",
+        "kind": "multiple-choice",
         "declared": true,
         "choices": [
           {
@@ -2269,13 +2637,14 @@
           }
         ],
         "correctChoiceIds": [
-          "A"
+          "C",
+          "D"
         ]
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "13. 设一种全相联缓存共包含4个缓存块，如果循环地顺序访问5个不同的缓存块，\n下列哪种替换算法会产生最多的命中？",
-        "answer": "答案：A\n考核替换算法的概念和过程\n答案修订：CD均正确。\n  A LRU命中率0%；\n  B FIFO命中率0%；\n  C Random每次新来一个块，随机换出的块会导致之后第1,2,3,4次访存有一\n次miss（等概率），每次miss平均2.5次访存，每次访存miss率40%，因此命中\n率60%；\n  D LIFO命中率60%，最后两个块交替发生miss。"
+        "answer": "答案：CD。\n\n修订说明：C、D 均正确。LRU 和 FIFO 循环访问 5 个块时命中率为 0%；Random 与 LIFO 的命中率均为 60%。\n  A LRU命中率0%；\n  B FIFO命中率0%；\n  C Random每次新来一个块，随机换出的块会导致之后第1,2,3,4次访存有一\n次miss（等概率），每次miss平均2.5次访存，每次访存miss率40%，因此命中\n率60%；\n  D LIFO命中率60%，最后两个块交替发生miss。"
       },
       "presentation": {
         "status": "ready",
@@ -2292,7 +2661,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 14",
       "summary": "SRAM/DRAM/SSD/磁盘容量与访问时间",
-      "content": "14. 以下关于存储的描述中，正确的是（  ）\nA) 由于基于SRAM的内存性能与CPU的性能有很大差距，因此现代计算机使用更\n快的基于DRAM的高速缓存，试图弥补CPU和内存间性能的差距。\nB) SSD相对于旋转磁盘而言具有更好的读性能，但是SSD写的速度通常比读的速\n度慢得多，而且SSD比旋转磁盘单位容量的价格更贵，此外SSD底层基于EEPROM\n的闪存会磨损。\nC) 一个有2个盘片、10000个柱面、每条磁道平均有400个扇区，每个扇区有\n512个字节的双面磁盘的容量为8GB。\nD) 访问一个磁盘扇区的平均时间主要取决于寻道时间和旋转延迟，因此一个旋转\n速率为6000RPM、平均寻道时间为9ms的磁盘的平均访问时间大约为19ms。\n答案：B\nA选项中SRAM和DRAM位置反了。\nC选项中，硬盘容量1GB=$10^9$ Byte，因此容量应该为8.192GB。\nD选项中，平均旋转延迟为0.5*(60s/6000RPM)=5ms，平均访问时间为14ms。",
+      "content": "14. 以下关于存储的描述中，正确的是（  ）\nA. 由于基于SRAM的内存性能与CPU的性能有很大差距，因此现代计算机使用更\n快的基于DRAM的高速缓存，试图弥补CPU和内存间性能的差距。\nB. SSD相对于旋转磁盘而言具有更好的读性能，但是SSD写的速度通常比读的速\n度慢得多，而且SSD比旋转磁盘单位容量的价格更贵，此外SSD底层基于EEPROM\n的闪存会磨损。\nC. 一个有2个盘片、10000个柱面、每条磁道平均有400个扇区，每个扇区有\n512个字节的双面磁盘的容量为8GB。\nD. 访问一个磁盘扇区的平均时间主要取决于寻道时间和旋转延迟，因此一个旋转\n速率为6000RPM、平均寻道时间为9ms的磁盘的平均访问时间大约为19ms。\n答案：B\nA选项中SRAM和DRAM位置反了。\nC选项中，硬盘容量1GB=$10^9$ Byte，因此容量应该为8.192GB。\nD选项中，平均旋转延迟为0.5*(60s/6000RPM)=5ms，平均访问时间为14ms。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2378,7 +2747,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 15",
       "summary": "数组访问顺序与 cache 全 miss 判断",
-      "content": "15. 某计算机地址空间12位，L1 cache大小为256字节，组数S=4，路数E=2，\n现在在地址0x0处开始有一个N行M列的int类型的数组int A[N][M]，有如\n下C代码：\n```c\nint ans=0;\nfor(int j=0;j<M;++j)\n    for(int i=0;i<N;++i)\n        ans+=A[i][j];\n```\n不考虑并行、编译优化等等会影响访问A数组元素顺序的因素，则如下(N,M)\n对中会导致全部Cache Miss的有（  ）\n(N,M)= (64,4), (32,8), (16,16), (2,128)\nA) 4个\nB) 3个\nC) 2个\nD) 1个\n答案：C\n每个缓存块可以存放256/S/E/4=8个int类型的数据\n1、(N,M)=(64,4)时，访问数组第一行元素会将第一、二行元素都放入缓存，因此\n在访问数组第二行元素A[1][0]时不会Cache Miss\n2、(N,M)=(32,8)时，可以验证全部Cache Miss\n3、(N,M)=(16,16)时，可以验证全部Cache Miss\n4、(N,M)=(2,128)时，访问A[0][1]时不会Cache Miss",
+      "content": "15. 某计算机地址空间12位，L1 cache大小为256字节，组数S=4，路数E=2，\n现在在地址0x0处开始有一个N行M列的int类型的数组int A[N][M]，有如\n下C代码：\n```c\nint ans=0;\nfor(int j=0;j<M;++j)\n    for(int i=0;i<N;++i)\n        ans+=A[i][j];\n```\n不考虑并行、编译优化等等会影响访问A数组元素顺序的因素，则如下(N,M)\n对中会导致全部Cache Miss的有（  ）\n(N,M)= (64,4), (32,8), (16,16), (2,128)\nA. 4个\nB. 3个\nC. 2个\nD. 1个\n答案：C\n每个缓存块可以存放256/S/E/4=8个int类型的数据\n1、(N,M)=(64,4)时，访问数组第一行元素会将第一、二行元素都放入缓存，因此\n在访问数组第二行元素A[1][0]时不会Cache Miss\n2、(N,M)=(32,8)时，可以验证全部Cache Miss\n3、(N,M)=(16,16)时，可以验证全部Cache Miss\n4、(N,M)=(2,128)时，访问A[0][1]时不会Cache Miss",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2464,7 +2833,7 @@
       "exam": "2018期中",
       "questionNo": "第五题",
       "summary": "Cache 组相联状态表、AMAT/miss rate 与容量计算",
-      "content": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（S=2, E=2），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：M[6-7]表示地址6和7对\n应的数据)\n  V  Tag  Data  V  TAG  Data\nSET 0  1    1\nSET 1  1    1\n共命中______次（1分），分别访问地址______________（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及miss\nrate）\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用________Bytes. (datasize + (valid bit size + tag\nsize) * blocks)\n答案：\n  V  Tag  Data  V  TAG  Data\nSET 0  1  101101  1  001011\nM[180-181]  M[44-45]\nSET 1  1  000011  1  101111\nM[14-15]  M[190-191]\n共命中3次\n（表格上每空格1分，tag和data都正确才得分；）\n命中次数回答正确得1分；\n分别为访问地址2、190、181（三个地址完全正确得2分，答对两个得1分）\n2) 解答：\nAddress  Binary address  C1 hit/miss  C2 hit/Miss\n3  000000 11  M  M\n180  101101 00  M  M\n43  001010 11  M  M\n2  000000 10  M  M\n191  101111 11  M  M\n88  010110 00  M  M\n190  101111 10  H  H\n14  000011 10  M  M\n181  101101 01  H  M\n44  001011 00  M  M\nC1更好。（1分）\nC1: miss rate = 8/10 = 80%,（0.5分） total cycles = 8 * 25 + 10 * 3 = 230 （1分）\nC2: miss rate = 9/10 = 90%, （0.5分） total cycles = 9 * 25 + 10 * 5 = 275 （1分）\n3) 解答：\ncache block为8 bytes，所以b=3；\ncache block 一共32*1024 / 8 = 4096个，又因为是直接映射，所以s=12；于是\ntag位一共t = 32 – s – b = 17。所以总大小为：\ntotalsize = datasize + (valid bit size + tag size) * blocks\n         = 32 * 1024 + (1 + 17) * 4096 / 8 = 41984 (bytes)",
+      "content": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（S=2, E=2），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：M[6-7]表示地址6和7对\n应的数据)\n| Set | Way 0 Tag | Way 0 Data | Way 1 Tag | Way 1 Data |\n| --- | --- | --- | --- | --- |\n| SET 0 | {{blank:s0t0}} | {{blank:s0d0}} | {{blank:s0t1}} | {{blank:s0d1}} |\n| SET 1 | {{blank:s1t0}} | {{blank:s1d0}} | {{blank:s1t1}} | {{blank:s1d1}} |\n共命中{{blank:hits}}次（1分），分别访问地址{{blank:hitaddrs}}（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及miss\nrate）。方案选择：{{blank:better}}。C1 miss rate：{{blank:c1miss}}，总时间：{{blank:c1time}}；C2 miss rate：{{blank:c2miss}}，总时间：{{blank:c2time}}。\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用{{blank:total}} Bytes. (datasize + (valid bit size + tag\nsize) * blocks)\n答案：\n  V  Tag  Data  V  TAG  Data\nSET 0  1  101101  1  001011\nM[180-181]  M[44-45]\nSET 1  1  000011  1  101111\nM[14-15]  M[190-191]\n共命中3次\n（表格上每空格1分，tag和data都正确才得分；）\n命中次数回答正确得1分；\n分别为访问地址2、190、181（三个地址完全正确得2分，答对两个得1分）\n2) 解答：\nAddress  Binary address  C1 hit/miss  C2 hit/Miss\n3  000000 11  M  M\n180  101101 00  M  M\n43  001010 11  M  M\n2  000000 10  M  M\n191  101111 11  M  M\n88  010110 00  M  M\n190  101111 10  H  H\n14  000011 10  M  M\n181  101101 01  H  M\n44  001011 00  M  M\nC1更好。（1分）\nC1: miss rate = 8/10 = 80%,（0.5分） total cycles = 8 * 25 + 10 * 3 = 230 （1分）\nC2: miss rate = 9/10 = 90%, （0.5分） total cycles = 9 * 25 + 10 * 5 = 275 （1分）\n3) 解答：\ncache block为8 bytes，所以b=3；\ncache block 一共32*1024 / 8 = 4096个，又因为是直接映射，所以s=12；于是\ntag位一共t = 32 – s – b = 17。所以总大小为：\ntotalsize = datasize + (valid bit size + tag size) * blocks\n         = 32 * 1024 + (1 + 17) * 4096 / 8 = 41984 (bytes)",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2484,17 +2853,289 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（S=2, E=2），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：M[6-7]表示地址6和7对\n应的数据)\n  V  Tag  Data  V  TAG  Data\nSET 0  1    1\nSET 1  1    1\n共命中______次（1分），分别访问地址______________（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及miss\nrate）\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用________Bytes. (datasize + (valid bit size + tag\nsize) * blocks)",
+        "stem": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（S=2, E=2），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：M[6-7]表示地址6和7对\n应的数据)\n| Set | Way 0 Tag | Way 0 Data | Way 1 Tag | Way 1 Data |\n| --- | --- | --- | --- | --- |\n| SET 0 | {{blank:s0t0}} | {{blank:s0d0}} | {{blank:s0t1}} | {{blank:s0d1}} |\n| SET 1 | {{blank:s1t0}} | {{blank:s1d0}} | {{blank:s1t1}} | {{blank:s1d1}} |\n共命中{{blank:hits}}次（1分），分别访问地址{{blank:hitaddrs}}（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及miss\nrate）。方案选择：{{blank:better}}。C1 miss rate：{{blank:c1miss}}，总时间：{{blank:c1time}}；C2 miss rate：{{blank:c2miss}}，总时间：{{blank:c2time}}。\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用{{blank:total}} Bytes. (datasize + (valid bit size + tag\nsize) * blocks)",
         "choices": [],
-        "answer": "答案：\n  V  Tag  Data  V  TAG  Data\nSET 0  1  101101  1  001011\nM[180-181]  M[44-45]\nSET 1  1  000011  1  101111\nM[14-15]  M[190-191]\n共命中3次\n（表格上每空格1分，tag和data都正确才得分；）\n命中次数回答正确得1分；\n分别为访问地址2、190、181（三个地址完全正确得2分，答对两个得1分）\n2) 解答：\nAddress  Binary address  C1 hit/miss  C2 hit/Miss\n3  000000 11  M  M\n180  101101 00  M  M\n43  001010 11  M  M\n2  000000 10  M  M\n191  101111 11  M  M\n88  010110 00  M  M\n190  101111 10  H  H\n14  000011 10  M  M\n181  101101 01  H  M\n44  001011 00  M  M\nC1更好。（1分）\nC1: miss rate = 8/10 = 80%,（0.5分） total cycles = 8 * 25 + 10 * 3 = 230 （1分）\nC2: miss rate = 9/10 = 90%, （0.5分） total cycles = 9 * 25 + 10 * 5 = 275 （1分）\n3) 解答：\ncache block为8 bytes，所以b=3；\ncache block 一共32*1024 / 8 = 4096个，又因为是直接映射，所以s=12；于是\ntag位一共t = 32 – s – b = 17。所以总大小为：\ntotalsize = datasize + (valid bit size + tag size) * blocks\n         = 32 * 1024 + (1 + 17) * 4096 / 8 = 41984 (bytes)"
+        "answer": "答案：\n  V  Tag  Data  V  TAG  Data\nSET 0  1  101101  1  001011\nM[180-181]  M[44-45]\nSET 1  1  000011  1  101111\nM[14-15]  M[190-191]\n共命中3次\n（表格上每空格1分，tag和data都正确才得分；）\n命中次数回答正确得1分；\n分别为访问地址2、190、181（三个地址完全正确得2分，答对两个得1分）\n2) 解答：\nAddress  Binary address  C1 hit/miss  C2 hit/Miss\n3  000000 11  M  M\n180  101101 00  M  M\n43  001010 11  M  M\n2  000000 10  M  M\n191  101111 11  M  M\n88  010110 00  M  M\n190  101111 10  H  H\n14  000011 10  M  M\n181  101101 01  H  M\n44  001011 00  M  M\nC1更好。（1分）\nC1: miss rate = 8/10 = 80%,（0.5分） total cycles = 8 * 25 + 10 * 3 = 230 （1分）\nC2: miss rate = 9/10 = 90%, （0.5分） total cycles = 9 * 25 + 10 * 5 = 275 （1分）\n3) 解答：\ncache block为8 bytes，所以b=3；\ncache block 一共32*1024 / 8 = 4096个，又因为是直接映射，所以s=12；于是\ntag位一共t = 32 – s – b = 17。所以总大小为：\ntotalsize = datasize + (valid bit size + tag size) * blocks\n         = 32 * 1024 + (1 + 17) * 4096 / 8 = 41984 (bytes)",
+        "blankAnswers": [
+          {
+            "id": "s0t0",
+            "acceptedAnswers": [
+              "101101"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s0d0",
+            "acceptedAnswers": [
+              "M[180-181]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s0t1",
+            "acceptedAnswers": [
+              "001011"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s0d1",
+            "acceptedAnswers": [
+              "M[44-45]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s1t0",
+            "acceptedAnswers": [
+              "000011"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s1d0",
+            "acceptedAnswers": [
+              "M[14-15]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s1t1",
+            "acceptedAnswers": [
+              "101111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s1d1",
+            "acceptedAnswers": [
+              "M[190-191]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hitaddrs",
+            "acceptedAnswers": [
+              "2, 190, 181",
+              "2、190、181"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "better",
+            "acceptedAnswers": [
+              "C1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c1miss",
+            "acceptedAnswers": [
+              "8/10 = 80%",
+              "80%"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c1time",
+            "acceptedAnswers": [
+              "8 * 25 + 10 * 3 = 230",
+              "230"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c2miss",
+            "acceptedAnswers": [
+              "9/10 = 90%",
+              "90%"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c2time",
+            "acceptedAnswers": [
+              "9 * 25 + 10 * 5 = 275",
+              "275"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "total",
+            "acceptedAnswers": [
+              "41984",
+              "41984 bytes"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "s0t0",
+            "acceptedAnswers": [
+              "101101"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s0d0",
+            "acceptedAnswers": [
+              "M[180-181]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s0t1",
+            "acceptedAnswers": [
+              "001011"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s0d1",
+            "acceptedAnswers": [
+              "M[44-45]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s1t0",
+            "acceptedAnswers": [
+              "000011"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s1d0",
+            "acceptedAnswers": [
+              "M[14-15]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s1t1",
+            "acceptedAnswers": [
+              "101111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "s1d1",
+            "acceptedAnswers": [
+              "M[190-191]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hits",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "hitaddrs",
+            "acceptedAnswers": [
+              "2, 190, 181",
+              "2、190、181"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "better",
+            "acceptedAnswers": [
+              "C1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c1miss",
+            "acceptedAnswers": [
+              "8/10 = 80%",
+              "80%"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c1time",
+            "acceptedAnswers": [
+              "8 * 25 + 10 * 3 = 230",
+              "230"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c2miss",
+            "acceptedAnswers": [
+              "9/10 = 90%",
+              "90%"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c2time",
+            "acceptedAnswers": [
+              "9 * 25 + 10 * 5 = 275",
+              "275"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "total",
+            "acceptedAnswers": [
+              "41984",
+              "41984 bytes"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（S=2, E=2），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：M[6-7]表示地址6和7对\n应的数据)\n  V  Tag  Data  V  TAG  Data\nSET 0  1    1\nSET 1  1    1\n共命中______次（1分），分别访问地址______________（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及miss\nrate）\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用________Bytes. (datasize + (valid bit size + tag\nsize) * blocks)",
+        "prompt": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（S=2, E=2），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：M[6-7]表示地址6和7对\n应的数据)\n| Set | Way 0 Tag | Way 0 Data | Way 1 Tag | Way 1 Data |\n| --- | --- | --- | --- | --- |\n| SET 0 | {{blank:s0t0}} | {{blank:s0d0}} | {{blank:s0t1}} | {{blank:s0d1}} |\n| SET 1 | {{blank:s1t0}} | {{blank:s1d0}} | {{blank:s1t1}} | {{blank:s1d1}} |\n共命中{{blank:hits}}次（1分），分别访问地址{{blank:hitaddrs}}（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及miss\nrate）。方案选择：{{blank:better}}。C1 miss rate：{{blank:c1miss}}，总时间：{{blank:c1time}}；C2 miss rate：{{blank:c2miss}}，总时间：{{blank:c2time}}。\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用{{blank:total}} Bytes. (datasize + (valid bit size + tag\nsize) * blocks)",
         "answer": "答案：\n  V  Tag  Data  V  TAG  Data\nSET 0  1  101101  1  001011\nM[180-181]  M[44-45]\nSET 1  1  000011  1  101111\nM[14-15]  M[190-191]\n共命中3次\n（表格上每空格1分，tag和data都正确才得分；）\n命中次数回答正确得1分；\n分别为访问地址2、190、181（三个地址完全正确得2分，答对两个得1分）\n2) 解答：\nAddress  Binary address  C1 hit/miss  C2 hit/Miss\n3  000000 11  M  M\n180  101101 00  M  M\n43  001010 11  M  M\n2  000000 10  M  M\n191  101111 11  M  M\n88  010110 00  M  M\n190  101111 10  H  H\n14  000011 10  M  M\n181  101101 01  H  M\n44  001011 00  M  M\nC1更好。（1分）\nC1: miss rate = 8/10 = 80%,（0.5分） total cycles = 8 * 25 + 10 * 3 = 230 （1分）\nC2: miss rate = 9/10 = 90%, （0.5分） total cycles = 9 * 25 + 10 * 5 = 275 （1分）\n3) 解答：\ncache block为8 bytes，所以b=3；\ncache block 一共32*1024 / 8 = 4096个，又因为是直接映射，所以s=12；于是\ntag位一共t = 32 – s – b = 17。所以总大小为：\ntotalsize = datasize + (valid bit size + tag size) * blocks\n         = 32 * 1024 + (1 + 17) * 4096 / 8 = 41984 (bytes)"
       },
       "presentation": {
@@ -5877,7 +6518,7 @@
       "exam": "2016期末",
       "questionNo": "第一题 6",
       "summary": "组相联 cache 地址序列命中次数手算",
-      "content": "6.  某机器内存为8位地址，cache设计参数为E=2,t=2,s=2,b=4，cache块\n大小为16字节。cache为空的初始状态下，数据访问的地址序列为0->4->34\n->162->128->192->2（以字节为单位），请问一共发生多少次cache命中？\n答：（     ）\nA. 0\nB. 1\nC. 2\nD. 3\n答案：B\n00 00 0000 miss\n3\n\n\n```\n00 00 0100 hit\n00 10 0010 miss\n10 10 0010 miss\n10 00 0000 miss\n11 00 0000 miss\n01 00 0000 miss\n00 00 0010 miss\n```",
+      "content": "6.  某机器内存为8位地址，cache设计参数为E=2,t=2,s=2,b=4，cache块\n大小为16字节。cache为空的初始状态下，数据访问的地址序列为0->4->34\n->162->128->192->2（以字节为单位），请问一共发生多少次cache命中？\n答：（     ）\nA. 0\nB. 1\nC. 2\nD. 3\n答案：B\n00 00 0000 miss\n\n\n```\n00 00 0100 hit\n00 10 0010 miss\n10 10 0010 miss\n10 00 0000 miss\n11 00 0000 miss\n01 00 0000 miss\n00 00 0010 miss\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5918,7 +6559,7 @@
             "content": "3"
           }
         ],
-        "answer": "答案：B\n00 00 0000 miss\n3\n\n\n```\n00 00 0100 hit\n00 10 0010 miss\n10 10 0010 miss\n10 00 0000 miss\n11 00 0000 miss\n01 00 0000 miss\n00 00 0010 miss\n```"
+        "answer": "答案：B\n00 00 0000 miss\n\n\n```\n00 00 0100 hit\n00 10 0010 miss\n10 10 0010 miss\n10 00 0000 miss\n11 00 0000 miss\n01 00 0000 miss\n00 00 0010 miss\n```"
       },
       "interaction": {
         "kind": "choice",
@@ -5948,7 +6589,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "6.  某机器内存为8位地址，cache设计参数为E=2,t=2,s=2,b=4，cache块\n大小为16字节。cache为空的初始状态下，数据访问的地址序列为0->4->34\n->162->128->192->2（以字节为单位），请问一共发生多少次cache命中？\n答：（     ）",
-        "answer": "答案：B\n00 00 0000 miss\n3\n\n\n```\n00 00 0100 hit\n00 10 0010 miss\n10 10 0010 miss\n10 00 0000 miss\n11 00 0000 miss\n01 00 0000 miss\n00 00 0010 miss\n```"
+        "answer": "答案：B\n00 00 0000 miss\n\n\n```\n00 00 0100 hit\n00 10 0010 miss\n10 10 0010 miss\n10 00 0000 miss\n11 00 0000 miss\n01 00 0000 miss\n00 00 0010 miss\n```"
       },
       "presentation": {
         "status": "ready",

@@ -22,9 +22,9 @@
       "name": "Machine Prog",
       "title": "程序的机器级表示",
       "questionCount": 152,
-      "choiceQuestionCount": 84,
-      "declaredQuestionCount": 148,
-      "publishedQuestionCount": 148,
+      "choiceQuestionCount": 85,
+      "declaredQuestionCount": 149,
+      "publishedQuestionCount": 149,
       "paperCount": 26,
       "questionFile": "questions/2-Machine-Prog.json"
     },
@@ -58,9 +58,9 @@
       "name": "Compilation (Program optimization and linking)",
       "title": "编译系统（程序优化与链接）",
       "questionCount": 81,
-      "choiceQuestionCount": 38,
-      "declaredQuestionCount": 73,
-      "publishedQuestionCount": 73,
+      "choiceQuestionCount": 42,
+      "declaredQuestionCount": 75,
+      "publishedQuestionCount": 75,
       "paperCount": 27,
       "questionFile": "questions/5-Compilation-Linking.json"
     },
@@ -93,10 +93,10 @@
       "number": 8,
       "name": "Network",
       "title": "网络编程",
-      "questionCount": 53,
-      "choiceQuestionCount": 34,
-      "declaredQuestionCount": 49,
-      "publishedQuestionCount": 49,
+      "questionCount": 54,
+      "choiceQuestionCount": 35,
+      "declaredQuestionCount": 51,
+      "publishedQuestionCount": 51,
       "paperCount": 13,
       "questionFile": "questions/8-Network.json"
     },
@@ -105,10 +105,10 @@
       "number": 9,
       "name": "Concurrent Programming and Synchronization",
       "title": "并发编程与同步",
-      "questionCount": 47,
+      "questionCount": 48,
       "choiceQuestionCount": 21,
-      "declaredQuestionCount": 42,
-      "publishedQuestionCount": 42,
+      "declaredQuestionCount": 43,
+      "publishedQuestionCount": 43,
       "paperCount": 12,
       "questionFile": "questions/9-Concurrent-Programming.json"
     }
@@ -138,10 +138,10 @@
     ]
   },
   "stats": {
-    "questions": 855,
-    "publishedChoiceQuestions": 471,
+    "questions": 857,
+    "publishedChoiceQuestions": 477,
     "withheldChoiceQuestions": 0,
-    "publishedQuestions": 821,
+    "publishedQuestions": 827,
     "withheldQuestions": 0,
     "papers": 28,
     "answerBlocks": 55

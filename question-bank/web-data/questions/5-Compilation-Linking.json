@@ -754,7 +754,7 @@
       "exam": "2016期中",
       "questionNo": "第三题 (2)",
       "summary": "链表循环 CPE 与关键路径，填 C 代码",
-      "content": "(2) 右边的汇编代码是由左边程序中的m函数编译而成。回答如下问题。\ntypedef struct _list {  m:\n  struct _list* next;    testq  %rdi, %rdi\n  int value;    je .L6\n} list;    movq  (%rdi), %rdx\n    movl  $100, %eax\nint m(list* p) {    testq  %rdx, %rdx\n  int r = 100;    jne .L4\n  while (__○1__) {    jmp .L3\n    r = __○2__;  .L14:\n    p = __○3__;    movq  (%rdi), %rdx\n  }    testq  %rdx, %rdx\n○   je .L3\n  if (p != 0) r = __4__;  .L4:\n  return r;    movl  8(%rdx), %r8d\n}    __○5__ 8(%rdi), %r8d\n  __○5__ %r8d, %eax\n  movq  (%rdx), %rdi\n  testq  %rdi, %rdi\n  jne .L14\n  ret\n.L3:\n  __○5__ 8(%rdi), %eax\n  ret\n.L6:\n  movl  $100, %eax\n  ret\n已知访存延迟1个指令周期。不访存的时候addl延迟4个指令周期，imull延迟 8 个指令周期，其他指令延迟 1个指令周期。指令访存时延迟的执行周期为不\n访存的时候延迟的指令周期和访存延迟的周期之和。函数m中的循环在处理链表p\n的时候CPE为4个指令周期。○5处的指令为movl, addl, imull中的一个。请\n填写○1-○5处的代码（○5空2分，其他3分）。\n○1\n○2\n○3\n○4\n○5\n答案：(2) ○5 空 2 分，其他 3 分\n○1 `p != 0 && p->next != 0`\n○2 `r * (p->value * p->next->value)`（注意：答案中运算可以交换，但不可结合）\n○3 `p->next->next`\n○4 `r * p->value`\n○5 `imull`（因为每次处理两个元素，所以关键路径的时间周期为 8。关键路径要么为两次访存和两次 mov，要么为 ○5 处的运算。前者不可能达到 8，所以只能是 imull。）\n\n给分说明：如果 ○2 ○4 的答案和 ○5 一致，但是 ○5 答错了就 ○2 ○4 各给 2 分。",
+      "content": "(2) 右边的汇编代码是由左边程序中的m函数编译而成。回答如下问题。\n**C 程序：**\n```c\ntypedef struct _list {\n    struct _list* next;\n    int value;\n} list;\n\nint m(list* p) {\n    int r = 100;\n    while ({{blank:q1}}) {\n        r = {{blank:q2}};\n        p = {{blank:q3}};\n    }\n    if (p != 0) r = {{blank:q4}};\n    return r;\n}\n```\n\n**对应的 X86-64 汇编代码：**\n```asm\nm:\n    testq  %rdi, %rdi\n    je     .L6\n    movq   (%rdi), %rdx\n    movl   $100, %eax\n    testq  %rdx, %rdx\n    jne    .L4\n    jmp    .L3\n.L14:\n    movq   (%rdi), %rdx\n    testq  %rdx, %rdx\n    je     .L3\n.L4:\n    movl   8(%rdx), %r8d\n    {{blank:q5a}} 8(%rdi), %r8d\n    {{blank:q5b}} %r8d, %eax\n    movq   (%rdx), %rdi\n    testq  %rdi, %rdi\n    jne    .L14\n    ret\n.L3:\n    {{blank:q5c}} 8(%rdi), %eax\n    ret\n.L6:\n    movl   $100, %eax\n    ret\n```\n已知访存延迟1个指令周期。不访存的时候addl延迟4个指令周期，imull延迟 8 个指令周期，其他指令延迟 1个指令周期。指令访存时延迟的执行周期为不\n访存的时候延迟的指令周期和访存延迟的周期之和。函数m中的循环在处理链表p\n的时候CPE为4个指令周期。○5处的指令为movl, addl, imull中的一个。请\n填写○1-○5处的代码（○5空2分，其他3分）。\n○1\n○2\n○3\n○4\n○5\n答案：(2) ○5 空 2 分，其他 3 分\n○1 `p != 0 && p->next != 0`\n○2 `r * (p->value * p->next->value)`（注意：答案中运算可以交换，但不可结合）\n○3 `p->next->next`\n○4 `r * p->value`\n○5 `imull`（因为每次处理两个元素，所以关键路径的时间周期为 8。关键路径要么为两次访存和两次 mov，要么为 ○5 处的运算。前者不可能达到 8，所以只能是 imull。）\n\n给分说明：如果 ○2 ○4 的答案和 ○5 一致，但是 ○5 答错了就 ○2 ○4 各给 2 分。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -777,17 +777,137 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "(2) 右边的汇编代码是由左边程序中的m函数编译而成。回答如下问题。\ntypedef struct _list {  m:\n  struct _list* next;    testq  %rdi, %rdi\n  int value;    je .L6\n} list;    movq  (%rdi), %rdx\n    movl  $100, %eax\nint m(list* p) {    testq  %rdx, %rdx\n  int r = 100;    jne .L4\n  while (__○1__) {    jmp .L3\n    r = __○2__;  .L14:\n    p = __○3__;    movq  (%rdi), %rdx\n  }    testq  %rdx, %rdx\n○   je .L3\n  if (p != 0) r = __4__;  .L4:\n  return r;    movl  8(%rdx), %r8d\n}    __○5__ 8(%rdi), %r8d\n  __○5__ %r8d, %eax\n  movq  (%rdx), %rdi\n  testq  %rdi, %rdi\n  jne .L14\n  ret\n.L3:\n  __○5__ 8(%rdi), %eax\n  ret\n.L6:\n  movl  $100, %eax\n  ret\n已知访存延迟1个指令周期。不访存的时候addl延迟4个指令周期，imull延迟 8 个指令周期，其他指令延迟 1个指令周期。指令访存时延迟的执行周期为不\n访存的时候延迟的指令周期和访存延迟的周期之和。函数m中的循环在处理链表p\n的时候CPE为4个指令周期。○5处的指令为movl, addl, imull中的一个。请\n填写○1-○5处的代码（○5空2分，其他3分）。\n○1\n○2\n○3\n○4\n○5",
+        "stem": "(2) 右边的汇编代码是由左边程序中的m函数编译而成。回答如下问题。\n**C 程序：**\n```c\ntypedef struct _list {\n    struct _list* next;\n    int value;\n} list;\n\nint m(list* p) {\n    int r = 100;\n    while ({{blank:q1}}) {\n        r = {{blank:q2}};\n        p = {{blank:q3}};\n    }\n    if (p != 0) r = {{blank:q4}};\n    return r;\n}\n```\n\n**对应的 X86-64 汇编代码：**\n```asm\nm:\n    testq  %rdi, %rdi\n    je     .L6\n    movq   (%rdi), %rdx\n    movl   $100, %eax\n    testq  %rdx, %rdx\n    jne    .L4\n    jmp    .L3\n.L14:\n    movq   (%rdi), %rdx\n    testq  %rdx, %rdx\n    je     .L3\n.L4:\n    movl   8(%rdx), %r8d\n    {{blank:q5a}} 8(%rdi), %r8d\n    {{blank:q5b}} %r8d, %eax\n    movq   (%rdx), %rdi\n    testq  %rdi, %rdi\n    jne    .L14\n    ret\n.L3:\n    {{blank:q5c}} 8(%rdi), %eax\n    ret\n.L6:\n    movl   $100, %eax\n    ret\n```\n已知访存延迟1个指令周期。不访存的时候addl延迟4个指令周期，imull延迟 8 个指令周期，其他指令延迟 1个指令周期。指令访存时延迟的执行周期为不\n访存的时候延迟的指令周期和访存延迟的周期之和。函数m中的循环在处理链表p\n的时候CPE为4个指令周期。○5处的指令为movl, addl, imull中的一个。请\n填写○1-○5处的代码（○5空2分，其他3分）。\n○1\n○2\n○3\n○4\n○5",
         "choices": [],
-        "answer": "答案：(2) ○5 空 2 分，其他 3 分\n○1 `p != 0 && p->next != 0`\n○2 `r * (p->value * p->next->value)`（注意：答案中运算可以交换，但不可结合）\n○3 `p->next->next`\n○4 `r * p->value`\n○5 `imull`（因为每次处理两个元素，所以关键路径的时间周期为 8。关键路径要么为两次访存和两次 mov，要么为 ○5 处的运算。前者不可能达到 8，所以只能是 imull。）\n\n给分说明：如果 ○2 ○4 的答案和 ○5 一致，但是 ○5 答错了就 ○2 ○4 各给 2 分。"
+        "answer": "答案：(2) ○5 空 2 分，其他 3 分\n○1 `p != 0 && p->next != 0`\n○2 `r * (p->value * p->next->value)`（注意：答案中运算可以交换，但不可结合）\n○3 `p->next->next`\n○4 `r * p->value`\n○5 `imull`（因为每次处理两个元素，所以关键路径的时间周期为 8。关键路径要么为两次访存和两次 mov，要么为 ○5 处的运算。前者不可能达到 8，所以只能是 imull。）\n\n给分说明：如果 ○2 ○4 的答案和 ○5 一致，但是 ○5 答错了就 ○2 ○4 各给 2 分。",
+        "blankAnswers": [
+          {
+            "id": "q1",
+            "acceptedAnswers": [
+              "p != 0 && p->next != 0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q2",
+            "acceptedAnswers": [
+              "r * (p->value * p->next->value)",
+              "(p->value * p->next->value) * r"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3",
+            "acceptedAnswers": [
+              "p->next->next"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4",
+            "acceptedAnswers": [
+              "r * p->value",
+              "p->value * r"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5a",
+            "acceptedAnswers": [
+              "imull"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5b",
+            "acceptedAnswers": [
+              "imull"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5c",
+            "acceptedAnswers": [
+              "imull"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q1",
+            "acceptedAnswers": [
+              "p != 0 && p->next != 0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q2",
+            "acceptedAnswers": [
+              "r * (p->value * p->next->value)",
+              "(p->value * p->next->value) * r"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3",
+            "acceptedAnswers": [
+              "p->next->next"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4",
+            "acceptedAnswers": [
+              "r * p->value",
+              "p->value * r"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5a",
+            "acceptedAnswers": [
+              "imull"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5b",
+            "acceptedAnswers": [
+              "imull"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5c",
+            "acceptedAnswers": [
+              "imull"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "(2) 右边的汇编代码是由左边程序中的m函数编译而成。回答如下问题。\ntypedef struct _list {  m:\n  struct _list* next;    testq  %rdi, %rdi\n  int value;    je .L6\n} list;    movq  (%rdi), %rdx\n    movl  $100, %eax\nint m(list* p) {    testq  %rdx, %rdx\n  int r = 100;    jne .L4\n  while (__○1__) {    jmp .L3\n    r = __○2__;  .L14:\n    p = __○3__;    movq  (%rdi), %rdx\n  }    testq  %rdx, %rdx\n○   je .L3\n  if (p != 0) r = __4__;  .L4:\n  return r;    movl  8(%rdx), %r8d\n}    __○5__ 8(%rdi), %r8d\n  __○5__ %r8d, %eax\n  movq  (%rdx), %rdi\n  testq  %rdi, %rdi\n  jne .L14\n  ret\n.L3:\n  __○5__ 8(%rdi), %eax\n  ret\n.L6:\n  movl  $100, %eax\n  ret\n已知访存延迟1个指令周期。不访存的时候addl延迟4个指令周期，imull延迟 8 个指令周期，其他指令延迟 1个指令周期。指令访存时延迟的执行周期为不\n访存的时候延迟的指令周期和访存延迟的周期之和。函数m中的循环在处理链表p\n的时候CPE为4个指令周期。○5处的指令为movl, addl, imull中的一个。请\n填写○1-○5处的代码（○5空2分，其他3分）。\n○1\n○2\n○3\n○4\n○5",
+        "prompt": "(2) 右边的汇编代码是由左边程序中的m函数编译而成。回答如下问题。\n**C 程序：**\n```c\ntypedef struct _list {\n    struct _list* next;\n    int value;\n} list;\n\nint m(list* p) {\n    int r = 100;\n    while ({{blank:q1}}) {\n        r = {{blank:q2}};\n        p = {{blank:q3}};\n    }\n    if (p != 0) r = {{blank:q4}};\n    return r;\n}\n```\n\n**对应的 X86-64 汇编代码：**\n```asm\nm:\n    testq  %rdi, %rdi\n    je     .L6\n    movq   (%rdi), %rdx\n    movl   $100, %eax\n    testq  %rdx, %rdx\n    jne    .L4\n    jmp    .L3\n.L14:\n    movq   (%rdi), %rdx\n    testq  %rdx, %rdx\n    je     .L3\n.L4:\n    movl   8(%rdx), %r8d\n    {{blank:q5a}} 8(%rdi), %r8d\n    {{blank:q5b}} %r8d, %eax\n    movq   (%rdx), %rdi\n    testq  %rdi, %rdi\n    jne    .L14\n    ret\n.L3:\n    {{blank:q5c}} 8(%rdi), %eax\n    ret\n.L6:\n    movl   $100, %eax\n    ret\n```\n已知访存延迟1个指令周期。不访存的时候addl延迟4个指令周期，imull延迟 8 个指令周期，其他指令延迟 1个指令周期。指令访存时延迟的执行周期为不\n访存的时候延迟的指令周期和访存延迟的周期之和。函数m中的循环在处理链表p\n的时候CPE为4个指令周期。○5处的指令为movl, addl, imull中的一个。请\n填写○1-○5处的代码（○5空2分，其他3分）。\n○1\n○2\n○3\n○4\n○5",
         "answer": "答案：(2) ○5 空 2 分，其他 3 分\n○1 `p != 0 && p->next != 0`\n○2 `r * (p->value * p->next->value)`（注意：答案中运算可以交换，但不可结合）\n○3 `p->next->next`\n○4 `r * p->value`\n○5 `imull`（因为每次处理两个元素，所以关键路径的时间周期为 8。关键路径要么为两次访存和两次 mov，要么为 ○5 处的运算。前者不可能达到 8，所以只能是 imull。）\n\n给分说明：如果 ○2 ○4 的答案和 ○5 一致，但是 ○5 答错了就 ○2 ○4 各给 2 分。"
       },
       "presentation": {
@@ -805,7 +925,7 @@
       "exam": "2017期中",
       "questionNo": "第一题 12",
       "summary": "编译器不会做的程序优化",
-      "content": "12. 假设已有声明int i, int j, const int n, int r, int a[n], int\nb[n], int mul(int, int)以下程序优化编译器一般不会进行的是:\n  优化前  优化后\n```\n    a[n * 8] += b[j];  for (j = 0; j < n; ++j)\n    a[tmp] += b[j];\n    r = (r * a[j]) * b[j];      r = r * (a[j] * b[j]);\n    a[mul(n, i) + j] = b[j];  for (j = 0; j < n; ++j)\n    a[ni + j] = b[j];\n    a[0] += a[j];  for (j = 1; j < n; ++j)\ntmp += a[j];\na[0] += tmp;\n```\nA. for (j = 0; j < n; ++j)  int tmp = (n << 3);\nB. for (j = 0; j < n; ++j)  for (j = 0; j < n; ++j)\nC. for (j = 0; j < n; ++j)  int ni = mul(n, i);\nD. for (j = 1; j < n; ++j)  int tmp = 0;\n答案: C",
+      "content": "12. 假设已有声明int i, int j, const int n, int r, int a[n], int\nb[n], int mul(int, int)以下程序优化编译器一般不会进行的是:\nA.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    a[n * 8] += b[j];\n\n/* 优化后 */\nint tmp = (n << 3);\nfor (j = 0; j < n; ++j)\n    a[tmp] += b[j];\n```\n\nB.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    r = (r * a[j]) * b[j];\n\n/* 优化后 */\nfor (j = 0; j < n; ++j)\n    r = r * (a[j] * b[j]);\n```\n\nC.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    a[mul(n, i) + j] = b[j];\n\n/* 优化后 */\nint ni = mul(n, i);\nfor (j = 0; j < n; ++j)\n    a[ni + j] = b[j];\n```\n\nD.\n```c\n/* 优化前 */\nfor (j = 1; j < n; ++j)\n    a[0] += a[j];\n\n/* 优化后 */\nint tmp = 0;\nfor (j = 1; j < n; ++j)\n    tmp += a[j];\na[0] += tmp;\n```\nA. 第一组变换\nB. 第二组变换\nC. 第三组变换\nD. 第四组变换\n答案: C",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -825,23 +945,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "12. 假设已有声明int i, int j, const int n, int r, int a[n], int\nb[n], int mul(int, int)以下程序优化编译器一般不会进行的是:\n  优化前  优化后\n```\n    a[n * 8] += b[j];  for (j = 0; j < n; ++j)\n    a[tmp] += b[j];\n    r = (r * a[j]) * b[j];      r = r * (a[j] * b[j]);\n    a[mul(n, i) + j] = b[j];  for (j = 0; j < n; ++j)\n    a[ni + j] = b[j];\n    a[0] += a[j];  for (j = 1; j < n; ++j)\ntmp += a[j];\na[0] += tmp;\n```",
+        "stem": "12. 假设已有声明int i, int j, const int n, int r, int a[n], int\nb[n], int mul(int, int)以下程序优化编译器一般不会进行的是:\nA.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    a[n * 8] += b[j];\n\n/* 优化后 */\nint tmp = (n << 3);\nfor (j = 0; j < n; ++j)\n    a[tmp] += b[j];\n```\n\nB.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    r = (r * a[j]) * b[j];\n\n/* 优化后 */\nfor (j = 0; j < n; ++j)\n    r = r * (a[j] * b[j]);\n```\n\nC.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    a[mul(n, i) + j] = b[j];\n\n/* 优化后 */\nint ni = mul(n, i);\nfor (j = 0; j < n; ++j)\n    a[ni + j] = b[j];\n```\n\nD.\n```c\n/* 优化前 */\nfor (j = 1; j < n; ++j)\n    a[0] += a[j];\n\n/* 优化后 */\nint tmp = 0;\nfor (j = 1; j < n; ++j)\n    tmp += a[j];\na[0] += tmp;\n```",
         "choices": [
           {
             "key": "A",
-            "content": "for (j = 0; j < n; ++j)  int tmp = (n << 3);"
+            "content": "第一组变换"
           },
           {
             "key": "B",
-            "content": "for (j = 0; j < n; ++j)  for (j = 0; j < n; ++j)"
+            "content": "第二组变换"
           },
           {
             "key": "C",
-            "content": "for (j = 0; j < n; ++j)  int ni = mul(n, i);"
+            "content": "第三组变换"
           },
           {
             "key": "D",
-            "content": "for (j = 1; j < n; ++j)  int tmp = 0;"
+            "content": "第四组变换"
           }
         ],
         "answer": "答案: C"
@@ -852,19 +972,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "for (j = 0; j < n; ++j)  int tmp = (n << 3);"
+            "content": "第一组变换"
           },
           {
             "id": "B",
-            "content": "for (j = 0; j < n; ++j)  for (j = 0; j < n; ++j)"
+            "content": "第二组变换"
           },
           {
             "id": "C",
-            "content": "for (j = 0; j < n; ++j)  int ni = mul(n, i);"
+            "content": "第三组变换"
           },
           {
             "id": "D",
-            "content": "for (j = 1; j < n; ++j)  int tmp = 0;"
+            "content": "第四组变换"
           }
         ],
         "correctChoiceIds": [
@@ -873,7 +993,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "12. 假设已有声明int i, int j, const int n, int r, int a[n], int\nb[n], int mul(int, int)以下程序优化编译器一般不会进行的是:\n  优化前  优化后\n```\n    a[n * 8] += b[j];  for (j = 0; j < n; ++j)\n    a[tmp] += b[j];\n    r = (r * a[j]) * b[j];      r = r * (a[j] * b[j]);\n    a[mul(n, i) + j] = b[j];  for (j = 0; j < n; ++j)\n    a[ni + j] = b[j];\n    a[0] += a[j];  for (j = 1; j < n; ++j)\ntmp += a[j];\na[0] += tmp;\n```",
+        "prompt": "12. 假设已有声明int i, int j, const int n, int r, int a[n], int\nb[n], int mul(int, int)以下程序优化编译器一般不会进行的是:\nA.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    a[n * 8] += b[j];\n\n/* 优化后 */\nint tmp = (n << 3);\nfor (j = 0; j < n; ++j)\n    a[tmp] += b[j];\n```\n\nB.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    r = (r * a[j]) * b[j];\n\n/* 优化后 */\nfor (j = 0; j < n; ++j)\n    r = r * (a[j] * b[j]);\n```\n\nC.\n```c\n/* 优化前 */\nfor (j = 0; j < n; ++j)\n    a[mul(n, i) + j] = b[j];\n\n/* 优化后 */\nint ni = mul(n, i);\nfor (j = 0; j < n; ++j)\n    a[ni + j] = b[j];\n```\n\nD.\n```c\n/* 优化前 */\nfor (j = 1; j < n; ++j)\n    a[0] += a[j];\n\n/* 优化后 */\nint tmp = 0;\nfor (j = 1; j < n; ++j)\n    tmp += a[j];\na[0] += tmp;\n```",
         "answer": "答案: C"
       },
       "presentation": {
@@ -891,7 +1011,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 11",
       "summary": "编译器总是可行的优化（别名/副作用）",
-      "content": "11. 假设已有声明int i, int sum, int *p, int *q, int *r，const int n =\n100, float a[n], float b[n], float c[n], int foo(int), void bar(),\n以下哪项程序优化编译器总是可以进行？\nfloat tmp;\nfor(i = 0; i < n; ++i) {  for(i = 0; i < n; ++i) {\nA    a[i] += b[i];    tmp = b[i] + c[i];\n  a[i] += c[i];    a[i] += tmp;\n}  }\nint tmp;\nB  *p += *q;  tmp = *q + *r;\n*p += *r;  *p += tmp;\nint N = n * 4;\nC  for(i = 0; i < n; ++i)  for(i = 0; i < N; i += 4)\n    sum += i * 4;      sum += i;\nint tmp = foo(n);\nD  for(i = 0; i < foo(n); ++i)  for(i = 0; i < tmp; ++i)\n    bar();      bar();\n答案：C\nA 浮点数不满足结合律\nB p,q,r可能指向同一个地址\nD foo函数可能有副作用",
+      "content": "11. 假设已有声明 `int i, int sum, int *p, int *q, int *r`，`const int n = 100`，`float a[n], float b[n], float c[n]`，`int foo(int), void bar()`，以下哪项程序优化编译器总是可以进行？\nA. 浮点数组循环：\n```c\nfor (i = 0; i < n; ++i) {\n    a[i] += b[i];\n    a[i] += c[i];\n}\n```\n优化为：\n```c\nfor (i = 0; i < n; ++i) {\n    tmp = b[i] + c[i];\n    a[i] += tmp;\n}\n```\nB. 指针读写：\n```c\n*p += *q;\n*p += *r;\n```\n优化为：\n```c\ntmp = *q + *r;\n*p += tmp;\n```\nC. 循环索引缩放：\n```c\nfor (i = 0; i < n; ++i)\n    sum += i * 4;\n```\n优化为：\n```c\nN = n * 4;\nfor (i = 0; i < N; i += 4)\n    sum += i;\n```\nD. 含函数调用的循环：\n```c\nfor (i = 0; i < foo(n); ++i)\n    bar();\n```\n优化为：\n```c\ntmp = foo(n);\nfor (i = 0; i < tmp; ++i)\n    bar();\n```\n答案：C\nA 浮点数不满足结合律。\nB `p`、`q`、`r` 可能指向同一个地址。\nD `foo` 函数可能有副作用。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -909,20 +1029,58 @@
         "curated": "_curated/期中/2018期中-带答案/173.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "11. 假设已有声明int i, int sum, int *p, int *q, int *r，const int n =\n100, float a[n], float b[n], float c[n], int foo(int), void bar(),\n以下哪项程序优化编译器总是可以进行？\nfloat tmp;\nfor(i = 0; i < n; ++i) {  for(i = 0; i < n; ++i) {\nA    a[i] += b[i];    tmp = b[i] + c[i];\n  a[i] += c[i];    a[i] += tmp;\n}  }\nint tmp;\nB  *p += *q;  tmp = *q + *r;\n*p += *r;  *p += tmp;\nint N = n * 4;\nC  for(i = 0; i < n; ++i)  for(i = 0; i < N; i += 4)\n    sum += i * 4;      sum += i;\nint tmp = foo(n);\nD  for(i = 0; i < foo(n); ++i)  for(i = 0; i < tmp; ++i)\n    bar();      bar();",
-        "choices": [],
-        "answer": "答案：C\nA 浮点数不满足结合律\nB p,q,r可能指向同一个地址\nD foo函数可能有副作用"
+        "mode": "choice",
+        "selection": "single",
+        "stem": "11. 假设已有声明 `int i, int sum, int *p, int *q, int *r`，`const int n = 100`，`float a[n], float b[n], float c[n]`，`int foo(int), void bar()`，以下哪项程序优化编译器总是可以进行？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "浮点数组循环：\n```c\nfor (i = 0; i < n; ++i) {\na[i] += b[i];\na[i] += c[i];\n}\n```\n优化为：\n```c\nfor (i = 0; i < n; ++i) {\ntmp = b[i] + c[i];\na[i] += tmp;\n}\n```"
+          },
+          {
+            "key": "B",
+            "content": "指针读写：\n```c\n*p += *q;\n*p += *r;\n```\n优化为：\n```c\ntmp = *q + *r;\n*p += tmp;\n```"
+          },
+          {
+            "key": "C",
+            "content": "循环索引缩放：\n```c\nfor (i = 0; i < n; ++i)\nsum += i * 4;\n```\n优化为：\n```c\nN = n * 4;\nfor (i = 0; i < N; i += 4)\nsum += i;\n```"
+          },
+          {
+            "key": "D",
+            "content": "含函数调用的循环：\n```c\nfor (i = 0; i < foo(n); ++i)\nbar();\n```\n优化为：\n```c\ntmp = foo(n);\nfor (i = 0; i < tmp; ++i)\nbar();\n```"
+          }
+        ],
+        "answer": "答案：C\nA 浮点数不满足结合律。\nB `p`、`q`、`r` 可能指向同一个地址。\nD `foo` 函数可能有副作用。"
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "浮点数组循环：\n```c\nfor (i = 0; i < n; ++i) {\na[i] += b[i];\na[i] += c[i];\n}\n```\n优化为：\n```c\nfor (i = 0; i < n; ++i) {\ntmp = b[i] + c[i];\na[i] += tmp;\n}\n```"
+          },
+          {
+            "id": "B",
+            "content": "指针读写：\n```c\n*p += *q;\n*p += *r;\n```\n优化为：\n```c\ntmp = *q + *r;\n*p += tmp;\n```"
+          },
+          {
+            "id": "C",
+            "content": "循环索引缩放：\n```c\nfor (i = 0; i < n; ++i)\nsum += i * 4;\n```\n优化为：\n```c\nN = n * 4;\nfor (i = 0; i < N; i += 4)\nsum += i;\n```"
+          },
+          {
+            "id": "D",
+            "content": "含函数调用的循环：\n```c\nfor (i = 0; i < foo(n); ++i)\nbar();\n```\n优化为：\n```c\ntmp = foo(n);\nfor (i = 0; i < tmp; ++i)\nbar();\n```"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "11. 假设已有声明int i, int sum, int *p, int *q, int *r，const int n =\n100, float a[n], float b[n], float c[n], int foo(int), void bar(),\n以下哪项程序优化编译器总是可以进行？\nfloat tmp;\nfor(i = 0; i < n; ++i) {  for(i = 0; i < n; ++i) {\nA    a[i] += b[i];    tmp = b[i] + c[i];\n  a[i] += c[i];    a[i] += tmp;\n}  }\nint tmp;\nB  *p += *q;  tmp = *q + *r;\n*p += *r;  *p += tmp;\nint N = n * 4;\nC  for(i = 0; i < n; ++i)  for(i = 0; i < N; i += 4)\n    sum += i * 4;      sum += i;\nint tmp = foo(n);\nD  for(i = 0; i < foo(n); ++i)  for(i = 0; i < tmp; ++i)\n    bar();      bar();",
-        "answer": "答案：C\nA 浮点数不满足结合律\nB p,q,r可能指向同一个地址\nD foo函数可能有副作用"
+        "prompt": "11. 假设已有声明 `int i, int sum, int *p, int *q, int *r`，`const int n = 100`，`float a[n], float b[n], float c[n]`，`int foo(int), void bar()`，以下哪项程序优化编译器总是可以进行？",
+        "answer": "答案：C\nA 浮点数不满足结合律。\nB `p`、`q`、`r` 可能指向同一个地址。\nD `foo` 函数可能有副作用。"
       },
       "presentation": {
         "status": "ready",
@@ -1028,7 +1186,7 @@
       "exam": "2019期中",
       "questionNo": "第一题 13",
       "summary": "loop unrolling 的原理与代价",
-      "content": "13. 对于loop-unrolling这种优化技巧，请指出下面哪一个陈述是错误的（一\n个）：\nA.  Loop-unrolling的原理是将尽量多的循环操作去掉相关性并重组，从\n而提高循环操作的并行性。\nB.  Loop-unrolling是一种将循环操作拆散的技术。\nC.  Loop-unrolling可以利用目标处理器的并行处理能力。\nD.  支持Loop-unrolling是有代价的，没有限制地增加并行支路数反而会\n降低运算速度。\n答案：B\n解析：B是错误的因为简单地拆散loop并不能提高运行速度，只有拆散后做并行\n6\n\n\n合并才能提高运行速度。",
+      "content": "13. 对于loop-unrolling这种优化技巧，请指出下面哪一个陈述是错误的（一\n个）：\nA.  Loop-unrolling的原理是将尽量多的循环操作去掉相关性并重组，从\n而提高循环操作的并行性。\nB.  Loop-unrolling是一种将循环操作拆散的技术。\nC.  Loop-unrolling可以利用目标处理器的并行处理能力。\nD.  支持Loop-unrolling是有代价的，没有限制地增加并行支路数反而会\n降低运算速度。\n答案：B\n解析：B是错误的因为简单地拆散loop并不能提高运行速度，只有拆散后做并行\n合并才能提高运行速度。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1070,7 +1228,7 @@
             "content": "支持Loop-unrolling是有代价的，没有限制地增加并行支路数反而会\n降低运算速度。"
           }
         ],
-        "answer": "答案：B\n解析：B是错误的因为简单地拆散loop并不能提高运行速度，只有拆散后做并行\n6\n\n\n合并才能提高运行速度。"
+        "answer": "答案：B\n解析：B是错误的因为简单地拆散loop并不能提高运行速度，只有拆散后做并行\n合并才能提高运行速度。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -1100,7 +1258,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "13. 对于loop-unrolling这种优化技巧，请指出下面哪一个陈述是错误的（一\n个）：",
-        "answer": "答案：B\n解析：B是错误的因为简单地拆散loop并不能提高运行速度，只有拆散后做并行\n6\n\n\n合并才能提高运行速度。"
+        "answer": "答案：B\n解析：B是错误的因为简单地拆散loop并不能提高运行速度，只有拆散后做并行\n合并才能提高运行速度。"
       },
       "presentation": {
         "status": "ready",
@@ -2604,7 +2762,7 @@
       "exam": "2016期末",
       "questionNo": "第一题 5",
       "summary": "strlen 外提优化与程序局部性",
-      "content": "5.  对于下面这段程序，哪个描述是正确的：_________\n```\nvoid upper(char *s)\n{\n  for(int i=0; i<strlen(s); i++)\n    if(s[i]>=’a’ && s[i]<=’z’)\ns[i] +=(‘A’-‘a’);\n}\n```\nA．假设s的长度为N，该程序的时间复杂度为O(NlogN)\nB．将“for(int i=0; i<strlen(s); i++){}”修改为:\n  “int len = strlen(s); for(int i=0; i<len; i++){}”\n可以使程序运行时间与S的长度线性相关\nC．B选项中的修改策略不影响程序的空间局部性与时间局部性\nD．B选项中的修改策略仅影响程序的空间局部性，不影响时间局部性\n答案： B （考察程序性能优化与程序局部性原理）",
+      "content": "5.  对于下面这段程序，哪个描述是正确的：_________\n```\nvoid upper(char *s)\n{\n  for(int i=0; i<strlen(s); i++)\n    if(s[i]>=’a’ && s[i]<=’z’)\n      s[i] +=(‘A’-‘a’);\n}\n```\nA．假设s的长度为N，该程序的时间复杂度为O(NlogN)\nB．将“for(int i=0; i<strlen(s); i++){}”修改为:\n  “int len = strlen(s); for(int i=0; i<len; i++){}”\n可以使程序运行时间与S的长度线性相关\nC．B选项中的修改策略不影响程序的空间局部性与时间局部性\nD．B选项中的修改策略仅影响程序的空间局部性，不影响时间局部性\n答案： B （考察程序性能优化与程序局部性原理）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2626,7 +2784,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "5.  对于下面这段程序，哪个描述是正确的：_________\n```\nvoid upper(char *s)\n{\n  for(int i=0; i<strlen(s); i++)\n    if(s[i]>=’a’ && s[i]<=’z’)\ns[i] +=(‘A’-‘a’);\n}\n```",
+        "stem": "5.  对于下面这段程序，哪个描述是正确的：_________\n```\nvoid upper(char *s)\n{\n  for(int i=0; i<strlen(s); i++)\n    if(s[i]>=’a’ && s[i]<=’z’)\n      s[i] +=(‘A’-‘a’);\n}\n```",
         "choices": [
           {
             "key": "A",
@@ -2674,7 +2832,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5.  对于下面这段程序，哪个描述是正确的：_________\n```\nvoid upper(char *s)\n{\n  for(int i=0; i<strlen(s); i++)\n    if(s[i]>=’a’ && s[i]<=’z’)\ns[i] +=(‘A’-‘a’);\n}\n```",
+        "prompt": "5.  对于下面这段程序，哪个描述是正确的：_________\n```\nvoid upper(char *s)\n{\n  for(int i=0; i<strlen(s); i++)\n    if(s[i]>=’a’ && s[i]<=’z’)\n      s[i] +=(‘A’-‘a’);\n}\n```",
         "answer": "答案： B （考察程序性能优化与程序局部性原理）"
       },
       "presentation": {
@@ -2692,7 +2850,7 @@
       "exam": "2016期末",
       "questionNo": "第一题 7",
       "summary": "同名全局变量的符号解析与 extern",
-      "content": "7.  C源文件f1.c 和 f2.c的代码分别如下所示，编译链接生成可执行文件后\n执行，输出结果为（ ）\nA. 100\nB. 200\nC. 201\nD. 链接错误\n```\n// f1.c  //f2.c\n#include <stdio.h>  int var = 200;\nstatic int var = 100;\nint main(void)  void f()\n{  {\n    extern int var ;      var++;\n    extern void f() ;  }\n    f() ;\n    printf(\"%d\\n\", var) ;\n    return 0;\n}\n```\n答案：A（f1.c中的extern int var, 会搜索f1.c之前定义过的全局变量, 因\n为之前已经已经有了var的定义，所以printf会打印该var的值100）",
+      "content": "7. C 源文件 `f1.c` 和 `f2.c` 如下。编译、链接并运行生成的可执行文件，输出结果为：\n\n`f1.c`：\n\n```c\n#include <stdio.h>\n\nstatic int var = 100;\n\nint main(void) {\n    extern int var;\n    extern void f(void);\n    f();\n    printf(\"%d\\n\", var);\n    return 0;\n}\n```\n\n`f2.c`：\n\n```c\nint var = 200;\n\nvoid f(void) {\n    var++;\n}\n```\nA. 100\nB. 200\nC. 201\nD. 链接错误\n答案：A。\n\n`f1.c` 中的 `var` 是文件内静态变量，`main` 中的 `extern int var` 仍引用同一翻译单元内已经声明的该变量；`f2.c` 中的全局 `var` 是另一个符号。`f()` 递增后者，不改变 `f1.c` 中打印的静态 `var`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2713,8 +2871,8 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
-        "stem": "7.  C源文件f1.c 和 f2.c的代码分别如下所示，编译链接生成可执行文件后\n执行，输出结果为（ ）",
+        "selection": "single",
+        "stem": "7. C 源文件 `f1.c` 和 `f2.c` 如下。编译、链接并运行生成的可执行文件，输出结果为：\n\n`f1.c`：\n\n```c\n#include <stdio.h>\n\nstatic int var = 100;\n\nint main(void) {\n    extern int var;\n    extern void f(void);\n    f();\n    printf(\"%d\\n\", var);\n    return 0;\n}\n```\n\n`f2.c`：\n\n```c\nint var = 200;\n\nvoid f(void) {\n    var++;\n}\n```",
         "choices": [
           {
             "key": "A",
@@ -2730,14 +2888,14 @@
           },
           {
             "key": "D",
-            "content": "链接错误\n```\n// f1.c  //f2.c\n#include <stdio.h>  int var = 200;\nstatic int var = 100;\nint main(void)  void f()\n{  {\nextern int var ;      var++;\nextern void f() ;  }\nf() ;\nprintf(\"%d\\n\", var) ;\nreturn 0;\n}\n```"
+            "content": "链接错误"
           }
         ],
-        "answer": "答案：A（f1.c中的extern int var, 会搜索f1.c之前定义过的全局变量, 因\n为之前已经已经有了var的定义，所以printf会打印该var的值100）"
+        "answer": "答案：A。\n\n`f1.c` 中的 `var` 是文件内静态变量，`main` 中的 `extern int var` 仍引用同一翻译单元内已经声明的该变量；`f2.c` 中的全局 `var` 是另一个符号。`f()` 递增后者，不改变 `f1.c` 中打印的静态 `var`。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -2753,7 +2911,7 @@
           },
           {
             "id": "D",
-            "content": "链接错误\n```\n// f1.c  //f2.c\n#include <stdio.h>  int var = 200;\nstatic int var = 100;\nint main(void)  void f()\n{  {\nextern int var ;      var++;\nextern void f() ;  }\nf() ;\nprintf(\"%d\\n\", var) ;\nreturn 0;\n}\n```"
+            "content": "链接错误"
           }
         ],
         "correctChoiceIds": [
@@ -2762,8 +2920,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "7.  C源文件f1.c 和 f2.c的代码分别如下所示，编译链接生成可执行文件后\n执行，输出结果为（ ）",
-        "answer": "答案：A（f1.c中的extern int var, 会搜索f1.c之前定义过的全局变量, 因\n为之前已经已经有了var的定义，所以printf会打印该var的值100）"
+        "prompt": "7. C 源文件 `f1.c` 和 `f2.c` 如下。编译、链接并运行生成的可执行文件，输出结果为：\n\n`f1.c`：\n\n```c\n#include <stdio.h>\n\nstatic int var = 100;\n\nint main(void) {\n    extern int var;\n    extern void f(void);\n    f();\n    printf(\"%d\\n\", var);\n    return 0;\n}\n```\n\n`f2.c`：\n\n```c\nint var = 200;\n\nvoid f(void) {\n    var++;\n}\n```",
+        "answer": "答案：A。\n\n`f1.c` 中的 `var` 是文件内静态变量，`main` 中的 `extern int var` 仍引用同一翻译单元内已经声明的该变量；`f2.c` 中的全局 `var` 是另一个符号。`f()` 递增后者，不改变 `f1.c` 中打印的静态 `var`。"
       },
       "presentation": {
         "status": "ready",
@@ -2868,12 +3026,12 @@
       "exam": "2016期末",
       "questionNo": "第四题",
       "summary": "强/弱符号属性表与多文件链接运行输出",
-      "content": "第四题（10分）\n在x86_64环境下，考虑如下4个文件（main.c, value.c, f1.c, f2.c）：\n```\n/* main.c */\n#include <stdio.h>\nextern void f_void_void();\nextern int f_int_void();\nvoid *f;\nint main()\n{\n    int a = 1, b, c;\n    f = (void *)f_void_void;\n    ((void (*)(int))f)(a);\n    b = ((int (*)())f)();\n    printf(\"b = %d\\n\", b);\n    f = (void *)f_int_void;\n    ((void (*)())f)(a);\n    c = ((int (*)(int))f)(a);\nprintf(\"c = %d\\n\", c);\n    return 0;\n}\n/* value.c */\nint BIG;\n/* f1.c */\n#include <stdio.h>\nextern int BIG;\nint small = 1;\nvoid f_void_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n}\n```\n1\n\n\n```\n/* f2.c*/\n#include <stdio.h>\nextern int BIG;\nstatic int small;\nint f_int_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n    return small + 1;\n}\n```\n使用命令\ngcc -o main main.c f1.c f2.c value.c\n编译这四个文件。\n使用\n./main\n运行编译好的程序。\n1. 对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱符号），不\n确定的请画X。\n源文件      符号名      局部或全局？    强符号或弱符号？\n```\nmain.c     f\nvalue.c     BIG\nf1.c       small\nf2.c       small\n```\n2. 请补全程序运行的输出，不确定的请画X。\n```\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nb = _____\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nc = _____\n```\n！！！！答案\n1\n\n\n1. （4 分）对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱\n符号），不确定的请填X。\n源文件      符号名      局部或全局？    强符号或弱符号？\nmain.c     f        全局        弱符号\nvalue.c     BIG       全局        弱符号\nf1.c       small      全局        强符号\nf2.c       small      局部        X\n评分标准：每空0.5分\n2. （6分）请补全程序运行的输出，不确定的请填X。\n```\nsmall = 2, BIG = 1\nsmall = 3, BIG = 2\nb = X\nsmall = 1, BIG = 3\nsmall = 2, BIG = 4\nc = 3\n```\n评分标准：small和BIG的值每空0.5分【取整，错1-2个扣1分，错3-4个\n扣2分，以此类推】，b和c的值每空1分\nb值无法确定，是因为传入参数无法确定。\n！！！！答案结束\n2\n3",
+      "content": "第四题（10分）\n在x86_64环境下，考虑如下4个文件（main.c, value.c, f1.c, f2.c）：\n```\n/* main.c */\n#include <stdio.h>\nextern void f_void_void();\nextern int f_int_void();\nvoid *f;\nint main()\n{\n    int a = 1, b, c;\n    f = (void *)f_void_void;\n    ((void (*)(int))f)(a);\n    b = ((int (*)())f)();\n    printf(\"b = %d\\n\", b);\n    f = (void *)f_int_void;\n    ((void (*)())f)(a);\n    c = ((int (*)(int))f)(a);\n    printf(\"c = %d\\n\", c);\n    return 0;\n}\n/* value.c */\nint BIG;\n/* f1.c */\n#include <stdio.h>\nextern int BIG;\nint small = 1;\nvoid f_void_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n}\n```\n```\n/* f2.c*/\n#include <stdio.h>\nextern int BIG;\nstatic int small;\nint f_int_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n    return small + 1;\n}\n```\n使用命令\ngcc -o main main.c f1.c f2.c value.c\n编译这四个文件。\n使用\n./main\n运行编译好的程序。\n1. 对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱符号），不\n确定的请画X。\n源文件      符号名      局部或全局？    强符号或弱符号？\n```\nmain.c     f\nvalue.c     BIG\nf1.c       small\nf2.c       small\n```\n2. 请补全程序运行的输出，不确定的请画X。\n```\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nb = _____\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nc = _____\n```\n！！！！答案\n1. （4 分）对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱\n符号），不确定的请填X。\n源文件      符号名      局部或全局？    强符号或弱符号？\nmain.c     f        全局        弱符号\nvalue.c     BIG       全局        弱符号\nf1.c       small      全局        强符号\nf2.c       small      局部        X\n评分标准：每空0.5分\n2. （6分）请补全程序运行的输出，不确定的请填X。\n```\nsmall = 2, BIG = 1\nsmall = 3, BIG = 2\nb = X\nsmall = 1, BIG = 3\nsmall = 2, BIG = 4\nc = 3\n```\n评分标准：small和BIG的值每空0.5分【取整，错1-2个扣1分，错3-4个\n扣2分，以此类推】，b和c的值每空1分\nb值无法确定，是因为传入参数无法确定。\n！！！！答案结束",
       "assets": [],
       "formatted": true,
       "answer": {
-        "inline": true,
-        "status": "verified",
+        "inline": false,
+        "status": "missing",
         "relatedBlockIds": [
           "a-3edc01064ad8cdd7"
         ]
@@ -2890,9 +3048,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第四题（10分）\n在x86_64环境下，考虑如下4个文件（main.c, value.c, f1.c, f2.c）：\n```\n/* main.c */\n#include <stdio.h>\nextern void f_void_void();\nextern int f_int_void();\nvoid *f;\nint main()\n{\n    int a = 1, b, c;\n    f = (void *)f_void_void;\n    ((void (*)(int))f)(a);\n    b = ((int (*)())f)();\n    printf(\"b = %d\\n\", b);\n    f = (void *)f_int_void;\n    ((void (*)())f)(a);\n    c = ((int (*)(int))f)(a);\nprintf(\"c = %d\\n\", c);\n    return 0;\n}\n/* value.c */\nint BIG;\n/* f1.c */\n#include <stdio.h>\nextern int BIG;\nint small = 1;\nvoid f_void_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n}\n```\n1\n\n\n```\n/* f2.c*/\n#include <stdio.h>\nextern int BIG;\nstatic int small;\nint f_int_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n    return small + 1;\n}\n```\n使用命令\ngcc -o main main.c f1.c f2.c value.c\n编译这四个文件。\n使用\n./main\n运行编译好的程序。\n1. 对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱符号），不\n确定的请画X。\n源文件      符号名      局部或全局？    强符号或弱符号？\n```\nmain.c     f\nvalue.c     BIG\nf1.c       small\nf2.c       small\n```\n2. 请补全程序运行的输出，不确定的请画X。\n```\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nb = _____\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nc = _____\n```\n！！！！答案\n1\n\n\n1. （4 分）对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱\n符号），不确定的请填X。\n源文件      符号名      局部或全局？    强符号或弱符号？\nmain.c     f        全局        弱符号\nvalue.c     BIG       全局        弱符号\nf1.c       small      全局        强符号\nf2.c       small      局部        X\n评分标准：每空0.5分\n2. （6分）请补全程序运行的输出，不确定的请填X。\n```\nsmall = 2, BIG = 1\nsmall = 3, BIG = 2\nb = X\nsmall = 1, BIG = 3\nsmall = 2, BIG = 4\nc = 3\n```\n评分标准：small和BIG的值每空0.5分【取整，错1-2个扣1分，错3-4个\n扣2分，以此类推】，b和c的值每空1分\nb值无法确定，是因为传入参数无法确定。\n！！！！答案结束",
+        "stem": "第四题（10分）\n在x86_64环境下，考虑如下4个文件（main.c, value.c, f1.c, f2.c）：\n```\n/* main.c */\n#include <stdio.h>\nextern void f_void_void();\nextern int f_int_void();\nvoid *f;\nint main()\n{\n    int a = 1, b, c;\n    f = (void *)f_void_void;\n    ((void (*)(int))f)(a);\n    b = ((int (*)())f)();\n    printf(\"b = %d\\n\", b);\n    f = (void *)f_int_void;\n    ((void (*)())f)(a);\n    c = ((int (*)(int))f)(a);\n    printf(\"c = %d\\n\", c);\n    return 0;\n}\n/* value.c */\nint BIG;\n/* f1.c */\n#include <stdio.h>\nextern int BIG;\nint small = 1;\nvoid f_void_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n}\n```\n```\n/* f2.c*/\n#include <stdio.h>\nextern int BIG;\nstatic int small;\nint f_int_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n    return small + 1;\n}\n```\n使用命令\ngcc -o main main.c f1.c f2.c value.c\n编译这四个文件。\n使用\n./main\n运行编译好的程序。\n1. 对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱符号），不\n确定的请画X。\n源文件      符号名      局部或全局？    强符号或弱符号？\n```\nmain.c     f\nvalue.c     BIG\nf1.c       small\nf2.c       small\n```\n2. 请补全程序运行的输出，不确定的请画X。\n```\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nb = _____\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nc = _____\n```\n！！！！答案\n1. （4 分）对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱\n符号），不确定的请填X。\n源文件      符号名      局部或全局？    强符号或弱符号？\nmain.c     f        全局        弱符号\nvalue.c     BIG       全局        弱符号\nf1.c       small      全局        强符号\nf2.c       small      局部        X\n评分标准：每空0.5分\n2. （6分）请补全程序运行的输出，不确定的请填X。\n```\nsmall = 2, BIG = 1\nsmall = 3, BIG = 2\nb = X\nsmall = 1, BIG = 3\nsmall = 2, BIG = 4\nc = 3\n```\n评分标准：small和BIG的值每空0.5分【取整，错1-2个扣1分，错3-4个\n扣2分，以此类推】，b和c的值每空1分\nb值无法确定，是因为传入参数无法确定。\n！！！！答案结束",
         "choices": [],
-        "answer": "2\n3"
+        "answer": ""
       },
       "interaction": {
         "kind": "fill",
@@ -2900,8 +3058,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题（10分）\n在x86_64环境下，考虑如下4个文件（main.c, value.c, f1.c, f2.c）：\n```\n/* main.c */\n#include <stdio.h>\nextern void f_void_void();\nextern int f_int_void();\nvoid *f;\nint main()\n{\n    int a = 1, b, c;\n    f = (void *)f_void_void;\n    ((void (*)(int))f)(a);\n    b = ((int (*)())f)();\n    printf(\"b = %d\\n\", b);\n    f = (void *)f_int_void;\n    ((void (*)())f)(a);\n    c = ((int (*)(int))f)(a);\nprintf(\"c = %d\\n\", c);\n    return 0;\n}\n/* value.c */\nint BIG;\n/* f1.c */\n#include <stdio.h>\nextern int BIG;\nint small = 1;\nvoid f_void_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n}\n```\n1\n\n\n```\n/* f2.c*/\n#include <stdio.h>\nextern int BIG;\nstatic int small;\nint f_int_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n    return small + 1;\n}\n```\n使用命令\ngcc -o main main.c f1.c f2.c value.c\n编译这四个文件。\n使用\n./main\n运行编译好的程序。\n1. 对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱符号），不\n确定的请画X。\n源文件      符号名      局部或全局？    强符号或弱符号？\n```\nmain.c     f\nvalue.c     BIG\nf1.c       small\nf2.c       small\n```\n2. 请补全程序运行的输出，不确定的请画X。\n```\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nb = _____\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nc = _____\n```\n！！！！答案\n1\n\n\n1. （4 分）对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱\n符号），不确定的请填X。\n源文件      符号名      局部或全局？    强符号或弱符号？\nmain.c     f        全局        弱符号\nvalue.c     BIG       全局        弱符号\nf1.c       small      全局        强符号\nf2.c       small      局部        X\n评分标准：每空0.5分\n2. （6分）请补全程序运行的输出，不确定的请填X。\n```\nsmall = 2, BIG = 1\nsmall = 3, BIG = 2\nb = X\nsmall = 1, BIG = 3\nsmall = 2, BIG = 4\nc = 3\n```\n评分标准：small和BIG的值每空0.5分【取整，错1-2个扣1分，错3-4个\n扣2分，以此类推】，b和c的值每空1分\nb值无法确定，是因为传入参数无法确定。\n！！！！答案结束",
-        "answer": "2\n3"
+        "prompt": "第四题（10分）\n在x86_64环境下，考虑如下4个文件（main.c, value.c, f1.c, f2.c）：\n```\n/* main.c */\n#include <stdio.h>\nextern void f_void_void();\nextern int f_int_void();\nvoid *f;\nint main()\n{\n    int a = 1, b, c;\n    f = (void *)f_void_void;\n    ((void (*)(int))f)(a);\n    b = ((int (*)())f)();\n    printf(\"b = %d\\n\", b);\n    f = (void *)f_int_void;\n    ((void (*)())f)(a);\n    c = ((int (*)(int))f)(a);\n    printf(\"c = %d\\n\", c);\n    return 0;\n}\n/* value.c */\nint BIG;\n/* f1.c */\n#include <stdio.h>\nextern int BIG;\nint small = 1;\nvoid f_void_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n}\n```\n```\n/* f2.c*/\n#include <stdio.h>\nextern int BIG;\nstatic int small;\nint f_int_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n    return small + 1;\n}\n```\n使用命令\ngcc -o main main.c f1.c f2.c value.c\n编译这四个文件。\n使用\n./main\n运行编译好的程序。\n1. 对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱符号），不\n确定的请画X。\n源文件      符号名      局部或全局？    强符号或弱符号？\n```\nmain.c     f\nvalue.c     BIG\nf1.c       small\nf2.c       small\n```\n2. 请补全程序运行的输出，不确定的请画X。\n```\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nb = _____\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nc = _____\n```\n！！！！答案\n1. （4 分）对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱\n符号），不确定的请填X。\n源文件      符号名      局部或全局？    强符号或弱符号？\nmain.c     f        全局        弱符号\nvalue.c     BIG       全局        弱符号\nf1.c       small      全局        强符号\nf2.c       small      局部        X\n评分标准：每空0.5分\n2. （6分）请补全程序运行的输出，不确定的请填X。\n```\nsmall = 2, BIG = 1\nsmall = 3, BIG = 2\nb = X\nsmall = 1, BIG = 3\nsmall = 2, BIG = 4\nc = 3\n```\n评分标准：small和BIG的值每空0.5分【取整，错1-2个扣1分，错3-4个\n扣2分，以此类推】，b和c的值每空1分\nb值无法确定，是因为传入参数无法确定。\n！！！！答案结束",
+        "answer": ""
       },
       "presentation": {
         "status": "ready",
@@ -2918,7 +3076,7 @@
       "exam": "2017期末",
       "questionNo": "第一题 7",
       "summary": "跨文件符号类型不一致的链接结果",
-      "content": "7.  C源文件f1.c 和 f2.c的代码分别如下所示：\n```\n// f1.c  //f2.c\n#include <stdio.h>  float x ;\nvoid f();  void f()\nint x ;  {\nint main(void)      x = 2 ;\n{  }\nx = 1;\nf() ;\n    printf(\"%x\\n\", x) ;\n    return 0;\n}\n```\n运行下面的命令后得到的结果是:\n```\n$ gcc f1.c f2.c\n$ ./a.out\n```\nA. 1\nB. 2\nC. 3f800000\nD. 40000000\n答案：D\n解析：f1.c 的 int x 与 f2.c 的 float x 都是未初始化的全局变量（COMMON 弱符号），链接器把它们合并成同一个 4 字节符号；f() 写入的是浮点 2.0（位模式 0x40000000），main 再按 int 以 %x 打印就得到 40000000。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "7.  C源文件f1.c 和 f2.c的代码分别如下所示：\n```\n// f1.c\n#include <stdio.h>\n\nvoid f(void);\nint x;\n\nint main(void) {\n    x = 1;\n    f();\n    printf(\"%x\\n\", x);\n    return 0;\n}\n\n// f2.c\nfloat x;\n\nvoid f(void) {\n    x = 2;\n}\n```\n运行下面的命令后得到的结果是:\n```\n$ gcc f1.c f2.c\n$ ./a.out\n```\nA. 1\nB. 2\nC. 3f800000\nD. 40000000\n答案：D\n解析：f1.c 的 int x 与 f2.c 的 float x 都是未初始化的全局变量（COMMON 弱符号），链接器把它们合并成同一个 4 字节符号；f() 写入的是浮点 2.0（位模式 0x40000000），main 再按 int 以 %x 打印就得到 40000000。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2938,7 +3096,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "7.  C源文件f1.c 和 f2.c的代码分别如下所示：\n```\n// f1.c  //f2.c\n#include <stdio.h>  float x ;\nvoid f();  void f()\nint x ;  {\nint main(void)      x = 2 ;\n{  }\nx = 1;\nf() ;\n    printf(\"%x\\n\", x) ;\n    return 0;\n}\n```\n运行下面的命令后得到的结果是:\n```\n$ gcc f1.c f2.c\n$ ./a.out\n```",
+        "stem": "7.  C源文件f1.c 和 f2.c的代码分别如下所示：\n```\n// f1.c\n#include <stdio.h>\n\nvoid f(void);\nint x;\n\nint main(void) {\n    x = 1;\n    f();\n    printf(\"%x\\n\", x);\n    return 0;\n}\n\n// f2.c\nfloat x;\n\nvoid f(void) {\n    x = 2;\n}\n```\n运行下面的命令后得到的结果是:\n```\n$ gcc f1.c f2.c\n$ ./a.out\n```",
         "choices": [
           {
             "key": "A",
@@ -2986,7 +3144,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "7.  C源文件f1.c 和 f2.c的代码分别如下所示：\n```\n// f1.c  //f2.c\n#include <stdio.h>  float x ;\nvoid f();  void f()\nint x ;  {\nint main(void)      x = 2 ;\n{  }\nx = 1;\nf() ;\n    printf(\"%x\\n\", x) ;\n    return 0;\n}\n```\n运行下面的命令后得到的结果是:\n```\n$ gcc f1.c f2.c\n$ ./a.out\n```",
+        "prompt": "7.  C源文件f1.c 和 f2.c的代码分别如下所示：\n```\n// f1.c\n#include <stdio.h>\n\nvoid f(void);\nint x;\n\nint main(void) {\n    x = 1;\n    f();\n    printf(\"%x\\n\", x);\n    return 0;\n}\n\n// f2.c\nfloat x;\n\nvoid f(void) {\n    x = 2;\n}\n```\n运行下面的命令后得到的结果是:\n```\n$ gcc f1.c f2.c\n$ ./a.out\n```",
         "answer": "答案：D\n解析：f1.c 的 int x 与 f2.c 的 float x 都是未初始化的全局变量（COMMON 弱符号），链接器把它们合并成同一个 4 字节符号；f() 写入的是浮点 2.0（位模式 0x40000000），main 再按 int 以 %x 打印就得到 40000000。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
@@ -3090,7 +3248,7 @@
       "exam": "2017期末",
       "questionNo": "第四题",
       "summary": "强弱符号多重定义与链接成功原因（兼 GC 根指针）",
-      "content": "第四题（10分）\n考虑以下三个文件：\npolygon.h                            main.c（函数中部分内容折叠）\n```\nstruct Node {  #include \"polygon.h\"\nfloat pos[2];  node* root_ptr ;\nint marked;  int main(){\nstruct Node* next;  node* p;\nstruct Node* prev;  init();\n};  p=alloc();\ntypedef struct Node node;  root_ptr =p;\n  ...\nnode* alloc();  gc();\nvoid init();  ...\nvoid gc();  return 0;\n}\n```\ngc.c（函数体被折叠）\n```\n#include \"polygon.h\"\n#define N (1<<20)\nstatic node polygon [N];\nstatic node* free_ptr ;\nstatic node* root_ptr ;\nvoid mark(node* v){...}\nvoid sweep() {...}\nvoid gc() {...}\nvoid init() {...}\nnode* alloc() {...}\n```\n使用命令gcc –o polygon main.c gc.c得到可执行文件polygon。\n\n\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n提示：如果某表项中的内容无法确定，请画X。\nmain.c\n  局部或全局？  强或弱？\n```\nroot_ptr\ninit\nmain\ngc.c\n```\n  局部或全局？  强或弱？\n```\nN\npolygon\nalloc\n```\n2. 解释为何其中一些符号被定义了多次，链接器仍然可以成功创建可执行文件。\n3. gc.c 的功能是实现一个垃圾收集器。解释为何前面的命令能够编译、链接成\n功，但得到的执行文件中却存在潜在错误。并试提出如何修复这一bug。\n答案：main.c —— root_ptr 全局/弱（COMMON）、init 全局（外部引用，非强非弱）、main 全局/强；gc.c —— N 无符号表条目（预处理宏）、polygon 局部（static）/非强非弱、alloc 全局/强。同名不冲突是因为 gc.c 里的 root_ptr 带 static（局部符号）；潜在错误是 gc() 用的是 gc.c 私有的 root_ptr（恒为 NULL），会把仍在使用的对象当垃圾回收。\n2. main.c 的全局 root_ptr 与 gc.c 的 `static node* root_ptr` 同名，但后者是 static 局部符号，不参与全局符号解析；gc.c 里对外可见的 init/alloc/gc/mark/sweep 都只定义一次，所以链接器不会报多重定义错误。\n3. main 把根指针写进的是 main.c 的全局 root_ptr，而 gc() 读的是 gc.c 自己的静态 root_ptr，mark 阶段找不到任何根，sweep 会把在用的对象回收。修复：去掉 gc.c 中 root_ptr 的 static，或把根指针作为参数/接口传给 gc()。\n逐项符号属性（与上面结论一致，便于对照答题纸表格）：\n| 文件 | 符号 | 局部/全局 | 强/弱 |\n| --- | --- | --- | --- |\n| main.c | root_ptr | 全局 | 弱（未初始化，COMMON）|\n| main.c | init | 全局（外部引用）| 非强非弱 |\n| main.c | main | 全局 | 强 |\n| gc.c | N | 无符号表条目（预处理宏）| 画 X |\n| gc.c | polygon | 局部（static）| 非强非弱 |\n| gc.c | alloc | 全局 | 强 |\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "第四题（10分）\n考虑以下三个文件：\n\n`polygon.h`：\n```c\nstruct Node {\n    float pos[2];\n    int marked;\n    struct Node* next;\n    struct Node* prev;\n};\ntypedef struct Node node;\n\nnode* alloc();\nvoid init();\nvoid gc();\n```\n\n`main.c`（函数中部分内容折叠）：\n```c\n#include \"polygon.h\"\n\nnode* root_ptr;\n\nint main() {\n    node* p;\n    init();\n    p = alloc();\n    root_ptr = p;\n    ...\n    gc();\n    ...\n    return 0;\n}\n```\n\n`gc.c`（函数体被折叠）：\n```c\n#include \"polygon.h\"\n\n#define N (1 << 20)\n\nstatic node polygon[N];\nstatic node* free_ptr;\nstatic node* root_ptr;\n\nvoid mark(node* v) { ... }\nvoid sweep() { ... }\nvoid gc() { ... }\nvoid init() { ... }\nnode* alloc() { ... }\n```\n使用命令gcc –o polygon main.c gc.c得到可执行文件polygon。\n\n\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n提示：如果某表项中的内容无法确定，请画X。\nmain.c\n  局部或全局？  强或弱？\n```\nroot_ptr\ninit\nmain\ngc.c\n```\n  局部或全局？  强或弱？\n```\nN\npolygon\nalloc\n```\n2. 解释为何其中一些符号被定义了多次，链接器仍然可以成功创建可执行文件。\n3. gc.c 的功能是实现一个垃圾收集器。解释为何前面的命令能够编译、链接成\n功，但得到的执行文件中却存在潜在错误。并试提出如何修复这一bug。\n答案：main.c —— root_ptr 全局/弱（COMMON）、init 全局（外部引用，非强非弱）、main 全局/强；gc.c —— N 无符号表条目（预处理宏）、polygon 局部（static）/非强非弱、alloc 全局/强。同名不冲突是因为 gc.c 里的 root_ptr 带 static（局部符号）；潜在错误是 gc() 用的是 gc.c 私有的 root_ptr（恒为 NULL），会把仍在使用的对象当垃圾回收。\n2. main.c 的全局 root_ptr 与 gc.c 的 `static node* root_ptr` 同名，但后者是 static 局部符号，不参与全局符号解析；gc.c 里对外可见的 init/alloc/gc/mark/sweep 都只定义一次，所以链接器不会报多重定义错误。\n3. main 把根指针写进的是 main.c 的全局 root_ptr，而 gc() 读的是 gc.c 自己的静态 root_ptr，mark 阶段找不到任何根，sweep 会把在用的对象回收。修复：去掉 gc.c 中 root_ptr 的 static，或把根指针作为参数/接口传给 gc()。\n逐项符号属性（与上面结论一致，便于对照答题纸表格）：\n| 文件 | 符号 | 局部/全局 | 强/弱 |\n| --- | --- | --- | --- |\n| main.c | root_ptr | 全局 | 弱（未初始化，COMMON）|\n| main.c | init | 全局（外部引用）| 非强非弱 |\n| main.c | main | 全局 | 强 |\n| gc.c | N | 无符号表条目（预处理宏）| 画 X |\n| gc.c | polygon | 局部（static）| 非强非弱 |\n| gc.c | alloc | 全局 | 强 |\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3110,7 +3268,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "第四题（10分）\n考虑以下三个文件：\npolygon.h                            main.c（函数中部分内容折叠）\n```\nstruct Node {  #include \"polygon.h\"\nfloat pos[2];  node* root_ptr ;\nint marked;  int main(){\nstruct Node* next;  node* p;\nstruct Node* prev;  init();\n};  p=alloc();\ntypedef struct Node node;  root_ptr =p;\n  ...\nnode* alloc();  gc();\nvoid init();  ...\nvoid gc();  return 0;\n}\n```\ngc.c（函数体被折叠）\n```\n#include \"polygon.h\"\n#define N (1<<20)\nstatic node polygon [N];\nstatic node* free_ptr ;\nstatic node* root_ptr ;\nvoid mark(node* v){...}\nvoid sweep() {...}\nvoid gc() {...}\nvoid init() {...}\nnode* alloc() {...}\n```\n使用命令gcc –o polygon main.c gc.c得到可执行文件polygon。\n\n\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n提示：如果某表项中的内容无法确定，请画X。\nmain.c\n  局部或全局？  强或弱？\n```\nroot_ptr\ninit\nmain\ngc.c\n```\n  局部或全局？  强或弱？\n```\nN\npolygon\nalloc\n```\n2. 解释为何其中一些符号被定义了多次，链接器仍然可以成功创建可执行文件。\n3. gc.c 的功能是实现一个垃圾收集器。解释为何前面的命令能够编译、链接成\n功，但得到的执行文件中却存在潜在错误。并试提出如何修复这一bug。",
+        "stem": "第四题（10分）\n考虑以下三个文件：\n\n`polygon.h`：\n```c\nstruct Node {\n    float pos[2];\n    int marked;\n    struct Node* next;\n    struct Node* prev;\n};\ntypedef struct Node node;\n\nnode* alloc();\nvoid init();\nvoid gc();\n```\n\n`main.c`（函数中部分内容折叠）：\n```c\n#include \"polygon.h\"\n\nnode* root_ptr;\n\nint main() {\n    node* p;\n    init();\n    p = alloc();\n    root_ptr = p;\n    ...\n    gc();\n    ...\n    return 0;\n}\n```\n\n`gc.c`（函数体被折叠）：\n```c\n#include \"polygon.h\"\n\n#define N (1 << 20)\n\nstatic node polygon[N];\nstatic node* free_ptr;\nstatic node* root_ptr;\n\nvoid mark(node* v) { ... }\nvoid sweep() { ... }\nvoid gc() { ... }\nvoid init() { ... }\nnode* alloc() { ... }\n```\n使用命令gcc –o polygon main.c gc.c得到可执行文件polygon。\n\n\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n提示：如果某表项中的内容无法确定，请画X。\nmain.c\n  局部或全局？  强或弱？\n```\nroot_ptr\ninit\nmain\ngc.c\n```\n  局部或全局？  强或弱？\n```\nN\npolygon\nalloc\n```\n2. 解释为何其中一些符号被定义了多次，链接器仍然可以成功创建可执行文件。\n3. gc.c 的功能是实现一个垃圾收集器。解释为何前面的命令能够编译、链接成\n功，但得到的执行文件中却存在潜在错误。并试提出如何修复这一bug。",
         "choices": [],
         "answer": "答案：main.c —— root_ptr 全局/弱（COMMON）、init 全局（外部引用，非强非弱）、main 全局/强；gc.c —— N 无符号表条目（预处理宏）、polygon 局部（static）/非强非弱、alloc 全局/强。同名不冲突是因为 gc.c 里的 root_ptr 带 static（局部符号）；潜在错误是 gc() 用的是 gc.c 私有的 root_ptr（恒为 NULL），会把仍在使用的对象当垃圾回收。\n2. main.c 的全局 root_ptr 与 gc.c 的 `static node* root_ptr` 同名，但后者是 static 局部符号，不参与全局符号解析；gc.c 里对外可见的 init/alloc/gc/mark/sweep 都只定义一次，所以链接器不会报多重定义错误。\n3. main 把根指针写进的是 main.c 的全局 root_ptr，而 gc() 读的是 gc.c 自己的静态 root_ptr，mark 阶段找不到任何根，sweep 会把在用的对象回收。修复：去掉 gc.c 中 root_ptr 的 static，或把根指针作为参数/接口传给 gc()。\n逐项符号属性（与上面结论一致，便于对照答题纸表格）：\n| 文件 | 符号 | 局部/全局 | 强/弱 |\n| --- | --- | --- | --- |\n| main.c | root_ptr | 全局 | 弱（未初始化，COMMON）|\n| main.c | init | 全局（外部引用）| 非强非弱 |\n| main.c | main | 全局 | 强 |\n| gc.c | N | 无符号表条目（预处理宏）| 画 X |\n| gc.c | polygon | 局部（static）| 非强非弱 |\n| gc.c | alloc | 全局 | 强 |\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
@@ -3120,7 +3278,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题（10分）\n考虑以下三个文件：\npolygon.h                            main.c（函数中部分内容折叠）\n```\nstruct Node {  #include \"polygon.h\"\nfloat pos[2];  node* root_ptr ;\nint marked;  int main(){\nstruct Node* next;  node* p;\nstruct Node* prev;  init();\n};  p=alloc();\ntypedef struct Node node;  root_ptr =p;\n  ...\nnode* alloc();  gc();\nvoid init();  ...\nvoid gc();  return 0;\n}\n```\ngc.c（函数体被折叠）\n```\n#include \"polygon.h\"\n#define N (1<<20)\nstatic node polygon [N];\nstatic node* free_ptr ;\nstatic node* root_ptr ;\nvoid mark(node* v){...}\nvoid sweep() {...}\nvoid gc() {...}\nvoid init() {...}\nnode* alloc() {...}\n```\n使用命令gcc –o polygon main.c gc.c得到可执行文件polygon。\n\n\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n提示：如果某表项中的内容无法确定，请画X。\nmain.c\n  局部或全局？  强或弱？\n```\nroot_ptr\ninit\nmain\ngc.c\n```\n  局部或全局？  强或弱？\n```\nN\npolygon\nalloc\n```\n2. 解释为何其中一些符号被定义了多次，链接器仍然可以成功创建可执行文件。\n3. gc.c 的功能是实现一个垃圾收集器。解释为何前面的命令能够编译、链接成\n功，但得到的执行文件中却存在潜在错误。并试提出如何修复这一bug。",
+        "prompt": "第四题（10分）\n考虑以下三个文件：\n\n`polygon.h`：\n```c\nstruct Node {\n    float pos[2];\n    int marked;\n    struct Node* next;\n    struct Node* prev;\n};\ntypedef struct Node node;\n\nnode* alloc();\nvoid init();\nvoid gc();\n```\n\n`main.c`（函数中部分内容折叠）：\n```c\n#include \"polygon.h\"\n\nnode* root_ptr;\n\nint main() {\n    node* p;\n    init();\n    p = alloc();\n    root_ptr = p;\n    ...\n    gc();\n    ...\n    return 0;\n}\n```\n\n`gc.c`（函数体被折叠）：\n```c\n#include \"polygon.h\"\n\n#define N (1 << 20)\n\nstatic node polygon[N];\nstatic node* free_ptr;\nstatic node* root_ptr;\n\nvoid mark(node* v) { ... }\nvoid sweep() { ... }\nvoid gc() { ... }\nvoid init() { ... }\nnode* alloc() { ... }\n```\n使用命令gcc –o polygon main.c gc.c得到可执行文件polygon。\n\n\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n提示：如果某表项中的内容无法确定，请画X。\nmain.c\n  局部或全局？  强或弱？\n```\nroot_ptr\ninit\nmain\ngc.c\n```\n  局部或全局？  强或弱？\n```\nN\npolygon\nalloc\n```\n2. 解释为何其中一些符号被定义了多次，链接器仍然可以成功创建可执行文件。\n3. gc.c 的功能是实现一个垃圾收集器。解释为何前面的命令能够编译、链接成\n功，但得到的执行文件中却存在潜在错误。并试提出如何修复这一bug。",
         "answer": "答案：main.c —— root_ptr 全局/弱（COMMON）、init 全局（外部引用，非强非弱）、main 全局/强；gc.c —— N 无符号表条目（预处理宏）、polygon 局部（static）/非强非弱、alloc 全局/强。同名不冲突是因为 gc.c 里的 root_ptr 带 static（局部符号）；潜在错误是 gc() 用的是 gc.c 私有的 root_ptr（恒为 NULL），会把仍在使用的对象当垃圾回收。\n2. main.c 的全局 root_ptr 与 gc.c 的 `static node* root_ptr` 同名，但后者是 static 局部符号，不参与全局符号解析；gc.c 里对外可见的 init/alloc/gc/mark/sweep 都只定义一次，所以链接器不会报多重定义错误。\n3. main 把根指针写进的是 main.c 的全局 root_ptr，而 gc() 读的是 gc.c 自己的静态 root_ptr，mark 阶段找不到任何根，sweep 会把在用的对象回收。修复：去掉 gc.c 中 root_ptr 的 static，或把根指针作为参数/接口传给 gc()。\n逐项符号属性（与上面结论一致，便于对照答题纸表格）：\n| 文件 | 符号 | 局部/全局 | 强/弱 |\n| --- | --- | --- | --- |\n| main.c | root_ptr | 全局 | 弱（未初始化，COMMON）|\n| main.c | init | 全局（外部引用）| 非强非弱 |\n| main.c | main | 全局 | 强 |\n| gc.c | N | 无符号表条目（预处理宏）| 画 X |\n| gc.c | polygon | 局部（static）| 非强非弱 |\n| gc.c | alloc | 全局 | 强 |\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
@@ -3159,7 +3317,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "4.  下列关于链接技术的描述，错误的是（  ）",
         "choices": [
           {
@@ -3182,8 +3340,8 @@
         "answer": "答案：选A。参考机械工业出版社第三版中文教材，四个选项分别对应P464第5自\n然段、P471页文末、P494页文末、P496文末的文字。其中选项B略有调整，增加\n了“占用空间最大的”，是Linux binutils中链接器实现的原则，仍是正确选项。\nA错误是因为全局符号的不恰当定义并不总会报警（甚至不报告warning）。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -3226,7 +3384,7 @@
       "exam": "2018期末",
       "questionNo": "第三题 1",
       "summary": "各符号的 .symtab 条目、类型与所在节",
-      "content": "第三题（10分）\n本题基于下列m.c及foo.c文件所编译生成的m.o和foo.o，编译过程未加优化选\n项。\n//m.c  //foo.c\nvoid foo();  extern int buf[];\nint buf[2] = {1, 2};  int *bufp0 = &buf[0];\nint main(){  int *bufp1;\n    foo();  void foo(){\n    return 0;  static int count = 0;\n}  int temp;\n  bufp1 = &buf[1];\ntemp = *bufp0;\n*bufp0 = *bufp1;\n*bufp1 = temp;\ncount++;\n}\n对于每个foo.o中定义和引用的符号，请用“是”或“否”指出它是否在模块foo.o\n的.symtab节中有符号表条目。如果存在条目，则请指出定义该符号的模块（foo.o\n或m.o）、符号类型（局部、全局或外部）以及它在模块中所处的节；如果不存在条\n目，则请将该行后继空白处标记为“/”。\n第一问每行1分，该行全部答对才给分数，节名如果漏了“.”可以算对。\n用英文回答的，如果正确也可以给分。\n符号  .symtab条目?  符号类型  定义符号的模块  节\nbufp0  是  全局  foo.o  .data\nbuf  是  外部  m.o  .data\nbufp1  是  全局  foo.o  COMMON\nfoo  是  全局  foo.o  .text\ntemp  否  /  /  /\ncnt  是  局部  foo.o  .bss\n符号  .symtab条目?  符号类型  定义符号的模块  节\nbufp0  是  全局  foo.o  .data\nbuf  是  外部  m.o  .data\nbufp1  是  全局  foo.o  COMMON\nfoo  是  全局  foo.o  .text\ntemp  否  /  /  /\ncnt  是  局部  foo.o  .bss",
+      "content": "第三题（10分）\n本题基于下列m.c及foo.c文件所编译生成的m.o和foo.o，编译过程未加优化选\n项。\n`m.c`：\n```c\nvoid foo();\nint buf[2] = {1, 2};\nint main() {\n    foo();\n    return 0;\n}\n```\n\n`foo.c`：\n```c\nextern int buf[];\nint *bufp0 = &buf[0];\nint *bufp1;\nvoid foo() {\n    static int count = 0;\n    int temp;\n    bufp1 = &buf[1];\n    temp = *bufp0;\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    count++;\n}\n```\n对于每个foo.o中定义和引用的符号，请用“是”或“否”指出它是否在模块foo.o\n的.symtab节中有符号表条目。如果存在条目，则请指出定义该符号的模块（foo.o\n或m.o）、符号类型（局部、全局或外部）以及它在模块中所处的节；如果不存在条\n目，则请将该行后继空白处标记为“/”。\n第一问每行1分，该行全部答对才给分数，节名如果漏了“.”可以算对。\n用英文回答的，如果正确也可以给分。\n| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| bufp0 |  |  |  |  |\n| buf |  |  |  |  |\n| bufp1 |  |  |  |  |\n| foo |  |  |  |  |\n| temp |  |  |  |  |\n| count |  |  |  |  |\n| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| bufp0 | 是 | 全局 | foo.o | .data |\n| buf | 是 | 外部 | m.o | .data |\n| bufp1 | 是 | 全局 | foo.o | COMMON |\n| foo | 是 | 全局 | foo.o | .text |\n| temp | 否 | / | / | / |\n| count | 是 | 局部 | foo.o | .bss |",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3246,20 +3404,20 @@
         "curated": "_curated/期末/2018期末-带答案/292.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第三题（10分）\n本题基于下列m.c及foo.c文件所编译生成的m.o和foo.o，编译过程未加优化选\n项。\n//m.c  //foo.c\nvoid foo();  extern int buf[];\nint buf[2] = {1, 2};  int *bufp0 = &buf[0];\nint main(){  int *bufp1;\n    foo();  void foo(){\n    return 0;  static int count = 0;\n}  int temp;\n  bufp1 = &buf[1];\ntemp = *bufp0;\n*bufp0 = *bufp1;\n*bufp1 = temp;\ncount++;\n}\n对于每个foo.o中定义和引用的符号，请用“是”或“否”指出它是否在模块foo.o\n的.symtab节中有符号表条目。如果存在条目，则请指出定义该符号的模块（foo.o\n或m.o）、符号类型（局部、全局或外部）以及它在模块中所处的节；如果不存在条\n目，则请将该行后继空白处标记为“/”。\n第一问每行1分，该行全部答对才给分数，节名如果漏了“.”可以算对。\n用英文回答的，如果正确也可以给分。\n符号  .symtab条目?  符号类型  定义符号的模块  节\nbufp0  是  全局  foo.o  .data\nbuf  是  外部  m.o  .data\nbufp1  是  全局  foo.o  COMMON\nfoo  是  全局  foo.o  .text\ntemp  否  /  /  /\ncnt  是  局部  foo.o  .bss",
+        "stem": "第三题（10分）\n本题基于下列m.c及foo.c文件所编译生成的m.o和foo.o，编译过程未加优化选\n项。\n`m.c`：\n```c\nvoid foo();\nint buf[2] = {1, 2};\nint main() {\n    foo();\n    return 0;\n}\n```\n\n`foo.c`：\n```c\nextern int buf[];\nint *bufp0 = &buf[0];\nint *bufp1;\nvoid foo() {\n    static int count = 0;\n    int temp;\n    bufp1 = &buf[1];\n    temp = *bufp0;\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    count++;\n}\n```\n对于每个foo.o中定义和引用的符号，请用“是”或“否”指出它是否在模块foo.o\n的.symtab节中有符号表条目。如果存在条目，则请指出定义该符号的模块（foo.o\n或m.o）、符号类型（局部、全局或外部）以及它在模块中所处的节；如果不存在条\n目，则请将该行后继空白处标记为“/”。\n第一问每行1分，该行全部答对才给分数，节名如果漏了“.”可以算对。\n用英文回答的，如果正确也可以给分。\n| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| bufp0 |  |  |  |  |\n| buf |  |  |  |  |\n| bufp1 |  |  |  |  |\n| foo |  |  |  |  |\n| temp |  |  |  |  |\n| count |  |  |  |  |",
         "choices": [],
-        "answer": "符号  .symtab条目?  符号类型  定义符号的模块  节\nbufp0  是  全局  foo.o  .data\nbuf  是  外部  m.o  .data\nbufp1  是  全局  foo.o  COMMON\nfoo  是  全局  foo.o  .text\ntemp  否  /  /  /\ncnt  是  局部  foo.o  .bss"
+        "answer": "| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| bufp0 | 是 | 全局 | foo.o | .data |\n| buf | 是 | 外部 | m.o | .data |\n| bufp1 | 是 | 全局 | foo.o | COMMON |\n| foo | 是 | 全局 | foo.o | .text |\n| temp | 否 | / | / | / |\n| count | 是 | 局部 | foo.o | .bss |"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第三题（10分）\n本题基于下列m.c及foo.c文件所编译生成的m.o和foo.o，编译过程未加优化选\n项。\n//m.c  //foo.c\nvoid foo();  extern int buf[];\nint buf[2] = {1, 2};  int *bufp0 = &buf[0];\nint main(){  int *bufp1;\n    foo();  void foo(){\n    return 0;  static int count = 0;\n}  int temp;\n  bufp1 = &buf[1];\ntemp = *bufp0;\n*bufp0 = *bufp1;\n*bufp1 = temp;\ncount++;\n}\n对于每个foo.o中定义和引用的符号，请用“是”或“否”指出它是否在模块foo.o\n的.symtab节中有符号表条目。如果存在条目，则请指出定义该符号的模块（foo.o\n或m.o）、符号类型（局部、全局或外部）以及它在模块中所处的节；如果不存在条\n目，则请将该行后继空白处标记为“/”。\n第一问每行1分，该行全部答对才给分数，节名如果漏了“.”可以算对。\n用英文回答的，如果正确也可以给分。\n符号  .symtab条目?  符号类型  定义符号的模块  节\nbufp0  是  全局  foo.o  .data\nbuf  是  外部  m.o  .data\nbufp1  是  全局  foo.o  COMMON\nfoo  是  全局  foo.o  .text\ntemp  否  /  /  /\ncnt  是  局部  foo.o  .bss",
-        "answer": "符号  .symtab条目?  符号类型  定义符号的模块  节\nbufp0  是  全局  foo.o  .data\nbuf  是  外部  m.o  .data\nbufp1  是  全局  foo.o  COMMON\nfoo  是  全局  foo.o  .text\ntemp  否  /  /  /\ncnt  是  局部  foo.o  .bss"
+        "prompt": "第三题（10分）\n本题基于下列m.c及foo.c文件所编译生成的m.o和foo.o，编译过程未加优化选\n项。\n`m.c`：\n```c\nvoid foo();\nint buf[2] = {1, 2};\nint main() {\n    foo();\n    return 0;\n}\n```\n\n`foo.c`：\n```c\nextern int buf[];\nint *bufp0 = &buf[0];\nint *bufp1;\nvoid foo() {\n    static int count = 0;\n    int temp;\n    bufp1 = &buf[1];\n    temp = *bufp0;\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    count++;\n}\n```\n对于每个foo.o中定义和引用的符号，请用“是”或“否”指出它是否在模块foo.o\n的.symtab节中有符号表条目。如果存在条目，则请指出定义该符号的模块（foo.o\n或m.o）、符号类型（局部、全局或外部）以及它在模块中所处的节；如果不存在条\n目，则请将该行后继空白处标记为“/”。\n第一问每行1分，该行全部答对才给分数，节名如果漏了“.”可以算对。\n用英文回答的，如果正确也可以给分。\n| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| bufp0 |  |  |  |  |\n| buf |  |  |  |  |\n| bufp1 |  |  |  |  |\n| foo |  |  |  |  |\n| temp |  |  |  |  |\n| count |  |  |  |  |",
+        "answer": "| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| bufp0 | 是 | 全局 | foo.o | .data |\n| buf | 是 | 外部 | m.o | .data |\n| bufp1 | 是 | 全局 | foo.o | COMMON |\n| foo | 是 | 全局 | foo.o | .text |\n| temp | 否 | / | / | / |\n| count | 是 | 局部 | foo.o | .bss |"
       },
       "presentation": {
         "status": "ready",
@@ -3296,14 +3454,14 @@
         "curated": "_curated/期末/2018期末-带答案/321.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
         "stem": "下图左边给出了m.o和foo.o的反汇编文件，右边给出了采用某个配置链接成可执行程序后再反汇编出来的文件。根据答题需要，其中的信息略有删减。\n\n```\n0000000000......<main>:                                          0000000000000fe8 <main>:\n55                    push    %rbp                    fe8:  55                    push   %rbp\n48 89 e5                mov      %rsp,%rbp           fe9:  48 89 e5             mov    %rsp,%rbp\nb8 00 00 00 00      mov      $0x0,%eax                fec:  b8 00 00 00 00      mov    $0x0,%eax\ne8 00 00 00 00      callq   e <main+0xe>        ①     ff1:  e8       ①            callq   1000 <foo>\nb8 00 00 00 00      mov      $0x0,%eax                ff6:  b8 00 00 00 00      mov    $0x0,%eax\n5d                          pop      %rbp              ffb:  5d                     pop    %rbp\nc3                          req                     ffc:  c3                     retq\n  ......略去部分和答题无关的信息......                     ......略去部分和答题无关的信息......\n0000000000......<foo>:                                        0000000000001000 <foo>:\n55                            push    %rbp              1000:  55                    push   %rbp\n48 89 e5                   mov      %rsp,%rbp           1001:  48 89 e5             mov    %rsp,%rbp\n48 c7 05 00 00 00 00 00 00 00 00                       1004:  48 c7 05 ?? ?? ?? ?? ?? ?? ?? ??\n                        movq      $0x0,0x0(%rip)               movq      ②  ,  ③  (%rip)\n③②\n48 8b 05 00 00 00 00 mov      0x0(%rip),%rax       ④   100f:  48 8b\n8b 00                     mov      (%rax),%eax           05 ?? ?? ?? ??  mov      0x????(%rip),%rax\n89 45 fc                    mov      %eax,-0x4(%rbp)      1016:  8b 00                  mov    (%rax),%eax\n48 8b 05 00 00 00 00 mov      0x0(%rip),%rax       ⑤   1018:  89 45 fc              mov    %eax,-0x4(%rbp)\n48 8b 15 00 00 00 00 mov      0x0(%rip),%rdx       ⑥   101b:  48 8b 05 ?? ?? ?? ??  mov      ⑤  (%rip),%rax\n8b 12                         mov      (%rdx),%edx      1022:  48 8b 15 ?? ?? ?? ??  mov    0x????(%rip),%rdx\n89 10                         mov      %edx,(%rax)         1029:  8b 12                  mov    (%rdx),%edx\n48 8b 05 00 00 00 00 mov      0x0(%rip),%rax       ⑦   102b:  89 10                  mov    %edx,(%rax)\n8b 55 fc                     mov      -0x4(%rbp),%edx  102d:  48 8b 05 ?? ?? ?? ??  mov    0x????(%rip),%rax\n89 10                         mov      %edx,(%rax)      1034:  8b 55 fc               mov    -0x4(%rbp),%edx\n8b  05  00  00  00  00        mov        0x0(%rip),%eax   1037:  89 10                  mov    %edx,(%rax)\n⑧                                                      1039:  8b 05 ?? ?? ?? ??    mov    0x????(%rip),%eax\n83 c0 01                     add      $0x1,%eax\n89  05  00  00  00  00        mov        %eax,0x0(%rip)   103f:  83 c0 01               add    $0x1,%eax\n⑨                                                      1042:  89 05 ?? ?? ?? ??    mov    %eax,  ⑨  (%rip)\n90                               nop                   1048:  90                      nop\n5d                               pop      %rbp           1049:  5d                      pop    %rbp\nc3                               retq                  104a:  c3                      retq\n  ......略去部分和答题无关的信息......                     ......略去部分和答题无关的信息......\n                                                       0000000000002330 <buf>:\n                                                          ......略去部分和答题无关的信息......\n                                                       0000000000002338 <bufp0>:\n                                                          ......略去部分和答题无关的信息......\n                                                       0000000000003024 <count.1837>:\n                                                          ......略去部分和答题无关的信息......\n                                                       0000000000003028 <bufp1>:\n```\n\n在上图中对所涉及到的重定位条目进行用数字①至⑨进行了标记，请根据下表中所提供的重定位条目信息，计算相应的重定位引用值并填写下表。\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ① | r.offset = 0xa　　r.symbol = 本题不提供<br>r.type = R_X86_64_PC32　　r.addend = -4 |  |\n| ② | r.offset = 0xb　　r.symbol = buf<br>r.type = R_X86_64_32　　r.addend = +4 |  |\n| ③ | r.offset = 0x7　　r.symbol = bufp1<br>r.type = R_X86_64_PC32　　r.addend = -8 |  |\n| ⑤ | r.offset = 0x1e　　r.symbol = bufp0<br>r.type = R_X86_64_PC32　　r.addend = -4 |  |\n| ⑨ | r.offset = 0x44　　r.symbol = 本题不提供<br>r.type = R_X86_64_PC32　　r.addend = -4 |  |",
         "choices": [],
         "answer": "| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ① | r.offset = 0xa　　r.symbol = 本题不提供<br>r.type = R_X86_64_PC32　　r.addend = -4 | 0a 00 00 00 |\n| ② | r.offset = 0xb　　r.symbol = buf<br>r.type = R_X86_64_32　　r.addend = +4 | 0x2334 |\n| ③ | r.offset = 0x7　　r.symbol = bufp1<br>r.type = R_X86_64_PC32　　r.addend = -8 | 0x2019 |\n| ⑤ | r.offset = 0x1e　　r.symbol = bufp0<br>r.type = R_X86_64_PC32　　r.addend = -4 | 0x1316 |\n| ⑨ | r.offset = 0x44　　r.symbol = 本题不提供<br>r.type = R_X86_64_PC32　　r.addend = -4 | 0x1fdc |"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
@@ -3871,7 +4029,7 @@
       "exam": "2021期末",
       "questionNo": "第一题 10",
       "summary": "静态局部符号与 COMMON 伪节",
-      "content": "10.  对如下两个C程序，用gcc 生成对应的.o模块，链接在一起得到a.out\n可执行程序。则下列说法正确的是：\n```\n// main.c  // util.c\n#include <stdio.h>  int a = 0;\nstatic int a;  int *func() {\nint main() {  return &a;\nint *func();  }\nprintf(\"%ld\\n\", func() - &a);\nreturn 0;\n}\n```\nA. 在 main.o 中，符号 a 位于.COMMON 伪节。\nB. 在 util.o 中，符号 a 位于.COMMON 伪节。\nC. 无论怎样链接和运行 a.out，输出的结果都一样，但必不为 0。\nD. 以上说法都不正确。\n答案：D",
+      "content": "10. 对如下两个 C 程序，分别用 GCC 生成对应的 `.o` 模块，再链接得到可执行程序 `a.out`。下列说法正确的是：\n\n`main.c`：\n\n```c\n#include <stdio.h>\n\nstatic int a;\n\nint main() {\n    int *func();\n    printf(\"%ld\\n\", func() - &a);\n    return 0;\n}\n```\n\n`util.c`：\n\n```c\nint a = 0;\n\nint *func() {\n    return &a;\n}\n```\nA. 在 `main.o` 中，符号 `a` 位于 `.COMMON` 伪节\nB. 在 `util.o` 中，符号 `a` 位于 `.COMMON` 伪节\nC. 无论怎样链接和运行 `a.out`，输出结果都相同，但一定不为 0\nD. 以上说法都不正确\n答案：D。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3893,26 +4051,26 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "10.  对如下两个C程序，用gcc 生成对应的.o模块，链接在一起得到a.out\n可执行程序。则下列说法正确的是：\n```\n// main.c  // util.c\n#include <stdio.h>  int a = 0;\nstatic int a;  int *func() {\nint main() {  return &a;\nint *func();  }\nprintf(\"%ld\\n\", func() - &a);\nreturn 0;\n}\n```",
+        "stem": "10. 对如下两个 C 程序，分别用 GCC 生成对应的 `.o` 模块，再链接得到可执行程序 `a.out`。下列说法正确的是：\n\n`main.c`：\n\n```c\n#include <stdio.h>\n\nstatic int a;\n\nint main() {\n    int *func();\n    printf(\"%ld\\n\", func() - &a);\n    return 0;\n}\n```\n\n`util.c`：\n\n```c\nint a = 0;\n\nint *func() {\n    return &a;\n}\n```",
         "choices": [
           {
             "key": "A",
-            "content": "在 main.o 中，符号 a 位于.COMMON 伪节。"
+            "content": "在 `main.o` 中，符号 `a` 位于 `.COMMON` 伪节"
           },
           {
             "key": "B",
-            "content": "在 util.o 中，符号 a 位于.COMMON 伪节。"
+            "content": "在 `util.o` 中，符号 `a` 位于 `.COMMON` 伪节"
           },
           {
             "key": "C",
-            "content": "无论怎样链接和运行 a.out，输出的结果都一样，但必不为 0。"
+            "content": "无论怎样链接和运行 `a.out`，输出结果都相同，但一定不为 0"
           },
           {
             "key": "D",
-            "content": "以上说法都不正确。"
+            "content": "以上说法都不正确"
           }
         ],
-        "answer": "答案：D"
+        "answer": "答案：D。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -3920,19 +4078,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "在 main.o 中，符号 a 位于.COMMON 伪节。"
+            "content": "在 `main.o` 中，符号 `a` 位于 `.COMMON` 伪节"
           },
           {
             "id": "B",
-            "content": "在 util.o 中，符号 a 位于.COMMON 伪节。"
+            "content": "在 `util.o` 中，符号 `a` 位于 `.COMMON` 伪节"
           },
           {
             "id": "C",
-            "content": "无论怎样链接和运行 a.out，输出的结果都一样，但必不为 0。"
+            "content": "无论怎样链接和运行 `a.out`，输出结果都相同，但一定不为 0"
           },
           {
             "id": "D",
-            "content": "以上说法都不正确。"
+            "content": "以上说法都不正确"
           }
         ],
         "correctChoiceIds": [
@@ -3941,8 +4099,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "10.  对如下两个C程序，用gcc 生成对应的.o模块，链接在一起得到a.out\n可执行程序。则下列说法正确的是：\n```\n// main.c  // util.c\n#include <stdio.h>  int a = 0;\nstatic int a;  int *func() {\nint main() {  return &a;\nint *func();  }\nprintf(\"%ld\\n\", func() - &a);\nreturn 0;\n}\n```",
-        "answer": "答案：D"
+        "prompt": "10. 对如下两个 C 程序，分别用 GCC 生成对应的 `.o` 模块，再链接得到可执行程序 `a.out`。下列说法正确的是：\n\n`main.c`：\n\n```c\n#include <stdio.h>\n\nstatic int a;\n\nint main() {\n    int *func();\n    printf(\"%ld\\n\", func() - &a);\n    return 0;\n}\n```\n\n`util.c`：\n\n```c\nint a = 0;\n\nint *func() {\n    return &a;\n}\n```",
+        "answer": "答案：D。"
       },
       "presentation": {
         "status": "ready",
@@ -4239,7 +4397,7 @@
       "exam": "2021期末",
       "questionNo": "第 2 题",
       "summary": "静态链接：符号 a 所在节与 a.out 输出可复现性（含答案与解析）",
-      "content": "（静态链接）中等，需要2-4min\n\n2.  对如下两个C程序，用gcc 生成对应的.o模块，再链接在一起得到a.out。则下列说法正确的是：\n\n| main.c | util.c |\n| --- | --- |\n| `// main.c`<br>`#include <stdio.h>`<br>`static int a;`<br>`int main() {`<br>`int *func();`<br>`printf(\"%ld\\n\", func() - &a);`<br>`return 0;`<br>`}` | `// util.c`<br>`int a = 0;`<br>`int *func() {`<br>`return &a;`<br>`}` |\n\n1.  在 main.o 中，符号 a 位于 COM 伪节\n\n2.  在 util. o 中，符号 a 位于 COM 伪节\n\n3.  无论怎样链接和运行 a.out， a.out 输出的结果都一样，但必不为 0\n\n4.  以上说法都不正确\n答案：4（第 4 项，即 D）\n\n原文选项按自动编号 1.–4. 计，故标准答案中的 D 对应第 4 项。\n\n选项 1 错。它位于 .bss 节。\n\n选项 2 错。它位于 .bss 节。\n\n选项 3 错。注意 ld 时文件顺序的交换会改变 a.out 中两个符号的相对偏移。\n\n于是选项 4 正确。",
+      "content": "2. 对如下两个 C 程序，分别用 GCC 生成对应的 `.o` 模块，再链接得到可执行程序 `a.out`。下列说法正确的是：\n\n`main.c`：\n\n```c\n#include <stdio.h>\n\nstatic int a;\n\nint main() {\n    int *func();\n    printf(\"%ld\\n\", func() - &a);\n    return 0;\n}\n```\n\n`util.c`：\n\n```c\nint a = 0;\n\nint *func() {\n    return &a;\n}\n```\nA. 在 `main.o` 中，符号 `a` 位于 `.COMMON` 伪节\nB. 在 `util.o` 中，符号 `a` 位于 `.COMMON` 伪节\nC. 无论怎样链接和运行 `a.out`，输出结果都相同，但一定不为 0\nD. 以上说法都不正确\n答案：D。\n\n选项 A 错：`main.c` 中的 `a` 是文件内静态未初始化变量，位于 `.bss` 节。\n\n选项 B 错：`util.c` 中的 `a` 是显式初始化为 0 的全局变量，位于 `.bss` 节。\n\n选项 C 错：改变链接时目标文件的顺序，可能改变可执行文件中两个对象的相对地址，从而改变指针相减的结果。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4262,20 +4420,58 @@
         "curated": "_curated/期末/chap 7 解析/27.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "（静态链接）中等，需要2-4min\n\n2.  对如下两个C程序，用gcc 生成对应的.o模块，再链接在一起得到a.out。则下列说法正确的是：\n\n| main.c | util.c |\n| --- | --- |\n| `// main.c`<br>`#include <stdio.h>`<br>`static int a;`<br>`int main() {`<br>`int *func();`<br>`printf(\"%ld\\n\", func() - &a);`<br>`return 0;`<br>`}` | `// util.c`<br>`int a = 0;`<br>`int *func() {`<br>`return &a;`<br>`}` |\n\n1.  在 main.o 中，符号 a 位于 COM 伪节\n\n2.  在 util. o 中，符号 a 位于 COM 伪节\n\n3.  无论怎样链接和运行 a.out， a.out 输出的结果都一样，但必不为 0\n\n4.  以上说法都不正确",
-        "choices": [],
-        "answer": "答案：4（第 4 项，即 D）\n\n原文选项按自动编号 1.–4. 计，故标准答案中的 D 对应第 4 项。\n\n选项 1 错。它位于 .bss 节。\n\n选项 2 错。它位于 .bss 节。\n\n选项 3 错。注意 ld 时文件顺序的交换会改变 a.out 中两个符号的相对偏移。\n\n于是选项 4 正确。"
+        "mode": "choice",
+        "selection": "single",
+        "stem": "2. 对如下两个 C 程序，分别用 GCC 生成对应的 `.o` 模块，再链接得到可执行程序 `a.out`。下列说法正确的是：\n\n`main.c`：\n\n```c\n#include <stdio.h>\n\nstatic int a;\n\nint main() {\n    int *func();\n    printf(\"%ld\\n\", func() - &a);\n    return 0;\n}\n```\n\n`util.c`：\n\n```c\nint a = 0;\n\nint *func() {\n    return &a;\n}\n```",
+        "choices": [
+          {
+            "key": "A",
+            "content": "在 `main.o` 中，符号 `a` 位于 `.COMMON` 伪节"
+          },
+          {
+            "key": "B",
+            "content": "在 `util.o` 中，符号 `a` 位于 `.COMMON` 伪节"
+          },
+          {
+            "key": "C",
+            "content": "无论怎样链接和运行 `a.out`，输出结果都相同，但一定不为 0"
+          },
+          {
+            "key": "D",
+            "content": "以上说法都不正确"
+          }
+        ],
+        "answer": "答案：D。\n\n选项 A 错：`main.c` 中的 `a` 是文件内静态未初始化变量，位于 `.bss` 节。\n\n选项 B 错：`util.c` 中的 `a` 是显式初始化为 0 的全局变量，位于 `.bss` 节。\n\n选项 C 错：改变链接时目标文件的顺序，可能改变可执行文件中两个对象的相对地址，从而改变指针相减的结果。"
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "在 `main.o` 中，符号 `a` 位于 `.COMMON` 伪节"
+          },
+          {
+            "id": "B",
+            "content": "在 `util.o` 中，符号 `a` 位于 `.COMMON` 伪节"
+          },
+          {
+            "id": "C",
+            "content": "无论怎样链接和运行 `a.out`，输出结果都相同，但一定不为 0"
+          },
+          {
+            "id": "D",
+            "content": "以上说法都不正确"
+          }
+        ],
+        "correctChoiceIds": [
+          "D"
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "（静态链接）中等，需要2-4min\n\n2.  对如下两个C程序，用gcc 生成对应的.o模块，再链接在一起得到a.out。则下列说法正确的是：\n\n| main.c | util.c |\n| --- | --- |\n| `// main.c`<br>`#include <stdio.h>`<br>`static int a;`<br>`int main() {`<br>`int *func();`<br>`printf(\"%ld\\n\", func() - &a);`<br>`return 0;`<br>`}` | `// util.c`<br>`int a = 0;`<br>`int *func() {`<br>`return &a;`<br>`}` |\n\n1.  在 main.o 中，符号 a 位于 COM 伪节\n\n2.  在 util. o 中，符号 a 位于 COM 伪节\n\n3.  无论怎样链接和运行 a.out， a.out 输出的结果都一样，但必不为 0\n\n4.  以上说法都不正确",
-        "answer": "答案：4（第 4 项，即 D）\n\n原文选项按自动编号 1.–4. 计，故标准答案中的 D 对应第 4 项。\n\n选项 1 错。它位于 .bss 节。\n\n选项 2 错。它位于 .bss 节。\n\n选项 3 错。注意 ld 时文件顺序的交换会改变 a.out 中两个符号的相对偏移。\n\n于是选项 4 正确。"
+        "prompt": "2. 对如下两个 C 程序，分别用 GCC 生成对应的 `.o` 模块，再链接得到可执行程序 `a.out`。下列说法正确的是：\n\n`main.c`：\n\n```c\n#include <stdio.h>\n\nstatic int a;\n\nint main() {\n    int *func();\n    printf(\"%ld\\n\", func() - &a);\n    return 0;\n}\n```\n\n`util.c`：\n\n```c\nint a = 0;\n\nint *func() {\n    return &a;\n}\n```",
+        "answer": "答案：D。\n\n选项 A 错：`main.c` 中的 `a` 是文件内静态未初始化变量，位于 `.bss` 节。\n\n选项 B 错：`util.c` 中的 `a` 是显式初始化为 0 的全局变量，位于 `.bss` 节。\n\n选项 C 错：改变链接时目标文件的顺序，可能改变可执行文件中两个对象的相对地址，从而改变指针相减的结果。"
       },
       "presentation": {
         "status": "ready",

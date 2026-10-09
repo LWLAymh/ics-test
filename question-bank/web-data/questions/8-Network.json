@@ -1045,7 +1045,7 @@
       "exam": "2016期末",
       "questionNo": "第七题",
       "summary": "并发 echo server 套接字程序填空",
-      "content": "第七题（12分）\n下面是一个基于进程的并发echo server的主要代码（省略了与本题无关的部分），\n每段代码都注释了相应的功能，请补充空缺的代码（可能是0行或多行）。请确保\n任何由你打开的文件描述符都被显式地关闭。\n```\nint open_listenfd(char *port) {\n  struct addrinfo hints, *listp, *p;\n  int listenfd, optval = 1;\n  /* Get a list of potential server addresses */\n  memset(&hints, 0, sizeof(struct addrinfo));\n  hints.ai_socktype = SOCK_STREAM;\n  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\n  hints.ai_flags |= AI_NUMERICSERV;\n  Getaddrinfo(NULL, port, &hints, &listp);\n  /* Walk the list for one that we can bind to */\n  for (p = listp; p; p = p->ai_next) {\n    /* Create a socket descriptor. If failed, try the next */\n    if ((listenfd = socket(p->ai_family,\n      p->ai_socktype, p->ai_protocol)) < 0)\n          (1)\n    /* Eliminates error from bind */\n    Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\n      (const void *)&optval, sizeof(int));\n    /* Bind the descriptor to the address */\n    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)\n          (2)     else /* Success, use the current one */\n          (3)          /* Bind failed, try the next */\n  }\n      (4)\n  if (!p) return -1; /* No address worked */\n  /* Make it a listening socket*/\n  if (listen(listenfd, LISTENQ) < 0) {\n        (5)\n    return -1;\n  }\n  return listenfd;\n}\nvoid echo(int fd); /* service a client via fd */\nvoid handler(int sig) {\n  while (waitpid(-1, 0, WNOHANG) > 0);\n  return;\n}\nint main(int argc, char **argv) {\n  int listenfd, connfd;\n  socklen_t clientlen;\n  struct sockaddr_storage clientaddr;\n  Signal(    (10)    , handler);\n  listenfd = Open_listenfd(argv[1]);\n  while (1) {\n    clientlen = sizeof(struct sockaddr_storage)\n      (6)   = Accept(  (7)  , (SA *)&clientaddr, &clientlen);\n    if (Fork() == 0) {\n      /* Child services client and close fd */\n          (8)\n      exit(0); /* Child exits */\n    }\n        (9)\n  }\n}\n```\n（第(9)空3分，其余每空1分; 共12分）\n答案：\n```\n(1)  continue;\n(2)  break;\n(3)  Close(listenfd);\n(4)  Freeaddrinfo(listp);\n(5)  Close(listenfd);\n(6)  connfd\n(7)  listenfd\n(8)  Close(listenfd); echo(connfd); Close(connfd);\n(9)  Close(connfd);\n(10)  SIGCHLD\n```",
+      "content": "第七题（12分）\n下面是一个基于进程的并发echo server的主要代码（省略了与本题无关的部分），\n每段代码都注释了相应的功能，请补充空缺的代码（可能是0行或多行）。请确保\n任何由你打开的文件描述符都被显式地关闭。\n```\nint open_listenfd(char *port) {\n  struct addrinfo hints, *listp, *p;\n  int listenfd, optval = 1;\n  /* Get a list of potential server addresses */\n  memset(&hints, 0, sizeof(struct addrinfo));\n  hints.ai_socktype = SOCK_STREAM;\n  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\n  hints.ai_flags |= AI_NUMERICSERV;\n  Getaddrinfo(NULL, port, &hints, &listp);\n  /* Walk the list for one that we can bind to */\n  for (p = listp; p; p = p->ai_next) {\n    /* Create a socket descriptor. If failed, try the next */\n    if ((listenfd = socket(p->ai_family,\n      p->ai_socktype, p->ai_protocol)) < 0)\n      (1)\n    /* Eliminates error from bind */\n    Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\n      (const void *)&optval, sizeof(int));\n    /* Bind the descriptor to the address */\n    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)\n      (2) /* Success, use the current one */\n    else\n      (3) /* Bind failed, try the next */\n  }\n  (4)\n  if (!p) return -1; /* No address worked */\n  /* Make it a listening socket*/\n  if (listen(listenfd, LISTENQ) < 0) {\n    (5)\n    return -1;\n  }\n  return listenfd;\n}\nvoid echo(int fd); /* service a client via fd */\nvoid handler(int sig) {\n  while (waitpid(-1, 0, WNOHANG) > 0);\n  return;\n}\nint main(int argc, char **argv) {\n  int listenfd, connfd;\n  socklen_t clientlen;\n  struct sockaddr_storage clientaddr;\n  Signal(    (10)    , handler);\n  listenfd = Open_listenfd(argv[1]);\n  while (1) {\n    clientlen = sizeof(struct sockaddr_storage);\n    (6) = Accept((7), (SA *)&clientaddr, &clientlen);\n    if (Fork() == 0) {\n      /* Child services client and close fd */\n      (8)\n      exit(0); /* Child exits */\n    }\n    (9)\n  }\n}\n```\n（第(9)空3分，其余每空1分; 共12分）\n答案：\n```\n(1)  continue;\n(2)  break;\n(3)  Close(listenfd);\n(4)  Freeaddrinfo(listp);\n(5)  Close(listenfd);\n(6)  connfd\n(7)  listenfd\n(8)  Close(listenfd); echo(connfd); Close(connfd);\n(9)  Close(connfd);\n(10)  SIGCHLD\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1067,7 +1067,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第七题（12分）\n下面是一个基于进程的并发echo server的主要代码（省略了与本题无关的部分），\n每段代码都注释了相应的功能，请补充空缺的代码（可能是0行或多行）。请确保\n任何由你打开的文件描述符都被显式地关闭。\n```\nint open_listenfd(char *port) {\n  struct addrinfo hints, *listp, *p;\n  int listenfd, optval = 1;\n  /* Get a list of potential server addresses */\n  memset(&hints, 0, sizeof(struct addrinfo));\n  hints.ai_socktype = SOCK_STREAM;\n  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\n  hints.ai_flags |= AI_NUMERICSERV;\n  Getaddrinfo(NULL, port, &hints, &listp);\n  /* Walk the list for one that we can bind to */\n  for (p = listp; p; p = p->ai_next) {\n    /* Create a socket descriptor. If failed, try the next */\n    if ((listenfd = socket(p->ai_family,\n      p->ai_socktype, p->ai_protocol)) < 0)\n          (1)\n    /* Eliminates error from bind */\n    Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\n      (const void *)&optval, sizeof(int));\n    /* Bind the descriptor to the address */\n    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)\n          (2)     else /* Success, use the current one */\n          (3)          /* Bind failed, try the next */\n  }\n      (4)\n  if (!p) return -1; /* No address worked */\n  /* Make it a listening socket*/\n  if (listen(listenfd, LISTENQ) < 0) {\n        (5)\n    return -1;\n  }\n  return listenfd;\n}\nvoid echo(int fd); /* service a client via fd */\nvoid handler(int sig) {\n  while (waitpid(-1, 0, WNOHANG) > 0);\n  return;\n}\nint main(int argc, char **argv) {\n  int listenfd, connfd;\n  socklen_t clientlen;\n  struct sockaddr_storage clientaddr;\n  Signal(    (10)    , handler);\n  listenfd = Open_listenfd(argv[1]);\n  while (1) {\n    clientlen = sizeof(struct sockaddr_storage)\n      (6)   = Accept(  (7)  , (SA *)&clientaddr, &clientlen);\n    if (Fork() == 0) {\n      /* Child services client and close fd */\n          (8)\n      exit(0); /* Child exits */\n    }\n        (9)\n  }\n}\n```\n（第(9)空3分，其余每空1分; 共12分）",
+        "stem": "第七题（12分）\n下面是一个基于进程的并发echo server的主要代码（省略了与本题无关的部分），\n每段代码都注释了相应的功能，请补充空缺的代码（可能是0行或多行）。请确保\n任何由你打开的文件描述符都被显式地关闭。\n```\nint open_listenfd(char *port) {\n  struct addrinfo hints, *listp, *p;\n  int listenfd, optval = 1;\n  /* Get a list of potential server addresses */\n  memset(&hints, 0, sizeof(struct addrinfo));\n  hints.ai_socktype = SOCK_STREAM;\n  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\n  hints.ai_flags |= AI_NUMERICSERV;\n  Getaddrinfo(NULL, port, &hints, &listp);\n  /* Walk the list for one that we can bind to */\n  for (p = listp; p; p = p->ai_next) {\n    /* Create a socket descriptor. If failed, try the next */\n    if ((listenfd = socket(p->ai_family,\n      p->ai_socktype, p->ai_protocol)) < 0)\n      (1)\n    /* Eliminates error from bind */\n    Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\n      (const void *)&optval, sizeof(int));\n    /* Bind the descriptor to the address */\n    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)\n      (2) /* Success, use the current one */\n    else\n      (3) /* Bind failed, try the next */\n  }\n  (4)\n  if (!p) return -1; /* No address worked */\n  /* Make it a listening socket*/\n  if (listen(listenfd, LISTENQ) < 0) {\n    (5)\n    return -1;\n  }\n  return listenfd;\n}\nvoid echo(int fd); /* service a client via fd */\nvoid handler(int sig) {\n  while (waitpid(-1, 0, WNOHANG) > 0);\n  return;\n}\nint main(int argc, char **argv) {\n  int listenfd, connfd;\n  socklen_t clientlen;\n  struct sockaddr_storage clientaddr;\n  Signal(    (10)    , handler);\n  listenfd = Open_listenfd(argv[1]);\n  while (1) {\n    clientlen = sizeof(struct sockaddr_storage);\n    (6) = Accept((7), (SA *)&clientaddr, &clientlen);\n    if (Fork() == 0) {\n      /* Child services client and close fd */\n      (8)\n      exit(0); /* Child exits */\n    }\n    (9)\n  }\n}\n```\n（第(9)空3分，其余每空1分; 共12分）",
         "choices": [],
         "answer": "答案：\n```\n(1)  continue;\n(2)  break;\n(3)  Close(listenfd);\n(4)  Freeaddrinfo(listp);\n(5)  Close(listenfd);\n(6)  connfd\n(7)  listenfd\n(8)  Close(listenfd); echo(connfd); Close(connfd);\n(9)  Close(connfd);\n(10)  SIGCHLD\n```"
       },
@@ -1077,7 +1077,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第七题（12分）\n下面是一个基于进程的并发echo server的主要代码（省略了与本题无关的部分），\n每段代码都注释了相应的功能，请补充空缺的代码（可能是0行或多行）。请确保\n任何由你打开的文件描述符都被显式地关闭。\n```\nint open_listenfd(char *port) {\n  struct addrinfo hints, *listp, *p;\n  int listenfd, optval = 1;\n  /* Get a list of potential server addresses */\n  memset(&hints, 0, sizeof(struct addrinfo));\n  hints.ai_socktype = SOCK_STREAM;\n  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\n  hints.ai_flags |= AI_NUMERICSERV;\n  Getaddrinfo(NULL, port, &hints, &listp);\n  /* Walk the list for one that we can bind to */\n  for (p = listp; p; p = p->ai_next) {\n    /* Create a socket descriptor. If failed, try the next */\n    if ((listenfd = socket(p->ai_family,\n      p->ai_socktype, p->ai_protocol)) < 0)\n          (1)\n    /* Eliminates error from bind */\n    Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\n      (const void *)&optval, sizeof(int));\n    /* Bind the descriptor to the address */\n    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)\n          (2)     else /* Success, use the current one */\n          (3)          /* Bind failed, try the next */\n  }\n      (4)\n  if (!p) return -1; /* No address worked */\n  /* Make it a listening socket*/\n  if (listen(listenfd, LISTENQ) < 0) {\n        (5)\n    return -1;\n  }\n  return listenfd;\n}\nvoid echo(int fd); /* service a client via fd */\nvoid handler(int sig) {\n  while (waitpid(-1, 0, WNOHANG) > 0);\n  return;\n}\nint main(int argc, char **argv) {\n  int listenfd, connfd;\n  socklen_t clientlen;\n  struct sockaddr_storage clientaddr;\n  Signal(    (10)    , handler);\n  listenfd = Open_listenfd(argv[1]);\n  while (1) {\n    clientlen = sizeof(struct sockaddr_storage)\n      (6)   = Accept(  (7)  , (SA *)&clientaddr, &clientlen);\n    if (Fork() == 0) {\n      /* Child services client and close fd */\n          (8)\n      exit(0); /* Child exits */\n    }\n        (9)\n  }\n}\n```\n（第(9)空3分，其余每空1分; 共12分）",
+        "prompt": "第七题（12分）\n下面是一个基于进程的并发echo server的主要代码（省略了与本题无关的部分），\n每段代码都注释了相应的功能，请补充空缺的代码（可能是0行或多行）。请确保\n任何由你打开的文件描述符都被显式地关闭。\n```\nint open_listenfd(char *port) {\n  struct addrinfo hints, *listp, *p;\n  int listenfd, optval = 1;\n  /* Get a list of potential server addresses */\n  memset(&hints, 0, sizeof(struct addrinfo));\n  hints.ai_socktype = SOCK_STREAM;\n  hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\n  hints.ai_flags |= AI_NUMERICSERV;\n  Getaddrinfo(NULL, port, &hints, &listp);\n  /* Walk the list for one that we can bind to */\n  for (p = listp; p; p = p->ai_next) {\n    /* Create a socket descriptor. If failed, try the next */\n    if ((listenfd = socket(p->ai_family,\n      p->ai_socktype, p->ai_protocol)) < 0)\n      (1)\n    /* Eliminates error from bind */\n    Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\n      (const void *)&optval, sizeof(int));\n    /* Bind the descriptor to the address */\n    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)\n      (2) /* Success, use the current one */\n    else\n      (3) /* Bind failed, try the next */\n  }\n  (4)\n  if (!p) return -1; /* No address worked */\n  /* Make it a listening socket*/\n  if (listen(listenfd, LISTENQ) < 0) {\n    (5)\n    return -1;\n  }\n  return listenfd;\n}\nvoid echo(int fd); /* service a client via fd */\nvoid handler(int sig) {\n  while (waitpid(-1, 0, WNOHANG) > 0);\n  return;\n}\nint main(int argc, char **argv) {\n  int listenfd, connfd;\n  socklen_t clientlen;\n  struct sockaddr_storage clientaddr;\n  Signal(    (10)    , handler);\n  listenfd = Open_listenfd(argv[1]);\n  while (1) {\n    clientlen = sizeof(struct sockaddr_storage);\n    (6) = Accept((7), (SA *)&clientaddr, &clientlen);\n    if (Fork() == 0) {\n      /* Child services client and close fd */\n      (8)\n      exit(0); /* Child exits */\n    }\n    (9)\n  }\n}\n```\n（第(9)空3分，其余每空1分; 共12分）",
         "answer": "答案：\n```\n(1)  continue;\n(2)  break;\n(3)  Close(listenfd);\n(4)  Freeaddrinfo(listp);\n(5)  Close(listenfd);\n(6)  connfd\n(7)  listenfd\n(8)  Close(listenfd); echo(connfd); Close(connfd);\n(9)  Close(connfd);\n(10)  SIGCHLD\n```"
       },
       "presentation": {
@@ -1344,16 +1344,16 @@
       }
     },
     {
-      "id": "q-639715cb9285f961",
+      "id": "q-9c5d3b54be5480a9",
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 27,
       "moduleId": "network",
       "year": 2017,
       "examType": "期末",
       "exam": "2017期末",
-      "questionNo": "第七题",
-      "summary": "Echo 客户端/服务器流程填空与协议判断",
-      "content": "第七题（12分）\n1. 请根据Echo server/client应用的标准程序填空。\n\n![Echo server/client 连接与通信流程图](assets/期末/2017期末-无答案/p18-img1.png)\n\n1. ______________  2. ______________  3. ______________\n4. ______________  5. ______________  6. ______________\n7. ______________  8. ______________  9. ______________\n\n2. 不定项选择题（全对得分，有错得0分）\nA. TCP是一种实现在用户态的端到端可靠数据传输协议\nB. 每一个连接在网络上的主机都会被分配一个固定的IP地址\nC. IP包在网际互联时通过其帧头（LAN frame header）和包头（Internet\npacket header）信息共同决定路由\nD. HTTP1.0支持在同一个连接里进行多个transaction\nE. Web代理作为网络缓存功能的时候对用户是显式存在的\nF. 10.0.0.0/12和172.16.0.0/16和192.168.0.0/20属于私有地址字段\n上述正确的有：_________________\n答案：C\n（1）Echo 框架填空：1 getaddrinfo；2 getaddrinfo；3 bind；4 listen；5 connect；6 accept；7 rio_writen；8 rio_readlineb；9 rio_readlineb。\n（2）不定项选择：只有 C 正确。A 错（TCP 在内核实现，不是用户态）；B 错（IP 地址可由 DHCP 动态分配）；D 错（HTTP/1.0 是非持续连接，HTTP/1.1 才支持一个连接多个事务）；E 错（Web 代理缓存对用户是隐式的）；F 错（私有地址段应为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "questionNo": "第七题 1",
+      "summary": "Echo 客户端/服务器流程填空",
+      "content": "第七题（12分）第1问：请根据 Echo server/client 应用的标准程序填空。\n\n![Echo server/client 连接与通信流程图](assets/期末/2017期末-无答案/p18-img1.png)\n\n1. {{blank:blank-1}}　2. {{blank:blank-2}}　3. {{blank:blank-3}}\n4. {{blank:blank-4}}　5. {{blank:blank-5}}　6. {{blank:blank-6}}\n7. {{blank:blank-7}}　8. {{blank:blank-8}}　9. {{blank:blank-9}}\n答案依次为：getaddrinfo、getaddrinfo、bind、listen、connect、accept、rio_writen、rio_readlineb、rio_readlineb。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [
         "assets/期末/2017期末-无答案/p18-img1.png"
       ],
@@ -1367,15 +1367,211 @@
         "document": "原文/期末/2017期末-无答案.md",
         "lines": {
           "start": 596,
-          "end": 631
+          "end": 622
         },
         "aliases": [],
         "curated": "_curated/期末/2017期末-无答案/596.md"
       },
       "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "第七题（12分）第1问：请根据 Echo server/client 应用的标准程序填空。\n\n![Echo server/client 连接与通信流程图](assets/期末/2017期末-无答案/p18-img1.png)\n\n1. {{blank:blank-1}}　2. {{blank:blank-2}}　3. {{blank:blank-3}}\n4. {{blank:blank-4}}　5. {{blank:blank-5}}　6. {{blank:blank-6}}\n7. {{blank:blank-7}}　8. {{blank:blank-8}}　9. {{blank:blank-9}}",
+        "choices": [],
+        "answer": "答案依次为：getaddrinfo、getaddrinfo、bind、listen、connect、accept、rio_writen、rio_readlineb、rio_readlineb。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+        "blankAnswers": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "getaddrinfo"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-2",
+            "acceptedAnswers": [
+              "getaddrinfo"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-3",
+            "acceptedAnswers": [
+              "bind"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-4",
+            "acceptedAnswers": [
+              "listen"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-5",
+            "acceptedAnswers": [
+              "connect"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-6",
+            "acceptedAnswers": [
+              "accept"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-7",
+            "acceptedAnswers": [
+              "rio_writen"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-8",
+            "acceptedAnswers": [
+              "rio_readlineb"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-9",
+            "acceptedAnswers": [
+              "rio_readlineb"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "blank-1",
+            "acceptedAnswers": [
+              "getaddrinfo"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-2",
+            "acceptedAnswers": [
+              "getaddrinfo"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-3",
+            "acceptedAnswers": [
+              "bind"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-4",
+            "acceptedAnswers": [
+              "listen"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-5",
+            "acceptedAnswers": [
+              "connect"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-6",
+            "acceptedAnswers": [
+              "accept"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-7",
+            "acceptedAnswers": [
+              "rio_writen"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-8",
+            "acceptedAnswers": [
+              "rio_readlineb"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "blank-9",
+            "acceptedAnswers": [
+              "rio_readlineb"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第七题（12分）第1问：请根据 Echo server/client 应用的标准程序填空。\n\n![Echo server/client 连接与通信流程图](assets/期末/2017期末-无答案/p18-img1.png)\n\n1. {{blank:blank-1}}　2. {{blank:blank-2}}　3. {{blank:blank-3}}\n4. {{blank:blank-4}}　5. {{blank:blank-5}}　6. {{blank:blank-6}}\n7. {{blank:blank-7}}　8. {{blank:blank-8}}　9. {{blank:blank-9}}",
+        "answer": "答案依次为：getaddrinfo、getaddrinfo、bind、listen、connect、accept、rio_writen、rio_readlineb、rio_readlineb。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-99e5e4f1f599db68",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 28,
+      "moduleId": "network",
+      "year": 2017,
+      "examType": "期末",
+      "exam": "2017期末",
+      "questionNo": "第七题 2",
+      "summary": "TCP/IP、HTTP 与私有地址判断",
+      "content": "第七题（12分）第2问：不定项选择题（全对得分，有错得0分）\nA. TCP是一种实现在用户态的端到端可靠数据传输协议\nB. 每一个连接在网络上的主机都会被分配一个固定的IP地址\nC. IP包在网际互联时通过其帧头（LAN frame header）和包头（Internet\npacket header）信息共同决定路由\nD. HTTP1.0支持在同一个连接里进行多个transaction\nE. Web代理作为网络缓存功能的时候对用户是显式存在的\nF. 10.0.0.0/12和172.16.0.0/16和192.168.0.0/20属于私有地址字段\n答案：C。\n\n只有 C 正确。A 错（TCP 在内核实现，不是用户态）；B 错（IP 地址可由 DHCP 动态分配）；D 错（HTTP/1.0 是非持续连接，HTTP/1.1 才支持一个连接多个事务）；E 错（Web 代理缓存对用户是隐式的）；F 错（私有地址段应为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2017期末-无答案.md",
+        "lines": {
+          "start": 623,
+          "end": 631
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2017期末-无答案/623.md"
+      },
+      "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "第七题（12分）\n1. 请根据Echo server/client应用的标准程序填空。\n\n![Echo server/client 连接与通信流程图](assets/期末/2017期末-无答案/p18-img1.png)\n\n1. ______________  2. ______________  3. ______________\n4. ______________  5. ______________  6. ______________\n7. ______________  8. ______________  9. ______________\n\n2. 不定项选择题（全对得分，有错得0分）",
+        "stem": "第七题（12分）第2问：不定项选择题（全对得分，有错得0分）",
         "choices": [
           {
             "key": "A",
@@ -1402,7 +1598,7 @@
             "content": "10.0.0.0/12和172.16.0.0/16和192.168.0.0/20属于私有地址字段"
           }
         ],
-        "answer": "上述正确的有：_________________\n答案：C\n（1）Echo 框架填空：1 getaddrinfo；2 getaddrinfo；3 bind；4 listen；5 connect；6 accept；7 rio_writen；8 rio_readlineb；9 rio_readlineb。\n（2）不定项选择：只有 C 正确。A 错（TCP 在内核实现，不是用户态）；B 错（IP 地址可由 DHCP 动态分配）；D 错（HTTP/1.0 是非持续连接，HTTP/1.1 才支持一个连接多个事务）；E 错（Web 代理缓存对用户是隐式的）；F 错（私有地址段应为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：C。\n\n只有 C 正确。A 错（TCP 在内核实现，不是用户态）；B 错（IP 地址可由 DHCP 动态分配）；D 错（HTTP/1.0 是非持续连接，HTTP/1.1 才支持一个连接多个事务）；E 错（Web 代理缓存对用户是隐式的）；F 错（私有地址段应为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "multiple-choice",
@@ -1439,8 +1635,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第七题（12分）\n1. 请根据Echo server/client应用的标准程序填空。\n\n![Echo server/client 连接与通信流程图](assets/期末/2017期末-无答案/p18-img1.png)\n\n1. ______________  2. ______________  3. ______________\n4. ______________  5. ______________  6. ______________\n7. ______________  8. ______________  9. ______________\n\n2. 不定项选择题（全对得分，有错得0分）",
-        "answer": "上述正确的有：_________________\n答案：C\n（1）Echo 框架填空：1 getaddrinfo；2 getaddrinfo；3 bind；4 listen；5 connect；6 accept；7 rio_writen；8 rio_readlineb；9 rio_readlineb。\n（2）不定项选择：只有 C 正确。A 错（TCP 在内核实现，不是用户态）；B 错（IP 地址可由 DHCP 动态分配）；D 错（HTTP/1.0 是非持续连接，HTTP/1.1 才支持一个连接多个事务）；E 错（Web 代理缓存对用户是隐式的）；F 错（私有地址段应为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "prompt": "第七题（12分）第2问：不定项选择题（全对得分，有错得0分）",
+        "answer": "答案：C。\n\n只有 C 正确。A 错（TCP 在内核实现，不是用户态）；B 错（IP 地址可由 DHCP 动态分配）；D 错（HTTP/1.0 是非持续连接，HTTP/1.1 才支持一个连接多个事务）；E 错（Web 代理缓存对用户是隐式的）；F 错（私有地址段应为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
@@ -1654,7 +1850,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "12. 使用浏览器打开网页www.pku.edu.cn的过程中，下列网络协议中，可能会被用\n到的网络协议有___个\n①  DNS  ② TCP  ③ IP  ④ HTTP",
         "choices": [
           {
@@ -1677,8 +1873,8 @@
         "answer": "答案：D\n  考察对于网络的整体理解。按照书上涉及的内容，要解析域名必须用到DNS协\n议，要传输网页必须用到HTTP协议，HTTP协议构建于TCP/IP协议之上，因此，所\n有的协议都可能会被用到。因为存在诸如HTTPS，QUIC等其他传输网页的协议，故\n加了可能两字。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -1743,14 +1939,14 @@
         "curated": "_curated/期末/2018期末-带答案/717.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
         "stem": "第六题（10分）\n1.  请在以下的表格中填入相应的内容，每个空格仅需填一项。其中第1列可填选项包括：网络层、传输层、应用层；第2列可填选项IP、UDP、TCP、HTTP；第3列可填选项包括：是、否。\n（说明：面向连接的协议保障数据按照发送时的顺序被接收）\n\n| 协议层次 | 协议名称 | 是面向连接的吗？ |\n| --- | --- | --- |\n| 网络层 |  |  |\n|  | HTTP |  |\n|  | TCP |  |\n\n2.  下图描述了客户端与服务器套接字连接和通信的过程，请在空格处补充相关步骤。\n\n![客户端与服务器套接字连接和通信流程图](assets/期末/2018期末-带答案/p23-img1.png)",
         "choices": [],
         "answer": "答案：（1 每空1分共6分；2 每空1分共4分）\n(1) \n| 协议层次 | 协议名称 | 是面向连接的吗？ |\n| --- | --- | --- |\n| 网络层 | IP | 否 |\n| 应用层 | HTTP | 否 |\n| 传输层 | TCP | 是 |\n\n(2) \n1：`bind`\n2：`listen`\n3：`connect`\n4：`rio_readlineb`\n（对照原卷配图：服务器端 `socket → 1 → 2 → accept`，客户端 `socket → 3 → Connection request`，\n`connect` 后客户端先 `rio_writen` 发请求、再 `rio_readlineb` 收应答；服务器端回完数据后\n客户端 `close` 发出 EOF，服务器端读到 EOF 在标号 4 处跳出读循环，然后 `close`。）\n\n解析：\n**1. 协议栈三行表。**\n- 网络层：可选的协议名只有 IP（UDP/TCP/HTTP 都在别的层），IP 是**无连接**的\n  「尽力而为」数据报服务，不保证顺序 ⇒ 否。\n- HTTP 是**应用层**协议（Web 应用协议），它建立在 TCP 之上，但 HTTP 自身\n  不是面向连接的协议 —— 题目说明「面向连接的协议保障数据按照发送时的顺序\n  被接收」，HTTP 消息本身不提供这种保证（顺序由下面的 TCP 保证）⇒ 否。\n- TCP 是**传输层**协议，三次握手建立连接、按序号确认重传 ⇒ 是。\n（干扰项 UDP 也是传输层，但它是无连接的，本题表格里没有它的位置。）\n\n**2. 套接字流程填空。**\n服务器端顺序是 `socket → bind → listen → accept`，\n客户端是 `socket → connect`。图中：\n1 = 服务器把自己的地址/端口绑定到套接字上 ⇒ **bind**；\n2 = 把主动套接字变成监听套接字，开始接收连接请求 ⇒ **listen**；\n3 = 客户端发起三次握手，建立到服务器的连接 ⇒ **connect**；\n4 = 客户端/服务器读一行数据的 RIO 函数 ⇒ **rio_readlineb**\n（对应的还有 `Rio_writen`，图中这一处是读方向）。\n\n> 说明：原卷在题面之后直接给出「答案：」两段（1 的三行表、2 的四个函数名）；\n> 本文件把散在题面中间的答案集中到 `%%% answer` 段，答案文字与原卷一致。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
@@ -2040,10 +2236,8 @@
       "exam": "2019期末",
       "questionNo": "第六题",
       "summary": "client-server echo 框架与 open_listenfd 补全",
-      "content": "第六题（10分）\n下图是一个基于echo服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n（2）  请补全下面server端open_listenfd函数中缺失的操作（Line 21, Line\n26和Line 34）\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\n```\n\n![图](assets/期末/2019期末-无答案/p14-img1.jpg)\n\n\n```\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if (_⑧_(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo(___⑨___);\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return __⑩___;\nLine 35:  }\n```\n答案：（1）① bind ② connect ③ accept ④ rio_writen ⑤ rio_readlineb ⑥ rio_readlineb ⑦ rio_writen。\n（2）⑧ bind ⑨ listp ⑩ listenfd。\n解析：客户端先后调 connect / rio_writen / rio_readlineb / close，服务器先后调 bind / listen / accept / rio_readlineb / rio_writen / rio_readlineb / close；open_listenfd 的第 21 行是 bind(listenfd, p->ai_addr, p->ai_addrlen)，第 26 行 Freeaddrinfo(listp)，第 34 行 return listenfd。\n（来源：2019、2020期末-答案解析）",
-      "assets": [
-        "assets/期末/2019期末-无答案/p14-img1.jpg"
-      ],
+      "content": "第六题（10分）\n下图是一个基于echo服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n（2）  请补全下面server端open_listenfd函数中缺失的操作（Line 21, Line\n26和Line 34）\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\n```\n\n![图](../../assets/期末/2019期末-无答案/p14-img1.jpg)\n\n图中编号①—⑦依次为：{{blank:diagram-1}}、{{blank:diagram-2}}、{{blank:diagram-3}}、{{blank:diagram-4}}、{{blank:diagram-5}}、{{blank:diagram-6}}、{{blank:diagram-7}}。\n\n\n```\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if ({{blank:bind-call}}(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo({{blank:freeaddrinfo-arg}});\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return {{blank:listenfd-return}};\nLine 35:  }\n```\n答案：（1）① bind ② connect ③ accept ④ rio_writen ⑤ rio_readlineb ⑥ rio_readlineb ⑦ rio_writen。\n（2）⑧ bind ⑨ listp ⑩ listenfd。\n解析：客户端先后调 connect / rio_writen / rio_readlineb / close，服务器先后调 bind / listen / accept / rio_readlineb / rio_writen / rio_readlineb / close；open_listenfd 的第 21 行是 bind(listenfd, p->ai_addr, p->ai_addrlen)，第 26 行 Freeaddrinfo(listp)，第 34 行 return listenfd。\n（来源：2019、2020期末-答案解析）",
+      "assets": [],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -2063,19 +2257,183 @@
         "curated": "_curated/期末/2019期末-无答案/532.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第六题（10分）\n下图是一个基于echo服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n（2）  请补全下面server端open_listenfd函数中缺失的操作（Line 21, Line\n26和Line 34）\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\n```\n\n![图](assets/期末/2019期末-无答案/p14-img1.jpg)\n\n\n```\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if (_⑧_(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo(___⑨___);\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return __⑩___;\nLine 35:  }\n```",
+        "stem": "第六题（10分）\n下图是一个基于echo服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n（2）  请补全下面server端open_listenfd函数中缺失的操作（Line 21, Line\n26和Line 34）\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\n```\n\n![图](../../assets/期末/2019期末-无答案/p14-img1.jpg)\n\n图中编号①—⑦依次为：{{blank:diagram-1}}、{{blank:diagram-2}}、{{blank:diagram-3}}、{{blank:diagram-4}}、{{blank:diagram-5}}、{{blank:diagram-6}}、{{blank:diagram-7}}。\n\n\n```\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if ({{blank:bind-call}}(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo({{blank:freeaddrinfo-arg}});\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return {{blank:listenfd-return}};\nLine 35:  }\n```",
         "choices": [],
-        "answer": "答案：（1）① bind ② connect ③ accept ④ rio_writen ⑤ rio_readlineb ⑥ rio_readlineb ⑦ rio_writen。\n（2）⑧ bind ⑨ listp ⑩ listenfd。\n解析：客户端先后调 connect / rio_writen / rio_readlineb / close，服务器先后调 bind / listen / accept / rio_readlineb / rio_writen / rio_readlineb / close；open_listenfd 的第 21 行是 bind(listenfd, p->ai_addr, p->ai_addrlen)，第 26 行 Freeaddrinfo(listp)，第 34 行 return listenfd。\n（来源：2019、2020期末-答案解析）"
+        "answer": "答案：（1）① bind ② connect ③ accept ④ rio_writen ⑤ rio_readlineb ⑥ rio_readlineb ⑦ rio_writen。\n（2）⑧ bind ⑨ listp ⑩ listenfd。\n解析：客户端先后调 connect / rio_writen / rio_readlineb / close，服务器先后调 bind / listen / accept / rio_readlineb / rio_writen / rio_readlineb / close；open_listenfd 的第 21 行是 bind(listenfd, p->ai_addr, p->ai_addrlen)，第 26 行 Freeaddrinfo(listp)，第 34 行 return listenfd。\n（来源：2019、2020期末-答案解析）",
+        "blankAnswers": [
+          {
+            "id": "diagram-1",
+            "acceptedAnswers": [
+              "bind"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-2",
+            "acceptedAnswers": [
+              "connect"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-3",
+            "acceptedAnswers": [
+              "accept"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-4",
+            "acceptedAnswers": [
+              "rio_writen"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-5",
+            "acceptedAnswers": [
+              "rio_readlineb"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-6",
+            "acceptedAnswers": [
+              "rio_readlineb"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-7",
+            "acceptedAnswers": [
+              "rio_writen"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "bind-call",
+            "acceptedAnswers": [
+              "bind"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "freeaddrinfo-arg",
+            "acceptedAnswers": [
+              "listp"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "listenfd-return",
+            "acceptedAnswers": [
+              "listenfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "diagram-1",
+            "acceptedAnswers": [
+              "bind"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-2",
+            "acceptedAnswers": [
+              "connect"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-3",
+            "acceptedAnswers": [
+              "accept"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-4",
+            "acceptedAnswers": [
+              "rio_writen"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-5",
+            "acceptedAnswers": [
+              "rio_readlineb"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-6",
+            "acceptedAnswers": [
+              "rio_readlineb"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "diagram-7",
+            "acceptedAnswers": [
+              "rio_writen"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "bind-call",
+            "acceptedAnswers": [
+              "bind"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "freeaddrinfo-arg",
+            "acceptedAnswers": [
+              "listp"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "listenfd-return",
+            "acceptedAnswers": [
+              "listenfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第六题（10分）\n下图是一个基于echo服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n（2）  请补全下面server端open_listenfd函数中缺失的操作（Line 21, Line\n26和Line 34）\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\n```\n\n![图](assets/期末/2019期末-无答案/p14-img1.jpg)\n\n\n```\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if (_⑧_(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo(___⑨___);\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return __⑩___;\nLine 35:  }\n```",
+        "prompt": "第六题（10分）\n下图是一个基于echo服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n（2）  请补全下面server端open_listenfd函数中缺失的操作（Line 21, Line\n26和Line 34）\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\n```\n\n![图](../../assets/期末/2019期末-无答案/p14-img1.jpg)\n\n图中编号①—⑦依次为：{{blank:diagram-1}}、{{blank:diagram-2}}、{{blank:diagram-3}}、{{blank:diagram-4}}、{{blank:diagram-5}}、{{blank:diagram-6}}、{{blank:diagram-7}}。\n\n\n```\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if ({{blank:bind-call}}(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo({{blank:freeaddrinfo-arg}});\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return {{blank:listenfd-return}};\nLine 35:  }\n```",
         "answer": "答案：（1）① bind ② connect ③ accept ④ rio_writen ⑤ rio_readlineb ⑥ rio_readlineb ⑦ rio_writen。\n（2）⑧ bind ⑨ listp ⑩ listenfd。\n解析：客户端先后调 connect / rio_writen / rio_readlineb / close，服务器先后调 bind / listen / accept / rio_readlineb / rio_writen / rio_readlineb / close；open_listenfd 的第 21 行是 bind(listenfd, p->ai_addr, p->ai_addrlen)，第 26 行 Freeaddrinfo(listp)，第 34 行 return listenfd。\n（来源：2019、2020期末-答案解析）"
       },
       "presentation": {

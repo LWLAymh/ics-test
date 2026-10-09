@@ -2616,7 +2616,7 @@
       "exam": "2016期中",
       "questionNo": "第一题 15",
       "summary": "unsigned short 转 int 零扩展",
-      "content": "15. 假定编译器规定int和short型长度分别为32位和16位，执行下列语句：\nunsigned short x = 65530;\nunsigned int y = x;\n得到y的机器数为___________。（用16进制表示，勿省略前导的0）\n答案：0000FFFA\n解析：x的机器数是FFFA\n      y的机器数是0000FFFA，注意无符号数使用零扩展",
+      "content": "15. 假定编译器规定int和short型长度分别为32位和16位，执行下列语句：\nunsigned short x = 65530;\nunsigned int y = x;\n得到y的机器数为 {{blank:y}}。（用16进制表示，勿省略前导的0）\n答案：0000FFFA\n解析：x的机器数是FFFA\n      y的机器数是0000FFFA，注意无符号数使用零扩展",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2639,17 +2639,43 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "15. 假定编译器规定int和short型长度分别为32位和16位，执行下列语句：\nunsigned short x = 65530;\nunsigned int y = x;\n得到y的机器数为___________。（用16进制表示，勿省略前导的0）",
+        "stem": "15. 假定编译器规定int和short型长度分别为32位和16位，执行下列语句：\nunsigned short x = 65530;\nunsigned int y = x;\n得到y的机器数为 {{blank:y}}。（用16进制表示，勿省略前导的0）",
         "choices": [],
-        "answer": "答案：0000FFFA\n解析：x的机器数是FFFA\n      y的机器数是0000FFFA，注意无符号数使用零扩展"
+        "answer": "答案：0000FFFA\n解析：x的机器数是FFFA\n      y的机器数是0000FFFA，注意无符号数使用零扩展",
+        "blankAnswers": [
+          {
+            "id": "y",
+            "acceptedAnswers": [
+              "0000FFFA",
+              "0x0000FFFA",
+              "0000fffa",
+              "0x0000fffa"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "y",
+            "acceptedAnswers": [
+              "0000FFFA",
+              "0x0000FFFA",
+              "0000fffa",
+              "0x0000fffa"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "15. 假定编译器规定int和short型长度分别为32位和16位，执行下列语句：\nunsigned short x = 65530;\nunsigned int y = x;\n得到y的机器数为___________。（用16进制表示，勿省略前导的0）",
+        "prompt": "15. 假定编译器规定int和short型长度分别为32位和16位，执行下列语句：\nunsigned short x = 65530;\nunsigned int y = x;\n得到y的机器数为 {{blank:y}}。（用16进制表示，勿省略前导的0）",
         "answer": "答案：0000FFFA\n解析：x的机器数是FFFA\n      y的机器数是0000FFFA，注意无符号数使用零扩展"
       },
       "presentation": {
@@ -2667,7 +2693,7 @@
       "exam": "2016期中",
       "questionNo": "第一题 16",
       "summary": "short 与 int 运算的符号扩展",
-      "content": "16. 一个C语言程序在一台32位机器上运行。程序中定义了三个变量x、y和z，\n其中x和z为int型，y为short型。当x=127，y=-9时，执行赋值语句\nz=x+y后，z的值是__________（用16进制表示，勿省略前导的0）\n答案：00000076\n解析：x的机器数是0000007F\n      y的机器数是FFF7，和int型运算时符号扩展为FFFFFFF7\n      z的机器数是0000007F+FFFFFFF7=00000076（最高位进位自\n然丢弃）\n      也可直接由127-9=118得到结果",
+      "content": "16. 一个C语言程序在一台32位机器上运行。程序中定义了三个变量x、y和z，\n其中x和z为int型，y为short型。当x=127，y=-9时，执行赋值语句\nz=x+y后，z的值是 {{blank:z}}（用16进制表示，勿省略前导的0）\n答案：00000076\n解析：x的机器数是0000007F\n      y的机器数是FFF7，和int型运算时符号扩展为FFFFFFF7\n      z的机器数是0000007F+FFFFFFF7=00000076（最高位进位自\n然丢弃）\n      也可直接由127-9=118得到结果",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2690,17 +2716,41 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "16. 一个C语言程序在一台32位机器上运行。程序中定义了三个变量x、y和z，\n其中x和z为int型，y为short型。当x=127，y=-9时，执行赋值语句\nz=x+y后，z的值是__________（用16进制表示，勿省略前导的0）",
+        "stem": "16. 一个C语言程序在一台32位机器上运行。程序中定义了三个变量x、y和z，\n其中x和z为int型，y为short型。当x=127，y=-9时，执行赋值语句\nz=x+y后，z的值是 {{blank:z}}（用16进制表示，勿省略前导的0）",
         "choices": [],
-        "answer": "答案：00000076\n解析：x的机器数是0000007F\n      y的机器数是FFF7，和int型运算时符号扩展为FFFFFFF7\n      z的机器数是0000007F+FFFFFFF7=00000076（最高位进位自\n然丢弃）\n      也可直接由127-9=118得到结果"
+        "answer": "答案：00000076\n解析：x的机器数是0000007F\n      y的机器数是FFF7，和int型运算时符号扩展为FFFFFFF7\n      z的机器数是0000007F+FFFFFFF7=00000076（最高位进位自\n然丢弃）\n      也可直接由127-9=118得到结果",
+        "blankAnswers": [
+          {
+            "id": "z",
+            "acceptedAnswers": [
+              "00000076",
+              "0x00000076",
+              "00000076h"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "z",
+            "acceptedAnswers": [
+              "00000076",
+              "0x00000076",
+              "00000076h"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "16. 一个C语言程序在一台32位机器上运行。程序中定义了三个变量x、y和z，\n其中x和z为int型，y为short型。当x=127，y=-9时，执行赋值语句\nz=x+y后，z的值是__________（用16进制表示，勿省略前导的0）",
+        "prompt": "16. 一个C语言程序在一台32位机器上运行。程序中定义了三个变量x、y和z，\n其中x和z为int型，y为short型。当x=127，y=-9时，执行赋值语句\nz=x+y后，z的值是 {{blank:z}}（用16进制表示，勿省略前导的0）",
         "answer": "答案：00000076\n解析：x的机器数是0000007F\n      y的机器数是FFF7，和int型运算时符号扩展为FFFFFFF7\n      z的机器数是0000007F+FFFFFFF7=00000076（最高位进位自\n然丢弃）\n      也可直接由127-9=118得到结果"
       },
       "presentation": {
@@ -2795,7 +2845,7 @@
       "exam": "2016期中",
       "questionNo": "第一题 18",
       "summary": "非规格化最大正数表达式",
-      "content": "18. 若我们采用基于IEEE浮点格式的浮点数表示方法，阶码字段exp占据k位，\n小数字段frac占据n位,则最大的非规格的正数是__________（结果用含\n有n,k的表达式表示）\n答案：$(1-2^{-n})*2^{-2^{k-1}+2}$\n解析：阶码字段exp：00...00\n      小数字段frac：11...11\n      偏置值bias:$2^{k-1}-1$",
+      "content": "18. 若我们采用基于IEEE浮点格式的浮点数表示方法，阶码字段exp占据k位，\n小数字段frac占据n位,则最大的非规格的正数是 {{blank:max-subnormal}}（结果用含\n有n,k的表达式表示）\n答案：$(1-2^{-n})*2^{-2^{k-1}+2}$\n解析：阶码字段exp：00...00\n      小数字段frac：11...11\n      偏置值bias:$2^{k-1}-1$",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2818,17 +2868,39 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "18. 若我们采用基于IEEE浮点格式的浮点数表示方法，阶码字段exp占据k位，\n小数字段frac占据n位,则最大的非规格的正数是__________（结果用含\n有n,k的表达式表示）",
+        "stem": "18. 若我们采用基于IEEE浮点格式的浮点数表示方法，阶码字段exp占据k位，\n小数字段frac占据n位,则最大的非规格的正数是 {{blank:max-subnormal}}（结果用含\n有n,k的表达式表示）",
         "choices": [],
-        "answer": "答案：$(1-2^{-n})*2^{-2^{k-1}+2}$\n解析：阶码字段exp：00...00\n      小数字段frac：11...11\n      偏置值bias:$2^{k-1}-1$"
+        "answer": "答案：$(1-2^{-n})*2^{-2^{k-1}+2}$\n解析：阶码字段exp：00...00\n      小数字段frac：11...11\n      偏置值bias:$2^{k-1}-1$",
+        "blankAnswers": [
+          {
+            "id": "max-subnormal",
+            "acceptedAnswers": [
+              "(1-2^{-n})*2^{-2^{k-1}+2}",
+              "(1-2^-n)×2^(-2^(k-1)+2)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "max-subnormal",
+            "acceptedAnswers": [
+              "(1-2^{-n})*2^{-2^{k-1}+2}",
+              "(1-2^-n)×2^(-2^(k-1)+2)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "18. 若我们采用基于IEEE浮点格式的浮点数表示方法，阶码字段exp占据k位，\n小数字段frac占据n位,则最大的非规格的正数是__________（结果用含\n有n,k的表达式表示）",
+        "prompt": "18. 若我们采用基于IEEE浮点格式的浮点数表示方法，阶码字段exp占据k位，\n小数字段frac占据n位,则最大的非规格的正数是 {{blank:max-subnormal}}（结果用含\n有n,k的表达式表示）",
         "answer": "答案：$(1-2^{-n})*2^{-2^{k-1}+2}$\n解析：阶码字段exp：00...00\n      小数字段frac：11...11\n      偏置值bias:$2^{k-1}-1$"
       },
       "presentation": {
@@ -2846,7 +2918,7 @@
       "exam": "2016期中",
       "questionNo": "第二题 1",
       "summary": "补码/无符号/浮点表达式恒成立判断",
-      "content": "第二题（20分）\n（边凯归，周明辉）\n1.在64位机器上，判断下列等式是否恒成立\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\nExpression  Always True?\n(x >= 0) || (3*x < 0)  Y     N\n(x >= 0) || (x < ux)  Y     N\n($(x >> 1)$ << 1) <= x  Y     N\n((x-y)<<3) + $(x>>1)$ - y == 8*x - 9*y + x/2  Y     N\n(x - y > 0)  ==   ((y+~x+1)>>31 == 1)  Y     N\ndx + dy == (double) (y+x)  Y     N\ndx + dy + dz == dz + dy + dx  Y     N\n(int)((lx+ly)>>1)   ==   ((x&y) +  Y     N\n(($x^y$)>>1))\n（前6题每题1分; 7、8两题每题2分; 共10分）\n答案：1. N（考虑 x = `(1<<31)>>1`）\n2. N（考虑 x = -1）\n3. Y\n4. N（考虑 x = -1，y = 0）\n5. N（考虑 x - y = Tmin）\n6. N（考虑 x + y 溢出）\n7. Y（恒成立，每一个 int 型都可以由一个 double 型精确表示）\n8. Y（恒成立）",
+      "content": "第二题（20分）\n（边凯归，周明辉）\n1.在64位机器上，判断下列等式是否恒成立\n```c\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\n```\n\n| 表达式 | 是否恒成立 |\n| --- | --- |\n| `(x >= 0) || (3*x < 0)` | {{blank:q1}} |\n| `(x >= 0) || (x < ux)` | {{blank:q2}} |\n| `((x >> 1) << 1) <= x` | {{blank:q3}} |\n| `((x-y)<<3) + (x>>1) - y == 8*x - 9*y + x/2` | {{blank:q4}} |\n| `(x - y > 0) == ((y+~x+1)>>31 == 1)` | {{blank:q5}} |\n| `dx + dy == (double) (y+x)` | {{blank:q6}} |\n| `dx + dy + dz == dz + dy + dx` | {{blank:q7}} |\n| `(int)((lx+ly)>>1) == ((x&y) + ((x^y)>>1))` | {{blank:q8}} |\n（前6题每题1分; 7、8两题每题2分; 共10分）\n答案：1. N（考虑 x = `(1<<31)>>1`）\n2. N（考虑 x = -1）\n3. Y\n4. N（考虑 x = -1，y = 0）\n5. N（考虑 x - y = Tmin）\n6. N（考虑 x + y 溢出）\n7. Y（恒成立，每一个 int 型都可以由一个 double 型精确表示）\n8. Y（恒成立）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2867,19 +2939,167 @@
         "curated": "_curated/期中/2016期中-带答案/206.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第二题（20分）\n（边凯归，周明辉）\n1.在64位机器上，判断下列等式是否恒成立\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\nExpression  Always True?\n(x >= 0) || (3*x < 0)  Y     N\n(x >= 0) || (x < ux)  Y     N\n($(x >> 1)$ << 1) <= x  Y     N\n((x-y)<<3) + $(x>>1)$ - y == 8*x - 9*y + x/2  Y     N\n(x - y > 0)  ==   ((y+~x+1)>>31 == 1)  Y     N\ndx + dy == (double) (y+x)  Y     N\ndx + dy + dz == dz + dy + dx  Y     N\n(int)((lx+ly)>>1)   ==   ((x&y) +  Y     N\n(($x^y$)>>1))\n（前6题每题1分; 7、8两题每题2分; 共10分）",
+        "stem": "第二题（20分）\n（边凯归，周明辉）\n1.在64位机器上，判断下列等式是否恒成立\n```c\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\n```\n\n| 表达式 | 是否恒成立 |\n| --- | --- |\n| `(x >= 0) || (3*x < 0)` | {{blank:q1}} |\n| `(x >= 0) || (x < ux)` | {{blank:q2}} |\n| `((x >> 1) << 1) <= x` | {{blank:q3}} |\n| `((x-y)<<3) + (x>>1) - y == 8*x - 9*y + x/2` | {{blank:q4}} |\n| `(x - y > 0) == ((y+~x+1)>>31 == 1)` | {{blank:q5}} |\n| `dx + dy == (double) (y+x)` | {{blank:q6}} |\n| `dx + dy + dz == dz + dy + dx` | {{blank:q7}} |\n| `(int)((lx+ly)>>1) == ((x&y) + ((x^y)>>1))` | {{blank:q8}} |\n（前6题每题1分; 7、8两题每题2分; 共10分）",
         "choices": [],
-        "answer": "答案：1. N（考虑 x = `(1<<31)>>1`）\n2. N（考虑 x = -1）\n3. Y\n4. N（考虑 x = -1，y = 0）\n5. N（考虑 x - y = Tmin）\n6. N（考虑 x + y 溢出）\n7. Y（恒成立，每一个 int 型都可以由一个 double 型精确表示）\n8. Y（恒成立）"
+        "answer": "答案：1. N（考虑 x = `(1<<31)>>1`）\n2. N（考虑 x = -1）\n3. Y\n4. N（考虑 x = -1，y = 0）\n5. N（考虑 x - y = Tmin）\n6. N（考虑 x + y 溢出）\n7. Y（恒成立，每一个 int 型都可以由一个 double 型精确表示）\n8. Y（恒成立）",
+        "blankAnswers": [
+          {
+            "id": "q1",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q2",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3",
+            "acceptedAnswers": [
+              "Y",
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q6",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7",
+            "acceptedAnswers": [
+              "Y",
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q8",
+            "acceptedAnswers": [
+              "Y",
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q1",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q2",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3",
+            "acceptedAnswers": [
+              "Y",
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q6",
+            "acceptedAnswers": [
+              "N",
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7",
+            "acceptedAnswers": [
+              "Y",
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q8",
+            "acceptedAnswers": [
+              "Y",
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（20分）\n（边凯归，周明辉）\n1.在64位机器上，判断下列等式是否恒成立\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\nExpression  Always True?\n(x >= 0) || (3*x < 0)  Y     N\n(x >= 0) || (x < ux)  Y     N\n($(x >> 1)$ << 1) <= x  Y     N\n((x-y)<<3) + $(x>>1)$ - y == 8*x - 9*y + x/2  Y     N\n(x - y > 0)  ==   ((y+~x+1)>>31 == 1)  Y     N\ndx + dy == (double) (y+x)  Y     N\ndx + dy + dz == dz + dy + dx  Y     N\n(int)((lx+ly)>>1)   ==   ((x&y) +  Y     N\n(($x^y$)>>1))\n（前6题每题1分; 7、8两题每题2分; 共10分）",
+        "prompt": "第二题（20分）\n（边凯归，周明辉）\n1.在64位机器上，判断下列等式是否恒成立\n```c\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\n```\n\n| 表达式 | 是否恒成立 |\n| --- | --- |\n| `(x >= 0) || (3*x < 0)` | {{blank:q1}} |\n| `(x >= 0) || (x < ux)` | {{blank:q2}} |\n| `((x >> 1) << 1) <= x` | {{blank:q3}} |\n| `((x-y)<<3) + (x>>1) - y == 8*x - 9*y + x/2` | {{blank:q4}} |\n| `(x - y > 0) == ((y+~x+1)>>31 == 1)` | {{blank:q5}} |\n| `dx + dy == (double) (y+x)` | {{blank:q6}} |\n| `dx + dy + dz == dz + dy + dx` | {{blank:q7}} |\n| `(int)((lx+ly)>>1) == ((x&y) + ((x^y)>>1))` | {{blank:q8}} |\n（前6题每题1分; 7、8两题每题2分; 共10分）",
         "answer": "答案：1. N（考虑 x = `(1<<31)>>1`）\n2. N（考虑 x = -1）\n3. Y\n4. N（考虑 x = -1，y = 0）\n5. N（考虑 x - y = Tmin）\n6. N（考虑 x + y 溢出）\n7. Y（恒成立，每一个 int 型都可以由一个 double 型精确表示）\n8. Y（恒成立）"
       },
       "presentation": {
@@ -2897,7 +3117,7 @@
       "exam": "2016期中",
       "questionNo": "第二题 2",
       "summary": "12 位浮点格式的极值与舍入溢出",
-      "content": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，其字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为_________\n相邻两数之间差值的最大值为_________\n2) 现定义了如下变量：\nT a = -15.875;\nT b = $(1<<28)$ + $(1<<24)$ + $(1<<22)$;\nT c = a*b;\n请写出各变量的二进制表示：\n变量  二进制表示\na\nb\nc\n（每空2分; 共10分）\n答案：\n1）\n$2^{-35}$\n$2^{26}$\n2）\n1 100011 00000 (发生进位)\n0 111011 00010 (发生舍入)\n1 111111 00000 (溢出，+∞)",
+      "content": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，其字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为 {{blank:min-diff}}\n相邻两数之间差值的最大值为 {{blank:max-diff}}\n2) 现定义了如下变量：\n```c\nT a = -15.875;\nT b = (1<<28) + (1<<24) + (1<<22);\nT c = a*b;\n```\n请写出各变量的二进制表示（每个字段之间以空格分隔）：\n\n| 变量 | 二进制表示 |\n| --- | --- |\n| a | {{blank:a}} |\n| b | {{blank:b}} |\n| c | {{blank:c}} |\n（每空2分; 共10分）\n答案：\n1）\n$2^{-35}$\n$2^{26}$\n2）\n1 100011 00000 (发生进位)\n0 111011 00010 (发生舍入)\n1 111111 00000 (溢出，+∞)",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2920,17 +3140,111 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，其字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为_________\n相邻两数之间差值的最大值为_________\n2) 现定义了如下变量：\nT a = -15.875;\nT b = $(1<<28)$ + $(1<<24)$ + $(1<<22)$;\nT c = a*b;\n请写出各变量的二进制表示：\n变量  二进制表示\na\nb\nc\n（每空2分; 共10分）",
+        "stem": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，其字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为 {{blank:min-diff}}\n相邻两数之间差值的最大值为 {{blank:max-diff}}\n2) 现定义了如下变量：\n```c\nT a = -15.875;\nT b = (1<<28) + (1<<24) + (1<<22);\nT c = a*b;\n```\n请写出各变量的二进制表示（每个字段之间以空格分隔）：\n\n| 变量 | 二进制表示 |\n| --- | --- |\n| a | {{blank:a}} |\n| b | {{blank:b}} |\n| c | {{blank:c}} |\n（每空2分; 共10分）",
         "choices": [],
-        "answer": "答案：\n1）\n$2^{-35}$\n$2^{26}$\n2）\n1 100011 00000 (发生进位)\n0 111011 00010 (发生舍入)\n1 111111 00000 (溢出，+∞)"
+        "answer": "答案：\n1）\n$2^{-35}$\n$2^{26}$\n2）\n1 100011 00000 (发生进位)\n0 111011 00010 (发生舍入)\n1 111111 00000 (溢出，+∞)",
+        "blankAnswers": [
+          {
+            "id": "min-diff",
+            "acceptedAnswers": [
+              "2^{-35}",
+              "2^-35"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "max-diff",
+            "acceptedAnswers": [
+              "2^{26}",
+              "2^26"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "a",
+            "acceptedAnswers": [
+              "1 100011 00000",
+              "1 100011 00000 (发生进位)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b",
+            "acceptedAnswers": [
+              "0 111011 00010",
+              "0 111011 00010 (发生舍入)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c",
+            "acceptedAnswers": [
+              "1 111111 00000",
+              "1 111111 00000 (溢出，+∞)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "min-diff",
+            "acceptedAnswers": [
+              "2^{-35}",
+              "2^-35"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "max-diff",
+            "acceptedAnswers": [
+              "2^{26}",
+              "2^26"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "a",
+            "acceptedAnswers": [
+              "1 100011 00000",
+              "1 100011 00000 (发生进位)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b",
+            "acceptedAnswers": [
+              "0 111011 00010",
+              "0 111011 00010 (发生舍入)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "c",
+            "acceptedAnswers": [
+              "1 111111 00000",
+              "1 111111 00000 (溢出，+∞)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，其字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为_________\n相邻两数之间差值的最大值为_________\n2) 现定义了如下变量：\nT a = -15.875;\nT b = $(1<<28)$ + $(1<<24)$ + $(1<<22)$;\nT c = a*b;\n请写出各变量的二进制表示：\n变量  二进制表示\na\nb\nc\n（每空2分; 共10分）",
+        "prompt": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，其字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为 {{blank:min-diff}}\n相邻两数之间差值的最大值为 {{blank:max-diff}}\n2) 现定义了如下变量：\n```c\nT a = -15.875;\nT b = (1<<28) + (1<<24) + (1<<22);\nT c = a*b;\n```\n请写出各变量的二进制表示（每个字段之间以空格分隔）：\n\n| 变量 | 二进制表示 |\n| --- | --- |\n| a | {{blank:a}} |\n| b | {{blank:b}} |\n| c | {{blank:c}} |\n（每空2分; 共10分）",
         "answer": "答案：\n1）\n$2^{-35}$\n$2^{26}$\n2）\n1 100011 00000 (发生进位)\n0 111011 00010 (发生舍入)\n1 111111 00000 (溢出，+∞)"
       },
       "presentation": {
@@ -3294,7 +3608,7 @@
       "exam": "2017期中",
       "questionNo": "第二题",
       "summary": "9 位浮点格式 A 的字段、最值与精度",
-      "content": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）\n描述  二进制位表示  值\n最大的非规格化数\n最小的正规格化数\n最大的规格化数\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）\n答案：1. k = 4，n = 4\n2. 最大的非规格化数：`0 0000 1111`，值 15/1024；最小的正规格化数：`0 0001 0000`，值 1/64；最大的规格化数：`0 1110 1111`，值 248\n3. 小数位变少后，NaN 的数量减少了，所以实数数量增加（1 分），数值精度降低（1 分）。",
+      "content": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）{{blank:format-fields}}\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）\n| 描述 | 二进制位表示 | 值 |\n| --- | --- | --- |\n| 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |\n| 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |\n| 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）实数数量：{{blank:real-count-change}}；数值精度：{{blank:precision-change}}。\n答案：1. k = 4，n = 4\n2. 最大的非规格化数：`0 0000 1111`，值 15/1024；最小的正规格化数：`0 0001 0000`，值 1/64；最大的规格化数：`0 1110 1111`，值 248\n3. 小数位变少后，NaN 的数量减少了，所以实数数量增加（1 分），数值精度降低（1 分）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3312,19 +3626,169 @@
         "curated": "_curated/期中/2017期中-带答案/202.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）\n描述  二进制位表示  值\n最大的非规格化数\n最小的正规格化数\n最大的规格化数\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）",
+        "stem": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）{{blank:format-fields}}\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）\n| 描述 | 二进制位表示 | 值 |\n| --- | --- | --- |\n| 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |\n| 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |\n| 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）实数数量：{{blank:real-count-change}}；数值精度：{{blank:precision-change}}。",
         "choices": [],
-        "answer": "答案：1. k = 4，n = 4\n2. 最大的非规格化数：`0 0000 1111`，值 15/1024；最小的正规格化数：`0 0001 0000`，值 1/64；最大的规格化数：`0 1110 1111`，值 248\n3. 小数位变少后，NaN 的数量减少了，所以实数数量增加（1 分），数值精度降低（1 分）。"
+        "answer": "答案：1. k = 4，n = 4\n2. 最大的非规格化数：`0 0000 1111`，值 15/1024；最小的正规格化数：`0 0001 0000`，值 1/64；最大的规格化数：`0 1110 1111`，值 248\n3. 小数位变少后，NaN 的数量减少了，所以实数数量增加（1 分），数值精度降低（1 分）。",
+        "blankAnswers": [
+          {
+            "id": "format-fields",
+            "acceptedAnswers": [
+              "k = 4，n = 4",
+              "k=4, n=4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "denormalized-bits",
+            "acceptedAnswers": [
+              "0 0000 1111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "denormalized-value",
+            "acceptedAnswers": [
+              "15/1024"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "min-normal-bits",
+            "acceptedAnswers": [
+              "0 0001 0000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "min-normal-value",
+            "acceptedAnswers": [
+              "1/64"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "max-normal-bits",
+            "acceptedAnswers": [
+              "0 1110 1111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "max-normal-value",
+            "acceptedAnswers": [
+              "248"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "real-count-change",
+            "acceptedAnswers": [
+              "增加"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "precision-change",
+            "acceptedAnswers": [
+              "降低"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "format-fields",
+            "acceptedAnswers": [
+              "k = 4，n = 4",
+              "k=4, n=4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "denormalized-bits",
+            "acceptedAnswers": [
+              "0 0000 1111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "denormalized-value",
+            "acceptedAnswers": [
+              "15/1024"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "min-normal-bits",
+            "acceptedAnswers": [
+              "0 0001 0000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "min-normal-value",
+            "acceptedAnswers": [
+              "1/64"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "max-normal-bits",
+            "acceptedAnswers": [
+              "0 1110 1111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "max-normal-value",
+            "acceptedAnswers": [
+              "248"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "real-count-change",
+            "acceptedAnswers": [
+              "增加"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "precision-change",
+            "acceptedAnswers": [
+              "降低"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）\n描述  二进制位表示  值\n最大的非规格化数\n最小的正规格化数\n最大的规格化数\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）",
+        "prompt": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）{{blank:format-fields}}\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）\n| 描述 | 二进制位表示 | 值 |\n| --- | --- | --- |\n| 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |\n| 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |\n| 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）实数数量：{{blank:real-count-change}}；数值精度：{{blank:precision-change}}。",
         "answer": "答案：1. k = 4，n = 4\n2. 最大的非规格化数：`0 0000 1111`，值 15/1024；最小的正规格化数：`0 0001 0000`，值 1/64；最大的规格化数：`0 1110 1111`，值 248\n3. 小数位变少后，NaN 的数量减少了，所以实数数量增加（1 分），数值精度降低（1 分）。"
       },
       "presentation": {
@@ -3342,7 +3806,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 1",
       "summary": "类型转换的溢出与舍入",
-      "content": "1.  下列哪种类型转换既可能导致溢出、又可能导致舍入？\nA. A) int转float\nB. B) float转int\nC. C) int转double\nD. D) float转double\n答案：b，本题考查浮点数类型转换，参见中文版86页。",
+      "content": "1.  下列哪种类型转换既可能导致溢出、又可能导致舍入？\nA. int转float\nB. float转int\nC. int转double\nD. float转double\n答案：b，本题考查浮点数类型转换，参见中文版86页。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3366,19 +3830,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "A) int转float"
+            "content": "int转float"
           },
           {
             "key": "B",
-            "content": "B) float转int"
+            "content": "float转int"
           },
           {
             "key": "C",
-            "content": "C) int转double"
+            "content": "int转double"
           },
           {
             "key": "D",
-            "content": "D) float转double"
+            "content": "float转double"
           }
         ],
         "answer": "答案：b，本题考查浮点数类型转换，参见中文版86页。"
@@ -3389,19 +3853,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "A) int转float"
+            "content": "int转float"
           },
           {
             "id": "B",
-            "content": "B) float转int"
+            "content": "float转int"
           },
           {
             "id": "C",
-            "content": "C) int转double"
+            "content": "int转double"
           },
           {
             "id": "D",
-            "content": "D) float转double"
+            "content": "float转double"
           }
         ],
         "correctChoiceIds": [
@@ -3428,7 +3892,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 2",
       "summary": "小端存储下字符串转整型与无符号转换",
-      "content": "2.  在采用小端法存储机器上运行下面的代码，输出的结果将会是？\n（int，unsigned 为32位长，short为16位长，0~9的ASCII码分别是0x30~0x39）\n```c\nchar *s = \"2018\";\nint *p1 = (int *)s;\nshort s1 = (*p1)>>12;\nunsigned u1 = (unsigned) s1;\nprintf(\"0x%x\\n\",u1);\n```\nA. A) 0x00002303\nB. B) 0x00032303\nC. C) 0xffff8313\nD. D) 0x00008313\n答案：C\n本题考查大小端存储，以及整数类型转化。字符串在存储时不区分大小端，前面的\n字符存储在低地址，而在被转化成整型的时候低地址被视为低位，因此*p1 为\n0x38313032，s1为0x8313。在由short转化为unsigned的时候，我们要先改变大\n小，之后完成有符号到无符号的转换，因此u1为0xffff8313。",
+      "content": "2.  在采用小端法存储机器上运行下面的代码，输出的结果将会是？\n（int，unsigned 为32位长，short为16位长，0~9的ASCII码分别是0x30~0x39）\n```c\nchar *s = \"2018\";\nint *p1 = (int *)s;\nshort s1 = (*p1)>>12;\nunsigned u1 = (unsigned) s1;\nprintf(\"0x%x\\n\",u1);\n```\nA. 0x00002303\nB. 0x00032303\nC. 0xffff8313\nD. 0x00008313\n答案：C\n本题考查大小端存储，以及整数类型转化。字符串在存储时不区分大小端，前面的\n字符存储在低地址，而在被转化成整型的时候低地址被视为低位，因此*p1 为\n0x38313032，s1为0x8313。在由short转化为unsigned的时候，我们要先改变大\n小，之后完成有符号到无符号的转换，因此u1为0xffff8313。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3452,19 +3916,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "A) 0x00002303"
+            "content": "0x00002303"
           },
           {
             "key": "B",
-            "content": "B) 0x00032303"
+            "content": "0x00032303"
           },
           {
             "key": "C",
-            "content": "C) 0xffff8313"
+            "content": "0xffff8313"
           },
           {
             "key": "D",
-            "content": "D) 0x00008313"
+            "content": "0x00008313"
           }
         ],
         "answer": "答案：C\n本题考查大小端存储，以及整数类型转化。字符串在存储时不区分大小端，前面的\n字符存储在低地址，而在被转化成整型的时候低地址被视为低位，因此*p1 为\n0x38313032，s1为0x8313。在由short转化为unsigned的时候，我们要先改变大\n小，之后完成有符号到无符号的转换，因此u1为0xffff8313。"
@@ -3475,19 +3939,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "A) 0x00002303"
+            "content": "0x00002303"
           },
           {
             "id": "B",
-            "content": "B) 0x00032303"
+            "content": "0x00032303"
           },
           {
             "id": "C",
-            "content": "C) 0xffff8313"
+            "content": "0xffff8313"
           },
           {
             "id": "D",
-            "content": "D) 0x00008313"
+            "content": "0x00008313"
           }
         ],
         "correctChoiceIds": [
@@ -3600,7 +4064,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 5",
       "summary": "union 与 double 位模式的字节拆分",
-      "content": "5.  以下代码的输出结果是\n```c\nunion {\n    double d;\n    struct {\n        int i;\n        char c[4];\n    } s;\n} u;\nu.d = 1;\nprintf(\"%d\\n\", u.s.c[2]);\n```\nA. A)  0\nB. B)  -16\nC. C) 240\nD. D) 191\n答案：B\nc[2]保存的数据是(11110000)2，char保存的数据是有符号数，所以应该是-16\n答案修订：ABC均正确。\n3\n\n\n  题目未说明大小端，若为大端法，选择A。若为小端法，u.s.c[2]为(11110000)2，\n由于char在不同的编译器上会被实现成signed char或unsigned char，因此扩\n展为int时-16和240均有可能，B，C均正确。",
+      "content": "5.  以下代码的输出结果是\n```c\nunion {\n    double d;\n    struct {\n        int i;\n        char c[4];\n    } s;\n} u;\nu.d = 1;\nprintf(\"%d\\n\", u.s.c[2]);\n```\nA. 0\nB. -16\nC. 240\nD. 191\n答案：ABC。\n\n修订说明：A、B、C 均可成立，原题未限定字节序，也未规定 `char` 是否为有符号类型。\n  题目未说明大小端，若为大端法，选择A。若为小端法，u.s.c[2]为(11110000)2，\n由于char在不同的编译器上会被实现成signed char或unsigned char，因此扩\n展为int时-16和240均有可能，B，C均正确。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3619,57 +4083,59 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": "single",
+        "selection": "multiple",
         "stem": "5.  以下代码的输出结果是\n```c\nunion {\n    double d;\n    struct {\n        int i;\n        char c[4];\n    } s;\n} u;\nu.d = 1;\nprintf(\"%d\\n\", u.s.c[2]);\n```",
         "choices": [
           {
             "key": "A",
-            "content": "A)  0"
+            "content": "0"
           },
           {
             "key": "B",
-            "content": "B)  -16"
+            "content": "-16"
           },
           {
             "key": "C",
-            "content": "C) 240"
+            "content": "240"
           },
           {
             "key": "D",
-            "content": "D) 191"
+            "content": "191"
           }
         ],
-        "answer": "答案：B\nc[2]保存的数据是(11110000)2，char保存的数据是有符号数，所以应该是-16\n答案修订：ABC均正确。\n3\n\n\n  题目未说明大小端，若为大端法，选择A。若为小端法，u.s.c[2]为(11110000)2，\n由于char在不同的编译器上会被实现成signed char或unsigned char，因此扩\n展为int时-16和240均有可能，B，C均正确。"
+        "answer": "答案：ABC。\n\n修订说明：A、B、C 均可成立，原题未限定字节序，也未规定 `char` 是否为有符号类型。\n  题目未说明大小端，若为大端法，选择A。若为小端法，u.s.c[2]为(11110000)2，\n由于char在不同的编译器上会被实现成signed char或unsigned char，因此扩\n展为int时-16和240均有可能，B，C均正确。"
       },
       "interaction": {
-        "kind": "single-choice",
+        "kind": "multiple-choice",
         "declared": true,
         "choices": [
           {
             "id": "A",
-            "content": "A)  0"
+            "content": "0"
           },
           {
             "id": "B",
-            "content": "B)  -16"
+            "content": "-16"
           },
           {
             "id": "C",
-            "content": "C) 240"
+            "content": "240"
           },
           {
             "id": "D",
-            "content": "D) 191"
+            "content": "191"
           }
         ],
         "correctChoiceIds": [
-          "B"
+          "A",
+          "B",
+          "C"
         ]
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "5.  以下代码的输出结果是\n```c\nunion {\n    double d;\n    struct {\n        int i;\n        char c[4];\n    } s;\n} u;\nu.d = 1;\nprintf(\"%d\\n\", u.s.c[2]);\n```",
-        "answer": "答案：B\nc[2]保存的数据是(11110000)2，char保存的数据是有符号数，所以应该是-16\n答案修订：ABC均正确。\n3\n\n\n  题目未说明大小端，若为大端法，选择A。若为小端法，u.s.c[2]为(11110000)2，\n由于char在不同的编译器上会被实现成signed char或unsigned char，因此扩\n展为int时-16和240均有可能，B，C均正确。"
+        "answer": "答案：ABC。\n\n修订说明：A、B、C 均可成立，原题未限定字节序，也未规定 `char` 是否为有符号类型。\n  题目未说明大小端，若为大端法，选择A。若为小端法，u.s.c[2]为(11110000)2，\n由于char在不同的编译器上会被实现成signed char或unsigned char，因此扩\n展为int时-16和240均有可能，B，C均正确。"
       },
       "presentation": {
         "status": "ready",
@@ -3686,7 +4152,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 6",
       "summary": "struct/union 成员排列与内存占用",
-      "content": "6.  下列关于C语言中的结构体(struct)以及联合(union)的说法中，正确的是：\nA)  对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小\nB)  对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大\nC)  对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小\nD)  对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大\n答案：A。联合以及只含一个基本数据类型成员的结构体的内存占用与其成员排列\n方式无关，即任意排列方式都可使得内存占用最小（最大），故b、c、d错误。对\n于struct，应当将成员按照其存储单元所占内存大小从小到大（或从大到小）的顺\n序进行排列才能使内存占用最小，故a正确。",
+      "content": "6.  下列关于C语言中的结构体(struct)以及联合(union)的说法中，正确的是：\nA. 对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小\nB. 对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大\nC. 对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小\nD. 对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大\n答案：A。联合以及只含一个基本数据类型成员的结构体的内存占用与其成员排列\n方式无关，即任意排列方式都可使得内存占用最小（最大），故b、c、d错误。对\n于struct，应当将成员按照其存储单元所占内存大小从小到大（或从大到小）的顺\n序进行排列才能使内存占用最小，故a正确。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3772,7 +4238,7 @@
       "exam": "2018期中",
       "questionNo": "第二题",
       "summary": "补码/无符号恒等式、nlz 与大小端 strlen",
-      "content": "第二题（10分）\n在本题中，int和unsigned均为32位。int用补码表示，算术右移。float为32\n位IEEE754标准，double为64位IEEE754标准。\n1.  （2 points）生成任意int类型的x，然后将它转换为unsigned类型：\n```\nint x = random();\n  unsigned ux = (unsigned) x;\n```\n  对于以下每个C语言表达式，你需要判断它的值是否恒为1。如果是，圈出Y；\n否则圈出N。\n表达式  恒为1？\n(x >= 0) || (x < ux)  Y      N\n( $(x>>1)$ << 1) <= x  Y      N\n2.  （2 point）请补全函数nlz，使之可以用来计算unsigned类型数据的二进制\n表示中前导零的个数（提示：填写数字）：\n```\n// TODO: Complete the `nlz` function to\n//       count the number of leading zeros\nint nlz(unsigned x) {\n  double w = 0.5;\n  double y = (double)x + w;\n  long long z;\n  memcpy(&z, &y, sizeof(y));\n  return      - (z >>     );\n}\n```\n3.  （2 point）上式中w的取值并不唯一。请判断以下哪个/哪些数字也符合w\n的要求：\n(a) 0.2 (b) 0.3 (c) 0.9 (d) 1.2\n4.  （4 points）下面所示的 strlen_x 是字符串求长度的函数在大端序电脑中的\n一种实现，nlz函数的意义如前所述。\n9\n\n\n```\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return nlz(y) >> 3;\n}\nsize_t strlen_x(const char *s) {\n  size_t t, n = 0;\n  const unsigned *si = (const unsigned *)s;\n  while ((t = func_x(*si++)) == 4) { n += t; }\n  return n + t;\n  }\n```\n  不改变strlen_x的实现，请修改func_x以使得strlen_x适用于小端序的电\n脑（提示：仅使用常数、算术/逻辑运算符和已定义变量）：\n```\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return (___– nlz((___) & (y-1))) >> 3;\n  }\n```\n答案：\n1.\n表达式  恒为1？\n(x >= 0) || (x < ux)  N: e.g. x = -1.\n( $(x>>1)$ << 1) <= x  Y: x>>1 rounds toward minus infinity.\n2.  32 - 1 - ($(z >> 52)$ - 1023)，即应该填1054。\n3.  w的取值范围为[0.5, 1)，因此只有c符合要求。\n4.  原始的func_x函数的意义在于在unsigned类型数据的四个字节中，从most\nsignificant byte到least significant byte寻找第一个等于’\\0’的字节\n的位置（0~3），若找不到则返回4，因此大端序机器上正好可以用来做\nstrlen_x的累加。而在一台小端序机器上，const unsigned类型的指针会将\n顺序排列的四个char颠倒顺序来解读，因此func_x的意义应改变为从least\nsignificant byte开始寻找第一个等于’\\0’的字节的位置。仔细考察y的\n含义，可以构造出以下式子：\n10\n\n\n```\n// TODO: Fill in the blank line\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return (32 – nlz(~y & (y-1))) >> 3;\n}\n```",
+      "content": "第二题（10分）\n在本题中，int和unsigned均为32位。int用补码表示，算术右移。float为32位IEEE754标准，double为64位IEEE754标准。\n1. （2 points）生成任意int类型的x，然后将它转换为unsigned类型：\n```c\nint x = random();\nunsigned ux = (unsigned) x;\n```\n对于以下每个C语言表达式，判断其值是否恒为1。如果是，圈出Y；否则圈出N。\n\n| 表达式 | 恒为1？ |\n| --- | --- |\n| `(x >= 0) || (x < ux)` | {{blank:q1a}} |\n| `((x >> 1) << 1) <= x` | {{blank:q1b}} |\n\n2. （2 point）补全函数 `nlz`，计算unsigned类型数据的二进制表示中的前导零个数（提示：填写数字）：\n```c\nint nlz(unsigned x) {\n    double w = 0.5;\n    double y = (double)x + w;\n    long long z;\n    memcpy(&z, &y, sizeof(y));\n    return {{blank:q2a}} - (z >> {{blank:q2b}});\n}\n```\n3. （2 point）上式中w的取值并不唯一。判断以下哪个/哪些数字也符合w的要求：{{blank:q3}}\n\n(a) 0.2　(b) 0.3　(c) 0.9　(d) 1.2\n\n4. （4 points）下面所示的 `strlen_x` 是字符串求长度函数在大端序电脑中的一种实现，`nlz`函数的意义如前所述：\n```c\nint func_x(unsigned x) {\n    unsigned u = 0x7F7F7F7F;\n    unsigned y = (x & u) + u;\n    y = ~(y | x | u);\n    return nlz(y) >> 3;\n}\n\nsize_t strlen_x(const char *s) {\n    size_t t, n = 0;\n    const unsigned *si = (const unsigned *)s;\n    while ((t = func_x(*si++)) == 4) {\n        n += t;\n    }\n    return n + t;\n}\n```\n不改变 `strlen_x` 的实现，修改 `func_x` 以使它适用于小端序电脑（仅使用常数、算术/逻辑运算符和已定义变量）：\n```c\nint func_x(unsigned x) {\n    unsigned u = 0x7F7F7F7F;\n    unsigned y = (x & u) + u;\n    y = ~(y | x | u);\n    return ({{blank:q4a}} - nlz(({{blank:q4b}}) & (y - 1))) >> 3;\n}\n```\n答案：\n1. 第一项N（例如x=-1），第二项Y（算术右移向负无穷取整）。\n2. 填1054和52，即 `32 - 1 - ((z >> 52) - 1023)`。\n3. w的取值范围为[0.5, 1)，因此选择(c) 0.9。\n4. 大端实现从最高有效字节到最低有效字节寻找第一个零字节；小端实现应从最低有效字节开始。填入32和`~y`，得到 `return (32 - nlz(~y & (y - 1))) >> 3;`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3792,18 +4258,136 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二题（10分）\n在本题中，int和unsigned均为32位。int用补码表示，算术右移。float为32\n位IEEE754标准，double为64位IEEE754标准。\n1.  （2 points）生成任意int类型的x，然后将它转换为unsigned类型：\n```\nint x = random();\n  unsigned ux = (unsigned) x;\n```\n  对于以下每个C语言表达式，你需要判断它的值是否恒为1。如果是，圈出Y；\n否则圈出N。\n表达式  恒为1？\n(x >= 0) || (x < ux)  Y      N\n( $(x>>1)$ << 1) <= x  Y      N\n2.  （2 point）请补全函数nlz，使之可以用来计算unsigned类型数据的二进制\n表示中前导零的个数（提示：填写数字）：\n```\n// TODO: Complete the `nlz` function to\n//       count the number of leading zeros\nint nlz(unsigned x) {\n  double w = 0.5;\n  double y = (double)x + w;\n  long long z;\n  memcpy(&z, &y, sizeof(y));\n  return      - (z >>     );\n}\n```\n3.  （2 point）上式中w的取值并不唯一。请判断以下哪个/哪些数字也符合w\n的要求：\n(a) 0.2 (b) 0.3 (c) 0.9 (d) 1.2\n4.  （4 points）下面所示的 strlen_x 是字符串求长度的函数在大端序电脑中的\n一种实现，nlz函数的意义如前所述。\n9\n\n\n```\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return nlz(y) >> 3;\n}\nsize_t strlen_x(const char *s) {\n  size_t t, n = 0;\n  const unsigned *si = (const unsigned *)s;\n  while ((t = func_x(*si++)) == 4) { n += t; }\n  return n + t;\n  }\n```\n  不改变strlen_x的实现，请修改func_x以使得strlen_x适用于小端序的电\n脑（提示：仅使用常数、算术/逻辑运算符和已定义变量）：\n```\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return (___– nlz((___) & (y-1))) >> 3;\n  }\n```",
+        "stem": "第二题（10分）\n在本题中，int和unsigned均为32位。int用补码表示，算术右移。float为32位IEEE754标准，double为64位IEEE754标准。\n1. （2 points）生成任意int类型的x，然后将它转换为unsigned类型：\n```c\nint x = random();\nunsigned ux = (unsigned) x;\n```\n对于以下每个C语言表达式，判断其值是否恒为1。如果是，圈出Y；否则圈出N。\n\n| 表达式 | 恒为1？ |\n| --- | --- |\n| `(x >= 0) || (x < ux)` | {{blank:q1a}} |\n| `((x >> 1) << 1) <= x` | {{blank:q1b}} |\n\n2. （2 point）补全函数 `nlz`，计算unsigned类型数据的二进制表示中的前导零个数（提示：填写数字）：\n```c\nint nlz(unsigned x) {\n    double w = 0.5;\n    double y = (double)x + w;\n    long long z;\n    memcpy(&z, &y, sizeof(y));\n    return {{blank:q2a}} - (z >> {{blank:q2b}});\n}\n```\n3. （2 point）上式中w的取值并不唯一。判断以下哪个/哪些数字也符合w的要求：{{blank:q3}}\n\n(a) 0.2　(b) 0.3　(c) 0.9　(d) 1.2\n\n4. （4 points）下面所示的 `strlen_x` 是字符串求长度函数在大端序电脑中的一种实现，`nlz`函数的意义如前所述：\n```c\nint func_x(unsigned x) {\n    unsigned u = 0x7F7F7F7F;\n    unsigned y = (x & u) + u;\n    y = ~(y | x | u);\n    return nlz(y) >> 3;\n}\n\nsize_t strlen_x(const char *s) {\n    size_t t, n = 0;\n    const unsigned *si = (const unsigned *)s;\n    while ((t = func_x(*si++)) == 4) {\n        n += t;\n    }\n    return n + t;\n}\n```\n不改变 `strlen_x` 的实现，修改 `func_x` 以使它适用于小端序电脑（仅使用常数、算术/逻辑运算符和已定义变量）：\n```c\nint func_x(unsigned x) {\n    unsigned u = 0x7F7F7F7F;\n    unsigned y = (x & u) + u;\n    y = ~(y | x | u);\n    return ({{blank:q4a}} - nlz(({{blank:q4b}}) & (y - 1))) >> 3;\n}\n```",
         "choices": [],
-        "answer": "答案：\n1.\n表达式  恒为1？\n(x >= 0) || (x < ux)  N: e.g. x = -1.\n( $(x>>1)$ << 1) <= x  Y: x>>1 rounds toward minus infinity.\n2.  32 - 1 - ($(z >> 52)$ - 1023)，即应该填1054。\n3.  w的取值范围为[0.5, 1)，因此只有c符合要求。\n4.  原始的func_x函数的意义在于在unsigned类型数据的四个字节中，从most\nsignificant byte到least significant byte寻找第一个等于’\\0’的字节\n的位置（0~3），若找不到则返回4，因此大端序机器上正好可以用来做\nstrlen_x的累加。而在一台小端序机器上，const unsigned类型的指针会将\n顺序排列的四个char颠倒顺序来解读，因此func_x的意义应改变为从least\nsignificant byte开始寻找第一个等于’\\0’的字节的位置。仔细考察y的\n含义，可以构造出以下式子：\n10\n\n\n```\n// TODO: Fill in the blank line\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return (32 – nlz(~y & (y-1))) >> 3;\n}\n```"
+        "answer": "答案：\n1. 第一项N（例如x=-1），第二项Y（算术右移向负无穷取整）。\n2. 填1054和52，即 `32 - 1 - ((z >> 52) - 1023)`。\n3. w的取值范围为[0.5, 1)，因此选择(c) 0.9。\n4. 大端实现从最高有效字节到最低有效字节寻找第一个零字节；小端实现应从最低有效字节开始。填入32和`~y`，得到 `return (32 - nlz(~y & (y - 1))) >> 3;`。",
+        "blankAnswers": [
+          {
+            "id": "q1a",
+            "acceptedAnswers": [
+              "N"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q1b",
+            "acceptedAnswers": [
+              "Y"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q2a",
+            "acceptedAnswers": [
+              "1054"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q2b",
+            "acceptedAnswers": [
+              "52"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3",
+            "acceptedAnswers": [
+              "c",
+              "0.9"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4a",
+            "acceptedAnswers": [
+              "32"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4b",
+            "acceptedAnswers": [
+              "~y"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q1a",
+            "acceptedAnswers": [
+              "N"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q1b",
+            "acceptedAnswers": [
+              "Y"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q2a",
+            "acceptedAnswers": [
+              "1054"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q2b",
+            "acceptedAnswers": [
+              "52"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3",
+            "acceptedAnswers": [
+              "c",
+              "0.9"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4a",
+            "acceptedAnswers": [
+              "32"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4b",
+            "acceptedAnswers": [
+              "~y"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（10分）\n在本题中，int和unsigned均为32位。int用补码表示，算术右移。float为32\n位IEEE754标准，double为64位IEEE754标准。\n1.  （2 points）生成任意int类型的x，然后将它转换为unsigned类型：\n```\nint x = random();\n  unsigned ux = (unsigned) x;\n```\n  对于以下每个C语言表达式，你需要判断它的值是否恒为1。如果是，圈出Y；\n否则圈出N。\n表达式  恒为1？\n(x >= 0) || (x < ux)  Y      N\n( $(x>>1)$ << 1) <= x  Y      N\n2.  （2 point）请补全函数nlz，使之可以用来计算unsigned类型数据的二进制\n表示中前导零的个数（提示：填写数字）：\n```\n// TODO: Complete the `nlz` function to\n//       count the number of leading zeros\nint nlz(unsigned x) {\n  double w = 0.5;\n  double y = (double)x + w;\n  long long z;\n  memcpy(&z, &y, sizeof(y));\n  return      - (z >>     );\n}\n```\n3.  （2 point）上式中w的取值并不唯一。请判断以下哪个/哪些数字也符合w\n的要求：\n(a) 0.2 (b) 0.3 (c) 0.9 (d) 1.2\n4.  （4 points）下面所示的 strlen_x 是字符串求长度的函数在大端序电脑中的\n一种实现，nlz函数的意义如前所述。\n9\n\n\n```\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return nlz(y) >> 3;\n}\nsize_t strlen_x(const char *s) {\n  size_t t, n = 0;\n  const unsigned *si = (const unsigned *)s;\n  while ((t = func_x(*si++)) == 4) { n += t; }\n  return n + t;\n  }\n```\n  不改变strlen_x的实现，请修改func_x以使得strlen_x适用于小端序的电\n脑（提示：仅使用常数、算术/逻辑运算符和已定义变量）：\n```\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return (___– nlz((___) & (y-1))) >> 3;\n  }\n```",
-        "answer": "答案：\n1.\n表达式  恒为1？\n(x >= 0) || (x < ux)  N: e.g. x = -1.\n( $(x>>1)$ << 1) <= x  Y: x>>1 rounds toward minus infinity.\n2.  32 - 1 - ($(z >> 52)$ - 1023)，即应该填1054。\n3.  w的取值范围为[0.5, 1)，因此只有c符合要求。\n4.  原始的func_x函数的意义在于在unsigned类型数据的四个字节中，从most\nsignificant byte到least significant byte寻找第一个等于’\\0’的字节\n的位置（0~3），若找不到则返回4，因此大端序机器上正好可以用来做\nstrlen_x的累加。而在一台小端序机器上，const unsigned类型的指针会将\n顺序排列的四个char颠倒顺序来解读，因此func_x的意义应改变为从least\nsignificant byte开始寻找第一个等于’\\0’的字节的位置。仔细考察y的\n含义，可以构造出以下式子：\n10\n\n\n```\n// TODO: Fill in the blank line\nint func_x(unsigned x) {\n  unsigned u = 0x7F7F7F7F;\n  unsigned y = (x & u) + u;\n  y = ~(y | x | u);\n  return (32 – nlz(~y & (y-1))) >> 3;\n}\n```"
+        "prompt": "第二题（10分）\n在本题中，int和unsigned均为32位。int用补码表示，算术右移。float为32位IEEE754标准，double为64位IEEE754标准。\n1. （2 points）生成任意int类型的x，然后将它转换为unsigned类型：\n```c\nint x = random();\nunsigned ux = (unsigned) x;\n```\n对于以下每个C语言表达式，判断其值是否恒为1。如果是，圈出Y；否则圈出N。\n\n| 表达式 | 恒为1？ |\n| --- | --- |\n| `(x >= 0) || (x < ux)` | {{blank:q1a}} |\n| `((x >> 1) << 1) <= x` | {{blank:q1b}} |\n\n2. （2 point）补全函数 `nlz`，计算unsigned类型数据的二进制表示中的前导零个数（提示：填写数字）：\n```c\nint nlz(unsigned x) {\n    double w = 0.5;\n    double y = (double)x + w;\n    long long z;\n    memcpy(&z, &y, sizeof(y));\n    return {{blank:q2a}} - (z >> {{blank:q2b}});\n}\n```\n3. （2 point）上式中w的取值并不唯一。判断以下哪个/哪些数字也符合w的要求：{{blank:q3}}\n\n(a) 0.2　(b) 0.3　(c) 0.9　(d) 1.2\n\n4. （4 points）下面所示的 `strlen_x` 是字符串求长度函数在大端序电脑中的一种实现，`nlz`函数的意义如前所述：\n```c\nint func_x(unsigned x) {\n    unsigned u = 0x7F7F7F7F;\n    unsigned y = (x & u) + u;\n    y = ~(y | x | u);\n    return nlz(y) >> 3;\n}\n\nsize_t strlen_x(const char *s) {\n    size_t t, n = 0;\n    const unsigned *si = (const unsigned *)s;\n    while ((t = func_x(*si++)) == 4) {\n        n += t;\n    }\n    return n + t;\n}\n```\n不改变 `strlen_x` 的实现，修改 `func_x` 以使它适用于小端序电脑（仅使用常数、算术/逻辑运算符和已定义变量）：\n```c\nint func_x(unsigned x) {\n    unsigned u = 0x7F7F7F7F;\n    unsigned y = (x & u) + u;\n    y = ~(y | x | u);\n    return ({{blank:q4a}} - nlz(({{blank:q4b}}) & (y - 1))) >> 3;\n}\n```",
+        "answer": "答案：\n1. 第一项N（例如x=-1），第二项Y（算术右移向负无穷取整）。\n2. 填1054和52，即 `32 - 1 - ((z >> 52) - 1023)`。\n3. w的取值范围为[0.5, 1)，因此选择(c) 0.9。\n4. 大端实现从最高有效字节到最低有效字节寻找第一个零字节；小端实现应从最低有效字节开始。填入32和`~y`，得到 `return (32 - nlz(~y & (y - 1))) >> 3;`。"
       },
       "presentation": {
         "status": "ready",
@@ -3820,7 +4404,7 @@
       "exam": "2018期中",
       "questionNo": "第三题 1",
       "summary": "结构体对齐填充与 sizeof 计算",
-      "content": "第三题（15分，每空1分）\n数据结构定义如下：（测试用机：64位Linux机器）\n```c\ntypedef struct s1 {\n         char cc[N];\n         int ii[N];\n         int *ip;\n} S1;\nS1 t1[N];\n```\n1、计算该数据结构的空间：\n当N=3时，sizeof(S1) =     (1)     ，sizeof(t1) =     (2)\n当N=4时，sizeof(S1) =     (3)     ，sizeof(t1) =     (4)\n当N=5时，sizeof(S1) =     (5)     ，sizeof(t1) =     (6)\n答案：\n（1）24 （2）72\n（3）32 （4）128\n（5）40 （6）200",
+      "content": "第三题（15分，每空1分）\n数据结构定义如下：（测试用机：64位Linux机器）\n```c\ntypedef struct s1 {\n         char cc[N];\n         int ii[N];\n         int *ip;\n} S1;\nS1 t1[N];\n```\n1、计算该数据结构的空间：\n当N=3时，sizeof(S1) = {{blank:n3_s1}}，sizeof(t1) = {{blank:n3_t1}}\n当N=4时，sizeof(S1) = {{blank:n4_s1}}，sizeof(t1) = {{blank:n4_t1}}\n当N=5时，sizeof(S1) = {{blank:n5_s1}}，sizeof(t1) = {{blank:n5_t1}}\n答案：\n（1）24 （2）72\n（3）32 （4）128\n（5）40 （6）200",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3840,17 +4424,117 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第三题（15分，每空1分）\n数据结构定义如下：（测试用机：64位Linux机器）\n```c\ntypedef struct s1 {\n         char cc[N];\n         int ii[N];\n         int *ip;\n} S1;\nS1 t1[N];\n```\n1、计算该数据结构的空间：\n当N=3时，sizeof(S1) =     (1)     ，sizeof(t1) =     (2)\n当N=4时，sizeof(S1) =     (3)     ，sizeof(t1) =     (4)\n当N=5时，sizeof(S1) =     (5)     ，sizeof(t1) =     (6)",
+        "stem": "第三题（15分，每空1分）\n数据结构定义如下：（测试用机：64位Linux机器）\n```c\ntypedef struct s1 {\n         char cc[N];\n         int ii[N];\n         int *ip;\n} S1;\nS1 t1[N];\n```\n1、计算该数据结构的空间：\n当N=3时，sizeof(S1) = {{blank:n3_s1}}，sizeof(t1) = {{blank:n3_t1}}\n当N=4时，sizeof(S1) = {{blank:n4_s1}}，sizeof(t1) = {{blank:n4_t1}}\n当N=5时，sizeof(S1) = {{blank:n5_s1}}，sizeof(t1) = {{blank:n5_t1}}",
         "choices": [],
-        "answer": "答案：\n（1）24 （2）72\n（3）32 （4）128\n（5）40 （6）200"
+        "answer": "答案：\n（1）24 （2）72\n（3）32 （4）128\n（5）40 （6）200",
+        "blankAnswers": [
+          {
+            "id": "n3_s1",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3_t1",
+            "acceptedAnswers": [
+              "72"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n4_s1",
+            "acceptedAnswers": [
+              "32"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n4_t1",
+            "acceptedAnswers": [
+              "128"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n5_s1",
+            "acceptedAnswers": [
+              "40"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n5_t1",
+            "acceptedAnswers": [
+              "200"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "n3_s1",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n3_t1",
+            "acceptedAnswers": [
+              "72"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n4_s1",
+            "acceptedAnswers": [
+              "32"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n4_t1",
+            "acceptedAnswers": [
+              "128"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n5_s1",
+            "acceptedAnswers": [
+              "40"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "n5_t1",
+            "acceptedAnswers": [
+              "200"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第三题（15分，每空1分）\n数据结构定义如下：（测试用机：64位Linux机器）\n```c\ntypedef struct s1 {\n         char cc[N];\n         int ii[N];\n         int *ip;\n} S1;\nS1 t1[N];\n```\n1、计算该数据结构的空间：\n当N=3时，sizeof(S1) =     (1)     ，sizeof(t1) =     (2)\n当N=4时，sizeof(S1) =     (3)     ，sizeof(t1) =     (4)\n当N=5时，sizeof(S1) =     (5)     ，sizeof(t1) =     (6)",
+        "prompt": "第三题（15分，每空1分）\n数据结构定义如下：（测试用机：64位Linux机器）\n```c\ntypedef struct s1 {\n         char cc[N];\n         int ii[N];\n         int *ip;\n} S1;\nS1 t1[N];\n```\n1、计算该数据结构的空间：\n当N=3时，sizeof(S1) = {{blank:n3_s1}}，sizeof(t1) = {{blank:n3_t1}}\n当N=4时，sizeof(S1) = {{blank:n4_s1}}，sizeof(t1) = {{blank:n4_t1}}\n当N=5时，sizeof(S1) = {{blank:n5_s1}}，sizeof(t1) = {{blank:n5_t1}}",
         "answer": "答案：\n（1）24 （2）72\n（3）32 （4）128\n（5）40 （6）200"
       },
       "presentation": {
@@ -3957,7 +4641,7 @@
       "exam": "2019期中",
       "questionNo": "第一题 2",
       "summary": "移位与按位运算结果的补码大小比较",
-      "content": "2.  已知0x2019和0x12是两个有符号32位整数。下列运算结果中，作为32位\n补码表示的整数最大的是：\nA. 0x2019 << 0x12\nB. 0x2019 & 0x12\n2\n\n\nC. 0x2019 | 0x12\nD. 0x2019 ^ 0x12\n答案：C\n解答：0x2019左移18位后刚好最高位为1，对应补码表示的是负数；另外三个\n选项的结果都是正数。运算数相同时，运算结果中”1”可能出现的位置也相同。\n按位或运算的结果在每个这样的位置都为”1”，而按位与和按位异或的结果中”1”\n的数量较少，因此按位或运算的结果最大。也可将三个选项的结果计算出来进行比\n较。",
+      "content": "2.  已知0x2019和0x12是两个有符号32位整数。下列运算结果中，作为32位\n补码表示的整数最大的是：\nA. 0x2019 << 0x12\nB. 0x2019 & 0x12\nC. 0x2019 | 0x12\nD. 0x2019 ^ 0x12\n答案：C\n解答：0x2019左移18位后刚好最高位为1，对应补码表示的是负数；另外三个\n选项的结果都是正数。运算数相同时，运算结果中”1”可能出现的位置也相同。\n按位或运算的结果在每个这样的位置都为”1”，而按位与和按位异或的结果中”1”\n的数量较少，因此按位或运算的结果最大。也可将三个选项的结果计算出来进行比\n较。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3988,7 +4672,7 @@
           },
           {
             "key": "B",
-            "content": "0x2019 & 0x12\n2"
+            "content": "0x2019 & 0x12"
           },
           {
             "key": "C",
@@ -4011,7 +4695,7 @@
           },
           {
             "id": "B",
-            "content": "0x2019 & 0x12\n2"
+            "content": "0x2019 & 0x12"
           },
           {
             "id": "C",
@@ -7818,7 +8502,7 @@
       "exam": "2019期末",
       "questionNo": "第一题 3",
       "summary": "有符号除法与算术右移的舍入差异",
-      "content": "```\n3.  int x = -2019;\nint a = (x / 8) * 8;\nint b = ((x + 7) >> 3) << 3;\nint c = -(((~x)+1) >> 3) << 3;\n```\na, b, c大小关系是什么？\nA. a=b, b=c\nB. a=b, b>c\nC. a<b b<c\nD. a<b, b=c\n答案：A（来源：2019、2020期末-答案解析）\n解析：a = (-2019/8)*8 = -2016；b = ((-2019+7)>>3)<<3 = -2016；c = -(((~x)+1)>>3)<<3 = -2016，故 a=b=c。",
+      "content": "3.\n\n```c\nint x = -2019;\nint a = (x / 8) * 8;\nint b = ((x + 7) >> 3) << 3;\nint c = -(((~x)+1) >> 3) << 3;\n```\na, b, c大小关系是什么？\nA. a=b, b=c\nB. a=b, b>c\nC. a<b b<c\nD. a<b, b=c\n答案：A（来源：2019、2020期末-答案解析）\n解析：a = (-2019/8)*8 = -2016；b = ((-2019+7)>>3)<<3 = -2016；c = -(((~x)+1)>>3)<<3 = -2016，故 a=b=c。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7841,7 +8525,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "```\n3.  int x = -2019;\nint a = (x / 8) * 8;\nint b = ((x + 7) >> 3) << 3;\nint c = -(((~x)+1) >> 3) << 3;\n```\na, b, c大小关系是什么？",
+        "stem": "3.\n\n```c\nint x = -2019;\nint a = (x / 8) * 8;\nint b = ((x + 7) >> 3) << 3;\nint c = -(((~x)+1) >> 3) << 3;\n```\na, b, c大小关系是什么？",
         "choices": [
           {
             "key": "A",
@@ -7889,7 +8573,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "```\n3.  int x = -2019;\nint a = (x / 8) * 8;\nint b = ((x + 7) >> 3) << 3;\nint c = -(((~x)+1) >> 3) << 3;\n```\na, b, c大小关系是什么？",
+        "prompt": "3.\n\n```c\nint x = -2019;\nint a = (x / 8) * 8;\nint b = ((x + 7) >> 3) << 3;\nint c = -(((~x)+1) >> 3) << 3;\n```\na, b, c大小关系是什么？",
         "answer": "答案：A（来源：2019、2020期末-答案解析）\n解析：a = (-2019/8)*8 = -2016；b = ((-2019+7)>>3)<<3 = -2016；c = -(((~x)+1)>>3)<<3 = -2016，故 a=b=c。"
       },
       "presentation": {

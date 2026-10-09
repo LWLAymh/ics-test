@@ -771,7 +771,7 @@
       "exam": "2016期末",
       "questionNo": "第一题 20",
       "summary": "信号量 PV 下多线程输出的可能性",
-      "content": "20. 请阅读如下代码：\n```\nsem_t s;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_inti(&s, 0, 1);\nfor (i=0; i <3; i++) {\n    pthread_create(&tids[i], NULL, justdoit, NULL);\n}\nfor (i=0; i <3; i++) {\n    pthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint j=0;\nvoid *justdoit(void *arg)\n{\n    P(&s);\nj = j + 1;\n    V(&s);\nprintf(“%d\\n”, j);\n}\n```\n  下列哪一个输出结果是不可能的？\nA. （1，3，2）\nB. （2，3，2）\nC. （3，3，2）\nD. （2，1，2）\n答案：D（本题考查对多线程、信号量使用的掌握）",
+      "content": "20. 请阅读如下代码：\n```\nsem_t s;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_inti(&s, 0, 1);\nfor (i=0; i <3; i++) {\n    pthread_create(&tids[i], NULL, justdoit, NULL);\n}\nfor (i=0; i <3; i++) {\n    pthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint j=0;\nvoid *justdoit(void *arg)\n{\n    P(&s);\n    j = j + 1;\n    V(&s);\n    printf(“%d\\n”, j);\n}\n```\n  下列哪一个输出结果是不可能的？\nA. （1，3，2）\nB. （2，3，2）\nC. （3，3，2）\nD. （2，1，2）\n答案：D（本题考查对多线程、信号量使用的掌握）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -793,7 +793,7 @@
       "layout": {
         "mode": "choice",
         "selection": null,
-        "stem": "20. 请阅读如下代码：\n```\nsem_t s;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_inti(&s, 0, 1);\nfor (i=0; i <3; i++) {\n    pthread_create(&tids[i], NULL, justdoit, NULL);\n}\nfor (i=0; i <3; i++) {\n    pthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint j=0;\nvoid *justdoit(void *arg)\n{\n    P(&s);\nj = j + 1;\n    V(&s);\nprintf(“%d\\n”, j);\n}\n```\n  下列哪一个输出结果是不可能的？",
+        "stem": "20. 请阅读如下代码：\n```\nsem_t s;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_inti(&s, 0, 1);\nfor (i=0; i <3; i++) {\n    pthread_create(&tids[i], NULL, justdoit, NULL);\n}\nfor (i=0; i <3; i++) {\n    pthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint j=0;\nvoid *justdoit(void *arg)\n{\n    P(&s);\n    j = j + 1;\n    V(&s);\n    printf(“%d\\n”, j);\n}\n```\n  下列哪一个输出结果是不可能的？",
         "choices": [
           {
             "key": "A",
@@ -841,7 +841,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "20. 请阅读如下代码：\n```\nsem_t s;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_inti(&s, 0, 1);\nfor (i=0; i <3; i++) {\n    pthread_create(&tids[i], NULL, justdoit, NULL);\n}\nfor (i=0; i <3; i++) {\n    pthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint j=0;\nvoid *justdoit(void *arg)\n{\n    P(&s);\nj = j + 1;\n    V(&s);\nprintf(“%d\\n”, j);\n}\n```\n  下列哪一个输出结果是不可能的？",
+        "prompt": "20. 请阅读如下代码：\n```\nsem_t s;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_inti(&s, 0, 1);\nfor (i=0; i <3; i++) {\n    pthread_create(&tids[i], NULL, justdoit, NULL);\n}\nfor (i=0; i <3; i++) {\n    pthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint j=0;\nvoid *justdoit(void *arg)\n{\n    P(&s);\n    j = j + 1;\n    V(&s);\n    printf(“%d\\n”, j);\n}\n```\n  下列哪一个输出结果是不可能的？",
         "answer": "答案：D（本题考查对多线程、信号量使用的掌握）"
       },
       "presentation": {
@@ -859,7 +859,7 @@
       "exam": "2016期末",
       "questionNo": "第八题",
       "summary": "多线程 cnt++ 竞态分析与 PV 实现司机售票员同步",
-      "content": "第八题（12分）\n1.请阅读下列代码badcnt.c：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n      司机进程：                 售票员进程：\n         while(1) {                 while(1) {\n            ①                          ⑤\n启动车辆；                   关门；\n            ②                          ⑥\n正常行驶；                   报站名或维持秩序；\n            ③                          ⑦\n到站停车；                   到站开门；\n            ④                          ⑧\n         }                            }\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧\n答案：\n25\n\n\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把cnt读\n入寄存器，寄存器加1，在未写回时，若线程2把cnt读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入cnt，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量s1=0、s2=1（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。",
+      "content": "第八题（12分）\n1.请阅读下列代码badcnt.c：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧\n答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把cnt读\n入寄存器，寄存器加1，在未写回时，若线程2把cnt读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入cnt，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量s1=0、s2=1（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -881,9 +881,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第八题（12分）\n1.请阅读下列代码badcnt.c：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n      司机进程：                 售票员进程：\n         while(1) {                 while(1) {\n            ①                          ⑤\n启动车辆；                   关门；\n            ②                          ⑥\n正常行驶；                   报站名或维持秩序；\n            ③                          ⑦\n到站停车；                   到站开门；\n            ④                          ⑧\n         }                            }\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧",
+        "stem": "第八题（12分）\n1.请阅读下列代码badcnt.c：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧",
         "choices": [],
-        "answer": "答案：\n25\n\n\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把cnt读\n入寄存器，寄存器加1，在未写回时，若线程2把cnt读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入cnt，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量s1=0、s2=1（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
+        "answer": "答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把cnt读\n入寄存器，寄存器加1，在未写回时，若线程2把cnt读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入cnt，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量s1=0、s2=1（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
       },
       "interaction": {
         "kind": "fill",
@@ -891,8 +891,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第八题（12分）\n1.请阅读下列代码badcnt.c：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n      司机进程：                 售票员进程：\n         while(1) {                 while(1) {\n            ①                          ⑤\n启动车辆；                   关门；\n            ②                          ⑥\n正常行驶；                   报站名或维持秩序；\n            ③                          ⑦\n到站停车；                   到站开门；\n            ④                          ⑧\n         }                            }\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧",
-        "answer": "答案：\n25\n\n\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把cnt读\n入寄存器，寄存器加1，在未写回时，若线程2把cnt读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入cnt，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量s1=0、s2=1（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
+        "prompt": "第八题（12分）\n1.请阅读下列代码badcnt.c：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧",
+        "answer": "答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把cnt读\n入寄存器，寄存器加1，在未写回时，若线程2把cnt读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入cnt，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量s1=0、s2=1（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
       },
       "presentation": {
         "status": "ready",
@@ -995,7 +995,7 @@
       "exam": "2017期末",
       "questionNo": "第一题 20",
       "summary": "主线程与线程1交错执行的输出种类",
-      "content": "20. 某进程的主线程和对等线程的代码如下所示：\n```\nsem_t sem;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_init(&sem, 0, 1);\nfor (i=0; i<3; i++) {\npthread_create(&tids[i], NULL, thread, NULL);\n}\nfor (i=0; i<3; i++) {\npthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint y = 15;\nvoid *thread (void *arg)\n{\nP(&sem);\ny = y - 3;\nV(&sem);\nprintf(\"%d\\n\", y);\n}\n```\n  执行上述代码后，会产生多少种不同的输出？\nA. 11\nB. 12\nC. 13\nD. 14\n答案：A\n\n（本题四个选项全错：不同输出只有 3 种，即 12、9、6；见下方解析。为让网页判分\n有可选项，此处填 A，但 A（11）同样是错的。）\n\n解析：\n**本题为错题（无正确选项）。** 三个对等线程共享一个初值为 1 的信号量 `sem`，\n`y` 是共享全局变量。\n\n代码的关键结构是：`P(&sem); y = y - 3; V(&sem); printf(\"%d\\n\", y);`\n—— 注意 **`printf` 在临界区之外**，所以每个线程打印的是「自己刚更新完、\n但可能已被别的线程继续更新」的 `y`。\n\n三个线程都把 `y` 减 3，`y` 从 15 变成 12、9、6（每次减 3），一共只会出现\n这 3 个数值：\n\n- 打印 **12**：某线程执行完 `y = y - 3`（y 变 12）后立刻离开临界区并 printf，\n  此时还没有别的线程改动 y。\n- 打印 **9**：该线程打印之前，已经有 2 个线程完成了 `y -= 3`。\n- 打印 **6**：该线程打印之前，3 个线程都完成了 `y -= 3`。\n\n（由于 `y` 是全局变量、每个线程的 `printf` 都是读当前内存中的 `y`，\n不可能出现 15 —— 每个线程自己至少减过一次；也不可能出现 12、9、6 之外的值，\n因为 `y` 只会取 `15 - 3k`。）\n\n所以要问「会产生多少种不同的输出」，答案是 **3 种**（12、9、6），\n而不是 11/12/13/14 中的任何一个。本卷无官方答案；原卷四个选项显然是把\n输出「行数」误当成了「不同输出值的个数」来设置的干扰项，本题应判为错题。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "20. 某进程的主线程和对等线程的代码如下所示：\n```c\nsem_t sem;\nint main(void) {\n    int i;\n    pthread_t tids[3];\n    sem_init(&sem, 0, 1);\n    for (i = 0; i < 3; i++) {\n        pthread_create(&tids[i], NULL, thread, NULL);\n    }\n    for (i = 0; i < 3; i++) {\n        pthread_join(&tids[i], NULL);\n    }\n    return 0;\n}\nint y = 15;\nvoid *thread(void *arg) {\n    P(&sem);\n    y = y - 3;\n    V(&sem);\n    printf(\"%d\\n\", y);\n}\n```\n  执行上述代码后，会产生多少种不同的输出？\nA. 11\nB. 12\nC. 13\nD. 14\nE. 以上选项均不正确\n答案：E。原题的 A–D 均不正确；按程序语义共有 **5 种不同的输出序列**。\n\n解析：`y -= 3` 在信号量保护下依次执行三次，`y` 依次变为 12、9、6；每次 `printf` 在临界区外读取当时的共享 `y`。因此：\n\n- 在第二次递减前打印的值只能是 12，至多出现一次；\n- 在第三次递减前打印的值只能是 9，最多出现两次；\n- 第三次递减完成后尚未打印的线程都读到 6，且至少有一个线程此时才打印。\n\n打印值的顺序只能是若干个 12、随后若干个 9、最后若干个 6。所有可行序列为：`6 6 6`、`9 6 6`、`9 9 6`、`12 6 6`、`12 9 6`，共 **5 种**。选项 11、12、13、14 均不正确，本题应标为无正确选项。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1015,7 +1015,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "20. 某进程的主线程和对等线程的代码如下所示：\n```\nsem_t sem;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_init(&sem, 0, 1);\nfor (i=0; i<3; i++) {\npthread_create(&tids[i], NULL, thread, NULL);\n}\nfor (i=0; i<3; i++) {\npthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint y = 15;\nvoid *thread (void *arg)\n{\nP(&sem);\ny = y - 3;\nV(&sem);\nprintf(\"%d\\n\", y);\n}\n```\n  执行上述代码后，会产生多少种不同的输出？",
+        "stem": "20. 某进程的主线程和对等线程的代码如下所示：\n```c\nsem_t sem;\nint main(void) {\n    int i;\n    pthread_t tids[3];\n    sem_init(&sem, 0, 1);\n    for (i = 0; i < 3; i++) {\n        pthread_create(&tids[i], NULL, thread, NULL);\n    }\n    for (i = 0; i < 3; i++) {\n        pthread_join(&tids[i], NULL);\n    }\n    return 0;\n}\nint y = 15;\nvoid *thread(void *arg) {\n    P(&sem);\n    y = y - 3;\n    V(&sem);\n    printf(\"%d\\n\", y);\n}\n```\n  执行上述代码后，会产生多少种不同的输出？",
         "choices": [
           {
             "key": "A",
@@ -1032,9 +1032,13 @@
           {
             "key": "D",
             "content": "14"
+          },
+          {
+            "key": "E",
+            "content": "以上选项均不正确"
           }
         ],
-        "answer": "答案：A\n\n（本题四个选项全错：不同输出只有 3 种，即 12、9、6；见下方解析。为让网页判分\n有可选项，此处填 A，但 A（11）同样是错的。）\n\n解析：\n**本题为错题（无正确选项）。** 三个对等线程共享一个初值为 1 的信号量 `sem`，\n`y` 是共享全局变量。\n\n代码的关键结构是：`P(&sem); y = y - 3; V(&sem); printf(\"%d\\n\", y);`\n—— 注意 **`printf` 在临界区之外**，所以每个线程打印的是「自己刚更新完、\n但可能已被别的线程继续更新」的 `y`。\n\n三个线程都把 `y` 减 3，`y` 从 15 变成 12、9、6（每次减 3），一共只会出现\n这 3 个数值：\n\n- 打印 **12**：某线程执行完 `y = y - 3`（y 变 12）后立刻离开临界区并 printf，\n  此时还没有别的线程改动 y。\n- 打印 **9**：该线程打印之前，已经有 2 个线程完成了 `y -= 3`。\n- 打印 **6**：该线程打印之前，3 个线程都完成了 `y -= 3`。\n\n（由于 `y` 是全局变量、每个线程的 `printf` 都是读当前内存中的 `y`，\n不可能出现 15 —— 每个线程自己至少减过一次；也不可能出现 12、9、6 之外的值，\n因为 `y` 只会取 `15 - 3k`。）\n\n所以要问「会产生多少种不同的输出」，答案是 **3 种**（12、9、6），\n而不是 11/12/13/14 中的任何一个。本卷无官方答案；原卷四个选项显然是把\n输出「行数」误当成了「不同输出值的个数」来设置的干扰项，本题应判为错题。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：E。原题的 A–D 均不正确；按程序语义共有 **5 种不同的输出序列**。\n\n解析：`y -= 3` 在信号量保护下依次执行三次，`y` 依次变为 12、9、6；每次 `printf` 在临界区外读取当时的共享 `y`。因此：\n\n- 在第二次递减前打印的值只能是 12，至多出现一次；\n- 在第三次递减前打印的值只能是 9，最多出现两次；\n- 第三次递减完成后尚未打印的线程都读到 6，且至少有一个线程此时才打印。\n\n打印值的顺序只能是若干个 12、随后若干个 9、最后若干个 6。所有可行序列为：`6 6 6`、`9 6 6`、`9 9 6`、`12 6 6`、`12 9 6`，共 **5 种**。选项 11、12、13、14 均不正确，本题应标为无正确选项。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -1055,16 +1059,20 @@
           {
             "id": "D",
             "content": "14"
+          },
+          {
+            "id": "E",
+            "content": "以上选项均不正确"
           }
         ],
         "correctChoiceIds": [
-          "A"
+          "E"
         ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "20. 某进程的主线程和对等线程的代码如下所示：\n```\nsem_t sem;\nint main()\n{\nint i;\npthread_t tids[3];\nsem_init(&sem, 0, 1);\nfor (i=0; i<3; i++) {\npthread_create(&tids[i], NULL, thread, NULL);\n}\nfor (i=0; i<3; i++) {\npthread_join(&tids[i], NULL);\n}\nreturn 0;\n}\nint y = 15;\nvoid *thread (void *arg)\n{\nP(&sem);\ny = y - 3;\nV(&sem);\nprintf(\"%d\\n\", y);\n}\n```\n  执行上述代码后，会产生多少种不同的输出？",
-        "answer": "答案：A\n\n（本题四个选项全错：不同输出只有 3 种，即 12、9、6；见下方解析。为让网页判分\n有可选项，此处填 A，但 A（11）同样是错的。）\n\n解析：\n**本题为错题（无正确选项）。** 三个对等线程共享一个初值为 1 的信号量 `sem`，\n`y` 是共享全局变量。\n\n代码的关键结构是：`P(&sem); y = y - 3; V(&sem); printf(\"%d\\n\", y);`\n—— 注意 **`printf` 在临界区之外**，所以每个线程打印的是「自己刚更新完、\n但可能已被别的线程继续更新」的 `y`。\n\n三个线程都把 `y` 减 3，`y` 从 15 变成 12、9、6（每次减 3），一共只会出现\n这 3 个数值：\n\n- 打印 **12**：某线程执行完 `y = y - 3`（y 变 12）后立刻离开临界区并 printf，\n  此时还没有别的线程改动 y。\n- 打印 **9**：该线程打印之前，已经有 2 个线程完成了 `y -= 3`。\n- 打印 **6**：该线程打印之前，3 个线程都完成了 `y -= 3`。\n\n（由于 `y` 是全局变量、每个线程的 `printf` 都是读当前内存中的 `y`，\n不可能出现 15 —— 每个线程自己至少减过一次；也不可能出现 12、9、6 之外的值，\n因为 `y` 只会取 `15 - 3k`。）\n\n所以要问「会产生多少种不同的输出」，答案是 **3 种**（12、9、6），\n而不是 11/12/13/14 中的任何一个。本卷无官方答案；原卷四个选项显然是把\n输出「行数」误当成了「不同输出值的个数」来设置的干扰项，本题应判为错题。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "prompt": "20. 某进程的主线程和对等线程的代码如下所示：\n```c\nsem_t sem;\nint main(void) {\n    int i;\n    pthread_t tids[3];\n    sem_init(&sem, 0, 1);\n    for (i = 0; i < 3; i++) {\n        pthread_create(&tids[i], NULL, thread, NULL);\n    }\n    for (i = 0; i < 3; i++) {\n        pthread_join(&tids[i], NULL);\n    }\n    return 0;\n}\nint y = 15;\nvoid *thread(void *arg) {\n    P(&sem);\n    y = y - 3;\n    V(&sem);\n    printf(\"%d\\n\", y);\n}\n```\n  执行上述代码后，会产生多少种不同的输出？",
+        "answer": "答案：E。原题的 A–D 均不正确；按程序语义共有 **5 种不同的输出序列**。\n\n解析：`y -= 3` 在信号量保护下依次执行三次，`y` 依次变为 12、9、6；每次 `printf` 在临界区外读取当时的共享 `y`。因此：\n\n- 在第二次递减前打印的值只能是 12，至多出现一次；\n- 在第三次递减前打印的值只能是 9，最多出现两次；\n- 第三次递减完成后尚未打印的线程都读到 6，且至少有一个线程此时才打印。\n\n打印值的顺序只能是若干个 12、随后若干个 9、最后若干个 6。所有可行序列为：`6 6 6`、`9 6 6`、`9 9 6`、`12 6 6`、`12 9 6`，共 **5 种**。选项 11、12、13、14 均不正确，本题应标为无正确选项。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
@@ -1072,16 +1080,16 @@
       }
     },
     {
-      "id": "q-bf8b1b6a955767c0",
+      "id": "q-c0a723762303c751",
       "paperId": "p-382bf3b10bc8d35a",
-      "paperOrder": 28,
+      "paperOrder": 29,
       "moduleId": "concurrent_programming",
       "year": 2017,
       "examType": "期末",
       "exam": "2017期末",
-      "questionNo": "第八题",
-      "summary": "并发 echo 服务器 P/T 代码找错与信号量同步",
-      "content": "1.  基于进程的并发Echo服务器代码（简称P代码）和基于线程的并发Echo服\n务器代码（简称T代码）如下所示：\nP代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid sigchld_handler(int sig)\n{\nif (waitpid(-1, 0, WNOHANG) > 0)\n;\nreturn;  }\nint main(int argc, char **argv)\n{  int listenfd, connfd;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd = Accept(listenfd,(SA*)&clientaddr,&clientlen);\n      if (Fork() == 0) {\n echo(connfd);\n Close(connfd);\n exit(0);\n      }\n      Close(connfd);\n   }\n}\n```\n\n\nT代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid *thread(void *vargp);\nint main(int argc, char **argv)\n{  int listenfd, connfd1;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   pthread_t tid;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd1 = Accept(listenfd,(SA*)&clientaddr, &clientlen);\n      Pthread_create(&tid, NULL, thread, connfd1);\n   }\n}\nvoid *thread(void *vargp)\n{\n    int connfd2 = *((int *)vargp);\n    Pthread_detach(pthread_self());\n    echo(connfd2);\n    Close(connfd2);\n    return NULL;\n}\n```\n问：以上 P 代码和 T 代码中存在几处错误，请指出出错的位置（请按照①、②等\n符号标注位置），解释出错的原因并给出修正错误的解决方案。\n\n\n2.  假设有3个线程，代码如下所示。已声明了三个信号量s1、s2和s3，其初\n值分别为1、0、0。请将信号量S1、S2、S3对应的P()和V()操作填写在\n三个线程中的标号处（每空至多填写1个操作），要求三个线程并发执行的结\n果只能是x = 10。\n```\nx = 1;\nvoid thread1()\n{\n```\n①\nx = x * 5;\n②\n```\n}\nvoid thread2()\n{\n```\n③\nx = x + 3;\n④\n```\n}\nvoid thread3()\n{\n```\n  ⑤\nx = x / 2;\n⑥\n}\n答案：P 代码缺少 Signal(SIGCHLD, sigchld_handler) 注册（子进程变僵尸）；T 代码把描述符按指针解引用（应为 int connfd2 = (int)vargp;）。信号量填 ①P(&s2)、②V(&s3)、③P(&s1)、④V(&s2)、⑤P(&s3)、⑥空。\n1. 存在两处错误：\n① P 代码虽然定义了 sigchld_handler，却从未调用 Signal(SIGCHLD, sigchld_handler) 注册它，子进程结束后不会被回收，会积累僵尸进程。修正：在 main 开头加 Signal(SIGCHLD, sigchld_handler);。\n② T 代码把文件描述符按值当作指针传给线程（Pthread_create(&tid, NULL, thread, connfd1)），线程里却按指针解引用（int connfd2 = *((int *)vargp);），会把描述符值当地址访问。修正：线程里写成 int connfd2 = (int)vargp;。\n2. 要求结果只能是 x = 10（1 → +3 → 4 → ×5 → 20 → ÷2 → 10），故执行顺序必须是线程 2 → 线程 1 → 线程 3：\n① P(&s2)　② V(&s3)　③ P(&s1)　④ V(&s2)　⑤ P(&s3)　⑥ 空。\n即 thread2 先执行（s1 初值 1 放行），做完 x+=3 后 V(&s2) 唤醒 thread1 做 x*=5，再 V(&s3) 唤醒 thread3 做 x/=2，最后得到 10。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "questionNo": "第八题 1",
+      "summary": "并发 echo 服务器 P/T 代码找错",
+      "content": "1.  基于进程的并发Echo服务器代码（简称P代码）和基于线程的并发Echo服\n务器代码（简称T代码）如下所示：\nP代码：\n```\n#include \"csapp.h\"\nvoid echo(int cnnfd);\nvoid sigchld_handler(int sig)\n{\n    if (waitpid(-1, 0, WNOHANG) > 0)\n        ;\n    return;\n}\n\nint main(int argc, char **argv)\n{\n    int listenfd, connfd;\n    socklen_t clientlen;\n    struct sockaddr_storage clientaddr;\n    listenfd = Open_listenfd(argv[1]);\n    while (1) {\n        clientlen = sizeof(struct sockaddr_storage);\n        connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen);\n        if (Fork() == 0) {\n            echo(connfd);\n            Close(connfd);\n            exit(0);\n        }\n        Close(connfd);\n    }\n}\n```\n\n\nT代码：\n```\n#include \"csapp.h\"\nvoid echo(int cnnfd);\nvoid *thread(void *vargp);\nint main(int argc, char **argv)\n{\n    int listenfd, connfd1;\n    socklen_t clientlen;\n    struct sockaddr_storage clientaddr;\n    pthread_t tid;\n    listenfd = Open_listenfd(argv[1]);\n    while (1) {\n        clientlen = sizeof(struct sockaddr_storage);\n        connfd1 = Accept(listenfd, (SA *)&clientaddr, &clientlen);\n        Pthread_create(&tid, NULL, thread, connfd1);\n    }\n}\nvoid *thread(void *vargp)\n{\n    int connfd2 = *((int *)vargp);\n    Pthread_detach(pthread_self());\n    echo(connfd2);\n    Close(connfd2);\n    return NULL;\n}\n```\n问：以上 P 代码和 T 代码中存在几处错误，请指出出错的位置（请按照①、②等\n符号标注位置），解释出错的原因并给出修正错误的解决方案。\n1. 存在两处错误：\n① P 代码虽然定义了 sigchld_handler，却从未调用 Signal(SIGCHLD, sigchld_handler) 注册它，子进程结束后不会被回收，会积累僵尸进程。修正：在 main 开头加 Signal(SIGCHLD, sigchld_handler);。\n② T 代码把文件描述符按值当作指针传给线程（Pthread_create(&tid, NULL, thread, connfd1)），线程里却按指针解引用（int connfd2 = *((int *)vargp);），会把描述符值当地址访问。修正：线程里写成 int connfd2 = (int)vargp;。\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1093,7 +1101,7 @@
         "document": "原文/期末/2017期末-无答案.md",
         "lines": {
           "start": 638,
-          "end": 731
+          "end": 697
         },
         "aliases": [],
         "curated": "_curated/期末/2017期末-无答案/638.md"
@@ -1101,9 +1109,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "1.  基于进程的并发Echo服务器代码（简称P代码）和基于线程的并发Echo服\n务器代码（简称T代码）如下所示：\nP代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid sigchld_handler(int sig)\n{\nif (waitpid(-1, 0, WNOHANG) > 0)\n;\nreturn;  }\nint main(int argc, char **argv)\n{  int listenfd, connfd;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd = Accept(listenfd,(SA*)&clientaddr,&clientlen);\n      if (Fork() == 0) {\n echo(connfd);\n Close(connfd);\n exit(0);\n      }\n      Close(connfd);\n   }\n}\n```\n\n\nT代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid *thread(void *vargp);\nint main(int argc, char **argv)\n{  int listenfd, connfd1;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   pthread_t tid;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd1 = Accept(listenfd,(SA*)&clientaddr, &clientlen);\n      Pthread_create(&tid, NULL, thread, connfd1);\n   }\n}\nvoid *thread(void *vargp)\n{\n    int connfd2 = *((int *)vargp);\n    Pthread_detach(pthread_self());\n    echo(connfd2);\n    Close(connfd2);\n    return NULL;\n}\n```\n问：以上 P 代码和 T 代码中存在几处错误，请指出出错的位置（请按照①、②等\n符号标注位置），解释出错的原因并给出修正错误的解决方案。\n\n\n2.  假设有3个线程，代码如下所示。已声明了三个信号量s1、s2和s3，其初\n值分别为1、0、0。请将信号量S1、S2、S3对应的P()和V()操作填写在\n三个线程中的标号处（每空至多填写1个操作），要求三个线程并发执行的结\n果只能是x = 10。\n```\nx = 1;\nvoid thread1()\n{\n```\n①\nx = x * 5;\n②\n```\n}\nvoid thread2()\n{\n```\n③\nx = x + 3;\n④\n```\n}\nvoid thread3()\n{\n```\n  ⑤\nx = x / 2;\n⑥\n}",
+        "stem": "1.  基于进程的并发Echo服务器代码（简称P代码）和基于线程的并发Echo服\n务器代码（简称T代码）如下所示：\nP代码：\n```\n#include \"csapp.h\"\nvoid echo(int cnnfd);\nvoid sigchld_handler(int sig)\n{\n    if (waitpid(-1, 0, WNOHANG) > 0)\n        ;\n    return;\n}\n\nint main(int argc, char **argv)\n{\n    int listenfd, connfd;\n    socklen_t clientlen;\n    struct sockaddr_storage clientaddr;\n    listenfd = Open_listenfd(argv[1]);\n    while (1) {\n        clientlen = sizeof(struct sockaddr_storage);\n        connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen);\n        if (Fork() == 0) {\n            echo(connfd);\n            Close(connfd);\n            exit(0);\n        }\n        Close(connfd);\n    }\n}\n```\n\n\nT代码：\n```\n#include \"csapp.h\"\nvoid echo(int cnnfd);\nvoid *thread(void *vargp);\nint main(int argc, char **argv)\n{\n    int listenfd, connfd1;\n    socklen_t clientlen;\n    struct sockaddr_storage clientaddr;\n    pthread_t tid;\n    listenfd = Open_listenfd(argv[1]);\n    while (1) {\n        clientlen = sizeof(struct sockaddr_storage);\n        connfd1 = Accept(listenfd, (SA *)&clientaddr, &clientlen);\n        Pthread_create(&tid, NULL, thread, connfd1);\n    }\n}\nvoid *thread(void *vargp)\n{\n    int connfd2 = *((int *)vargp);\n    Pthread_detach(pthread_self());\n    echo(connfd2);\n    Close(connfd2);\n    return NULL;\n}\n```\n问：以上 P 代码和 T 代码中存在几处错误，请指出出错的位置（请按照①、②等\n符号标注位置），解释出错的原因并给出修正错误的解决方案。",
         "choices": [],
-        "answer": "答案：P 代码缺少 Signal(SIGCHLD, sigchld_handler) 注册（子进程变僵尸）；T 代码把描述符按指针解引用（应为 int connfd2 = (int)vargp;）。信号量填 ①P(&s2)、②V(&s3)、③P(&s1)、④V(&s2)、⑤P(&s3)、⑥空。\n1. 存在两处错误：\n① P 代码虽然定义了 sigchld_handler，却从未调用 Signal(SIGCHLD, sigchld_handler) 注册它，子进程结束后不会被回收，会积累僵尸进程。修正：在 main 开头加 Signal(SIGCHLD, sigchld_handler);。\n② T 代码把文件描述符按值当作指针传给线程（Pthread_create(&tid, NULL, thread, connfd1)），线程里却按指针解引用（int connfd2 = *((int *)vargp);），会把描述符值当地址访问。修正：线程里写成 int connfd2 = (int)vargp;。\n2. 要求结果只能是 x = 10（1 → +3 → 4 → ×5 → 20 → ÷2 → 10），故执行顺序必须是线程 2 → 线程 1 → 线程 3：\n① P(&s2)　② V(&s3)　③ P(&s1)　④ V(&s2)　⑤ P(&s3)　⑥ 空。\n即 thread2 先执行（s1 初值 1 放行），做完 x+=3 后 V(&s2) 唤醒 thread1 做 x*=5，再 V(&s3) 唤醒 thread3 做 x/=2，最后得到 10。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "1. 存在两处错误：\n① P 代码虽然定义了 sigchld_handler，却从未调用 Signal(SIGCHLD, sigchld_handler) 注册它，子进程结束后不会被回收，会积累僵尸进程。修正：在 main 开头加 Signal(SIGCHLD, sigchld_handler);。\n② T 代码把文件描述符按值当作指针传给线程（Pthread_create(&tid, NULL, thread, connfd1)），线程里却按指针解引用（int connfd2 = *((int *)vargp);），会把描述符值当地址访问。修正：线程里写成 int connfd2 = (int)vargp;。\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "short-answer",
@@ -1111,8 +1119,158 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1.  基于进程的并发Echo服务器代码（简称P代码）和基于线程的并发Echo服\n务器代码（简称T代码）如下所示：\nP代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid sigchld_handler(int sig)\n{\nif (waitpid(-1, 0, WNOHANG) > 0)\n;\nreturn;  }\nint main(int argc, char **argv)\n{  int listenfd, connfd;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd = Accept(listenfd,(SA*)&clientaddr,&clientlen);\n      if (Fork() == 0) {\n echo(connfd);\n Close(connfd);\n exit(0);\n      }\n      Close(connfd);\n   }\n}\n```\n\n\nT代码：\n```\n#include “csapp.h”\nvoid echo(int cnnfd);\nvoid *thread(void *vargp);\nint main(int argc, char **argv)\n{  int listenfd, connfd1;\n   socklen_t clientlen;\n   struct sockaddr_storage clientaddr;\n   pthread_t tid;\n   listenfd = Open_listenfd(argv[1]);\n   while (1) {\n      clientlen = sizeof(struct sockaddr_storage);\n      connfd1 = Accept(listenfd,(SA*)&clientaddr, &clientlen);\n      Pthread_create(&tid, NULL, thread, connfd1);\n   }\n}\nvoid *thread(void *vargp)\n{\n    int connfd2 = *((int *)vargp);\n    Pthread_detach(pthread_self());\n    echo(connfd2);\n    Close(connfd2);\n    return NULL;\n}\n```\n问：以上 P 代码和 T 代码中存在几处错误，请指出出错的位置（请按照①、②等\n符号标注位置），解释出错的原因并给出修正错误的解决方案。\n\n\n2.  假设有3个线程，代码如下所示。已声明了三个信号量s1、s2和s3，其初\n值分别为1、0、0。请将信号量S1、S2、S3对应的P()和V()操作填写在\n三个线程中的标号处（每空至多填写1个操作），要求三个线程并发执行的结\n果只能是x = 10。\n```\nx = 1;\nvoid thread1()\n{\n```\n①\nx = x * 5;\n②\n```\n}\nvoid thread2()\n{\n```\n③\nx = x + 3;\n④\n```\n}\nvoid thread3()\n{\n```\n  ⑤\nx = x / 2;\n⑥\n}",
-        "answer": "答案：P 代码缺少 Signal(SIGCHLD, sigchld_handler) 注册（子进程变僵尸）；T 代码把描述符按指针解引用（应为 int connfd2 = (int)vargp;）。信号量填 ①P(&s2)、②V(&s3)、③P(&s1)、④V(&s2)、⑤P(&s3)、⑥空。\n1. 存在两处错误：\n① P 代码虽然定义了 sigchld_handler，却从未调用 Signal(SIGCHLD, sigchld_handler) 注册它，子进程结束后不会被回收，会积累僵尸进程。修正：在 main 开头加 Signal(SIGCHLD, sigchld_handler);。\n② T 代码把文件描述符按值当作指针传给线程（Pthread_create(&tid, NULL, thread, connfd1)），线程里却按指针解引用（int connfd2 = *((int *)vargp);），会把描述符值当地址访问。修正：线程里写成 int connfd2 = (int)vargp;。\n2. 要求结果只能是 x = 10（1 → +3 → 4 → ×5 → 20 → ÷2 → 10），故执行顺序必须是线程 2 → 线程 1 → 线程 3：\n① P(&s2)　② V(&s3)　③ P(&s1)　④ V(&s2)　⑤ P(&s3)　⑥ 空。\n即 thread2 先执行（s1 初值 1 放行），做完 x+=3 后 V(&s2) 唤醒 thread1 做 x*=5，再 V(&s3) 唤醒 thread3 做 x/=2，最后得到 10。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "prompt": "1.  基于进程的并发Echo服务器代码（简称P代码）和基于线程的并发Echo服\n务器代码（简称T代码）如下所示：\nP代码：\n```\n#include \"csapp.h\"\nvoid echo(int cnnfd);\nvoid sigchld_handler(int sig)\n{\n    if (waitpid(-1, 0, WNOHANG) > 0)\n        ;\n    return;\n}\n\nint main(int argc, char **argv)\n{\n    int listenfd, connfd;\n    socklen_t clientlen;\n    struct sockaddr_storage clientaddr;\n    listenfd = Open_listenfd(argv[1]);\n    while (1) {\n        clientlen = sizeof(struct sockaddr_storage);\n        connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen);\n        if (Fork() == 0) {\n            echo(connfd);\n            Close(connfd);\n            exit(0);\n        }\n        Close(connfd);\n    }\n}\n```\n\n\nT代码：\n```\n#include \"csapp.h\"\nvoid echo(int cnnfd);\nvoid *thread(void *vargp);\nint main(int argc, char **argv)\n{\n    int listenfd, connfd1;\n    socklen_t clientlen;\n    struct sockaddr_storage clientaddr;\n    pthread_t tid;\n    listenfd = Open_listenfd(argv[1]);\n    while (1) {\n        clientlen = sizeof(struct sockaddr_storage);\n        connfd1 = Accept(listenfd, (SA *)&clientaddr, &clientlen);\n        Pthread_create(&tid, NULL, thread, connfd1);\n    }\n}\nvoid *thread(void *vargp)\n{\n    int connfd2 = *((int *)vargp);\n    Pthread_detach(pthread_self());\n    echo(connfd2);\n    Close(connfd2);\n    return NULL;\n}\n```\n问：以上 P 代码和 T 代码中存在几处错误，请指出出错的位置（请按照①、②等\n符号标注位置），解释出错的原因并给出修正错误的解决方案。",
+        "answer": "1. 存在两处错误：\n① P 代码虽然定义了 sigchld_handler，却从未调用 Signal(SIGCHLD, sigchld_handler) 注册它，子进程结束后不会被回收，会积累僵尸进程。修正：在 main 开头加 Signal(SIGCHLD, sigchld_handler);。\n② T 代码把文件描述符按值当作指针传给线程（Pthread_create(&tid, NULL, thread, connfd1)），线程里却按指针解引用（int connfd2 = *((int *)vargp);），会把描述符值当地址访问。修正：线程里写成 int connfd2 = (int)vargp;。\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-24598d7deeb69df7",
+      "paperId": "p-382bf3b10bc8d35a",
+      "paperOrder": 30,
+      "moduleId": "concurrent_programming",
+      "year": 2017,
+      "examType": "期末",
+      "exam": "2017期末",
+      "questionNo": "第八题 2",
+      "summary": "信号量控制线程执行顺序",
+      "content": "第八题（12分）第2问：已声明三个信号量 s1、s2、s3，初值分别为 1、0、0。请将对应的 P() 和 V() 操作填入标号处（每空至多填写 1 个操作），要求三个线程并发执行的结果只能是 x = 10。\n```c\nx = 1;\nvoid thread1(void) {\n    {{blank:slot-1}}\n    x = x * 5;\n    {{blank:slot-2}}\n}\nvoid thread2(void) {\n    {{blank:slot-3}}\n    x = x + 3;\n    {{blank:slot-4}}\n}\nvoid thread3(void) {\n    {{blank:slot-5}}\n    x = x / 2;\n    {{blank:slot-6}}\n}\n```\n答案：① P(&s2)，② V(&s3)，③ P(&s1)，④ V(&s2)，⑤ P(&s3)，⑥ 空。\n\n执行顺序必须为线程 2 → 线程 1 → 线程 3：1 + 3 = 4，4 × 5 = 20，20 ÷ 2 = 10。线程 2 的 P(&s1) 由初值 1 放行，随后 V(&s2) 放行线程 1，最后 V(&s3) 放行线程 3。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2017期末-无答案.md",
+        "lines": {
+          "start": 702,
+          "end": 731
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2017期末-无答案/702.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "第八题（12分）第2问：已声明三个信号量 s1、s2、s3，初值分别为 1、0、0。请将对应的 P() 和 V() 操作填入标号处（每空至多填写 1 个操作），要求三个线程并发执行的结果只能是 x = 10。\n```c\nx = 1;\nvoid thread1(void) {\n    {{blank:slot-1}}\n    x = x * 5;\n    {{blank:slot-2}}\n}\nvoid thread2(void) {\n    {{blank:slot-3}}\n    x = x + 3;\n    {{blank:slot-4}}\n}\nvoid thread3(void) {\n    {{blank:slot-5}}\n    x = x / 2;\n    {{blank:slot-6}}\n}\n```",
+        "choices": [],
+        "answer": "答案：① P(&s2)，② V(&s3)，③ P(&s1)，④ V(&s2)，⑤ P(&s3)，⑥ 空。\n\n执行顺序必须为线程 2 → 线程 1 → 线程 3：1 + 3 = 4，4 × 5 = 20，20 ÷ 2 = 10。线程 2 的 P(&s1) 由初值 1 放行，随后 V(&s2) 放行线程 1，最后 V(&s3) 放行线程 3。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+        "blankAnswers": [
+          {
+            "id": "slot-1",
+            "acceptedAnswers": [
+              "P(&s2)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-2",
+            "acceptedAnswers": [
+              "V(&s3)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-3",
+            "acceptedAnswers": [
+              "P(&s1)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-4",
+            "acceptedAnswers": [
+              "V(&s2)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-5",
+            "acceptedAnswers": [
+              "P(&s3)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-6",
+            "acceptedAnswers": [
+              "空",
+              "无操作"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "interaction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "slot-1",
+            "acceptedAnswers": [
+              "P(&s2)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-2",
+            "acceptedAnswers": [
+              "V(&s3)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-3",
+            "acceptedAnswers": [
+              "P(&s1)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-4",
+            "acceptedAnswers": [
+              "V(&s2)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-5",
+            "acceptedAnswers": [
+              "P(&s3)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "slot-6",
+            "acceptedAnswers": [
+              "空",
+              "无操作"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "第八题（12分）第2问：已声明三个信号量 s1、s2、s3，初值分别为 1、0、0。请将对应的 P() 和 V() 操作填入标号处（每空至多填写 1 个操作），要求三个线程并发执行的结果只能是 x = 10。\n```c\nx = 1;\nvoid thread1(void) {\n    {{blank:slot-1}}\n    x = x * 5;\n    {{blank:slot-2}}\n}\nvoid thread2(void) {\n    {{blank:slot-3}}\n    x = x + 3;\n    {{blank:slot-4}}\n}\nvoid thread3(void) {\n    {{blank:slot-5}}\n    x = x / 2;\n    {{blank:slot-6}}\n}\n```",
+        "answer": "答案：① P(&s2)，② V(&s3)，③ P(&s1)，④ V(&s2)，⑤ P(&s3)，⑥ 空。\n\n执行顺序必须为线程 2 → 线程 1 → 线程 3：1 + 3 = 4，4 × 5 = 20，20 ÷ 2 = 10。线程 2 的 P(&s1) 由初值 1 放行，随后 V(&s2) 放行线程 1，最后 V(&s3) 放行线程 3。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
@@ -1393,7 +1551,7 @@
       "exam": "2018期末",
       "questionNo": "第七题 2-4",
       "summary": "i++/j++ 竞态的输出可能性与信号量死锁",
-      "content": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n(a) 2000, 2000\n(b) 1500, 1500\n(c) 1000, 1000\n(d) 2, 2\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n8.  int a;\n9.    for (a = 0; a < 1000; a++) {\n10. P(&si);\n11. P(&sj);\n12. i++;\n13. j++;\n14. V(&si);\n15. V(&sj);\n16. }\n17. return NULL;\n18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n20. int a;\n21. for (a = 0; a < 1000; a++) {\n22. P(&sj);\n23. P(&si);\n24. j++;\n25. i++;\n26. V(&si);\n27. V(&sj);\n28. }\n\n```\n\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。\n答案\n1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）\n2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，则i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，则i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n\n\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）\n2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）",
+      "content": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n(a) 2000, 2000\n(b) 1500, 1500\n(c) 1000, 1000\n(d) 2, 2\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n8.  int a;\n9.    for (a = 0; a < 1000; a++) {\n10. P(&si);\n11. P(&sj);\n12. i++;\n13. j++;\n14. V(&si);\n15. V(&sj);\n16. }\n17. return NULL;\n18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n20. int a;\n21. for (a = 0; a < 1000; a++) {\n22. P(&sj);\n23. P(&si);\n24. j++;\n25. i++;\n26. V(&si);\n27. V(&sj);\n28. }\n\n```\n\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。\n2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1415,7 +1573,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n(a) 2000, 2000\n(b) 1500, 1500\n(c) 1000, 1000\n(d) 2, 2\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n8.  int a;\n9.    for (a = 0; a < 1000; a++) {\n10. P(&si);\n11. P(&sj);\n12. i++;\n13. j++;\n14. V(&si);\n15. V(&sj);\n16. }\n17. return NULL;\n18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n20. int a;\n21. for (a = 0; a < 1000; a++) {\n22. P(&sj);\n23. P(&si);\n24. j++;\n25. i++;\n26. V(&si);\n27. V(&sj);\n28. }\n\n```\n\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。\n答案\n1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）\n2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，则i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，则i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n\n\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）",
+        "stem": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n(a) 2000, 2000\n(b) 1500, 1500\n(c) 1000, 1000\n(d) 2, 2\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n8.  int a;\n9.    for (a = 0; a < 1000; a++) {\n10. P(&si);\n11. P(&sj);\n12. i++;\n13. j++;\n14. V(&si);\n15. V(&sj);\n16. }\n17. return NULL;\n18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n20. int a;\n21. for (a = 0; a < 1000; a++) {\n22. P(&sj);\n23. P(&si);\n24. j++;\n25. i++;\n26. V(&si);\n27. V(&sj);\n28. }\n\n```\n\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。",
         "choices": [],
         "answer": "2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）"
       },
@@ -1425,7 +1583,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n(a) 2000, 2000\n(b) 1500, 1500\n(c) 1000, 1000\n(d) 2, 2\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n8.  int a;\n9.    for (a = 0; a < 1000; a++) {\n10. P(&si);\n11. P(&sj);\n12. i++;\n13. j++;\n14. V(&si);\n15. V(&sj);\n16. }\n17. return NULL;\n18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n20. int a;\n21. for (a = 0; a < 1000; a++) {\n22. P(&sj);\n23. P(&si);\n24. j++;\n25. i++;\n26. V(&si);\n27. V(&sj);\n28. }\n\n```\n\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。\n答案\n1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）\n2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，则i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，则i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n\n\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）",
+        "prompt": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n(a) 2000, 2000\n(b) 1500, 1500\n(c) 1000, 1000\n(d) 2, 2\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n8.  int a;\n9.    for (a = 0; a < 1000; a++) {\n10. P(&si);\n11. P(&sj);\n12. i++;\n13. j++;\n14. V(&si);\n15. V(&sj);\n16. }\n17. return NULL;\n18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n20. int a;\n21. for (a = 0; a < 1000; a++) {\n22. P(&sj);\n23. P(&si);\n24. j++;\n25. i++;\n26. V(&si);\n27. V(&sj);\n28. }\n\n```\n\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。",
         "answer": "2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，do_stuff1先执行了读取i的操作，然后do_stuff2执行500次循\n环，接下来do_stuff1写回i完成该次循环，i变成1，j变成501。之后\ndo_stuff2 执行了读取 j 的操作，然后 do_stuff1 执行 500 次循环，接下来\ndo_stuff2完成该次循环，i变成501，j变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有i+j>=2002。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后h该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）"
       },
       "presentation": {
@@ -1711,7 +1869,7 @@
       "exam": "2019期末",
       "questionNo": "第一题 19",
       "summary": "多线程 echo 服务器中 connfd 的竞争",
-      "content": "19. 在以下基于线程的并发Echo服务器代码中，哪一个代码片段会潜在引发\n不正确的程序执行结果？\nA.  int main(int argc, char **argv)\n{                              /*假设有配对的”}”\n        int listenfd, connfd;\n```\n        socklen_t clientlen;\n        struct sockaddr_storage clientaddr;\n        pthread_t tid;\n```\nB. listenfd = Open_listenfd(argv[1]);\nC. while (1) {\n      connfd = Accept(listenfd, (SA *) &clientaddr,\n&clientlen);\n      Pthread_create(&tid, NULL, thread, &connfd);\n    }\nD. void *thread(void *vargp)\n{\n      int connfd = *((int *)vargp);\n      Pthread_detach(pthread_self());\n      echo(connfd);\n      Close(connfd);\n      return NULL;\n}\n答案：C（来源：2019、2020期末-答案解析）\n解析：connfd 是主线程的局部变量，把 &connfd 传给对等线程会在「主线程下一次 accept 赋值」与「线程读取 *vargp」之间引入竞争，可能读到错误的描述符。",
+      "content": "19. 在以下基于线程的并发Echo服务器代码中，哪一个代码片段会潜在引发\n不正确的程序执行结果？\nA.\n```c\nint main(int argc, char **argv)\n{                              /*假设有配对的”}”\n        int listenfd, connfd;\n        socklen_t clientlen;\n        struct sockaddr_storage clientaddr;\n        pthread_t tid;\n```\nB. listenfd = Open_listenfd(argv[1]);\nC. while (1) {\n      connfd = Accept(listenfd, (SA *) &clientaddr,\n&clientlen);\n      Pthread_create(&tid, NULL, thread, &connfd);\n    }\nD. void *thread(void *vargp)\n{\n      int connfd = *((int *)vargp);\n      Pthread_detach(pthread_self());\n      echo(connfd);\n      Close(connfd);\n      return NULL;\n}\n答案：C（来源：2019、2020期末-答案解析）\n解析：connfd 是主线程的局部变量，把 &connfd 传给对等线程会在「主线程下一次 accept 赋值」与「线程读取 *vargp」之间引入竞争，可能读到错误的描述符。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1738,7 +1896,7 @@
         "choices": [
           {
             "key": "A",
-            "content": "int main(int argc, char **argv)\n{                              /*假设有配对的”}”\nint listenfd, connfd;\n```\nsocklen_t clientlen;\nstruct sockaddr_storage clientaddr;\npthread_t tid;\n```"
+            "content": "```c\nint main(int argc, char **argv)\n{                              /*假设有配对的”}”\nint listenfd, connfd;\nsocklen_t clientlen;\nstruct sockaddr_storage clientaddr;\npthread_t tid;\n```"
           },
           {
             "key": "B",
@@ -1761,7 +1919,7 @@
         "choices": [
           {
             "id": "A",
-            "content": "int main(int argc, char **argv)\n{                              /*假设有配对的”}”\nint listenfd, connfd;\n```\nsocklen_t clientlen;\nstruct sockaddr_storage clientaddr;\npthread_t tid;\n```"
+            "content": "```c\nint main(int argc, char **argv)\n{                              /*假设有配对的”}”\nint listenfd, connfd;\nsocklen_t clientlen;\nstruct sockaddr_storage clientaddr;\npthread_t tid;\n```"
           },
           {
             "id": "B",
