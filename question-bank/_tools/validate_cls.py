@@ -2,6 +2,8 @@
 """校验 _cls/*.json 是否符合 CLS_CONTRACT.md。
 
 只报告问题，不改文件。有问题就让对应的分类 agent 重做那一个文件。
+有不合格项时以非 0 退出（报告仍写入 _tools/_cls_report.txt），这样 CI 能直接拦住，
+不必靠人读输出。
 """
 import io
 import os
@@ -171,6 +173,8 @@ def main():
              % (len(paths), nbad, len(seen_curated), len(orphans)))
     io.open(os.path.join(HERE, "_cls_report.txt"), "w", encoding="utf-8").write("\n".join(L))
     print("checked", len(paths), "bad", nbad)
+    if nbad:
+        raise SystemExit("validate_cls: %d 个文件不合格，详见 _tools/_cls_report.txt" % nbad)
 
 
 if __name__ == "__main__":

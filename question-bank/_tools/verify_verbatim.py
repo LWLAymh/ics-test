@@ -91,6 +91,9 @@ def main():
     io.open(os.path.join(HERE, "_verify.txt"), "w", encoding="utf-8").write("\n".join(L))
     print("hit %d  missed %d  expected-miss %d  empty %d"
           % (ok, len(missed), len(expected), empty))
+    if missed or empty:
+        raise SystemExit("verify_verbatim: 未命中 %d 条、空片 %d 条，详见 _tools/_verify.txt"
+                         % (len(missed), empty))
 
 
 if __name__ == "__main__":
