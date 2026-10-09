@@ -106,6 +106,26 @@ output/pdf/question-review/
 powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1 -Module machine_prog
 ```
 
+### 按指定试卷导出
+
+先查看可用试卷及其稳定 `paper ID`：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1 -ListPapers
+```
+
+再按 `paper ID` 或完整显示名导出一套试卷：
+
+```powershell
+npm run review-paper -- -Paper p-e8f40973e2cc056e
+# 或
+powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1 -Paper "2025期末"
+```
+
+输出默认写入 `output/pdf/paper-review/`。PDF 严格按原卷顺序连续排列，每个题目片段都显示唯一 question ID、题型、题号、模块、源文件、人工 Markdown 路径、题面、图片和全部选项；跨页长题会自然续排，不人为插入空白页。这个导出仍然只呈现显式结构，不会自动“修复”题目。
+
+`2025期末-带答案.pdf` 是同一套 2025 期末试卷的答案速查稿，并不是第二套试卷；它通过 `publish_as_paper: false` 保留在维护材料中，但不会进入线上题池或试卷下拉框。线上只发布完整的 `2025期末-无答案.pdf` 题面及人工校对后的答案。
+
 如果本机没有可用的 PDF 依赖，包装脚本会在 `.venv-review-pdf/` 创建独立环境并安装 `scripts/review-pdf-requirements.txt`。中文字体会优先使用 Windows 自带的 Noto Sans SC 或微软雅黑，也可通过 `-Font` 显式指定。
 
 ## 当前状态与下一步
@@ -557,6 +577,8 @@ v4 校验器必须让下列情况直接构建失败：
 ## 当前 v3 题库的维护与构建
 
 在 v4 迁移完成前，仍按现行流程修改 `question-bank/_curated/`：
+
+人工复核过的 v3 填空题也应在题面中显式写出 `{{blank:<稳定局部 ID>}}`。该标记可以出现在普通 Markdown、表格或 fenced code 中，前端会在原位为每个标记生成一个独立输入框。旧题中的 `____` 仅作为历史兼容保留；新录入或人工修订时不得再依赖下划线、空括号或题号去猜空位。
 
 ### 当前接口：把同一大题的多个文件合并为一次作答
 

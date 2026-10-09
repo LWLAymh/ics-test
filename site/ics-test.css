@@ -1,5 +1,5 @@
 .page-ics-test {
-  background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 94%, var(--accent-soft)) 100%);
+  background: color-mix(in srgb, var(--bg) 96%, #dfeaf4);
   background-attachment: fixed;
 }
 
@@ -7,8 +7,8 @@
   --ics-success: #27835c;
   --ics-danger: #b54c55;
   --ics-warn: #b7791f;
-  max-width: 1160px;
-  padding-top: 24px;
+  max-width: 1060px;
+  padding: 22px 24px 56px;
 }
 .page-ics-test .progress-bar { display: none; }
 
@@ -19,30 +19,30 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  margin: 1.5rem 0 2rem;
-  padding: clamp(1.6rem, 5vw, 3.4rem);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  background: var(--bg-elevated);
-  box-shadow: var(--shadow-sm);
+  margin: .8rem 0 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.4rem);
+  border: 0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #17324d 0%, #245b8e 70%, #3274a8 100%);
+  box-shadow: 0 14px 36px rgba(17, 48, 76, .16);
 }
-.ics-theme-toggle { position: absolute; top: 1rem; right: 1rem; z-index: 1; }
+.ics-theme-toggle { position: absolute; top: .85rem; right: .85rem; z-index: 1; border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.1); color: #fff; }
 
-.ics-hero h1 { margin: .1rem 0 .45rem; font: 700 clamp(2rem, 6vw, 3.5rem)/1.15 var(--font-display); }
-.ics-hero-copy > p:last-child { max-width: 680px; margin: 0; color: var(--text-muted); }
-.ics-eyebrow { margin: 0; color: var(--accent); font-size: .78rem; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
-.ics-hero-status { display: grid; grid-template-columns: auto auto; align-items: center; flex: 0 0 auto; gap: .12rem .55rem; padding: .75rem .9rem; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-soft); }
+.ics-hero h1 { margin: .2rem 0 .5rem; color: #fff; font: 760 clamp(2rem, 5vw, 2.8rem)/1.1 var(--font-ui); letter-spacing: -.035em; }
+.ics-hero-copy > p:last-child { max-width: 650px; margin: 0; color: #dbe7f2; line-height: 1.7; }
+.ics-eyebrow { margin: 0; color: #9fd5ff; font-size: .73rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.ics-hero-status { display: grid; grid-template-columns: auto auto; align-items: center; flex: 0 0 auto; gap: .12rem .55rem; margin-right: 1.8rem; padding: .75rem .9rem; border: 1px solid rgba(255,255,255,.18); border-radius: 12px; background: rgba(255,255,255,.1); color: #fff; }
 .ics-hero-status > span { grid-row: 1 / 3; width: .65rem; height: .65rem; border-radius: 50%; background: var(--ics-success); box-shadow: 0 0 0 5px color-mix(in srgb, var(--ics-success) 13%, transparent); }
 .ics-hero-status strong { font-size: .84rem; }
-.ics-hero-status small { color: var(--text-muted); font-size: .72rem; }
+.ics-hero-status small { color: #c9daea; font-size: .72rem; }
 
 .ics-panel {
-  margin: 0 0 1.5rem;
-  padding: clamp(1.1rem, 3vw, 2rem);
+  margin: 0 0 1rem;
+  padding: clamp(1.1rem, 2.5vw, 1.55rem);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 16px;
   background: var(--bg-elevated);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 8px 24px rgba(30, 60, 88, .06);
 }
 
 .ics-panel[hidden] { display: none; }
@@ -53,43 +53,44 @@
   gap: 1rem;
 }
 .ics-panel-head { justify-content: space-between; }
-.ics-panel-head h2, .ics-result h2 { margin: 0; font-family: var(--font-display); }
+.ics-panel-head h2, .ics-result h2 { margin: 0; font: 760 1.35rem/1.3 var(--font-ui); letter-spacing: -.02em; }
 .ics-panel-head p { margin: .2rem 0 0; color: var(--text-muted); }
 
 .ics-module-fieldset { margin: 1.4rem 0; padding: 0; border: 0; }
 .ics-module-fieldset legend { margin-bottom: .75rem; font-weight: 700; }
 .ics-mode-fieldset { margin: 1.35rem 0 0; padding: 0; border: 0; }
 .ics-mode-fieldset legend { margin-bottom: .65rem; font-weight: 700; }
-.ics-mode-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; }
+.ics-mode-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
 .ics-mode-card {
   display: flex;
   align-items: flex-start;
   gap: .7rem;
-  padding: .85rem .9rem;
+  min-height: 76px;
+  padding: .78rem .82rem;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 11px;
   cursor: pointer;
   transition: border-color .15s ease, background .15s ease, transform .15s ease;
 }
 .ics-mode-card:hover { transform: translateY(-1px); border-color: var(--accent); }
-.ics-mode-card:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 1px var(--accent); }
+.ics-mode-card:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent-soft) 72%, var(--bg-elevated)); box-shadow: inset 3px 0 0 var(--accent); }
 .ics-mode-card input { margin-top: .24rem; accent-color: var(--accent); }
 .ics-mode-card strong, .ics-mode-card small { display: block; }
 .ics-mode-card small { margin-top: .22rem; color: var(--text-muted); line-height: 1.45; }
-.ics-module-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; }
+.ics-module-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
 .ics-module-card {
   position: relative;
   display: flex;
-  min-height: 92px;
+  min-height: 72px;
   gap: .75rem;
-  padding: .9rem;
+  padding: .72rem .78rem;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 11px;
   cursor: pointer;
   transition: border-color .15s ease, background .15s ease, transform .15s ease;
 }
 .ics-module-card:hover { transform: translateY(-1px); border-color: var(--accent); }
-.ics-module-card:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.ics-module-card:has(input:checked) { border-color: color-mix(in srgb, var(--accent) 72%, var(--border)); background: color-mix(in srgb, var(--accent-soft) 68%, var(--bg-elevated)); }
 .ics-module-card input { width: 1rem; height: 1rem; margin-top: .28rem; accent-color: var(--accent); }
 .ics-module-card strong, .ics-module-card small { display: block; }
 .ics-module-card strong { line-height: 1.45; }
@@ -112,14 +113,14 @@
 
 .ics-primary, .ics-secondary, .ics-text-button, .ics-grade-buttons button, .ics-report-button, .ics-issue-copy {
   border: 0;
-  border-radius: 10px;
+  border-radius: 9px;
   font: 650 .94rem/1 var(--font-ui);
   cursor: pointer;
   transition: filter .15s ease, transform .15s ease, opacity .15s ease;
 }
-.ics-primary { min-height: 43px; padding: .75rem 1.15rem; background: var(--accent); color: white; }
+.ics-primary { min-height: 43px; padding: .75rem 1.2rem; background: #245b8e; color: white; box-shadow: 0 5px 14px rgba(36, 91, 142, .18); }
 .ics-secondary { min-height: 43px; padding: .75rem 1.15rem; background: var(--bg-soft); color: var(--text); }
-.ics-text-button { padding: .55rem .2rem; background: transparent; color: var(--accent); }
+.ics-text-button { padding: .55rem .2rem; background: transparent; color: var(--accent); white-space: nowrap; }
 .ics-primary:hover, .ics-secondary:hover, .ics-grade-buttons button:hover { filter: brightness(1.07); transform: translateY(-1px); }
 .ics-primary:disabled { cursor: wait; opacity: .55; transform: none; }
 .ics-report-button {
@@ -136,10 +137,10 @@
 .ics-answer-actions .ics-primary { margin-left: auto; }
 
 .ics-progress-row { justify-content: space-between; color: var(--text-muted); font-size: .9rem; }
-.ics-progress-track { height: 6px; margin: .75rem 0 1.5rem; overflow: hidden; border-radius: 99px; background: var(--bg-soft); }
+.ics-progress-track { height: 5px; margin: .7rem 0 1.25rem; overflow: hidden; border-radius: 99px; background: var(--bg-soft); }
 .ics-progress-track span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--accent); transition: width .25s ease; }
 .ics-question-meta { display: flex; flex-wrap: wrap; gap: .45rem; }
-.ics-question-meta span { padding: .12rem .55rem; border-radius: 99px; background: var(--chip-bg); color: var(--text-muted); font-size: .78rem; }
+.ics-question-meta span { padding: .18rem .55rem; border-radius: 7px; background: var(--chip-bg); color: var(--text-muted); font-size: .76rem; }
 .ics-question-content { min-width: 0; overflow-wrap: anywhere; line-height: 1.75; }
 .ics-question-content > p, .ics-reference > p { margin: .75rem 0; }
 .ics-question-content hr, .ics-reference hr { margin: 1.8rem 0; border: 0; border-top: 1px solid var(--border); }
@@ -213,17 +214,17 @@
   align-items: start;
   gap: .8rem;
   width: 100%;
-  padding: .8rem .95rem;
+  padding: .78rem .9rem;
   border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--bg);
+  border-radius: 10px;
+  background: var(--bg-elevated);
   color: var(--text);
   text-align: left;
   cursor: pointer;
   transition: border-color .15s ease, background .15s ease, transform .15s ease;
 }
 .ics-choice:hover { border-color: var(--accent); transform: translateY(-1px); }
-.ics-choice.selected { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 1px var(--accent); }
+.ics-choice.selected { border-color: var(--accent); background: color-mix(in srgb, var(--accent-soft) 76%, var(--bg-elevated)); box-shadow: inset 3px 0 0 var(--accent); }
 .ics-choice-key {
   display: grid;
   place-items: center;
@@ -363,9 +364,9 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 2rem;
-  margin: 2rem 0 .5rem;
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border-radius: 20px;
+  margin: 1.25rem 0 .5rem;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--bg-elevated);
   box-shadow: var(--shadow-sm);
@@ -393,6 +394,7 @@
 
 @media (max-width: 800px) {
   .ics-hero { align-items: flex-start; flex-direction: column; gap: 1.2rem; }
+  .ics-hero-status { margin-right: 0; }
   .ics-contact { grid-template-columns: 1fr; }
   .ics-contact-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ics-mode-grid { grid-template-columns: 1fr; }
@@ -400,7 +402,8 @@
 }
 
 @media (max-width: 560px) {
-  .ics-hero { border-radius: 18px; }
+  .page-ics-test .site-main { padding: 10px 12px 36px; }
+  .ics-hero { border-radius: 14px; margin-top: .35rem; }
   .ics-hero-status { width: 100%; }
   .ics-panel { padding: 1rem; border-radius: 16px; }
   .ics-module-grid { grid-template-columns: 1fr; }

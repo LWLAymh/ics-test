@@ -2719,14 +2719,25 @@
         "choices": [],
         "answer": "答案：每行 1 分（按行得分；空白处填写错误，该行不得分）：\n\n| 访问地址序列 | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | 是否命中 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| A0 | | | 1 | | | | | | N |\n| 20 | | | 0 | | | | | | N |\n| A2 | | | 1 | | | | | | N |\n| 0 | 0 | | | | | | | | N |\n| 80 | 1 | | | | | | | | N |\n| 4 | 0 | | | | | | | | N |"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第五题（15分）\n1）不同的Cache组织结构对访存性能有很大的影响。以直接映射Cache为例，\nL1 Cache的容量为128字节，block size为16个字节。为简化起见，使用\n8位地址访问该Cache，地址如下图所示：\n\n![图](assets/期中/2019期中-带答案/p19-addr-fields.png)\n\n对于如下访问序列，请填写 L1 Cache (Tag Ram) 中的变化，其中 B0 ~ B7 对应 8 个\nCache Block，表项中填写对应的 Tag。（6分）\n\n| 访问地址序列 | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | 是否命中(Y / N) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| A0 |  |  |  |  |  |  |  |  |  |\n| 20 |  |  |  |  |  |  |  |  |  |\n| A2 |  |  |  |  |  |  |  |  |  |\n| 0 |  |  |  |  |  |  |  |  |  |\n| 80 |  |  |  |  |  |  |  |  |  |\n| 4 |  |  |  |  |  |  |  |  |  |",
         "answer": "答案：每行 1 分（按行得分；空白处填写错误，该行不得分）：\n\n| 访问地址序列 | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | 是否命中 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| A0 | | | 1 | | | | | | N |\n| 20 | | | 0 | | | | | | N |\n| A2 | | | 1 | | | | | | N |\n| 0 | 0 | | | | | | | | N |\n| 80 | 1 | | | | | | | | N |\n| 4 | 0 | | | | | | | | N |"
+      },
+      "group": {
+        "id": "p-a12b4c73bf0c30d2:2019-mid-q5",
+        "questionId": "q-e9162b5ebf244c22",
+        "title": "第五题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -2772,14 +2783,25 @@
         "choices": [],
         "answer": "答案：每行 1 分（若空白处填写错误，该行不得分；B0 和 B1 互换也算正确；若首行填写内容，本表格不得分；tag 应为二进制，否则本表格不得分；填写的 tag 位数错误，本表格不得分）：\n\n| 访问地址序列 | B0 | B1 | 是否命中 |\n| --- | --- | --- | --- |\n| A0 | | | N |\n| 20 | 1010 | | N |\n| A2 | | 0010 | Y |\n| 0 | | | N |\n| 80 | 0000 | | N |\n| 4 | | 1000 | Y |\n\n命中率为 2/6 = 1/3 或 33.3%（3分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2）由1）可见，直接映射结构的Cache失效率高。为改善性能，N.  Jouppi提\n出Victim Cache结构，即在L1 Cache之外接入一个很小的全相联Cache来\n为替换出L1 Cache的数据做备份，具体结构如下图，工作原理如下所述。\n\n![图](assets/期中/2019期中-带答案/p20-victim-cache.png)\n\na）如果L1 Cache命中，则数据由L1 Cache传给CPU；\nb）如果L1 Cache失效，则访问Victim Cache。如果在Victim Cache中命\n中，则数据由Victim Cache传给CPU，并写回L1 Cache，否则访问下一级存\n储；\nc）如果L1 Cache发生替换，替换出去的数据放入全相联结构的Victim Cache\n中；\nd）Victim Cache采用FIFO（先进先出）替换算法，从Victim Cache中替\n换出去的数据，如果发生修改，直接写回下一级存储。\n\n在题1）的基础上，为其添加一个32字节的全相联Victim Cache，仍然使用题\n1）中的访问序列，请填写Victim Cache中的Tag Ram变化，并计算命中率。\n（9分）\n| 访问地址序列 | B0 | B1 | 是否命中(Y / N) |\n| --- | --- | --- | --- |\n| A0 |  |  |  |\n| 20 |  |  |  |\n| A2 |  |  |  |\n| 0 |  |  |  |\n| 80 |  |  |  |\n| 4 |  |  |  |",
         "answer": "答案：每行 1 分（若空白处填写错误，该行不得分；B0 和 B1 互换也算正确；若首行填写内容，本表格不得分；tag 应为二进制，否则本表格不得分；填写的 tag 位数错误，本表格不得分）：\n\n| 访问地址序列 | B0 | B1 | 是否命中 |\n| --- | --- | --- | --- |\n| A0 | | | N |\n| 20 | 1010 | | N |\n| A2 | | 0010 | Y |\n| 0 | | | N |\n| 80 | 0000 | | N |\n| 4 | | 1000 | Y |\n\n命中率为 2/6 = 1/3 或 33.3%（3分）"
+      },
+      "group": {
+        "id": "p-a12b4c73bf0c30d2:2019-mid-q5",
+        "questionId": "q-e9162b5ebf244c22",
+        "title": "第五题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -3134,7 +3156,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "12、以下关于存储器的说法中，正确的是：",
         "choices": [
           {
@@ -3157,8 +3179,8 @@
         "answer": "B"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -3408,7 +3430,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "11. 下列有关存储器的说法中，正确的是：",
         "choices": [
           {
@@ -3431,8 +3453,8 @@
         "answer": "答案：C\n解析：\nA. 错误。DMA技术是将磁盘的内容直接传送到主存，而不是寄存器。\nB. 错误。为了减少读取一个逻辑块的时间，最好让属于同一逻辑块的扇区分布在\n同一个磁道上，以减少寻道时间。\nC. 正确。见教材415页。\nD. 错误。SRAM属于易失性存储器，断电后不会保存信息。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -3499,7 +3521,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "12. 下列有关存储器的说法中，错误的是：\n间\n复杂性，同时也有利于对损坏的扇区进行管理\n内存延迟的差距，频繁地使用高速缓存\n否包含数据（是否全为1）无关\nA. 正确。见教材409页。\nB. 正确。见教材410页。\nC. 正确。见教材417页。\nD. 错误。见教材415页，如果写操作试图修改一个包含已经有数据的页时，那么\n这个块中所有带有数据的页都必须被复制到一个新（擦除过的）块，然后才能进行\n对该页的写。因此，写入页的时间与该页是否包含数据有关。",
         "choices": [
           {
@@ -3522,8 +3544,8 @@
         "answer": "答案：D"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -3590,7 +3612,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "13. 分析下面的C程序，以下关于局部性(locality)说法错误的是：\n```\nint i = 0, a = 1, b = 1;\nfor (;i < 100; i++)  {\na = a + b;\nb = a + b;\n}\n```",
         "choices": [
           {
@@ -3613,8 +3635,8 @@
         "answer": "答案：D\n解析：对于有意义的循环操作，均体现了指令的时间空间局部性。该段程序对a b\n的循环访问也体现了数据的时间局部性。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -3686,14 +3708,25 @@
         "choices": [],
         "answer": "（每行1分，\n共3分）\n✔\n✔\n✔\n解析：考察教材6.1.1中的“1.静态RAM”和“2.动态RAM”的区别\n评论：该题都是基本概念，较为简单"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第五题（15分）说明：本题的cache都是写分配的\n1． 请从SRAM和DRAM中，选出更符合描述的一项，并在表格里打✔\n  SRAM  DRAM\n常用于当代个人电脑\nCPU中的高速缓存\n在 10-100 毫秒内会失\n去电荷，因此需要周期性\n地刷新\n单位容量价格更高",
         "answer": "（每行1分，\n共3分）\n✔\n✔\n✔\n解析：考察教材6.1.1中的“1.静态RAM”和“2.动态RAM”的区别\n评论：该题都是基本概念，较为简单"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q5",
+        "questionId": "q-342720662ae6f949",
+        "title": "第五题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -3739,14 +3772,25 @@
         "choices": [],
         "answer": "（共12分）\n12   bits。（3分）\n解析：考察6.4.1“通用的高速缓存存储器组织结构”\n地址长度m=16 bits\nE=1\nB=4 Bytes, b=2 bits\nS=C/(E*B)=4，s=2 bits\n故tag长度为m-s-b=12 bits\n评论：该题考查基本概念，计算量小，较为简单"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2． 在一个16-bit地址空间的机器上，有一个总大小为16 Bytes的cache，\n替换策略为LRU，回答如下问题（本题不考虑编译优化）\n：\n（1）若每个block的大小为4 Bytes，采用直接映射的方式组织，则tag段长\n度为\n```\n```",
         "answer": "（共12分）\n12   bits。（3分）\n解析：考察6.4.1“通用的高速缓存存储器组织结构”\n地址长度m=16 bits\nE=1\nB=4 Bytes, b=2 bits\nS=C/(E*B)=4，s=2 bits\n故tag长度为m-s-b=12 bits\n评论：该题考查基本概念，计算量小，较为简单"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q5",
+        "questionId": "q-342720662ae6f949",
+        "title": "第五题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -3792,14 +3836,25 @@
         "choices": [],
         "answer": "（共5分）\n2    次。（3分）\n② 若数组x、y的起始地址与①相同，cache block大小为4 Bytes，则无论\n采取何种方式组织cache、且无论如何增大cache的大小，命中次数至多为   5\n次。（2分）\n解析：考察6.4.3“组相联高速缓存”\n（1）中，仅有对x[1]和x[3]的访问会命中\n（2）中，只需要考虑访问序列分散在几个block中（block大小为4 Byte），\n因此去掉地址的后2个bit，分析还有多少不重复的元素即可\n评论：这两空是较为基础的计算，如果按照朴素的方法计算，有一定的计算量，难\n度适中；如果能够找到规律，计算其实较为简单"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "（2）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问\n：\n```\n# define N 4\nchar x[N];\nshort y[N];\nint main() {\nfor (int i = 0; i < N; i++) {\nx[i] = i;\ny[i] = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组x、y的起始地址分别为 0x0000、0x0008，cache block大小为2\nBytes，组相联度为2，则命中次数为",
         "answer": "（共5分）\n2    次。（3分）\n② 若数组x、y的起始地址与①相同，cache block大小为4 Bytes，则无论\n采取何种方式组织cache、且无论如何增大cache的大小，命中次数至多为   5\n次。（2分）\n解析：考察6.4.3“组相联高速缓存”\n（1）中，仅有对x[1]和x[3]的访问会命中\n（2）中，只需要考虑访问序列分散在几个block中（block大小为4 Byte），\n因此去掉地址的后2个bit，分析还有多少不重复的元素即可\n评论：这两空是较为基础的计算，如果按照朴素的方法计算，有一定的计算量，难\n度适中；如果能够找到规律，计算其实较为简单"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q5",
+        "questionId": "q-342720662ae6f949",
+        "title": "第五题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -3858,14 +3913,25 @@
         ],
         "answer": "460   周期（注意结构体数据对齐）。（2分）\n470\n（2分）\n解析：考察点与2.2相同，探索了数据对齐的作用（现代cache允许并行访问，\n但是本题仍不失为一种启发）\n②比①多10个周期的原因在于②中对p[2].y的访问跨两个缓存块\n评论：（3）难度与（2）相比并无明显提升，仍是一道难度适中的题目。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "（3）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问，假定：\n为190周期；\n存不能并行）。\n（共4分）\n```\n# define N 4\ntypedef struct {\nchar x;\nshort y;\n} node;\nnode p[N];\nint main() {\nfor (int i = 0; i < N; i++) {\np[i].x = i;\np[i].y = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组p的起始地址为0x0000，cache block大小为8 Bytes，采用直接\n映射，则cache访问的总延迟为\n② 若结构体不采用数据对齐（即(void *)&p[i] – (void *)&p[0] == 3\n* i），则上 述代码 ①在中的条件下，则cache访问的总延迟为\n周期。",
         "answer": "460   周期（注意结构体数据对齐）。（2分）\n470\n（2分）\n解析：考察点与2.2相同，探索了数据对齐的作用（现代cache允许并行访问，\n但是本题仍不失为一种启发）\n②比①多10个周期的原因在于②中对p[2].y的访问跨两个缓存块\n评论：（3）难度与（2）相比并无明显提升，仍是一道难度适中的题目。"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q5",
+        "questionId": "q-342720662ae6f949",
+        "title": "第五题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -4450,7 +4516,7 @@
       "exam": "2023期中",
       "questionNo": "第一题 17",
       "summary": "RAM与NVM（非易失存储器）特性",
-      "content": "17.关于RAM（Random-access memory）和NVM (Non-volatile memory)\n表述正确的是:\nA. RAM支持随机访问，NVM不支持随机访问；\nB. DRAM不能被用来做Cache；\nC. NVM不能被用来做主存；\nD. 新介质（如3D XPoint）既能作为块设备也能作为字节设备；\nE. 与RAM相比，所有NVM都遵循擦除后写（erase before write）的规则；\nF. 在磁盘系统的实现中不会使用到DRAM；\n答案：AD\n正确答案：D，A 中 NVM 支持随机访问，B 中 eDRAM 被用于 L3/L4 缓存，C 中\nOptane DC PMM可以被用于主存，E中Optane支持in-place update，F中\n磁盘包含32MB-128MB DRAM作为缓存。",
+      "content": "17.关于RAM（Random-access memory）和NVM (Non-volatile memory)\n表述正确的是:\nA. RAM支持随机访问，NVM不支持随机访问；\nB. DRAM不能被用来做Cache；\nC. NVM不能被用来做主存；\nD. 新介质（如3D XPoint）既能作为块设备也能作为字节设备；\nE. 与RAM相比，所有NVM都遵循擦除后写（erase before write）的规则；\nF. 在磁盘系统的实现中不会使用到DRAM；\n正确答案：D。A 错，NVM 也支持随机访问；B 错，eDRAM 可用于 L3/L4 缓存；C 错，Optane DC PMM 可用作主存；E 错，Optane 支持 in-place update；F 错，磁盘中可带有 DRAM 缓存。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4474,7 +4540,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": "multiple",
+        "selection": "single",
         "stem": "17.关于RAM（Random-access memory）和NVM (Non-volatile memory)\n表述正确的是:",
         "choices": [
           {
@@ -4502,10 +4568,10 @@
             "content": "在磁盘系统的实现中不会使用到DRAM；"
           }
         ],
-        "answer": "答案：AD\n正确答案：D，A 中 NVM 支持随机访问，B 中 eDRAM 被用于 L3/L4 缓存，C 中\nOptane DC PMM可以被用于主存，E中Optane支持in-place update，F中\n磁盘包含32MB-128MB DRAM作为缓存。"
+        "answer": "正确答案：D。A 错，NVM 也支持随机访问；B 错，eDRAM 可用于 L3/L4 缓存；C 错，Optane DC PMM 可用作主存；E 错，Optane 支持 in-place update；F 错，磁盘中可带有 DRAM 缓存。"
       },
       "interaction": {
-        "kind": "multiple-choice",
+        "kind": "single-choice",
         "declared": true,
         "choices": [
           {
@@ -4534,14 +4600,13 @@
           }
         ],
         "correctChoiceIds": [
-          "A",
           "D"
         ]
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "17.关于RAM（Random-access memory）和NVM (Non-volatile memory)\n表述正确的是:",
-        "answer": "答案：AD\n正确答案：D，A 中 NVM 支持随机访问，B 中 eDRAM 被用于 L3/L4 缓存，C 中\nOptane DC PMM可以被用于主存，E中Optane支持in-place update，F中\n磁盘包含32MB-128MB DRAM作为缓存。"
+        "answer": "正确答案：D。A 错，NVM 也支持随机访问；B 错，eDRAM 可用于 L3/L4 缓存；C 错，Optane DC PMM 可用作主存；E 错，Optane 支持 in-place update；F 错，磁盘中可带有 DRAM 缓存。"
       },
       "presentation": {
         "status": "ready",
@@ -4801,7 +4866,7 @@
       "exam": "2023期中",
       "questionNo": "第五题 2",
       "summary": "直接映射cache访存模拟与命中统计",
-      "content": "2、假想一个存储系统（特性与教材中的示例类似），地址宽度是4位（内存总容量\n为16个字节）。高速缓存（cache）采用直接映射（Direct-mapped）的形式，\n其总容量为8个字节，每个高速缓存块（cache block）为2字节。高速缓存的\n初始状态为空。高速缓存的结构示意如下表所示：\n\n| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 |  |  |  |\n| 1 |  |  |  |\n| 2 |  |  |  |\n| 3 |  |  |  |\n\n如果此时有如下的访存地址序列（十进制形式）：5、10、15、6、11、4、13。每\n次访存读一个字节。这段序列完成后，高速缓存中的内容是什么样的？请填在上面\n的表格里。Valid和Tag都用二进制表示，block内容用M[0-1]、M[2-3]、……\n的形式表示，初始状态未改变的行保持为空即可。（每行1分，包括空行，共4分）\n在这个访存地址序列中，高速缓存发生了 ______ 次命中（hit）, ______ 次不命中\n（miss）。（每空1分，共2分）\n\n（修订：本小题不计分、所有人都给分）\n1  1  M[10-11]\n1  1  M[12-13]\n1  0  M[6-7]\n2  次命中（hit）,  5",
+      "content": "2、假想一个存储系统（特性与教材中的示例类似），地址宽度是4位（内存总容量\n为16个字节）。高速缓存（cache）采用直接映射（Direct-mapped）的形式，\n其总容量为8个字节，每个高速缓存块（cache block）为2字节。高速缓存的\n初始状态为空。高速缓存的结构示意如下表所示：\n\n| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 | — | — | — |\n| 1 | {{blank:set1-valid}} | {{blank:set1-tag}} | {{blank:set1-block}} |\n| 2 | {{blank:set2-valid}} | {{blank:set2-tag}} | {{blank:set2-block}} |\n| 3 | {{blank:set3-valid}} | {{blank:set3-tag}} | {{blank:set3-block}} |\n\n如果此时有如下的访存地址序列（十进制形式）：5、10、15、6、11、4、13。每\n次访存读一个字节。这段序列完成后，高速缓存中的内容是什么样的？请填在上面\n的表格里。Valid和Tag都用二进制表示，block内容用M[0-1]、M[2-3]、……\n的形式表示，初始状态未改变的行保持为空即可。（每行1分，包括空行，共4分）\n在这个访存地址序列中，高速缓存发生了 {{blank:hit-count}} 次命中（hit），{{blank:miss-count}} 次不命中\n（miss）。（每空1分，共2分）\n\n（修订：本小题不计分、所有人都给分）\n| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 |  |  |  |\n| 1 | 1 | 1 | M[10-11] |\n| 2 | 1 | 1 | M[12-13] |\n| 3 | 1 | 0 | M[6-7] |\n\n命中（hit）2 次，不命中（miss）5 次。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4824,20 +4889,20 @@
         "curated": "_curated/期中/2023期中-带答案/677.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "2、假想一个存储系统（特性与教材中的示例类似），地址宽度是4位（内存总容量\n为16个字节）。高速缓存（cache）采用直接映射（Direct-mapped）的形式，\n其总容量为8个字节，每个高速缓存块（cache block）为2字节。高速缓存的\n初始状态为空。高速缓存的结构示意如下表所示：\n\n| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 |  |  |  |\n| 1 |  |  |  |\n| 2 |  |  |  |\n| 3 |  |  |  |\n\n如果此时有如下的访存地址序列（十进制形式）：5、10、15、6、11、4、13。每\n次访存读一个字节。这段序列完成后，高速缓存中的内容是什么样的？请填在上面\n的表格里。Valid和Tag都用二进制表示，block内容用M[0-1]、M[2-3]、……\n的形式表示，初始状态未改变的行保持为空即可。（每行1分，包括空行，共4分）\n在这个访存地址序列中，高速缓存发生了 ______ 次命中（hit）, ______ 次不命中\n（miss）。（每空1分，共2分）\n\n（修订：本小题不计分、所有人都给分）",
+        "stem": "2、假想一个存储系统（特性与教材中的示例类似），地址宽度是4位（内存总容量\n为16个字节）。高速缓存（cache）采用直接映射（Direct-mapped）的形式，\n其总容量为8个字节，每个高速缓存块（cache block）为2字节。高速缓存的\n初始状态为空。高速缓存的结构示意如下表所示：\n\n| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 | — | — | — |\n| 1 | {{blank:set1-valid}} | {{blank:set1-tag}} | {{blank:set1-block}} |\n| 2 | {{blank:set2-valid}} | {{blank:set2-tag}} | {{blank:set2-block}} |\n| 3 | {{blank:set3-valid}} | {{blank:set3-tag}} | {{blank:set3-block}} |\n\n如果此时有如下的访存地址序列（十进制形式）：5、10、15、6、11、4、13。每\n次访存读一个字节。这段序列完成后，高速缓存中的内容是什么样的？请填在上面\n的表格里。Valid和Tag都用二进制表示，block内容用M[0-1]、M[2-3]、……\n的形式表示，初始状态未改变的行保持为空即可。（每行1分，包括空行，共4分）\n在这个访存地址序列中，高速缓存发生了 {{blank:hit-count}} 次命中（hit），{{blank:miss-count}} 次不命中\n（miss）。（每空1分，共2分）\n\n（修订：本小题不计分、所有人都给分）",
         "choices": [],
-        "answer": "1  1  M[10-11]\n1  1  M[12-13]\n1  0  M[6-7]\n2  次命中（hit）,  5"
+        "answer": "| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 |  |  |  |\n| 1 | 1 | 1 | M[10-11] |\n| 2 | 1 | 1 | M[12-13] |\n| 3 | 1 | 0 | M[6-7] |\n\n命中（hit）2 次，不命中（miss）5 次。"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2、假想一个存储系统（特性与教材中的示例类似），地址宽度是4位（内存总容量\n为16个字节）。高速缓存（cache）采用直接映射（Direct-mapped）的形式，\n其总容量为8个字节，每个高速缓存块（cache block）为2字节。高速缓存的\n初始状态为空。高速缓存的结构示意如下表所示：\n\n| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 |  |  |  |\n| 1 |  |  |  |\n| 2 |  |  |  |\n| 3 |  |  |  |\n\n如果此时有如下的访存地址序列（十进制形式）：5、10、15、6、11、4、13。每\n次访存读一个字节。这段序列完成后，高速缓存中的内容是什么样的？请填在上面\n的表格里。Valid和Tag都用二进制表示，block内容用M[0-1]、M[2-3]、……\n的形式表示，初始状态未改变的行保持为空即可。（每行1分，包括空行，共4分）\n在这个访存地址序列中，高速缓存发生了 ______ 次命中（hit）, ______ 次不命中\n（miss）。（每空1分，共2分）\n\n（修订：本小题不计分、所有人都给分）",
-        "answer": "1  1  M[10-11]\n1  1  M[12-13]\n1  0  M[6-7]\n2  次命中（hit）,  5"
+        "prompt": "2、假想一个存储系统（特性与教材中的示例类似），地址宽度是4位（内存总容量\n为16个字节）。高速缓存（cache）采用直接映射（Direct-mapped）的形式，\n其总容量为8个字节，每个高速缓存块（cache block）为2字节。高速缓存的\n初始状态为空。高速缓存的结构示意如下表所示：\n\n| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 | — | — | — |\n| 1 | {{blank:set1-valid}} | {{blank:set1-tag}} | {{blank:set1-block}} |\n| 2 | {{blank:set2-valid}} | {{blank:set2-tag}} | {{blank:set2-block}} |\n| 3 | {{blank:set3-valid}} | {{blank:set3-tag}} | {{blank:set3-block}} |\n\n如果此时有如下的访存地址序列（十进制形式）：5、10、15、6、11、4、13。每\n次访存读一个字节。这段序列完成后，高速缓存中的内容是什么样的？请填在上面\n的表格里。Valid和Tag都用二进制表示，block内容用M[0-1]、M[2-3]、……\n的形式表示，初始状态未改变的行保持为空即可。（每行1分，包括空行，共4分）\n在这个访存地址序列中，高速缓存发生了 {{blank:hit-count}} 次命中（hit），{{blank:miss-count}} 次不命中\n（miss）。（每空1分，共2分）\n\n（修订：本小题不计分、所有人都给分）",
+        "answer": "| Set | Valid | Tag | Block |\n| --- | --- | --- | --- |\n| 0 |  |  |  |\n| 1 | 1 | 1 | M[10-11] |\n| 2 | 1 | 1 | M[12-13] |\n| 3 | 1 | 0 | M[6-7] |\n\n命中（hit）2 次，不命中（miss）5 次。"
       },
       "presentation": {
         "status": "ready",
@@ -4854,7 +4919,7 @@
       "exam": "2023期中",
       "questionNo": "第五题 3",
       "summary": "L1 d-cache地址位域划分与组数计算",
-      "content": "3、在Intel Core i7中，一级数据高速缓存（L1 Data Cahe）的容量为32k\n字节，每个高速缓存块为64字节，地址宽度为47位。由此推算，地址划分成Tag、\nSet Index和Block offset三个域分别为多少位？将回答填在下表中，用十\n进制表示。（每空1分，共3分）\n```\nTag  Set Index  Block offset\n35  6  6\n```\n该高速缓存有_\n个line。（每空1分，共2分）\n64 个Set，每个Set中有  8",
+      "content": "3. 在 Intel Core i7 中，一级数据高速缓存（L1 Data Cache）的容量为 32K 字节，每个高速缓存块为 64 字节，地址宽度为 47 位。由此推算，地址划分成 Tag、Set Index 和 Block offset 三个域分别为多少位？将回答填在下表中，用十进制表示。（每空 1 分，共 3 分）\n\n| Tag | Set Index | Block offset |\n| --- | --- | --- |\n| {{blank:tag-bits}} | {{blank:set-index-bits}} | {{blank:block-offset-bits}} |\n\n该高速缓存有 {{blank:line-count}} 个 line。\nTag：35 位；Set Index：6 位；Block offset：6 位。缓存共有 512 个 line（64 个 Set，每个 Set 有 8 个 line）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4877,20 +4942,20 @@
         "curated": "_curated/期中/2023期中-带答案/699.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "3、在Intel Core i7中，一级数据高速缓存（L1 Data Cahe）的容量为32k\n字节，每个高速缓存块为64字节，地址宽度为47位。由此推算，地址划分成Tag、\nSet Index和Block offset三个域分别为多少位？将回答填在下表中，用十\n进制表示。（每空1分，共3分）\n```\nTag  Set Index  Block offset\n35  6  6\n```\n该高速缓存有_\n个line。（每空1分，共2分）",
+        "stem": "3. 在 Intel Core i7 中，一级数据高速缓存（L1 Data Cache）的容量为 32K 字节，每个高速缓存块为 64 字节，地址宽度为 47 位。由此推算，地址划分成 Tag、Set Index 和 Block offset 三个域分别为多少位？将回答填在下表中，用十进制表示。（每空 1 分，共 3 分）\n\n| Tag | Set Index | Block offset |\n| --- | --- | --- |\n| {{blank:tag-bits}} | {{blank:set-index-bits}} | {{blank:block-offset-bits}} |\n\n该高速缓存有 {{blank:line-count}} 个 line。",
         "choices": [],
-        "answer": "64 个Set，每个Set中有  8"
+        "answer": "Tag：35 位；Set Index：6 位；Block offset：6 位。缓存共有 512 个 line（64 个 Set，每个 Set 有 8 个 line）。"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3、在Intel Core i7中，一级数据高速缓存（L1 Data Cahe）的容量为32k\n字节，每个高速缓存块为64字节，地址宽度为47位。由此推算，地址划分成Tag、\nSet Index和Block offset三个域分别为多少位？将回答填在下表中，用十\n进制表示。（每空1分，共3分）\n```\nTag  Set Index  Block offset\n35  6  6\n```\n该高速缓存有_\n个line。（每空1分，共2分）",
-        "answer": "64 个Set，每个Set中有  8"
+        "prompt": "3. 在 Intel Core i7 中，一级数据高速缓存（L1 Data Cache）的容量为 32K 字节，每个高速缓存块为 64 字节，地址宽度为 47 位。由此推算，地址划分成 Tag、Set Index 和 Block offset 三个域分别为多少位？将回答填在下表中，用十进制表示。（每空 1 分，共 3 分）\n\n| Tag | Set Index | Block offset |\n| --- | --- | --- |\n| {{blank:tag-bits}} | {{blank:set-index-bits}} | {{blank:block-offset-bits}} |\n\n该高速缓存有 {{blank:line-count}} 个 line。",
+        "answer": "Tag：35 位；Set Index：6 位；Block offset：6 位。缓存共有 512 个 line（64 个 Set，每个 Set 有 8 个 line）。"
       },
       "presentation": {
         "status": "ready",
@@ -4931,7 +4996,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "12.以下关于存储设备的说法正确的是：",
         "choices": [
           {
@@ -4954,8 +5019,8 @@
         "answer": "答案：C\nA. SRAM是易失性存储器，非易失性存储器指断电后仍然能保存数据，\nB. DRAM速度一般比SRAM慢\nC. 正确\nD. 旋转磁盘相比SSD仍然有价格便宜，不会磨损等优点"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -5022,7 +5087,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "13.考虑一个有x个盘片，每个扇区y字节，每个面z条磁道，每条磁道平均w个扇区，旋转速率a RPM，平均寻道时间b ms 的磁盘。则下列说法正确的是：",
         "choices": [
           {
@@ -5045,8 +5110,8 @@
         "answer": "答案：D\nA.  磁盘容量为2wxyz / $10^9$ GB\nB.  访问一个磁盘扇区内容的平均时间为 (60/a * 1/2 * 1000 + 60/a / w * 1000 + b)\nms\nC.  访问一个磁盘扇区中512个字节的时间主要是寻道时间和旋转延迟。访问扇\n区中的 第一个字节用了很长时间，但是访问剩下的字节几乎不用时间。\nD.  假设旋转速率未知，在通常情况下我们可以简单估计 a = 60/b * 1/2 * 1000\nRPM（书上提到可以用寻道时间的两倍来估计访问时间，故可以用寻道时间估\n计旋转延迟）"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -6364,14 +6429,25 @@
         "choices": [],
         "answer": "答案：50 个周期（来源：2019、2020期末-答案解析）\n解析：直接映射数据缓存块 64B，可放 8 个长整数；起始地址 0x8008 不是 64 字节对齐，所以 8 次访存中有 2 次不命中，额外付 2×(2-1)=2 个周期 → 48+2 = 50。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "（3）  现在考虑数据缓存（data cache）对该处理器的影响。\n该处理器配置了一个简单的直接映射（direct-mapped，E=1）数据缓存，\n总容量32KB，每个缓存块的大小是64Byte。对于movq指令，如果被访问\n的数据在该缓存中，则1个周期可以处理完成。否则，则需要2个周期才能完\n成。在运行上述汇编代码之前，数据缓存初始状态为空，其他设置同上一问。\n请再次计算：完成上述汇编代码段一共需要多少周期？",
         "answer": "答案：50 个周期（来源：2019、2020期末-答案解析）\n解析：直接映射数据缓存块 64B，可放 8 个长整数；起始地址 0x8008 不是 64 字节对齐，所以 8 次访存中有 2 次不命中，额外付 2×(2-1)=2 个周期 → 48+2 = 50。"
+      },
+      "group": {
+        "id": "p-98acf19964247e22:2019-final-q2",
+        "questionId": "q-5f2d2b416c72e83f",
+        "title": "第二题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -6504,14 +6580,25 @@
         "choices": [],
         "answer": "答案：I-cache 命中 47 次、D-cache 命中 5 次，共需 96 个时钟周期（来源：2019、2020期末-答案解析）\n解析：两个缓存都是块 32B → 5 位偏移、10 位组索引；取指共 48 次，只有 1 次冷不命中 → 命中 47 次；数据缓存每块放 4 个长整数，且起始地址不是 32 字节对齐 → 8 次访存中 3 次不命中 → 命中 5 次；4 次不命中每次额外 9 个周期，60+36 = 96 个周期。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3） 现需要考虑实际执行时，存储层次对于流水线执行时间的影响：\n•  该处理器包含一个L1指令缓存（I-cache）和一个L1数据缓存（D-cache）；\n•  I-cache是一个直接映射（direct-mapped，E=1）缓存，总容量32KB，每个缓存块\n的大小是32Byte，代码执行前I-cache全部为空；\n•  D-cache也是一个直接映射（direct-mapped，E=1）缓存，总容量32KB，每个缓\n存块的大小是32Byte，代码执行前D-cache全部为空；\n•  取指（F）阶段，如果指令在I-cache中，则需要1个周期，否则需要10个周期；\n•  访存（M）阶段，如果数据在D-cache中，则需要1个周期，否则需要10个周期；\n请问执行上述代码I-cache缓存命中____次、D-cache缓存命中_______次?\n在存储层次的影响下，执行完代码需要 ______ 个时钟周期？",
         "answer": "答案：I-cache 命中 47 次、D-cache 命中 5 次，共需 96 个时钟周期（来源：2019、2020期末-答案解析）\n解析：两个缓存都是块 32B → 5 位偏移、10 位组索引；取指共 48 次，只有 1 次冷不命中 → 命中 47 次；数据缓存每块放 4 个长整数，且起始地址不是 32 字节对齐 → 8 次访存中 3 次不命中 → 命中 5 次；4 次不命中每次额外 9 个周期，60+36 = 96 个周期。"
+      },
+      "group": {
+        "id": "p-f99ca20e1a729e32:2020-final-q2",
+        "questionId": "q-19c4d964d98fc677",
+        "title": "第二题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -7030,390 +7117,6 @@
       }
     },
     {
-      "id": "q-08c97bc49ce1e08d",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 10,
-      "moduleId": "memory_hierarchy",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 10",
-      "summary": "局部性（locality）与遍历方式",
-      "content": "10.关于“局部性（locality）”，下列说法哪些正确？\nA. 顺序扫描连续数组通常具有良好的空间局部性\nB. 在短时间内多次访问同一标量变量通常具有良好的时间局部性\nC. 遍历单链表（指针追踪）相比遍历连续数组，通常空间局部性更差\nD. 对行优先（row-major）二维数组，按列遍历通常比按行遍历空间局部性更好\nE. 增大 cache block 大小只会改善时间局部性，不会影响空间局部性\n答案：ABC\n解析：A/B/C 都是教材强调的经典现象；D 反了（行优先按行更连续）；E 错在 block 变\n大主要就是利用空间局部性（一次带回相邻数据）。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 64,
-          "end": 67
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/64.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "10.关于“局部性（locality）”，下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "顺序扫描连续数组通常具有良好的空间局部性"
-          },
-          {
-            "key": "B",
-            "content": "在短时间内多次访问同一标量变量通常具有良好的时间局部性"
-          },
-          {
-            "key": "C",
-            "content": "遍历单链表（指针追踪）相比遍历连续数组，通常空间局部性更差"
-          },
-          {
-            "key": "D",
-            "content": "对行优先（row-major）二维数组，按列遍历通常比按行遍历空间局部性更好"
-          },
-          {
-            "key": "E",
-            "content": "增大 cache block 大小只会改善时间局部性，不会影响空间局部性"
-          }
-        ],
-        "answer": "答案：ABC\n解析：A/B/C 都是教材强调的经典现象；D 反了（行优先按行更连续）；E 错在 block 变\n大主要就是利用空间局部性（一次带回相邻数据）。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "顺序扫描连续数组通常具有良好的空间局部性"
-          },
-          {
-            "id": "B",
-            "content": "在短时间内多次访问同一标量变量通常具有良好的时间局部性"
-          },
-          {
-            "id": "C",
-            "content": "遍历单链表（指针追踪）相比遍历连续数组，通常空间局部性更差"
-          },
-          {
-            "id": "D",
-            "content": "对行优先（row-major）二维数组，按列遍历通常比按行遍历空间局部性更好"
-          },
-          {
-            "id": "E",
-            "content": "增大 cache block 大小只会改善时间局部性，不会影响空间局部性"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "C"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "10.关于“局部性（locality）”，下列说法哪些正确？",
-        "answer": "答案：ABC\n解析：A/B/C 都是教材强调的经典现象；D 反了（行优先按行更连续）；E 错在 block 变\n大主要就是利用空间局部性（一次带回相邻数据）。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-f9563f5e509a93c2",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 11,
-      "moduleId": "memory_hierarchy",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 11",
-      "summary": "cache 写策略 write-back/through 与写分配",
-      "content": "11.关于高速缓存的写策略，下列说法哪些正确？\nA. write-back cache 通常需要每行一个 dirty bit\nB. write-through 设计中常见搭配是 no-write-allocate\nC. write-allocate在写不命中时不把 block 载入 cache，直接写到下一层\nD. write-back的相关控制电路通常比write-through简单\nE. write-through会更快，因为向下一层的写入是“立刻发生”的\n答案：AB\n解析： C/D/E 都是把概念说反或忽略现实代价：write-allocate 是“写 miss 先装\n入再写”；write-back需要管理不同情况，控制更复杂；write-through 往往更需要\nwrite buffer 以免写操作拖慢流水。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 68,
-          "end": 72
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/68.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "11.关于高速缓存的写策略，下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "write-back cache 通常需要每行一个 dirty bit"
-          },
-          {
-            "key": "B",
-            "content": "write-through 设计中常见搭配是 no-write-allocate"
-          },
-          {
-            "key": "C",
-            "content": "write-allocate在写不命中时不把 block 载入 cache，直接写到下一层"
-          },
-          {
-            "key": "D",
-            "content": "write-back的相关控制电路通常比write-through简单"
-          },
-          {
-            "key": "E",
-            "content": "write-through会更快，因为向下一层的写入是“立刻发生”的"
-          }
-        ],
-        "answer": "答案：AB\n解析： C/D/E 都是把概念说反或忽略现实代价：write-allocate 是“写 miss 先装\n入再写”；write-back需要管理不同情况，控制更复杂；write-through 往往更需要\nwrite buffer 以免写操作拖慢流水。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "write-back cache 通常需要每行一个 dirty bit"
-          },
-          {
-            "id": "B",
-            "content": "write-through 设计中常见搭配是 no-write-allocate"
-          },
-          {
-            "id": "C",
-            "content": "write-allocate在写不命中时不把 block 载入 cache，直接写到下一层"
-          },
-          {
-            "id": "D",
-            "content": "write-back的相关控制电路通常比write-through简单"
-          },
-          {
-            "id": "E",
-            "content": "write-through会更快，因为向下一层的写入是“立刻发生”的"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "11.关于高速缓存的写策略，下列说法哪些正确？",
-        "answer": "答案：AB\n解析： C/D/E 都是把概念说反或忽略现实代价：write-allocate 是“写 miss 先装\n入再写”；write-back需要管理不同情况，控制更复杂；write-through 往往更需要\nwrite buffer 以免写操作拖慢流水。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-a90ce3dc7ad294b6",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 12,
-      "moduleId": "memory_hierarchy",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 12",
-      "summary": "两级 cache 的 AMAT 与 miss rate 计算",
-      "content": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n• L1 hit time = 1 cycle，\n• L1 miss rate = 5%\n• L2 hit time = 10 cycles\n• L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n• L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？\nA. 按所有到达内存的访问计，global miss rate 为 0.05×0.20=1%\nB. L1 的平均 miss penalty 为10+0.20×100=30 cycles\nC. 平均访存时间为1+0.05×30=2.5 cycles\nD. 若L2 local miss rate 降到10%，平均访存时间会增大\nE. 若L1 miss rate降到2.5%，平均访存时间为变为1+0.025×30=1.75 cycles\n答案：ABCE\n解析： D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存\n时间",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 73,
-          "end": 76
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/73.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n• L1 hit time = 1 cycle，\n• L1 miss rate = 5%\n• L2 hit time = 10 cycles\n• L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n• L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "按所有到达内存的访问计，global miss rate 为 0.05×0.20=1%"
-          },
-          {
-            "key": "B",
-            "content": "L1 的平均 miss penalty 为10+0.20×100=30 cycles"
-          },
-          {
-            "key": "C",
-            "content": "平均访存时间为1+0.05×30=2.5 cycles"
-          },
-          {
-            "key": "D",
-            "content": "若L2 local miss rate 降到10%，平均访存时间会增大"
-          },
-          {
-            "key": "E",
-            "content": "若L1 miss rate降到2.5%，平均访存时间为变为1+0.025×30=1.75 cycles"
-          }
-        ],
-        "answer": "答案：ABCE\n解析： D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存\n时间"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "按所有到达内存的访问计，global miss rate 为 0.05×0.20=1%"
-          },
-          {
-            "id": "B",
-            "content": "L1 的平均 miss penalty 为10+0.20×100=30 cycles"
-          },
-          {
-            "id": "C",
-            "content": "平均访存时间为1+0.05×30=2.5 cycles"
-          },
-          {
-            "id": "D",
-            "content": "若L2 local miss rate 降到10%，平均访存时间会增大"
-          },
-          {
-            "id": "E",
-            "content": "若L1 miss rate降到2.5%，平均访存时间为变为1+0.025×30=1.75 cycles"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "C",
-          "E"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n• L1 hit time = 1 cycle，\n• L1 miss rate = 5%\n• L2 hit time = 10 cycles\n• L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n• L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？",
-        "answer": "答案：ABCE\n解析： D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存\n时间"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-bfacf466cd2f5113",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 13,
-      "moduleId": "memory_hierarchy",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 13",
-      "summary": "memory mountain 与 stride/工作集",
-      "content": "13.关于教材里的 memory mountain（吞吐/带宽随工作集大小与 stride 变化）的解\n释，下列说法哪些正确？\nA. 固定 stride 时，工作集从小到大跨过某级 cache 容量边界，性能常出现“断崖”\nB. 固定工作集大小时，stride 变大通常降低空间局部性，从而降低有效吞吐\nC. stride=1 的优势主要来自时间局部性\nD. 该现象同时受 cache 容量与 cache line 大小影响\nE. 只要工作集大小不变，stride 的变化不影响cache命中率\n答案：ABD\n解析： stride=1 的主要收益是空间局部性而不是“反复访问同一元素”（C 错）；E 明显\n错误。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 77,
-          "end": 85
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/77.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "13.关于教材里的 memory mountain（吞吐/带宽随工作集大小与 stride 变化）的解\n释，下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "固定 stride 时，工作集从小到大跨过某级 cache 容量边界，性能常出现“断崖”"
-          },
-          {
-            "key": "B",
-            "content": "固定工作集大小时，stride 变大通常降低空间局部性，从而降低有效吞吐"
-          },
-          {
-            "key": "C",
-            "content": "stride=1 的优势主要来自时间局部性"
-          },
-          {
-            "key": "D",
-            "content": "该现象同时受 cache 容量与 cache line 大小影响"
-          },
-          {
-            "key": "E",
-            "content": "只要工作集大小不变，stride 的变化不影响cache命中率"
-          }
-        ],
-        "answer": "答案：ABD\n解析： stride=1 的主要收益是空间局部性而不是“反复访问同一元素”（C 错）；E 明显\n错误。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "固定 stride 时，工作集从小到大跨过某级 cache 容量边界，性能常出现“断崖”"
-          },
-          {
-            "id": "B",
-            "content": "固定工作集大小时，stride 变大通常降低空间局部性，从而降低有效吞吐"
-          },
-          {
-            "id": "C",
-            "content": "stride=1 的优势主要来自时间局部性"
-          },
-          {
-            "id": "D",
-            "content": "该现象同时受 cache 容量与 cache line 大小影响"
-          },
-          {
-            "id": "E",
-            "content": "只要工作集大小不变，stride 的变化不影响cache命中率"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "D"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "13.关于教材里的 memory mountain（吞吐/带宽随工作集大小与 stride 变化）的解\n释，下列说法哪些正确？",
-        "answer": "答案：ABD\n解析： stride=1 的主要收益是空间局部性而不是“反复访问同一元素”（C 错）；E 明显\n错误。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
       "id": "q-073e12e82f88d0a6",
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 10,
@@ -7614,7 +7317,7 @@
       "exam": "2025期末",
       "questionNo": "一 12",
       "summary": "两级 cache 的 AMAT 与 miss rate 计算",
-      "content": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n• L1 hit time = 1 cycle，\n```\n• L1 miss rate = 5%\n• L2 hit time = 10 cycles\n```\n• L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n• L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？\nA. 按所有到达内存的访问计，global miss rate 为 0.05×0.20=1%\nB. L1 的平均 miss penalty 为10+0.20×100=30 cycles\nC. 平均访存时间为1+0.05×30=2.5 cycles\nD. 若L2 local miss rate 降到10%，平均访存时间会增大\nE. 若L1 miss rate降到2.5%，平均访存时间为变为1+0.025×30=1.75 cycles\n答案：ABCE\n解析：D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存时间。",
+      "content": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n- L1 hit time = 1 cycle，\n- L1 miss rate = 5%\n- L2 hit time = 10 cycles\n- L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n- L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？\nA. 按所有到达内存的访问计，global miss rate 为 0.05×0.20=1%\nB. L1 的平均 miss penalty 为10+0.20×100=30 cycles\nC. 平均访存时间为1+0.05×30=2.5 cycles\nD. 若L2 local miss rate 降到10%，平均访存时间会增大\nE. 若L1 miss rate降到2.5%，平均访存时间为变为1+0.025×30=1.75 cycles\n答案：ABCE\n解析：D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存时间。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7634,7 +7337,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n• L1 hit time = 1 cycle，\n```\n• L1 miss rate = 5%\n• L2 hit time = 10 cycles\n```\n• L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n• L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？",
+        "stem": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n- L1 hit time = 1 cycle，\n- L1 miss rate = 5%\n- L2 hit time = 10 cycles\n- L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n- L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？",
         "choices": [
           {
             "key": "A",
@@ -7693,7 +7396,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n• L1 hit time = 1 cycle，\n```\n• L1 miss rate = 5%\n• L2 hit time = 10 cycles\n```\n• L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n• L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？",
+        "prompt": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n- L1 hit time = 1 cycle，\n- L1 miss rate = 5%\n- L2 hit time = 10 cycles\n- L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n- L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？",
         "answer": "答案：ABCE\n解析：D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存时间。"
       },
       "presentation": {
@@ -7807,7 +7510,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第12讲 11",
       "summary": "SRAM 与 DRAM 的功耗与价格对比",
-      "content": "11.（2分）对比同样容量的SRAM和DRAM，功耗更高是\n。\nSRAM ，价格更低是 DRAM",
+      "content": "11.（2分）对比同样容量的 SRAM 和 DRAM，功耗更高的是 {{blank:q11-power}}，价格更低的是 {{blank:q11-price}}。\n功耗更高：SRAM；价格更低：DRAM。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7825,20 +7528,20 @@
         "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/166.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "11.（2分）对比同样容量的SRAM和DRAM，功耗更高是\n。",
+        "stem": "11.（2分）对比同样容量的 SRAM 和 DRAM，功耗更高的是 {{blank:q11-power}}，价格更低的是 {{blank:q11-price}}。",
         "choices": [],
-        "answer": "SRAM ，价格更低是 DRAM"
+        "answer": "功耗更高：SRAM；价格更低：DRAM。"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "11.（2分）对比同样容量的SRAM和DRAM，功耗更高是\n。",
-        "answer": "SRAM ，价格更低是 DRAM"
+        "prompt": "11.（2分）对比同样容量的 SRAM 和 DRAM，功耗更高的是 {{blank:q11-power}}，价格更低的是 {{blank:q11-price}}。",
+        "answer": "功耗更高：SRAM；价格更低：DRAM。"
       },
       "presentation": {
         "status": "ready",
@@ -7903,7 +7606,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第12讲 13",
       "summary": "DDR3 内存条数据位宽与 64 位数在芯片间分散",
-      "content": "13.（4分）下图是一根DDR3SDRAM内存条，数据位宽是64-bit，总容量为2GB，由8\n颗内存芯片构成。如果一个计算机系统只有这根内存条作为全部内存，那往地址\n0x01001000写一个64-bit数0x12345678，这个数会放在内存条上从左向右数第\n几颗（或哪几颗）内存芯片中？并解释这样存放的原因。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png)\n答：这个64-bit数分散在全部8颗内存芯片，每个芯片存8-bit（2分）。因为每\n颗芯片数据位宽有限（8-bit），这样存放读取速度更快（2分）。注意：关键点是“分散”，\n如果写成分散到从左往右的1~4颗或者5~8颗，并说明每颗芯片位宽16-bit，也算对。",
+      "content": "13.（4分）下图是一根 DDR3 SDRAM 内存条，数据位宽是 64-bit，总容量为 2GB，由 8 颗内存芯片构成。如果一个计算机系统只有这根内存条作为全部内存，那往地址 0x01001000 写一个 64-bit 数 0x12345678，这个数会放在内存条上从左向右数第几颗（或哪几颗）内存芯片中？并解释这样存放的原因。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png)\n答：这个64-bit数分散在全部8颗内存芯片，每个芯片存8-bit（2分）。因为每\n颗芯片数据位宽有限（8-bit），这样存放读取速度更快（2分）。注意：关键点是“分散”，\n如果写成分散到从左往右的1~4颗或者5~8颗，并说明每颗芯片位宽16-bit，也算对。",
       "assets": [
         "assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png"
       ],
@@ -7925,7 +7628,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "13.（4分）下图是一根DDR3SDRAM内存条，数据位宽是64-bit，总容量为2GB，由8\n颗内存芯片构成。如果一个计算机系统只有这根内存条作为全部内存，那往地址\n0x01001000写一个64-bit数0x12345678，这个数会放在内存条上从左向右数第\n几颗（或哪几颗）内存芯片中？并解释这样存放的原因。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png)",
+        "stem": "13.（4分）下图是一根 DDR3 SDRAM 内存条，数据位宽是 64-bit，总容量为 2GB，由 8 颗内存芯片构成。如果一个计算机系统只有这根内存条作为全部内存，那往地址 0x01001000 写一个 64-bit 数 0x12345678，这个数会放在内存条上从左向右数第几颗（或哪几颗）内存芯片中？并解释这样存放的原因。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png)",
         "choices": [],
         "answer": "答：这个64-bit数分散在全部8颗内存芯片，每个芯片存8-bit（2分）。因为每\n颗芯片数据位宽有限（8-bit），这样存放读取速度更快（2分）。注意：关键点是“分散”，\n如果写成分散到从左往右的1~4颗或者5~8颗，并说明每颗芯片位宽16-bit，也算对。"
       },
@@ -7935,7 +7638,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "13.（4分）下图是一根DDR3SDRAM内存条，数据位宽是64-bit，总容量为2GB，由8\n颗内存芯片构成。如果一个计算机系统只有这根内存条作为全部内存，那往地址\n0x01001000写一个64-bit数0x12345678，这个数会放在内存条上从左向右数第\n几颗（或哪几颗）内存芯片中？并解释这样存放的原因。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png)",
+        "prompt": "13.（4分）下图是一根 DDR3 SDRAM 内存条，数据位宽是 64-bit，总容量为 2GB，由 8 颗内存芯片构成。如果一个计算机系统只有这根内存条作为全部内存，那往地址 0x01001000 写一个 64-bit 数 0x12345678，这个数会放在内存条上从左向右数第几颗（或哪几颗）内存芯片中？并解释这样存放的原因。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png)",
         "answer": "答：这个64-bit数分散在全部8颗内存芯片，每个芯片存8-bit（2分）。因为每\n颗芯片数据位宽有限（8-bit），这样存放读取速度更快（2分）。注意：关键点是“分散”，\n如果写成分散到从左往右的1~4颗或者5~8颗，并说明每颗芯片位宽16-bit，也算对。"
       },
       "presentation": {

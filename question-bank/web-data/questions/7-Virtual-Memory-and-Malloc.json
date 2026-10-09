@@ -3165,20 +3165,31 @@
         "curated": "_curated/期末/2021期末-无答案/559.md"
       },
       "layout": {
-        "mode": "fill",
+        "mode": "short",
         "selection": null,
         "stem": "IA32体系采用小端法、32位虚拟地址和两级页表。两级页表大小相同，页大小\n都是4 KB = 212 Byte，结构也相同。TLB 采用直接映射，4位组索引。TLB\n和页表每一项格式如图所示：\n```\n31                            12  11    9  8  7  6  5  4  3  2  1  0\nP  P  P  U  R\nAddress of 4KB page frame  Ignored  G  A  D  A  C  W  /  /  P\nT  D  T  S  W\n```\n部分位的含义如下：\n0 (P): 1表示存在，0表示不存在\n1 (R/W)：1表示可写，0表示只读\n2 (U/S)：1表示内核模式，0表示用户模式\n当系统运行到某一时刻，TLB有效位为1的条目如下（未列出部分都是无效的）：\n索引（十进制）  TLB 标记  内容\n```\n0  0x0400  0x0ec91313\n3  0x02ff  0x5d2bac01\n5  0xd551  0x019fa42d\n11  0x55a6  0xfdd3c66b\n13  0x5515  0xb591926b\n```\n一级页表基地址为0x00e66000，物理内存中的部分内容如下（均为十六进制）：\n地址  内容  地址  内容  地址  内容\n```\n00615000  21  00615001  2d  00615002  ee\n00615003  c0  006154d0  ff  006154d1  a0\n00e66001  a1  00e66002  a4  00e66003  67\n00e66004  21  00e66005  57  00e66006  61\n00e66d07  00  2167e000  42  2167e001  67\n2167e002  9a  2167e003  7c  c0ee2000  6f\nc0ee2001  d5  c0ee2002  7e  c0ee24d0  48\nc0ee24d1  83  c0ee24d2  ec  c0ee2d21  11\nc0ee2d22  6b  c0ee2d23  82  c0ee2d24  8a\n```\n1. 将 cache 清空，访问一个在主存中的虚拟地址，TLB命中，没有触发缺页\n异常，这一过程中，需要访问物理内存_____次（3分）。具体来说，如果该地址\n为 y = 0xd5515213，y 地址所具有的实质权限是_________（多选题，选\n对才得分2分）。\n①可写 ②只读 ③用户模式权限  ④内核模式权限",
         "choices": [],
         "answer": "答案：\n需要访问物理内存 1 次（TLB 命中且无缺页，只需访问一次物理页）。\ny = 0xd5515213 的实质权限为 ②④（只读、内核模式权限）。"
       },
-      "interaction": {
-        "kind": "fill",
+      "partInteraction": {
+        "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "IA32体系采用小端法、32位虚拟地址和两级页表。两级页表大小相同，页大小\n都是4 KB = 212 Byte，结构也相同。TLB 采用直接映射，4位组索引。TLB\n和页表每一项格式如图所示：\n```\n31                            12  11    9  8  7  6  5  4  3  2  1  0\nP  P  P  U  R\nAddress of 4KB page frame  Ignored  G  A  D  A  C  W  /  /  P\nT  D  T  S  W\n```\n部分位的含义如下：\n0 (P): 1表示存在，0表示不存在\n1 (R/W)：1表示可写，0表示只读\n2 (U/S)：1表示内核模式，0表示用户模式\n当系统运行到某一时刻，TLB有效位为1的条目如下（未列出部分都是无效的）：\n索引（十进制）  TLB 标记  内容\n```\n0  0x0400  0x0ec91313\n3  0x02ff  0x5d2bac01\n5  0xd551  0x019fa42d\n11  0x55a6  0xfdd3c66b\n13  0x5515  0xb591926b\n```\n一级页表基地址为0x00e66000，物理内存中的部分内容如下（均为十六进制）：\n地址  内容  地址  内容  地址  内容\n```\n00615000  21  00615001  2d  00615002  ee\n00615003  c0  006154d0  ff  006154d1  a0\n00e66001  a1  00e66002  a4  00e66003  67\n00e66004  21  00e66005  57  00e66006  61\n00e66d07  00  2167e000  42  2167e001  67\n2167e002  9a  2167e003  7c  c0ee2000  6f\nc0ee2001  d5  c0ee2002  7e  c0ee24d0  48\nc0ee24d1  83  c0ee24d2  ec  c0ee2d21  11\nc0ee2d22  6b  c0ee2d23  82  c0ee2d24  8a\n```\n1. 将 cache 清空，访问一个在主存中的虚拟地址，TLB命中，没有触发缺页\n异常，这一过程中，需要访问物理内存_____次（3分）。具体来说，如果该地址\n为 y = 0xd5515213，y 地址所具有的实质权限是_________（多选题，选\n对才得分2分）。\n①可写 ②只读 ③用户模式权限  ④内核模式权限",
         "answer": "答案：\n需要访问物理内存 1 次（TLB 命中且无缺页，只需访问一次物理页）。\ny = 0xd5515213 的实质权限为 ②④（只读、内核模式权限）。"
+      },
+      "group": {
+        "id": "p-2c2b56c4452255b1:2021-final-q5",
+        "questionId": "q-3843863f7e2c5084",
+        "title": "第五题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -3221,14 +3232,25 @@
         "choices": [],
         "answer": "答案：\n需要访问物理内存 3 次（TLB 未命中且无缺页，需访问页目录、二级页表和物理页）。\nx = 0x004004d0 对应的二级页表起始地址是 0x00615000，x 地址上单字节的内容是 0x48。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2. 不考虑第一小问，将 cache 清空，访问一个在主存中的虚拟地址，TLB不\n命中，没有触发缺页异常，这一过程中，需要访问物理内存_____次（3分）。具\n体来说，如果该地址为x = 0x004004d0，那么x 对应的二级页表起始地址是\n______________（填写16进制，例如0x00123000，2分），x 地址上单字\n节的内容是__________（填写16进制，例如0x00，1分）。",
         "answer": "答案：\n需要访问物理内存 3 次（TLB 未命中且无缺页，需访问页目录、二级页表和物理页）。\nx = 0x004004d0 对应的二级页表起始地址是 0x00615000，x 地址上单字节的内容是 0x48。"
+      },
+      "group": {
+        "id": "p-2c2b56c4452255b1:2021-final-q5",
+        "questionId": "q-3843863f7e2c5084",
+        "title": "第五题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -3271,14 +3293,25 @@
         "choices": [],
         "answer": "答案：\n⑴ 第 4 行改为：int *y = (int *)calloc(n, sizeof(int));（calloc/Calloc 的两个参数只要乘起来等于 n * sizeof(int) 即算对）\n\n⑵ n < 0（或其他等价表达）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3. 考虑下面计算矩阵和向量乘法代码：\n```\n1 int *mat_vec_mul(int **A, int *x, int n)\n2 {\n3     int i, j;\n4     int *y = (int *)malloc(n * sizeof(int));\n5     for (i = 0; i < n; i++)\n6         for (j = 0; j < n; j++)\n7             y[i] += A[i][j] * x[j];\n8     return y;\n9 }\n```\n⑴ 在64位 Linux 机器中运行该代码，输入同一组合法的参数后，每次运行\n返回的向量的值都不一样，修复这一错误有一种简单的方法，将第____行改为\n_________________________。（第二空填写C代码，每空1分，共2分）\n可能用到的函数：\n```\nvoid *memcpy(void *dest, const void *src, size_t n);\nvoid *memset(void *s, int c, size_t n);\nvoid *calloc(size_t nelem, size_t elemsize);\nvoid *realloc(void *ptr, size_t size);\n```\n⑵ 在进行前一问的测试之前，还在64位 Linux 机器上进行过如下用户代码\n测试（输入 mat_vec_mul的参数都非零）：\n```\nint *y = mat_vec_mul(A, x, n);\nint z = y[0];\n```\n结果发生了段错误。通过gdb调试发现mat_vec_mul函数内并没有发生段错\n误，但是在初始化变量z时发生了段错误，后来发现是参数的输入有问题。写出\n出现这种错误的充分必要条件________________________（1分）",
         "answer": "答案：\n⑴ 第 4 行改为：int *y = (int *)calloc(n, sizeof(int));（calloc/Calloc 的两个参数只要乘起来等于 n * sizeof(int) 即算对）\n\n⑵ n < 0（或其他等价表达）"
+      },
+      "group": {
+        "id": "p-2c2b56c4452255b1:2021-final-q5",
+        "questionId": "q-3843863f7e2c5084",
+        "title": "第五题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -4414,7 +4447,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "multiple",
         "stem": "9. 关于虚拟地址和物理地址的转换，下列说法错误的是：（多选）",
         "choices": [
           {
@@ -4437,8 +4470,8 @@
         "answer": "答案：AD\nA. 错误，在现代计算机中，操作系统（如Linux）通过页表实现虚拟地址到物理\n地址的映射，而非物理地址到虚拟地址的映射。\nB. TLB 是一种专用的硬件缓存，存储最近访问的虚拟地址到物理地址的映射，\nCPU可以快速找到对应的物理地址而无需访问内存，\nC.  2MB/4KB=$2^9$，原来是四级页表； 9*4+12=48，使用大页后变为\n9*3+(9+12)=48，可以少用一级页表，提高性能\nD. 错误，CR3寄存器用于保存一级页表的物理地址，而非虚拟地址。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "multiple-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4505,7 +4538,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "10. 关于Linux内存映射，下列说法错误的是：",
         "choices": [
           {
@@ -4528,8 +4561,8 @@
         "answer": "答案： D\nA. 在 Linux 中，fork()系统调用会创建一个子进程。为了实现高效的进程复\n制，内核使用写时复制（COW）技术，在fork()后，父进程和子进程共享相同的\n物理页面，直到其中一个进程尝试写入这些页面时，才会为该进程分配独立的物理\n页面。为了确保写时复制机制的正确性，这些页面会被标记为只读，只有在写操作\n发生时才会进行复制。\nB.execve()函数加载一个新的程序并替换当前进程的映像，包括程序计数器（PC）\n和其他执行上下文。程序计数器会被设置为新程序的起始地址。\nC. munmap()函数用于解除内存映射区域的映射，删除该区域后，再尝试访问该\n内存区域会导致访问非法内存，从而引发段错误（Segmentation Fault）。\nD. 错误。交换空间（swap space）用于在物理内存不足时存储不常用的页面。\n交换空间的大小限制了操作系统能够为进程分配的虚拟内存的总量，尤其是在内存\n不足的情况下。如果系统没有足够的物理内存来满足所有进程的虚拟内存需求，交\n换空间的大小就成为一个限制因素。因此，交换空间与当前运行进程能够分配的虚\n拟页面总数是有关系的。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4660,292 +4693,6 @@
         "format": "markdown",
         "prompt": "Part B: 动态内存分配(9分)\n小明开发了一种简单的动态内存分配器，仅采取无脚部的隐式空闲链表组织方\n式，没有额外的数据结构，内存分配块采取8字节对齐，其内存块如图1所示，块\n大小采用小端法存储。分配算法采用首次适配，堆空间足够大。\n\n\n1） 在如上动态内存分配器的机器上（初始堆为空），小张执行  void *p =\nmalloc(5); 后，p实际指向的位置为图1中的     位置（选填”A”、B””、”\nC”或”D”）， 此A时处的1个字节的内容为     （用十六进制表示，如0xFF）。\n（每空1分）\n2） 小明设计的分配器采取的空闲块合并方式为推迟合并，假设某次合并前，堆空\n间共有n个独立的内存块，则该合并过程的时间复杂度至少为     。（ 单选 ，填\n写选项）（1分）\nA. 𝑂(1)   B. 𝑂(𝑙𝑜𝑔𝑛)   C. 𝑂(𝑛)     D. 𝑂(𝑛!)\n3） 为了提高空闲块合并的效率，小明为每个内存块在结尾处都添加了脚部，如图\n2所示，空闲块合并策略更改为立即合并，假设某次释放某已分配内存块后，堆空\n间共有n个独立的内存块，则此时的合并操作的时间复杂度至少为     。（ 单选 ，\n填写选项）\nA. 𝑂(1)   B. 𝑂(𝑙𝑜𝑔𝑛)   C. 𝑂(𝑛)     D. 𝑂(𝑛!)\n此时使用malloc申请内存时，单个内存块的内存利用率最低为     。（用 最简\n分数表示，内存利用率=申请块大小/实际分配块大小）（每空1分）\n4） 为了进一步提升内存利用率，小明只对空闲块添加脚部，而不对分配块添加脚\n部。则此时对已分配块执行释放操作时，     有足够空间存放脚部。（1分）\nA. 一定           B. 不一定\n5） 小明改进后的合并方法如下：每当释放一个内存块时，取出该内存块头部之前\n的四个字节的数据，检查最低位是否为0，如果最低位为0，再利用取出的字节的\n\n\n其他部分读出块大小，并根据大小找到对应的头部位置，如果此时找到的头部与取\n出的四个字节内容完全相同，则合并这个块。小张认为小明此时的合并方式存在问\n题，于是构造了如下代码进行攻击，假设初始堆为空：\n```\n#include <stdlib.h>\nint main() {\n    void *p1 =  calloc(28);\n    void *p2 =  calloc(32);\n    *((char*)p1 + 24 ) = 0x10;\n    *((char*)p1 + ① ) =  ② ;\n    free(p2);\n}\n```\n为了使小明的内存分配器合并空闲块出错，上述代码段①、②处应当分别填\n写     、     ，此时在执行完 free(p2) ;后，小明的内存分配器会错误地认\n为从地址 ((char*)p1 +      ) 开始的堆内存都是空闲的。（3分，代码两空\n全部正确得1分，最后一空2分）",
         "answer": "22\n23"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-a7f849b7ff415529",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 21,
-      "moduleId": "virtual_memory_and_malloc",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 21",
-      "summary": "fork 后地址空间独立与 COW 缺页",
-      "content": "21.执行下面的C程序代码\n```\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) { *p = 20; _exit(0); }\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？\nA. 输出一定为 20\nB. 输出一定为 10\nC. 输出有可能是10，也有可能是20，取决于进程调度顺序\nD. fork之后，父进程由于Copy-on-Write可能会发生缺页异常\nE. fork之后，子进程由于Copy-on-Write可能会发生缺页异常\n答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 125,
-          "end": 129
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/125.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "21.执行下面的C程序代码\n```\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) { *p = 20; _exit(0); }\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "输出一定为 20"
-          },
-          {
-            "key": "B",
-            "content": "输出一定为 10"
-          },
-          {
-            "key": "C",
-            "content": "输出有可能是10，也有可能是20，取决于进程调度顺序"
-          },
-          {
-            "key": "D",
-            "content": "fork之后，父进程由于Copy-on-Write可能会发生缺页异常"
-          },
-          {
-            "key": "E",
-            "content": "fork之后，子进程由于Copy-on-Write可能会发生缺页异常"
-          }
-        ],
-        "answer": "答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "输出一定为 20"
-          },
-          {
-            "id": "B",
-            "content": "输出一定为 10"
-          },
-          {
-            "id": "C",
-            "content": "输出有可能是10，也有可能是20，取决于进程调度顺序"
-          },
-          {
-            "id": "D",
-            "content": "fork之后，父进程由于Copy-on-Write可能会发生缺页异常"
-          },
-          {
-            "id": "E",
-            "content": "fork之后，子进程由于Copy-on-Write可能会发生缺页异常"
-          }
-        ],
-        "correctChoiceIds": [
-          "B",
-          "E"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "21.执行下面的C程序代码\n```\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) { *p = 20; _exit(0); }\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？",
-        "answer": "答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-d64d46c4527819b2",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 22,
-      "moduleId": "virtual_memory_and_malloc",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 22",
-      "summary": "TLB 作用、上下文切换与 page fault 关系",
-      "content": "22.关于TLB，下列说法哪些正确？\nA. TLB 本质上是缓存，缓存最近使用的页表条目\nB. TLB 命中时，CPU 通常无需再访问内存中的页表即可完成地址翻译\nC. 进程上下文切换时 TLB 必须清空，否则会被另一个进程误用\nD. TLB 的miss rate由页大小决定，与程序访问模式无关\nE. 发生page fault之前必然有一次对应的TLB miss\n答案：AB\n解析：TLB 是“页表项缓存”；TLB miss 会引发页表遍历甚至缺页处理。上下文切换时是否“必须清空”取决于是否有地址空间标识等机制，因此 C 说法太绝对。TLB 命中时，如果有效位为 0，也会导致缺页（E 错误）。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 130,
-          "end": 134
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/130.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "22.关于TLB，下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "TLB 本质上是缓存，缓存最近使用的页表条目"
-          },
-          {
-            "key": "B",
-            "content": "TLB 命中时，CPU 通常无需再访问内存中的页表即可完成地址翻译"
-          },
-          {
-            "key": "C",
-            "content": "进程上下文切换时 TLB 必须清空，否则会被另一个进程误用"
-          },
-          {
-            "key": "D",
-            "content": "TLB 的miss rate由页大小决定，与程序访问模式无关"
-          },
-          {
-            "key": "E",
-            "content": "发生page fault之前必然有一次对应的TLB miss"
-          }
-        ],
-        "answer": "答案：AB\n解析：TLB 是“页表项缓存”；TLB miss 会引发页表遍历甚至缺页处理。上下文切换时是否“必须清空”取决于是否有地址空间标识等机制，因此 C 说法太绝对。TLB 命中时，如果有效位为 0，也会导致缺页（E 错误）。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "TLB 本质上是缓存，缓存最近使用的页表条目"
-          },
-          {
-            "id": "B",
-            "content": "TLB 命中时，CPU 通常无需再访问内存中的页表即可完成地址翻译"
-          },
-          {
-            "id": "C",
-            "content": "进程上下文切换时 TLB 必须清空，否则会被另一个进程误用"
-          },
-          {
-            "id": "D",
-            "content": "TLB 的miss rate由页大小决定，与程序访问模式无关"
-          },
-          {
-            "id": "E",
-            "content": "发生page fault之前必然有一次对应的TLB miss"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "22.关于TLB，下列说法哪些正确？",
-        "answer": "答案：AB\n解析：TLB 是“页表项缓存”；TLB miss 会引发页表遍历甚至缺页处理。上下文切换时是否“必须清空”取决于是否有地址空间标识等机制，因此 C 说法太绝对。TLB 命中时，如果有效位为 0，也会导致缺页（E 错误）。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-82b70e5374acf683",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 23,
-      "moduleId": "virtual_memory_and_malloc",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 23",
-      "summary": "隐式/显式空闲链表与内外部碎片",
-      "content": "23.关于动态内存分配，下列说法哪些正确？\nA. 隐式空闲链表（implicit list）通常需要线性扫描找空闲块，吞吐可能受影响\nB. 显式空闲链表（explicit free list）把空闲块串起来，往往能更快找到候选块，\n但空闲块需要额外指针字段\nC. 内部碎片的通常体现：空闲总量足够但分散，无法满足较大连续请求\nD. 外部碎片的通常体现：分配块比请求需求大造成的浪费\nE. 分割（splitting）是把大空闲块切成“已分配块 + 剩余空闲块”，可能提高利用率\n但增加管理开销\n答案：ABE\n解析：CD 描述反了。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 135,
-          "end": 137
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/135.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "23.关于动态内存分配，下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "隐式空闲链表（implicit list）通常需要线性扫描找空闲块，吞吐可能受影响"
-          },
-          {
-            "key": "B",
-            "content": "显式空闲链表（explicit free list）把空闲块串起来，往往能更快找到候选块，\n但空闲块需要额外指针字段"
-          },
-          {
-            "key": "C",
-            "content": "内部碎片的通常体现：空闲总量足够但分散，无法满足较大连续请求"
-          },
-          {
-            "key": "D",
-            "content": "外部碎片的通常体现：分配块比请求需求大造成的浪费"
-          },
-          {
-            "key": "E",
-            "content": "分割（splitting）是把大空闲块切成“已分配块 + 剩余空闲块”，可能提高利用率\n但增加管理开销"
-          }
-        ],
-        "answer": "答案：ABE\n解析：CD 描述反了。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "隐式空闲链表（implicit list）通常需要线性扫描找空闲块，吞吐可能受影响"
-          },
-          {
-            "id": "B",
-            "content": "显式空闲链表（explicit free list）把空闲块串起来，往往能更快找到候选块，\n但空闲块需要额外指针字段"
-          },
-          {
-            "id": "C",
-            "content": "内部碎片的通常体现：空闲总量足够但分散，无法满足较大连续请求"
-          },
-          {
-            "id": "D",
-            "content": "外部碎片的通常体现：分配块比请求需求大造成的浪费"
-          },
-          {
-            "id": "E",
-            "content": "分割（splitting）是把大空闲块切成“已分配块 + 剩余空闲块”，可能提高利用率\n但增加管理开销"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "E"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "23.关于动态内存分配，下列说法哪些正确？",
-        "answer": "答案：ABE\n解析：CD 描述反了。"
       },
       "presentation": {
         "status": "ready",

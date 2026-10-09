@@ -2789,7 +2789,7 @@
     {
       "id": "q-51ff2770273733c0",
       "paperId": "p-7016510094998ec2",
-      "paperOrder": 42,
+      "paperOrder": 38,
       "moduleId": "concurrent_programming",
       "year": 2022,
       "examType": "期末",
@@ -2823,14 +2823,25 @@
         "choices": [],
         "answer": "答案：\n/* 1 */ P(&mutex);\n/* 2 */ P(&w);\n/* 3 */ V(&mutex);\n/* 4 */ P(&mutex);\n/* 5 */ V(&w);\n/* 6 */ V(&mutex);\n/* 7 */ P(&w);\n/* 8 */ V(&w);"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "1、第一类读者-写者问题（读者优先：总是给读者优先权，只要写者当前没有进行写操作，读者就能获得访问权；这种情况存在于读者很多，写者不经常更新的时候使用）\n\n```c\nint readcnt;    /* Initially 0 */\nsem_t mutex, w; /* Both initially 1 */\n\nvoid reader(void)\n{\n  while (1) {\n    /* 1 */\n    readcnt++;\n    if (readcnt == 1) /* First in */\n      /* 2 */\n    /* 3 */\n\n    /* Reading happens here */\n\n    /* 4 */\n    readcnt--;\n    if (readcnt == 0) /* Last out */\n      /* 5 */\n    /* 6 */\n  }\n}\n\nvoid writer(void)\n{\n```\n\n\n```c\n  while (1) {\n    /* 7 */\n\n    /* Writing here */\n\n    /* 8 */\n  }\n}\n```",
         "answer": "答案：\n/* 1 */ P(&mutex);\n/* 2 */ P(&w);\n/* 3 */ V(&mutex);\n/* 4 */ P(&mutex);\n/* 5 */ V(&w);\n/* 6 */ V(&mutex);\n/* 7 */ P(&w);\n/* 8 */ V(&w);"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q7",
+        "questionId": "q-b04eecbfa5be0f56",
+        "title": "第七题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -2840,7 +2851,7 @@
     {
       "id": "q-f83ca79637ff66b3",
       "paperId": "p-7016510094998ec2",
-      "paperOrder": 43,
+      "paperOrder": 39,
       "moduleId": "concurrent_programming",
       "year": 2022,
       "examType": "期末",
@@ -2874,14 +2885,25 @@
         "choices": [],
         "answer": "答案：\n/* 1 */ 1\n/* 2 */ P(&r);\n/* 3 */ if (readcnt == 1) P(&w);\n/* 4 */ V(&r);\n/* 5 */ if (readcnt == 0) V(&w);\n/* 6 */ if (writecnt == 1) P(&r);\n/* 7 */ if (writecnt == 0) V(&r);"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2、第二类读者-写者问题（写者优先：写者具有优先权，将后来的读者延迟到所有等待的或活动的写者都完成为止；这种情况存在于经常更新的系统，而读者的目的是获取最新的数据）\n\n```c\nint readcnt, writecnt;      // Initially 0\nsem_t rmutex, wmutex;       // Initially 1\nsem_t r, w;                 // Initially /* 1 */\nvoid reader(void)\n{\n  while (1) {\n    /* 2 */\n    P(&rmutex);\n    readcnt++;\n    /* 3 */\n    V(&rmutex);\n    /* 4 */\n\n    /* Reading happens here */\n\n    P(&rmutex);\n    readcnt--;\n    /* 5 */\n    V(&rmutex);\n  }\n}\n\nvoid writer(void)\n{\n  while (1) {\n    P(&wmutex);\n    writecnt++;\n    /* 6 */\n    V(&wmutex);\n\n    P(&w);\n    /* Writing here */\n    V(&w);\n\n    P(&wmutex);\n    writecnt--;\n    /* 7 */\n    V(&wmutex);\n  }\n}\n```",
         "answer": "答案：\n/* 1 */ 1\n/* 2 */ P(&r);\n/* 3 */ if (readcnt == 1) P(&w);\n/* 4 */ V(&r);\n/* 5 */ if (readcnt == 0) V(&w);\n/* 6 */ if (writecnt == 1) P(&r);\n/* 7 */ if (writecnt == 0) V(&r);"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q7",
+        "questionId": "q-b04eecbfa5be0f56",
+        "title": "第七题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -3113,236 +3135,6 @@
       }
     },
     {
-      "id": "q-a2e00c811e17660e",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 25,
-      "moduleId": "concurrent_programming",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 25",
-      "summary": "进程与线程资源共享与寄存器独立",
-      "content": "25.关于进程(processes) 和线程 (threads) 的描述，下列说法哪些正确？\n答案：ABCD\n解析：线程切换会保存CPU的寄存器，E错误",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 144,
-          "end": 146
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/144.md"
-      },
-      "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "25.关于进程(processes) 和线程 (threads) 的描述，下列说法哪些正确？",
-        "choices": [],
-        "answer": "答案：ABCD\n解析：线程切换会保存CPU的寄存器，E错误"
-      },
-      "interaction": {
-        "kind": "short-answer",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "25.关于进程(processes) 和线程 (threads) 的描述，下列说法哪些正确？",
-        "answer": "答案：ABCD\n解析：线程切换会保存CPU的寄存器，E错误"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-a84a52ca10e39ac7",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 29,
-      "moduleId": "concurrent_programming",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "四 1",
-      "summary": "共享变量识别及参考答案",
-      "content": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr，哪几个是共享变量？\n答：\n答案：static_local；cnt；shared_array；dynamic_ptr（每个1分）",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 176,
-          "end": 181
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/176.md"
-      },
-      "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr，哪几个是共享变量？\n答：",
-        "choices": [],
-        "answer": "答案：static_local；cnt；shared_array；dynamic_ptr（每个1分）"
-      },
-      "interaction": {
-        "kind": "short-answer",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr，哪几个是共享变量？\n答：",
-        "answer": "答案：static_local；cnt；shared_array；dynamic_ptr（每个1分）"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-84b4945864fa71b5",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 30,
-      "moduleId": "concurrent_programming",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "四 2",
-      "summary": "Lightswitch 读者-写者两问及答案",
-      "content": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其\n中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有\n读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提\n示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和\n2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者\n执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2,\nW2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：\n答：（ ）\nA. (9),(8),(4),(2),(11)\nB. (11),(8),(3),(3),(8)\nC. (11),(11),(3),(2),(8)\nD. (9),(11),(4),(3),(11)\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时\n间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```\n答案：C\n（1）否（1 分）；（2）C（2 分）",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 182,
-          "end": 192
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/182.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "single",
-        "stem": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其\n中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有\n读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提\n示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和\n2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者\n执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2,\nW2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：\n答：（ ）",
-        "choices": [
-          {
-            "key": "A",
-            "content": "(9),(8),(4),(2),(11)"
-          },
-          {
-            "key": "B",
-            "content": "(11),(8),(3),(3),(8)"
-          },
-          {
-            "key": "C",
-            "content": "(11),(11),(3),(2),(8)"
-          },
-          {
-            "key": "D",
-            "content": "(9),(11),(4),(3),(11)\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时\n间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```"
-          }
-        ],
-        "answer": "答案：C\n（1）否（1 分）；（2）C（2 分）"
-      },
-      "interaction": {
-        "kind": "single-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "(9),(8),(4),(2),(11)"
-          },
-          {
-            "id": "B",
-            "content": "(11),(8),(3),(3),(8)"
-          },
-          {
-            "id": "C",
-            "content": "(11),(11),(3),(2),(8)"
-          },
-          {
-            "id": "D",
-            "content": "(9),(11),(4),(3),(11)\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时\n间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```"
-          }
-        ],
-        "correctChoiceIds": [
-          "C"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其\n中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有\n读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提\n示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和\n2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者\n执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2,\nW2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：\n答：（ ）",
-        "answer": "答案：C\n（1）否（1 分）；（2）C（2 分）"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-1e24e8308ba529c5",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 31,
-      "moduleId": "concurrent_programming",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "四 3",
-      "summary": "生产者-消费者订单缓冲区空白答案",
-      "content": "3.（8分）在现代餐饮行业中，高效的订单处理系统至关重要。小红设计了一个模拟在线餐\n厅的订单处理流程，其中服务员接收顾客订单，厨师处理这些订单。为最大化效率，餐厅雇\n佣了多个服务员和厨师同时工作，他们通过一个共享的订单缓冲区进行协作。该场景遵循以\n下规则：\n 服务员有NUM_WAITERS名，厨师有NUM_COOKS名（NUM_WAITERS和NUM_COOKS\n都大于1），服务员和厨师使用同一个共享订单缓冲区；\n 每个服务员独立工作，每次将接收到的一个顾客订单放入共享的订单缓冲区内，当缓冲\n区满时，服务员必须等待，直到有空闲位置才能放入新订单；\n 每个厨师独立工作，每次从共享订单缓冲区内取出一个订单进行烹饪处理，当缓冲区为\n空时，厨师必须等待，直到有新的订单被放入；\n 订单缓冲区的容量为BUF_SIZE（BUF_SIZE大于0），用于存放待处理的订单，且初\n始情况下订单缓冲区为空。\n下面代码中，waiter函数为服务员线程，cook函数为厨师线程，init_buffer函\n数为初始化函数，会在系统启动时调用一次，略去其他部分代码和无关逻辑。\n请填写程序中对应空白处的代码：\n#define NUM_WAITERS 4 // 服务员数量\n#define NUM_COOKS 2 // 厨师数量\n#define BUF_SIZE 5 // 订单缓冲区容量\n```\ntypedef struct {\nchar* orders[BUF_SIZE];\nint in;\nint out;\nsem_t mutex;\nsem_t empty;\nsem_t full;\n} Buffer;\nBuffer buffer;\nvoid init_buffer() {\nbuffer.in = 0;\nbuffer.out = 0;\nsem_init(&buffer.mutex, 0, ______(1)_______);\nsem_init(&buffer.empty, 0, _______(2)_______);\nsem_init(&buffer.full, 0, 0);\n}\nvoid* waiter(void* arg) {\nwhile(1) {\n```\n// 接单逻辑\nchar* order = xxxx;\n// 将订单放入缓冲区\n```\n______(3)______;\n______(4)______;\nbuffer.orders[buffer.in] = order;\nbuffer.in = (buffer.in+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(5)______;\n```\n// 其他逻辑略去\n```\n}\n}\nvoid* cook(void* arg) {\nwhile(1) {\n```\n// 从缓冲区取出订单\n```\n______(6)______;\n______(7)______;\nchar* order = buffer.orders[buffer.out];\nbuffer.out = (buffer.out+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(8)______;\n```\n// 其他逻辑略去\n```\n}\n}\n```\n答案（每项 1 分）：\n(1) 1\n(2) BUF_SIZE\n(3) P(&buffer.empty)\n(4) P(&buffer.mutex)\n(5) V(&buffer.full)\n(6) P(&buffer.full)\n(7) P(&buffer.mutex)\n(8) V(&buffer.empty)",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 193,
-          "end": 202
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/193.md"
-      },
-      "layout": {
-        "mode": "fill",
-        "selection": null,
-        "stem": "3.（8分）在现代餐饮行业中，高效的订单处理系统至关重要。小红设计了一个模拟在线餐\n厅的订单处理流程，其中服务员接收顾客订单，厨师处理这些订单。为最大化效率，餐厅雇\n佣了多个服务员和厨师同时工作，他们通过一个共享的订单缓冲区进行协作。该场景遵循以\n下规则：\n 服务员有NUM_WAITERS名，厨师有NUM_COOKS名（NUM_WAITERS和NUM_COOKS\n都大于1），服务员和厨师使用同一个共享订单缓冲区；\n 每个服务员独立工作，每次将接收到的一个顾客订单放入共享的订单缓冲区内，当缓冲\n区满时，服务员必须等待，直到有空闲位置才能放入新订单；\n 每个厨师独立工作，每次从共享订单缓冲区内取出一个订单进行烹饪处理，当缓冲区为\n空时，厨师必须等待，直到有新的订单被放入；\n 订单缓冲区的容量为BUF_SIZE（BUF_SIZE大于0），用于存放待处理的订单，且初\n始情况下订单缓冲区为空。\n下面代码中，waiter函数为服务员线程，cook函数为厨师线程，init_buffer函\n数为初始化函数，会在系统启动时调用一次，略去其他部分代码和无关逻辑。\n请填写程序中对应空白处的代码：\n#define NUM_WAITERS 4 // 服务员数量\n#define NUM_COOKS 2 // 厨师数量\n#define BUF_SIZE 5 // 订单缓冲区容量\n```\ntypedef struct {\nchar* orders[BUF_SIZE];\nint in;\nint out;\nsem_t mutex;\nsem_t empty;\nsem_t full;\n} Buffer;\nBuffer buffer;\nvoid init_buffer() {\nbuffer.in = 0;\nbuffer.out = 0;\nsem_init(&buffer.mutex, 0, ______(1)_______);\nsem_init(&buffer.empty, 0, _______(2)_______);\nsem_init(&buffer.full, 0, 0);\n}\nvoid* waiter(void* arg) {\nwhile(1) {\n```\n// 接单逻辑\nchar* order = xxxx;\n// 将订单放入缓冲区\n```\n______(3)______;\n______(4)______;\nbuffer.orders[buffer.in] = order;\nbuffer.in = (buffer.in+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(5)______;\n```\n// 其他逻辑略去\n```\n}\n}\nvoid* cook(void* arg) {\nwhile(1) {\n```\n// 从缓冲区取出订单\n```\n______(6)______;\n______(7)______;\nchar* order = buffer.orders[buffer.out];\nbuffer.out = (buffer.out+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(8)______;\n```\n// 其他逻辑略去\n```\n}\n}\n```",
-        "choices": [],
-        "answer": "答案（每项 1 分）：\n(1) 1\n(2) BUF_SIZE\n(3) P(&buffer.empty)\n(4) P(&buffer.mutex)\n(5) V(&buffer.full)\n(6) P(&buffer.full)\n(7) P(&buffer.mutex)\n(8) V(&buffer.empty)"
-      },
-      "interaction": {
-        "kind": "fill",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "3.（8分）在现代餐饮行业中，高效的订单处理系统至关重要。小红设计了一个模拟在线餐\n厅的订单处理流程，其中服务员接收顾客订单，厨师处理这些订单。为最大化效率，餐厅雇\n佣了多个服务员和厨师同时工作，他们通过一个共享的订单缓冲区进行协作。该场景遵循以\n下规则：\n 服务员有NUM_WAITERS名，厨师有NUM_COOKS名（NUM_WAITERS和NUM_COOKS\n都大于1），服务员和厨师使用同一个共享订单缓冲区；\n 每个服务员独立工作，每次将接收到的一个顾客订单放入共享的订单缓冲区内，当缓冲\n区满时，服务员必须等待，直到有空闲位置才能放入新订单；\n 每个厨师独立工作，每次从共享订单缓冲区内取出一个订单进行烹饪处理，当缓冲区为\n空时，厨师必须等待，直到有新的订单被放入；\n 订单缓冲区的容量为BUF_SIZE（BUF_SIZE大于0），用于存放待处理的订单，且初\n始情况下订单缓冲区为空。\n下面代码中，waiter函数为服务员线程，cook函数为厨师线程，init_buffer函\n数为初始化函数，会在系统启动时调用一次，略去其他部分代码和无关逻辑。\n请填写程序中对应空白处的代码：\n#define NUM_WAITERS 4 // 服务员数量\n#define NUM_COOKS 2 // 厨师数量\n#define BUF_SIZE 5 // 订单缓冲区容量\n```\ntypedef struct {\nchar* orders[BUF_SIZE];\nint in;\nint out;\nsem_t mutex;\nsem_t empty;\nsem_t full;\n} Buffer;\nBuffer buffer;\nvoid init_buffer() {\nbuffer.in = 0;\nbuffer.out = 0;\nsem_init(&buffer.mutex, 0, ______(1)_______);\nsem_init(&buffer.empty, 0, _______(2)_______);\nsem_init(&buffer.full, 0, 0);\n}\nvoid* waiter(void* arg) {\nwhile(1) {\n```\n// 接单逻辑\nchar* order = xxxx;\n// 将订单放入缓冲区\n```\n______(3)______;\n______(4)______;\nbuffer.orders[buffer.in] = order;\nbuffer.in = (buffer.in+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(5)______;\n```\n// 其他逻辑略去\n```\n}\n}\nvoid* cook(void* arg) {\nwhile(1) {\n```\n// 从缓冲区取出订单\n```\n______(6)______;\n______(7)______;\nchar* order = buffer.orders[buffer.out];\nbuffer.out = (buffer.out+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(8)______;\n```\n// 其他逻辑略去\n```\n}\n}\n```",
-        "answer": "答案（每项 1 分）：\n(1) 1\n(2) BUF_SIZE\n(3) P(&buffer.empty)\n(4) P(&buffer.mutex)\n(5) V(&buffer.full)\n(6) P(&buffer.full)\n(7) P(&buffer.mutex)\n(8) V(&buffer.empty)"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
       "id": "q-d334458ae32ec316",
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 25,
@@ -3488,16 +3280,16 @@
       }
     },
     {
-      "id": "q-467405a40a38dee6",
+      "id": "q-51332fd0f4b3baa8",
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 30,
       "moduleId": "concurrent_programming",
       "year": 2025,
       "examType": "期末",
       "exam": "2025期末",
-      "questionNo": "四 2",
-      "summary": "Lightswitch 读者-写者与到达时刻状态分析",
-      "content": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其\n中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有\n读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提\n示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和\n2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者\n执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2,\nW2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：\n答：（ ）\nA. (9),(8),(4),(2),(11)\nB. (11),(8),(3),(3),(8)\nC. (11),(11),(3),(2),(8)\nD. (9),(11),(4),(3),(11)\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时\n间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```\n答案：C\n解析：（1）否（1 分）；（2）C（2 分）",
+      "questionNo": "四 2（1）",
+      "summary": "Lightswitch 读者-写者：调整信号量操作后的竞争/死锁判断",
+      "content": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty); 两行，是否会导致竞争或死锁问题？答：（  ）[是/否]\n答案：（1）否（1分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3509,15 +3301,74 @@
         "document": "原文/期末/2025期末-无答案.md",
         "lines": {
           "start": 499,
-          "end": 601
+          "end": 504
         },
         "aliases": [],
         "curated": "_curated/期末/2025期末-无答案/499.md"
       },
       "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty); 两行，是否会导致竞争或死锁问题？答：（  ）[是/否]",
+        "choices": [],
+        "answer": "答案：（1）否（1分）"
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty); 两行，是否会导致竞争或死锁问题？答：（  ）[是/否]",
+        "answer": "答案：（1）否（1分）"
+      },
+      "group": {
+        "id": "p-e8f40973e2cc056e:2025-final-q4-2",
+        "questionId": "q-3ec4aed1f80da6f3",
+        "title": "四 2",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-6b0d64ca8f0741b2",
+      "paperId": "p-e8f40973e2cc056e",
+      "paperOrder": 31,
+      "moduleId": "concurrent_programming",
+      "year": 2025,
+      "examType": "期末",
+      "exam": "2025期末",
+      "questionNo": "四 2（2）",
+      "summary": "Lightswitch 读者-写者：给定到达时刻的并发状态选择",
+      "content": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```\nA. (9),(8),(4),(2),(11)\nB. (11),(8),(3),(3),(8)\nC. (11),(11),(3),(2),(8)\nD. (9),(11),(4),(3),(11)\n答案：C（2分）",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2025期末-无答案.md",
+        "lines": {
+          "start": 505,
+          "end": 601
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2025期末-无答案/505.md"
+      },
+      "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其\n中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有\n读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提\n示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和\n2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者\n执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2,\nW2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：\n答：（ ）",
+        "stem": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```",
         "choices": [
           {
             "key": "A",
@@ -3533,12 +3384,12 @@
           },
           {
             "key": "D",
-            "content": "(9),(11),(4),(3),(11)\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时\n间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```"
+            "content": "(9),(11),(4),(3),(11)"
           }
         ],
-        "answer": "答案：C\n解析：（1）否（1 分）；（2）C（2 分）"
+        "answer": "答案：C（2分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "single-choice",
         "declared": true,
         "choices": [
@@ -3556,17 +3407,28 @@
           },
           {
             "id": "D",
-            "content": "(9),(11),(4),(3),(11)\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时\n间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```"
+            "content": "(9),(11),(4),(3),(11)"
           }
         ],
         "correctChoiceIds": [
           "C"
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其\n中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有\n读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提\n示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty);\n两行，是否会导致竞争或死锁问题？答：（ ）[是/否]\n（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和\n2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者\n执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2,\nW2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：\n答：（ ）",
-        "answer": "答案：C\n解析：（1）否（1 分）；（2）C（2 分）"
+        "prompt": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```",
+        "answer": "答案：C（2分）"
+      },
+      "group": {
+        "id": "p-e8f40973e2cc056e:2025-final-q4-2",
+        "questionId": "q-3ec4aed1f80da6f3",
+        "title": "四 2",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -3576,7 +3438,7 @@
     {
       "id": "q-20fcc7293246e535",
       "paperId": "p-e8f40973e2cc056e",
-      "paperOrder": 31,
+      "paperOrder": 32,
       "moduleId": "concurrent_programming",
       "year": 2025,
       "examType": "期末",

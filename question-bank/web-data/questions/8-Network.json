@@ -3005,14 +3005,25 @@
         "choices": [],
         "answer": "答案：SOCK_STREAM"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "学完《网络编程》一章，小明迫不及待地想搭建自己的游戏服务器。他根据课本上代码写出的《网络乒乓》服务器代码如下。他在 Class Machine 上运行代码，TCP 等协议都采用默认设置。请你根据代码回答问题。\n\n```c\n 1  #include \"csapp.h\"\n 2  #include \"stdlib.h\"\n 3  #include \"stdio.h\"\n 4  #define GOAL 100\n 5\n 6  int main(int argc, char **argv)\n 7  {\n 8      int listenfd, connfd;\n 9      socklen_t clientlen;\n10      struct sockaddr_storage clientaddr;\n11      char client_hostname[MAXLINE], client_port[MAXLINE], buf[MAXLINE];\n12      if (argc != 2) {\n13          fprintf(stderr, \"usage: %s <port>\\n\", argv[0]);\n14          exit(0);\n15      }\n16      listenfd = Open_listenfd(argv[1]); // Open listen socket\n17      int ball_cnt = 0;\n18      while (1){\n19          clientlen = sizeof(struct sockaddr_storage);\n20          connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); // Accept connection\n21          Getnameinfo((SA *)&clientaddr, clientlen, client_hostname, MAXLINE,\n22                      client_port, MAXLINE, 0);\n23          printf(\"Connected to (%s, %s)\\n\", client_hostname, client_port);\n24\n25          rio_t rio;\n26          Rio_readinitb(&rio, connfd);\n27          Rio_readlineb(&rio, buf, MAXLINE);\n28          int recv_num = atoi(buf);\n29          if (recv_num == ball_cnt){\n30              if (ball_cnt == GOAL){\n31                  sprintf(buf, \"You win!\\n\");\n32                  Rio_writen(connfd, buf, strlen(buf));\n33                  ball_cnt = 0;\n34              }\n35              else {\n36                  sprintf(buf, \"%d\\n\", ball_cnt+1);\n37                  Rio_writen(connfd, buf, strlen(buf));\n38                  ball_cnt += 2;\n39              }\n40          }\n41          Close(connfd); // Close the connection\n42      }\n43      exit(0);\n44  }\n```\n\n\n1. 函数 Open_listenfd 要建立的是可靠的TCP连接。因此，里面有一行代码设置了 hints.ai_socktype = ______；（SOCK_STREAM / SOCK_DGRAM）。（1分）",
         "answer": "答案：SOCK_STREAM"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q6",
+        "questionId": "q-9eb1f8b0e041bbe7",
+        "title": "第六题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -3056,14 +3067,25 @@
         "choices": [],
         "answer": "答案：IP地址对应的主机名"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2. 函数 Getnameinfo 的用途是查询输入的______（主机名对应的IP地址 / IP地址对应的主机名）。（1分）",
         "answer": "答案：IP地址对应的主机名"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q6",
+        "questionId": "q-9eb1f8b0e041bbe7",
+        "title": "第六题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -3107,14 +3129,25 @@
         "choices": [],
         "answer": "答案：localhost 50000"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3. 小明的朋友们对他的游戏都不感兴趣，小明只好自己写了一个客户端来玩自己的游戏。他的客户端代码如下：\n\n```c\n 1  #include \"csapp.h\"\n 2  #define GOAL 100\n 3\n 4  int main(int argc, char **argv){\n 5      int clientfd;\n 6      char *host, *port, buf[MAXLINE];\n 7      rio_t rio;\n 8\n 9      if (argc != 3){\n10          fprintf(stderr, \"usage: %s <host> <port>\\n\", argv[0]);\n11          exit(0);\n12      }\n13      host = argv[1];\n14      port = argv[2];\n15\n16      for (int ball_cnt=0; ball_cnt<=GOAL; ball_cnt+=2){\n17          clientfd = Open_clientfd(host, port);\n18          Rio_readinitb(&rio, clientfd);\n19          sprintf(buf, \"%d\\n\", ball_cnt);\n20          Rio_writen(clientfd, buf, strlen(buf));\n21          Rio_readlineb(&rio, buf, MAXLINE);\n22          Fputs(buf, stdout);\n23      }\n24      exit(0);\n25  }\n```\n\n他在同一台主机上运行服务器和客户端。他的操作流程是：\n\n```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是 Connected to (localhost, 33580)。请填入小明操作流程中缺失的两处信息。（2分）",
         "answer": "答案：localhost 50000"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q6",
+        "questionId": "q-9eb1f8b0e041bbe7",
+        "title": "第六题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -3158,14 +3191,25 @@
         "choices": [],
         "answer": "答案：每次循环都打开了一个新的 clientfd 而没有关闭，导致文件数量过多，耗尽系统资源"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "4. 小明认为设置 #define GOAL 100 难度太低了，于是将服务器与客户端中的代码都改成了 #define GOAL 100000。他像之前一样运行服务器与客户端，结果发现客户端开始报错，并且始终没有输出\"You win\"。请你解释为什么修改成 100000 会让程序不能正常运行。（2分）",
         "answer": "答案：每次循环都打开了一个新的 clientfd 而没有关闭，导致文件数量过多，耗尽系统资源"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q6",
+        "questionId": "q-9eb1f8b0e041bbe7",
+        "title": "第六题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -3209,14 +3253,25 @@
         "choices": [],
         "answer": "答案：第 22 行之后；Close(clientfd);"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "5. 请在客户端中添加一行代码，使得 #define GOAL 100000 时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）",
         "answer": "答案：第 22 行之后；Close(clientfd);"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q6",
+        "questionId": "q-9eb1f8b0e041bbe7",
+        "title": "第六题",
+        "order": 5
       },
       "presentation": {
         "status": "ready",
@@ -3273,7 +3328,7 @@
         ],
         "answer": "答案：A\n（小明的服务器在迭代处理两个客户端时，ball_cnt 只会在某一次与其中一个客户端连接时等于 GOAL，之后便会设为 0，而另一个客户端已经超过 0，因此只会发送一次\"You win!\"。）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "single-choice",
         "declared": true,
         "choices": [
@@ -3293,245 +3348,22 @@
         "correctChoiceIds": [
           "A"
         ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "6. 小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（ ）（2分）",
         "answer": "答案：A\n（小明的服务器在迭代处理两个客户端时，ball_cnt 只会在某一次与其中一个客户端连接时等于 GOAL，之后便会设为 0，而另一个客户端已经超过 0，因此只会发送一次\"You win!\"。）"
       },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-18e6c3bb20600af5",
-      "paperId": "p-7016510094998ec2",
-      "paperOrder": 38,
-      "moduleId": "network",
-      "year": 2022,
-      "examType": "期末",
-      "exam": "2022期末",
-      "questionNo": "第六题 3（第 14 页重复）",
-      "summary": "操作流程与端口推断题面，扫描重复页",
-      "content": "```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是`Connected to (localhost, 33580)`。请填入小明操作流程中缺失的两处信息。（2分）\n答案：localhost 50000",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": [
-          "a-bc6da33280192b2a",
-          "a-3edc01064ad8cdd7"
-        ]
-      },
-      "source": {
-        "document": "原文/期末/2022期末-无答案.md",
-        "lines": {
-          "start": 625,
-          "end": 631
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2022期末-无答案/625.md"
-      },
-      "layout": {
-        "mode": "fill",
-        "selection": null,
-        "stem": "```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是`Connected to (localhost, 33580)`。请填入小明操作流程中缺失的两处信息。（2分）",
-        "choices": [],
-        "answer": "答案：localhost 50000"
-      },
-      "interaction": {
-        "kind": "fill",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是`Connected to (localhost, 33580)`。请填入小明操作流程中缺失的两处信息。（2分）",
-        "answer": "答案：localhost 50000"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-fac6c4e88dd85fd7",
-      "paperId": "p-7016510094998ec2",
-      "paperOrder": 39,
-      "moduleId": "network",
-      "year": 2022,
-      "examType": "期末",
-      "exam": "2022期末",
-      "questionNo": "第六题 4（第 14 页重复）",
-      "summary": "GOAL 增大报错原因，扫描重复页",
-      "content": "4、小明认为设置 #define GOAL 100 难度太低了，于是将服务器与客户端中的代码都改成了`#define GOAL 100000`。他像之前一样运行服务器与客户端，结果发现客户端开始报错，并且始终没有输出\"You win\"。请你解释为什么修改成 100000 会让程序不能正常运行。（2分）\n答案：每次循环都打开了一个新的 clientfd 而没有关闭，导致文件数量过多，耗尽系统资源",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": [
-          "a-bc6da33280192b2a",
-          "a-3edc01064ad8cdd7"
-        ]
-      },
-      "source": {
-        "document": "原文/期末/2022期末-无答案.md",
-        "lines": {
-          "start": 633,
-          "end": 633
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2022期末-无答案/633.md"
-      },
-      "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "4、小明认为设置 #define GOAL 100 难度太低了，于是将服务器与客户端中的代码都改成了`#define GOAL 100000`。他像之前一样运行服务器与客户端，结果发现客户端开始报错，并且始终没有输出\"You win\"。请你解释为什么修改成 100000 会让程序不能正常运行。（2分）",
-        "choices": [],
-        "answer": "答案：每次循环都打开了一个新的 clientfd 而没有关闭，导致文件数量过多，耗尽系统资源"
-      },
-      "interaction": {
-        "kind": "short-answer",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "4、小明认为设置 #define GOAL 100 难度太低了，于是将服务器与客户端中的代码都改成了`#define GOAL 100000`。他像之前一样运行服务器与客户端，结果发现客户端开始报错，并且始终没有输出\"You win\"。请你解释为什么修改成 100000 会让程序不能正常运行。（2分）",
-        "answer": "答案：每次循环都打开了一个新的 clientfd 而没有关闭，导致文件数量过多，耗尽系统资源"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-9137059a87a2553e",
-      "paperId": "p-7016510094998ec2",
-      "paperOrder": 40,
-      "moduleId": "network",
-      "year": 2022,
-      "examType": "期末",
-      "exam": "2022期末",
-      "questionNo": "第六题 5（第 14 页重复）",
-      "summary": "补代码支持大 GOAL，扫描重复页",
-      "content": "5、请在客户端中添加一行代码，使得`#define GOAL 100000`时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）\n答案：第 22 行之后；Close(clientfd);",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": [
-          "a-bc6da33280192b2a",
-          "a-3edc01064ad8cdd7"
-        ]
-      },
-      "source": {
-        "document": "原文/期末/2022期末-无答案.md",
-        "lines": {
-          "start": 635,
-          "end": 635
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2022期末-无答案/635.md"
-      },
-      "layout": {
-        "mode": "fill",
-        "selection": null,
-        "stem": "5、请在客户端中添加一行代码，使得`#define GOAL 100000`时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）",
-        "choices": [],
-        "answer": "答案：第 22 行之后；Close(clientfd);"
-      },
-      "interaction": {
-        "kind": "fill",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "5、请在客户端中添加一行代码，使得`#define GOAL 100000`时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）",
-        "answer": "答案：第 22 行之后；Close(clientfd);"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-36b29c7e9d07d58b",
-      "paperId": "p-7016510094998ec2",
-      "paperOrder": 41,
-      "moduleId": "network",
-      "year": 2022,
-      "examType": "期末",
-      "exam": "2022期末",
-      "questionNo": "第六题 6（第 14 页重复）",
-      "summary": "多客户端并发结果分析，扫描重复页",
-      "content": "6、小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（ ）（2分）\nA. 有且只有一个人的屏幕上会出现\"You win!\"。\nB. 两个人的屏幕上都不会出现\"You win!\"。\nC. 两个人的屏幕上都会出现\"You win!\"。\n答案：A\n（小明的服务器在迭代处理两个客户端时，ball_cnt 只会在某一次与其中一个客户端连接时等于 GOAL，之后便会设为 0，而另一个客户端已经超过 0，因此只会发送一次\"You win!\"。）",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": [
-          "a-bc6da33280192b2a",
-          "a-3edc01064ad8cdd7"
-        ]
-      },
-      "source": {
-        "document": "原文/期末/2022期末-无答案.md",
-        "lines": {
-          "start": 637,
-          "end": 641
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2022期末-无答案/637.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "single",
-        "stem": "6、小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（ ）（2分）",
-        "choices": [
-          {
-            "key": "A",
-            "content": "有且只有一个人的屏幕上会出现\"You win!\"。"
-          },
-          {
-            "key": "B",
-            "content": "两个人的屏幕上都不会出现\"You win!\"。"
-          },
-          {
-            "key": "C",
-            "content": "两个人的屏幕上都会出现\"You win!\"。"
-          }
-        ],
-        "answer": "答案：A\n（小明的服务器在迭代处理两个客户端时，ball_cnt 只会在某一次与其中一个客户端连接时等于 GOAL，之后便会设为 0，而另一个客户端已经超过 0，因此只会发送一次\"You win!\"。）"
-      },
-      "interaction": {
-        "kind": "single-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "有且只有一个人的屏幕上会出现\"You win!\"。"
-          },
-          {
-            "id": "B",
-            "content": "两个人的屏幕上都不会出现\"You win!\"。"
-          },
-          {
-            "id": "C",
-            "content": "两个人的屏幕上都会出现\"You win!\"。"
-          }
-        ],
-        "correctChoiceIds": [
-          "A"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "6、小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（ ）（2分）",
-        "answer": "答案：A\n（小明的服务器在迭代处理两个客户端时，ball_cnt 只会在某一次与其中一个客户端连接时等于 GOAL，之后便会设为 0，而另一个客户端已经超过 0，因此只会发送一次\"You win!\"。）"
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q6",
+        "questionId": "q-9eb1f8b0e041bbe7",
+        "title": "第六题",
+        "order": 6
       },
       "presentation": {
         "status": "ready",
@@ -3571,7 +3403,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "11. 下列关于全球 IP 因特网的描述中正确的是：",
         "choices": [
           {
@@ -3594,8 +3426,8 @@
         "answer": "答案：B\n\n解析：\n原卷（2024期末-带答案）第 9 页的红色参考答案为 **B**；`原文` 的转写在这一题漏掉了\n答案行（第 12 题起才有「答案：C」），本文件按原卷页图补回。\n\n逐项分析：\n- **A. 错。** IP 协议提供的是**主机到主机**（host-to-host）的递送，属于网络层；\n  「进程到进程」是传输层（TCP/UDP 用端口号区分进程）才提供的服务。\n- **B. 对。** TCP 是传输层协议，通过三次握手面向连接，用序号/确认/重传提供\n  **可靠的**、**全双工**的字节流服务，连接双方可同时收发。\n- **C. 错。** IP 地址结构中的多字节字段（如网络号、主机号）**固定采用大端法**\n  （网络字节序），与主机自己是大端还是小端无关；发送前要用\n  `htons/htonl` 转换。\n- **D. 错。** 多个域名可以映射到同一个 IP 地址（虚拟主机：一台服务器一个 IP\n  上跑多个站点的情形非常常见），一个域名也可以对应多个 IP。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -3661,7 +3493,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "12. 套接字接口结合Unix I/O函数，可以创建网络应用。下列相关描述中，错\n误的是：",
         "choices": [
           {
@@ -3684,8 +3516,8 @@
         "answer": "答案： C\nA. socket()函数创建一个新的套接字，并返回一个文件描述符，这个套接字只\n是被创建出来，并不是立即可用于读写数据。要进行读写操作，需要额外的步骤，\n如调用 bind() 绑定地址、 listen() 启动监听（对于服务器端），或者\nconnect()建立连接（对于客户端）。\nB. TCP 连接是通过四元组唯一标识的，这个四元组包括：客户端的 IP 地址、\n客户端的端口号、服务器的 IP 地址、服务器的端口号。这四个信息组合在一起\n能唯一确定一个 TCP 连接。\nC. 错误，应为listen函数。 bind() 函数只是绑定套接字到特定的地址和端\n口，套接字是否监听则是通过 listen() 来实现的。\nD. connect() 函数用于建立与服务器的连接。对于客户端而言，connect()\n是一个阻塞调用，直到连接成功建立或者出现错误（例如服务器不可达）时才会返\n回。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -3712,101 +3544,6 @@
         "format": "markdown",
         "prompt": "12. 套接字接口结合Unix I/O函数，可以创建网络应用。下列相关描述中，错\n误的是：",
         "answer": "答案： C\nA. socket()函数创建一个新的套接字，并返回一个文件描述符，这个套接字只\n是被创建出来，并不是立即可用于读写数据。要进行读写操作，需要额外的步骤，\n如调用 bind() 绑定地址、 listen() 启动监听（对于服务器端），或者\nconnect()建立连接（对于客户端）。\nB. TCP 连接是通过四元组唯一标识的，这个四元组包括：客户端的 IP 地址、\n客户端的端口号、服务器的 IP 地址、服务器的端口号。这四个信息组合在一起\n能唯一确定一个 TCP 连接。\nC. 错误，应为listen函数。 bind() 函数只是绑定套接字到特定的地址和端\n口，套接字是否监听则是通过 listen() 来实现的。\nD. connect() 函数用于建立与服务器的连接。对于客户端而言，connect()\n是一个阻塞调用，直到连接成功建立或者出现错误（例如服务器不可达）时才会返\n回。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-f5e93c163454841e",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 24,
-      "moduleId": "network",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 24",
-      "summary": "并发网络服务器 listenfd/connfd 与 SIGCHLD",
-      "content": "24.并发网络服务器的这段程序代码：\n```\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\nint connfd = accept(listenfd, NULL, NULL);\nif (fork() == 0) {\necho(connfd);\nexit(0);\n}\nclose(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？\nA. 子进程在 echo(connfd) 前应 close(listenfd)\nB. 父进程在 fork 后应 close(listenfd)\nC. 父进程应处理 SIGCHLD（或循环 waitpid）以回收子进程，避免 zombie\nD. 父进程不应 close(connfd)，否则子进程会立即断开\nE. while循环的判断条件应该加上连接出错时跳出循环\n答案：AC\n解析：fork 后两边都持有 listenfd/connfd，子进程应关 listenfd 防泄漏；父进程应回收子进程避免僵尸。父进程关 connfd 不影响子进程持有的 connfd（D 错）。E 错误，网络服务要一直运行。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 139,
-          "end": 143
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/139.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "24.并发网络服务器的这段程序代码：\n```\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\nint connfd = accept(listenfd, NULL, NULL);\nif (fork() == 0) {\necho(connfd);\nexit(0);\n}\nclose(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "子进程在 echo(connfd) 前应 close(listenfd)"
-          },
-          {
-            "key": "B",
-            "content": "父进程在 fork 后应 close(listenfd)"
-          },
-          {
-            "key": "C",
-            "content": "父进程应处理 SIGCHLD（或循环 waitpid）以回收子进程，避免 zombie"
-          },
-          {
-            "key": "D",
-            "content": "父进程不应 close(connfd)，否则子进程会立即断开"
-          },
-          {
-            "key": "E",
-            "content": "while循环的判断条件应该加上连接出错时跳出循环"
-          }
-        ],
-        "answer": "答案：AC\n解析：fork 后两边都持有 listenfd/connfd，子进程应关 listenfd 防泄漏；父进程应回收子进程避免僵尸。父进程关 connfd 不影响子进程持有的 connfd（D 错）。E 错误，网络服务要一直运行。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "子进程在 echo(connfd) 前应 close(listenfd)"
-          },
-          {
-            "id": "B",
-            "content": "父进程在 fork 后应 close(listenfd)"
-          },
-          {
-            "id": "C",
-            "content": "父进程应处理 SIGCHLD（或循环 waitpid）以回收子进程，避免 zombie"
-          },
-          {
-            "id": "D",
-            "content": "父进程不应 close(connfd)，否则子进程会立即断开"
-          },
-          {
-            "id": "E",
-            "content": "while循环的判断条件应该加上连接出错时跳出循环"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "C"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "24.并发网络服务器的这段程序代码：\n```\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\nint connfd = accept(listenfd, NULL, NULL);\nif (fork() == 0) {\necho(connfd);\nexit(0);\n}\nclose(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？",
-        "answer": "答案：AC\n解析：fork 后两边都持有 listenfd/connfd，子进程应关 listenfd 防泄漏；父进程应回收子进程避免僵尸。父进程关 connfd 不影响子进程持有的 connfd（D 错）。E 错误，网络服务要一直运行。"
       },
       "presentation": {
         "status": "ready",
@@ -4348,7 +4085,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 49",
       "summary": "10.7.74.125 的地址类别与私有地址",
-      "content": "49. （2分）用个人笔记本连接北大无线网，可能获得的IP地址是10.7.74.125，这个\nIP地址属于：\nA. A类地址（0开头，加7位Net ID）\nB. B类地址（10开头，加14位Net ID）\nC. C类地址（110开头，加21位Net ID）\nD. 私有地址（Unrouted IP addresses）\n答案：D\n\n解析：课件在讲 DHCP/NAT 时明确把 10.x.y.z 与 192.168.1.5 一起列为\"家用路由器/校园网网关通过 DHCP 给终端临时分配的私有地址，只在本地网络中有效\"；本题正是校园网 DHCP 拿到的地址，故取 D。（按旧的有类编址，10 开头确实也落在 A 类，但题目问的是该地址在校网中的性质，考点是私有地址，故选 D。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "49. （2分）用个人笔记本连接北大无线网，可能获得的IP地址是10.7.74.125，这个\nIP地址属于：\nA. A类地址（0开头，加7位Net ID）\nB. B类地址（10开头，加14位Net ID）\nC. C类地址（110开头，加21位Net ID）\nD. 私有地址（Unrouted IP addresses）\n答案：A、D。\n\n解析：10.7.74.125 的首字节为 10，按旧的有类编址属于 A 类；10.0.0.0/8 同时属于私有地址范围。因此按题面 A、D 均成立。原卷没有提供官方答案。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4367,7 +4104,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": "single",
+        "selection": "multiple",
         "stem": "49. （2分）用个人笔记本连接北大无线网，可能获得的IP地址是10.7.74.125，这个\nIP地址属于：",
         "choices": [
           {
@@ -4387,10 +4124,10 @@
             "content": "私有地址（Unrouted IP addresses）"
           }
         ],
-        "answer": "答案：D\n\n解析：课件在讲 DHCP/NAT 时明确把 10.x.y.z 与 192.168.1.5 一起列为\"家用路由器/校园网网关通过 DHCP 给终端临时分配的私有地址，只在本地网络中有效\"；本题正是校园网 DHCP 拿到的地址，故取 D。（按旧的有类编址，10 开头确实也落在 A 类，但题目问的是该地址在校网中的性质，考点是私有地址，故选 D。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：A、D。\n\n解析：10.7.74.125 的首字节为 10，按旧的有类编址属于 A 类；10.0.0.0/8 同时属于私有地址范围。因此按题面 A、D 均成立。原卷没有提供官方答案。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
-        "kind": "single-choice",
+        "kind": "multiple-choice",
         "declared": true,
         "choices": [
           {
@@ -4411,13 +4148,14 @@
           }
         ],
         "correctChoiceIds": [
+          "A",
           "D"
         ]
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "49. （2分）用个人笔记本连接北大无线网，可能获得的IP地址是10.7.74.125，这个\nIP地址属于：",
-        "answer": "答案：D\n\n解析：课件在讲 DHCP/NAT 时明确把 10.x.y.z 与 192.168.1.5 一起列为\"家用路由器/校园网网关通过 DHCP 给终端临时分配的私有地址，只在本地网络中有效\"；本题正是校园网 DHCP 拿到的地址，故取 D。（按旧的有类编址，10 开头确实也落在 A 类，但题目问的是该地址在校网中的性质，考点是私有地址，故选 D。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：A、D。\n\n解析：10.7.74.125 的首字节为 10，按旧的有类编址属于 A 类；10.0.0.0/8 同时属于私有地址范围。因此按题面 A、D 均成立。原卷没有提供官方答案。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
@@ -4434,7 +4172,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 50",
       "summary": "域名映射、IP 可靠性与 getaddrinfo/freeaddrinfo",
-      "content": "50. （2分）以下说法正确的是：\nA. 建立套接字连接的客户端和服务器端的IP地址不能相同\nB. IP协议提供了可靠的主机与主机之间的数据包传输能力\nC. 一个域名可以映射到多个IP，也可以不映射到任何IP\nD. 为了防止内存泄漏，使用 getaddrinfo 函数获得的 addrinfo 链表只能调用\nfreeaddrinfo函数释放\n答案：C\n\n解析：课件\"因特网域名\"一页明确写着：一个域名可以解析到多个 IP 地址、一个 IP 地址可以对应多个域名、某些合法的域名没有映射到任何 IP 地址——C 与课件逐字对应，故 C 对。A 错：客户端和服务器可以在同一台主机上（例如回环地址），IP 完全可以相同；B 错：IP 提供的是\"尽力而为\"的不可靠数据报服务，可靠性由 TCP 等上层协议负责。⚠️ D 其实也是对的：教材要求 getaddrinfo 返回的 addrinfo 链表必须用 freeaddrinfo 整体释放（不能用 free 逐个释放），因此本题按题面有两个正确项，是道有缺陷的题；这里按课件原文取 C，D 亦应视为正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "50. （2分）以下说法正确的是：\nA. 建立套接字连接的客户端和服务器端的IP地址不能相同\nB. IP协议提供了可靠的主机与主机之间的数据包传输能力\nC. 一个域名可以映射到多个IP，也可以不映射到任何IP\nD. 为了防止内存泄漏，使用 getaddrinfo 函数获得的 addrinfo 链表只能调用\nfreeaddrinfo函数释放\n答案：C、D。\n\n解析：一个域名可以解析到多个 IP 地址，也可能暂时没有 IP 映射，故 C 正确；`getaddrinfo` 返回的 `addrinfo` 链表应由 `freeaddrinfo` 整体释放，故 D 正确。A 错在客户端与服务器可以运行在同一主机上；B 错在 IP 本身提供尽力而为的数据报服务，可靠传输由 TCP 等上层协议实现。原卷没有提供官方答案。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4453,7 +4191,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": "single",
+        "selection": "multiple",
         "stem": "50. （2分）以下说法正确的是：",
         "choices": [
           {
@@ -4473,10 +4211,10 @@
             "content": "为了防止内存泄漏，使用 getaddrinfo 函数获得的 addrinfo 链表只能调用\nfreeaddrinfo函数释放"
           }
         ],
-        "answer": "答案：C\n\n解析：课件\"因特网域名\"一页明确写着：一个域名可以解析到多个 IP 地址、一个 IP 地址可以对应多个域名、某些合法的域名没有映射到任何 IP 地址——C 与课件逐字对应，故 C 对。A 错：客户端和服务器可以在同一台主机上（例如回环地址），IP 完全可以相同；B 错：IP 提供的是\"尽力而为\"的不可靠数据报服务，可靠性由 TCP 等上层协议负责。⚠️ D 其实也是对的：教材要求 getaddrinfo 返回的 addrinfo 链表必须用 freeaddrinfo 整体释放（不能用 free 逐个释放），因此本题按题面有两个正确项，是道有缺陷的题；这里按课件原文取 C，D 亦应视为正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：C、D。\n\n解析：一个域名可以解析到多个 IP 地址，也可能暂时没有 IP 映射，故 C 正确；`getaddrinfo` 返回的 `addrinfo` 链表应由 `freeaddrinfo` 整体释放，故 D 正确。A 错在客户端与服务器可以运行在同一主机上；B 错在 IP 本身提供尽力而为的数据报服务，可靠传输由 TCP 等上层协议实现。原卷没有提供官方答案。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
-        "kind": "single-choice",
+        "kind": "multiple-choice",
         "declared": true,
         "choices": [
           {
@@ -4497,13 +4235,14 @@
           }
         ],
         "correctChoiceIds": [
-          "C"
+          "C",
+          "D"
         ]
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "50. （2分）以下说法正确的是：",
-        "answer": "答案：C\n\n解析：课件\"因特网域名\"一页明确写着：一个域名可以解析到多个 IP 地址、一个 IP 地址可以对应多个域名、某些合法的域名没有映射到任何 IP 地址——C 与课件逐字对应，故 C 对。A 错：客户端和服务器可以在同一台主机上（例如回环地址），IP 完全可以相同；B 错：IP 提供的是\"尽力而为\"的不可靠数据报服务，可靠性由 TCP 等上层协议负责。⚠️ D 其实也是对的：教材要求 getaddrinfo 返回的 addrinfo 链表必须用 freeaddrinfo 整体释放（不能用 free 逐个释放），因此本题按题面有两个正确项，是道有缺陷的题；这里按课件原文取 C，D 亦应视为正确。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：C、D。\n\n解析：一个域名可以解析到多个 IP 地址，也可能暂时没有 IP 映射，故 C 正确；`getaddrinfo` 返回的 `addrinfo` 链表应由 `freeaddrinfo` 整体释放，故 D 正确。A 错在客户端与服务器可以运行在同一主机上；B 错在 IP 本身提供尽力而为的数据报服务，可靠传输由 TCP 等上层协议实现。原卷没有提供官方答案。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",

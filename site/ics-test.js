@@ -684,16 +684,15 @@
 
   function parseFillQuestion(source) {
     let gapCount = 0;
-    const gapPattern = /_{2,}|＿{2,}|（[\s　]{2,}）|\([\s　]{2,}\)|_+\s*(?:\(\d{1,2}\)|[①②③④⑤⑥⑦⑧⑨⑩])\s*_+/g;
-    const parts = String(source || '').split(/(```+[\s\S]*?```+|~~~+[\s\S]*?~~~+)/g);
-    const markdown = parts.map(function (part, index) {
-      if (index % 2 === 1) return part;
-      return part.replace(gapPattern, function () {
-        const token = 'ICSGAP' + gapCount + 'X';
-        gapCount += 1;
-        return token;
-      });
-    }).join('');
+    const gapPattern = /\{\{blank:[A-Za-z][A-Za-z0-9_-]*\}\}|_+\s*(?:\(\d{1,2}\)|[①②③④⑤⑥⑦⑧⑨⑩])\s*_+|_{2,}|＿{2,}|（[\s　]{2,}）|\([\s　]{2,}\)/g;
+    // 空位必须由人工 Markdown 显式写出；不猜测题意。代码补全题的空位通常
+    // 正在 fenced code block 内，因此也要替换成占位 token，等 Markdown 渲染
+    // 完成后再把 token 换成逐空输入框。
+    const markdown = String(source || '').replace(gapPattern, function () {
+      const token = 'ICSGAP' + gapCount + 'X';
+      gapCount += 1;
+      return token;
+    });
     return gapCount ? { markdown: markdown, count: gapCount } : null;
   }
 

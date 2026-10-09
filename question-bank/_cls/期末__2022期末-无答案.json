@@ -299,38 +299,6 @@
       "curated": "期末/2022期末-无答案/617.md"
     },
     {
-      "start": 625,
-      "end": 631,
-      "module": "Network",
-      "qno": "第六题 3（第 14 页重复）",
-      "note": "操作流程与端口推断题面，扫描重复页",
-      "curated": "期末/2022期末-无答案/625.md"
-    },
-    {
-      "start": 633,
-      "end": 633,
-      "module": "Network",
-      "qno": "第六题 4（第 14 页重复）",
-      "note": "GOAL 增大报错原因，扫描重复页",
-      "curated": "期末/2022期末-无答案/633.md"
-    },
-    {
-      "start": 635,
-      "end": 635,
-      "module": "Network",
-      "qno": "第六题 5（第 14 页重复）",
-      "note": "补代码支持大 GOAL，扫描重复页",
-      "curated": "期末/2022期末-无答案/635.md"
-    },
-    {
-      "start": 637,
-      "end": 641,
-      "module": "Network",
-      "qno": "第六题 6（第 14 页重复）",
-      "note": "多客户端并发结果分析，扫描重复页",
-      "curated": "期末/2022期末-无答案/637.md"
-    },
-    {
       "start": 645,
       "end": 685,
       "module": "Concurrent Programming and Synchronization",

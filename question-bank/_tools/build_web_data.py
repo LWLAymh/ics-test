@@ -239,6 +239,8 @@ def main():
     for material in all_materials:
         if material.get("dup_of"):
             aliases[material["dup_of"]].append(material["rel"])
+        elif not material.get("publish_as_paper", True):
+            continue
         else:
             materials.append(material)
 

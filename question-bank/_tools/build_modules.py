@@ -96,6 +96,10 @@ def load():
             # kind 缺省为 questions；勘误/评分说明类材料没有题目，但可能通过
             # applies_to 指名它注解的是哪几份卷子，从而挂进对应模块。
             "kind": d.get("kind") or "questions",
+            # 有些“带答案”文件只是同一份试卷的答案速查稿，不是第二套卷子。
+            # 显式标为 false 后保留其人工整理文件，但不进入题池和试卷列表。
+            "publish_as_paper": d.get("publish_as_paper", True),
+            "canonical_paper": d.get("canonical_paper"),
             "applies_to": d.get("applies_to") or [],
             "lines": io.open(src, encoding="utf-8").read().splitlines(),
         })
@@ -142,6 +146,8 @@ def main():
     for d in allp:
         if d.get("dup_of"):
             aliases[d["dup_of"]].append(d["rel"])
+        elif not d.get("publish_as_paper", True):
+            continue
         else:
             papers.append(d)
 

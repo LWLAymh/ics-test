@@ -44,6 +44,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BANK = ROOT / "question-bank"
 WEB_DATA = BANK / "web-data"
 DEFAULT_OUTPUT = ROOT / "output" / "pdf" / "question-review"
+DEFAULT_PAPER_OUTPUT = ROOT / "output" / "pdf" / "paper-review"
 TYPE_LABELS = {
     "single-choice": "单选题",
     "multiple-choice": "多选题",
@@ -56,6 +57,7 @@ TYPE_LABELS = {
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^\s)]+)(?:\s+[\"']([^\"')]*)[\"'])?\)")
 FENCE_RE = re.compile(r"^\s*```\s*([A-Za-z0-9_+-]*)\s*$")
 INLINE_CODE_RE = re.compile(r"`([^`\n]+)`")
+BLANK_MARKER_RE = re.compile(r"\{\{blank:([A-Za-z][A-Za-z0-9_-]*)\}\}")
 BOLD_RE = re.compile(r"\*\*([^*\n]+)\*\*")
 COMMENT_RE = re.compile(r"<!--(.*?)-->", re.S)
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
@@ -355,6 +357,12 @@ def inline_markup(text: str, sheet: dict, *, mono_font: str = "ReviewMono") -> s
     stash = Stash()
     text = str(text or "").replace("\r\n", "\n").replace("\r", "\n")
 
+    # 填空位是作者显式写入的接口标记。审阅 PDF 不提供交互输入框，
+    # 因而把它显示为带 ID 的醒目标记，既不泄露答案，也方便定位错位的空。
+    text = BLANK_MARKER_RE.sub(
+        lambda m: stash.put('<font color="#1D4ED8">〔填空 %s〕</font>'
+                            % html.escape(m.group(1))), text)
+
     text = INLINE_CODE_RE.sub(
         lambda m: stash.put('<font name="%s" color="#7C2D12">%s</font>'
                             % (mono_font, html.escape(m.group(1)))), text)
@@ -571,7 +579,8 @@ def markdown_flowables(markdown: str, sheet: dict, *, max_width: float,
                 code.append("[未闭合的代码围栏]")
             index += 1
             label = ("[%s]\n" % language) if language else ""
-            body = label + "\n".join(code)
+            body = BLANK_MARKER_RE.sub(lambda m: "[填空 %s]" % m.group(1),
+                                       label + "\n".join(code))
             result.append(Preformatted(body, code_style(body, sheet), maxLineLength=110))
             continue
         if TABLE_ROW_RE.match(line):
@@ -733,13 +742,14 @@ def safe_slug(value: str) -> str:
     return slug or "questions"
 
 
-def collect_modules():
+def collect_bank():
     catalog = load_json(WEB_DATA / "catalog.json")
     modules = []
     for module in catalog.get("modules", []):
         payload = load_json(WEB_DATA / module["questionFile"])
         modules.append((module, payload.get("questions", [])))
-    return catalog, modules
+    papers = load_json(WEB_DATA / catalog["papersFile"]).get("papers", [])
+    return catalog, modules, papers
 
 
 def write_manifest(output: Path, rows: list[dict], summary: dict):
@@ -788,7 +798,9 @@ def build_module_pdf(module: dict, questions: list[dict], output: Path, sheet: d
     base_rows = []
     for index, question in enumerate(questions):
         if index:
-            story.append(PageBreak())
+            story.extend([Spacer(1, 7 * mm), HRFlowable(width="100%", thickness=0.8,
+                                                        color=colors.HexColor("#AFC3D6")),
+                          Spacer(1, 7 * mm)])
         story.extend(question_flowables(question, module, sheet, usable_width))
         kind = (question.get("interaction") or {}).get("kind") or "legacy"
         source = question.get("source") or {}
@@ -813,25 +825,119 @@ def build_module_pdf(module: dict, questions: list[dict], output: Path, sheet: d
     return base_rows
 
 
+def build_paper_pdf(paper: dict, questions: list[dict], modules_by_id: dict,
+                    output: Path, sheet: dict) -> list[dict]:
+    display_name = str(paper.get("displayName") or paper.get("id") or "paper")
+    # 文件名使用稳定 paper ID，避免中文标题在 ASCII slug 中全部退化成
+    # ``paper-questions.pdf``，也避免同次导出多份中文试卷时互相覆盖。
+    filename = "paper-%s.pdf" % safe_slug(str(paper.get("id") or display_name))
+    path = output / filename
+    page_rows: list[dict] = []
+    doc = ReviewDocTemplate(
+        str(path), module_title=display_name,
+        manifest_rows=page_rows, pagesize=A4,
+        leftMargin=18 * mm, rightMargin=18 * mm, topMargin=18 * mm, bottomMargin=22 * mm,
+        title="ICS 试卷审阅 - %s" % display_name,
+        author="ICS Test",
+        subject="按原卷顺序审阅题面、选项与题型；不含答案",
+    )
+    usable_width = A4[0] - doc.leftMargin - doc.rightMargin
+    counts = collections.Counter((q.get("interaction") or {}).get("kind") or "legacy" for q in questions)
+    count_text = " · ".join(
+        "%s %d" % (TYPE_LABELS.get(kind, kind), count)
+        for kind, count in sorted(counts.items(), key=lambda item: item[0]))
+    story: list[Flowable] = [
+        Spacer(1, 28 * mm),
+        Paragraph("ICS 试卷题面审阅", sheet["cover_title"]),
+        Paragraph(html.escape(display_name), sheet["cover_title"]),
+        Paragraph("paper ID: %s" % html.escape(str(paper.get("id") or "-")), sheet["cover_body"]),
+        Paragraph("共 %d 个题目片段" % len(questions), sheet["cover_body"]),
+        Paragraph(html.escape(count_text), sheet["cover_body"]),
+        Spacer(1, 8 * mm),
+        Paragraph("题目严格按原卷顺序排列。每题显示稳定 ID、当前题型、题面、选项、知识模块和源文件；不主动附加答案，便于逐题核对提取和排版。", sheet["cover_body"]),
+        Paragraph("导出器只呈现人工 Markdown 中显式写出的结构，不猜测代码、公式、图片、选项或填空。", sheet["cover_body"]),
+        PageBreak(),
+    ]
+    base_rows = []
+    fallback_module = {"id": "unknown", "name": "Unknown", "title": "未分类"}
+    for index, question in enumerate(questions):
+        if index:
+            story.extend([Spacer(1, 7 * mm), HRFlowable(width="100%", thickness=0.8,
+                                                        color=colors.HexColor("#AFC3D6")),
+                          Spacer(1, 7 * mm)])
+        module = modules_by_id.get(question.get("moduleId"), fallback_module)
+        story.extend(question_flowables(question, module, sheet, usable_width))
+        kind = (question.get("interaction") or {}).get("kind") or "legacy"
+        source = question.get("source") or {}
+        base_rows.append({
+            "question_id": question.get("id"),
+            "type": kind,
+            "type_label": TYPE_LABELS.get(kind, "未知题型"),
+            "pdf": filename,
+            "module_id": module.get("id"),
+            "module_title": module.get("title"),
+            "paper_id": question.get("paperId"),
+            "paper_order": question.get("paperOrder"),
+            "exam": question.get("exam"),
+            "question_no": question.get("questionNo"),
+            "source_document": source.get("document"),
+            "source_curated": source.get("curated"),
+        })
+    doc.build(story)
+    page_by_id = {row["question_id"]: row["page"] for row in page_rows}
+    for row in base_rows:
+        row["page"] = page_by_id.get(row["question_id"])
+    return base_rows
+
+
+def resolve_papers(tokens: list[str], papers: list[dict]) -> list[dict]:
+    selected = []
+    for token in tokens:
+        matches = [paper for paper in papers if token in {
+            str(paper.get("id") or ""),
+            str(paper.get("displayName") or ""),
+        }]
+        if not matches:
+            raise SystemExit("unknown paper: %s (run with --list-papers)" % token)
+        if len(matches) > 1:
+            raise SystemExit("ambiguous paper: %s; use the paper ID" % token)
+        if matches[0] not in selected:
+            selected.append(matches[0])
+    return selected
+
+
 def main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Generate searchable PDFs for manual question/type review")
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT, help="output directory")
+    parser.add_argument("--output", type=Path, help="output directory (defaults by export mode)")
     parser.add_argument("--font", help="path to a Chinese TrueType/OpenType font")
     parser.add_argument("--mono-font", help="path to a monospace TrueType font used for code blocks")
     parser.add_argument("--module", action="append", help="only export this module id; may be repeated")
+    parser.add_argument("--paper", action="append", help="export this paper ID or exact display name; may be repeated")
+    parser.add_argument("--list-papers", action="store_true", help="list available paper IDs and exit")
     parser.add_argument("--keep-output", action="store_true", help="do not clear existing output directory")
     args = parser.parse_args(list(argv) if argv is not None else None)
 
+    if args.module and args.paper:
+        raise SystemExit("--module and --paper cannot be used together")
+
+    catalog, modules, papers = collect_bank()
+    if args.list_papers:
+        for paper in papers:
+            print("%s\t%s\t%d" % (
+                paper.get("id"), paper.get("displayName"),
+                int(paper.get("publishedQuestionCount") or paper.get("questionCount") or 0)))
+        return 0
+
     font_path = find_font(args.font)
     mono_path = register_fonts(font_path, find_mono_font(args.mono_font))
-    output = args.output.resolve()
+    output_arg = args.output or (DEFAULT_PAPER_OUTPUT if args.paper else DEFAULT_OUTPUT)
+    output = output_arg.resolve()
     if output == ROOT.resolve() or ROOT.resolve() not in output.parents:
         raise SystemExit("output must be a subdirectory of the repository")
     if output.exists() and not args.keep_output:
         shutil.rmtree(output)
     output.mkdir(parents=True, exist_ok=True)
 
-    catalog, modules = collect_modules()
     selected = set(args.module or [])
     if selected:
         known = {module.get("id") for module, _ in modules}
@@ -840,23 +946,39 @@ def main(argv: Iterable[str] | None = None) -> int:
             raise SystemExit("unknown module id(s): %s" % ", ".join(unknown))
         modules = [(module, questions) for module, questions in modules if module.get("id") in selected]
 
+    selected_papers = resolve_papers(args.paper or [], papers)
+    questions_by_id = {
+        question.get("id"): question
+        for _, questions in modules
+        for question in questions
+    }
+    modules_by_id = {module.get("id"): module for module, _ in modules}
+
     sheet = styles()
     rows: list[dict] = []
-    for module, questions in modules:
-        print("生成 %s：%d 道题" % (module.get("title"), len(questions)), flush=True)
-        rows.extend(build_module_pdf(module, questions, output, sheet))
+    if selected_papers:
+        for paper in selected_papers:
+            questions = [questions_by_id[qid] for qid in paper.get("questionIds", []) if qid in questions_by_id]
+            print("生成试卷 %s：%d 个题目片段" % (paper.get("displayName"), len(questions)), flush=True)
+            rows.extend(build_paper_pdf(paper, questions, modules_by_id, output, sheet))
+        pdf_count = len(selected_papers)
+    else:
+        for module, questions in modules:
+            print("生成 %s：%d 道题" % (module.get("title"), len(questions)), flush=True)
+            rows.extend(build_module_pdf(module, questions, output, sheet))
+        pdf_count = len(modules)
     summary = {
         "generatedAt": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
         "schemaVersion": catalog.get("schemaVersion"),
         "questionCount": len(rows),
-        "pdfCount": len(modules),
+        "pdfCount": pdf_count,
         "font": str(font_path),
         "monoFont": str(mono_path) if mono_path else None,
         "answerIncluded": False,
         "typeCounts": dict(sorted(collections.Counter(row["type"] for row in rows).items())),
     }
     write_manifest(output, rows, summary)
-    print("完成：%d 道题，%d 个 PDF，输出到 %s" % (len(rows), len(modules), output))
+    print("完成：%d 道题，%d 个 PDF，输出到 %s" % (len(rows), pdf_count, output))
     return 0
 
 

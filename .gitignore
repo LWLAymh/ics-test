@@ -3,4 +3,5 @@ node_modules/
 tmp-*.json
 .venv-review-pdf/
 output/pdf/question-review/
+output/pdf/paper-review/
 

@@ -236,11 +236,19 @@
     },
     {
       "start": 499,
+      "end": 504,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "四 2（1）",
+      "note": "Lightswitch 读者-写者：调整信号量操作后的竞争/死锁判断",
+      "curated": "期末/2025期末-无答案/499.md"
+    },
+    {
+      "start": 505,
       "end": 601,
       "module": "Concurrent Programming and Synchronization",
-      "qno": "四 2",
-      "note": "Lightswitch 读者-写者与到达时刻状态分析",
-      "curated": "期末/2025期末-无答案/499.md"
+      "qno": "四 2（2）",
+      "note": "Lightswitch 读者-写者：给定到达时刻的并发状态选择",
+      "curated": "期末/2025期末-无答案/505.md"
     },
     {
       "start": 603,

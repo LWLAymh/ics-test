@@ -1138,7 +1138,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "8、仅考虑以下代码，哪个或哪些代码片段在当前主流编译器的标准优化选项下一定会被优化？（假设 int i, int j, int A[N], int B[N], int *p 都是局部变量，int foo(int) 是一个函数）",
         "choices": [
           {
@@ -1161,8 +1161,8 @@
         "answer": "B"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -1325,14 +1325,25 @@
         "choices": [],
         "answer": "答案：① `p->next`　② `p->next->u1.f`　③ `p->next->next`　④ `p`\n\n解析（本题的 `s_element` 是一个链表结点：`union u_inner u1` 里放 `float f`，另有 `next` 指向下一个结点；原函数 `func` 就是遍历链表把每个结点的 `u1.f` 累加）：\n\n1. ① 循环条件必须保证「还有**两个**结点可以处理」，否则第 4 行访问 `p->next->u1.f` 会解引用空指针 → 填 `p->next`（完整写法 `p && p->next`）。\n2. ② 第 3 行已经把本轮第一个结点的 `p->u1.f` 加进 `ans1`，第二个累积变量对应本轮第二个结点 → 填 `p->next->u1.f`。\n3. ③ 一轮吃掉两个结点，指针要一次前进两格 → 填 `p->next->next`。\n4. ④ 退出循环时只可能剩下两种情况：结点数为偶数（两个两个处理完，`p == NULL`）或为奇数（还剩最后一个结点，`p != NULL`）。第 6–7 行就是把可能剩下的那个结点补加到 `ans1`，所以条件填 `p`（等价于 `p != NULL`）。若写成 `p->next`，当 `p` 是最后一个结点时会漏加，而 `p` 为 NULL 时还会解引用空指针。\n5. 累加口径：`ans1` 收第 0、2、4… 个结点，`ans2` 收第 1、3、5… 个结点，最后 `ans1 + ans2` 就是全部结点之和 —— 功能上与原 `func` 等价。但注意：这里改变了浮点加法的结合次序，结果可能与原 `func` 不同（这正是下一小问的考点）。\n\n> 📌 答案有官方来源：原卷参考答案「4）① p->next ② p->next->u1.f ③ p->next->next ④ p」（原文/期中/2021期中-带答案.md 第 866–869 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "4. 在学习了循环展开后，同学I想对func函数进行优化。他决定尝试模仿书上\n2*2循环展开的方法，使用两个累积变量以提高代码并行性，请补全他改进后的函\n数func1的代码。（1*4=4分）\n```\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && ____①____){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += _____②_____;      //line 4\n        p = _____③______;        //line 5\n    }\n    if(_____④______)          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① ________________\n② ________________\n③ ________________\n④ ________________\n```",
         "answer": "答案：① `p->next`　② `p->next->u1.f`　③ `p->next->next`　④ `p`\n\n解析（本题的 `s_element` 是一个链表结点：`union u_inner u1` 里放 `float f`，另有 `next` 指向下一个结点；原函数 `func` 就是遍历链表把每个结点的 `u1.f` 累加）：\n\n1. ① 循环条件必须保证「还有**两个**结点可以处理」，否则第 4 行访问 `p->next->u1.f` 会解引用空指针 → 填 `p->next`（完整写法 `p && p->next`）。\n2. ② 第 3 行已经把本轮第一个结点的 `p->u1.f` 加进 `ans1`，第二个累积变量对应本轮第二个结点 → 填 `p->next->u1.f`。\n3. ③ 一轮吃掉两个结点，指针要一次前进两格 → 填 `p->next->next`。\n4. ④ 退出循环时只可能剩下两种情况：结点数为偶数（两个两个处理完，`p == NULL`）或为奇数（还剩最后一个结点，`p != NULL`）。第 6–7 行就是把可能剩下的那个结点补加到 `ans1`，所以条件填 `p`（等价于 `p != NULL`）。若写成 `p->next`，当 `p` 是最后一个结点时会漏加，而 `p` 为 NULL 时还会解引用空指针。\n5. 累加口径：`ans1` 收第 0、2、4… 个结点，`ans2` 收第 1、3、5… 个结点，最后 `ans1 + ans2` 就是全部结点之和 —— 功能上与原 `func` 等价。但注意：这里改变了浮点加法的结合次序，结果可能与原 `func` 不同（这正是下一小问的考点）。\n\n> 📌 答案有官方来源：原卷参考答案「4）① p->next ② p->next->u1.f ③ p->next->next ④ p」（原文/期中/2021期中-带答案.md 第 866–869 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q6",
+        "questionId": "q-b0ef359a9e930155",
+        "title": "第六题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -1378,14 +1389,25 @@
         "choices": [],
         "answer": "答案：浮点数加法不满足结合律；`func1` 用两个累积变量改变了相加的次序（重新结合），舍入结果可能不同，于是 `func1` 的返回值可能与原 `func` 不相等。\n\n解析：\n\n1. 原 `func` 用**一个**变量按链表顺序累加：`((f0 + f1) + f2) + f3 + …`，相加次序就是链表顺序。\n2. `func1` 把结点按奇偶分成两路：`ans1 = f0 + f2 + f4 + …`，`ans2 = f1 + f3 + f5 + …`，最后才做一次 `ans1 + ans2`。这是典型的「重新结合（reassociation）」——相邻元素的加法次序被换掉了。\n3. IEEE 754 浮点加法有舍入，**不满足结合律**，即 `(a+b)+c` 与 `a+(b+c)` 可能不相等。例如单精度下取 `a = 1e20f`、`b = -1e20f`、`c = 1.0f`：`(a+b)+c = 0 + 1 = 1.0f`；而 `b+c` 舍入后仍是 `-1e20f`，`a+(b+c) = 0.0f`。链表越长、各元素量级差别越大，出现差异的机会越多。\n4. 所以把单一累积变量拆成多个（循环展开提高并行性的常用手法）时，必须确认这段浮点计算允许改变结合次序；这也是编译器在未开启 `-ffast-math` 之类选项时不会对浮点做这种重结合的原因（教材 5.8 节「重新结合变换」的限制，同时呼应书上 2×2 展开只用于整数/可结合运算的例子）。\n5. 补充：差异并非必然出现——若链表只有一两个结点，或各级部分和都能被浮点精确表示，两者结果相同；但隐患是真实存在的，这就是同学 C 指出的「新的错误」。\n\n> 📌 答案有官方来源：原卷参考答案「5）浮点数加法不满足结合律，可能会导致func1和func函数结果不同」（原文/期中/2021期中-带答案.md 第 870–871 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "5. 此时，同学C指出同学I的做法会导致新的错误，原因是_______________。\n（2分）",
         "answer": "答案：浮点数加法不满足结合律；`func1` 用两个累积变量改变了相加的次序（重新结合），舍入结果可能不同，于是 `func1` 的返回值可能与原 `func` 不相等。\n\n解析：\n\n1. 原 `func` 用**一个**变量按链表顺序累加：`((f0 + f1) + f2) + f3 + …`，相加次序就是链表顺序。\n2. `func1` 把结点按奇偶分成两路：`ans1 = f0 + f2 + f4 + …`，`ans2 = f1 + f3 + f5 + …`，最后才做一次 `ans1 + ans2`。这是典型的「重新结合（reassociation）」——相邻元素的加法次序被换掉了。\n3. IEEE 754 浮点加法有舍入，**不满足结合律**，即 `(a+b)+c` 与 `a+(b+c)` 可能不相等。例如单精度下取 `a = 1e20f`、`b = -1e20f`、`c = 1.0f`：`(a+b)+c = 0 + 1 = 1.0f`；而 `b+c` 舍入后仍是 `-1e20f`，`a+(b+c) = 0.0f`。链表越长、各元素量级差别越大，出现差异的机会越多。\n4. 所以把单一累积变量拆成多个（循环展开提高并行性的常用手法）时，必须确认这段浮点计算允许改变结合次序；这也是编译器在未开启 `-ffast-math` 之类选项时不会对浮点做这种重结合的原因（教材 5.8 节「重新结合变换」的限制，同时呼应书上 2×2 展开只用于整数/可结合运算的例子）。\n5. 补充：差异并非必然出现——若链表只有一两个结点，或各级部分和都能被浮点精确表示，两者结果相同；但隐患是真实存在的，这就是同学 C 指出的「新的错误」。\n\n> 📌 答案有官方来源：原卷参考答案「5）浮点数加法不满足结合律，可能会导致func1和func函数结果不同」（原文/期中/2021期中-带答案.md 第 870–871 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q6",
+        "questionId": "q-b0ef359a9e930155",
+        "title": "第六题",
+        "order": 5
       },
       "presentation": {
         "status": "ready",
@@ -1431,14 +1453,25 @@
         "choices": [],
         "answer": "（2分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "6. 同学S从书上读到，k * k循环展开在k很大时反而可能获得较差的效果，\n这是因为k很大时会导致___________________。",
         "answer": "（2分）"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q6",
+        "questionId": "q-b0ef359a9e930155",
+        "title": "第六题",
+        "order": 6
       },
       "presentation": {
         "status": "ready",
@@ -1638,7 +1671,7 @@
       "exam": "2024期中",
       "questionNo": "第一题 15",
       "summary": "代码优化等价性判断（别名、副作用、strlen）",
-      "content": "15.假设已有声明int a, int b, int i, int* pa, int* pb, float\nfa, float fb, float fc, char s[100], int f(),以及\n#include<string.h>，以下优化正确的是：\n  原程序  优化程序\nA  int c = *pa;  *pb ^= *pa;\n\n\n```\n*pa = *pb;  *pa ^= *pb;\n*pb = c;  *pb ^= *pa;\nB  a = f();  a = f();\nb = f();  int sum = a+a;\nint sum = a+b;\nC  int sum = 0;  int sum = 0;\nfor(i = 0; i <  int len = strlen(s);\nstrlen(s); ++i)  for(i = 0; i < len; ++i)\nsum += s[i] - 'a';  sum += s[i] - 'a';\nD  float ret =   float ret = (fa+fb)*fc;\nfa*fc + fb*fc;\n```\n答案：C\nA. pa和pb可能指向同一内存位置\nB. f可能产生副作用\nC. 正确，string.h中strlen无副作用\nD. 浮点数运算不满足分配律",
+      "content": "15. 假设已有声明 `int a, int b, int i, int* pa, int* pb, float fa, float fb, float fc, char s[100], int f()`，以及 `#include<string.h>`，以下优化正确的是：\nA. 原程序：`int c = *pa; *pa = *pb; *pb = c;`；优化程序：`*pb ^= *pa; *pa ^= *pb; *pb ^= *pa;`\nB. 原程序：`a = f(); b = f(); int sum = a+b;`；优化程序：`a = f(); int sum = a+a;`\nC. 原程序：`int sum = 0; for(i = 0; i < strlen(s); ++i) sum += s[i] - 'a';`；优化程序：`int sum = 0; int len = strlen(s); for(i = 0; i < len; ++i) sum += s[i] - 'a';`\nD. 原程序：`float ret = fa*fc + fb*fc;`；优化程序：`float ret = (fa+fb)*fc;`\n答案：C。\nA 错：pa 和 pb 可能指向同一内存位置，异或交换会把值清零。\nB 错：f() 可能产生副作用，不能省略第二次调用。\nC 正确：strlen(s) 在循环中重复计算；先保存长度不改变结果。\nD 错：浮点数运算不满足分配律。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1661,20 +1694,58 @@
         "curated": "_curated/期中/2024期中-带答案/288.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "15.假设已有声明int a, int b, int i, int* pa, int* pb, float\nfa, float fb, float fc, char s[100], int f(),以及\n#include<string.h>，以下优化正确的是：\n  原程序  优化程序\nA  int c = *pa;  *pb ^= *pa;\n\n\n```\n*pa = *pb;  *pa ^= *pb;\n*pb = c;  *pb ^= *pa;\nB  a = f();  a = f();\nb = f();  int sum = a+a;\nint sum = a+b;\nC  int sum = 0;  int sum = 0;\nfor(i = 0; i <  int len = strlen(s);\nstrlen(s); ++i)  for(i = 0; i < len; ++i)\nsum += s[i] - 'a';  sum += s[i] - 'a';\nD  float ret =   float ret = (fa+fb)*fc;\nfa*fc + fb*fc;\n```",
-        "choices": [],
-        "answer": "答案：C\nA. pa和pb可能指向同一内存位置\nB. f可能产生副作用\nC. 正确，string.h中strlen无副作用\nD. 浮点数运算不满足分配律"
+        "mode": "choice",
+        "selection": "single",
+        "stem": "15. 假设已有声明 `int a, int b, int i, int* pa, int* pb, float fa, float fb, float fc, char s[100], int f()`，以及 `#include<string.h>`，以下优化正确的是：",
+        "choices": [
+          {
+            "key": "A",
+            "content": "原程序：`int c = *pa; *pa = *pb; *pb = c;`；优化程序：`*pb ^= *pa; *pa ^= *pb; *pb ^= *pa;`"
+          },
+          {
+            "key": "B",
+            "content": "原程序：`a = f(); b = f(); int sum = a+b;`；优化程序：`a = f(); int sum = a+a;`"
+          },
+          {
+            "key": "C",
+            "content": "原程序：`int sum = 0; for(i = 0; i < strlen(s); ++i) sum += s[i] - 'a';`；优化程序：`int sum = 0; int len = strlen(s); for(i = 0; i < len; ++i) sum += s[i] - 'a';`"
+          },
+          {
+            "key": "D",
+            "content": "原程序：`float ret = fa*fc + fb*fc;`；优化程序：`float ret = (fa+fb)*fc;`"
+          }
+        ],
+        "answer": "答案：C。\nA 错：pa 和 pb 可能指向同一内存位置，异或交换会把值清零。\nB 错：f() 可能产生副作用，不能省略第二次调用。\nC 正确：strlen(s) 在循环中重复计算；先保存长度不改变结果。\nD 错：浮点数运算不满足分配律。"
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "原程序：`int c = *pa; *pa = *pb; *pb = c;`；优化程序：`*pb ^= *pa; *pa ^= *pb; *pb ^= *pa;`"
+          },
+          {
+            "id": "B",
+            "content": "原程序：`a = f(); b = f(); int sum = a+b;`；优化程序：`a = f(); int sum = a+a;`"
+          },
+          {
+            "id": "C",
+            "content": "原程序：`int sum = 0; for(i = 0; i < strlen(s); ++i) sum += s[i] - 'a';`；优化程序：`int sum = 0; int len = strlen(s); for(i = 0; i < len; ++i) sum += s[i] - 'a';`"
+          },
+          {
+            "id": "D",
+            "content": "原程序：`float ret = fa*fc + fb*fc;`；优化程序：`float ret = (fa+fb)*fc;`"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "15.假设已有声明int a, int b, int i, int* pa, int* pb, float\nfa, float fb, float fc, char s[100], int f(),以及\n#include<string.h>，以下优化正确的是：\n  原程序  优化程序\nA  int c = *pa;  *pb ^= *pa;\n\n\n```\n*pa = *pb;  *pa ^= *pb;\n*pb = c;  *pb ^= *pa;\nB  a = f();  a = f();\nb = f();  int sum = a+a;\nint sum = a+b;\nC  int sum = 0;  int sum = 0;\nfor(i = 0; i <  int len = strlen(s);\nstrlen(s); ++i)  for(i = 0; i < len; ++i)\nsum += s[i] - 'a';  sum += s[i] - 'a';\nD  float ret =   float ret = (fa+fb)*fc;\nfa*fc + fb*fc;\n```",
-        "answer": "答案：C\nA. pa和pb可能指向同一内存位置\nB. f可能产生副作用\nC. 正确，string.h中strlen无副作用\nD. 浮点数运算不满足分配律"
+        "prompt": "15. 假设已有声明 `int a, int b, int i, int* pa, int* pb, float fa, float fb, float fc, char s[100], int f()`，以及 `#include<string.h>`，以下优化正确的是：",
+        "answer": "答案：C。\nA 错：pa 和 pb 可能指向同一内存位置，异或交换会把值清零。\nB 错：f() 可能产生副作用，不能省略第二次调用。\nC 正确：strlen(s) 在循环中重复计算；先保存长度不改变结果。\nD 错：浮点数运算不满足分配律。"
       },
       "presentation": {
         "status": "ready",
@@ -4775,7 +4846,7 @@
       "exam": "2024期末",
       "questionNo": "第一题 5",
       "summary": "gcc 编译链接过程、ld 报错与重定位",
-      "content": "5. 针对如下代码，假定编译器不做任何编译优化，同时编译系统在预处理a.c和\nb.c时可以顺利找到common.h。运行gcc a.c b.c命令，发现报错。已知报\n错信息中含有如下内容：\n\n\n```\ncollect2: error: ld returned 1 exit status\n// a.c  // b.c  // common.h\n#include <stdio.h>  #include \"common.h\"\n#include \"common.h\"    int x = 1;\n  int funcB(void) {\nint main() {    x++;  int funcB(void);\n  scanf(\"%d\\n\", &x);  }\n  funcB();\n  printf(\"%d\\n\", x);\n}\n```\n则下列说法正确的是：\nA. 在编译系统及二进制工具链对本题所涉源代码进行处理过程中，会产生名为\n中的预处理器输出的。\n过调整编译顺序来解决，即gcc b.c a.c。\n目标文件的.text节中，对于变量x的引用都需要在链接时重定位。\nA. o、b.o的中间临时文件，并将其链接到一起。\nB. 根据题目中的报错信息描述进行推断，报错信息是由编译系统及二进制工具链\nC. 报错原因是a.c、b.c、common.h其中之一含有语法错误。这个错误可以通\nD. 在编译系统及二进制工具链对本题所涉源代码进行处理过程中，所产生的中间\n答案：D\n本题考察编译和链接的相关知识。\nA. 用该命令编译时，common.h只被预处理器复制到a.c与b.c中，而不参与\n之后的编译阶段。产生的中间临时文件名是随机的，并非一定为a.o和b.o。\nB. 报错原因是int x=1; 会被预处理器分别复制到a.c与b.c中，从而导致强\n符号a重定义，链接时报错，类似\n```\n/usr/bin/ld:  /tmp/cckR3OM5.o:(.data+0x0):  multiple\ndefinition  of  `a';  /tmp/ccSDjtQc.o:(.data+0x0):  first\ndefined here\ncollect2: error: ld returned 1 exit status\n```\nC. 各种信息都说明这是链接器报错；最明显的是：ld是GNU 链接器的简称。\nD. 确实，任何在编译时无法确定地址的数据引用需要重定位",
+      "content": "5. 针对下列代码，假定编译器不做任何编译优化，同时编译系统在预处理 a.c 和 b.c 时可以顺利找到 common.h。运行 `gcc a.c b.c` 命令，发现报错。已知报错信息中含有如下内容：\n```\ncollect2: error: ld returned 1 exit status\n```\nA. 在编译系统及二进制工具链对本题所涉源代码进行处理过程中，会产生名为 `a.o`、`b.o` 的中间临时文件，并将其链接到一起。\nB. 根据题目中的报错信息描述进行推断，报错信息是由编译系统及二进制工具链中的预处理器输出的。\nC. 报错原因是 `a.c`、`b.c`、`common.h` 其中之一含有语法错误。这个错误可以通过调整编译顺序来解决，即 `gcc b.c a.c`。\nD. 在编译系统及二进制工具链对本题所涉源代码进行处理过程中，所产生的中间目标文件的 `.text` 节中，对于变量 `x` 的引用都需要在链接时重定位。\n原卷给出的源文件：\n```c\n// a.c\n#include <stdio.h>\n#include \"common.h\"\nint main() {\n    scanf(\"%d\\n\", &x);\n    funcB();\n    printf(\"%d\\n\", x);\n}\n\n// b.c\n#include \"common.h\"\nint funcB(void) {\n    x++;\n}\n\n// common.h\nint x = 1;\nint funcB(void);\n```\n答案：D。\nA 错：中间目标文件的名字不是固定的 `a.o` 和 `b.o`，编译器会使用临时文件。\nB 错：`collect2` 与 `ld` 表明错误发生在链接阶段，而非预处理阶段。\nC 错：`common.h` 中定义的 `int x = 1;` 被包含到两个源文件，导致链接时强符号 `x` 重定义；调整编译顺序不能解决。\nD 对：在未优化且分别编译的情况下，`.text` 中对外部数据符号 `x` 的引用需要在链接时重定位。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4799,26 +4870,26 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "5. 针对如下代码，假定编译器不做任何编译优化，同时编译系统在预处理a.c和\nb.c时可以顺利找到common.h。运行gcc a.c b.c命令，发现报错。已知报\n错信息中含有如下内容：\n\n\n```\ncollect2: error: ld returned 1 exit status\n// a.c  // b.c  // common.h\n#include <stdio.h>  #include \"common.h\"\n#include \"common.h\"    int x = 1;\n  int funcB(void) {\nint main() {    x++;  int funcB(void);\n  scanf(\"%d\\n\", &x);  }\n  funcB();\n  printf(\"%d\\n\", x);\n}\n```\n则下列说法正确的是：\nA. 在编译系统及二进制工具链对本题所涉源代码进行处理过程中，会产生名为\n中的预处理器输出的。\n过调整编译顺序来解决，即gcc b.c a.c。\n目标文件的.text节中，对于变量x的引用都需要在链接时重定位。",
+        "stem": "5. 针对下列代码，假定编译器不做任何编译优化，同时编译系统在预处理 a.c 和 b.c 时可以顺利找到 common.h。运行 `gcc a.c b.c` 命令，发现报错。已知报错信息中含有如下内容：\n```\ncollect2: error: ld returned 1 exit status\n```",
         "choices": [
           {
             "key": "A",
-            "content": "o、b.o的中间临时文件，并将其链接到一起。"
+            "content": "在编译系统及二进制工具链对本题所涉源代码进行处理过程中，会产生名为 `a.o`、`b.o` 的中间临时文件，并将其链接到一起。"
           },
           {
             "key": "B",
-            "content": "根据题目中的报错信息描述进行推断，报错信息是由编译系统及二进制工具链"
+            "content": "根据题目中的报错信息描述进行推断，报错信息是由编译系统及二进制工具链中的预处理器输出的。"
           },
           {
             "key": "C",
-            "content": "报错原因是a.c、b.c、common.h其中之一含有语法错误。这个错误可以通"
+            "content": "报错原因是 `a.c`、`b.c`、`common.h` 其中之一含有语法错误。这个错误可以通过调整编译顺序来解决，即 `gcc b.c a.c`。"
           },
           {
             "key": "D",
-            "content": "在编译系统及二进制工具链对本题所涉源代码进行处理过程中，所产生的中间"
+            "content": "在编译系统及二进制工具链对本题所涉源代码进行处理过程中，所产生的中间目标文件的 `.text` 节中，对于变量 `x` 的引用都需要在链接时重定位。\n原卷给出的源文件：\n```c\n// a.c\n#include <stdio.h>\n#include \"common.h\"\nint main() {\nscanf(\"%d\\n\", &x);\nfuncB();\nprintf(\"%d\\n\", x);\n}\n// b.c\n#include \"common.h\"\nint funcB(void) {\nx++;\n}\n// common.h\nint x = 1;\nint funcB(void);\n```"
           }
         ],
-        "answer": "答案：D\n本题考察编译和链接的相关知识。\nA. 用该命令编译时，common.h只被预处理器复制到a.c与b.c中，而不参与\n之后的编译阶段。产生的中间临时文件名是随机的，并非一定为a.o和b.o。\nB. 报错原因是int x=1; 会被预处理器分别复制到a.c与b.c中，从而导致强\n符号a重定义，链接时报错，类似\n```\n/usr/bin/ld:  /tmp/cckR3OM5.o:(.data+0x0):  multiple\ndefinition  of  `a';  /tmp/ccSDjtQc.o:(.data+0x0):  first\ndefined here\ncollect2: error: ld returned 1 exit status\n```\nC. 各种信息都说明这是链接器报错；最明显的是：ld是GNU 链接器的简称。\nD. 确实，任何在编译时无法确定地址的数据引用需要重定位"
+        "answer": "答案：D。\nA 错：中间目标文件的名字不是固定的 `a.o` 和 `b.o`，编译器会使用临时文件。\nB 错：`collect2` 与 `ld` 表明错误发生在链接阶段，而非预处理阶段。\nC 错：`common.h` 中定义的 `int x = 1;` 被包含到两个源文件，导致链接时强符号 `x` 重定义；调整编译顺序不能解决。\nD 对：在未优化且分别编译的情况下，`.text` 中对外部数据符号 `x` 的引用需要在链接时重定位。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -4826,19 +4897,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "o、b.o的中间临时文件，并将其链接到一起。"
+            "content": "在编译系统及二进制工具链对本题所涉源代码进行处理过程中，会产生名为 `a.o`、`b.o` 的中间临时文件，并将其链接到一起。"
           },
           {
             "id": "B",
-            "content": "根据题目中的报错信息描述进行推断，报错信息是由编译系统及二进制工具链"
+            "content": "根据题目中的报错信息描述进行推断，报错信息是由编译系统及二进制工具链中的预处理器输出的。"
           },
           {
             "id": "C",
-            "content": "报错原因是a.c、b.c、common.h其中之一含有语法错误。这个错误可以通"
+            "content": "报错原因是 `a.c`、`b.c`、`common.h` 其中之一含有语法错误。这个错误可以通过调整编译顺序来解决，即 `gcc b.c a.c`。"
           },
           {
             "id": "D",
-            "content": "在编译系统及二进制工具链对本题所涉源代码进行处理过程中，所产生的中间"
+            "content": "在编译系统及二进制工具链对本题所涉源代码进行处理过程中，所产生的中间目标文件的 `.text` 节中，对于变量 `x` 的引用都需要在链接时重定位。\n原卷给出的源文件：\n```c\n// a.c\n#include <stdio.h>\n#include \"common.h\"\nint main() {\nscanf(\"%d\\n\", &x);\nfuncB();\nprintf(\"%d\\n\", x);\n}\n// b.c\n#include \"common.h\"\nint funcB(void) {\nx++;\n}\n// common.h\nint x = 1;\nint funcB(void);\n```"
           }
         ],
         "correctChoiceIds": [
@@ -4847,8 +4918,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5. 针对如下代码，假定编译器不做任何编译优化，同时编译系统在预处理a.c和\nb.c时可以顺利找到common.h。运行gcc a.c b.c命令，发现报错。已知报\n错信息中含有如下内容：\n\n\n```\ncollect2: error: ld returned 1 exit status\n// a.c  // b.c  // common.h\n#include <stdio.h>  #include \"common.h\"\n#include \"common.h\"    int x = 1;\n  int funcB(void) {\nint main() {    x++;  int funcB(void);\n  scanf(\"%d\\n\", &x);  }\n  funcB();\n  printf(\"%d\\n\", x);\n}\n```\n则下列说法正确的是：\nA. 在编译系统及二进制工具链对本题所涉源代码进行处理过程中，会产生名为\n中的预处理器输出的。\n过调整编译顺序来解决，即gcc b.c a.c。\n目标文件的.text节中，对于变量x的引用都需要在链接时重定位。",
-        "answer": "答案：D\n本题考察编译和链接的相关知识。\nA. 用该命令编译时，common.h只被预处理器复制到a.c与b.c中，而不参与\n之后的编译阶段。产生的中间临时文件名是随机的，并非一定为a.o和b.o。\nB. 报错原因是int x=1; 会被预处理器分别复制到a.c与b.c中，从而导致强\n符号a重定义，链接时报错，类似\n```\n/usr/bin/ld:  /tmp/cckR3OM5.o:(.data+0x0):  multiple\ndefinition  of  `a';  /tmp/ccSDjtQc.o:(.data+0x0):  first\ndefined here\ncollect2: error: ld returned 1 exit status\n```\nC. 各种信息都说明这是链接器报错；最明显的是：ld是GNU 链接器的简称。\nD. 确实，任何在编译时无法确定地址的数据引用需要重定位"
+        "prompt": "5. 针对下列代码，假定编译器不做任何编译优化，同时编译系统在预处理 a.c 和 b.c 时可以顺利找到 common.h。运行 `gcc a.c b.c` 命令，发现报错。已知报错信息中含有如下内容：\n```\ncollect2: error: ld returned 1 exit status\n```",
+        "answer": "答案：D。\nA 错：中间目标文件的名字不是固定的 `a.o` 和 `b.o`，编译器会使用临时文件。\nB 错：`collect2` 与 `ld` 表明错误发生在链接阶段，而非预处理阶段。\nC 错：`common.h` 中定义的 `int x = 1;` 被包含到两个源文件，导致链接时强符号 `x` 重定义；调整编译顺序不能解决。\nD 对：在未优化且分别编译的情况下，`.text` 中对外部数据符号 `x` 的引用需要在链接时重定位。"
       },
       "presentation": {
         "status": "ready",
@@ -4939,236 +5010,6 @@
         "format": "markdown",
         "prompt": "6. 本题基于下面c语言文件编译生成的可重定位目标文件main.o。该文件的生\n成过程在x86-64 Linux下完成，其中编译过程未加优化选项。已知本题不涉及\nCOMMON节，不涉及重定位相关节。下面有关符号及其所在节说法错误的是：\n\n\n```\n//main.c\nextern int extern_var;\nvoid global_used_func();\nint init_var = 1;\nint init_func() {\n    return 1145;\n}\nvoid f() {\n    static int x = 2;\n    int local_var = 1;\n    local_var++;\n    x++;\n}\nint main() {\n    extern_var++;\n    global_used_func();\n    return 0;\n}\n```",
         "answer": "答案：C\n本题考察链接与符号表的相关知识。\nA. 正确，函数声明默认为extern。extern_var和global_used_func都在\nmain 函数中被使用，因此在符号表中。 两个符号没有定义，在 UND 节。\nextern_unused_var没有被使用且没有定义，因此不在符号表中。\nB. 正确。初值不为0的全局静态变量被放在.data节；未初始化全局静态变量放\n在.bss。\nC. 错误。含有定义的函数即使没有被使用也会存放在符号表中，可供其他.o文\n件使用。\n6\n\n\nD. 正确。初值非0的局部静态变量被存放在.data节。后半句包含解释。\n可以使用objdump -t main.o 验证答案："
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-36badfb35aa69fd5",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 14,
-      "moduleId": "compilation_linking",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 14",
-      "summary": "全局符号强/弱定义与类型检查",
-      "content": "二 不定项选择题（下）（36分）\n（链接）\n14.三个C程序文件，下面仅观察其中的全局符号g：\n答案：ACD\n解析： intg=1 是强定义；intg; 是“弱/共同（common）”风格，强胜弱，因此 A 对、\nB 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会\n出问题）。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 86,
-          "end": 92
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/86.md"
-      },
-      "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "二 不定项选择题（下）（36分）\n（链接）\n14.三个C程序文件，下面仅观察其中的全局符号g：",
-        "choices": [],
-        "answer": "答案：ACD\n解析： intg=1 是强定义；intg; 是“弱/共同（common）”风格，强胜弱，因此 A 对、\nB 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会\n出问题）。"
-      },
-      "interaction": {
-        "kind": "short-answer",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "二 不定项选择题（下）（36分）\n（链接）\n14.三个C程序文件，下面仅观察其中的全局符号g：",
-        "answer": "答案：ACD\n解析： intg=1 是强定义；intg; 是“弱/共同（common）”风格，强胜弱，因此 A 对、\nB 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会\n出问题）。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-f3d0a1d45f0f8d08",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 26,
-      "moduleId": "compilation_linking",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "三 1",
-      "summary": "符号表条目、符号类型与所在节（含答案）",
-      "content": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```\n// main.c // sum.c\n#include <stdio.h> int sum_array(int *arr, int n) {\nextern int sum_array(int *arr, int n); int sum = 0;\nint arr[5] = {1, 2, 3, 4, 5}, result; for (int i = 0; i < n; i++) {\nstatic int fix = 2010; sum += arr[i];\nint main() { }\nresult = sum_array(arr, 5)+fix; return sum;\nprintf(\"sum = %d\\n\", res1); }\nreturn 0;\n}\n```\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```\n答案：每行 1 分\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| 1 arr | 是 | 全局 | main.o | .data |\n| 2 result | 是 | 全局 | main.o | .bss |\n| 3 fix | 是 | 局部 | main.o | .data |\n| 4 sum_array | 是 | 外部 | sum.o | .text |\n| 5 i | 否 | / | / | / |\n| 6 sum | 否 | / | / | / |\n| 7 printf | 是 | 外部 | libc.so | .text |",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 147,
-          "end": 156
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/147.md"
-      },
-      "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```\n// main.c // sum.c\n#include <stdio.h> int sum_array(int *arr, int n) {\nextern int sum_array(int *arr, int n); int sum = 0;\nint arr[5] = {1, 2, 3, 4, 5}, result; for (int i = 0; i < n; i++) {\nstatic int fix = 2010; sum += arr[i];\nint main() { }\nresult = sum_array(arr, 5)+fix; return sum;\nprintf(\"sum = %d\\n\", res1); }\nreturn 0;\n}\n```\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```",
-        "choices": [],
-        "answer": "答案：每行 1 分\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| 1 arr | 是 | 全局 | main.o | .data |\n| 2 result | 是 | 全局 | main.o | .bss |\n| 3 fix | 是 | 局部 | main.o | .data |\n| 4 sum_array | 是 | 外部 | sum.o | .text |\n| 5 i | 否 | / | / | / |\n| 6 sum | 否 | / | / | / |\n| 7 printf | 是 | 外部 | libc.so | .text |"
-      },
-      "interaction": {
-        "kind": "short-answer",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```\n// main.c // sum.c\n#include <stdio.h> int sum_array(int *arr, int n) {\nextern int sum_array(int *arr, int n); int sum = 0;\nint arr[5] = {1, 2, 3, 4, 5}, result; for (int i = 0; i < n; i++) {\nstatic int fix = 2010; sum += arr[i];\nint main() { }\nresult = sum_array(arr, 5)+fix; return sum;\nprintf(\"sum = %d\\n\", res1); }\nreturn 0;\n}\n```\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```",
-        "answer": "答案：每行 1 分\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| 1 arr | 是 | 全局 | main.o | .data |\n| 2 result | 是 | 全局 | main.o | .bss |\n| 3 fix | 是 | 局部 | main.o | .data |\n| 4 sum_array | 是 | 外部 | sum.o | .text |\n| 5 i | 否 | / | / | / |\n| 6 sum | 否 | / | / | / |\n| 7 printf | 是 | 外部 | libc.so | .text |"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-15ffd00faddcd5bd",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 27,
-      "moduleId": "compilation_linking",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "三 2",
-      "summary": "重定位条目与 32 位小端机器码（含答案）",
-      "content": "2.重定位分析（2分）\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段\n（部分地址和内容为示意）\n```\n0000000000001149 <main>:\n1149: 55 push %rbp\n114a: 48 89 e5 mov %rsp, %rbp\n114d: be 05 00 00 00 mov $0x5, %esi\n```\n1152: bf __ __ __ __ mov `$_______`, %edi ; arr的地址\n```\n1157: e8 __ __ __ __ callq _____________ ; sum_array\n```\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。\n（注：在答题纸上画出下面表格的第1列和第3列）\n编号 重定位条目信息 重定位引用值32位编码（参\n照代码中的16进制形式）\n```\n① r.offset = 0x09 r.symbol = arr\nr.type = R_X86_64_32 r.addend = 0\n② r.offset = 0x0e r.symbol = sum_array\nr.type = R_X86_64_PC32 r.addend = -4\n```\n此处假设arr 在可执行文件中的地址为 0x402010，sum_array 的地址为 0x1180\nresult 的地址为 0x404018，main 中 call 指令的下一指令地址为 0x115c\n答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 161,
-          "end": 170
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/161.md"
-      },
-      "layout": {
-        "mode": "fill",
-        "selection": null,
-        "stem": "2.重定位分析（2分）\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段\n（部分地址和内容为示意）\n```\n0000000000001149 <main>:\n1149: 55 push %rbp\n114a: 48 89 e5 mov %rsp, %rbp\n114d: be 05 00 00 00 mov $0x5, %esi\n```\n1152: bf __ __ __ __ mov `$_______`, %edi ; arr的地址\n```\n1157: e8 __ __ __ __ callq _____________ ; sum_array\n```\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。\n（注：在答题纸上画出下面表格的第1列和第3列）\n编号 重定位条目信息 重定位引用值32位编码（参\n照代码中的16进制形式）\n```\n① r.offset = 0x09 r.symbol = arr\nr.type = R_X86_64_32 r.addend = 0\n② r.offset = 0x0e r.symbol = sum_array\nr.type = R_X86_64_PC32 r.addend = -4\n```\n此处假设arr 在可执行文件中的地址为 0x402010，sum_array 的地址为 0x1180\nresult 的地址为 0x404018，main 中 call 指令的下一指令地址为 0x115c",
-        "choices": [],
-        "answer": "答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00"
-      },
-      "interaction": {
-        "kind": "fill",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "2.重定位分析（2分）\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段\n（部分地址和内容为示意）\n```\n0000000000001149 <main>:\n1149: 55 push %rbp\n114a: 48 89 e5 mov %rsp, %rbp\n114d: be 05 00 00 00 mov $0x5, %esi\n```\n1152: bf __ __ __ __ mov `$_______`, %edi ; arr的地址\n```\n1157: e8 __ __ __ __ callq _____________ ; sum_array\n```\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。\n（注：在答题纸上画出下面表格的第1列和第3列）\n编号 重定位条目信息 重定位引用值32位编码（参\n照代码中的16进制形式）\n```\n① r.offset = 0x09 r.symbol = arr\nr.type = R_X86_64_32 r.addend = 0\n② r.offset = 0x0e r.symbol = sum_array\nr.type = R_X86_64_PC32 r.addend = -4\n```\n此处假设arr 在可执行文件中的地址为 0x402010，sum_array 的地址为 0x1180\nresult 的地址为 0x404018，main 中 call 指令的下一指令地址为 0x115c",
-        "answer": "答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-32ee06c05b6b05e9",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 28,
-      "moduleId": "compilation_linking",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "三 3",
-      "summary": "链接顺序影响的答案选项",
-      "content": "3.链接顺序影响（1分）\n执行以下两条命令\n①gcc -o m1 main.c sum.c ②gcc -o m2 sum.c main.c\n关于生成的两个可执行文件 m1 和 m2，以下说法正确的是（ ）\nA.两者大小相同，内容相同\nB.两者大小相同，内容不同\nC.两者大小不同，内容相同\nD.两者大小不同，内容不同\n答案：B",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 172,
-          "end": 175
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/172.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "single",
-        "stem": "3.链接顺序影响（1分）\n执行以下两条命令\n①gcc -o m1 main.c sum.c ②gcc -o m2 sum.c main.c\n关于生成的两个可执行文件 m1 和 m2，以下说法正确的是（ ）",
-        "choices": [
-          {
-            "key": "A",
-            "content": "两者大小相同，内容相同"
-          },
-          {
-            "key": "B",
-            "content": "两者大小相同，内容不同"
-          },
-          {
-            "key": "C",
-            "content": "两者大小不同，内容相同"
-          },
-          {
-            "key": "D",
-            "content": "两者大小不同，内容不同"
-          }
-        ],
-        "answer": "答案：B"
-      },
-      "interaction": {
-        "kind": "single-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "两者大小相同，内容相同"
-          },
-          {
-            "id": "B",
-            "content": "两者大小相同，内容不同"
-          },
-          {
-            "id": "C",
-            "content": "两者大小不同，内容相同"
-          },
-          {
-            "id": "D",
-            "content": "两者大小不同，内容不同"
-          }
-        ],
-        "correctChoiceIds": [
-          "B"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "3.链接顺序影响（1分）\n执行以下两条命令\n①gcc -o m1 main.c sum.c ②gcc -o m2 sum.c main.c\n关于生成的两个可执行文件 m1 和 m2，以下说法正确的是（ ）",
-        "answer": "答案：B"
       },
       "presentation": {
         "status": "ready",

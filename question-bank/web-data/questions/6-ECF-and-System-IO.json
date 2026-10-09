@@ -3697,7 +3697,7 @@
       "exam": "2021期末",
       "questionNo": "第五题 4",
       "summary": "double fault 异常的成因（不定项）",
-      "content": "4. Double fault：Intel 处理器中有一种特殊的异常，被称为 double\nfault。此异常发生表明调用某个故障（fault）A的处理程序后又触发了另一\n个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B\n和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依\n然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺\n页异常处理程序外，其他异常处理程序都不会产生新的故障。如果在某次缺页故\n障时产生了double fault，其原因可能是__________（不定项选择，都选\n对才得分，1分）\n① 运行缺页故障处理程序时， CPU上的权限位是内核态，但所执行代码段\nU/S=0\n② 运行缺页故障处理程序时，CPU接收到了键盘发送的Ctrl + C信号\n③ 缺页故障处理程序没有加载到主存中\n答案：③",
+      "content": "4. Double fault：Intel 处理器中有一种特殊的异常，称为 double fault。此异常表示调用某个故障（fault）A 的处理程序后又触发了另一故障 B。正常情况下，故障 B 会有相应异常处理程序来处理，因此两个故障 B 和 A 可以被顺序解决。但是，如果处理器无法正常处理故障 B，或处理之后仍无法处理故障 A，就会产生 double fault 并终止（abort）。假设除了缺页异常处理程序外，其他异常处理程序都不会产生新的故障。如果在某次缺页故障时产生了 double fault，其原因可能是：（不定项选择，都选对才得分，1 分）\nA. 运行缺页故障处理程序时，CPU 上的权限位是内核态，但所执行代码段 U/S=0。\nB. 运行缺页故障处理程序时，CPU 接收到了键盘发送的 Ctrl+C 信号。\nC. 缺页故障处理程序没有加载到主存中。\n答案：C（原卷选项③）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3717,20 +3717,61 @@
         "curated": "_curated/期末/2021期末-无答案/639.md"
       },
       "layout": {
-        "mode": "fill",
-        "selection": null,
-        "stem": "4. Double fault：Intel 处理器中有一种特殊的异常，被称为 double\nfault。此异常发生表明调用某个故障（fault）A的处理程序后又触发了另一\n个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B\n和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依\n然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺\n页异常处理程序外，其他异常处理程序都不会产生新的故障。如果在某次缺页故\n障时产生了double fault，其原因可能是__________（不定项选择，都选\n对才得分，1分）\n① 运行缺页故障处理程序时， CPU上的权限位是内核态，但所执行代码段\nU/S=0\n② 运行缺页故障处理程序时，CPU接收到了键盘发送的Ctrl + C信号\n③ 缺页故障处理程序没有加载到主存中",
-        "choices": [],
-        "answer": "答案：③"
+        "mode": "choice",
+        "selection": "multiple",
+        "stem": "4. Double fault：Intel 处理器中有一种特殊的异常，称为 double fault。此异常表示调用某个故障（fault）A 的处理程序后又触发了另一故障 B。正常情况下，故障 B 会有相应异常处理程序来处理，因此两个故障 B 和 A 可以被顺序解决。但是，如果处理器无法正常处理故障 B，或处理之后仍无法处理故障 A，就会产生 double fault 并终止（abort）。假设除了缺页异常处理程序外，其他异常处理程序都不会产生新的故障。如果在某次缺页故障时产生了 double fault，其原因可能是：（不定项选择，都选对才得分，1 分）",
+        "choices": [
+          {
+            "key": "A",
+            "content": "运行缺页故障处理程序时，CPU 上的权限位是内核态，但所执行代码段 U/S=0。"
+          },
+          {
+            "key": "B",
+            "content": "运行缺页故障处理程序时，CPU 接收到了键盘发送的 Ctrl+C 信号。"
+          },
+          {
+            "key": "C",
+            "content": "缺页故障处理程序没有加载到主存中。"
+          }
+        ],
+        "answer": "答案：C（原卷选项③）。"
+      },
+      "partInteraction": {
+        "kind": "multiple-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "运行缺页故障处理程序时，CPU 上的权限位是内核态，但所执行代码段 U/S=0。"
+          },
+          {
+            "id": "B",
+            "content": "运行缺页故障处理程序时，CPU 接收到了键盘发送的 Ctrl+C 信号。"
+          },
+          {
+            "id": "C",
+            "content": "缺页故障处理程序没有加载到主存中。"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
       },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "multiple-choice"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4. Double fault：Intel 处理器中有一种特殊的异常，被称为 double\nfault。此异常发生表明调用某个故障（fault）A的处理程序后又触发了另一\n个故障B。正常情况下，故障B会有相应异常处理程序来处理，因此两个故障B\n和A可以被顺序解决。但是如果处理器无法正常处理故障B，或是处理了之后依\n然无法处理故障A，就会产生double fault，并终止（abort）。假设除了缺\n页异常处理程序外，其他异常处理程序都不会产生新的故障。如果在某次缺页故\n障时产生了double fault，其原因可能是__________（不定项选择，都选\n对才得分，1分）\n① 运行缺页故障处理程序时， CPU上的权限位是内核态，但所执行代码段\nU/S=0\n② 运行缺页故障处理程序时，CPU接收到了键盘发送的Ctrl + C信号\n③ 缺页故障处理程序没有加载到主存中",
-        "answer": "答案：③"
+        "prompt": "4. Double fault：Intel 处理器中有一种特殊的异常，称为 double fault。此异常表示调用某个故障（fault）A 的处理程序后又触发了另一故障 B。正常情况下，故障 B 会有相应异常处理程序来处理，因此两个故障 B 和 A 可以被顺序解决。但是，如果处理器无法正常处理故障 B，或处理之后仍无法处理故障 A，就会产生 double fault 并终止（abort）。假设除了缺页异常处理程序外，其他异常处理程序都不会产生新的故障。如果在某次缺页故障时产生了 double fault，其原因可能是：（不定项选择，都选对才得分，1 分）",
+        "answer": "答案：C（原卷选项③）。"
+      },
+      "group": {
+        "id": "p-2c2b56c4452255b1:2021-final-q5",
+        "questionId": "q-3843863f7e2c5084",
+        "title": "第五题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -4560,7 +4601,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "7. 下列陈述中，错误陈述的数量为：\n①进程调度的实现在一定程度上依赖于定时器中断（timer interrupts）。\n②execv()函数成功调用后不会返回。\n③使用fork()创建的子进程与父进程对内存的修改是共享的。\n④在X86-64 Linux中，访存缺页异常属于故障。\n⑤异常处理的返回行为包括：返回当前指令、返回下一条指令和终止(abort)。\n⑥如果处理得当（如设置SIGFPE的信号处理函数），除以零引发的除法错误不会\n导致终止(abort)。\n⑦单核处理器上，可以通过不断地上下文切换交替运行并发的程序，给用户呈现一\n种并发的程序在同时运行的感觉。\n⑧进入信号处理函数时会创建新的进程。",
         "choices": [
           {
@@ -4583,8 +4624,8 @@
         "answer": "答案：C， ③⑧错误。使用 fork 创建的子进程和父进程在 初始阶段 的内存内\n容是相同的，但它们并不是直接共享内存。父子进程初期的内存内容是相同的，但\n它们对内存的修改是 独立的，并不共享。进入信号处理函数并不会创建新的进程。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4650,7 +4691,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "8. 在Ubuntu Linux 24.04环境中，关于系统级IO，下列说法正确的是：",
         "choices": [
           {
@@ -4673,8 +4714,8 @@
         "answer": "答案：C\nA. SIGKILL会直接终止进程，此时，仍留存在用户态缓冲区的内容尚未被写入\n磁盘。这里要求“未进行特殊设置和额外操作”保证了缓冲区存在且不被清空。\nB. fprintf是线程安全的，内部有同步机制，不会导致程序崩溃。一个特殊情况\n是如果两个竞争的fprintf调用操作同一个FILE*对象，那么文件内容的最终顺\n序是不确定的。但也不会导致程序崩溃。\nC. 正确\nD. fork() 创建的子进程的标准 I/O 缓冲区不总是空的，它会复制父进程的标\n准 I/O 缓冲区的内容。注意——COW并不会立即复制父进程的缓冲区，而是在子\n进程或父进程尝试修改缓冲区时才会复制。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4857,435 +4898,6 @@
         "format": "markdown",
         "prompt": "Part C: 分析下面这段代码的行为，假设file.txt文件存在且初始内容为空，\n并且不需要考虑open()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main() {\nchar *numbers = \"0123456789\";\nchar buffer[100];\nbuffer[0] = '\\0';\npid_t father_pid = getpid();\nfor (int i = 0; i < 10; ++i){\nif (fork() != 0) {\nstrncat(buffer, numbers + i, 1);\n}\n}\nint fd = open(\"./file.txt\", O_RDWR , 0);\nwrite(fd, buffer, strlen(buffer));\nwhile(wait(NULL) != -1){}\nif (getpid() == father_pid) {\nclose(fd);\nfd = open(\"./file.txt\", O_RDONLY, 0);\nchar content[100];\nread(fd, content, 100);\nprintf(\"%c\\n\", content[3]);\nprintf(\"%c\\n\", content[6]);\n}\nexit(0);\n}\n```\n\n\n如果你不清楚string.h中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\ndest，一个源字符串src和最大追加的字符数n。在src的长度至少为n时，这个函数将\nsrc的前n个字符拼接到dest字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为            ，\n第二行的内容可能为            。（ 你 需 要 列 出所有可能出现的 输 出， 每种 可能\n性用逗号隔开，每空1分）\n2） 在运行这段代码之后，file.txt中的内容有            种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）",
         "answer": "7"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-57f02c06a6382d33",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 15,
-      "moduleId": "ecf_and_system_io",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 15",
-      "summary": "异常四分类与返回行为",
-      "content": "15.关于异常（exception）的细分类型，下列说法哪些正确？\n答案：ABD\n解析： trap 常见于系统调用，返回到下一条；fault 典型会重启当前指令（例如页故障\n修好后重新执行触发缺页的那条访存指令），因此 C 错；page fault是 fault，不是\ntrap（E 错）。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 94,
-          "end": 98
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/94.md"
-      },
-      "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "15.关于异常（exception）的细分类型，下列说法哪些正确？",
-        "choices": [],
-        "answer": "答案：ABD\n解析： trap 常见于系统调用，返回到下一条；fault 典型会重启当前指令（例如页故障\n修好后重新执行触发缺页的那条访存指令），因此 C 错；page fault是 fault，不是\ntrap（E 错）。"
-      },
-      "interaction": {
-        "kind": "short-answer",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "15.关于异常（exception）的细分类型，下列说法哪些正确？",
-        "answer": "答案：ABD\n解析： trap 常见于系统调用，返回到下一条；fault 典型会重启当前指令（例如页故障\n修好后重新执行触发缺页的那条访存指令），因此 C 错；page fault是 fault，不是\ntrap（E 错）。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-40d6bbb04610d275",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 16,
-      "moduleId": "ecf_and_system_io",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 16",
-      "summary": "进程上下文切换的时机与地址空间",
-      "content": "16.关于“进程上下文切换（context switch）”，下列说法哪些正确？\n答案：ACD\n解析： B 错（不一定，有可能还在当前进程）；E 错（切换进程通常意味着切换到另一个\n地址空间/页表）。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 99,
-          "end": 102
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/99.md"
-      },
-      "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "16.关于“进程上下文切换（context switch）”，下列说法哪些正确？",
-        "choices": [],
-        "answer": "答案：ACD\n解析： B 错（不一定，有可能还在当前进程）；E 错（切换进程通常意味着切换到另一个\n地址空间/页表）。"
-      },
-      "interaction": {
-        "kind": "short-answer",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "16.关于“进程上下文切换（context switch）”，下列说法哪些正确？",
-        "answer": "答案：ACD\n解析： B 错（不一定，有可能还在当前进程）；E 错（切换进程通常意味着切换到另一个\n地址空间/页表）。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-e232b8d0d805682e",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 17,
-      "moduleId": "ecf_and_system_io",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 17",
-      "summary": "fork 后共享 open file description 的 read",
-      "content": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n答案：ABE\n解析： 父子进程共享同一个 open file description，因此 4 次 read 总体按顺序\n消耗 a,b,c,d。某个进程读到的两字节一定是“先后顺序递增”的组合（如\nab/ac/bd/cd/...），但不可能倒序（ca）或重复（aa）。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 103,
-          "end": 107
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/103.md"
-      },
-      "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "17.文件t.txt的内容恰好是4字节：abcd（示意）",
-        "choices": [],
-        "answer": "答案：ABE\n解析： 父子进程共享同一个 open file description，因此 4 次 read 总体按顺序\n消耗 a,b,c,d。某个进程读到的两字节一定是“先后顺序递增”的组合（如\nab/ac/bd/cd/...），但不可能倒序（ca）或重复（aa）。"
-      },
-      "interaction": {
-        "kind": "short-answer",
-        "declared": true
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "17.文件t.txt的内容恰好是4字节：abcd（示意）",
-        "answer": "答案：ABE\n解析： 父子进程共享同一个 open file description，因此 4 次 read 总体按顺序\n消耗 a,b,c,d。某个进程读到的两字节一定是“先后顺序递增”的组合（如\nab/ac/bd/cd/...），但不可能倒序（ca）或重复（aa）。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-38fe1a2c683ed497",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 18,
-      "moduleId": "ecf_and_system_io",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 18",
-      "summary": "SIGCHLD 合并递送、waitpid 回收与 zombie",
-      "content": "18.观察下面的C程序代码\n```\nvolatile sig_atomic_t reap = 0;\nvoid handler(int sig){\nwhile (waitpid(-1, NULL, WNOHANG) > 0)\nreap++;\n}\nint main(void){\nSignal(SIGCHLD, handler);\nfor (int i = 0; i < 2; i++)\nif (fork() == 0) _exit(0);\nwhile (reap < 2) ;\nprintf(\"OK\\n\");\n}\n```\n下列说法哪些正确？\nA. handler 可能只被调用 1 次，但 reap 最终仍可能变为 2\nB. 程序打印 OK 时，通常不会残留 zombie 子进程\nC. 因为 SIGCHLD 不排队，reap 最大只能到 1\nD. 若把 handler 里的 while 改为只调用一次 waitpid，则一定不会留下 zombie\nE. OK 可能在任意时刻打印（包括在子进程尚未退出时）\n答案：AB\n解析： SIGCHLD 可能合并递送；一次进入 handler 用 while(waitpid...) 可回收\n多个已退出子进程，因此 A 对。reap==2 意味着两个子都已被回收，通常不会有 zombie\n（B 对）。C/D/E 都不成立。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 108,
-          "end": 112
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/108.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "18.观察下面的C程序代码\n```\nvolatile sig_atomic_t reap = 0;\nvoid handler(int sig){\nwhile (waitpid(-1, NULL, WNOHANG) > 0)\nreap++;\n}\nint main(void){\nSignal(SIGCHLD, handler);\nfor (int i = 0; i < 2; i++)\nif (fork() == 0) _exit(0);\nwhile (reap < 2) ;\nprintf(\"OK\\n\");\n}\n```\n下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "handler 可能只被调用 1 次，但 reap 最终仍可能变为 2"
-          },
-          {
-            "key": "B",
-            "content": "程序打印 OK 时，通常不会残留 zombie 子进程"
-          },
-          {
-            "key": "C",
-            "content": "因为 SIGCHLD 不排队，reap 最大只能到 1"
-          },
-          {
-            "key": "D",
-            "content": "若把 handler 里的 while 改为只调用一次 waitpid，则一定不会留下 zombie"
-          },
-          {
-            "key": "E",
-            "content": "OK 可能在任意时刻打印（包括在子进程尚未退出时）"
-          }
-        ],
-        "answer": "答案：AB\n解析： SIGCHLD 可能合并递送；一次进入 handler 用 while(waitpid...) 可回收\n多个已退出子进程，因此 A 对。reap==2 意味着两个子都已被回收，通常不会有 zombie\n（B 对）。C/D/E 都不成立。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "handler 可能只被调用 1 次，但 reap 最终仍可能变为 2"
-          },
-          {
-            "id": "B",
-            "content": "程序打印 OK 时，通常不会残留 zombie 子进程"
-          },
-          {
-            "id": "C",
-            "content": "因为 SIGCHLD 不排队，reap 最大只能到 1"
-          },
-          {
-            "id": "D",
-            "content": "若把 handler 里的 while 改为只调用一次 waitpid，则一定不会留下 zombie"
-          },
-          {
-            "id": "E",
-            "content": "OK 可能在任意时刻打印（包括在子进程尚未退出时）"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "18.观察下面的C程序代码\n```\nvolatile sig_atomic_t reap = 0;\nvoid handler(int sig){\nwhile (waitpid(-1, NULL, WNOHANG) > 0)\nreap++;\n}\nint main(void){\nSignal(SIGCHLD, handler);\nfor (int i = 0; i < 2; i++)\nif (fork() == 0) _exit(0);\nwhile (reap < 2) ;\nprintf(\"OK\\n\");\n}\n```\n下列说法哪些正确？",
-        "answer": "答案：AB\n解析： SIGCHLD 可能合并递送；一次进入 handler 用 while(waitpid...) 可回收\n多个已退出子进程，因此 A 对。reap==2 意味着两个子都已被回收，通常不会有 zombie\n（B 对）。C/D/E 都不成立。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-5b49e82696d6e69a",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 19,
-      "moduleId": "ecf_and_system_io",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 19",
-      "summary": "阻塞期间同类信号 pending 不排队",
-      "content": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？\nA. count 一定为 0\nB. count 一定为 1\nC. count 可能为 2\nD. 在解除阻塞之前，handler可能会运行\nE. 在设置阻塞之前，handler可能会运行\n答案：B\n解析： 普通信号（非实时信号）通常不排队：阻塞期间同种信号 pending 只记一次，因\n此解除阻塞后 handler 只会跑一次（B/E 对），解除阻塞前不会递送（D 错）。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 113,
-          "end": 116
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/113.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "single",
-        "stem": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "count 一定为 0"
-          },
-          {
-            "key": "B",
-            "content": "count 一定为 1"
-          },
-          {
-            "key": "C",
-            "content": "count 可能为 2"
-          },
-          {
-            "key": "D",
-            "content": "在解除阻塞之前，handler可能会运行"
-          },
-          {
-            "key": "E",
-            "content": "在设置阻塞之前，handler可能会运行"
-          }
-        ],
-        "answer": "答案：B\n解析： 普通信号（非实时信号）通常不排队：阻塞期间同种信号 pending 只记一次，因\n此解除阻塞后 handler 只会跑一次（B/E 对），解除阻塞前不会递送（D 错）。"
-      },
-      "interaction": {
-        "kind": "single-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "count 一定为 0"
-          },
-          {
-            "id": "B",
-            "content": "count 一定为 1"
-          },
-          {
-            "id": "C",
-            "content": "count 可能为 2"
-          },
-          {
-            "id": "D",
-            "content": "在解除阻塞之前，handler可能会运行"
-          },
-          {
-            "id": "E",
-            "content": "在设置阻塞之前，handler可能会运行"
-          }
-        ],
-        "correctChoiceIds": [
-          "B"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
-        "answer": "答案：B\n解析： 普通信号（非实时信号）通常不排队：阻塞期间同种信号 pending 只记一次，因\n此解除阻塞后 handler 只会跑一次（B/E 对），解除阻塞前不会递送（D 错）。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-daaaba27ab72275a",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 20,
-      "moduleId": "ecf_and_system_io",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "二 20",
-      "summary": "execve 成功后 PID 与地址空间语义",
-      "content": "20.关于 execve()成功执行后的语义，下列说法哪些正确？\nA. 成功的 execve() 不会返回到调用点（除非失败）\nB. execve() 会用新程序的代码/数据替换当前进程的用户态地址空间\nC. execve() 成功后，进程 PID 会改变（变成新程序的 PID）\nD. execve() 成功后，默认情况下已打开的文件描述符仍然保持打开（除非设置\nclose-on-exec）\nE. execve() 会创建一个新进程，因此父子关系会改变\n答案：ABD\n解析： exec 是“在同一进程里换程序”，PID 不变（C 错），也不会创建新进程（E 错）",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 117,
-          "end": 123
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/117.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "20.关于 execve()成功执行后的语义，下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "成功的 execve() 不会返回到调用点（除非失败）"
-          },
-          {
-            "key": "B",
-            "content": "execve() 会用新程序的代码/数据替换当前进程的用户态地址空间"
-          },
-          {
-            "key": "C",
-            "content": "execve() 成功后，进程 PID 会改变（变成新程序的 PID）"
-          },
-          {
-            "key": "D",
-            "content": "execve() 成功后，默认情况下已打开的文件描述符仍然保持打开（除非设置\nclose-on-exec）"
-          },
-          {
-            "key": "E",
-            "content": "execve() 会创建一个新进程，因此父子关系会改变"
-          }
-        ],
-        "answer": "答案：ABD\n解析： exec 是“在同一进程里换程序”，PID 不变（C 错），也不会创建新进程（E 错）"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "成功的 execve() 不会返回到调用点（除非失败）"
-          },
-          {
-            "id": "B",
-            "content": "execve() 会用新程序的代码/数据替换当前进程的用户态地址空间"
-          },
-          {
-            "id": "C",
-            "content": "execve() 成功后，进程 PID 会改变（变成新程序的 PID）"
-          },
-          {
-            "id": "D",
-            "content": "execve() 成功后，默认情况下已打开的文件描述符仍然保持打开（除非设置\nclose-on-exec）"
-          },
-          {
-            "id": "E",
-            "content": "execve() 会创建一个新进程，因此父子关系会改变"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "D"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "20.关于 execve()成功执行后的语义，下列说法哪些正确？",
-        "answer": "答案：ABD\n解析： exec 是“在同一进程里换程序”，PID 不变（C 错），也不会创建新进程（E 错）"
       },
       "presentation": {
         "status": "ready",
@@ -5685,7 +5297,7 @@
       "exam": "2025期末",
       "questionNo": "二 19",
       "summary": "阻塞信号 pending 不排队与 sigprocmask",
-      "content": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\n```\n\n\n```\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\n```\nraise(SIGINT);// raise()用于向当前进程发出指定信号\n```\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？\nA. count 一定为 0\nB. count 一定为 1\nC. count 可能为 2\nD. 在解除阻塞之前，handler可能会运行\nE. 在设置阻塞之前，handler可能会运行\n答案：B\n解析：普通信号（非实时信号）通常不排队：阻塞期间同种信号 pending 只记一次，因此解除阻塞后 handler 只会跑一次，解除阻塞前不会递送（D 错）。（答案表原文此处附注“B/E 对”，与所给答案 B 不一致，以答案行 B 为准。）",
+      "content": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？\nA. count 一定为 0\nB. count 一定为 1\nC. count 可能为 2\nD. 在解除阻塞之前，handler可能会运行\nE. 在设置阻塞之前，handler可能会运行\n答案：B（原答案行）。注意：带答案卷的解析同时标注“B/E 对”；若允许阻塞前收到外部 SIGINT，则 E 可能成立、且 B 不再必然。题目未明确是否排除外部信号，因此原材料的答案与解析存在冲突，需向出题方确认默认假设。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5704,8 +5316,8 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": "single",
-        "stem": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\n```\n\n\n```\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\n```\nraise(SIGINT);// raise()用于向当前进程发出指定信号\n```\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
+        "selection": "multiple",
+        "stem": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
@@ -5728,10 +5340,10 @@
             "content": "在设置阻塞之前，handler可能会运行"
           }
         ],
-        "answer": "答案：B\n解析：普通信号（非实时信号）通常不排队：阻塞期间同种信号 pending 只记一次，因此解除阻塞后 handler 只会跑一次，解除阻塞前不会递送（D 错）。（答案表原文此处附注“B/E 对”，与所给答案 B 不一致，以答案行 B 为准。）"
+        "answer": "答案：B（原答案行）。注意：带答案卷的解析同时标注“B/E 对”；若允许阻塞前收到外部 SIGINT，则 E 可能成立、且 B 不再必然。题目未明确是否排除外部信号，因此原材料的答案与解析存在冲突，需向出题方确认默认假设。"
       },
       "interaction": {
-        "kind": "single-choice",
+        "kind": "multiple-choice",
         "declared": true,
         "choices": [
           {
@@ -5761,8 +5373,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\n```\n\n\n```\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\n```\nraise(SIGINT);// raise()用于向当前进程发出指定信号\n```\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
-        "answer": "答案：B\n解析：普通信号（非实时信号）通常不排队：阻塞期间同种信号 pending 只记一次，因此解除阻塞后 handler 只会跑一次，解除阻塞前不会递送（D 错）。（答案表原文此处附注“B/E 对”，与所给答案 B 不一致，以答案行 B 为准。）"
+        "prompt": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
+        "answer": "答案：B（原答案行）。注意：带答案卷的解析同时标注“B/E 对”；若允许阻塞前收到外部 SIGINT，则 E 可能成立、且 B 不再必然。题目未明确是否排除外部信号，因此原材料的答案与解析存在冲突，需向出题方确认默认假设。"
       },
       "presentation": {
         "status": "ready",

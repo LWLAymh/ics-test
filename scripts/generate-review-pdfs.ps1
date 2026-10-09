@@ -2,7 +2,9 @@
 param(
     [string]$Output,
     [string[]]$Module,
+    [string[]]$Paper,
     [string]$Font,
+    [switch]$ListPapers,
     [switch]$KeepOutput
 )
 
@@ -43,7 +45,9 @@ if (-not $python) {
 $arguments = @($generator)
 if ($Output) { $arguments += @('--output', $Output) }
 foreach ($moduleId in $Module) { $arguments += @('--module', $moduleId) }
+foreach ($paperId in $Paper) { $arguments += @('--paper', $paperId) }
 if ($Font) { $arguments += @('--font', $Font) }
+if ($ListPapers) { $arguments += '--list-papers' }
 if ($KeepOutput) { $arguments += '--keep-output' }
 
 Push-Location $repo

@@ -3884,14 +3884,25 @@
         "choices": [],
         "answer": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制： | 十进制： |  |\n| Two’s Complement | 二进制： | 十进制： |  |",
         "answer": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |"
+      },
+      "group": {
+        "id": "p-a12b4c73bf0c30d2:2019-mid-q2",
+        "questionId": "q-fff3be8833a226ca",
+        "title": "第二题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -3935,14 +3946,25 @@
         "choices": [],
         "answer": "答案：2.\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| 0x80000000 | -0 |\n| 0x41180000 | +9.5 |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} != 2 + (2^{50} - 2^{50})$ | 是 |\n| $2^{25} + 1 + 1 + 1 + 1 == 2^{25} + 4$ | 否 |\n\nAssociative: Only 23 bits of mantissa (M), so $2 + 2^{50} = 2^{50}$ (2 gets rounded off). So LHS = 0, RHS = 2.\n\nCumulative: 1 is 25 powers of 2 away from $2^{25}$, so $2^{25} + 1 = 2^{25}$, but 4 is 23 powers of 2 away from $2^{25}$, so it doesn't get rounded off."
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2. （4 point）假设IEEE 754 浮点数标准，请回答以下问题（每空1分）\n| 浮点数 | Decimal values |\n| --- | --- |\n| 0x80000000 |  |\n| 0x41180000 |  |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} != 2 + (2^{50} - 2^{50})$ |  |\n| $2^{25} + 1 + 1 + 1 + 1 == 2^{25} + 4$ |  |",
         "answer": "答案：2.\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| 0x80000000 | -0 |\n| 0x41180000 | +9.5 |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} != 2 + (2^{50} - 2^{50})$ | 是 |\n| $2^{25} + 1 + 1 + 1 + 1 == 2^{25} + 4$ | 否 |\n\nAssociative: Only 23 bits of mantissa (M), so $2 + 2^{50} = 2^{50}$ (2 gets rounded off). So LHS = 0, RHS = 2.\n\nCumulative: 1 is 25 powers of 2 away from $2^{25}$, so $2^{25} + 1 = 2^{25}$, but 4 is 23 powers of 2 away from $2^{25}$, so it doesn't get rounded off."
+      },
+      "group": {
+        "id": "p-a12b4c73bf0c30d2:2019-mid-q2",
+        "questionId": "q-fff3be8833a226ca",
+        "title": "第二题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -4196,7 +4218,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "2.函数g定义如下：\n```\nint g(float f){\nunion {\nfloat f;\nint i;\n} x;\nx.f = f;\nreturn x.i ^ ((1u << (x.i < 0 ? 31 : 0)) - 1);\n}\n```\n则对于两个float型变量a,b，有a<b是g(a)<g(b)的:\n当a，b有意义时，a<b与g(a)<g(b)等价，而当a与b是NaN或者正负0时，\ng(a)<g(b)无法推出a<b。",
         "choices": [
           {
@@ -4219,8 +4241,8 @@
         "answer": "B"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4287,7 +4309,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "3.阅读如下一段代码\n```\nint s = 0;\nfor (int i = 0; i < 32; i++)\ns = s ^ i;\nprintf(\"%d\", s);\n```\n问运行这段代码后的输出是什么:\n列表找规律即可。",
         "choices": [
           {
@@ -4310,8 +4332,8 @@
         "answer": "A"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4378,7 +4400,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "4.阅读如下一段代码\n```\nint x = 0x2021;\nint y = -x;\nint z = (x / 2) - (x >> 1) + (y / 2) - (y >> 1);\nprintf(\"%d\", z);\n```\n问运行这段代码后的输出是什么:\n3\n\n\n右移向下取整，而除以2则是向0取整。",
         "choices": [
           {
@@ -4401,8 +4423,8 @@
         "answer": "C"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4445,7 +4467,7 @@
       "exam": "2021期中",
       "questionNo": "第二题 1",
       "summary": "short 的小端存放、补码与绝对值",
-      "content": "第二题 请结合教材第二章“信息的表示和处理”的相关知识,回答下列问题（10\n分）\n1. 假设某x86-64机器在地址0x100和0x101处存储的数据用二进制表示分\n别为[1010 1100]2和[1111 1011]2.又假设x是一个short类型的变量,其\n地址为0x100.则x的十六进制补码表示为\n____(\n0x____(1)____,这是一个\n2)____(填“正”或“负”)数，其绝对值为____(3)____(用十进制数\n字表示).",
+      "content": "第二题：请结合教材第二章“信息的表示和处理”的相关知识回答下列问题（10 分）。\n\n1. 假设某 x86-64 机器在地址 `0x100` 和 `0x101` 处存储的数据用二进制表示分别为 `[1010 1100]₂` 和 `[1111 1011]₂`。又假设 `x` 是一个 `short` 类型的变量，其地址为 `0x100`。则 `x` 的十六进制补码表示为 `0x{{blank:hex-value}}`，这是一个 {{blank:sign}}（填“正”或“负”）数，其绝对值为 {{blank:absolute-value}}（用十进制数字表示）。\n(1) `fbac`；(2) 负；(3) `1108`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4470,9 +4492,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二题 请结合教材第二章“信息的表示和处理”的相关知识,回答下列问题（10\n分）\n1. 假设某x86-64机器在地址0x100和0x101处存储的数据用二进制表示分\n别为[1010 1100]2和[1111 1011]2.又假设x是一个short类型的变量,其\n地址为0x100.则x的十六进制补码表示为\n____(",
+        "stem": "第二题：请结合教材第二章“信息的表示和处理”的相关知识回答下列问题（10 分）。\n\n1. 假设某 x86-64 机器在地址 `0x100` 和 `0x101` 处存储的数据用二进制表示分别为 `[1010 1100]₂` 和 `[1111 1011]₂`。又假设 `x` 是一个 `short` 类型的变量，其地址为 `0x100`。则 `x` 的十六进制补码表示为 `0x{{blank:hex-value}}`，这是一个 {{blank:sign}}（填“正”或“负”）数，其绝对值为 {{blank:absolute-value}}（用十进制数字表示）。",
         "choices": [],
-        "answer": "0x____(1)____,这是一个\n2)____(填“正”或“负”)数，其绝对值为____(3)____(用十进制数\n字表示)."
+        "answer": "(1) `fbac`；(2) 负；(3) `1108`。"
       },
       "interaction": {
         "kind": "fill",
@@ -4480,8 +4502,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题 请结合教材第二章“信息的表示和处理”的相关知识,回答下列问题（10\n分）\n1. 假设某x86-64机器在地址0x100和0x101处存储的数据用二进制表示分\n别为[1010 1100]2和[1111 1011]2.又假设x是一个short类型的变量,其\n地址为0x100.则x的十六进制补码表示为\n____(",
-        "answer": "0x____(1)____,这是一个\n2)____(填“正”或“负”)数，其绝对值为____(3)____(用十进制数\n字表示)."
+        "prompt": "第二题：请结合教材第二章“信息的表示和处理”的相关知识回答下列问题（10 分）。\n\n1. 假设某 x86-64 机器在地址 `0x100` 和 `0x101` 处存储的数据用二进制表示分别为 `[1010 1100]₂` 和 `[1111 1011]₂`。又假设 `x` 是一个 `short` 类型的变量，其地址为 `0x100`。则 `x` 的十六进制补码表示为 `0x{{blank:hex-value}}`，这是一个 {{blank:sign}}（填“正”或“负”）数，其绝对值为 {{blank:absolute-value}}（用十进制数字表示）。",
+        "answer": "(1) `fbac`；(2) 负；(3) `1108`。"
       },
       "presentation": {
         "status": "ready",
@@ -4498,7 +4520,7 @@
       "exam": "2021期中",
       "questionNo": "第二题 2",
       "summary": "补码比较与无符号表达式求值",
-      "content": "2. 设整型变量采用32位补码表示,判断正误(填“√”或“×”):\ni. 设x,y,z是整型变量,且x<y<z<0,则(-y)>(-z)>0. (\n____)\nii. 表达式“(-5) + sizeof(int) < 0”为真. (\n____)\n____(4)\n____(5)",
+      "content": "2. 设整型变量采用 32 位补码表示，判断正误（填“√”或“×”）：\n\ni. 设 `x,y,z` 是整型变量，且 `x < y < z < 0`，则 `(-y) > (-z) > 0`。（{{blank:statement-1}}）\n\nii. 表达式 `(-5) + sizeof(int) < 0` 为真。（{{blank:statement-2}}）\n(4) √；(5) ×。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4523,9 +4545,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2. 设整型变量采用32位补码表示,判断正误(填“√”或“×”):\ni. 设x,y,z是整型变量,且x<y<z<0,则(-y)>(-z)>0. (\n____)\nii. 表达式“(-5) + sizeof(int) < 0”为真. (\n____)",
+        "stem": "2. 设整型变量采用 32 位补码表示，判断正误（填“√”或“×”）：\n\ni. 设 `x,y,z` 是整型变量，且 `x < y < z < 0`，则 `(-y) > (-z) > 0`。（{{blank:statement-1}}）\n\nii. 表达式 `(-5) + sizeof(int) < 0` 为真。（{{blank:statement-2}}）",
         "choices": [],
-        "answer": "____(4)\n____(5)"
+        "answer": "(4) √；(5) ×。"
       },
       "interaction": {
         "kind": "fill",
@@ -4533,8 +4555,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. 设整型变量采用32位补码表示,判断正误(填“√”或“×”):\ni. 设x,y,z是整型变量,且x<y<z<0,则(-y)>(-z)>0. (\n____)\nii. 表达式“(-5) + sizeof(int) < 0”为真. (\n____)",
-        "answer": "____(4)\n____(5)"
+        "prompt": "2. 设整型变量采用 32 位补码表示，判断正误（填“√”或“×”）：\n\ni. 设 `x,y,z` 是整型变量，且 `x < y < z < 0`，则 `(-y) > (-z) > 0`。（{{blank:statement-1}}）\n\nii. 表达式 `(-5) + sizeof(int) < 0` 为真。（{{blank:statement-2}}）",
+        "answer": "(4) √；(5) ×。"
       },
       "presentation": {
         "status": "ready",
@@ -4551,7 +4573,7 @@
       "exam": "2021期中",
       "questionNo": "第二题 3",
       "summary": "自定义 IEEE 浮点格式的最大规格化数与舍入",
-      "content": "3. 考虑一种新的遵从IEEE 规范的浮点格式系统,该浮点数系统包含1位符\n号,4 位阶码,7 位尾数.\ni. 该浮点数系统所能表示的最大规格化数\n____.\n!\nii. 将−\"#$用该浮点数系统表示,写成十六进制为\n!\n舍入的原则，把\"#$的二进制表示舍入到最近的一百二十八分之一,将得到\n____(填最简真分数).\n(十进制)为____(6)\n0x____(7)____.按照向偶\n数\n____(8)",
+      "content": "3. 考虑一种新的遵从 IEEE 规范的浮点格式系统，该浮点数系统包含 1 位符号、4 位阶码、7 位尾数。\n\ni. 该浮点数系统所能表示的最大规格化数（十进制）为 {{blank:max-normal}}。\n\nii. 将 `−3/256` 用该浮点数系统表示，写成十六进制为 `0x{{blank:negative-three-over-256}}`。按照向偶数舍入的原则，把 `3/256` 的二进制表示舍入到最近的 `1/128`，将得到 {{blank:rounded-fraction}}（填最简真分数）。\n(6) `255`；(7) `860`；(8) `1/64`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4576,9 +4598,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3. 考虑一种新的遵从IEEE 规范的浮点格式系统,该浮点数系统包含1位符\n号,4 位阶码,7 位尾数.\ni. 该浮点数系统所能表示的最大规格化数\n____.\n!\nii. 将−\"#$用该浮点数系统表示,写成十六进制为\n!\n舍入的原则，把\"#$的二进制表示舍入到最近的一百二十八分之一,将得到\n____(填最简真分数).",
+        "stem": "3. 考虑一种新的遵从 IEEE 规范的浮点格式系统，该浮点数系统包含 1 位符号、4 位阶码、7 位尾数。\n\ni. 该浮点数系统所能表示的最大规格化数（十进制）为 {{blank:max-normal}}。\n\nii. 将 `−3/256` 用该浮点数系统表示，写成十六进制为 `0x{{blank:negative-three-over-256}}`。按照向偶数舍入的原则，把 `3/256` 的二进制表示舍入到最近的 `1/128`，将得到 {{blank:rounded-fraction}}（填最简真分数）。",
         "choices": [],
-        "answer": "(十进制)为____(6)\n0x____(7)____.按照向偶\n数\n____(8)"
+        "answer": "(6) `255`；(7) `860`；(8) `1/64`。"
       },
       "interaction": {
         "kind": "fill",
@@ -4586,8 +4608,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. 考虑一种新的遵从IEEE 规范的浮点格式系统,该浮点数系统包含1位符\n号,4 位阶码,7 位尾数.\ni. 该浮点数系统所能表示的最大规格化数\n____.\n!\nii. 将−\"#$用该浮点数系统表示,写成十六进制为\n!\n舍入的原则，把\"#$的二进制表示舍入到最近的一百二十八分之一,将得到\n____(填最简真分数).",
-        "answer": "(十进制)为____(6)\n0x____(7)____.按照向偶\n数\n____(8)"
+        "prompt": "3. 考虑一种新的遵从 IEEE 规范的浮点格式系统，该浮点数系统包含 1 位符号、4 位阶码、7 位尾数。\n\ni. 该浮点数系统所能表示的最大规格化数（十进制）为 {{blank:max-normal}}。\n\nii. 将 `−3/256` 用该浮点数系统表示，写成十六进制为 `0x{{blank:negative-three-over-256}}`。按照向偶数舍入的原则，把 `3/256` 的二进制表示舍入到最近的 `1/128`，将得到 {{blank:rounded-fraction}}（填最简真分数）。",
+        "answer": "(6) `255`；(7) `860`；(8) `1/64`。"
       },
       "presentation": {
         "status": "ready",
@@ -4604,7 +4626,7 @@
       "exam": "2021期中",
       "questionNo": "第二题 4",
       "summary": "非规格化/规格化浮点相邻间隔与精度",
-      "content": "4. 有下面一段程序：\n```\nint i, j, k;\nfor(i = 0; i <= 2147483647 - 2; i ++){\nj = i + 1;\nk = j + 1;\nfloat *x = (float *)(&i);\nfloat *y = (float *)(&j);\nfloat *z = (float *)(&k);\nif(*y - *x != *z - *y){\n```\nprintf(\"0x%08x\\n\", i);   //输出8位16进制数\n```\nbreak;\n}\n}\n```\n\n\n其中 float 类型表示 IEEE-754 规定的浮点数，包括1位符号,8位阶码,23\n位尾数. 请问该程序是否会有输出？\n____(填“是”或“否”).若有输\n出，请给出输出内容，若没有输出，请说明理由\n____.\n11\n____(9)\n____(10)",
+      "content": "4. 有下面一段程序：\n```c\nint i, j, k;\nfor (i = 0; i <= 2147483647 - 2; i++) {\n    j = i + 1;\n    k = j + 1;\n    float *x = (float *)(&i);\n    float *y = (float *)(&j);\n    float *z = (float *)(&k);\n    if (*y - *x != *z - *y) {\n        printf(\"0x%08x\\n\", i); // 输出8位16进制数\n        break;\n    }\n}\n```\n其中 `float` 类型表示 IEEE-754 规定的浮点数，包括 1 位符号、8 位阶码、23 位尾数。请问该程序是否会有输出？{{blank:has-output}}（填“是”或“否”）。若有输出，请给出输出内容；若没有输出，请说明理由：{{blank:output-or-reason}}。\n(9) 是；(10) `0x00ffffff`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4629,9 +4651,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "4. 有下面一段程序：\n```\nint i, j, k;\nfor(i = 0; i <= 2147483647 - 2; i ++){\nj = i + 1;\nk = j + 1;\nfloat *x = (float *)(&i);\nfloat *y = (float *)(&j);\nfloat *z = (float *)(&k);\nif(*y - *x != *z - *y){\n```\nprintf(\"0x%08x\\n\", i);   //输出8位16进制数\n```\nbreak;\n}\n}\n```\n\n\n其中 float 类型表示 IEEE-754 规定的浮点数，包括1位符号,8位阶码,23\n位尾数. 请问该程序是否会有输出？\n____(填“是”或“否”).若有输\n出，请给出输出内容，若没有输出，请说明理由\n____.",
+        "stem": "4. 有下面一段程序：\n```c\nint i, j, k;\nfor (i = 0; i <= 2147483647 - 2; i++) {\n    j = i + 1;\n    k = j + 1;\n    float *x = (float *)(&i);\n    float *y = (float *)(&j);\n    float *z = (float *)(&k);\n    if (*y - *x != *z - *y) {\n        printf(\"0x%08x\\n\", i); // 输出8位16进制数\n        break;\n    }\n}\n```\n其中 `float` 类型表示 IEEE-754 规定的浮点数，包括 1 位符号、8 位阶码、23 位尾数。请问该程序是否会有输出？{{blank:has-output}}（填“是”或“否”）。若有输出，请给出输出内容；若没有输出，请说明理由：{{blank:output-or-reason}}。",
         "choices": [],
-        "answer": "11\n____(9)\n____(10)"
+        "answer": "(9) 是；(10) `0x00ffffff`。"
       },
       "interaction": {
         "kind": "fill",
@@ -4639,8 +4661,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4. 有下面一段程序：\n```\nint i, j, k;\nfor(i = 0; i <= 2147483647 - 2; i ++){\nj = i + 1;\nk = j + 1;\nfloat *x = (float *)(&i);\nfloat *y = (float *)(&j);\nfloat *z = (float *)(&k);\nif(*y - *x != *z - *y){\n```\nprintf(\"0x%08x\\n\", i);   //输出8位16进制数\n```\nbreak;\n}\n}\n```\n\n\n其中 float 类型表示 IEEE-754 规定的浮点数，包括1位符号,8位阶码,23\n位尾数. 请问该程序是否会有输出？\n____(填“是”或“否”).若有输\n出，请给出输出内容，若没有输出，请说明理由\n____.",
-        "answer": "11\n____(9)\n____(10)"
+        "prompt": "4. 有下面一段程序：\n```c\nint i, j, k;\nfor (i = 0; i <= 2147483647 - 2; i++) {\n    j = i + 1;\n    k = j + 1;\n    float *x = (float *)(&i);\n    float *y = (float *)(&j);\n    float *z = (float *)(&k);\n    if (*y - *x != *z - *y) {\n        printf(\"0x%08x\\n\", i); // 输出8位16进制数\n        break;\n    }\n}\n```\n其中 `float` 类型表示 IEEE-754 规定的浮点数，包括 1 位符号、8 位阶码、23 位尾数。请问该程序是否会有输出？{{blank:has-output}}（填“是”或“否”）。若有输出，请给出输出内容；若没有输出，请说明理由：{{blank:output-or-reason}}。",
+        "answer": "(9) 是；(10) `0x00ffffff`。"
       },
       "presentation": {
         "status": "ready",
@@ -4686,14 +4708,25 @@
         "choices": [],
         "answer": "（2分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "7. 同学B使用了同学I改进后的func1函数实现下面这段代码，并在大端法机\n器上运行，最终得到的输出是：____________________。\n```\ns_element x, y, z;\n    x.u1.f = 1.2;\n    y.u1.f = 3.55;\n    x.next = &y;\n    y.next = nullptr;\n    z.u1.f = func1(&x);\n    printf(\"0x%x  %d\\n\",  z.u1.s[0]-z.u1.s[1],  &z.u1.s[0]-\n&z.u1.s[1]);\n```",
         "answer": "（2分）"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q6",
+        "questionId": "q-b0ef359a9e930155",
+        "title": "第六题",
+        "order": 7
       },
       "presentation": {
         "status": "ready",
@@ -5861,7 +5894,7 @@
       "exam": "2023期中",
       "questionNo": "第二题",
       "summary": "FP8 E4M3/E5M2浮点格式：规格化数、溢出舍入、求和顺序",
-      "content": "第二题（15分） 请结合教材第二章的相关知识,回答下列问题\n量化（Quantization）是将输入值从大集合映射到较小集合中的输出值的过程，\n在神经网络中是压缩模型的经典方法，通过降低权重、偏差和激活精度消耗更少的\n内存。 量化利用了神经网络对噪声的弹性； 通过使用较低精度的值，量化会引入\n一些噪声，但深度神经网络仍然可以学习拾取关键模式并忽略噪声。在 Nvidia\nH100 GPU 中引入了对新数据类型 FP8（8 位浮点）的支持，从而实现了更高的\n矩阵乘法和卷积吞吐量。FP8包含E4M3和E5M2两种不同的数据类型，E4M3包\n含1位符号，4位阶码，3位尾数；E5M2包含1位符号，5位阶码，2位尾数。\n（M是mantissa的缩写表示尾数部分，与书本上fraction等价）\n   1. 其中E5M2遵守IEEE-754标准，根据所学的float和double的知识，\n该数据类型能表示最大的规格化数（二进制）是(1)____；最大的非规格化数（二\n进制）是(2)____。\n   2. 但是在Nvidia的设计中E4M3放弃了IEEE-754标准，通过回收用于特\n殊值的大多数位模式来扩展动态范围，它只保留了阶码(E)和尾数(M)全为1时为\n特殊值 NaN，则该数据类型将能表示的最大规格化数扩展到（二进制）\n(3)________，值（十进制）是(4)________，是IEEE-754标准设计出的最\n大规格化数的(5)________倍（舍入到整数）。因为在这种情况下，实现的更大范\n围比支持特殊值的多种编码有用得多。\n   3. 另一种 8bit 格式 int8（8bit 整型）在模型量化中占有重要地位。与\nfloat相比，int8在少量精度损失下将模型大小和内存带宽需求降低4倍，使得\n模型表示更加紧凑，并且在PyTorch, TensorFlow框架中都有很好的支持。那\n么在H100 GPU上用Nvidia E4M3表示int8，是否会发生溢出(6)________\n1\n\n\n（请填是/否），是否会发生舍入(7)________（请填是/否）。\n   4. 深度学习模型计算会涉及大量浮点数的加法和乘法，而计算顺序对于结果\n有很大的影响。要将E5M2表示的-1.25, 1.5, 1/16, 1/32四个浮点数相加，\n写出可能得到的最小计算结果（分数）(8)________，最大计算结果（分数）\n(9)________。\n   5. 在深度学习中，我们期望使用在容忍一定误差的前提下使用内存占用最小\n的数据类型，则对于以下一维卷积应当采用(10)________的浮点型（请填\nfloat/double/E4M3/E5M2）\n   在训练神经网络期间， 通常前向激活和权重需要更高的精度，因此最好在前向\n传递期间使用 E4M3 数据类型。 然而在后向传递中，流经网络的梯度通常不太容\n易受到精度损失的影响，但需要更高的动态范围。 因此，最好使用 E5M2 数据格\n式存储它们。\n3",
+      "content": "第二题（15分） 请结合教材第二章的相关知识,回答下列问题\n量化（Quantization）是将输入值从大集合映射到较小集合中的输出值的过程，\n在神经网络中是压缩模型的经典方法，通过降低权重、偏差和激活精度消耗更少的\n内存。 量化利用了神经网络对噪声的弹性； 通过使用较低精度的值，量化会引入\n一些噪声，但深度神经网络仍然可以学习拾取关键模式并忽略噪声。在 Nvidia\nH100 GPU 中引入了对新数据类型 FP8（8 位浮点）的支持，从而实现了更高的\n矩阵乘法和卷积吞吐量。FP8包含E4M3和E5M2两种不同的数据类型，E4M3包\n含1位符号，4位阶码，3位尾数；E5M2包含1位符号，5位阶码，2位尾数。\n（M是mantissa的缩写表示尾数部分，与书本上fraction等价）\n   1. 其中E5M2遵守IEEE-754标准，根据所学的float和double的知识，\n该数据类型能表示最大的规格化数（二进制）是 {{blank:e5m2-max-normal}}；最大的非规格化数（二\n进制）是 {{blank:e5m2-max-subnormal}}。\n   2. 但是在Nvidia的设计中E4M3放弃了IEEE-754标准，通过回收用于特\n殊值的大多数位模式来扩展动态范围，它只保留了阶码(E)和尾数(M)全为1时为\n特殊值 NaN，则该数据类型将能表示的最大规格化数扩展到（二进制）\n(3) {{blank:e4m3-max-bits}}，值（十进制）是 (4) {{blank:e4m3-max-value}}，是 IEEE-754 标准设计出的最\n大规格化数的 (5) {{blank:e4m3-range-ratio}} 倍（舍入到整数）。因为在这种情况下，实现的更大范\n围比支持特殊值的多种编码有用得多。\n   3. 另一种 8bit 格式 int8（8bit 整型）在模型量化中占有重要地位。与\nfloat相比，int8在少量精度损失下将模型大小和内存带宽需求降低4倍，使得\n模型表示更加紧凑，并且在PyTorch, TensorFlow框架中都有很好的支持。那\n么在H100 GPU上用Nvidia E4M3表示int8，是否会发生溢出 (6) {{blank:int8-overflow}}\n\n\n（请填是/否），是否会发生舍入 (7) {{blank:int8-rounding}}（请填是/否）。\n   4. 深度学习模型计算会涉及大量浮点数的加法和乘法，而计算顺序对于结果\n有很大的影响。要将E5M2表示的-1.25, 1.5, 1/16, 1/32四个浮点数相加，\n写出可能得到的最小计算结果（分数）(8) {{blank:min-sum}}，最大计算结果（分数）\n(9) {{blank:max-sum}}。\n   5. 在深度学习中，我们期望使用在容忍一定误差的前提下使用内存占用最小\n的数据类型，则对于以下一维卷积应当采用 (10) {{blank:preferred-fp8}} 的浮点型（请填\nfloat/double/E4M3/E5M2）\n   在训练神经网络期间， 通常前向激活和权重需要更高的精度，因此最好在前向\n传递期间使用 E4M3 数据类型。 然而在后向传递中，流经网络的梯度通常不太容\n易受到精度损失的影响，但需要更高的动态范围。 因此，最好使用 E5M2 数据格\n式存储它们。\n1. (1) `01111011`；(2) `00000011`。\n2. (3) `01111110`；(4) `448`；(5) `2`。\n3. (6) 不会溢出；(7) 会舍入。\n4. (8) `1/4`；(9) `3/8`（向偶数舍入）。\n5. (10) `E4M3`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5886,9 +5919,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二题（15分） 请结合教材第二章的相关知识,回答下列问题\n量化（Quantization）是将输入值从大集合映射到较小集合中的输出值的过程，\n在神经网络中是压缩模型的经典方法，通过降低权重、偏差和激活精度消耗更少的\n内存。 量化利用了神经网络对噪声的弹性； 通过使用较低精度的值，量化会引入\n一些噪声，但深度神经网络仍然可以学习拾取关键模式并忽略噪声。在 Nvidia\nH100 GPU 中引入了对新数据类型 FP8（8 位浮点）的支持，从而实现了更高的\n矩阵乘法和卷积吞吐量。FP8包含E4M3和E5M2两种不同的数据类型，E4M3包\n含1位符号，4位阶码，3位尾数；E5M2包含1位符号，5位阶码，2位尾数。\n（M是mantissa的缩写表示尾数部分，与书本上fraction等价）\n   1. 其中E5M2遵守IEEE-754标准，根据所学的float和double的知识，\n该数据类型能表示最大的规格化数（二进制）是(1)____；最大的非规格化数（二\n进制）是(2)____。\n   2. 但是在Nvidia的设计中E4M3放弃了IEEE-754标准，通过回收用于特\n殊值的大多数位模式来扩展动态范围，它只保留了阶码(E)和尾数(M)全为1时为\n特殊值 NaN，则该数据类型将能表示的最大规格化数扩展到（二进制）\n(3)________，值（十进制）是(4)________，是IEEE-754标准设计出的最\n大规格化数的(5)________倍（舍入到整数）。因为在这种情况下，实现的更大范\n围比支持特殊值的多种编码有用得多。\n   3. 另一种 8bit 格式 int8（8bit 整型）在模型量化中占有重要地位。与\nfloat相比，int8在少量精度损失下将模型大小和内存带宽需求降低4倍，使得\n模型表示更加紧凑，并且在PyTorch, TensorFlow框架中都有很好的支持。那\n么在H100 GPU上用Nvidia E4M3表示int8，是否会发生溢出(6)________\n1\n\n\n（请填是/否），是否会发生舍入(7)________（请填是/否）。\n   4. 深度学习模型计算会涉及大量浮点数的加法和乘法，而计算顺序对于结果\n有很大的影响。要将E5M2表示的-1.25, 1.5, 1/16, 1/32四个浮点数相加，\n写出可能得到的最小计算结果（分数）(8)________，最大计算结果（分数）\n(9)________。\n   5. 在深度学习中，我们期望使用在容忍一定误差的前提下使用内存占用最小\n的数据类型，则对于以下一维卷积应当采用(10)________的浮点型（请填\nfloat/double/E4M3/E5M2）\n   在训练神经网络期间， 通常前向激活和权重需要更高的精度，因此最好在前向\n传递期间使用 E4M3 数据类型。 然而在后向传递中，流经网络的梯度通常不太容\n易受到精度损失的影响，但需要更高的动态范围。 因此，最好使用 E5M2 数据格\n式存储它们。",
+        "stem": "第二题（15分） 请结合教材第二章的相关知识,回答下列问题\n量化（Quantization）是将输入值从大集合映射到较小集合中的输出值的过程，\n在神经网络中是压缩模型的经典方法，通过降低权重、偏差和激活精度消耗更少的\n内存。 量化利用了神经网络对噪声的弹性； 通过使用较低精度的值，量化会引入\n一些噪声，但深度神经网络仍然可以学习拾取关键模式并忽略噪声。在 Nvidia\nH100 GPU 中引入了对新数据类型 FP8（8 位浮点）的支持，从而实现了更高的\n矩阵乘法和卷积吞吐量。FP8包含E4M3和E5M2两种不同的数据类型，E4M3包\n含1位符号，4位阶码，3位尾数；E5M2包含1位符号，5位阶码，2位尾数。\n（M是mantissa的缩写表示尾数部分，与书本上fraction等价）\n   1. 其中E5M2遵守IEEE-754标准，根据所学的float和double的知识，\n该数据类型能表示最大的规格化数（二进制）是 {{blank:e5m2-max-normal}}；最大的非规格化数（二\n进制）是 {{blank:e5m2-max-subnormal}}。\n   2. 但是在Nvidia的设计中E4M3放弃了IEEE-754标准，通过回收用于特\n殊值的大多数位模式来扩展动态范围，它只保留了阶码(E)和尾数(M)全为1时为\n特殊值 NaN，则该数据类型将能表示的最大规格化数扩展到（二进制）\n(3) {{blank:e4m3-max-bits}}，值（十进制）是 (4) {{blank:e4m3-max-value}}，是 IEEE-754 标准设计出的最\n大规格化数的 (5) {{blank:e4m3-range-ratio}} 倍（舍入到整数）。因为在这种情况下，实现的更大范\n围比支持特殊值的多种编码有用得多。\n   3. 另一种 8bit 格式 int8（8bit 整型）在模型量化中占有重要地位。与\nfloat相比，int8在少量精度损失下将模型大小和内存带宽需求降低4倍，使得\n模型表示更加紧凑，并且在PyTorch, TensorFlow框架中都有很好的支持。那\n么在H100 GPU上用Nvidia E4M3表示int8，是否会发生溢出 (6) {{blank:int8-overflow}}\n\n\n（请填是/否），是否会发生舍入 (7) {{blank:int8-rounding}}（请填是/否）。\n   4. 深度学习模型计算会涉及大量浮点数的加法和乘法，而计算顺序对于结果\n有很大的影响。要将E5M2表示的-1.25, 1.5, 1/16, 1/32四个浮点数相加，\n写出可能得到的最小计算结果（分数）(8) {{blank:min-sum}}，最大计算结果（分数）\n(9) {{blank:max-sum}}。\n   5. 在深度学习中，我们期望使用在容忍一定误差的前提下使用内存占用最小\n的数据类型，则对于以下一维卷积应当采用 (10) {{blank:preferred-fp8}} 的浮点型（请填\nfloat/double/E4M3/E5M2）\n   在训练神经网络期间， 通常前向激活和权重需要更高的精度，因此最好在前向\n传递期间使用 E4M3 数据类型。 然而在后向传递中，流经网络的梯度通常不太容\n易受到精度损失的影响，但需要更高的动态范围。 因此，最好使用 E5M2 数据格\n式存储它们。",
         "choices": [],
-        "answer": "3"
+        "answer": "1. (1) `01111011`；(2) `00000011`。\n2. (3) `01111110`；(4) `448`；(5) `2`。\n3. (6) 不会溢出；(7) 会舍入。\n4. (8) `1/4`；(9) `3/8`（向偶数舍入）。\n5. (10) `E4M3`。"
       },
       "interaction": {
         "kind": "fill",
@@ -5896,8 +5929,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（15分） 请结合教材第二章的相关知识,回答下列问题\n量化（Quantization）是将输入值从大集合映射到较小集合中的输出值的过程，\n在神经网络中是压缩模型的经典方法，通过降低权重、偏差和激活精度消耗更少的\n内存。 量化利用了神经网络对噪声的弹性； 通过使用较低精度的值，量化会引入\n一些噪声，但深度神经网络仍然可以学习拾取关键模式并忽略噪声。在 Nvidia\nH100 GPU 中引入了对新数据类型 FP8（8 位浮点）的支持，从而实现了更高的\n矩阵乘法和卷积吞吐量。FP8包含E4M3和E5M2两种不同的数据类型，E4M3包\n含1位符号，4位阶码，3位尾数；E5M2包含1位符号，5位阶码，2位尾数。\n（M是mantissa的缩写表示尾数部分，与书本上fraction等价）\n   1. 其中E5M2遵守IEEE-754标准，根据所学的float和double的知识，\n该数据类型能表示最大的规格化数（二进制）是(1)____；最大的非规格化数（二\n进制）是(2)____。\n   2. 但是在Nvidia的设计中E4M3放弃了IEEE-754标准，通过回收用于特\n殊值的大多数位模式来扩展动态范围，它只保留了阶码(E)和尾数(M)全为1时为\n特殊值 NaN，则该数据类型将能表示的最大规格化数扩展到（二进制）\n(3)________，值（十进制）是(4)________，是IEEE-754标准设计出的最\n大规格化数的(5)________倍（舍入到整数）。因为在这种情况下，实现的更大范\n围比支持特殊值的多种编码有用得多。\n   3. 另一种 8bit 格式 int8（8bit 整型）在模型量化中占有重要地位。与\nfloat相比，int8在少量精度损失下将模型大小和内存带宽需求降低4倍，使得\n模型表示更加紧凑，并且在PyTorch, TensorFlow框架中都有很好的支持。那\n么在H100 GPU上用Nvidia E4M3表示int8，是否会发生溢出(6)________\n1\n\n\n（请填是/否），是否会发生舍入(7)________（请填是/否）。\n   4. 深度学习模型计算会涉及大量浮点数的加法和乘法，而计算顺序对于结果\n有很大的影响。要将E5M2表示的-1.25, 1.5, 1/16, 1/32四个浮点数相加，\n写出可能得到的最小计算结果（分数）(8)________，最大计算结果（分数）\n(9)________。\n   5. 在深度学习中，我们期望使用在容忍一定误差的前提下使用内存占用最小\n的数据类型，则对于以下一维卷积应当采用(10)________的浮点型（请填\nfloat/double/E4M3/E5M2）\n   在训练神经网络期间， 通常前向激活和权重需要更高的精度，因此最好在前向\n传递期间使用 E4M3 数据类型。 然而在后向传递中，流经网络的梯度通常不太容\n易受到精度损失的影响，但需要更高的动态范围。 因此，最好使用 E5M2 数据格\n式存储它们。",
-        "answer": "3"
+        "prompt": "第二题（15分） 请结合教材第二章的相关知识,回答下列问题\n量化（Quantization）是将输入值从大集合映射到较小集合中的输出值的过程，\n在神经网络中是压缩模型的经典方法，通过降低权重、偏差和激活精度消耗更少的\n内存。 量化利用了神经网络对噪声的弹性； 通过使用较低精度的值，量化会引入\n一些噪声，但深度神经网络仍然可以学习拾取关键模式并忽略噪声。在 Nvidia\nH100 GPU 中引入了对新数据类型 FP8（8 位浮点）的支持，从而实现了更高的\n矩阵乘法和卷积吞吐量。FP8包含E4M3和E5M2两种不同的数据类型，E4M3包\n含1位符号，4位阶码，3位尾数；E5M2包含1位符号，5位阶码，2位尾数。\n（M是mantissa的缩写表示尾数部分，与书本上fraction等价）\n   1. 其中E5M2遵守IEEE-754标准，根据所学的float和double的知识，\n该数据类型能表示最大的规格化数（二进制）是 {{blank:e5m2-max-normal}}；最大的非规格化数（二\n进制）是 {{blank:e5m2-max-subnormal}}。\n   2. 但是在Nvidia的设计中E4M3放弃了IEEE-754标准，通过回收用于特\n殊值的大多数位模式来扩展动态范围，它只保留了阶码(E)和尾数(M)全为1时为\n特殊值 NaN，则该数据类型将能表示的最大规格化数扩展到（二进制）\n(3) {{blank:e4m3-max-bits}}，值（十进制）是 (4) {{blank:e4m3-max-value}}，是 IEEE-754 标准设计出的最\n大规格化数的 (5) {{blank:e4m3-range-ratio}} 倍（舍入到整数）。因为在这种情况下，实现的更大范\n围比支持特殊值的多种编码有用得多。\n   3. 另一种 8bit 格式 int8（8bit 整型）在模型量化中占有重要地位。与\nfloat相比，int8在少量精度损失下将模型大小和内存带宽需求降低4倍，使得\n模型表示更加紧凑，并且在PyTorch, TensorFlow框架中都有很好的支持。那\n么在H100 GPU上用Nvidia E4M3表示int8，是否会发生溢出 (6) {{blank:int8-overflow}}\n\n\n（请填是/否），是否会发生舍入 (7) {{blank:int8-rounding}}（请填是/否）。\n   4. 深度学习模型计算会涉及大量浮点数的加法和乘法，而计算顺序对于结果\n有很大的影响。要将E5M2表示的-1.25, 1.5, 1/16, 1/32四个浮点数相加，\n写出可能得到的最小计算结果（分数）(8) {{blank:min-sum}}，最大计算结果（分数）\n(9) {{blank:max-sum}}。\n   5. 在深度学习中，我们期望使用在容忍一定误差的前提下使用内存占用最小\n的数据类型，则对于以下一维卷积应当采用 (10) {{blank:preferred-fp8}} 的浮点型（请填\nfloat/double/E4M3/E5M2）\n   在训练神经网络期间， 通常前向激活和权重需要更高的精度，因此最好在前向\n传递期间使用 E4M3 数据类型。 然而在后向传递中，流经网络的梯度通常不太容\n易受到精度损失的影响，但需要更高的动态范围。 因此，最好使用 E5M2 数据格\n式存储它们。",
+        "answer": "1. (1) `01111011`；(2) `00000011`。\n2. (3) `01111110`；(4) `448`；(5) `2`。\n3. (6) 不会溢出；(7) 会舍入。\n4. (8) `1/4`；(9) `3/8`（向偶数舍入）。\n5. (10) `E4M3`。"
       },
       "presentation": {
         "status": "ready",
@@ -6029,7 +6062,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "2.在 x86-64 机器上运行如下代码，输出是：\n```\nchar A[12] = \"19260817\";\nchar B[12] = \"20241104\";\nvoid *x = (void *)&A;\nvoid *y = 2 + (void *)&B;\nunsigned short P = *(unsigned short *)x;\nunsigned short Q = *(unsigned short *)y;\nprintf(\"0x%04x\", (unsigned short)(P - Q));\n```\n提示：‘0’,‘1’, ...,‘9’的ASCII码分别是 0x30, 0x31, ..., 0x39。",
         "choices": [
           {
@@ -6052,8 +6085,8 @@
         "answer": "答案：B。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -7861,393 +7894,6 @@
       }
     },
     {
-      "id": "q-41a8d702aec3088c",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 1,
-      "moduleId": "data_representation",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 1",
-      "summary": "有符号/无符号转换、模回绕与比较",
-      "content": "一 不定项选择题（上）（39分）\n（信息的表示和处理）\n1. 观察下面的C程序代码：\n```c\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？\nA. u 的十六进制表示为 0xFFFFFFEC\nB. v 的值为 30\nC. 表达式 (x < u) 的值为 1\nD. 表达式 (x == u) 的值为 1\nE. 表达式 (v < u) 的值为 1\n答案：A, B, D, E\n（x 与 u 比较时会把 x 转成无符号；u+50 发生模 (2^{32}) 回绕）",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 16,
-          "end": 20
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/16.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "一 不定项选择题（上）（39分）\n（信息的表示和处理）\n1. 观察下面的C程序代码：\n```c\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "u 的十六进制表示为 0xFFFFFFEC"
-          },
-          {
-            "key": "B",
-            "content": "v 的值为 30"
-          },
-          {
-            "key": "C",
-            "content": "表达式 (x < u) 的值为 1"
-          },
-          {
-            "key": "D",
-            "content": "表达式 (x == u) 的值为 1"
-          },
-          {
-            "key": "E",
-            "content": "表达式 (v < u) 的值为 1"
-          }
-        ],
-        "answer": "答案：A, B, D, E\n（x 与 u 比较时会把 x 转成无符号；u+50 发生模 (2^{32}) 回绕）"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "u 的十六进制表示为 0xFFFFFFEC"
-          },
-          {
-            "id": "B",
-            "content": "v 的值为 30"
-          },
-          {
-            "id": "C",
-            "content": "表达式 (x < u) 的值为 1"
-          },
-          {
-            "id": "D",
-            "content": "表达式 (x == u) 的值为 1"
-          },
-          {
-            "id": "E",
-            "content": "表达式 (v < u) 的值为 1"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "D",
-          "E"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "一 不定项选择题（上）（39分）\n（信息的表示和处理）\n1. 观察下面的C程序代码：\n```c\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？",
-        "answer": "答案：A, B, D, E\n（x 与 u 比较时会把 x 转成无符号；u+50 发生模 (2^{32}) 回绕）"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-35fa59fb6ae73c33",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 2,
-      "moduleId": "data_representation",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 2",
-      "summary": "int↔float 转换精度与舍入",
-      "content": "2. 对任意 非负 int x，执行：\n```c\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）\nA. 若 0 <= x <= 16777216，则一定有 y == x\nB. 若 x == 16777217，则一定有 y == 16777216\nC. 对任意 x，一定有 y == x\nD. 存在某个 x 使得 y > x\nE. 若 x 为偶数，则一定有 y == x\n答案：A, B, D\n（float 只有 24 位有效精度；超过 (2^{24}) 后相邻可表示整数间隔变大，可能向上\n舍入）",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 21,
-          "end": 24
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/21.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "2. 对任意 非负 int x，执行：\n```c\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）",
-        "choices": [
-          {
-            "key": "A",
-            "content": "若 0 <= x <= 16777216，则一定有 y == x"
-          },
-          {
-            "key": "B",
-            "content": "若 x == 16777217，则一定有 y == 16777216"
-          },
-          {
-            "key": "C",
-            "content": "对任意 x，一定有 y == x"
-          },
-          {
-            "key": "D",
-            "content": "存在某个 x 使得 y > x"
-          },
-          {
-            "key": "E",
-            "content": "若 x 为偶数，则一定有 y == x"
-          }
-        ],
-        "answer": "答案：A, B, D\n（float 只有 24 位有效精度；超过 (2^{24}) 后相邻可表示整数间隔变大，可能向上\n舍入）"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "若 0 <= x <= 16777216，则一定有 y == x"
-          },
-          {
-            "id": "B",
-            "content": "若 x == 16777217，则一定有 y == 16777216"
-          },
-          {
-            "id": "C",
-            "content": "对任意 x，一定有 y == x"
-          },
-          {
-            "id": "D",
-            "content": "存在某个 x 使得 y > x"
-          },
-          {
-            "id": "E",
-            "content": "若 x 为偶数，则一定有 y == x"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "D"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "2. 对任意 非负 int x，执行：\n```c\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）",
-        "answer": "答案：A, B, D\n（float 只有 24 位有效精度；超过 (2^{24}) 后相邻可表示整数间隔变大，可能向上\n舍入）"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-7df6b3425715c412",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 3,
-      "moduleId": "data_representation",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 3",
-      "summary": "右移左移清零低 5 位",
-      "content": "3. 对任意 unsigned int x，定义：\n```c\nunsigned int y = (x >> 5) << 5;\n```\n下列说法哪些正确？\nA. y == (x & ~31u)\nB. y <= x\nC. x - y 的取值一定在 [0, 31]\nD. 若 x 是 32 的倍数，则 y == x\nE. 若 x 不是 32 的倍数，则 y == x + 1\n答案：A, B, C, D\n（清零低 5 位；E 错在不是 +1 而是减去低 5 位形成的余数）",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 25,
-          "end": 27
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/25.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "3. 对任意 unsigned int x，定义：\n```c\nunsigned int y = (x >> 5) << 5;\n```\n下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "y == (x & ~31u)"
-          },
-          {
-            "key": "B",
-            "content": "y <= x"
-          },
-          {
-            "key": "C",
-            "content": "x - y 的取值一定在 [0, 31]"
-          },
-          {
-            "key": "D",
-            "content": "若 x 是 32 的倍数，则 y == x"
-          },
-          {
-            "key": "E",
-            "content": "若 x 不是 32 的倍数，则 y == x + 1"
-          }
-        ],
-        "answer": "答案：A, B, C, D\n（清零低 5 位；E 错在不是 +1 而是减去低 5 位形成的余数）"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "y == (x & ~31u)"
-          },
-          {
-            "id": "B",
-            "content": "y <= x"
-          },
-          {
-            "id": "C",
-            "content": "x - y 的取值一定在 [0, 31]"
-          },
-          {
-            "id": "D",
-            "content": "若 x 是 32 的倍数，则 y == x"
-          },
-          {
-            "id": "E",
-            "content": "若 x 不是 32 的倍数，则 y == x + 1"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "C",
-          "D"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "3. 对任意 unsigned int x，定义：\n```c\nunsigned int y = (x >> 5) << 5;\n```\n下列说法哪些正确？",
-        "answer": "答案：A, B, C, D\n（清零低 5 位；E 错在不是 +1 而是减去低 5 位形成的余数）"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-211c3458dfb3976b",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 4,
-      "moduleId": "data_representation",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 4",
-      "summary": "结构体对齐与填充（原卷归入信息的表示）",
-      "content": "4. 在 x86-64 常见对齐规则下，给定：\n```c\nstruct S {\nchar c;\nint i;\nshort s;\ndouble d;\n};\n```\n下列说法哪些正确？\nA. offsetof(struct S, i) == 4\nB. offsetof(struct S, s) == 8\nC. offsetof(struct S, d) == 10\nD. sizeof(struct S) == 24\nE. 若改为字段顺序 double d; int i; short s; char c;，则该结构体大小应该会变为16\n答案：A, B, D, E\n（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 28,
-          "end": 30
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/28.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "4. 在 x86-64 常见对齐规则下，给定：\n```c\nstruct S {\nchar c;\nint i;\nshort s;\ndouble d;\n};\n```\n下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "offsetof(struct S, i) == 4"
-          },
-          {
-            "key": "B",
-            "content": "offsetof(struct S, s) == 8"
-          },
-          {
-            "key": "C",
-            "content": "offsetof(struct S, d) == 10"
-          },
-          {
-            "key": "D",
-            "content": "sizeof(struct S) == 24"
-          },
-          {
-            "key": "E",
-            "content": "若改为字段顺序 double d; int i; short s; char c;，则该结构体大小应该会变为16"
-          }
-        ],
-        "answer": "答案：A, B, D, E\n（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "offsetof(struct S, i) == 4"
-          },
-          {
-            "id": "B",
-            "content": "offsetof(struct S, s) == 8"
-          },
-          {
-            "id": "C",
-            "content": "offsetof(struct S, d) == 10"
-          },
-          {
-            "id": "D",
-            "content": "sizeof(struct S) == 24"
-          },
-          {
-            "id": "E",
-            "content": "若改为字段顺序 double d; int i; short s; char c;，则该结构体大小应该会变为16"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "D",
-          "E"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "4. 在 x86-64 常见对齐规则下，给定：\n```c\nstruct S {\nchar c;\nint i;\nshort s;\ndouble d;\n};\n```\n下列说法哪些正确？",
-        "answer": "答案：A, B, D, E\n（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
       "id": "q-a0620c11aef4ea34",
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 1,
@@ -8836,7 +8482,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第3讲 5",
       "summary": "二进制小数向偶数舍入到三位",
-      "content": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100→________  101.100100→________\n答案：110.000  101.100",
+      "content": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100 → {{blank:q5-1}}　101.100100 → {{blank:q5-2}}\n答案：110.000  101.100",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8854,19 +8500,19 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/68.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100→________  101.100100→________",
+        "stem": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100 → {{blank:q5-1}}　101.100100 → {{blank:q5-2}}",
         "choices": [],
         "answer": "答案：110.000  101.100"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100→________  101.100100→________",
+        "prompt": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100 → {{blank:q5-1}}　101.100100 → {{blank:q5-2}}",
         "answer": "答案：110.000  101.100"
       },
       "presentation": {
@@ -8884,7 +8530,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第3讲 6",
       "summary": "float/double 运算的结合律与除法性质判断",
-      "content": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。\nA. (float) x == (float) dx →\nB. (dx + dy) + dz == dx + (dy + dz) →\nC. (dx * dy) * dz == dx * (dy * dz) →\nD. dx/dx == dz/dz →\n是\n是\n否\n否",
+      "content": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：\n是\n是\n否\n否",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8902,54 +8548,19 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/70.md"
       },
       "layout": {
-        "mode": "choice",
+        "mode": "short",
         "selection": null,
-        "stem": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。",
-        "choices": [
-          {
-            "key": "A",
-            "content": "(float) x == (float) dx →"
-          },
-          {
-            "key": "B",
-            "content": "(dx + dy) + dz == dx + (dy + dz) →"
-          },
-          {
-            "key": "C",
-            "content": "(dx * dy) * dz == dx * (dy * dz) →"
-          },
-          {
-            "key": "D",
-            "content": "dx/dx == dz/dz →"
-          }
-        ],
+        "stem": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：",
+        "choices": [],
         "answer": "是\n是\n否\n否"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
-        "choices": [
-          {
-            "id": "A",
-            "content": "(float) x == (float) dx →"
-          },
-          {
-            "id": "B",
-            "content": "(dx + dy) + dz == dx + (dy + dz) →"
-          },
-          {
-            "id": "C",
-            "content": "(dx * dy) * dz == dx * (dy * dz) →"
-          },
-          {
-            "id": "D",
-            "content": "dx/dx == dz/dz →"
-          }
-        ]
+        "kind": "short-answer",
+        "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。",
+        "prompt": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：",
         "answer": "是\n是\n否\n否"
       },
       "presentation": {

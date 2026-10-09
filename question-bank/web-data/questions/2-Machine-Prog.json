@@ -4491,7 +4491,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "2、条件码描述了最近一次算术或逻辑操作的属性。下列关于条件码的叙述中，哪\n一个是不正确的？\n号指示的位置",
         "choices": [
           {
@@ -4514,8 +4514,8 @@
         "answer": "答案：C"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4579,7 +4579,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "3、假定静态int型二维数组a和指针数组pa的声明如下：\n```\nstatic int a[4][4]={ {3, 8, -2, 6}, {2, 1, -5, 3 }, {1, 18, 4,\n10},{4, -2, 0, 8}};\n```\n\n\nstatic int *pa[4]={a[0], a[1], a[2], a[3]};\n若a的首地址为0x601080，则&pa[0]和pa[1]分别是:",
         "choices": [
           {
@@ -4602,8 +4602,8 @@
         "answer": "A"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4667,7 +4667,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "4、下列关于x86-64过程调用的叙述中，哪一个是不正确的？\n指令的地址",
         "choices": [
           {
@@ -4690,8 +4690,8 @@
         "answer": "答案：C"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -4755,7 +4755,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "5、假设结构体类型student_info的声明如下：\n```\nstruct student_info {\n        char id[8];\n        char name[16];\n        unsigned zip;\n        char address[50];\n        char phone[20];\n}x;\n```\n若x的首地址在%rdx中，则“unsigned xzip=x.zip;”所对应的汇编指令\n为:",
         "choices": [
           {
@@ -4778,8 +4778,8 @@
         "answer": "B"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -5029,7 +5029,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "5.在x86-64机器上，有关栈的描述中，说法不正确的是：\n栈是向下增长的。",
         "choices": [
           {
@@ -5052,8 +5052,8 @@
         "answer": "C"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -5120,7 +5120,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "6.以下关于x86-64指令的描述，说法正确的是：",
         "choices": [
           {
@@ -5143,8 +5143,8 @@
         "answer": "答案：B\n解析： 数Imm放到目的地址(%rax)中。A中movabsq的目的操作数只能是寄存器，C中%rax的值即为跳转目标，D中等效于movq (%rsp), %rax; addq \\$8, %rsp。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -5211,7 +5211,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "7.阅读下列C代码和在x86-64机器上得到的汇编代码：\n```\nint a[__A__][__B__];\nfor (int i = 0; i < __C__; i++)\na[i][__C__ - i] = 1;\nleaq 40(%rdi), %rax\naddq $440, %rdi\n.L2:\nmovl $1, (%rax)\naddq $40, %rax\ncmpq %rdi, %rax\njne  .L2\n```\n假设a的地址初始时放在%rdi中，假设程序正常运行且没有发生越界问题，则C\n代码中的A、B、C处应分别填：",
         "choices": [
           {
@@ -5234,8 +5234,8 @@
         "answer": "A"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -5307,14 +5307,25 @@
         "choices": [],
         "answer": "答案：\n（1）m == 1\n（2）m & 1或 m % 2 == 1 或其余相同语义的表达式\n（3）f(n - 1, m * 3 + 1)\n（4）%rsp\n（5）07\n（6）516b <f+0x22>\n（7）-0x20\n（8）51ab <f+0x62>\n（9）%rdx\n（10）sar\n（11）0x00007fffffffe580\n（12）0x0000000000000005\n（13）0x00005555555551a1\n（14）0x0000000000000003\n（15）2"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第三题（15分）请阅读并分析下面的C语言程序和对应的x86-64汇编代码。\n1. 其中，有一部分缺失的代码（用标号标出），请在标号对应的横线上填写缺失的\n内容。注:汇编与机器码中的数字用16进制数填写。\nC代码如下：\n```\nlong f(long n, long m)\n{\nif (n == 0 ||\n```\n___)\n```\nreturn m;\nif (\n```\n___)\n```\n{\nlong ret =\n```\n___;\n```\nreturn ret;\n}\nelse\n{\nlong ret = f(n - 1, m >> 1);\nreturn ret;\n}\n}\n```\nx86-64汇编代码如下（为简单起见，函数内指令地址只给出后四位，需要时可补\n全）：\n0x0000555555555149 <f>:\n```\n    5149:  f3 0f 1e fa           endbr64\n    514d:  55                     push   %rbp\n    514e:  48 89 e5              mov\n```\n__,%rbp\n```\n    5151:  48 83 ec 20           sub    $0x20,%rsp\n    5155:  48 89 7d e8           mov    %rdi,-0x18(%rbp)\n    5159:  48 89 75 e0           mov    %rsi,-0x20(%rbp)\n    515d:  48 83 7d e8 00        cmpq   $0x0,-0x18(%rbp)\n    5162:  74\n```\n__\n```\n    5164:  48 83 7d e0 01        cmpq   $0x1,-0x20(%rbp)\n5169:  75 06                  jne    5171 <f+0x28>\n516b:  48 8b 45 e0           mov\n```\n__(%rbp),%rax\n```\n516f:  eb 5f                  jmp    51d0 <f+0x87>\n\n5171:  48 8b 45 e0           mov    -0x20(%rbp),%rax\n5175:  83 e0 01              and    $0x1,%eax\n5178:  48 85 c0              test   %rax,%rax\n517b:  74 ??                  je\n```\n__\n```\n517d:  48 8b 55 e0           mov    -0x20(%rbp),%rdx\n5181:  48 89 d0              mov    %rdx,%rax\n5184:  48 01 c0              add    %rax,%rax\n5187:  48 01 d0              add    %rdx,%rax\n518a:  48 8d 50 01           lea    0x1(%rax),%rdx\n518e:  48 8b 45 e8           mov    -0x18(%rbp),%rax\n5192:  48 83 e8 01           sub    $0x1,%rax\n5196:  48 89 d6              mov\n```\n__,%rsi\n```\n5199:  48 89 c7              mov    %rax,%rdi\n519c:  e8 a8 ff ff ff        callq  5149 <f>\n51a1:  48 89 45 f8           mov    %rax,-0x8(%rbp)\n51a5:  48 8b 45 f8           mov    -0x8(%rbp),%rax\n51a9:  eb 25                  jmp    51d0 <f+0x87>\n51ab:  48 8b 45 e0           mov    -0x20(%rbp),%rax\n51af:  48 d1 f8\n```\n__    %rax\n```\n51b2:  48 89 c2              mov    %rax,%rdx\n51b5:  48 8b 45 e8           mov    -0x18(%rbp),%rax\n51b9:  48 83 e8 01           sub    $0x1,%rax\n51bd:  48 89 d6              mov\n```\n__,%rsi\n```\n51c0:  48 89 c7              mov    %rax,%rdi\n51c3:  e8 81 ff ff ff        callq  5149 <f>\n51c8:  48 89 45 f0           mov    %rax,-0x10(%rbp)\n51cc:  48 8b 45 f0           mov    -0x10(%rbp),%rax\n51d0:  c9                     leaveq\n51d1:  c3                     retq\n```",
         "answer": "答案：\n（1）m == 1\n（2）m & 1或 m % 2 == 1 或其余相同语义的表达式\n（3）f(n - 1, m * 3 + 1)\n（4）%rsp\n（5）07\n（6）516b <f+0x22>\n（7）-0x20\n（8）51ab <f+0x62>\n（9）%rdx\n（10）sar\n（11）0x00007fffffffe580\n（12）0x0000000000000005\n（13）0x00005555555551a1\n（14）0x0000000000000003\n（15）2"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q3",
+        "questionId": "q-9270f741d613d9a2",
+        "title": "第三题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -5360,14 +5371,25 @@
         "choices": [],
         "answer": "答案：\n（11）0x00007fffffffe580\n（12）0x0000000000000005\n（13）0x00005555555551a1\n（14）0x0000000000000003"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2. 已知在调用函数f(7,6)时，我们在gdb中使用b f指令在函数f处加上了\n断点，下面是程序某一次运行到断点时从栈顶开始的栈的内容，请在空格中填入相\n应的值。（U表示不要求填写）\n0x7fffffffe558  0x00005555555551c8\n0x7fffffffe550  （11）______\n```\n0x7fffffffe548  U\n0x7fffffffe540  U\n0x7fffffffe538  U\n```\n0x7fffffffe530  （12）______\n0x7fffffffe528  （13）______\n```\n0x7fffffffe520  0x00007fffffffe550\n0x7fffffffe518  U\n0x7fffffffe510  U\n```\n0x7fffffffe508  （14）______\n```\n0x7fffffffe500  0x0000000000000010\n0x7fffffffe4f8  0x00005555555551c8\n```",
         "answer": "答案：\n（11）0x00007fffffffe580\n（12）0x0000000000000005\n（13）0x00005555555551a1\n（14）0x0000000000000003"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q3",
+        "questionId": "q-9270f741d613d9a2",
+        "title": "第三题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -5413,14 +5435,25 @@
         "choices": [],
         "answer": "答案：（15）2"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3. 运行函数f(7,6)后得到的值是多少？ （15）_________",
         "answer": "答案：（15）2"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q3",
+        "questionId": "q-9270f741d613d9a2",
+        "title": "第三题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -5466,14 +5499,25 @@
         "choices": [],
         "answer": "（1分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第六题（15分）\n```\nstruct s_element{\nunion u_inner{\n    float f;\n    short s[2];\n} u1;\n    s_element* next;\n};\nfloat func(s_element* p){\n    float ans = 0;\n    while( p ){\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```\n1.  若 tmp 是一个 s_element 类型的变量 ,  则 sizeof  (tmp.u1)  =\n_________。",
         "answer": "（1分）"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q6",
+        "questionId": "q-b0ef359a9e930155",
+        "title": "第六题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -5519,14 +5563,25 @@
         "choices": [],
         "answer": "（2分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2. 简述函数func的功能。",
         "answer": "（2分）"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q6",
+        "questionId": "q-b0ef359a9e930155",
+        "title": "第六题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -5572,14 +5627,25 @@
         "choices": [],
         "answer": "（2分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3. 函数func循环部分的汇编代码如下，补全汇编代码：\n提示：vaddss S1, S2, D实现单精度浮点数加法D ← S1+S2\n```\nL1:\n  vaddss   (%rdx), %xmm0, %xmm0\n______________________________\nL2:\n  testq    %rdx, %rdx\n  jne L1\n```",
         "answer": "（2分）"
+      },
+      "group": {
+        "id": "p-ffd1f5f688babe1b:2021-mid-q6",
+        "questionId": "q-b0ef359a9e930155",
+        "title": "第六题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -6747,7 +6813,7 @@
       "exam": "2023期中",
       "questionNo": "第三题",
       "summary": "递归函数ncr的C与汇编代码补全",
-      "content": "第三题（15分）一个函数的C语言代码和汇编代码分别如下，请分别补全对应的\n代码内容：\n```\nint ncr(int n, int r)\n{\n  if (n<r)  return   （1）   ;\n  if (r==0) return   （2）   ;\n  if (r==1) return   （3）   ;\n  if (n==1) return   （4）   ;\n  return ncr(n-1, r-1) + ncr(n-1, r);\n}\n```\n0000000000001149 <ncr>:\n```\n    1149:  f3 0f 1e fa           endbr64\n    114d:  55                     push     （5）\n    114e:  48 89 e5              mov    %rsp,%rbp\n    1151:  53                     push     （6）\n    1152:  48 83 ec 18           sub    $0x18,%rsp\n    1156:  89 7d ec              mov    %edi,-0x14(%rbp)\n    1159:  89 75 e8              mov    %esi,-0x18(%rbp)\n    115c:  8b 45 ec              mov    -0x14(%rbp),%eax\n    115f:  3b 45 e8              cmp    -0x18(%rbp),%eax\n    1162:  7d 07                  jge    116b <ncr+0x22>\n    1164:  b8 00 00 00 00        mov    $0x0,%eax\n    1169:  eb 50                  jmp    11bb <ncr+0x72>\n    116b:  83 7d e8 00           cmpl   $0x0,-0x18(%rbp)\n    116f:  75 07                  jne    1178 <ncr+0x2f>\n    1171:  b8 01 00 00 00        mov    $0x1,%eax\n    1176:  eb 43                  jmp    11bb <ncr+0x72>\n    1178:  83 7d e8 01           cmpl   $0x1,-0x18(%rbp)\n    117c:  75 05                  jne    1183 <ncr+0x3a>\n    117e:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1181:  eb 38                  jmp    11bb <ncr+0x72>\n\n    1183:  83 7d ec 01           cmpl   $0x1,-0x14(%rbp)\n    1187:  75 07                  jne    1190 <ncr+0x47>\n    1189:  b8 01 00 00 00        mov    $0x1,%eax\n    118e:  eb 2b                  jmp    11bb <ncr+0x72>\n    1190:  8b 45 e8              mov    -0x18(%rbp),%eax\n    1193:  8d 50 ff              lea     （7）  (%rax),%edx\n    1196:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1199:  83 e8 01              sub    $0x1,%eax\n    119c:  89 d6                  mov    %edx, （8）\n    119e:  89 c7                  mov    %eax, （9）\n    11a0:  e8 a4 ff ff ff        call   1149 <ncr>\n    11a5:  89 c3                  mov    %eax,%ebx\n    11a7:  8b 45 ec              mov    -0x14(%rbp),%eax\n    11aa:  8d 50 ff              lea    -0x1(%rax),%edx\n    11ad:  8b 45 e8              mov    -0x18(%rbp),%eax\n    11b0:  89 c6                  mov      （10）  ,%esi\n    11b2:  89 d7                  mov      （11）  ,%edi\n    11b4:  e8 90 ff ff ff        call   1149 <ncr>\n    11b9:  01 d8                  add      （12）  ,%eax\n    11bb:  48 8b 5d f8           mov    -0x8(%rbp),%rbx\n    11bf:  c9                     leave\n    11c0:  c3                       （13）\n```\n调用ncr( 5, 2)的返回结果为：  （14）\n调用ncr(10, 3)的返回结果为：  （15）\n6",
+      "content": "第三题（15分）一个函数的C语言代码和汇编代码分别如下，请分别补全对应的\n代码内容：\n```\nint ncr(int n, int r)\n{\n  if (n<r)  return {{blank:c-return-1}};\n  if (r==0) return {{blank:c-return-2}};\n  if (r==1) return {{blank:c-return-3}};\n  if (n==1) return {{blank:c-return-4}};\n  return ncr(n-1, r-1) + ncr(n-1, r);\n}\n```\n0000000000001149 <ncr>:\n```\n    1149:  f3 0f 1e fa           endbr64\n    114d:  55                     push     {{blank:asm-5}}\n    114e:  48 89 e5              mov    %rsp,%rbp\n    1151:  53                     push     {{blank:asm-6}}\n    1152:  48 83 ec 18           sub    $0x18,%rsp\n    1156:  89 7d ec              mov    %edi,-0x14(%rbp)\n    1159:  89 75 e8              mov    %esi,-0x18(%rbp)\n    115c:  8b 45 ec              mov    -0x14(%rbp),%eax\n    115f:  3b 45 e8              cmp    -0x18(%rbp),%eax\n    1162:  7d 07                  jge    116b <ncr+0x22>\n    1164:  b8 00 00 00 00        mov    $0x0,%eax\n    1169:  eb 50                  jmp    11bb <ncr+0x72>\n    116b:  83 7d e8 00           cmpl   $0x0,-0x18(%rbp)\n    116f:  75 07                  jne    1178 <ncr+0x2f>\n    1171:  b8 01 00 00 00        mov    $0x1,%eax\n    1176:  eb 43                  jmp    11bb <ncr+0x72>\n    1178:  83 7d e8 01           cmpl   $0x1,-0x18(%rbp)\n    117c:  75 05                  jne    1183 <ncr+0x3a>\n    117e:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1181:  eb 38                  jmp    11bb <ncr+0x72>\n\n    1183:  83 7d ec 01           cmpl   $0x1,-0x14(%rbp)\n    1187:  75 07                  jne    1190 <ncr+0x47>\n    1189:  b8 01 00 00 00        mov    $0x1,%eax\n    118e:  eb 2b                  jmp    11bb <ncr+0x72>\n    1190:  8b 45 e8              mov    -0x18(%rbp),%eax\n    1193:  8d 50 ff              lea     {{blank:asm-7}}(%rax),%edx\n    1196:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1199:  83 e8 01              sub    $0x1,%eax\n    119c:  89 d6                  mov    %edx,{{blank:asm-8}}\n    119e:  89 c7                  mov    %eax,{{blank:asm-9}}\n    11a0:  e8 a4 ff ff ff        call   1149 <ncr>\n    11a5:  89 c3                  mov    %eax,%ebx\n    11a7:  8b 45 ec              mov    -0x14(%rbp),%eax\n    11aa:  8d 50 ff              lea    -0x1(%rax),%edx\n    11ad:  8b 45 e8              mov    -0x18(%rbp),%eax\n    11b0:  89 c6                  mov      {{blank:asm-10}},%esi\n    11b2:  89 d7                  mov      {{blank:asm-11}},%edi\n    11b4:  e8 90 ff ff ff        call   1149 <ncr>\n    11b9:  01 d8                  add      {{blank:asm-12}},%eax\n    11bb:  48 8b 5d f8           mov    -0x8(%rbp),%rbx\n    11bf:  c9                     leave\n    11c0:  c3                       {{blank:asm-13}}\n```\n调用 `ncr(5, 2)` 的返回结果为：(14) {{blank:ncr-5-2}}\n\n调用 `ncr(10, 3)` 的返回结果为：(15) {{blank:ncr-10-3}}\n(1) `0`；(2) `1`；(3) `n`；(4) `1`。\n(5) `%rbp`；(6) `%rbx`；(7) `-0x1`（或 `-1`）。\n(8) `%esi`；(9) `%edi`；(10) `%eax`；(11) `%edx`；(12) `%ebx`；(13) `retq`。\n(14) `10`；(15) `120`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6772,9 +6838,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第三题（15分）一个函数的C语言代码和汇编代码分别如下，请分别补全对应的\n代码内容：\n```\nint ncr(int n, int r)\n{\n  if (n<r)  return   （1）   ;\n  if (r==0) return   （2）   ;\n  if (r==1) return   （3）   ;\n  if (n==1) return   （4）   ;\n  return ncr(n-1, r-1) + ncr(n-1, r);\n}\n```\n0000000000001149 <ncr>:\n```\n    1149:  f3 0f 1e fa           endbr64\n    114d:  55                     push     （5）\n    114e:  48 89 e5              mov    %rsp,%rbp\n    1151:  53                     push     （6）\n    1152:  48 83 ec 18           sub    $0x18,%rsp\n    1156:  89 7d ec              mov    %edi,-0x14(%rbp)\n    1159:  89 75 e8              mov    %esi,-0x18(%rbp)\n    115c:  8b 45 ec              mov    -0x14(%rbp),%eax\n    115f:  3b 45 e8              cmp    -0x18(%rbp),%eax\n    1162:  7d 07                  jge    116b <ncr+0x22>\n    1164:  b8 00 00 00 00        mov    $0x0,%eax\n    1169:  eb 50                  jmp    11bb <ncr+0x72>\n    116b:  83 7d e8 00           cmpl   $0x0,-0x18(%rbp)\n    116f:  75 07                  jne    1178 <ncr+0x2f>\n    1171:  b8 01 00 00 00        mov    $0x1,%eax\n    1176:  eb 43                  jmp    11bb <ncr+0x72>\n    1178:  83 7d e8 01           cmpl   $0x1,-0x18(%rbp)\n    117c:  75 05                  jne    1183 <ncr+0x3a>\n    117e:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1181:  eb 38                  jmp    11bb <ncr+0x72>\n\n    1183:  83 7d ec 01           cmpl   $0x1,-0x14(%rbp)\n    1187:  75 07                  jne    1190 <ncr+0x47>\n    1189:  b8 01 00 00 00        mov    $0x1,%eax\n    118e:  eb 2b                  jmp    11bb <ncr+0x72>\n    1190:  8b 45 e8              mov    -0x18(%rbp),%eax\n    1193:  8d 50 ff              lea     （7）  (%rax),%edx\n    1196:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1199:  83 e8 01              sub    $0x1,%eax\n    119c:  89 d6                  mov    %edx, （8）\n    119e:  89 c7                  mov    %eax, （9）\n    11a0:  e8 a4 ff ff ff        call   1149 <ncr>\n    11a5:  89 c3                  mov    %eax,%ebx\n    11a7:  8b 45 ec              mov    -0x14(%rbp),%eax\n    11aa:  8d 50 ff              lea    -0x1(%rax),%edx\n    11ad:  8b 45 e8              mov    -0x18(%rbp),%eax\n    11b0:  89 c6                  mov      （10）  ,%esi\n    11b2:  89 d7                  mov      （11）  ,%edi\n    11b4:  e8 90 ff ff ff        call   1149 <ncr>\n    11b9:  01 d8                  add      （12）  ,%eax\n    11bb:  48 8b 5d f8           mov    -0x8(%rbp),%rbx\n    11bf:  c9                     leave\n    11c0:  c3                       （13）\n```\n调用ncr( 5, 2)的返回结果为：  （14）\n调用ncr(10, 3)的返回结果为：  （15）",
+        "stem": "第三题（15分）一个函数的C语言代码和汇编代码分别如下，请分别补全对应的\n代码内容：\n```\nint ncr(int n, int r)\n{\n  if (n<r)  return {{blank:c-return-1}};\n  if (r==0) return {{blank:c-return-2}};\n  if (r==1) return {{blank:c-return-3}};\n  if (n==1) return {{blank:c-return-4}};\n  return ncr(n-1, r-1) + ncr(n-1, r);\n}\n```\n0000000000001149 <ncr>:\n```\n    1149:  f3 0f 1e fa           endbr64\n    114d:  55                     push     {{blank:asm-5}}\n    114e:  48 89 e5              mov    %rsp,%rbp\n    1151:  53                     push     {{blank:asm-6}}\n    1152:  48 83 ec 18           sub    $0x18,%rsp\n    1156:  89 7d ec              mov    %edi,-0x14(%rbp)\n    1159:  89 75 e8              mov    %esi,-0x18(%rbp)\n    115c:  8b 45 ec              mov    -0x14(%rbp),%eax\n    115f:  3b 45 e8              cmp    -0x18(%rbp),%eax\n    1162:  7d 07                  jge    116b <ncr+0x22>\n    1164:  b8 00 00 00 00        mov    $0x0,%eax\n    1169:  eb 50                  jmp    11bb <ncr+0x72>\n    116b:  83 7d e8 00           cmpl   $0x0,-0x18(%rbp)\n    116f:  75 07                  jne    1178 <ncr+0x2f>\n    1171:  b8 01 00 00 00        mov    $0x1,%eax\n    1176:  eb 43                  jmp    11bb <ncr+0x72>\n    1178:  83 7d e8 01           cmpl   $0x1,-0x18(%rbp)\n    117c:  75 05                  jne    1183 <ncr+0x3a>\n    117e:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1181:  eb 38                  jmp    11bb <ncr+0x72>\n\n    1183:  83 7d ec 01           cmpl   $0x1,-0x14(%rbp)\n    1187:  75 07                  jne    1190 <ncr+0x47>\n    1189:  b8 01 00 00 00        mov    $0x1,%eax\n    118e:  eb 2b                  jmp    11bb <ncr+0x72>\n    1190:  8b 45 e8              mov    -0x18(%rbp),%eax\n    1193:  8d 50 ff              lea     {{blank:asm-7}}(%rax),%edx\n    1196:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1199:  83 e8 01              sub    $0x1,%eax\n    119c:  89 d6                  mov    %edx,{{blank:asm-8}}\n    119e:  89 c7                  mov    %eax,{{blank:asm-9}}\n    11a0:  e8 a4 ff ff ff        call   1149 <ncr>\n    11a5:  89 c3                  mov    %eax,%ebx\n    11a7:  8b 45 ec              mov    -0x14(%rbp),%eax\n    11aa:  8d 50 ff              lea    -0x1(%rax),%edx\n    11ad:  8b 45 e8              mov    -0x18(%rbp),%eax\n    11b0:  89 c6                  mov      {{blank:asm-10}},%esi\n    11b2:  89 d7                  mov      {{blank:asm-11}},%edi\n    11b4:  e8 90 ff ff ff        call   1149 <ncr>\n    11b9:  01 d8                  add      {{blank:asm-12}},%eax\n    11bb:  48 8b 5d f8           mov    -0x8(%rbp),%rbx\n    11bf:  c9                     leave\n    11c0:  c3                       {{blank:asm-13}}\n```\n调用 `ncr(5, 2)` 的返回结果为：(14) {{blank:ncr-5-2}}\n\n调用 `ncr(10, 3)` 的返回结果为：(15) {{blank:ncr-10-3}}",
         "choices": [],
-        "answer": "6"
+        "answer": "(1) `0`；(2) `1`；(3) `n`；(4) `1`。\n(5) `%rbp`；(6) `%rbx`；(7) `-0x1`（或 `-1`）。\n(8) `%esi`；(9) `%edi`；(10) `%eax`；(11) `%edx`；(12) `%ebx`；(13) `retq`。\n(14) `10`；(15) `120`。"
       },
       "interaction": {
         "kind": "fill",
@@ -6782,8 +6848,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第三题（15分）一个函数的C语言代码和汇编代码分别如下，请分别补全对应的\n代码内容：\n```\nint ncr(int n, int r)\n{\n  if (n<r)  return   （1）   ;\n  if (r==0) return   （2）   ;\n  if (r==1) return   （3）   ;\n  if (n==1) return   （4）   ;\n  return ncr(n-1, r-1) + ncr(n-1, r);\n}\n```\n0000000000001149 <ncr>:\n```\n    1149:  f3 0f 1e fa           endbr64\n    114d:  55                     push     （5）\n    114e:  48 89 e5              mov    %rsp,%rbp\n    1151:  53                     push     （6）\n    1152:  48 83 ec 18           sub    $0x18,%rsp\n    1156:  89 7d ec              mov    %edi,-0x14(%rbp)\n    1159:  89 75 e8              mov    %esi,-0x18(%rbp)\n    115c:  8b 45 ec              mov    -0x14(%rbp),%eax\n    115f:  3b 45 e8              cmp    -0x18(%rbp),%eax\n    1162:  7d 07                  jge    116b <ncr+0x22>\n    1164:  b8 00 00 00 00        mov    $0x0,%eax\n    1169:  eb 50                  jmp    11bb <ncr+0x72>\n    116b:  83 7d e8 00           cmpl   $0x0,-0x18(%rbp)\n    116f:  75 07                  jne    1178 <ncr+0x2f>\n    1171:  b8 01 00 00 00        mov    $0x1,%eax\n    1176:  eb 43                  jmp    11bb <ncr+0x72>\n    1178:  83 7d e8 01           cmpl   $0x1,-0x18(%rbp)\n    117c:  75 05                  jne    1183 <ncr+0x3a>\n    117e:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1181:  eb 38                  jmp    11bb <ncr+0x72>\n\n    1183:  83 7d ec 01           cmpl   $0x1,-0x14(%rbp)\n    1187:  75 07                  jne    1190 <ncr+0x47>\n    1189:  b8 01 00 00 00        mov    $0x1,%eax\n    118e:  eb 2b                  jmp    11bb <ncr+0x72>\n    1190:  8b 45 e8              mov    -0x18(%rbp),%eax\n    1193:  8d 50 ff              lea     （7）  (%rax),%edx\n    1196:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1199:  83 e8 01              sub    $0x1,%eax\n    119c:  89 d6                  mov    %edx, （8）\n    119e:  89 c7                  mov    %eax, （9）\n    11a0:  e8 a4 ff ff ff        call   1149 <ncr>\n    11a5:  89 c3                  mov    %eax,%ebx\n    11a7:  8b 45 ec              mov    -0x14(%rbp),%eax\n    11aa:  8d 50 ff              lea    -0x1(%rax),%edx\n    11ad:  8b 45 e8              mov    -0x18(%rbp),%eax\n    11b0:  89 c6                  mov      （10）  ,%esi\n    11b2:  89 d7                  mov      （11）  ,%edi\n    11b4:  e8 90 ff ff ff        call   1149 <ncr>\n    11b9:  01 d8                  add      （12）  ,%eax\n    11bb:  48 8b 5d f8           mov    -0x8(%rbp),%rbx\n    11bf:  c9                     leave\n    11c0:  c3                       （13）\n```\n调用ncr( 5, 2)的返回结果为：  （14）\n调用ncr(10, 3)的返回结果为：  （15）",
-        "answer": "6"
+        "prompt": "第三题（15分）一个函数的C语言代码和汇编代码分别如下，请分别补全对应的\n代码内容：\n```\nint ncr(int n, int r)\n{\n  if (n<r)  return {{blank:c-return-1}};\n  if (r==0) return {{blank:c-return-2}};\n  if (r==1) return {{blank:c-return-3}};\n  if (n==1) return {{blank:c-return-4}};\n  return ncr(n-1, r-1) + ncr(n-1, r);\n}\n```\n0000000000001149 <ncr>:\n```\n    1149:  f3 0f 1e fa           endbr64\n    114d:  55                     push     {{blank:asm-5}}\n    114e:  48 89 e5              mov    %rsp,%rbp\n    1151:  53                     push     {{blank:asm-6}}\n    1152:  48 83 ec 18           sub    $0x18,%rsp\n    1156:  89 7d ec              mov    %edi,-0x14(%rbp)\n    1159:  89 75 e8              mov    %esi,-0x18(%rbp)\n    115c:  8b 45 ec              mov    -0x14(%rbp),%eax\n    115f:  3b 45 e8              cmp    -0x18(%rbp),%eax\n    1162:  7d 07                  jge    116b <ncr+0x22>\n    1164:  b8 00 00 00 00        mov    $0x0,%eax\n    1169:  eb 50                  jmp    11bb <ncr+0x72>\n    116b:  83 7d e8 00           cmpl   $0x0,-0x18(%rbp)\n    116f:  75 07                  jne    1178 <ncr+0x2f>\n    1171:  b8 01 00 00 00        mov    $0x1,%eax\n    1176:  eb 43                  jmp    11bb <ncr+0x72>\n    1178:  83 7d e8 01           cmpl   $0x1,-0x18(%rbp)\n    117c:  75 05                  jne    1183 <ncr+0x3a>\n    117e:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1181:  eb 38                  jmp    11bb <ncr+0x72>\n\n    1183:  83 7d ec 01           cmpl   $0x1,-0x14(%rbp)\n    1187:  75 07                  jne    1190 <ncr+0x47>\n    1189:  b8 01 00 00 00        mov    $0x1,%eax\n    118e:  eb 2b                  jmp    11bb <ncr+0x72>\n    1190:  8b 45 e8              mov    -0x18(%rbp),%eax\n    1193:  8d 50 ff              lea     {{blank:asm-7}}(%rax),%edx\n    1196:  8b 45 ec              mov    -0x14(%rbp),%eax\n    1199:  83 e8 01              sub    $0x1,%eax\n    119c:  89 d6                  mov    %edx,{{blank:asm-8}}\n    119e:  89 c7                  mov    %eax,{{blank:asm-9}}\n    11a0:  e8 a4 ff ff ff        call   1149 <ncr>\n    11a5:  89 c3                  mov    %eax,%ebx\n    11a7:  8b 45 ec              mov    -0x14(%rbp),%eax\n    11aa:  8d 50 ff              lea    -0x1(%rax),%edx\n    11ad:  8b 45 e8              mov    -0x18(%rbp),%eax\n    11b0:  89 c6                  mov      {{blank:asm-10}},%esi\n    11b2:  89 d7                  mov      {{blank:asm-11}},%edi\n    11b4:  e8 90 ff ff ff        call   1149 <ncr>\n    11b9:  01 d8                  add      {{blank:asm-12}},%eax\n    11bb:  48 8b 5d f8           mov    -0x8(%rbp),%rbx\n    11bf:  c9                     leave\n    11c0:  c3                       {{blank:asm-13}}\n```\n调用 `ncr(5, 2)` 的返回结果为：(14) {{blank:ncr-5-2}}\n\n调用 `ncr(10, 3)` 的返回结果为：(15) {{blank:ncr-10-3}}",
+        "answer": "(1) `0`；(2) `1`；(3) `n`；(4) `1`。\n(5) `%rbp`；(6) `%rbx`；(7) `-0x1`（或 `-1`）。\n(8) `%esi`；(9) `%edi`；(10) `%eax`；(11) `%edx`；(12) `%ebx`；(13) `retq`。\n(14) `10`；(15) `120`。"
       },
       "presentation": {
         "status": "ready",
@@ -8422,7 +8488,7 @@
       "exam": "2019期末",
       "questionNo": "第二题 (1)",
       "summary": "由汇编循环推断 C 代码循环次数（含共用汇编段）",
-      "content": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax  %rdi  0x8008\n    addq    $8, %rdi  %rax  0\n    addq    $1, %rcx  %rbx  0\n    cmpq    $8, %rcx  %rcx  0\n    jl     .L2\n```\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```\n答案：8（来源：2019、2020期末-答案解析）\n解析：循环体每轮 rdi 加 8、rcx 加 1，rcx<8 时继续，故数组下标上界为 8。",
+      "content": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax\n    addq    $8, %rdi\n    addq    $1, %rcx\n    cmpq    $8, %rcx\n    jl     .L2\n```\n初始寄存器值：`%rdi = 0x8008`，`%rax = 0`，`%rbx = 0`，`%rcx = 0`。\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```\n答案：8（来源：2019、2020期末-答案解析）\n解析：循环体每轮 rdi 加 8、rcx 加 1，rcx<8 时继续，故数组下标上界为 8。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8445,18 +8511,29 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax  %rdi  0x8008\n    addq    $8, %rdi  %rax  0\n    addq    $1, %rcx  %rbx  0\n    cmpq    $8, %rcx  %rcx  0\n    jl     .L2\n```\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```",
+        "stem": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax\n    addq    $8, %rdi\n    addq    $1, %rcx\n    cmpq    $8, %rcx\n    jl     .L2\n```\n初始寄存器值：`%rdi = 0x8008`，`%rax = 0`，`%rbx = 0`，`%rcx = 0`。\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```",
         "choices": [],
         "answer": "答案：8（来源：2019、2020期末-答案解析）\n解析：循环体每轮 rdi 加 8、rcx 加 1，rcx<8 时继续，故数组下标上界为 8。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax  %rdi  0x8008\n    addq    $8, %rdi  %rax  0\n    addq    $1, %rcx  %rbx  0\n    cmpq    $8, %rcx  %rcx  0\n    jl     .L2\n```\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```",
+        "prompt": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax\n    addq    $8, %rdi\n    addq    $1, %rcx\n    cmpq    $8, %rcx\n    jl     .L2\n```\n初始寄存器值：`%rdi = 0x8008`，`%rax = 0`，`%rbx = 0`，`%rcx = 0`。\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```",
         "answer": "答案：8（来源：2019、2020期末-答案解析）\n解析：循环体每轮 rdi 加 8、rcx 加 1，rcx<8 时继续，故数组下标上界为 8。"
+      },
+      "group": {
+        "id": "p-98acf19964247e22:2019-final-q2",
+        "questionId": "q-5f2d2b416c72e83f",
+        "title": "第二题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -8921,295 +8998,6 @@
       }
     },
     {
-      "id": "q-e5e2511734c08dc8",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 5,
-      "moduleId": "machine_prog",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 5",
-      "summary": "addl 结果、写 %eax 清零高位与标志位",
-      "content": "5. 观察下面的汇编代码：\n```\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？\nA. 执行后 %rax == 0x0000000000000000\nB. 执行后 %rax == 0x1234567800000000\nC. 执行后 CF=1\nD. 执行后 ZF=1\nE. 执行后 OF=1\n答案：ACD\n解析： addl 是 32 位加法：%eax=0xFFFFFFFF + 1 -> 0x00000000（低 32 位回\n绕）。写 %eax 会把 %rax 的高 32 位清零，所以 %rax 变为全 0。回绕产生进位所以\nCF=1；结果为 0 所以 ZF=1；有符号角度是 -1 + 1 = 0 不溢出，OF=0。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 32,
-          "end": 36
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/32.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "5. 观察下面的汇编代码：\n```\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "执行后 %rax == 0x0000000000000000"
-          },
-          {
-            "key": "B",
-            "content": "执行后 %rax == 0x1234567800000000"
-          },
-          {
-            "key": "C",
-            "content": "执行后 CF=1"
-          },
-          {
-            "key": "D",
-            "content": "执行后 ZF=1"
-          },
-          {
-            "key": "E",
-            "content": "执行后 OF=1"
-          }
-        ],
-        "answer": "答案：ACD\n解析： addl 是 32 位加法：%eax=0xFFFFFFFF + 1 -> 0x00000000（低 32 位回\n绕）。写 %eax 会把 %rax 的高 32 位清零，所以 %rax 变为全 0。回绕产生进位所以\nCF=1；结果为 0 所以 ZF=1；有符号角度是 -1 + 1 = 0 不溢出，OF=0。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "执行后 %rax == 0x0000000000000000"
-          },
-          {
-            "id": "B",
-            "content": "执行后 %rax == 0x1234567800000000"
-          },
-          {
-            "id": "C",
-            "content": "执行后 CF=1"
-          },
-          {
-            "id": "D",
-            "content": "执行后 ZF=1"
-          },
-          {
-            "id": "E",
-            "content": "执行后 OF=1"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "C",
-          "D"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "5. 观察下面的汇编代码：\n```\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？",
-        "answer": "答案：ACD\n解析： addl 是 32 位加法：%eax=0xFFFFFFFF + 1 -> 0x00000000（低 32 位回\n绕）。写 %eax 会把 %rax 的高 32 位清零，所以 %rax 变为全 0。回绕产生进位所以\nCF=1；结果为 0 所以 ZF=1；有符号角度是 -1 + 1 = 0 不溢出，OF=0。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-fa649e6948d3cfd4",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 6,
-      "moduleId": "machine_prog",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 6",
-      "summary": "栈帧布局、%rsp 对齐与 leave 语义",
-      "content": "6. 观察下面的汇编代码片段：\n```\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？\nA. 0(%rbp) 处保存的是调用者的旧 %rbp\nB. 8(%rbp) 处保存的是返回地址\nC. 紧挨着执行 callq qux 之前，%rsp ≡ 8 (mod16)\nD. subq `$48`,%rsp 为局部数据预留了 48 字节（不含保存的%rbp和返回地址）\nE. 这里的 leave 等价于 addq `$48`,%rsp; popq %rbp（假设 %rbp 未被改写）\n答案：ABDE\n解析： push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节\n是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，\n所以 C 错。leave语义是mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把%rsp\n加回 48 再弹出%rbp。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 37,
-          "end": 46
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/37.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "6. 观察下面的汇编代码片段：\n```\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "0(%rbp) 处保存的是调用者的旧 %rbp"
-          },
-          {
-            "key": "B",
-            "content": "8(%rbp) 处保存的是返回地址"
-          },
-          {
-            "key": "C",
-            "content": "紧挨着执行 callq qux 之前，%rsp ≡ 8 (mod16)"
-          },
-          {
-            "key": "D",
-            "content": "subq `$48`,%rsp 为局部数据预留了 48 字节（不含保存的%rbp和返回地址）"
-          },
-          {
-            "key": "E",
-            "content": "这里的 leave 等价于 addq `$48`,%rsp; popq %rbp（假设 %rbp 未被改写）"
-          }
-        ],
-        "answer": "答案：ABDE\n解析： push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节\n是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，\n所以 C 错。leave语义是mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把%rsp\n加回 48 再弹出%rbp。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "0(%rbp) 处保存的是调用者的旧 %rbp"
-          },
-          {
-            "id": "B",
-            "content": "8(%rbp) 处保存的是返回地址"
-          },
-          {
-            "id": "C",
-            "content": "紧挨着执行 callq qux 之前，%rsp ≡ 8 (mod16)"
-          },
-          {
-            "id": "D",
-            "content": "subq `$48`,%rsp 为局部数据预留了 48 字节（不含保存的%rbp和返回地址）"
-          },
-          {
-            "id": "E",
-            "content": "这里的 leave 等价于 addq `$48`,%rsp; popq %rbp（假设 %rbp 未被改写）"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "D",
-          "E"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "6. 观察下面的汇编代码片段：\n```\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？",
-        "answer": "答案：ABDE\n解析： push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节\n是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，\n所以 C 错。leave语义是mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把%rsp\n加回 48 再弹出%rbp。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
-      "id": "q-6d214194ca271b2f",
-      "paperId": "p-5ee6f6e8778f358e",
-      "paperOrder": 7,
-      "moduleId": "machine_prog",
-      "year": 2025,
-      "examType": "期末",
-      "exam": "2025期末（答案速查表）",
-      "questionNo": "一 7",
-      "summary": "8 个 long 参数的寄存器/栈传递与 ABI",
-      "content": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？\nA. 在 f 的入口处（尚未动 %rsp），a7 位于 8(%rsp)\nB. 若把两条 push 顺序改为先 push a7 再 push a8，则 f 看到的 a7/a8 会互换\nC. 应当由caller回收栈上的传参空间（用 addq `$16`,%rsp）\nD. a7,a8也可以放在%r10,%r11中传递\nE. 因为用了栈传参，所以f中必须设置和管理%rbp帧指针\n答案：ABC\n解析： 超过 6 个整数参数后，其余从栈上传递；在被调函数入口，0(%rsp)是返回地址，\n因此第 7 个参数在 8(%rsp)，第 8 个在 16(%rsp)。caller 负责把自己 push 的参\n数空间收回。%r10/%r11不是传参寄存器；是否用%rbp是编译器选择，不是 ABI 强制。",
-      "assets": [],
-      "formatted": true,
-      "answer": {
-        "inline": true,
-        "status": "verified",
-        "relatedBlockIds": []
-      },
-      "source": {
-        "document": "原文/期末/2025期末-带答案.md",
-        "lines": {
-          "start": 47,
-          "end": 51
-        },
-        "aliases": [],
-        "curated": "_curated/期末/2025期末-带答案/47.md"
-      },
-      "layout": {
-        "mode": "choice",
-        "selection": "multiple",
-        "stem": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
-        "choices": [
-          {
-            "key": "A",
-            "content": "在 f 的入口处（尚未动 %rsp），a7 位于 8(%rsp)"
-          },
-          {
-            "key": "B",
-            "content": "若把两条 push 顺序改为先 push a7 再 push a8，则 f 看到的 a7/a8 会互换"
-          },
-          {
-            "key": "C",
-            "content": "应当由caller回收栈上的传参空间（用 addq `$16`,%rsp）"
-          },
-          {
-            "key": "D",
-            "content": "a7,a8也可以放在%r10,%r11中传递"
-          },
-          {
-            "key": "E",
-            "content": "因为用了栈传参，所以f中必须设置和管理%rbp帧指针"
-          }
-        ],
-        "answer": "答案：ABC\n解析： 超过 6 个整数参数后，其余从栈上传递；在被调函数入口，0(%rsp)是返回地址，\n因此第 7 个参数在 8(%rsp)，第 8 个在 16(%rsp)。caller 负责把自己 push 的参\n数空间收回。%r10/%r11不是传参寄存器；是否用%rbp是编译器选择，不是 ABI 强制。"
-      },
-      "interaction": {
-        "kind": "multiple-choice",
-        "declared": true,
-        "choices": [
-          {
-            "id": "A",
-            "content": "在 f 的入口处（尚未动 %rsp），a7 位于 8(%rsp)"
-          },
-          {
-            "id": "B",
-            "content": "若把两条 push 顺序改为先 push a7 再 push a8，则 f 看到的 a7/a8 会互换"
-          },
-          {
-            "id": "C",
-            "content": "应当由caller回收栈上的传参空间（用 addq `$16`,%rsp）"
-          },
-          {
-            "id": "D",
-            "content": "a7,a8也可以放在%r10,%r11中传递"
-          },
-          {
-            "id": "E",
-            "content": "因为用了栈传参，所以f中必须设置和管理%rbp帧指针"
-          }
-        ],
-        "correctChoiceIds": [
-          "A",
-          "B",
-          "C"
-        ]
-      },
-      "contentV3": {
-        "format": "markdown",
-        "prompt": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
-        "answer": "答案：ABC\n解析： 超过 6 个整数参数后，其余从栈上传递；在被调函数入口，0(%rsp)是返回地址，\n因此第 7 个参数在 8(%rsp)，第 8 个在 16(%rsp)。caller 负责把自己 push 的参\n数空间收回。%r10/%r11不是传参寄存器；是否用%rbp是编译器选择，不是 ABI 强制。"
-      },
-      "presentation": {
-        "status": "ready",
-        "issues": []
-      }
-    },
-    {
       "id": "q-278ab17999fada62",
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 5,
@@ -9652,7 +9440,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第5讲 10",
       "summary": "cmp/test 与 sub/and 的等价关系",
-      "content": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```\nsubq %rbx,%ra\nandq %rbx,%rax",
+      "content": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```\nsubq %rbx,%rax\nandq %rbx,%rax",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9674,7 +9462,7 @@
         "selection": null,
         "stem": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```",
         "choices": [],
-        "answer": "subq %rbx,%ra\nandq %rbx,%rax"
+        "answer": "subq %rbx,%rax\nandq %rbx,%rax"
       },
       "interaction": {
         "kind": "short-answer",
@@ -9683,7 +9471,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```",
-        "answer": "subq %rbx,%ra\nandq %rbx,%rax"
+        "answer": "subq %rbx,%rax\nandq %rbx,%rax"
       },
       "presentation": {
         "status": "ready",
@@ -9940,7 +9728,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第6讲 16",
       "summary": "过程调用栈帧、callq/ret、参数寄存器与被调用者保存",
-      "content": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行callq指令时，%rsp内容为0x110，那执行完callq指令后，\n%rsp内容为\n。（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx:\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把C代码中的mult2(x,y)改为mult2(y,x)，汇编代码会有什么变化：\n需要在call指令之前交换%rdi和%rsi的内容\n0x108 ，%rsp指向的内存中的数值为 0x400649 。随后执行完地址\n400657处的retq指令后，%rsp内容为 0x110\n%rdi y:%rsi a:%rdi b:%rsi s:%rax\nABI 中规定的寄存器\n保存规则，要求%rbx 是被调用者保存",
+      "content": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？\n（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9958,20 +9746,20 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/217.md"
       },
       "layout": {
-        "mode": "fill",
+        "mode": "short",
         "selection": null,
-        "stem": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行callq指令时，%rsp内容为0x110，那执行完callq指令后，\n%rsp内容为\n。（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx:\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把C代码中的mult2(x,y)改为mult2(y,x)，汇编代码会有什么变化：\n需要在call指令之前交换%rdi和%rsi的内容",
+        "stem": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？",
         "choices": [],
-        "answer": "0x108 ，%rsp指向的内存中的数值为 0x400649 。随后执行完地址\n400657处的retq指令后，%rsp内容为 0x110\n%rdi y:%rsi a:%rdi b:%rsi s:%rax\nABI 中规定的寄存器\n保存规则，要求%rbx 是被调用者保存"
+        "answer": "（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。"
       },
       "interaction": {
-        "kind": "fill",
+        "kind": "short-answer",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行callq指令时，%rsp内容为0x110，那执行完callq指令后，\n%rsp内容为\n。（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx:\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把C代码中的mult2(x,y)改为mult2(y,x)，汇编代码会有什么变化：\n需要在call指令之前交换%rdi和%rsi的内容",
-        "answer": "0x108 ，%rsp指向的内存中的数值为 0x400649 。随后执行完地址\n400657处的retq指令后，%rsp内容为 0x110\n%rdi y:%rsi a:%rdi b:%rsi s:%rax\nABI 中规定的寄存器\n保存规则，要求%rbx 是被调用者保存"
+        "prompt": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？",
+        "answer": "（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。"
       },
       "presentation": {
         "status": "ready",
@@ -9988,7 +9776,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第6讲 17",
       "summary": "取地址与解引用，变量存放于寄存器还是内存",
-      "content": "17.考虑以下C语言代码：\nlong bit_not1(long a) {\nlong x = ~\nreturn x;\n\n\n```\n}\nlong bit_not2(long *p) {\nlong x = *p;\nlong y = ~x\nreturn y;\n}\nlong call_bitnot() {\nlong v0 = 1010;\nlong v1 = 1010;\nlong v2 = bit_not1(v0);\nlong v3 = bit_not2(&v1);\nreturn v2+v3;\n}\n```\n下列变量分别存放在寄存器还是内存中？\nv0：\na; //考卷有笔误，写成了~p\n寄存器 v1：内存 v2：寄存器 v3：寄存器",
+      "content": "17. 考虑以下 C 语言代码：\n```c\nlong bit_not1(long a) {\n    long x = ~p;\n    return x;\n}\nlong bit_not2(long *p) {\n    long x = *p;\n    long y = ~x\n    return y;\n}\nlong call_bitnot() {\n    long v0 = 1010;\n    long v1 = 1010;\n    long v2 = bit_not1(v0);\n    long v3 = bit_not2(&v1);\n    return v2+v3;\n}\n```\n下列变量分别存放在寄存器还是内存中？\nv0：{{blank:q17-v0}}　v1：{{blank:q17-v1}}　v2：{{blank:q17-v2}}　v3：{{blank:q17-v3}}\nv0：寄存器；v1：内存；v2：寄存器；v3：寄存器。\n\n注：原卷将 `long x = ~p;`（预期应为 `~a`）以及 `long y = ~x`（缺少分号）印成笔误；此处保留原题写法。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10006,20 +9794,20 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/252.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "17.考虑以下C语言代码：\nlong bit_not1(long a) {\nlong x = ~\nreturn x;\n\n\n```\n}\nlong bit_not2(long *p) {\nlong x = *p;\nlong y = ~x\nreturn y;\n}\nlong call_bitnot() {\nlong v0 = 1010;\nlong v1 = 1010;\nlong v2 = bit_not1(v0);\nlong v3 = bit_not2(&v1);\nreturn v2+v3;\n}\n```\n下列变量分别存放在寄存器还是内存中？\nv0：",
+        "stem": "17. 考虑以下 C 语言代码：\n```c\nlong bit_not1(long a) {\n    long x = ~p;\n    return x;\n}\nlong bit_not2(long *p) {\n    long x = *p;\n    long y = ~x\n    return y;\n}\nlong call_bitnot() {\n    long v0 = 1010;\n    long v1 = 1010;\n    long v2 = bit_not1(v0);\n    long v3 = bit_not2(&v1);\n    return v2+v3;\n}\n```\n下列变量分别存放在寄存器还是内存中？\nv0：{{blank:q17-v0}}　v1：{{blank:q17-v1}}　v2：{{blank:q17-v2}}　v3：{{blank:q17-v3}}",
         "choices": [],
-        "answer": "a; //考卷有笔误，写成了~p\n寄存器 v1：内存 v2：寄存器 v3：寄存器"
+        "answer": "v0：寄存器；v1：内存；v2：寄存器；v3：寄存器。\n\n注：原卷将 `long x = ~p;`（预期应为 `~a`）以及 `long y = ~x`（缺少分号）印成笔误；此处保留原题写法。"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "17.考虑以下C语言代码：\nlong bit_not1(long a) {\nlong x = ~\nreturn x;\n\n\n```\n}\nlong bit_not2(long *p) {\nlong x = *p;\nlong y = ~x\nreturn y;\n}\nlong call_bitnot() {\nlong v0 = 1010;\nlong v1 = 1010;\nlong v2 = bit_not1(v0);\nlong v3 = bit_not2(&v1);\nreturn v2+v3;\n}\n```\n下列变量分别存放在寄存器还是内存中？\nv0：",
-        "answer": "a; //考卷有笔误，写成了~p\n寄存器 v1：内存 v2：寄存器 v3：寄存器"
+        "prompt": "17. 考虑以下 C 语言代码：\n```c\nlong bit_not1(long a) {\n    long x = ~p;\n    return x;\n}\nlong bit_not2(long *p) {\n    long x = *p;\n    long y = ~x\n    return y;\n}\nlong call_bitnot() {\n    long v0 = 1010;\n    long v1 = 1010;\n    long v2 = bit_not1(v0);\n    long v3 = bit_not2(&v1);\n    return v2+v3;\n}\n```\n下列变量分别存放在寄存器还是内存中？\nv0：{{blank:q17-v0}}　v1：{{blank:q17-v1}}　v2：{{blank:q17-v2}}　v3：{{blank:q17-v3}}",
+        "answer": "v0：寄存器；v1：内存；v2：寄存器；v3：寄存器。\n\n注：原卷将 `long x = ~p;`（预期应为 `~a`）以及 `long y = ~x`（缺少分号）印成笔误；此处保留原题写法。"
       },
       "presentation": {
         "status": "ready",
@@ -10036,7 +9824,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 18",
       "summary": "二维数组 arr_data[x][y] 寻址补全汇编",
-      "content": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4,\nmovl arr_data(\n```\n%rdi\n%rdi, %rsi, 4 ), %eax",
+      "content": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4, {{blank:q18-shift-register}}\nmovl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```\n依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10054,20 +9842,20 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/278.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4,\nmovl arr_data(\n```",
+        "stem": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4, {{blank:q18-shift-register}}\nmovl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```",
         "choices": [],
-        "answer": "%rdi\n%rdi, %rsi, 4 ), %eax"
+        "answer": "依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4,\nmovl arr_data(\n```",
-        "answer": "%rdi\n%rdi, %rsi, 4 ), %eax"
+        "prompt": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4, {{blank:q18-shift-register}}\nmovl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```",
+        "answer": "依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。"
       },
       "presentation": {
         "status": "ready",
@@ -10132,7 +9920,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 20",
       "summary": "汇编代码输出结果（原文 OCR 列错行，内容难辨）",
-      "content": "# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\nvar_ele:\nmovq %rdx, %rax\n, %rax\n, %rax\nmovl (%rsi,%rax,4), %eax\nret\n```\n20.考虑下面的代码，输出结果是：\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},\nimulq %rdi\naddq %rcx\n16",
+      "content": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},\n{1, 5, 2, 2, 1}};\nint *linear_zip = (int *) pgh;\nint *zip1 = (int *) pgh[1];\nint result =\n    pgh[2][3] +\n    linear_zip[14] +\n    *(linear_zip + 16) +\n    zip1[4];\nprintf(\"result: %d\\n\", result);\n}\n```\n16",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10150,20 +9938,20 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/305.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\nvar_ele:\nmovq %rdx, %rax\n, %rax\n, %rax\nmovl (%rsi,%rax,4), %eax\nret\n```\n20.考虑下面的代码，输出结果是：\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},",
+        "stem": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},\n{1, 5, 2, 2, 1}};\nint *linear_zip = (int *) pgh;\nint *zip1 = (int *) pgh[1];\nint result =\n    pgh[2][3] +\n    linear_zip[14] +\n    *(linear_zip + 16) +\n    zip1[4];\nprintf(\"result: %d\\n\", result);\n}\n```",
         "choices": [],
-        "answer": "imulq %rdi\naddq %rcx\n16"
+        "answer": "16"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\nvar_ele:\nmovq %rdx, %rax\n, %rax\n, %rax\nmovl (%rsi,%rax,4), %eax\nret\n```\n20.考虑下面的代码，输出结果是：\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},",
-        "answer": "imulq %rdi\naddq %rcx\n16"
+        "prompt": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},\n{1, 5, 2, 2, 1}};\nint *linear_zip = (int *) pgh;\nint *zip1 = (int *) pgh[1];\nint result =\n    pgh[2][3] +\n    linear_zip[14] +\n    *(linear_zip + 16) +\n    zip1[4];\nprintf(\"result: %d\\n\", result);\n}\n```",
+        "answer": "16"
       },
       "presentation": {
         "status": "ready",
@@ -10180,7 +9968,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 21",
       "summary": "数组循环 C 代码与汇编，求常量 A、B（OCR 错行）",
-      "content": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求A 和 B 的值是多少？\nA：\n9 B： 5",
+      "content": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}\nA：9；B：5",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10200,9 +9988,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求A 和 B 的值是多少？\nA：",
+        "stem": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}",
         "choices": [],
-        "answer": "9 B： 5"
+        "answer": "A：9；B：5"
       },
       "interaction": {
         "kind": "short-answer",
@@ -10210,8 +9998,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求A 和 B 的值是多少？\nA：",
-        "answer": "9 B： 5"
+        "prompt": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}",
+        "answer": "A：9；B：5"
       },
       "presentation": {
         "status": "ready",
@@ -10276,7 +10064,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第8讲 24",
       "summary": "缓冲区溢出攻击防御方法对比（兼 VM 保护机制）",
-      "content": "24.课上讲授了防御或者避免缓冲区攻击的几种主要方法，分析它们的特点。以普遍性情况\n为准，不用考虑少见的软硬件需求。（每行算作一空）\n是否需要修改用户程 是否需要重新编译 是否需要更换新的\n序源代码？ 用户程序？ CPU硬件？\n使用fgets()等安\n是 是 否\n全的库函数\n栈初始位置随机化\n在内存访问权限上设\n否 否 是\n置“可执行”位\n“金丝雀”（哨兵）\n否 是 否\n制\n否 否 否\n机",
+      "content": "24.课上讲授了防御或者避免缓冲区攻击的几种主要方法，分析它们的特点。以普遍性情况\n为准，不用考虑少见的软硬件需求。（每行算作一空）\n| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | {{blank:q24-aslr-source}} | {{blank:q24-aslr-recompile}} | {{blank:q24-aslr-hardware}} |\n| 在内存访问权限上设置“可执行”位 | {{blank:q24-nx-source}} | {{blank:q24-nx-recompile}} | {{blank:q24-nx-hardware}} |\n| “金丝雀”（哨兵）机制 | {{blank:q24-canary-source}} | {{blank:q24-canary-recompile}} | {{blank:q24-canary-hardware}} |\n| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | 否 | 否 | 否 |\n| 在内存访问权限上设置“可执行”位 | 否 | 否 | 是 |\n| “金丝雀”（哨兵）机制 | 否 | 是 | 否 |",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10294,20 +10082,20 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/405.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "24.课上讲授了防御或者避免缓冲区攻击的几种主要方法，分析它们的特点。以普遍性情况\n为准，不用考虑少见的软硬件需求。（每行算作一空）\n是否需要修改用户程 是否需要重新编译 是否需要更换新的\n序源代码？ 用户程序？ CPU硬件？\n使用fgets()等安\n是 是 否\n全的库函数\n栈初始位置随机化\n在内存访问权限上设\n否 否 是\n置“可执行”位\n“金丝雀”（哨兵）\n否 是 否\n制",
+        "stem": "24.课上讲授了防御或者避免缓冲区攻击的几种主要方法，分析它们的特点。以普遍性情况\n为准，不用考虑少见的软硬件需求。（每行算作一空）\n| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | {{blank:q24-aslr-source}} | {{blank:q24-aslr-recompile}} | {{blank:q24-aslr-hardware}} |\n| 在内存访问权限上设置“可执行”位 | {{blank:q24-nx-source}} | {{blank:q24-nx-recompile}} | {{blank:q24-nx-hardware}} |\n| “金丝雀”（哨兵）机制 | {{blank:q24-canary-source}} | {{blank:q24-canary-recompile}} | {{blank:q24-canary-hardware}} |",
         "choices": [],
-        "answer": "否 否 否\n机"
+        "answer": "| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | 否 | 否 | 否 |\n| 在内存访问权限上设置“可执行”位 | 否 | 否 | 是 |\n| “金丝雀”（哨兵）机制 | 否 | 是 | 否 |"
       },
       "interaction": {
-        "kind": "short-answer",
+        "kind": "fill",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "24.课上讲授了防御或者避免缓冲区攻击的几种主要方法，分析它们的特点。以普遍性情况\n为准，不用考虑少见的软硬件需求。（每行算作一空）\n是否需要修改用户程 是否需要重新编译 是否需要更换新的\n序源代码？ 用户程序？ CPU硬件？\n使用fgets()等安\n是 是 否\n全的库函数\n栈初始位置随机化\n在内存访问权限上设\n否 否 是\n置“可执行”位\n“金丝雀”（哨兵）\n否 是 否\n制",
-        "answer": "否 否 否\n机"
+        "prompt": "24.课上讲授了防御或者避免缓冲区攻击的几种主要方法，分析它们的特点。以普遍性情况\n为准，不用考虑少见的软硬件需求。（每行算作一空）\n| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | {{blank:q24-aslr-source}} | {{blank:q24-aslr-recompile}} | {{blank:q24-aslr-hardware}} |\n| 在内存访问权限上设置“可执行”位 | {{blank:q24-nx-source}} | {{blank:q24-nx-recompile}} | {{blank:q24-nx-hardware}} |\n| “金丝雀”（哨兵）机制 | {{blank:q24-canary-source}} | {{blank:q24-canary-recompile}} | {{blank:q24-canary-hardware}} |",
+        "answer": "| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | 否 | 否 | 否 |\n| 在内存访问权限上设置“可执行”位 | 否 | 否 | 是 |\n| “金丝雀”（哨兵）机制 | 否 | 是 | 否 |"
       },
       "presentation": {
         "status": "ready",
