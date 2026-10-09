@@ -13,7 +13,7 @@
       "choiceQuestionCount": 75,
       "declaredQuestionCount": 124,
       "publishedQuestionCount": 124,
-      "paperCount": 27,
+      "paperCount": 26,
       "questionFile": "questions/1-Data-Representation.json"
     },
     {
@@ -25,7 +25,7 @@
       "choiceQuestionCount": 84,
       "declaredQuestionCount": 148,
       "publishedQuestionCount": 148,
-      "paperCount": 27,
+      "paperCount": 26,
       "questionFile": "questions/2-Machine-Prog.json"
     },
     {
@@ -37,7 +37,7 @@
       "choiceQuestionCount": 62,
       "declaredQuestionCount": 123,
       "publishedQuestionCount": 123,
-      "paperCount": 28,
+      "paperCount": 27,
       "questionFile": "questions/3-Processor-Arch.json"
     },
     {
@@ -49,7 +49,7 @@
       "choiceQuestionCount": 63,
       "declaredQuestionCount": 108,
       "publishedQuestionCount": 108,
-      "paperCount": 26,
+      "paperCount": 25,
       "questionFile": "questions/4-Memory-Hierarchy.json"
     },
     {
@@ -61,7 +61,7 @@
       "choiceQuestionCount": 38,
       "declaredQuestionCount": 73,
       "publishedQuestionCount": 73,
-      "paperCount": 29,
+      "paperCount": 27,
       "questionFile": "questions/5-Compilation-Linking.json"
     },
     {
@@ -73,7 +73,7 @@
       "choiceQuestionCount": 52,
       "declaredQuestionCount": 87,
       "publishedQuestionCount": 87,
-      "paperCount": 18,
+      "paperCount": 14,
       "questionFile": "questions/6-ECF-and-System-IO.json"
     },
     {
@@ -85,7 +85,7 @@
       "choiceQuestionCount": 42,
       "declaredQuestionCount": 67,
       "publishedQuestionCount": 67,
-      "paperCount": 14,
+      "paperCount": 13,
       "questionFile": "questions/7-Virtual-Memory-and-Malloc.json"
     },
     {
@@ -97,7 +97,7 @@
       "choiceQuestionCount": 34,
       "declaredQuestionCount": 49,
       "publishedQuestionCount": 49,
-      "paperCount": 14,
+      "paperCount": 13,
       "questionFile": "questions/8-Network.json"
     },
     {
@@ -109,7 +109,7 @@
       "choiceQuestionCount": 21,
       "declaredQuestionCount": 42,
       "publishedQuestionCount": 42,
-      "paperCount": 13,
+      "paperCount": 12,
       "questionFile": "questions/9-Concurrent-Programming.json"
     }
   ],
@@ -143,7 +143,7 @@
     "withheldChoiceQuestions": 0,
     "publishedQuestions": 821,
     "withheldQuestions": 0,
-    "papers": 34,
+    "papers": 28,
     "answerBlocks": 55
   },
   "answerBlocksFile": "answer-blocks.json",

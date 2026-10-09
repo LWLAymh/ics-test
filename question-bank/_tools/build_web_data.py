@@ -236,6 +236,7 @@ def is_published_question(question):
 def main():
     os.makedirs(QUESTIONS_OUT, exist_ok=True)
     all_materials = build_modules.load()
+    materials_by_rel = {material["rel"]: material for material in all_materials}
 
     aliases = collections.defaultdict(list)
     materials = []
@@ -291,17 +292,19 @@ def main():
     for material in materials:
         if material["kind"] != "questions":
             continue
-        # paperId 用文件名词干（`stem`）算，不用展示名：这样改试卷显示名不会
-        # 让 paperId 变来变去，也不会因为两份卷子取了同名而被合并成一份。
-        paper_id = short_id("p", material["cat"], material["stem"])
+        # 同一套卷子可能按章节拆成多个维护文件。canonical_paper 显式指向
+        # 其正式试卷来源；这些文件共享一个 paperId，但题目仍保留各自 source。
+        canonical_rel = material.get("canonical_paper") or material["rel"]
+        canonical_material = materials_by_rel.get(canonical_rel, material)
+        paper_id = short_id("p", canonical_material["cat"], canonical_material["stem"])
         paper = papers.setdefault(paper_id, {
             "id": paper_id,
-            "year": material["year"] or None,
-            "examType": material["cat"],
+            "year": canonical_material["year"] or None,
+            "examType": canonical_material["cat"],
             # `title` 是下拉里的短名，可以为空（前端会跳过空字段，只显示「年份 · 类别」）；
             # `displayName` 永远非空，给报告、日志这类需要完整名字的地方用。
-            "title": material["label"],
-            "displayName": build_modules.display_name(material),
+            "title": canonical_material["label"],
+            "displayName": build_modules.display_name(canonical_material),
             "questionIds": [],
             "verifiedAnswerCount": 0,
             "singleChoiceCount": 0,
@@ -310,7 +313,8 @@ def main():
             "shortAnswerCount": 0,
             "compositeCount": 0,
         })
-        for paper_order, item in enumerate(material["items"], 1):
+        for item in material["items"]:
+            paper_order = len(paper["questionIds"]) + 1
             module = MODULE_BY_NAME.get(item.get("module"))
             start, end = item.get("start"), item.get("end")
             if not module or not isinstance(start, int) or not isinstance(end, int):
@@ -388,9 +392,9 @@ def main():
                 "paperId": paper_id,
                 "paperOrder": paper_order,
                 "moduleId": module["id"],
-                "year": material["year"] or None,
-                "examType": material["cat"],
-                "exam": build_modules.display_name(material),
+                "year": canonical_material["year"] or None,
+                "examType": canonical_material["cat"],
+                "exam": build_modules.display_name(canonical_material),
                 "questionNo": item.get("qno", ""),
                 "summary": item.get("note", ""),
                 "content": content,
