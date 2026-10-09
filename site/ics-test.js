@@ -128,27 +128,9 @@
     return hardBreakOptions(normalizeText(source));
   }
 
-  // markdown-it 关掉了 html，内容里写的 <br>/<sub>/<sup>/<u> 会被转义成
-  // 可见文本（例如 `&lt;br&gt;`），整套题库有 53 处因此显示成字面标签。
-  // 这里只把内容实际用到的这四个标签还原回来。不开 html: true 的原因是：
-  // objdump 输出里的 `0000000000401cb2 <getbuf>:` 会被当成 HTML 标签解析，
-  // 符号名直接消失（实测 39 个段落受影响）。
-  // 代码跨度与围栏代码内的同名文本保持字面量——那里本来就是在展示标签本身。
-  const ESCAPED_TAG = /&lt;(\/?)(br|sub|sup|u)\s*(\/?)&gt;/g;
-  const CODE_REGION = /(<pre[\s\S]*?<\/pre>|<code>[\s\S]*?<\/code>)/g;
-
-  function restoreContentTags(html) {
-    return String(html).split(CODE_REGION).map(function (part, index) {
-      if (index % 2 === 1) return part;
-      return part.replace(ESCAPED_TAG, function (whole, close, name) {
-        return name === 'br' ? '<br>' : '<' + close + name + '>';
-      });
-    }).join('');
-  }
-
   function renderMarkdown(source) {
     const clean = cleanMarkdown(source);
-    return md ? restoreContentTags(md.render(clean)) : '<pre>' + escapeHtml(clean) + '</pre>';
+    return md ? md.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';
   }
 
   // 兜底路径的选项渲染：与 renderMarkdown 完全相同。

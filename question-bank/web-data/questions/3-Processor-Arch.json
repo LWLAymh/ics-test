@@ -1136,7 +1136,7 @@
       "exam": "2014期中",
       "questionNo": "第六题",
       "summary": "Y86 新增 caddXX 指令在 SEQ 各阶段的操作",
-      "content": "第六题（10 分）\n\n请分析 Y86 ISA 中新加入的一条指令 `caddXX`（条件加法）。其功能可以参考 `add` 和 `cmovXX` 两条指令。\n\n| 指令 | 第 1 字节高 4 位 | 第 1 字节低 4 位 | 第 2 字节高 4 位 | 第 2 字节低 4 位 |\n| --- | --- | --- | --- | --- |\n| `caddXX rA, rB` | `C` | `fn` | `rA` | `rB` |\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 `R[rB] ← Cnd? valE: valB`\n答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← M<sub>1</sub>[PC]<br>rA:rB ← M<sub>1</sub>[PC+1]<br>valP ← PC+2 |\n| Decode | `valA ← R[rA]`<br>`valB ← R[rB]` |\n| Execute | valE ← valA+valB<br>Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | `if(Cnd) R[rB] ← valE` |\n| PC update | PC ← valP |",
+      "content": "第六题（10 分）\n\n请分析 Y86 ISA 中新加入的一条指令 `caddXX`（条件加法）。其功能可以参考 `add` 和 `cmovXX` 两条指令。\n\n| 指令 | 第 1 字节高 4 位 | 第 1 字节低 4 位 | 第 2 字节高 4 位 | 第 2 字节低 4 位 |\n| --- | --- | --- | --- | --- |\n| `caddXX rA, rB` | `C` | `fn` | `rA` | `rB` |\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 `R[rB] ← Cnd? valE: valB`\n答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← $M_{1}$[PC]；rA:rB ← $M_{1}$[PC+1]；valP ← PC+2 |\n| Decode | `valA ← R[rA]` `valB ← R[rB]` |\n| Execute | valE ← valA+valB；Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | `if(Cnd) R[rB] ← valE` |\n| PC update | PC ← valP |",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1160,7 +1160,7 @@
         "selection": null,
         "stem": "第六题（10 分）\n\n请分析 Y86 ISA 中新加入的一条指令 `caddXX`（条件加法）。其功能可以参考 `add` 和 `cmovXX` 两条指令。\n\n| 指令 | 第 1 字节高 4 位 | 第 1 字节低 4 位 | 第 2 字节高 4 位 | 第 2 字节低 4 位 |\n| --- | --- | --- | --- | --- |\n| `caddXX rA, rB` | `C` | `fn` | `rA` | `rB` |\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 `R[rB] ← Cnd? valE: valB`",
         "choices": [],
-        "answer": "答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← M<sub>1</sub>[PC]<br>rA:rB ← M<sub>1</sub>[PC+1]<br>valP ← PC+2 |\n| Decode | `valA ← R[rA]`<br>`valB ← R[rB]` |\n| Execute | valE ← valA+valB<br>Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | `if(Cnd) R[rB] ← valE` |\n| PC update | PC ← valP |"
+        "answer": "答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← $M_{1}$[PC]；rA:rB ← $M_{1}$[PC+1]；valP ← PC+2 |\n| Decode | `valA ← R[rA]` `valB ← R[rB]` |\n| Execute | valE ← valA+valB；Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | `if(Cnd) R[rB] ← valE` |\n| PC update | PC ← valP |"
       },
       "interaction": {
         "kind": "short-answer",
@@ -1169,7 +1169,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "第六题（10 分）\n\n请分析 Y86 ISA 中新加入的一条指令 `caddXX`（条件加法）。其功能可以参考 `add` 和 `cmovXX` 两条指令。\n\n| 指令 | 第 1 字节高 4 位 | 第 1 字节低 4 位 | 第 2 字节高 4 位 | 第 2 字节低 4 位 |\n| --- | --- | --- | --- | --- |\n| `caddXX rA, rB` | `C` | `fn` | `rA` | `rB` |\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 `R[rB] ← Cnd? valE: valB`",
-        "answer": "答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← M<sub>1</sub>[PC]<br>rA:rB ← M<sub>1</sub>[PC+1]<br>valP ← PC+2 |\n| Decode | `valA ← R[rA]`<br>`valB ← R[rB]` |\n| Execute | valE ← valA+valB<br>Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | `if(Cnd) R[rB] ← valE` |\n| PC update | PC ← valP |"
+        "answer": "答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← $M_{1}$[PC]；rA:rB ← $M_{1}$[PC+1]；valP ← PC+2 |\n| Decode | `valA ← R[rA]` `valB ← R[rB]` |\n| Execute | valE ← valA+valB；Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | `if(Cnd) R[rB] ← valE` |\n| PC update | PC ← valP |"
       },
       "presentation": {
         "status": "ready",
