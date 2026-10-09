@@ -17,7 +17,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 14",
       "summary": "已初始化变量所在的 ELF 段（.data）",
-      "content": "14. In what section of an ELF binary are initialized variables located? **(2pts) (e2b-s11)**\n   a) .symtab\n   b) .data\n   c) .bss\n   d) .text\n**答案：B**",
+      "content": "14. In what section of an ELF binary are initialized variables located? **(2pts)**\n   a) `.symtab`\n   b) `.data`\n   c) `.bss`\n   d) `.text`\n**答案：B**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -37,23 +37,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "14. In what section of an ELF binary are initialized variables located? **(2pts) (e2b-s11)**",
+        "stem": "14. In what section of an ELF binary are initialized variables located? **(2pts)**",
         "choices": [
           {
             "key": "A",
-            "content": ".symtab"
+            "content": "`.symtab`"
           },
           {
             "key": "B",
-            "content": ".data"
+            "content": "`.data`"
           },
           {
             "key": "C",
-            "content": ".bss"
+            "content": "`.bss`"
           },
           {
             "key": "D",
-            "content": ".text"
+            "content": "`.text`"
           }
         ],
         "answer": "**答案：B**"
@@ -64,19 +64,19 @@
         "choices": [
           {
             "id": "A",
-            "content": ".symtab"
+            "content": "`.symtab`"
           },
           {
             "id": "B",
-            "content": ".data"
+            "content": "`.data`"
           },
           {
             "id": "C",
-            "content": ".bss"
+            "content": "`.bss`"
           },
           {
             "id": "D",
-            "content": ".text"
+            "content": "`.text`"
           }
         ],
         "correctChoiceIds": [
@@ -85,7 +85,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "14. In what section of an ELF binary are initialized variables located? **(2pts) (e2b-s11)**",
+        "prompt": "14. In what section of an ELF binary are initialized variables located? **(2pts)**",
         "answer": "**答案：B**"
       },
       "presentation": {
@@ -239,7 +239,7 @@
       "exam": "2013期中",
       "questionNo": "选择题 15",
       "summary": "编译器可自动进行的优化变换",
-      "content": "15、以下哪些程序优化编译器总是可以自动进行？（假设`int i, int j, int A[N], int B[N], int m`\n都是局部变量，N是一个整数型常量，int foo(int) 是一个函数）答：（      ）\n  优化前  优化后\nA.  for (j = 0 ; j < N ; j ++)  int temp = i*N;\n   m + = i\\*N\\*j;  for (j= 0 ; j < N ; j ++)\n   m + = temp * j;\nB.  for (j = 0 ; j < N ; j ++)  int temp = B[i];\n   B[i] *= A[j];  for (j= 0 ; j < N ; j ++)\n   temp *= A[j];\nB[i] = temp;\nC.  for (j = 0 ; j < N ; j ++)  for (j = 0 ; j < N ; j ++)\n   m = (m + A[j]) + B[j];     m = m + (A[j] + B[j]);\nD.  for (j = 0 ; j < foo(N) ; j ++)  int temp = foo(N);\n   m ++;  for (j= 0 ; j < temp ; j ++)\n   m ++;\n答案：AC",
+      "content": "15、以下哪些程序优化编译器总是可以自动进行？（假设 `int i, int j, int A[N], int B[N], int m` 都是局部变量，`N` 是一个整数型常量，`int foo(int)` 是一个函数）\nA. 优化前：\n\n```c\nfor (j = 0; j < N; j++)\n    m += i * N * j;\n```\n\n优化后：\n\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\n    m += temp * j;\n```\n\nB. 优化前：\n\n```c\nfor (j = 0; j < N; j++)\n    B[i] *= A[j];\n```\n\n优化后：\n\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\n    temp *= A[j];\nB[i] = temp;\n```\n\nC. 优化前：\n\n```c\nfor (j = 0; j < N; j++)\n    m = (m + A[j]) + B[j];\n```\n\n优化后：\n\n```c\nfor (j = 0; j < N; j++)\n    m = m + (A[j] + B[j]);\n```\n\nD. 优化前：\n\n```c\nfor (j = 0; j < foo(N); j++)\n    m++;\n```\n\n优化后：\n\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\n    m++;\n```\n答案：AC",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -259,23 +259,23 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "15、以下哪些程序优化编译器总是可以自动进行？（假设`int i, int j, int A[N], int B[N], int m`\n都是局部变量，N是一个整数型常量，int foo(int) 是一个函数）答：（      ）\n  优化前  优化后",
+        "stem": "15、以下哪些程序优化编译器总是可以自动进行？（假设 `int i, int j, int A[N], int B[N], int m` 都是局部变量，`N` 是一个整数型常量，`int foo(int)` 是一个函数）",
         "choices": [
           {
             "key": "A",
-            "content": "for (j = 0 ; j < N ; j ++)  int temp = i*N;\nm + = i\\*N\\*j;  for (j= 0 ; j < N ; j ++)\nm + = temp * j;"
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\n    m += i * N * j;\n```\n优化后：\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\n    m += temp * j;\n```"
           },
           {
             "key": "B",
-            "content": "for (j = 0 ; j < N ; j ++)  int temp = B[i];\nB[i] *= A[j];  for (j= 0 ; j < N ; j ++)\ntemp *= A[j];\nB[i] = temp;"
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\n    B[i] *= A[j];\n```\n优化后：\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\n    temp *= A[j];\nB[i] = temp;\n```"
           },
           {
             "key": "C",
-            "content": "for (j = 0 ; j < N ; j ++)  for (j = 0 ; j < N ; j ++)\nm = (m + A[j]) + B[j];     m = m + (A[j] + B[j]);"
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\n    m = (m + A[j]) + B[j];\n```\n优化后：\n```c\nfor (j = 0; j < N; j++)\n    m = m + (A[j] + B[j]);\n```"
           },
           {
             "key": "D",
-            "content": "for (j = 0 ; j < foo(N) ; j ++)  int temp = foo(N);\nm ++;  for (j= 0 ; j < temp ; j ++)\nm ++;"
+            "content": "优化前：\n```c\nfor (j = 0; j < foo(N); j++)\n    m++;\n```\n优化后：\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\n    m++;\n```"
           }
         ],
         "answer": "答案：AC"
@@ -286,19 +286,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "for (j = 0 ; j < N ; j ++)  int temp = i*N;\nm + = i\\*N\\*j;  for (j= 0 ; j < N ; j ++)\nm + = temp * j;"
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\n    m += i * N * j;\n```\n优化后：\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\n    m += temp * j;\n```"
           },
           {
             "id": "B",
-            "content": "for (j = 0 ; j < N ; j ++)  int temp = B[i];\nB[i] *= A[j];  for (j= 0 ; j < N ; j ++)\ntemp *= A[j];\nB[i] = temp;"
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\n    B[i] *= A[j];\n```\n优化后：\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\n    temp *= A[j];\nB[i] = temp;\n```"
           },
           {
             "id": "C",
-            "content": "for (j = 0 ; j < N ; j ++)  for (j = 0 ; j < N ; j ++)\nm = (m + A[j]) + B[j];     m = m + (A[j] + B[j]);"
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\n    m = (m + A[j]) + B[j];\n```\n优化后：\n```c\nfor (j = 0; j < N; j++)\n    m = m + (A[j] + B[j]);\n```"
           },
           {
             "id": "D",
-            "content": "for (j = 0 ; j < foo(N) ; j ++)  int temp = foo(N);\nm ++;  for (j= 0 ; j < temp ; j ++)\nm ++;"
+            "content": "优化前：\n```c\nfor (j = 0; j < foo(N); j++)\n    m++;\n```\n优化后：\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\n    m++;\n```"
           }
         ],
         "correctChoiceIds": [
@@ -308,7 +308,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "15、以下哪些程序优化编译器总是可以自动进行？（假设`int i, int j, int A[N], int B[N], int m`\n都是局部变量，N是一个整数型常量，int foo(int) 是一个函数）答：（      ）\n  优化前  优化后",
+        "prompt": "15、以下哪些程序优化编译器总是可以自动进行？（假设 `int i, int j, int A[N], int B[N], int m` 都是局部变量，`N` 是一个整数型常量，`int foo(int)` 是一个函数）",
         "answer": "答案：AC"
       },
       "presentation": {

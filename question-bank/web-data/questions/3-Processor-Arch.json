@@ -7227,7 +7227,7 @@
       "exam": "2017期末",
       "questionNo": "第一题 4",
       "summary": "由执行步骤识别 Y86 指令",
-      "content": "4.  分析下图的指令执行步骤，请问这是Y86指令系统的哪条指令？\n\n![各阶段指令执行步骤表](assets/期末/2017期末-无答案/p2-instr-steps.png)\nA. `call`\nB. `ret`\nC. pushl\nD. popl\n答案：B\n解析：执行步骤为 `Decode: valA←R[%esp]`、`valB←R[%esp]`；Execute: valE←valB+4；`Memory: valM←M4[valA]`；`Write back: R[%esp]←valE`；PC update: PC←valM，这正是 `ret` 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "4.  分析下图的指令执行步骤，请问这是Y86指令系统的哪条指令？\n\n![各阶段指令执行步骤表](assets/期末/2017期末-无答案/p2-instr-steps.png)\nA. `call`\nB. `ret`\nC. `pushl`\nD. `popl`\n答案：B\n解析：执行步骤为 `Decode: valA←R[%esp]`、`valB←R[%esp]`；`Execute: valE←valB+4`；`Memory: valM←M4[valA]`；`Write back: R[%esp]←valE`；`PC update: PC←valM`，这正是 `ret` 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [
         "assets/期末/2017期末-无答案/p2-instr-steps.png"
       ],
@@ -7261,14 +7261,14 @@
           },
           {
             "key": "C",
-            "content": "pushl"
+            "content": "`pushl`"
           },
           {
             "key": "D",
-            "content": "popl"
+            "content": "`popl`"
           }
         ],
-        "answer": "答案：B\n解析：执行步骤为 `Decode: valA←R[%esp]`、`valB←R[%esp]`；Execute: valE←valB+4；`Memory: valM←M4[valA]`；`Write back: R[%esp]←valE`；PC update: PC←valM，这正是 `ret` 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：B\n解析：执行步骤为 `Decode: valA←R[%esp]`、`valB←R[%esp]`；`Execute: valE←valB+4`；`Memory: valM←M4[valA]`；`Write back: R[%esp]←valE`；`PC update: PC←valM`，这正是 `ret` 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -7284,11 +7284,11 @@
           },
           {
             "id": "C",
-            "content": "pushl"
+            "content": "`pushl`"
           },
           {
             "id": "D",
-            "content": "popl"
+            "content": "`popl`"
           }
         ],
         "correctChoiceIds": [
@@ -7298,7 +7298,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "4.  分析下图的指令执行步骤，请问这是Y86指令系统的哪条指令？\n\n![各阶段指令执行步骤表](assets/期末/2017期末-无答案/p2-instr-steps.png)",
-        "answer": "答案：B\n解析：执行步骤为 `Decode: valA←R[%esp]`、`valB←R[%esp]`；Execute: valE←valB+4；`Memory: valM←M4[valA]`；`Write back: R[%esp]←valE`；PC update: PC←valM，这正是 `ret` 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：B\n解析：执行步骤为 `Decode: valA←R[%esp]`、`valB←R[%esp]`；`Execute: valE←valB+4`；`Memory: valM←M4[valA]`；`Write back: R[%esp]←valE`；`PC update: PC←valM`，这正是 `ret` 的 SEQ 实现。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
@@ -9651,7 +9651,7 @@
       "exam": "2025期末",
       "questionNo": "一 8",
       "summary": "Y86-64 指令编码 regids 与 valC 字段",
-      "content": "8. 在 Y86-64 指令集中，下列哪些指令在指令字节序列中同时包含 regids 字节与\nvalC 常量字段？\nA. irmovq V, rB\nB. rmmovq rA, D(rB)\nC. call Dest\nD. OPq rA, rB\nE. `ret`\n答案：AB\n解析：`irmovq/rmmovq/mrmovq` 需要寄存器说明（regids）且需要常量/位移（valC）。`call/jXX` 只有 valC；OPq 只有 regids；`ret` 两者都不需要。",
+      "content": "8. 在 Y86-64 指令集中，下列哪些指令在指令字节序列中同时包含 regids 字节与\nvalC 常量字段？\nA. `irmovq V, rB`\nB. `rmmovq rA, D(rB)`\nC. `call Dest`\nD. `OPq rA, rB`\nE. `ret`\n答案：AB\n解析：`irmovq/rmmovq/mrmovq` 需要寄存器说明（regids）且需要常量/位移（valC）。`call/jXX` 只有 valC；OPq 只有 regids；`ret` 两者都不需要。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9675,19 +9675,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "irmovq V, rB"
+            "content": "`irmovq V, rB`"
           },
           {
             "key": "B",
-            "content": "rmmovq rA, D(rB)"
+            "content": "`rmmovq rA, D(rB)`"
           },
           {
             "key": "C",
-            "content": "call Dest"
+            "content": "`call Dest`"
           },
           {
             "key": "D",
-            "content": "OPq rA, rB"
+            "content": "`OPq rA, rB`"
           },
           {
             "key": "E",
@@ -9702,19 +9702,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "irmovq V, rB"
+            "content": "`irmovq V, rB`"
           },
           {
             "id": "B",
-            "content": "rmmovq rA, D(rB)"
+            "content": "`rmmovq rA, D(rB)`"
           },
           {
             "id": "C",
-            "content": "call Dest"
+            "content": "`call Dest`"
           },
           {
             "id": "D",
-            "content": "OPq rA, rB"
+            "content": "`OPq rA, rB`"
           },
           {
             "id": "E",

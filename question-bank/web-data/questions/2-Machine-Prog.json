@@ -17,7 +17,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 5",
       "summary": "函数返回值放在 %eax 的调用约定",
-      "content": "5. How does x86 assembly store the return value when a function is finished?\n   a) The ret instruction stores it in a special retval register.\n   b) By convention, it is always in %eax.\n   c) It is stored on the stack just above the (%ebp) of the callee.\n   d) It is stored on the stack just above all the arguments to the function\n**答案：B**",
+      "content": "5. How does x86 assembly store the return value when a function is finished?\n   a) The `ret` instruction stores it in a special `retval` register.\n   b) By convention, it is always in `%eax`.\n   c) It is stored on the stack just above the `(%ebp)` of the callee.\n   d) It is stored on the stack just above all the arguments to the function\n**答案：B**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -41,15 +41,15 @@
         "choices": [
           {
             "key": "A",
-            "content": "The ret instruction stores it in a special retval register."
+            "content": "The `ret` instruction stores it in a special `retval` register."
           },
           {
             "key": "B",
-            "content": "By convention, it is always in %eax."
+            "content": "By convention, it is always in `%eax`."
           },
           {
             "key": "C",
-            "content": "It is stored on the stack just above the (%ebp) of the callee."
+            "content": "It is stored on the stack just above the `(%ebp)` of the callee."
           },
           {
             "key": "D",
@@ -64,15 +64,15 @@
         "choices": [
           {
             "id": "A",
-            "content": "The ret instruction stores it in a special retval register."
+            "content": "The `ret` instruction stores it in a special `retval` register."
           },
           {
             "id": "B",
-            "content": "By convention, it is always in %eax."
+            "content": "By convention, it is always in `%eax`."
           },
           {
             "id": "C",
-            "content": "It is stored on the stack just above the (%ebp) of the callee."
+            "content": "It is stored on the stack just above the `(%ebp)` of the callee."
           },
           {
             "id": "D",
@@ -189,7 +189,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 9",
       "summary": "mov 与 lea 的语义区别（访存 vs 算地址）",
-      "content": "9. What is the difference between the mov and lea instructions?\n   a) lea dereferences an address, while mov doesn’t.\n   b) mov dereferences an address, while lea doesn’t.\n   c) lea can be used to copy a register into another register, while mov cannot.\n   d) mov can be used to copy a register into another register, while lea cannnot.\n**答案：B**",
+      "content": "9. What is the difference between the `mov` and `lea` instructions?\n   a) `lea` dereferences an address, while `mov` doesn’t.\n   b) `mov` dereferences an address, while `lea` doesn’t.\n   c) `lea` can be used to copy a register into another register, while `mov` cannot.\n   d) `mov` can be used to copy a register into another register, while `lea` cannnot.\n**答案：B**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -209,23 +209,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "9. What is the difference between the mov and lea instructions?",
+        "stem": "9. What is the difference between the `mov` and `lea` instructions?",
         "choices": [
           {
             "key": "A",
-            "content": "lea dereferences an address, while mov doesn’t."
+            "content": "`lea` dereferences an address, while `mov` doesn’t."
           },
           {
             "key": "B",
-            "content": "mov dereferences an address, while lea doesn’t."
+            "content": "`mov` dereferences an address, while `lea` doesn’t."
           },
           {
             "key": "C",
-            "content": "lea can be used to copy a register into another register, while mov cannot."
+            "content": "`lea` can be used to copy a register into another register, while `mov` cannot."
           },
           {
             "key": "D",
-            "content": "mov can be used to copy a register into another register, while lea cannnot."
+            "content": "`mov` can be used to copy a register into another register, while `lea` cannnot."
           }
         ],
         "answer": "**答案：B**"
@@ -236,19 +236,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "lea dereferences an address, while mov doesn’t."
+            "content": "`lea` dereferences an address, while `mov` doesn’t."
           },
           {
             "id": "B",
-            "content": "mov dereferences an address, while lea doesn’t."
+            "content": "`mov` dereferences an address, while `lea` doesn’t."
           },
           {
             "id": "C",
-            "content": "lea can be used to copy a register into another register, while mov cannot."
+            "content": "`lea` can be used to copy a register into another register, while `mov` cannot."
           },
           {
             "id": "D",
-            "content": "mov can be used to copy a register into another register, while lea cannnot."
+            "content": "`mov` can be used to copy a register into another register, while `lea` cannnot."
           }
         ],
         "correctChoiceIds": [
@@ -257,7 +257,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "9. What is the difference between the mov and lea instructions?",
+        "prompt": "9. What is the difference between the `mov` and `lea` instructions?",
         "answer": "**答案：B**"
       },
       "presentation": {
@@ -275,7 +275,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 11",
       "summary": "pushq 后 %rsp 的取值（栈向低地址增长）",
-      "content": "11. %rsp is 0xdeadbeefdeadd0d0. What is the value in %rsp after the following instruction executes?\n\n`pushq %rbx`\n   a) 0xdeadbeefdead0d4\n   b) 0xdeadbeefdead0d8\n   c) 0xdeadbeefdead0cc\n   d) 0xdeadbeefdead0c8\n**答案：D**",
+      "content": "11. `%rsp` is `0xdeadbeefdeadd0d0`. What is the value in `%rsp` after the following instruction executes?\n\n```asm\npushq %rbx\n```\n   a) `0xdeadbeefdead0d4`\n   b) `0xdeadbeefdead0d8`\n   c) `0xdeadbeefdead0cc`\n   d) `0xdeadbeefdead0c8`\n**答案：D**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -295,23 +295,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "11. %rsp is 0xdeadbeefdeadd0d0. What is the value in %rsp after the following instruction executes?\n\n`pushq %rbx`",
+        "stem": "11. `%rsp` is `0xdeadbeefdeadd0d0`. What is the value in `%rsp` after the following instruction executes?\n\n```asm\npushq %rbx\n```",
         "choices": [
           {
             "key": "A",
-            "content": "0xdeadbeefdead0d4"
+            "content": "`0xdeadbeefdead0d4`"
           },
           {
             "key": "B",
-            "content": "0xdeadbeefdead0d8"
+            "content": "`0xdeadbeefdead0d8`"
           },
           {
             "key": "C",
-            "content": "0xdeadbeefdead0cc"
+            "content": "`0xdeadbeefdead0cc`"
           },
           {
             "key": "D",
-            "content": "0xdeadbeefdead0c8"
+            "content": "`0xdeadbeefdead0c8`"
           }
         ],
         "answer": "**答案：D**"
@@ -322,19 +322,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0xdeadbeefdead0d4"
+            "content": "`0xdeadbeefdead0d4`"
           },
           {
             "id": "B",
-            "content": "0xdeadbeefdead0d8"
+            "content": "`0xdeadbeefdead0d8`"
           },
           {
             "id": "C",
-            "content": "0xdeadbeefdead0cc"
+            "content": "`0xdeadbeefdead0cc`"
           },
           {
             "id": "D",
-            "content": "0xdeadbeefdead0c8"
+            "content": "`0xdeadbeefdead0c8`"
           }
         ],
         "correctChoiceIds": [
@@ -343,7 +343,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "11. %rsp is 0xdeadbeefdeadd0d0. What is the value in %rsp after the following instruction executes?\n\n`pushq %rbx`",
+        "prompt": "11. `%rsp` is `0xdeadbeefdeadd0d0`. What is the value in `%rsp` after the following instruction executes?\n\n```asm\npushq %rbx\n```",
         "answer": "**答案：D**"
       },
       "presentation": {
@@ -361,7 +361,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 12",
       "summary": "C 语句 a[n] 对应的比例变址寻址汇编",
-      "content": "12. Consider an int *a and an int n. If the value of %ecx is a and the value of %edx is n, which of the\n    following assembly snippets best corresponds to the C statement return a[n]?\n   a)\n```asm\nret (%ecx,%edx,4)\n```\n   b)\n```asm\nleal (%ecx,%edx,4),%eax\nret\n```\n   c)\n```asm\nmov (%ecx,%edx,4),%eax\nret\n```\n   d)\n```asm\nmov (%ecx,%edx,1),%eax\nret\n```\n**答案：C**",
+      "content": "12. Consider an `int *a` and an `int n`. If the value of `%ecx` is `a` and the value of `%edx` is `n`, which of the following assembly snippets best corresponds to the C statement `return a[n]`?\n   a)\n```asm\nret (%ecx,%edx,4)\n```\n   b)\n```asm\nleal (%ecx,%edx,4),%eax\nret\n```\n   c)\n```asm\nmov (%ecx,%edx,4),%eax\nret\n```\n   d)\n```asm\nmov (%ecx,%edx,1),%eax\nret\n```\n**答案：C**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -381,7 +381,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "12. Consider an int *a and an int n. If the value of %ecx is a and the value of %edx is n, which of the\n    following assembly snippets best corresponds to the C statement return a[n]?",
+        "stem": "12. Consider an `int *a` and an `int n`. If the value of `%ecx` is `a` and the value of `%edx` is `n`, which of the following assembly snippets best corresponds to the C statement `return a[n]`?",
         "choices": [
           {
             "key": "A",
@@ -429,7 +429,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "12. Consider an int *a and an int n. If the value of %ecx is a and the value of %edx is n, which of the\n    following assembly snippets best corresponds to the C statement return a[n]?",
+        "prompt": "12. Consider an `int *a` and an `int n`. If the value of `%ecx` is `a` and the value of `%edx` is `n`, which of the following assembly snippets best corresponds to the C statement `return a[n]`?",
         "answer": "**答案：C**"
       },
       "presentation": {
@@ -581,7 +581,7 @@
       "exam": "2012期中",
       "questionNo": "Problem C 2 a)",
       "summary": "lea (%rax,%r8,1),%ecx 对应的 C 表达式",
-      "content": "2. Below is some assembly code to a famous algorithm. Please briefly read the code then\n   answer the questions on the following page. **12pts**\n\n```asm\n0000000000400498 <mystery>:\n 400498:  41 b8 00 00 00 00   mov    $0x0,%r8d\n 40049e:  eb 22               jmp    4004c2 <mystery+0x2a>\n 4004a0:  89 c8               mov    %ecx,%eax\n 4004a2:  c1 e8 1f            shr    $0x1f,%eax\n 4004a5:  01 c8               add    %ecx,%eax\n 4004a7:  d1 f8               sar    %eax            ; arith shift right 1 bit\n 4004a9:  42 8d 0c 80         lea    (%rax,%r8,1),%ecx\n 4004ad:  48 63 c1            movslq %ecx,%rax\n 4004b0:  8b 04 87            mov    (%rdi,%rax,4),%eax\n 4004b3:  39 d0               cmp    %edx,%eax\n 4004b5:  7d 05               jge    4004bc <mystery+0x24>\n 4004b7:  41 89 c8            mov    %ecx,%r8d\n 4004ba:  eb 06               jmp    4004c2 <mystery+0x2a>\n 4004bc:  39 d0               cmp    %edx,%eax\n 4004be:  7e 10               jle    4004d0 <mystery+0x38>\n 4004c0:  89 ce               mov    %ecx,%esi\n 4004c2:  89 f1               mov    %esi,%ecx\n 4004c4:  44 29 c1            sub    %r8d,%ecx\n 4004c7:  85 c9               test   %ecx,%ecx\n 4004c9:  7f d5               jg     4004a0 <mystery+0x8>\n 4004cb:  b9 ff ff ff ff      mov    $0xffffffff,%ecx\n 4004d0:  89 c8               mov    %ecx,%eax\n 4004d2:  c3                  retq\n```\n\n   a) Please write a single line of C code to represent the instruction lea (%rax,%r8,1),%ecx (Use C\n      variables named rax,r8, and ecx, you can ignore types).\n答案：`ecx = rax + r8`",
+      "content": "2. Below is some assembly code to a famous algorithm. Please briefly read the code then\n   answer the questions on the following page. **12pts**\n\n```asm\n0000000000400498 <mystery>:\n 400498:  41 b8 00 00 00 00   mov    $0x0,%r8d\n 40049e:  eb 22               jmp    4004c2 <mystery+0x2a>\n 4004a0:  89 c8               mov    %ecx,%eax\n 4004a2:  c1 e8 1f            shr    $0x1f,%eax\n 4004a5:  01 c8               add    %ecx,%eax\n 4004a7:  d1 f8               sar    %eax            ; arith shift right 1 bit\n 4004a9:  42 8d 0c 80         lea    (%rax,%r8,1),%ecx\n 4004ad:  48 63 c1            movslq %ecx,%rax\n 4004b0:  8b 04 87            mov    (%rdi,%rax,4),%eax\n 4004b3:  39 d0               cmp    %edx,%eax\n 4004b5:  7d 05               jge    4004bc <mystery+0x24>\n 4004b7:  41 89 c8            mov    %ecx,%r8d\n 4004ba:  eb 06               jmp    4004c2 <mystery+0x2a>\n 4004bc:  39 d0               cmp    %edx,%eax\n 4004be:  7e 10               jle    4004d0 <mystery+0x38>\n 4004c0:  89 ce               mov    %ecx,%esi\n 4004c2:  89 f1               mov    %esi,%ecx\n 4004c4:  44 29 c1            sub    %r8d,%ecx\n 4004c7:  85 c9               test   %ecx,%ecx\n 4004c9:  7f d5               jg     4004a0 <mystery+0x8>\n 4004cb:  b9 ff ff ff ff      mov    $0xffffffff,%ecx\n 4004d0:  89 c8               mov    %ecx,%eax\n 4004d2:  c3                  retq\n```\n\n   a) Please write a single line of C code to represent the instruction `lea (%rax,%r8,1),%ecx` (Use C variables named `rax`, `r8`, and `ecx`, you can ignore types).\n答案：`ecx = rax + r8`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -601,7 +601,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "2. Below is some assembly code to a famous algorithm. Please briefly read the code then\n   answer the questions on the following page. **12pts**\n\n```asm\n0000000000400498 <mystery>:\n 400498:  41 b8 00 00 00 00   mov    $0x0,%r8d\n 40049e:  eb 22               jmp    4004c2 <mystery+0x2a>\n 4004a0:  89 c8               mov    %ecx,%eax\n 4004a2:  c1 e8 1f            shr    $0x1f,%eax\n 4004a5:  01 c8               add    %ecx,%eax\n 4004a7:  d1 f8               sar    %eax            ; arith shift right 1 bit\n 4004a9:  42 8d 0c 80         lea    (%rax,%r8,1),%ecx\n 4004ad:  48 63 c1            movslq %ecx,%rax\n 4004b0:  8b 04 87            mov    (%rdi,%rax,4),%eax\n 4004b3:  39 d0               cmp    %edx,%eax\n 4004b5:  7d 05               jge    4004bc <mystery+0x24>\n 4004b7:  41 89 c8            mov    %ecx,%r8d\n 4004ba:  eb 06               jmp    4004c2 <mystery+0x2a>\n 4004bc:  39 d0               cmp    %edx,%eax\n 4004be:  7e 10               jle    4004d0 <mystery+0x38>\n 4004c0:  89 ce               mov    %ecx,%esi\n 4004c2:  89 f1               mov    %esi,%ecx\n 4004c4:  44 29 c1            sub    %r8d,%ecx\n 4004c7:  85 c9               test   %ecx,%ecx\n 4004c9:  7f d5               jg     4004a0 <mystery+0x8>\n 4004cb:  b9 ff ff ff ff      mov    $0xffffffff,%ecx\n 4004d0:  89 c8               mov    %ecx,%eax\n 4004d2:  c3                  retq\n```\n\n   a) Please write a single line of C code to represent the instruction lea (%rax,%r8,1),%ecx (Use C\n      variables named rax,r8, and ecx, you can ignore types).",
+        "stem": "2. Below is some assembly code to a famous algorithm. Please briefly read the code then\n   answer the questions on the following page. **12pts**\n\n```asm\n0000000000400498 <mystery>:\n 400498:  41 b8 00 00 00 00   mov    $0x0,%r8d\n 40049e:  eb 22               jmp    4004c2 <mystery+0x2a>\n 4004a0:  89 c8               mov    %ecx,%eax\n 4004a2:  c1 e8 1f            shr    $0x1f,%eax\n 4004a5:  01 c8               add    %ecx,%eax\n 4004a7:  d1 f8               sar    %eax            ; arith shift right 1 bit\n 4004a9:  42 8d 0c 80         lea    (%rax,%r8,1),%ecx\n 4004ad:  48 63 c1            movslq %ecx,%rax\n 4004b0:  8b 04 87            mov    (%rdi,%rax,4),%eax\n 4004b3:  39 d0               cmp    %edx,%eax\n 4004b5:  7d 05               jge    4004bc <mystery+0x24>\n 4004b7:  41 89 c8            mov    %ecx,%r8d\n 4004ba:  eb 06               jmp    4004c2 <mystery+0x2a>\n 4004bc:  39 d0               cmp    %edx,%eax\n 4004be:  7e 10               jle    4004d0 <mystery+0x38>\n 4004c0:  89 ce               mov    %ecx,%esi\n 4004c2:  89 f1               mov    %esi,%ecx\n 4004c4:  44 29 c1            sub    %r8d,%ecx\n 4004c7:  85 c9               test   %ecx,%ecx\n 4004c9:  7f d5               jg     4004a0 <mystery+0x8>\n 4004cb:  b9 ff ff ff ff      mov    $0xffffffff,%ecx\n 4004d0:  89 c8               mov    %ecx,%eax\n 4004d2:  c3                  retq\n```\n\n   a) Please write a single line of C code to represent the instruction `lea (%rax,%r8,1),%ecx` (Use C variables named `rax`, `r8`, and `ecx`, you can ignore types).",
         "choices": [],
         "answer": "答案：`ecx = rax + r8`"
       },
@@ -616,7 +616,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. Below is some assembly code to a famous algorithm. Please briefly read the code then\n   answer the questions on the following page. **12pts**\n\n```asm\n0000000000400498 <mystery>:\n 400498:  41 b8 00 00 00 00   mov    $0x0,%r8d\n 40049e:  eb 22               jmp    4004c2 <mystery+0x2a>\n 4004a0:  89 c8               mov    %ecx,%eax\n 4004a2:  c1 e8 1f            shr    $0x1f,%eax\n 4004a5:  01 c8               add    %ecx,%eax\n 4004a7:  d1 f8               sar    %eax            ; arith shift right 1 bit\n 4004a9:  42 8d 0c 80         lea    (%rax,%r8,1),%ecx\n 4004ad:  48 63 c1            movslq %ecx,%rax\n 4004b0:  8b 04 87            mov    (%rdi,%rax,4),%eax\n 4004b3:  39 d0               cmp    %edx,%eax\n 4004b5:  7d 05               jge    4004bc <mystery+0x24>\n 4004b7:  41 89 c8            mov    %ecx,%r8d\n 4004ba:  eb 06               jmp    4004c2 <mystery+0x2a>\n 4004bc:  39 d0               cmp    %edx,%eax\n 4004be:  7e 10               jle    4004d0 <mystery+0x38>\n 4004c0:  89 ce               mov    %ecx,%esi\n 4004c2:  89 f1               mov    %esi,%ecx\n 4004c4:  44 29 c1            sub    %r8d,%ecx\n 4004c7:  85 c9               test   %ecx,%ecx\n 4004c9:  7f d5               jg     4004a0 <mystery+0x8>\n 4004cb:  b9 ff ff ff ff      mov    $0xffffffff,%ecx\n 4004d0:  89 c8               mov    %ecx,%eax\n 4004d2:  c3                  retq\n```\n\n   a) Please write a single line of C code to represent the instruction lea (%rax,%r8,1),%ecx (Use C\n      variables named rax,r8, and ecx, you can ignore types).",
+        "prompt": "2. Below is some assembly code to a famous algorithm. Please briefly read the code then\n   answer the questions on the following page. **12pts**\n\n```asm\n0000000000400498 <mystery>:\n 400498:  41 b8 00 00 00 00   mov    $0x0,%r8d\n 40049e:  eb 22               jmp    4004c2 <mystery+0x2a>\n 4004a0:  89 c8               mov    %ecx,%eax\n 4004a2:  c1 e8 1f            shr    $0x1f,%eax\n 4004a5:  01 c8               add    %ecx,%eax\n 4004a7:  d1 f8               sar    %eax            ; arith shift right 1 bit\n 4004a9:  42 8d 0c 80         lea    (%rax,%r8,1),%ecx\n 4004ad:  48 63 c1            movslq %ecx,%rax\n 4004b0:  8b 04 87            mov    (%rdi,%rax,4),%eax\n 4004b3:  39 d0               cmp    %edx,%eax\n 4004b5:  7d 05               jge    4004bc <mystery+0x24>\n 4004b7:  41 89 c8            mov    %ecx,%r8d\n 4004ba:  eb 06               jmp    4004c2 <mystery+0x2a>\n 4004bc:  39 d0               cmp    %edx,%eax\n 4004be:  7e 10               jle    4004d0 <mystery+0x38>\n 4004c0:  89 ce               mov    %ecx,%esi\n 4004c2:  89 f1               mov    %esi,%ecx\n 4004c4:  44 29 c1            sub    %r8d,%ecx\n 4004c7:  85 c9               test   %ecx,%ecx\n 4004c9:  7f d5               jg     4004a0 <mystery+0x8>\n 4004cb:  b9 ff ff ff ff      mov    $0xffffffff,%ecx\n 4004d0:  89 c8               mov    %ecx,%eax\n 4004d2:  c3                  retq\n```\n\n   a) Please write a single line of C code to represent the instruction `lea (%rax,%r8,1),%ecx` (Use C variables named `rax`, `r8`, and `ecx`, you can ignore types).",
         "answer": "答案：`ecx = rax + r8`"
       },
       "group": {
@@ -640,7 +640,7 @@
       "exam": "2012期中",
       "questionNo": "Problem C 2 b)",
       "summary": "mov (%rdi,%rax,4),%eax 对应的 C 表达式",
-      "content": "   b) Please write a single line of C code to represent the instruction mov (%rdi,%rax,4),%eax (Use\n      C variables named rdi and rax, you can ignore types).\n答案：`eax = *(rdi + rax)`（rdi is int *）；`eax = *(rdi + 4 * rax)`（rdi is char *）",
+      "content": "   b) Please write a single line of C code to represent the instruction `mov (%rdi,%rax,4),%eax` (Use C variables named `rdi` and `rax`, you can ignore types).\n答案：`eax = *(rdi + rax)`（`rdi` is `int *`）；`eax = *(rdi + 4 * rax)`（`rdi` is `char *`）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -660,9 +660,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "   b) Please write a single line of C code to represent the instruction mov (%rdi,%rax,4),%eax (Use\n      C variables named rdi and rax, you can ignore types).",
+        "stem": "   b) Please write a single line of C code to represent the instruction `mov (%rdi,%rax,4),%eax` (Use C variables named `rdi` and `rax`, you can ignore types).",
         "choices": [],
-        "answer": "答案：`eax = *(rdi + rax)`（rdi is int *）；`eax = *(rdi + 4 * rax)`（rdi is char *）"
+        "answer": "答案：`eax = *(rdi + rax)`（`rdi` is `int *`）；`eax = *(rdi + 4 * rax)`（`rdi` is `char *`）"
       },
       "partInteraction": {
         "kind": "short-answer",
@@ -675,8 +675,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "   b) Please write a single line of C code to represent the instruction mov (%rdi,%rax,4),%eax (Use\n      C variables named rdi and rax, you can ignore types).",
-        "answer": "答案：`eax = *(rdi + rax)`（rdi is int *）；`eax = *(rdi + 4 * rax)`（rdi is char *）"
+        "prompt": "   b) Please write a single line of C code to represent the instruction `mov (%rdi,%rax,4),%eax` (Use C variables named `rdi` and `rax`, you can ignore types).",
+        "answer": "答案：`eax = *(rdi + rax)`（`rdi` is `int *`）；`eax = *(rdi + 4 * rax)`（`rdi` is `char *`）"
       },
       "group": {
         "id": "p-ea869cda0eb89689:2012-mid-problem-c2",
@@ -699,7 +699,7 @@
       "exam": "2012期中",
       "questionNo": "Problem C 2 c)",
       "summary": "本题代码中为何没有 leave 指令",
-      "content": "   c) Commonly found in assembly is the leave instruction; why is that instruction not in this code?\n答案：no stack to return from, no push %ebp",
+      "content": "   c) Commonly found in assembly is the `leave` instruction; why is that instruction not in this code?\n答案：no stack to return from, no `push %ebp`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -719,9 +719,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "   c) Commonly found in assembly is the leave instruction; why is that instruction not in this code?",
+        "stem": "   c) Commonly found in assembly is the `leave` instruction; why is that instruction not in this code?",
         "choices": [],
-        "answer": "答案：no stack to return from, no push %ebp"
+        "answer": "答案：no stack to return from, no `push %ebp`"
       },
       "partInteraction": {
         "kind": "short-answer",
@@ -734,8 +734,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "   c) Commonly found in assembly is the leave instruction; why is that instruction not in this code?",
-        "answer": "答案：no stack to return from, no push %ebp"
+        "prompt": "   c) Commonly found in assembly is the `leave` instruction; why is that instruction not in this code?",
+        "answer": "答案：no stack to return from, no `push %ebp`"
       },
       "group": {
         "id": "p-ea869cda0eb89689:2012-mid-problem-c2",
@@ -817,7 +817,7 @@
       "exam": "2012期中",
       "questionNo": "Problem D B",
       "summary": "ret 前 %esp 与 %ebp 的取值",
-      "content": "**B.** What are the values of %esp and %ebp immediately before the execution of the ret\ninstruction for gcd(15, 3)?\n答案：%esp = 0xffff0fcc；%ebp = 0xffff0fe0（原卷红色标注）",
+      "content": "**B.** What are the values of `%esp` and `%ebp` immediately before the execution of the `ret` instruction for `gcd(15, 3)`?\n答案：`%esp = 0xffff0fcc`；`%ebp = 0xffff0fe0`（原卷红色标注）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -837,9 +837,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "**B.** What are the values of %esp and %ebp immediately before the execution of the ret\ninstruction for gcd(15, 3)?",
+        "stem": "**B.** What are the values of `%esp` and `%ebp` immediately before the execution of the `ret` instruction for `gcd(15, 3)`?",
         "choices": [],
-        "answer": "答案：%esp = 0xffff0fcc；%ebp = 0xffff0fe0（原卷红色标注）"
+        "answer": "答案：`%esp = 0xffff0fcc`；`%ebp = 0xffff0fe0`（原卷红色标注）"
       },
       "partInteraction": {
         "kind": "short-answer",
@@ -852,8 +852,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "**B.** What are the values of %esp and %ebp immediately before the execution of the ret\ninstruction for gcd(15, 3)?",
-        "answer": "答案：%esp = 0xffff0fcc；%ebp = 0xffff0fe0（原卷红色标注）"
+        "prompt": "**B.** What are the values of `%esp` and `%ebp` immediately before the execution of the `ret` instruction for `gcd(15, 3)`?",
+        "answer": "答案：`%esp = 0xffff0fcc`；`%ebp = 0xffff0fe0`（原卷红色标注）"
       },
       "group": {
         "id": "p-ea869cda0eb89689:2012-mid-problem-d",
@@ -2734,7 +2734,7 @@
       "exam": "2015期中",
       "questionNo": "选择题 6",
       "summary": "x86 寻址模式正确性",
-      "content": "6.  下列寻址模式中，正确的是：\nA. `(%eax, , 4)`\nB. `(%eax, %esp, 3)`\nC. 123\nD. `$1``(%ebx, %ebp, 1)`\n答案：C\nA 中不能省略 Ei，B 中比例因子错误，D 中偏移地址表示错误。",
+      "content": "6.  下列寻址模式中，正确的是：\nA. `(%eax, , 4)`\nB. `(%eax, %esp, 3)`\nC. `123`\nD. `$1(%ebx, %ebp, 1)`\n答案：C\nA 中不能省略 Ei，B 中比例因子错误，D 中偏移地址表示错误。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2768,11 +2768,11 @@
           },
           {
             "key": "C",
-            "content": "123"
+            "content": "`123`"
           },
           {
             "key": "D",
-            "content": "`$1``(%ebx, %ebp, 1)`"
+            "content": "`$1(%ebx, %ebp, 1)`"
           }
         ],
         "answer": "答案：C\nA 中不能省略 Ei，B 中比例因子错误，D 中偏移地址表示错误。"
@@ -2791,11 +2791,11 @@
           },
           {
             "id": "C",
-            "content": "123"
+            "content": "`123`"
           },
           {
             "id": "D",
-            "content": "`$1``(%ebx, %ebp, 1)`"
+            "content": "`$1(%ebx, %ebp, 1)`"
           }
         ],
         "correctChoiceIds": [
@@ -4193,7 +4193,7 @@
       "exam": "2017期中",
       "questionNo": "第一题 6",
       "summary": "函数指针的过程调用指令",
-      "content": "6.  有如下代码段：\n```\nint func(int x, int y);\nint (*p) (int a, int b);\np = func;\np(0,0);\n```\n对应的下列x86-64过程调用正确的是：\nA. `call *%rax`\nB. `call (%rax)`\nC. `call *(%rax)`\nD. call func\n答案：A（D 也对，视优化级别而定）\n解析：用O0编译可以得到A，用Og编译可以得到D。原题面在此处有歧义，\n判定时按 A 计分；若答 D 也应算对。",
+      "content": "6.  有如下代码段：\n```c\nint func(int x, int y);\nint (*p) (int a, int b);\np = func;\np(0,0);\n```\n对应的下列x86-64过程调用正确的是：\nA. `call *%rax`\nB. `call (%rax)`\nC. `call *(%rax)`\nD. `call func`\n答案：A（D 也对，视优化级别而定）\n解析：用O0编译可以得到A，用Og编译可以得到D。原题面在此处有歧义，\n判定时按 A 计分；若答 D 也应算对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4213,7 +4213,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "6.  有如下代码段：\n```\nint func(int x, int y);\nint (*p) (int a, int b);\np = func;\np(0,0);\n```\n对应的下列x86-64过程调用正确的是：",
+        "stem": "6.  有如下代码段：\n```c\nint func(int x, int y);\nint (*p) (int a, int b);\np = func;\np(0,0);\n```\n对应的下列x86-64过程调用正确的是：",
         "choices": [
           {
             "key": "A",
@@ -4229,7 +4229,7 @@
           },
           {
             "key": "D",
-            "content": "call func"
+            "content": "`call func`"
           }
         ],
         "answer": "答案：A（D 也对，视优化级别而定）\n解析：用O0编译可以得到A，用Og编译可以得到D。原题面在此处有歧义，\n判定时按 A 计分；若答 D 也应算对。"
@@ -4252,7 +4252,7 @@
           },
           {
             "id": "D",
-            "content": "call func"
+            "content": "`call func`"
           }
         ],
         "correctChoiceIds": [
@@ -4261,7 +4261,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "6.  有如下代码段：\n```\nint func(int x, int y);\nint (*p) (int a, int b);\np = func;\np(0,0);\n```\n对应的下列x86-64过程调用正确的是：",
+        "prompt": "6.  有如下代码段：\n```c\nint func(int x, int y);\nint (*p) (int a, int b);\np = func;\np(0,0);\n```\n对应的下列x86-64过程调用正确的是：",
         "answer": "答案：A（D 也对，视优化级别而定）\n解析：用O0编译可以得到A，用Og编译可以得到D。原题面在此处有歧义，\n判定时按 A 计分；若答 D 也应算对。"
       },
       "presentation": {
@@ -4657,7 +4657,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 4",
       "summary": "movl/cltq/movabsq/movswq 语义",
-      "content": "4.  在x86-64下，以下哪个选项的说法是错误的？\nA. `movl`指令以寄存器作为目的时，会将该寄存器的高位`4`字节设置为`0`\nB. cltq指令的作用是将`%eax`符号扩展到`%rax`\nC. movabsq指令只能以寄存器作为目的\nD. movswq指令的作用是将零扩展的字传送到四字节目的\n答案：D\nmovswq应该是符号扩展",
+      "content": "4.  在x86-64下，以下哪个选项的说法是错误的？\nA. `movl`指令以寄存器作为目的时，会将该寄存器的高位`4`字节设置为`0`\nB. `cltq`指令的作用是将`%eax`符号扩展到`%rax`\nC. `movabsq`指令只能以寄存器作为目的\nD. `movswq`指令的作用是将零扩展的字传送到四字节目的\n答案：D\n`movswq`应该是符号扩展。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4685,18 +4685,18 @@
           },
           {
             "key": "B",
-            "content": "cltq指令的作用是将`%eax`符号扩展到`%rax`"
+            "content": "`cltq`指令的作用是将`%eax`符号扩展到`%rax`"
           },
           {
             "key": "C",
-            "content": "movabsq指令只能以寄存器作为目的"
+            "content": "`movabsq`指令只能以寄存器作为目的"
           },
           {
             "key": "D",
-            "content": "movswq指令的作用是将零扩展的字传送到四字节目的"
+            "content": "`movswq`指令的作用是将零扩展的字传送到四字节目的"
           }
         ],
-        "answer": "答案：D\nmovswq应该是符号扩展"
+        "answer": "答案：D\n`movswq`应该是符号扩展。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -4708,15 +4708,15 @@
           },
           {
             "id": "B",
-            "content": "cltq指令的作用是将`%eax`符号扩展到`%rax`"
+            "content": "`cltq`指令的作用是将`%eax`符号扩展到`%rax`"
           },
           {
             "id": "C",
-            "content": "movabsq指令只能以寄存器作为目的"
+            "content": "`movabsq`指令只能以寄存器作为目的"
           },
           {
             "id": "D",
-            "content": "movswq指令的作用是将零扩展的字传送到四字节目的"
+            "content": "`movswq`指令的作用是将零扩展的字传送到四字节目的"
           }
         ],
         "correctChoiceIds": [
@@ -4726,7 +4726,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "4.  在x86-64下，以下哪个选项的说法是错误的？",
-        "answer": "答案：D\nmovswq应该是符号扩展"
+        "answer": "答案：D\n`movswq`应该是符号扩展。"
       },
       "presentation": {
         "status": "ready",
@@ -9350,7 +9350,7 @@
       "exam": "2015期末",
       "questionNo": "第一题 1",
       "summary": "哪条指令不改变 esp",
-      "content": "1.  下面哪条指令不会引起`esp`的变化？\nA. `movl   %esp, %ebp`\nB. `pushl  %ebp`\nC. call   printf\nD. `subl   $20, %esp`\n答案：A，考察汇编指令和栈的理解。",
+      "content": "1.  下面哪条指令不会引起`esp`的变化？\nA. `movl   %esp, %ebp`\nB. `pushl  %ebp`\nC. `call   printf`\nD. `subl   $20, %esp`\n答案：A，考察汇编指令和栈的理解。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9384,7 +9384,7 @@
           },
           {
             "key": "C",
-            "content": "call   printf"
+            "content": "`call   printf`"
           },
           {
             "key": "D",
@@ -9407,7 +9407,7 @@
           },
           {
             "id": "C",
-            "content": "call   printf"
+            "content": "`call   printf`"
           },
           {
             "id": "D",
@@ -11090,7 +11090,7 @@
       "exam": "2025期末",
       "questionNo": "一 7",
       "summary": "8 个 long 参数的寄存器/栈传递与 ABI",
-      "content": "7. 调用一个有 8 个 `long` 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？\nA. 在 `f` 的入口处（尚未动 `%rsp`），`a7` 位于 `8(%rsp)`\nB. 若把两条 `push` 顺序改为先 push a7 再 push a8，则 `f` 看到的 a7/a8 会互换\nC. 应当由caller回收栈上的传参空间（用 `addq` `$16``,%rsp`）\nD. a7,a8也可以放在`%r10,%r11`中传递\nE. 因为用了栈传参，所以`f`中必须设置和管理`%rbp`帧指针\n答案：ABC\n解析：超过 6 个整数参数后，其余从栈上传递；在被调函数入口，`0(%rsp)` 是返回地址，因此第 7 个参数在 `8(%rsp)`，第 8 个在 `16(%rsp)`。caller 负责把自己 `push` 的参数空间收回。`%r10/%r11` 不是传参寄存器；是否用 `%rbp` 是编译器选择，不是 ABI 强制。",
+      "content": "7. 调用一个有 8 个 `long` 参数的函数 `f(a1,...,a8)`，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？\nA. 在 `f` 的入口处（尚未动 `%rsp`），`a7` 位于 `8(%rsp)`\nB. 若把两条 `push` 顺序改为先 `push a7` 再 `push a8`，则 `f` 看到的 `a7/a8` 会互换\nC. 应当由 caller 回收栈上的传参空间（用 `addq $16, %rsp`）\nD. `a7,a8` 也可以放在 `%r10,%r11` 中传递\nE. 因为用了栈传参，所以`f`中必须设置和管理`%rbp`帧指针\n答案：ABC\n解析：超过 6 个整数参数后，其余从栈上传递；在被调函数入口，`0(%rsp)` 是返回地址，因此第 7 个参数在 `8(%rsp)`，第 8 个在 `16(%rsp)`。caller 负责把自己 `push` 的参数空间收回。`%r10/%r11` 不是传参寄存器；是否用 `%rbp` 是编译器选择，不是 ABI 强制。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -11110,7 +11110,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "7. 调用一个有 8 个 `long` 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
+        "stem": "7. 调用一个有 8 个 `long` 参数的函数 `f(a1,...,a8)`，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
@@ -11118,15 +11118,15 @@
           },
           {
             "key": "B",
-            "content": "若把两条 `push` 顺序改为先 push a7 再 push a8，则 `f` 看到的 a7/a8 会互换"
+            "content": "若把两条 `push` 顺序改为先 `push a7` 再 `push a8`，则 `f` 看到的 `a7/a8` 会互换"
           },
           {
             "key": "C",
-            "content": "应当由caller回收栈上的传参空间（用 `addq` `$16``,%rsp`）"
+            "content": "应当由 caller 回收栈上的传参空间（用 `addq $16, %rsp`）"
           },
           {
             "key": "D",
-            "content": "a7,a8也可以放在`%r10,%r11`中传递"
+            "content": "`a7,a8` 也可以放在 `%r10,%r11` 中传递"
           },
           {
             "key": "E",
@@ -11145,15 +11145,15 @@
           },
           {
             "id": "B",
-            "content": "若把两条 `push` 顺序改为先 push a7 再 push a8，则 `f` 看到的 a7/a8 会互换"
+            "content": "若把两条 `push` 顺序改为先 `push a7` 再 `push a8`，则 `f` 看到的 `a7/a8` 会互换"
           },
           {
             "id": "C",
-            "content": "应当由caller回收栈上的传参空间（用 `addq` `$16``,%rsp`）"
+            "content": "应当由 caller 回收栈上的传参空间（用 `addq $16, %rsp`）"
           },
           {
             "id": "D",
-            "content": "a7,a8也可以放在`%r10,%r11`中传递"
+            "content": "`a7,a8` 也可以放在 `%r10,%r11` 中传递"
           },
           {
             "id": "E",
@@ -11168,7 +11168,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "7. 调用一个有 8 个 `long` 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
+        "prompt": "7. 调用一个有 8 个 `long` 参数的函数 `f(a1,...,a8)`，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
         "answer": "答案：ABC\n解析：超过 6 个整数参数后，其余从栈上传递；在被调函数入口，`0(%rsp)` 是返回地址，因此第 7 个参数在 `8(%rsp)`，第 8 个在 `16(%rsp)`。caller 负责把自己 `push` 的参数空间收回。`%r10/%r11` 不是传参寄存器；是否用 `%rbp` 是编译器选择，不是 ABI 强制。"
       },
       "presentation": {

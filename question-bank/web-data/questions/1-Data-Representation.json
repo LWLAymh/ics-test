@@ -17,7 +17,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 1",
       "summary": "整数除法截断与算术右移 -31/8 vs -31>>3",
-      "content": "1. Let int x = -31/8 and int y = -31 >> 3. What are the values of x and y? **(m-f10-a 1-5)**\n   a) x = -3, y = -3\n   b) x = -4, y = -4\n   c) x = -3, y = -4\n   d) x = -4, y = -3\n**答案：C**",
+      "content": "1. Let `int x = -31/8` and `int y = -31 >> 3`. What are the values of `x` and `y`?\n   a) `x = -3, y = -3`\n   b) `x = -4, y = -4`\n   c) `x = -3, y = -4`\n   d) `x = -4, y = -3`\n**答案：C**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -37,23 +37,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "1. Let int x = -31/8 and int y = -31 >> 3. What are the values of x and y? **(m-f10-a 1-5)**",
+        "stem": "1. Let `int x = -31/8` and `int y = -31 >> 3`. What are the values of `x` and `y`?",
         "choices": [
           {
             "key": "A",
-            "content": "x = -3, y = -3"
+            "content": "`x = -3, y = -3`"
           },
           {
             "key": "B",
-            "content": "x = -4, y = -4"
+            "content": "`x = -4, y = -4`"
           },
           {
             "key": "C",
-            "content": "x = -3, y = -4"
+            "content": "`x = -3, y = -4`"
           },
           {
             "key": "D",
-            "content": "x = -4, y = -3"
+            "content": "`x = -4, y = -3`"
           }
         ],
         "answer": "**答案：C**"
@@ -64,19 +64,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "x = -3, y = -3"
+            "content": "`x = -3, y = -3`"
           },
           {
             "id": "B",
-            "content": "x = -4, y = -4"
+            "content": "`x = -4, y = -4`"
           },
           {
             "id": "C",
-            "content": "x = -3, y = -4"
+            "content": "`x = -3, y = -4`"
           },
           {
             "id": "D",
-            "content": "x = -4, y = -3"
+            "content": "`x = -4, y = -3`"
           }
         ],
         "correctChoiceIds": [
@@ -85,7 +85,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1. Let int x = -31/8 and int y = -31 >> 3. What are the values of x and y? **(m-f10-a 1-5)**",
+        "prompt": "1. Let `int x = -31/8` and `int y = -31 >> 3`. What are the values of `x` and `y`?",
         "answer": "**答案：C**"
       },
       "presentation": {
@@ -103,7 +103,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 2",
       "summary": "int→float→int 转换的舍入精度丢失范围",
-      "content": "2. For which values can X not be equal to Z in the code below (circle all that apply) **(f-f09 1-B)**\n\n```c\nint X = CONSTANT;\nfloat Y = X;\nint Z = Y;\n```\n   a) For large positive values of CONSTANT (e.g.,>1,000,000,000)\n   b) For large negative values of CONSTANT (e.g.,>-100)\n   c) For small positive values of CONSTANT (e.g.,<100)\n   d) For small negative values of CONSTANT (e.g.,<-1,000,000,000)\n   e) None of the above (i.e., X==Z in all of these cases)\n答案：AD\n（原卷标注：A&D。）x 为大正数时 int→float 丢精度，x 为绝对值很大的负数时同样丢精度，故 A、D 两种情况下 X 可能不等于 Z。\n原卷选项 B 的示例写作 “large negative values (e.g., >-100)”，与“large negative”语义不符；此处保留原卷文字，不据此推断选项答案。",
+      "content": "2. For which values can `X` not be equal to `Z` in the code below (circle all that apply)?\n\n```c\nint X = CONSTANT;\nfloat Y = X;\nint Z = Y;\n```\n   a) For large positive values of CONSTANT (e.g.,>1,000,000,000)\n   b) For large negative values of CONSTANT (e.g.,>-100)\n   c) For small positive values of CONSTANT (e.g.,<100)\n   d) For small negative values of CONSTANT (e.g.,<-1,000,000,000)\n   e) None of the above (i.e., `X==Z` in all of these cases)\n答案：AD\n（原卷标注：A&D。）x 为大正数时 int→float 丢精度，x 为绝对值很大的负数时同样丢精度，故 A、D 两种情况下 X 可能不等于 Z。\n原卷选项 B 的示例写作 “large negative values (e.g., >-100)”，与“large negative”语义不符；此处保留原卷文字，不据此推断选项答案。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -123,7 +123,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "2. For which values can X not be equal to Z in the code below (circle all that apply) **(f-f09 1-B)**\n\n```c\nint X = CONSTANT;\nfloat Y = X;\nint Z = Y;\n```",
+        "stem": "2. For which values can `X` not be equal to `Z` in the code below (circle all that apply)?\n\n```c\nint X = CONSTANT;\nfloat Y = X;\nint Z = Y;\n```",
         "choices": [
           {
             "key": "A",
@@ -143,7 +143,7 @@
           },
           {
             "key": "E",
-            "content": "None of the above (i.e., X==Z in all of these cases)"
+            "content": "None of the above (i.e., `X==Z` in all of these cases)"
           }
         ],
         "answer": "答案：AD\n（原卷标注：A&D。）x 为大正数时 int→float 丢精度，x 为绝对值很大的负数时同样丢精度，故 A、D 两种情况下 X 可能不等于 Z。\n原卷选项 B 的示例写作 “large negative values (e.g., >-100)”，与“large negative”语义不符；此处保留原卷文字，不据此推断选项答案。"
@@ -170,7 +170,7 @@
           },
           {
             "id": "E",
-            "content": "None of the above (i.e., X==Z in all of these cases)"
+            "content": "None of the above (i.e., `X==Z` in all of these cases)"
           }
         ],
         "correctChoiceIds": [
@@ -180,7 +180,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. For which values can X not be equal to Z in the code below (circle all that apply) **(f-f09 1-B)**\n\n```c\nint X = CONSTANT;\nfloat Y = X;\nint Z = Y;\n```",
+        "prompt": "2. For which values can `X` not be equal to `Z` in the code below (circle all that apply)?\n\n```c\nint X = CONSTANT;\nfloat Y = X;\nint Z = Y;\n```",
         "answer": "答案：AD\n（原卷标注：A&D。）x 为大正数时 int→float 丢精度，x 为绝对值很大的负数时同样丢精度，故 A、D 两种情况下 X 可能不等于 Z。\n原卷选项 B 的示例写作 “large negative values (e.g., >-100)”，与“large negative”语义不符；此处保留原卷文字，不据此推断选项答案。"
       },
       "presentation": {
@@ -198,7 +198,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 3",
       "summary": "右移后取低字节作 char/unsigned char 与 %d/%u 输出",
-      "content": "3. Consider the following code, what is the output of the printf? **(m-f10-a 1-1)**\n\n```c\nint x = 0x15213F10 >> 4;\nchar y = (char) x;\nunsigned char z = (unsigned char) x;\nprintf(\"%d, %u\", y, z);\n```\n   a) -241, 15\n   b) -15, 241\n   c) -241, 241\n   d) -15, 15\n答案：B\n`x = 0x15213F10 >> 4 = 0x015213F1`；`y = (char)x = 0xF1 = -15`；`z = (unsigned char)x = 0xF1 = 241`。",
+      "content": "3. Consider the following code, what is the output of the `printf`?\n\n```c\nint x = 0x15213F10 >> 4;\nchar y = (char) x;\nunsigned char z = (unsigned char) x;\nprintf(\"%d, %u\", y, z);\n```\n   a) -241, 15\n   b) -15, 241\n   c) -241, 241\n   d) -15, 15\n答案：B\n`x = 0x15213F10 >> 4 = 0x015213F1`；`y = (char)x = 0xF1 = -15`；`z = (unsigned char)x = 0xF1 = 241`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -218,7 +218,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "3. Consider the following code, what is the output of the printf? **(m-f10-a 1-1)**\n\n```c\nint x = 0x15213F10 >> 4;\nchar y = (char) x;\nunsigned char z = (unsigned char) x;\nprintf(\"%d, %u\", y, z);\n```",
+        "stem": "3. Consider the following code, what is the output of the `printf`?\n\n```c\nint x = 0x15213F10 >> 4;\nchar y = (char) x;\nunsigned char z = (unsigned char) x;\nprintf(\"%d, %u\", y, z);\n```",
         "choices": [
           {
             "key": "A",
@@ -266,7 +266,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. Consider the following code, what is the output of the printf? **(m-f10-a 1-1)**\n\n```c\nint x = 0x15213F10 >> 4;\nchar y = (char) x;\nunsigned char z = (unsigned char) x;\nprintf(\"%d, %u\", y, z);\n```",
+        "prompt": "3. Consider the following code, what is the output of the `printf`?\n\n```c\nint x = 0x15213F10 >> 4;\nchar y = (char) x;\nunsigned char z = (unsigned char) x;\nprintf(\"%d, %u\", y, z);\n```",
         "answer": "答案：B\n`x = 0x15213F10 >> 4 = 0x015213F1`；`y = (char)x = 0xF1 = -15`；`z = (unsigned char)x = 0xF1 = 241`。"
       },
       "presentation": {
@@ -284,7 +284,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 4",
       "summary": "无符号加法回绕与表达式宽度提升",
-      "content": "4. After executing the following code, which of the variables are equal to 0? **(m-f11 1-3)**\n**答案：CD or CDE**\n   a) unsigned int a = 0xffffffff;\n   b) unsigned int b = 1;\n   c) unsigned int c = a + b;\n   d) unsigned long d = a + b;\n   e) unsigned long e = (unsigned long)a + b",
+      "content": "4. After executing the following code, which of the variables are equal to 0?\n**答案：CD or CDE**\n   a) `unsigned int a = 0xffffffff;`\n   b) `unsigned int b = 1;`\n   c) `unsigned int c = a + b;`\n   d) `unsigned long d = a + b;`\n   e) `unsigned long e = (unsigned long)a + b`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -304,27 +304,27 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "4. After executing the following code, which of the variables are equal to 0? **(m-f11 1-3)**",
+        "stem": "4. After executing the following code, which of the variables are equal to 0?",
         "choices": [
           {
             "key": "A",
-            "content": "unsigned int a = 0xffffffff;"
+            "content": "`unsigned int a = 0xffffffff;`"
           },
           {
             "key": "B",
-            "content": "unsigned int b = 1;"
+            "content": "`unsigned int b = 1;`"
           },
           {
             "key": "C",
-            "content": "unsigned int c = a + b;"
+            "content": "`unsigned int c = a + b;`"
           },
           {
             "key": "D",
-            "content": "unsigned long d = a + b;"
+            "content": "`unsigned long d = a + b;`"
           },
           {
             "key": "E",
-            "content": "unsigned long e = (unsigned long)a + b"
+            "content": "`unsigned long e = (unsigned long)a + b`"
           }
         ],
         "answer": "**答案：CD or CDE**"
@@ -335,23 +335,23 @@
         "choices": [
           {
             "id": "A",
-            "content": "unsigned int a = 0xffffffff;"
+            "content": "`unsigned int a = 0xffffffff;`"
           },
           {
             "id": "B",
-            "content": "unsigned int b = 1;"
+            "content": "`unsigned int b = 1;`"
           },
           {
             "id": "C",
-            "content": "unsigned int c = a + b;"
+            "content": "`unsigned int c = a + b;`"
           },
           {
             "id": "D",
-            "content": "unsigned long d = a + b;"
+            "content": "`unsigned long d = a + b;`"
           },
           {
             "id": "E",
-            "content": "unsigned long e = (unsigned long)a + b"
+            "content": "`unsigned long e = (unsigned long)a + b`"
           }
         ],
         "correctChoiceIds": [
@@ -361,7 +361,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4. After executing the following code, which of the variables are equal to 0? **(m-f11 1-3)**",
+        "prompt": "4. After executing the following code, which of the variables are equal to 0?",
         "answer": "**答案：CD or CDE**"
       },
       "presentation": {
@@ -379,7 +379,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 7",
       "summary": "非规格化浮点数表示极小值",
-      "content": "7. Denormalized floating point numbers are **(m-f10-a 1-18)**\n   a) Very close to zero (small magnitude)\n   b) Very far from zero (large magnitude)\n   c) Un-representable on a number line\n   d) Zero.\n**答案：A**",
+      "content": "7. Denormalized floating point numbers are:\n   a) Very close to zero (small magnitude)\n   b) Very far from zero (large magnitude)\n   c) Un-representable on a number line\n   d) Zero.\n**答案：A**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -399,7 +399,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "7. Denormalized floating point numbers are **(m-f10-a 1-18)**",
+        "stem": "7. Denormalized floating point numbers are:",
         "choices": [
           {
             "key": "A",
@@ -447,7 +447,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "7. Denormalized floating point numbers are **(m-f10-a 1-18)**",
+        "prompt": "7. Denormalized floating point numbers are:",
         "answer": "**答案：A**"
       },
       "presentation": {
@@ -465,7 +465,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 8",
       "summary": "32 位补码最小（最负）整数 -2^31",
-      "content": "8. What is the minimum (most negative) value of a 32-bit two’s complement integer? **(m-f11 1-1)**\n   a) −$2^{32}$\n   b) −$2^{32}$ + 1\n   c) −$2^{31}$\n   d) −$2^{31}$ + 1\n**答案：C**",
+      "content": "8. What is the minimum (most negative) value of a 32-bit two’s complement integer?\n   a) −$2^{32}$\n   b) −$2^{32}$ + 1\n   c) −$2^{31}$\n   d) −$2^{31}$ + 1\n**答案：C**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -485,7 +485,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "8. What is the minimum (most negative) value of a 32-bit two’s complement integer? **(m-f11 1-1)**",
+        "stem": "8. What is the minimum (most negative) value of a 32-bit two’s complement integer?",
         "choices": [
           {
             "key": "A",
@@ -533,7 +533,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "8. What is the minimum (most negative) value of a 32-bit two’s complement integer? **(m-f11 1-1)**",
+        "prompt": "8. What is the minimum (most negative) value of a 32-bit two’s complement integer?",
         "answer": "**答案：C**"
       },
       "presentation": {
@@ -551,7 +551,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 10",
       "summary": "8 位浮点格式中 NaN 的判据",
-      "content": "10. Which of the following 8 bit floating point numbers (1 sign, 3 exponent, 4 fraction) represent\n    NaN? **(m-s11 1-2)**\n   a) 1 000 1111\n   b) 0 111 1111\n   c) 0 100 0000\n   d) 1 111 0000\n**答案：B**",
+      "content": "10. Which of the following 8 bit floating point numbers (1 sign, 3 exponent, 4 fraction) represent NaN?\n   a) `1 000 1111`\n   b) `0 111 1111`\n   c) `0 100 0000`\n   d) `1 111 0000`\n**答案：B**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -571,23 +571,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "10. Which of the following 8 bit floating point numbers (1 sign, 3 exponent, 4 fraction) represent\n    NaN? **(m-s11 1-2)**",
+        "stem": "10. Which of the following 8 bit floating point numbers (1 sign, 3 exponent, 4 fraction) represent NaN?",
         "choices": [
           {
             "key": "A",
-            "content": "1 000 1111"
+            "content": "`1 000 1111`"
           },
           {
             "key": "B",
-            "content": "0 111 1111"
+            "content": "`0 111 1111`"
           },
           {
             "key": "C",
-            "content": "0 100 0000"
+            "content": "`0 100 0000`"
           },
           {
             "key": "D",
-            "content": "1 111 0000"
+            "content": "`1 111 0000`"
           }
         ],
         "answer": "**答案：B**"
@@ -598,19 +598,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "1 000 1111"
+            "content": "`1 000 1111`"
           },
           {
             "id": "B",
-            "content": "0 111 1111"
+            "content": "`0 111 1111`"
           },
           {
             "id": "C",
-            "content": "0 100 0000"
+            "content": "`0 100 0000`"
           },
           {
             "id": "D",
-            "content": "1 111 0000"
+            "content": "`1 111 0000`"
           }
         ],
         "correctChoiceIds": [
@@ -619,7 +619,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "10. Which of the following 8 bit floating point numbers (1 sign, 3 exponent, 4 fraction) represent\n    NaN? **(m-s11 1-2)**",
+        "prompt": "10. Which of the following 8 bit floating point numbers (1 sign, 3 exponent, 4 fraction) represent NaN?",
         "answer": "**答案：B**"
       },
       "presentation": {
@@ -637,7 +637,7 @@
       "exam": "2012期中",
       "questionNo": "Problem B 1",
       "summary": "有符号/无符号比较与算术右移下恒成立的关系符（含作答表）",
-      "content": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | `x` |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | `If (x >> 31)` < 0 then x | { } | 0 |\n| (3) | `If (x << 31` >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | `y` |\n答案：(1) `!=`　(2) `<` 和 `!=`　(3) `>` 和 `!=`　(4) `!=`\n\n原卷红色标注（每行花括号内填写的内容）：\n```\n(1) !=\n(2) <\n    !=\n(3) >\n    !=\n(4) !=\n```",
+      "content": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If `x > y` then `y` | { `<`　`!=` }（原卷已填） | `x` |\n| 示例 2 | If `x < 0` then `x+1` | { X }（原卷已填） | `0` |\n| (1) | If `x > 0` then `x+1` | { } | `0` |\n| (2) | If `(x >> 31) < 0` then `x` | { } | `0` |\n| (3) | If `(x << 31 >> 31) < 0` then `x & 1` | { } | `0` |\n| (4) | If `x > y` then `(unsigned) x` | { } | `y` |\n答案：(1) `!=`　(2) `<` 和 `!=`　(3) `>` 和 `!=`　(4) `!=`\n\n原卷红色标注（每行花括号内填写的内容）：\n```\n(1) !=\n(2) <\n    !=\n(3) >\n    !=\n(4) !=\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -657,7 +657,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | `x` |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | `If (x >> 31)` < 0 then x | { } | 0 |\n| (3) | `If (x << 31` >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | `y` |",
+        "stem": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If `x > y` then `y` | { `<`　`!=` }（原卷已填） | `x` |\n| 示例 2 | If `x < 0` then `x+1` | { X }（原卷已填） | `0` |\n| (1) | If `x > 0` then `x+1` | { } | `0` |\n| (2) | If `(x >> 31) < 0` then `x` | { } | `0` |\n| (3) | If `(x << 31 >> 31) < 0` then `x & 1` | { } | `0` |\n| (4) | If `x > y` then `(unsigned) x` | { } | `y` |",
         "choices": [],
         "answer": "答案：(1) `!=`　(2) `<` 和 `!=`　(3) `>` 和 `!=`　(4) `!=`\n\n原卷红色标注（每行花括号内填写的内容）：\n```\n(1) !=\n(2) <\n    !=\n(3) >\n    !=\n(4) !=\n```"
       },
@@ -667,7 +667,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | `x` |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | `If (x >> 31)` < 0 then x | { } | 0 |\n| (3) | `If (x << 31` >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | `y` |",
+        "prompt": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If `x > y` then `y` | { `<`　`!=` }（原卷已填） | `x` |\n| 示例 2 | If `x < 0` then `x+1` | { X }（原卷已填） | `0` |\n| (1) | If `x > 0` then `x+1` | { } | `0` |\n| (2) | If `(x >> 31) < 0` then `x` | { } | `0` |\n| (3) | If `(x << 31 >> 31) < 0` then `x & 1` | { } | `0` |\n| (4) | If `x > y` then `(unsigned) x` | { } | `y` |",
         "answer": "答案：(1) `!=`　(2) `<` 和 `!=`　(3) `>` 和 `!=`　(4) `!=`\n\n原卷红色标注（每行花括号内填写的内容）：\n```\n(1) !=\n(2) <\n    !=\n(3) >\n    !=\n(4) !=\n```"
       },
       "presentation": {
@@ -865,7 +865,7 @@
       "exam": "2012期中",
       "questionNo": "Problem B 3",
       "summary": "利用双精度规格化加速 float→int（加 2^52 取低 32 位）",
-      "content": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts) (f-f09 7)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```\n答案：1) “implied leading 1” 代表 $2^{52}$；2) 应当加 $2^{52}$；3) 取回 **Lower 32 bits（低 32 位）**；4) 按 **to the nearest even（向偶数舍入）** 取整。",
+      "content": "3. Conversion from `float` to `int` is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```\n答案：1) “implied leading 1” 代表 $2^{52}$；2) 应当加 $2^{52}$；3) 取回 **Lower 32 bits（低 32 位）**；4) 按 **to the nearest even（向偶数舍入）** 取整。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -885,7 +885,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts) (f-f09 7)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```",
+        "stem": "3. Conversion from `float` to `int` is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```",
         "choices": [],
         "answer": "答案：1) “implied leading 1” 代表 $2^{52}$；2) 应当加 $2^{52}$；3) 取回 **Lower 32 bits（低 32 位）**；4) 按 **to the nearest even（向偶数舍入）** 取整。",
         "blankAnswers": [
@@ -983,7 +983,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts) (f-f09 7)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```",
+        "prompt": "3. Conversion from `float` to `int` is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```",
         "answer": "答案：1) “implied leading 1” 代表 $2^{52}$；2) 应当加 $2^{52}$；3) 取回 **Lower 32 bits（低 32 位）**；4) 按 **to the nearest even（向偶数舍入）** 取整。"
       },
       "presentation": {

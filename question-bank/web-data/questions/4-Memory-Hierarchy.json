@@ -17,7 +17,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 15",
       "summary": "2 路组相联、16 组、64B 块由地址求组索引",
-      "content": "15. A system uses a two-way set-associative cache with 16 sets and 64-byte blocks. Which set does\n    the byte with the address 0xdeadbeef map to? **(2pts) (e2-f10)**\n   a) Set 7\n   b) Set 11\n   c) Set 13\n   d) Set 14\n**答案：B**",
+      "content": "15. A system uses a two-way set-associative cache with 16 sets and 64-byte blocks. Which set does the byte with the address `0xdeadbeef` map to? **(2pts)**\n   a) Set 7\n   b) Set 11\n   c) Set 13\n   d) Set 14\n**答案：B**",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -37,7 +37,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "15. A system uses a two-way set-associative cache with 16 sets and 64-byte blocks. Which set does\n    the byte with the address 0xdeadbeef map to? **(2pts) (e2-f10)**",
+        "stem": "15. A system uses a two-way set-associative cache with 16 sets and 64-byte blocks. Which set does the byte with the address `0xdeadbeef` map to? **(2pts)**",
         "choices": [
           {
             "key": "A",
@@ -85,7 +85,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "15. A system uses a two-way set-associative cache with 16 sets and 64-byte blocks. Which set does\n    the byte with the address 0xdeadbeef map to? **(2pts) (e2-f10)**",
+        "prompt": "15. A system uses a two-way set-associative cache with 16 sets and 64-byte blocks. Which set does the byte with the address `0xdeadbeef` map to? **(2pts)**",
         "answer": "**答案：B**"
       },
       "presentation": {
