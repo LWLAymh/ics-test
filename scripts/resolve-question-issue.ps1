@@ -17,6 +17,10 @@ $headers = @{
     apikey = $secretKey
     Authorization = 'Bearer ' + $secretKey
     'Content-Type' = 'application/json'
+    # Supabase secret keys are rejected when the request looks like it came
+    # from a browser. PowerShell's default User-Agent can trigger that guard,
+    # so identify this explicitly as the repository's server-side maintainer.
+    'User-Agent' = 'ics-test-maintenance-script/1.0'
 }
 $body = @{ p_question_id = $QuestionId } | ConvertTo-Json -Compress
 $removed = Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -Body $body
