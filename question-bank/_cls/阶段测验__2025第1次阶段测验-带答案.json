@@ -44,11 +44,35 @@
     },
     {
       "start": 70,
+      "end": 87,
+      "module": "Data Representation",
+      "qno": "第3讲 6（A）",
+      "note": "float 转 double 后再转回 float 的恒等判断",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/70.md"
+    },
+    {
+      "start": 88,
+      "end": 88,
+      "module": "Data Representation",
+      "qno": "第3讲 6（B）",
+      "note": "double 加法结合律判断",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/88.md"
+    },
+    {
+      "start": 89,
+      "end": 89,
+      "module": "Data Representation",
+      "qno": "第3讲 6（C）",
+      "note": "double 乘法结合律判断",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/89.md"
+    },
+    {
+      "start": 90,
       "end": 90,
       "module": "Data Representation",
-      "qno": "第3讲 6",
-      "note": "float/double 运算的结合律与除法性质判断",
-      "curated": "阶段测验/2025第1次阶段测验-带答案/70.md"
+      "qno": "第3讲 6（D）",
+      "note": "零除零产生 NaN 的判断",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/90.md"
     },
     {
       "start": 92,
@@ -84,19 +108,43 @@
     },
     {
       "start": 113,
-      "end": 134,
+      "end": 130,
       "module": "Machine Prog",
-      "qno": "第5讲 11",
-      "note": "cmp+set 指令补全汇编，movzbl 功能与高位清零",
+      "qno": "第5讲 11（1）",
+      "note": "cmp+set 指令补全汇编",
       "curated": "阶段测验/2025第1次阶段测验-带答案/113.md"
     },
     {
+      "start": 131,
+      "end": 132,
+      "module": "Machine Prog",
+      "qno": "第5讲 11（2）",
+      "note": "movzbl 的零扩展功能",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/131.md"
+    },
+    {
+      "start": 133,
+      "end": 134,
+      "module": "Machine Prog",
+      "qno": "第5讲 11（3）",
+      "note": "写 32 位寄存器时隐含的高位清零",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/133.md"
+    },
+    {
       "start": 135,
+      "end": 159,
+      "module": "Machine Prog",
+      "qno": "第5讲 12（1）（2）",
+      "note": "absdiff 的分支实现与条件传送实现补空",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/135.md"
+    },
+    {
+      "start": 160,
       "end": 165,
       "module": "Machine Prog",
-      "qno": "第5讲 12",
-      "note": "absdiff 分支实现与条件传送 cmov 实现对比",
-      "curated": "阶段测验/2025第1次阶段测验-带答案/135.md"
+      "qno": "第5讲 12（4）",
+      "note": "不适合使用条件传送的情况",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/160.md"
     },
     {
       "start": 166,
@@ -124,11 +172,35 @@
     },
     {
       "start": 217,
+      "end": 244,
+      "module": "Machine Prog",
+      "qno": "第6讲 16（1）",
+      "note": "callq/ret 对栈指针与返回地址的影响",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/217.md"
+    },
+    {
+      "start": 245,
+      "end": 246,
+      "module": "Machine Prog",
+      "qno": "第6讲 16（2）",
+      "note": "参数与返回值所在寄存器",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/245.md"
+    },
+    {
+      "start": 247,
+      "end": 249,
+      "module": "Machine Prog",
+      "qno": "第6讲 16（3）",
+      "note": "被调用者保存寄存器规则",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/247.md"
+    },
+    {
+      "start": 250,
       "end": 251,
       "module": "Machine Prog",
-      "qno": "第6讲 16",
-      "note": "过程调用栈帧、callq/ret、参数寄存器与被调用者保存",
-      "curated": "阶段测验/2025第1次阶段测验-带答案/217.md"
+      "qno": "第6讲 16（4）",
+      "note": "交换实参顺序时的寄存器变化",
+      "curated": "阶段测验/2025第1次阶段测验-带答案/250.md"
     },
     {
       "start": 252,

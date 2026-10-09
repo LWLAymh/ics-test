@@ -65,21 +65,22 @@ skip 期末__2021期末-带答案__chap 9 解析.json                       item
 ok   期末__2021期末-带答案__chap 9 题目.json                       items=11   Dynamic Memory=10, System IO=1
       （curated 28 条）
 ok   期末__2021期末-无答案.json                                  items=28   Compilation=5, System IO=5, Dynamic Memory=5, Processor Arch=4, Network=3, Memory Hierarc=2, Synchronizatio=2, Data Represent=1, Machine Prog=1
-      （curated 43 条）
-ok   期末__2022期末-无答案.json                                  items=43   Network=12, Compilation=7, Dynamic Memory=6, Processor Arch=6, System IO=5, Synchronizatio=4, Machine Prog=2, Data Represent=1
+      （curated 39 条）
+ok   期末__2022期末-无答案.json                                  items=39   Network=8, Compilation=7, Dynamic Memory=6, Processor Arch=6, System IO=5, Synchronizatio=4, Machine Prog=2, Data Represent=1
 skip 期末__2022期末-答案.json                                   items=0    
       ~ 本文件是答案/解析材料，不是试卷；原 21 条 items 已移除。
       （curated 23 条）
 ok   期末__2024期末-带答案.json                                  items=23   System IO=5, Processor Arch=4, Dynamic Memory=4, Synchronizatio=3, Memory Hierarc=2, Compilation=2, Network=2, Data Represent=1
       （curated 31 条）
 ok   期末__2025期末-带答案.json                                  items=31   System IO=6, Data Represent=4, Memory Hierarc=4, Compilation=4, Synchronizatio=4, Machine Prog=3, Dynamic Memory=3, Processor Arch=2, Network=1
-      （curated 31 条）
-ok   期末__2025期末-无答案.json                                  items=31   System IO=6, Data Represent=4, Memory Hierarc=4, Compilation=4, Synchronizatio=4, Machine Prog=3, Dynamic Memory=3, Processor Arch=2, Network=1
+      ~ 本文件是 2025 期末同一套试卷的答案速查稿，不作为第二套独立试卷发布。
+      （curated 32 条）
+ok   期末__2025期末-无答案.json                                  items=32   System IO=6, Synchronizatio=5, Data Represent=4, Memory Hierarc=4, Compilation=4, Machine Prog=3, Dynamic Memory=3, Processor Arch=2, Network=1
 skip 期末__期末往年题勘误、详解 by Arthals.json                       items=0    
       ~ 本文件是答案/解析材料，不是试卷；原 36 条 items 已移除。
-      （curated 24 条）
-ok   阶段测验__2025第1次阶段测验-带答案.json                           items=24   Machine Prog=17, Data Represent=7
+      （curated 33 条）
+ok   阶段测验__2025第1次阶段测验-带答案.json                           items=33   Machine Prog=23, Data Represent=10
       （curated 24 条）
 ok   阶段测验__2025第2次阶段测验-带答案.json                           items=24   Processor Arch=10, Memory Hierarc=8, Compilation=3, System IO=3
 
-共 42 个文件，0 个不合格；curated 指针 871 个，孤儿 0 个
+共 42 个文件，0 个不合格；curated 指针 877 个，孤儿 0 个

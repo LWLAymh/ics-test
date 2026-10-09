@@ -8765,7 +8765,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第2讲 1",
       "summary": "二进制转十进制/十六进制、按位与、逻辑非",
-      "content": "1. 两个8位二进制数10110101和01011100，分别记为a和b。问：\n（1）a转换为十进制表示为：\n（2）b转换为十六进制表示为：\n（3）a和b按位与操作，a&b（用十六进制表示）：\n（4）用C语言中的“非”操作，!!b（用十六进制表示）：\n181\n0x5C\n0x14\n0x01",
+      "content": "1. 两个 8 位二进制数 `10110101` 和 `01011100`，分别记为 `a` 和 `b`。问：\n\n（1）`a` 转换为十进制表示为：{{blank:q1-a-decimal}}\n\n（2）`b` 转换为十六进制表示为：{{blank:q1-b-hex}}\n\n（3）`a` 和 `b` 按位与操作，`a & b`（用十六进制表示）：{{blank:q1-and}}\n\n（4）用 C 语言中的“非”操作，`!!b`（用十六进制表示）：{{blank:q1-not}}\n答案：\n\n（1）`181`\n\n（2）`0x5C`\n\n（3）`0x14`\n\n（4）`0x01`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8785,18 +8785,96 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "1. 两个8位二进制数10110101和01011100，分别记为a和b。问：\n（1）a转换为十进制表示为：\n（2）b转换为十六进制表示为：\n（3）a和b按位与操作，a&b（用十六进制表示）：\n（4）用C语言中的“非”操作，!!b（用十六进制表示）：",
+        "stem": "1. 两个 8 位二进制数 `10110101` 和 `01011100`，分别记为 `a` 和 `b`。问：\n\n（1）`a` 转换为十进制表示为：{{blank:q1-a-decimal}}\n\n（2）`b` 转换为十六进制表示为：{{blank:q1-b-hex}}\n\n（3）`a` 和 `b` 按位与操作，`a & b`（用十六进制表示）：{{blank:q1-and}}\n\n（4）用 C 语言中的“非”操作，`!!b`（用十六进制表示）：{{blank:q1-not}}",
         "choices": [],
-        "answer": "181\n0x5C\n0x14\n0x01"
+        "answer": "答案：\n\n（1）`181`\n\n（2）`0x5C`\n\n（3）`0x14`\n\n（4）`0x01`",
+        "blankAnswers": [
+          {
+            "id": "q1-a-decimal",
+            "acceptedAnswers": [
+              "181"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q1-b-hex",
+            "acceptedAnswers": [
+              "0x5C",
+              "5C"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q1-and",
+            "acceptedAnswers": [
+              "0x14",
+              "14"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q1-not",
+            "acceptedAnswers": [
+              "0x01",
+              "0x1",
+              "01",
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q1-a-decimal",
+            "acceptedAnswers": [
+              "181"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q1-b-hex",
+            "acceptedAnswers": [
+              "0x5C",
+              "5C"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q1-and",
+            "acceptedAnswers": [
+              "0x14",
+              "14"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q1-not",
+            "acceptedAnswers": [
+              "0x01",
+              "0x1",
+              "01",
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1. 两个8位二进制数10110101和01011100，分别记为a和b。问：\n（1）a转换为十进制表示为：\n（2）b转换为十六进制表示为：\n（3）a和b按位与操作，a&b（用十六进制表示）：\n（4）用C语言中的“非”操作，!!b（用十六进制表示）：",
-        "answer": "181\n0x5C\n0x14\n0x01"
+        "prompt": "1. 两个 8 位二进制数 `10110101` 和 `01011100`，分别记为 `a` 和 `b`。问：\n\n（1）`a` 转换为十进制表示为：{{blank:q1-a-decimal}}\n\n（2）`b` 转换为十六进制表示为：{{blank:q1-b-hex}}\n\n（3）`a` 和 `b` 按位与操作，`a & b`（用十六进制表示）：{{blank:q1-and}}\n\n（4）用 C 语言中的“非”操作，`!!b`（用十六进制表示）：{{blank:q1-not}}",
+        "answer": "答案：\n\n（1）`181`\n\n（2）`0x5C`\n\n（3）`0x14`\n\n（4）`0x01`"
       },
       "presentation": {
         "status": "ready",
@@ -8813,7 +8891,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第2讲 2",
       "summary": "-10 与 10U 比较，有符号转无符号",
-      "content": "2. 将C语言中的两个常量比较大小：-10和10U。关系是（大于、小于、等于）：\n大于",
+      "content": "2. 将 C 语言中的两个常量比较大小：`-10` 和 `10U`。\n关系是（大于、小于、等于）：{{blank:q2-relation}}\n答案：大于",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8831,20 +8909,40 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/55.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "2. 将C语言中的两个常量比较大小：-10和10U。关系是（大于、小于、等于）：",
+        "stem": "2. 将 C 语言中的两个常量比较大小：`-10` 和 `10U`。\n关系是（大于、小于、等于）：{{blank:q2-relation}}",
         "choices": [],
-        "answer": "大于"
+        "answer": "答案：大于",
+        "blankAnswers": [
+          {
+            "id": "q2-relation",
+            "acceptedAnswers": [
+              "大于"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q2-relation",
+            "acceptedAnswers": [
+              "大于"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. 将C语言中的两个常量比较大小：-10和10U。关系是（大于、小于、等于）：",
-        "answer": "大于"
+        "prompt": "2. 将 C 语言中的两个常量比较大小：`-10` 和 `10U`。\n关系是（大于、小于、等于）：{{blank:q2-relation}}",
+        "answer": "答案：大于"
       },
       "presentation": {
         "status": "ready",
@@ -8861,7 +8959,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第2讲 3",
       "summary": "short 转 int 符号扩展与首字节（字节序）",
-      "content": "3. 分析下面的C语言代码\n```c\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：\n0xFF",
+      "content": "3. 分析下面的 C 语言代码：\n\n```c\nshort int y = -12;\nint iy = (int) y;\n```\n\n`iy` 首字节的值为（用十六进制表示）：{{blank:q3-first-byte}}\n答案：`0xFF`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8879,20 +8977,42 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/56.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "3. 分析下面的C语言代码\n```c\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：",
+        "stem": "3. 分析下面的 C 语言代码：\n\n```c\nshort int y = -12;\nint iy = (int) y;\n```\n\n`iy` 首字节的值为（用十六进制表示）：{{blank:q3-first-byte}}",
         "choices": [],
-        "answer": "0xFF"
+        "answer": "答案：`0xFF`",
+        "blankAnswers": [
+          {
+            "id": "q3-first-byte",
+            "acceptedAnswers": [
+              "0xFF",
+              "FF"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q3-first-byte",
+            "acceptedAnswers": [
+              "0xFF",
+              "FF"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. 分析下面的C语言代码\n```c\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：",
-        "answer": "0xFF"
+        "prompt": "3. 分析下面的 C 语言代码：\n\n```c\nshort int y = -12;\nint iy = (int) y;\n```\n\n`iy` 首字节的值为（用十六进制表示）：{{blank:q3-first-byte}}",
+        "answer": "答案：`0xFF`"
       },
       "presentation": {
         "status": "ready",
@@ -8909,7 +9029,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第3讲 4",
       "summary": "IEEE 754 单精度编码结构、正无穷、按位段求值",
-      "content": "4. 在 IEEE 754 标准中，单精度浮点数（C语言中的float, 32 位）的编码结构要点\n为：符号位（1-bit)、阶码（8-bit）、尾数（23-bit）。据此，问：\n(1)正无穷的编码为（用十六进制表示）：\n(2)将编码0xA1100000对应到表达式v=(–1)s × M × 2E，则：\ns=\n（均用十进制表示）\n0x7F800000\n1 ,M= 1.125 ,E= -61",
+      "content": "4. 在 IEEE 754 标准中，单精度浮点数（C 语言中的 `float`，32 位）的编码结构要点为：符号位（1 bit）、阶码（8 bit）、尾数（23 bit）。据此，问：\n\n（1）正无穷的编码为（用十六进制表示）：{{blank:q4-infinity}}\n\n（2）将编码 `0xA1100000` 对应到表达式 $v=(-1)^s\\times M\\times 2^E$，则：\n\n$s=$ {{blank:q4-sign}}，$M=$ {{blank:q4-mantissa}}，$E=$ {{blank:q4-exponent}}（均用十进制表示）。\n答案：\n\n（1）`0x7F800000`\n\n（2）$s=1$，$M=1.125$，$E=-61$",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8929,18 +9049,88 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "4. 在 IEEE 754 标准中，单精度浮点数（C语言中的float, 32 位）的编码结构要点\n为：符号位（1-bit)、阶码（8-bit）、尾数（23-bit）。据此，问：\n(1)正无穷的编码为（用十六进制表示）：\n(2)将编码0xA1100000对应到表达式v=(–1)s × M × 2E，则：\ns=\n（均用十进制表示）",
+        "stem": "4. 在 IEEE 754 标准中，单精度浮点数（C 语言中的 `float`，32 位）的编码结构要点为：符号位（1 bit）、阶码（8 bit）、尾数（23 bit）。据此，问：\n\n（1）正无穷的编码为（用十六进制表示）：{{blank:q4-infinity}}\n\n（2）将编码 `0xA1100000` 对应到表达式 $v=(-1)^s\\times M\\times 2^E$，则：\n\n$s=$ {{blank:q4-sign}}，$M=$ {{blank:q4-mantissa}}，$E=$ {{blank:q4-exponent}}（均用十进制表示）。",
         "choices": [],
-        "answer": "0x7F800000\n1 ,M= 1.125 ,E= -61"
+        "answer": "答案：\n\n（1）`0x7F800000`\n\n（2）$s=1$，$M=1.125$，$E=-61$",
+        "blankAnswers": [
+          {
+            "id": "q4-infinity",
+            "acceptedAnswers": [
+              "0x7F800000",
+              "7F800000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-sign",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-mantissa",
+            "acceptedAnswers": [
+              "1.125"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-exponent",
+            "acceptedAnswers": [
+              "-61"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q4-infinity",
+            "acceptedAnswers": [
+              "0x7F800000",
+              "7F800000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-sign",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-mantissa",
+            "acceptedAnswers": [
+              "1.125"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-exponent",
+            "acceptedAnswers": [
+              "-61"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4. 在 IEEE 754 标准中，单精度浮点数（C语言中的float, 32 位）的编码结构要点\n为：符号位（1-bit)、阶码（8-bit）、尾数（23-bit）。据此，问：\n(1)正无穷的编码为（用十六进制表示）：\n(2)将编码0xA1100000对应到表达式v=(–1)s × M × 2E，则：\ns=\n（均用十进制表示）",
-        "answer": "0x7F800000\n1 ,M= 1.125 ,E= -61"
+        "prompt": "4. 在 IEEE 754 标准中，单精度浮点数（C 语言中的 `float`，32 位）的编码结构要点为：符号位（1 bit）、阶码（8 bit）、尾数（23 bit）。据此，问：\n\n（1）正无穷的编码为（用十六进制表示）：{{blank:q4-infinity}}\n\n（2）将编码 `0xA1100000` 对应到表达式 $v=(-1)^s\\times M\\times 2^E$，则：\n\n$s=$ {{blank:q4-sign}}，$M=$ {{blank:q4-mantissa}}，$E=$ {{blank:q4-exponent}}（均用十进制表示）。",
+        "answer": "答案：\n\n（1）`0x7F800000`\n\n（2）$s=1$，$M=1.125$，$E=-61$"
       },
       "presentation": {
         "status": "ready",
@@ -8957,7 +9147,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第3讲 5",
       "summary": "二进制小数向偶数舍入到三位",
-      "content": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100 → {{blank:q5-1}}　101.100100 → {{blank:q5-2}}\n答案：110.000  101.100",
+      "content": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n\n`101.111100` → {{blank:q5-1}}\n\n`101.100100` → {{blank:q5-2}}\n答案：`110.000`；`101.100`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8977,18 +9167,54 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100 → {{blank:q5-1}}　101.100100 → {{blank:q5-2}}",
+        "stem": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n\n`101.111100` → {{blank:q5-1}}\n\n`101.100100` → {{blank:q5-2}}",
         "choices": [],
-        "answer": "答案：110.000  101.100"
+        "answer": "答案：`110.000`；`101.100`",
+        "blankAnswers": [
+          {
+            "id": "q5-1",
+            "acceptedAnswers": [
+              "110.000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5-2",
+            "acceptedAnswers": [
+              "101.100"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q5-1",
+            "acceptedAnswers": [
+              "110.000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q5-2",
+            "acceptedAnswers": [
+              "101.100"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n101.111100 → {{blank:q5-1}}　101.100100 → {{blank:q5-2}}",
-        "answer": "答案：110.000  101.100"
+        "prompt": "5. 按照“向偶数舍入”的规则，将下面的二进制数保留小数点后三位：\n\n`101.111100` → {{blank:q5-1}}\n\n`101.100100` → {{blank:q5-2}}",
+        "answer": "答案：`110.000`；`101.100`"
       },
       "presentation": {
         "status": "ready",
@@ -8996,16 +9222,16 @@
       }
     },
     {
-      "id": "q-7d68d5fc2818f8af",
+      "id": "q-1638b3fc06b77cb0",
       "paperId": "p-febcfbeee0f364b2",
       "paperOrder": 6,
       "moduleId": "data_representation",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
-      "questionNo": "第3讲 6",
-      "summary": "float/double 运算的结合律与除法性质判断",
-      "content": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，给出简要说明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：\n是\n是\n否\n否",
+      "questionNo": "第3讲 6（A）",
+      "summary": "float 转 double 后再转回 float 的恒等判断",
+      "content": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，可在查看答案后阅读说明。\n\n**A.** `(float) x == (float) dx`\nA. 是\nB. 否\n答案：A",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9017,26 +9243,302 @@
         "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
         "lines": {
           "start": 70,
-          "end": 90
+          "end": 87
         },
         "aliases": [],
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/70.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，给出简要说明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：",
-        "choices": [],
-        "answer": "是\n是\n否\n否"
+        "mode": "choice",
+        "selection": "single",
+        "stem": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，可在查看答案后阅读说明。\n\n**A.** `(float) x == (float) dx`",
+        "choices": [
+          {
+            "key": "A",
+            "content": "是"
+          },
+          {
+            "key": "B",
+            "content": "否"
+          }
+        ],
+        "answer": "答案：A"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "是"
+          },
+          {
+            "id": "B",
+            "content": "否"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，给出简要说明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：",
-        "answer": "是\n是\n否\n否"
+        "prompt": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，可在查看答案后阅读说明。\n\n**A.** `(float) x == (float) dx`",
+        "answer": "答案：A"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q6",
+        "questionId": "q-155f1dde880cc7e5",
+        "title": "第3讲 6",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-87db868e0bfc837e",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 7,
+      "moduleId": "data_representation",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第3讲 6（B）",
+      "summary": "double 加法结合律判断",
+      "content": "**B.** `(dx + dy) + dz == dx + (dy + dz)`\nA. 是\nB. 否\n答案：A",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 88,
+          "end": 88
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/88.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "**B.** `(dx + dy) + dz == dx + (dy + dz)`",
+        "choices": [
+          {
+            "key": "A",
+            "content": "是"
+          },
+          {
+            "key": "B",
+            "content": "否"
+          }
+        ],
+        "answer": "答案：A"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "是"
+          },
+          {
+            "id": "B",
+            "content": "否"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "**B.** `(dx + dy) + dz == dx + (dy + dz)`",
+        "answer": "答案：A"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q6",
+        "questionId": "q-155f1dde880cc7e5",
+        "title": "第3讲 6",
+        "order": 2
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-e79ccb5c1591b9f9",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 8,
+      "moduleId": "data_representation",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第3讲 6（C）",
+      "summary": "double 乘法结合律判断",
+      "content": "**C.** `(dx * dy) * dz == dx * (dy * dz)`\nA. 是\nB. 否\n答案：B\n\n两个 32 位整数的乘积可能需要超过 53 位有效数字，因而中间乘法会发生舍入；不同结合次序的中间舍入结果不一定相同。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 89,
+          "end": 89
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/89.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "**C.** `(dx * dy) * dz == dx * (dy * dz)`",
+        "choices": [
+          {
+            "key": "A",
+            "content": "是"
+          },
+          {
+            "key": "B",
+            "content": "否"
+          }
+        ],
+        "answer": "答案：B\n\n两个 32 位整数的乘积可能需要超过 53 位有效数字，因而中间乘法会发生舍入；不同结合次序的中间舍入结果不一定相同。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "是"
+          },
+          {
+            "id": "B",
+            "content": "否"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "**C.** `(dx * dy) * dz == dx * (dy * dz)`",
+        "answer": "答案：B\n\n两个 32 位整数的乘积可能需要超过 53 位有效数字，因而中间乘法会发生舍入；不同结合次序的中间舍入结果不一定相同。"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q6",
+        "questionId": "q-155f1dde880cc7e5",
+        "title": "第3讲 6",
+        "order": 3
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-c6f39a9fc14b2643",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 9,
+      "moduleId": "data_representation",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第3讲 6（D）",
+      "summary": "零除零产生 NaN 的判断",
+      "content": "**D.** `dx / dx == dz / dz`\nA. 是\nB. 否\n答案：B\n\n当 `x` 或 `z` 为 0 时，对应的 `0.0 / 0.0` 产生 NaN；NaN 与任何值（包括自身）比较都不相等。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 90,
+          "end": 90
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/90.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "**D.** `dx / dx == dz / dz`",
+        "choices": [
+          {
+            "key": "A",
+            "content": "是"
+          },
+          {
+            "key": "B",
+            "content": "否"
+          }
+        ],
+        "answer": "答案：B\n\n当 `x` 或 `z` 为 0 时，对应的 `0.0 / 0.0` 产生 NaN；NaN 与任何值（包括自身）比较都不相等。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "是"
+          },
+          {
+            "id": "B",
+            "content": "否"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "**D.** `dx / dx == dz / dz`",
+        "answer": "答案：B\n\n当 `x` 或 `z` 为 0 时，对应的 `0.0 / 0.0` 产生 NaN；NaN 与任何值（包括自身）比较都不相等。"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q6",
+        "questionId": "q-155f1dde880cc7e5",
+        "title": "第3讲 6",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -9046,14 +9548,14 @@
     {
       "id": "q-6cf7fdea35ca7215",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 23,
+      "paperOrder": 32,
       "moduleId": "data_representation",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第8讲 23",
       "summary": "union 与大端字节序下的输出结果",
-      "content": "23.考虑下面的C语言代码：\n```c\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\n    int j;\n    for (j = 0; j < 8; j++)\n        dw.c[j] = 0xC0 + j;\n    printf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]\n0xC0C1C2C3,0xC4C5C6C7",
+      "content": "23. 考虑下面的 C 语言代码：\n\n```c\nunion {\n    unsigned char c[8];\n    unsigned int i[2];\n} dw;\n\nint j;\nfor (j = 0; j < 8; j++)\n    dw.c[j] = 0xC0 + j;\n\nprintf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n\n如果在大端模式的计算机（如 Sun）上运行，输出结果是：\n\n`Ints 0-1 == [` {{blank:q23-word-0}} `,` {{blank:q23-word-1}} `]`\n答案：`0xC0C1C2C3`；`0xC4C5C6C7`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9071,20 +9573,60 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/392.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "23.考虑下面的C语言代码：\n```c\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\n    int j;\n    for (j = 0; j < 8; j++)\n        dw.c[j] = 0xC0 + j;\n    printf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]",
+        "stem": "23. 考虑下面的 C 语言代码：\n\n```c\nunion {\n    unsigned char c[8];\n    unsigned int i[2];\n} dw;\n\nint j;\nfor (j = 0; j < 8; j++)\n    dw.c[j] = 0xC0 + j;\n\nprintf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n\n如果在大端模式的计算机（如 Sun）上运行，输出结果是：\n\n`Ints 0-1 == [` {{blank:q23-word-0}} `,` {{blank:q23-word-1}} `]`",
         "choices": [],
-        "answer": "0xC0C1C2C3,0xC4C5C6C7"
+        "answer": "答案：`0xC0C1C2C3`；`0xC4C5C6C7`",
+        "blankAnswers": [
+          {
+            "id": "q23-word-0",
+            "acceptedAnswers": [
+              "0xC0C1C2C3",
+              "C0C1C2C3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q23-word-1",
+            "acceptedAnswers": [
+              "0xC4C5C6C7",
+              "C4C5C6C7"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q23-word-0",
+            "acceptedAnswers": [
+              "0xC0C1C2C3",
+              "C0C1C2C3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q23-word-1",
+            "acceptedAnswers": [
+              "0xC4C5C6C7",
+              "C4C5C6C7"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "23.考虑下面的C语言代码：\n```c\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\n    int j;\n    for (j = 0; j < 8; j++)\n        dw.c[j] = 0xC0 + j;\n    printf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]",
-        "answer": "0xC0C1C2C3,0xC4C5C6C7"
+        "prompt": "23. 考虑下面的 C 语言代码：\n\n```c\nunion {\n    unsigned char c[8];\n    unsigned int i[2];\n} dw;\n\nint j;\nfor (j = 0; j < 8; j++)\n    dw.c[j] = 0xC0 + j;\n\nprintf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n\n如果在大端模式的计算机（如 Sun）上运行，输出结果是：\n\n`Ints 0-1 == [` {{blank:q23-word-0}} `,` {{blank:q23-word-1}} `]`",
+        "answer": "答案：`0xC0C1C2C3`；`0xC4C5C6C7`"
       },
       "presentation": {
         "status": "ready",

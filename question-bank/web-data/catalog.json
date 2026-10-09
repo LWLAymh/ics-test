@@ -9,10 +9,10 @@
       "number": 1,
       "name": "Data Representation",
       "title": "数据的表示",
-      "questionCount": 121,
+      "questionCount": 124,
       "choiceQuestionCount": 75,
-      "declaredQuestionCount": 121,
-      "publishedQuestionCount": 121,
+      "declaredQuestionCount": 124,
+      "publishedQuestionCount": 124,
       "paperCount": 27,
       "questionFile": "questions/1-Data-Representation.json"
     },
@@ -21,10 +21,10 @@
       "number": 2,
       "name": "Machine Prog",
       "title": "程序的机器级表示",
-      "questionCount": 146,
+      "questionCount": 152,
       "choiceQuestionCount": 84,
-      "declaredQuestionCount": 142,
-      "publishedQuestionCount": 142,
+      "declaredQuestionCount": 148,
+      "publishedQuestionCount": 148,
       "paperCount": 27,
       "questionFile": "questions/2-Machine-Prog.json"
     },
@@ -138,10 +138,10 @@
     ]
   },
   "stats": {
-    "questions": 837,
+    "questions": 846,
     "publishedChoiceQuestions": 470,
     "withheldChoiceQuestions": 0,
-    "publishedQuestions": 803,
+    "publishedQuestions": 812,
     "withheldQuestions": 0,
     "papers": 34,
     "answerBlocks": 55

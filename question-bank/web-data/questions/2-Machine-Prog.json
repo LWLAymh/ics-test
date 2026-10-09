@@ -9620,14 +9620,14 @@
     {
       "id": "q-783d7bff35751d8f",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 7,
+      "paperOrder": 10,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第4讲 7",
       "summary": "通用寄存器低 32 位/最低字节的名称",
-      "content": "7. x86-64的通用寄存器中，对应rbx低32位的寄存器名称为：\n；对应rcx\n最低字节的寄存器名称为：\n。\nebx\ncl",
+      "content": "7. x86-64 的通用寄存器中，对应 `%rbx` 低 32 位的寄存器名称为：{{blank:q7-rbx32}}；对应 `%rcx` 最低字节的寄存器名称为：{{blank:q7-rcx8}}。\n答案：`%ebx`；`%cl`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9645,20 +9645,60 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/92.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "7. x86-64的通用寄存器中，对应rbx低32位的寄存器名称为：\n；对应rcx\n最低字节的寄存器名称为：\n。",
+        "stem": "7. x86-64 的通用寄存器中，对应 `%rbx` 低 32 位的寄存器名称为：{{blank:q7-rbx32}}；对应 `%rcx` 最低字节的寄存器名称为：{{blank:q7-rcx8}}。",
         "choices": [],
-        "answer": "ebx\ncl"
+        "answer": "答案：`%ebx`；`%cl`",
+        "blankAnswers": [
+          {
+            "id": "q7-rbx32",
+            "acceptedAnswers": [
+              "ebx",
+              "%ebx"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-rcx8",
+            "acceptedAnswers": [
+              "cl",
+              "%cl"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q7-rbx32",
+            "acceptedAnswers": [
+              "ebx",
+              "%ebx"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-rcx8",
+            "acceptedAnswers": [
+              "cl",
+              "%cl"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "7. x86-64的通用寄存器中，对应rbx低32位的寄存器名称为：\n；对应rcx\n最低字节的寄存器名称为：\n。",
-        "answer": "ebx\ncl"
+        "prompt": "7. x86-64 的通用寄存器中，对应 `%rbx` 低 32 位的寄存器名称为：{{blank:q7-rbx32}}；对应 `%rcx` 最低字节的寄存器名称为：{{blank:q7-rcx8}}。",
+        "answer": "答案：`%ebx`；`%cl`"
       },
       "presentation": {
         "status": "ready",
@@ -9668,14 +9708,14 @@
     {
       "id": "q-4acd2d114b967a38",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 8,
+      "paperOrder": 11,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第4讲 8",
       "summary": "swap 汇编中寄存器与内存访问次数统计",
-      "content": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```asm\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```\n8 次通用寄存器访问，有 4",
+      "content": "8. 以下代码中，有 {{blank:q8-register-accesses}} 次通用寄存器访问，有 {{blank:q8-memory-accesses}} 次内存访问（均不含取指令相关操作）。\n\n```asm\nswap:\n    movq (%rdi), %rax\n    movq (%rsi), %rdx\n    movq %rdx, (%rdi)\n    movq %rax, (%rsi)\n```\n答案：8 次通用寄存器访问；4 次内存访问。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9693,20 +9733,56 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/94.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```asm\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```",
+        "stem": "8. 以下代码中，有 {{blank:q8-register-accesses}} 次通用寄存器访问，有 {{blank:q8-memory-accesses}} 次内存访问（均不含取指令相关操作）。\n\n```asm\nswap:\n    movq (%rdi), %rax\n    movq (%rsi), %rdx\n    movq %rdx, (%rdi)\n    movq %rax, (%rsi)\n```",
         "choices": [],
-        "answer": "8 次通用寄存器访问，有 4"
+        "answer": "答案：8 次通用寄存器访问；4 次内存访问。",
+        "blankAnswers": [
+          {
+            "id": "q8-register-accesses",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q8-memory-accesses",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q8-register-accesses",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q8-memory-accesses",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```asm\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```",
-        "answer": "8 次通用寄存器访问，有 4"
+        "prompt": "8. 以下代码中，有 {{blank:q8-register-accesses}} 次通用寄存器访问，有 {{blank:q8-memory-accesses}} 次内存访问（均不含取指令相关操作）。\n\n```asm\nswap:\n    movq (%rdi), %rax\n    movq (%rsi), %rdx\n    movq %rdx, (%rdi)\n    movq %rax, (%rsi)\n```",
+        "answer": "答案：8 次通用寄存器访问；4 次内存访问。"
       },
       "presentation": {
         "status": "ready",
@@ -9716,14 +9792,14 @@
     {
       "id": "q-70a59d239438b38a",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 9,
+      "paperOrder": 12,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第4讲 9",
       "summary": "比例变址寻址方式地址计算",
-      "content": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```asm\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```\n0xC810\n0x60030",
+      "content": "9. 若寄存器内容为 `%rdx = 0xC000`、`%rcx = 0x0200`，计算下列地址的值（十六进制表示）：\n\n```asm\n0x10(%rdx,%rcx,4): {{blank:q9-address-1}}\n0x30(,%rdx,8):     {{blank:q9-address-2}}\n```\n答案：`0xC810`；`0x60030`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9741,20 +9817,60 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/102.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```asm\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```",
+        "stem": "9. 若寄存器内容为 `%rdx = 0xC000`、`%rcx = 0x0200`，计算下列地址的值（十六进制表示）：\n\n```asm\n0x10(%rdx,%rcx,4): {{blank:q9-address-1}}\n0x30(,%rdx,8):     {{blank:q9-address-2}}\n```",
         "choices": [],
-        "answer": "0xC810\n0x60030"
+        "answer": "答案：`0xC810`；`0x60030`",
+        "blankAnswers": [
+          {
+            "id": "q9-address-1",
+            "acceptedAnswers": [
+              "0xC810",
+              "C810"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q9-address-2",
+            "acceptedAnswers": [
+              "0x60030",
+              "60030"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q9-address-1",
+            "acceptedAnswers": [
+              "0xC810",
+              "C810"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q9-address-2",
+            "acceptedAnswers": [
+              "0x60030",
+              "60030"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```asm\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```",
-        "answer": "0xC810\n0x60030"
+        "prompt": "9. 若寄存器内容为 `%rdx = 0xC000`、`%rcx = 0x0200`，计算下列地址的值（十六进制表示）：\n\n```asm\n0x10(%rdx,%rcx,4): {{blank:q9-address-1}}\n0x30(,%rdx,8):     {{blank:q9-address-2}}\n```",
+        "answer": "答案：`0xC810`；`0x60030`"
       },
       "presentation": {
         "status": "ready",
@@ -9764,14 +9880,14 @@
     {
       "id": "q-5db77487acc41d3e",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 10,
+      "paperOrder": 13,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第5讲 10",
       "summary": "cmp/test 与 sub/and 的等价关系",
-      "content": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```asm\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```\n```asm\nsubq %rbx,%rax\nandq %rbx,%rax\n```",
+      "content": "10. 对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n\n```asm\ncmpq  %rbx, %rax  →  {{blank:q10-cmp}}\ntestq %rbx, %rax  →  {{blank:q10-test}}\n```\n答案：\n\n```asm\nsubq %rbx, %rax\nandq %rbx, %rax\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9789,20 +9905,60 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/108.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```asm\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```",
+        "stem": "10. 对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n\n```asm\ncmpq  %rbx, %rax  →  {{blank:q10-cmp}}\ntestq %rbx, %rax  →  {{blank:q10-test}}\n```",
         "choices": [],
-        "answer": "```asm\nsubq %rbx,%rax\nandq %rbx,%rax\n```"
+        "answer": "答案：\n\n```asm\nsubq %rbx, %rax\nandq %rbx, %rax\n```",
+        "blankAnswers": [
+          {
+            "id": "q10-cmp",
+            "acceptedAnswers": [
+              "subq %rbx, %rax",
+              "subq %rbx,%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q10-test",
+            "acceptedAnswers": [
+              "andq %rbx, %rax",
+              "andq %rbx,%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q10-cmp",
+            "acceptedAnswers": [
+              "subq %rbx, %rax",
+              "subq %rbx,%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q10-test",
+            "acceptedAnswers": [
+              "andq %rbx, %rax",
+              "andq %rbx,%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```asm\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```",
-        "answer": "```asm\nsubq %rbx,%rax\nandq %rbx,%rax\n```"
+        "prompt": "10. 对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n\n```asm\ncmpq  %rbx, %rax  →  {{blank:q10-cmp}}\ntestq %rbx, %rax  →  {{blank:q10-test}}\n```",
+        "answer": "答案：\n\n```asm\nsubq %rbx, %rax\nandq %rbx, %rax\n```"
       },
       "presentation": {
         "status": "ready",
@@ -9810,16 +9966,16 @@
       }
     },
     {
-      "id": "q-fce67100219f6c6e",
+      "id": "q-0f71738d4b9ce3de",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 11,
+      "paperOrder": 14,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
-      "questionNo": "第5讲 11",
-      "summary": "cmp+set 指令补全汇编，movzbl 功能与高位清零",
-      "content": "11.下面的C语言代码与汇编语言代码对应\n\n\n```c\nint cmpxy(long x, long y)\n{\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```c\nint cmpxy(long x, long y)\n{\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：\n```asm\nsetle %al\n```\n\n`movzbl` 从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数；在 x86-64 中，写入 32 位寄存器还会将对应寄存器的高 32 位清零（这里是 `%rax`）。",
+      "questionNo": "第5讲 11（1）",
+      "summary": "cmp+set 指令补全汇编",
+      "content": "11. 下面的 C 语言代码与汇编语言代码对应：\n\n```c\nint cmpxy(long x, long y) {\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n\n（1）修改 C 语言代码如下，相应补全汇编语言代码：\n\n```c\nint cmpxy(long x, long y) {\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```\n答案：`setle %al`\n\n```asm\nsetle %al\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9831,7 +9987,7 @@
         "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
         "lines": {
           "start": 113,
-          "end": 134
+          "end": 130
         },
         "aliases": [],
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/113.md"
@@ -9839,9 +9995,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "11.下面的C语言代码与汇编语言代码对应\n\n\n```c\nint cmpxy(long x, long y)\n{\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```c\nint cmpxy(long x, long y)\n{\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：",
+        "stem": "11. 下面的 C 语言代码与汇编语言代码对应：\n\n```c\nint cmpxy(long x, long y) {\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n\n（1）修改 C 语言代码如下，相应补全汇编语言代码：\n\n```c\nint cmpxy(long x, long y) {\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```",
         "choices": [],
-        "answer": "```asm\nsetle %al\n```\n\n`movzbl` 从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数；在 x86-64 中，写入 32 位寄存器还会将对应寄存器的高 32 位清零（这里是 `%rax`）。",
+        "answer": "答案：`setle %al`\n\n```asm\nsetle %al\n```",
         "blankAnswers": [
           {
             "id": "q11-set-condition",
@@ -9853,7 +10009,7 @@
           }
         ]
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true,
         "blankAnswers": [
@@ -9867,10 +10023,21 @@
           }
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
-        "prompt": "11.下面的C语言代码与汇编语言代码对应\n\n\n```c\nint cmpxy(long x, long y)\n{\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```c\nint cmpxy(long x, long y)\n{\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：",
-        "answer": "```asm\nsetle %al\n```\n\n`movzbl` 从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数；在 x86-64 中，写入 32 位寄存器还会将对应寄存器的高 32 位清零（这里是 `%rax`）。"
+        "prompt": "11. 下面的 C 语言代码与汇编语言代码对应：\n\n```c\nint cmpxy(long x, long y) {\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n\n（1）修改 C 语言代码如下，相应补全汇编语言代码：\n\n```c\nint cmpxy(long x, long y) {\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```",
+        "answer": "答案：`setle %al`\n\n```asm\nsetle %al\n```"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q11",
+        "questionId": "q-4a63354dbb394c04",
+        "title": "第5讲 11",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -9878,16 +10045,134 @@
       }
     },
     {
-      "id": "q-1ad71e0b2af3d7af",
+      "id": "q-ca1ea21621239695",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 12,
+      "paperOrder": 15,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
-      "questionNo": "第5讲 12",
-      "summary": "absdiff 分支实现与条件传送 cmov 实现对比",
-      "content": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```c\nlong absdiff(long x, long y)\n{\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    cmpq %rsi, %rdi\n    cmovg %rdx, %rax\n    ret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用\n（1）\n```asm\njg .L4\nret\n```\n\n（4）条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能有副作用。",
+      "questionNo": "第5讲 11（2）",
+      "summary": "movzbl 的零扩展功能",
+      "content": "（2）`movzbl` 指令本身的功能是什么？\n答案：从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 131,
+          "end": 132
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/131.md"
+      },
+      "layout": {
+        "mode": "short",
+        "selection": null,
+        "stem": "（2）`movzbl` 指令本身的功能是什么？",
+        "choices": [],
+        "answer": "答案：从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数。"
+      },
+      "partInteraction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（2）`movzbl` 指令本身的功能是什么？",
+        "answer": "答案：从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数。"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q11",
+        "questionId": "q-4a63354dbb394c04",
+        "title": "第5讲 11",
+        "order": 2
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-ab06db7b52036584",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 16,
+      "moduleId": "machine_prog",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第5讲 11（3）",
+      "summary": "写 32 位寄存器时隐含的高位清零",
+      "content": "（3）在 x86-64 中，这条 `movzbl` 指令还隐含了什么操作？\n答案：写入 32 位目的寄存器时，会将对应 64 位寄存器的高 32 位清零；本题中即 `%rax` 的高 32 位清零。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 133,
+          "end": 134
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/133.md"
+      },
+      "layout": {
+        "mode": "short",
+        "selection": null,
+        "stem": "（3）在 x86-64 中，这条 `movzbl` 指令还隐含了什么操作？",
+        "choices": [],
+        "answer": "答案：写入 32 位目的寄存器时，会将对应 64 位寄存器的高 32 位清零；本题中即 `%rax` 的高 32 位清零。"
+      },
+      "partInteraction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（3）在 x86-64 中，这条 `movzbl` 指令还隐含了什么操作？",
+        "answer": "答案：写入 32 位目的寄存器时，会将对应 64 位寄存器的高 32 位清零；本题中即 `%rax` 的高 32 位清零。"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q11",
+        "questionId": "q-4a63354dbb394c04",
+        "title": "第5讲 11",
+        "order": 3
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-c62728deb08346bb",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 17,
+      "moduleId": "machine_prog",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第5讲 12（1）（2）",
+      "summary": "absdiff 的分支实现与条件传送实现补空",
+      "content": "12. 下面的 C 语言代码与汇编语言代码对应，补全汇编代码：\n\n```c\nlong absdiff(long x, long y) {\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码（注意要符合编译器生成代码的常规情况）：\n\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    {{blank:q12-compare}}\n    cmovg %rdx, %rax\n    ret\n```\n答案：\n\n```asm\njg .L4\nret\ncmpq %rsi, %rdi\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9899,7 +10184,7 @@
         "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
         "lines": {
           "start": 135,
-          "end": 165
+          "end": 159
         },
         "aliases": [],
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/135.md"
@@ -9907,9 +10192,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```c\nlong absdiff(long x, long y)\n{\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    cmpq %rsi, %rdi\n    cmovg %rdx, %rax\n    ret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用",
+        "stem": "12. 下面的 C 语言代码与汇编语言代码对应，补全汇编代码：\n\n```c\nlong absdiff(long x, long y) {\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码（注意要符合编译器生成代码的常规情况）：\n\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    {{blank:q12-compare}}\n    cmovg %rdx, %rax\n    ret\n```",
         "choices": [],
-        "answer": "（1）\n```asm\njg .L4\nret\n```\n\n（4）条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能有副作用。",
+        "answer": "答案：\n\n```asm\njg .L4\nret\ncmpq %rsi, %rdi\n```",
         "blankAnswers": [
           {
             "id": "q12-branch",
@@ -9926,10 +10211,19 @@
             ],
             "caseSensitive": false,
             "trimWhitespace": true
+          },
+          {
+            "id": "q12-compare",
+            "acceptedAnswers": [
+              "cmpq %rsi, %rdi",
+              "cmpq %rsi,%rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
           }
         ]
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true,
         "blankAnswers": [
@@ -9948,13 +10242,92 @@
             ],
             "caseSensitive": false,
             "trimWhitespace": true
+          },
+          {
+            "id": "q12-compare",
+            "acceptedAnswers": [
+              "cmpq %rsi, %rdi",
+              "cmpq %rsi,%rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
           }
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
-        "prompt": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```c\nlong absdiff(long x, long y)\n{\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    cmpq %rsi, %rdi\n    cmovg %rdx, %rax\n    ret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用",
-        "answer": "（1）\n```asm\njg .L4\nret\n```\n\n（4）条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能有副作用。"
+        "prompt": "12. 下面的 C 语言代码与汇编语言代码对应，补全汇编代码：\n\n```c\nlong absdiff(long x, long y) {\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码（注意要符合编译器生成代码的常规情况）：\n\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    {{blank:q12-compare}}\n    cmovg %rdx, %rax\n    ret\n```",
+        "answer": "答案：\n\n```asm\njg .L4\nret\ncmpq %rsi, %rdi\n```"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q12",
+        "questionId": "q-39f3f84bc46decbc",
+        "title": "第5讲 12",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-60f6356d0e6b5538",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 18,
+      "moduleId": "machine_prog",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第5讲 12（4）",
+      "summary": "不适合使用条件传送的情况",
+      "content": "（4）有些情况不适合使用条件传送指令。原因是什么？\n答案：条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能产生副作用。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 160,
+          "end": 165
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/160.md"
+      },
+      "layout": {
+        "mode": "short",
+        "selection": null,
+        "stem": "（4）有些情况不适合使用条件传送指令。原因是什么？",
+        "choices": [],
+        "answer": "答案：条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能产生副作用。"
+      },
+      "partInteraction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（4）有些情况不适合使用条件传送指令。原因是什么？",
+        "answer": "答案：条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能产生副作用。"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q12",
+        "questionId": "q-39f3f84bc46decbc",
+        "title": "第5讲 12",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -9964,7 +10337,7 @@
     {
       "id": "q-1951cd500e3fca0c",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 13,
+      "paperOrder": 19,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
@@ -10100,14 +10473,14 @@
     {
       "id": "q-e885081ef86a9b63",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 14,
+      "paperOrder": 20,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第5讲 14",
       "summary": "跳转表 jmp *.L1(,%rdi,8) 的目标计算",
-      "content": "14.考虑下面汇编代码片段：\n```asm\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。\n1 ; mask != 0 ; mask = mask<<n\nx&mask\n（第14题） .L13",
+      "content": "14. 考虑下面的汇编代码片段：\n\n```asm\n.section .rodata\n    .align 8\n.L1:\n    .quad .L11\n    .quad .L12\n    .quad .L13\n    .quad .L14\n    ...\n    jmp *.L1(,%rdi,8)\n```\n\n若执行到 `jmp` 指令时，`%rdi` 的值为 2，则该指令会跳转到 {{blank:q14-target}} 指向的位置。\n答案：`.L13`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10125,20 +10498,42 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/189.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "14.考虑下面汇编代码片段：\n```asm\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。",
+        "stem": "14. 考虑下面的汇编代码片段：\n\n```asm\n.section .rodata\n    .align 8\n.L1:\n    .quad .L11\n    .quad .L12\n    .quad .L13\n    .quad .L14\n    ...\n    jmp *.L1(,%rdi,8)\n```\n\n若执行到 `jmp` 指令时，`%rdi` 的值为 2，则该指令会跳转到 {{blank:q14-target}} 指向的位置。",
         "choices": [],
-        "answer": "1 ; mask != 0 ; mask = mask<<n\nx&mask\n（第14题） .L13"
+        "answer": "答案：`.L13`",
+        "blankAnswers": [
+          {
+            "id": "q14-target",
+            "acceptedAnswers": [
+              ".L13",
+              "L13"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q14-target",
+            "acceptedAnswers": [
+              ".L13",
+              "L13"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "14.考虑下面汇编代码片段：\n```asm\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。",
-        "answer": "1 ; mask != 0 ; mask = mask<<n\nx&mask\n（第14题） .L13"
+        "prompt": "14. 考虑下面的汇编代码片段：\n\n```asm\n.section .rodata\n    .align 8\n.L1:\n    .quad .L11\n    .quad .L12\n    .quad .L13\n    .quad .L14\n    ...\n    jmp *.L1(,%rdi,8)\n```\n\n若执行到 `jmp` 指令时，`%rdi` 的值为 2，则该指令会跳转到 {{blank:q14-target}} 指向的位置。",
+        "answer": "答案：`.L13`"
       },
       "presentation": {
         "status": "ready",
@@ -10148,14 +10543,14 @@
     {
       "id": "q-a3683993969e5d68",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 15,
+      "paperOrder": 21,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第6讲 15",
       "summary": "popq 指令各步骤与 %rsp 变化",
-      "content": "15.x86-64中，执行popq %rbx的操作依次为如下步骤：\n（1）从寄存器\n中读出数据x，以x为地址，读出对应内存中的数据y；\n（2）将（1）中提到的寄存器（加减多少）：\n；\n（3）将y存到寄存器\n中。\n%rsp\n加8\n%rbx",
+      "content": "15. x86-64 中，执行 `popq %rbx` 的操作依次为如下步骤：\n\n（1）从寄存器 {{blank:q15-stack-pointer}} 中读出数据 `x`，以 `x` 为地址，读出对应内存中的数据 `y`；\n\n（2）将（1）中提到的寄存器（加减多少）：{{blank:q15-adjustment}}；\n\n（3）将 `y` 存到寄存器 {{blank:q15-destination}} 中。\n答案：`%rsp`；加 8；`%rbx`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10175,18 +10570,78 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "15.x86-64中，执行popq %rbx的操作依次为如下步骤：\n（1）从寄存器\n中读出数据x，以x为地址，读出对应内存中的数据y；\n（2）将（1）中提到的寄存器（加减多少）：\n；\n（3）将y存到寄存器\n中。",
+        "stem": "15. x86-64 中，执行 `popq %rbx` 的操作依次为如下步骤：\n\n（1）从寄存器 {{blank:q15-stack-pointer}} 中读出数据 `x`，以 `x` 为地址，读出对应内存中的数据 `y`；\n\n（2）将（1）中提到的寄存器（加减多少）：{{blank:q15-adjustment}}；\n\n（3）将 `y` 存到寄存器 {{blank:q15-destination}} 中。",
         "choices": [],
-        "answer": "%rsp\n加8\n%rbx"
+        "answer": "答案：`%rsp`；加 8；`%rbx`",
+        "blankAnswers": [
+          {
+            "id": "q15-stack-pointer",
+            "acceptedAnswers": [
+              "%rsp",
+              "rsp"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q15-adjustment",
+            "acceptedAnswers": [
+              "加8",
+              "+8",
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q15-destination",
+            "acceptedAnswers": [
+              "%rbx",
+              "rbx"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q15-stack-pointer",
+            "acceptedAnswers": [
+              "%rsp",
+              "rsp"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q15-adjustment",
+            "acceptedAnswers": [
+              "加8",
+              "+8",
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q15-destination",
+            "acceptedAnswers": [
+              "%rbx",
+              "rbx"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "15.x86-64中，执行popq %rbx的操作依次为如下步骤：\n（1）从寄存器\n中读出数据x，以x为地址，读出对应内存中的数据y；\n（2）将（1）中提到的寄存器（加减多少）：\n；\n（3）将y存到寄存器\n中。",
-        "answer": "%rsp\n加8\n%rbx"
+        "prompt": "15. x86-64 中，执行 `popq %rbx` 的操作依次为如下步骤：\n\n（1）从寄存器 {{blank:q15-stack-pointer}} 中读出数据 `x`，以 `x` 为地址，读出对应内存中的数据 `y`；\n\n（2）将（1）中提到的寄存器（加减多少）：{{blank:q15-adjustment}}；\n\n（3）将 `y` 存到寄存器 {{blank:q15-destination}} 中。",
+        "answer": "答案：`%rsp`；加 8；`%rbx`"
       },
       "presentation": {
         "status": "ready",
@@ -10194,16 +10649,16 @@
       }
     },
     {
-      "id": "q-3c3aa356eeac67ff",
+      "id": "q-d88a44aeb2ce10d9",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 16,
+      "paperOrder": 22,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
-      "questionNo": "第6讲 16",
-      "summary": "过程调用栈帧、callq/ret、参数寄存器与被调用者保存",
-      "content": "16.以下两组对应的C语言代码和汇编语言代码：\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？\n（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。",
+      "questionNo": "第6讲 16（1）",
+      "summary": "callq/ret 对栈指针与返回地址的影响",
+      "content": "16. 以下两组对应的 C 语言代码和汇编语言代码：\n\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n\n（1）假设准备执行 `callq` 指令时，`%rsp` 内容为 `0x110`。执行完 `callq` 指令后，`%rsp` 内容为 {{blank:q16-rsp-after-call}}，`%rsp` 指向的内存中的数值为 {{blank:q16-return-address}}。随后执行完地址 `400657` 处的 `retq` 指令后，`%rsp` 内容为 {{blank:q16-rsp-after-ret}}。（均为十六进制）\n答案：`0x108`；`0x400649`；`0x110`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10215,26 +10670,366 @@
         "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
         "lines": {
           "start": 217,
-          "end": 251
+          "end": 244
         },
         "aliases": [],
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/217.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "16.以下两组对应的C语言代码和汇编语言代码：\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？",
+        "stem": "16. 以下两组对应的 C 语言代码和汇编语言代码：\n\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n\n（1）假设准备执行 `callq` 指令时，`%rsp` 内容为 `0x110`。执行完 `callq` 指令后，`%rsp` 内容为 {{blank:q16-rsp-after-call}}，`%rsp` 指向的内存中的数值为 {{blank:q16-return-address}}。随后执行完地址 `400657` 处的 `retq` 指令后，`%rsp` 内容为 {{blank:q16-rsp-after-ret}}。（均为十六进制）",
         "choices": [],
-        "answer": "（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。"
+        "answer": "答案：`0x108`；`0x400649`；`0x110`",
+        "blankAnswers": [
+          {
+            "id": "q16-rsp-after-call",
+            "acceptedAnswers": [
+              "0x108",
+              "108"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-return-address",
+            "acceptedAnswers": [
+              "0x400649",
+              "400649"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-rsp-after-ret",
+            "acceptedAnswers": [
+              "0x110",
+              "110"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q16-rsp-after-call",
+            "acceptedAnswers": [
+              "0x108",
+              "108"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-return-address",
+            "acceptedAnswers": [
+              "0x400649",
+              "400649"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-rsp-after-ret",
+            "acceptedAnswers": [
+              "0x110",
+              "110"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "16.以下两组对应的C语言代码和汇编语言代码：\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？",
-        "answer": "（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。"
+        "prompt": "16. 以下两组对应的 C 语言代码和汇编语言代码：\n\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n\n（1）假设准备执行 `callq` 指令时，`%rsp` 内容为 `0x110`。执行完 `callq` 指令后，`%rsp` 内容为 {{blank:q16-rsp-after-call}}，`%rsp` 指向的内存中的数值为 {{blank:q16-return-address}}。随后执行完地址 `400657` 处的 `retq` 指令后，`%rsp` 内容为 {{blank:q16-rsp-after-ret}}。（均为十六进制）",
+        "answer": "答案：`0x108`；`0x400649`；`0x110`"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q16",
+        "questionId": "q-dbff5f97713c99d7",
+        "title": "第6讲 16",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-ec8d099be2077dda",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 23,
+      "moduleId": "machine_prog",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第6讲 16（2）",
+      "summary": "参数与返回值所在寄存器",
+      "content": "（2）C 代码中的下列变量分别保存在哪个寄存器中：\n\n`x`：{{blank:q16-x}}　`y`：{{blank:q16-y}}　`a`：{{blank:q16-a}}　`b`：{{blank:q16-b}}　`s`：{{blank:q16-s}}\n答案：`x`：`%rdi`；`y`：`%rsi`；`a`：`%rdi`；`b`：`%rsi`；`s`：`%rax`。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 245,
+          "end": 246
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/245.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "（2）C 代码中的下列变量分别保存在哪个寄存器中：\n\n`x`：{{blank:q16-x}}　`y`：{{blank:q16-y}}　`a`：{{blank:q16-a}}　`b`：{{blank:q16-b}}　`s`：{{blank:q16-s}}",
+        "choices": [],
+        "answer": "答案：`x`：`%rdi`；`y`：`%rsi`；`a`：`%rdi`；`b`：`%rsi`；`s`：`%rax`。",
+        "blankAnswers": [
+          {
+            "id": "q16-x",
+            "acceptedAnswers": [
+              "%rdi",
+              "rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-y",
+            "acceptedAnswers": [
+              "%rsi",
+              "rsi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-a",
+            "acceptedAnswers": [
+              "%rdi",
+              "rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-b",
+            "acceptedAnswers": [
+              "%rsi",
+              "rsi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-s",
+            "acceptedAnswers": [
+              "%rax",
+              "rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q16-x",
+            "acceptedAnswers": [
+              "%rdi",
+              "rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-y",
+            "acceptedAnswers": [
+              "%rsi",
+              "rsi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-a",
+            "acceptedAnswers": [
+              "%rdi",
+              "rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-b",
+            "acceptedAnswers": [
+              "%rsi",
+              "rsi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q16-s",
+            "acceptedAnswers": [
+              "%rax",
+              "rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（2）C 代码中的下列变量分别保存在哪个寄存器中：\n\n`x`：{{blank:q16-x}}　`y`：{{blank:q16-y}}　`a`：{{blank:q16-a}}　`b`：{{blank:q16-b}}　`s`：{{blank:q16-s}}",
+        "answer": "答案：`x`：`%rdi`；`y`：`%rsi`；`a`：`%rdi`；`b`：`%rsi`；`s`：`%rax`。"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q16",
+        "questionId": "q-dbff5f97713c99d7",
+        "title": "第6讲 16",
+        "order": 2
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-f2d08e525678649c",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 24,
+      "moduleId": "machine_prog",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第6讲 16（3）",
+      "summary": "被调用者保存寄存器规则",
+      "content": "（3）汇编代码中，地址 `400641` 的指令修改了 `%rbx`，地址 `400649` 的指令使用了 `%rbx`，而二者中间有过程调用 `call`。是什么机制保证了 `%rbx` 不会被修改？\n答案：ABI 规定 `%rbx` 是被调用者保存寄存器；被调用过程若修改 `%rbx`，必须先保存并在返回前恢复。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 247,
+          "end": 249
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/247.md"
+      },
+      "layout": {
+        "mode": "short",
+        "selection": null,
+        "stem": "（3）汇编代码中，地址 `400641` 的指令修改了 `%rbx`，地址 `400649` 的指令使用了 `%rbx`，而二者中间有过程调用 `call`。是什么机制保证了 `%rbx` 不会被修改？",
+        "choices": [],
+        "answer": "答案：ABI 规定 `%rbx` 是被调用者保存寄存器；被调用过程若修改 `%rbx`，必须先保存并在返回前恢复。"
+      },
+      "partInteraction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（3）汇编代码中，地址 `400641` 的指令修改了 `%rbx`，地址 `400649` 的指令使用了 `%rbx`，而二者中间有过程调用 `call`。是什么机制保证了 `%rbx` 不会被修改？",
+        "answer": "答案：ABI 规定 `%rbx` 是被调用者保存寄存器；被调用过程若修改 `%rbx`，必须先保存并在返回前恢复。"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q16",
+        "questionId": "q-dbff5f97713c99d7",
+        "title": "第6讲 16",
+        "order": 3
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-ce58933dd5b2fa33",
+      "paperId": "p-febcfbeee0f364b2",
+      "paperOrder": 25,
+      "moduleId": "machine_prog",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第1次）",
+      "questionNo": "第6讲 16（4）",
+      "summary": "交换实参顺序时的寄存器变化",
+      "content": "（4）如果把 C 代码中的 `mult2(x, y)` 改为 `mult2(y, x)`，汇编代码会有什么变化？\n答案：需要在 `call` 指令之前交换 `%rdi` 和 `%rsi` 的内容。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第1次阶段测验-带答案.md",
+        "lines": {
+          "start": 250,
+          "end": 251
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/250.md"
+      },
+      "layout": {
+        "mode": "short",
+        "selection": null,
+        "stem": "（4）如果把 C 代码中的 `mult2(x, y)` 改为 `mult2(y, x)`，汇编代码会有什么变化？",
+        "choices": [],
+        "answer": "答案：需要在 `call` 指令之前交换 `%rdi` 和 `%rsi` 的内容。"
+      },
+      "partInteraction": {
+        "kind": "short-answer",
+        "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（4）如果把 C 代码中的 `mult2(x, y)` 改为 `mult2(y, x)`，汇编代码会有什么变化？",
+        "answer": "答案：需要在 `call` 指令之前交换 `%rdi` 和 `%rsi` 的内容。"
+      },
+      "group": {
+        "id": "p-febcfbeee0f364b2:2025-stage1-q16",
+        "questionId": "q-dbff5f97713c99d7",
+        "title": "第6讲 16",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -10244,7 +11039,7 @@
     {
       "id": "q-c14b1d06d6cfa8ba",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 17,
+      "paperOrder": 26,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
@@ -10273,11 +11068,79 @@
         "selection": null,
         "stem": "17. 考虑以下 C 语言代码：\n```c\nlong bit_not1(long a) {\n    long x = ~p;\n    return x;\n}\nlong bit_not2(long *p) {\n    long x = *p;\n    long y = ~x\n    return y;\n}\nlong call_bitnot() {\n    long v0 = 1010;\n    long v1 = 1010;\n    long v2 = bit_not1(v0);\n    long v3 = bit_not2(&v1);\n    return v2+v3;\n}\n```\n下列变量分别存放在寄存器还是内存中？\nv0：{{blank:q17-v0}}　v1：{{blank:q17-v1}}　v2：{{blank:q17-v2}}　v3：{{blank:q17-v3}}",
         "choices": [],
-        "answer": "v0：寄存器；v1：内存；v2：寄存器；v3：寄存器。\n\n注：原卷将 `long x = ~p;`（预期应为 `~a`）以及 `long y = ~x`（缺少分号）印成笔误；此处保留原题写法。"
+        "answer": "v0：寄存器；v1：内存；v2：寄存器；v3：寄存器。\n\n注：原卷将 `long x = ~p;`（预期应为 `~a`）以及 `long y = ~x`（缺少分号）印成笔误；此处保留原题写法。",
+        "blankAnswers": [
+          {
+            "id": "q17-v0",
+            "acceptedAnswers": [
+              "寄存器"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q17-v1",
+            "acceptedAnswers": [
+              "内存"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q17-v2",
+            "acceptedAnswers": [
+              "寄存器"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q17-v3",
+            "acceptedAnswers": [
+              "寄存器"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q17-v0",
+            "acceptedAnswers": [
+              "寄存器"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q17-v1",
+            "acceptedAnswers": [
+              "内存"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q17-v2",
+            "acceptedAnswers": [
+              "寄存器"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q17-v3",
+            "acceptedAnswers": [
+              "寄存器"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
@@ -10292,7 +11155,7 @@
     {
       "id": "q-8e5e9e4fc14730b5",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 18,
+      "paperOrder": 27,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
@@ -10321,11 +11184,87 @@
         "selection": null,
         "stem": "18.考虑下面的C语言代码:\n```c\n#define CNT 4\nint arr_data[CNT][CNT] =\n    {{900, 901, 902, 903},\n     {910, 911, 912, 913},\n     {920, 921, 922, 923},\n     {930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\n    return arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```asm\nget_digit:\n    shlq $4, {{blank:q18-shift-register}}\n    movl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```",
         "choices": [],
-        "answer": "依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。"
+        "answer": "依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。",
+        "blankAnswers": [
+          {
+            "id": "q18-shift-register",
+            "acceptedAnswers": [
+              "%rdi",
+              "rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q18-base",
+            "acceptedAnswers": [
+              "%rdi",
+              "rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q18-index",
+            "acceptedAnswers": [
+              "%rsi",
+              "rsi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q18-destination",
+            "acceptedAnswers": [
+              "%eax",
+              "eax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q18-shift-register",
+            "acceptedAnswers": [
+              "%rdi",
+              "rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q18-base",
+            "acceptedAnswers": [
+              "%rdi",
+              "rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q18-index",
+            "acceptedAnswers": [
+              "%rsi",
+              "rsi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q18-destination",
+            "acceptedAnswers": [
+              "%eax",
+              "eax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
@@ -10340,7 +11279,7 @@
     {
       "id": "q-a44ec5ff33556a53",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 19,
+      "paperOrder": 28,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
@@ -10428,7 +11367,7 @@
     {
       "id": "q-339849bc860968a1",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 20,
+      "paperOrder": 29,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
@@ -10496,14 +11435,14 @@
     {
       "id": "q-735c91c07220052a",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 21,
+      "paperOrder": 30,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 21",
       "summary": "数组循环 C 代码与汇编，求常量 A、B（OCR 错行）",
-      "content": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}\nA：9；B：5",
+      "content": "21. 考虑下面的代码，`A` 和 `B` 是用 `#define` 定义的常数：\n\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n\n求 `A` 和 `B` 的值是多少？\n\n`A`：{{blank:q21-a}}　`B`：{{blank:q21-b}}\n答案：`A = 9`；`B = 5`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10521,20 +11460,56 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/324.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}",
+        "stem": "21. 考虑下面的代码，`A` 和 `B` 是用 `#define` 定义的常数：\n\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n\n求 `A` 和 `B` 的值是多少？\n\n`A`：{{blank:q21-a}}　`B`：{{blank:q21-b}}",
         "choices": [],
-        "answer": "A：9；B：5"
+        "answer": "答案：`A = 9`；`B = 5`",
+        "blankAnswers": [
+          {
+            "id": "q21-a",
+            "acceptedAnswers": [
+              "9"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q21-b",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q21-a",
+            "acceptedAnswers": [
+              "9"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q21-b",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}",
-        "answer": "A：9；B：5"
+        "prompt": "21. 考虑下面的代码，`A` 和 `B` 是用 `#define` 定义的常数：\n\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n\n求 `A` 和 `B` 的值是多少？\n\n`A`：{{blank:q21-a}}　`B`：{{blank:q21-b}}",
+        "answer": "答案：`A = 9`；`B = 5`"
       },
       "presentation": {
         "status": "ready",
@@ -10544,14 +11519,14 @@
     {
       "id": "q-d4a11a242626c6f1",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 22,
+      "paperOrder": 31,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 22",
       "summary": "浮点参数经 xmm 寄存器传递的汇编分析",
-      "content": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:\n%rsi c:%xmm0 result:%xmm0",
+      "content": "22. 考虑下面的 C 语言代码和对应的汇编语言代码：\n\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\n\nC 代码中的下列变量分别位于哪个寄存器中？\n\n`b`：{{blank:q22-b}}　`c`：{{blank:q22-c}}　`result`：{{blank:q22-result}}\n答案：`b`：`%rsi`；`c`：`%xmm0`；`result`：`%xmm0`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10569,20 +11544,78 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/370.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:",
+        "stem": "22. 考虑下面的 C 语言代码和对应的汇编语言代码：\n\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\n\nC 代码中的下列变量分别位于哪个寄存器中？\n\n`b`：{{blank:q22-b}}　`c`：{{blank:q22-c}}　`result`：{{blank:q22-result}}",
         "choices": [],
-        "answer": "%rsi c:%xmm0 result:%xmm0"
+        "answer": "答案：`b`：`%rsi`；`c`：`%xmm0`；`result`：`%xmm0`",
+        "blankAnswers": [
+          {
+            "id": "q22-b",
+            "acceptedAnswers": [
+              "%rsi",
+              "rsi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q22-c",
+            "acceptedAnswers": [
+              "%xmm0",
+              "xmm0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q22-result",
+            "acceptedAnswers": [
+              "%xmm0",
+              "xmm0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q22-b",
+            "acceptedAnswers": [
+              "%rsi",
+              "rsi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q22-c",
+            "acceptedAnswers": [
+              "%xmm0",
+              "xmm0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q22-result",
+            "acceptedAnswers": [
+              "%xmm0",
+              "xmm0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:",
-        "answer": "%rsi c:%xmm0 result:%xmm0"
+        "prompt": "22. 考虑下面的 C 语言代码和对应的汇编语言代码：\n\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\n\nC 代码中的下列变量分别位于哪个寄存器中？\n\n`b`：{{blank:q22-b}}　`c`：{{blank:q22-c}}　`result`：{{blank:q22-result}}",
+        "answer": "答案：`b`：`%rsi`；`c`：`%xmm0`；`result`：`%xmm0`"
       },
       "presentation": {
         "status": "ready",
@@ -10592,7 +11625,7 @@
     {
       "id": "q-fb0c6fbc0e9f5b44",
       "paperId": "p-febcfbeee0f364b2",
-      "paperOrder": 24,
+      "paperOrder": 33,
       "moduleId": "machine_prog",
       "year": 2025,
       "examType": "阶段测验",
@@ -10621,11 +11654,159 @@
         "selection": null,
         "stem": "24.课上讲授了防御或者避免缓冲区攻击的几种主要方法，分析它们的特点。以普遍性情况\n为准，不用考虑少见的软硬件需求。（每行算作一空）\n| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | {{blank:q24-aslr-source}} | {{blank:q24-aslr-recompile}} | {{blank:q24-aslr-hardware}} |\n| 在内存访问权限上设置“可执行”位 | {{blank:q24-nx-source}} | {{blank:q24-nx-recompile}} | {{blank:q24-nx-hardware}} |\n| “金丝雀”（哨兵）机制 | {{blank:q24-canary-source}} | {{blank:q24-canary-recompile}} | {{blank:q24-canary-hardware}} |",
         "choices": [],
-        "answer": "| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | 否 | 否 | 否 |\n| 在内存访问权限上设置“可执行”位 | 否 | 否 | 是 |\n| “金丝雀”（哨兵）机制 | 否 | 是 | 否 |"
+        "answer": "| 方法 | 是否需要修改用户程序源代码？ | 是否需要重新编译用户程序？ | 是否需要更换新的 CPU 硬件？ |\n| --- | --- | --- | --- |\n| 使用 `fgets()` 等安全的库函数 | 是 | 是 | 否 |\n| 栈初始位置随机化 | 否 | 否 | 否 |\n| 在内存访问权限上设置“可执行”位 | 否 | 否 | 是 |\n| “金丝雀”（哨兵）机制 | 否 | 是 | 否 |",
+        "blankAnswers": [
+          {
+            "id": "q24-aslr-source",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-aslr-recompile",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-aslr-hardware",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-nx-source",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-nx-recompile",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-nx-hardware",
+            "acceptedAnswers": [
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-canary-source",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-canary-recompile",
+            "acceptedAnswers": [
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-canary-hardware",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q24-aslr-source",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-aslr-recompile",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-aslr-hardware",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-nx-source",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-nx-recompile",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-nx-hardware",
+            "acceptedAnswers": [
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-canary-source",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-canary-recompile",
+            "acceptedAnswers": [
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q24-canary-hardware",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
