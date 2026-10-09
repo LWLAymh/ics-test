@@ -127,14 +127,25 @@
         "choices": [],
         "answer": "答案：A. 表中每次访问都是 miss（原卷红色参考答案全部为 M）：\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | M | M | M | M | M | M | M |\n| 1 | M | M | M | M | M | M | M | M |\n| 2 | M | M | M | M | M | M | M | M |\n| 3 | M | M | M | M | M | M | M | M |\n\nmiss rate = 1（100%）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "**Problem E -- The Hit or Miss Question (15 pts)**\n\nGiven a 32-bit Linux system that has a 2-way associative cache of size 128 bytes with 32 bytes\nper block. Long longs are 8 bytes. For all parts, assume that table starts at address 0x0.\n\n```c\nint i;\n\nint j;\n\nlong long table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n    for (i = 0; i < 4; i++) {\n\n        table[i][j] = i + j;\n\n    }\n\n}\n```\n\n**A.** This problem refers to code sample 1. In the table below write down in each space whether that\nelement’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 |  |  |  |  |  |  |  |  |\n| 1 |  |  |  |  |  |  |  |  |\n| 2 |  |  |  |  |  |  |  |  |\n| 3 |  |  |  |  |  |  |  |  |\n\n\nWhat is the miss rate of this code sample?",
         "answer": "答案：A. 表中每次访问都是 miss（原卷红色参考答案全部为 M）：\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | M | M | M | M | M | M | M |\n| 1 | M | M | M | M | M | M | M | M |\n| 2 | M | M | M | M | M | M | M | M |\n| 3 | M | M | M | M | M | M | M | M |\n\nmiss rate = 1（100%）"
+      },
+      "group": {
+        "id": "p-ea869cda0eb89689:2012-mid-problem-e",
+        "questionId": "q-cae27331f3036dc5",
+        "title": "Problem E",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -175,14 +186,25 @@
         "choices": [],
         "answer": "答案：B 的 4×8 命中/缺失表 —— 第 0 列全为 M，第 1–7 列全为 H。\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = **1/8**（32 次访问中 4 次缺失）\n\n解析：\n\n1. 先把 cache 参数换算清楚：容量 128 B ÷ 块大小 32 B = 4 个块；2 路组相联 ⇒ 4 ÷ 2 = **2 组**（Set 0 / Set 1）。于是「块号的奇偶」就是组索引（组索引 = 块号 mod 2），块内偏移占低 5 位，剩下的高位是标记。\n2. 本题的样例是 `int table[4][8]`（元素 4 字节）：一行 8 个 int = 32 字节，**正好等于一个 cache block**。所以整个数组 128 字节 = 4 个块，元素 `table[i][j]` 落在**块 i** 上；组索引 = `i mod 2`：第 0、2 行 → Set 0，第 1、3 行 → Set 1。每组只需要放 2 个块，恰好用满 2 路 —— 整个数组都能常驻 cache（这正是本题 C 部分所说「the entire array fits in the cache」）。\n3. 访问次序是 j 外层、i 内层（列优先遍历），每次访问 `table[i][j]`：\n   - j=0：依次访问 (0,0)(1,0)(2,0)(3,0)，落在块 0、1、2、3，cache 初始为空 ⇒ 4 次冷启动不命中，第 0 列 4 个格子全为 M；\n   - j=1…7：每个 (i,j) 仍然落在块 i，而这些块在 j=0 时已经被取进 cache，且期间没有任何访问会把它们挤出（每组只用到 2 个块、2 路）⇒ 第 1–7 列全部为 H。\n4. 缺失率 = 4 次缺失 ÷ 32 次访问 = 1/8。\n\n> 对照 code sample 1（上一小题）：那时 `table` 是 `long long`，一行 64 字节 = 2 个块，`table[i][j]` 落在块 `2i + (j≥4 ? 1 : 0)`，于是 Set 0 要容纳块 0、2、4、6（4 个块）、Set 1 要容纳块 1、3、5、7（4 个块），而每组只有 2 路 ⇒ 每次访问都把上一个块冲突挤出，32 次访问**全部缺失**，缺失率 1。所以 C 部分说第二个样例更好：它只有冷启动不命中。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "**B.** This problem refers to code sample above. In the table below write down in each space whether\nthat element’s access will be a hit or a miss. Indicate hits with a ‘H’ and misses with a ‘M’.\n\n> 原卷 Problem E 的公共配置（见原卷第 11 页）：32 位 Linux 系统，2 路组相联（2-way associative）cache，容量 128 字节，块大小 32 字节；`long long` 为 8 字节；`table` 起始地址为 0x0。\n>\n> 本题（code sample above）的代码如下：\n```c\nint i;\n\nint j;\n\nint table[4][8];\n\nfor (j = 0; j < 8; j++) {\n\n for (i = 0; i < 4; i++) {\n\n table [i] [j] = i + j;\n\n table[j][i]?\n\n }\n\n}\n```\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 |  |  |  |  |  |  |  |  |\n| 1 |  |  |  |  |  |  |  |  |\n| 2 |  |  |  |  |  |  |  |  |\n| 3 |  |  |  |  |  |  |  |  |\n\nWhat is the miss rate of this code sample?",
         "answer": "答案：B 的 4×8 命中/缺失表 —— 第 0 列全为 M，第 1–7 列全为 H。\n\n| | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 0 | M | H | H | H | H | H | H | H |\n| 1 | M | H | H | H | H | H | H | H |\n| 2 | M | H | H | H | H | H | H | H |\n| 3 | M | H | H | H | H | H | H | H |\n\nmiss rate = **1/8**（32 次访问中 4 次缺失）\n\n解析：\n\n1. 先把 cache 参数换算清楚：容量 128 B ÷ 块大小 32 B = 4 个块；2 路组相联 ⇒ 4 ÷ 2 = **2 组**（Set 0 / Set 1）。于是「块号的奇偶」就是组索引（组索引 = 块号 mod 2），块内偏移占低 5 位，剩下的高位是标记。\n2. 本题的样例是 `int table[4][8]`（元素 4 字节）：一行 8 个 int = 32 字节，**正好等于一个 cache block**。所以整个数组 128 字节 = 4 个块，元素 `table[i][j]` 落在**块 i** 上；组索引 = `i mod 2`：第 0、2 行 → Set 0，第 1、3 行 → Set 1。每组只需要放 2 个块，恰好用满 2 路 —— 整个数组都能常驻 cache（这正是本题 C 部分所说「the entire array fits in the cache」）。\n3. 访问次序是 j 外层、i 内层（列优先遍历），每次访问 `table[i][j]`：\n   - j=0：依次访问 (0,0)(1,0)(2,0)(3,0)，落在块 0、1、2、3，cache 初始为空 ⇒ 4 次冷启动不命中，第 0 列 4 个格子全为 M；\n   - j=1…7：每个 (i,j) 仍然落在块 i，而这些块在 j=0 时已经被取进 cache，且期间没有任何访问会把它们挤出（每组只用到 2 个块、2 路）⇒ 第 1–7 列全部为 H。\n4. 缺失率 = 4 次缺失 ÷ 32 次访问 = 1/8。\n\n> 对照 code sample 1（上一小题）：那时 `table` 是 `long long`，一行 64 字节 = 2 个块，`table[i][j]` 落在块 `2i + (j≥4 ? 1 : 0)`，于是 Set 0 要容纳块 0、2、4、6（4 个块）、Set 1 要容纳块 1、3、5、7（4 个块），而每组只有 2 路 ⇒ 每次访问都把上一个块冲突挤出，32 次访问**全部缺失**，缺失率 1。所以 C 部分说第二个样例更好：它只有冷启动不命中。"
+      },
+      "group": {
+        "id": "p-ea869cda0eb89689:2012-mid-problem-e",
+        "questionId": "q-cae27331f3036dc5",
+        "title": "Problem E",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -223,14 +245,25 @@
         "choices": [],
         "answer": "答案：The second sample performs better than the first because it makes better use of the cache. In the first, heavy conflict results in a large number of evictions. In the second, the entire array fits in the cache, and the only misses are cold misses."
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "**C.** One code sample performs better than the other. Why is this?",
         "answer": "答案：The second sample performs better than the first because it makes better use of the cache. In the first, heavy conflict results in a large number of evictions. In the second, the entire array fits in the cache, and the only misses are cold misses."
+      },
+      "group": {
+        "id": "p-ea869cda0eb89689:2012-mid-problem-e",
+        "questionId": "q-cae27331f3036dc5",
+        "title": "Problem E",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -1229,7 +1262,7 @@
           }
         ]
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true,
         "blankAnswers": [
@@ -1319,10 +1352,21 @@
           }
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "第八题（10 分）\n\n假设存在一个能够存储四个 Block 的 Cache，每一个 Block 的长度为 2Byte。假设内存空间大小共是 16Byte，即内存空间地址长度一共是 4bit，可访问地址为(0~15)，数据访问地址序列如下所示，访问数据单位是 Byte，默认替换策略是 LRU。\n\n2　3　10　9　6　8\n\n1）如果 Cache 的结构是下图所示（S=2， E=2），请在下图空白处填入访问上述六次数据访问后 Cache 的状态。注：用[0-1]表示地址 0 至 1 上对应的数据 （4 分）\n\n|  | V | TAG | Block | V | TAG | Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | {{blank:lru-s0-v0}} | {{blank:lru-s0-tag0}} | {{blank:lru-s0-block0}} | {{blank:lru-s0-v1}} | — | — |\n| set1 | {{blank:lru-s1-v0}} | {{blank:lru-s1-tag0}} | {{blank:lru-s1-block0}} | {{blank:lru-s1-v1}} | {{blank:lru-s1-tag1}} | {{blank:lru-s1-block1}} |",
         "answer": "答案：访问上述六次数据后 Cache 的状态（S=2, E=2, LRU）：\n\n|  | V | TAG | Block | V | TAG | Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 10 | [8-9] | 0 |  |  |\n| set1 | 1 | 01 | [6-7] | 1 | 10 | [10-11] |"
+      },
+      "group": {
+        "id": "p-4486554924f4e320:2014-mid-q8",
+        "questionId": "q-6fe57822597184ce",
+        "title": "第八题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -1375,7 +1419,7 @@
           }
         ]
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true,
         "blankAnswers": [
@@ -1389,10 +1433,21 @@
           }
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "2）这六次数据访问一共产生了多少次 Miss？{{blank:miss-count}}（2 分）",
         "answer": "答案：4"
+      },
+      "group": {
+        "id": "p-4486554924f4e320:2014-mid-q8",
+        "questionId": "q-6fe57822597184ce",
+        "title": "第八题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -1522,7 +1577,7 @@
           }
         ]
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true,
         "blankAnswers": [
@@ -1613,10 +1668,21 @@
           }
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "3）如果 Cache 的替换策略改成 MRU（即，最近使用的数据被替换出去），请在下图空白处填入访问上述六次数据访问后 Cache 的状态（2 分）。\n\n|  | V | TAG | Block | V | TAG | Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | {{blank:mru-s0-v0}} | {{blank:mru-s0-tag0}} | {{blank:mru-s0-block0}} | {{blank:mru-s0-v1}} | — | — |\n| set1 | {{blank:mru-s1-v0}} | {{blank:mru-s1-tag0}} | {{blank:mru-s1-block0}} | {{blank:mru-s1-v1}} | {{blank:mru-s1-tag1}} | {{blank:mru-s1-block1}} |",
         "answer": "答案：替换策略改成 MRU 后 Cache 的状态：\n\n|  | V | TAG | Block | V | TAG | Block |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 10 | [8-9] | 0 |  |  |\n| set1 | 1 | 00 | [2-3] | 1 | 01 | [6-7] |"
+      },
+      "group": {
+        "id": "p-4486554924f4e320:2014-mid-q8",
+        "questionId": "q-6fe57822597184ce",
+        "title": "第八题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -1669,7 +1735,7 @@
           }
         ]
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true,
         "blankAnswers": [
@@ -1683,10 +1749,21 @@
           }
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "4）这六次数据访问一共产生了多少次 Miss？{{blank:miss-count}}（2 分）",
         "answer": "答案：4"
+      },
+      "group": {
+        "id": "p-4486554924f4e320:2014-mid-q8",
+        "questionId": "q-6fe57822597184ce",
+        "title": "第八题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -2169,14 +2246,25 @@
         "choices": [],
         "answer": "答案：1) 4 次失效\n2) 16 次失效\n3) A；会引起 14 次失效\n4) 3) 运行后 cache 的最终状态：\n\n|  | V | Tag | Data | V | Tag | Data |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 101 | Array[1][0]~Array[1][3] | 1 | 100 | Array[0][0]~Array[0][3] |\n| set1 | 1 | 110 | Array[2][0]~Array[2][3] | 1 | 111 | Array[3][0]~Array[3][3] |"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第五题（20分）\n (每个填空和选择1分，表格每相邻两格1分)\n1.仔细阅读下面的程序，根据条件回答下列各题（10分）\n•  地址宽度为7，数组的起始地址为0x1000000\n•  Block Size = 4 Byte，Set = 4，两路组相连.\n•  替换算法为 LRU（最近最少使用）\n```\n#define LENGTH 8\nvoid clear4x4 ( char array[LENGTH][LENGTH] )  {\n  int row, col ;\n  for ( col = 0 ; col < 4; col++ ) {\n    for ( row = 0; row < 4 ; row++ ) {\n      array[ row] [ col] = 0;\n    }\n  }\n}\n```\n1)  以上程序执行会引起多少次失效？\n______\n2)  如果LENGTH改为16，会引起多少次失效？\n______\n3)  如果LENGTH变为17，与2)相比，下面描述正确的是：______，会引起 ______ 次\n失效。\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n4)  请画出3）运行后cache中set0和set1的最终状态。\n（3）运行后 cache 中 set0 和 set1 的最终状态见答案）",
         "answer": "答案：1) 4 次失效\n2) 16 次失效\n3) A；会引起 14 次失效\n4) 3) 运行后 cache 的最终状态：\n\n|  | V | Tag | Data | V | Tag | Data |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 101 | Array[1][0]~Array[1][3] | 1 | 100 | Array[0][0]~Array[0][3] |\n| set1 | 1 | 110 | Array[2][0]~Array[2][3] | 1 | 111 | Array[3][0]~Array[3][3] |"
+      },
+      "group": {
+        "id": "p-89e8b793519e36c6:2015-mid-q5",
+        "questionId": "q-6422fce8a943ccfa",
+        "title": "第五题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -2219,14 +2307,25 @@
         "choices": [],
         "answer": "答案：1) Tag 的位数为 6\n2) LENGTH=8 时，会引起 4 次失效\n3) LENGTH 改为 16 时，会引起 4 次失效\n4) C（16×16 比 17×17 产生更少的失效次数）\n5) 4) 执行后 cache 的最终状态：\n\n| | V | Tag | Data |\n| --- | --- | --- | --- |\n| | 1 | 100000 | Array[0][0]~Array[0][3] |\n| | 1 | 100101 | Array[1][0]~Array[1][3] |\n| | 1 | 101001 | Array[2][0]~Array[2][3] |\n| | 1 | 101101 | Array[3][0]~Array[3][3] |"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2.改变假设条件，回答下列各题（10分）\n•  地址宽度为8，数组的起始地址为0x10000000\n•  Cache容量为16 Byte，Block Size = 4 Byte，全相联Cache\n•  替换算法为 LRU（最近最少使用）\n1)  Tag的位数为 ______\n2)  如果执行上述程序，当LENGTH=8时，会引起多少次失效？\n______\n3)  如果LENGTH改为16，会引起多少次失效？\n______\n4)  如果LENGTH变为17，与3)相比，下面描述正确的是：______\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n5)  请画出4）执行后cache的最终状态\n（4）执行后 cache 的最终状态见答案）",
         "answer": "答案：1) Tag 的位数为 6\n2) LENGTH=8 时，会引起 4 次失效\n3) LENGTH 改为 16 时，会引起 4 次失效\n4) C（16×16 比 17×17 产生更少的失效次数）\n5) 4) 执行后 cache 的最终状态：\n\n| | V | Tag | Data |\n| --- | --- | --- | --- |\n| | 1 | 100000 | Array[0][0]~Array[0][3] |\n| | 1 | 100101 | Array[1][0]~Array[1][3] |\n| | 1 | 101001 | Array[2][0]~Array[2][3] |\n| | 1 | 101101 | Array[3][0]~Array[3][3] |"
+      },
+      "group": {
+        "id": "p-89e8b793519e36c6:2015-mid-q5",
+        "questionId": "q-6422fce8a943ccfa",
+        "title": "第五题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -5208,7 +5307,7 @@
       "exam": "2021期中",
       "questionNo": "第五题 2(2)",
       "summary": "命中次数计算与组相联/块大小的影响",
-      "content": "（2）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问\n：\n```\n# define N 4\nchar x[N];\nshort y[N];\nint main() {\nfor (int i = 0; i < N; i++) {\nx[i] = i;\ny[i] = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组x、y的起始地址分别为 0x0000、0x0008，cache block大小为2\nBytes，组相联度为2，则命中次数为 {{blank:q2-x-y-2byte-hits}} 次。\n（共5分）\n2    次。（3分）\n② 若数组x、y的起始地址与①相同，cache block大小为4 Bytes，则无论\n采取何种方式组织cache、且无论如何增大cache的大小，命中次数至多为 {{blank:q2-x-y-4byte-max-hits}} 次。（2分）\n解析：考察6.4.3“组相联高速缓存”\n（1）中，仅有对x[1]和x[3]的访问会命中\n（2）中，只需要考虑访问序列分散在几个block中（block大小为4 Byte），\n因此去掉地址的后2个bit，分析还有多少不重复的元素即可\n评论：这两空是较为基础的计算，如果按照朴素的方法计算，有一定的计算量，难\n度适中；如果能够找到规律，计算其实较为简单",
+      "content": "（2）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问\n：\n```\n# define N 4\nchar x[N];\nshort y[N];\nint main() {\n    for (int i = 0; i < N; i++) {\n        x[i] = i;\n        y[i] = 1 - i;\n    }\n    return 0;\n}\n```\n① 若数组x、y的起始地址分别为 0x0000、0x0008，cache block大小为2\nBytes，组相联度为2，则命中次数为 {{blank:q2-x-y-2byte-hits}} 次。\n（共5分）\n2    次。（3分）\n② 若数组x、y的起始地址与①相同，cache block大小为4 Bytes，则无论\n采取何种方式组织cache、且无论如何增大cache的大小，命中次数至多为 {{blank:q2-x-y-4byte-max-hits}} 次。（2分）\n解析：考察6.4.3“组相联高速缓存”\n（1）中，仅有对x[1]和x[3]的访问会命中\n（2）中，只需要考虑访问序列分散在几个block中（block大小为4 Byte），\n因此去掉地址的后2个bit，分析还有多少不重复的元素即可\n评论：这两空是较为基础的计算，如果按照朴素的方法计算，有一定的计算量，难\n度适中；如果能够找到规律，计算其实较为简单",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5233,7 +5332,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "（2）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问\n：\n```\n# define N 4\nchar x[N];\nshort y[N];\nint main() {\nfor (int i = 0; i < N; i++) {\nx[i] = i;\ny[i] = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组x、y的起始地址分别为 0x0000、0x0008，cache block大小为2\nBytes，组相联度为2，则命中次数为 {{blank:q2-x-y-2byte-hits}} 次。",
+        "stem": "（2）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问\n：\n```\n# define N 4\nchar x[N];\nshort y[N];\nint main() {\n    for (int i = 0; i < N; i++) {\n        x[i] = i;\n        y[i] = 1 - i;\n    }\n    return 0;\n}\n```\n① 若数组x、y的起始地址分别为 0x0000、0x0008，cache block大小为2\nBytes，组相联度为2，则命中次数为 {{blank:q2-x-y-2byte-hits}} 次。",
         "choices": [],
         "answer": "（共5分）\n2    次。（3分）\n② 若数组x、y的起始地址与①相同，cache block大小为4 Bytes，则无论\n采取何种方式组织cache、且无论如何增大cache的大小，命中次数至多为 {{blank:q2-x-y-4byte-max-hits}} 次。（2分）\n解析：考察6.4.3“组相联高速缓存”\n（1）中，仅有对x[1]和x[3]的访问会命中\n（2）中，只需要考虑访问序列分散在几个block中（block大小为4 Byte），\n因此去掉地址的后2个bit，分析还有多少不重复的元素即可\n评论：这两空是较为基础的计算，如果按照朴素的方法计算，有一定的计算量，难\n度适中；如果能够找到规律，计算其实较为简单"
       },
@@ -5248,7 +5347,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "（2）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问\n：\n```\n# define N 4\nchar x[N];\nshort y[N];\nint main() {\nfor (int i = 0; i < N; i++) {\nx[i] = i;\ny[i] = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组x、y的起始地址分别为 0x0000、0x0008，cache block大小为2\nBytes，组相联度为2，则命中次数为 {{blank:q2-x-y-2byte-hits}} 次。",
+        "prompt": "（2）在如下代码中，假设初始时cache为空，只考虑读写数据引起的cache访\n问\n：\n```\n# define N 4\nchar x[N];\nshort y[N];\nint main() {\n    for (int i = 0; i < N; i++) {\n        x[i] = i;\n        y[i] = 1 - i;\n    }\n    return 0;\n}\n```\n① 若数组x、y的起始地址分别为 0x0000、0x0008，cache block大小为2\nBytes，组相联度为2，则命中次数为 {{blank:q2-x-y-2byte-hits}} 次。",
         "answer": "（共5分）\n2    次。（3分）\n② 若数组x、y的起始地址与①相同，cache block大小为4 Bytes，则无论\n采取何种方式组织cache、且无论如何增大cache的大小，命中次数至多为 {{blank:q2-x-y-4byte-max-hits}} 次。（2分）\n解析：考察6.4.3“组相联高速缓存”\n（1）中，仅有对x[1]和x[3]的访问会命中\n（2）中，只需要考虑访问序列分散在几个block中（block大小为4 Byte），\n因此去掉地址的后2个bit，分析还有多少不重复的元素即可\n评论：这两空是较为基础的计算，如果按照朴素的方法计算，有一定的计算量，难\n度适中；如果能够找到规律，计算其实较为简单"
       },
       "group": {
@@ -5272,7 +5371,7 @@
       "exam": "2021期中",
       "questionNo": "第五题 2(3)",
       "summary": "数据对齐对总延迟的影响（AMAT）",
-      "content": "（3）在如下代码中，假设初始时 cache 为空，只考虑读写数据引起的 cache 访问，并假定：\n\na. Cache 命中的延迟为 10 周期，不命中处罚（miss penalty）为 190 周期；\nb. 延迟与数据的长度无关；\nc. 若数据对应到不同的缓存块，则需进行多次访问，且访问之间不能重叠（即访存不能并行）。\n\n（共4分）\n```\n# define N 4\ntypedef struct {\nchar x;\nshort y;\n} node;\nnode p[N];\nint main() {\nfor (int i = 0; i < N; i++) {\np[i].x = i;\np[i].y = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组 p 的起始地址为 `0x0000`，cache block 大小为 8 Bytes，采用直接映射，则 cache 访问的总延迟为 {{blank:q2-3-aligned-delay}} 周期。\n\n② 若结构体不采用数据对齐（即 `(void *)&p[i] - (void *)&p[0] == 3 * i`），则在①的条件下，cache 访问的总延迟为 {{blank:q2-3-unaligned-delay}} 周期。\n① 460 周期（注意结构体数据对齐）。（2分）\n② 470 周期。（2分）\n解析：考察点与2.2相同，探索了数据对齐的作用（现代cache允许并行访问，\n但是本题仍不失为一种启发）\n②比①多10个周期的原因在于②中对p[2].y的访问跨两个缓存块\n评论：（3）难度与（2）相比并无明显提升，仍是一道难度适中的题目。",
+      "content": "（3）在如下代码中，假设初始时 cache 为空，只考虑读写数据引起的 cache 访问，并假定：\n\na. Cache 命中的延迟为 10 周期，不命中处罚（miss penalty）为 190 周期；\nb. 延迟与数据的长度无关；\nc. 若数据对应到不同的缓存块，则需进行多次访问，且访问之间不能重叠（即访存不能并行）。\n\n（共4分）\n```\n# define N 4\ntypedef struct {\n    char x;\n    short y;\n} node;\nnode p[N];\nint main() {\n    for (int i = 0; i < N; i++) {\n        p[i].x = i;\n        p[i].y = 1 - i;\n    }\n    return 0;\n}\n```\n① 若数组 p 的起始地址为 `0x0000`，cache block 大小为 8 Bytes，采用直接映射，则 cache 访问的总延迟为 {{blank:q2-3-aligned-delay}} 周期。\n\n② 若结构体不采用数据对齐（即 `(void *)&p[i] - (void *)&p[0] == 3 * i`），则在①的条件下，cache 访问的总延迟为 {{blank:q2-3-unaligned-delay}} 周期。\n① 460 周期（注意结构体数据对齐）。（2分）\n② 470 周期。（2分）\n解析：考察点与2.2相同，探索了数据对齐的作用（现代cache允许并行访问，\n但是本题仍不失为一种启发）\n②比①多10个周期的原因在于②中对p[2].y的访问跨两个缓存块\n评论：（3）难度与（2）相比并无明显提升，仍是一道难度适中的题目。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5297,7 +5396,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "（3）在如下代码中，假设初始时 cache 为空，只考虑读写数据引起的 cache 访问，并假定：\n\na. Cache 命中的延迟为 10 周期，不命中处罚（miss penalty）为 190 周期；\nb. 延迟与数据的长度无关；\nc. 若数据对应到不同的缓存块，则需进行多次访问，且访问之间不能重叠（即访存不能并行）。\n\n（共4分）\n```\n# define N 4\ntypedef struct {\nchar x;\nshort y;\n} node;\nnode p[N];\nint main() {\nfor (int i = 0; i < N; i++) {\np[i].x = i;\np[i].y = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组 p 的起始地址为 `0x0000`，cache block 大小为 8 Bytes，采用直接映射，则 cache 访问的总延迟为 {{blank:q2-3-aligned-delay}} 周期。\n\n② 若结构体不采用数据对齐（即 `(void *)&p[i] - (void *)&p[0] == 3 * i`），则在①的条件下，cache 访问的总延迟为 {{blank:q2-3-unaligned-delay}} 周期。",
+        "stem": "（3）在如下代码中，假设初始时 cache 为空，只考虑读写数据引起的 cache 访问，并假定：\n\na. Cache 命中的延迟为 10 周期，不命中处罚（miss penalty）为 190 周期；\nb. 延迟与数据的长度无关；\nc. 若数据对应到不同的缓存块，则需进行多次访问，且访问之间不能重叠（即访存不能并行）。\n\n（共4分）\n```\n# define N 4\ntypedef struct {\n    char x;\n    short y;\n} node;\nnode p[N];\nint main() {\n    for (int i = 0; i < N; i++) {\n        p[i].x = i;\n        p[i].y = 1 - i;\n    }\n    return 0;\n}\n```\n① 若数组 p 的起始地址为 `0x0000`，cache block 大小为 8 Bytes，采用直接映射，则 cache 访问的总延迟为 {{blank:q2-3-aligned-delay}} 周期。\n\n② 若结构体不采用数据对齐（即 `(void *)&p[i] - (void *)&p[0] == 3 * i`），则在①的条件下，cache 访问的总延迟为 {{blank:q2-3-unaligned-delay}} 周期。",
         "choices": [],
         "answer": "① 460 周期（注意结构体数据对齐）。（2分）\n② 470 周期。（2分）\n解析：考察点与2.2相同，探索了数据对齐的作用（现代cache允许并行访问，\n但是本题仍不失为一种启发）\n②比①多10个周期的原因在于②中对p[2].y的访问跨两个缓存块\n评论：（3）难度与（2）相比并无明显提升，仍是一道难度适中的题目。"
       },
@@ -5312,7 +5411,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "（3）在如下代码中，假设初始时 cache 为空，只考虑读写数据引起的 cache 访问，并假定：\n\na. Cache 命中的延迟为 10 周期，不命中处罚（miss penalty）为 190 周期；\nb. 延迟与数据的长度无关；\nc. 若数据对应到不同的缓存块，则需进行多次访问，且访问之间不能重叠（即访存不能并行）。\n\n（共4分）\n```\n# define N 4\ntypedef struct {\nchar x;\nshort y;\n} node;\nnode p[N];\nint main() {\nfor (int i = 0; i < N; i++) {\np[i].x = i;\np[i].y = 1 - i;\n}\nreturn 0;\n}\n```\n① 若数组 p 的起始地址为 `0x0000`，cache block 大小为 8 Bytes，采用直接映射，则 cache 访问的总延迟为 {{blank:q2-3-aligned-delay}} 周期。\n\n② 若结构体不采用数据对齐（即 `(void *)&p[i] - (void *)&p[0] == 3 * i`），则在①的条件下，cache 访问的总延迟为 {{blank:q2-3-unaligned-delay}} 周期。",
+        "prompt": "（3）在如下代码中，假设初始时 cache 为空，只考虑读写数据引起的 cache 访问，并假定：\n\na. Cache 命中的延迟为 10 周期，不命中处罚（miss penalty）为 190 周期；\nb. 延迟与数据的长度无关；\nc. 若数据对应到不同的缓存块，则需进行多次访问，且访问之间不能重叠（即访存不能并行）。\n\n（共4分）\n```\n# define N 4\ntypedef struct {\n    char x;\n    short y;\n} node;\nnode p[N];\nint main() {\n    for (int i = 0; i < N; i++) {\n        p[i].x = i;\n        p[i].y = 1 - i;\n    }\n    return 0;\n}\n```\n① 若数组 p 的起始地址为 `0x0000`，cache block 大小为 8 Bytes，采用直接映射，则 cache 访问的总延迟为 {{blank:q2-3-aligned-delay}} 周期。\n\n② 若结构体不采用数据对齐（即 `(void *)&p[i] - (void *)&p[0] == 3 * i`），则在①的条件下，cache 访问的总延迟为 {{blank:q2-3-unaligned-delay}} 周期。",
         "answer": "① 460 周期（注意结构体数据对齐）。（2分）\n② 470 周期。（2分）\n解析：考察点与2.2相同，探索了数据对齐的作用（现代cache允许并行访问，\n但是本题仍不失为一种启发）\n②比①多10个周期的原因在于②中对p[2].y的访问跨两个缓存块\n评论：（3）难度与（2）相比并无明显提升，仍是一道难度适中的题目。"
       },
       "group": {
@@ -5704,7 +5803,7 @@
       "exam": "2022期中",
       "questionNo": "第一题 20",
       "summary": "saxpy内存带宽计算（含写分配）",
-      "content": "20. 执行以下函数，消耗的内存带宽约为（）。\n已知：\n1.  Write miss发生时采用写分配（write-allocate）\n2.  X、Y、result三个数组在函数执行前均不存在于CPU cache中，函数\n执行完毕后均写入内存中\n3.  不考虑SIMD指令，不考虑编译优化（包括循环展开等）\n4.  Cache line size为64 Bytes，内存到cache的传输以cache line\n为单位\n```\nvoid saxpy(int N,\nfloat scale,\nconst float X[],\nconst float Y[],\nfloat result[]) {\nfor (int i = 0; i < N; i++) {\nresult[i] = scale * X[i] + Y[i];\n}\n}\n```\n（提示：1. 只需考虑对 X、Y、result 三个数组的读写；2. 消耗的内存带宽=\n从内存中读取的字节数+写入内存的字节数）\nA. 3N Bytes\nB. 4N Bytes\nC. 12N Bytes\nD. 16N Bytes\n答案：D\n难度：难\n解析：本题容易误选为C。因为写分配，CPU会把result数组也读入cache中。具\n体而言，假定result数组的起始地址64字节对齐，那么写入result[0]的时候，cache\n里会为 result[0..15]分配空间，因而 result[1..15]都需要读入 cache；再考虑内存到\ncache传输的最小单位是cache line，那么result[0]也要读入\n背景：本题是性能分析中的常见误区。内存带宽计算是性能瓶颈分析的重要一环（在\n并行计算中尤其如此），忘记考虑write-allocate是一大失误。",
+      "content": "20. 执行以下函数，消耗的内存带宽约为（）。\n已知：\n1.  Write miss发生时采用写分配（write-allocate）\n2.  X、Y、result三个数组在函数执行前均不存在于CPU cache中，函数\n执行完毕后均写入内存中\n3.  不考虑SIMD指令，不考虑编译优化（包括循环展开等）\n4.  Cache line size为64 Bytes，内存到cache的传输以cache line\n为单位\n```\nvoid saxpy(int N,\n    float scale,\n    const float X[],\n    const float Y[],\n    float result[]) {\n    for (int i = 0; i < N; i++) {\n        result[i] = scale * X[i] + Y[i];\n    }\n}\n```\n（提示：1. 只需考虑对 X、Y、result 三个数组的读写；2. 消耗的内存带宽=\n从内存中读取的字节数+写入内存的字节数）\nA. 3N Bytes\nB. 4N Bytes\nC. 12N Bytes\nD. 16N Bytes\n答案：D\n难度：难\n解析：本题容易误选为C。因为写分配，CPU会把result数组也读入cache中。具\n体而言，假定result数组的起始地址64字节对齐，那么写入result[0]的时候，cache\n里会为 result[0..15]分配空间，因而 result[1..15]都需要读入 cache；再考虑内存到\ncache传输的最小单位是cache line，那么result[0]也要读入\n背景：本题是性能分析中的常见误区。内存带宽计算是性能瓶颈分析的重要一环（在\n并行计算中尤其如此），忘记考虑write-allocate是一大失误。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5730,7 +5829,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "20. 执行以下函数，消耗的内存带宽约为（）。\n已知：\n1.  Write miss发生时采用写分配（write-allocate）\n2.  X、Y、result三个数组在函数执行前均不存在于CPU cache中，函数\n执行完毕后均写入内存中\n3.  不考虑SIMD指令，不考虑编译优化（包括循环展开等）\n4.  Cache line size为64 Bytes，内存到cache的传输以cache line\n为单位\n```\nvoid saxpy(int N,\nfloat scale,\nconst float X[],\nconst float Y[],\nfloat result[]) {\nfor (int i = 0; i < N; i++) {\nresult[i] = scale * X[i] + Y[i];\n}\n}\n```\n（提示：1. 只需考虑对 X、Y、result 三个数组的读写；2. 消耗的内存带宽=\n从内存中读取的字节数+写入内存的字节数）",
+        "stem": "20. 执行以下函数，消耗的内存带宽约为（）。\n已知：\n1.  Write miss发生时采用写分配（write-allocate）\n2.  X、Y、result三个数组在函数执行前均不存在于CPU cache中，函数\n执行完毕后均写入内存中\n3.  不考虑SIMD指令，不考虑编译优化（包括循环展开等）\n4.  Cache line size为64 Bytes，内存到cache的传输以cache line\n为单位\n```\nvoid saxpy(int N,\n    float scale,\n    const float X[],\n    const float Y[],\n    float result[]) {\n    for (int i = 0; i < N; i++) {\n        result[i] = scale * X[i] + Y[i];\n    }\n}\n```\n（提示：1. 只需考虑对 X、Y、result 三个数组的读写；2. 消耗的内存带宽=\n从内存中读取的字节数+写入内存的字节数）",
         "choices": [
           {
             "key": "A",
@@ -5778,7 +5877,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "20. 执行以下函数，消耗的内存带宽约为（）。\n已知：\n1.  Write miss发生时采用写分配（write-allocate）\n2.  X、Y、result三个数组在函数执行前均不存在于CPU cache中，函数\n执行完毕后均写入内存中\n3.  不考虑SIMD指令，不考虑编译优化（包括循环展开等）\n4.  Cache line size为64 Bytes，内存到cache的传输以cache line\n为单位\n```\nvoid saxpy(int N,\nfloat scale,\nconst float X[],\nconst float Y[],\nfloat result[]) {\nfor (int i = 0; i < N; i++) {\nresult[i] = scale * X[i] + Y[i];\n}\n}\n```\n（提示：1. 只需考虑对 X、Y、result 三个数组的读写；2. 消耗的内存带宽=\n从内存中读取的字节数+写入内存的字节数）",
+        "prompt": "20. 执行以下函数，消耗的内存带宽约为（）。\n已知：\n1.  Write miss发生时采用写分配（write-allocate）\n2.  X、Y、result三个数组在函数执行前均不存在于CPU cache中，函数\n执行完毕后均写入内存中\n3.  不考虑SIMD指令，不考虑编译优化（包括循环展开等）\n4.  Cache line size为64 Bytes，内存到cache的传输以cache line\n为单位\n```\nvoid saxpy(int N,\n    float scale,\n    const float X[],\n    const float Y[],\n    float result[]) {\n    for (int i = 0; i < N; i++) {\n        result[i] = scale * X[i] + Y[i];\n    }\n}\n```\n（提示：1. 只需考虑对 X、Y、result 三个数组的读写；2. 消耗的内存带宽=\n从内存中读取的字节数+写入内存的字节数）",
         "answer": "答案：D\n难度：难\n解析：本题容易误选为C。因为写分配，CPU会把result数组也读入cache中。具\n体而言，假定result数组的起始地址64字节对齐，那么写入result[0]的时候，cache\n里会为 result[0..15]分配空间，因而 result[1..15]都需要读入 cache；再考虑内存到\ncache传输的最小单位是cache line，那么result[0]也要读入\n背景：本题是性能分析中的常见误区。内存带宽计算是性能瓶颈分析的重要一环（在\n并行计算中尤其如此），忘记考虑write-allocate是一大失误。"
       },
       "presentation": {
@@ -6473,7 +6572,7 @@
       "exam": "2024期中",
       "questionNo": "第一题 13",
       "summary": "磁盘容量与平均访问时间估算",
-      "content": "13.考虑一个有x个盘片，每个扇区y字节，每个面z条磁道，每条磁道平均w个扇区，旋转速率a RPM，平均寻道时间b ms 的磁盘。则下列说法正确的是：\nA. 磁盘容量为2wxyz / $2^30$ GB\nB. 访问一个磁盘扇区内容的平均时间为 (60/a * 1000 + 60/a/w * 1000\n+ b) ms\nC. 访问一个磁盘扇区中512个字节的时间主要是寻道时间和传送时间\nD. 假设旋转速率未知，在通常情况下我们可以简单估计 a = 60/b * 1/2 *\n1000 RPM\n答案：D\nA.  磁盘容量为2wxyz / $10^9$ GB\nB.  访问一个磁盘扇区内容的平均时间为 (60/a * 1/2 * 1000 + 60/a / w * 1000 + b)\nms\nC.  访问一个磁盘扇区中512个字节的时间主要是寻道时间和旋转延迟。访问扇\n区中的 第一个字节用了很长时间，但是访问剩下的字节几乎不用时间。\nD.  假设旋转速率未知，在通常情况下我们可以简单估计 a = 60/b * 1/2 * 1000\nRPM（书上提到可以用寻道时间的两倍来估计访问时间，故可以用寻道时间估\n计旋转延迟）",
+      "content": "13.考虑一个有x个盘片，每个扇区y字节，每个面z条磁道，每条磁道平均w个扇区，旋转速率a RPM，平均寻道时间b ms 的磁盘。则下列说法正确的是：\nA. 磁盘容量为2wxyz / $2^30$ GB\nB. 访问一个磁盘扇区内容的平均时间为 (60/a * 1000 + 60/a/w * 1000\n+ b) ms\nC. 访问一个磁盘扇区中512个字节的时间主要是寻道时间和传送时间\nD. 假设旋转速率未知，在通常情况下我们可以简单估计 `a = 60/b * 1/2 *`\n1000 RPM\n答案：D\nA.  磁盘容量为2wxyz / $10^9$ GB\nB.  访问一个磁盘扇区内容的平均时间为 (60/a * 1/2 * 1000 + 60/a / w * 1000 + b)\nms\nC.  访问一个磁盘扇区中512个字节的时间主要是寻道时间和旋转延迟。访问扇\n区中的 第一个字节用了很长时间，但是访问剩下的字节几乎不用时间。\nD.  假设旋转速率未知，在通常情况下我们可以简单估计 a = 60/b * 1/2 * 1000\nRPM（书上提到可以用寻道时间的两倍来估计访问时间，故可以用寻道时间估\n计旋转延迟）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6514,7 +6613,7 @@
           },
           {
             "key": "D",
-            "content": "假设旋转速率未知，在通常情况下我们可以简单估计 a = 60/b * 1/2 *\n1000 RPM"
+            "content": "假设旋转速率未知，在通常情况下我们可以简单估计 `a = 60/b * 1/2 *`\n1000 RPM"
           }
         ],
         "answer": "答案：D\nA.  磁盘容量为2wxyz / $10^9$ GB\nB.  访问一个磁盘扇区内容的平均时间为 (60/a * 1/2 * 1000 + 60/a / w * 1000 + b)\nms\nC.  访问一个磁盘扇区中512个字节的时间主要是寻道时间和旋转延迟。访问扇\n区中的 第一个字节用了很长时间，但是访问剩下的字节几乎不用时间。\nD.  假设旋转速率未知，在通常情况下我们可以简单估计 a = 60/b * 1/2 * 1000\nRPM（书上提到可以用寻道时间的两倍来估计访问时间，故可以用寻道时间估\n计旋转延迟）"
@@ -6537,7 +6636,7 @@
           },
           {
             "id": "D",
-            "content": "假设旋转速率未知，在通常情况下我们可以简单估计 a = 60/b * 1/2 *\n1000 RPM"
+            "content": "假设旋转速率未知，在通常情况下我们可以简单估计 `a = 60/b * 1/2 *`\n1000 RPM"
           }
         ],
         "correctChoiceIds": [
@@ -6701,7 +6800,7 @@
         ],
         "answer": "C"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "single-choice",
         "declared": true,
         "choices": [
@@ -6726,10 +6825,21 @@
           "C"
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "第五题（20分）\n某一计算机的内存空间的大小是32 Bytes，即内存空间的地址范围如下：\n$0_{10}$ ($00000_2$) -- $31_{10}$ ($11111_2$)\n1.  （4分）假设Cache容量大小是8 Bytes，初始状态为空。由于容量过\n小，需要扩容。若为充分利用原有硬件设计，不希望大幅度修改cache\n地址解析逻辑，那么最适宜采用的扩容方式是",
         "answer": "C"
+      },
+      "group": {
+        "id": "p-0fe6817c7f881573:2024-mid-q5",
+        "questionId": "q-3000615f0e2c7873",
+        "title": "第五题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -6792,7 +6902,7 @@
         ],
         "answer": "B"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "single-choice",
         "declared": true,
         "choices": [
@@ -6817,10 +6927,21 @@
           "B"
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "2.  （4分）在前题基础上，将Cache容量扩大为16 Bytes。假设对于访\n问内存地址序列 $0_{10}$,$2_{10}$,$4_{10}$,$8_{10}$,$12_{10}$,$14_{10}$，其命中率为33.3%，\n那么请问该Cache的block大小是\n？",
         "answer": "B"
+      },
+      "group": {
+        "id": "p-0fe6817c7f881573:2024-mid-q5",
+        "questionId": "q-3000615f0e2c7873",
+        "title": "第五题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -6866,14 +6987,25 @@
         "choices": [],
         "answer": "Cache 状态：\n\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 00 | M[0-3] |\n| set0 | 1 | 01 | M[8-11] |\n| set1 | 1 | 10 | M[20-23] |\n| set1 | 1 | 01 | M[12-15] |\n\nHit：4 次。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3.  在前题基础上，假设每个Cache Block的大小为4 Bytes（即 B =\n4），Cache的结构如下图所示（S=2，E=2），且替换策略为LRU。\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n210  2310  1310  910  2010   1510   1310   1010\n请在下图空白处填入访问上述数据后Cache的状态。（4分）\n（TAG使用二进制格式；Data Block使用十进制格式，例：M[4-7]表示\n地址410-710对应的数据）（注：同Set内不同Line的顺序可颠倒）\n```\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 |  |  |  |\n| set0 |  |  |  |\n| set1 |  |  |  |\n| set1 |  |  |  |\n```\n上述数据访问一共产生了多少次Hit（2分）：",
         "answer": "Cache 状态：\n\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 00 | M[0-3] |\n| set0 | 1 | 01 | M[8-11] |\n| set1 | 1 | 10 | M[20-23] |\n| set1 | 1 | 01 | M[12-15] |\n\nHit：4 次。"
+      },
+      "group": {
+        "id": "p-0fe6817c7f881573:2024-mid-q5",
+        "questionId": "q-3000615f0e2c7873",
+        "title": "第五题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -6919,14 +7051,25 @@
         "choices": [],
         "answer": "Cache 状态：\n\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 00 | M[0-3] |\n| set0 | 0 |  |  |\n| set1 | 1 | 01 | M[12-15] |\n| set1 | 0 |  |  |\n\nHit：2 次。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "4. 在前题基础上，增加一条新规则：地址区间包含10倍数的block将不\n会被缓存。假设仍旧使用LRU替换策略，请在下图空白处填入访问上述数据\n后Cache的状态（4分）。（注：同Set内不同Line的顺序可颠倒）\n```\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 |  |  |  |\n| set0 |  |  |  |\n| set1 |  |  |  |\n| set1 |  |  |  |\n```\n上述数据访问一共产生了多少次Hit（2分）：",
         "answer": "Cache 状态：\n\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 00 | M[0-3] |\n| set0 | 0 |  |  |\n| set1 | 1 | 01 | M[12-15] |\n| set1 | 0 |  |  |\n\nHit：2 次。"
+      },
+      "group": {
+        "id": "p-0fe6817c7f881573:2024-mid-q5",
+        "questionId": "q-3000615f0e2c7873",
+        "title": "第五题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -7547,7 +7690,7 @@
       "exam": "2018期末",
       "questionNo": "第一题 1",
       "summary": "累加变量与数组的时空局部性辨析",
-      "content": "1.  在如下的代码中，下列关于局部性的说法正确的是：\n\n```c\nint add (int *a, int n){\n  int sum = 0;\n  for (int i = 0; i < n; ++i)\n    sum += a[i];\n  return sum;\n}\n```\nA. 变量sum具有良好的空间局部性.\nB. 数组a具有良好的空间局部性.\nC. 数组a具有良好的时间局部性\nD. 以上说法都正确\n答案：B.",
+      "content": "1.  在如下的代码中，下列关于局部性的说法正确的是：\n\n```c\nint add (int *a, int n){\n  int sum = 0;\n  for (int i = 0; i < n; ++i)\n    sum += a[i];\n  return sum;\n}\n```\nA. 变量`sum`具有良好的空间局部性.\nB. 数组`a`具有良好的空间局部性.\nC. 数组`a`具有良好的时间局部性\nD. 以上说法都正确\n答案：B.",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7573,15 +7716,15 @@
         "choices": [
           {
             "key": "A",
-            "content": "变量sum具有良好的空间局部性."
+            "content": "变量`sum`具有良好的空间局部性."
           },
           {
             "key": "B",
-            "content": "数组a具有良好的空间局部性."
+            "content": "数组`a`具有良好的空间局部性."
           },
           {
             "key": "C",
-            "content": "数组a具有良好的时间局部性"
+            "content": "数组`a`具有良好的时间局部性"
           },
           {
             "key": "D",
@@ -7596,15 +7739,15 @@
         "choices": [
           {
             "id": "A",
-            "content": "变量sum具有良好的空间局部性."
+            "content": "变量`sum`具有良好的空间局部性."
           },
           {
             "id": "B",
-            "content": "数组a具有良好的空间局部性."
+            "content": "数组`a`具有良好的空间局部性."
           },
           {
             "id": "C",
-            "content": "数组a具有良好的时间局部性"
+            "content": "数组`a`具有良好的时间局部性"
           },
           {
             "id": "D",
@@ -8841,7 +8984,7 @@
       "exam": "2025期末",
       "questionNo": "一 12",
       "summary": "两级 cache 的 AMAT 与 miss rate 计算",
-      "content": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n- L1 hit time = 1 cycle，\n- L1 miss rate = 5%\n- L2 hit time = 10 cycles\n- L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n- L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？\nA. 按所有到达内存的访问计，global miss rate 为 0.05×0.20=1%\nB. L1 的平均 miss penalty 为10+0.20×100=30 cycles\nC. 平均访存时间为1+0.05×30=2.5 cycles\nD. 若L2 local miss rate 降到10%，平均访存时间会增大\nE. 若L1 miss rate降到2.5%，平均访存时间为变为1+0.025×30=1.75 cycles\n答案：ABCE\n解析：D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存时间。",
+      "content": "12.在一个有两级高速缓存（cache）的计算机系统里，设：\n- L1 hit time = 1 cycle，\n- L1 miss rate = 5%\n- L2 hit time = 10 cycles\n- L2 local miss rate = 20%（按所有到达L2 cache的访问计）\n- L2 到内存的miss penalty = 100 cycles\n下列哪些结论正确？\nA. 按所有到达内存的访问计，global miss rate 为 `0.05×0.20=1%`\nB. L1 的平均 miss penalty 为`10+0.20×100=30 cycles`\nC. 平均访存时间为`1+0.05×30=2.5 cycles`\nD. 若L2 local miss rate 降到10%，平均访存时间会增大\nE. 若L1 miss rate降到2.5%，平均访存时间为变为`1+0.025×30=1.75 cycles`\n答案：ABCE\n解析：D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存时间。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8865,15 +9008,15 @@
         "choices": [
           {
             "key": "A",
-            "content": "按所有到达内存的访问计，global miss rate 为 0.05×0.20=1%"
+            "content": "按所有到达内存的访问计，global miss rate 为 `0.05×0.20=1%`"
           },
           {
             "key": "B",
-            "content": "L1 的平均 miss penalty 为10+0.20×100=30 cycles"
+            "content": "L1 的平均 miss penalty 为`10+0.20×100=30 cycles`"
           },
           {
             "key": "C",
-            "content": "平均访存时间为1+0.05×30=2.5 cycles"
+            "content": "平均访存时间为`1+0.05×30=2.5 cycles`"
           },
           {
             "key": "D",
@@ -8881,7 +9024,7 @@
           },
           {
             "key": "E",
-            "content": "若L1 miss rate降到2.5%，平均访存时间为变为1+0.025×30=1.75 cycles"
+            "content": "若L1 miss rate降到2.5%，平均访存时间为变为`1+0.025×30=1.75 cycles`"
           }
         ],
         "answer": "答案：ABCE\n解析：D 反了：L2 更少 miss 会降低 L1 的平均 miss penalty，从而降低平均访存时间。"
@@ -8892,15 +9035,15 @@
         "choices": [
           {
             "id": "A",
-            "content": "按所有到达内存的访问计，global miss rate 为 0.05×0.20=1%"
+            "content": "按所有到达内存的访问计，global miss rate 为 `0.05×0.20=1%`"
           },
           {
             "id": "B",
-            "content": "L1 的平均 miss penalty 为10+0.20×100=30 cycles"
+            "content": "L1 的平均 miss penalty 为`10+0.20×100=30 cycles`"
           },
           {
             "id": "C",
-            "content": "平均访存时间为1+0.05×30=2.5 cycles"
+            "content": "平均访存时间为`1+0.05×30=2.5 cycles`"
           },
           {
             "id": "D",
@@ -8908,7 +9051,7 @@
           },
           {
             "id": "E",
-            "content": "若L1 miss rate降到2.5%，平均访存时间为变为1+0.025×30=1.75 cycles"
+            "content": "若L1 miss rate降到2.5%，平均访存时间为变为`1+0.025×30=1.75 cycles`"
           }
         ],
         "correctChoiceIds": [
@@ -8938,7 +9081,7 @@
       "exam": "2025期末",
       "questionNo": "一 13",
       "summary": "memory mountain 与 stride/工作集",
-      "content": "13.关于教材里的 memory mountain（吞吐/带宽随工作集大小与 stride 变化）的解\n释，下列说法哪些正确？\nA. 固定 stride 时，工作集从小到大跨过某级 cache 容量边界，性能常出现“断崖”\nB. 固定工作集大小时，stride 变大通常降低空间局部性，从而降低有效吞吐\nC. stride=1 的优势主要来自时间局部性\nD. 该现象同时受 cache 容量与 cache line 大小影响\nE. 只要工作集大小不变，stride 的变化不影响cache命中率\n答案：ABD\n解析：stride=1 的主要收益是空间局部性而不是“反复访问同一元素”（C 错）；E 明显错误。",
+      "content": "13.关于教材里的 memory mountain（吞吐/带宽随工作集大小与 stride 变化）的解\n释，下列说法哪些正确？\nA. 固定 stride 时，工作集从小到大跨过某级 cache 容量边界，性能常出现“断崖”\nB. 固定工作集大小时，stride 变大通常降低空间局部性，从而降低有效吞吐\nC. `stride=1` 的优势主要来自时间局部性\nD. 该现象同时受 cache 容量与 cache line 大小影响\nE. 只要工作集大小不变，stride 的变化不影响cache命中率\n答案：ABD\n解析：stride=1 的主要收益是空间局部性而不是“反复访问同一元素”（C 错）；E 明显错误。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8970,7 +9113,7 @@
           },
           {
             "key": "C",
-            "content": "stride=1 的优势主要来自时间局部性"
+            "content": "`stride=1` 的优势主要来自时间局部性"
           },
           {
             "key": "D",
@@ -8997,7 +9140,7 @@
           },
           {
             "id": "C",
-            "content": "stride=1 的优势主要来自时间局部性"
+            "content": "`stride=1` 的优势主要来自时间局部性"
           },
           {
             "id": "D",
@@ -9537,7 +9680,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 31",
       "summary": "CacheLab 中 valgrind 生成内存访问 trace",
-      "content": "31. （2分）在CacheLab实验中，valgrind 工具的主要用途是什么？\nA. 作为参考缓存模拟器 (csim-ref) 来检查输出结果\nB. 编译 csim.c 和 trans.c 文件\nC. 生成程序运行时的内存访问轨迹 (trace files)\nD. 自动评估 Part B 矩阵转置的性能得分\n答案：C\n\n解析：CacheLab 用 `valgrind --tool=lackey --trace-mem=yes` 把程序的内存访问记录成 trace 文件，csim.c 再回放它，故 C 对。csim-ref 是课程提供的参考模拟器，编译由 make/gcc 完成，成绩由 driver 与自动评测给出，都与 valgrind 无关。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "31. （2分）在CacheLab实验中，valgrind 工具的主要用途是什么？\nA. 作为参考缓存模拟器 (csim-ref) 来检查输出结果\nB. 编译 `csim.c` 和 `trans.c` 文件\nC. 生成程序运行时的内存访问轨迹 (trace files)\nD. 自动评估 Part B 矩阵转置的性能得分\n答案：C\n\n解析：CacheLab 用 `valgrind --tool=lackey --trace-mem=yes` 把程序的内存访问记录成 trace 文件，csim.c 再回放它，故 C 对。csim-ref 是课程提供的参考模拟器，编译由 make/gcc 完成，成绩由 driver 与自动评测给出，都与 valgrind 无关。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9565,7 +9708,7 @@
           },
           {
             "key": "B",
-            "content": "编译 csim.c 和 trans.c 文件"
+            "content": "编译 `csim.c` 和 `trans.c` 文件"
           },
           {
             "key": "C",
@@ -9588,7 +9731,7 @@
           },
           {
             "id": "B",
-            "content": "编译 csim.c 和 trans.c 文件"
+            "content": "编译 `csim.c` 和 `trans.c` 文件"
           },
           {
             "id": "C",

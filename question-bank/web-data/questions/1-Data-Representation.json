@@ -637,7 +637,7 @@
       "exam": "2012期中",
       "questionNo": "Problem B 1",
       "summary": "有符号/无符号比较与算术右移下恒成立的关系符（含作答表）",
-      "content": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | x |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | If $(x >> 31)$ < 0 then x | { } | 0 |\n| (3) | If ($(x << 31)$ >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | y |\n答案：(1) `!=`　(2) `<` 和 `!=`　(3) `>` 和 `!=`　(4) `!=`\n\n原卷红色标注（每行花括号内填写的内容）：\n```\n(1) !=\n(2) <\n    !=\n(3) >\n    !=\n(4) !=\n```",
+      "content": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | x |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | If `(x >> 31)` < 0 then x | { } | 0 |\n| (3) | If (`x << 31` >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | y |\n答案：(1) `!=`　(2) `<` 和 `!=`　(3) `>` 和 `!=`　(4) `!=`\n\n原卷红色标注（每行花括号内填写的内容）：\n```\n(1) !=\n(2) <\n    !=\n(3) >\n    !=\n(4) !=\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -657,7 +657,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | x |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | If $(x >> 31)$ < 0 then x | { } | 0 |\n| (3) | If ($(x << 31)$ >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | y |",
+        "stem": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | x |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | If `(x >> 31)` < 0 then x | { } | 0 |\n| (3) | If (`x << 31` >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | y |",
         "choices": [],
         "answer": "答案：(1) `!=`　(2) `<` 和 `!=`　(3) `>` 和 `!=`　(4) `!=`\n\n原卷红色标注（每行花括号内填写的内容）：\n```\n(1) !=\n(2) <\n    !=\n(3) >\n    !=\n(4) !=\n```"
       },
@@ -667,7 +667,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | x |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | If $(x >> 31)$ < 0 then x | { } | 0 |\n| (3) | If ($(x << 31)$ >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | y |",
+        "prompt": "1. For each of the following propositions, write in all comparisons that make it always true among\n   the four possibilities:\n\n```\n   <  >  ==  !=\n```\n\n   If none are guaranteed to hold, please indicate that explicitly by marking it with an X. We\n   have filled in the first two for you as examples. Assume the variables are declared with\n\n```c\nint x, y;\n```\n\n   and initialized to some unknown values. You may assume that int’s are 32 bits wide, char’s are 8\n   bits wide and that right shift is arithmetical on signed numbers and logical on unsigned numbers.\n   **(m-s07 1) (4pts)**\n\n\n\n| 行 | 命题 | 花括号内（作答区） | 右侧 |\n| --- | --- | --- | --- |\n| 示例 1 | If x > y then y | { <　!= }（原卷已填） | x |\n| 示例 2 | If x < 0 then x+1 | { X }（原卷已填） | 0 |\n| (1) | If x > 0 then x+1 | { } | 0 |\n| (2) | If `(x >> 31)` < 0 then x | { } | 0 |\n| (3) | If (`x << 31` >> 31) < 0 then x & 1 | { } | 0 |\n| (4) | If x > y then (unsigned) x | { } | y |",
         "answer": "答案：(1) `!=`　(2) `<` 和 `!=`　(3) `>` 和 `!=`　(4) `!=`\n\n原卷红色标注（每行花括号内填写的内容）：\n```\n(1) !=\n(2) <\n    !=\n(3) >\n    !=\n(4) !=\n```"
       },
       "presentation": {
@@ -955,7 +955,7 @@
       "exam": "2013期中",
       "questionNo": "选择题 2",
       "summary": "补码/无符号比较、移位与类型转换",
-      "content": "2、假设下列int和unsigned数均为32位，\n```c\nint x = 0x80000000;\nunsigned y = 0x00000001;\nint z = 0x80000001;\n```\n以下表达式正确的是（       ）\nA. (-x) < 0\nB. (-1) > y\nC. $(z<<3)$ == (z*8)\nD. y*24  == z<<5 - z<<3\n答案:ABCD；考虑到运算符的优先顺序，选ABC也算对\nA. int中0x80000000的相反数还是自己\nB. signed (-1) 和 unsinged y 比较，都按照 unsigned，所以强制类型转换后 （-1）很大\nC: unsigned, signed左移三位 = *8\nD：应该是相等关系；signed 左移之后，和 unsigned y*24 相比都看成 unsigned",
+      "content": "2、假设下列int和unsigned数均为32位，\n```c\nint x = 0x80000000;\nunsigned y = 0x00000001;\nint z = 0x80000001;\n```\n以下表达式正确的是（       ）\nA. `(-x) < 0`\nB. `(-1) > y`\nC. `(z<<3) == (z*8)`\nD. `y*24  == z<<5 - z<<3`\n答案:ABCD；考虑到运算符的优先顺序，选ABC也算对\nA. int中0x80000000的相反数还是自己\nB. signed (-1) 和 unsinged y 比较，都按照 unsigned，所以强制类型转换后 （-1）很大\nC: unsigned, signed左移三位 = *8\nD：应该是相等关系；signed 左移之后，和 unsigned y*24 相比都看成 unsigned",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -979,19 +979,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "(-x) < 0"
+            "content": "`(-x) < 0`"
           },
           {
             "key": "B",
-            "content": "(-1) > y"
+            "content": "`(-1) > y`"
           },
           {
             "key": "C",
-            "content": "$(z<<3)$ == (z*8)"
+            "content": "`(z<<3) == (z*8)`"
           },
           {
             "key": "D",
-            "content": "y*24  == z<<5 - z<<3"
+            "content": "`y*24  == z<<5 - z<<3`"
           }
         ],
         "answer": "答案:ABCD；考虑到运算符的优先顺序，选ABC也算对\nA. int中0x80000000的相反数还是自己\nB. signed (-1) 和 unsinged y 比较，都按照 unsigned，所以强制类型转换后 （-1）很大\nC: unsigned, signed左移三位 = *8\nD：应该是相等关系；signed 左移之后，和 unsigned y*24 相比都看成 unsigned"
@@ -1002,19 +1002,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "(-x) < 0"
+            "content": "`(-x) < 0`"
           },
           {
             "id": "B",
-            "content": "(-1) > y"
+            "content": "`(-1) > y`"
           },
           {
             "id": "C",
-            "content": "$(z<<3)$ == (z*8)"
+            "content": "`(z<<3) == (z*8)`"
           },
           {
             "id": "D",
-            "content": "y*24  == z<<5 - z<<3"
+            "content": "`y*24  == z<<5 - z<<3`"
           }
         ],
         "correctChoiceIds": [
@@ -1240,25 +1240,14 @@
         "choices": [],
         "answer": "答案：\n\n| | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | F | X = $-2^{w-1}$ |\n| u<= -1 | T | -1 作为无符号来比大于 u |\n| if x> y, then -x < -y | F | X=0, y = $-2^{w-1}$ |\n| if u> v, then -u > -v | F | U=2, v=1 |"
       },
-      "partInteraction": {
+      "interaction": {
         "kind": "short-answer",
         "declared": true
-      },
-      "interaction": {
-        "kind": "composite",
-        "declared": true,
-        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第二题（8分）\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行1分）\n```c\nint x, y;\nunsigned u, v;\n```\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 |  |  |\n| u<= -1 |  |  |\n| if x> y, then -x < -y |  |  |\n| if u> v, then -u > -v |  |  |",
         "answer": "答案：\n\n| | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | F | X = $-2^{w-1}$ |\n| u<= -1 | T | -1 作为无符号来比大于 u |\n| if x> y, then -x < -y | F | X=0, y = $-2^{w-1}$ |\n| if u> v, then -u > -v | F | U=2, v=1 |"
-      },
-      "group": {
-        "id": "p-d0ae6162300a90de:2013-mid-q2",
-        "questionId": "q-21d22ddd3d289948",
-        "title": "第二题",
-        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -1299,25 +1288,14 @@
         "choices": [],
         "answer": "答案：\n\n| Value | $(-1)^s$ × M × $2^E$，1<=M<2 | Hex representation |\n| --- | --- | --- |\n| $-1\\frac{1}{2}$ | $(-1) \\times 1.1 \\times 2^0$ | 0xBFC00000 |\n| $2^{-149}$ | $1.0 \\times 2^{-149}$ | 0x00000001 |"
       },
-      "partInteraction": {
+      "interaction": {
         "kind": "fill",
         "declared": true
-      },
-      "interaction": {
-        "kind": "composite",
-        "declared": true,
-        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2）请按 IEEE 浮点标准的单精度浮点数表示下表中的数值，首先写出形如(-1)s ×M×2E的\n表达式，然后给出十六进制的表示。（每格1分）\n注：单精度浮点数的字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：8-bit；小数字段（frac）：23-bit；偏置值（bias）：127。\n| Value | $(-1)^s \\times M \\times 2^E$，$1\\le M<2$ | Hex representation |\n| --- | --- | --- |\n| $-1\\frac{1}{2}$ | {{blank:negative-expression}} | {{blank:negative-hex}} |\n| $2^{-149}$ | {{blank:subnormal-expression}} | {{blank:subnormal-hex}} |",
         "answer": "答案：\n\n| Value | $(-1)^s$ × M × $2^E$，1<=M<2 | Hex representation |\n| --- | --- | --- |\n| $-1\\frac{1}{2}$ | $(-1) \\times 1.1 \\times 2^0$ | 0xBFC00000 |\n| $2^{-149}$ | $1.0 \\times 2^{-149}$ | 0x00000001 |"
-      },
-      "group": {
-        "id": "p-d0ae6162300a90de:2013-mid-q2",
-        "questionId": "q-21d22ddd3d289948",
-        "title": "第二题",
-        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -1422,7 +1400,7 @@
       "exam": "2014期中",
       "questionNo": "第一题 2",
       "summary": "反码/补码中 0 的唯一性、单精度浮点位模式",
-      "content": "2、下面说法正确的是：\nA. 数 0 的反码表示是唯一的\nB. 数 0 的补码表示不是唯一的\nC. 1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 表示唯一的整数是 0x8FEFC000\nD. 1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 如果是单精度浮点表示，则表示的是 $-(1.110111111)_2 \\times 2^{31-127}$\n\n答：（　　　）\n答案：D\n\n考察反码、补码\n\nA. 错误。若用反码表示，则可表示为 00000000 或 11111111。\n\nB. 错误。数 0 的补码表示是唯一的:+0 的补码=+0 的反码=+0 的原码=00000000；0 的原码和反码有两种，补码只有一种。\n\n\nC. 错误。如果是无符号数表示，则表示的是 0x8FEFC000；如果是补码表示，则表示的是 -0x70104000\n\nD. 正确。",
+      "content": "2、下面说法正确的是：\nA. 数 0 的反码表示是唯一的\nB. 数 0 的补码表示不是唯一的\nC. 1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 表示唯一的整数是 `0x8FEFC000`\nD. 1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 如果是单精度浮点表示，则表示的是 $-(1.110111111)_2 \\times 2^{31-127}$\n\n答：（　　　）\n答案：D\n\n考察反码、补码\n\nA. 错误。若用反码表示，则可表示为 00000000 或 11111111。\n\nB. 错误。数 0 的补码表示是唯一的:+0 的补码=+0 的反码=+0 的原码=00000000；0 的原码和反码有两种，补码只有一种。\n\n\nC. 错误。如果是无符号数表示，则表示的是 0x8FEFC000；如果是补码表示，则表示的是 -0x70104000\n\nD. 正确。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1456,7 +1434,7 @@
           },
           {
             "key": "C",
-            "content": "1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 表示唯一的整数是 0x8FEFC000"
+            "content": "1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 表示唯一的整数是 `0x8FEFC000`"
           },
           {
             "key": "D",
@@ -1479,7 +1457,7 @@
           },
           {
             "id": "C",
-            "content": "1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 表示唯一的整数是 0x8FEFC000"
+            "content": "1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 表示唯一的整数是 `0x8FEFC000`"
           },
           {
             "id": "D",
@@ -1510,7 +1488,7 @@
       "exam": "2014期中",
       "questionNo": "第一题 3",
       "summary": "无符号比较、逻辑右移、整型溢出",
-      "content": "3、下面表达式中为\"真\"的是：\nA. (unsigned) -1 < -2\nB. 2147483647 > (int) 2147483648U\nC. $(0x80005942 >> 4)$ == 0x09005942\nD. 2147483647 + 1 != 2147483648\n\n答：（　　　）\n答案：B",
+      "content": "3、下面表达式中为\"真\"的是：\nA. `(unsigned) -1 < -2`\nB. `2147483647 > (int) 2147483648U`\nC. `(0x80005942 >> 4) == 0x09005942`\nD. `2147483647 + 1 != 2147483648`\n\n答：（　　　）\n答案：B",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1536,19 +1514,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "(unsigned) -1 < -2"
+            "content": "`(unsigned) -1 < -2`"
           },
           {
             "key": "B",
-            "content": "2147483647 > (int) 2147483648U"
+            "content": "`2147483647 > (int) 2147483648U`"
           },
           {
             "key": "C",
-            "content": "$(0x80005942 >> 4)$ == 0x09005942"
+            "content": "`(0x80005942 >> 4) == 0x09005942`"
           },
           {
             "key": "D",
-            "content": "2147483647 + 1 != 2147483648\n答：（　　　）"
+            "content": "`2147483647 + 1 != 2147483648`\n答：（　　　）"
           }
         ],
         "answer": "答案：B"
@@ -1559,19 +1537,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "(unsigned) -1 < -2"
+            "content": "`(unsigned) -1 < -2`"
           },
           {
             "id": "B",
-            "content": "2147483647 > (int) 2147483648U"
+            "content": "`2147483647 > (int) 2147483648U`"
           },
           {
             "id": "C",
-            "content": "$(0x80005942 >> 4)$ == 0x09005942"
+            "content": "`(0x80005942 >> 4) == 0x09005942`"
           },
           {
             "id": "D",
-            "content": "2147483647 + 1 != 2147483648\n答：（　　　）"
+            "content": "`2147483647 + 1 != 2147483648`\n答：（　　　）"
           }
         ],
         "correctChoiceIds": [
@@ -1598,7 +1576,7 @@
       "exam": "2014期中",
       "questionNo": "第一题 6",
       "summary": "结构体对齐与 sizeof、成员指针差（兼 Machine Prog）",
-      "content": "6、有如下定义的结构，在 x86-64 下，下述结论中错误的是？\n\n```c\nstruct {\n    char c;\n    union {\n        char vc;\n        double value;\n        int vi;\n    } u;\n    int i;\n} sa;\n```\nA. sizeof(sa) == 24\nB. (&sa.i - &sa.u.vi) == 8\nC. (&sa.u.vc - &sa.c) == 8\nD. 优化成员变量的顺序，可以做到\"sizeof(sa) == 16\"\n\n答：（　　　）\n答案：B\n\n由于对齐的需求，在 x86-64 下，要保证 sa.u.value（double 类型变量）的地址必须 8 字节对齐，而在 ia32 的 Linux 系统中，可 4 字节对齐。故 sizeof(sa) 在 x86-64 下要占用三个 8 字节的空间共 24 字节。sa.u.vc 与 sa.c 之间和 sa.i 与 sa.u.vi 之间的地址值之差均为 8，但即使不知道 (&sa.i - &sa.u.vi) 表示之间可以放置多少个整数（值为 2），也可通过优化成员变量顺序后有 sizeof(sa) == 16，用排除法得出正确答案。",
+      "content": "6、有如下定义的结构，在 x86-64 下，下述结论中错误的是？\n\n```c\nstruct {\n    char c;\n    union {\n        char vc;\n        double value;\n        int vi;\n    } u;\n    int i;\n} sa;\n```\nA. `sizeof(sa) == 24`\nB. `(&sa.i - &sa.u.vi) == 8`\nC. `(&sa.u.vc - &sa.c) == 8`\nD. 优化成员变量的顺序，可以做到`\"sizeof(sa) == 16\"`\n\n答：（　　　）\n答案：B\n\n由于对齐的需求，在 x86-64 下，要保证 sa.u.value（double 类型变量）的地址必须 8 字节对齐，而在 ia32 的 Linux 系统中，可 4 字节对齐。故 sizeof(sa) 在 x86-64 下要占用三个 8 字节的空间共 24 字节。sa.u.vc 与 sa.c 之间和 sa.i 与 sa.u.vi 之间的地址值之差均为 8，但即使不知道 (&sa.i - &sa.u.vi) 表示之间可以放置多少个整数（值为 2），也可通过优化成员变量顺序后有 sizeof(sa) == 16，用排除法得出正确答案。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1624,19 +1602,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "sizeof(sa) == 24"
+            "content": "`sizeof(sa) == 24`"
           },
           {
             "key": "B",
-            "content": "(&sa.i - &sa.u.vi) == 8"
+            "content": "`(&sa.i - &sa.u.vi) == 8`"
           },
           {
             "key": "C",
-            "content": "(&sa.u.vc - &sa.c) == 8"
+            "content": "`(&sa.u.vc - &sa.c) == 8`"
           },
           {
             "key": "D",
-            "content": "优化成员变量的顺序，可以做到\"sizeof(sa) == 16\"\n答：（　　　）"
+            "content": "优化成员变量的顺序，可以做到`\"sizeof(sa) == 16\"`\n答：（　　　）"
           }
         ],
         "answer": "答案：B\n\n由于对齐的需求，在 x86-64 下，要保证 sa.u.value（double 类型变量）的地址必须 8 字节对齐，而在 ia32 的 Linux 系统中，可 4 字节对齐。故 sizeof(sa) 在 x86-64 下要占用三个 8 字节的空间共 24 字节。sa.u.vc 与 sa.c 之间和 sa.i 与 sa.u.vi 之间的地址值之差均为 8，但即使不知道 (&sa.i - &sa.u.vi) 表示之间可以放置多少个整数（值为 2），也可通过优化成员变量顺序后有 sizeof(sa) == 16，用排除法得出正确答案。"
@@ -1647,19 +1625,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "sizeof(sa) == 24"
+            "content": "`sizeof(sa) == 24`"
           },
           {
             "id": "B",
-            "content": "(&sa.i - &sa.u.vi) == 8"
+            "content": "`(&sa.i - &sa.u.vi) == 8`"
           },
           {
             "id": "C",
-            "content": "(&sa.u.vc - &sa.c) == 8"
+            "content": "`(&sa.u.vc - &sa.c) == 8`"
           },
           {
             "id": "D",
-            "content": "优化成员变量的顺序，可以做到\"sizeof(sa) == 16\"\n答：（　　　）"
+            "content": "优化成员变量的顺序，可以做到`\"sizeof(sa) == 16\"`\n答：（　　　）"
           }
         ],
         "correctChoiceIds": [
@@ -2370,7 +2348,7 @@
       "exam": "2015期中",
       "questionNo": "选择题 3",
       "summary": "C90 类型转换顺序与 INT_MIN",
-      "content": "3.  在32位平台上，按C90标准以下语句中，结果为假的是\nA.  return INT_MIN < INT_MAX;\nB.  return -2147483648 < 2147483647;\nC.  int a = -2147483648; return a < 2147483647;\nD.  return -2147483647-1 < 2147483647;\n答案：b。因为2147483648超出了有符号数的表示范围，C90的C语言会将其\n识别为unsigned。注意在32位机器上long和int都是32位。\n\n参考信息（原卷红字）：\nC90的转换顺序：int -> long -> unsigned -> unsigned long\n$2^{31}=2147483648$",
+      "content": "3.  在32位平台上，按C90标准以下语句中，结果为假的是\nA.  `return INT_MIN < INT_MAX;`\nB.  `return -2147483648 < 2147483647;`\nC.  `int a = -2147483648; return a < 2147483647;`\nD.  `return -2147483647-1 < 2147483647;`\n答案：b。因为2147483648超出了有符号数的表示范围，C90的C语言会将其\n识别为unsigned。注意在32位机器上long和int都是32位。\n\n参考信息（原卷红字）：\nC90的转换顺序：int -> long -> unsigned -> unsigned long\n$2^{31}=2147483648$",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2396,19 +2374,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "return INT_MIN < INT_MAX;"
+            "content": "`return INT_MIN < INT_MAX;`"
           },
           {
             "key": "B",
-            "content": "return -2147483648 < 2147483647;"
+            "content": "`return -2147483648 < 2147483647;`"
           },
           {
             "key": "C",
-            "content": "int a = -2147483648; return a < 2147483647;"
+            "content": "`int a = -2147483648; return a < 2147483647;`"
           },
           {
             "key": "D",
-            "content": "return -2147483647-1 < 2147483647;"
+            "content": "`return -2147483647-1 < 2147483647;`"
           }
         ],
         "answer": "答案：b。因为2147483648超出了有符号数的表示范围，C90的C语言会将其\n识别为unsigned。注意在32位机器上long和int都是32位。\n\n参考信息（原卷红字）：\nC90的转换顺序：int -> long -> unsigned -> unsigned long\n$2^{31}=2147483648$"
@@ -2419,19 +2397,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "return INT_MIN < INT_MAX;"
+            "content": "`return INT_MIN < INT_MAX;`"
           },
           {
             "id": "B",
-            "content": "return -2147483648 < 2147483647;"
+            "content": "`return -2147483648 < 2147483647;`"
           },
           {
             "id": "C",
-            "content": "int a = -2147483648; return a < 2147483647;"
+            "content": "`int a = -2147483648; return a < 2147483647;`"
           },
           {
             "id": "D",
-            "content": "return -2147483647-1 < 2147483647;"
+            "content": "`return -2147483647-1 < 2147483647;`"
           }
         ],
         "correctChoiceIds": [
@@ -2458,7 +2436,7 @@
       "exam": "2015期中",
       "questionNo": "选择题 4",
       "summary": "浮点运算单调性与精度",
-      "content": "4.  关于浮点数，以下说法正确的是\nA.  给定任意浮点数a，b和x，如果a>b成立（求值为1），则一定a+x>b+x\n成立\nB.  不考虑结果为NaN、Inf或运算过程发生溢出的情况，高精度浮点数一定\n得到比低精度浮点数更精确或相同的结果\nC.  不考虑输入为NaN、Inf的情况，高精度浮点数一定得到比低精度浮点数\n更精确或相同的结果\nD.  给定任意浮点数a, b和x，如果a>b不成立（求值为0），则一定a+x>b+x\n不成立。\n答案：D。A 不成立，例如取 a = +Inf、b = 1、x = −Inf，则 a > b 为真，但 a + x 和 b + x 分别为 NaN 和 −Inf，比较结果不满足 A。IEEE 浮点加法保持单调性；当 a > b 不成立时，给两边加上同一个 x 不会使比较反转为 a + x > b + x。涉及 NaN 时，比较结果为假。关于 B、C，高精度运算也不保证对特定精确结果的舍入误差总小于低精度运算。",
+      "content": "4.  关于浮点数，以下说法正确的是\nA.  给定任意浮点数a，b和x，如果`a>b`成立（求值为`1`），则一定`a+x>b+x`\n成立\nB.  不考虑结果为NaN、Inf或运算过程发生溢出的情况，高精度浮点数一定\n得到比低精度浮点数更精确或相同的结果\nC.  不考虑输入为NaN、Inf的情况，高精度浮点数一定得到比低精度浮点数\n更精确或相同的结果\nD.  给定任意浮点数a, b和x，如果`a>b`不成立（求值为`0`），则一定`a+x>b+x`\n不成立。\n答案：D。A 不成立，例如取 a = +Inf、b = 1、x = −Inf，则 a > b 为真，但 a + x 和 b + x 分别为 NaN 和 −Inf，比较结果不满足 A。IEEE 浮点加法保持单调性；当 a > b 不成立时，给两边加上同一个 x 不会使比较反转为 a + x > b + x。涉及 NaN 时，比较结果为假。关于 B、C，高精度运算也不保证对特定精确结果的舍入误差总小于低精度运算。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2484,7 +2462,7 @@
         "choices": [
           {
             "key": "A",
-            "content": "给定任意浮点数a，b和x，如果a>b成立（求值为1），则一定a+x>b+x\n成立"
+            "content": "给定任意浮点数a，b和x，如果`a>b`成立（求值为`1`），则一定`a+x>b+x`\n成立"
           },
           {
             "key": "B",
@@ -2496,7 +2474,7 @@
           },
           {
             "key": "D",
-            "content": "给定任意浮点数a, b和x，如果a>b不成立（求值为0），则一定a+x>b+x\n不成立。"
+            "content": "给定任意浮点数a, b和x，如果`a>b`不成立（求值为`0`），则一定`a+x>b+x`\n不成立。"
           }
         ],
         "answer": "答案：D。A 不成立，例如取 a = +Inf、b = 1、x = −Inf，则 a > b 为真，但 a + x 和 b + x 分别为 NaN 和 −Inf，比较结果不满足 A。IEEE 浮点加法保持单调性；当 a > b 不成立时，给两边加上同一个 x 不会使比较反转为 a + x > b + x。涉及 NaN 时，比较结果为假。关于 B、C，高精度运算也不保证对特定精确结果的舍入误差总小于低精度运算。"
@@ -2507,7 +2485,7 @@
         "choices": [
           {
             "id": "A",
-            "content": "给定任意浮点数a，b和x，如果a>b成立（求值为1），则一定a+x>b+x\n成立"
+            "content": "给定任意浮点数a，b和x，如果`a>b`成立（求值为`1`），则一定`a+x>b+x`\n成立"
           },
           {
             "id": "B",
@@ -2519,7 +2497,7 @@
           },
           {
             "id": "D",
-            "content": "给定任意浮点数a, b和x，如果a>b不成立（求值为0），则一定a+x>b+x\n不成立。"
+            "content": "给定任意浮点数a, b和x，如果`a>b`不成立（求值为`0`），则一定`a+x>b+x`\n不成立。"
           }
         ],
         "correctChoiceIds": [
@@ -2634,7 +2612,7 @@
       "exam": "2015期中",
       "questionNo": "选择题 7",
       "summary": "大端法下 union 的字节解释",
-      "content": "7.  假设存储器按“大端法”存储数据对象，已知如下的C语言数据结构：\n\n```c\nunion { char c[2]; int i; };\n```\n\n当c的值为0x01, 0x23时，i的值为：\nA. 0x0123\nB. 0x2301\nC. 0x01230000\nD.不确定\n答案：D\n因为 i 的两个高地址字节的值未知。",
+      "content": "7.  假设存储器按“大端法”存储数据对象，已知如下的C语言数据结构：\n\n```c\nunion { char c[2]; int i; };\n```\n\n当c的值为0x01, 0x23时，i的值为：\nA. `0x0123`\nB. `0x2301`\nC. `0x01230000`\nD.不确定\n答案：D\n因为 i 的两个高地址字节的值未知。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2660,15 +2638,15 @@
         "choices": [
           {
             "key": "A",
-            "content": "0x0123"
+            "content": "`0x0123`"
           },
           {
             "key": "B",
-            "content": "0x2301"
+            "content": "`0x2301`"
           },
           {
             "key": "C",
-            "content": "0x01230000"
+            "content": "`0x01230000`"
           },
           {
             "key": "D",
@@ -2683,15 +2661,15 @@
         "choices": [
           {
             "id": "A",
-            "content": "0x0123"
+            "content": "`0x0123`"
           },
           {
             "id": "B",
-            "content": "0x2301"
+            "content": "`0x2301`"
           },
           {
             "id": "C",
-            "content": "0x01230000"
+            "content": "`0x01230000`"
           },
           {
             "id": "D",
@@ -3020,7 +2998,7 @@
           }
         ]
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true,
         "blankAnswers": [
@@ -3034,10 +3012,21 @@
           }
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "第三题（20分）\n1.考虑下面的union的声明，回答后面的问题。\n```\nunion ELE {\n  struct {\n    int x;\n    int *p;\n  }e1;\n  struct {\n    union ELE * next;\n    int y;\n  }e2;\n};\n```\n(注：32位机器)\n这个 union 总共大小为多少{{blank:union-size}}字节？（2分）",
         "answer": "答案：8 字节（32 位机器上 e1 占 4+4=8 字节，e2 占 4+4=8 字节，union 取较大者）"
+      },
+      "group": {
+        "id": "p-89e8b793519e36c6:2015-mid-q3",
+        "questionId": "q-cb30db95322d3051",
+        "title": "第三题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -4244,7 +4233,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 1",
       "summary": "类型转换的溢出与舍入",
-      "content": "1.  下列哪种类型转换既可能导致溢出、又可能导致舍入？\nA. int转float\nB. float转int\nC. int转double\nD. float转double\n答案：b，本题考查浮点数类型转换，参见中文版86页。",
+      "content": "1.  下列哪种类型转换既可能导致溢出、又可能导致舍入？\nA. `int`转`float`\nB. `float`转`int`\nC. `int`转`double`\nD. `float`转`double`\n答案：b，本题考查浮点数类型转换，参见中文版86页。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4268,19 +4257,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "int转float"
+            "content": "`int`转`float`"
           },
           {
             "key": "B",
-            "content": "float转int"
+            "content": "`float`转`int`"
           },
           {
             "key": "C",
-            "content": "int转double"
+            "content": "`int`转`double`"
           },
           {
             "key": "D",
-            "content": "float转double"
+            "content": "`float`转`double`"
           }
         ],
         "answer": "答案：b，本题考查浮点数类型转换，参见中文版86页。"
@@ -4291,19 +4280,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "int转float"
+            "content": "`int`转`float`"
           },
           {
             "id": "B",
-            "content": "float转int"
+            "content": "`float`转`int`"
           },
           {
             "id": "C",
-            "content": "int转double"
+            "content": "`int`转`double`"
           },
           {
             "id": "D",
-            "content": "float转double"
+            "content": "`float`转`double`"
           }
         ],
         "correctChoiceIds": [
@@ -4330,7 +4319,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 2",
       "summary": "小端存储下字符串转整型与无符号转换",
-      "content": "2.  在采用小端法存储机器上运行下面的代码，输出的结果将会是？\n（int，unsigned 为32位长，short为16位长，0~9的ASCII码分别是0x30~0x39）\n```c\nchar *s = \"2018\";\nint *p1 = (int *)s;\nshort s1 = (*p1)>>12;\nunsigned u1 = (unsigned) s1;\nprintf(\"0x%x\\n\",u1);\n```\nA. 0x00002303\nB. 0x00032303\nC. 0xffff8313\nD. 0x00008313\n答案：C\n本题考查大小端存储，以及整数类型转化。字符串在存储时不区分大小端，前面的\n字符存储在低地址，而在被转化成整型的时候低地址被视为低位，因此*p1 为\n0x38313032，s1为0x8313。在由short转化为unsigned的时候，我们要先改变大\n小，之后完成有符号到无符号的转换，因此u1为0xffff8313。",
+      "content": "2.  在采用小端法存储机器上运行下面的代码，输出的结果将会是？\n（int，unsigned 为32位长，short为16位长，0~9的ASCII码分别是0x30~0x39）\n```c\nchar *s = \"2018\";\nint *p1 = (int *)s;\nshort s1 = (*p1)>>12;\nunsigned u1 = (unsigned) s1;\nprintf(\"0x%x\\n\",u1);\n```\nA. `0x00002303`\nB. `0x00032303`\nC. `0xffff8313`\nD. `0x00008313`\n答案：C\n本题考查大小端存储，以及整数类型转化。字符串在存储时不区分大小端，前面的\n字符存储在低地址，而在被转化成整型的时候低地址被视为低位，因此*p1 为\n0x38313032，s1为0x8313。在由short转化为unsigned的时候，我们要先改变大\n小，之后完成有符号到无符号的转换，因此u1为0xffff8313。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4354,19 +4343,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "0x00002303"
+            "content": "`0x00002303`"
           },
           {
             "key": "B",
-            "content": "0x00032303"
+            "content": "`0x00032303`"
           },
           {
             "key": "C",
-            "content": "0xffff8313"
+            "content": "`0xffff8313`"
           },
           {
             "key": "D",
-            "content": "0x00008313"
+            "content": "`0x00008313`"
           }
         ],
         "answer": "答案：C\n本题考查大小端存储，以及整数类型转化。字符串在存储时不区分大小端，前面的\n字符存储在低地址，而在被转化成整型的时候低地址被视为低位，因此*p1 为\n0x38313032，s1为0x8313。在由short转化为unsigned的时候，我们要先改变大\n小，之后完成有符号到无符号的转换，因此u1为0xffff8313。"
@@ -4377,19 +4366,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0x00002303"
+            "content": "`0x00002303`"
           },
           {
             "id": "B",
-            "content": "0x00032303"
+            "content": "`0x00032303`"
           },
           {
             "id": "C",
-            "content": "0xffff8313"
+            "content": "`0xffff8313`"
           },
           {
             "id": "D",
-            "content": "0x00008313"
+            "content": "`0x00008313`"
           }
         ],
         "correctChoiceIds": [
@@ -4590,7 +4579,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 6",
       "summary": "struct/union 成员排列与内存占用",
-      "content": "6.  下列关于C语言中的结构体(struct)以及联合(union)的说法中，正确的是：\nA. 对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小\nB. 对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大\nC. 对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小\nD. 对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大\n答案：A。联合以及只含一个基本数据类型成员的结构体的内存占用与其成员排列\n方式无关，即任意排列方式都可使得内存占用最小（最大），故b、c、d错误。对\n于struct，应当将成员按照其存储单元所占内存大小从小到大（或从大到小）的顺\n序进行排列才能使内存占用最小，故a正确。",
+      "content": "6.  下列关于C语言中的结构体(struct)以及联合(union)的说法中，正确的是：\nA. 对于任意`struct`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小\nB. 对于任意`struct`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大\nC. 对于任意 `union`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小\nD. 对于任意 `union`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大\n答案：A。联合以及只含一个基本数据类型成员的结构体的内存占用与其成员排列\n方式无关，即任意排列方式都可使得内存占用最小（最大），故b、c、d错误。对\n于struct，应当将成员按照其存储单元所占内存大小从小到大（或从大到小）的顺\n序进行排列才能使内存占用最小，故a正确。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4614,19 +4603,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小"
+            "content": "对于任意`struct`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小"
           },
           {
             "key": "B",
-            "content": "对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大"
+            "content": "对于任意`struct`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大"
           },
           {
             "key": "C",
-            "content": "对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小"
+            "content": "对于任意 `union`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小"
           },
           {
             "key": "D",
-            "content": "对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大"
+            "content": "对于任意 `union`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大"
           }
         ],
         "answer": "答案：A。联合以及只含一个基本数据类型成员的结构体的内存占用与其成员排列\n方式无关，即任意排列方式都可使得内存占用最小（最大），故b、c、d错误。对\n于struct，应当将成员按照其存储单元所占内存大小从小到大（或从大到小）的顺\n序进行排列才能使内存占用最小，故a正确。"
@@ -4637,19 +4626,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小"
+            "content": "对于任意`struct`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小"
           },
           {
             "id": "B",
-            "content": "对于任意struct，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大"
+            "content": "对于任意`struct`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大"
           },
           {
             "id": "C",
-            "content": "对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小"
+            "content": "对于任意 `union`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n不一定会使之内存占用最小"
           },
           {
             "id": "D",
-            "content": "对于任意 union，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大"
+            "content": "对于任意 `union`，将其成员按照其实际占用内存大小从小到大的顺序进行排列\n一定不会使之内存占用最大"
           }
         ],
         "correctChoiceIds": [
@@ -4916,7 +4905,7 @@
           }
         ]
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true,
         "blankAnswers": [
@@ -4970,10 +4959,21 @@
           }
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "第三题（15分，每空1分）\n数据结构定义如下：（测试用机：64位Linux机器）\n```c\ntypedef struct s1 {\n         char cc[N];\n         int ii[N];\n         int *ip;\n} S1;\nS1 t1[N];\n```\n1、计算该数据结构的空间：\n当N=3时，sizeof(S1) = {{blank:n3_s1}}，sizeof(t1) = {{blank:n3_t1}}\n当N=4时，sizeof(S1) = {{blank:n4_s1}}，sizeof(t1) = {{blank:n4_t1}}\n当N=5时，sizeof(S1) = {{blank:n5_s1}}，sizeof(t1) = {{blank:n5_t1}}",
         "answer": "答案：\n（1）24 （2）72\n（3）32 （4）128\n（5）40 （6）200"
+      },
+      "group": {
+        "id": "p-eaef0ab4d19e72c9:2018-mid-q3",
+        "questionId": "q-dc098e5a5efcc480",
+        "title": "第三题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -4990,7 +4990,7 @@
       "exam": "2019期中",
       "questionNo": "第一题 1",
       "summary": "IPv4 地址的大端存放与掩码、字节序",
-      "content": "1.  一个IPv4地址就是一个32位无符号整数。例如，10.2.155.253对应的地\n址是 0x0a029bfd。协议规定，无论主机字节顺序如何，IP 地址在内存中总\n是以大端法来存放的。下面代码要实现的功能是检验 IP 是否符合\n192.168.56.xx（xx表示任意0~255的数）的模式，如果满足，则执行if\n语句内部指令。那么，在小端法的机器上，应该分别补充的数字是：\n```\n    unsigned ip, mask;\n    // set ip\n    mask = __________;\n    if(ip & mask == __________)\n    {\n        // do something\n    }\n```\nA. 0x00ffffff　0x0038a8c0\nB. 0x00ffffff　0x00838a0c\nC. 0xffffff00　0xc0a83800\nD. 0xffffff00　0x0c8a8300\n答案：A\n解答：192.168.56.xx对应的十六进制表示为0xc0a838xx（大端），在小端法\n机器上对应的 32 位无符号整数就是 0xxx38a8c0。为了将某个数最高的 8 位掩\n去，可以把它与0x00ffffff进行按位与运算，这样会把高8位全部置为0，而\n低24位不改变。再将其与0x0038a8c0进行比较，即可得出结果。",
+      "content": "1.  一个IPv4地址就是一个32位无符号整数。例如，10.2.155.253对应的地\n址是 0x0a029bfd。协议规定，无论主机字节顺序如何，IP 地址在内存中总\n是以大端法来存放的。下面代码要实现的功能是检验 IP 是否符合\n192.168.56.xx（xx表示任意0~255的数）的模式，如果满足，则执行if\n语句内部指令。那么，在小端法的机器上，应该分别补充的数字是：\n```\n    unsigned ip, mask;\n    // set ip\n    mask = __________;\n    if(ip & mask == __________)\n    {\n        // do something\n    }\n```\nA. `0x00ffffff`　`0x0038a8c0`\nB. `0x00ffffff`　`0x00838a0c`\nC. `0xffffff00`　`0xc0a83800`\nD. `0xffffff00`　`0x0c8a8300`\n答案：A\n解答：192.168.56.xx对应的十六进制表示为0xc0a838xx（大端），在小端法\n机器上对应的 32 位无符号整数就是 0xxx38a8c0。为了将某个数最高的 8 位掩\n去，可以把它与0x00ffffff进行按位与运算，这样会把高8位全部置为0，而\n低24位不改变。再将其与0x0038a8c0进行比较，即可得出结果。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5017,19 +5017,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "0x00ffffff　0x0038a8c0"
+            "content": "`0x00ffffff`　`0x0038a8c0`"
           },
           {
             "key": "B",
-            "content": "0x00ffffff　0x00838a0c"
+            "content": "`0x00ffffff`　`0x00838a0c`"
           },
           {
             "key": "C",
-            "content": "0xffffff00　0xc0a83800"
+            "content": "`0xffffff00`　`0xc0a83800`"
           },
           {
             "key": "D",
-            "content": "0xffffff00　0x0c8a8300"
+            "content": "`0xffffff00`　`0x0c8a8300`"
           }
         ],
         "answer": "答案：A\n解答：192.168.56.xx对应的十六进制表示为0xc0a838xx（大端），在小端法\n机器上对应的 32 位无符号整数就是 0xxx38a8c0。为了将某个数最高的 8 位掩\n去，可以把它与0x00ffffff进行按位与运算，这样会把高8位全部置为0，而\n低24位不改变。再将其与0x0038a8c0进行比较，即可得出结果。"
@@ -5040,19 +5040,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0x00ffffff　0x0038a8c0"
+            "content": "`0x00ffffff`　`0x0038a8c0`"
           },
           {
             "id": "B",
-            "content": "0x00ffffff　0x00838a0c"
+            "content": "`0x00ffffff`　`0x00838a0c`"
           },
           {
             "id": "C",
-            "content": "0xffffff00　0xc0a83800"
+            "content": "`0xffffff00`　`0xc0a83800`"
           },
           {
             "id": "D",
-            "content": "0xffffff00　0x0c8a8300"
+            "content": "`0xffffff00`　`0x0c8a8300`"
           }
         ],
         "correctChoiceIds": [
@@ -5079,7 +5079,7 @@
       "exam": "2019期中",
       "questionNo": "第一题 2",
       "summary": "移位与按位运算结果的补码大小比较",
-      "content": "2.  已知0x2019和0x12是两个有符号32位整数。下列运算结果中，作为32位\n补码表示的整数最大的是：\nA. 0x2019 << 0x12\nB. 0x2019 & 0x12\nC. 0x2019 | 0x12\nD. 0x2019 ^ 0x12\n答案：C\n解答：0x2019左移18位后刚好最高位为1，对应补码表示的是负数；另外三个\n选项的结果都是正数。运算数相同时，运算结果中”1”可能出现的位置也相同。\n按位或运算的结果在每个这样的位置都为”1”，而按位与和按位异或的结果中”1”\n的数量较少，因此按位或运算的结果最大。也可将三个选项的结果计算出来进行比\n较。",
+      "content": "2.  已知0x2019和0x12是两个有符号32位整数。下列运算结果中，作为32位\n补码表示的整数最大的是：\nA. `0x2019 << 0x12`\nB. `0x2019 & 0x12`\nC. `0x2019 | 0x12`\nD. `0x2019 ^ 0x12`\n答案：C\n解答：0x2019左移18位后刚好最高位为1，对应补码表示的是负数；另外三个\n选项的结果都是正数。运算数相同时，运算结果中”1”可能出现的位置也相同。\n按位或运算的结果在每个这样的位置都为”1”，而按位与和按位异或的结果中”1”\n的数量较少，因此按位或运算的结果最大。也可将三个选项的结果计算出来进行比\n较。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5106,19 +5106,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "0x2019 << 0x12"
+            "content": "`0x2019 << 0x12`"
           },
           {
             "key": "B",
-            "content": "0x2019 & 0x12"
+            "content": "`0x2019 & 0x12`"
           },
           {
             "key": "C",
-            "content": "0x2019 | 0x12"
+            "content": "`0x2019 | 0x12`"
           },
           {
             "key": "D",
-            "content": "0x2019 ^ 0x12"
+            "content": "`0x2019 ^ 0x12`"
           }
         ],
         "answer": "答案：C\n解答：0x2019左移18位后刚好最高位为1，对应补码表示的是负数；另外三个\n选项的结果都是正数。运算数相同时，运算结果中”1”可能出现的位置也相同。\n按位或运算的结果在每个这样的位置都为”1”，而按位与和按位异或的结果中”1”\n的数量较少，因此按位或运算的结果最大。也可将三个选项的结果计算出来进行比\n较。"
@@ -5129,19 +5129,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0x2019 << 0x12"
+            "content": "`0x2019 << 0x12`"
           },
           {
             "id": "B",
-            "content": "0x2019 & 0x12"
+            "content": "`0x2019 & 0x12`"
           },
           {
             "id": "C",
-            "content": "0x2019 | 0x12"
+            "content": "`0x2019 | 0x12`"
           },
           {
             "id": "D",
-            "content": "0x2019 ^ 0x12"
+            "content": "`0x2019 ^ 0x12`"
           }
         ],
         "correctChoiceIds": [
@@ -5168,7 +5168,7 @@
       "exam": "2019期中",
       "questionNo": "第一题 3",
       "summary": "IEEE float 尾数精度，f+1-f 的舍入",
-      "content": "3.  运行下面的代码，输出结果是（其中float类型表示IEEE-754规定的浮点\n数，包括1位符号、8位阶码和23位尾数）：\n```\n    for(float f = 1;; f = f + 1)\n    {\n        if(f + 1 - f != (float)1)\n        {\n            printf(\"%.0f\\n\", f);\n            break;\n        }\n    }\n```\nA. 8388608(=2^23)\nB. 16777216(=2^24)\nC. 2147483647(=2^31-1)\nD. 程序为死循环，没有输出\n答案:B\n解答：这种float类型的23位尾数意味着其与23位及以内的整数可以建立一一\n对应的联系，自然f + 1 – f == 1成立；当f超过这一范围时，f + 1的运\n算结果会发生舍入，因而无法恢复到之前的结果。随着f自增，最小的超过精度范\n围的整数是2^24，故可以得出选项。",
+      "content": "3.  运行下面的代码，输出结果是（其中float类型表示IEEE-754规定的浮点\n数，包括1位符号、8位阶码和23位尾数）：\n```\n    for(float f = 1;; f = f + 1)\n    {\n        if(f + 1 - f != (float)1)\n        {\n            printf(\"%.0f\\n\", f);\n            break;\n        }\n    }\n```\nA. `8388608(=2^23)`\nB. `16777216(=2^24)`\nC. `2147483647(=2^31-1)`\nD. 程序为死循环，没有输出\n答案:B\n解答：这种float类型的23位尾数意味着其与23位及以内的整数可以建立一一\n对应的联系，自然f + 1 – f == 1成立；当f超过这一范围时，f + 1的运\n算结果会发生舍入，因而无法恢复到之前的结果。随着f自增，最小的超过精度范\n围的整数是2^24，故可以得出选项。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5195,15 +5195,15 @@
         "choices": [
           {
             "key": "A",
-            "content": "8388608(=2^23)"
+            "content": "`8388608(=2^23)`"
           },
           {
             "key": "B",
-            "content": "16777216(=2^24)"
+            "content": "`16777216(=2^24)`"
           },
           {
             "key": "C",
-            "content": "2147483647(=2^31-1)"
+            "content": "`2147483647(=2^31-1)`"
           },
           {
             "key": "D",
@@ -5218,15 +5218,15 @@
         "choices": [
           {
             "id": "A",
-            "content": "8388608(=2^23)"
+            "content": "`8388608(=2^23)`"
           },
           {
             "id": "B",
-            "content": "16777216(=2^24)"
+            "content": "`16777216(=2^24)`"
           },
           {
             "id": "C",
-            "content": "2147483647(=2^31-1)"
+            "content": "`2147483647(=2^31-1)`"
           },
           {
             "id": "D",
@@ -5284,25 +5284,14 @@
         "choices": [],
         "answer": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |"
       },
-      "partInteraction": {
+      "interaction": {
         "kind": "short-answer",
         "declared": true
-      },
-      "interaction": {
-        "kind": "composite",
-        "declared": true,
-        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制： | 十进制： |  |\n| Two’s Complement | 二进制： | 十进制： |  |",
         "answer": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |"
-      },
-      "group": {
-        "id": "p-a12b4c73bf0c30d2:2019-mid-q2",
-        "questionId": "q-fff3be8833a226ca",
-        "title": "第二题",
-        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -5346,25 +5335,14 @@
         "choices": [],
         "answer": "答案：2.\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| 0x80000000 | -0 |\n| 0x41180000 | +9.5 |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} != 2 + (2^{50} - 2^{50})$ | 是 |\n| $2^{25} + 1 + 1 + 1 + 1 == 2^{25} + 4$ | 否 |\n\nAssociative: Only 23 bits of mantissa (M), so $2 + 2^{50} = 2^{50}$ (2 gets rounded off). So LHS = 0, RHS = 2.\n\nCumulative: 1 is 25 powers of 2 away from $2^{25}$, so $2^{25} + 1 = 2^{25}$, but 4 is 23 powers of 2 away from $2^{25}$, so it doesn't get rounded off."
       },
-      "partInteraction": {
+      "interaction": {
         "kind": "short-answer",
         "declared": true
-      },
-      "interaction": {
-        "kind": "composite",
-        "declared": true,
-        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2. （4 point）假设IEEE 754 浮点数标准，请回答以下问题（每空1分）\n| 浮点数 | Decimal values |\n| --- | --- |\n| 0x80000000 |  |\n| 0x41180000 |  |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} != 2 + (2^{50} - 2^{50})$ |  |\n| $2^{25} + 1 + 1 + 1 + 1 == 2^{25} + 4$ |  |",
         "answer": "答案：2.\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| 0x80000000 | -0 |\n| 0x41180000 | +9.5 |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} != 2 + (2^{50} - 2^{50})$ | 是 |\n| $2^{25} + 1 + 1 + 1 + 1 == 2^{25} + 4$ | 否 |\n\nAssociative: Only 23 bits of mantissa (M), so $2 + 2^{50} = 2^{50}$ (2 gets rounded off). So LHS = 0, RHS = 2.\n\nCumulative: 1 is 25 powers of 2 away from $2^{25}$, so $2^{25} + 1 = 2^{25}$, but 4 is 23 powers of 2 away from $2^{25}$, so it doesn't get rounded off."
-      },
-      "group": {
-        "id": "p-a12b4c73bf0c30d2:2019-mid-q2",
-        "questionId": "q-fff3be8833a226ca",
-        "title": "第二题",
-        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -5657,7 +5635,7 @@
       "exam": "2021期中",
       "questionNo": "第一题 1",
       "summary": "union 中 char 数组与指针、大小端解释",
-      "content": "1. 考虑如下代码在x86-64处理器上的运行情况：\n```\nunion U{\nchar x[12];\nchar *p;\n}u;\nint main() {\nstrcpy(u.x, \"I love ICS!\");\nprintf(\"%p\\n\", u.p);\nreturn 0;\n}\n```\n提示：\n1) \"I love ICS!\"对应的字节序列是49 20 6c 6f 76 65 20 49 43 53\n21\n2) %p用于输出一个指针的值\n程序运行的输出是:\nA. 0x49206c6f76652049435321\nB. 0x215343492065766f6c2049\nC. 0x49206c6f76652049\nD. 0x492065766f6c2049\n答案：D\nD",
+      "content": "1. 考虑如下代码在x86-64处理器上的运行情况：\n```\nunion U{\nchar x[12];\nchar *p;\n}u;\nint main() {\nstrcpy(u.x, \"I love ICS!\");\nprintf(\"%p\\n\", u.p);\nreturn 0;\n}\n```\n提示：\n1) \"I love ICS!\"对应的字节序列是49 20 6c 6f 76 65 20 49 43 53\n21\n2) %p用于输出一个指针的值\n程序运行的输出是:\nA. `0x49206c6f76652049435321`\nB. `0x215343492065766f6c2049`\nC. `0x49206c6f76652049`\nD. `0x492065766f6c2049`\n答案：D\nD",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5686,19 +5664,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "0x49206c6f76652049435321"
+            "content": "`0x49206c6f76652049435321`"
           },
           {
             "key": "B",
-            "content": "0x215343492065766f6c2049"
+            "content": "`0x215343492065766f6c2049`"
           },
           {
             "key": "C",
-            "content": "0x49206c6f76652049"
+            "content": "`0x49206c6f76652049`"
           },
           {
             "key": "D",
-            "content": "0x492065766f6c2049"
+            "content": "`0x492065766f6c2049`"
           }
         ],
         "answer": "答案：D\nD"
@@ -5709,19 +5687,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0x49206c6f76652049435321"
+            "content": "`0x49206c6f76652049435321`"
           },
           {
             "id": "B",
-            "content": "0x215343492065766f6c2049"
+            "content": "`0x215343492065766f6c2049`"
           },
           {
             "id": "C",
-            "content": "0x49206c6f76652049"
+            "content": "`0x49206c6f76652049`"
           },
           {
             "id": "D",
-            "content": "0x492065766f6c2049"
+            "content": "`0x492065766f6c2049`"
           }
         ],
         "correctChoiceIds": [
@@ -5748,7 +5726,7 @@
       "exam": "2021期中",
       "questionNo": "第一题 2",
       "summary": "float 位模式重解释为整数后的序关系",
-      "content": "2.函数g定义如下：\n```\nint g(float f){\nunion {\nfloat f;\nint i;\n} x;\nx.f = f;\nreturn x.i ^ ((1u << (x.i < 0 ? 31 : 0)) - 1);\n}\n```\n则对于两个float型变量a,b，有a<b是g(a)<g(b)的:\nA. 充分必要条件\nB. 充分不必要条件\nC. 必要不充分条件\nD. 不必要不充分条件\nB",
+      "content": "2.函数g定义如下：\n```\nint g(float f){\n    union {\n        float f;\n        int i;\n    } x;\n    x.f = f;\n    return x.i ^ ((1u << (x.i < 0 ? 31 : 0)) - 1);\n}\n```\n则对于两个float型变量a,b，有a<b是g(a)<g(b)的:\nA. 充分必要条件\nB. 充分不必要条件\nC. 必要不充分条件\nD. 不必要不充分条件\nB",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5773,7 +5751,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "2.函数g定义如下：\n```\nint g(float f){\nunion {\nfloat f;\nint i;\n} x;\nx.f = f;\nreturn x.i ^ ((1u << (x.i < 0 ? 31 : 0)) - 1);\n}\n```\n则对于两个float型变量a,b，有a<b是g(a)<g(b)的:",
+        "stem": "2.函数g定义如下：\n```\nint g(float f){\n    union {\n        float f;\n        int i;\n    } x;\n    x.f = f;\n    return x.i ^ ((1u << (x.i < 0 ? 31 : 0)) - 1);\n}\n```\n则对于两个float型变量a,b，有a<b是g(a)<g(b)的:",
         "choices": [
           {
             "key": "A",
@@ -5821,7 +5799,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.函数g定义如下：\n```\nint g(float f){\nunion {\nfloat f;\nint i;\n} x;\nx.f = f;\nreturn x.i ^ ((1u << (x.i < 0 ? 31 : 0)) - 1);\n}\n```\n则对于两个float型变量a,b，有a<b是g(a)<g(b)的:",
+        "prompt": "2.函数g定义如下：\n```\nint g(float f){\n    union {\n        float f;\n        int i;\n    } x;\n    x.f = f;\n    return x.i ^ ((1u << (x.i < 0 ? 31 : 0)) - 1);\n}\n```\n则对于两个float型变量a,b，有a<b是g(a)<g(b)的:",
         "answer": "B"
       },
       "presentation": {
@@ -6297,7 +6275,7 @@
       "exam": "2022期中",
       "questionNo": "第一题 1",
       "summary": "整数运算律：取负、按位取反、除法与右移",
-      "content": "1.已知 a 是 int 类型变量，表达式 a < 0 为真，下列选项中一定为真的表达\n式是：\nA. -a > 0\nB. ~a > 0\nC. (a / 2) < 0\nD. $(a >> 1)$ < 0\n答案：D\n本题考察整数的运算律，A选项a = TMIN时，-a = TMIN不满足；B,C选项中若 a\n= -1，由补码表示和向零舍入，a/2 = ~a = 0。",
+      "content": "1.已知 a 是 int 类型变量，表达式 a < 0 为真，下列选项中一定为真的表达\n式是：\nA. `-a > 0`\nB. `~a > 0`\nC. `(a / 2) < 0`\nD. `(a >> 1)` < 0\n答案：D\n本题考察整数的运算律，A选项a = TMIN时，-a = TMIN不满足；B,C选项中若 a\n= -1，由补码表示和向零舍入，a/2 = ~a = 0。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6327,19 +6305,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "-a > 0"
+            "content": "`-a > 0`"
           },
           {
             "key": "B",
-            "content": "~a > 0"
+            "content": "`~a > 0`"
           },
           {
             "key": "C",
-            "content": "(a / 2) < 0"
+            "content": "`(a / 2) < 0`"
           },
           {
             "key": "D",
-            "content": "$(a >> 1)$ < 0"
+            "content": "`(a >> 1)` < 0"
           }
         ],
         "answer": "答案：D\n本题考察整数的运算律，A选项a = TMIN时，-a = TMIN不满足；B,C选项中若 a\n= -1，由补码表示和向零舍入，a/2 = ~a = 0。"
@@ -6350,19 +6328,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "-a > 0"
+            "content": "`-a > 0`"
           },
           {
             "id": "B",
-            "content": "~a > 0"
+            "content": "`~a > 0`"
           },
           {
             "id": "C",
-            "content": "(a / 2) < 0"
+            "content": "`(a / 2) < 0`"
           },
           {
             "id": "D",
-            "content": "$(a >> 1)$ < 0"
+            "content": "`(a >> 1)` < 0"
           }
         ],
         "correctChoiceIds": [
@@ -6389,7 +6367,7 @@
       "exam": "2022期中",
       "questionNo": "第一题 2",
       "summary": "浮点运算律：交换律成立、结合律不成立",
-      "content": "2.对于 float 类型变量 a, b, c下列说法正确的是：\nA. 若 a > b，则 a + c > b + c\nB. 若 a == b，则 a + c == b + c\nC. 若 a + b + c == 0.0，则 c + b + a == 0.0\nD. 若 a + b == 0.0，则 b + a == 0.0\n答案：D\n本题考察浮点数运算律，A选项c = INF，B选项c = NAN时不对，C、D选项变相\n考察浮点数不满足结合律但满足交换律",
+      "content": "2.对于 float 类型变量 a, b, c下列说法正确的是：\nA. 若 `a > b`，则 `a + c > b + c`\nB. 若 `a == b`，则 `a + c == b + c`\nC. 若 `a + b + c == 0.0`，则 `c + b + a == 0.0`\nD. 若 `a + b == 0.0`，则 `b + a == 0.0`\n答案：D\n本题考察浮点数运算律，A选项c = INF，B选项c = NAN时不对，C、D选项变相\n考察浮点数不满足结合律但满足交换律",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6419,19 +6397,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "若 a > b，则 a + c > b + c"
+            "content": "若 `a > b`，则 `a + c > b + c`"
           },
           {
             "key": "B",
-            "content": "若 a == b，则 a + c == b + c"
+            "content": "若 `a == b`，则 `a + c == b + c`"
           },
           {
             "key": "C",
-            "content": "若 a + b + c == 0.0，则 c + b + a == 0.0"
+            "content": "若 `a + b + c == 0.0`，则 `c + b + a == 0.0`"
           },
           {
             "key": "D",
-            "content": "若 a + b == 0.0，则 b + a == 0.0"
+            "content": "若 `a + b == 0.0`，则 `b + a == 0.0`"
           }
         ],
         "answer": "答案：D\n本题考察浮点数运算律，A选项c = INF，B选项c = NAN时不对，C、D选项变相\n考察浮点数不满足结合律但满足交换律"
@@ -6442,19 +6420,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "若 a > b，则 a + c > b + c"
+            "content": "若 `a > b`，则 `a + c > b + c`"
           },
           {
             "id": "B",
-            "content": "若 a == b，则 a + c == b + c"
+            "content": "若 `a == b`，则 `a + c == b + c`"
           },
           {
             "id": "C",
-            "content": "若 a + b + c == 0.0，则 c + b + a == 0.0"
+            "content": "若 `a + b + c == 0.0`，则 `c + b + a == 0.0`"
           },
           {
             "id": "D",
-            "content": "若 a + b == 0.0，则 b + a == 0.0"
+            "content": "若 `a + b == 0.0`，则 `b + a == 0.0`"
           }
         ],
         "correctChoiceIds": [
@@ -6481,7 +6459,7 @@
       "exam": "2022期中",
       "questionNo": "第一题 3",
       "summary": "有符号/无符号整型的位级表示与比较",
-      "content": "3.假设在C语言中有如下声明：\n```\nint i = 0x80000000;\nunsigned u = 0x80000001;\nshort s = 0x8001;\n```\n则下列表达式结果为真的是：\nA. i > (int)u\nB. i - 1 > u\nC. (unsigned)-1 < i\nD. s > u\n答案：D\n本题考查整型的位级表示，A选项(int)u比i大 1所以错误；B选项左边先溢出\n为0x7fffffff再隐式转换为unsigned, 比右边的u小所以也错误；C选项右\n边隐式转换成unsigned为 0x80000000U, 左边为 0xffffffffU, 因此左边\n大于右边，错误；D选项s隐式转化成unsigned为0xffff8001U,明显大于u,\n所以正确",
+      "content": "3.假设在C语言中有如下声明：\n```\nint i = 0x80000000;\nunsigned u = 0x80000001;\nshort s = 0x8001;\n```\n则下列表达式结果为真的是：\nA. `i > (int)u`\nB. `i - 1 > u`\nC. `(unsigned)-1 < i`\nD. `s > u`\n答案：D\n本题考查整型的位级表示，A选项(int)u比i大 1所以错误；B选项左边先溢出\n为0x7fffffff再隐式转换为unsigned, 比右边的u小所以也错误；C选项右\n边隐式转换成unsigned为 0x80000000U, 左边为 0xffffffffU, 因此左边\n大于右边，错误；D选项s隐式转化成unsigned为0xffff8001U,明显大于u,\n所以正确",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6511,19 +6489,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "i > (int)u"
+            "content": "`i > (int)u`"
           },
           {
             "key": "B",
-            "content": "i - 1 > u"
+            "content": "`i - 1 > u`"
           },
           {
             "key": "C",
-            "content": "(unsigned)-1 < i"
+            "content": "`(unsigned)-1 < i`"
           },
           {
             "key": "D",
-            "content": "s > u"
+            "content": "`s > u`"
           }
         ],
         "answer": "答案：D\n本题考查整型的位级表示，A选项(int)u比i大 1所以错误；B选项左边先溢出\n为0x7fffffff再隐式转换为unsigned, 比右边的u小所以也错误；C选项右\n边隐式转换成unsigned为 0x80000000U, 左边为 0xffffffffU, 因此左边\n大于右边，错误；D选项s隐式转化成unsigned为0xffff8001U,明显大于u,\n所以正确"
@@ -6534,19 +6512,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "i > (int)u"
+            "content": "`i > (int)u`"
           },
           {
             "id": "B",
-            "content": "i - 1 > u"
+            "content": "`i - 1 > u`"
           },
           {
             "id": "C",
-            "content": "(unsigned)-1 < i"
+            "content": "`(unsigned)-1 < i`"
           },
           {
             "id": "D",
-            "content": "s > u"
+            "content": "`s > u`"
           }
         ],
         "correctChoiceIds": [
@@ -6573,7 +6551,7 @@
       "exam": "2022期中",
       "questionNo": "第一题 4",
       "summary": "sizeof无符号、移位、浮点位级比较与阶码范围",
-      "content": "4.下列说法正确的是：\nA. 在 64 位机器上有 int 型变量 a 和 char 型变量 b, 则 sizeof(b) -\nsizeof(a) < 0为真\nB. 若x为整型，则(x >> 1) << 1 <= x为真\nC. 假设a, b为32位浮点数，ia, ib是分别与a, b位级表示相同的32位有\n符号整型数，则a < b等价于ia < ib\nD. 双精度浮点数所能表示的规格化数的阶码范围为 [-127, 126]\n答案：B\n本题考查整形和浮点数的位级表示，A选项sizeof返回无符号数所以错误，B选\n项左边相当于把x末位置0, 显然小于等于x; C选项考察的是IEEE浮点数的比\n较可以按照位级表示判断，但注意负数需要反过来，所以错误；D选项应该为[-126,\n127].",
+      "content": "4.下列说法正确的是：\nA. 在 `64` 位机器上有 `int` 型变量 a 和 `char` 型变量 b, 则 `sizeof(b) -`\nsizeof(a) < 0为真\nB. 若x为整型，则`(x >> 1) << 1 <= x`为真\nC. 假设a, b为32位浮点数，ia, ib是分别与a, b位级表示相同的32位有\n符号整型数，则a < b等价于ia < ib\nD. 双精度浮点数所能表示的规格化数的阶码范围为 [-127, 126]\n答案：B\n本题考查整形和浮点数的位级表示，A选项sizeof返回无符号数所以错误，B选\n项左边相当于把x末位置0, 显然小于等于x; C选项考察的是IEEE浮点数的比\n较可以按照位级表示判断，但注意负数需要反过来，所以错误；D选项应该为[-126,\n127].",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6603,11 +6581,11 @@
         "choices": [
           {
             "key": "A",
-            "content": "在 64 位机器上有 int 型变量 a 和 char 型变量 b, 则 sizeof(b) -\nsizeof(a) < 0为真"
+            "content": "在 `64` 位机器上有 `int` 型变量 a 和 `char` 型变量 b, 则 `sizeof(b) -`\nsizeof(a) < 0为真"
           },
           {
             "key": "B",
-            "content": "若x为整型，则(x >> 1) << 1 <= x为真"
+            "content": "若x为整型，则`(x >> 1) << 1 <= x`为真"
           },
           {
             "key": "C",
@@ -6626,11 +6604,11 @@
         "choices": [
           {
             "id": "A",
-            "content": "在 64 位机器上有 int 型变量 a 和 char 型变量 b, 则 sizeof(b) -\nsizeof(a) < 0为真"
+            "content": "在 `64` 位机器上有 `int` 型变量 a 和 `char` 型变量 b, 则 `sizeof(b) -`\nsizeof(a) < 0为真"
           },
           {
             "id": "B",
-            "content": "若x为整型，则(x >> 1) << 1 <= x为真"
+            "content": "若x为整型，则`(x >> 1) << 1 <= x`为真"
           },
           {
             "id": "C",
@@ -6665,7 +6643,7 @@
       "exam": "2022期中",
       "questionNo": "第一题 5",
       "summary": "小端字节序与short/int指针读取（原答案有争议）",
-      "content": "5.字符串char s[8]在某小端法存储的x86-64机器内存里从低地址到高地址表\n示为[32 30 32 33 33 32 30 34]16（不考虑字符串末尾的’\\0’），同时在 C\n语言中声明short sh1 = *(short *)(s + 2)和short sh2 = *(short *)(s\n+ 6)。已知0到9的ascii码分别为0x30到0x39. 则下列说法正确的是\nA. sh2 – sh1 < 0为真\nB. 语句 printf(“%s”, s)的输出为40233202\nC. 执行语句 *(int *)(s + 2) = 0x3531 后 printf(“%s”, s)的输出为\n20150004\nD. 执行语句 *(int *)(s + 2) = 0x3531 后 printf(“%s”, s)的输出为\n40150002\n答案：C 本题考查大小端。sh1 == 0x3332, sh2 = 0x3430, 因此sh2 - sh1 >\n0, 因此A选项错误。B选项，字符串顺序存储没有大小端一说，所以s的内容就\n是20233204; 如果执行 *(int *)(s + 2) = 0x3531会把s的第3, 4, 5,\n6个字节按照小端法覆盖，成为[32 30 31 35 00 00 30 34]16, 因此s的内\n容变成20150004, 所以选C\n（注：该题答案存在问题）",
+      "content": "5.字符串char s[8]在某小端法存储的x86-64机器内存里从低地址到高地址表\n示为[32 30 32 33 33 32 30 34]16（不考虑字符串末尾的’\\0’），同时在 C\n语言中声明short sh1 = *(short *)(s + 2)和short sh2 = *(short *)(s\n+ 6)。已知0到9的ascii码分别为0x30到0x39. 则下列说法正确的是\nA. `sh2 – sh1 < 0`为真\nB. 语句 `printf(“%s”, s)`的输出为`40233202`\nC. 执行语句 `*(int *)(s + 2) = 0x3531` 后 `printf(“%s”, s)`的输出为\n20150004\nD. 执行语句 `*(int *)(s + 2) = 0x3531` 后 `printf(“%s”, s)`的输出为\n40150002\n答案：C 本题考查大小端。sh1 == 0x3332, sh2 = 0x3430, 因此sh2 - sh1 >\n0, 因此A选项错误。B选项，字符串顺序存储没有大小端一说，所以s的内容就\n是20233204; 如果执行 *(int *)(s + 2) = 0x3531会把s的第3, 4, 5,\n6个字节按照小端法覆盖，成为[32 30 31 35 00 00 30 34]16, 因此s的内\n容变成20150004, 所以选C\n（注：该题答案存在问题）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6695,19 +6673,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "sh2 – sh1 < 0为真"
+            "content": "`sh2 – sh1 < 0`为真"
           },
           {
             "key": "B",
-            "content": "语句 printf(“%s”, s)的输出为40233202"
+            "content": "语句 `printf(“%s”, s)`的输出为`40233202`"
           },
           {
             "key": "C",
-            "content": "执行语句 *(int *)(s + 2) = 0x3531 后 printf(“%s”, s)的输出为\n20150004"
+            "content": "执行语句 `*(int *)(s + 2) = 0x3531` 后 `printf(“%s”, s)`的输出为\n20150004"
           },
           {
             "key": "D",
-            "content": "执行语句 *(int *)(s + 2) = 0x3531 后 printf(“%s”, s)的输出为\n40150002"
+            "content": "执行语句 `*(int *)(s + 2) = 0x3531` 后 `printf(“%s”, s)`的输出为\n40150002"
           }
         ],
         "answer": "答案：C 本题考查大小端。sh1 == 0x3332, sh2 = 0x3430, 因此sh2 - sh1 >\n0, 因此A选项错误。B选项，字符串顺序存储没有大小端一说，所以s的内容就\n是20233204; 如果执行 *(int *)(s + 2) = 0x3531会把s的第3, 4, 5,\n6个字节按照小端法覆盖，成为[32 30 31 35 00 00 30 34]16, 因此s的内\n容变成20150004, 所以选C\n（注：该题答案存在问题）"
@@ -6718,19 +6696,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "sh2 – sh1 < 0为真"
+            "content": "`sh2 – sh1 < 0`为真"
           },
           {
             "id": "B",
-            "content": "语句 printf(“%s”, s)的输出为40233202"
+            "content": "语句 `printf(“%s”, s)`的输出为`40233202`"
           },
           {
             "id": "C",
-            "content": "执行语句 *(int *)(s + 2) = 0x3531 后 printf(“%s”, s)的输出为\n20150004"
+            "content": "执行语句 `*(int *)(s + 2) = 0x3531` 后 `printf(“%s”, s)`的输出为\n20150004"
           },
           {
             "id": "D",
-            "content": "执行语句 *(int *)(s + 2) = 0x3531 后 printf(“%s”, s)的输出为\n40150002"
+            "content": "执行语句 `*(int *)(s + 2) = 0x3531` 后 `printf(“%s”, s)`的输出为\n40150002"
           }
         ],
         "correctChoiceIds": [
@@ -6811,7 +6789,7 @@
       "exam": "2023期中",
       "questionNo": "第一题 1",
       "summary": "有符号/无符号比较与short截断、符号扩展",
-      "content": "1.假设在C语言中有如下声明：\n```\nunsigned u = 0x7FFFFFFF;\nint i = 0x80000000;\nshort s = 0x7FFF;\n```\n则下列表达式结果为真的是：\nA. i < u\nB. -i > i\nC. (short)i < s + (int)1\nD. (unsigned)s > u\n答案：C\n考察整型的位级表示。\nA 错误。int和unsigned比较时按unsigned计算，此时i比u大1。\nB 错误。-i与i的位级表示相同（0x80000000），故它们相等。\nC 正确。(short)i做了截断，其值为0。s + 1按int计算，其值为0x00008000。\n最后比较时按int计算，左侧仍然是0，从而小于右侧。\nD 错误。(unsigned)s 转换为 unsigned int 后零扩展，由于 s 的最高位为 0，所以扩展后为\n0x00007FFF，其值比u小。",
+      "content": "1.假设在C语言中有如下声明：\n```\nunsigned u = 0x7FFFFFFF;\nint i = 0x80000000;\nshort s = 0x7FFF;\n```\n则下列表达式结果为真的是：\nA. `i < u`\nB. `-i > i`\nC. `(short)i < s + (int)1`\nD. `(unsigned)s > u`\n答案：C\n考察整型的位级表示。\nA 错误。int和unsigned比较时按unsigned计算，此时i比u大1。\nB 错误。-i与i的位级表示相同（0x80000000），故它们相等。\nC 正确。(short)i做了截断，其值为0。s + 1按int计算，其值为0x00008000。\n最后比较时按int计算，左侧仍然是0，从而小于右侧。\nD 错误。(unsigned)s 转换为 unsigned int 后零扩展，由于 s 的最高位为 0，所以扩展后为\n0x00007FFF，其值比u小。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6840,19 +6818,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "i < u"
+            "content": "`i < u`"
           },
           {
             "key": "B",
-            "content": "-i > i"
+            "content": "`-i > i`"
           },
           {
             "key": "C",
-            "content": "(short)i < s + (int)1"
+            "content": "`(short)i < s + (int)1`"
           },
           {
             "key": "D",
-            "content": "(unsigned)s > u"
+            "content": "`(unsigned)s > u`"
           }
         ],
         "answer": "答案：C\n考察整型的位级表示。\nA 错误。int和unsigned比较时按unsigned计算，此时i比u大1。\nB 错误。-i与i的位级表示相同（0x80000000），故它们相等。\nC 正确。(short)i做了截断，其值为0。s + 1按int计算，其值为0x00008000。\n最后比较时按int计算，左侧仍然是0，从而小于右侧。\nD 错误。(unsigned)s 转换为 unsigned int 后零扩展，由于 s 的最高位为 0，所以扩展后为\n0x00007FFF，其值比u小。"
@@ -6863,19 +6841,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "i < u"
+            "content": "`i < u`"
           },
           {
             "id": "B",
-            "content": "-i > i"
+            "content": "`-i > i`"
           },
           {
             "id": "C",
-            "content": "(short)i < s + (int)1"
+            "content": "`(short)i < s + (int)1`"
           },
           {
             "id": "D",
-            "content": "(unsigned)s > u"
+            "content": "`(unsigned)s > u`"
           }
         ],
         "correctChoiceIds": [
@@ -6993,7 +6971,7 @@
       "exam": "2023期中",
       "questionNo": "第一题 3",
       "summary": "浮点位级表示、最小正规格化数与无穷",
-      "content": "3.对于float类型的变量a，b，下列说法正确的是：\nA．假设a，b不是NaN，则(a + b) - a == b总为真\nB．a的小数字段长度为23位，所以它能精确表示的最小正数是2-149\nC．假设a表示的是一个整数，那么(int)a == a总为真\nD．假设a不是NaN，则存在b的取值使得a + b == 0为真\n答案：B\n考察浮点数的位级表示和运算规则。\nA 错误。比如a为1e20，b为1.0，a + b会舍入到1e20,(a + b) – a的\n结果是0.0。\nB 正确。float的位级表示有1个符号位，8位阶码(偏移为127)，23位小数。\n所以最小的可精确表达的正数是 $2^{-23} \\times 2^{1-127} = 2^{-149}$。\nC 错误。可能会发生溢出。\nD 错误。a的值为无穷大时，不存在这样的b（因为正负无穷相加结果为NaN）。",
+      "content": "3.对于float类型的变量a，b，下列说法正确的是：\nA．假设a，b不是NaN，则`(a + b) - a == b`总为真\nB．a的小数字段长度为23位，所以它能精确表示的最小正数是2-149\nC．假设a表示的是一个整数，那么`(int)a == a`总为真\nD．假设a不是NaN，则存在b的取值使得`a + b == 0`为真\n答案：B\n考察浮点数的位级表示和运算规则。\nA 错误。比如a为1e20，b为1.0，a + b会舍入到1e20,(a + b) – a的\n结果是0.0。\nB 正确。float的位级表示有1个符号位，8位阶码(偏移为127)，23位小数。\n所以最小的可精确表达的正数是 $2^{-23} \\times 2^{1-127} = 2^{-149}$。\nC 错误。可能会发生溢出。\nD 错误。a的值为无穷大时，不存在这样的b（因为正负无穷相加结果为NaN）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7022,7 +7000,7 @@
         "choices": [
           {
             "key": "A",
-            "content": "假设a，b不是NaN，则(a + b) - a == b总为真"
+            "content": "假设a，b不是NaN，则`(a + b) - a == b`总为真"
           },
           {
             "key": "B",
@@ -7030,11 +7008,11 @@
           },
           {
             "key": "C",
-            "content": "假设a表示的是一个整数，那么(int)a == a总为真"
+            "content": "假设a表示的是一个整数，那么`(int)a == a`总为真"
           },
           {
             "key": "D",
-            "content": "假设a不是NaN，则存在b的取值使得a + b == 0为真"
+            "content": "假设a不是NaN，则存在b的取值使得`a + b == 0`为真"
           }
         ],
         "answer": "答案：B\n考察浮点数的位级表示和运算规则。\nA 错误。比如a为1e20，b为1.0，a + b会舍入到1e20,(a + b) – a的\n结果是0.0。\nB 正确。float的位级表示有1个符号位，8位阶码(偏移为127)，23位小数。\n所以最小的可精确表达的正数是 $2^{-23} \\times 2^{1-127} = 2^{-149}$。\nC 错误。可能会发生溢出。\nD 错误。a的值为无穷大时，不存在这样的b（因为正负无穷相加结果为NaN）。"
@@ -7045,7 +7023,7 @@
         "choices": [
           {
             "id": "A",
-            "content": "假设a，b不是NaN，则(a + b) - a == b总为真"
+            "content": "假设a，b不是NaN，则`(a + b) - a == b`总为真"
           },
           {
             "id": "B",
@@ -7053,11 +7031,11 @@
           },
           {
             "id": "C",
-            "content": "假设a表示的是一个整数，那么(int)a == a总为真"
+            "content": "假设a表示的是一个整数，那么`(int)a == a`总为真"
           },
           {
             "id": "D",
-            "content": "假设a不是NaN，则存在b的取值使得a + b == 0为真"
+            "content": "假设a不是NaN，则存在b的取值使得`a + b == 0`为真"
           }
         ],
         "correctChoiceIds": [
@@ -7175,7 +7153,7 @@
       "exam": "2023期中",
       "questionNo": "第一题 13",
       "summary": "类型转换中的舍入与溢出判断",
-      "content": "13. 在下列类型转换的过程中可能会发生舍入，但绝对不会发生溢出的是：\nA. unsigned long long 转 float\nB. float 转 unsigned\nC. double 转 float\nD. int 转 short\n答案：A. 类型转换舍入会影响精度，但是溢出则会影响结果，所以在编写程序中\n溢出是需要严格避免的，而舍入是可以容忍的。整型浮点型位数多转位数少一定会\n溢出，整型和浮点型相互转换是考察的重点",
+      "content": "13. 在下列类型转换的过程中可能会发生舍入，但绝对不会发生溢出的是：\nA. `unsigned long long` 转 `float`\nB. `float` 转 `unsigned`\nC. `double` 转 `float`\nD. `int` 转 `short`\n答案：A. 类型转换舍入会影响精度，但是溢出则会影响结果，所以在编写程序中\n溢出是需要严格避免的，而舍入是可以容忍的。整型浮点型位数多转位数少一定会\n溢出，整型和浮点型相互转换是考察的重点",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7204,19 +7182,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "unsigned long long 转 float"
+            "content": "`unsigned long long` 转 `float`"
           },
           {
             "key": "B",
-            "content": "float 转 unsigned"
+            "content": "`float` 转 `unsigned`"
           },
           {
             "key": "C",
-            "content": "double 转 float"
+            "content": "`double` 转 `float`"
           },
           {
             "key": "D",
-            "content": "int 转 short"
+            "content": "`int` 转 `short`"
           }
         ],
         "answer": "答案：A. 类型转换舍入会影响精度，但是溢出则会影响结果，所以在编写程序中\n溢出是需要严格避免的，而舍入是可以容忍的。整型浮点型位数多转位数少一定会\n溢出，整型和浮点型相互转换是考察的重点"
@@ -7227,19 +7205,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "unsigned long long 转 float"
+            "content": "`unsigned long long` 转 `float`"
           },
           {
             "id": "B",
-            "content": "float 转 unsigned"
+            "content": "`float` 转 `unsigned`"
           },
           {
             "id": "C",
-            "content": "double 转 float"
+            "content": "`double` 转 `float`"
           },
           {
             "id": "D",
-            "content": "int 转 short"
+            "content": "`int` 转 `short`"
           }
         ],
         "correctChoiceIds": [
@@ -7595,7 +7573,7 @@
       "exam": "2024期中",
       "questionNo": "第一题 2",
       "summary": "字符数组指针读取、字节序与ASCII码",
-      "content": "2.在 x86-64 机器上运行如下代码，输出是：\n```\nchar A[12] = \"19260817\";\nchar B[12] = \"20241104\";\nvoid *x = (void *)&A;\nvoid *y = 2 + (void *)&B;\nunsigned short P = *(unsigned short *)x;\nunsigned short Q = *(unsigned short *)y;\nprintf(\"0x%04x\", (unsigned short)(P - Q));\n```\n提示：‘0’,‘1’, ...,‘9’的ASCII码分别是 0x30, 0x31, ..., 0x39。\nA. 0xff05\nB. 0x04ff\nC. 0x0822\nD. 0x0800\n答案：B。",
+      "content": "2.在 x86-64 机器上运行如下代码，输出是：\n```\nchar A[12] = \"19260817\";\nchar B[12] = \"20241104\";\nvoid *x = (void *)&A;\nvoid *y = 2 + (void *)&B;\nunsigned short P = *(unsigned short *)x;\nunsigned short Q = *(unsigned short *)y;\nprintf(\"0x%04x\", (unsigned short)(P - Q));\n```\n提示：‘0’,‘1’, ...,‘9’的ASCII码分别是 0x30, 0x31, ..., 0x39。\nA. `0xff05`\nB. `0x04ff`\nC. `0x0822`\nD. `0x0800`\n答案：B。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7624,19 +7602,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "0xff05"
+            "content": "`0xff05`"
           },
           {
             "key": "B",
-            "content": "0x04ff"
+            "content": "`0x04ff`"
           },
           {
             "key": "C",
-            "content": "0x0822"
+            "content": "`0x0822`"
           },
           {
             "key": "D",
-            "content": "0x0800"
+            "content": "`0x0800`"
           }
         ],
         "answer": "答案：B。"
@@ -7647,19 +7625,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0xff05"
+            "content": "`0xff05`"
           },
           {
             "id": "B",
-            "content": "0x04ff"
+            "content": "`0x04ff`"
           },
           {
             "id": "C",
-            "content": "0x0822"
+            "content": "`0x0822`"
           },
           {
             "id": "D",
-            "content": "0x0800"
+            "content": "`0x0800`"
           }
         ],
         "correctChoiceIds": [
@@ -7815,14 +7793,25 @@
         ],
         "answer": "参考答案：\n1. （1） 否；是。  （每空1分）\n（2） 3.75。  （2分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第二题（15分）\nGCC的内联汇编（inline assembly）特性允许在C程序中直接嵌入汇编代码，\n使开发者能够访问常规 C 代码无法直接访问的底层机器特性，例如寄存器的值或\n特定的处理器指令。通过这种方式，开发者可以对硬件进行精细控制，提升程序性\n能或实现特定的底层操作。请结合教材第二、三章的相关知识，回答下列问题。\n1. 下列运行在x86-64机器上的C 代码展示了一个使用内联汇编的例子：\n```\nfloat *p = 0x7ffc3608bf40;\nfloat value;\n/* inline assembly starts */\n__asm__ __volatile__(\n    \"vmovss (%1), %0\"\n    : \"=x\"(value)\n    : \"r\"(p)\n);\n/* inline assembly ends */\nprintf(“%.2f\\n”, value);\n```\n这段代码通过在 C 代码中插入浮点指令 vmovss（Vector  Move  Scalar\nSingle-Precision Floating-Point）将内存地址0x7ffc3608bf40处的\n浮点数数据读取到float类型的变量value中。\n（1）  （2分）请判断以下说法是否正确（填“是”或“否”）：",
         "answer": "参考答案：\n1. （1） 否；是。  （每空1分）\n（2） 3.75。  （2分）"
+      },
+      "group": {
+        "id": "p-0fe6817c7f881573:2024-mid-q2",
+        "questionId": "q-48830bbf91e759fa",
+        "title": "第二题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -7868,14 +7857,25 @@
         "choices": [],
         "answer": "答案：2. （1） 10000001；2-14。 （每空2分）\n（2） 3。    （2分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2. 从上一题中可以看出，当需要表示的浮点数的有效位数较少时，使用 IEEE-\n754标准编码浮点数会造成一些内存浪费。下面基于IEEE-754标准定义一种\n8位的浮点数，符号位、阶码位和尾数位长度分别为1,5,2。\n（1）  （4分）该浮点数格式可表示的最大的负非规格化数（不考虑-0）的二进\n制表示为        ，可表示的最小的正规格化数为        （填十进制\n数，无需计算出结果中2的幂的值）。\n（2）  （2分）只考虑符号位为0的情况，表示NaN的浮点数有        个。",
         "answer": "答案：2. （1） 10000001；2-14。 （每空2分）\n（2） 3。    （2分）"
+      },
+      "group": {
+        "id": "p-0fe6817c7f881573:2024-mid-q2",
+        "questionId": "q-48830bbf91e759fa",
+        "title": "第二题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -7921,14 +7921,25 @@
         "choices": [],
         "answer": "答案：3. （1） 否；否。  （每空1分）\n（2） -1105。  （3分）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3. 接第1题，现在我们已经将内存中0x7ffc3608bf40处的浮点数数据读取到\n了变量value中，下 面的C代码使用联合（union）对value进行类型转换。\n（1）  （2分）请判断以下说法是否正确（填“是”或“否”）：\n```\nunion{\n    float f;\n    int i;\n} converter;\nconverter.f = value;\nprintf(“%d\\n”, converter.i);\n```\na. 这段代码的输出在 任．何．情．况．下都和语句 ”printf(“%d\\n”,\n(int)value);”的输出相同。                （    ）\nb. float转换为int有可能发生舍入和溢出，但int转换为float不\n会发生舍入，也不会出现溢出。             （    ）\n（2）  （3 分）若第 1 题中读取到 value 中的值为 -1104.5，则\nprintf(\"%d\\n\",(int)converter.f+(converter.i >> 31))；的\n输出为        。",
         "answer": "答案：3. （1） 否；否。  （每空1分）\n（2） -1105。  （3分）"
+      },
+      "group": {
+        "id": "p-0fe6817c7f881573:2024-mid-q2",
+        "questionId": "q-48830bbf91e759fa",
+        "title": "第二题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -8275,14 +8286,25 @@
         "choices": [],
         "answer": "答案：\n（1）`c(b(a(1))) = 0x800000`\n（2）`a(b(c(1))) = 0`\n\n解析（原卷自带答案，此处补全推导）：\n`d[256]` 就是**8 位比特反转表**：`d[x]` 把 x 的 8 个比特整个反过来\n（`d[1] = 0x80`、`d[0x80] = 1`、`d[0x0F] = 0xF0` …）。\n三个函数都是**按字节/半字/字做整数的比特反转**：\n- `a(x) = d[x]`：8 位内反转比特；\n- `b(x) = (a(x & 0xff) << 8) | a(x >> 8)`：把低字节与高字节交换、各自再反转比特\n  ⇒ 16 位整数的比特反转；\n- `c(x) = (b(x & 0xffff) << 16) | b(x >> 16)`：两个半字交换、各自再做 16 位反转\n  ⇒ 32 位整数的比特反转。\n\n（1）逐步算：\n- `a(1) = d[1] = 0x80`\n- `b(0x0080)`：低字节 0x80、高字节 0x00 ⇒ `(a(0x80) << 8) | a(0x00)`\n  `= (0x01 << 8) | 0x00 = 0x0100`\n- `c(0x00000100)`：低半字 0x0100、高半字 0x0000 ⇒ `(b(0x0100) << 16) | b(0x0000)`\n  `= (0x0080 << 16) | 0x0000 = 0x800000`\n⇒ **`c(b(a(1))) = 0x800000`**，与原卷答案一致。\n\n（2）逐步算：\n- `c(1)`：低半字 0x0001、高半字 0x0000\n  ⇒ `(b(0x0001) << 16) | b(0x0000)`，其中 `b(0x0001) = (a(0x01) << 8) | a(0x00) = 0x0100`\n  ⇒ `c(1) = 0x0100 << 16 = 0x01000000`\n- `b(0x01000000)`（unsigned short 形参，取低 16 位 0x0000 与高 16 位 0x0100）\n  ⇒ `(a(0x00) << 8) | a(0x0100)`；`a` 的形参是 unsigned char，0x0100 截断为 0x00\n  ⇒ `0x00 | d[0x00] = 0`\n- `a(0) = d[0] = 0`\n⇒ **`a(b(c(1))) = 0`**，与原卷答案一致。\n\n> 备注：`b`/`c` 的语义就是「对本宽度的整数做完整比特反转」（字节序交换 + 逐字节\n> 反转比特）。第（1）问把 1 放在 32 位里反转落在 bit24（= 0x800000），第（2）问\n> 反转后被 `a` 截到低 8 位，结果为 0。\n\n> 说明：原卷把答案（1）0x800000、（2）0 直接印在题面之后；本文件把答案移入\n> `%%% answer` 段，字符内容与原卷完全一致。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第二题（10分）汇编\n阅读下面的C代码：\n```\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，下面的结果是：\n```\nc(b(a(1))) =     (1)\na(b(c(1))) =     (2)\n```",
         "answer": "答案：\n（1）`c(b(a(1))) = 0x800000`\n（2）`a(b(c(1))) = 0`\n\n解析（原卷自带答案，此处补全推导）：\n`d[256]` 就是**8 位比特反转表**：`d[x]` 把 x 的 8 个比特整个反过来\n（`d[1] = 0x80`、`d[0x80] = 1`、`d[0x0F] = 0xF0` …）。\n三个函数都是**按字节/半字/字做整数的比特反转**：\n- `a(x) = d[x]`：8 位内反转比特；\n- `b(x) = (a(x & 0xff) << 8) | a(x >> 8)`：把低字节与高字节交换、各自再反转比特\n  ⇒ 16 位整数的比特反转；\n- `c(x) = (b(x & 0xffff) << 16) | b(x >> 16)`：两个半字交换、各自再做 16 位反转\n  ⇒ 32 位整数的比特反转。\n\n（1）逐步算：\n- `a(1) = d[1] = 0x80`\n- `b(0x0080)`：低字节 0x80、高字节 0x00 ⇒ `(a(0x80) << 8) | a(0x00)`\n  `= (0x01 << 8) | 0x00 = 0x0100`\n- `c(0x00000100)`：低半字 0x0100、高半字 0x0000 ⇒ `(b(0x0100) << 16) | b(0x0000)`\n  `= (0x0080 << 16) | 0x0000 = 0x800000`\n⇒ **`c(b(a(1))) = 0x800000`**，与原卷答案一致。\n\n（2）逐步算：\n- `c(1)`：低半字 0x0001、高半字 0x0000\n  ⇒ `(b(0x0001) << 16) | b(0x0000)`，其中 `b(0x0001) = (a(0x01) << 8) | a(0x00) = 0x0100`\n  ⇒ `c(1) = 0x0100 << 16 = 0x01000000`\n- `b(0x01000000)`（unsigned short 形参，取低 16 位 0x0000 与高 16 位 0x0100）\n  ⇒ `(a(0x00) << 8) | a(0x0100)`；`a` 的形参是 unsigned char，0x0100 截断为 0x00\n  ⇒ `0x00 | d[0x00] = 0`\n- `a(0) = d[0] = 0`\n⇒ **`a(b(c(1))) = 0`**，与原卷答案一致。\n\n> 备注：`b`/`c` 的语义就是「对本宽度的整数做完整比特反转」（字节序交换 + 逐字节\n> 反转比特）。第（1）问把 1 放在 32 位里反转落在 bit24（= 0x800000），第（2）问\n> 反转后被 `a` 截到低 8 位，结果为 0。\n\n> 说明：原卷把答案（1）0x800000、（2）0 直接印在题面之后；本文件把答案移入\n> `%%% answer` 段，字符内容与原卷完全一致。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+      },
+      "group": {
+        "id": "p-089627b27e9b5e79:2014-final-q2",
+        "questionId": "q-7d2647844e7abcf9",
+        "title": "第二题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -8299,7 +8321,7 @@
       "exam": "2015期末",
       "questionNo": "第一题 2",
       "summary": "单精度浮点数 27.5 的内存十六进制表示",
-      "content": "2.  单精度浮点数27.5实际存储在内存中的十六进制数值为：\nA.  0x41ee0000\nB.  0x425c0000\nC.  0x41dc0000\nD.  0x025c0000\n参考信息：单精度浮点数阶码8位，尾数23位\n答案：C，考察浮点数的理解。",
+      "content": "2.  单精度浮点数27.5实际存储在内存中的十六进制数值为：\nA.  `0x41ee0000`\nB.  `0x425c0000`\nC.  `0x41dc0000`\nD.  `0x025c0000`\n参考信息：单精度浮点数阶码8位，尾数23位\n答案：C，考察浮点数的理解。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8325,19 +8347,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "0x41ee0000"
+            "content": "`0x41ee0000`"
           },
           {
             "key": "B",
-            "content": "0x425c0000"
+            "content": "`0x425c0000`"
           },
           {
             "key": "C",
-            "content": "0x41dc0000"
+            "content": "`0x41dc0000`"
           },
           {
             "key": "D",
-            "content": "0x025c0000\n参考信息：单精度浮点数阶码8位，尾数23位"
+            "content": "`0x025c0000`\n参考信息：单精度浮点数阶码8位，尾数23位"
           }
         ],
         "answer": "答案：C，考察浮点数的理解。"
@@ -8348,19 +8370,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0x41ee0000"
+            "content": "`0x41ee0000`"
           },
           {
             "id": "B",
-            "content": "0x425c0000"
+            "content": "`0x425c0000`"
           },
           {
             "id": "C",
-            "content": "0x41dc0000"
+            "content": "`0x41dc0000`"
           },
           {
             "id": "D",
-            "content": "0x025c0000\n参考信息：单精度浮点数阶码8位，尾数23位"
+            "content": "`0x025c0000`\n参考信息：单精度浮点数阶码8位，尾数23位"
           }
         ],
         "correctChoiceIds": [
@@ -8387,7 +8409,7 @@
       "exam": "2016期末",
       "questionNo": "第一题 1",
       "summary": "int/unsigned 混合比较与类型转换规则",
-      "content": "1.  C语言中的int和unsigned类型的常数进行比较时，下列表达式及描述正\n确的是：（注：位宽为32位，TMIN=-2,147,483,648，TMAX=2,147,483,647）\nA. 0 == 0U，按有符号数进行比较\nB. 2147483647U > -2147483647-1，按无符号数进行比较\nC. (unsigned)-1 < -2，按无符号数进行比较\nD. 2147483647 > (int)2147483648U，按有符号数进行比较\n答案：D\nA- 按无符号数进行比较\n```\nB- <\nC- >\n```",
+      "content": "1.  C语言中的int和unsigned类型的常数进行比较时，下列表达式及描述正\n确的是：（注：位宽为32位，TMIN=-2,147,483,648，TMAX=2,147,483,647）\nA. `0 == 0U`，按有符号数进行比较\nB. 2147483647U > -2147483647-1，按无符号数进行比较\nC. `(unsigned)-1 < -2`，按无符号数进行比较\nD. `2147483647 > (int)2147483648U`，按有符号数进行比较\n答案：D\nA- 按无符号数进行比较\n```\nB- <\nC- >\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8413,7 +8435,7 @@
         "choices": [
           {
             "key": "A",
-            "content": "0 == 0U，按有符号数进行比较"
+            "content": "`0 == 0U`，按有符号数进行比较"
           },
           {
             "key": "B",
@@ -8421,11 +8443,11 @@
           },
           {
             "key": "C",
-            "content": "(unsigned)-1 < -2，按无符号数进行比较"
+            "content": "`(unsigned)-1 < -2`，按无符号数进行比较"
           },
           {
             "key": "D",
-            "content": "2147483647 > (int)2147483648U，按有符号数进行比较"
+            "content": "`2147483647 > (int)2147483648U`，按有符号数进行比较"
           }
         ],
         "answer": "答案：D\nA- 按无符号数进行比较\n```\nB- <\nC- >\n```"
@@ -8436,7 +8458,7 @@
         "choices": [
           {
             "id": "A",
-            "content": "0 == 0U，按有符号数进行比较"
+            "content": "`0 == 0U`，按有符号数进行比较"
           },
           {
             "id": "B",
@@ -8444,11 +8466,11 @@
           },
           {
             "id": "C",
-            "content": "(unsigned)-1 < -2，按无符号数进行比较"
+            "content": "`(unsigned)-1 < -2`，按无符号数进行比较"
           },
           {
             "id": "D",
-            "content": "2147483647 > (int)2147483648U，按有符号数进行比较"
+            "content": "`2147483647 > (int)2147483648U`，按有符号数进行比较"
           }
         ],
         "correctChoiceIds": [
@@ -8856,7 +8878,7 @@
       "exam": "2019期末",
       "questionNo": "第一题 1",
       "summary": "浮点加法结合律与舍入、重排表达式",
-      "content": "1.  已知浮点运算表达式：\n\n```c\nt = a + b; x = t + c; y = d + t;\n```\n\n下列表达式中，x, y不能都得到相同的计算结果的是：\nA. x = a + b + c; y = d + a + b;\nB. x = a + b + c; y = d + (a + b);\nC. x = c + (a + b); y = a + b + d;\nD. x = (a + b) + c; y = d + (a + b);\n答案：A（来源：2019、2020期末-答案解析）\n解析：唯有这一项会先算 d+a（b 与 d 先相加），破坏了与题设 t=a+b 相同的结合顺序。",
+      "content": "1.  已知浮点运算表达式：\n\n```c\nt = a + b; x = t + c; y = d + t;\n```\n\n下列表达式中，x, y不能都得到相同的计算结果的是：\nA. `x = a + b + c; y = d + a + b;`\nB. `x = a + b + c; y = d + (a + b);`\nC. `x = c + (a + b); y = a + b + d;`\nD. `x = (a + b) + c; y = d + (a + b);`\n答案：A（来源：2019、2020期末-答案解析）\n解析：唯有这一项会先算 d+a（b 与 d 先相加），破坏了与题设 t=a+b 相同的结合顺序。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8883,19 +8905,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "x = a + b + c; y = d + a + b;"
+            "content": "`x = a + b + c; y = d + a + b;`"
           },
           {
             "key": "B",
-            "content": "x = a + b + c; y = d + (a + b);"
+            "content": "`x = a + b + c; y = d + (a + b);`"
           },
           {
             "key": "C",
-            "content": "x = c + (a + b); y = a + b + d;"
+            "content": "`x = c + (a + b); y = a + b + d;`"
           },
           {
             "key": "D",
-            "content": "x = (a + b) + c; y = d + (a + b);"
+            "content": "`x = (a + b) + c; y = d + (a + b);`"
           }
         ],
         "answer": "答案：A（来源：2019、2020期末-答案解析）\n解析：唯有这一项会先算 d+a（b 与 d 先相加），破坏了与题设 t=a+b 相同的结合顺序。"
@@ -8906,19 +8928,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "x = a + b + c; y = d + a + b;"
+            "content": "`x = a + b + c; y = d + a + b;`"
           },
           {
             "id": "B",
-            "content": "x = a + b + c; y = d + (a + b);"
+            "content": "`x = a + b + c; y = d + (a + b);`"
           },
           {
             "id": "C",
-            "content": "x = c + (a + b); y = a + b + d;"
+            "content": "`x = c + (a + b); y = a + b + d;`"
           },
           {
             "id": "D",
-            "content": "x = (a + b) + c; y = d + (a + b);"
+            "content": "`x = (a + b) + c; y = d + (a + b);`"
           }
         ],
         "correctChoiceIds": [
@@ -8945,7 +8967,7 @@
       "exam": "2019期末",
       "questionNo": "第一题 3",
       "summary": "有符号除法与算术右移的舍入差异",
-      "content": "3.\n\n```c\nint x = -2019;\nint a = (x / 8) * 8;\nint b = ((x + 7) >> 3) << 3;\nint c = -(((~x)+1) >> 3) << 3;\n```\na, b, c大小关系是什么？\nA. a=b, b=c\nB. a=b, b>c\nC. a<b b<c\nD. a<b, b=c\n答案：A（来源：2019、2020期末-答案解析）\n解析：a = (-2019/8)*8 = -2016；b = ((-2019+7)>>3)<<3 = -2016；c = -(((~x)+1)>>3)<<3 = -2016，故 a=b=c。",
+      "content": "3.\n\n```c\nint x = -2019;\nint a = (x / 8) * 8;\nint b = ((x + 7) >> 3) << 3;\nint c = -(((~x)+1) >> 3) << 3;\n```\na, b, c大小关系是什么？\nA. `a=b, b=c`\nB. `a=b, b>c`\nC. `a<b b<c`\nD. `a<b, b=c`\n答案：A（来源：2019、2020期末-答案解析）\n解析：a = (-2019/8)*8 = -2016；b = ((-2019+7)>>3)<<3 = -2016；c = -(((~x)+1)>>3)<<3 = -2016，故 a=b=c。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8972,19 +8994,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "a=b, b=c"
+            "content": "`a=b, b=c`"
           },
           {
             "key": "B",
-            "content": "a=b, b>c"
+            "content": "`a=b, b>c`"
           },
           {
             "key": "C",
-            "content": "a<b b<c"
+            "content": "`a<b b<c`"
           },
           {
             "key": "D",
-            "content": "a<b, b=c"
+            "content": "`a<b, b=c`"
           }
         ],
         "answer": "答案：A（来源：2019、2020期末-答案解析）\n解析：a = (-2019/8)*8 = -2016；b = ((-2019+7)>>3)<<3 = -2016；c = -(((~x)+1)>>3)<<3 = -2016，故 a=b=c。"
@@ -8995,19 +9017,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "a=b, b=c"
+            "content": "`a=b, b=c`"
           },
           {
             "id": "B",
-            "content": "a=b, b>c"
+            "content": "`a=b, b>c`"
           },
           {
             "id": "C",
-            "content": "a<b b<c"
+            "content": "`a<b b<c`"
           },
           {
             "id": "D",
-            "content": "a<b, b=c"
+            "content": "`a<b, b=c`"
           }
         ],
         "correctChoiceIds": [
@@ -9034,7 +9056,7 @@
       "exam": "2020期末",
       "questionNo": "第一题 3",
       "summary": "补码与无符号运算的恒等式",
-      "content": "3.  在int 类型值为32 位、用补码表示、采用算术右移，unsigned 类型值也为32 位的机器上，声明\n\n```c\nint x, y;\nunsigned ux = (unsigned)x;\nunsigned uy = (unsigned)y;\n```\n\n则下列表达式中，当x 与y 取遍所有可能值时，可能为假的是\nA. (x<y)==(-x>-y)\nB. ~x+~y+1==~(x+y)\nC. (ux-uy)==-(unsigned)(y-x)\nD. ((x>>3)<<3)<=x\n答案：A（来源：2019、2020期末-答案解析）\n解析：取 x=INT_MIN 时 -x 溢出，故 (x<y)==(-x>-y) 可能为假；B、C、D 恒真。",
+      "content": "3.  在int 类型值为32 位、用补码表示、采用算术右移，unsigned 类型值也为32 位的机器上，声明\n\n```c\nint x, y;\nunsigned ux = (unsigned)x;\nunsigned uy = (unsigned)y;\n```\n\n则下列表达式中，当x 与y 取遍所有可能值时，可能为假的是\nA. `(x<y)==(-x>-y)`\nB. `~x+~y+1==~(x+y)`\nC. `(ux-uy)==-(unsigned)(y-x)`\nD. `((x>>3)<<3)<=x`\n答案：A（来源：2019、2020期末-答案解析）\n解析：取 x=INT_MIN 时 -x 溢出，故 (x<y)==(-x>-y) 可能为假；B、C、D 恒真。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9061,19 +9083,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "(x<y)==(-x>-y)"
+            "content": "`(x<y)==(-x>-y)`"
           },
           {
             "key": "B",
-            "content": "~x+~y+1==~(x+y)"
+            "content": "`~x+~y+1==~(x+y)`"
           },
           {
             "key": "C",
-            "content": "(ux-uy)==-(unsigned)(y-x)"
+            "content": "`(ux-uy)==-(unsigned)(y-x)`"
           },
           {
             "key": "D",
-            "content": "((x>>3)<<3)<=x"
+            "content": "`((x>>3)<<3)<=x`"
           }
         ],
         "answer": "答案：A（来源：2019、2020期末-答案解析）\n解析：取 x=INT_MIN 时 -x 溢出，故 (x<y)==(-x>-y) 可能为假；B、C、D 恒真。"
@@ -9084,19 +9106,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "(x<y)==(-x>-y)"
+            "content": "`(x<y)==(-x>-y)`"
           },
           {
             "id": "B",
-            "content": "~x+~y+1==~(x+y)"
+            "content": "`~x+~y+1==~(x+y)`"
           },
           {
             "id": "C",
-            "content": "(ux-uy)==-(unsigned)(y-x)"
+            "content": "`(ux-uy)==-(unsigned)(y-x)`"
           },
           {
             "id": "D",
-            "content": "((x>>3)<<3)<=x"
+            "content": "`((x>>3)<<3)<=x`"
           }
         ],
         "correctChoiceIds": [
@@ -9123,7 +9145,7 @@
       "exam": "2020期末",
       "questionNo": "第一题 4",
       "summary": "类型转换的溢出与舍入",
-      "content": "4.  下列哪种类型转换既可能导致溢出、又可能导致舍入？\nA. int转float\nB. float转int\nC. int转double\nD. float转double\n答案：B（来源：2019、2020期末-答案解析）\n解析：float→int 既可能溢出（超出 int 范围）又可能舍入（截断小数）；int→float 只可能舍入。",
+      "content": "4.  下列哪种类型转换既可能导致溢出、又可能导致舍入？\nA. `int`转`float`\nB. `float`转`int`\nC. `int`转`double`\nD. `float`转`double`\n答案：B（来源：2019、2020期末-答案解析）\n解析：float→int 既可能溢出（超出 int 范围）又可能舍入（截断小数）；int→float 只可能舍入。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9150,19 +9172,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "int转float"
+            "content": "`int`转`float`"
           },
           {
             "key": "B",
-            "content": "float转int"
+            "content": "`float`转`int`"
           },
           {
             "key": "C",
-            "content": "int转double"
+            "content": "`int`转`double`"
           },
           {
             "key": "D",
-            "content": "float转double"
+            "content": "`float`转`double`"
           }
         ],
         "answer": "答案：B（来源：2019、2020期末-答案解析）\n解析：float→int 既可能溢出（超出 int 范围）又可能舍入（截断小数）；int→float 只可能舍入。"
@@ -9173,19 +9195,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "int转float"
+            "content": "`int`转`float`"
           },
           {
             "id": "B",
-            "content": "float转int"
+            "content": "`float`转`int`"
           },
           {
             "id": "C",
-            "content": "int转double"
+            "content": "`int`转`double`"
           },
           {
             "id": "D",
-            "content": "float转double"
+            "content": "`float`转`double`"
           }
         ],
         "correctChoiceIds": [
@@ -9212,7 +9234,7 @@
       "exam": "2021期末",
       "questionNo": "第一题 1",
       "summary": "整数/浮点乘法的结合律与分配律",
-      "content": "1. 现定义了如下变量：\n```\nint x, y, z;\nfloat fx, fy, fz;\n```\n则以下表达式不恒为真的是：\n（其中fx,fy均不为无穷或非数，NaN和int类型溢出按照模运算处理）\nA.x * y == y * x\nB.(x + y) * z == x * z + y * z\nC.fx + fy == fy + fx\nD.(fx + fy) * fz == fx * fz + fy * fz\n答案：D",
+      "content": "1. 现定义了如下变量：\n```\nint x, y, z;\nfloat fx, fy, fz;\n```\n则以下表达式不恒为真的是：\n（其中fx,fy均不为无穷或非数，NaN和int类型溢出按照模运算处理）\nA.`x * y == y * x`\nB.`(x + y) * z == x * z + y * z`\nC.`fx + fy == fy + fx`\nD.`(fx + fy) * fz == fx * fz + fy * fz`\n答案：D",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9238,19 +9260,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "x * y == y * x"
+            "content": "`x * y == y * x`"
           },
           {
             "key": "B",
-            "content": "(x + y) * z == x * z + y * z"
+            "content": "`(x + y) * z == x * z + y * z`"
           },
           {
             "key": "C",
-            "content": "fx + fy == fy + fx"
+            "content": "`fx + fy == fy + fx`"
           },
           {
             "key": "D",
-            "content": "(fx + fy) * fz == fx * fz + fy * fz"
+            "content": "`(fx + fy) * fz == fx * fz + fy * fz`"
           }
         ],
         "answer": "答案：D"
@@ -9261,19 +9283,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "x * y == y * x"
+            "content": "`x * y == y * x`"
           },
           {
             "id": "B",
-            "content": "(x + y) * z == x * z + y * z"
+            "content": "`(x + y) * z == x * z + y * z`"
           },
           {
             "id": "C",
-            "content": "fx + fy == fy + fx"
+            "content": "`fx + fy == fy + fx`"
           },
           {
             "id": "D",
-            "content": "(fx + fy) * fz == fx * fz + fy * fz"
+            "content": "`(fx + fy) * fz == fx * fz + fy * fz`"
           }
         ],
         "correctChoiceIds": [
@@ -9389,7 +9411,7 @@
       "exam": "2021期末",
       "questionNo": "第一题 2",
       "summary": "整数与浮点运算的结合律/分配律是否恒成立",
-      "content": "2.现定义了如下变量：\n\n```c\nint x, y, z;\nfloat fx, fy, fz;\n```\n\n则以下表达式不恒为真的是（其中fx,fy均不为无穷或非数）：\nA.x * y == y * x\n\nB.(x + y) * z == x * z + y * z\n\nC.fx + fy == fy + fx\n\nD.(fx + fy) * fz == fx * fz + fy * fz\n答案：D。大数吃小数。",
+      "content": "2.现定义了如下变量：\n\n```c\nint x, y, z;\nfloat fx, fy, fz;\n```\n\n则以下表达式不恒为真的是（其中fx,fy均不为无穷或非数）：\nA.`x * y == y * x`\n\nB.`(x + y) * z == x * z + y * z`\n\nC.`fx + fy == fy + fx`\n\nD.`(fx + fy) * fz == fx * fz + fy * fz`\n答案：D。大数吃小数。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9416,19 +9438,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "x * y == y * x"
+            "content": "`x * y == y * x`"
           },
           {
             "key": "B",
-            "content": "(x + y) * z == x * z + y * z"
+            "content": "`(x + y) * z == x * z + y * z`"
           },
           {
             "key": "C",
-            "content": "fx + fy == fy + fx"
+            "content": "`fx + fy == fy + fx`"
           },
           {
             "key": "D",
-            "content": "(fx + fy) * fz == fx * fz + fy * fz"
+            "content": "`(fx + fy) * fz == fx * fz + fy * fz`"
           }
         ],
         "answer": "答案：D。大数吃小数。"
@@ -9439,19 +9461,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "x * y == y * x"
+            "content": "`x * y == y * x`"
           },
           {
             "id": "B",
-            "content": "(x + y) * z == x * z + y * z"
+            "content": "`(x + y) * z == x * z + y * z`"
           },
           {
             "id": "C",
-            "content": "fx + fy == fy + fx"
+            "content": "`fx + fy == fy + fx`"
           },
           {
             "id": "D",
-            "content": "(fx + fy) * fz == fx * fz + fy * fz"
+            "content": "`(fx + fy) * fz == fx * fz + fy * fz`"
           }
         ],
         "correctChoiceIds": [
@@ -9619,7 +9641,7 @@
       "exam": "2025期末",
       "questionNo": "一 1",
       "summary": "有符号/无符号转换、模回绕与比较",
-      "content": "一 不定项选择题（上）（39分）\n1. 观察下面的C程序代码：\n```c\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？\nA. u 的十六进制表示为 0xFFFFFFEC\nB. v 的值为 30\nC. 表达式 (x < u) 的值为 1\nD. 表达式 (x == u) 的值为 1\nE. 表达式 (v < u) 的值为 1\n答案：A, B, D, E\n解析：（x 与 u 比较时会把 x 转成无符号；u+50 发生模 2^{32} 回绕）",
+      "content": "一 不定项选择题（上）（39分）\n1. 观察下面的C程序代码：\n```c\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？\nA. `u` 的十六进制表示为 `0xFFFFFFEC`\nB. `v` 的值为 `30`\nC. 表达式 `(x < u)` 的值为 `1`\nD. 表达式 `(x == u)` 的值为 `1`\nE. 表达式 `(v < u)` 的值为 `1`\n答案：A, B, D, E\n解析：（x 与 u 比较时会把 x 转成无符号；u+50 发生模 2^{32} 回绕）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9643,23 +9665,23 @@
         "choices": [
           {
             "key": "A",
-            "content": "u 的十六进制表示为 0xFFFFFFEC"
+            "content": "`u` 的十六进制表示为 `0xFFFFFFEC`"
           },
           {
             "key": "B",
-            "content": "v 的值为 30"
+            "content": "`v` 的值为 `30`"
           },
           {
             "key": "C",
-            "content": "表达式 (x < u) 的值为 1"
+            "content": "表达式 `(x < u)` 的值为 `1`"
           },
           {
             "key": "D",
-            "content": "表达式 (x == u) 的值为 1"
+            "content": "表达式 `(x == u)` 的值为 `1`"
           },
           {
             "key": "E",
-            "content": "表达式 (v < u) 的值为 1"
+            "content": "表达式 `(v < u)` 的值为 `1`"
           }
         ],
         "answer": "答案：A, B, D, E\n解析：（x 与 u 比较时会把 x 转成无符号；u+50 发生模 2^{32} 回绕）"
@@ -9670,23 +9692,23 @@
         "choices": [
           {
             "id": "A",
-            "content": "u 的十六进制表示为 0xFFFFFFEC"
+            "content": "`u` 的十六进制表示为 `0xFFFFFFEC`"
           },
           {
             "id": "B",
-            "content": "v 的值为 30"
+            "content": "`v` 的值为 `30`"
           },
           {
             "id": "C",
-            "content": "表达式 (x < u) 的值为 1"
+            "content": "表达式 `(x < u)` 的值为 `1`"
           },
           {
             "id": "D",
-            "content": "表达式 (x == u) 的值为 1"
+            "content": "表达式 `(x == u)` 的值为 `1`"
           },
           {
             "id": "E",
-            "content": "表达式 (v < u) 的值为 1"
+            "content": "表达式 `(v < u)` 的值为 `1`"
           }
         ],
         "correctChoiceIds": [
@@ -9716,7 +9738,7 @@
       "exam": "2025期末",
       "questionNo": "一 2",
       "summary": "int↔float 转换精度与舍入",
-      "content": "2. 对任意 非负 int x，执行：\n```c\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）\nA. 若 0 <= x <= 16777216，则一定有 y == x\nB. 若 x == 16777217，则一定有 y == 16777216\nC. 对任意 x，一定有 y == x\nD. 存在某个 x 使得 y > x\nE. 若 x 为偶数，则一定有 y == x\n答案：A, B, D\n解析：（float 只有 24 位有效精度；超过 2^{24} 后相邻可表示整数间隔变大，可能向上舍入）",
+      "content": "2. 对任意 非负 int x，执行：\n```c\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）\nA. 若 `0 <= x <= 16777216`，则一定有 `y == x`\nB. 若 `x == 16777217`，则一定有 `y == 16777216`\nC. 对任意 `x`，一定有 `y == x`\nD. 存在某个 `x` 使得 `y > x`\nE. 若 `x` 为偶数，则一定有 `y == x`\n答案：A, B, D\n解析：（float 只有 24 位有效精度；超过 2^{24} 后相邻可表示整数间隔变大，可能向上舍入）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9740,23 +9762,23 @@
         "choices": [
           {
             "key": "A",
-            "content": "若 0 <= x <= 16777216，则一定有 y == x"
+            "content": "若 `0 <= x <= 16777216`，则一定有 `y == x`"
           },
           {
             "key": "B",
-            "content": "若 x == 16777217，则一定有 y == 16777216"
+            "content": "若 `x == 16777217`，则一定有 `y == 16777216`"
           },
           {
             "key": "C",
-            "content": "对任意 x，一定有 y == x"
+            "content": "对任意 `x`，一定有 `y == x`"
           },
           {
             "key": "D",
-            "content": "存在某个 x 使得 y > x"
+            "content": "存在某个 `x` 使得 `y > x`"
           },
           {
             "key": "E",
-            "content": "若 x 为偶数，则一定有 y == x"
+            "content": "若 `x` 为偶数，则一定有 `y == x`"
           }
         ],
         "answer": "答案：A, B, D\n解析：（float 只有 24 位有效精度；超过 2^{24} 后相邻可表示整数间隔变大，可能向上舍入）"
@@ -9767,23 +9789,23 @@
         "choices": [
           {
             "id": "A",
-            "content": "若 0 <= x <= 16777216，则一定有 y == x"
+            "content": "若 `0 <= x <= 16777216`，则一定有 `y == x`"
           },
           {
             "id": "B",
-            "content": "若 x == 16777217，则一定有 y == 16777216"
+            "content": "若 `x == 16777217`，则一定有 `y == 16777216`"
           },
           {
             "id": "C",
-            "content": "对任意 x，一定有 y == x"
+            "content": "对任意 `x`，一定有 `y == x`"
           },
           {
             "id": "D",
-            "content": "存在某个 x 使得 y > x"
+            "content": "存在某个 `x` 使得 `y > x`"
           },
           {
             "id": "E",
-            "content": "若 x 为偶数，则一定有 y == x"
+            "content": "若 `x` 为偶数，则一定有 `y == x`"
           }
         ],
         "correctChoiceIds": [
@@ -9909,7 +9931,7 @@
       "exam": "2025期末",
       "questionNo": "一 4",
       "summary": "结构体对齐、offsetof 与 sizeof",
-      "content": "4. 在 x86-64 常见对齐规则下，给定：\n```c\nstruct S {\n    char c;\n    int i;\n    short s;\n    double d;\n};\n```\n下列说法哪些正确？\nA. offsetof(struct S, i) == 4\nB. offsetof(struct S, s) == 8\nC. offsetof(struct S, d) == 10\nD. sizeof(struct S) == 24\nE. 若改为字段顺序 double d; int i; short s; char c;，则该结构体大小应该会\n变为16\n答案：A, B, D, E\n解析：（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）",
+      "content": "4. 在 x86-64 常见对齐规则下，给定：\n```c\nstruct S {\n    char c;\n    int i;\n    short s;\n    double d;\n};\n```\n下列说法哪些正确？\nA. `offsetof(struct S, i) == 4`\nB. `offsetof(struct S, s) == 8`\nC. `offsetof(struct S, d) == 10`\nD. `sizeof(struct S) == 24`\nE. 若改为字段顺序 `double d; int i; short s; char c;`，则该结构体大小应该会\n变为16\n答案：A, B, D, E\n解析：（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9933,23 +9955,23 @@
         "choices": [
           {
             "key": "A",
-            "content": "offsetof(struct S, i) == 4"
+            "content": "`offsetof(struct S, i) == 4`"
           },
           {
             "key": "B",
-            "content": "offsetof(struct S, s) == 8"
+            "content": "`offsetof(struct S, s) == 8`"
           },
           {
             "key": "C",
-            "content": "offsetof(struct S, d) == 10"
+            "content": "`offsetof(struct S, d) == 10`"
           },
           {
             "key": "D",
-            "content": "sizeof(struct S) == 24"
+            "content": "`sizeof(struct S) == 24`"
           },
           {
             "key": "E",
-            "content": "若改为字段顺序 double d; int i; short s; char c;，则该结构体大小应该会\n变为16"
+            "content": "若改为字段顺序 `double d; int i; short s; char c;`，则该结构体大小应该会\n变为16"
           }
         ],
         "answer": "答案：A, B, D, E\n解析：（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）"
@@ -9960,23 +9982,23 @@
         "choices": [
           {
             "id": "A",
-            "content": "offsetof(struct S, i) == 4"
+            "content": "`offsetof(struct S, i) == 4`"
           },
           {
             "id": "B",
-            "content": "offsetof(struct S, s) == 8"
+            "content": "`offsetof(struct S, s) == 8`"
           },
           {
             "id": "C",
-            "content": "offsetof(struct S, d) == 10"
+            "content": "`offsetof(struct S, d) == 10`"
           },
           {
             "id": "D",
-            "content": "sizeof(struct S) == 24"
+            "content": "`sizeof(struct S) == 24`"
           },
           {
             "id": "E",
-            "content": "若改为字段顺序 double d; int i; short s; char c;，则该结构体大小应该会\n变为16"
+            "content": "若改为字段顺序 `double d; int i; short s; char c;`，则该结构体大小应该会\n变为16"
           }
         ],
         "correctChoiceIds": [
@@ -10884,7 +10906,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 11",
       "summary": "satMul2 溢出判断表达式（补码运算）",
-      "content": "11. （2分）下面给出了satMul2函数的代码，其中变量overflow在结果溢出时会被设\n置为 0xFFFFFFFF，否则为 0。下面哪一个选项正确给出了 overflow 的表达式(提\n示：可根据x和2 * x的符号位来判断是否溢出)：\n```\n/*\n * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow\n *   Examples: satMul2(0x30000000) = 0x60000000\n *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)\n *             satMul2(0x90000000) = 0x80000000 (saturate to TMin)\n*/\nint satMul2(int x) {\nint overflow, negative_x, raw_result, tmin, tmax;\n    overflow = ____________________\n    negative_x = x >> 31;\n    raw_result = x << 1;\n    tmin = 1 << 31;\ntmax = tmin + ~0;\n    return (overflow & negative_x & tmin) | (overflow & ~negative_x &\ntmax) | (~overflow & raw_result);\n}\n```\nA. (x ^ (x + 1)) >> 31;\nB. (x ^ (x + ~0)) >> 31;\nC. (x ^ (x << 1)) >> 31;\nD. (x ^ (x >> 1)) >> 31;\n答案：C\n\n解析：溢出的判据是 x 与 2x 的符号位不同，而 (x << 1) 的最高位正是 2x 的符号位，所以 `x ^ (x << 1)` 的最高位为 1 时溢出，算术右移 31 位即得全 1（溢出）或全 0，故 C 对。A 用 x+1、B 用 x-1、D 用 x>>1 都取不到\"2x 的符号位\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "11. （2分）下面给出了satMul2函数的代码，其中变量overflow在结果溢出时会被设\n置为 0xFFFFFFFF，否则为 0。下面哪一个选项正确给出了 overflow 的表达式(提\n示：可根据x和2 * x的符号位来判断是否溢出)：\n```\n/*\n * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow\n *   Examples: satMul2(0x30000000) = 0x60000000\n *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)\n *             satMul2(0x90000000) = 0x80000000 (saturate to TMin)\n*/\nint satMul2(int x) {\nint overflow, negative_x, raw_result, tmin, tmax;\n    overflow = ____________________\n    negative_x = x >> 31;\n    raw_result = x << 1;\n    tmin = 1 << 31;\ntmax = tmin + ~0;\n    return (overflow & negative_x & tmin) | (overflow & ~negative_x &\ntmax) | (~overflow & raw_result);\n}\n```\nA. `(x ^ (x + 1)) >> 31;`\nB. `(x ^ (x + ~0)) >> 31;`\nC. `(x ^ (x << 1)) >> 31;`\nD. `(x ^ (x >> 1)) >> 31;`\n答案：C\n\n解析：溢出的判据是 x 与 2x 的符号位不同，而 (x << 1) 的最高位正是 2x 的符号位，所以 `x ^ (x << 1)` 的最高位为 1 时溢出，算术右移 31 位即得全 1（溢出）或全 0，故 C 对。A 用 x+1、B 用 x-1、D 用 x>>1 都取不到\"2x 的符号位\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10908,19 +10930,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "(x ^ (x + 1)) >> 31;"
+            "content": "`(x ^ (x + 1)) >> 31;`"
           },
           {
             "key": "B",
-            "content": "(x ^ (x + ~0)) >> 31;"
+            "content": "`(x ^ (x + ~0)) >> 31;`"
           },
           {
             "key": "C",
-            "content": "(x ^ (x << 1)) >> 31;"
+            "content": "`(x ^ (x << 1)) >> 31;`"
           },
           {
             "key": "D",
-            "content": "(x ^ (x >> 1)) >> 31;"
+            "content": "`(x ^ (x >> 1)) >> 31;`"
           }
         ],
         "answer": "答案：C\n\n解析：溢出的判据是 x 与 2x 的符号位不同，而 (x << 1) 的最高位正是 2x 的符号位，所以 `x ^ (x << 1)` 的最高位为 1 时溢出，算术右移 31 位即得全 1（溢出）或全 0，故 C 对。A 用 x+1、B 用 x-1、D 用 x>>1 都取不到\"2x 的符号位\"。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
@@ -10931,19 +10953,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "(x ^ (x + 1)) >> 31;"
+            "content": "`(x ^ (x + 1)) >> 31;`"
           },
           {
             "id": "B",
-            "content": "(x ^ (x + ~0)) >> 31;"
+            "content": "`(x ^ (x + ~0)) >> 31;`"
           },
           {
             "id": "C",
-            "content": "(x ^ (x << 1)) >> 31;"
+            "content": "`(x ^ (x << 1)) >> 31;`"
           },
           {
             "id": "D",
-            "content": "(x ^ (x >> 1)) >> 31;"
+            "content": "`(x ^ (x >> 1)) >> 31;`"
           }
         ],
         "correctChoiceIds": [
@@ -10970,7 +10992,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 12",
       "summary": "bitParity 奇偶校验的位运算求值",
-      "content": "12. （2分）下面给出了bitParity函数的代码，该函数用于判断整数x的二进制表示中\n0的个数是否为奇数。设整数x的二进制表示为x[31]x[30]...x[1]x[0]，则x1[15]\n的值可表示为：\n```\n/*\n * bitParity - returns 1 if x contains an odd number of 0's\n *   Examples: bitParity(5) = 0, bitParity(7) = 1\n*/\nint bitParity(int x) {\n    int x1, x2, x3, x4, x5;\n    x1 = x ^ (x >> 16);\n    x2 = x1 ^ (x1 >> 8);\n    x3 = x2 ^ (x2 >> 4);\n    x4 = x3 ^ (x3 >> 2);\n    x5 = x4 ^ (x4 >> 1);\n    return x5 & 1;\n}\n```\nA. x[31] ^ x[15]\nB. x[31] ^ x[16]\nC. x[30] ^ x[15]\nD. x[30] ^ x[16]\n答案：A\n\n解析：x1 = x ^ (x >> 16)，所以 x1 的第 i 位 = x[i] ^ x[i+16]；取 i = 15 得 x1[15] = x[15] ^ x[31]。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "12. （2分）下面给出了bitParity函数的代码，该函数用于判断整数x的二进制表示中\n0的个数是否为奇数。设整数x的二进制表示为x[31]x[30]...x[1]x[0]，则x1[15]\n的值可表示为：\n```\n/*\n * bitParity - returns 1 if x contains an odd number of 0's\n *   Examples: bitParity(5) = 0, bitParity(7) = 1\n*/\nint bitParity(int x) {\n    int x1, x2, x3, x4, x5;\n    x1 = x ^ (x >> 16);\n    x2 = x1 ^ (x1 >> 8);\n    x3 = x2 ^ (x2 >> 4);\n    x4 = x3 ^ (x3 >> 2);\n    x5 = x4 ^ (x4 >> 1);\n    return x5 & 1;\n}\n```\nA. `x[31] ^ x[15]`\nB. `x[31] ^ x[16]`\nC. `x[30] ^ x[15]`\nD. `x[30] ^ x[16]`\n答案：A\n\n解析：x1 = x ^ (x >> 16)，所以 x1 的第 i 位 = x[i] ^ x[i+16]；取 i = 15 得 x1[15] = x[15] ^ x[31]。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10994,19 +11016,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "x[31] ^ x[15]"
+            "content": "`x[31] ^ x[15]`"
           },
           {
             "key": "B",
-            "content": "x[31] ^ x[16]"
+            "content": "`x[31] ^ x[16]`"
           },
           {
             "key": "C",
-            "content": "x[30] ^ x[15]"
+            "content": "`x[30] ^ x[15]`"
           },
           {
             "key": "D",
-            "content": "x[30] ^ x[16]"
+            "content": "`x[30] ^ x[16]`"
           }
         ],
         "answer": "答案：A\n\n解析：x1 = x ^ (x >> 16)，所以 x1 的第 i 位 = x[i] ^ x[i+16]；取 i = 15 得 x1[15] = x[15] ^ x[31]。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
@@ -11017,19 +11039,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "x[31] ^ x[15]"
+            "content": "`x[31] ^ x[15]`"
           },
           {
             "id": "B",
-            "content": "x[31] ^ x[16]"
+            "content": "`x[31] ^ x[16]`"
           },
           {
             "id": "C",
-            "content": "x[30] ^ x[15]"
+            "content": "`x[30] ^ x[15]`"
           },
           {
             "id": "D",
-            "content": "x[30] ^ x[16]"
+            "content": "`x[30] ^ x[16]`"
           }
         ],
         "correctChoiceIds": [
@@ -11056,7 +11078,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 13",
       "summary": "float_half 浮点位模式减半与舍入",
-      "content": "13. （2分）下面给出了float_half函数的代码，该函数给出单精度浮点数f的一半（即\n0.5 * f）的位模式。下面哪一个选项正确给出了(1)和(2)处应当填写的值？\n```\n/*\n * float_half - Return bit-level equivalent of expression 0.5*f for\n *   floating point argument f.\n *   Both the argument and result are passed as unsigned int's, but\n *   they are to be interpreted as the bit-level representation of\n *   single-precision floating point values.\n *   When argument is NaN, return argument\n*/\nunsigned float_half(unsigned uf) {\n  unsigned sign = uf >> 31;\n  unsigned exp = (uf >> 23) & 0xFF;\n  unsigned frac = uf & 0x7FFFFF;\n  /* Only roundup case will be when rounding to even */\n  unsigned roundup = (frac & 0x3) == 3;\n  if (exp == 0) {\n    /* Denormalized. Must halve fraction */\n    frac = (frac >> 1) + roundup;\n  } else if (exp < 0xFF) {\n    /* Normalized. Decrease exponent */\n    exp--;\n    if (exp == 0) {\n      /* Denormalize adding back leading one */\n      frac = (frac >> 1) + roundup + _____(1)_____;\n    }\n  }\n  /* NaN Infinity do not require any changes */\n  return (sign << 31) | (exp << _____(2)_____) | frac;\n}\n```\nA. (1) 0x800000 (2) 8\nB. (1) 0x800000 (2) 23\nC. (1) 0x400000 (2) 8\nD. (1) 0x400000 (2) 23\n答案：D\n\n解析：(2) 处要把 exp 放回第 23~30 位，移位量是 23；(1) 处是 exp 减到 0 变成非规格化数时，必须把隐含的前导 1 补进小数域最高位（第 22 位，即 0x400000），而 0x800000 是符号位的位置。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "13. （2分）下面给出了float_half函数的代码，该函数给出单精度浮点数f的一半（即\n0.5 * f）的位模式。下面哪一个选项正确给出了(1)和(2)处应当填写的值？\n```\n/*\n * float_half - Return bit-level equivalent of expression 0.5*f for\n *   floating point argument f.\n *   Both the argument and result are passed as unsigned int's, but\n *   they are to be interpreted as the bit-level representation of\n *   single-precision floating point values.\n *   When argument is NaN, return argument\n*/\nunsigned float_half(unsigned uf) {\n  unsigned sign = uf >> 31;\n  unsigned exp = (uf >> 23) & 0xFF;\n  unsigned frac = uf & 0x7FFFFF;\n  /* Only roundup case will be when rounding to even */\n  unsigned roundup = (frac & 0x3) == 3;\n  if (exp == 0) {\n    /* Denormalized. Must halve fraction */\n    frac = (frac >> 1) + roundup;\n  } else if (exp < 0xFF) {\n    /* Normalized. Decrease exponent */\n    exp--;\n    if (exp == 0) {\n      /* Denormalize adding back leading one */\n      frac = (frac >> 1) + roundup + _____(1)_____;\n    }\n  }\n  /* NaN Infinity do not require any changes */\n  return (sign << 31) | (exp << _____(2)_____) | frac;\n}\n```\nA. `(1) 0x800000 (2) 8`\nB. `(1) 0x800000 (2) 23`\nC. `(1) 0x400000 (2) 8`\nD. `(1) 0x400000 (2) 23`\n答案：D\n\n解析：(2) 处要把 exp 放回第 23~30 位，移位量是 23；(1) 处是 exp 减到 0 变成非规格化数时，必须把隐含的前导 1 补进小数域最高位（第 22 位，即 0x400000），而 0x800000 是符号位的位置。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -11080,19 +11102,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "(1) 0x800000 (2) 8"
+            "content": "`(1) 0x800000 (2) 8`"
           },
           {
             "key": "B",
-            "content": "(1) 0x800000 (2) 23"
+            "content": "`(1) 0x800000 (2) 23`"
           },
           {
             "key": "C",
-            "content": "(1) 0x400000 (2) 8"
+            "content": "`(1) 0x400000 (2) 8`"
           },
           {
             "key": "D",
-            "content": "(1) 0x400000 (2) 23"
+            "content": "`(1) 0x400000 (2) 23`"
           }
         ],
         "answer": "答案：D\n\n解析：(2) 处要把 exp 放回第 23~30 位，移位量是 23；(1) 处是 exp 减到 0 变成非规格化数时，必须把隐含的前导 1 补进小数域最高位（第 22 位，即 0x400000），而 0x800000 是符号位的位置。故选 D。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
@@ -11103,19 +11125,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "(1) 0x800000 (2) 8"
+            "content": "`(1) 0x800000 (2) 8`"
           },
           {
             "id": "B",
-            "content": "(1) 0x800000 (2) 23"
+            "content": "`(1) 0x800000 (2) 23`"
           },
           {
             "id": "C",
-            "content": "(1) 0x400000 (2) 8"
+            "content": "`(1) 0x400000 (2) 8`"
           },
           {
             "id": "D",
-            "content": "(1) 0x400000 (2) 23"
+            "content": "`(1) 0x400000 (2) 23`"
           }
         ],
         "correctChoiceIds": [
@@ -11142,7 +11164,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 14",
       "summary": "byteSwap 字节交换的移位与掩码",
-      "content": "14. （2 分）下面给出了 byteSwap 函数的代码，该函数交换后两个参数所指定的两个字\n节的数据。下面哪一个选项正确给出了(1)和(2)处应当填写的内容？\n```\n/*\n * byteSwap - swaps the nth byte and the mth byte\n *  Examples: byteSwap(0x12345678, 1, 3) = 0x56341278\n *              byteSwap(0xDEADBEEF, 0, 2) = 0xDEEFBEAD\n *  You may assume that 0 <= n <= 3, 0 <= m <= 3\n*/\nint byteSwap(int x, int n, int m) {\n    int n8 = n << ___(1)___;\n    int m8 = m << ___(1)___;\n    int swap_byte = ((x >> m8) __(2)__ (x >> n8)) & 0xff;\n    return x ^ (swap_byte << n8) __(2)__ (swap_byte << m8);\n}\n```\nA. (1) 3 (2) ^\nB. (1) 8 (2) ^\nC. (1) 3 (2) |\nD. (1) 8 (2) |\n答案：A\n\n解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 (1) = 3；两个字节的差异用异或取出（swap_byte = byte_m ^ byte_n），再在 n、m 两个位置各异或一次就完成了交换，故 (2) = ^。若用 |，两处字节会被\"或\"成同一个值而不是互换。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "14. （2 分）下面给出了 byteSwap 函数的代码，该函数交换后两个参数所指定的两个字\n节的数据。下面哪一个选项正确给出了(1)和(2)处应当填写的内容？\n```\n/*\n * byteSwap - swaps the nth byte and the mth byte\n *  Examples: byteSwap(0x12345678, 1, 3) = 0x56341278\n *              byteSwap(0xDEADBEEF, 0, 2) = 0xDEEFBEAD\n *  You may assume that 0 <= n <= 3, 0 <= m <= 3\n*/\nint byteSwap(int x, int n, int m) {\n    int n8 = n << ___(1)___;\n    int m8 = m << ___(1)___;\n    int swap_byte = ((x >> m8) __(2)__ (x >> n8)) & 0xff;\n    return x ^ (swap_byte << n8) __(2)__ (swap_byte << m8);\n}\n```\nA. `(1) 3 (2) ^`\nB. `(1) 8 (2) ^`\nC. (1) 3 (2) |\nD. (1) 8 (2) |\n答案：A\n\n解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 (1) = 3；两个字节的差异用异或取出（swap_byte = byte_m ^ byte_n），再在 n、m 两个位置各异或一次就完成了交换，故 (2) = ^。若用 |，两处字节会被\"或\"成同一个值而不是互换。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -11166,11 +11188,11 @@
         "choices": [
           {
             "key": "A",
-            "content": "(1) 3 (2) ^"
+            "content": "`(1) 3 (2) ^`"
           },
           {
             "key": "B",
-            "content": "(1) 8 (2) ^"
+            "content": "`(1) 8 (2) ^`"
           },
           {
             "key": "C",
@@ -11189,11 +11211,11 @@
         "choices": [
           {
             "id": "A",
-            "content": "(1) 3 (2) ^"
+            "content": "`(1) 3 (2) ^`"
           },
           {
             "id": "B",
-            "content": "(1) 8 (2) ^"
+            "content": "`(1) 8 (2) ^`"
           },
           {
             "id": "C",
@@ -11228,7 +11250,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 15",
       "summary": "oddBits 奇数位全 1 的常量构造",
-      "content": "15. （2分）下面给出了oddBits函数的代码，该函数将所有奇数位设置为1（设整数x\n的二进制表示为x[31]x[30]...x[1]x[0]，奇数位是指j 为奇数的所有x[j]）。\n下面哪个选项给出了byte的正确设置：\n```\n/*\n * oddBits - return word with all odd-numbered bits set to 1\n*/\nint oddBits(void) {\n  int byte = ________;\n  int word = byte | byte<<8;\n  return word | word<<16;\n}\n```\nA. 0x55\nB. 0xAA\nC. 0x11\nD. 0xff\n答案：B\n\n解析：目标是奇数位全 1、偶数位全 0 的 0xAAAAAAAA：byte | byte<<8 得 0xAAAA，再 word | word<<16 得 0xAAAAAAAA，所以 byte 应取 0xAA。0x55 会得到 0x55555555（偶数位全 1），0x11、0xff 也不符。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "15. （2分）下面给出了oddBits函数的代码，该函数将所有奇数位设置为1（设整数x\n的二进制表示为x[31]x[30]...x[1]x[0]，奇数位是指j 为奇数的所有x[j]）。\n下面哪个选项给出了byte的正确设置：\n```\n/*\n * oddBits - return word with all odd-numbered bits set to 1\n*/\nint oddBits(void) {\n  int byte = ________;\n  int word = byte | byte<<8;\n  return word | word<<16;\n}\n```\nA. `0x55`\nB. `0xAA`\nC. `0x11`\nD. `0xff`\n答案：B\n\n解析：目标是奇数位全 1、偶数位全 0 的 0xAAAAAAAA：byte | byte<<8 得 0xAAAA，再 word | word<<16 得 0xAAAAAAAA，所以 byte 应取 0xAA。0x55 会得到 0x55555555（偶数位全 1），0x11、0xff 也不符。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -11252,19 +11274,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "0x55"
+            "content": "`0x55`"
           },
           {
             "key": "B",
-            "content": "0xAA"
+            "content": "`0xAA`"
           },
           {
             "key": "C",
-            "content": "0x11"
+            "content": "`0x11`"
           },
           {
             "key": "D",
-            "content": "0xff"
+            "content": "`0xff`"
           }
         ],
         "answer": "答案：B\n\n解析：目标是奇数位全 1、偶数位全 0 的 0xAAAAAAAA：byte | byte<<8 得 0xAAAA，再 word | word<<16 得 0xAAAAAAAA，所以 byte 应取 0xAA。0x55 会得到 0x55555555（偶数位全 1），0x11、0xff 也不符。故选 B。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
@@ -11275,19 +11297,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0x55"
+            "content": "`0x55`"
           },
           {
             "id": "B",
-            "content": "0xAA"
+            "content": "`0xAA`"
           },
           {
             "id": "C",
-            "content": "0x11"
+            "content": "`0x11`"
           },
           {
             "id": "D",
-            "content": "0xff"
+            "content": "`0xff`"
           }
         ],
         "correctChoiceIds": [

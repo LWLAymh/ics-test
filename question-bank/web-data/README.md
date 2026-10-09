@@ -11,7 +11,10 @@ python _tools/build_web_data.py
 
 - `catalog.json`：题库入口，包含模块、筛选项、统计信息及各模块文件路径。
 - `questions/*.json`：按模块拆分的题目；正文是 Markdown 字符串。
-- `answer-blocks.json`：试卷中暂时无法可靠拆到单题的整段答案或解析。
+- `answer-blocks.json`：试卷中暂时无法可靠拆到单题的整段答案或解析。**站点不发布它**：
+  题目的 `answer.relatedBlockIds` 指向的往往是整份试卷的答案块，与单题并不精确对应，
+  前端展示会泄题；因此 `scripts/build-site.js` 不再把它复制进 `_site/`，前端只展示
+  人工录入的 `answer`（`layout.answer`）。这个文件保留在这里供维护与 PDF 审阅使用。
 - `../assets/`：图片文件。`catalog.json` 的 `assetBase` 指向题库目录的上一级，题目正文中的
   图片路径统一为 `assets/...`。部署时应保持 `web-data/` 与 `assets/` 的相对位置，或由前端
   在渲染 Markdown 前统一改写资源 URL。

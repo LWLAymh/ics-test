@@ -275,7 +275,7 @@
       "exam": "2013期末",
       "questionNo": "第一题 14",
       "summary": "隐式空闲链表分配器的适配、吞吐与对齐",
-      "content": "14、用带有header和footer的隐式空闲链表实现分配器时，如果一个应用请\n求一个3字节的块，下列说法哪一项是错误的？答：（     ）\nA. 搜索空闲链表时，存储利用率为：best fit > next fit > first fit\nB. 搜索空闲链表时，吞吐率为：next fit > first fit > best fit\nC. 在x86机器上，malloc(3)实际分配的空闲块大小可能为8字节\nD. 在x64机器上，malloc(3)返回的地址可能为2147549777\n答案 ：D，malloc在64位机器上返回的地址应该按16字节对齐。",
+      "content": "14、用带有header和footer的隐式空闲链表实现分配器时，如果一个应用请\n求一个3字节的块，下列说法哪一项是错误的？答：（     ）\nA. 搜索空闲链表时，存储利用率为：`best fit > next fit > first fit`\nB. 搜索空闲链表时，吞吐率为：`next fit > first fit > best fit`\nC. 在x86机器上，`malloc(3)`实际分配的空闲块大小可能为`8`字节\nD. 在x64机器上，`malloc(3)`返回的地址可能为`2147549777`\n答案 ：D，malloc在64位机器上返回的地址应该按16字节对齐。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -299,19 +299,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "搜索空闲链表时，存储利用率为：best fit > next fit > first fit"
+            "content": "搜索空闲链表时，存储利用率为：`best fit > next fit > first fit`"
           },
           {
             "key": "B",
-            "content": "搜索空闲链表时，吞吐率为：next fit > first fit > best fit"
+            "content": "搜索空闲链表时，吞吐率为：`next fit > first fit > best fit`"
           },
           {
             "key": "C",
-            "content": "在x86机器上，malloc(3)实际分配的空闲块大小可能为8字节"
+            "content": "在x86机器上，`malloc(3)`实际分配的空闲块大小可能为`8`字节"
           },
           {
             "key": "D",
-            "content": "在x64机器上，malloc(3)返回的地址可能为2147549777"
+            "content": "在x64机器上，`malloc(3)`返回的地址可能为`2147549777`"
           }
         ],
         "answer": "答案 ：D，malloc在64位机器上返回的地址应该按16字节对齐。"
@@ -322,19 +322,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "搜索空闲链表时，存储利用率为：best fit > next fit > first fit"
+            "content": "搜索空闲链表时，存储利用率为：`best fit > next fit > first fit`"
           },
           {
             "id": "B",
-            "content": "搜索空闲链表时，吞吐率为：next fit > first fit > best fit"
+            "content": "搜索空闲链表时，吞吐率为：`next fit > first fit > best fit`"
           },
           {
             "id": "C",
-            "content": "在x86机器上，malloc(3)实际分配的空闲块大小可能为8字节"
+            "content": "在x86机器上，`malloc(3)`实际分配的空闲块大小可能为`8`字节"
           },
           {
             "id": "D",
-            "content": "在x64机器上，malloc(3)返回的地址可能为2147549777"
+            "content": "在x64机器上，`malloc(3)`返回的地址可能为`2147549777`"
           }
         ],
         "correctChoiceIds": [
@@ -583,7 +583,7 @@
       "exam": "2014期末",
       "questionNo": "第一题 14",
       "summary": "malloc 堆分配与栈数组的区别",
-      "content": "14. 有程序段如下：\n\n\n```\nint foo( ) {\n  char str1[20], *str2;\n  str2 = (char*)malloc(20*sizeof(char));\n  free(str2);\n}\n```\n下列说法中正确的是(      )\nA. str1和str2指向的内存都是分配在栈空间内的\nB. str1和str2指向的内存都是分配在堆空间内的\nC. str1指向的内存是分配在栈空间内的，str2指向的内存是分配在堆空间内的\nD. str1指向的内存是分配在堆空间内的，str2指向的内存是分配在栈空间内的\n【答案】Ｃ\n【说明】考察malloc函数是显式地分配和释放堆存储器\n答案：C\n考察malloc函数是显式地分配和释放堆存储器。",
+      "content": "14. 有程序段如下：\n\n\n```\nint foo( ) {\n  char str1[20], *str2;\n  str2 = (char*)malloc(20*sizeof(char));\n  free(str2);\n}\n```\n下列说法中正确的是(      )\nA. `str1`和`str2`指向的内存都是分配在栈空间内的\nB. `str1`和`str2`指向的内存都是分配在堆空间内的\nC. `str1`指向的内存是分配在栈空间内的，`str2`指向的内存是分配在堆空间内的\nD. `str1`指向的内存是分配在堆空间内的，`str2`指向的内存是分配在栈空间内的\n【答案】Ｃ\n【说明】考察malloc函数是显式地分配和释放堆存储器\n答案：C\n考察malloc函数是显式地分配和释放堆存储器。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -607,19 +607,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "str1和str2指向的内存都是分配在栈空间内的"
+            "content": "`str1`和`str2`指向的内存都是分配在栈空间内的"
           },
           {
             "key": "B",
-            "content": "str1和str2指向的内存都是分配在堆空间内的"
+            "content": "`str1`和`str2`指向的内存都是分配在堆空间内的"
           },
           {
             "key": "C",
-            "content": "str1指向的内存是分配在栈空间内的，str2指向的内存是分配在堆空间内的"
+            "content": "`str1`指向的内存是分配在栈空间内的，`str2`指向的内存是分配在堆空间内的"
           },
           {
             "key": "D",
-            "content": "str1指向的内存是分配在堆空间内的，str2指向的内存是分配在栈空间内的\n【答案】Ｃ\n【说明】考察malloc函数是显式地分配和释放堆存储器"
+            "content": "`str1`指向的内存是分配在堆空间内的，`str2`指向的内存是分配在栈空间内的\n【答案】Ｃ\n【说明】考察malloc函数是显式地分配和释放堆存储器"
           }
         ],
         "answer": "答案：C\n考察malloc函数是显式地分配和释放堆存储器。"
@@ -630,19 +630,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "str1和str2指向的内存都是分配在栈空间内的"
+            "content": "`str1`和`str2`指向的内存都是分配在栈空间内的"
           },
           {
             "id": "B",
-            "content": "str1和str2指向的内存都是分配在堆空间内的"
+            "content": "`str1`和`str2`指向的内存都是分配在堆空间内的"
           },
           {
             "id": "C",
-            "content": "str1指向的内存是分配在栈空间内的，str2指向的内存是分配在堆空间内的"
+            "content": "`str1`指向的内存是分配在栈空间内的，`str2`指向的内存是分配在堆空间内的"
           },
           {
             "id": "D",
-            "content": "str1指向的内存是分配在堆空间内的，str2指向的内存是分配在栈空间内的\n【答案】Ｃ\n【说明】考察malloc函数是显式地分配和释放堆存储器"
+            "content": "`str1`指向的内存是分配在堆空间内的，`str2`指向的内存是分配在栈空间内的\n【答案】Ｃ\n【说明】考察malloc函数是显式地分配和释放堆存储器"
           }
         ],
         "correctChoiceIds": [
@@ -1427,7 +1427,7 @@
       "exam": "2016期末",
       "questionNo": "第一题 13",
       "summary": "虚拟地址与物理地址的位段划分关系",
-      "content": "13. 在Core i7中，关于虚拟地址和物理地址的说法，不正确的是：\nA. VPO = CI + CO\nB. PPN = TLBT + TLBI\nC. VPN1 = VPN2 = VPN3 = VPN4\nD. TLBT + TLBI = VPN\n答案：B (VPN = TLBT + TLBI)",
+      "content": "13. 在Core i7中，关于虚拟地址和物理地址的说法，不正确的是：\nA. `VPO = CI + CO`\nB. `PPN = TLBT + TLBI`\nC. `VPN1 = VPN2 = VPN3 = VPN4`\nD. `TLBT + TLBI = VPN`\n答案：B (VPN = TLBT + TLBI)",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1453,19 +1453,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "VPO = CI + CO"
+            "content": "`VPO = CI + CO`"
           },
           {
             "key": "B",
-            "content": "PPN = TLBT + TLBI"
+            "content": "`PPN = TLBT + TLBI`"
           },
           {
             "key": "C",
-            "content": "VPN1 = VPN2 = VPN3 = VPN4"
+            "content": "`VPN1 = VPN2 = VPN3 = VPN4`"
           },
           {
             "key": "D",
-            "content": "TLBT + TLBI = VPN"
+            "content": "`TLBT + TLBI = VPN`"
           }
         ],
         "answer": "答案：B (VPN = TLBT + TLBI)"
@@ -1476,19 +1476,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "VPO = CI + CO"
+            "content": "`VPO = CI + CO`"
           },
           {
             "id": "B",
-            "content": "PPN = TLBT + TLBI"
+            "content": "`PPN = TLBT + TLBI`"
           },
           {
             "id": "C",
-            "content": "VPN1 = VPN2 = VPN3 = VPN4"
+            "content": "`VPN1 = VPN2 = VPN3 = VPN4`"
           },
           {
             "id": "D",
-            "content": "TLBT + TLBI = VPN"
+            "content": "`TLBT + TLBI = VPN`"
           }
         ],
         "correctChoiceIds": [
@@ -1651,7 +1651,7 @@
       "exam": "2017期末",
       "questionNo": "第一题 12",
       "summary": "空闲链表搜索与合并策略、二叉树结构",
-      "content": "12. 在设计分配器时，下列说法中错误的是：\nA. 搜索空闲链表时，存储利用率为：best fit > next fit > first fit\nB. 带头部的隐式空闲链表，合并（内存中的）下一个空闲块可在常数时间内完成\nC. 如果采取立刻合并策略（immediate coalescing），会在某些请求模式中\n出现反复合并又分割的情况，于是会有较小的吞吐率\nD. 分配器使用二叉树结构，主要是为了能够更快地找到适配的空闲块\n答案：A\n解析：搜索空闲链表时三种策略的存储利用率并没有「best fit > next fit > first fit」这样的确定排序（next fit 的利用率通常比 first fit 还差），A 错；带头部的隐式空闲链表只需按块大小跳过当前块即可在常数时间内找到并合并下一个块（B 对）；立即合并会在某些请求模式下反复合并又分割，降低吞吐率（C 对）；显式/分离空闲链表中用（平衡）二叉树组织，正是为了更快找到适配的空闲块（D 对）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "12. 在设计分配器时，下列说法中错误的是：\nA. 搜索空闲链表时，存储利用率为：`best fit > next fit > first fit`\nB. 带头部的隐式空闲链表，合并（内存中的）下一个空闲块可在常数时间内完成\nC. 如果采取立刻合并策略（immediate coalescing），会在某些请求模式中\n出现反复合并又分割的情况，于是会有较小的吞吐率\nD. 分配器使用二叉树结构，主要是为了能够更快地找到适配的空闲块\n答案：A\n解析：搜索空闲链表时三种策略的存储利用率并没有「best fit > next fit > first fit」这样的确定排序（next fit 的利用率通常比 first fit 还差），A 错；带头部的隐式空闲链表只需按块大小跳过当前块即可在常数时间内找到并合并下一个块（B 对）；立即合并会在某些请求模式下反复合并又分割，降低吞吐率（C 对）；显式/分离空闲链表中用（平衡）二叉树组织，正是为了更快找到适配的空闲块（D 对）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1675,7 +1675,7 @@
         "choices": [
           {
             "key": "A",
-            "content": "搜索空闲链表时，存储利用率为：best fit > next fit > first fit"
+            "content": "搜索空闲链表时，存储利用率为：`best fit > next fit > first fit`"
           },
           {
             "key": "B",
@@ -1698,7 +1698,7 @@
         "choices": [
           {
             "id": "A",
-            "content": "搜索空闲链表时，存储利用率为：best fit > next fit > first fit"
+            "content": "搜索空闲链表时，存储利用率为：`best fit > next fit > first fit`"
           },
           {
             "id": "B",
@@ -2283,7 +2283,7 @@
       "exam": "2018期末",
       "questionNo": "第五题",
       "summary": "多级页表页数、TLB 地址翻译与页表项改写",
-      "content": "第五题（12分）\n1.  (2分，每空一分，考察多级页表和单级页表的设计思想的理解)\n在进行地址翻译的过程中，操作系统需要借助页表(Page Table)的帮助。考虑\n一个32位的系统，页大小是4KB，页表项(Page Table Entry)大小是4字节(Byte)，\n如果不使用多级页表，常驻内存的页表一共需要     页。\n考虑下图已经显示的物理内存分配情况，在二级页表的情况下，已经显示的区\n域的页表需要占据     页。\n```\nVP0\n…\nVP1023  已分配页\nVP1024\n…\nVP2047\nGap\n未分配页\n1023\nunallocated\npages\nVP10239\nVP10240  已分配页\n…\nVP11263\n```\n2.  (6分，每错一空扣一分，扣完为止。考察地址翻译过程)\nIA32体系采用小端法和二级页表。其中两级页表大小相同，页大小均为4KB，\n结构也相同。TLB采用直接映射。TLB和页表每一项的后7位含义如下图所示。为\n简便起见，假设TLB和页表每一项的后8~12位都是0且不会被改变。注意后7位\n值为“27”则表示可读写。\n当系统运行到某一时刻时，TLB内容如下：\n```\n索引  TLB标记  内容  有效位\n0  0x04013  0x3312D027  1\n1  0x01000  0x24833020  0\n2  0x005AE  0x00055004  1\n3  0x00402  0x24AEE020  0\n4  0x0AA00  0x0005505C  0\n5  0x0000A  0x29DEE000  1\n6  0x1AE82  0x00A23027  1\n7  0x28DFC  0x00023000  0\n```\n一级页表的基地址为0x0C23B00，物理内存中的部分内容如下：\n```\n地址  内容  地址  内容  地址  内容  地址  内容\n00023000  E0  00023001  BE  00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055464  97  00055465  D2  00055466  7B  00055467  45\n0C23B020  27  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  27  0C23B041  40  0C23B042  DE  0C23B043  29\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n29DE404C  27  29DE404D  42  29DE404E  BA  29DE404F  00\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n```\n此刻，系统先后试图对两个已经缓存在cache中的内存地址进行写操作，请分\n析完成写之后系统的状态 (写的地址和上面的内存地址无交集)，完成下面的填空。\n若不需要某次访问或者缺少所需信息，请填“\\”。\n第一次向地址0xD7416560写入内容，TLB索引为：               ，完成写之后\n该项TLB内容为：               ，\n二级页表页表项地址为：               ，物理地址为：               。\n第二次向地址0x0401369B写入内容，\nTLB索引为：               ，完成写之后该项TLB内容为：\n二级页表页表项地址为：               ，物理地址为：               。\n3.  (2分，考察对于虚拟内存独立地址空间的理解)\n本学期的fork bomb作业中，大家曾用fork逼近系统的进程数量上限。下面\n有一个类似的程序，请仔细阅读程序并填空。\n```\n#include <stdio.h>\n#include <sys/wait.h>\n#include <unistd.h>\n#define N 4\nint main() {\nvolatile int pid, cnt = 1;\nfor (int i = 0; i < N; i++) {\nif ((pid = fork()) > 0) {\ncnt++;\n}\n}\nwhile (wait(NULL) > 0);\nreturn 0;\n}\n```\n整个过程中，变量cnt最大值是       。假设所有的数据都已经存在于内存中，\npid和cnt在同一个物理页中。从第一个进程开始执行for语句开始，此过程对于\ncnt的操作至少会导致页表中       次虚拟页对应的物理页被修改。\n答案：\n1：1024， 5\n2：第一次试图向地址0xD7416560写入内容，TLB索引为 6 ，完成写之后该项TLB\n内容是 0x00A23067 ，二级页表页表项地址为 \\ ，物理地址是 0x00A23560 。第\n二次试图向地址0x0401369B写入内容，TLB索引为 3 ，完成写之后该项TLB内容\n是  0x00BA4067  二级页表页表项所在地址为  0x29DE404C  ，物理地址是\n0x00BA469B 。\n3：5，15",
+      "content": "第五题（12分）\n1.  (2分，每空一分，考察多级页表和单级页表的设计思想的理解)\n在进行地址翻译的过程中，操作系统需要借助页表(Page Table)的帮助。考虑\n一个32位的系统，页大小是4KB，页表项(Page Table Entry)大小是4字节(Byte)，\n如果不使用多级页表，常驻内存的页表一共需要     页。\n考虑下图已经显示的物理内存分配情况，在二级页表的情况下，已经显示的区\n域的页表需要占据     页。\n```\nVP0\n…\nVP1023  已分配页\nVP1024\n…\nVP2047\nGap\n未分配页\n1023\nunallocated\npages\nVP10239\nVP10240  已分配页\n…\nVP11263\n```\n2.  (6分，每错一空扣一分，扣完为止。考察地址翻译过程)\nIA32体系采用小端法和二级页表。其中两级页表大小相同，页大小均为4KB，\n结构也相同。TLB采用直接映射。TLB和页表每一项的后7位含义如下图所示。为\n简便起见，假设TLB和页表每一项的后8~12位都是0且不会被改变。注意后7位\n值为“27”则表示可读写。\n当系统运行到某一时刻时，TLB内容如下：\n```\n索引  TLB标记  内容  有效位\n0  0x04013  0x3312D027  1\n1  0x01000  0x24833020  0\n2  0x005AE  0x00055004  1\n3  0x00402  0x24AEE020  0\n4  0x0AA00  0x0005505C  0\n5  0x0000A  0x29DEE000  1\n6  0x1AE82  0x00A23027  1\n7  0x28DFC  0x00023000  0\n```\n一级页表的基地址为0x0C23B00，物理内存中的部分内容如下：\n```\n地址  内容  地址  内容  地址  内容  地址  内容\n00023000  E0  00023001  BE  00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055464  97  00055465  D2  00055466  7B  00055467  45\n0C23B020  27  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  27  0C23B041  40  0C23B042  DE  0C23B043  29\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n29DE404C  27  29DE404D  42  29DE404E  BA  29DE404F  00\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n```\n此刻，系统先后试图对两个已经缓存在cache中的内存地址进行写操作，请分\n析完成写之后系统的状态 (写的地址和上面的内存地址无交集)，完成下面的填空。\n若不需要某次访问或者缺少所需信息，请填“\\”。\n第一次向地址0xD7416560写入内容，TLB索引为：               ，完成写之后\n该项TLB内容为：               ，\n二级页表页表项地址为：               ，物理地址为：               。\n第二次向地址0x0401369B写入内容，\nTLB索引为：               ，完成写之后该项TLB内容为：\n二级页表页表项地址为：               ，物理地址为：               。\n3.  (2分，考察对于虚拟内存独立地址空间的理解)\n本学期的fork bomb作业中，大家曾用fork逼近系统的进程数量上限。下面\n有一个类似的程序，请仔细阅读程序并填空。\n```\n#include <stdio.h>\n#include <sys/wait.h>\n#include <unistd.h>\n#define N 4\nint main() {\n    volatile int pid, cnt = 1;\n    for (int i = 0; i < N; i++) {\n        if ((pid = fork()) > 0) {\n            cnt++;\n        }\n    }\n    while (wait(NULL) > 0);\n    return 0;\n}\n```\n整个过程中，变量cnt最大值是       。假设所有的数据都已经存在于内存中，\npid和cnt在同一个物理页中。从第一个进程开始执行for语句开始，此过程对于\ncnt的操作至少会导致页表中       次虚拟页对应的物理页被修改。\n答案：\n1：1024， 5\n2：第一次试图向地址0xD7416560写入内容，TLB索引为 6 ，完成写之后该项TLB\n内容是 0x00A23067 ，二级页表页表项地址为 \\ ，物理地址是 0x00A23560 。第\n二次试图向地址0x0401369B写入内容，TLB索引为 3 ，完成写之后该项TLB内容\n是  0x00BA4067  二级页表页表项所在地址为  0x29DE404C  ，物理地址是\n0x00BA469B 。\n3：5，15",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2305,7 +2305,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第五题（12分）\n1.  (2分，每空一分，考察多级页表和单级页表的设计思想的理解)\n在进行地址翻译的过程中，操作系统需要借助页表(Page Table)的帮助。考虑\n一个32位的系统，页大小是4KB，页表项(Page Table Entry)大小是4字节(Byte)，\n如果不使用多级页表，常驻内存的页表一共需要     页。\n考虑下图已经显示的物理内存分配情况，在二级页表的情况下，已经显示的区\n域的页表需要占据     页。\n```\nVP0\n…\nVP1023  已分配页\nVP1024\n…\nVP2047\nGap\n未分配页\n1023\nunallocated\npages\nVP10239\nVP10240  已分配页\n…\nVP11263\n```\n2.  (6分，每错一空扣一分，扣完为止。考察地址翻译过程)\nIA32体系采用小端法和二级页表。其中两级页表大小相同，页大小均为4KB，\n结构也相同。TLB采用直接映射。TLB和页表每一项的后7位含义如下图所示。为\n简便起见，假设TLB和页表每一项的后8~12位都是0且不会被改变。注意后7位\n值为“27”则表示可读写。\n当系统运行到某一时刻时，TLB内容如下：\n```\n索引  TLB标记  内容  有效位\n0  0x04013  0x3312D027  1\n1  0x01000  0x24833020  0\n2  0x005AE  0x00055004  1\n3  0x00402  0x24AEE020  0\n4  0x0AA00  0x0005505C  0\n5  0x0000A  0x29DEE000  1\n6  0x1AE82  0x00A23027  1\n7  0x28DFC  0x00023000  0\n```\n一级页表的基地址为0x0C23B00，物理内存中的部分内容如下：\n```\n地址  内容  地址  内容  地址  内容  地址  内容\n00023000  E0  00023001  BE  00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055464  97  00055465  D2  00055466  7B  00055467  45\n0C23B020  27  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  27  0C23B041  40  0C23B042  DE  0C23B043  29\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n29DE404C  27  29DE404D  42  29DE404E  BA  29DE404F  00\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n```\n此刻，系统先后试图对两个已经缓存在cache中的内存地址进行写操作，请分\n析完成写之后系统的状态 (写的地址和上面的内存地址无交集)，完成下面的填空。\n若不需要某次访问或者缺少所需信息，请填“\\”。\n第一次向地址0xD7416560写入内容，TLB索引为：               ，完成写之后\n该项TLB内容为：               ，\n二级页表页表项地址为：               ，物理地址为：               。\n第二次向地址0x0401369B写入内容，\nTLB索引为：               ，完成写之后该项TLB内容为：\n二级页表页表项地址为：               ，物理地址为：               。\n3.  (2分，考察对于虚拟内存独立地址空间的理解)\n本学期的fork bomb作业中，大家曾用fork逼近系统的进程数量上限。下面\n有一个类似的程序，请仔细阅读程序并填空。\n```\n#include <stdio.h>\n#include <sys/wait.h>\n#include <unistd.h>\n#define N 4\nint main() {\nvolatile int pid, cnt = 1;\nfor (int i = 0; i < N; i++) {\nif ((pid = fork()) > 0) {\ncnt++;\n}\n}\nwhile (wait(NULL) > 0);\nreturn 0;\n}\n```\n整个过程中，变量cnt最大值是       。假设所有的数据都已经存在于内存中，\npid和cnt在同一个物理页中。从第一个进程开始执行for语句开始，此过程对于\ncnt的操作至少会导致页表中       次虚拟页对应的物理页被修改。",
+        "stem": "第五题（12分）\n1.  (2分，每空一分，考察多级页表和单级页表的设计思想的理解)\n在进行地址翻译的过程中，操作系统需要借助页表(Page Table)的帮助。考虑\n一个32位的系统，页大小是4KB，页表项(Page Table Entry)大小是4字节(Byte)，\n如果不使用多级页表，常驻内存的页表一共需要     页。\n考虑下图已经显示的物理内存分配情况，在二级页表的情况下，已经显示的区\n域的页表需要占据     页。\n```\nVP0\n…\nVP1023  已分配页\nVP1024\n…\nVP2047\nGap\n未分配页\n1023\nunallocated\npages\nVP10239\nVP10240  已分配页\n…\nVP11263\n```\n2.  (6分，每错一空扣一分，扣完为止。考察地址翻译过程)\nIA32体系采用小端法和二级页表。其中两级页表大小相同，页大小均为4KB，\n结构也相同。TLB采用直接映射。TLB和页表每一项的后7位含义如下图所示。为\n简便起见，假设TLB和页表每一项的后8~12位都是0且不会被改变。注意后7位\n值为“27”则表示可读写。\n当系统运行到某一时刻时，TLB内容如下：\n```\n索引  TLB标记  内容  有效位\n0  0x04013  0x3312D027  1\n1  0x01000  0x24833020  0\n2  0x005AE  0x00055004  1\n3  0x00402  0x24AEE020  0\n4  0x0AA00  0x0005505C  0\n5  0x0000A  0x29DEE000  1\n6  0x1AE82  0x00A23027  1\n7  0x28DFC  0x00023000  0\n```\n一级页表的基地址为0x0C23B00，物理内存中的部分内容如下：\n```\n地址  内容  地址  内容  地址  内容  地址  内容\n00023000  E0  00023001  BE  00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055464  97  00055465  D2  00055466  7B  00055467  45\n0C23B020  27  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  27  0C23B041  40  0C23B042  DE  0C23B043  29\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n29DE404C  27  29DE404D  42  29DE404E  BA  29DE404F  00\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n```\n此刻，系统先后试图对两个已经缓存在cache中的内存地址进行写操作，请分\n析完成写之后系统的状态 (写的地址和上面的内存地址无交集)，完成下面的填空。\n若不需要某次访问或者缺少所需信息，请填“\\”。\n第一次向地址0xD7416560写入内容，TLB索引为：               ，完成写之后\n该项TLB内容为：               ，\n二级页表页表项地址为：               ，物理地址为：               。\n第二次向地址0x0401369B写入内容，\nTLB索引为：               ，完成写之后该项TLB内容为：\n二级页表页表项地址为：               ，物理地址为：               。\n3.  (2分，考察对于虚拟内存独立地址空间的理解)\n本学期的fork bomb作业中，大家曾用fork逼近系统的进程数量上限。下面\n有一个类似的程序，请仔细阅读程序并填空。\n```\n#include <stdio.h>\n#include <sys/wait.h>\n#include <unistd.h>\n#define N 4\nint main() {\n    volatile int pid, cnt = 1;\n    for (int i = 0; i < N; i++) {\n        if ((pid = fork()) > 0) {\n            cnt++;\n        }\n    }\n    while (wait(NULL) > 0);\n    return 0;\n}\n```\n整个过程中，变量cnt最大值是       。假设所有的数据都已经存在于内存中，\npid和cnt在同一个物理页中。从第一个进程开始执行for语句开始，此过程对于\ncnt的操作至少会导致页表中       次虚拟页对应的物理页被修改。",
         "choices": [],
         "answer": "答案：\n1：1024， 5\n2：第一次试图向地址0xD7416560写入内容，TLB索引为 6 ，完成写之后该项TLB\n内容是 0x00A23067 ，二级页表页表项地址为 \\ ，物理地址是 0x00A23560 。第\n二次试图向地址0x0401369B写入内容，TLB索引为 3 ，完成写之后该项TLB内容\n是  0x00BA4067  二级页表页表项所在地址为  0x29DE404C  ，物理地址是\n0x00BA469B 。\n3：5，15"
       },
@@ -2315,7 +2315,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（12分）\n1.  (2分，每空一分，考察多级页表和单级页表的设计思想的理解)\n在进行地址翻译的过程中，操作系统需要借助页表(Page Table)的帮助。考虑\n一个32位的系统，页大小是4KB，页表项(Page Table Entry)大小是4字节(Byte)，\n如果不使用多级页表，常驻内存的页表一共需要     页。\n考虑下图已经显示的物理内存分配情况，在二级页表的情况下，已经显示的区\n域的页表需要占据     页。\n```\nVP0\n…\nVP1023  已分配页\nVP1024\n…\nVP2047\nGap\n未分配页\n1023\nunallocated\npages\nVP10239\nVP10240  已分配页\n…\nVP11263\n```\n2.  (6分，每错一空扣一分，扣完为止。考察地址翻译过程)\nIA32体系采用小端法和二级页表。其中两级页表大小相同，页大小均为4KB，\n结构也相同。TLB采用直接映射。TLB和页表每一项的后7位含义如下图所示。为\n简便起见，假设TLB和页表每一项的后8~12位都是0且不会被改变。注意后7位\n值为“27”则表示可读写。\n当系统运行到某一时刻时，TLB内容如下：\n```\n索引  TLB标记  内容  有效位\n0  0x04013  0x3312D027  1\n1  0x01000  0x24833020  0\n2  0x005AE  0x00055004  1\n3  0x00402  0x24AEE020  0\n4  0x0AA00  0x0005505C  0\n5  0x0000A  0x29DEE000  1\n6  0x1AE82  0x00A23027  1\n7  0x28DFC  0x00023000  0\n```\n一级页表的基地址为0x0C23B00，物理内存中的部分内容如下：\n```\n地址  内容  地址  内容  地址  内容  地址  内容\n00023000  E0  00023001  BE  00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055464  97  00055465  D2  00055466  7B  00055467  45\n0C23B020  27  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  27  0C23B041  40  0C23B042  DE  0C23B043  29\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n29DE404C  27  29DE404D  42  29DE404E  BA  29DE404F  00\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n```\n此刻，系统先后试图对两个已经缓存在cache中的内存地址进行写操作，请分\n析完成写之后系统的状态 (写的地址和上面的内存地址无交集)，完成下面的填空。\n若不需要某次访问或者缺少所需信息，请填“\\”。\n第一次向地址0xD7416560写入内容，TLB索引为：               ，完成写之后\n该项TLB内容为：               ，\n二级页表页表项地址为：               ，物理地址为：               。\n第二次向地址0x0401369B写入内容，\nTLB索引为：               ，完成写之后该项TLB内容为：\n二级页表页表项地址为：               ，物理地址为：               。\n3.  (2分，考察对于虚拟内存独立地址空间的理解)\n本学期的fork bomb作业中，大家曾用fork逼近系统的进程数量上限。下面\n有一个类似的程序，请仔细阅读程序并填空。\n```\n#include <stdio.h>\n#include <sys/wait.h>\n#include <unistd.h>\n#define N 4\nint main() {\nvolatile int pid, cnt = 1;\nfor (int i = 0; i < N; i++) {\nif ((pid = fork()) > 0) {\ncnt++;\n}\n}\nwhile (wait(NULL) > 0);\nreturn 0;\n}\n```\n整个过程中，变量cnt最大值是       。假设所有的数据都已经存在于内存中，\npid和cnt在同一个物理页中。从第一个进程开始执行for语句开始，此过程对于\ncnt的操作至少会导致页表中       次虚拟页对应的物理页被修改。",
+        "prompt": "第五题（12分）\n1.  (2分，每空一分，考察多级页表和单级页表的设计思想的理解)\n在进行地址翻译的过程中，操作系统需要借助页表(Page Table)的帮助。考虑\n一个32位的系统，页大小是4KB，页表项(Page Table Entry)大小是4字节(Byte)，\n如果不使用多级页表，常驻内存的页表一共需要     页。\n考虑下图已经显示的物理内存分配情况，在二级页表的情况下，已经显示的区\n域的页表需要占据     页。\n```\nVP0\n…\nVP1023  已分配页\nVP1024\n…\nVP2047\nGap\n未分配页\n1023\nunallocated\npages\nVP10239\nVP10240  已分配页\n…\nVP11263\n```\n2.  (6分，每错一空扣一分，扣完为止。考察地址翻译过程)\nIA32体系采用小端法和二级页表。其中两级页表大小相同，页大小均为4KB，\n结构也相同。TLB采用直接映射。TLB和页表每一项的后7位含义如下图所示。为\n简便起见，假设TLB和页表每一项的后8~12位都是0且不会被改变。注意后7位\n值为“27”则表示可读写。\n当系统运行到某一时刻时，TLB内容如下：\n```\n索引  TLB标记  内容  有效位\n0  0x04013  0x3312D027  1\n1  0x01000  0x24833020  0\n2  0x005AE  0x00055004  1\n3  0x00402  0x24AEE020  0\n4  0x0AA00  0x0005505C  0\n5  0x0000A  0x29DEE000  1\n6  0x1AE82  0x00A23027  1\n7  0x28DFC  0x00023000  0\n```\n一级页表的基地址为0x0C23B00，物理内存中的部分内容如下：\n```\n地址  内容  地址  内容  地址  内容  地址  内容\n00023000  E0  00023001  BE  00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055464  97  00055465  D2  00055466  7B  00055467  45\n0C23B020  27  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  27  0C23B041  40  0C23B042  DE  0C23B043  29\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n29DE404C  27  29DE404D  42  29DE404E  BA  29DE404F  00\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n```\n此刻，系统先后试图对两个已经缓存在cache中的内存地址进行写操作，请分\n析完成写之后系统的状态 (写的地址和上面的内存地址无交集)，完成下面的填空。\n若不需要某次访问或者缺少所需信息，请填“\\”。\n第一次向地址0xD7416560写入内容，TLB索引为：               ，完成写之后\n该项TLB内容为：               ，\n二级页表页表项地址为：               ，物理地址为：               。\n第二次向地址0x0401369B写入内容，\nTLB索引为：               ，完成写之后该项TLB内容为：\n二级页表页表项地址为：               ，物理地址为：               。\n3.  (2分，考察对于虚拟内存独立地址空间的理解)\n本学期的fork bomb作业中，大家曾用fork逼近系统的进程数量上限。下面\n有一个类似的程序，请仔细阅读程序并填空。\n```\n#include <stdio.h>\n#include <sys/wait.h>\n#include <unistd.h>\n#define N 4\nint main() {\n    volatile int pid, cnt = 1;\n    for (int i = 0; i < N; i++) {\n        if ((pid = fork()) > 0) {\n            cnt++;\n        }\n    }\n    while (wait(NULL) > 0);\n    return 0;\n}\n```\n整个过程中，变量cnt最大值是       。假设所有的数据都已经存在于内存中，\npid和cnt在同一个物理页中。从第一个进程开始执行for语句开始，此过程对于\ncnt的操作至少会导致页表中       次虚拟页对应的物理页被修改。",
         "answer": "答案：\n1：1024， 5\n2：第一次试图向地址0xD7416560写入内容，TLB索引为 6 ，完成写之后该项TLB\n内容是 0x00A23067 ，二级页表页表项地址为 \\ ，物理地址是 0x00A23560 。第\n二次试图向地址0x0401369B写入内容，TLB索引为 3 ，完成写之后该项TLB内容\n是  0x00BA4067  二级页表页表项所在地址为  0x29DE404C  ，物理地址是\n0x00BA469B 。\n3：5，15"
       },
       "presentation": {
@@ -3960,7 +3960,7 @@
       "exam": "2021期末",
       "questionNo": "选择题 2",
       "summary": "mmap 私有映射配合 fork/wait 的终端输出",
-      "content": "2.  阅读下列代码并回答选项。（已知文件“input.txt”中的内容为“12”，头文件没有列出）\n\n```c\nvoid *Mmap(void *addr, size_t length, int prot, int flags,\nint fd, off_t offset);\nint main(){\nint status;\nint fd = Open(\"./input.txt\", O_RDWR);\nchar* bufp = Mmap(NULL, 2, PROT_READ | PROT_WRITE ,\nMAP_PRIVATE, fd, 0);\nif (Fork()>0){\nwhile(waitpid(-1,&status,0)>0);\n*(bufp+1) = '1';\nWrite(1, bufp, 2); // 1: stdout\nbufp = Mmap(NULL, 2, PROT_READ, MAP_PRIVATE, fd, 0);\nWrite(1, bufp, 2);\n}\nelse{\n*bufp = '2';\nWrite(1, bufp, 2);\n}\nclose(fd);\nreturn 0;\n}\n```\n\n在shell中运行该程序，正常运行时的终端输出应为\nA. 221112\nB. 222121\nC. 222112\nD. 221111\n答案：A",
+      "content": "2.  阅读下列代码并回答选项。（已知文件“input.txt”中的内容为“12”，头文件没有列出）\n\n```c\nvoid *Mmap(void *addr, size_t length, int prot, int flags,\n    int fd, off_t offset);\nint main(){\n    int status;\n    int fd = Open(\"./input.txt\", O_RDWR);\n    char* bufp = Mmap(NULL, 2, PROT_READ | PROT_WRITE ,\n        MAP_PRIVATE, fd, 0);\n    if (Fork()>0){\n        while(waitpid(-1,&status,0)>0);\n        *(bufp+1) = '1';\n        Write(1, bufp, 2); // 1: stdout\n        bufp = Mmap(NULL, 2, PROT_READ, MAP_PRIVATE, fd, 0);\n        Write(1, bufp, 2);\n    }\n    else{\n        *bufp = '2';\n        Write(1, bufp, 2);\n    }\n    close(fd);\n    return 0;\n}\n```\n\n在shell中运行该程序，正常运行时的终端输出应为\nA. 221112\nB. 222121\nC. 222112\nD. 221111\n答案：A",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3988,7 +3988,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "2.  阅读下列代码并回答选项。（已知文件“input.txt”中的内容为“12”，头文件没有列出）\n\n```c\nvoid *Mmap(void *addr, size_t length, int prot, int flags,\nint fd, off_t offset);\nint main(){\nint status;\nint fd = Open(\"./input.txt\", O_RDWR);\nchar* bufp = Mmap(NULL, 2, PROT_READ | PROT_WRITE ,\nMAP_PRIVATE, fd, 0);\nif (Fork()>0){\nwhile(waitpid(-1,&status,0)>0);\n*(bufp+1) = '1';\nWrite(1, bufp, 2); // 1: stdout\nbufp = Mmap(NULL, 2, PROT_READ, MAP_PRIVATE, fd, 0);\nWrite(1, bufp, 2);\n}\nelse{\n*bufp = '2';\nWrite(1, bufp, 2);\n}\nclose(fd);\nreturn 0;\n}\n```\n\n在shell中运行该程序，正常运行时的终端输出应为",
+        "stem": "2.  阅读下列代码并回答选项。（已知文件“input.txt”中的内容为“12”，头文件没有列出）\n\n```c\nvoid *Mmap(void *addr, size_t length, int prot, int flags,\n    int fd, off_t offset);\nint main(){\n    int status;\n    int fd = Open(\"./input.txt\", O_RDWR);\n    char* bufp = Mmap(NULL, 2, PROT_READ | PROT_WRITE ,\n        MAP_PRIVATE, fd, 0);\n    if (Fork()>0){\n        while(waitpid(-1,&status,0)>0);\n        *(bufp+1) = '1';\n        Write(1, bufp, 2); // 1: stdout\n        bufp = Mmap(NULL, 2, PROT_READ, MAP_PRIVATE, fd, 0);\n        Write(1, bufp, 2);\n    }\n    else{\n        *bufp = '2';\n        Write(1, bufp, 2);\n    }\n    close(fd);\n    return 0;\n}\n```\n\n在shell中运行该程序，正常运行时的终端输出应为",
         "choices": [
           {
             "key": "A",
@@ -4036,7 +4036,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.  阅读下列代码并回答选项。（已知文件“input.txt”中的内容为“12”，头文件没有列出）\n\n```c\nvoid *Mmap(void *addr, size_t length, int prot, int flags,\nint fd, off_t offset);\nint main(){\nint status;\nint fd = Open(\"./input.txt\", O_RDWR);\nchar* bufp = Mmap(NULL, 2, PROT_READ | PROT_WRITE ,\nMAP_PRIVATE, fd, 0);\nif (Fork()>0){\nwhile(waitpid(-1,&status,0)>0);\n*(bufp+1) = '1';\nWrite(1, bufp, 2); // 1: stdout\nbufp = Mmap(NULL, 2, PROT_READ, MAP_PRIVATE, fd, 0);\nWrite(1, bufp, 2);\n}\nelse{\n*bufp = '2';\nWrite(1, bufp, 2);\n}\nclose(fd);\nreturn 0;\n}\n```\n\n在shell中运行该程序，正常运行时的终端输出应为",
+        "prompt": "2.  阅读下列代码并回答选项。（已知文件“input.txt”中的内容为“12”，头文件没有列出）\n\n```c\nvoid *Mmap(void *addr, size_t length, int prot, int flags,\n    int fd, off_t offset);\nint main(){\n    int status;\n    int fd = Open(\"./input.txt\", O_RDWR);\n    char* bufp = Mmap(NULL, 2, PROT_READ | PROT_WRITE ,\n        MAP_PRIVATE, fd, 0);\n    if (Fork()>0){\n        while(waitpid(-1,&status,0)>0);\n        *(bufp+1) = '1';\n        Write(1, bufp, 2); // 1: stdout\n        bufp = Mmap(NULL, 2, PROT_READ, MAP_PRIVATE, fd, 0);\n        Write(1, bufp, 2);\n    }\n    else{\n        *bufp = '2';\n        Write(1, bufp, 2);\n    }\n    close(fd);\n    return 0;\n}\n```\n\n在shell中运行该程序，正常运行时的终端输出应为",
         "answer": "答案：A"
       },
       "presentation": {
@@ -4086,14 +4086,25 @@
         "choices": [],
         "answer": "答案：1 次（TLB 命中且无缺页，故只需访问一次物理内存取数据）；②④（选项为原文的 ①可写 ②只读 ③用户模式权限 ④内核模式权限）\n\n依据：y 的 TLBT=0xd551、TLBI=5，查表得 TLB 条目内容 0x019fa42d，其中 R/W=0、U/S=1，故该页实质权限为只读、内核模式。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "大题（15分）\n\nIA32体系采用**小端法**、32位虚拟地址和两级页表。两级页表大小相同，页大小都是4 KB = 2<sup>12</sup> Byte，结构也相同。TLB 采用**直接映射**，4位组索引。TLB 和页表每一项格式如图所示：\n\n| 31 12 | 11 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |\n|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| Address of 4KB page frame | Ignored | G | PAT | D | A | PCD | PWT | U/S | R/W | P |\n\n部分位的含义如下：\n\n0 (P): 1表示存在，0表示不存在\n\n1 (R/W)：1表示可写，0表示只读\n\n2 (U/S)：1表示内核模式，0表示用户模式\n\n当系统运行到某一时刻时，TLB**有效位为1**的条目如下（未列出部分都是无效的）：\n\n| 索引（十进制） | TLB 标记 |    内容    |\n|:--------------:|:--------:|:----------:|\n|       0        |  0x0400  | 0x0ec91313 |\n|       3        |  0x02ff  | 0x5d2bac01 |\n|       5        |  0xd551  | 0x019fa42d |\n|       11       |  0x55a6  | 0xfdd3c66b |\n|       13       |  0x5515  | 0xb591926b |\n\n一级页表的基地址为0x00e66000，物理内存中的部分内容如下（均为十六进制）：\n\n|   地址   | 内容 |   地址   | 内容 |   地址   | 内容 |\n|:--------:|:----:|:--------:|:----:|:--------:|:----:|\n| 00615000 |  21  | 00615001 |  2d  | 00615002 |  ee  |\n| 00615003 |  c0  | 006154d0 |  ff  | 006154d1 |  a0  |\n| 00e66001 |  a1  | 00e66002 |  a4  | 00e66003 |  67  |\n| 00e66004 |  21  | 00e66005 |  57  | 00e66006 |  61  |\n| 00e66007 |  00  | 2167e000 |  42  | 2167e001 |  67  |\n| 2167e002 |  9a  | 2167e003 |  7c  | c0ee2000 |  6f  |\n| c0ee2001 |  d5  | c0ee2002 |  7e  | c0ee24d0 |  48  |\n| c0ee24d1 |  83  | c0ee24d2 |  ec  | c0ee2d21 |  11  |\n| c0ee2d22 |  6b  | c0ee2d23 |  82  | c0ee2d24 |  8a  |\n\n1.  将 cache 清空。访问一个在主存中的虚拟地址，TLB命中，**没有**触发缺页异常，这一过程中，需要访问物理内存（主存）\\_\\_\\_\\_\\_次（3分）。具体来说，如果该虚拟地址为 y = 0xd5515213，y 地址所具有的**实质权限**是\\_\\_\\_\\_\\_\\_\\_\\_\\_（多选题，选对才得分2分）。",
         "answer": "答案：1 次（TLB 命中且无缺页，故只需访问一次物理内存取数据）；②④（选项为原文的 ①可写 ②只读 ③用户模式权限 ④内核模式权限）\n\n依据：y 的 TLBT=0xd551、TLBI=5，查表得 TLB 条目内容 0x019fa42d，其中 R/W=0、U/S=1，故该页实质权限为只读、内核模式。"
+      },
+      "group": {
+        "id": "p-2c2b56c4452255b1:2021-final-chap9-q1",
+        "questionId": "q-ffaf26f77f01eef5",
+        "title": "大题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -4142,14 +4153,25 @@
         "choices": [],
         "answer": "答案：3 次；0x00615000；0x48\n\n依据：TLB 未命中且无缺页，需要访问页目录、二级页表和物理页，共 3 次。x 的 VPN1=1、VPN2=0、PPO=0x4d0，页目录项地址 0x00e66000+1\\*4=0x00e66004，按小端读出 0x00615721，故二级页表首地址为 0x00615000；该地址处的表项小端读出 0xc0ee2d21，物理页首地址 0xc0ee2000，故 x 的物理地址为 0xc0ee2000+0x4d0=0xc0ee24d0，内容为 0x48。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2.  不考虑第一小问，将 cache 清空。访问一个在主存中的虚拟地址，TLB不命中，**没有**触发缺页异常，这一过程中，需要访问物理内存（主存）\\_\\_\\_\\_\\_次（3分）。具体来说，如果该虚拟地址为x = 0x004004d0，那么x 对应的二级页表起始地址是\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_（填写16进制，例如0x00123000，2分），x 地址上单字节的**内容**是\\_\\_\\_\\_\\_\\_（填写16进制，例如0x00，1分）。",
         "answer": "答案：3 次；0x00615000；0x48\n\n依据：TLB 未命中且无缺页，需要访问页目录、二级页表和物理页，共 3 次。x 的 VPN1=1、VPN2=0、PPO=0x4d0，页目录项地址 0x00e66000+1\\*4=0x00e66004，按小端读出 0x00615721，故二级页表首地址为 0x00615000；该地址处的表项小端读出 0xc0ee2d21，物理页首地址 0xc0ee2000，故 x 的物理地址为 0xc0ee2000+0x4d0=0xc0ee24d0，内容为 0x48。"
+      },
+      "group": {
+        "id": "p-2c2b56c4452255b1:2021-final-chap9-q1",
+        "questionId": "q-ffaf26f77f01eef5",
+        "title": "大题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -4198,14 +4220,25 @@
         "choices": [],
         "answer": "答案：第 4 行改为 int \\*y = (int \\*)calloc(n, sizeof(int)); 或 int \\*y = (int \\*)Calloc(n, sizeof(int));（calloc/Calloc 的两个参数只要乘起来等于 n \\* sizeof(int) 即算对）\n\n依据：malloc 不会清零所分配的内存区域，故同一组输入可能得到不同的输出；改用以清零方式分配的 calloc/Calloc 即可修复。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "3.  考虑下面计算矩阵和向量乘法代码：\n\n1 int \\*mat_vec_mul(int \\*\\*A, int \\*x, int n)\n\n2 {\n\n3 int i, j;\n\n4 int \\*y = (int \\*)malloc(n \\* sizeof(int));\n\n5 *for* (i = 0; i \\< n; i++)\n\n6 *for* (j = 0; j \\< n; j++)\n\n7 y\\[i\\] += A\\[i\\]\\[j\\] \\* x\\[j\\];\n\n8 *return* y;\n\n9 }\n\n⑴ 在64位 Linux 机器中运行该代码，输入**同一组合法的参数**后，每次运行返回的向量的值都**不一样**，修复这一错误有一种简单的方法，将第\\_\\_\\_\\_行改为\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_。（第二空填写C代码，每空1分，共2分）\n\n可能用到的函数：\n\nvoid \\*memcpy(void \\*dest, const void \\*src, size_t n);\n\nvoid \\*memset(void \\*s, int c, size_t n);\n\nvoid \\*calloc(size_t nelem, size_t elemsize);\n\nvoid \\*realloc(void \\*ptr, size_t size);",
         "answer": "答案：第 4 行改为 int \\*y = (int \\*)calloc(n, sizeof(int)); 或 int \\*y = (int \\*)Calloc(n, sizeof(int));（calloc/Calloc 的两个参数只要乘起来等于 n \\* sizeof(int) 即算对）\n\n依据：malloc 不会清零所分配的内存区域，故同一组输入可能得到不同的输出；改用以清零方式分配的 calloc/Calloc 即可修复。"
+      },
+      "group": {
+        "id": "p-2c2b56c4452255b1:2021-final-chap9-q1",
+        "questionId": "q-ffaf26f77f01eef5",
+        "title": "大题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -4254,14 +4287,25 @@
         "choices": [],
         "answer": "答案：n \\< 0（或其他等价表达）\n\n依据：若 malloc 分配成功则 y 非空指针，y\\[0\\] 不可能在外部访问时出现段错误，故 malloc 一定失败、y 为空指针；而 mat_vec_mul 内部没有触发段错误，说明两次循环都没有进入，即 n\\<=0，结合参数非零得 n\\<0。反过来，64 位 Linux 的用户虚拟地址空间为 48 位，n\\<0 时 n\\*sizeof(int) 经符号扩展后最高位至少有 33 个 1，乘 sizeof(int) 后仍大于 2<sup>63</sup> 与 2<sup>48</sup>，malloc 必定失败，故 n\\<0 也是充分条件。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "⑵ 在进行前一问的测试**之前**，还在64位 Linux 机器上进行过如下用户代码测试（输入 mat_vec_mul的参数都**非零**）：\n\nint \\*y = mat_vec_mul(A, x, n);\n\nint z = y\\[0\\];\n\n结果发生了段错误。通过gdb调试发现mat_vec_mul函数内并没有发生段错误，但是在初始化变量z时发生了段错误，后来发现是参数的输入有问题。写出出现这种错误的**充分必要条件**\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_（1分）",
         "answer": "答案：n \\< 0（或其他等价表达）\n\n依据：若 malloc 分配成功则 y 非空指针，y\\[0\\] 不可能在外部访问时出现段错误，故 malloc 一定失败、y 为空指针；而 mat_vec_mul 内部没有触发段错误，说明两次循环都没有进入，即 n\\<=0，结合参数非零得 n\\<0。反过来，64 位 Linux 的用户虚拟地址空间为 48 位，n\\<0 时 n\\*sizeof(int) 经符号扩展后最高位至少有 33 个 1，乘 sizeof(int) 后仍大于 2<sup>63</sup> 与 2<sup>48</sup>，malloc 必定失败，故 n\\<0 也是充分条件。"
+      },
+      "group": {
+        "id": "p-2c2b56c4452255b1:2021-final-chap9-q1",
+        "questionId": "q-ffaf26f77f01eef5",
+        "title": "大题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -4466,7 +4510,7 @@
       "exam": "2021期末",
       "questionNo": "备选题 3",
       "summary": "sbrk/free/mmap 等动态内存分配说法正误",
-      "content": "3.  以下关于动态内存分配的说法中，**错误**的是\nA. 可以通过调用 sbrk(0) 获取当前进程中堆的顶部地址\n\nB. 如果向一个已经 free 的指针写入数据，**一定会**触发异常\n\nC. 如果使用 malloc(0x10) 获取一个指针，然后写入 0x200 字节大小的数据，**不一定**会触发异常\n\nD. 使用 mmap 也是动态分配内存的方法之一\n答案：B\n\n依据：已经分配的内存一般不会被 OS 回收，向已 free 的指针写入数据相当于用户空间正常的内存访问，不一定触发异常；A、C、D 均与课本表述一致，是正确的。",
+      "content": "3.  以下关于动态内存分配的说法中，**错误**的是\nA. 可以通过调用 sbrk(0) 获取当前进程中堆的顶部地址\n\nB. 如果向一个已经 free 的指针写入数据，**一定会**触发异常\n\nC. 如果使用 `malloc(0x10)` 获取一个指针，然后写入 `0x200` 字节大小的数据，**不一定**会触发异常\n\nD. 使用 mmap 也是动态分配内存的方法之一\n答案：B\n\n依据：已经分配的内存一般不会被 OS 回收，向已 free 的指针写入数据相当于用户空间正常的内存访问，不一定触发异常；A、C、D 均与课本表述一致，是正确的。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4506,7 +4550,7 @@
           },
           {
             "key": "C",
-            "content": "如果使用 malloc(0x10) 获取一个指针，然后写入 0x200 字节大小的数据，**不一定**会触发异常"
+            "content": "如果使用 `malloc(0x10)` 获取一个指针，然后写入 `0x200` 字节大小的数据，**不一定**会触发异常"
           },
           {
             "key": "D",
@@ -4529,7 +4573,7 @@
           },
           {
             "id": "C",
-            "content": "如果使用 malloc(0x10) 获取一个指针，然后写入 0x200 字节大小的数据，**不一定**会触发异常"
+            "content": "如果使用 `malloc(0x10)` 获取一个指针，然后写入 `0x200` 字节大小的数据，**不一定**会触发异常"
           },
           {
             "id": "D",
@@ -4933,7 +4977,7 @@
       "exam": "2022期末",
       "questionNo": "第五题 3",
       "summary": "堆上代码的 4 处内存安全错误定位",
-      "content": "3、内存安全（共 4 分，找出一个错误给 1 分）\n\n以下代码有 4 处内存安全错误，请指出所在代码行行号并简要说明。\n\n注意：\n\n1）请仔细阅读注释；\n\n2）不需要考虑库函数的错误和库函数调用出错的情况（因此不需要考虑返回值检查）；\n\n3）说明时加上必要的代码行号，请使用简洁的语言；\n\n4）只需说明为什么会出错，无需给出修补方法。\n\n```c\n 5) #include <assert.h>\n 6) #include <stdio.h>\n 7) #include <stdlib.h>\n 8)\n 9) // There're 4 memory safety bugs\n10)\n11) // Assume all calls to library functions succeed\n12) // For simplicity, our vector type can only hold ints.\n13) typedef struct {\n14)     int *data;      // Pointer to our array on the heap\n15)     int length;     // How many elements are in our array\n16)     int capacity;   // How many elements our array can hold\n17) } Stack;\n18)\n19) // Get a chunk of heap memory that can accomodate `size` int number\n20) int *get_heap_memory(int size) {\n21)     int *new_data = (int *)malloc(size);\n22)     assert(new_data != NULL);\n23)     return new_data;\n24) }\n```\n\n\n```c\n25)\n26) Stack *stack_new() {\n27)     Stack stack;\n28)     stack.data      = get_heap_memory(1);\n29)     stack.length    = 0;\n30)     stack.capacity  = 1;\n31)     return &stack;\n32) }\n33)\n34) void stack_push(Stack *stack, int n) {\n35)     if (stack->length == stack->capacity) {\n36)         int new_capacity = stack->capacity * 2;\n37)\n38)         int *new_data = get_heap_memory(new_capacity);\n39)\n40)         for (int i = 0; i < stack->length; ++i) {\n41)             new_data[i] = stack->data[i];\n42)         }\n43)\n44)         free(stack->data);\n45)         stack->data       = new_data;\n46)         stack->capacity   = new_capacity;\n47)     }\n48)\n49)     stack->data[stack->length] = n;\n50)     stack->length += 1;\n51) }\n52)\n53) int main() {\n54)     Stack *stack = stack_new();\n55)     stack_push(stack, 107);\n56)\n57)     int *n = &stack->data[0];\n58)     stack_push(stack, 110);\n59)     printf(\"%d\\n\", *n);\n60)\n61)     free(stack);\n62) }\n```\n\n错误：\n\n(1) ________________________________________________________________________________\n\n(2) ________________________________________________________________________________\n\n(3) ________________________________________________________________________________\n\n(4) ________________________________________________________________________________\n答案：\n① 第 21 行 所申请的内存大小不足，应该为 malloc(size*sizeof(int));\n② 第 27 与 31 行 不能返回局部变量的地址\n③ 第 59 行 n 所指向的地址在 push 后可能已经被释放\n④ 第 61 行 stack.data 没有被释放，造成内存泄露",
+      "content": "3、内存安全（共 4 分，找出一个错误给 1 分）\n\n以下代码有 4 处内存安全错误，请指出所在代码行行号并简要说明。\n\n注意：\n\n1）请仔细阅读注释；\n\n2）不需要考虑库函数的错误和库函数调用出错的情况（因此不需要考虑返回值检查）；\n\n3）说明时加上必要的代码行号，请使用简洁的语言；\n\n4）只需说明为什么会出错，无需给出修补方法。\n\n```c\n 5) #include <assert.h>\n 6) #include <stdio.h>\n 7) #include <stdlib.h>\n 8)\n 9) // There're 4 memory safety bugs\n10)\n11) // Assume all calls to library functions succeed\n12) // For simplicity, our vector type can only hold ints.\n13) typedef struct {\n14)     int *data;      // Pointer to our array on the heap\n15)     int length;     // How many elements are in our array\n16)     int capacity;   // How many elements our array can hold\n17) } Stack;\n18)\n19) // Get a chunk of heap memory that can accomodate `size` int number\n20) int *get_heap_memory(int size) {\n21)     int *new_data = (int *)malloc(size);\n22)     assert(new_data != NULL);\n23)     return new_data;\n24) }\n```\n\n\n```c\n25)\n26) Stack *stack_new() {\n    27)     Stack stack;\n    28)     stack.data      = get_heap_memory(1);\n    29)     stack.length    = 0;\n    30)     stack.capacity  = 1;\n    31)     return &stack;\n    32) }\n33)\n34) void stack_push(Stack *stack, int n) {\n    35)     if (stack->length == stack->capacity) {\n        36)         int new_capacity = stack->capacity * 2;\n        37)\n        38)         int *new_data = get_heap_memory(new_capacity);\n        39)\n        40)         for (int i = 0; i < stack->length; ++i) {\n            41)             new_data[i] = stack->data[i];\n            42)         }\n        43)\n        44)         free(stack->data);\n        45)         stack->data       = new_data;\n        46)         stack->capacity   = new_capacity;\n        47)     }\n    48)\n    49)     stack->data[stack->length] = n;\n    50)     stack->length += 1;\n    51) }\n52)\n53) int main() {\n    54)     Stack *stack = stack_new();\n    55)     stack_push(stack, 107);\n    56)\n    57)     int *n = &stack->data[0];\n    58)     stack_push(stack, 110);\n    59)     printf(\"%d\\n\", *n);\n    60)\n    61)     free(stack);\n    62) }\n```\n\n错误：\n\n(1) ________________________________________________________________________________\n\n(2) ________________________________________________________________________________\n\n(3) ________________________________________________________________________________\n\n(4) ________________________________________________________________________________\n答案：\n① 第 21 行 所申请的内存大小不足，应该为 malloc(size*sizeof(int));\n② 第 27 与 31 行 不能返回局部变量的地址\n③ 第 59 行 n 所指向的地址在 push 后可能已经被释放\n④ 第 61 行 stack.data 没有被释放，造成内存泄露",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4956,7 +5000,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3、内存安全（共 4 分，找出一个错误给 1 分）\n\n以下代码有 4 处内存安全错误，请指出所在代码行行号并简要说明。\n\n注意：\n\n1）请仔细阅读注释；\n\n2）不需要考虑库函数的错误和库函数调用出错的情况（因此不需要考虑返回值检查）；\n\n3）说明时加上必要的代码行号，请使用简洁的语言；\n\n4）只需说明为什么会出错，无需给出修补方法。\n\n```c\n 5) #include <assert.h>\n 6) #include <stdio.h>\n 7) #include <stdlib.h>\n 8)\n 9) // There're 4 memory safety bugs\n10)\n11) // Assume all calls to library functions succeed\n12) // For simplicity, our vector type can only hold ints.\n13) typedef struct {\n14)     int *data;      // Pointer to our array on the heap\n15)     int length;     // How many elements are in our array\n16)     int capacity;   // How many elements our array can hold\n17) } Stack;\n18)\n19) // Get a chunk of heap memory that can accomodate `size` int number\n20) int *get_heap_memory(int size) {\n21)     int *new_data = (int *)malloc(size);\n22)     assert(new_data != NULL);\n23)     return new_data;\n24) }\n```\n\n\n```c\n25)\n26) Stack *stack_new() {\n27)     Stack stack;\n28)     stack.data      = get_heap_memory(1);\n29)     stack.length    = 0;\n30)     stack.capacity  = 1;\n31)     return &stack;\n32) }\n33)\n34) void stack_push(Stack *stack, int n) {\n35)     if (stack->length == stack->capacity) {\n36)         int new_capacity = stack->capacity * 2;\n37)\n38)         int *new_data = get_heap_memory(new_capacity);\n39)\n40)         for (int i = 0; i < stack->length; ++i) {\n41)             new_data[i] = stack->data[i];\n42)         }\n43)\n44)         free(stack->data);\n45)         stack->data       = new_data;\n46)         stack->capacity   = new_capacity;\n47)     }\n48)\n49)     stack->data[stack->length] = n;\n50)     stack->length += 1;\n51) }\n52)\n53) int main() {\n54)     Stack *stack = stack_new();\n55)     stack_push(stack, 107);\n56)\n57)     int *n = &stack->data[0];\n58)     stack_push(stack, 110);\n59)     printf(\"%d\\n\", *n);\n60)\n61)     free(stack);\n62) }\n```\n\n错误：\n\n(1) ________________________________________________________________________________\n\n(2) ________________________________________________________________________________\n\n(3) ________________________________________________________________________________\n\n(4) ________________________________________________________________________________",
+        "stem": "3、内存安全（共 4 分，找出一个错误给 1 分）\n\n以下代码有 4 处内存安全错误，请指出所在代码行行号并简要说明。\n\n注意：\n\n1）请仔细阅读注释；\n\n2）不需要考虑库函数的错误和库函数调用出错的情况（因此不需要考虑返回值检查）；\n\n3）说明时加上必要的代码行号，请使用简洁的语言；\n\n4）只需说明为什么会出错，无需给出修补方法。\n\n```c\n 5) #include <assert.h>\n 6) #include <stdio.h>\n 7) #include <stdlib.h>\n 8)\n 9) // There're 4 memory safety bugs\n10)\n11) // Assume all calls to library functions succeed\n12) // For simplicity, our vector type can only hold ints.\n13) typedef struct {\n14)     int *data;      // Pointer to our array on the heap\n15)     int length;     // How many elements are in our array\n16)     int capacity;   // How many elements our array can hold\n17) } Stack;\n18)\n19) // Get a chunk of heap memory that can accomodate `size` int number\n20) int *get_heap_memory(int size) {\n21)     int *new_data = (int *)malloc(size);\n22)     assert(new_data != NULL);\n23)     return new_data;\n24) }\n```\n\n\n```c\n25)\n26) Stack *stack_new() {\n    27)     Stack stack;\n    28)     stack.data      = get_heap_memory(1);\n    29)     stack.length    = 0;\n    30)     stack.capacity  = 1;\n    31)     return &stack;\n    32) }\n33)\n34) void stack_push(Stack *stack, int n) {\n    35)     if (stack->length == stack->capacity) {\n        36)         int new_capacity = stack->capacity * 2;\n        37)\n        38)         int *new_data = get_heap_memory(new_capacity);\n        39)\n        40)         for (int i = 0; i < stack->length; ++i) {\n            41)             new_data[i] = stack->data[i];\n            42)         }\n        43)\n        44)         free(stack->data);\n        45)         stack->data       = new_data;\n        46)         stack->capacity   = new_capacity;\n        47)     }\n    48)\n    49)     stack->data[stack->length] = n;\n    50)     stack->length += 1;\n    51) }\n52)\n53) int main() {\n    54)     Stack *stack = stack_new();\n    55)     stack_push(stack, 107);\n    56)\n    57)     int *n = &stack->data[0];\n    58)     stack_push(stack, 110);\n    59)     printf(\"%d\\n\", *n);\n    60)\n    61)     free(stack);\n    62) }\n```\n\n错误：\n\n(1) ________________________________________________________________________________\n\n(2) ________________________________________________________________________________\n\n(3) ________________________________________________________________________________\n\n(4) ________________________________________________________________________________",
         "choices": [],
         "answer": "答案：\n① 第 21 行 所申请的内存大小不足，应该为 malloc(size*sizeof(int));\n② 第 27 与 31 行 不能返回局部变量的地址\n③ 第 59 行 n 所指向的地址在 push 后可能已经被释放\n④ 第 61 行 stack.data 没有被释放，造成内存泄露"
       },
@@ -4971,7 +5015,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3、内存安全（共 4 分，找出一个错误给 1 分）\n\n以下代码有 4 处内存安全错误，请指出所在代码行行号并简要说明。\n\n注意：\n\n1）请仔细阅读注释；\n\n2）不需要考虑库函数的错误和库函数调用出错的情况（因此不需要考虑返回值检查）；\n\n3）说明时加上必要的代码行号，请使用简洁的语言；\n\n4）只需说明为什么会出错，无需给出修补方法。\n\n```c\n 5) #include <assert.h>\n 6) #include <stdio.h>\n 7) #include <stdlib.h>\n 8)\n 9) // There're 4 memory safety bugs\n10)\n11) // Assume all calls to library functions succeed\n12) // For simplicity, our vector type can only hold ints.\n13) typedef struct {\n14)     int *data;      // Pointer to our array on the heap\n15)     int length;     // How many elements are in our array\n16)     int capacity;   // How many elements our array can hold\n17) } Stack;\n18)\n19) // Get a chunk of heap memory that can accomodate `size` int number\n20) int *get_heap_memory(int size) {\n21)     int *new_data = (int *)malloc(size);\n22)     assert(new_data != NULL);\n23)     return new_data;\n24) }\n```\n\n\n```c\n25)\n26) Stack *stack_new() {\n27)     Stack stack;\n28)     stack.data      = get_heap_memory(1);\n29)     stack.length    = 0;\n30)     stack.capacity  = 1;\n31)     return &stack;\n32) }\n33)\n34) void stack_push(Stack *stack, int n) {\n35)     if (stack->length == stack->capacity) {\n36)         int new_capacity = stack->capacity * 2;\n37)\n38)         int *new_data = get_heap_memory(new_capacity);\n39)\n40)         for (int i = 0; i < stack->length; ++i) {\n41)             new_data[i] = stack->data[i];\n42)         }\n43)\n44)         free(stack->data);\n45)         stack->data       = new_data;\n46)         stack->capacity   = new_capacity;\n47)     }\n48)\n49)     stack->data[stack->length] = n;\n50)     stack->length += 1;\n51) }\n52)\n53) int main() {\n54)     Stack *stack = stack_new();\n55)     stack_push(stack, 107);\n56)\n57)     int *n = &stack->data[0];\n58)     stack_push(stack, 110);\n59)     printf(\"%d\\n\", *n);\n60)\n61)     free(stack);\n62) }\n```\n\n错误：\n\n(1) ________________________________________________________________________________\n\n(2) ________________________________________________________________________________\n\n(3) ________________________________________________________________________________\n\n(4) ________________________________________________________________________________",
+        "prompt": "3、内存安全（共 4 分，找出一个错误给 1 分）\n\n以下代码有 4 处内存安全错误，请指出所在代码行行号并简要说明。\n\n注意：\n\n1）请仔细阅读注释；\n\n2）不需要考虑库函数的错误和库函数调用出错的情况（因此不需要考虑返回值检查）；\n\n3）说明时加上必要的代码行号，请使用简洁的语言；\n\n4）只需说明为什么会出错，无需给出修补方法。\n\n```c\n 5) #include <assert.h>\n 6) #include <stdio.h>\n 7) #include <stdlib.h>\n 8)\n 9) // There're 4 memory safety bugs\n10)\n11) // Assume all calls to library functions succeed\n12) // For simplicity, our vector type can only hold ints.\n13) typedef struct {\n14)     int *data;      // Pointer to our array on the heap\n15)     int length;     // How many elements are in our array\n16)     int capacity;   // How many elements our array can hold\n17) } Stack;\n18)\n19) // Get a chunk of heap memory that can accomodate `size` int number\n20) int *get_heap_memory(int size) {\n21)     int *new_data = (int *)malloc(size);\n22)     assert(new_data != NULL);\n23)     return new_data;\n24) }\n```\n\n\n```c\n25)\n26) Stack *stack_new() {\n    27)     Stack stack;\n    28)     stack.data      = get_heap_memory(1);\n    29)     stack.length    = 0;\n    30)     stack.capacity  = 1;\n    31)     return &stack;\n    32) }\n33)\n34) void stack_push(Stack *stack, int n) {\n    35)     if (stack->length == stack->capacity) {\n        36)         int new_capacity = stack->capacity * 2;\n        37)\n        38)         int *new_data = get_heap_memory(new_capacity);\n        39)\n        40)         for (int i = 0; i < stack->length; ++i) {\n            41)             new_data[i] = stack->data[i];\n            42)         }\n        43)\n        44)         free(stack->data);\n        45)         stack->data       = new_data;\n        46)         stack->capacity   = new_capacity;\n        47)     }\n    48)\n    49)     stack->data[stack->length] = n;\n    50)     stack->length += 1;\n    51) }\n52)\n53) int main() {\n    54)     Stack *stack = stack_new();\n    55)     stack_push(stack, 107);\n    56)\n    57)     int *n = &stack->data[0];\n    58)     stack_push(stack, 110);\n    59)     printf(\"%d\\n\", *n);\n    60)\n    61)     free(stack);\n    62) }\n```\n\n错误：\n\n(1) ________________________________________________________________________________\n\n(2) ________________________________________________________________________________\n\n(3) ________________________________________________________________________________\n\n(4) ________________________________________________________________________________",
         "answer": "答案：\n① 第 21 行 所申请的内存大小不足，应该为 malloc(size*sizeof(int));\n② 第 27 与 31 行 不能返回局部变量的地址\n③ 第 59 行 n 所指向的地址在 push 后可能已经被释放\n④ 第 61 行 stack.data 没有被释放，造成内存泄露"
       },
       "group": {
@@ -5284,7 +5328,7 @@
       "exam": "2025期末",
       "questionNo": "二 21",
       "summary": "fork 后地址空间与 COW 缺页（兼 fork 语义）",
-      "content": "21.执行下面的C程序代码\n```c\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) {\n    *p = 20;\n    _exit(0);\n}\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？\nA. 输出一定为 20\nB. 输出一定为 10\nC. 输出有可能是10，也有可能是20，取决于进程调度顺序\nD. fork之后，父进程由于Copy-on-Write可能会发生缺页异常\nE. fork之后，子进程由于Copy-on-Write可能会发生缺页异常\n答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。",
+      "content": "21.执行下面的C程序代码\n```c\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) {\n    *p = 20;\n    _exit(0);\n}\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？\nA. 输出一定为 20\nB. 输出一定为 10\nC. 输出有可能是10，也有可能是20，取决于进程调度顺序\nD. `fork`之后，父进程由于Copy-on-Write可能会发生缺页异常\nE. `fork`之后，子进程由于Copy-on-Write可能会发生缺页异常\n答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5320,11 +5364,11 @@
           },
           {
             "key": "D",
-            "content": "fork之后，父进程由于Copy-on-Write可能会发生缺页异常"
+            "content": "`fork`之后，父进程由于Copy-on-Write可能会发生缺页异常"
           },
           {
             "key": "E",
-            "content": "fork之后，子进程由于Copy-on-Write可能会发生缺页异常"
+            "content": "`fork`之后，子进程由于Copy-on-Write可能会发生缺页异常"
           }
         ],
         "answer": "答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。"
@@ -5347,11 +5391,11 @@
           },
           {
             "id": "D",
-            "content": "fork之后，父进程由于Copy-on-Write可能会发生缺页异常"
+            "content": "`fork`之后，父进程由于Copy-on-Write可能会发生缺页异常"
           },
           {
             "id": "E",
-            "content": "fork之后，子进程由于Copy-on-Write可能会发生缺页异常"
+            "content": "`fork`之后，子进程由于Copy-on-Write可能会发生缺页异常"
           }
         ],
         "correctChoiceIds": [
@@ -5656,7 +5700,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 42",
       "summary": "用 mem_sbrk 扩展堆，禁用 libc malloc/mmap",
-      "content": "42. （2分）在MallocLab中关于系统调用和库函数的使用，以下说法正确的是？\nA. 可以使用libc的malloc\nB. 可以使用sbrk系统调用来扩展堆\nC. 必须通过调用memlib.c中的mem_sbrk函数来扩展堆\nD. 分配大空间时，可以使用mmap等内存管理函数\n答案：C\n\n解析：MallocLab 只允许用 memlib 提供的 mem_sbrk 来扩展堆（它还负责维护 mem_heap_lo/hi 等），禁止调用 libc 的 malloc、free、realloc、sbrk、brk 以及 mmap 等内存管理函数，故 C 对，A、B、D 都违规。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "42. （2分）在MallocLab中关于系统调用和库函数的使用，以下说法正确的是？\nA. 可以使用libc的malloc\nB. 可以使用sbrk系统调用来扩展堆\nC. 必须通过调用`memlib.c`中的mem_sbrk函数来扩展堆\nD. 分配大空间时，可以使用mmap等内存管理函数\n答案：C\n\n解析：MallocLab 只允许用 memlib 提供的 mem_sbrk 来扩展堆（它还负责维护 mem_heap_lo/hi 等），禁止调用 libc 的 malloc、free、realloc、sbrk、brk 以及 mmap 等内存管理函数，故 C 对，A、B、D 都违规。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5688,7 +5732,7 @@
           },
           {
             "key": "C",
-            "content": "必须通过调用memlib.c中的mem_sbrk函数来扩展堆"
+            "content": "必须通过调用`memlib.c`中的mem_sbrk函数来扩展堆"
           },
           {
             "key": "D",
@@ -5711,7 +5755,7 @@
           },
           {
             "id": "C",
-            "content": "必须通过调用memlib.c中的mem_sbrk函数来扩展堆"
+            "content": "必须通过调用`memlib.c`中的mem_sbrk函数来扩展堆"
           },
           {
             "id": "D",
@@ -5742,7 +5786,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 43",
       "summary": "free/realloc/calloc 的行为辨析",
-      "content": "43. （2分）以下关于各函数行为的描述中，哪一项是正确的？\nA. free(NULL)是非法的，会导致程序崩溃或未定义行为\nB. 当 realloc 为了扩容而将数据移动到新地址时，旧块会自动被释放，用户不需要\n再调用其他函数释放该块\nC. calloc与malloc区别仅在于参数形式不同，两个函数分配的内存区域都是未初\n始化的\nD. realloc(ptr, 0) (其中ptr不为NULL) 的行为是将该块的大小标记为0，但\n保留该块的已分配状态，并返回原指针\n答案：B\n\n解析：writeup 说明：若 realloc 返回的地址与传入地址不同，说明数据已被搬到新块，旧块\"已经被释放\"，不能再使用、释放或再传给 realloc，故 B 对。free(NULL) 是无操作、并非非法（A 错）；calloc 会把内存清零，与 malloc 的区别不只是参数形式（C 错）；realloc(ptr,0) 等价于 free(ptr) 并返回 NULL，而不是保留一个大小为 0 的已分配块（D 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "43. （2分）以下关于各函数行为的描述中，哪一项是正确的？\nA. `free(NULL)`是非法的，会导致程序崩溃或未定义行为\nB. 当 realloc 为了扩容而将数据移动到新地址时，旧块会自动被释放，用户不需要\n再调用其他函数释放该块\nC. calloc与malloc区别仅在于参数形式不同，两个函数分配的内存区域都是未初\n始化的\nD. `realloc(ptr, 0) (`其中ptr不为NULL) 的行为是将该块的大小标记为`0`，但\n保留该块的已分配状态，并返回原指针\n答案：B\n\n解析：writeup 说明：若 realloc 返回的地址与传入地址不同，说明数据已被搬到新块，旧块\"已经被释放\"，不能再使用、释放或再传给 realloc，故 B 对。free(NULL) 是无操作、并非非法（A 错）；calloc 会把内存清零，与 malloc 的区别不只是参数形式（C 错）；realloc(ptr,0) 等价于 free(ptr) 并返回 NULL，而不是保留一个大小为 0 的已分配块（D 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5766,7 +5810,7 @@
         "choices": [
           {
             "key": "A",
-            "content": "free(NULL)是非法的，会导致程序崩溃或未定义行为"
+            "content": "`free(NULL)`是非法的，会导致程序崩溃或未定义行为"
           },
           {
             "key": "B",
@@ -5778,7 +5822,7 @@
           },
           {
             "key": "D",
-            "content": "realloc(ptr, 0) (其中ptr不为NULL) 的行为是将该块的大小标记为0，但\n保留该块的已分配状态，并返回原指针"
+            "content": "`realloc(ptr, 0) (`其中ptr不为NULL) 的行为是将该块的大小标记为`0`，但\n保留该块的已分配状态，并返回原指针"
           }
         ],
         "answer": "答案：B\n\n解析：writeup 说明：若 realloc 返回的地址与传入地址不同，说明数据已被搬到新块，旧块\"已经被释放\"，不能再使用、释放或再传给 realloc，故 B 对。free(NULL) 是无操作、并非非法（A 错）；calloc 会把内存清零，与 malloc 的区别不只是参数形式（C 错）；realloc(ptr,0) 等价于 free(ptr) 并返回 NULL，而不是保留一个大小为 0 的已分配块（D 错）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
@@ -5789,7 +5833,7 @@
         "choices": [
           {
             "id": "A",
-            "content": "free(NULL)是非法的，会导致程序崩溃或未定义行为"
+            "content": "`free(NULL)`是非法的，会导致程序崩溃或未定义行为"
           },
           {
             "id": "B",
@@ -5801,7 +5845,7 @@
           },
           {
             "id": "D",
-            "content": "realloc(ptr, 0) (其中ptr不为NULL) 的行为是将该块的大小标记为0，但\n保留该块的已分配状态，并返回原指针"
+            "content": "`realloc(ptr, 0) (`其中ptr不为NULL) 的行为是将该块的大小标记为`0`，但\n保留该块的已分配状态，并返回原指针"
           }
         ],
         "correctChoiceIds": [
@@ -5914,7 +5958,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 45",
       "summary": "堆大小限制及其带来的优化思路",
-      "content": "45. （2分）虽然实验环境是64位的，但writeup指出了堆大小有一个特殊限制，并且\n该限制为我们提供了一种优化思路，这个限制是？\nA. 堆的大小不会超过2^32字节\nB. 堆的大小不会超过2^64字节\nC. 堆大小受限于物理内存大小\nD. 堆中的数据不会被交换到外部存储中\n答案：A\n\n解析：writeup 特别指出：虽然跑在 64 位机器上，但\"堆的大小永远不会大于或等于 2^32 字节\"，这提示可以用 4 字节偏移量代替 8 字节指针之类的优化，故 A 对；B、C、D 都与这条说明无关。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "45. （2分）虽然实验环境是64位的，但writeup指出了堆大小有一个特殊限制，并且\n该限制为我们提供了一种优化思路，这个限制是？\nA. 堆的大小不会超过`2^32`字节\nB. 堆的大小不会超过`2^64`字节\nC. 堆大小受限于物理内存大小\nD. 堆中的数据不会被交换到外部存储中\n答案：A\n\n解析：writeup 特别指出：虽然跑在 64 位机器上，但\"堆的大小永远不会大于或等于 2^32 字节\"，这提示可以用 4 字节偏移量代替 8 字节指针之类的优化，故 A 对；B、C、D 都与这条说明无关。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5938,11 +5982,11 @@
         "choices": [
           {
             "key": "A",
-            "content": "堆的大小不会超过2^32字节"
+            "content": "堆的大小不会超过`2^32`字节"
           },
           {
             "key": "B",
-            "content": "堆的大小不会超过2^64字节"
+            "content": "堆的大小不会超过`2^64`字节"
           },
           {
             "key": "C",
@@ -5961,11 +6005,11 @@
         "choices": [
           {
             "id": "A",
-            "content": "堆的大小不会超过2^32字节"
+            "content": "堆的大小不会超过`2^32`字节"
           },
           {
             "id": "B",
-            "content": "堆的大小不会超过2^64字节"
+            "content": "堆的大小不会超过`2^64`字节"
           },
           {
             "id": "C",

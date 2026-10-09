@@ -32,6 +32,8 @@ SECTION = re.compile(r"^%%%\s*(stem|choices|answer)\s*$")
 SETTING = re.compile(r"^%%%\s*([A-Za-z_]+)\s*:\s*(.*)$")
 # 选项行：`A. ` / `B、` / `C) ` / `D．`（也接受全角）
 CHOICE = re.compile(r"^\s*([A-Ha-h])\s*[.、)．:：]\s*(.*)$")
+# 代码围栏行；选项里可以放整段代码，围栏内的前导空白必须原样保留
+FENCE = re.compile(r"^\s*(?:`{3,}|~{3,})")
 MODES = ("choice", "fill", "short", "composite")
 PROVENANCE = ("verbatim", "reflow", "rewritten")
 SELECTIONS = ("single", "multiple")
@@ -139,16 +141,22 @@ def parse(text):
     choices_text = "\n".join(sections["choices"]).strip("\n")
     answer = "\n".join(sections["answer"]).strip("\n")
 
-    # 选项解析：一行一个 `A. …`，不属于任何选项的续行并入上一项
+    # 选项解析：一行一个 `A. …`，不属于任何选项的续行并入上一项。
+    # 围栏内的续行必须保留前导空白（整段代码原样进 `<pre>`）；
+    # 围栏外的续行按老规则 strip —— 那只是 PDF 按纸张宽度产生的折行。
     choices = []
+    in_fence = False
     for ln in sections["choices"]:
-        m = CHOICE.match(ln)
+        is_fence = bool(FENCE.match(ln))
+        if is_fence:
+            in_fence = not in_fence
+        m = CHOICE.match(ln) if not in_fence else None
         if m:
             choices.append({"key": m.group(1).upper(),
                             "content": m.group(2).strip(),
                             "lines": [ln]})
         elif choices and ln.strip():
-            choices[-1]["content"] += "\n" + ln.strip()
+            choices[-1]["content"] += "\n" + (ln.rstrip() if in_fence else ln.strip())
             choices[-1]["lines"].append(ln)
         elif ln.strip():
             problems.append("choices 段里无法解析的行: %r" % ln[:60])
