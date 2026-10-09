@@ -893,7 +893,7 @@
       "exam": "2015期末",
       "questionNo": "第一题 15",
       "summary": "IA32 二级页表地址翻译计算",
-      "content": "15. Intel 的 IA32 体系结构采用二级页表，称第一级页表为页目录（Page\nDirectory），第二级页表为页表（Page Table）。页面的大小为 4KB，页\n表项4字节。以下给出了页目录与若干页表中的部分内容，例如，页目录中的\n第1个项索引到的是页表3，页表1中的第3个项索引到的是物理地址中的\n第 5 个页。则十六进制逻辑地址 8052CB 经过地址转换后形成的物理地址应\n为十进制的（）\n页目录  页表1  页表2  页表3\nVPN  页表号  VPN  页号  VPN  页号  VPN  页号\n```\n1  3  3  5  2  1  2  9\n2  1  4  2  4  4  3  8\n3  2  5  7  8  6  5  3\n```\nA. 21195\nB. 29387\nC. 21126\nD. 47195\n答案：B\n\n解析：4KB=$2^12$，所以页内地址有12位。`4KB/4B=1K`，所以页目录和每个页表\n中的页表项数为 1K 个。因此，在 32 位的虚拟地址中，最低的 12 位为页内地址\n（Offset），最高的10位为页目录的虚拟地址（Dir），中间10位为页表的虚拟\n地址（Table）。十六进制逻辑地址8052CB转换为二进制后为10 0000000101\n001011001011，Dir为10，即10进制的2，在表中对应到页表1。Table为\n101，即10进制的5，在表中对应到物理页面7。因此，物理地址应为7的二进\n制111和Offset的拼合，即111001011001011，转换为十进制为29387，答\n案为B。",
+      "content": "15. Intel 的 IA32 体系结构采用二级页表，称第一级页表为页目录（Page\nDirectory），第二级页表为页表（Page Table）。页面的大小为 4KB，页\n表项4字节。以下给出了页目录与若干页表中的部分内容，例如，页目录中的\n第1个项索引到的是页表3，页表1中的第3个项索引到的是物理地址中的\n第 5 个页。则十六进制逻辑地址 8052CB 经过地址转换后形成的物理地址应\n为十进制的（）\n页目录  页表1  页表2  页表3\nVPN  页表号  VPN  页号  VPN  页号  VPN  页号\n```\n1  3  3  5  2  1  2  9\n2  1  4  2  4  4  3  8\n3  2  5  7  8  6  5  3\n```\nA. 21195\nB. 29387\nC. 21126\nD. 47195\n答案：B\n\n解析：4KB=$2^{12}$，所以页内地址有12位。`4KB/4B=1K`，所以页目录和每个页表\n中的页表项数为 1K 个。因此，在 32 位的虚拟地址中，最低的 12 位为页内地址\n（Offset），最高的10位为页目录的虚拟地址（Dir），中间10位为页表的虚拟\n地址（Table）。十六进制逻辑地址8052CB转换为二进制后为10 0000000101\n001011001011，Dir为10，即10进制的2，在表中对应到页表1。Table为\n101，即10进制的5，在表中对应到物理页面7。因此，物理地址应为7的二进\n制111和Offset的拼合，即111001011001011，转换为十进制为29387，答\n案为B。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -934,7 +934,7 @@
             "content": "47195"
           }
         ],
-        "answer": "答案：B\n\n解析：4KB=$2^12$，所以页内地址有12位。`4KB/4B=1K`，所以页目录和每个页表\n中的页表项数为 1K 个。因此，在 32 位的虚拟地址中，最低的 12 位为页内地址\n（Offset），最高的10位为页目录的虚拟地址（Dir），中间10位为页表的虚拟\n地址（Table）。十六进制逻辑地址8052CB转换为二进制后为10 0000000101\n001011001011，Dir为10，即10进制的2，在表中对应到页表1。Table为\n101，即10进制的5，在表中对应到物理页面7。因此，物理地址应为7的二进\n制111和Offset的拼合，即111001011001011，转换为十进制为29387，答\n案为B。"
+        "answer": "答案：B\n\n解析：4KB=$2^{12}$，所以页内地址有12位。`4KB/4B=1K`，所以页目录和每个页表\n中的页表项数为 1K 个。因此，在 32 位的虚拟地址中，最低的 12 位为页内地址\n（Offset），最高的10位为页目录的虚拟地址（Dir），中间10位为页表的虚拟\n地址（Table）。十六进制逻辑地址8052CB转换为二进制后为10 0000000101\n001011001011，Dir为10，即10进制的2，在表中对应到页表1。Table为\n101，即10进制的5，在表中对应到物理页面7。因此，物理地址应为7的二进\n制111和Offset的拼合，即111001011001011，转换为十进制为29387，答\n案为B。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -964,7 +964,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "15. Intel 的 IA32 体系结构采用二级页表，称第一级页表为页目录（Page\nDirectory），第二级页表为页表（Page Table）。页面的大小为 4KB，页\n表项4字节。以下给出了页目录与若干页表中的部分内容，例如，页目录中的\n第1个项索引到的是页表3，页表1中的第3个项索引到的是物理地址中的\n第 5 个页。则十六进制逻辑地址 8052CB 经过地址转换后形成的物理地址应\n为十进制的（）\n页目录  页表1  页表2  页表3\nVPN  页表号  VPN  页号  VPN  页号  VPN  页号\n```\n1  3  3  5  2  1  2  9\n2  1  4  2  4  4  3  8\n3  2  5  7  8  6  5  3\n```",
-        "answer": "答案：B\n\n解析：4KB=$2^12$，所以页内地址有12位。`4KB/4B=1K`，所以页目录和每个页表\n中的页表项数为 1K 个。因此，在 32 位的虚拟地址中，最低的 12 位为页内地址\n（Offset），最高的10位为页目录的虚拟地址（Dir），中间10位为页表的虚拟\n地址（Table）。十六进制逻辑地址8052CB转换为二进制后为10 0000000101\n001011001011，Dir为10，即10进制的2，在表中对应到页表1。Table为\n101，即10进制的5，在表中对应到物理页面7。因此，物理地址应为7的二进\n制111和Offset的拼合，即111001011001011，转换为十进制为29387，答\n案为B。"
+        "answer": "答案：B\n\n解析：4KB=$2^{12}$，所以页内地址有12位。`4KB/4B=1K`，所以页目录和每个页表\n中的页表项数为 1K 个。因此，在 32 位的虚拟地址中，最低的 12 位为页内地址\n（Offset），最高的10位为页目录的虚拟地址（Dir），中间10位为页表的虚拟\n地址（Table）。十六进制逻辑地址8052CB转换为二进制后为10 0000000101\n001011001011，Dir为10，即10进制的2，在表中对应到页表1。Table为\n101，即10进制的5，在表中对应到物理页面7。因此，物理地址应为7的二进\n制111和Offset的拼合，即111001011001011，转换为十进制为29387，答\n案为B。"
       },
       "presentation": {
         "status": "ready",
@@ -4188,7 +4188,7 @@
       "exam": "2021期末",
       "questionNo": "大题 3(1)",
       "summary": "malloc 未初始化致结果不定，应改 calloc/memset",
-      "content": "3.  考虑下面计算矩阵和向量乘法代码：\n\n1 int \\*mat_vec_mul(int \\*\\*A, int \\*x, int n)\n\n2 {\n\n3 int i, j;\n\n4 int \\*y = (int \\*)malloc(n \\* sizeof(int));\n\n5 *for* (i = 0; i \\< n; i++)\n\n6 *for* (j = 0; j \\< n; j++)\n\n7 y\\[i\\] += A\\[i\\]\\[j\\] \\* x\\[j\\];\n\n8 *return* y;\n\n9 }\n\n⑴ 在64位 Linux 机器中运行该代码，输入**同一组合法的参数**后，每次运行返回的向量的值都**不一样**，修复这一错误有一种简单的方法，将第\\_\\_\\_\\_行改为\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_。（第二空填写C代码，每空1分，共2分）\n\n可能用到的函数：\n\nvoid \\*memcpy(void \\*dest, const void \\*src, size_t n);\n\nvoid \\*memset(void \\*s, int c, size_t n);\n\nvoid \\*calloc(size_t nelem, size_t elemsize);\n\nvoid \\*realloc(void \\*ptr, size_t size);\n答案：第 4 行改为 int \\*y = (int \\*)calloc(n, sizeof(int)); 或 int \\*y = (int \\*)Calloc(n, sizeof(int));（calloc/Calloc 的两个参数只要乘起来等于 n \\* sizeof(int) 即算对）\n\n依据：malloc 不会清零所分配的内存区域，故同一组输入可能得到不同的输出；改用以清零方式分配的 calloc/Calloc 即可修复。",
+      "content": "3.  考虑下面计算矩阵和向量乘法代码：\n\n1 int \\*mat_vec_mul(int \\*\\*A, int \\*x, int n)\n\n2 {\n\n3 int i, j;\n\n4 int \\*y = (int \\*)malloc(n \\* sizeof(int));\n\n5 \\*for\\* (i = 0; i \\< n; i++)\n\n6 \\*for\\* (j = 0; j \\< n; j++)\n\n7 y\\[i\\] += A\\[i\\]\\[j\\] \\* x\\[j\\];\n\n8 \\*return\\* y;\n\n9 }\n\n⑴ 在64位 Linux 机器中运行该代码，输入**同一组合法的参数**后，每次运行返回的向量的值都**不一样**，修复这一错误有一种简单的方法，将第\\_\\_\\_\\_行改为\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_。（第二空填写C代码，每空1分，共2分）\n\n可能用到的函数：\n\nvoid \\*memcpy(void \\*dest, const void \\*src, size_t n);\n\nvoid \\*memset(void \\*s, int c, size_t n);\n\nvoid \\*calloc(size_t nelem, size_t elemsize);\n\nvoid \\*realloc(void \\*ptr, size_t size);\n答案：第 4 行改为 int \\*y = (int \\*)calloc(n, sizeof(int)); 或 int \\*y = (int \\*)Calloc(n, sizeof(int));（calloc/Calloc 的两个参数只要乘起来等于 n \\* sizeof(int) 即算对）\n\n依据：malloc 不会清零所分配的内存区域，故同一组输入可能得到不同的输出；改用以清零方式分配的 calloc/Calloc 即可修复。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4216,7 +4216,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "3.  考虑下面计算矩阵和向量乘法代码：\n\n1 int \\*mat_vec_mul(int \\*\\*A, int \\*x, int n)\n\n2 {\n\n3 int i, j;\n\n4 int \\*y = (int \\*)malloc(n \\* sizeof(int));\n\n5 *for* (i = 0; i \\< n; i++)\n\n6 *for* (j = 0; j \\< n; j++)\n\n7 y\\[i\\] += A\\[i\\]\\[j\\] \\* x\\[j\\];\n\n8 *return* y;\n\n9 }\n\n⑴ 在64位 Linux 机器中运行该代码，输入**同一组合法的参数**后，每次运行返回的向量的值都**不一样**，修复这一错误有一种简单的方法，将第\\_\\_\\_\\_行改为\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_。（第二空填写C代码，每空1分，共2分）\n\n可能用到的函数：\n\nvoid \\*memcpy(void \\*dest, const void \\*src, size_t n);\n\nvoid \\*memset(void \\*s, int c, size_t n);\n\nvoid \\*calloc(size_t nelem, size_t elemsize);\n\nvoid \\*realloc(void \\*ptr, size_t size);",
+        "stem": "3.  考虑下面计算矩阵和向量乘法代码：\n\n1 int \\*mat_vec_mul(int \\*\\*A, int \\*x, int n)\n\n2 {\n\n3 int i, j;\n\n4 int \\*y = (int \\*)malloc(n \\* sizeof(int));\n\n5 \\*for\\* (i = 0; i \\< n; i++)\n\n6 \\*for\\* (j = 0; j \\< n; j++)\n\n7 y\\[i\\] += A\\[i\\]\\[j\\] \\* x\\[j\\];\n\n8 \\*return\\* y;\n\n9 }\n\n⑴ 在64位 Linux 机器中运行该代码，输入**同一组合法的参数**后，每次运行返回的向量的值都**不一样**，修复这一错误有一种简单的方法，将第\\_\\_\\_\\_行改为\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_。（第二空填写C代码，每空1分，共2分）\n\n可能用到的函数：\n\nvoid \\*memcpy(void \\*dest, const void \\*src, size_t n);\n\nvoid \\*memset(void \\*s, int c, size_t n);\n\nvoid \\*calloc(size_t nelem, size_t elemsize);\n\nvoid \\*realloc(void \\*ptr, size_t size);",
         "choices": [],
         "answer": "答案：第 4 行改为 int \\*y = (int \\*)calloc(n, sizeof(int)); 或 int \\*y = (int \\*)Calloc(n, sizeof(int));（calloc/Calloc 的两个参数只要乘起来等于 n \\* sizeof(int) 即算对）\n\n依据：malloc 不会清零所分配的内存区域，故同一组输入可能得到不同的输出；改用以清零方式分配的 calloc/Calloc 即可修复。"
       },
@@ -4231,7 +4231,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3.  考虑下面计算矩阵和向量乘法代码：\n\n1 int \\*mat_vec_mul(int \\*\\*A, int \\*x, int n)\n\n2 {\n\n3 int i, j;\n\n4 int \\*y = (int \\*)malloc(n \\* sizeof(int));\n\n5 *for* (i = 0; i \\< n; i++)\n\n6 *for* (j = 0; j \\< n; j++)\n\n7 y\\[i\\] += A\\[i\\]\\[j\\] \\* x\\[j\\];\n\n8 *return* y;\n\n9 }\n\n⑴ 在64位 Linux 机器中运行该代码，输入**同一组合法的参数**后，每次运行返回的向量的值都**不一样**，修复这一错误有一种简单的方法，将第\\_\\_\\_\\_行改为\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_。（第二空填写C代码，每空1分，共2分）\n\n可能用到的函数：\n\nvoid \\*memcpy(void \\*dest, const void \\*src, size_t n);\n\nvoid \\*memset(void \\*s, int c, size_t n);\n\nvoid \\*calloc(size_t nelem, size_t elemsize);\n\nvoid \\*realloc(void \\*ptr, size_t size);",
+        "prompt": "3.  考虑下面计算矩阵和向量乘法代码：\n\n1 int \\*mat_vec_mul(int \\*\\*A, int \\*x, int n)\n\n2 {\n\n3 int i, j;\n\n4 int \\*y = (int \\*)malloc(n \\* sizeof(int));\n\n5 \\*for\\* (i = 0; i \\< n; i++)\n\n6 \\*for\\* (j = 0; j \\< n; j++)\n\n7 y\\[i\\] += A\\[i\\]\\[j\\] \\* x\\[j\\];\n\n8 \\*return\\* y;\n\n9 }\n\n⑴ 在64位 Linux 机器中运行该代码，输入**同一组合法的参数**后，每次运行返回的向量的值都**不一样**，修复这一错误有一种简单的方法，将第\\_\\_\\_\\_行改为\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_。（第二空填写C代码，每空1分，共2分）\n\n可能用到的函数：\n\nvoid \\*memcpy(void \\*dest, const void \\*src, size_t n);\n\nvoid \\*memset(void \\*s, int c, size_t n);\n\nvoid \\*calloc(size_t nelem, size_t elemsize);\n\nvoid \\*realloc(void \\*ptr, size_t size);",
         "answer": "答案：第 4 行改为 int \\*y = (int \\*)calloc(n, sizeof(int)); 或 int \\*y = (int \\*)Calloc(n, sizeof(int));（calloc/Calloc 的两个参数只要乘起来等于 n \\* sizeof(int) 即算对）\n\n依据：malloc 不会清零所分配的内存区域，故同一组输入可能得到不同的输出；改用以清零方式分配的 calloc/Calloc 即可修复。"
       },
       "group": {

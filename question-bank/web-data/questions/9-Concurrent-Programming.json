@@ -17,7 +17,7 @@
       "exam": "2013期末",
       "questionNo": "第一题 19",
       "summary": "pthread_create 程序输出判断",
-      "content": "19、在Pthread线程包使用中，下列代码输出正确的是：（     ）\n```\nvoid *th_f(void * arg)\n{\n printf(\"Hello World\") ;\n  pthread_exit(0) ;\n}\nint main(void)\n{\n   pthread_t tid;\n   int st;\n   st = pthread_create(&tid,NULL,th_f,NULL);\n   if(st<0) {\n      printf(\"Oops, I can not create thread\\n\");\n      exit(-1);\n   }\n   sleep(1);\n   exit(0);\n}\n```\nA. Oops, I can not create thread\nB. `Hello World<br>Oops, I can not create thread`\nC. Hello World\nD. 不输出任何信息\n答案：C",
+      "content": "19、在Pthread线程包使用中，下列代码输出正确的是：（     ）\n```\nvoid *th_f(void * arg)\n{\n printf(\"Hello World\") ;\n  pthread_exit(0) ;\n}\nint main(void)\n{\n   pthread_t tid;\n   int st;\n   st = pthread_create(&tid,NULL,th_f,NULL);\n   if(st<0) {\n      printf(\"Oops, I can not create thread\\n\");\n      exit(-1);\n   }\n   sleep(1);\n   exit(0);\n}\n```\nA. Oops, I can not create thread\nB. `Hello World` `Oops, I can not create thread`\nC. Hello World\nD. 不输出任何信息\n答案：C",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -45,7 +45,7 @@
           },
           {
             "key": "B",
-            "content": "`Hello World<br>Oops, I can not create thread`"
+            "content": "`Hello World` `Oops, I can not create thread`"
           },
           {
             "key": "C",
@@ -68,7 +68,7 @@
           },
           {
             "id": "B",
-            "content": "`Hello World<br>Oops, I can not create thread`"
+            "content": "`Hello World` `Oops, I can not create thread`"
           },
           {
             "id": "C",
