@@ -212,19 +212,35 @@
     },
     {
       "start": 596,
-      "end": 631,
+      "end": 622,
       "module": "Network",
-      "qno": "第七题",
-      "note": "Echo 客户端/服务器流程填空与协议判断",
+      "qno": "第七题 1",
+      "note": "Echo 客户端/服务器流程填空",
       "curated": "期末/2017期末-无答案/596.md"
     },
     {
+      "start": 623,
+      "end": 631,
+      "module": "Network",
+      "qno": "第七题 2",
+      "note": "TCP/IP、HTTP 与私有地址判断",
+      "curated": "期末/2017期末-无答案/623.md"
+    },
+    {
       "start": 638,
+      "end": 697,
+      "module": "Concurrent Programming and Synchronization",
+      "qno": "第八题 1",
+      "note": "并发 echo 服务器 P/T 代码找错",
+      "curated": "期末/2017期末-无答案/638.md"
+    },
+    {
+      "start": 702,
       "end": 731,
       "module": "Concurrent Programming and Synchronization",
-      "qno": "第八题",
-      "note": "并发 echo 服务器 P/T 代码找错与信号量同步",
-      "curated": "期末/2017期末-无答案/638.md"
+      "qno": "第八题 2",
+      "note": "信号量控制线程执行顺序",
+      "curated": "期末/2017期末-无答案/702.md"
     }
   ],
   "answer_sections": [],
