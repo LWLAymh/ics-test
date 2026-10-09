@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build-site.js",
-    "check": "node --check site/ics-test.js && node --check site/standalone.js && node --check scripts/build-site.js && python question-bank/_tools/validate_web_data.py",
+    "check": "node --check site/ics-test.js && node --check site/standalone.js && node --check scripts/build-site.js && python question-bank/_tools/validate_web_data.py && python question-bank/_tools/v4_1_conformance.py",
     "review-pdfs": "powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1",
     "review-paper": "powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1",
     "resolve-issue": "powershell -ExecutionPolicy Bypass -File scripts/resolve-question-issue.ps1"

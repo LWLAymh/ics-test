@@ -1,0 +1,404 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lwlaymh.github.io/ics-test/schema/question-v4.1.schema.json",
+  "title": "ICS Test Question v4.1",
+  "description": "设计稿，尚未接入构建。相对 v4 的主要变化：答案成为类型化数据、题面/选项里的 Markdown 不许出现答案标记、新增 code 内容块、每个 part 自带 modules、答案来源结构化、source.provenance 进 schema。详见 docs/QUESTION_AUTHORING_V4_1.md。",
+  "type": "object",
+  "required": ["schemaVersion", "id", "revision", "paperId", "paperOrder", "number", "classification", "type", "stem", "solution", "publication", "source"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {"const": "4.1", "description": "字符串而非数字：将来 4.10 可以排在 4.9 之后，且不会与 4.1 混淆。"},
+    "id": {"type": "string", "pattern": "^q-[a-f0-9]{16}$", "description": "永久稳定 ID。改题面排版、错别字不改变它；题型或选项含义改变必须新建 ID。"},
+    "revision": {"type": "integer", "minimum": 1, "description": "内容修订号，从 1 开始；区分「同一题的哪个版本」，不参与学生可见身份。"},
+    "paperId": {"type": "string", "pattern": "^p-[a-f0-9]{16}$"},
+    "paperOrder": {"type": "integer", "minimum": 1, "description": "在原卷中的顺序，从 1 开始且与该试卷 questionIds 顺序一致。"},
+    "number": {"$ref": "#/$defs/number"},
+    "classification": {"$ref": "#/$defs/classification"},
+    "type": {"enum": ["single-choice", "multiple-choice", "fill", "short-answer", "composite"]},
+    "stem": {"$ref": "#/$defs/stemContent"},
+    "options": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/option"}},
+    "parts": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/part"}},
+    "solution": {"$ref": "#/$defs/anySolution"},
+    "publication": {"$ref": "#/$defs/publication"},
+    "source": {"$ref": "#/$defs/source"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice"]}}, "required": ["type"]},
+      "then": {
+        "required": ["options"],
+        "not": {"required": ["parts"]},
+        "properties": {
+          "solution": {"$ref": "#/$defs/choiceTypeSolution"},
+          "stem": {"properties": {"blocks": {"not": {"contains": {"$ref": "#/$defs/blankBlock"}}}}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"type": {"const": "single-choice"}}, "required": ["type"]},
+      "then": {
+        "properties": {
+          "solution": {
+            "if": {"properties": {"state": {"const": "verified"}}, "required": ["state"]},
+            "then": {"properties": {"correctOptionIds": {"maxItems": 1}}}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"type": {"const": "fill"}}, "required": ["type"]},
+      "then": {
+        "not": {"anyOf": [{"required": ["options"]}, {"required": ["parts"]}]},
+        "properties": {
+          "solution": {"$ref": "#/$defs/fillTypeSolution"},
+          "stem": {"properties": {"blocks": {"contains": {"$ref": "#/$defs/blankBlock"}}}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"type": {"const": "short-answer"}}, "required": ["type"]},
+      "then": {
+        "not": {"anyOf": [{"required": ["options"]}, {"required": ["parts"]}]},
+        "properties": {
+          "solution": {"$ref": "#/$defs/referenceTypeSolution"},
+          "stem": {"properties": {"blocks": {"not": {"contains": {"$ref": "#/$defs/blankBlock"}}}}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"type": {"const": "composite"}}, "required": ["type"]},
+      "then": {
+        "required": ["parts"],
+        "not": {"required": ["options"]},
+        "properties": {
+          "solution": {"$ref": "#/$defs/compositeSolution"},
+          "stem": {"properties": {"blocks": {"not": {"contains": {"$ref": "#/$defs/blankBlock"}}}}}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "number": {
+      "type": "object",
+      "required": ["display", "major", "minor", "parts"],
+      "additionalProperties": false,
+      "properties": {
+        "display": {"type": "string", "minLength": 1, "description": "原卷题号原样文本，例如 第一题 9 / Problem B 2(a)；只用于展示，排序不得解析它。"},
+        "major": {"$ref": "#/$defs/numberPart"},
+        "minor": {"oneOf": [{"$ref": "#/$defs/numberPart"}, {"type": "null"}]},
+        "parts": {"type": "array", "items": {"type": "string", "minLength": 1}, "description": "更深层级，例如 [\"a\", \"iii\"]；无法可靠识别时留空，不得猜测。"}
+      }
+    },
+    "numberPart": {
+      "type": "object",
+      "required": ["display", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "display": {"type": "string", "minLength": 1},
+        "value": {"type": "string", "minLength": 1}
+      }
+    },
+    "classification": {
+      "type": "object",
+      "required": ["primaryModuleId", "moduleIds", "tags"],
+      "additionalProperties": false,
+      "properties": {
+        "primaryModuleId": {"type": "string", "minLength": 1},
+        "moduleIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}, "description": "必须包含 primaryModuleId。"},
+        "tags": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+
+    "markdownBlock": {
+      "type": "object",
+      "required": ["type", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "markdown"},
+        "text": {"type": "string", "minLength": 1, "description": "正文。程序表达式必须写成行内代码。"}
+      }
+    },
+    "proseBlock": {
+      "type": "object",
+      "required": ["type", "text"],
+      "additionalProperties": false,
+      "description": "题面/选项里的普通文字。答案绝不能写在这里——构造期就由 pattern 拒绝。",
+      "properties": {
+        "type": {"const": "markdown"},
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "答案必须放在 solution 里。出现「答案：」或「！！！！答案」会被直接拒绝，避免把答案写进题面（实测有题目把整份答案连同评分标准写进题干）。",
+          "not": {"pattern": "(?:参考)?答案\\s*[:：]|！！！！答案"}
+        }
+      }
+    },
+    "codeBlock": {
+      "type": "object",
+      "required": ["type", "language", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "code"},
+        "language": {"enum": ["c", "cpp", "asm", "y86", "hcl", "bash", "text"], "description": "封闭枚举，避免拼错导致字体与高亮不确定。"},
+        "text": {"type": "string", "minLength": 1, "description": "逐字节保留，包括前导缩进与空行；不再需要也不允许 ``` 围栏。"},
+        "caption": {"type": "string"}
+      }
+    },
+    "imageBlock": {
+      "type": "object",
+      "required": ["type", "src", "alt"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "image"},
+        "src": {"type": "string", "pattern": "^assets/", "description": "必须以 assets/ 开头且不得包含 ..。"},
+        "alt": {"type": "string", "minLength": 1, "description": "必填，且要说明图片内容。"},
+        "caption": {"type": "string"}
+      }
+    },
+    "blankBlock": {
+      "type": "object",
+      "required": ["type", "id", "width"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"const": "blank"},
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$", "description": "同一题内唯一且永久稳定。"},
+        "label": {"type": "string"},
+        "placeholder": {"type": "string"},
+        "width": {"enum": ["short", "medium", "long"], "description": "只控制展示宽度，不改变答案语义。"}
+      }
+    },
+
+    "stemBlock": {"oneOf": [{"$ref": "#/$defs/proseBlock"}, {"$ref": "#/$defs/codeBlock"}, {"$ref": "#/$defs/imageBlock"}, {"$ref": "#/$defs/blankBlock"}]},
+    "optionBlock": {"oneOf": [{"$ref": "#/$defs/proseBlock"}, {"$ref": "#/$defs/codeBlock"}, {"$ref": "#/$defs/imageBlock"}]},
+    "answerBlock": {"oneOf": [{"$ref": "#/$defs/markdownBlock"}, {"$ref": "#/$defs/codeBlock"}, {"$ref": "#/$defs/imageBlock"}]},
+
+    "stemContent": {
+      "type": "object",
+      "required": ["blocks"],
+      "additionalProperties": false,
+      "properties": {"blocks": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/stemBlock"}}}
+    },
+    "optionContent": {
+      "type": "object",
+      "required": ["blocks"],
+      "additionalProperties": false,
+      "properties": {"blocks": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/optionBlock"}}}
+    },
+    "answerContent": {
+      "type": "object",
+      "required": ["blocks"],
+      "additionalProperties": false,
+      "description": "参考答案与解析。这里允许出现「答案：」之类的字样——学生只在提交后才看到。",
+      "properties": {"blocks": {"type": "array", "items": {"$ref": "#/$defs/answerBlock"}}}
+    },
+
+    "option": {
+      "type": "object",
+      "required": ["id", "content"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]*$", "description": "选项 ID 稳定；改文字不改 ID。"},
+        "content": {"$ref": "#/$defs/optionContent"}
+      }
+    },
+
+    "provenance": {
+      "type": "object",
+      "required": ["origin", "crossChecked"],
+      "additionalProperties": false,
+      "properties": {
+        "origin": {"enum": ["official", "human-derived", "ai-derived"], "description": "答案从哪来。ai-derived 由界面渲染署名徽章，不再写进答案正文（实测 94 道题的答案是靠正文里一句中文免责声明署名的）。"},
+        "crossChecked": {"type": "boolean", "description": "是否已与官方答案核对过。"},
+        "attribution": {"type": "string", "minLength": 1, "description": "origin = ai-derived 时必填，例如 deepseek v4.1 flash · 大肥鱼小姐。"},
+        "note": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"origin": {"const": "ai-derived"}}, "required": ["origin"]},
+          "then": {"required": ["attribution"]}
+        }
+      ]
+    },
+
+    "blankAnswer": {
+      "type": "object",
+      "required": ["blankId"],
+      "additionalProperties": false,
+      "properties": {
+        "blankId": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+        "accept": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}, "description": "明确等价的字面答案白名单。系统不会自行推断等价——8 与 0x8 必须都写出来。"},
+        "numeric": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "description": "显式声明的数值判定，用来替代一长串等价字面量（24 / 0x18 / 024 …）。与 accept 二选一。",
+          "properties": {
+            "equals": {"type": "number"},
+            "min": {"type": "number"},
+            "max": {"type": "number"},
+            "integer": {"type": "boolean"}
+          }
+        },
+        "normalize": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "trimWhitespace": {"type": "boolean", "default": true},
+            "caseSensitive": {"type": "boolean", "default": false}
+          }
+        }
+      },
+      "oneOf": [{"required": ["accept"]}, {"required": ["numeric"]}]
+    },
+
+    "missingSolution": {
+      "type": "object",
+      "required": ["state", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "state": {"const": "missing"},
+        "reason": {"type": "string", "minLength": 1, "description": "必须说明为什么没有答案，不能留空。缺答案的题仍必须保留在原卷顺序里。"}
+      }
+    },
+    "needsReviewSolution": {
+      "type": "object",
+      "required": ["state", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "state": {"const": "needs-review"},
+        "reason": {"type": "string", "minLength": 1},
+        "candidate": {"$ref": "#/$defs/answerContent"}
+      }
+    },
+    "choiceSolution": {
+      "type": "object",
+      "required": ["state", "kind", "correctOptionIds", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "state": {"const": "verified"},
+        "kind": {"const": "choice"},
+        "correctOptionIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]*$"}, "description": "单选恰好 1 个；多选至少 1 个。判分比较选项 ID 集合是否完全相等。"},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "explanation": {"$ref": "#/$defs/answerContent"}
+      }
+    },
+    "blanksSolution": {
+      "type": "object",
+      "required": ["state", "kind", "blanks", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "state": {"const": "verified"},
+        "kind": {"const": "blanks"},
+        "blanks": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/blankAnswer"}},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "explanation": {"$ref": "#/$defs/answerContent"}
+      }
+    },
+    "referenceSolution": {
+      "type": "object",
+      "required": ["state", "kind", "reference", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "state": {"const": "verified"},
+        "kind": {"const": "reference"},
+        "reference": {"$ref": "#/$defs/answerContent", "description": "简答题的参考答案，学生查看后自评。"},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "explanation": {"$ref": "#/$defs/answerContent"}
+      }
+    },
+    "aggregateSolution": {
+      "type": "object",
+      "required": ["state", "provenance"],
+      "additionalProperties": false,
+      "description": "复合题顶层只放跨小问的说明；每个小问的答案必须放在对应 part 里，避免答案错位。",
+      "properties": {
+        "state": {"const": "verified"},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "explanation": {"$ref": "#/$defs/answerContent"}
+      }
+    },
+
+    "anySolution": {"oneOf": [{"$ref": "#/$defs/missingSolution"}, {"$ref": "#/$defs/needsReviewSolution"}, {"$ref": "#/$defs/choiceSolution"}, {"$ref": "#/$defs/blanksSolution"}, {"$ref": "#/$defs/referenceSolution"}, {"$ref": "#/$defs/aggregateSolution"}]},
+    "choiceTypeSolution": {"oneOf": [{"$ref": "#/$defs/missingSolution"}, {"$ref": "#/$defs/needsReviewSolution"}, {"$ref": "#/$defs/choiceSolution"}]},
+    "fillTypeSolution": {"oneOf": [{"$ref": "#/$defs/missingSolution"}, {"$ref": "#/$defs/needsReviewSolution"}, {"$ref": "#/$defs/blanksSolution"}]},
+    "referenceTypeSolution": {"oneOf": [{"$ref": "#/$defs/missingSolution"}, {"$ref": "#/$defs/needsReviewSolution"}, {"$ref": "#/$defs/referenceSolution"}]},
+    "compositeSolution": {"oneOf": [{"$ref": "#/$defs/missingSolution"}, {"$ref": "#/$defs/needsReviewSolution"}, {"$ref": "#/$defs/aggregateSolution"}]},
+    "partSolution": {"oneOf": [{"$ref": "#/$defs/missingSolution"}, {"$ref": "#/$defs/needsReviewSolution"}, {"$ref": "#/$defs/choiceSolution"}, {"$ref": "#/$defs/blanksSolution"}, {"$ref": "#/$defs/referenceSolution"}]},
+
+    "part": {
+      "type": "object",
+      "required": ["id", "label", "type", "modules", "stem", "solution"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$", "description": "题内唯一且永久稳定；数组顺序就是原卷顺序。"},
+        "label": {"type": "string", "minLength": 1, "description": "原卷小问标签，例如 （1）；不得自拟概括性标题。"},
+        "type": {"enum": ["single-choice", "multiple-choice", "fill", "short-answer"], "description": "不允许再次嵌套 composite。"},
+        "modules": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}, "description": "小问自己的知识模块。组合题因此可以原生跨模块，不需要 v3 那套 %%% group 分组层。"},
+        "stem": {"$ref": "#/$defs/stemContent"},
+        "options": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/option"}},
+        "solution": {"$ref": "#/$defs/partSolution"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice"]}}, "required": ["type"]},
+          "then": {
+            "required": ["options"],
+            "properties": {"stem": {"properties": {"blocks": {"not": {"contains": {"$ref": "#/$defs/blankBlock"}}}}}}
+          }
+        },
+        {
+          "if": {"properties": {"type": {"const": "fill"}}, "required": ["type"]},
+          "then": {
+            "not": {"required": ["options"]},
+            "properties": {"stem": {"properties": {"blocks": {"contains": {"$ref": "#/$defs/blankBlock"}}}}}
+          }
+        },
+        {
+          "if": {"properties": {"type": {"const": "short-answer"}}, "required": ["type"]},
+          "then": {
+            "not": {"required": ["options"]},
+            "properties": {"stem": {"properties": {"blocks": {"not": {"contains": {"$ref": "#/$defs/blankBlock"}}}}}}
+          }
+        }
+      ]
+    },
+
+    "publication": {
+      "type": "object",
+      "required": ["state", "reviewer", "reviewedAt"],
+      "additionalProperties": false,
+      "properties": {
+        "state": {"enum": ["draft", "review", "published"]},
+        "reviewer": {"type": ["string", "null"]},
+        "reviewedAt": {"type": ["string", "null"], "format": "date"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"state": {"const": "published"}}, "required": ["state"]},
+          "then": {"properties": {"reviewer": {"type": "string", "minLength": 1}, "reviewedAt": {"type": "string", "format": "date"}}}
+        }
+      ]
+    },
+
+    "source": {
+      "type": "object",
+      "required": ["document", "provenance"],
+      "additionalProperties": false,
+      "properties": {
+        "document": {"type": "string", "minLength": 1},
+        "lines": {
+          "type": "object",
+          "required": ["start", "end"],
+          "additionalProperties": false,
+          "properties": {
+            "start": {"type": "integer", "minimum": 1},
+            "end": {"type": "integer", "minimum": 1}
+          }
+        },
+        "pages": {"type": "array", "uniqueItems": true, "items": {"type": "integer", "minimum": 1}},
+        "provenance": {"enum": ["verbatim", "reflow", "rewritten"], "description": "自描述，取代原先外挂的 _rewritten_allowlist.txt 清单。"},
+        "curated": {"type": "string", "description": "迁移前的 _curated 路径，仅供追溯，可省略。"}
+      }
+    }
+  }
+}

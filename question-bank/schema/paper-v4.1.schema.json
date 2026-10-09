@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lwlaymh.github.io/ics-test/schema/paper-v4.1.schema.json",
+  "title": "ICS Test Paper v4.1",
+  "description": "设计稿，尚未接入构建。描述「一份试卷」。发布出去的 papers.json 形如 {\"schemaVersion\":\"4.1\",\"papers\":[<本 schema>...]}。统计字段由构建器计算，不写进人工数据。",
+  "type": "object",
+  "required": ["schemaVersion", "id", "revision", "displayName", "term", "examKind", "questionIds", "complete"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {"const": "4.1"},
+    "id": {"type": "string", "pattern": "^p-[a-f0-9]{16}$", "description": "永久稳定。改标题、改年份不得改变它。"},
+    "revision": {"type": "integer", "minimum": 1},
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "用户可见的名称，必填。原来 title 为空串会让「选卷」下拉框出现空白项；v4.1 把它拆成必填的 displayName 与可空的 title。"
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "原卷正式标题；原卷未给出时可省略或为 null，界面一律回退到 displayName。"
+    },
+    "year": {"type": ["integer", "null"], "minimum": 2000, "maximum": 2100, "description": "考试发生的自然年；未知为 null。同一年可能有多套卷，因此它不是主键。"},
+    "academicYear": {"type": ["string", "null"], "pattern": "^[0-9]{4}-[0-9]{4}$"},
+    "term": {"enum": ["spring", "fall", "summer", "winter", "unknown"]},
+    "examKind": {
+      "enum": ["midterm", "final", "stage-test", "quiz", "lab-quiz", "practice", "other"],
+      "description": "比 v4 多一个 lab-quiz：题库里确实存在 Lab 测验，v4 只能笼统记成 quiz。"
+    },
+    "sequence": {"type": ["integer", "null"], "minimum": 1, "description": "第几次阶段测验/小测；不适用为 null。examKind 为 stage-test 时必填（原卷标题里就写着「第 N 次」）；lab-quiz 不强制。"},
+    "sourceLabel": {"type": ["string", "null"], "description": "原材料名称，仅用于追溯，不参与选卷。"},
+    "sourceDocument": {"type": ["string", "null"]},
+    "questionIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^q-[a-f0-9]{16}$"},
+      "description": "严格按原卷顺序排列。题目的 paperOrder 必须与此数组下标一致。"
+    },
+    "complete": {"type": "boolean", "description": "是否完整收录该卷（编辑判断），不是「是否都有答案」。缺答案的题仍必须留在 questionIds 里。"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"examKind": {"const": "stage-test"}}, "required": ["examKind"]},
+      "then": {"required": ["sequence"], "properties": {"sequence": {"type": "integer", "minimum": 1}}}
+    }
+  ]
+}
