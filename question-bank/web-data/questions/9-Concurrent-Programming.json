@@ -861,7 +861,7 @@
       "exam": "2015期末",
       "questionNo": "第八题",
       "summary": "双缓冲区生产者-消费者信号量设计与 PV 填空",
-      "content": "第八题（10分）并发\n有三个线程 PA、PB、PC 协作工作以解决文件打印问题：PA 将记录从磁盘读\n入内存缓冲区 `Buff1`，每执行一次读一个记录；PB 将缓冲区 `Buff1` 的内容复制\n到缓冲区`Buff2`，每执行一次复制一个记录； PC将缓冲区`Buff2`的内容打印出\n来，每执行一次打印一个记录。缓冲区 `Buff1` 可以放 4 个记录；缓冲区 `Buff2`\n可以放8个记录。请用信号量及P、V操作实现上述三个线程以保证文件的正确打\n印。\n```\nPA() {\n  while (1) {\n    /* ① */\n    从磁盘读入一个记录\n    /* ② */\n    将记录放入 Buff1\n    /* ③ */\n  }\n}\nPB() {\n  while (1) {\n    /* ④ */\n    从 Buff1 中取出一个记录\n    /* ⑤ */\n    将记录放入 Buff2\n    /* ⑥ */\n  }\n}\nPC() {\n  while (1) {\n    /* ⑦ */\n    从 Buff2 中取出一个记录\n    /* ⑧ */\n    打印\n  }\n}\n```\n1．请设计若干信号量，给出每一个信号量的作用和初值。\n\n\n2．请将信号量上对应的 PV操作填写在代码中适当位置。注意：每一标号处可\n以不填入语句（请标记成 X），或填入一条或多条语句。\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | {{blank:q8-1}} |\n| ② | {{blank:q8-2}} |\n| ③ | {{blank:q8-3}} |\n| ④ | {{blank:q8-4}} |\n| ⑤ | {{blank:q8-5}} |\n| ⑥ | {{blank:q8-6}} |\n| ⑦ | {{blank:q8-7}} |\n| ⑧ | {{blank:q8-8}} |\n答案：（本大题总得分按四舍五入取整数）\n1．3分，答对1个0.5分\nempty1，初值4；\nfull1，初值0；\nempty2，初值8；\nfull2，初值0；\nmutex1，初值1；\nmutex2，初值2\n2．7分\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | X |\n| ② | `P(&empty1);`<br>`P(&mutex1);` |\n| ③ | `V(&full1);`<br>`V(&mutex1);` |\n| ④ | `P(&full1);`<br>`P(&mutex1);` |\n| ⑤ | `P(&empty2);`<br>`P(&mutex2);` |\n| ⑥ | `V(&mutex2);`<br>`V(&full2);` |\n| ⑦ | `P(&full2);`<br>`P(&mutex2);` |\n| ⑧ | `V(&mutex2);`<br>`V(&empty2);` |\n\n注意：P 操作的顺序不能错。各操作按原卷评分标准计分。",
+      "content": "第八题（10分）并发\n有三个线程 PA、PB、PC 协作工作以解决文件打印问题：PA 将记录从磁盘读\n入内存缓冲区 `Buff1`，每执行一次读一个记录；PB 将缓冲区 `Buff1` 的内容复制\n到缓冲区`Buff2`，每执行一次复制一个记录； PC将缓冲区`Buff2`的内容打印出\n来，每执行一次打印一个记录。缓冲区 `Buff1` 可以放 4 个记录；缓冲区 `Buff2`\n可以放8个记录。请用信号量及P、V操作实现上述三个线程以保证文件的正确打\n印。\n```\nPA() {\n  while (1) {\n    /* ① */\n    从磁盘读入一个记录\n    /* ② */\n    将记录放入 Buff1\n    /* ③ */\n  }\n}\nPB() {\n  while (1) {\n    /* ④ */\n    从 Buff1 中取出一个记录\n    /* ⑤ */\n    将记录放入 Buff2\n    /* ⑥ */\n  }\n}\nPC() {\n  while (1) {\n    /* ⑦ */\n    从 Buff2 中取出一个记录\n    /* ⑧ */\n    打印\n  }\n}\n```\n1．请设计若干信号量，给出每一个信号量的作用和初值。\n\n\n2．请将信号量上对应的 PV操作填写在代码中适当位置。注意：每一标号处可\n以不填入语句（请标记成 X），或填入一条或多条语句。\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | {{blank:q8-1}} |\n| ② | {{blank:q8-2}} |\n| ③ | {{blank:q8-3}} |\n| ④ | {{blank:q8-4}} |\n| ⑤ | {{blank:q8-5}} |\n| ⑥ | {{blank:q8-6}} |\n| ⑦ | {{blank:q8-7}} |\n| ⑧ | {{blank:q8-8}} |\n答案：（本大题总得分按四舍五入取整数）\n1．3分，答对1个0.5分\n`empty1`，初值4；\n`full1`，初值0；\n`empty2`，初值8；\n`full2`，初值0；\n`mutex1`，初值1；\n`mutex2`，初值2\n2．7分\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | X |\n| ② | `P(&empty1);`<br>`P(&mutex1);` |\n| ③ | `V(&full1);`<br>`V(&mutex1);` |\n| ④ | `P(&full1);`<br>`P(&mutex1);` |\n| ⑤ | `P(&empty2);`<br>`P(&mutex2);` |\n| ⑥ | `V(&mutex2);`<br>`V(&full2);` |\n| ⑦ | `P(&full2);`<br>`P(&mutex2);` |\n| ⑧ | `V(&mutex2);`<br>`V(&empty2);` |\n\n注意：P 操作的顺序不能错。各操作按原卷评分标准计分。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -885,7 +885,7 @@
         "selection": null,
         "stem": "第八题（10分）并发\n有三个线程 PA、PB、PC 协作工作以解决文件打印问题：PA 将记录从磁盘读\n入内存缓冲区 `Buff1`，每执行一次读一个记录；PB 将缓冲区 `Buff1` 的内容复制\n到缓冲区`Buff2`，每执行一次复制一个记录； PC将缓冲区`Buff2`的内容打印出\n来，每执行一次打印一个记录。缓冲区 `Buff1` 可以放 4 个记录；缓冲区 `Buff2`\n可以放8个记录。请用信号量及P、V操作实现上述三个线程以保证文件的正确打\n印。\n```\nPA() {\n  while (1) {\n    /* ① */\n    从磁盘读入一个记录\n    /* ② */\n    将记录放入 Buff1\n    /* ③ */\n  }\n}\nPB() {\n  while (1) {\n    /* ④ */\n    从 Buff1 中取出一个记录\n    /* ⑤ */\n    将记录放入 Buff2\n    /* ⑥ */\n  }\n}\nPC() {\n  while (1) {\n    /* ⑦ */\n    从 Buff2 中取出一个记录\n    /* ⑧ */\n    打印\n  }\n}\n```\n1．请设计若干信号量，给出每一个信号量的作用和初值。\n\n\n2．请将信号量上对应的 PV操作填写在代码中适当位置。注意：每一标号处可\n以不填入语句（请标记成 X），或填入一条或多条语句。\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | {{blank:q8-1}} |\n| ② | {{blank:q8-2}} |\n| ③ | {{blank:q8-3}} |\n| ④ | {{blank:q8-4}} |\n| ⑤ | {{blank:q8-5}} |\n| ⑥ | {{blank:q8-6}} |\n| ⑦ | {{blank:q8-7}} |\n| ⑧ | {{blank:q8-8}} |",
         "choices": [],
-        "answer": "答案：（本大题总得分按四舍五入取整数）\n1．3分，答对1个0.5分\nempty1，初值4；\nfull1，初值0；\nempty2，初值8；\nfull2，初值0；\nmutex1，初值1；\nmutex2，初值2\n2．7分\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | X |\n| ② | `P(&empty1);`<br>`P(&mutex1);` |\n| ③ | `V(&full1);`<br>`V(&mutex1);` |\n| ④ | `P(&full1);`<br>`P(&mutex1);` |\n| ⑤ | `P(&empty2);`<br>`P(&mutex2);` |\n| ⑥ | `V(&mutex2);`<br>`V(&full2);` |\n| ⑦ | `P(&full2);`<br>`P(&mutex2);` |\n| ⑧ | `V(&mutex2);`<br>`V(&empty2);` |\n\n注意：P 操作的顺序不能错。各操作按原卷评分标准计分。",
+        "answer": "答案：（本大题总得分按四舍五入取整数）\n1．3分，答对1个0.5分\n`empty1`，初值4；\n`full1`，初值0；\n`empty2`，初值8；\n`full2`，初值0；\n`mutex1`，初值1；\n`mutex2`，初值2\n2．7分\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | X |\n| ② | `P(&empty1);`<br>`P(&mutex1);` |\n| ③ | `V(&full1);`<br>`V(&mutex1);` |\n| ④ | `P(&full1);`<br>`P(&mutex1);` |\n| ⑤ | `P(&empty2);`<br>`P(&mutex2);` |\n| ⑥ | `V(&mutex2);`<br>`V(&full2);` |\n| ⑦ | `P(&full2);`<br>`P(&mutex2);` |\n| ⑧ | `V(&mutex2);`<br>`V(&empty2);` |\n\n注意：P 操作的顺序不能错。各操作按原卷评分标准计分。",
         "blankAnswers": [
           {
             "id": "q8-1",
@@ -1042,7 +1042,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "第八题（10分）并发\n有三个线程 PA、PB、PC 协作工作以解决文件打印问题：PA 将记录从磁盘读\n入内存缓冲区 `Buff1`，每执行一次读一个记录；PB 将缓冲区 `Buff1` 的内容复制\n到缓冲区`Buff2`，每执行一次复制一个记录； PC将缓冲区`Buff2`的内容打印出\n来，每执行一次打印一个记录。缓冲区 `Buff1` 可以放 4 个记录；缓冲区 `Buff2`\n可以放8个记录。请用信号量及P、V操作实现上述三个线程以保证文件的正确打\n印。\n```\nPA() {\n  while (1) {\n    /* ① */\n    从磁盘读入一个记录\n    /* ② */\n    将记录放入 Buff1\n    /* ③ */\n  }\n}\nPB() {\n  while (1) {\n    /* ④ */\n    从 Buff1 中取出一个记录\n    /* ⑤ */\n    将记录放入 Buff2\n    /* ⑥ */\n  }\n}\nPC() {\n  while (1) {\n    /* ⑦ */\n    从 Buff2 中取出一个记录\n    /* ⑧ */\n    打印\n  }\n}\n```\n1．请设计若干信号量，给出每一个信号量的作用和初值。\n\n\n2．请将信号量上对应的 PV操作填写在代码中适当位置。注意：每一标号处可\n以不填入语句（请标记成 X），或填入一条或多条语句。\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | {{blank:q8-1}} |\n| ② | {{blank:q8-2}} |\n| ③ | {{blank:q8-3}} |\n| ④ | {{blank:q8-4}} |\n| ⑤ | {{blank:q8-5}} |\n| ⑥ | {{blank:q8-6}} |\n| ⑦ | {{blank:q8-7}} |\n| ⑧ | {{blank:q8-8}} |",
-        "answer": "答案：（本大题总得分按四舍五入取整数）\n1．3分，答对1个0.5分\nempty1，初值4；\nfull1，初值0；\nempty2，初值8；\nfull2，初值0；\nmutex1，初值1；\nmutex2，初值2\n2．7分\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | X |\n| ② | `P(&empty1);`<br>`P(&mutex1);` |\n| ③ | `V(&full1);`<br>`V(&mutex1);` |\n| ④ | `P(&full1);`<br>`P(&mutex1);` |\n| ⑤ | `P(&empty2);`<br>`P(&mutex2);` |\n| ⑥ | `V(&mutex2);`<br>`V(&full2);` |\n| ⑦ | `P(&full2);`<br>`P(&mutex2);` |\n| ⑧ | `V(&mutex2);`<br>`V(&empty2);` |\n\n注意：P 操作的顺序不能错。各操作按原卷评分标准计分。"
+        "answer": "答案：（本大题总得分按四舍五入取整数）\n1．3分，答对1个0.5分\n`empty1`，初值4；\n`full1`，初值0；\n`empty2`，初值8；\n`full2`，初值0；\n`mutex1`，初值1；\n`mutex2`，初值2\n2．7分\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | X |\n| ② | `P(&empty1);`<br>`P(&mutex1);` |\n| ③ | `V(&full1);`<br>`V(&mutex1);` |\n| ④ | `P(&full1);`<br>`P(&mutex1);` |\n| ⑤ | `P(&empty2);`<br>`P(&mutex2);` |\n| ⑥ | `V(&mutex2);`<br>`V(&full2);` |\n| ⑦ | `P(&full2);`<br>`P(&mutex2);` |\n| ⑧ | `V(&mutex2);`<br>`V(&empty2);` |\n\n注意：P 操作的顺序不能错。各操作按原卷评分标准计分。"
       },
       "presentation": {
         "status": "ready",
@@ -1235,7 +1235,7 @@
       "exam": "2016期末",
       "questionNo": "第八题",
       "summary": "多线程 cnt++ 竞态分析与 PV 实现司机售票员同步",
-      "content": "第八题（12分）\n1.请阅读下列代码`badcnt.c`：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧\n答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把`cnt`读\n入寄存器，寄存器加1，在未写回时，若线程2把`cnt`读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入`cnt`，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量`s1=0`、`s2=1`（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。",
+      "content": "第八题（12分）\n1.请阅读下列代码`badcnt.c`：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧\n答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把`cnt`读\n入寄存器，寄存器加1，在未写回时，若线程2把`cnt`读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入`cnt`，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量`s1=0`、`s2=1`（2分）。`s1`用于司机进程是否能启动车辆（1\n分），`s2`用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1259,7 +1259,7 @@
         "selection": null,
         "stem": "第八题（12分）\n1.请阅读下列代码`badcnt.c`：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧",
         "choices": [],
-        "answer": "答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把`cnt`读\n入寄存器，寄存器加1，在未写回时，若线程2把`cnt`读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入`cnt`，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量`s1=0`、`s2=1`（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
+        "answer": "答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把`cnt`读\n入寄存器，寄存器加1，在未写回时，若线程2把`cnt`读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入`cnt`，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量`s1=0`、`s2=1`（2分）。`s1`用于司机进程是否能启动车辆（1\n分），`s2`用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
       },
       "interaction": {
         "kind": "fill",
@@ -1268,7 +1268,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "第八题（12分）\n1.请阅读下列代码`badcnt.c`：\n```\n/* Global shared variable */\nvolatile long cnt = 0; /* Counter */\nint main(int argc, char **argv)\n{\n    long niters;\n    pthread_t tid1, tid2;\n    niters = atoi(argv[1]);\n    Pthread_create(&tid1, NULL, thread, &niters);\n    Pthread_create(&tid2, NULL, thread, &niters);\n    Pthread_join(tid1, NULL);\n    Pthread_join(tid2, NULL);\n    /* Check result */\n    if (cnt != (2 * niters))\n        printf(\"BOOM! cnt=%ld\\n\", cnt);\n    else\n        printf(\"OK cnt=%ld\\n\", cnt);\n    exit(0);\n}\n/* Thread routine */\nvoid *thread(void *vargp)\n{\n    long i, niters = *((long *)vargp);\n    for (i = 0; i < niters; i++)\n        cnt++;\n    return NULL;\n}\n```\n运行后可能产生如下结果：\n```\nlinux> ./badcnt 10000\nOK cnt=20000\n```\n或者：\n```\nlinux> ./badcnt 10000\nBOOM! cnt=13051\nlinux>\n```\n为什么会产生不同的结果？请分析产生不同结果的原因。\n\n\n2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧",
-        "answer": "答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把`cnt`读\n入寄存器，寄存器加1，在未写回时，若线程2把`cnt`读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入`cnt`，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量`s1=0`、`s2=1`（2分）。s1用于司机进程是否能启动车辆（1\n分），s2用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
+        "answer": "答案：\n1. （4分）\ncnt++ 在汇编里会被分成加载、更新、写回三个步骤（2分）。线程1把`cnt`读\n入寄存器，寄存器加1，在未写回时，若线程2把`cnt`读入自己的寄存器，寄存\n器加1，最终两个线程都是把cnt+1写入`cnt`，这就造成了错误。（2分）\n2. （8分）\n（1）设置两个信号量`s1=0`、`s2=1`（2分）。`s1`用于司机进程是否能启动车辆（1\n分），`s2`用于售票员进程是否能开门（1分）。\n（2） ① P(s1)\n② X\n③ X\n④ V(s2)\n⑤ X\n⑥ V(s1)\n⑦ P(s2)\n⑧ X\n评分：每空0.5分，共4分。"
       },
       "presentation": {
         "status": "ready",
@@ -1285,7 +1285,7 @@
       "exam": "2017期末",
       "questionNo": "第一题 19",
       "summary": "死锁定义、信号量顺序与线程安全",
-      "content": "19. 下列关于死锁的叙述中，不正确的是：\nA. 所谓死锁是指一组线程被阻塞，等待一个永远不会为真的条件\nB. 在用信号量及 PV 操作解决生产者消费者问题（多个缓冲区、多个生产者，多\n个消费者）时，如果先给缓冲区加锁 P(&sp->mutex)，再申请可用的缓冲区槽\nP(&sp->slots)；则可能出现死锁\nC. `printf()`是线程安全函数\nD. 在信号处理函数中使用`printf()`不会导致死锁\n答案：D\n解析：在信号处理程序中调用 `printf()` 可能死锁（printf 不可重入，若加锁后被打断），D 错；A、B、C 都正确（先 P(mutex) 再 P(slots) 与生产者/消费者的加锁顺序相反，可能死锁）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "19. 下列关于死锁的叙述中，不正确的是：\nA. 所谓死锁是指一组线程被阻塞，等待一个永远不会为真的条件\nB. 在用信号量及 PV 操作解决生产者消费者问题（多个缓冲区、多个生产者，多\n个消费者）时，如果先给缓冲区加锁 P(&sp->mutex)，再申请可用的缓冲区槽\nP(&sp->slots)；则可能出现死锁\nC. `printf()`是线程安全函数\nD. 在信号处理函数中使用`printf()`不会导致死锁\n答案：D\n解析：在信号处理程序中调用 `printf()` 可能死锁（`printf` 不可重入，若加锁后被打断），D 错；A、B、C 都正确（先 P(mutex) 再 P(slots) 与生产者/消费者的加锁顺序相反，可能死锁）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1324,7 +1324,7 @@
             "content": "在信号处理函数中使用`printf()`不会导致死锁"
           }
         ],
-        "answer": "答案：D\n解析：在信号处理程序中调用 `printf()` 可能死锁（printf 不可重入，若加锁后被打断），D 错；A、B、C 都正确（先 P(mutex) 再 P(slots) 与生产者/消费者的加锁顺序相反，可能死锁）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：D\n解析：在信号处理程序中调用 `printf()` 可能死锁（`printf` 不可重入，若加锁后被打断），D 错；A、B、C 都正确（先 P(mutex) 再 P(slots) 与生产者/消费者的加锁顺序相反，可能死锁）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -1354,7 +1354,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "19. 下列关于死锁的叙述中，不正确的是：",
-        "answer": "答案：D\n解析：在信号处理程序中调用 `printf()` 可能死锁（printf 不可重入，若加锁后被打断），D 错；A、B、C 都正确（先 P(mutex) 再 P(slots) 与生产者/消费者的加锁顺序相反，可能死锁）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：D\n解析：在信号处理程序中调用 `printf()` 可能死锁（`printf` 不可重入，若加锁后被打断），D 错；A、B、C 都正确（先 P(mutex) 再 P(slots) 与生产者/消费者的加锁顺序相反，可能死锁）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
@@ -2078,7 +2078,7 @@
       "exam": "2019期末",
       "questionNo": "第一题 17",
       "summary": "死锁现象的判定",
-      "content": "17. 并发程序执行时会遇到下列各种情况：\n①   程序执行结果的正确性依赖于一个线程要在另一个线程到达y点之\n前到达其控制流的x点\n② 程序员使用P和V操作顺序不当\n③ 外部事件和/或系统调度决策阻止了任务进度\n④ 不合理的资源分配策略导致程序难以向前运行\n⑤ 程序的执行结果取决于系统的调度决策\n⑥ 在信号处理函数中调用`printf()`\n请问下列哪些情况表示可能产生死锁现象？\nA.  ①、②和⑤\nB.  ②、③和④\nC.  ③、④和⑥\nD.  ②、④和⑥\n答案：D（来源：2019、2020期末-答案解析）\n解析：②PV 操作顺序不当、④不合理的资源分配、⑥在信号处理程序中调用 printf（不可重入、加锁后被打断会死锁）都可能引起死锁；①属于竞争，③⑤只是并发带来的不确定性。",
+      "content": "17. 并发程序执行时会遇到下列各种情况：\n①   程序执行结果的正确性依赖于一个线程要在另一个线程到达y点之\n前到达其控制流的x点\n② 程序员使用P和V操作顺序不当\n③ 外部事件和/或系统调度决策阻止了任务进度\n④ 不合理的资源分配策略导致程序难以向前运行\n⑤ 程序的执行结果取决于系统的调度决策\n⑥ 在信号处理函数中调用`printf()`\n请问下列哪些情况表示可能产生死锁现象？\nA.  ①、②和⑤\nB.  ②、③和④\nC.  ③、④和⑥\nD.  ②、④和⑥\n答案：D（来源：2019、2020期末-答案解析）\n解析：②PV 操作顺序不当、④不合理的资源分配、⑥在信号处理程序中调用 `printf`（不可重入、加锁后被打断会死锁）都可能引起死锁；①属于竞争，③⑤只是并发带来的不确定性。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2120,7 +2120,7 @@
             "content": "②、④和⑥"
           }
         ],
-        "answer": "答案：D（来源：2019、2020期末-答案解析）\n解析：②PV 操作顺序不当、④不合理的资源分配、⑥在信号处理程序中调用 printf（不可重入、加锁后被打断会死锁）都可能引起死锁；①属于竞争，③⑤只是并发带来的不确定性。"
+        "answer": "答案：D（来源：2019、2020期末-答案解析）\n解析：②PV 操作顺序不当、④不合理的资源分配、⑥在信号处理程序中调用 `printf`（不可重入、加锁后被打断会死锁）都可能引起死锁；①属于竞争，③⑤只是并发带来的不确定性。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -2150,7 +2150,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "17. 并发程序执行时会遇到下列各种情况：\n①   程序执行结果的正确性依赖于一个线程要在另一个线程到达y点之\n前到达其控制流的x点\n② 程序员使用P和V操作顺序不当\n③ 外部事件和/或系统调度决策阻止了任务进度\n④ 不合理的资源分配策略导致程序难以向前运行\n⑤ 程序的执行结果取决于系统的调度决策\n⑥ 在信号处理函数中调用`printf()`\n请问下列哪些情况表示可能产生死锁现象？",
-        "answer": "答案：D（来源：2019、2020期末-答案解析）\n解析：②PV 操作顺序不当、④不合理的资源分配、⑥在信号处理程序中调用 printf（不可重入、加锁后被打断会死锁）都可能引起死锁；①属于竞争，③⑤只是并发带来的不确定性。"
+        "answer": "答案：D（来源：2019、2020期末-答案解析）\n解析：②PV 操作顺序不当、④不合理的资源分配、⑥在信号处理程序中调用 `printf`（不可重入、加锁后被打断会死锁）都可能引起死锁；①属于竞争，③⑤只是并发带来的不确定性。"
       },
       "presentation": {
         "status": "ready",
@@ -3856,7 +3856,7 @@
       "exam": "2025期末",
       "questionNo": "四 2（1）",
       "summary": "Lightswitch 读者-写者：调整信号量操作后的竞争/死锁判断",
-      "content": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）\n答案：（1）否（1分）",
+      "content": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注`reader`和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）\n答案：（1）否（1分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3876,7 +3876,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）",
+        "stem": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注`reader`和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）",
         "choices": [],
         "answer": "答案：（1）否（1分）",
         "blankAnswers": [
@@ -3911,7 +3911,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）",
+        "prompt": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注`reader`和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）",
         "answer": "答案：（1）否（1分）"
       },
       "group": {

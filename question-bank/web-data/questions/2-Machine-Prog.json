@@ -3969,7 +3969,7 @@
       "exam": "2016期中",
       "questionNo": "第三题 (1)",
       "summary": "switch 跳转表与 gdb 内存检查输出",
-      "content": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从rsp中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```\n答案：每空 1 分，gdb 输出如下：\n`0x400690:   0x00000000004004d1      0x00000000004004b8`\n`0x4006a0:   0x00000000004004bb      0x00000000004004c0`\n`0x4006b0:   0x00000000004004d4      0x00000000004004c3`",
+      "content": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从`rsp`中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```\n答案：每空 1 分，gdb 输出如下：\n`0x400690:   0x00000000004004d1      0x00000000004004b8`\n`0x4006a0:   0x00000000004004bb      0x00000000004004c0`\n`0x4006b0:   0x00000000004004d4      0x00000000004004c3`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3992,7 +3992,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从rsp中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```",
+        "stem": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从`rsp`中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```",
         "choices": [],
         "answer": "答案：每空 1 分，gdb 输出如下：\n`0x400690:   0x00000000004004d1      0x00000000004004b8`\n`0x4006a0:   0x00000000004004bb      0x00000000004004c0`\n`0x4006b0:   0x00000000004004d4      0x00000000004004c3`"
       },
@@ -4002,7 +4002,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从rsp中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```",
+        "prompt": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从`rsp`中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```",
         "answer": "答案：每空 1 分，gdb 输出如下：\n`0x400690:   0x00000000004004d1      0x00000000004004b8`\n`0x4006a0:   0x00000000004004bb      0x00000000004004c0`\n`0x4006b0:   0x00000000004004d4      0x00000000004004c3`"
       },
       "presentation": {
@@ -5211,7 +5211,7 @@
       "exam": "2019期中",
       "questionNo": "第一题 5",
       "summary": "call 后栈上第 k 个参数的地址",
-      "content": "5.  已知函数func的参数超过6个。当x86-64机器执行完指令`call func`之\n后，`%rsp`的值为S。那么func的第`k(k > 6)`个参数的存储地址是？\nA. S + 8 * (k - 6)\nB. S + 8 * (k - 7)\nC. S – 8 * (k - 6)\nD. S – 8 * (k - 7)\n答案：A\n本题考察x86-64运行时栈帧结构，答案为A。当执行完call指令后，S处存储\n的是函数的返回地址；再往上依次是第7、第8个函数参数…故第k个函数参数存\n储在S + 8 * (k - 6)的地址处。",
+      "content": "5.  已知函数`func`的参数超过6个。当x86-64机器执行完指令`call func`之\n后，`%rsp`的值为S。那么`func`的第`k(k > 6)`个参数的存储地址是？\nA. S + 8 * (k - 6)\nB. S + 8 * (k - 7)\nC. S – 8 * (k - 6)\nD. S – 8 * (k - 7)\n答案：A\n本题考察x86-64运行时栈帧结构，答案为A。当执行完call指令后，S处存储\n的是函数的返回地址；再往上依次是第7、第8个函数参数…故第k个函数参数存\n储在S + 8 * (k - 6)的地址处。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5234,7 +5234,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "5.  已知函数func的参数超过6个。当x86-64机器执行完指令`call func`之\n后，`%rsp`的值为S。那么func的第`k(k > 6)`个参数的存储地址是？",
+        "stem": "5.  已知函数`func`的参数超过6个。当x86-64机器执行完指令`call func`之\n后，`%rsp`的值为S。那么`func`的第`k(k > 6)`个参数的存储地址是？",
         "choices": [
           {
             "key": "A",
@@ -5282,7 +5282,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5.  已知函数func的参数超过6个。当x86-64机器执行完指令`call func`之\n后，`%rsp`的值为S。那么func的第`k(k > 6)`个参数的存储地址是？",
+        "prompt": "5.  已知函数`func`的参数超过6个。当x86-64机器执行完指令`call func`之\n后，`%rsp`的值为S。那么`func`的第`k(k > 6)`个参数的存储地址是？",
         "answer": "答案：A\n本题考察x86-64运行时栈帧结构，答案为A。当执行完call指令后，S处存储\n的是函数的返回地址；再往上依次是第7、第8个函数参数…故第k个函数参数存\n储在S + 8 * (k - 6)的地址处。"
       },
       "presentation": {
@@ -6669,7 +6669,7 @@
       "exam": "2021期中",
       "questionNo": "第一题 6",
       "summary": "movabsq/INC/popq/call 指令语义辨析",
-      "content": "6.以下关于x86-64指令的描述，说法正确的是：\nA. 数据传送指令 `movabsq $Imm, (%rax)` 将以64位二进制补码表示的立即数 Imm 放到目的地址 `(%rax)` 中。\nB. `INC`和`DEC`指令会设置溢出标志`OF`和零标志`ZF`，但不会改变进位标志`CF`。\nC. `call *%rax` 指令以 `%rax` 中的值作为读地址，从内存中读出调用目标。\nD. `popq %rax` 指令的行为等效于 `movq %rsp, %rax; addq $8, %rsp`。\n答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。",
+      "content": "6.以下关于x86-64指令的描述，说法正确的是：\nA. 数据传送指令 `movabsq $Imm, (%rax)` 将以64位二进制补码表示的立即数 Imm 放到目的地址 `(%rax)` 中。\nB. `INC`和`DEC`指令会设置溢出标志`OF`和零标志`ZF`，但不会改变进位标志`CF`。\nC. `call *%rax` 指令以 `%rax` 中的值作为读地址，从内存中读出调用目标。\nD. `popq %rax` 指令的行为等效于 `movq %rsp, %rax; addq $8, %rsp`。\n答案：B\n解析： 数`Imm`放到目的地址`(%rax)`中。A中`movabsq`的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6713,7 +6713,7 @@
             "content": "`popq %rax` 指令的行为等效于 `movq %rsp, %rax; addq $8, %rsp`。"
           }
         ],
-        "answer": "答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。"
+        "answer": "答案：B\n解析： 数`Imm`放到目的地址`(%rax)`中。A中`movabsq`的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6743,7 +6743,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "6.以下关于x86-64指令的描述，说法正确的是：",
-        "answer": "答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。"
+        "answer": "答案：B\n解析： 数`Imm`放到目的地址`(%rax)`中。A中`movabsq`的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。"
       },
       "presentation": {
         "status": "ready",
@@ -7043,7 +7043,7 @@
       "exam": "2021期中",
       "questionNo": "第六题 1",
       "summary": "struct/union 的大小与末尾 padding",
-      "content": "第六题（15分）\n```\nstruct s_element{\nunion u_inner{\n    float f;\n    short s[2];\n} u1;\n    s_element* next;\n};\nfloat func(s_element* p){\n    float ans = 0;\n    while( p ){\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```\n1.  若 tmp 是一个 `s_element` 类型的变量 ,  则 `sizeof  (tmp.u1)`  =\n{{blank:q6-1-sizeof}}。\n（1分）",
+      "content": "第六题（15分）\n```\nstruct s_element{\nunion u_inner{\n    float f;\n    short s[2];\n} u1;\n    s_element* next;\n};\nfloat func(s_element* p){\n    float ans = 0;\n    while( p ){\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```\n1.  若 `tmp` 是一个 `s_element` 类型的变量 ,  则 `sizeof  (tmp.u1)`  =\n{{blank:q6-1-sizeof}}。\n（1分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7068,7 +7068,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第六题（15分）\n```\nstruct s_element{\nunion u_inner{\n    float f;\n    short s[2];\n} u1;\n    s_element* next;\n};\nfloat func(s_element* p){\n    float ans = 0;\n    while( p ){\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```\n1.  若 tmp 是一个 `s_element` 类型的变量 ,  则 `sizeof  (tmp.u1)`  =\n{{blank:q6-1-sizeof}}。",
+        "stem": "第六题（15分）\n```\nstruct s_element{\nunion u_inner{\n    float f;\n    short s[2];\n} u1;\n    s_element* next;\n};\nfloat func(s_element* p){\n    float ans = 0;\n    while( p ){\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```\n1.  若 `tmp` 是一个 `s_element` 类型的变量 ,  则 `sizeof  (tmp.u1)`  =\n{{blank:q6-1-sizeof}}。",
         "choices": [],
         "answer": "（1分）"
       },
@@ -7083,7 +7083,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第六题（15分）\n```\nstruct s_element{\nunion u_inner{\n    float f;\n    short s[2];\n} u1;\n    s_element* next;\n};\nfloat func(s_element* p){\n    float ans = 0;\n    while( p ){\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```\n1.  若 tmp 是一个 `s_element` 类型的变量 ,  则 `sizeof  (tmp.u1)`  =\n{{blank:q6-1-sizeof}}。",
+        "prompt": "第六题（15分）\n```\nstruct s_element{\nunion u_inner{\n    float f;\n    short s[2];\n} u1;\n    s_element* next;\n};\nfloat func(s_element* p){\n    float ans = 0;\n    while( p ){\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```\n1.  若 `tmp` 是一个 `s_element` 类型的变量 ,  则 `sizeof  (tmp.u1)`  =\n{{blank:q6-1-sizeof}}。",
         "answer": "（1分）"
       },
       "group": {
@@ -9033,7 +9033,7 @@
       "exam": "2013期末",
       "questionNo": "第一题 3",
       "summary": "用 leal 计算 5x+7",
-      "content": "3、已知变量x的值已经存放在寄存器eax中，现在想把5x+7的值计算出来并存\n放到寄存器ebx中，如果不允许用乘法和除法指令，则至少需要多少条IA-32指\n令完成该任务？答：（     ）\nA. 1条\nB. 3条\nC. 2条\nD. 4条\n答案：A\n考察学生对`leal`指令的用法是否熟悉。\n使用一条指令“`leal 7(%eax, %eax, 4), %ebx`”即可。",
+      "content": "3、已知变量x的值已经存放在寄存器`eax`中，现在想把5x+7的值计算出来并存\n放到寄存器`ebx`中，如果不允许用乘法和除法指令，则至少需要多少条IA-32指\n令完成该任务？答：（     ）\nA. 1条\nB. 3条\nC. 2条\nD. 4条\n答案：A\n考察学生对`leal`指令的用法是否熟悉。\n使用一条指令“`leal 7(%eax, %eax, 4), %ebx`”即可。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9053,7 +9053,7 @@
       "layout": {
         "mode": "choice",
         "selection": null,
-        "stem": "3、已知变量x的值已经存放在寄存器eax中，现在想把5x+7的值计算出来并存\n放到寄存器ebx中，如果不允许用乘法和除法指令，则至少需要多少条IA-32指\n令完成该任务？答：（     ）",
+        "stem": "3、已知变量x的值已经存放在寄存器`eax`中，现在想把5x+7的值计算出来并存\n放到寄存器`ebx`中，如果不允许用乘法和除法指令，则至少需要多少条IA-32指\n令完成该任务？答：（     ）",
         "choices": [
           {
             "key": "A",
@@ -9101,7 +9101,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3、已知变量x的值已经存放在寄存器eax中，现在想把5x+7的值计算出来并存\n放到寄存器ebx中，如果不允许用乘法和除法指令，则至少需要多少条IA-32指\n令完成该任务？答：（     ）",
+        "prompt": "3、已知变量x的值已经存放在寄存器`eax`中，现在想把5x+7的值计算出来并存\n放到寄存器`ebx`中，如果不允许用乘法和除法指令，则至少需要多少条IA-32指\n令完成该任务？答：（     ）",
         "answer": "答案：A\n考察学生对`leal`指令的用法是否熟悉。\n使用一条指令“`leal 7(%eax, %eax, 4), %ebx`”即可。"
       },
       "presentation": {
@@ -9350,7 +9350,7 @@
       "exam": "2015期末",
       "questionNo": "第一题 1",
       "summary": "哪条指令不改变 esp",
-      "content": "1.  下面哪条指令不会引起esp的变化？\nA. `movl   %esp, %ebp`\nB. `pushl  %ebp`\nC. call   printf\nD. `subl   $20, %esp`\n答案：A，考察汇编指令和栈的理解。",
+      "content": "1.  下面哪条指令不会引起`esp`的变化？\nA. `movl   %esp, %ebp`\nB. `pushl  %ebp`\nC. call   printf\nD. `subl   $20, %esp`\n答案：A，考察汇编指令和栈的理解。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9372,7 +9372,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "1.  下面哪条指令不会引起esp的变化？",
+        "stem": "1.  下面哪条指令不会引起`esp`的变化？",
         "choices": [
           {
             "key": "A",
@@ -9420,7 +9420,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1.  下面哪条指令不会引起esp的变化？",
+        "prompt": "1.  下面哪条指令不会引起`esp`的变化？",
         "answer": "答案：A，考察汇编指令和栈的理解。"
       },
       "presentation": {
@@ -9926,7 +9926,7 @@
       "exam": "2017期末",
       "questionNo": "第一题 1",
       "summary": "gdb 单步进入被调函数（si/ni）",
-      "content": "1.  在`gdb`调试中，下一条指令是`call func1`。下面哪条`gdb`指令能执行该指令并\n且停留在func1的第一条指令？\nA. br func1\nB. si\nC. ni\nD. disas func1\n答案：B\n解析：si（stepi）执行一条机器指令并在被调函数的第一条指令处停下；ni 会越过 `call`，br/disas 不是单步执行。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "1.  在`gdb`调试中，下一条指令是`call func1`。下面哪条`gdb`指令能执行该指令并\n且停留在`func1`的第一条指令？\nA. br func1\nB. si\nC. ni\nD. disas func1\n答案：B\n解析：si（stepi）执行一条机器指令并在被调函数的第一条指令处停下；ni 会越过 `call`，br/disas 不是单步执行。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9946,7 +9946,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "1.  在`gdb`调试中，下一条指令是`call func1`。下面哪条`gdb`指令能执行该指令并\n且停留在func1的第一条指令？",
+        "stem": "1.  在`gdb`调试中，下一条指令是`call func1`。下面哪条`gdb`指令能执行该指令并\n且停留在`func1`的第一条指令？",
         "choices": [
           {
             "key": "A",
@@ -9994,7 +9994,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1.  在`gdb`调试中，下一条指令是`call func1`。下面哪条`gdb`指令能执行该指令并\n且停留在func1的第一条指令？",
+        "prompt": "1.  在`gdb`调试中，下一条指令是`call func1`。下面哪条`gdb`指令能执行该指令并\n且停留在`func1`的第一条指令？",
         "answer": "答案：B\n解析：si（stepi）执行一条机器指令并在被调函数的第一条指令处停下；ni 会越过 `call`，br/disas 不是单步执行。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
@@ -10012,7 +10012,7 @@
       "exam": "2017期末",
       "questionNo": "第一题 3",
       "summary": "指令长度、test 与 cmp 等价、跳转表",
-      "content": "3.  下面说法正确的是：\nA. 不同指令的机器码长度是相同的\nB. `test %rax, %rax`恒等于`cmp $0, %rax`\nC. `switch`编译后总是会产生跳转表\nD. 以上都不对\n答案：B\n解析：`test %rax,%rax` 只把 rax 与自身相与，其 `ZF/SF/PF` 与 `cmp $0,%rax` 完全一致，`CF` 与 `OF` 也同为 0，二者在条件转移上等价；A 错（指令长度可变），C 错（`switch` 只有分支密集时才生成跳转表）。\n注：若按「标志位完全相同」的严格口径（`TEST` 的 `AF` 未定义），本题也可选 D「以上都不对」，此处取课程教材中「`TEST` 与 `CMP $0` 等价」的表述。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "3.  下面说法正确的是：\nA. 不同指令的机器码长度是相同的\nB. `test %rax, %rax`恒等于`cmp $0, %rax`\nC. `switch`编译后总是会产生跳转表\nD. 以上都不对\n答案：B\n解析：`test %rax,%rax` 只把 `rax` 与自身相与，其 `ZF/SF/PF` 与 `cmp $0,%rax` 完全一致，`CF` 与 `OF` 也同为 0，二者在条件转移上等价；A 错（指令长度可变），C 错（`switch` 只有分支密集时才生成跳转表）。\n注：若按「标志位完全相同」的严格口径（`TEST` 的 `AF` 未定义），本题也可选 D「以上都不对」，此处取课程教材中「`TEST` 与 `CMP $0` 等价」的表述。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10051,7 +10051,7 @@
             "content": "以上都不对"
           }
         ],
-        "answer": "答案：B\n解析：`test %rax,%rax` 只把 rax 与自身相与，其 `ZF/SF/PF` 与 `cmp $0,%rax` 完全一致，`CF` 与 `OF` 也同为 0，二者在条件转移上等价；A 错（指令长度可变），C 错（`switch` 只有分支密集时才生成跳转表）。\n注：若按「标志位完全相同」的严格口径（`TEST` 的 `AF` 未定义），本题也可选 D「以上都不对」，此处取课程教材中「`TEST` 与 `CMP $0` 等价」的表述。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：B\n解析：`test %rax,%rax` 只把 `rax` 与自身相与，其 `ZF/SF/PF` 与 `cmp $0,%rax` 完全一致，`CF` 与 `OF` 也同为 0，二者在条件转移上等价；A 错（指令长度可变），C 错（`switch` 只有分支密集时才生成跳转表）。\n注：若按「标志位完全相同」的严格口径（`TEST` 的 `AF` 未定义），本题也可选 D「以上都不对」，此处取课程教材中「`TEST` 与 `CMP $0` 等价」的表述。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -10081,7 +10081,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "3.  下面说法正确的是：",
-        "answer": "答案：B\n解析：`test %rax,%rax` 只把 rax 与自身相与，其 `ZF/SF/PF` 与 `cmp $0,%rax` 完全一致，`CF` 与 `OF` 也同为 0，二者在条件转移上等价；A 错（指令长度可变），C 错（`switch` 只有分支密集时才生成跳转表）。\n注：若按「标志位完全相同」的严格口径（`TEST` 的 `AF` 未定义），本题也可选 D「以上都不对」，此处取课程教材中「`TEST` 与 `CMP $0` 等价」的表述。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：B\n解析：`test %rax,%rax` 只把 `rax` 与自身相与，其 `ZF/SF/PF` 与 `cmp $0,%rax` 完全一致，`CF` 与 `OF` 也同为 0，二者在条件转移上等价；A 错（指令长度可变），C 错（`switch` 只有分支密集时才生成跳转表）。\n注：若按「标志位完全相同」的严格口径（`TEST` 的 `AF` 未定义），本题也可选 D「以上都不对」，此处取课程教材中「`TEST` 与 `CMP $0` 等价」的表述。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
@@ -13387,7 +13387,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 17",
       "summary": "GDB 常用命令（break/info registers/ni/si/p）辨误",
-      "content": "17. （2分）GDB是一款功能强大的调试工具，下列关于 GDB 的用法错误的是？\nA. BombLab 中为了避免炸弹爆炸，可使用命令 break explode_bomb 下断点，\n使程序自动跳过 explode_bomb 函数的执行\nB. 命令info registers可显示程序中所有寄存器的值，包括 16 个通用寄存器和\n程序计数器、条件码寄存器等其他寄存器\nC. 命令 ni, si 都会执行下一条指令，但如果该指令是函数调用，命令 ni 不会进\n入函数内部，命令 si 会进入函数内部\nD. 命令 p `$rsp` 表示将 `$rsp` 寄存器中的值打印出来，如果 p 后面加上 /x 或\n/d，表示打印成以十六进制或整数的形式\n答案：A\n\n解析：`break explode_bomb` 只是让程序在 explode_bomb 入口停下来，要\"跳过\"必须自己改 `%rip`（例如 jump 或 `return`），故 A 是错误用法。`info registers` 会显示 16 个通用寄存器以及 rip、eflags 等（B 对）；ni 不进入被调用函数、si 进入（C 对）；`p/x`、p/d 分别按十六进制、十进制打印（D 对）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "17. （2分）GDB是一款功能强大的调试工具，下列关于 GDB 的用法错误的是？\nA. BombLab 中为了避免炸弹爆炸，可使用命令 break explode_bomb 下断点，\n使程序自动跳过 explode_bomb 函数的执行\nB. 命令info registers可显示程序中所有寄存器的值，包括 16 个通用寄存器和\n程序计数器、条件码寄存器等其他寄存器\nC. 命令 ni, si 都会执行下一条指令，但如果该指令是函数调用，命令 ni 不会进\n入函数内部，命令 si 会进入函数内部\nD. 命令 p `$rsp` 表示将 `$rsp` 寄存器中的值打印出来，如果 p 后面加上 /x 或\n/d，表示打印成以十六进制或整数的形式\n答案：A\n\n解析：`break explode_bomb` 只是让程序在 `explode_bomb` 入口停下来，要\"跳过\"必须自己改 `%rip`（例如 jump 或 `return`），故 A 是错误用法。`info registers` 会显示 16 个通用寄存器以及 `rip`、eflags 等（B 对）；ni 不进入被调用函数、si 进入（C 对）；`p/x`、p/d 分别按十六进制、十进制打印（D 对）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -13426,7 +13426,7 @@
             "content": "命令 p `$rsp` 表示将 `$rsp` 寄存器中的值打印出来，如果 p 后面加上 /x 或\n/d，表示打印成以十六进制或整数的形式"
           }
         ],
-        "answer": "答案：A\n\n解析：`break explode_bomb` 只是让程序在 explode_bomb 入口停下来，要\"跳过\"必须自己改 `%rip`（例如 jump 或 `return`），故 A 是错误用法。`info registers` 会显示 16 个通用寄存器以及 rip、eflags 等（B 对）；ni 不进入被调用函数、si 进入（C 对）；`p/x`、p/d 分别按十六进制、十进制打印（D 对）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：A\n\n解析：`break explode_bomb` 只是让程序在 `explode_bomb` 入口停下来，要\"跳过\"必须自己改 `%rip`（例如 jump 或 `return`），故 A 是错误用法。`info registers` 会显示 16 个通用寄存器以及 `rip`、eflags 等（B 对）；ni 不进入被调用函数、si 进入（C 对）；`p/x`、p/d 分别按十六进制、十进制打印（D 对）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -13456,7 +13456,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "17. （2分）GDB是一款功能强大的调试工具，下列关于 GDB 的用法错误的是？",
-        "answer": "答案：A\n\n解析：`break explode_bomb` 只是让程序在 explode_bomb 入口停下来，要\"跳过\"必须自己改 `%rip`（例如 jump 或 `return`），故 A 是错误用法。`info registers` 会显示 16 个通用寄存器以及 rip、eflags 等（B 对）；ni 不进入被调用函数、si 进入（C 对）；`p/x`、p/d 分别按十六进制、十进制打印（D 对）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "答案：A\n\n解析：`break explode_bomb` 只是让程序在 `explode_bomb` 入口停下来，要\"跳过\"必须自己改 `%rip`（例如 jump 或 `return`），故 A 是错误用法。`info registers` 会显示 16 个通用寄存器以及 `rip`、eflags 等（B 对）；ni 不进入被调用函数、si 进入（C 对）；`p/x`、p/d 分别按十六进制、十进制打印（D 对）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {
         "status": "ready",
