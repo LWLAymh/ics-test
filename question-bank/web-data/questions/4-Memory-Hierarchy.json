@@ -9546,7 +9546,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第13讲 17",
       "summary": "直接映射 Cache 写分配写返回下的状态更新与命中统计",
-      "content": "17.（8分）有一个计算机系统，存储地址空间为64字节；采用直接映射（Direct-mapped）\n的数据高速缓存（cache），其容量为16字节；每个高速缓存块（cache block）\n为 4 字节（`B=4Byte/block`）；采用写分配（write-allocate）、写返回\n（write-back）策略。Cache的当前状态如下表。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 |  |  |  |\n| set1 | 1 | 0 | `Mem[4-7]` |\n| set2 |  |  |  |\n| set3 |  |  |  |\n经过如下地址访问序列后（十进制表示，每次访问1个字节）：18 40 50 16 43 48，\n在上表中更新Cache的状态。这个序列过程中，该高速缓存发生\n次Miss。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 11 | `Mem[48-51]` |\n| set1 | 1 | 00 | `Mem[4-7]` |\n| set2 | 1 | 10 | `Mem[40-43]` |\n| set3 | 0 |  |  |\n\n该序列过程中，这个高速缓存发生2次Hit和4次Miss。\n（注：表格每行2分，一行全对才得分；填空每空2分）",
+      "content": "17.（8分）有一个计算机系统，存储地址空间为64字节；采用直接映射（Direct-mapped）\n的数据高速缓存（cache），其容量为16字节；每个高速缓存块（cache block）\n为 4 字节（`B=4Byte/block`）；采用写分配（write-allocate）、写返回\n（write-back）策略。Cache的当前状态如下表。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | {{blank:set0-r1-c1}} | {{blank:set0-r1-c2}} | {{blank:set0-r1-c3}} |\n| set1 | 1 | 0 | `Mem[4-7]` |\n| set2 | {{blank:set2-r3-c1}} | {{blank:set2-r3-c2}} | {{blank:set2-r3-c3}} |\n| set3 | {{blank:set3-r4-c1}} |  |  |\n经过如下地址访问序列后（十进制表示，每次访问1个字节）：18 40 50 16 43 48，\n在上表中更新Cache的状态。这个序列过程中，该高速缓存发生\n次Miss。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 11 | `Mem[48-51]` |\n| set1 | 1 | 00 | `Mem[4-7]` |\n| set2 | 1 | 10 | `Mem[40-43]` |\n| set3 | 0 |  |  |\n\n该序列过程中，这个高速缓存发生2次Hit和4次Miss。\n（注：表格每行2分，一行全对才得分；填空每空2分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9564,19 +9564,135 @@
         "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/211.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "17.（8分）有一个计算机系统，存储地址空间为64字节；采用直接映射（Direct-mapped）\n的数据高速缓存（cache），其容量为16字节；每个高速缓存块（cache block）\n为 4 字节（`B=4Byte/block`）；采用写分配（write-allocate）、写返回\n（write-back）策略。Cache的当前状态如下表。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 |  |  |  |\n| set1 | 1 | 0 | `Mem[4-7]` |\n| set2 |  |  |  |\n| set3 |  |  |  |\n经过如下地址访问序列后（十进制表示，每次访问1个字节）：18 40 50 16 43 48，\n在上表中更新Cache的状态。这个序列过程中，该高速缓存发生\n次Miss。",
+        "stem": "17.（8分）有一个计算机系统，存储地址空间为64字节；采用直接映射（Direct-mapped）\n的数据高速缓存（cache），其容量为16字节；每个高速缓存块（cache block）\n为 4 字节（`B=4Byte/block`）；采用写分配（write-allocate）、写返回\n（write-back）策略。Cache的当前状态如下表。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | {{blank:set0-r1-c1}} | {{blank:set0-r1-c2}} | {{blank:set0-r1-c3}} |\n| set1 | 1 | 0 | `Mem[4-7]` |\n| set2 | {{blank:set2-r3-c1}} | {{blank:set2-r3-c2}} | {{blank:set2-r3-c3}} |\n| set3 | {{blank:set3-r4-c1}} |  |  |\n经过如下地址访问序列后（十进制表示，每次访问1个字节）：18 40 50 16 43 48，\n在上表中更新Cache的状态。这个序列过程中，该高速缓存发生\n次Miss。",
         "choices": [],
-        "answer": "|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 11 | `Mem[48-51]` |\n| set1 | 1 | 00 | `Mem[4-7]` |\n| set2 | 1 | 10 | `Mem[40-43]` |\n| set3 | 0 |  |  |\n\n该序列过程中，这个高速缓存发生2次Hit和4次Miss。\n（注：表格每行2分，一行全对才得分；填空每空2分）"
+        "answer": "|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 11 | `Mem[48-51]` |\n| set1 | 1 | 00 | `Mem[4-7]` |\n| set2 | 1 | 10 | `Mem[40-43]` |\n| set3 | 0 |  |  |\n\n该序列过程中，这个高速缓存发生2次Hit和4次Miss。\n（注：表格每行2分，一行全对才得分；填空每空2分）",
+        "blankAnswers": [
+          {
+            "id": "set0-r1-c1",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-r1-c2",
+            "acceptedAnswers": [
+              "11"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-r1-c3",
+            "acceptedAnswers": [
+              "Mem[48-51]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set2-r3-c1",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set2-r3-c2",
+            "acceptedAnswers": [
+              "10"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set2-r3-c3",
+            "acceptedAnswers": [
+              "Mem[40-43]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set3-r4-c1",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "set0-r1-c1",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-r1-c2",
+            "acceptedAnswers": [
+              "11"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set0-r1-c3",
+            "acceptedAnswers": [
+              "Mem[48-51]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set2-r3-c1",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set2-r3-c2",
+            "acceptedAnswers": [
+              "10"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set2-r3-c3",
+            "acceptedAnswers": [
+              "Mem[40-43]"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "set3-r4-c1",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "17.（8分）有一个计算机系统，存储地址空间为64字节；采用直接映射（Direct-mapped）\n的数据高速缓存（cache），其容量为16字节；每个高速缓存块（cache block）\n为 4 字节（`B=4Byte/block`）；采用写分配（write-allocate）、写返回\n（write-back）策略。Cache的当前状态如下表。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 |  |  |  |\n| set1 | 1 | 0 | `Mem[4-7]` |\n| set2 |  |  |  |\n| set3 |  |  |  |\n经过如下地址访问序列后（十进制表示，每次访问1个字节）：18 40 50 16 43 48，\n在上表中更新Cache的状态。这个序列过程中，该高速缓存发生\n次Miss。",
+        "prompt": "17.（8分）有一个计算机系统，存储地址空间为64字节；采用直接映射（Direct-mapped）\n的数据高速缓存（cache），其容量为16字节；每个高速缓存块（cache block）\n为 4 字节（`B=4Byte/block`）；采用写分配（write-allocate）、写返回\n（write-back）策略。Cache的当前状态如下表。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | {{blank:set0-r1-c1}} | {{blank:set0-r1-c2}} | {{blank:set0-r1-c3}} |\n| set1 | 1 | 0 | `Mem[4-7]` |\n| set2 | {{blank:set2-r3-c1}} | {{blank:set2-r3-c2}} | {{blank:set2-r3-c3}} |\n| set3 | {{blank:set3-r4-c1}} |  |  |\n经过如下地址访问序列后（十进制表示，每次访问1个字节）：18 40 50 16 43 48，\n在上表中更新Cache的状态。这个序列过程中，该高速缓存发生\n次Miss。",
         "answer": "|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 11 | `Mem[48-51]` |\n| set1 | 1 | 00 | `Mem[4-7]` |\n| set2 | 1 | 10 | `Mem[40-43]` |\n| set3 | 0 |  |  |\n\n该序列过程中，这个高速缓存发生2次Hit和4次Miss。\n（注：表格每行2分，一行全对才得分；填空每空2分）"
       },
       "presentation": {

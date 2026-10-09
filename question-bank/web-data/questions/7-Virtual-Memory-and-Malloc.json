@@ -3456,7 +3456,7 @@
       "exam": "2020期末",
       "questionNo": "第五题",
       "summary": "循环次序对缺页与 dTLB 失效的影响（兼 Memory Hierarchy）",
-      "content": "第五题（10分）\n考虑一对 n*n 矩阵相乘问题：`C=AB`。矩阵乘法函数通常用 3 个嵌套循环实现，分别用索引 `i`、`j` 和 `k` 标识。改变循环次序可以得到以下 6 个功能等价的版本：\n\n1）ijk 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (j = 0; j < n; j++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n2）jik 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (i = 0; i < n; i++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n3）jki 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (k = 0; k < n; k++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n4）kji 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (j = 0; j < n; j++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n5）kij 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (i = 0; i < n; i++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n\n6）ikj 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (k = 0; k < n; k++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n本题目具有以下假设：\n  每个数组都是一个`double`类型的n*n的数组，`sizeof(double)==8`\n  虚拟存储分页管理，页大小为4K字节，且A的起始地址为页对齐，ABC连续存放\n  TLB为全相联结构\n  初始时TLB为空，数据全部在硬盘中\n  一级dTLB有64表项，采用LRU（Least-Recently-Used）置换策略\n  分析过程只考虑矩阵操作本身的数据空间，且i/j/k/n/r/sum等变量都存放在寄存器中\n  分析过程不考虑进程切换和异常处理程序的影响\n  不考虑对页表本身的访问\n`n` 的取值：8、16、64、512；请填写缺页次数和一级 dTLB 失效次数：\n\n| `n` | 缺页次数 | 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 |  |  |  |  |  |  |  |\n| 16 |  |  |  |  |  |  |  |\n| 64 |  |  |  |  |  |  |  |\n| 512 |  |  |  |  |  |  |  |\n答案：缺页次数依次为 1、2、24、1536；dTLB 失效次数见下表。\n| `n` | 缺页次数 | dTLB 失效次数 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |\n| 16 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |\n| 64 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |\n| 512 | 1536 | 266436157 | 268661500 | 252182591 | 252182591 | 235241284 | 521528 |\n解析：缺页次数只与矩阵占用的页数有关，为 ceil(3n²×8/2¹²)，即 1、2、24、1536；TLB 失效次数等价于一个「块 4KB、64 行、全相联」高速缓存的 miss 次数，前三行因为 TLB 未满而恰好等于页面数。\n（来源：2019、2020期末-答案解析）",
+      "content": "第五题（10分）\n考虑一对 n*n 矩阵相乘问题：`C=AB`。矩阵乘法函数通常用 3 个嵌套循环实现，分别用索引 `i`、`j` 和 `k` 标识。改变循环次序可以得到以下 6 个功能等价的版本：\n\n1）ijk 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (j = 0; j < n; j++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n2）jik 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (i = 0; i < n; i++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n3）jki 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (k = 0; k < n; k++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n4）kji 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (j = 0; j < n; j++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n5）kij 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (i = 0; i < n; i++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n\n6）ikj 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (k = 0; k < n; k++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n本题目具有以下假设：\n  每个数组都是一个`double`类型的n*n的数组，`sizeof(double)==8`\n  虚拟存储分页管理，页大小为4K字节，且A的起始地址为页对齐，ABC连续存放\n  TLB为全相联结构\n  初始时TLB为空，数据全部在硬盘中\n  一级dTLB有64表项，采用LRU（Least-Recently-Used）置换策略\n  分析过程只考虑矩阵操作本身的数据空间，且i/j/k/n/r/sum等变量都存放在寄存器中\n  分析过程不考虑进程切换和异常处理程序的影响\n  不考虑对页表本身的访问\n`n` 的取值：8、16、64、512；请填写缺页次数和一级 dTLB 失效次数：\n\n| `n` | 缺页次数 | 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | {{blank:b8-r1-c1}} | {{blank:b8-r1-c2}} | {{blank:b8-r1-c3}} | {{blank:b8-r1-c4}} | {{blank:b8-r1-c5}} | {{blank:b8-r1-c6}} | {{blank:b8-r1-c7}} |\n| 16 | {{blank:b16-r2-c1}} | {{blank:b16-r2-c2}} | {{blank:b16-r2-c3}} | {{blank:b16-r2-c4}} | {{blank:b16-r2-c5}} | {{blank:b16-r2-c6}} | {{blank:b16-r2-c7}} |\n| 64 | {{blank:b64-r3-c1}} | {{blank:b64-r3-c2}} | {{blank:b64-r3-c3}} | {{blank:b64-r3-c4}} | {{blank:b64-r3-c5}} | {{blank:b64-r3-c6}} | {{blank:b64-r3-c7}} |\n| 512 | {{blank:b512-r4-c1}} | {{blank:b512-r4-c2}} | {{blank:b512-r4-c3}} | {{blank:b512-r4-c4}} | {{blank:b512-r4-c5}} | {{blank:b512-r4-c6}} | {{blank:b512-r4-c7}} |\n答案：缺页次数依次为 1、2、24、1536；dTLB 失效次数见下表。\n| `n` | 缺页次数 | dTLB 失效次数 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |\n| 16 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |\n| 64 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |\n| 512 | 1536 | 266436157 | 268661500 | 252182591 | 252182591 | 235241284 | 521528 |\n解析：缺页次数只与矩阵占用的页数有关，为 ceil(3n²×8/2¹²)，即 1、2、24、1536；TLB 失效次数等价于一个「块 4KB、64 行、全相联」高速缓存的 miss 次数，前三行因为 TLB 未满而恰好等于页面数。\n（来源：2019、2020期末-答案解析）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3477,19 +3477,471 @@
         "curated": "_curated/期末/2020期末-无答案/475.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第五题（10分）\n考虑一对 n*n 矩阵相乘问题：`C=AB`。矩阵乘法函数通常用 3 个嵌套循环实现，分别用索引 `i`、`j` 和 `k` 标识。改变循环次序可以得到以下 6 个功能等价的版本：\n\n1）ijk 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (j = 0; j < n; j++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n2）jik 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (i = 0; i < n; i++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n3）jki 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (k = 0; k < n; k++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n4）kji 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (j = 0; j < n; j++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n5）kij 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (i = 0; i < n; i++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n\n6）ikj 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (k = 0; k < n; k++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n本题目具有以下假设：\n  每个数组都是一个`double`类型的n*n的数组，`sizeof(double)==8`\n  虚拟存储分页管理，页大小为4K字节，且A的起始地址为页对齐，ABC连续存放\n  TLB为全相联结构\n  初始时TLB为空，数据全部在硬盘中\n  一级dTLB有64表项，采用LRU（Least-Recently-Used）置换策略\n  分析过程只考虑矩阵操作本身的数据空间，且i/j/k/n/r/sum等变量都存放在寄存器中\n  分析过程不考虑进程切换和异常处理程序的影响\n  不考虑对页表本身的访问\n`n` 的取值：8、16、64、512；请填写缺页次数和一级 dTLB 失效次数：\n\n| `n` | 缺页次数 | 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 |  |  |  |  |  |  |  |\n| 16 |  |  |  |  |  |  |  |\n| 64 |  |  |  |  |  |  |  |\n| 512 |  |  |  |  |  |  |  |",
+        "stem": "第五题（10分）\n考虑一对 n*n 矩阵相乘问题：`C=AB`。矩阵乘法函数通常用 3 个嵌套循环实现，分别用索引 `i`、`j` 和 `k` 标识。改变循环次序可以得到以下 6 个功能等价的版本：\n\n1）ijk 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (j = 0; j < n; j++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n2）jik 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (i = 0; i < n; i++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n3）jki 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (k = 0; k < n; k++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n4）kji 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (j = 0; j < n; j++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n5）kij 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (i = 0; i < n; i++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n\n6）ikj 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (k = 0; k < n; k++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n本题目具有以下假设：\n  每个数组都是一个`double`类型的n*n的数组，`sizeof(double)==8`\n  虚拟存储分页管理，页大小为4K字节，且A的起始地址为页对齐，ABC连续存放\n  TLB为全相联结构\n  初始时TLB为空，数据全部在硬盘中\n  一级dTLB有64表项，采用LRU（Least-Recently-Used）置换策略\n  分析过程只考虑矩阵操作本身的数据空间，且i/j/k/n/r/sum等变量都存放在寄存器中\n  分析过程不考虑进程切换和异常处理程序的影响\n  不考虑对页表本身的访问\n`n` 的取值：8、16、64、512；请填写缺页次数和一级 dTLB 失效次数：\n\n| `n` | 缺页次数 | 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | {{blank:b8-r1-c1}} | {{blank:b8-r1-c2}} | {{blank:b8-r1-c3}} | {{blank:b8-r1-c4}} | {{blank:b8-r1-c5}} | {{blank:b8-r1-c6}} | {{blank:b8-r1-c7}} |\n| 16 | {{blank:b16-r2-c1}} | {{blank:b16-r2-c2}} | {{blank:b16-r2-c3}} | {{blank:b16-r2-c4}} | {{blank:b16-r2-c5}} | {{blank:b16-r2-c6}} | {{blank:b16-r2-c7}} |\n| 64 | {{blank:b64-r3-c1}} | {{blank:b64-r3-c2}} | {{blank:b64-r3-c3}} | {{blank:b64-r3-c4}} | {{blank:b64-r3-c5}} | {{blank:b64-r3-c6}} | {{blank:b64-r3-c7}} |\n| 512 | {{blank:b512-r4-c1}} | {{blank:b512-r4-c2}} | {{blank:b512-r4-c3}} | {{blank:b512-r4-c4}} | {{blank:b512-r4-c5}} | {{blank:b512-r4-c6}} | {{blank:b512-r4-c7}} |",
         "choices": [],
-        "answer": "答案：缺页次数依次为 1、2、24、1536；dTLB 失效次数见下表。\n| `n` | 缺页次数 | dTLB 失效次数 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |\n| 16 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |\n| 64 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |\n| 512 | 1536 | 266436157 | 268661500 | 252182591 | 252182591 | 235241284 | 521528 |\n解析：缺页次数只与矩阵占用的页数有关，为 ceil(3n²×8/2¹²)，即 1、2、24、1536；TLB 失效次数等价于一个「块 4KB、64 行、全相联」高速缓存的 miss 次数，前三行因为 TLB 未满而恰好等于页面数。\n（来源：2019、2020期末-答案解析）"
+        "answer": "答案：缺页次数依次为 1、2、24、1536；dTLB 失效次数见下表。\n| `n` | 缺页次数 | dTLB 失效次数 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |\n| 16 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |\n| 64 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |\n| 512 | 1536 | 266436157 | 268661500 | 252182591 | 252182591 | 235241284 | 521528 |\n解析：缺页次数只与矩阵占用的页数有关，为 ceil(3n²×8/2¹²)，即 1、2、24、1536；TLB 失效次数等价于一个「块 4KB、64 行、全相联」高速缓存的 miss 次数，前三行因为 TLB 未满而恰好等于页面数。\n（来源：2019、2020期末-答案解析）",
+        "blankAnswers": [
+          {
+            "id": "b8-r1-c1",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c2",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c3",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c4",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c5",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c6",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c7",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c1",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c2",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c3",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c4",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c5",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c6",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c7",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c1",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c2",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c3",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c4",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c5",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c6",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c7",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c1",
+            "acceptedAnswers": [
+              "1536"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c2",
+            "acceptedAnswers": [
+              "266436157"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c3",
+            "acceptedAnswers": [
+              "268661500"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c4",
+            "acceptedAnswers": [
+              "252182591"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c5",
+            "acceptedAnswers": [
+              "252182591"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c6",
+            "acceptedAnswers": [
+              "235241284"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c7",
+            "acceptedAnswers": [
+              "521528"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "b8-r1-c1",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c2",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c3",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c4",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c5",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c6",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b8-r1-c7",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c1",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c2",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c3",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c4",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c5",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c6",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b16-r2-c7",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c1",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c2",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c3",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c4",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c5",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c6",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b64-r3-c7",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c1",
+            "acceptedAnswers": [
+              "1536"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c2",
+            "acceptedAnswers": [
+              "266436157"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c3",
+            "acceptedAnswers": [
+              "268661500"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c4",
+            "acceptedAnswers": [
+              "252182591"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c5",
+            "acceptedAnswers": [
+              "252182591"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c6",
+            "acceptedAnswers": [
+              "235241284"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b512-r4-c7",
+            "acceptedAnswers": [
+              "521528"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（10分）\n考虑一对 n*n 矩阵相乘问题：`C=AB`。矩阵乘法函数通常用 3 个嵌套循环实现，分别用索引 `i`、`j` 和 `k` 标识。改变循环次序可以得到以下 6 个功能等价的版本：\n\n1）ijk 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (j = 0; j < n; j++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n2）jik 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (i = 0; i < n; i++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n3）jki 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (k = 0; k < n; k++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n4）kji 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (j = 0; j < n; j++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n5）kij 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (i = 0; i < n; i++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n\n6）ikj 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (k = 0; k < n; k++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n本题目具有以下假设：\n  每个数组都是一个`double`类型的n*n的数组，`sizeof(double)==8`\n  虚拟存储分页管理，页大小为4K字节，且A的起始地址为页对齐，ABC连续存放\n  TLB为全相联结构\n  初始时TLB为空，数据全部在硬盘中\n  一级dTLB有64表项，采用LRU（Least-Recently-Used）置换策略\n  分析过程只考虑矩阵操作本身的数据空间，且i/j/k/n/r/sum等变量都存放在寄存器中\n  分析过程不考虑进程切换和异常处理程序的影响\n  不考虑对页表本身的访问\n`n` 的取值：8、16、64、512；请填写缺页次数和一级 dTLB 失效次数：\n\n| `n` | 缺页次数 | 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 |  |  |  |  |  |  |  |\n| 16 |  |  |  |  |  |  |  |\n| 64 |  |  |  |  |  |  |  |\n| 512 |  |  |  |  |  |  |  |",
+        "prompt": "第五题（10分）\n考虑一对 n*n 矩阵相乘问题：`C=AB`。矩阵乘法函数通常用 3 个嵌套循环实现，分别用索引 `i`、`j` 和 `k` 标识。改变循环次序可以得到以下 6 个功能等价的版本：\n\n1）ijk 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (j = 0; j < n; j++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n2）jik 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (i = 0; i < n; i++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n3）jki 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (k = 0; k < n; k++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n4）kji 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (j = 0; j < n; j++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n5）kij 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (i = 0; i < n; i++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n\n6）ikj 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (k = 0; k < n; k++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n本题目具有以下假设：\n  每个数组都是一个`double`类型的n*n的数组，`sizeof(double)==8`\n  虚拟存储分页管理，页大小为4K字节，且A的起始地址为页对齐，ABC连续存放\n  TLB为全相联结构\n  初始时TLB为空，数据全部在硬盘中\n  一级dTLB有64表项，采用LRU（Least-Recently-Used）置换策略\n  分析过程只考虑矩阵操作本身的数据空间，且i/j/k/n/r/sum等变量都存放在寄存器中\n  分析过程不考虑进程切换和异常处理程序的影响\n  不考虑对页表本身的访问\n`n` 的取值：8、16、64、512；请填写缺页次数和一级 dTLB 失效次数：\n\n| `n` | 缺页次数 | 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | {{blank:b8-r1-c1}} | {{blank:b8-r1-c2}} | {{blank:b8-r1-c3}} | {{blank:b8-r1-c4}} | {{blank:b8-r1-c5}} | {{blank:b8-r1-c6}} | {{blank:b8-r1-c7}} |\n| 16 | {{blank:b16-r2-c1}} | {{blank:b16-r2-c2}} | {{blank:b16-r2-c3}} | {{blank:b16-r2-c4}} | {{blank:b16-r2-c5}} | {{blank:b16-r2-c6}} | {{blank:b16-r2-c7}} |\n| 64 | {{blank:b64-r3-c1}} | {{blank:b64-r3-c2}} | {{blank:b64-r3-c3}} | {{blank:b64-r3-c4}} | {{blank:b64-r3-c5}} | {{blank:b64-r3-c6}} | {{blank:b64-r3-c7}} |\n| 512 | {{blank:b512-r4-c1}} | {{blank:b512-r4-c2}} | {{blank:b512-r4-c3}} | {{blank:b512-r4-c4}} | {{blank:b512-r4-c5}} | {{blank:b512-r4-c6}} | {{blank:b512-r4-c7}} |",
         "answer": "答案：缺页次数依次为 1、2、24、1536；dTLB 失效次数见下表。\n| `n` | 缺页次数 | dTLB 失效次数 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |\n| 16 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |\n| 64 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |\n| 512 | 1536 | 266436157 | 268661500 | 252182591 | 252182591 | 235241284 | 521528 |\n解析：缺页次数只与矩阵占用的页数有关，为 ceil(3n²×8/2¹²)，即 1、2、24、1536；TLB 失效次数等价于一个「块 4KB、64 行、全相联」高速缓存的 miss 次数，前三行因为 TLB 未满而恰好等于页面数。\n（来源：2019、2020期末-答案解析）"
       },
       "presentation": {

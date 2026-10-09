@@ -685,7 +685,7 @@
       "exam": "2012期中",
       "questionNo": "Problem B 2",
       "summary": "5 位浮点（k=3,n=2,bias=3）编码与就近偶数舍入",
-      "content": "2. Floating point encoding. Consider the following 5-bit floating point representation based on\n   the IEEE floating point format. This format does not have a sign bit – it can only represent\n   nonnegative numbers.\n   • There are k = 3 exponent bits. The exponent bias is 3.\n   • There are n = 2 fraction bits.\n   Recall that numeric values are encoded as a value of the form V = M × $2^E$, where E is the\n   exponent after biasing, and M is the significant value. The fraction bits encode the significant\n   value M using either a denormalized (exponent field 0) or a normalized representation (exponent\n   field nonzero). The exponent E is given by E = 1 – Bias for denormalized values and E = e – Bias\n   for normalized values, where e is the value of the exponent field exp interpreted as an unsigned\n   number.\n   Below, you are given some decimal values, and your task it to encode them in floating point\n   format. In addition, you should give the rounded value of the encoded floating point number. To\n   get credit, you must give these as whole numbers (e.g., 17) or as fractions in reduced form (e.g.,\n   3/4). Any rounding of the significand is based on round-to-even, which rounds an\n   unrepresentable value that lies halfway between two representable values to the nearest even\n   representable value.\n   **(8pts)**\n\n\n\n| Value | Floating Point Bits | Rounded value |\n| --- | --- | --- |\n| 9/32 | 001 00 | 1/4 |\n| 3 | | |\n| 9 | | |\n| 3/16 | | |\n| 15/2 | | |\n答案：\n| Value | FP bits | Rounded value |\n| --- | --- | --- |\n| 3 | `100 10` | 3　normalized, exact |\n| 9 | `110 00` | 8　normalized, round down, because 10 is odd |\n| 3/16 | `000 11` | 3/16　exact, denorm |\n| 15/2 | `110 00` | 8　normalized, round up, change exponent |",
+      "content": "2. Floating point encoding. Consider the following 5-bit floating point representation based on\n   the IEEE floating point format. This format does not have a sign bit – it can only represent\n   nonnegative numbers.\n   • There are k = 3 exponent bits. The exponent bias is 3.\n   • There are n = 2 fraction bits.\n   Recall that numeric values are encoded as a value of the form V = M × $2^E$, where E is the\n   exponent after biasing, and M is the significant value. The fraction bits encode the significant\n   value M using either a denormalized (exponent field 0) or a normalized representation (exponent\n   field nonzero). The exponent E is given by E = 1 – Bias for denormalized values and E = e – Bias\n   for normalized values, where e is the value of the exponent field exp interpreted as an unsigned\n   number.\n   Below, you are given some decimal values, and your task it to encode them in floating point\n   format. In addition, you should give the rounded value of the encoded floating point number. To\n   get credit, you must give these as whole numbers (e.g., 17) or as fractions in reduced form (e.g.,\n   3/4). Any rounding of the significand is based on round-to-even, which rounds an\n   unrepresentable value that lies halfway between two representable values to the nearest even\n   representable value.\n   **(8pts)**\n\n\n\n| Value | Floating Point Bits | Rounded value |\n| --- | --- | --- |\n| 9/32 | 001 00 | 1/4 |\n| 3 | {{blank:b3-r2-c1}} | {{blank:b3-r2-c2}} |\n| 9 | {{blank:b9-r3-c1}} | {{blank:b9-r3-c2}} |\n| 3/16 | {{blank:b3-16-r4-c1}} | {{blank:b3-16-r4-c2}} |\n| 15/2 | {{blank:b15-2-r5-c1}} | {{blank:b15-2-r5-c2}} |\n答案：\n| Value | FP bits | Rounded value |\n| --- | --- | --- |\n| 3 | `100 10` | 3　normalized, exact |\n| 9 | `110 00` | 8　normalized, round down, because 10 is odd |\n| 3/16 | `000 11` | 3/16　exact, denorm |\n| 15/2 | `110 00` | 8　normalized, round up, change exponent |",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -703,19 +703,151 @@
         "curated": "_curated/期中/2012期中-带答案/178.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "2. Floating point encoding. Consider the following 5-bit floating point representation based on\n   the IEEE floating point format. This format does not have a sign bit – it can only represent\n   nonnegative numbers.\n   • There are k = 3 exponent bits. The exponent bias is 3.\n   • There are n = 2 fraction bits.\n   Recall that numeric values are encoded as a value of the form V = M × $2^E$, where E is the\n   exponent after biasing, and M is the significant value. The fraction bits encode the significant\n   value M using either a denormalized (exponent field 0) or a normalized representation (exponent\n   field nonzero). The exponent E is given by E = 1 – Bias for denormalized values and E = e – Bias\n   for normalized values, where e is the value of the exponent field exp interpreted as an unsigned\n   number.\n   Below, you are given some decimal values, and your task it to encode them in floating point\n   format. In addition, you should give the rounded value of the encoded floating point number. To\n   get credit, you must give these as whole numbers (e.g., 17) or as fractions in reduced form (e.g.,\n   3/4). Any rounding of the significand is based on round-to-even, which rounds an\n   unrepresentable value that lies halfway between two representable values to the nearest even\n   representable value.\n   **(8pts)**\n\n\n\n| Value | Floating Point Bits | Rounded value |\n| --- | --- | --- |\n| 9/32 | 001 00 | 1/4 |\n| 3 | | |\n| 9 | | |\n| 3/16 | | |\n| 15/2 | | |",
+        "stem": "2. Floating point encoding. Consider the following 5-bit floating point representation based on\n   the IEEE floating point format. This format does not have a sign bit – it can only represent\n   nonnegative numbers.\n   • There are k = 3 exponent bits. The exponent bias is 3.\n   • There are n = 2 fraction bits.\n   Recall that numeric values are encoded as a value of the form V = M × $2^E$, where E is the\n   exponent after biasing, and M is the significant value. The fraction bits encode the significant\n   value M using either a denormalized (exponent field 0) or a normalized representation (exponent\n   field nonzero). The exponent E is given by E = 1 – Bias for denormalized values and E = e – Bias\n   for normalized values, where e is the value of the exponent field exp interpreted as an unsigned\n   number.\n   Below, you are given some decimal values, and your task it to encode them in floating point\n   format. In addition, you should give the rounded value of the encoded floating point number. To\n   get credit, you must give these as whole numbers (e.g., 17) or as fractions in reduced form (e.g.,\n   3/4). Any rounding of the significand is based on round-to-even, which rounds an\n   unrepresentable value that lies halfway between two representable values to the nearest even\n   representable value.\n   **(8pts)**\n\n\n\n| Value | Floating Point Bits | Rounded value |\n| --- | --- | --- |\n| 9/32 | 001 00 | 1/4 |\n| 3 | {{blank:b3-r2-c1}} | {{blank:b3-r2-c2}} |\n| 9 | {{blank:b9-r3-c1}} | {{blank:b9-r3-c2}} |\n| 3/16 | {{blank:b3-16-r4-c1}} | {{blank:b3-16-r4-c2}} |\n| 15/2 | {{blank:b15-2-r5-c1}} | {{blank:b15-2-r5-c2}} |",
         "choices": [],
-        "answer": "答案：\n| Value | FP bits | Rounded value |\n| --- | --- | --- |\n| 3 | `100 10` | 3　normalized, exact |\n| 9 | `110 00` | 8　normalized, round down, because 10 is odd |\n| 3/16 | `000 11` | 3/16　exact, denorm |\n| 15/2 | `110 00` | 8　normalized, round up, change exponent |"
+        "answer": "答案：\n| Value | FP bits | Rounded value |\n| --- | --- | --- |\n| 3 | `100 10` | 3　normalized, exact |\n| 9 | `110 00` | 8　normalized, round down, because 10 is odd |\n| 3/16 | `000 11` | 3/16　exact, denorm |\n| 15/2 | `110 00` | 8　normalized, round up, change exponent |",
+        "blankAnswers": [
+          {
+            "id": "b3-r2-c1",
+            "acceptedAnswers": [
+              "100 10"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b3-r2-c2",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b9-r3-c1",
+            "acceptedAnswers": [
+              "110 00"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b9-r3-c2",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b3-16-r4-c1",
+            "acceptedAnswers": [
+              "000 11"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b3-16-r4-c2",
+            "acceptedAnswers": [
+              "3/16"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b15-2-r5-c1",
+            "acceptedAnswers": [
+              "110 00"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b15-2-r5-c2",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "b3-r2-c1",
+            "acceptedAnswers": [
+              "100 10"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b3-r2-c2",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b9-r3-c1",
+            "acceptedAnswers": [
+              "110 00"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b9-r3-c2",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b3-16-r4-c1",
+            "acceptedAnswers": [
+              "000 11"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b3-16-r4-c2",
+            "acceptedAnswers": [
+              "3/16"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b15-2-r5-c1",
+            "acceptedAnswers": [
+              "110 00"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "b15-2-r5-c2",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. Floating point encoding. Consider the following 5-bit floating point representation based on\n   the IEEE floating point format. This format does not have a sign bit – it can only represent\n   nonnegative numbers.\n   • There are k = 3 exponent bits. The exponent bias is 3.\n   • There are n = 2 fraction bits.\n   Recall that numeric values are encoded as a value of the form V = M × $2^E$, where E is the\n   exponent after biasing, and M is the significant value. The fraction bits encode the significant\n   value M using either a denormalized (exponent field 0) or a normalized representation (exponent\n   field nonzero). The exponent E is given by E = 1 – Bias for denormalized values and E = e – Bias\n   for normalized values, where e is the value of the exponent field exp interpreted as an unsigned\n   number.\n   Below, you are given some decimal values, and your task it to encode them in floating point\n   format. In addition, you should give the rounded value of the encoded floating point number. To\n   get credit, you must give these as whole numbers (e.g., 17) or as fractions in reduced form (e.g.,\n   3/4). Any rounding of the significand is based on round-to-even, which rounds an\n   unrepresentable value that lies halfway between two representable values to the nearest even\n   representable value.\n   **(8pts)**\n\n\n\n| Value | Floating Point Bits | Rounded value |\n| --- | --- | --- |\n| 9/32 | 001 00 | 1/4 |\n| 3 | | |\n| 9 | | |\n| 3/16 | | |\n| 15/2 | | |",
+        "prompt": "2. Floating point encoding. Consider the following 5-bit floating point representation based on\n   the IEEE floating point format. This format does not have a sign bit – it can only represent\n   nonnegative numbers.\n   • There are k = 3 exponent bits. The exponent bias is 3.\n   • There are n = 2 fraction bits.\n   Recall that numeric values are encoded as a value of the form V = M × $2^E$, where E is the\n   exponent after biasing, and M is the significant value. The fraction bits encode the significant\n   value M using either a denormalized (exponent field 0) or a normalized representation (exponent\n   field nonzero). The exponent E is given by E = 1 – Bias for denormalized values and E = e – Bias\n   for normalized values, where e is the value of the exponent field exp interpreted as an unsigned\n   number.\n   Below, you are given some decimal values, and your task it to encode them in floating point\n   format. In addition, you should give the rounded value of the encoded floating point number. To\n   get credit, you must give these as whole numbers (e.g., 17) or as fractions in reduced form (e.g.,\n   3/4). Any rounding of the significand is based on round-to-even, which rounds an\n   unrepresentable value that lies halfway between two representable values to the nearest even\n   representable value.\n   **(8pts)**\n\n\n\n| Value | Floating Point Bits | Rounded value |\n| --- | --- | --- |\n| 9/32 | 001 00 | 1/4 |\n| 3 | {{blank:b3-r2-c1}} | {{blank:b3-r2-c2}} |\n| 9 | {{blank:b9-r3-c1}} | {{blank:b9-r3-c2}} |\n| 3/16 | {{blank:b3-16-r4-c1}} | {{blank:b3-16-r4-c2}} |\n| 15/2 | {{blank:b15-2-r5-c1}} | {{blank:b15-2-r5-c2}} |",
         "answer": "答案：\n| Value | FP bits | Rounded value |\n| --- | --- | --- |\n| 3 | `100 10` | 3　normalized, exact |\n| 9 | `110 00` | 8　normalized, round down, because 10 is odd |\n| 3/16 | `000 11` | 3/16　exact, denorm |\n| 15/2 | `110 00` | 8　normalized, round up, change exponent |"
       },
       "presentation": {
@@ -1216,7 +1348,7 @@
       "exam": "2013期中",
       "questionNo": "第二题 1)",
       "summary": "有符号/无符号比较与运算溢出判断",
-      "content": "第二题（8分）\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行1分）\n```c\nint x, y;\nunsigned u, v;\n```\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 |  |  |\n| `u<= -1` |  |  |\n| if x> y, then -x < -y |  |  |\n| if u> v, then -u > -v |  |  |\n答案：\n\n| | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | F | X = $-2^{w-1}$ |\n| `u<= -1` | T | -1 作为无符号来比大于 `u` |\n| if x> y, then -x < -y | F | `X=0, y` = $-2^{w-1}$ |\n| if u> v, then -u > -v | F | `U=2, v=1` |",
+      "content": "第二题（8分）\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行1分）\n```c\nint x, y;\nunsigned u, v;\n```\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | {{blank:if-x-0-then-x-2-0-r1-c1}} |  |\n| `u<= -1` | {{blank:u-1-r2-c1}} |  |\n| if x> y, then -x < -y | {{blank:if-x-y-then-x-y-r3-c1}} |  |\n| if u> v, then -u > -v | {{blank:if-u-v-then-u-v-r4-c1}} |  |\n答案：\n\n| | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | F | X = $-2^{w-1}$ |\n| `u<= -1` | T | -1 作为无符号来比大于 `u` |\n| if x> y, then -x < -y | F | `X=0, y` = $-2^{w-1}$ |\n| if u> v, then -u > -v | F | `U=2, v=1` |",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1234,19 +1366,87 @@
         "curated": "_curated/期中/2013期中-带答案/176.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第二题（8分）\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行1分）\n```c\nint x, y;\nunsigned u, v;\n```\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 |  |  |\n| `u<= -1` |  |  |\n| if x> y, then -x < -y |  |  |\n| if u> v, then -u > -v |  |  |",
+        "stem": "第二题（8分）\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行1分）\n```c\nint x, y;\nunsigned u, v;\n```\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | {{blank:if-x-0-then-x-2-0-r1-c1}} |  |\n| `u<= -1` | {{blank:u-1-r2-c1}} |  |\n| if x> y, then -x < -y | {{blank:if-x-y-then-x-y-r3-c1}} |  |\n| if u> v, then -u > -v | {{blank:if-u-v-then-u-v-r4-c1}} |  |",
         "choices": [],
-        "answer": "答案：\n\n| | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | F | X = $-2^{w-1}$ |\n| `u<= -1` | T | -1 作为无符号来比大于 `u` |\n| if x> y, then -x < -y | F | `X=0, y` = $-2^{w-1}$ |\n| if u> v, then -u > -v | F | `U=2, v=1` |"
+        "answer": "答案：\n\n| | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | F | X = $-2^{w-1}$ |\n| `u<= -1` | T | -1 作为无符号来比大于 `u` |\n| if x> y, then -x < -y | F | `X=0, y` = $-2^{w-1}$ |\n| if u> v, then -u > -v | F | `U=2, v=1` |",
+        "blankAnswers": [
+          {
+            "id": "if-x-0-then-x-2-0-r1-c1",
+            "acceptedAnswers": [
+              "F"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "u-1-r2-c1",
+            "acceptedAnswers": [
+              "T"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "if-x-y-then-x-y-r3-c1",
+            "acceptedAnswers": [
+              "F"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "if-u-v-then-u-v-r4-c1",
+            "acceptedAnswers": [
+              "F"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "if-x-0-then-x-2-0-r1-c1",
+            "acceptedAnswers": [
+              "F"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "u-1-r2-c1",
+            "acceptedAnswers": [
+              "T"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "if-x-y-then-x-y-r3-c1",
+            "acceptedAnswers": [
+              "F"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "if-u-v-then-u-v-r4-c1",
+            "acceptedAnswers": [
+              "F"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（8分）\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行1分）\n```c\nint x, y;\nunsigned u, v;\n```\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 |  |  |\n| `u<= -1` |  |  |\n| if x> y, then -x < -y |  |  |\n| if u> v, then -u > -v |  |  |",
+        "prompt": "第二题（8分）\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行1分）\n```c\nint x, y;\nunsigned u, v;\n```\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | {{blank:if-x-0-then-x-2-0-r1-c1}} |  |\n| `u<= -1` | {{blank:u-1-r2-c1}} |  |\n| if x> y, then -x < -y | {{blank:if-x-y-then-x-y-r3-c1}} |  |\n| if u> v, then -u > -v | {{blank:if-u-v-then-u-v-r4-c1}} |  |",
         "answer": "答案：\n\n| | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | F | X = $-2^{w-1}$ |\n| `u<= -1` | T | -1 作为无符号来比大于 `u` |\n| if x> y, then -x < -y | F | `X=0, y` = $-2^{w-1}$ |\n| if u> v, then -u > -v | F | `U=2, v=1` |"
       },
       "presentation": {
@@ -5257,7 +5457,7 @@
       "exam": "2019期中",
       "questionNo": "第二题 1",
       "summary": "8 位整数最大值溢出与补码/无符号加法",
-      "content": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制： | 十进制： |  |\n| Two’s Complement | 二进制： | 十进制： |  |\n答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |",
+      "content": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：{{blank:unsigned-r1-c1}} | 十进制：{{blank:unsigned-r1-c2}} | {{blank:unsigned-r1-c3}} |\n| Two’s Complement | 二进制：{{blank:two-s-complement-r2-c1}} | 十进制：{{blank:two-s-complement-r2-c2}} | {{blank:two-s-complement-r2-c3}} |\n答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5278,19 +5478,119 @@
         "curated": "_curated/期中/2019期中-带答案/257.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制： | 十进制： |  |\n| Two’s Complement | 二进制： | 十进制： |  |",
+        "stem": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：{{blank:unsigned-r1-c1}} | 十进制：{{blank:unsigned-r1-c2}} | {{blank:unsigned-r1-c3}} |\n| Two’s Complement | 二进制：{{blank:two-s-complement-r2-c1}} | 十进制：{{blank:two-s-complement-r2-c2}} | {{blank:two-s-complement-r2-c3}} |",
         "choices": [],
-        "answer": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |"
+        "answer": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |",
+        "blankAnswers": [
+          {
+            "id": "unsigned-r1-c1",
+            "acceptedAnswers": [
+              "0000 0000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "unsigned-r1-c2",
+            "acceptedAnswers": [
+              "168"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "unsigned-r1-c3",
+            "acceptedAnswers": [
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "two-s-complement-r2-c1",
+            "acceptedAnswers": [
+              "1000 0000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "two-s-complement-r2-c2",
+            "acceptedAnswers": [
+              "-88"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "two-s-complement-r2-c3",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "unsigned-r1-c1",
+            "acceptedAnswers": [
+              "0000 0000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "unsigned-r1-c2",
+            "acceptedAnswers": [
+              "168"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "unsigned-r1-c3",
+            "acceptedAnswers": [
+              "是"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "two-s-complement-r2-c1",
+            "acceptedAnswers": [
+              "1000 0000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "two-s-complement-r2-c2",
+            "acceptedAnswers": [
+              "-88"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "two-s-complement-r2-c3",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制： | 十进制： |  |\n| Two’s Complement | 二进制： | 十进制： |  |",
+        "prompt": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：{{blank:unsigned-r1-c1}} | 十进制：{{blank:unsigned-r1-c2}} | {{blank:unsigned-r1-c3}} |\n| Two’s Complement | 二进制：{{blank:two-s-complement-r2-c1}} | 十进制：{{blank:two-s-complement-r2-c2}} | {{blank:two-s-complement-r2-c3}} |",
         "answer": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |"
       },
       "presentation": {
