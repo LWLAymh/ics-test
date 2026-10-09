@@ -32,7 +32,7 @@ CUR = os.path.join(BASE, "_curated")
 
 sys.path.insert(0, HERE)
 import build_modules as bm                              # noqa: E402
-import build_web_data as bw                             # noqa: E402
+import legacy_v3 as bw                                  # noqa: E402
 import project as P                                     # noqa: E402
 import curated as CU                                    # noqa: E402
 

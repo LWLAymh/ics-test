@@ -1,0 +1,25 @@
+name: Validate v5 (no deployment)
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: python -m pip install -r question-bank/_tools/requirements.txt
+      - run: npm run compile-bank
+      - run: npm run check
+      - run: npm run build
+      - name: Generated source must be committed
+        run: git diff --exit-code -- question-bank/web-data

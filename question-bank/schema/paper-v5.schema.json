@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "revision",
+    "displayName",
+    "title",
+    "year",
+    "academicYear",
+    "term",
+    "examKind",
+    "sequence",
+    "questionIds",
+    "coverage",
+    "sourceDocuments"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "5"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^p-[a-f0-9]{16}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "year": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1900,
+      "maximum": 2200
+    },
+    "academicYear": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9]{4}-[0-9]{4}$"
+    },
+    "term": {
+      "enum": [
+        "spring",
+        "summer",
+        "fall",
+        "winter",
+        "unknown"
+      ]
+    },
+    "examKind": {
+      "enum": [
+        "midterm",
+        "final",
+        "stage-test",
+        "quiz",
+        "lab-quiz",
+        "practice",
+        "other"
+      ]
+    },
+    "sequence": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "questionIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^q-[a-f0-9]{16}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "note"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "unknown",
+            "partial",
+            "complete"
+          ]
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "sourceDocuments": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lwlaymh.github.io/ics-test/schema/paper-v5.schema.json",
+  "title": "ICS Paper v5"
+}

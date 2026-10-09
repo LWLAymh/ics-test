@@ -179,6 +179,8 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-blank-number { color: var(--text-muted); font: 11px/1 var(--font-ui); }
 .ics-blank-input { width: clamp(90px, 16vw, 170px); max-width: 100%; min-height: 32px; padding: 4px 8px; border: 1px solid var(--border); border-bottom-color: var(--text-muted); border-radius: 3px; background: var(--surface); color: var(--text); font: 14px/1.5 var(--font-mono); }
 .ics-blank-input.missing { border-color: var(--ics-danger); }
+.ics-blank-input[data-width="short"] { width: 90px; }
+.ics-blank-input[data-width="long"] { width: clamp(150px, 24vw, 260px); }
 .ics-blank-input:disabled { opacity: 1; color: var(--text-muted); background: var(--bg-soft); }
 .ics-issue-board-panel { padding: 0; }
 .ics-issue-board > summary { display: flex; align-items: center; gap: 14px; padding: 16px 24px; cursor: pointer; list-style: none; }

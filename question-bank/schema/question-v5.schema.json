@@ -1,0 +1,1079 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "revision",
+    "paperId",
+    "paperOrder",
+    "number",
+    "classification",
+    "type",
+    "stem",
+    "solution",
+    "publication",
+    "sources"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "5"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^q-[a-f0-9]{16}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "paperId": {
+      "type": "string",
+      "pattern": "^p-[a-f0-9]{16}$"
+    },
+    "paperOrder": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "number": {
+      "$ref": "#/$defs/number"
+    },
+    "classification": {
+      "$ref": "#/$defs/classification"
+    },
+    "type": {
+      "enum": [
+        "single-choice",
+        "multiple-choice",
+        "fill",
+        "short-answer",
+        "composite",
+        "unclassified-choice"
+      ]
+    },
+    "stem": {
+      "$ref": "#/$defs/content"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/option"
+      },
+      "minItems": 2
+    },
+    "parts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/part"
+      },
+      "minItems": 2
+    },
+    "solution": {
+      "$ref": "#/$defs/solution"
+    },
+    "publication": {
+      "$ref": "#/$defs/publication"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/origin"
+      },
+      "minItems": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "single-choice",
+              "multiple-choice",
+              "unclassified-choice"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "options"
+        ],
+        "not": {
+          "required": [
+            "parts"
+          ]
+        },
+        "properties": {
+          "solution": {
+            "properties": {
+              "grading": {
+                "enum": [
+                  "choice",
+                  "self",
+                  "none"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "single-choice"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "solution": {
+            "properties": {
+              "correctOptionIds": {
+                "maxItems": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "fill"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "options"
+              ]
+            },
+            {
+              "required": [
+                "parts"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "solution": {
+            "properties": {
+              "grading": {
+                "enum": [
+                  "blanks",
+                  "self",
+                  "none"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "short-answer"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "options"
+              ]
+            },
+            {
+              "required": [
+                "parts"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "solution": {
+            "properties": {
+              "grading": {
+                "enum": [
+                  "self",
+                  "none"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "composite"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "required": [
+          "parts"
+        ],
+        "not": {
+          "required": [
+            "options"
+          ]
+        },
+        "properties": {
+          "solution": {
+            "properties": {
+              "grading": {
+                "enum": [
+                  "parts",
+                  "none"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "blank": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "marker",
+        "occurrence",
+        "width"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+        },
+        "marker": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "label": {
+          "type": "string"
+        },
+        "width": {
+          "enum": [
+            "short",
+            "medium",
+            "long"
+          ]
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "text"
+      ],
+      "properties": {
+        "format": {
+          "const": "markdown"
+        },
+        "text": {
+          "type": "string"
+        },
+        "blanks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/blank"
+          },
+          "minItems": 0
+        }
+      }
+    },
+    "numberPart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "display",
+        "value"
+      ],
+      "properties": {
+        "display": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "number": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "display",
+        "major",
+        "minor",
+        "parts"
+      ],
+      "properties": {
+        "display": {
+          "type": "string"
+        },
+        "major": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/numberPart"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "minor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/numberPart"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primaryModuleId",
+        "moduleIds",
+        "tags"
+      ],
+      "properties": {
+        "primaryModuleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "moduleIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "origin",
+        "crossChecked"
+      ],
+      "properties": {
+        "origin": {
+          "enum": [
+            "unknown",
+            "official",
+            "human-derived",
+            "ai-derived"
+          ]
+        },
+        "crossChecked": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "attribution": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "origin": {
+                "const": "ai-derived"
+              }
+            },
+            "required": [
+              "origin"
+            ]
+          },
+          "then": {
+            "required": [
+              "attribution"
+            ],
+            "properties": {
+              "attribution": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blankId",
+        "method"
+      ],
+      "properties": {
+        "blankId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "enum": [
+            "exact",
+            "self"
+          ]
+        },
+        "acceptedAnswers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "normalize": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "trimWhitespace",
+            "caseSensitive"
+          ],
+          "properties": {
+            "trimWhitespace": {
+              "type": "boolean"
+            },
+            "caseSensitive": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "method": {
+                "const": "exact"
+              }
+            },
+            "required": [
+              "method"
+            ]
+          },
+          "then": {
+            "required": [
+              "acceptedAnswers",
+              "normalize"
+            ]
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "acceptedAnswers"
+                  ]
+                },
+                {
+                  "required": [
+                    "normalize"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "solution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "grading",
+        "reference",
+        "provenance"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "available",
+            "missing",
+            "needs-review"
+          ]
+        },
+        "grading": {
+          "enum": [
+            "choice",
+            "blanks",
+            "self",
+            "none",
+            "parts"
+          ]
+        },
+        "correctOptionIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-H]$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "blankAnswers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rule"
+          },
+          "minItems": 1
+        },
+        "reference": {
+          "$ref": "#/$defs/content"
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "missing",
+                  "needs-review"
+                ]
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "required": [
+              "reason"
+            ],
+            "properties": {
+              "grading": {
+                "const": "none"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "available"
+              }
+            },
+            "required": [
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "grading": {
+                "not": {
+                  "const": "none"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "grading": {
+                "const": "choice"
+              }
+            },
+            "required": [
+              "grading"
+            ]
+          },
+          "then": {
+            "required": [
+              "correctOptionIds"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "correctOptionIds"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "grading": {
+                "const": "blanks"
+              }
+            },
+            "required": [
+              "grading"
+            ]
+          },
+          "then": {
+            "required": [
+              "blankAnswers"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "blankAnswers"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "content"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-H]$"
+        },
+        "content": {
+          "$ref": "#/$defs/content"
+        }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document",
+        "provenance"
+      ],
+      "properties": {
+        "legacyId": {
+          "type": "string",
+          "pattern": "^q-[a-f0-9]{16}$"
+        },
+        "document": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lines": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "end": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "curated": {
+          "type": "string"
+        },
+        "provenance": {
+          "enum": [
+            "verbatim",
+            "reflow",
+            "rewritten",
+            "unknown"
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "editorNote": {
+          "type": "string"
+        }
+      }
+    },
+    "part": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "number",
+        "type",
+        "moduleIds",
+        "stem",
+        "solution",
+        "sources",
+        "issues"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "number": {
+          "$ref": "#/$defs/number"
+        },
+        "type": {
+          "enum": [
+            "single-choice",
+            "multiple-choice",
+            "fill",
+            "short-answer",
+            "unclassified-choice"
+          ]
+        },
+        "moduleIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "stem": {
+          "$ref": "#/$defs/content"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/option"
+          },
+          "minItems": 2
+        },
+        "solution": {
+          "$ref": "#/$defs/solution"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/origin"
+          },
+          "minItems": 1
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "single-choice",
+                  "multiple-choice",
+                  "unclassified-choice"
+                ]
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "required": [
+              "options"
+            ],
+            "not": {
+              "required": [
+                "parts"
+              ]
+            },
+            "properties": {
+              "solution": {
+                "properties": {
+                  "grading": {
+                    "enum": [
+                      "choice",
+                      "self",
+                      "none"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "single-choice"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "solution": {
+                "properties": {
+                  "correctOptionIds": {
+                    "maxItems": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "fill"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "options"
+                  ]
+                },
+                {
+                  "required": [
+                    "parts"
+                  ]
+                }
+              ]
+            },
+            "properties": {
+              "solution": {
+                "properties": {
+                  "grading": {
+                    "enum": [
+                      "blanks",
+                      "self",
+                      "none"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "short-answer"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "options"
+                  ]
+                },
+                {
+                  "required": [
+                    "parts"
+                  ]
+                }
+              ]
+            },
+            "properties": {
+              "solution": {
+                "properties": {
+                  "grading": {
+                    "enum": [
+                      "self",
+                      "none"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "basis",
+        "reviewer",
+        "reviewedAt",
+        "issues"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "draft",
+            "review",
+            "published"
+          ]
+        },
+        "basis": {
+          "enum": [
+            "human-review",
+            "legacy-migration"
+          ]
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "const": "human-review"
+              },
+              "state": {
+                "const": "published"
+              }
+            },
+            "required": [
+              "basis",
+              "state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "reviewer": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reviewedAt": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lwlaymh.github.io/ics-test/schema/question-v5.schema.json",
+  "title": "ICS Question v5",
+  "description": "Implemented authoring and runtime contract. Ordered Markdown remains intact; blanks use explicit literal anchors. Cross-reference validation is additionally mandatory."
+}

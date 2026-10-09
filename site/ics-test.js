@@ -34,11 +34,12 @@
 
   const state = {
     catalog: null, papers: [], questions: [], index: 0, score: 0, records: [], drafts: [], currentMode: '',
-    groups: new Map(), moduleCache: new Map(),
+    bankPromise: null,
     supabase: null, statsChannel: null, currentStats: null, statsQuestionId: '', statsRevealed: false,
     issueChannel: null, reportedIssues: [], issueQuestionIndex: new Map(), issueIndexLoaded: false,
     reportedThisSession: new Set(), issueReloadTimer: null, pendingCompositeGrade: null,
   };
+  const contract = window.ICSQuestionV5;
   const PUBLISHED_QUESTION_KINDS = new Set([
     'single-choice', 'multiple-choice', 'fill', 'short-answer', 'composite',
   ]);
@@ -51,8 +52,8 @@
     rendererInstance.renderer.rules.image = function (tokens, index, options, env, renderer) {
       const token = tokens[index];
       const source = String(token.attrGet('src') || '').replace(/\\/g, '/');
-      const assetIndex = source.indexOf('assets/');
-      if (assetIndex >= 0) token.attrSet('src', './web-data/assets/' + source.slice(assetIndex + 7));
+      const asset = source.replace(/^(?:\.\.\/)+(?=assets\/)/, '');
+      if (asset.startsWith('assets/')) token.attrSet('src', './web-data/' + asset);
       // 页面同时只展示一道题，题面图片应立即加载；lazy + content-visibility 会让
       // 部分浏览器长时间保留空白占位。
       token.attrSet('loading', 'eager');
@@ -64,113 +65,36 @@
     return rendererInstance;
   }
   const md = createMarkdownRenderer(false);
-  // `_curated/*.md` 使用标准 Markdown 换行语义：普通单换行只是源码折行，
-  // 空行才分段；需要保留的换行应写成代码围栏或 Markdown 硬换行。
-  // 不能启用 breaks=true，否则 PDF/人工录入留下的行尾会在宽屏上提前断句。
-  const formattedMd = createMarkdownRenderer(false);
 
   function escapeHtml(value) {
-    return String(value == null ? '' : value)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return String(value == null ? '' : value).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   function isPublishedQuestion(question) {
-    return PUBLISHED_QUESTION_KINDS.has(question && question.interaction && question.interaction.kind) &&
-      question.presentation && question.presentation.status === 'ready';
+    return question.schemaVersion === contract.VERSION && question.publication.state === 'published' &&
+      PUBLISHED_QUESTION_KINDS.has(question.type);
   }
 
-  function withoutPrintedLineNumber(line) {
-    return String(line || '').replace(/^\s*\d{1,3}[.．]\s+/, '').trim();
+  // Only authored Markdown is rendered. No content rewriting, type guessing or answer extraction.
+  function renderContent(content) {
+    return md ? md.render(content.text) : '<pre>' + escapeHtml(content.text) + '</pre>';
   }
 
-  /* ------------------------------------------------------------------
-   * 结构猜测代码已于 L4 全部删除。
-   *
-   * 这里原本有 isAssemblyLine / isStrongCodeLine / isCodeContinuation /
-   * looksLikeDisplayMath / structureMarkdown —— 它们靠正则猜「哪些行是代码、
-   * 哪些行是公式」，正是 A 类（把正文误包成 $$）与 C 类（同题选项样式割裂）
-   * 缺陷的来源。
-   *
-   * 现在题库 1009 道全部带 `formatted && layout`，结构由 `_curated/*.md` 显式给出，
-   * 前端不再需要任何猜测。删除前的对照证据：
-   *   node tools/_ics_pool_diff.js  -> total 1009 poolOld 314 poolNew 314 lost 0 gained 0
-   *   node tools/ics-check.js       -> 问题条目 0（删前旧路径 58 条）
-   * 回滚备份：D:\blog\_ics_backup\blog_static\ics-test.js.before_heuristic_delete
-   * ------------------------------------------------------------------ */
-
-  // 无损清洗：只做「不改变语义」的修正，新旧两条路径都要用。
-  // 页码注释、全角字形、PDF 折行、OCR 把代码和题干粘在一行 —— 这些都与结构无关。
-  function normalizeText(source) {
-    return String(source || '')
-      .replace(/^\s*\d+\s*\n+(?=\s*<!--\s*=+\s*page\s+\d+\s*=+\s*-->)/gim, '')
-      .replace(/<!--\s*=+\s*page\s+\d+\s*=+\s*-->/gi, '')
-      .replace(/\uF02D/g, '−').replace(/\uF03D/g, '=').replace(/\uF02B/g, '+')
-      // OCR 偶尔会把代码末尾和下一句题干粘在同一行。
-      .replace(/([);}])\s*(?=(?:请问|问[：:]|下列|上述|则[，,]))/g, '$1\n')
-      // PDF 转文本常把一个中文词从中间换行；Markdown 会额外补一个空格。
-      .replace(/([\u3400-\u9fff])\n(?=[\u3400-\u9fff])/g, '$1');
+  function paperFor(question) { return state.papers.find(function (paper) { return paper.id === question.paperId; }); }
+  function moduleTitle(question) {
+    return state.catalog.modules.filter(function (module) {
+      return question.classification.moduleIds.includes(module.id);
+    }).map(function (module) { return module.title; }).join(' / ');
   }
 
-  // 只把 A./B./… 选项前的换行变成显式换行，既保证选项逐行显示，
-  // 又不把 PDF 的正文折行全部保留下来。
-  function hardBreakOptions(source) {
-    return String(source || '').split(/(```+[\s\S]*?```+|~~~+[\s\S]*?~~~+)/g).map(function (part, index) {
-      if (index % 2 === 1) return part;
-      const withChoices = part.replace(/\n(?=\s*[A-Ha-h][.．、)]\s*)/g, '  \n');
-      return withChoices.split('\n').map(function (line) {
-        // PDF 文本里的汇编通常没有围栏；保留这些指令行的换行，避免整段挤成一行。
-        return /^\s*(?:mov|push|pop|call|ret|leave|add|sub|cmp|test|lea|xor|and|or|sal|sar|shr|jmp|j[a-z]+|set[a-z]+|cmov[a-z]+)[a-z]*q?\b/i.test(line)
-          ? line.replace(/\s*$/, '') + '  '
-          : line;
-      }).join('\n');
-    }).join('');
-  }
-
-  // 兜底路径（题库数据没有 formatted 字段时才会走到）：只做无损清洗，
-  // **不再补代码围栏、也不再合成 $$** —— 那些猜测已随 structureMarkdown 一起删除。
-  function cleanMarkdown(source) {
-    return hardBreakOptions(normalizeText(source));
-  }
-
-  function renderMarkdown(source) {
-    const clean = cleanMarkdown(source);
-    return md ? md.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';
-  }
-
-  // 兜底路径的选项渲染：与 renderMarkdown 完全相同。
-  // 原来这里有一条「命中 unsigned|int|~|0x… 就把整个选项套 <code>」的启发式，
-  // 正是 C 类缺陷（同一题里一个选项等宽、兄弟选项普通文本）的根源，已删除。
-  function renderChoiceMarkdown(source) {
-    return renderMarkdown(String(source || '').trim());
-  }
-
-  // Markdown 的 softbreak 在 HTML 中会折叠成一个空格。英文需要这个空格，
-  // 中文 PDF 折行则不应凭空插入空格；围栏代码与显式硬换行保持原样。
-  function normalizeLayoutMarkdown(source) {
-    return String(source || '').replace(/\r\n?/g, '\n')
-      .split(/(```+[\s\S]*?```+|~~~+[\s\S]*?~~~+)/g)
-      .map(function (part, index) {
-        if (index % 2 === 1) return part;
-        return part.replace(/([\u3000-\u303f\u3400-\u9fff\uff00-\uff65])\n(?=[\u3000-\u303f\u3400-\u9fff\uff00-\uff65])/g, '$1');
-      }).join('');
-  }
-
-  // 新路径（formatted）：题库已经给出结构化 layout，前端**一点不猜**。
-  // 该是代码就写反引号、该是公式就写 $…$、都不写就是普通文本 —— 同一题内不可能
-  // 再出现「一个选项等宽、兄弟选项普通文本」的观感割裂。
-  // 注意：这两个函数必须留在 ics-check.js 抽取的片段内（escapeHtml..secureShuffle），
-  // 否则体检脚本里的 Function 构造会报 not defined。
-  function renderLayoutStem(text) {
-    const clean = normalizeLayoutMarkdown(text);
-    return formattedMd ? formattedMd.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';
-  }
-
-  function renderLayoutChoice(text) {
-    const clean = normalizeLayoutMarkdown(text).trim();
-    // 选项本身也允许是完整的人工 Markdown（表格、围栏代码、图片等），
-    // 不能用 renderInline 把块级结构当成普通字符显示。
-    return formattedMd ? formattedMd.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';
+  function loadQuestionBank() {
+    if (!state.bankPromise) state.bankPromise = fetchJson('./web-data/' + state.catalog.questionsFile).then(function (payload) {
+      contract.assertVersion(payload);
+      payload.questions.forEach(contract.assertVersion);
+      return payload.questions;
+    }).catch(function (error) { state.bankPromise = null; throw error; });
+    return state.bankPromise;
   }
 
   function typeset(element) {
@@ -258,26 +182,21 @@
   async function ensureIssueQuestionIndex() {
     if (state.issueIndexLoaded || !state.catalog) return;
     ui.issueBoardStatus.textContent = '正在读取题目定位信息…';
-    const payloads = await Promise.all(state.catalog.modules.map(function (module) {
-      return fetchJson('./web-data/' + module.questionFile).then(function (payload) {
-        return { module: module, questions: payload.questions || [] };
+    const questions = await loadQuestionBank();
+    questions.forEach(function (question) {
+      const paper = paperFor(question);
+      const meta = { kind: question.type, moduleTitle: moduleTitle(question),
+        exam: paper ? paper.displayName : '', questionNo: question.number.display };
+      state.issueQuestionIndex.set(question.id, meta);
+      (question.sources || []).forEach(function (source) {
+        if (source.legacyId) state.issueQuestionIndex.set(source.legacyId, meta);
       });
-    }));
-    payloads.forEach(function (payload) {
-      payload.questions.forEach(function (question) {
-        const meta = {
-          kind: question.interaction && question.interaction.kind,
-          moduleTitle: payload.module.title,
-          exam: question.exam,
-          questionNo: question.questionNo,
-        };
-        state.issueQuestionIndex.set(question.id, meta);
-        if (question.group && question.group.questionId) {
-          state.issueQuestionIndex.set(question.group.questionId, {
-            kind: 'composite', moduleTitle: payload.module.title,
-            exam: question.exam, questionNo: question.group.title,
-          });
-        }
+      (question.parts || []).forEach(function (part) {
+        const partMeta = Object.assign({}, meta, { kind: part.type, questionNo: part.number.display });
+        state.issueQuestionIndex.set(part.id, partMeta);
+        part.sources.forEach(function (source) {
+          if (source.legacyId) state.issueQuestionIndex.set(source.legacyId, partMeta);
+        });
       });
     });
     state.issueIndexLoaded = true;
@@ -380,7 +299,7 @@
     }).join('');
     ui.statsNote.textContent = choices.length
       ? '多选题各选项比例之和可能超过 100%。统计会在其他同学提交后自动更新。'
-      : '本题暂无选项分布；正确率根据查看答案后的自评结果计算。';
+      : '本题暂无选项分布；正确率包含自动核对与自评结果。';
   }
 
   async function loadQuestionStats(questionId) {
@@ -443,362 +362,73 @@
     renderLiveStats();
   }
 
-  function splitAnswer(content) {
-    let prompt = String(content || '');
-    const answers = [];
-
-    prompt = prompt.replace(/\*\*(?:参考答案|答案|答)\s*[:：]\s*([^*\n]+?)\*\*/gi, function (_, answer) {
-      answers.push('答案：' + answer.trim());
-      return '';
+  function renderFillQuestion(content, partIndex) {
+    const spans = contract.blankSpans(content);
+    if (!spans.length) return renderContent(content) +
+      '<p class="ics-composite-note">本题声明为填空题，但空位尚待人工标注；暂时查看参考答案后自评。</p>';
+    let prefix = 'ICSBLANKTOKEN';
+    while (content.text.includes(prefix)) prefix += 'X';
+    let cursor = 0, markdown = '';
+    spans.forEach(function (span, index) {
+      markdown += content.text.slice(cursor, span.start) + prefix + index + 'END';
+      cursor = span.end;
     });
-
-    const marker = /(?:^|\n)\s*(?:\*\*)?(?:参考答案|答案|答)\s*[:：]\s*/im.exec(prompt);
-    if (marker) {
-      const start = marker.index + (prompt[marker.index] === '\n' ? 1 : 0);
-      answers.push(prompt.slice(start).trim());
-      prompt = prompt.slice(0, marker.index).trim();
-    }
-
-    return { prompt: prompt.trim(), answer: answers.join('\n\n').trim() };
-  }
-
-  function questionIdentity(raw) {
-    return [raw.moduleId, raw.year, raw.examType, raw.questionNo, raw.summary]
-      .map(function (value) { return String(value || '').trim(); }).join('|');
-  }
-
-  function prepareQuestion(raw, module, companion, options) {
-    // 版本门控：只有题库明确给出 formatted && layout 时才走零猜测新路径，
-    // 其余一律旧路径。这样题库只同步了一半也不会白屏，支持分批上线。
-    const layout = (raw.formatted && raw.layout) ? raw.layout : null;
-    let prompt;
-    let directAnswer;
-    let layoutChoices = null;
-
-    if (layout) {
-      prompt = String(layout.stem || '');
-      directAnswer = String(layout.answer || '');
-      if (!directAnswer) {
-        // 兜底：实测有 6 条题目的答案标记紧贴前文（`2、答案：4f`），切进 %%% answer 段
-        // 会改变投影，因此仍留在题干里。这里退回按正文拆答案，否则这 6 道会被静默
-        // 移出题库（自测池会从 314 掉下来）。
-        const fallback = splitAnswer(raw.content);
-        directAnswer = fallback.answer;
-        if (directAnswer) prompt = fallback.prompt;
-      }
-      if (layout.mode === 'choice' && Array.isArray(layout.choices)
-          && layout.choices.length >= 2) {
-        layoutChoices = layout.choices.map(function (choice) {
-          return { key: choice.key, content: choice.content };
-        });
-      }
-      // 有无答案版的同题时用它补齐选项。旧路径一直这么做，**不能省**：
-      // 实测 2025期末 有 17 道「答案是多选字母、但本题切片里根本没有选项」的题
-      // 完全依赖它进池；漏掉就会静默少 17 道（自测池 314 -> 299）。
-      if (!layoutChoices && companion) {
-        const compLayout = (companion.formatted && companion.layout)
-          ? companion.layout : null;
-        if (compLayout && Array.isArray(compLayout.choices)
-            && compLayout.choices.length >= 2) {
-          layoutChoices = compLayout.choices.map(function (choice) {
-            return { key: choice.key, content: choice.content };
-          });
-          if (String(compLayout.stem || '').length > prompt.length) {
-            prompt = String(compLayout.stem);
-          }
-        } else if (String(companion.content || '').trim().length > prompt.length) {
-          prompt = String(companion.content).trim();
-        }
-      }
-    } else {
-      const split = splitAnswer(raw.content);
-      // 只纳入能够从正文可靠拆出答案的题。relatedBlockIds 指向的往往是整份试卷
-      // 的答案块，不保证与单题精确对应；使用它自动组卷会造成泄题或误判。
-      if (!split.answer) return null;
-      prompt = split.prompt;
-      directAnswer = split.answer;
-      if (companion && String(companion.content || '').trim().length > prompt.length) {
-        prompt = String(companion.content).trim();
-      }
-    }
-
-    const answerStatus = raw.answer && raw.answer.status
-      ? raw.answer.status : (raw.answer && raw.answer.inline ? 'verified' : 'missing');
-    const answerAvailable = answerStatus === 'verified' && Boolean(directAnswer);
-    if (!answerAvailable && !(options && options.allowIncomplete)) return null;
-    if (!answerAvailable) directAnswer = '';
-    if (/(?:参考)?答案\s*[:：]/.test(prompt)) return null;
-    const expected = simpleExpected(directAnswer);
-    // 答案是选项字母、题面却没有完整选项时，通常是 PDF/题库切分丢失。
-    // curated 题面（layout.stem）已经把选项拆出去了，所以优先信 layout.choices；
-    // 没有结构化选项时退回原来的正文解析，保证与旧路径同一套 gating。
-    //
-    // 这道门禁只对「选择题」成立：填空题、简答题和组合片段的答案本来就可能以 A、B、
-    // C 甚至 `E_icode` 这种字母开头，simpleExpected 会把它误读成选项字母。若不按声明
-    // 的题型限定，这些题会被静默移出练习池（实测 15 道，其中 6 道是组合片段，会让整道
-    // 组合题凭空少掉小问）。没有结构化 layout 的旧路径仍沿用原来的判断。
-    const declaredKind = raw.interaction && raw.interaction.kind;
-    const isChoiceKind = declaredKind === 'single-choice' || declaredKind === 'multiple-choice';
-    if (expected && expected.kind === 'choice' && !layoutChoices && (!layout || isChoiceKind)) {
-      // 结构化选项优先；没有时退回正文解析。这里必须用 `prompt`
-      // （与旧路径同一个变量，含 companion 补齐的结果），否则「靠同题无答案版
-      // 补齐选项」的那批题会被判掉。
-      if (!parseChoiceQuestion(prompt, expected)) return null;
-    }
-    if (prompt.length < 140 && /(?:如下|下列|如图|所示|代码序列)\s*[：:]?\s*$/.test(prompt)) return null;
-    return Object.assign({}, raw, {
-      moduleTitle: module.title,
-      prompt: prompt,
-      directAnswer: directAnswer,
-      answerStatus: answerStatus,
-      answerAvailable: answerAvailable,
-      formatted: !!layout,
-      layoutChoices: layoutChoices,
+    markdown += content.text.slice(cursor);
+    let html = renderContent({ text: markdown });
+    spans.forEach(function (span, index) {
+      const blank = span.blank;
+      const label = blank.label || ('第 ' + (index + 1) + ' 空');
+      const input = '<span class="ics-inline-blank"><span class="ics-blank-number">' + (index + 1) + '</span>' +
+        '<input class="ics-blank-input" name="blank-' + (partIndex == null ? 'root' : partIndex) + '-' + index + '" ' +
+        'data-blank-id="' + escapeHtml(blank.id) + '" data-blank-scope="' + (partIndex == null ? 'root' : partIndex) + '" ' +
+        'data-width="' + blank.width + '" form="ics-answer-form" aria-label="' + escapeHtml(label) +
+        '" autocomplete="off" required></span>';
+      html = html.replace(prefix + index + 'END', input);
     });
-  }
-
-  function combineQuestionGroup(members) {
-    const ordered = members.slice().sort(function (a, b) {
-      return Number(a.group.order || 0) - Number(b.group.order || 0);
-    });
-    const first = ordered[0];
-    const group = first.group;
-    const prompt = ordered.map(function (question) {
-      let part = String(question.prompt || '').trim();
-      const explicitChoices = question.layout && Array.isArray(question.layout.choices)
-        ? question.layout.choices : [];
-      if (explicitChoices.length) {
-        part += '\n\n' + explicitChoices.map(function (choice) {
-          return '**' + choice.key + '.**\n\n' + String(choice.content || '').trim();
-        }).join('\n\n');
-      }
-      return part;
-    }).filter(Boolean).join('\n\n---\n\n');
-    const directAnswer = ordered.map(function (question) {
-      const heading = String(question.questionNo || '').trim();
-      const answer = String(question.directAnswer || '').trim() || '本部分答案尚未完成校对。';
-      return (heading ? '### ' + heading + '\n\n' : '') + answer;
-    }).join('\n\n---\n\n');
-    const answerAvailable = ordered.every(function (question) { return question.answerAvailable; });
-    const compositeParts = ordered.map(function (question, index) {
-      const partInteraction = question.partInteraction || question.interaction || {};
-      return {
-        id: question.id,
-        label: String(question.questionNo || '').trim() || ('第 ' + (index + 1) + ' 小问'),
-        kind: partInteraction.kind || 'short-answer',
-        stem: String(question.prompt || '').trim(),
-        choices: Array.isArray(question.layoutChoices) ? question.layoutChoices : [],
-        correctChoiceIds: Array.isArray(partInteraction.correctChoiceIds)
-          ? partInteraction.correctChoiceIds : [],
-        blankAnswers: Array.isArray(partInteraction.blankAnswers)
-          ? partInteraction.blankAnswers : [],
-        answer: String(question.directAnswer || '').trim(),
-        answerAvailable: question.answerAvailable,
-      };
-    });
-    const assets = [];
-    ordered.forEach(function (question) {
-      (question.assets || []).forEach(function (asset) {
-        if (!assets.includes(asset)) assets.push(asset);
-      });
-    });
-    return Object.assign({}, first, {
-      id: group.questionId,
-      questionNo: group.title,
-      paperOrder: Math.min.apply(null, ordered.map(function (question) {
-        return Number(question.paperOrder || 0);
-      })),
-      prompt: prompt,
-      directAnswer: directAnswer,
-      answerStatus: answerAvailable ? 'verified' : 'needs-review',
-      answerAvailable: answerAvailable,
-      formatted: true,
-      layout: { mode: 'composite', selection: null, stem: prompt, choices: [], answer: directAnswer },
-      interaction: { kind: 'composite', declared: true },
-      layoutChoices: null,
-      compositeParts: compositeParts,
-      assets: assets,
-      groupMembers: ordered.map(function (question) { return question.id; }),
-    });
-  }
-
-  function collapseQuestionGroups(pool) {
-    const groups = new Map();
-    pool.forEach(function (question) {
-      if (!question.group || !question.group.questionId) return;
-      if (!groups.has(question.group.questionId)) groups.set(question.group.questionId, []);
-      groups.get(question.group.questionId).push(question);
-    });
-    const emitted = new Set();
-    const collapsed = [];
-    pool.forEach(function (question) {
-      if (!question.group || !question.group.questionId) {
-        collapsed.push(question);
-        return;
-      }
-      const groupId = question.group.questionId;
-      if (emitted.has(groupId)) return;
-      emitted.add(groupId);
-      collapsed.push(combineQuestionGroup(groups.get(groupId)));
-    });
-    return collapsed;
-  }
-
-  function simpleExpected(answer) {
-    const text = String(answer || '').replace(/\*+/g, '').trim();
-    const upperText = text.toUpperCase();
-    let match = upperText.match(/(?:答案|答)\s*[:：]\s*(?:选|为)?\s*((?:[A-H](?![A-Z0-9])(?:\s*(?:[、,，/&+]|和|及)\s*[A-H](?![A-Z0-9]))+)|(?:[A-H]+(?![A-Z0-9])))/);
-    if (!match) match = upperText.match(/^\s*(?:选)?\s*((?:[A-H](?![A-Z0-9])(?:\s*(?:[、,，/&+]|和|及)\s*[A-H](?![A-Z0-9]))+)|(?:[A-H]+(?![A-Z0-9])))\s*[。.!！]?\s*$/);
-    if (match) {
-      const letters = match[1].match(/[A-H]/g);
-      const hasSeparator = /[、,，/&+]|和|及/.test(match[1]);
-      // 连写多选答案通常是按字母顺序且无重复的 ABC/ABDE；避免把 FFFA/FBAC
-      // 这类十六进制填空误判成选择题答案。
-      if (!hasSeparator && letters.length > 1 && letters.join('') !== Array.from(new Set(letters)).sort().join('')) return null;
-      return { kind: 'choice', value: letters.sort().join('') };
-    }
-    match = text.match(/(?:答案|答)\s*[:：]\s*(正确|错误|对|错|是|否|√|×)/);
-    if (match) return { kind: 'boolean', value: normalizeBoolean(match[1]) };
-    return null;
-  }
-
-  function normalizeBoolean(value) {
-    const s = String(value).trim();
-    if (/^(正确|对|是|√)$/.test(s)) return 'true';
-    if (/^(错误|错|否|×)$/.test(s)) return 'false';
-    return '';
-  }
-
-  function autoGrade(userAnswer, expected) {
-    if (!expected) return null;
-    if (expected.kind === 'boolean') return normalizeBoolean(userAnswer) === expected.value;
-    const compact = String(userAnswer).toUpperCase()
-      .replace(/^\s*(?:答案)?\s*[:：]?\s*(?:选)?\s*/i, '')
-      .replace(/[、,，/&+\s]|和|及/g, '')
-      .replace(/[。.!！]+$/g, '');
-    if (!/^[A-H]+$/.test(compact)) return false;
-    return compact.split('').sort().join('') === expected.value;
-  }
-
-  function parseChoiceQuestion(source, expected) {
-    if (!expected || expected.kind !== 'choice') return null;
-    // PDF 表格经常把 A/B/C/D 四项压在同一行，用两个以上空格分栏。
-    // 在明确知道答案是选项字母时，先恢复 B..H 的逻辑换行再解析。
-    const normalizedSource = String(source || '').replace(
-      /[ \t]{2,}(?=[B-H](?:[.．、)]\s*|[ \t]{2,}))/g,
-      '\n'
-    );
-    const lines = normalizedSource.split('\n');
-    let first = -1;
-    const optionMatch = function (line) {
-      return line.match(/^\s*([A-H])(?:[.．、)]\s*|\s{2,})(.*)$/i);
-    };
-    for (let i = 0; i < lines.length; i += 1) {
-      const match = optionMatch(lines[i]);
-      if (match && match[1].toUpperCase() === 'A') { first = i; break; }
-    }
-    if (first < 0) return null;
-
-    const choices = [];
-    let current = null;
-    for (let i = first; i < lines.length; i += 1) {
-      const match = optionMatch(lines[i]);
-      if (match) {
-        if (current) choices.push(current);
-        current = { key: match[1].toUpperCase(), lines: [match[2]] };
-      } else if (current) {
-        current.lines.push(lines[i]);
-      }
-    }
-    if (current) choices.push(current);
-
-    const keys = choices.map(function (choice) { return choice.key; });
-    if (choices.length < 2 || new Set(keys).size !== choices.length) return null;
-    for (let i = 0; i < keys.length; i += 1) {
-      if (keys[i] !== String.fromCharCode(65 + i)) return null;
-    }
-    return {
-      stem: lines.slice(0, first).join('\n').trim(),
-      choices: choices.map(function (choice) {
-        return { key: choice.key, content: choice.lines.join('\n').trim() };
-      }),
-      multiple: expected.value.length > 1,
-    };
-  }
-
-  function parseFillQuestion(source) {
-    let gapCount = 0;
-    const gaps = [];
-    const gapPattern = /\{\{blank:([A-Za-z][A-Za-z0-9_-]*)\}\}|_+\s*(?:\(\d{1,2}\)|[①②③④⑤⑥⑦⑧⑨⑩])\s*_+|_{2,}|＿{2,}|（[\s　]{2,}）|\([\s　]{2,}\)/g;
-    // 空位必须由人工 Markdown 显式写出；不猜测题意。代码补全题的空位通常
-    // 正在 fenced code block 内，因此也要替换成占位 token，等 Markdown 渲染
-    // 完成后再把 token 换成逐空输入框。
-    const markdown = String(source || '').replace(gapPattern, function (_, explicitId) {
-      const token = 'ICSGAP' + gapCount + 'X';
-      gaps.push({ id: explicitId || ('legacy-gap-' + gapCount), explicit: Boolean(explicitId) });
-      gapCount += 1;
-      return token;
-    });
-    return gapCount ? { markdown: markdown, count: gapCount, gaps: gaps } : null;
-  }
-
-  function renderFillQuestion(fillQuestion, formatted, partIndex) {
-    let html = formatted ? renderLayoutStem(fillQuestion.markdown) : renderMarkdown(fillQuestion.markdown);
-    for (let i = 0; i < fillQuestion.count; i += 1) {
-      const gap = fillQuestion.gaps[i];
-      const input = '<span class="ics-inline-blank"><span class="ics-blank-number">' + (i + 1) + '</span>' +
-        '<input class="ics-blank-input" name="blank-' + (partIndex == null ? 'root' : partIndex) + '-' + i + '" ' +
-        'data-gap="' + i + '" data-blank-id="' + escapeHtml(gap.id) + '" ' +
-        (partIndex == null ? '' : 'data-part-index="' + partIndex + '" ') +
-        'form="ics-answer-form" aria-label="第 ' + (i + 1) + ' 空" autocomplete="off" required></span>';
-      html = html.replace('ICSGAP' + i + 'X', input);
-    }
     return html;
   }
 
-  function gradeFillInputs(inputs, blankAnswers) {
-    const configs = new Map((blankAnswers || []).map(function (item) { return [item.id, item]; }));
-    if (!inputs.length || inputs.some(function (input) { return !configs.has(input.dataset.blankId); })) return null;
-    return inputs.every(function (input) {
-      const config = configs.get(input.dataset.blankId);
-      let actual = input.value;
-      if (config.trimWhitespace !== false) actual = actual.trim();
-      if (!config.caseSensitive) actual = actual.toLocaleLowerCase();
-      return (config.acceptedAnswers || []).some(function (candidate) {
-        let expected = String(candidate);
-        if (config.trimWhitespace !== false) expected = expected.trim();
-        if (!config.caseSensitive) expected = expected.toLocaleLowerCase();
-        return actual === expected;
-      });
-    });
+  function gradeFillInputs(inputs, solution) {
+    const values = {};
+    inputs.forEach(function (input) { values[input.dataset.blankId] = input.value; });
+    return contract.gradeBlanks(values, solution);
+  }
+
+  function renderOptions(options, attribute) {
+    return options.map(function (option) {
+      return '<button class="ics-choice" type="button" ' + attribute + '="' + escapeHtml(option.id) +
+        '" aria-pressed="false"><span class="ics-choice-key">' + escapeHtml(option.id) + '</span>' +
+        '<span class="ics-choice-content post-content">' + renderContent(option.content) + '</span></button>';
+    }).join('');
   }
 
   function renderCompositeQuestion(question) {
-    return (question.compositeParts || []).map(function (part, index) {
-      const kind = part.kind;
-      const kindLabel = kind === 'single-choice' ? '单选' : kind === 'multiple-choice' ? '多选'
-        : kind === 'fill' ? '填空' : '简答';
-      let body = '';
-      if (kind === 'fill') {
-        const fill = parseFillQuestion(part.stem);
-        body = fill ? renderFillQuestion(fill, true, index) : renderLayoutStem(part.stem);
-      } else {
-        body = renderLayoutStem(part.stem);
-      }
-      if (kind === 'single-choice' || kind === 'multiple-choice') {
+    return renderContent(question.stem) + question.parts.map(function (part, index) {
+      let body = part.type === 'fill' ? renderFillQuestion(part.stem, index) : renderContent(part.stem);
+      if (part.type === 'single-choice' || part.type === 'multiple-choice') {
         body += '<div class="ics-composite-choices" data-part-index="' + index + '" data-multiple="' +
-          (kind === 'multiple-choice' ? 'true' : 'false') + '">' + (part.choices || []).map(function (choice) {
-            return '<button class="ics-choice" type="button" data-composite-choice="' + escapeHtml(choice.key) +
-              '" aria-pressed="false"><span class="ics-choice-key">' + escapeHtml(choice.key) + '</span>' +
-              '<span class="ics-choice-content post-content">' + renderLayoutChoice(choice.content) + '</span></button>';
-          }).join('') + '</div>';
-      } else if (kind === 'short-answer') {
+          (part.type === 'multiple-choice') + '">' + renderOptions(part.options, 'data-composite-choice') + '</div>';
+      } else if (part.type === 'short-answer') {
         body += '<p class="ics-composite-note">本小问思考完成后，在整题提交时查看参考答案并自评。</p>';
       }
-      return '<section class="ics-composite-part" data-composite-part="' + index + '">' +
-        '<header><strong>' + escapeHtml(part.label || ('第 ' + (index + 1) + ' 小问')) + '</strong>' +
-        '<span>' + kindLabel + '</span></header><div class="ics-composite-body">' + body + '</div></section>';
+      if (part.solution.state !== 'available') body += '<p class="ics-composite-note">本小问答案待复核，不计分。</p>';
+      return '<section class="ics-composite-part" data-composite-part="' + index + '"><header><strong>' +
+        escapeHtml(part.number.display || ('第 ' + (index + 1) + ' 小问')) + '</strong><span>' +
+        issueTypeLabel(part.type) + '</span></header><div class="ics-composite-body">' + body + '</div></section>';
     }).join('');
+  }
+
+  function renderSolution(question) {
+    const solution = question.solution;
+    if (question.type === 'composite') return question.parts.map(function (part) {
+      return '<section><h4>' + escapeHtml(part.number.display) + '</h4>' + renderSolution(part) + '</section>';
+    }).join('') + renderContent(solution.reference);
+    if (solution.state !== 'available') return '<p>' + escapeHtml(solution.reason || '本题答案待复核，未计分。') + '</p>';
+    const key = solution.grading === 'choice'
+      ? '<p><strong>正确选项：' + solution.correctOptionIds.map(escapeHtml).join('、') + '</strong></p>' : '';
+    const notice = solution.provenance.origin === 'ai-derived'
+      ? '<p class="ics-composite-note">此参考答案含 AI 推导，请核对原卷。</p>' : '';
+    return key + notice + renderContent(solution.reference);
   }
 
   function secureShuffle(items) {
@@ -854,111 +484,20 @@
   function updatePaperStatus() {
     const paper = state.papers.find(function (item) { return item.id === ui.paper.value; });
     if (!paper) { ui.paperStatus.textContent = ''; return; }
-    const quizCount = Number(paper.quizQuestionCount || paper.publishedQuestionCount || 0);
-    ui.paperStatus.textContent = quizCount + ' 道测试题（' + paper.publishedQuestionCount + ' 个题目片段） · 单选 ' +
-      paper.singleChoiceCount + ' · 多选 ' + paper.multipleChoiceCount +
-      ' · 填空 ' + Number(paper.fillCount || 0) +
-      ' · 简答 ' + Number(paper.shortAnswerCount || 0) +
-      ' · 组合片段 ' + Number(paper.compositeCount || 0);
-  }
-
-  // 组合题索引由构建期写出（web-data/groups.json）。前端只读它来定位同组片段，
-  // 不解析文件名、也不从题面文字猜关联关系。
-  async function loadQuestionGroups() {
-    if (!state.catalog.groupsFile) return;
-    const payload = await fetchJson('./web-data/' + state.catalog.groupsFile);
-    state.groups = new Map();
-    (payload.groups || []).forEach(function (group) {
-      if (group && group.questionId) state.groups.set(group.questionId, group);
-    });
-  }
-
-  function companionIndex(questions) {
-    const companions = new Map();
-    questions.forEach(function (candidate) {
-      if (!candidate || !candidate.content) return;
-      const hasInlineAnswer = candidate.answer && candidate.answer.inline;
-      if (hasInlineAnswer || /(?:参考)?答案\s*[:：]/.test(candidate.content)) return;
-      const key = questionIdentity(candidate);
-      const previous = companions.get(key);
-      if (!previous || candidate.content.length > previous.content.length) companions.set(key, candidate);
-    });
-    return companions;
-  }
-
-  function loadModulePayload(module) {
-    if (!state.moduleCache.has(module.id)) {
-      state.moduleCache.set(module.id, fetchJson('./web-data/' + module.questionFile).then(function (data) {
-        const questions = data.questions || [];
-        return { module: module, questions: questions, companions: companionIndex(questions) };
-      }));
-    }
-    return state.moduleCache.get(module.id);
-  }
-
-  // 一个组合题的各小问可能被分到不同模块。只要练习池里出现了它的任一片段，
-  // 就必须把其余片段从各自模块补齐，否则「一大题」会被渲染成只剩几个小问的残缺题面。
-  // 补齐只看构建期索引，与用户选中了哪些模块无关；组合题本身不可拆分作答。
-  async function completeQuestionGroups(pool, prepareOptions) {
-    if (!state.groups.size) return pool;
-    const present = new Set();
-    pool.forEach(function (question) { present.add(question.id); });
-    const missingIds = new Set();
-    const moduleFiles = new Set();
-    pool.forEach(function (question) {
-      const groupId = question.group && question.group.questionId;
-      if (!groupId) return;
-      const group = state.groups.get(groupId);
-      if (!group) return;
-      (group.members || []).forEach(function (member) {
-        if (present.has(member.id)) return;
-        missingIds.add(member.id);
-        moduleFiles.add(member.questionFile);
-      });
-    });
-    if (!missingIds.size) return pool;
-    const moduleByFile = new Map(state.catalog.modules.map(function (module) {
-      return [module.questionFile, module];
-    }));
-    const payloads = await Promise.all(Array.from(moduleFiles).map(function (file) {
-      const module = moduleByFile.get(file);
-      return module ? loadModulePayload(module) : null;
-    }));
-    payloads.forEach(function (payload) {
-      if (!payload) return;
-      payload.questions.forEach(function (raw) {
-        if (!missingIds.has(raw.id)) return;
-        const prepared = prepareQuestion(raw, payload.module, payload.companions.get(questionIdentity(raw)), prepareOptions);
-        if (prepared) pool.push(prepared);
-      });
-    });
-    return pool;
-  }
-
-  // 片段仍然拼不齐时宁可整题移出本次练习，也不显示被截断的题面。
-  function dropIncompleteGroups(pool) {
-    if (!state.groups.size) return pool;
-    return pool.filter(function (question) {
-      const groupId = question.group && question.group.questionId;
-      if (!groupId) return true;
-      const group = state.groups.get(groupId);
-      if (!group) return true;
-      const found = Array.isArray(question.groupMembers) ? question.groupMembers.length : 0;
-      const expected = (group.members || []).length;
-      if (found === expected) return true;
-      console.warn('[ics-test] 组合题片段不完整，整题移出本次练习：' + groupId +
-        '（' + found + '/' + expected + '）');
-      return false;
-    });
+    const stats = paper.stats;
+    ui.paperStatus.textContent = stats.quizQuestionCount + ' 道独立题目 · 单选 ' + stats.singleChoiceCount +
+      ' · 多选 ' + stats.multipleChoiceCount + ' · 填空 ' + stats.fillCount +
+      ' · 简答 ' + stats.shortAnswerCount + ' · 综合 ' + stats.compositeCount;
   }
 
   async function init() {
     try {
       state.catalog = await fetchJson(app.dataset.catalog);
+      contract.assertVersion(state.catalog);
       const paperPayload = await fetchJson('./web-data/' + state.catalog.papersFile);
-      await loadQuestionGroups();
+      contract.assertVersion(paperPayload);
       state.papers = (paperPayload.papers || []).filter(function (paper) {
-        return Number(paper.publishedQuestionCount || 0) > 0;
+        return Number(paper.stats.publishedQuestionCount || 0) > 0;
       });
       ui.bankSummary.textContent = Number(state.catalog.stats.quizQuestions || state.catalog.stats.publishedQuestions) +
         ' 道练习题 · ' + state.papers.length + ' 份试卷 · ' + state.catalog.modules.length + ' 个知识模块';
@@ -975,8 +514,7 @@
       state.papers.forEach(function (paper) {
         const option = document.createElement('option');
         option.value = paper.id;
-        option.textContent = [paper.year, paper.examType, paper.title].filter(Boolean).join(' · ') +
-          '（' + Number(paper.quizQuestionCount || paper.publishedQuestionCount) + ' 题）';
+        option.textContent = paper.displayName + '（' + paper.stats.quizQuestionCount + ' 题）';
         ui.paper.appendChild(option);
       });
       initSupabase();
@@ -1029,25 +567,15 @@
     showSetupError('');
     ui.start.disabled = true; ui.start.textContent = mode === 'mistakes' ? '正在读取错误率…' : '正在准备…';
     try {
-      const modules = state.catalog.modules.filter(function (module) { return ids.includes(module.id); });
-      const payloads = await Promise.all(modules.map(loadModulePayload));
+      const bank = await loadQuestionBank();
       const examType = mode === 'module-all' || mode === 'exam' ? '' : ui.examType.value;
-      const selectedPaper = mode === 'exam'
-        ? state.papers.find(function (paper) { return paper.id === ui.paper.value; }) : null;
-      const prepareOptions = { allowIncomplete: mode === 'exam' };
-      let pool = [];
-      payloads.forEach(function (payload) {
-        payload.questions.forEach(function (raw) {
-          if (!isPublishedQuestion(raw)) return;
-          if (examType && raw.examType !== examType) return;
-          if (selectedPaper && raw.paperId !== selectedPaper.id) return;
-          const prepared = prepareQuestion(raw, payload.module, payload.companions.get(questionIdentity(raw)), prepareOptions);
-          if (prepared) pool.push(prepared);
-        });
-      });
-      // 组合题可能横跨多个模块：先补齐同组片段，再合并；仍然拼不齐的整题移出。
-      await completeQuestionGroups(pool, prepareOptions);
-      pool = dropIncompleteGroups(collapseQuestionGroups(pool));
+      let pool = bank.filter(function (question) {
+        const paper = paperFor(question);
+        return isPublishedQuestion(question) && question.classification.moduleIds.some(function (id) { return ids.includes(id); }) &&
+          (!examType || (paper && contract.EXAM_LABELS[paper.examKind] === examType)) &&
+          (mode !== 'exam' || question.paperId === ui.paper.value);
+      }).map(function (question) { return Object.assign({}, question); });
+
       if (!pool.length) throw new Error('当前筛选条件下没有可用题目');
       if (mode === 'mistakes') pool = await rankByErrorRate(pool);
 
@@ -1119,13 +647,10 @@
   }
 
   function highlightChoiceResults(question) {
-    const expected = simpleExpected(question.directAnswer);
-    const declared = (question.interaction && question.interaction.correctChoiceIds) || [];
-    const correct = declared.length ? declared : expected && expected.kind === 'choice' ? expected.value.split('') : [];
-    if (!correct.length) return;
+    const correct = question.solution.grading === 'choice' ? question.solution.correctOptionIds : [];
     ui.choiceList.querySelectorAll('[data-choice]').forEach(function (button) {
       button.classList.toggle('is-correct', correct.includes(button.dataset.choice));
-      button.classList.toggle('is-incorrect', button.classList.contains('selected') && !correct.includes(button.dataset.choice));
+      button.classList.toggle('is-incorrect', correct.length > 0 && button.classList.contains('selected') && !correct.includes(button.dataset.choice));
     });
   }
 
@@ -1153,9 +678,8 @@
     ui.feedback.hidden = false; ui.selfGrade.hidden = !draft.needsSelfGrade;
     state.pendingCompositeGrade = draft.pendingCompositeGrade;
     ui.verdict.textContent = draft.verdict; ui.verdict.className = draft.verdictClass;
-    ui.reference.innerHTML = !question.answerAvailable
-      ? '<p>这道题尚未建立可靠的题目—答案映射。为避免展示错位答案，系统没有自动猜测。</p>'
-      : question.formatted ? renderLayoutStem(referenceFor(question)) : renderMarkdown(referenceFor(question));
+    ui.reference.innerHTML = renderSolution(question);
+
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
     ui.questionContent.querySelectorAll('button, input').forEach(function (control) { control.disabled = true; });
     if (!draft.needsSelfGrade) highlightChoiceResults(question);
@@ -1166,49 +690,22 @@
     const q = state.questions[state.index];
     state.pendingCompositeGrade = null;
     const number = state.index + 1;
-    const expected = simpleExpected(q.directAnswer);
-    let choiceQuestion = null;
-    let fillQuestion = null;
-    if (!q.answerAvailable) {
-      choiceQuestion = null;
-      fillQuestion = null;
-    } else if (q.formatted) {
-      // 结构化数据只按显式 interaction.kind 分流，不从题面猜题型。
-      const declaredKind = q.interaction && q.interaction.kind;
-      if ((declaredKind === 'single-choice' || declaredKind === 'multiple-choice') &&
-          q.layoutChoices && q.layoutChoices.length >= 2) {
-        choiceQuestion = {
-          stem: q.prompt,
-          choices: q.layoutChoices,
-          multiple: declaredKind === 'multiple-choice',
-        };
-      } else if (declaredKind === 'fill') {
-        fillQuestion = parseFillQuestion(q.prompt);
-      }
-    } else {
-      choiceQuestion = parseChoiceQuestion(q.prompt, expected);
-      fillQuestion = choiceQuestion ? null : parseFillQuestion(q.prompt);
-    }
-    const compositeQuestion = q.interaction && q.interaction.kind === 'composite';
-    state.currentMode = !q.answerAvailable ? 'unavailable' : choiceQuestion ? 'choice'
-      : fillQuestion ? 'fill' : compositeQuestion ? 'composite' : 'short';
-    const modeLabel = state.currentMode === 'unavailable' ? '待校对'
-      : state.currentMode === 'choice'
-      ? (choiceQuestion.multiple ? '多选题' : '单选题')
-      : state.currentMode === 'fill' ? '填空题'
-        : state.currentMode === 'composite' ? '综合题' : '简答题';
+    const choiceQuestion = q.type === 'single-choice' || q.type === 'multiple-choice';
+    const compositeQuestion = q.type === 'composite';
+    state.currentMode = q.solution.state !== 'available' ? 'unavailable' : choiceQuestion ? 'choice'
+      : q.type === 'fill' ? 'fill' : compositeQuestion ? 'composite' : 'short';
+    const modeLabel = issueTypeLabel(q.type);
+
     ui.progressText.textContent = '第 ' + number + ' / ' + state.questions.length + ' 题';
     ui.questionMeta.innerHTML = '<span class="ics-mode-badge">' + modeLabel + '</span>' +
-      [q.exam || [q.year, q.examType].filter(Boolean).join(' · '), q.questionNo, q.moduleTitle]
+      [paperFor(q) && paperFor(q).displayName, q.number.display, moduleTitle(q)]
         .filter(Boolean).map(function (item) { return '<span>' + escapeHtml(item) + '</span>'; }).join('');
     ui.questionHistory.hidden = !q.practiceStats;
     ui.questionHistory.textContent = q.practiceStats
       ? '历史错误率 ' + Math.round(q.practiceStats.errorRate * 100) + '% · ' + q.practiceStats.total + ' 人作答 · 按错误率降序练习' : '';
-    ui.questionContent.innerHTML = choiceQuestion
-      ? (q.formatted ? renderLayoutStem(choiceQuestion.stem) : renderMarkdown(choiceQuestion.stem))
-      : fillQuestion ? renderFillQuestion(fillQuestion, q.formatted)
-        : compositeQuestion && Array.isArray(q.compositeParts) ? renderCompositeQuestion(q)
-        : (q.formatted ? renderLayoutStem(q.prompt) : renderMarkdown(q.prompt));
+    ui.questionContent.innerHTML = q.type === 'fill' ? renderFillQuestion(q.stem)
+      : compositeQuestion ? renderCompositeQuestion(q) : renderContent(q.stem);
+
     ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false; ui.skip.disabled = false;
     ui.submit.hidden = false; ui.skip.hidden = false;
     const alreadyReported = state.reportedThisSession.has(q.id);
@@ -1228,7 +725,7 @@
     ui.answerHint.textContent = state.currentMode === 'unavailable'
       ? '题目仍按原卷顺序展示，本题不会计入成绩'
       : state.currentMode === 'choice'
-      ? (choiceQuestion.multiple ? '可选择多个选项' : '点击一个选项')
+      ? (q.type === 'multiple-choice' ? '可选择多个选项' : '点击一个选项')
       : state.currentMode === 'fill' ? '每个空格单独填写'
         : state.currentMode === 'composite' ? '选择与填空自动核对；简答显示答案后自评'
           : '本题查看答案后自评';
@@ -1237,13 +734,20 @@
         ? (state.currentMode === 'composite' ? '提交整题' : '显示参考答案')
         : '提交答案';
     if (choiceQuestion) {
-      ui.choiceList.dataset.multiple = choiceQuestion.multiple ? 'true' : 'false';
-      ui.choiceList.innerHTML = choiceQuestion.choices.map(function (choice) {
-        return '<button class="ics-choice" type="button" data-choice="' + choice.key + '" aria-pressed="false">' +
-          '<span class="ics-choice-key">' + choice.key + '</span>' +
-          '<span class="ics-choice-content post-content">' + (q.formatted ? renderLayoutChoice(choice.content) : renderChoiceMarkdown(choice.content)) + '</span></button>';
-      }).join('');
+      ui.choiceList.dataset.multiple = q.type === 'multiple-choice' ? 'true' : 'false';
+      ui.choiceList.innerHTML = renderOptions(q.options, 'data-choice');
     }
+    if (q.solution.state !== 'available') {
+      ui.questionContent.querySelectorAll('input, button').forEach(function (control) { control.disabled = true; });
+      ui.choiceList.querySelectorAll('button').forEach(function (control) { control.disabled = true; });
+    } else if (compositeQuestion) {
+      q.parts.forEach(function (part, index) {
+        if (part.solution.state === 'available') return;
+        ui.questionContent.querySelector('[data-composite-part="' + index + '"]')
+          .querySelectorAll('input, button').forEach(function (control) { control.disabled = true; });
+      });
+    }
+
     ui.answerForm.hidden = false; ui.feedback.hidden = true; ui.selfGrade.hidden = true;
     ui.choiceList.classList.remove('needs-choice');
     ui.feedback.querySelector('details').open = true;
@@ -1260,12 +764,7 @@
     window.scrollTo({ top: Math.max(0, ui.quiz.offsetTop - 16), behavior: 'auto' });
   }
 
-  // 参考答案只取 layout.answer（人工录入的那一份）。题目的 relatedBlockIds 指向的
-  // 往往是整份试卷的答案块，与单题并不精确对应，展示它会泄题，因此不参与渲染——
-  // 这也是不再发布 answer-blocks.json 的原因。
-  function referenceFor(q) {
-    return q.directAnswer || '这道题暂无可展示的参考答案。';
-  }
+
 
   function recordGrade(points, mode) {
     const q = state.questions[state.index];
@@ -1289,10 +788,10 @@
     let objectiveCount = 0;
     let subjectiveCount = 0;
     let firstMissing = null;
-    (question.compositeParts || []).forEach(function (part, index) {
+    question.parts.forEach(function (part, index) {
       const root = ui.questionContent.querySelector('[data-composite-part="' + index + '"]');
-      if (!root) return;
-      if (part.kind === 'single-choice' || part.kind === 'multiple-choice') {
+      if (!root || part.solution.state !== 'available') return;
+      if (part.type === 'single-choice' || part.type === 'multiple-choice') {
         const list = root.querySelector('.ics-composite-choices');
         const selected = Array.from(list.querySelectorAll('.selected'))
           .map(function (button) { return button.dataset.compositeChoice; }).sort();
@@ -1301,15 +800,15 @@
           if (!firstMissing) firstMissing = list;
           return;
         }
-        const expected = (part.correctChoiceIds || []).slice().sort();
-        answers.push(part.label + '：' + selected.join(''));
-        if (expected.length) {
+        const result = contract.gradeChoice(selected, part.solution);
+        answers.push(part.number.display + '：' + selected.join(''));
+        if (result !== null) {
           objectiveCount += 1;
-          if (selected.join('|') === expected.join('|')) objectiveCorrect += 1;
+          if (result) objectiveCorrect += 1;
         } else {
           subjectiveCount += 1;
         }
-      } else if (part.kind === 'fill') {
+      } else if (part.type === 'fill') {
         const inputs = Array.from(root.querySelectorAll('.ics-blank-input'));
         const missing = inputs.find(function (input) { return !input.value.trim(); });
         if (missing) {
@@ -1317,10 +816,10 @@
           if (!firstMissing) firstMissing = missing;
           return;
         }
-        answers.push(part.label + '：' + inputs.map(function (input) {
+        answers.push(part.number.display + '：' + inputs.map(function (input) {
           return input.dataset.blankId + '=' + input.value.trim();
         }).join('；'));
-        const fillResult = gradeFillInputs(inputs, part.blankAnswers);
+        const fillResult = gradeFillInputs(inputs, part.solution);
         if (fillResult === null) subjectiveCount += 1;
         else {
           objectiveCount += 1;
@@ -1328,7 +827,7 @@
         }
       } else {
         subjectiveCount += 1;
-        answers.push(part.label + '：查看答案后自评');
+        answers.push(part.number.display + '：查看答案后自评');
       }
     });
     if (firstMissing) {
@@ -1353,7 +852,7 @@
       ui.answer.value = '答案待校对，本题未计分';
       ui.submit.disabled = true; ui.skip.disabled = true;
       ui.feedback.hidden = false;
-      ui.reference.innerHTML = '<p>这道题尚未建立可靠的题目—答案映射。为避免展示错位答案，系统没有自动猜测。</p>';
+      ui.reference.innerHTML = renderSolution(state.questions[state.index]);
       ui.verdict.className = 'ics-verdict';
       ui.verdict.textContent = '本题已跳过，不计入本次成绩。';
       recordGrade(null, 'unavailable');
@@ -1382,23 +881,28 @@
     }
     ui.skip.disabled = true;
     const q = state.questions[state.index];
-    const expected = simpleExpected(q.directAnswer);
     const fillInputs = state.currentMode === 'fill'
       ? Array.from(ui.questionContent.querySelectorAll('.ics-blank-input')) : [];
-    const result = state.currentMode === 'choice' ? autoGrade(ui.answer.value, expected)
-      : state.currentMode === 'fill' ? gradeFillInputs(fillInputs,
-        (q.interaction && q.interaction.blankAnswers) || [])
+    const selected = Array.from(ui.choiceList.querySelectorAll('.selected')).map(function (button) { return button.dataset.choice; });
+    const result = state.currentMode === 'choice' ? contract.gradeChoice(selected, q.solution)
+      : state.currentMode === 'fill' ? gradeFillInputs(fillInputs, q.solution)
         : state.currentMode === 'composite' && compositeResult.subjectiveCount === 0 && compositeResult.objectiveCount
           ? compositeResult.objectiveCorrect === compositeResult.objectiveCount : null;
+
     ui.answer.disabled = true; ui.submit.disabled = true; ui.feedback.hidden = false;
     ui.submit.hidden = true; ui.skip.hidden = true;
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
-    ui.reference.innerHTML = q.formatted
-      ? renderLayoutStem(referenceFor(q))
-      : renderMarkdown(referenceFor(q));
+    ui.reference.innerHTML = renderSolution(q);
+
     typeset(ui.reference);
 
-    if (result === true) {
+    if (state.currentMode === 'composite' && compositeResult.subjectiveCount === 0 && compositeResult.objectiveCount) {
+      const points = Math.round(compositeResult.objectiveCorrect / compositeResult.objectiveCount * 100) / 100;
+      ui.verdict.className = 'ics-verdict ' + (points === 1 ? 'correct' : points === 0 ? 'incorrect' : '');
+      ui.verdict.textContent = '客观小问自动核对：' + compositeResult.objectiveCorrect + ' / ' + compositeResult.objectiveCount +
+        '，本题得 ' + points + ' 分。';
+      recordGrade(points, 'auto');
+    } else if (result === true) {
       ui.verdict.className = 'ics-verdict correct'; ui.verdict.textContent = '回答正确，得 1 分。';
       recordGrade(1, 'auto');
     } else if (result === false) {
@@ -1461,7 +965,7 @@
       const draft = state.drafts[index];
       const score = record && record.mode === 'skipped' ? '已跳过'
         : record && typeof record.points === 'number' ? record.points + ' 分' : draft && draft.needsSelfGrade ? '待自评' : '未计分';
-      const originalNumber = question.questionNo ? ' · ' + escapeHtml(question.questionNo) : '';
+      const originalNumber = question.number.display ? ' · ' + escapeHtml(question.number.display) : '';
       return '<button type="button" class="ics-review-item" data-review-index="' + index + '"><span class="ics-review-score">' + score + '</span>' +
         '<strong>第 ' + (index + 1) + ' 题' + originalNumber + '</strong>' +
         '<p>' + (record && record.mode !== 'skipped' ? '你的回答：' + escapeHtml(record.answer)
@@ -1562,7 +1066,13 @@
     list.classList.remove('needs-choice');
   });
   ui.questionContent.addEventListener('input', function (event) {
-    if (event.target.matches('.ics-blank-input')) event.target.classList.remove('missing');
+    const input = event.target;
+    if (!input.matches('.ics-blank-input')) return;
+    ui.questionContent.querySelectorAll('.ics-blank-input').forEach(function (other) {
+      if (other.dataset.blankId === input.dataset.blankId && other.dataset.blankScope === input.dataset.blankScope) {
+        other.value = input.value; other.classList.remove('missing');
+      }
+    });
   });
   ui.selfGrade.addEventListener('click', function (event) {
     const button = event.target.closest('[data-grade]');

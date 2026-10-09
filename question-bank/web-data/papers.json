@@ -1,12 +1,17 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": "5",
   "papers": [
     {
+      "schemaVersion": "5",
       "id": "p-e8f40973e2cc056e",
-      "year": 2025,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2025期末",
+      "title": null,
+      "year": 2025,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-a0620c11aef4ea34",
         "q-de02009b607fb02b",
@@ -33,56 +38,58 @@
         "q-3c6961b8f05b8a00",
         "q-f83fe8e69923ea0e",
         "q-d334458ae32ec316",
-        "q-d429874a3b3999f4",
-        "q-dc2cb1d34ff2b09f",
-        "q-672cc1ac83994854",
+        "q-c799f2158ed1e841",
         "q-c5a45b9c928fb3ce",
-        "q-51332fd0f4b3baa8",
-        "q-6b0d64ca8f0741b2",
+        "q-3ec4aed1f80da6f3",
         "q-20fcc7293246e535"
       ],
-      "verifiedAnswerCount": 32,
-      "singleChoiceCount": 0,
-      "multipleChoiceCount": 25,
-      "fillCount": 2,
-      "shortAnswerCount": 0,
-      "compositeCount": 5,
-      "questionCount": 32,
-      "publishedQuestionCount": 32,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2025期末-无答案.md"
+      ],
+      "stats": {
+        "questionCount": 29,
+        "publishedQuestionCount": 29,
+        "quizQuestionCount": 29,
+        "verifiedAnswerCount": 29,
+        "singleChoiceCount": 0,
+        "multipleChoiceCount": 25,
+        "fillCount": 2,
+        "shortAnswerCount": 0,
+        "compositeCount": 2
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-febcfbeee0f364b2",
-      "year": 2025,
-      "examType": "阶段测验",
-      "title": "第1次",
+      "revision": 1,
       "displayName": "2025阶段测验（第1次）",
+      "title": null,
+      "year": 2025,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "stage-test",
+      "sequence": 1,
       "questionIds": [
         "q-3def6f4fcf70faae",
         "q-be9654f19b9b4b25",
         "q-c43f907076bd5a56",
         "q-72523787bc625042",
         "q-ad7a29eee267029d",
-        "q-1638b3fc06b77cb0",
-        "q-87db868e0bfc837e",
-        "q-e79ccb5c1591b9f9",
-        "q-c6f39a9fc14b2643",
+        "q-155f1dde880cc7e5",
         "q-783d7bff35751d8f",
         "q-4acd2d114b967a38",
         "q-70a59d239438b38a",
         "q-5db77487acc41d3e",
-        "q-0f71738d4b9ce3de",
-        "q-ca1ea21621239695",
-        "q-ab06db7b52036584",
-        "q-c62728deb08346bb",
-        "q-60f6356d0e6b5538",
+        "q-4a63354dbb394c04",
+        "q-39f3f84bc46decbc",
         "q-1951cd500e3fca0c",
         "q-e885081ef86a9b63",
         "q-a3683993969e5d68",
-        "q-d88a44aeb2ce10d9",
-        "q-ec8d099be2077dda",
-        "q-f2d08e525678649c",
-        "q-ce58933dd5b2fa33",
+        "q-dbff5f97713c99d7",
         "q-c14b1d06d6cfa8ba",
         "q-8e5e9e4fc14730b5",
         "q-a44ec5ff33556a53",
@@ -92,22 +99,36 @@
         "q-6cf7fdea35ca7215",
         "q-fb0c6fbc0e9f5b44"
       ],
-      "verifiedAnswerCount": 33,
-      "singleChoiceCount": 0,
-      "multipleChoiceCount": 0,
-      "fillCount": 20,
-      "shortAnswerCount": 0,
-      "compositeCount": 13,
-      "questionCount": 33,
-      "publishedQuestionCount": 33,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/阶段测验/2025第1次阶段测验-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 24,
+        "publishedQuestionCount": 24,
+        "quizQuestionCount": 24,
+        "verifiedAnswerCount": 24,
+        "singleChoiceCount": 0,
+        "multipleChoiceCount": 0,
+        "fillCount": 20,
+        "shortAnswerCount": 0,
+        "compositeCount": 4
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-0439188e8c4bdac1",
-      "year": 2025,
-      "examType": "阶段测验",
-      "title": "第2次",
+      "revision": 1,
       "displayName": "2025阶段测验（第2次）",
+      "title": null,
+      "year": 2025,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "stage-test",
+      "sequence": 2,
       "questionIds": [
         "q-7ab33282d6b7459a",
         "q-7f8151d920f046d9",
@@ -131,29 +152,39 @@
         "q-1193a85ee97e9eb7",
         "q-8ecabaa93552c5fd",
         "q-18521c5015bccc53",
-        "q-299cfc11fecaff44",
-        "q-da401d06b08a07ee",
-        "q-c6a0365de9075c10",
-        "q-50a647f5a470d688",
-        "q-a255defea0f15cf2",
-        "q-8c64e5287043dc94"
+        "q-f0b98b6dbd158843",
+        "q-2d91d3370d28d2d1"
       ],
-      "verifiedAnswerCount": 28,
-      "singleChoiceCount": 2,
-      "multipleChoiceCount": 3,
-      "fillCount": 7,
-      "shortAnswerCount": 10,
-      "compositeCount": 6,
-      "questionCount": 28,
-      "publishedQuestionCount": 28,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/阶段测验/2025第2次阶段测验-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 24,
+        "publishedQuestionCount": 24,
+        "quizQuestionCount": 24,
+        "verifiedAnswerCount": 24,
+        "singleChoiceCount": 2,
+        "multipleChoiceCount": 3,
+        "fillCount": 7,
+        "shortAnswerCount": 10,
+        "compositeCount": 2
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-9c11139ca386240d",
-      "year": 2025,
-      "examType": "Lab测验",
-      "title": "",
+      "revision": 1,
       "displayName": "2025Lab测验",
+      "title": null,
+      "year": 2025,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "lab-quiz",
+      "sequence": null,
       "questionIds": [
         "q-5cf6817ce4f8db9c",
         "q-8948287db87fa2ef",
@@ -206,22 +237,36 @@
         "q-5e2b5c6f170c5ce6",
         "q-68003f0197c16d34"
       ],
-      "verifiedAnswerCount": 50,
-      "singleChoiceCount": 48,
-      "multipleChoiceCount": 2,
-      "fillCount": 0,
-      "shortAnswerCount": 0,
-      "compositeCount": 0,
-      "questionCount": 50,
-      "publishedQuestionCount": 50,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/Lab测验/2025Lab测验-无答案.md"
+      ],
+      "stats": {
+        "questionCount": 50,
+        "publishedQuestionCount": 50,
+        "quizQuestionCount": 50,
+        "verifiedAnswerCount": 50,
+        "singleChoiceCount": 48,
+        "multipleChoiceCount": 2,
+        "fillCount": 0,
+        "shortAnswerCount": 0,
+        "compositeCount": 0
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-0fe6817c7f881573",
-      "year": 2024,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2024期中",
+      "title": null,
+      "year": 2024,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-fd90631e605fc0f6",
         "q-17ad9fe8fcec6820",
@@ -238,32 +283,41 @@
         "q-2544d07c1cb39879",
         "q-ff210b58391d1031",
         "q-89f018b6386fdfc2",
-        "q-49ad744352e4e33c",
-        "q-eb74c681a9a0fc82",
-        "q-50d8c8bfdff1fa9f",
+        "q-48830bbf91e759fa",
         "q-1d4f3586e8bd5b5c",
         "q-a2b60d2e0a94d42b",
-        "q-686d90d0e3f23820",
-        "q-cda155a17f4b086f",
-        "q-ba47e9c8f9fcb711",
-        "q-adb65b85c2659c2f"
+        "q-3000615f0e2c7873"
       ],
-      "verifiedAnswerCount": 24,
-      "singleChoiceCount": 15,
-      "multipleChoiceCount": 0,
-      "fillCount": 2,
-      "shortAnswerCount": 0,
-      "compositeCount": 7,
-      "questionCount": 24,
-      "publishedQuestionCount": 24,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2024期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 19,
+        "publishedQuestionCount": 19,
+        "quizQuestionCount": 19,
+        "verifiedAnswerCount": 19,
+        "singleChoiceCount": 15,
+        "multipleChoiceCount": 0,
+        "fillCount": 2,
+        "shortAnswerCount": 0,
+        "compositeCount": 2
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-ae9ab20d09974cf3",
-      "year": 2024,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2024期末",
+      "title": null,
+      "year": 2024,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-31fd3c710550b47e",
         "q-aea5c2e39bc03911",
@@ -282,30 +336,43 @@
         "q-fa2e2a9bd845f2cf",
         "q-0324b364e9cc3917",
         "q-db07f3829cfe0e66",
-        "q-1aa9bebc1b718737",
-        "q-5d199a2b3087a536",
+        "q-226325586bcfc18b",
         "q-f106961e4b86af22",
         "q-492c07fd54f9b065",
         "q-69a53f8a7ed107eb",
         "q-a01a9f044af56d47",
         "q-c686bf5ca67f4ed8"
       ],
-      "verifiedAnswerCount": 24,
-      "singleChoiceCount": 13,
-      "multipleChoiceCount": 2,
-      "fillCount": 6,
-      "shortAnswerCount": 1,
-      "compositeCount": 2,
-      "questionCount": 24,
-      "publishedQuestionCount": 24,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2024期末-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 23,
+        "publishedQuestionCount": 23,
+        "quizQuestionCount": 23,
+        "verifiedAnswerCount": 23,
+        "singleChoiceCount": 13,
+        "multipleChoiceCount": 2,
+        "fillCount": 6,
+        "shortAnswerCount": 1,
+        "compositeCount": 1
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-bed4802d7c36448b",
-      "year": 2023,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2023期中",
+      "title": null,
+      "year": 2023,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-d8271f9c65e007a9",
         "q-028b466009019ed8",
@@ -334,22 +401,36 @@
         "q-1a8cc69307ec0038",
         "q-fc5832aa452d9480"
       ],
-      "verifiedAnswerCount": 26,
-      "singleChoiceCount": 20,
-      "multipleChoiceCount": 0,
-      "fillCount": 6,
-      "shortAnswerCount": 0,
-      "compositeCount": 0,
-      "questionCount": 26,
-      "publishedQuestionCount": 26,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2023期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 26,
+        "publishedQuestionCount": 26,
+        "quizQuestionCount": 26,
+        "verifiedAnswerCount": 26,
+        "singleChoiceCount": 20,
+        "multipleChoiceCount": 0,
+        "fillCount": 6,
+        "shortAnswerCount": 0,
+        "compositeCount": 0
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-12950876262955d9",
-      "year": 2022,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2022期中",
+      "title": null,
+      "year": 2022,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-6467625b6cf0ae5a",
         "q-1085001ca3207c84",
@@ -374,25 +455,38 @@
         "q-d077d3270d2bb69f",
         "q-a70c753abad8eb3c",
         "q-67ee13bfb461a052",
-        "q-a828b7c3d731fde9",
-        "q-874ae2f7a48e149c"
+        "q-398fe9f606ec567b"
       ],
-      "verifiedAnswerCount": 25,
-      "singleChoiceCount": 20,
-      "multipleChoiceCount": 0,
-      "fillCount": 0,
-      "shortAnswerCount": 3,
-      "compositeCount": 2,
-      "questionCount": 25,
-      "publishedQuestionCount": 25,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2022期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 24,
+        "publishedQuestionCount": 24,
+        "quizQuestionCount": 24,
+        "verifiedAnswerCount": 24,
+        "singleChoiceCount": 20,
+        "multipleChoiceCount": 0,
+        "fillCount": 0,
+        "shortAnswerCount": 3,
+        "compositeCount": 1
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-7016510094998ec2",
-      "year": 2022,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2022期末",
+      "title": null,
+      "year": 2022,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-7d2a26a53d81e35c",
         "q-50ebd81e30dc512c",
@@ -409,47 +503,43 @@
         "q-923088b4fef4799c",
         "q-e834855ad8c927b2",
         "q-ad12aab7f4702415",
-        "q-29d415104884ac35",
-        "q-f1ee76a3d0c7a75f",
-        "q-f7a75a0fc3fe1818",
-        "q-884f888c0dd8ba76",
-        "q-b2dba99cfe5c89fa",
-        "q-905b90d9ffe7f3c7",
-        "q-e783a0ee4d4f6992",
-        "q-47cb6ca285432b91",
-        "q-a8829955670a11db",
-        "q-f45e5c01f10ecffa",
-        "q-9bc46cc82b1120f4",
-        "q-42ff4c55dfbfaeab",
-        "q-ad848f471879e035",
-        "q-d92185485a797988",
-        "q-443a702b2f36d4d9",
-        "q-7e4dbca71b0f137c",
-        "q-35b31dd6c25ebe73",
-        "q-9839dd0d198535d7",
-        "q-8ef75472241f3c98",
-        "q-d1c53aa2285305a2",
-        "q-9173da3272ca94be",
-        "q-2caa71db00b101fa",
-        "q-51ff2770273733c0",
-        "q-f83ca79637ff66b3"
+        "q-80560a1ecf2223dd",
+        "q-c448153415e0dd8d",
+        "q-0534efd83d6a6a83",
+        "q-ba30b4acb8d6c86e",
+        "q-9eb1f8b0e041bbe7",
+        "q-b04eecbfa5be0f56"
       ],
-      "verifiedAnswerCount": 39,
-      "singleChoiceCount": 0,
-      "multipleChoiceCount": 0,
-      "fillCount": 15,
-      "shortAnswerCount": 0,
-      "compositeCount": 24,
-      "questionCount": 39,
-      "publishedQuestionCount": 39,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2022期末-无答案.md"
+      ],
+      "stats": {
+        "questionCount": 21,
+        "publishedQuestionCount": 21,
+        "quizQuestionCount": 21,
+        "verifiedAnswerCount": 21,
+        "singleChoiceCount": 0,
+        "multipleChoiceCount": 0,
+        "fillCount": 15,
+        "shortAnswerCount": 0,
+        "compositeCount": 6
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-ffd1f5f688babe1b",
-      "year": 2021,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2021期中",
+      "title": null,
+      "year": 2021,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-bc9df96c65fdf526",
         "q-591cfff8cfc18240",
@@ -470,41 +560,41 @@
         "q-c9a40cdea839080f",
         "q-5a39736ee882403b",
         "q-ce72197e573dfd2e",
-        "q-df98089e83ddf0c0",
-        "q-454a1151ce796abd",
-        "q-b34c10536980dd91",
-        "q-b99c43e33a7b2e51",
-        "q-d5102c7a07230210",
-        "q-a0690be315dc71d3",
-        "q-46ca868fd841b060",
-        "q-ff6b5e9c28e228ff",
-        "q-6becc834d008884a",
-        "q-d1779a363b6bb5e2",
-        "q-c0f710b5f948f825",
-        "q-4b04af65cec464e8",
-        "q-13fdd7e738109fe2",
-        "q-0b593b74352e632c",
-        "q-22d8754a3541d68a",
-        "q-e06f959730a36946",
-        "q-a18d830efa0ca402",
-        "q-793aaab0d5e579d8"
+        "q-9270f741d613d9a2",
+        "q-bcf23ec71ae6c080",
+        "q-342720662ae6f949",
+        "q-b0ef359a9e930155"
       ],
-      "verifiedAnswerCount": 37,
-      "singleChoiceCount": 15,
-      "multipleChoiceCount": 0,
-      "fillCount": 4,
-      "shortAnswerCount": 0,
-      "compositeCount": 18,
-      "questionCount": 37,
-      "publishedQuestionCount": 37,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2021期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 23,
+        "publishedQuestionCount": 23,
+        "quizQuestionCount": 23,
+        "verifiedAnswerCount": 23,
+        "singleChoiceCount": 15,
+        "multipleChoiceCount": 0,
+        "fillCount": 4,
+        "shortAnswerCount": 0,
+        "compositeCount": 4
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-2c2b56c4452255b1",
-      "year": 2021,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2021期末",
+      "title": null,
+      "year": 2021,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-51a408b61bad12f9",
         "q-fb590e5544273795",
@@ -529,10 +619,7 @@
         "q-c4db69af5ae828fe",
         "q-53b7581785c41178",
         "q-aef3c997509d203e",
-        "q-64ab5fa1b609de6b",
-        "q-a71284ceb71900f9",
-        "q-af42836a7c424fe9",
-        "q-c470de9f3073d787",
+        "q-3843863f7e2c5084",
         "q-59acf52820891cfb",
         "q-8e49d99d7ee8ec93",
         "q-1b01a780840c7519",
@@ -542,8 +629,7 @@
         "q-1639587f017ccb0b",
         "q-58bc8ac66edffeea",
         "q-e641b2a8a8e75c05",
-        "q-08951d5914ab55c4",
-        "q-9bda8f7ba04cd7af",
+        "q-f4d710674cf7853e",
         "q-a23137c496983fb6",
         "q-4ba0de4690739561",
         "q-5b6c4fa627324353",
@@ -559,44 +645,54 @@
         "q-b4f989f5aa9710c3",
         "q-07143baf94cfb8b9",
         "q-f1dbfc943fb856f1",
-        "q-a26ced764598c929",
-        "q-c7c4cf76549e1f00",
-        "q-58e76213788bb4aa",
+        "q-bcf53a1d45ecdc51",
         "q-6c373b26bf4709ad",
         "q-687f6fa75252ad9e",
-        "q-bc5bd7a7600545af",
-        "q-6d5194cb1b419dbd",
-        "q-2961eaea167bf027",
-        "q-0256d58ecc4558e0",
-        "q-c36fd896a1758c57",
+        "q-4730c11ac9b401ca",
         "q-d0e496c385014ce7",
         "q-b7a9ecc73a484504",
-        "q-c269d968c30f6a73",
-        "q-b48bdc4603e2fe19",
-        "q-7e98b751f0325385",
-        "q-f7fcda18b34e3a29",
-        "q-4689e57e852af72d",
+        "q-ffaf26f77f01eef5",
         "q-1d708cca57ab7565",
         "q-52ff86ba42790c5b",
         "q-279d029b6a62bcfa",
         "q-ef2d486e3c11f3f9"
       ],
-      "verifiedAnswerCount": 74,
-      "singleChoiceCount": 47,
-      "multipleChoiceCount": 0,
-      "fillCount": 5,
-      "shortAnswerCount": 3,
-      "compositeCount": 19,
-      "questionCount": 74,
-      "publishedQuestionCount": 74,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2021期末-无答案.md",
+        "原文/期末/2021期末-带答案/chap 10 解析.md",
+        "原文/期末/2021期末-带答案/chap 11-12 题目.md",
+        "原文/期末/2021期末-带答案/chap 2-6 解析.md",
+        "原文/期末/2021期末-带答案/chap 7 解析.md",
+        "原文/期末/2021期末-带答案/chap 8 解析.md",
+        "原文/期末/2021期末-带答案/chap 9 题目.md"
+      ],
+      "stats": {
+        "questionCount": 60,
+        "publishedQuestionCount": 60,
+        "quizQuestionCount": 60,
+        "verifiedAnswerCount": 60,
+        "singleChoiceCount": 47,
+        "multipleChoiceCount": 0,
+        "fillCount": 5,
+        "shortAnswerCount": 3,
+        "compositeCount": 5
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-d72f88c4198cf267",
-      "year": 2020,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2020期中",
+      "title": null,
+      "year": 2020,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-06a308985172b84a",
         "q-5bda1cdcfd5e9cdd",
@@ -610,33 +706,41 @@
         "q-0a9a932448567b16",
         "q-31a026ec4bb13cfd",
         "q-6b0b7118635c93ec",
-        "q-c26dcb8894f2b45e",
-        "q-77dc7db573e0ee5a",
-        "q-0e7411e79eb6dc92",
-        "q-3969dec85485a1a1",
-        "q-83f219186da3fa88",
-        "q-a0df39f626281360",
-        "q-d93abf1fc2d6d51a",
-        "q-271458572c646e53",
-        "q-93065bcb1bef9ed1",
-        "q-be2aa45e9dbbafe7"
+        "q-dfb1408ac4bafee7",
+        "q-e79fe5b33df52e8d",
+        "q-13c961451563b43b",
+        "q-521d76fb06b284d2"
       ],
-      "verifiedAnswerCount": 22,
-      "singleChoiceCount": 12,
-      "multipleChoiceCount": 0,
-      "fillCount": 0,
-      "shortAnswerCount": 0,
-      "compositeCount": 10,
-      "questionCount": 22,
-      "publishedQuestionCount": 22,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2020期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 16,
+        "publishedQuestionCount": 16,
+        "quizQuestionCount": 16,
+        "verifiedAnswerCount": 16,
+        "singleChoiceCount": 12,
+        "multipleChoiceCount": 0,
+        "fillCount": 0,
+        "shortAnswerCount": 0,
+        "compositeCount": 4
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-f99ca20e1a729e32",
-      "year": 2020,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2020期末",
+      "title": null,
+      "year": 2020,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-7d29433073c3ab5d",
         "q-70e351f742b73d89",
@@ -663,30 +767,42 @@
         "q-9866683d66b6b84b",
         "q-d79493be4d3d185e",
         "q-4fc7a18df82a3d2a",
-        "q-83dd71fdca4ab2d3",
-        "q-216b79eb6ccbcf5b",
-        "q-6e8b718edb015123",
+        "q-19c4d964d98fc677",
         "q-0db09198d5c9f64c",
         "q-5d574996f3b93516",
         "q-36cdda52cd922bd2",
         "q-ca36da4b1e755039"
       ],
-      "verifiedAnswerCount": 32,
-      "singleChoiceCount": 25,
-      "multipleChoiceCount": 0,
-      "fillCount": 2,
-      "shortAnswerCount": 2,
-      "compositeCount": 3,
-      "questionCount": 32,
-      "publishedQuestionCount": 32,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2020期末-无答案.md"
+      ],
+      "stats": {
+        "questionCount": 30,
+        "publishedQuestionCount": 30,
+        "quizQuestionCount": 30,
+        "verifiedAnswerCount": 30,
+        "singleChoiceCount": 25,
+        "multipleChoiceCount": 0,
+        "fillCount": 2,
+        "shortAnswerCount": 2,
+        "compositeCount": 1
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-a12b4c73bf0c30d2",
-      "year": 2019,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2019期中",
+      "title": null,
+      "year": 2019,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-286ab5a9bb872d3a",
         "q-169cd36128770fb3",
@@ -706,30 +822,40 @@
         "q-b9417a58e44059bb",
         "q-d3c830eb8ed35d68",
         "q-873f08e7b04463d8",
-        "q-bffbee417aaeea5f",
-        "q-6957f246589b063b",
-        "q-63323b2447997aa0",
-        "q-ccd41903ffb2c793",
-        "q-383f5a26f0e47e6a",
-        "q-6ed6272f93aa82e5",
+        "q-9acce0371658f35f",
+        "q-e9162b5ebf244c22",
         "q-09e5c0e61848d20a"
       ],
-      "verifiedAnswerCount": 25,
-      "singleChoiceCount": 15,
-      "multipleChoiceCount": 0,
-      "fillCount": 3,
-      "shortAnswerCount": 1,
-      "compositeCount": 6,
-      "questionCount": 25,
-      "publishedQuestionCount": 25,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2019期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 21,
+        "publishedQuestionCount": 21,
+        "quizQuestionCount": 21,
+        "verifiedAnswerCount": 21,
+        "singleChoiceCount": 15,
+        "multipleChoiceCount": 0,
+        "fillCount": 3,
+        "shortAnswerCount": 1,
+        "compositeCount": 2
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-98acf19964247e22",
-      "year": 2019,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2019期末",
+      "title": null,
+      "year": 2019,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-15ba3470bcd76391",
         "q-bf1eb89c46abaafa",
@@ -751,33 +877,43 @@
         "q-dcfefd7978752921",
         "q-2f87a3c061ca7520",
         "q-9a71ecec1819ecdf",
-        "q-57ec38ee956f34b3",
-        "q-384c822e93f6ad37",
-        "q-7ebc4d63395e862f",
-        "q-3569c67504ccc569",
-        "q-97ee53783d7536e8",
+        "q-5f2d2b416c72e83f",
         "q-96576bae25379ede",
         "q-3f14235fd87550aa",
         "q-f5038dc497e7b201",
         "q-2b4c6c474fcda60d",
         "q-7429c141baec19f7"
       ],
-      "verifiedAnswerCount": 30,
-      "singleChoiceCount": 19,
-      "multipleChoiceCount": 1,
-      "fillCount": 3,
-      "shortAnswerCount": 2,
-      "compositeCount": 5,
-      "questionCount": 30,
-      "publishedQuestionCount": 30,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2019期末-无答案.md"
+      ],
+      "stats": {
+        "questionCount": 26,
+        "publishedQuestionCount": 26,
+        "quizQuestionCount": 26,
+        "verifiedAnswerCount": 26,
+        "singleChoiceCount": 19,
+        "multipleChoiceCount": 1,
+        "fillCount": 3,
+        "shortAnswerCount": 2,
+        "compositeCount": 1
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-eaef0ab4d19e72c9",
-      "year": 2018,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2018期中",
+      "title": null,
+      "year": 2018,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-f92b86e958bfc3c6",
         "q-78a7e4e87f74f95d",
@@ -795,28 +931,41 @@
         "q-e458a8b289c20fcb",
         "q-07674f4f843ac295",
         "q-7b8ae9d0614c29bf",
-        "q-9fdd13d9aa346014",
-        "q-6f1e2a8202d6c801",
+        "q-dc098e5a5efcc480",
         "q-0d7bc75a367777ab",
         "q-91d52adb5f08e3b9",
         "q-0267d244626bea1b"
       ],
-      "verifiedAnswerCount": 21,
-      "singleChoiceCount": 12,
-      "multipleChoiceCount": 3,
-      "fillCount": 4,
-      "shortAnswerCount": 0,
-      "compositeCount": 2,
-      "questionCount": 21,
-      "publishedQuestionCount": 21,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2018期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 20,
+        "publishedQuestionCount": 20,
+        "quizQuestionCount": 20,
+        "verifiedAnswerCount": 20,
+        "singleChoiceCount": 12,
+        "multipleChoiceCount": 3,
+        "fillCount": 4,
+        "shortAnswerCount": 0,
+        "compositeCount": 1
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-e3f869956fc29bd8",
-      "year": 2018,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2018期末",
+      "title": null,
+      "year": 2018,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-f11e1f3760e8cd45",
         "q-d2849e98f1c73576",
@@ -834,31 +983,43 @@
         "q-51b97ab5d9b4706a",
         "q-9758fb88a663210b",
         "q-c7cbe7724a1752f2",
-        "q-fcdcf49e11759e0e",
-        "q-906e831c908a1bd5",
+        "q-f0b0ad5391aaad24",
         "q-54e55a2556b716c4",
         "q-24321282fb032032",
         "q-b72158b8a694d842",
-        "q-11519e4dc5364b32",
-        "q-c36c9b861c58b521",
+        "q-6e0eea29f44ce37d",
         "q-116083ef80b5731e"
       ],
-      "verifiedAnswerCount": 24,
-      "singleChoiceCount": 15,
-      "multipleChoiceCount": 0,
-      "fillCount": 4,
-      "shortAnswerCount": 1,
-      "compositeCount": 4,
-      "questionCount": 24,
-      "publishedQuestionCount": 24,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2018期末-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 22,
+        "publishedQuestionCount": 22,
+        "quizQuestionCount": 22,
+        "verifiedAnswerCount": 22,
+        "singleChoiceCount": 15,
+        "multipleChoiceCount": 0,
+        "fillCount": 4,
+        "shortAnswerCount": 1,
+        "compositeCount": 2
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-5e37064fe519258d",
-      "year": 2017,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2017期中",
+      "title": null,
+      "year": 2017,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-78fcffb697c7ff79",
         "q-5f869c9dbc978cec",
@@ -880,22 +1041,36 @@
         "q-4e5696eed6d12f64",
         "q-48a073bf38414881"
       ],
-      "verifiedAnswerCount": 19,
-      "singleChoiceCount": 13,
-      "multipleChoiceCount": 2,
-      "fillCount": 4,
-      "shortAnswerCount": 0,
-      "compositeCount": 0,
-      "questionCount": 19,
-      "publishedQuestionCount": 19,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2017期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 19,
+        "publishedQuestionCount": 19,
+        "quizQuestionCount": 19,
+        "verifiedAnswerCount": 19,
+        "singleChoiceCount": 13,
+        "multipleChoiceCount": 2,
+        "fillCount": 4,
+        "shortAnswerCount": 0,
+        "compositeCount": 0
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-382bf3b10bc8d35a",
-      "year": 2017,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2017期末",
+      "title": null,
+      "year": 2017,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-8decdfc029a55ef4",
         "q-36b4ad87abc1091d",
@@ -917,8 +1092,7 @@
         "q-ca7f9653fe94b2de",
         "q-af14851262ed34fa",
         "q-273b6d36967b7fec",
-        "q-84b72f73a942f670",
-        "q-9b7cd569a8bd4748",
+        "q-a52d536a178598a6",
         "q-78daa36a28b35c57",
         "q-3434d079e56bbb46",
         "q-46374f8a549b7cd5",
@@ -928,22 +1102,36 @@
         "q-c0a723762303c751",
         "q-24598d7deeb69df7"
       ],
-      "verifiedAnswerCount": 30,
-      "singleChoiceCount": 20,
-      "multipleChoiceCount": 1,
-      "fillCount": 5,
-      "shortAnswerCount": 2,
-      "compositeCount": 2,
-      "questionCount": 30,
-      "publishedQuestionCount": 30,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2017期末-无答案.md"
+      ],
+      "stats": {
+        "questionCount": 29,
+        "publishedQuestionCount": 29,
+        "quizQuestionCount": 29,
+        "verifiedAnswerCount": 29,
+        "singleChoiceCount": 20,
+        "multipleChoiceCount": 1,
+        "fillCount": 5,
+        "shortAnswerCount": 2,
+        "compositeCount": 1
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-662d741f28b2bed0",
-      "year": 2016,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2016期中",
+      "title": null,
+      "year": 2016,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-8aadc109f577ef1f",
         "q-0e23ada3c873fa51",
@@ -972,22 +1160,36 @@
         "q-4a6077bec6fc2f43",
         "q-186b708735f7569c"
       ],
-      "verifiedAnswerCount": 26,
-      "singleChoiceCount": 14,
-      "multipleChoiceCount": 0,
-      "fillCount": 12,
-      "shortAnswerCount": 0,
-      "compositeCount": 0,
-      "questionCount": 26,
-      "publishedQuestionCount": 26,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2016期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 26,
+        "publishedQuestionCount": 26,
+        "quizQuestionCount": 26,
+        "verifiedAnswerCount": 26,
+        "singleChoiceCount": 14,
+        "multipleChoiceCount": 0,
+        "fillCount": 12,
+        "shortAnswerCount": 0,
+        "compositeCount": 0
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-bc69f9ea3beff7ee",
-      "year": 2016,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2016期末",
+      "title": null,
+      "year": 2016,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-11f1ddbad880172b",
         "q-28abf0da673e7840",
@@ -1017,22 +1219,36 @@
         "q-496d550407168984",
         "q-d00b4881c35e6fec"
       ],
-      "verifiedAnswerCount": 27,
-      "singleChoiceCount": 15,
-      "multipleChoiceCount": 0,
-      "fillCount": 4,
-      "shortAnswerCount": 3,
-      "compositeCount": 0,
-      "questionCount": 27,
-      "publishedQuestionCount": 22,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2016期末-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 27,
+        "publishedQuestionCount": 22,
+        "quizQuestionCount": 22,
+        "verifiedAnswerCount": 27,
+        "singleChoiceCount": 15,
+        "multipleChoiceCount": 0,
+        "fillCount": 4,
+        "shortAnswerCount": 3,
+        "compositeCount": 0
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-89e8b793519e36c6",
-      "year": 2015,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2015期中",
+      "title": null,
+      "year": 2015,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-55606fe1a682f920",
         "q-c643d80addef7ead",
@@ -1056,34 +1272,41 @@
         "q-8b9cdb6549f4cc25",
         "q-1737c983c32fea14",
         "q-41c02668a37db3bd",
-        "q-c8483324725aa335",
-        "q-135a936b527da7c1",
-        "q-4284650c2063ef72",
+        "q-cb30db95322d3051",
         "q-7cd9182305e4534c",
-        "q-18826e7345c68578",
-        "q-28004d989e87b6bf",
-        "q-c9d76ebb64035a15",
-        "q-278295a15c09eeed",
-        "q-8711f15fcf771dd7",
-        "q-6acdab44e2b32dd2",
-        "q-80c11cfc4df40242"
+        "q-61bd7ec829d2642e",
+        "q-6422fce8a943ccfa"
       ],
-      "verifiedAnswerCount": 33,
-      "singleChoiceCount": 20,
-      "multipleChoiceCount": 0,
-      "fillCount": 2,
-      "shortAnswerCount": 1,
-      "compositeCount": 10,
-      "questionCount": 33,
-      "publishedQuestionCount": 33,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2015期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 26,
+        "publishedQuestionCount": 26,
+        "quizQuestionCount": 26,
+        "verifiedAnswerCount": 26,
+        "singleChoiceCount": 20,
+        "multipleChoiceCount": 0,
+        "fillCount": 2,
+        "shortAnswerCount": 1,
+        "compositeCount": 3
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-08e665c0f6e47348",
-      "year": 2015,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2015期末",
+      "title": null,
+      "year": 2015,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-f347a3902ff7f0bb",
         "q-52bb69c4e3f41cdd",
@@ -1113,22 +1336,36 @@
         "q-c42dbf66f5c328f4",
         "q-06903e5136e1ac18"
       ],
-      "verifiedAnswerCount": 27,
-      "singleChoiceCount": 19,
-      "multipleChoiceCount": 1,
-      "fillCount": 5,
-      "shortAnswerCount": 2,
-      "compositeCount": 0,
-      "questionCount": 27,
-      "publishedQuestionCount": 27,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2015期末-20160104-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 27,
+        "publishedQuestionCount": 27,
+        "quizQuestionCount": 27,
+        "verifiedAnswerCount": 27,
+        "singleChoiceCount": 19,
+        "multipleChoiceCount": 1,
+        "fillCount": 5,
+        "shortAnswerCount": 2,
+        "compositeCount": 0
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-4486554924f4e320",
-      "year": 2014,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2014期中",
+      "title": null,
+      "year": 2014,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-896e650b637b8431",
         "q-625767f0ca5f1aff",
@@ -1149,35 +1386,42 @@
         "q-746eb955647f12a3",
         "q-bf82915267634dbd",
         "q-766f1527a77ef647",
-        "q-508d7ffb9832cda4",
-        "q-39f64c6f4e5efbcd",
-        "q-7eb261d90bb14a76",
+        "q-3469f6f994d8a49f",
         "q-e2de5ec52a9714b6",
         "q-5214b9c525fac227",
-        "q-ba2c74807aaa6642",
-        "q-183f85f12346b2b9",
-        "q-98eb3da0dc90d60f",
-        "q-3dc92908d6900c92",
-        "q-7951d30cb854cd83",
-        "q-6c5a9bde5c50f960",
-        "q-d27108da9d340067"
+        "q-44c6858ae0982408",
+        "q-6fe57822597184ce"
       ],
-      "verifiedAnswerCount": 31,
-      "singleChoiceCount": 15,
-      "multipleChoiceCount": 1,
-      "fillCount": 4,
-      "shortAnswerCount": 1,
-      "compositeCount": 10,
-      "questionCount": 31,
-      "publishedQuestionCount": 31,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2014期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 24,
+        "publishedQuestionCount": 24,
+        "quizQuestionCount": 24,
+        "verifiedAnswerCount": 24,
+        "singleChoiceCount": 15,
+        "multipleChoiceCount": 1,
+        "fillCount": 4,
+        "shortAnswerCount": 1,
+        "compositeCount": 3
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-089627b27e9b5e79",
-      "year": 2014,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2014期末",
+      "title": null,
+      "year": 2014,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-515451e49e93dcdd",
         "q-49e2ba2fc68bee01",
@@ -1199,35 +1443,46 @@
         "q-005346f534f14bb8",
         "q-798628eee4c9aa30",
         "q-69a1bf250f9b6afa",
-        "q-6d58b9ff175a39ff",
-        "q-5fdb7b45da649a68",
+        "q-7d2647844e7abcf9",
         "q-7d39077bb218b8b1",
         "q-dce1153891e59f40",
         "q-e7e0b2274550651e",
         "q-ca7c15d1d3855afc",
         "q-e0aacd0c843b23b9",
-        "q-cc44657cf1bca7a5",
-        "q-d22a47b8639d39e3",
-        "q-3853d43cd0c59fdd",
+        "q-bdf00ae3b8f09094",
         "q-00a8b5c318a16492",
         "q-423c96723fb1c59c"
       ],
-      "verifiedAnswerCount": 32,
-      "singleChoiceCount": 7,
-      "multipleChoiceCount": 0,
-      "fillCount": 6,
-      "shortAnswerCount": 1,
-      "compositeCount": 5,
-      "questionCount": 32,
-      "publishedQuestionCount": 19,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2014期末-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 29,
+        "publishedQuestionCount": 16,
+        "quizQuestionCount": 16,
+        "verifiedAnswerCount": 29,
+        "singleChoiceCount": 7,
+        "multipleChoiceCount": 0,
+        "fillCount": 6,
+        "shortAnswerCount": 1,
+        "compositeCount": 2
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-d0ae6162300a90de",
-      "year": 2013,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2013期中",
+      "title": null,
+      "year": 2013,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-b6e3f1dcce4873ad",
         "q-4e2859f161b0083a",
@@ -1246,44 +1501,48 @@
         "q-19e5039cf0a34dd9",
         "q-f4ab8ae043083a94",
         "q-7c426adae1c5565a",
-        "q-1f2bff3fb41a5d8f",
-        "q-2d891b9552fe7a60",
+        "q-292ff23f4274929e",
         "q-6f4c44345bb516e8",
-        "q-afe2d4c7ea8a15ef",
-        "q-b9d41514096fda00",
-        "q-759f821ac0a5bd5d",
-        "q-68bba4b7636ed213",
+        "q-d167b837a24ec9b4",
         "q-70c8ec9689916f78",
-        "q-877f13ec2edade3e",
-        "q-861325a26a6428f6",
-        "q-986268962ac158bc",
-        "q-bb29c57bb80c754f",
-        "q-ccf1130c97dc3c8e"
+        "q-2d3657e2f402ef3b",
+        "q-f5e6c2afdaa570f0"
       ],
-      "verifiedAnswerCount": 30,
-      "singleChoiceCount": 7,
-      "multipleChoiceCount": 7,
-      "fillCount": 4,
-      "shortAnswerCount": 1,
-      "compositeCount": 11,
-      "questionCount": 30,
-      "publishedQuestionCount": 30,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2013期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 23,
+        "publishedQuestionCount": 23,
+        "quizQuestionCount": 23,
+        "verifiedAnswerCount": 23,
+        "singleChoiceCount": 7,
+        "multipleChoiceCount": 7,
+        "fillCount": 4,
+        "shortAnswerCount": 1,
+        "compositeCount": 4
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-ac5fea2cf89e5bed",
-      "year": 2013,
-      "examType": "期末",
-      "title": "",
+      "revision": 1,
       "displayName": "2013期末",
+      "title": null,
+      "year": 2013,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "final",
+      "sequence": null,
       "questionIds": [
         "q-43a1589d2b1dd375",
         "q-34034ec7c304c05c",
         "q-13f557fbb3882f61",
-        "q-62255a22a4ea1e74",
-        "q-75c36f88f1c3c806",
-        "q-7a22222d757afa82",
-        "q-e4d86201d3caab9a",
+        "q-66f2c548dbe1ef9e",
         "q-ffc3db50cfb5b1e6",
         "q-39b199c0e170c708",
         "q-0bc6b1b75062d552",
@@ -1303,28 +1562,41 @@
         "q-dc4e632066c6ca4a",
         "q-214498ca68ff174f",
         "q-cd43f371ef053fb9",
-        "q-f53b15929aeee7a3",
-        "q-6dd4034787785d68",
+        "q-a694e52c9a6493d6",
         "q-d4217f1e765bf0d4",
         "q-fa6afdda8f92ace2",
         "q-37f5173360d9f28e"
       ],
-      "verifiedAnswerCount": 31,
-      "singleChoiceCount": 11,
-      "multipleChoiceCount": 0,
-      "fillCount": 4,
-      "shortAnswerCount": 3,
-      "compositeCount": 6,
-      "questionCount": 31,
-      "publishedQuestionCount": 24,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期末/2013期末-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 27,
+        "publishedQuestionCount": 20,
+        "quizQuestionCount": 20,
+        "verifiedAnswerCount": 27,
+        "singleChoiceCount": 11,
+        "multipleChoiceCount": 0,
+        "fillCount": 4,
+        "shortAnswerCount": 3,
+        "compositeCount": 2
+      }
     },
     {
+      "schemaVersion": "5",
       "id": "p-ea869cda0eb89689",
-      "year": 2012,
-      "examType": "期中",
-      "title": "",
+      "revision": 1,
       "displayName": "2012期中",
+      "title": null,
+      "year": 2012,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "midterm",
+      "sequence": null,
       "questionIds": [
         "q-7aabada2327c4f09",
         "q-068ac46150aabfe3",
@@ -1345,26 +1617,29 @@
         "q-ac2f0dc843d3564e",
         "q-d4e518301c1a0c8f",
         "q-4521377acbabad7a",
-        "q-b1e2040786a012b1",
-        "q-c8e6cf8c0f1a3806",
-        "q-e785c90c29302bf8",
-        "q-2040ad6328a10517",
-        "q-ffb00bcb6235a466",
-        "q-179b101190044f97",
-        "q-5665e1af6468ce1a",
-        "q-75be8682bc238388",
-        "q-5e663c7d74390b87",
+        "q-0cdd46de91002c03",
+        "q-ddc156550a8238c1",
+        "q-cae27331f3036dc5",
         "q-42af73d55bf9c63b"
       ],
-      "verifiedAnswerCount": 29,
-      "singleChoiceCount": 13,
-      "multipleChoiceCount": 2,
-      "fillCount": 4,
-      "shortAnswerCount": 1,
-      "compositeCount": 9,
-      "questionCount": 29,
-      "publishedQuestionCount": 29,
-      "complete": true
+      "coverage": {
+        "state": "unknown",
+        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+      },
+      "sourceDocuments": [
+        "原文/期中/2012期中-带答案.md"
+      ],
+      "stats": {
+        "questionCount": 23,
+        "publishedQuestionCount": 23,
+        "quizQuestionCount": 23,
+        "verifiedAnswerCount": 23,
+        "singleChoiceCount": 13,
+        "multipleChoiceCount": 2,
+        "fillCount": 4,
+        "shortAnswerCount": 1,
+        "compositeCount": 3
+      }
     }
   ]
 }

@@ -1,0 +1,2 @@
+jsonschema==4.23.0
+markdown-it-py==2.2.0

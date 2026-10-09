@@ -13,7 +13,7 @@ sys.path.insert(0, TOOLS)
 import project as P                                     # noqa: E402
 import curated as CU                                    # noqa: E402
 import scaffold_curated as S                            # noqa: E402
-import build_web_data as bw                             # noqa: E402
+import legacy_v3 as bw                                  # noqa: E402
 
 
 def main():

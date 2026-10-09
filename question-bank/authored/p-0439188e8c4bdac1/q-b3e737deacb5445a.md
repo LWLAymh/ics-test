@@ -1,0 +1,92 @@
++++json
+{
+  "schemaVersion": "5",
+  "id": "q-b3e737deacb5445a",
+  "revision": 1,
+  "paperId": "p-0439188e8c4bdac1",
+  "paperOrder": 3,
+  "number": {
+    "display": "第9讲 3",
+    "major": {
+      "display": "第9讲",
+      "value": null
+    },
+    "minor": {
+      "display": "3",
+      "value": "3"
+    },
+    "parts": []
+  },
+  "classification": {
+    "primaryModuleId": "processor_arch",
+    "moduleIds": [
+      "processor_arch"
+    ],
+    "tags": []
+  },
+  "publication": {
+    "state": "published",
+    "basis": "legacy-migration",
+    "reviewer": null,
+    "reviewedAt": null,
+    "issues": [
+      "blank-positions-unresolved"
+    ]
+  },
+  "sources": [
+    {
+      "legacyId": "q-b3e737deacb5445a",
+      "document": "原文/阶段测验/2025第2次阶段测验-带答案.md",
+      "lines": {
+        "start": 69,
+        "end": 77
+      },
+      "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/69.md",
+      "aliases": [],
+      "provenance": "rewritten",
+      "editorNote": "由 HCL 布尔表达式补全组合逻辑电路图"
+    }
+  ],
+  "type": "fill",
+  "stem": {
+    "format": "markdown",
+    "blanks": []
+  },
+  "solution": {
+    "state": "available",
+    "grading": "self",
+    "reference": {
+      "format": "markdown"
+    },
+    "provenance": {
+      "origin": "unknown",
+      "crossChecked": null,
+      "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
+    }
+  }
+}
++++
+%%% stem
+3. （各3分，共6分）根据HCL表达式补全电路图
+`(1)bool eq = (a&&b)||(!a&&!b)`
+
+![第（1）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part1-prompt.png)
+
+(2)bool out = (s&&a)||(!s&&b)
+
+![第（2）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part2-prompt.png)
+%%% reference
+答案：
+（1）`eq = (a&&b)||(!a&&!b)`：用 **2 个与门 + 1 个或门**（a、b 各取反后进与门）实现。
+　　a 分两路：一路直接接第一个与门的输入，另一路经**非门**得到 `!a` 接第二个与门的输入；b 分两路：一路直接接第一个与门的另一个输入，另一路经**非门**得到 `!b` 接第二个与门的另一个输入。两个与门的输出接同一个**或门**，或门的输出就是 `eq`。
+（2）`out = (s&&a)||(!s&&b)`：用 **2 个与门 + 1 个或门 + 1 个非门** 实现。
+　　s 分两路：一路经**非门**得到 `!s`，接上面那个与门的输入；另一路直接接下面那个与门的输入。`a` 接下面与门的另一个输入，`b` 接上面与门的另一个输入。两个与门的输出接**或门**，或门输出即 `out`（图上两个与门一上一下、或门在右侧）。它就是一个 2 选 1 的多路选择器：`s=1` 时 out=a，`s=0` 时 out=b。
+
+解析：
+
+1. HCL 与门电路的对应关系：`&&` = 与门（`AND`），`||` = 或门（`OR`），`!` = 非门（`NOT`，三角形加小圆圈）；信号线上的黑点表示把同一信号分支接到多个门的输入。原卷答案就是按这个对应关系把表达式「翻译」成门级电路。
+2. 第（1）问：表达式是两个乘积项 `(a&&b)` 与 `(!a&&!b)` 的或，所以需要两个与门加一个或门；`!a`、`!b` 各需要一个非门（原卷图里 a 用独立的非门符号，b 用的是一条带小圆圈的取反缓冲）。真值表：`a=b=1 → 1`，`a=b=0 → 1`，其余为 0，也就是「a 与 b 相等时输出 1」，对应教材图 4.10 的 **Bit equal**（一位相等比较器）。
+3. 第（2）问：展开两项可知 `s=1` 时 `s&&a` 这一项生效（此时 `!s&&b`=0）→ out=a；`s=0` 时 `(!s&&b)` 生效 → out=b。所以它就是受 s 控制的多路选择器，对应教材图 4.11 的 **Bit MUX**。注意两条数据通路的接法不能颠倒（把 a、b 对调就变成「`s=1` 选 b」）；`!s` 也可以画成第二个与门输入端的取反小圆圈，只要逻辑等价即可。
+4. 画图检查清单：输入信号名（a、b、s）在左、输出（eq/out）在右；与门/或门/非门的符号方向一致；每个门的每个输入都有信号线接入（不能悬空）；分支点画黑点；门数分别为 (1) 2 与门+1 或门+2 非门、(2) 2 与门+1 或门+1 非门。
+
+> 📌 答案有官方来源：原卷红色参考答案即印刷在第 3 页上的两幅红字电路图（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-03.png`：上图为第 (1) 问的 Bit equal，下图为第 (2) 问的 Bit MUX；原卷文字层的「答案：」是空的，答案只以红图形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。

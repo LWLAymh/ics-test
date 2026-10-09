@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "5",
+  "modules": [
+    {
+      "id": "data_representation",
+      "number": 1,
+      "name": "Data Representation",
+      "title": "数据的表示"
+    },
+    {
+      "id": "machine_prog",
+      "number": 2,
+      "name": "Machine Prog",
+      "title": "程序的机器级表示"
+    },
+    {
+      "id": "processor_arch",
+      "number": 3,
+      "name": "Processor Arch",
+      "title": "处理器体系结构"
+    },
+    {
+      "id": "memory_hierarchy",
+      "number": 4,
+      "name": "Memory Hierarchy",
+      "title": "存储层次"
+    },
+    {
+      "id": "compilation_linking",
+      "number": 5,
+      "name": "Compilation (Program optimization and linking)",
+      "title": "编译系统（程序优化与链接）"
+    },
+    {
+      "id": "ecf_and_system_io",
+      "number": 6,
+      "name": "ECF and System IO",
+      "title": "异常控制流与系统级 I/O"
+    },
+    {
+      "id": "virtual_memory_and_malloc",
+      "number": 7,
+      "name": "Virtual Memory and Dynamic Memory Allocation",
+      "title": "虚拟内存与动态内存分配"
+    },
+    {
+      "id": "network",
+      "number": 8,
+      "name": "Network",
+      "title": "网络编程"
+    },
+    {
+      "id": "concurrent_programming",
+      "number": 9,
+      "name": "Concurrent Programming and Synchronization",
+      "title": "并发编程与同步"
+    }
+  ]
+}

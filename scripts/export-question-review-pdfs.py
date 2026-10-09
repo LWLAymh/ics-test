@@ -3,7 +3,7 @@
 
 This is intentionally a read-only presentation tool. It does not infer types,
 rewrite Markdown, fix fences, or write to question-bank/. Every displayed type
-and content fragment comes from the generated v3 data as-is.
+and content fragment comes from the generated v5 data as-is.
 
 Rendering policy: **no content heuristics**. The exporter only honours structure
 the data explicitly declares — fenced code, inline code, `$...$` formulas,
@@ -51,7 +51,7 @@ TYPE_LABELS = {
     "fill": "填空题",
     "short-answer": "简答题",
     "composite": "复合题",
-    "choice": "选择题（单/多选未明确）",
+    "unclassified-choice": "选择题（单/多选未明确）",
     "legacy": "旧题（题型未明确）",
 }
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^\s)]+)(?:\s+[\"']([^\"')]*)[\"'])?\)")
@@ -651,12 +651,11 @@ def markdown_flowables(markdown: str, sheet: dict, *, max_width: float,
 
 
 def question_flowables(question: dict, module: dict, sheet: dict, usable_width: float) -> list[Flowable]:
-    interaction = question.get("interaction") or {}
-    kind = interaction.get("kind") or "legacy"
+    kind = question["type"]
     qid = str(question.get("id") or "missing-id")
-    qno = str(question.get("questionNo") or "（无题号）")
-    exam = str(question.get("exam") or "（未知试卷）")
-    source = question.get("source") or {}
+    qno = str(question["number"]["display"] or "（无题号）")
+    exam = str(question.get("_paperName") or "（未知试卷）")
+    source = (question.get("sources") or [{}])[0]
     source_doc = str(source.get("curated") or source.get("document") or "（无源文件）")
     paper_order = question.get("paperOrder")
     type_text = "%s（%s）" % (TYPE_LABELS.get(kind, "未知题型"), kind)
@@ -680,7 +679,7 @@ def question_flowables(question: dict, module: dict, sheet: dict, usable_width: 
 
     meta_rows = [
         ["试卷", exam, "卷内顺序", str(paper_order or "-")],
-        ["原卷题号", qno, "知识模块", "%s / %s" % (module.get("name", ""), module.get("title", ""))],
+        ["原卷题号", qno, "知识模块", ", ".join(question.get("moduleIds", question.get("classification", {}).get("moduleIds", [module.get("id", "")])) )],
         ["源文件", source_doc, "paper ID", str(question.get("paperId") or "-")],
     ]
     meta_table = Table(
@@ -700,16 +699,17 @@ def question_flowables(question: dict, module: dict, sheet: dict, usable_width: 
     ]))
     result.extend([meta_table, Spacer(1, 6 * mm)])
 
-    layout = question.get("layout") or {}
-    stem = layout.get("stem") if question.get("formatted") else question.get("content")
-    result.extend(markdown_flowables(stem or "", sheet, max_width=usable_width))
-
-    choices = layout.get("choices") or interaction.get("choices") or []
+    result.extend(markdown_flowables(question["stem"]["text"], sheet, max_width=usable_width))
+    if question["type"] == "composite":
+        for part in question["parts"]:
+            child = dict(part, paperId=question["paperId"], paperOrder=question["paperOrder"], _paperName=question.get("_paperName"))
+            result.extend(question_flowables(child, module, sheet, usable_width))
+    choices = question.get("options", [])
     if choices:
         result.append(Spacer(1, 2 * mm))
         for choice in choices:
-            key = str(choice.get("key") or choice.get("id") or "?")
-            content = str(choice.get("content") or "")
+            key = str(choice["id"])
+            content = choice["content"]["text"]
             option_body = markdown_flowables(content, sheet, max_width=usable_width - 18 * mm)
             # A table cell cannot split across pages. Keep only the option label in
             # a small table and let the authored Markdown flow naturally below it.
@@ -744,11 +744,16 @@ def safe_slug(value: str) -> str:
 
 def collect_bank():
     catalog = load_json(WEB_DATA / "catalog.json")
-    modules = []
-    for module in catalog.get("modules", []):
-        payload = load_json(WEB_DATA / module["questionFile"])
-        modules.append((module, payload.get("questions", [])))
-    papers = load_json(WEB_DATA / catalog["papersFile"]).get("papers", [])
+    if catalog.get("schemaVersion") != "5":
+        raise ValueError("PDF exporter requires v5")
+    payload = load_json(WEB_DATA / catalog["questionsFile"])
+    if payload.get("schemaVersion") != "5":
+        raise ValueError("PDF question payload requires v5")
+    papers = load_json(WEB_DATA / catalog["papersFile"])["papers"]
+    paper_names = {p["id"]: p["displayName"] for p in papers}
+    questions = [dict(q, _paperName=paper_names[q["paperId"]]) for q in payload["questions"]]
+    modules = [(module, [q for q in questions if module["id"] in q["classification"]["moduleIds"]])
+               for module in catalog["modules"]]
     return catalog, modules, papers
 
 
@@ -779,7 +784,7 @@ def build_module_pdf(module: dict, questions: list[dict], output: Path, sheet: d
         subject="题面、选项与题型人工审阅；不含答案",
     )
     usable_width = A4[0] - doc.leftMargin - doc.rightMargin
-    counts = collections.Counter((q.get("interaction") or {}).get("kind") or "legacy" for q in questions)
+    counts = collections.Counter(q["type"] for q in questions)
     count_text = " · ".join(
         "%s %d" % (TYPE_LABELS.get(kind, kind), count)
         for kind, count in sorted(counts.items(), key=lambda item: item[0]))
@@ -802,8 +807,8 @@ def build_module_pdf(module: dict, questions: list[dict], output: Path, sheet: d
                                                         color=colors.HexColor("#AFC3D6")),
                           Spacer(1, 7 * mm)])
         story.extend(question_flowables(question, module, sheet, usable_width))
-        kind = (question.get("interaction") or {}).get("kind") or "legacy"
-        source = question.get("source") or {}
+        kind = question["type"]
+        source = (question.get("sources") or [{}])[0]
         base_rows.append({
             "question_id": question.get("id"),
             "type": kind,
@@ -813,8 +818,8 @@ def build_module_pdf(module: dict, questions: list[dict], output: Path, sheet: d
             "module_title": module.get("title"),
             "paper_id": question.get("paperId"),
             "paper_order": question.get("paperOrder"),
-            "exam": question.get("exam"),
-            "question_no": question.get("questionNo"),
+            "exam": question.get("_paperName"),
+            "question_no": question["number"]["display"],
             "source_document": source.get("document"),
             "source_curated": source.get("curated"),
         })
@@ -842,7 +847,7 @@ def build_paper_pdf(paper: dict, questions: list[dict], modules_by_id: dict,
         subject="按原卷顺序审阅题面、选项与题型；不含答案",
     )
     usable_width = A4[0] - doc.leftMargin - doc.rightMargin
-    counts = collections.Counter((q.get("interaction") or {}).get("kind") or "legacy" for q in questions)
+    counts = collections.Counter(q["type"] for q in questions)
     count_text = " · ".join(
         "%s %d" % (TYPE_LABELS.get(kind, kind), count)
         for kind, count in sorted(counts.items(), key=lambda item: item[0]))
@@ -851,7 +856,7 @@ def build_paper_pdf(paper: dict, questions: list[dict], modules_by_id: dict,
         Paragraph("ICS 试卷题面审阅", sheet["cover_title"]),
         Paragraph(html.escape(display_name), sheet["cover_title"]),
         Paragraph("paper ID: %s" % html.escape(str(paper.get("id") or "-")), sheet["cover_body"]),
-        Paragraph("共 %d 个题目片段" % len(questions), sheet["cover_body"]),
+        Paragraph("共 %d 道独立题目" % len(questions), sheet["cover_body"]),
         Paragraph(html.escape(count_text), sheet["cover_body"]),
         Spacer(1, 8 * mm),
         Paragraph("题目严格按原卷顺序排列。每题显示稳定 ID、当前题型、题面、选项、知识模块和源文件；不主动附加答案，便于逐题核对提取和排版。", sheet["cover_body"]),
@@ -865,10 +870,10 @@ def build_paper_pdf(paper: dict, questions: list[dict], modules_by_id: dict,
             story.extend([Spacer(1, 7 * mm), HRFlowable(width="100%", thickness=0.8,
                                                         color=colors.HexColor("#AFC3D6")),
                           Spacer(1, 7 * mm)])
-        module = modules_by_id.get(question.get("moduleId"), fallback_module)
+        module = modules_by_id.get(question["classification"]["primaryModuleId"], fallback_module)
         story.extend(question_flowables(question, module, sheet, usable_width))
-        kind = (question.get("interaction") or {}).get("kind") or "legacy"
-        source = question.get("source") or {}
+        kind = question["type"]
+        source = (question.get("sources") or [{}])[0]
         base_rows.append({
             "question_id": question.get("id"),
             "type": kind,
@@ -878,8 +883,8 @@ def build_paper_pdf(paper: dict, questions: list[dict], modules_by_id: dict,
             "module_title": module.get("title"),
             "paper_id": question.get("paperId"),
             "paper_order": question.get("paperOrder"),
-            "exam": question.get("exam"),
-            "question_no": question.get("questionNo"),
+            "exam": question.get("_paperName"),
+            "question_no": question["number"]["display"],
             "source_document": source.get("document"),
             "source_curated": source.get("curated"),
         })
@@ -925,7 +930,7 @@ def main(argv: Iterable[str] | None = None) -> int:
         for paper in papers:
             print("%s\t%s\t%d" % (
                 paper.get("id"), paper.get("displayName"),
-                int(paper.get("publishedQuestionCount") or paper.get("questionCount") or 0)))
+                int(paper["stats"]["questionCount"])))
         return 0
 
     font_path = find_font(args.font)
@@ -938,6 +943,8 @@ def main(argv: Iterable[str] | None = None) -> int:
         shutil.rmtree(output)
     output.mkdir(parents=True, exist_ok=True)
 
+    if args.module and args.paper:
+        raise SystemExit("--module and --paper cannot be combined: papers must remain complete")
     selected = set(args.module or [])
     if selected:
         known = {module.get("id") for module, _ in modules}
@@ -959,7 +966,7 @@ def main(argv: Iterable[str] | None = None) -> int:
     if selected_papers:
         for paper in selected_papers:
             questions = [questions_by_id[qid] for qid in paper.get("questionIds", []) if qid in questions_by_id]
-            print("生成试卷 %s：%d 个题目片段" % (paper.get("displayName"), len(questions)), flush=True)
+            print("生成试卷 %s：%d 道独立题目" % (paper.get("displayName"), len(questions)), flush=True)
             rows.extend(build_paper_pdf(paper, questions, modules_by_id, output, sheet))
         pdf_count = len(selected_papers)
     else:
