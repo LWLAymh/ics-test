@@ -5480,7 +5480,7 @@
       "exam": "2019期中",
       "questionNo": "第一题 8",
       "summary": "栈帧定长、编译时确定大小",
-      "content": "8.  大多数过程的栈帧是____的，其长度在____时确定。（注：此处的编译指从高\n级语言转化为汇编语言的过程）\nA.  定长，编译\nB.  定长，汇编\nC.  可变长，汇编\nD.  可变长，运行\n答案：A。\n说明：大多数过程的栈帧是定长的，在过程开始时通过减小栈指针的方式分配，\n减小的大小由编译器在编译时计算。大家常常在汇编代码中过程的开头看到\n“`subq $24`, %rsp”，就是编译器计算出了栈帧大小并写在了汇编代码里。（书\nP165）",
+      "content": "8.  大多数过程的栈帧是____的，其长度在____时确定。（注：此处的编译指从高\n级语言转化为汇编语言的过程）\nA.  定长，编译\nB.  定长，汇编\nC.  可变长，汇编\nD.  可变长，运行\n答案：A。\n说明：大多数过程的栈帧是定长的，在过程开始时通过减小栈指针的方式分配，\n减小的大小由编译器在编译时计算。大家常常在汇编代码中过程的开头看到\n“`subq $24, %rsp`”，就是编译器计算出了栈帧大小并写在了汇编代码里。（书\nP165）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5522,7 +5522,7 @@
             "content": "可变长，运行"
           }
         ],
-        "answer": "答案：A。\n说明：大多数过程的栈帧是定长的，在过程开始时通过减小栈指针的方式分配，\n减小的大小由编译器在编译时计算。大家常常在汇编代码中过程的开头看到\n“`subq $24`, %rsp”，就是编译器计算出了栈帧大小并写在了汇编代码里。（书\nP165）"
+        "answer": "答案：A。\n说明：大多数过程的栈帧是定长的，在过程开始时通过减小栈指针的方式分配，\n减小的大小由编译器在编译时计算。大家常常在汇编代码中过程的开头看到\n“`subq $24, %rsp`”，就是编译器计算出了栈帧大小并写在了汇编代码里。（书\nP165）"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5552,7 +5552,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "8.  大多数过程的栈帧是____的，其长度在____时确定。（注：此处的编译指从高\n级语言转化为汇编语言的过程）",
-        "answer": "答案：A。\n说明：大多数过程的栈帧是定长的，在过程开始时通过减小栈指针的方式分配，\n减小的大小由编译器在编译时计算。大家常常在汇编代码中过程的开头看到\n“`subq $24`, %rsp”，就是编译器计算出了栈帧大小并写在了汇编代码里。（书\nP165）"
+        "answer": "答案：A。\n说明：大多数过程的栈帧是定长的，在过程开始时通过减小栈指针的方式分配，\n减小的大小由编译器在编译时计算。大家常常在汇编代码中过程的开头看到\n“`subq $24, %rsp`”，就是编译器计算出了栈帧大小并写在了汇编代码里。（书\nP165）"
       },
       "presentation": {
         "status": "ready",
@@ -6671,7 +6671,7 @@
       "exam": "2021期中",
       "questionNo": "第一题 6",
       "summary": "movabsq/INC/popq/call 指令语义辨析",
-      "content": "6.以下关于x86-64指令的描述，说法正确的是：\nA. 数据传送指令 `movabsq $Imm, (%rax)` 将以64位二进制补码表示的立即数 Imm 放到目的地址 `(%rax)` 中。\nB. `INC`和`DEC`指令会设置溢出标志`OF`和零标志`ZF`，但不会改变进位标志`CF`。\nC. `call *%rax` 指令以 `%rax` 中的值作为读地址，从内存中读出调用目标。\nD. `popq %rax` 指令的行为等效于 `movq %rsp, %rax; addq $8, %rsp`。\n答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于movq (%rsp), %rax; addq \\$8, %rsp。",
+      "content": "6.以下关于x86-64指令的描述，说法正确的是：\nA. 数据传送指令 `movabsq $Imm, (%rax)` 将以64位二进制补码表示的立即数 Imm 放到目的地址 `(%rax)` 中。\nB. `INC`和`DEC`指令会设置溢出标志`OF`和零标志`ZF`，但不会改变进位标志`CF`。\nC. `call *%rax` 指令以 `%rax` 中的值作为读地址，从内存中读出调用目标。\nD. `popq %rax` 指令的行为等效于 `movq %rsp, %rax; addq $8, %rsp`。\n答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6715,7 +6715,7 @@
             "content": "`popq %rax` 指令的行为等效于 `movq %rsp, %rax; addq $8, %rsp`。"
           }
         ],
-        "answer": "答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于movq (%rsp), %rax; addq \\$8, %rsp。"
+        "answer": "答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -6745,7 +6745,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "6.以下关于x86-64指令的描述，说法正确的是：",
-        "answer": "答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于movq (%rsp), %rax; addq \\$8, %rsp。"
+        "answer": "答案：B\n解析： 数Imm放到目的地址`(%rax)`中。A中movabsq的目的操作数只能是寄存器，C中`%rax`的值即为跳转目标，D中等效于`movq (%rsp), %rax; addq $8, %rsp`。"
       },
       "presentation": {
         "status": "ready",
@@ -8441,7 +8441,7 @@
       "exam": "2024期中",
       "questionNo": "第一题 4",
       "summary": "结构体对齐与指针数组声明的sizeof/指针差",
-      "content": "4.在 x86-64 架构、Linux 操作系统下，有如下代码：\n```\n#include <stdio.h>\nstruct student {\n    int id;\n    char name[6];\n    short age;\n    char gender;\n    float score;\n};\nint main() {\n    struct student s;\n    struct student* (*p[8])[4];\n    printf(\"%lu\\n\", sizeof(s));\n    printf(\"%lu\\n\", sizeof(**p));\n    printf(\"%lu\\n\", (char*)&p[2] - (char*)p);\n    printf(\"%lu\\n\", &p[4] - p);\n    return 0;\n}\n```\n那么四个输出之和为？\nA. 72\nB. 48\nC. 56\nD. 84\n答案：A。\n由于 student 结构体内，最大的数据类型为 int/float，这就要求 student\n3\n\n\n整体字节数为 4 的倍数。进行内部/外部对齐后，得到 student 的长度为：\n4(0)+6(0)+2(0)+1(3)+4(0)=20 字节（括号内为对应的内部对齐）。\n所以 sizeof(s)=20。\n继续看 p 的声明，采用左右法则阅读表达式，可以知道 p 是一个有着 8 个元素\n的数组，元素类型为指针，指向一个有着 4 个元素的数组，元素类型为指针，指\n向 student 类型。\n所以，我们得到 `p` 实际上是一个有着 4 个元素的数组，元素类型为 `student`\n类型的指针，所以 $\\operatorname{sizeof}(**p) = 4 \\times 8 = 32$。\n接着，看 (char*)&p[2] - (char*)p，注意到这里都先强转为了 char* 类\n型，所以其计算得到的就是 &p[2] 和 p 的实际差值，由于 p 是一个数组，其\n元素为指针，所以这里的差就是 2 个指针的字节长度，从而 (char*)&p[2] -\n(char*)p=16。\n最后，看 &p[4] – p，与上一行不同，这里没有发生强转，所以实际上计算得到\n的实际差值会除以步长，从而 &p[4] – p = 4。\n综上，此题答案为 20+32+16+4=72。",
+      "content": "4.在 x86-64 架构、Linux 操作系统下，有如下代码：\n```\n#include <stdio.h>\nstruct student {\n    int id;\n    char name[6];\n    short age;\n    char gender;\n    float score;\n};\nint main() {\n    struct student s;\n    struct student* (*p[8])[4];\n    printf(\"%lu\\n\", sizeof(s));\n    printf(\"%lu\\n\", sizeof(**p));\n    printf(\"%lu\\n\", (char*)&p[2] - (char*)p);\n    printf(\"%lu\\n\", &p[4] - p);\n    return 0;\n}\n```\n那么四个输出之和为？\nA. 72\nB. 48\nC. 56\nD. 84\n答案：A。\n由于 `student` 结构体内，最大的数据类型为 int/float，这就要求 `student`\n3\n\n\n整体字节数为 4 的倍数。进行内部/外部对齐后，得到 `student` 的长度为：\n`4(0)+6(0)+2(0)+1(3)+4(0)=20` 字节（括号内为对应的内部对齐）。\n所以 `sizeof(s)=20`。\n继续看 `p` 的声明，采用左右法则阅读表达式，可以知道 `p` 是一个有着 8 个元素\n的数组，元素类型为指针，指向一个有着 4 个元素的数组，元素类型为指针，指\n向 `student` 类型。\n所以，我们得到 `p` 实际上是一个有着 4 个元素的数组，元素类型为 `student`\n类型的指针，所以 $\\operatorname{sizeof}(**p) = 4 \\times 8 = 32$。\n接着，看 `(char*)&p[2] - (char*)p`，注意到这里都先强转为了 char* 类\n型，所以其计算得到的就是 `&p[2]` 和 `p` 的实际差值，由于 `p` 是一个数组，其\n元素为指针，所以这里的差就是 2 个指针的字节长度，从而 `(char*)&p[2] -`\n`(char*)p=16`。\n最后，看 `&p[4]` – `p`，与上一行不同，这里没有发生强转，所以实际上计算得到\n的实际差值会除以步长，从而 `&p[4]` – `p = 4`。\n综上，此题答案为 20+32+16+4=72。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8485,7 +8485,7 @@
             "content": "84"
           }
         ],
-        "answer": "答案：A。\n由于 student 结构体内，最大的数据类型为 int/float，这就要求 student\n3\n\n\n整体字节数为 4 的倍数。进行内部/外部对齐后，得到 student 的长度为：\n4(0)+6(0)+2(0)+1(3)+4(0)=20 字节（括号内为对应的内部对齐）。\n所以 sizeof(s)=20。\n继续看 p 的声明，采用左右法则阅读表达式，可以知道 p 是一个有着 8 个元素\n的数组，元素类型为指针，指向一个有着 4 个元素的数组，元素类型为指针，指\n向 student 类型。\n所以，我们得到 `p` 实际上是一个有着 4 个元素的数组，元素类型为 `student`\n类型的指针，所以 $\\operatorname{sizeof}(**p) = 4 \\times 8 = 32$。\n接着，看 (char*)&p[2] - (char*)p，注意到这里都先强转为了 char* 类\n型，所以其计算得到的就是 &p[2] 和 p 的实际差值，由于 p 是一个数组，其\n元素为指针，所以这里的差就是 2 个指针的字节长度，从而 (char*)&p[2] -\n(char*)p=16。\n最后，看 &p[4] – p，与上一行不同，这里没有发生强转，所以实际上计算得到\n的实际差值会除以步长，从而 &p[4] – p = 4。\n综上，此题答案为 20+32+16+4=72。"
+        "answer": "答案：A。\n由于 `student` 结构体内，最大的数据类型为 int/float，这就要求 `student`\n3\n\n\n整体字节数为 4 的倍数。进行内部/外部对齐后，得到 `student` 的长度为：\n`4(0)+6(0)+2(0)+1(3)+4(0)=20` 字节（括号内为对应的内部对齐）。\n所以 `sizeof(s)=20`。\n继续看 `p` 的声明，采用左右法则阅读表达式，可以知道 `p` 是一个有着 8 个元素\n的数组，元素类型为指针，指向一个有着 4 个元素的数组，元素类型为指针，指\n向 `student` 类型。\n所以，我们得到 `p` 实际上是一个有着 4 个元素的数组，元素类型为 `student`\n类型的指针，所以 $\\operatorname{sizeof}(**p) = 4 \\times 8 = 32$。\n接着，看 `(char*)&p[2] - (char*)p`，注意到这里都先强转为了 char* 类\n型，所以其计算得到的就是 `&p[2]` 和 `p` 的实际差值，由于 `p` 是一个数组，其\n元素为指针，所以这里的差就是 2 个指针的字节长度，从而 `(char*)&p[2] -`\n`(char*)p=16`。\n最后，看 `&p[4]` – `p`，与上一行不同，这里没有发生强转，所以实际上计算得到\n的实际差值会除以步长，从而 `&p[4]` – `p = 4`。\n综上，此题答案为 20+32+16+4=72。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -8515,7 +8515,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "4.在 x86-64 架构、Linux 操作系统下，有如下代码：\n```\n#include <stdio.h>\nstruct student {\n    int id;\n    char name[6];\n    short age;\n    char gender;\n    float score;\n};\nint main() {\n    struct student s;\n    struct student* (*p[8])[4];\n    printf(\"%lu\\n\", sizeof(s));\n    printf(\"%lu\\n\", sizeof(**p));\n    printf(\"%lu\\n\", (char*)&p[2] - (char*)p);\n    printf(\"%lu\\n\", &p[4] - p);\n    return 0;\n}\n```\n那么四个输出之和为？",
-        "answer": "答案：A。\n由于 student 结构体内，最大的数据类型为 int/float，这就要求 student\n3\n\n\n整体字节数为 4 的倍数。进行内部/外部对齐后，得到 student 的长度为：\n4(0)+6(0)+2(0)+1(3)+4(0)=20 字节（括号内为对应的内部对齐）。\n所以 sizeof(s)=20。\n继续看 p 的声明，采用左右法则阅读表达式，可以知道 p 是一个有着 8 个元素\n的数组，元素类型为指针，指向一个有着 4 个元素的数组，元素类型为指针，指\n向 student 类型。\n所以，我们得到 `p` 实际上是一个有着 4 个元素的数组，元素类型为 `student`\n类型的指针，所以 $\\operatorname{sizeof}(**p) = 4 \\times 8 = 32$。\n接着，看 (char*)&p[2] - (char*)p，注意到这里都先强转为了 char* 类\n型，所以其计算得到的就是 &p[2] 和 p 的实际差值，由于 p 是一个数组，其\n元素为指针，所以这里的差就是 2 个指针的字节长度，从而 (char*)&p[2] -\n(char*)p=16。\n最后，看 &p[4] – p，与上一行不同，这里没有发生强转，所以实际上计算得到\n的实际差值会除以步长，从而 &p[4] – p = 4。\n综上，此题答案为 20+32+16+4=72。"
+        "answer": "答案：A。\n由于 `student` 结构体内，最大的数据类型为 int/float，这就要求 `student`\n3\n\n\n整体字节数为 4 的倍数。进行内部/外部对齐后，得到 `student` 的长度为：\n`4(0)+6(0)+2(0)+1(3)+4(0)=20` 字节（括号内为对应的内部对齐）。\n所以 `sizeof(s)=20`。\n继续看 `p` 的声明，采用左右法则阅读表达式，可以知道 `p` 是一个有着 8 个元素\n的数组，元素类型为指针，指向一个有着 4 个元素的数组，元素类型为指针，指\n向 `student` 类型。\n所以，我们得到 `p` 实际上是一个有着 4 个元素的数组，元素类型为 `student`\n类型的指针，所以 $\\operatorname{sizeof}(**p) = 4 \\times 8 = 32$。\n接着，看 `(char*)&p[2] - (char*)p`，注意到这里都先强转为了 char* 类\n型，所以其计算得到的就是 `&p[2]` 和 `p` 的实际差值，由于 `p` 是一个数组，其\n元素为指针，所以这里的差就是 2 个指针的字节长度，从而 `(char*)&p[2] -`\n`(char*)p=16`。\n最后，看 `&p[4]` – `p`，与上一行不同，这里没有发生强转，所以实际上计算得到\n的实际差值会除以步长，从而 `&p[4]` – `p = 4`。\n综上，此题答案为 20+32+16+4=72。"
       },
       "presentation": {
         "status": "ready",
@@ -9878,7 +9878,7 @@
       "exam": "2016期末",
       "questionNo": "第二题",
       "summary": "32 位汇编反推 C 函数并计算返回值",
-      "content": "第二题（12分）\n下面程序是一个完整C函数myfunction经编译器优化后生成的32位汇编语言\n代码：\n```\nmyfunction:\n  pushl  %ecx\n  movl 0x10(%esp), %ecx\n  movl 8(%esp), %edx\n  pushl %ebx\n  movl 0x18(%esp), %ebx\n  pushl %esi\n  movl 0x14(%esp), %esi\n  pushl %ebp\n  xorl %eax, %eax\n  pushl %edi\n  jmp .L2\n  leal (%esp), %esp\n.L2:\n  movl 8(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl (%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl %edi, (%ecx)\n  movl 0xc(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl 4(%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl (%ecx), %ebp\n  addl %edi, %ebp\n  addl %ebp, %ebx\n  movl %edi, 4(%ecx)\n  incl %eax\n  addl $8, %ecx\n  cmpl $2, %eax\n  jl .L2\n  popl %edi\n  popl %ebp\n  popl %esi\n  movl %ebx, %eax\n  popl %ebx\n  popl %ecx\n  ret\n```\n提示：32位汇编使用栈来传递所有参数，参数压栈顺序为从右至左。\n1. 请根据上述汇编代码，根据提示，补全 myfunction 的代码。注意，每行一\n条语句；不能定义新的变量。\n```\nint myfunction(int a[], int b[], int c[], int d) {\n  int i;\n  for (i = 0; i <       ; i++) {\n              =                                        ;\n              =                                        ;\n              =                                        ;\n  }\n  return       ;\n}\n```\n2. 请给出以下程序的输出结果。\n```\nint main( )\n{\nint a[5] = {1, 2, 3, 4, 5};\nint b[5] = {9, 8, 5, 6, 4};\nint c[5] = {7, 9, 8, 10, 11};\nint d = 5;\nint ret = myfunction(a, b, c, d);\nprintf(\"%d\\n\", ret);\nreturn 0;\n}\n```\n答案：\n1. for (i = 0; i <  2 ; i++) { //（1分）\n//下面第一二个等式左边都对得1分，第三个等式左边写对得1分\n    c[2\\*i] = b[0] \\* a[2\\*i] + b[2] \\* a[2\\*i+1]; //（等式右边\n乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    c[2\\*i+1] = b[1] \\* a[2\\*i] + b[3] \\* a[2\\*i+1]; //（等式右\n边乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    d = d + c[2\\*i] + c[2\\*i+1];  //（等式右边两个加号得1分，等\n式右边写对2\\*i和2\\*i+1得1分）\n  return    d   ;  //（1分）\n2. 139  （2分）",
+      "content": "第二题（12分）\n下面程序是一个完整C函数`myfunction`经编译器优化后生成的32位汇编语言\n代码：\n```\nmyfunction:\n  pushl  %ecx\n  movl 0x10(%esp), %ecx\n  movl 8(%esp), %edx\n  pushl %ebx\n  movl 0x18(%esp), %ebx\n  pushl %esi\n  movl 0x14(%esp), %esi\n  pushl %ebp\n  xorl %eax, %eax\n  pushl %edi\n  jmp .L2\n  leal (%esp), %esp\n.L2:\n  movl 8(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl (%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl %edi, (%ecx)\n  movl 0xc(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl 4(%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl (%ecx), %ebp\n  addl %edi, %ebp\n  addl %ebp, %ebx\n  movl %edi, 4(%ecx)\n  incl %eax\n  addl $8, %ecx\n  cmpl $2, %eax\n  jl .L2\n  popl %edi\n  popl %ebp\n  popl %esi\n  movl %ebx, %eax\n  popl %ebx\n  popl %ecx\n  ret\n```\n提示：32位汇编使用栈来传递所有参数，参数压栈顺序为从右至左。\n1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。注意，每行一\n条语句；不能定义新的变量。\n```\nint myfunction(int a[], int b[], int c[], int d) {\n  int i;\n  for (i = 0; i <       ; i++) {\n              =                                        ;\n              =                                        ;\n              =                                        ;\n  }\n  return       ;\n}\n```\n2. 请给出以下程序的输出结果。\n```\nint main( )\n{\nint a[5] = {1, 2, 3, 4, 5};\nint b[5] = {9, 8, 5, 6, 4};\nint c[5] = {7, 9, 8, 10, 11};\nint d = 5;\nint ret = myfunction(a, b, c, d);\nprintf(\"%d\\n\", ret);\nreturn 0;\n}\n```\n答案：\n1. for (i = 0; i <  2 ; i++) { //（1分）\n//下面第一二个等式左边都对得1分，第三个等式左边写对得1分\n    `c[2*i] = b[0] * a[2*i] + b[2] * a[2*i+1]; //`（等式右边\n乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    `c[2*i+1] = b[1] * a[2*i] + b[3] * a[2*i+1]; //`（等式右\n边乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    `d = d + c[2*i] + c[2*i+1];  //`（等式右边两个加号得1分，等\n式右边写对2\\*i和2\\*i+1得1分）\n  return    d   ;  //（1分）\n2. 139  （2分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9900,9 +9900,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "第二题（12分）\n下面程序是一个完整C函数myfunction经编译器优化后生成的32位汇编语言\n代码：\n```\nmyfunction:\n  pushl  %ecx\n  movl 0x10(%esp), %ecx\n  movl 8(%esp), %edx\n  pushl %ebx\n  movl 0x18(%esp), %ebx\n  pushl %esi\n  movl 0x14(%esp), %esi\n  pushl %ebp\n  xorl %eax, %eax\n  pushl %edi\n  jmp .L2\n  leal (%esp), %esp\n.L2:\n  movl 8(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl (%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl %edi, (%ecx)\n  movl 0xc(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl 4(%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl (%ecx), %ebp\n  addl %edi, %ebp\n  addl %ebp, %ebx\n  movl %edi, 4(%ecx)\n  incl %eax\n  addl $8, %ecx\n  cmpl $2, %eax\n  jl .L2\n  popl %edi\n  popl %ebp\n  popl %esi\n  movl %ebx, %eax\n  popl %ebx\n  popl %ecx\n  ret\n```\n提示：32位汇编使用栈来传递所有参数，参数压栈顺序为从右至左。\n1. 请根据上述汇编代码，根据提示，补全 myfunction 的代码。注意，每行一\n条语句；不能定义新的变量。\n```\nint myfunction(int a[], int b[], int c[], int d) {\n  int i;\n  for (i = 0; i <       ; i++) {\n              =                                        ;\n              =                                        ;\n              =                                        ;\n  }\n  return       ;\n}\n```\n2. 请给出以下程序的输出结果。\n```\nint main( )\n{\nint a[5] = {1, 2, 3, 4, 5};\nint b[5] = {9, 8, 5, 6, 4};\nint c[5] = {7, 9, 8, 10, 11};\nint d = 5;\nint ret = myfunction(a, b, c, d);\nprintf(\"%d\\n\", ret);\nreturn 0;\n}\n```",
+        "stem": "第二题（12分）\n下面程序是一个完整C函数`myfunction`经编译器优化后生成的32位汇编语言\n代码：\n```\nmyfunction:\n  pushl  %ecx\n  movl 0x10(%esp), %ecx\n  movl 8(%esp), %edx\n  pushl %ebx\n  movl 0x18(%esp), %ebx\n  pushl %esi\n  movl 0x14(%esp), %esi\n  pushl %ebp\n  xorl %eax, %eax\n  pushl %edi\n  jmp .L2\n  leal (%esp), %esp\n.L2:\n  movl 8(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl (%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl %edi, (%ecx)\n  movl 0xc(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl 4(%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl (%ecx), %ebp\n  addl %edi, %ebp\n  addl %ebp, %ebx\n  movl %edi, 4(%ecx)\n  incl %eax\n  addl $8, %ecx\n  cmpl $2, %eax\n  jl .L2\n  popl %edi\n  popl %ebp\n  popl %esi\n  movl %ebx, %eax\n  popl %ebx\n  popl %ecx\n  ret\n```\n提示：32位汇编使用栈来传递所有参数，参数压栈顺序为从右至左。\n1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。注意，每行一\n条语句；不能定义新的变量。\n```\nint myfunction(int a[], int b[], int c[], int d) {\n  int i;\n  for (i = 0; i <       ; i++) {\n              =                                        ;\n              =                                        ;\n              =                                        ;\n  }\n  return       ;\n}\n```\n2. 请给出以下程序的输出结果。\n```\nint main( )\n{\nint a[5] = {1, 2, 3, 4, 5};\nint b[5] = {9, 8, 5, 6, 4};\nint c[5] = {7, 9, 8, 10, 11};\nint d = 5;\nint ret = myfunction(a, b, c, d);\nprintf(\"%d\\n\", ret);\nreturn 0;\n}\n```",
         "choices": [],
-        "answer": "答案：\n1. for (i = 0; i <  2 ; i++) { //（1分）\n//下面第一二个等式左边都对得1分，第三个等式左边写对得1分\n    c[2\\*i] = b[0] \\* a[2\\*i] + b[2] \\* a[2\\*i+1]; //（等式右边\n乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    c[2\\*i+1] = b[1] \\* a[2\\*i] + b[3] \\* a[2\\*i+1]; //（等式右\n边乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    d = d + c[2\\*i] + c[2\\*i+1];  //（等式右边两个加号得1分，等\n式右边写对2\\*i和2\\*i+1得1分）\n  return    d   ;  //（1分）\n2. 139  （2分）"
+        "answer": "答案：\n1. for (i = 0; i <  2 ; i++) { //（1分）\n//下面第一二个等式左边都对得1分，第三个等式左边写对得1分\n    `c[2*i] = b[0] * a[2*i] + b[2] * a[2*i+1]; //`（等式右边\n乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    `c[2*i+1] = b[1] * a[2*i] + b[3] * a[2*i+1]; //`（等式右\n边乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    `d = d + c[2*i] + c[2*i+1];  //`（等式右边两个加号得1分，等\n式右边写对2\\*i和2\\*i+1得1分）\n  return    d   ;  //（1分）\n2. 139  （2分）"
       },
       "interaction": {
         "kind": "short-answer",
@@ -9910,8 +9910,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（12分）\n下面程序是一个完整C函数myfunction经编译器优化后生成的32位汇编语言\n代码：\n```\nmyfunction:\n  pushl  %ecx\n  movl 0x10(%esp), %ecx\n  movl 8(%esp), %edx\n  pushl %ebx\n  movl 0x18(%esp), %ebx\n  pushl %esi\n  movl 0x14(%esp), %esi\n  pushl %ebp\n  xorl %eax, %eax\n  pushl %edi\n  jmp .L2\n  leal (%esp), %esp\n.L2:\n  movl 8(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl (%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl %edi, (%ecx)\n  movl 0xc(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl 4(%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl (%ecx), %ebp\n  addl %edi, %ebp\n  addl %ebp, %ebx\n  movl %edi, 4(%ecx)\n  incl %eax\n  addl $8, %ecx\n  cmpl $2, %eax\n  jl .L2\n  popl %edi\n  popl %ebp\n  popl %esi\n  movl %ebx, %eax\n  popl %ebx\n  popl %ecx\n  ret\n```\n提示：32位汇编使用栈来传递所有参数，参数压栈顺序为从右至左。\n1. 请根据上述汇编代码，根据提示，补全 myfunction 的代码。注意，每行一\n条语句；不能定义新的变量。\n```\nint myfunction(int a[], int b[], int c[], int d) {\n  int i;\n  for (i = 0; i <       ; i++) {\n              =                                        ;\n              =                                        ;\n              =                                        ;\n  }\n  return       ;\n}\n```\n2. 请给出以下程序的输出结果。\n```\nint main( )\n{\nint a[5] = {1, 2, 3, 4, 5};\nint b[5] = {9, 8, 5, 6, 4};\nint c[5] = {7, 9, 8, 10, 11};\nint d = 5;\nint ret = myfunction(a, b, c, d);\nprintf(\"%d\\n\", ret);\nreturn 0;\n}\n```",
-        "answer": "答案：\n1. for (i = 0; i <  2 ; i++) { //（1分）\n//下面第一二个等式左边都对得1分，第三个等式左边写对得1分\n    c[2\\*i] = b[0] \\* a[2\\*i] + b[2] \\* a[2\\*i+1]; //（等式右边\n乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    c[2\\*i+1] = b[1] \\* a[2\\*i] + b[3] \\* a[2\\*i+1]; //（等式右\n边乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    d = d + c[2\\*i] + c[2\\*i+1];  //（等式右边两个加号得1分，等\n式右边写对2\\*i和2\\*i+1得1分）\n  return    d   ;  //（1分）\n2. 139  （2分）"
+        "prompt": "第二题（12分）\n下面程序是一个完整C函数`myfunction`经编译器优化后生成的32位汇编语言\n代码：\n```\nmyfunction:\n  pushl  %ecx\n  movl 0x10(%esp), %ecx\n  movl 8(%esp), %edx\n  pushl %ebx\n  movl 0x18(%esp), %ebx\n  pushl %esi\n  movl 0x14(%esp), %esi\n  pushl %ebp\n  xorl %eax, %eax\n  pushl %edi\n  jmp .L2\n  leal (%esp), %esp\n.L2:\n  movl 8(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl (%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl %edi, (%ecx)\n  movl 0xc(%esi), %edi\n  imull 4(%edx,%eax,8), %edi\n  movl 4(%esi), %ebp\n  imull (%edx,%eax,8), %ebp\n  addl %ebp, %edi\n  movl (%ecx), %ebp\n  addl %edi, %ebp\n  addl %ebp, %ebx\n  movl %edi, 4(%ecx)\n  incl %eax\n  addl $8, %ecx\n  cmpl $2, %eax\n  jl .L2\n  popl %edi\n  popl %ebp\n  popl %esi\n  movl %ebx, %eax\n  popl %ebx\n  popl %ecx\n  ret\n```\n提示：32位汇编使用栈来传递所有参数，参数压栈顺序为从右至左。\n1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。注意，每行一\n条语句；不能定义新的变量。\n```\nint myfunction(int a[], int b[], int c[], int d) {\n  int i;\n  for (i = 0; i <       ; i++) {\n              =                                        ;\n              =                                        ;\n              =                                        ;\n  }\n  return       ;\n}\n```\n2. 请给出以下程序的输出结果。\n```\nint main( )\n{\nint a[5] = {1, 2, 3, 4, 5};\nint b[5] = {9, 8, 5, 6, 4};\nint c[5] = {7, 9, 8, 10, 11};\nint d = 5;\nint ret = myfunction(a, b, c, d);\nprintf(\"%d\\n\", ret);\nreturn 0;\n}\n```",
+        "answer": "答案：\n1. for (i = 0; i <  2 ; i++) { //（1分）\n//下面第一二个等式左边都对得1分，第三个等式左边写对得1分\n    `c[2*i] = b[0] * a[2*i] + b[2] * a[2*i+1]; //`（等式右边\n乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    `c[2*i+1] = b[1] * a[2*i] + b[3] * a[2*i+1]; //`（等式右\n边乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    `d = d + c[2*i] + c[2*i+1];  //`（等式右边两个加号得1分，等\n式右边写对2\\*i和2\\*i+1得1分）\n  return    d   ;  //（1分）\n2. 139  （2分）"
       },
       "presentation": {
         "status": "ready",
@@ -10319,7 +10319,7 @@
       "exam": "2018期末",
       "questionNo": "第七题 1",
       "summary": "i++ 对应的 x86-64 汇编代码",
-      "content": "第七题（10分）\n给定如下程序：\n```\n#include <stdio.h>\n#include <pthread.h>\nint i = 0;\nint j = 0;\nvoid *do_stuff1(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{i++; j++;}\nreturn NULL;\n}\nvoid *do_stuff2(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{j++; i++;}\nreturn NULL;\n}\nint main() {\npthread_t tid1, tid2;\npthread_create(&tid1, NULL, do_stuff1, NULL);\npthread_create(&tid2, NULL, do_stuff2, NULL);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nprintf(\"%d, %d\\n\", i, j);\nreturn 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1`, %eax\n1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）",
+      "content": "第七题（10分）\n给定如下程序：\n```\n#include <stdio.h>\n#include <pthread.h>\nint i = 0;\nint j = 0;\nvoid *do_stuff1(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{i++; j++;}\nreturn NULL;\n}\nvoid *do_stuff2(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{j++; i++;}\nreturn NULL;\n}\nint main() {\npthread_t tid1, tid2;\npthread_create(&tid1, NULL, do_stuff1, NULL);\npthread_create(&tid2, NULL, do_stuff2, NULL);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nprintf(\"%d, %d\\n\", i, j);\nreturn 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1, %eax`\n1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10341,7 +10341,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第七题（10分）\n给定如下程序：\n```\n#include <stdio.h>\n#include <pthread.h>\nint i = 0;\nint j = 0;\nvoid *do_stuff1(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{i++; j++;}\nreturn NULL;\n}\nvoid *do_stuff2(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{j++; i++;}\nreturn NULL;\n}\nint main() {\npthread_t tid1, tid2;\npthread_create(&tid1, NULL, do_stuff1, NULL);\npthread_create(&tid2, NULL, do_stuff2, NULL);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nprintf(\"%d, %d\\n\", i, j);\nreturn 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1`, %eax",
+        "stem": "第七题（10分）\n给定如下程序：\n```\n#include <stdio.h>\n#include <pthread.h>\nint i = 0;\nint j = 0;\nvoid *do_stuff1(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{i++; j++;}\nreturn NULL;\n}\nvoid *do_stuff2(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{j++; i++;}\nreturn NULL;\n}\nint main() {\npthread_t tid1, tid2;\npthread_create(&tid1, NULL, do_stuff1, NULL);\npthread_create(&tid2, NULL, do_stuff2, NULL);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nprintf(\"%d, %d\\n\", i, j);\nreturn 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1, %eax`",
         "choices": [],
         "answer": "1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）"
       },
@@ -10356,7 +10356,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第七题（10分）\n给定如下程序：\n```\n#include <stdio.h>\n#include <pthread.h>\nint i = 0;\nint j = 0;\nvoid *do_stuff1(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{i++; j++;}\nreturn NULL;\n}\nvoid *do_stuff2(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{j++; i++;}\nreturn NULL;\n}\nint main() {\npthread_t tid1, tid2;\npthread_create(&tid1, NULL, do_stuff1, NULL);\npthread_create(&tid2, NULL, do_stuff2, NULL);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nprintf(\"%d, %d\\n\", i, j);\nreturn 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1`, %eax",
+        "prompt": "第七题（10分）\n给定如下程序：\n```\n#include <stdio.h>\n#include <pthread.h>\nint i = 0;\nint j = 0;\nvoid *do_stuff1(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{i++; j++;}\nreturn NULL;\n}\nvoid *do_stuff2(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{j++; i++;}\nreturn NULL;\n}\nint main() {\npthread_t tid1, tid2;\npthread_create(&tid1, NULL, do_stuff1, NULL);\npthread_create(&tid2, NULL, do_stuff2, NULL);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nprintf(\"%d, %d\\n\", i, j);\nreturn 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1, %eax`",
         "answer": "1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）"
       },
       "group": {
