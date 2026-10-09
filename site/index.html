@@ -6,18 +6,17 @@
 <script>
 (function(){try{var t=localStorage.getItem('lwl-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
-<title>ICS 随机测试</title>
+<title>ICS 练习</title>
 <meta name="description" content="从 PKU ICS 历年题中按知识模块随机组卷并评分。">
 <meta name="author" content="LWLAymh">
 <link rel="canonical" href="https://LWLAymh.github.io/ics-test/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="LWLAymh的备忘录">
+<meta property="og:site_name" content="ICS 练习">
 <meta property="og:url" content="https://LWLAymh.github.io/ics-test/">
-<meta property="og:title" content="ICS 随机测试">
+<meta property="og:title" content="ICS 练习">
 <meta property="og:description" content="从 PKU ICS 历年题中按知识模块随机组卷并评分。">
 <link rel="icon" href="./images/favicon.jpg">
 <link rel="apple-touch-icon" href="./images/favicon.jpg">
-<link rel="stylesheet" href="./style.css">
 <script>
 window.MathJax = {
   tex: {
@@ -34,27 +33,19 @@ window.MathJax = {
 <link rel="stylesheet" href="./ics-test.css">
 </head>
 <body class="page-ics-test">
-<div class="progress-bar" id="progress-bar"></div>
-
 <main class="site-main">
 <section class="ics-shell" id="ics-app" data-catalog="./web-data/catalog.json" data-supabase-url="https://mecmgiejovjmyzptuela.supabase.co" data-supabase-key="sb_publishable_y6w0NcfEp_WCJl1hDctSZw_DNplokC-">
   <header class="ics-hero">
+    <div class="ics-brand"><span class="ics-brand-mark">ICS</span><div><h1>计算机系统导论 · 练习</h1><p>PKU · Introduction to Computer Systems</p></div></div>
     <button class="theme-toggle ics-theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" title="切换亮/暗主题">
       <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
-    <div class="ics-hero-copy">
-      <p class="ics-eyebrow">PKU · Introduction to Computer Systems</p>
-      <h1>ICS 随机测试</h1>
-      <p>练习池包含已经结构化录入的单选、多选、填空与简答题；选择题自动判分，填空题逐空作答，简答题查看解析后自评。</p>
-    </div>
-    <div class="ics-hero-status"><span></span><strong>实时统计已连接</strong><small>Supabase Realtime</small></div>
   </header>
 
   <div class="ics-panel" id="ics-setup">
     <div class="ics-panel-head">
-      <div><h2>组一份测试</h2><p id="ics-bank-summary">正在读取题库…</p></div>
-      <button class="ics-text-button" id="ics-select-toggle" type="button">取消全选</button>
+      <div><p class="ics-eyebrow">开始练习</p><h2>选择你的练习范围</h2><p id="ics-bank-summary">正在读取题库…</p></div>
     </div>
     <fieldset class="ics-mode-fieldset">
       <legend>练习方式</legend>
@@ -62,10 +53,12 @@ window.MathJax = {
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="random" checked><span><strong>模块随机</strong><small>从一个或多个模块随机抽题</small></span></label>
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="module-all"><span><strong>模块全练</strong><small>完成一个模块的全部可用题目</small></span></label>
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="exam"><span><strong>按卷练习</strong><small>按原顺序完成一份试卷中的可用题目</small></span></label>
+        <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="mistakes"><span><strong>高错题优先</strong><small>按大家的错误率从高到低练习</small></span></label>
       </div>
     </fieldset>
     <fieldset class="ics-module-fieldset" id="ics-module-fieldset">
       <legend id="ics-module-legend">知识模块（可多选）</legend>
+      <button class="ics-text-button ics-select-toggle" id="ics-select-toggle" type="button">取消全选</button>
       <div class="ics-module-grid" id="ics-modules" aria-live="polite"></div>
     </fieldset>
     <div class="ics-options">
@@ -86,20 +79,26 @@ window.MathJax = {
         <select id="ics-paper"><option value="">请选择试卷</option></select>
         <small id="ics-paper-status"></small>
       </label>
-      <button class="ics-primary" id="ics-start" type="button" disabled>开始测试</button>
+      <label class="ics-field" id="ics-min-attempts-field" hidden>最低作答人数
+        <select id="ics-min-attempts"><option value="1">至少 1 人</option><option value="5">至少 5 人</option><option value="10">至少 10 人</option><option value="20">至少 20 人</option></select>
+      </label>
+      <button class="ics-primary" id="ics-start" type="button" disabled>开始练习 <span aria-hidden="true">→</span></button>
     </div>
+    <p class="ics-setup-note" id="ics-practice-note">选择题与已配置答案的填空题自动核对，简答题查看参考答案后自评。</p>
     <p class="ics-error" id="ics-setup-error" role="alert" hidden></p>
   </div>
 
-  <section class="ics-panel ics-quiz" id="ics-quiz" hidden aria-live="polite">
+  <section class="ics-panel ics-quiz" id="ics-quiz" hidden aria-label="当前练习">
     <div class="ics-progress-row">
-      <button class="ics-text-button" id="ics-abandon" type="button">← 重新组卷</button>
-      <span id="ics-progress-text"></span>
+      <div><button class="ics-text-button" id="ics-abandon" type="button">重新组卷</button><span class="ics-toolbar-divider" aria-hidden="true"></span><span id="ics-progress-text" aria-live="polite"></span></div>
       <span id="ics-score-text"></span>
     </div>
     <div class="ics-progress-track" aria-hidden="true"><span id="ics-progress-bar"></span></div>
+    <div class="ics-workspace">
+    <div class="ics-workspace-main">
     <article class="ics-question">
       <div class="ics-question-meta" id="ics-question-meta"></div>
+      <p class="ics-question-history" id="ics-question-history" hidden></p>
       <div class="post-content ics-question-content" id="ics-question-content"></div>
     </article>
     <form id="ics-answer-form">
@@ -110,8 +109,6 @@ window.MathJax = {
       <div class="ics-choice-list" id="ics-choice-list" role="group" aria-labelledby="ics-answer-label" hidden></div>
       <input id="ics-answer" type="hidden" value="">
       <div class="ics-answer-actions">
-        <button class="ics-report-button" id="ics-report-issue" type="button">您认为此题有误</button>
-        <span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span>
         <button class="ics-secondary ics-skip-button" id="ics-skip" type="button">跳过本题</button>
         <button class="ics-primary" id="ics-submit" type="submit">提交答案</button>
       </div>
@@ -138,14 +135,30 @@ window.MathJax = {
           <button type="button" data-grade="1">回答正确</button>
         </div>
       </div>
-      <button class="ics-primary" id="ics-next" type="button" hidden>下一题</button>
     </section>
+    <nav class="ics-question-navigation" aria-label="题目导航">
+      <button class="ics-secondary" id="ics-previous" type="button">← 上一题</button>
+      <span id="ics-navigation-status" role="status"></span>
+      <button class="ics-secondary" id="ics-next" type="button">下一题 →</button>
+    </nav>
+    <div class="ics-question-utilities"><button class="ics-report-button" id="ics-report-issue" type="button">您认为此题有误</button><span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span></div>
+    </div>
+    <aside class="ics-session-sidebar" aria-label="本次练习概览">
+      <details id="ics-question-map" open>
+        <summary>答题卡 <span id="ics-completion-summary"></span></summary>
+        <div class="ics-question-grid" id="ics-question-grid" aria-label="跳转到指定题目"></div>
+        <div class="ics-map-legend"><span><i class="answered"></i>已作答</span><span><i class="draft"></i>草稿</span><span><i class="skipped"></i>跳过</span><span><i></i>未作答</span></div>
+      </details>
+      <p class="ics-session-note">可自由切换题目。草稿和作答结果会保留在本次练习中。</p>
+      <button class="ics-secondary" id="ics-finish" type="button">查看练习结果</button>
+    </aside>
+    </div>
   </section>
 
   <section class="ics-panel ics-issue-board-panel">
     <details class="ics-issue-board" id="ics-issue-board">
       <summary>
-        <span><strong>大家认为可能有误的题目</strong><small>实时更新 · 默认折叠</small></span>
+        <span><strong>待复核题目</strong><small>同学反馈 · 实时更新</small></span>
         <span class="ics-issue-count" id="ics-issue-count">正在读取…</span>
       </summary>
       <div class="ics-issue-board-body">
@@ -157,20 +170,21 @@ window.MathJax = {
   </section>
 
   <section class="ics-panel ics-result" id="ics-result" hidden>
-    <p class="ics-eyebrow">TEST COMPLETE</p>
-    <h2>本次测试完成</h2>
+    <p class="ics-eyebrow">练习记录</p>
+    <h2>本次练习结果</h2>
     <div class="ics-score-ring" id="ics-final-score"></div>
     <p id="ics-final-summary"></p>
     <div class="ics-result-actions">
-      <button class="ics-primary" id="ics-retry" type="button">再来一组</button>
+      <button class="ics-primary" id="ics-resume" type="button">继续练习</button>
+      <button class="ics-secondary" id="ics-retry" type="button">重新组卷</button>
       <button class="ics-secondary" id="ics-review-toggle" type="button">查看答题记录</button>
     </div>
     <div class="ics-review-list" id="ics-review-list" hidden></div>
   </section>
 
   <footer class="ics-contact">
-    <div><p class="ics-eyebrow">FEEDBACK</p><h2>发现题目问题？</h2><p>欢迎通过微信或邮件告诉我，也可以直接在 GitHub 提交 Issue 或 PR 帮忙修正。</p></div>
-    <div class="ics-contact-actions"><button class="ics-contact-link" type="button" data-copy-wechat="LWLAymh"><span>微信</span><strong>LWLAymh</strong><small>点击复制</small></button><a class="ics-contact-link" href="mailto:lwlaymh@outlook.com"><span>邮件</span><strong>lwlaymh@outlook.com</strong><small>点击写信</small></a><a class="ics-contact-link" href="https://github.com/LWLAymh/ics-test" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>LWLAymh/ics-test</strong><small>提交 Issue 或 PR</small></a></div>
+    <p>题目反馈与建议</p>
+    <div class="ics-contact-actions"><button class="ics-contact-link" type="button" data-copy-wechat="LWLAymh"><span>微信</span> LWLAymh <small>复制</small></button><a class="ics-contact-link" href="mailto:lwlaymh@outlook.com">lwlaymh@outlook.com</a><a class="ics-contact-link" href="https://github.com/LWLAymh/ics-test" target="_blank" rel="noopener noreferrer">GitHub · Issue / PR <span aria-hidden="true">↗</span></a></div>
   </footer>
 </section>
 </main>

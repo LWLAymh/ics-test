@@ -23,12 +23,17 @@
     selfGrade: $('ics-self-grade'), next: $('ics-next'), result: $('ics-result'),
     finalScore: $('ics-final-score'), finalSummary: $('ics-final-summary'), retry: $('ics-retry'),
     reviewToggle: $('ics-review-toggle'), reviewList: $('ics-review-list'),
+    previous: $('ics-previous'), finish: $('ics-finish'), resume: $('ics-resume'),
+    questionGrid: $('ics-question-grid'), completionSummary: $('ics-completion-summary'),
+    navigationStatus: $('ics-navigation-status'), questionHistory: $('ics-question-history'),
+    minAttempts: $('ics-min-attempts'), minAttemptsField: $('ics-min-attempts-field'),
+    practiceNote: $('ics-practice-note'),
     issueBoard: $('ics-issue-board'), issueCount: $('ics-issue-count'),
     issueBoardStatus: $('ics-issue-board-status'), issueList: $('ics-issue-list'),
   };
 
   const state = {
-    catalog: null, papers: [], questions: [], index: 0, score: 0, records: [], currentMode: '',
+    catalog: null, papers: [], questions: [], index: 0, score: 0, records: [], drafts: [], currentMode: '',
     groups: new Map(), moduleCache: new Map(),
     supabase: null, statsChannel: null, currentStats: null, statsQuestionId: '', statsRevealed: false,
     issueChannel: null, reportedIssues: [], issueQuestionIndex: new Map(), issueIndexLoaded: false,
@@ -392,6 +397,7 @@
       .eq('question_id', questionId).maybeSingle();
     if (state.statsQuestionId !== questionId) return;
     if (!result.error && result.data) state.currentStats = result.data;
+    renderLiveStats();
 
     state.statsChannel = state.supabase.channel('ics-question-' + questionId)
       .on('postgres_changes', {
@@ -821,9 +827,13 @@
     const isAll = mode === 'module-all';
     ui.moduleFieldset.hidden = isExam;
     ui.selectToggle.hidden = isExam || isAll;
-    ui.countField.hidden = mode !== 'random';
+    ui.countField.hidden = mode !== 'random' && mode !== 'mistakes';
     ui.examTypeField.hidden = isAll || isExam;
     ui.paperField.hidden = !isExam;
+    ui.minAttemptsField.hidden = mode !== 'mistakes';
+    ui.practiceNote.textContent = mode === 'mistakes'
+      ? '按历史错误率降序排列；错误率相同时优先展示作答人数更多的题。没有达到最低人数的题不会入选，统计包含自评。'
+      : '选择题与已配置答案的填空题自动核对，简答题查看参考答案后自评。';
     ui.moduleLegend.textContent = isAll ? '选择一个知识模块' : '知识模块（可多选）';
 
     if (isAll) {
@@ -951,14 +961,13 @@
         return Number(paper.publishedQuestionCount || 0) > 0;
       });
       ui.bankSummary.textContent = Number(state.catalog.stats.quizQuestions || state.catalog.stats.publishedQuestions) +
-        ' 道题已上线（含选择、填空、简答与综合题） · ' + state.catalog.stats.withheldQuestions +
-        ' 道排版待复核题暂缓开放';
+        ' 道练习题 · ' + state.papers.length + ' 份试卷 · ' + state.catalog.modules.length + ' 个知识模块';
       ui.modules.innerHTML = state.catalog.modules.filter(function (module) {
         return Number(module.publishedQuestionCount || 0) > 0;
       }).map(function (module) {
         return '<label class="ics-module-card"><input type="checkbox" value="' + escapeHtml(module.id) + '" checked>' +
           '<span><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
-          '<small>' + escapeHtml(module.name) + ' · ' + Number(module.quizQuestionCount || module.publishedQuestionCount) + ' 道题</small></span></label>';
+          '<small>' + Number(module.quizQuestionCount || module.publishedQuestionCount) + ' 道题</small></span></label>';
       }).join('');
       (state.catalog.filters.examTypes || []).forEach(function (type) {
         const option = document.createElement('option'); option.value = type; option.textContent = type; ui.examType.appendChild(option);
@@ -981,6 +990,34 @@
     }
   }
 
+  async function rankByErrorRate(pool) {
+    if (!state.supabase) throw new Error('答题统计暂时无法连接，请稍后重试。');
+    const stats = new Map();
+    // 先按当前题池 ID 分批查询，避免全表分页或超过 URL 长度限制。
+    for (let start = 0; start < pool.length; start += 100) {
+      const ids = pool.slice(start, start + 100).map(function (question) { return question.id; });
+      const result = await state.supabase.from('ics_question_stats')
+        .select('question_id,total_answers,correct_answers').in('question_id', ids);
+      if (result.error) throw new Error('无法读取历史错误率，请稍后重试。');
+      (result.data || []).forEach(function (row) { stats.set(row.question_id, row); });
+    }
+    const minimum = Number(ui.minAttempts.value);
+    const ranked = pool.filter(function (question) {
+      const row = stats.get(question.id);
+      const total = row && Number(row.total_answers);
+      if (!row || !Number.isFinite(total) || total < minimum) return false;
+      const correct = Number(row.correct_answers);
+      if (!Number.isFinite(correct) || correct < 0 || correct > total) return false;
+      question.practiceStats = { total: total, errorRate: (total - correct) / total };
+      return true;
+    });
+    if (!ranked.length) throw new Error('当前范围内没有达到最低作答人数的题目，可降低人数门槛或扩大练习范围。');
+    return ranked.sort(function (a, b) {
+      return b.practiceStats.errorRate - a.practiceStats.errorRate ||
+        b.practiceStats.total - a.practiceStats.total || a.id.localeCompare(b.id);
+    });
+  }
+
   async function startQuiz() {
     const mode = quizMode();
     const ids = mode === 'exam' ? state.catalog.modules.map(function (module) { return module.id; }) : selectedModuleIds();
@@ -990,7 +1027,7 @@
       showSetupError('整卷练习需要选择一份具体试卷。'); return;
     }
     showSetupError('');
-    ui.start.disabled = true; ui.start.textContent = '正在抽题…';
+    ui.start.disabled = true; ui.start.textContent = mode === 'mistakes' ? '正在读取错误率…' : '正在准备…';
     try {
       const modules = state.catalog.modules.filter(function (module) { return ids.includes(module.id); });
       const payloads = await Promise.all(modules.map(loadModulePayload));
@@ -1012,20 +1049,117 @@
       await completeQuestionGroups(pool, prepareOptions);
       pool = dropIncompleteGroups(collapseQuestionGroups(pool));
       if (!pool.length) throw new Error('当前筛选条件下没有可用题目');
+      if (mode === 'mistakes') pool = await rankByErrorRate(pool);
 
-      const count = mode === 'random' ? Math.min(Number(ui.count.value), pool.length) : pool.length;
+      const count = mode === 'random' || mode === 'mistakes' ? Math.min(Number(ui.count.value), pool.length) : pool.length;
       state.questions = mode === 'exam'
         ? pool.sort(function (a, b) { return Number(a.paperOrder || 0) - Number(b.paperOrder || 0); })
-        : secureShuffle(pool).slice(0, count);
-      state.index = 0; state.score = 0; state.records = [];
+        : mode === 'mistakes' ? pool.slice(0, count) : secureShuffle(pool).slice(0, count);
+      state.index = 0; state.score = 0; state.records = []; state.drafts = [];
+      $('ics-question-map').open = !window.matchMedia('(max-width: 720px)').matches;
 
       ui.setup.hidden = true; ui.result.hidden = true; ui.quiz.hidden = false;
       renderQuestion();
     } catch (error) {
       showSetupError(error.message);
     } finally {
-      ui.start.disabled = false; ui.start.textContent = '开始测试';
+      ui.start.disabled = false; ui.start.textContent = '开始练习 →';
     }
+  }
+
+  function saveQuestionDraft() {
+    if (!state.questions[state.index] || ui.quiz.hidden) return;
+    state.drafts[state.index] = {
+      answer: ui.answer.value,
+      blanks: Array.from(ui.questionContent.querySelectorAll('.ics-blank-input')).map(function (input) {
+        return { name: input.name, value: input.value };
+      }),
+      compositeChoices: Array.from(ui.questionContent.querySelectorAll('[data-composite-choice].selected')).map(function (button) {
+        return { part: button.closest('[data-part-index]').dataset.partIndex, choice: button.dataset.compositeChoice };
+      }),
+      submitted: !ui.feedback.hidden,
+      needsSelfGrade: !ui.selfGrade.hidden,
+      pendingCompositeGrade: state.pendingCompositeGrade,
+      verdict: ui.verdict.textContent,
+      verdictClass: ui.verdict.className,
+    };
+  }
+
+  function draftHasContent(draft) {
+    return draft && (draft.answer || draft.submitted || draft.blanks.some(function (blank) { return blank.value; }) || draft.compositeChoices.length);
+  }
+
+  function updateNavigation() {
+    const answered = state.records.filter(function (record) { return record && typeof record.points === 'number'; }).length;
+    const visited = state.records.filter(Boolean).length;
+    const draft = state.drafts[state.index];
+    const record = state.records[state.index];
+    ui.scoreText.textContent = '已答 ' + answered + ' / ' + state.questions.length + ' · ' + state.score + ' 分';
+    ui.completionSummary.textContent = answered + ' / ' + state.questions.length;
+    ui.progressBar.style.width = (visited / state.questions.length * 100) + '%';
+    ui.previous.disabled = state.index === 0;
+    ui.next.hidden = false;
+    ui.next.textContent = state.index === state.questions.length - 1 ? '查看结果 →' : '下一题 →';
+    ui.navigationStatus.textContent = record && typeof record.points === 'number' ? '已作答 · ' + record.points + ' 分'
+      : draft && draft.needsSelfGrade ? '请完成自评'
+        : record && record.mode === 'skipped' ? '已跳过，可继续作答'
+          : record && record.mode === 'unavailable' ? '答案待校对，未计分'
+            : draftHasContent(draft) ? '草稿已保存' : '尚未作答';
+    ui.questionGrid.innerHTML = state.questions.map(function (question, index) {
+      const item = state.records[index];
+      const saved = state.drafts[index];
+      const status = item && typeof item.points === 'number' ? 'answered'
+        : saved && saved.needsSelfGrade ? 'draft'
+          : item && item.mode === 'skipped' ? 'skipped' : draftHasContent(saved) ? 'draft' : '';
+      const label = status === 'answered' ? '已作答' : status === 'skipped' ? '已跳过' : status === 'draft' ? '有草稿' : '未作答';
+      return '<button type="button" data-question-index="' + index + '" class="' + status + '"' +
+        (index === state.index ? ' aria-current="step"' : '') +
+        ' aria-label="第 ' + (index + 1) + ' 题，' + label + '">' + (index + 1) + '</button>';
+    }).join('');
+  }
+
+  function highlightChoiceResults(question) {
+    const expected = simpleExpected(question.directAnswer);
+    const declared = (question.interaction && question.interaction.correctChoiceIds) || [];
+    const correct = declared.length ? declared : expected && expected.kind === 'choice' ? expected.value.split('') : [];
+    if (!correct.length) return;
+    ui.choiceList.querySelectorAll('[data-choice]').forEach(function (button) {
+      button.classList.toggle('is-correct', correct.includes(button.dataset.choice));
+      button.classList.toggle('is-incorrect', button.classList.contains('selected') && !correct.includes(button.dataset.choice));
+    });
+  }
+
+  function restoreQuestionDraft(question) {
+    const draft = state.drafts[state.index];
+    if (!draft) return;
+    ui.answer.value = draft.answer;
+    ui.choiceList.querySelectorAll('[data-choice]').forEach(function (button) {
+      const selected = draft.answer.includes(button.dataset.choice);
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    ui.questionContent.querySelectorAll('.ics-blank-input').forEach(function (input) {
+      const saved = draft.blanks.find(function (blank) { return blank.name === input.name; });
+      if (saved) input.value = saved.value;
+    });
+    ui.questionContent.querySelectorAll('[data-composite-choice]').forEach(function (button) {
+      const part = button.closest('[data-part-index]').dataset.partIndex;
+      const selected = draft.compositeChoices.some(function (saved) { return saved.part === part && saved.choice === button.dataset.compositeChoice; });
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    if (!draft.submitted) return;
+    ui.answer.disabled = true; ui.submit.disabled = true; ui.submit.hidden = true; ui.skip.hidden = true;
+    ui.feedback.hidden = false; ui.selfGrade.hidden = !draft.needsSelfGrade;
+    state.pendingCompositeGrade = draft.pendingCompositeGrade;
+    ui.verdict.textContent = draft.verdict; ui.verdict.className = draft.verdictClass;
+    ui.reference.innerHTML = !question.answerAvailable
+      ? '<p>这道题尚未建立可靠的题目—答案映射。为避免展示错位答案，系统没有自动猜测。</p>'
+      : question.formatted ? renderLayoutStem(referenceFor(question)) : renderMarkdown(referenceFor(question));
+    ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
+    ui.questionContent.querySelectorAll('button, input').forEach(function (control) { control.disabled = true; });
+    if (!draft.needsSelfGrade) highlightChoiceResults(question);
+    typeset(ui.reference);
   }
 
   function renderQuestion() {
@@ -1064,17 +1198,19 @@
       : state.currentMode === 'fill' ? '填空题'
         : state.currentMode === 'composite' ? '综合题' : '简答题';
     ui.progressText.textContent = '第 ' + number + ' / ' + state.questions.length + ' 题';
-    ui.scoreText.textContent = '当前 ' + state.score + ' 分';
-    ui.progressBar.style.width = ((state.index / state.questions.length) * 100) + '%';
     ui.questionMeta.innerHTML = '<span class="ics-mode-badge">' + modeLabel + '</span>' +
-      [q.moduleTitle, q.year, q.examType, q.questionNo, q.exam]
+      [q.exam || [q.year, q.examType].filter(Boolean).join(' · '), q.questionNo, q.moduleTitle]
         .filter(Boolean).map(function (item) { return '<span>' + escapeHtml(item) + '</span>'; }).join('');
+    ui.questionHistory.hidden = !q.practiceStats;
+    ui.questionHistory.textContent = q.practiceStats
+      ? '历史错误率 ' + Math.round(q.practiceStats.errorRate * 100) + '% · ' + q.practiceStats.total + ' 人作答 · 按错误率降序练习' : '';
     ui.questionContent.innerHTML = choiceQuestion
       ? (q.formatted ? renderLayoutStem(choiceQuestion.stem) : renderMarkdown(choiceQuestion.stem))
       : fillQuestion ? renderFillQuestion(fillQuestion, q.formatted)
         : compositeQuestion && Array.isArray(q.compositeParts) ? renderCompositeQuestion(q)
         : (q.formatted ? renderLayoutStem(q.prompt) : renderMarkdown(q.prompt));
     ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false; ui.skip.disabled = false;
+    ui.submit.hidden = false; ui.skip.hidden = false;
     const alreadyReported = state.reportedThisSession.has(q.id);
     ui.reportIssue.disabled = alreadyReported;
     ui.reportIssue.textContent = alreadyReported ? '已报告，感谢反馈' : '您认为此题有误';
@@ -1108,12 +1244,20 @@
           '<span class="ics-choice-content post-content">' + (q.formatted ? renderLayoutChoice(choice.content) : renderChoiceMarkdown(choice.content)) + '</span></button>';
       }).join('');
     }
-    ui.answerForm.hidden = false; ui.feedback.hidden = true; ui.selfGrade.hidden = true; ui.next.hidden = true;
+    ui.answerForm.hidden = false; ui.feedback.hidden = true; ui.selfGrade.hidden = true;
+    ui.choiceList.classList.remove('needs-choice');
+    ui.feedback.querySelector('details').open = true;
     ui.verdict.className = 'ics-verdict'; ui.reference.innerHTML = '';
+    restoreQuestionDraft(q);
+    updateNavigation();
     typeset(ui.questionContent);
     typeset(ui.choiceList);
     loadQuestionStats(q.id).catch(function () {});
-    window.scrollTo({ top: ui.quiz.offsetTop - 90, behavior: 'smooth' });
+    if (state.drafts[state.index] && state.drafts[state.index].submitted) {
+      state.statsRevealed = true;
+      renderLiveStats();
+    }
+    window.scrollTo({ top: Math.max(0, ui.quiz.offsetTop - 16), behavior: 'auto' });
   }
 
   // 参考答案只取 layout.answer（人工录入的那一份）。题目的 relatedBlockIds 指向的
@@ -1125,13 +1269,18 @@
 
   function recordGrade(points, mode) {
     const q = state.questions[state.index];
-    if (typeof points === 'number') state.score += points;
-    state.records.push({ question: q, answer: ui.answer.value.trim(), points: points, mode: mode });
+    const previous = state.records[state.index];
+    if (previous && typeof previous.points === 'number') return;
+    state.records[state.index] = { question: q, answer: ui.answer.value.trim(), points: points, mode: mode };
+    state.score = Math.round(state.records.reduce(function (total, record) {
+      return total + (record && typeof record.points === 'number' ? record.points : 0);
+    }, 0) * 100) / 100;
     if (typeof points === 'number') recordRemoteStats(q, points === 1).catch(function () {});
-    ui.scoreText.textContent = '当前 ' + state.score + ' 分';
     ui.selfGrade.hidden = true;
-    ui.next.hidden = false;
-    ui.next.textContent = state.index === state.questions.length - 1 ? '查看成绩' : '下一题';
+    ui.submit.hidden = true; ui.skip.hidden = true;
+    highlightChoiceResults(q);
+    saveQuestionDraft();
+    updateNavigation();
   }
 
   function evaluateComposite(question) {
@@ -1199,6 +1348,7 @@
 
   function submitAnswer(event) {
     event.preventDefault();
+    if (ui.submit.disabled) return;
     if (state.currentMode === 'unavailable') {
       ui.answer.value = '答案待校对，本题未计分';
       ui.submit.disabled = true; ui.skip.disabled = true;
@@ -1241,6 +1391,7 @@
         : state.currentMode === 'composite' && compositeResult.subjectiveCount === 0 && compositeResult.objectiveCount
           ? compositeResult.objectiveCorrect === compositeResult.objectiveCount : null;
     ui.answer.disabled = true; ui.submit.disabled = true; ui.feedback.hidden = false;
+    ui.submit.hidden = true; ui.skip.hidden = true;
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
     ui.reference.innerHTML = q.formatted
       ? renderLayoutStem(referenceFor(q))
@@ -1265,42 +1416,72 @@
       }
       ui.selfGrade.hidden = false;
     }
+    saveQuestionDraft();
+    updateNavigation();
+  }
+
+  function navigateQuestion(index) {
+    if (index < 0 || index >= state.questions.length || index === state.index) return;
+    saveQuestionDraft();
+    state.index = index;
+    renderQuestion();
   }
 
   function advanceQuestion() {
     if (state.index >= state.questions.length - 1) finishQuiz();
-    else { state.index += 1; renderQuestion(); }
+    else navigateQuestion(state.index + 1);
   }
 
   function skipCurrentQuestion() {
     const q = state.questions[state.index];
-    if (!q) return;
-    state.records.push({ question: q, answer: '已跳过', points: null, mode: 'skipped' });
+    if (!q || (state.records[state.index] && typeof state.records[state.index].points === 'number')) return;
+    saveQuestionDraft();
+    state.records[state.index] = { question: q, answer: '已跳过', points: null, mode: 'skipped' };
     advanceQuestion();
   }
 
   function finishQuiz() {
+    saveQuestionDraft();
     stopStatsSubscription();
     ui.quiz.hidden = true; ui.result.hidden = false;
     const total = state.questions.length;
     const graded = state.records.filter(function (record) { return typeof record.points === 'number'; }).length;
     const skipped = state.records.filter(function (record) { return record.mode === 'skipped'; }).length;
+    const unavailable = state.records.filter(function (record) { return record.mode === 'unavailable'; }).length;
+    const ungraded = total - graded - skipped - unavailable;
     const percent = graded ? Math.round((state.score / graded) * 100) : 0;
     ui.finalScore.textContent = graded ? percent + '%' : '—';
-    ui.finalSummary.textContent = graded
-      ? '共浏览 ' + total + ' 题，其中 ' + graded + ' 题计分、' + skipped + ' 题跳过，得到 ' + state.score + ' / ' + graded + ' 分。'
-      : '共浏览 ' + total + ' 题，其中 ' + skipped + ' 题跳过；本次没有计分题。';
+    ui.finalSummary.textContent = '本次共 ' + total + ' 题 · 已计分 ' + graded + ' 题 · 跳过 ' + skipped +
+      ' 题 · 待完成 ' + ungraded + ' 题' + (unavailable ? ' · 答案待校对 ' + unavailable + ' 题' : '') +
+      (graded ? '。得分 ' + state.score + ' / ' + graded + '。' : '。');
+    ui.resume.textContent = ungraded || skipped ? '继续未完成的题' : '返回题目';
     ui.reviewList.hidden = true; ui.reviewToggle.textContent = '查看答题记录';
-    ui.reviewList.innerHTML = state.records.map(function (record, index) {
-      const score = record.mode === 'skipped' ? '已跳过'
-        : typeof record.points === 'number' ? record.points + ' 分' : '未计分';
-      const originalNumber = record.question.questionNo
-        ? ' · 原题号 ' + escapeHtml(record.question.questionNo) : '';
-      return '<div class="ics-review-item"><span class="ics-review-score">' + score + '</span>' +
+    ui.reviewList.innerHTML = state.questions.map(function (question, index) {
+      const record = state.records[index];
+      const draft = state.drafts[index];
+      const score = record && record.mode === 'skipped' ? '已跳过'
+        : record && typeof record.points === 'number' ? record.points + ' 分' : draft && draft.needsSelfGrade ? '待自评' : '未计分';
+      const originalNumber = question.questionNo ? ' · ' + escapeHtml(question.questionNo) : '';
+      return '<button type="button" class="ics-review-item" data-review-index="' + index + '"><span class="ics-review-score">' + score + '</span>' +
         '<strong>第 ' + (index + 1) + ' 题' + originalNumber + '</strong>' +
-        '<p>' + (record.mode === 'skipped' ? '本题未作答' : '你的回答：' + escapeHtml(record.answer)) + '</p></div>';
+        '<p>' + (record && record.mode !== 'skipped' ? '你的回答：' + escapeHtml(record.answer)
+          : draftHasContent(draft) ? '已保留草稿，点击返回题目' : '尚未作答，点击返回题目') + '</p></button>';
     }).join('');
     window.scrollTo({ top: ui.result.offsetTop - 90, behavior: 'smooth' });
+  }
+
+  function resumeQuiz(index) {
+    if (!state.questions.length) return;
+    if (typeof index !== 'number') {
+      index = state.questions.findIndex(function (question, position) {
+        const record = state.records[position];
+        return !record || (typeof record.points !== 'number' && record.mode !== 'unavailable');
+      });
+      if (index < 0) index = state.index;
+    }
+    ui.result.hidden = true; ui.quiz.hidden = false;
+    state.index = index;
+    renderQuestion();
   }
 
   function resetToSetup() {
@@ -1345,7 +1526,7 @@
   ui.answerForm.addEventListener('submit', submitAnswer);
   ui.choiceList.addEventListener('click', function (event) {
     const button = event.target.closest('[data-choice]');
-    if (!button) return;
+    if (!button || button.disabled) return;
     const multiple = ui.choiceList.dataset.multiple === 'true';
     if (!multiple) {
       ui.choiceList.querySelectorAll('[data-choice]').forEach(function (item) {
@@ -1403,6 +1584,23 @@
     recordGrade(finalPoints, state.currentMode === 'composite' ? 'mixed' : 'self');
   });
   ui.next.addEventListener('click', advanceQuestion);
+  ui.previous.addEventListener('click', function () { navigateQuestion(state.index - 1); });
+  ui.finish.addEventListener('click', finishQuiz);
+  ui.resume.addEventListener('click', function () { resumeQuiz(); });
+  ui.questionGrid.addEventListener('click', function (event) {
+    const button = event.target.closest('[data-question-index]');
+    if (button) navigateQuestion(Number(button.dataset.questionIndex));
+  });
+  ui.reviewList.addEventListener('click', function (event) {
+    const button = event.target.closest('[data-review-index]');
+    if (button) resumeQuiz(Number(button.dataset.reviewIndex));
+  });
+  function saveEditedDraft() { saveQuestionDraft(); updateNavigation(); }
+  ui.choiceList.addEventListener('click', function () { if (!ui.submit.disabled) saveEditedDraft(); });
+  ui.questionContent.addEventListener('input', saveEditedDraft);
+  ui.questionContent.addEventListener('click', function (event) {
+    if (event.target.closest('[data-composite-choice]') && !ui.submit.disabled) saveEditedDraft();
+  });
   ui.skip.addEventListener('click', skipCurrentQuestion);
   ui.abandon.addEventListener('click', resetToSetup);
   ui.retry.addEventListener('click', resetToSetup);
