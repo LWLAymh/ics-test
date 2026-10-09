@@ -180,19 +180,51 @@
     },
     {
       "start": 302,
-      "end": 326,
+      "end": 320,
       "module": "ECF and System IO",
-      "qno": "第16/17讲 23",
-      "note": "fork 程序的输出次数与输出顺序判断",
+      "qno": "第16/17讲 23 (1)",
+      "note": "fork 程序输出 D 的次数",
       "curated": "阶段测验/2025第2次阶段测验-带答案/302.md"
     },
     {
+      "start": 325,
+      "end": 325,
+      "module": "ECF and System IO",
+      "qno": "第16/17讲 23 (2)",
+      "note": "fork 后 B 与 C 的输出顺序",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/325.md"
+    },
+    {
+      "start": 326,
+      "end": 326,
+      "module": "ECF and System IO",
+      "qno": "第16/17讲 23 (3)",
+      "note": "判断给定并发输出序列是否可能",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/326.md"
+    },
+    {
       "start": 327,
+      "end": 358,
+      "module": "ECF and System IO",
+      "qno": "第16/17讲 24 (1)",
+      "note": "含 fork/wait/sleep 的程序进程数",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/327.md"
+    },
+    {
+      "start": 359,
+      "end": 359,
+      "module": "ECF and System IO",
+      "qno": "第16/17讲 24 (2)",
+      "note": "程序输出总行数",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/359.md"
+    },
+    {
+      "start": 360,
       "end": 361,
       "module": "ECF and System IO",
-      "qno": "第16/17讲 24",
-      "note": "含 fork/wait/sleep 的程序进程数与输出行数",
-      "curated": "阶段测验/2025第2次阶段测验-带答案/327.md"
+      "qno": "第16/17讲 24 (3)",
+      "note": "程序最后一行输出",
+      "curated": "阶段测验/2025第2次阶段测验-带答案/360.md"
     }
   ],
   "answer_sections": [],

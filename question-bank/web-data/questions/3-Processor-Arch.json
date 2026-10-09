@@ -239,7 +239,7 @@
       "exam": "2013期中",
       "questionNo": "选择题 11-13",
       "summary": "Y86 PIPE 数据冒险/转发信号判断",
-      "content": " (11-13)、在教材所描述的流水线处理器（the PIPE processor）上分别运行如下四段\nY86程序代码。请分析其中数据冒险的具体情况，并回答后续3个小题。\n\n```\n#Program 1:\nmrmovl  8(%ebx), %edx\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 2:\nmrmovl  8(%ebx), %edx\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 3:\nmrmovl  8(%ebx), %edx\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 4:\nmrmovl  8(%ebx), %edx\nnop\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n11、对于每段程序，请指出是否会因为数据冒险导致流水线停顿（Stall）。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. Stall     B. No-Stall\n\n12、对于每段程序，请指出流水线处理器内是否会产生数据转发（Forwarding）。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. Forwarding     B. No-Forwarding\n\n13、对于每段程序，请指出流水线处理器内使用哪个信号进行数据转发，如果不进行\n数据转发，则用none表示。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. m_valM     B. W_valM     C. none\n答案： A, B, B, B\n12）解答：A, A, A, B\n13）解答：A, A, B, C",
+      "content": " (11-13)、在教材所描述的流水线处理器（the PIPE processor）上分别运行如下四段\nY86程序代码。请分析其中数据冒险的具体情况，并回答后续3个小题。\n\n```\n#Program 1:\nmrmovl  8(%ebx), %edx\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 2:\nmrmovl  8(%ebx), %edx\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 3:\nmrmovl  8(%ebx), %edx\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 4:\nmrmovl  8(%ebx), %edx\nnop\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n11、对于每段程序，请指出是否会因为数据冒险导致流水线停顿（Stall）。\nProgram 1：{{blank:stall-p1}}，Program 2：{{blank:stall-p2}}，Program 3：{{blank:stall-p3}}，Program 4：\n{{blank:stall-p4}}；\nA. Stall     B. No-Stall\n\n12、对于每段程序，请指出流水线处理器内是否会产生数据转发（Forwarding）。\nProgram 1：{{blank:forwarding-p1}}，Program 2：{{blank:forwarding-p2}}，Program 3：{{blank:forwarding-p3}}，Program 4：\n{{blank:forwarding-p4}}；\nA. Forwarding     B. No-Forwarding\n\n13、对于每段程序，请指出流水线处理器内使用哪个信号进行数据转发，如果不进行\n数据转发，则用none表示。\nProgram 1：{{blank:signal-p1}}，Program 2：{{blank:signal-p2}}，Program 3：{{blank:signal-p3}}，Program 4：\n{{blank:signal-p4}}；\nA. m_valM     B. W_valM     C. none\n11）A、B、B、B\n12）A、A、A、B\n13）A、A、B、C",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -257,20 +257,216 @@
         "curated": "_curated/期中/2013期中-带答案/107.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": " (11-13)、在教材所描述的流水线处理器（the PIPE processor）上分别运行如下四段\nY86程序代码。请分析其中数据冒险的具体情况，并回答后续3个小题。\n\n```\n#Program 1:\nmrmovl  8(%ebx), %edx\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 2:\nmrmovl  8(%ebx), %edx\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 3:\nmrmovl  8(%ebx), %edx\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 4:\nmrmovl  8(%ebx), %edx\nnop\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n11、对于每段程序，请指出是否会因为数据冒险导致流水线停顿（Stall）。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. Stall     B. No-Stall\n\n12、对于每段程序，请指出流水线处理器内是否会产生数据转发（Forwarding）。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. Forwarding     B. No-Forwarding\n\n13、对于每段程序，请指出流水线处理器内使用哪个信号进行数据转发，如果不进行\n数据转发，则用none表示。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. m_valM     B. W_valM     C. none",
+        "stem": " (11-13)、在教材所描述的流水线处理器（the PIPE processor）上分别运行如下四段\nY86程序代码。请分析其中数据冒险的具体情况，并回答后续3个小题。\n\n```\n#Program 1:\nmrmovl  8(%ebx), %edx\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 2:\nmrmovl  8(%ebx), %edx\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 3:\nmrmovl  8(%ebx), %edx\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 4:\nmrmovl  8(%ebx), %edx\nnop\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n11、对于每段程序，请指出是否会因为数据冒险导致流水线停顿（Stall）。\nProgram 1：{{blank:stall-p1}}，Program 2：{{blank:stall-p2}}，Program 3：{{blank:stall-p3}}，Program 4：\n{{blank:stall-p4}}；\nA. Stall     B. No-Stall\n\n12、对于每段程序，请指出流水线处理器内是否会产生数据转发（Forwarding）。\nProgram 1：{{blank:forwarding-p1}}，Program 2：{{blank:forwarding-p2}}，Program 3：{{blank:forwarding-p3}}，Program 4：\n{{blank:forwarding-p4}}；\nA. Forwarding     B. No-Forwarding\n\n13、对于每段程序，请指出流水线处理器内使用哪个信号进行数据转发，如果不进行\n数据转发，则用none表示。\nProgram 1：{{blank:signal-p1}}，Program 2：{{blank:signal-p2}}，Program 3：{{blank:signal-p3}}，Program 4：\n{{blank:signal-p4}}；\nA. m_valM     B. W_valM     C. none",
         "choices": [],
-        "answer": "答案： A, B, B, B\n12）解答：A, A, A, B\n13）解答：A, A, B, C"
+        "answer": "11）A、B、B、B\n12）A、A、A、B\n13）A、A、B、C",
+        "blankAnswers": [
+          {
+            "id": "stall-p1",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stall-p2",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stall-p3",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stall-p4",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "forwarding-p1",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "forwarding-p2",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "forwarding-p3",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "forwarding-p4",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "signal-p1",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "signal-p2",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "signal-p3",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "signal-p4",
+            "acceptedAnswers": [
+              "C"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "stall-p1",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stall-p2",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stall-p3",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stall-p4",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "forwarding-p1",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "forwarding-p2",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "forwarding-p3",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "forwarding-p4",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "signal-p1",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "signal-p2",
+            "acceptedAnswers": [
+              "A"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "signal-p3",
+            "acceptedAnswers": [
+              "B"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "signal-p4",
+            "acceptedAnswers": [
+              "C"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": " (11-13)、在教材所描述的流水线处理器（the PIPE processor）上分别运行如下四段\nY86程序代码。请分析其中数据冒险的具体情况，并回答后续3个小题。\n\n```\n#Program 1:\nmrmovl  8(%ebx), %edx\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 2:\nmrmovl  8(%ebx), %edx\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 3:\nmrmovl  8(%ebx), %edx\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 4:\nmrmovl  8(%ebx), %edx\nnop\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n11、对于每段程序，请指出是否会因为数据冒险导致流水线停顿（Stall）。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. Stall     B. No-Stall\n\n12、对于每段程序，请指出流水线处理器内是否会产生数据转发（Forwarding）。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. Forwarding     B. No-Forwarding\n\n13、对于每段程序，请指出流水线处理器内使用哪个信号进行数据转发，如果不进行\n数据转发，则用none表示。\nProgram 1：（   ），Program 2：（   ），Program 3：（   ），Program 4：\n（   ）；\nA. m_valM     B. W_valM     C. none",
-        "answer": "答案： A, B, B, B\n12）解答：A, A, A, B\n13）解答：A, A, B, C"
+        "prompt": " (11-13)、在教材所描述的流水线处理器（the PIPE processor）上分别运行如下四段\nY86程序代码。请分析其中数据冒险的具体情况，并回答后续3个小题。\n\n```\n#Program 1:\nmrmovl  8(%ebx), %edx\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 2:\nmrmovl  8(%ebx), %edx\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 3:\nmrmovl  8(%ebx), %edx\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n```\n#Program 4:\nmrmovl  8(%ebx), %edx\nnop\nnop\nnop\nrmmovl  %edx, 16(%ecx)\n```\n11、对于每段程序，请指出是否会因为数据冒险导致流水线停顿（Stall）。\nProgram 1：{{blank:stall-p1}}，Program 2：{{blank:stall-p2}}，Program 3：{{blank:stall-p3}}，Program 4：\n{{blank:stall-p4}}；\nA. Stall     B. No-Stall\n\n12、对于每段程序，请指出流水线处理器内是否会产生数据转发（Forwarding）。\nProgram 1：{{blank:forwarding-p1}}，Program 2：{{blank:forwarding-p2}}，Program 3：{{blank:forwarding-p3}}，Program 4：\n{{blank:forwarding-p4}}；\nA. Forwarding     B. No-Forwarding\n\n13、对于每段程序，请指出流水线处理器内使用哪个信号进行数据转发，如果不进行\n数据转发，则用none表示。\nProgram 1：{{blank:signal-p1}}，Program 2：{{blank:signal-p2}}，Program 3：{{blank:signal-p3}}，Program 4：\n{{blank:signal-p4}}；\nA. m_valM     B. W_valM     C. none",
+        "answer": "11）A、B、B、B\n12）A、A、A、B\n13）A、A、B、C"
       },
       "presentation": {
         "status": "ready",
@@ -313,14 +509,25 @@
         "choices": [],
         "answer": "答案：吞吐率 = 1000/(280 + 20) = 1000/300 = 3.33 GIPS"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "第五题（9分）\n\n![四级流水线各流水级的工作内容和延迟](assets/期中/2013期中-带答案/p10-pipeline-structure.png)\n\n在“取指-译码-执行-写回”的四级流水线中，各流水级的工作内容和延迟如上图所示，寄存器的延迟\n也已标出。数据和指令分别存放在不同的存储器中。Cycle N写入寄存器文件的数据Cycle N+1才可读出。\n请问：\n1）若不考虑流水线填充和清空时间，请计算该处理器的吞吐率。（1分）",
         "answer": "答案：吞吐率 = 1000/(280 + 20) = 1000/300 = 3.33 GIPS"
+      },
+      "group": {
+        "id": "p-d0ae6162300a90de:2013-mid-q5",
+        "questionId": "q-d167b837a24ec9b4",
+        "title": "第五题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -361,14 +568,25 @@
         "choices": [],
         "answer": "答案：吞吐率 = 1000/(80 + 60 + 280 + 60 + 20) = 1000/500 = 2 GIPS"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2）若将该处理器改造为单周期处理器（SEQ），请计算SEQ处理器的吞吐率。（1分）",
         "answer": "答案：吞吐率 = 1000/(80 + 60 + 280 + 60 + 20) = 1000/500 = 2 GIPS"
+      },
+      "group": {
+        "id": "p-d0ae6162300a90de:2013-mid-q5",
+        "questionId": "q-d167b837a24ec9b4",
+        "title": "第五题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -385,7 +603,7 @@
       "exam": "2013期中",
       "questionNo": "第五题 3)",
       "summary": "Y86 程序段的数据相关与冒险",
-      "content": "3）在上述流水线中，执行阶段包含了访问数据存储的时间。对于如下的Y86程序段，指令间存在哪些数据\n相关（dependence），会引起哪些数据冒险（hazard）？（5分）\nProg:\n```\nirmovl$128, %edx    #instr1\nirmovl$3, %ecx      #instr2\n```\nrmmovl  %ecx, 0(%edx)  #instr3\n```\nirmovl$10, %ebx   #instr4\n```\nmrmovl  0(%edx), %eax  #instr5\n```\naddl    %ebx, %eax    #instr6\n```\n答案：各指令的含义（原卷红色标注）：1、dx = 128；2、cx = 3；3、[dx] = cx；4、bx = 10；5、ax = [dx]；6、bx = bx + ax。\n\n数据相关（dependence）：1-3、2-3、1-5、4-6、5-6\n\n数据冒险（hazard）：1-3、2-3、4-6、5-6",
+      "content": "3）在上述流水线中，执行阶段包含了访问数据存储的时间。对于如下的Y86程序段，指令间存在哪些数据\n相关（dependence），会引起哪些数据冒险（hazard）？（5分）\nProg:\n```asm\nirmovl $128, %edx       # instr1\nirmovl $3, %ecx         # instr2\nrmmovl %ecx, 0(%edx)    # instr3\nirmovl $10, %ebx        # instr4\nmrmovl 0(%edx), %eax    # instr5\naddl %ebx, %eax         # instr6\n```\n答案：各指令的含义（原卷红色标注）：1、dx = 128；2、cx = 3；3、[dx] = cx；4、bx = 10；5、ax = [dx]；6、bx = bx + ax。\n\n数据相关（dependence）：1-3、2-3、1-5、4-6、5-6\n\n数据冒险（hazard）：1-3、2-3、4-6、5-6",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -405,18 +623,29 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "3）在上述流水线中，执行阶段包含了访问数据存储的时间。对于如下的Y86程序段，指令间存在哪些数据\n相关（dependence），会引起哪些数据冒险（hazard）？（5分）\nProg:\n```\nirmovl$128, %edx    #instr1\nirmovl$3, %ecx      #instr2\n```\nrmmovl  %ecx, 0(%edx)  #instr3\n```\nirmovl$10, %ebx   #instr4\n```\nmrmovl  0(%edx), %eax  #instr5\n```\naddl    %ebx, %eax    #instr6\n```",
+        "stem": "3）在上述流水线中，执行阶段包含了访问数据存储的时间。对于如下的Y86程序段，指令间存在哪些数据\n相关（dependence），会引起哪些数据冒险（hazard）？（5分）\nProg:\n```asm\nirmovl $128, %edx       # instr1\nirmovl $3, %ecx         # instr2\nrmmovl %ecx, 0(%edx)    # instr3\nirmovl $10, %ebx        # instr4\nmrmovl 0(%edx), %eax    # instr5\naddl %ebx, %eax         # instr6\n```",
         "choices": [],
         "answer": "答案：各指令的含义（原卷红色标注）：1、dx = 128；2、cx = 3；3、[dx] = cx；4、bx = 10；5、ax = [dx]；6、bx = bx + ax。\n\n数据相关（dependence）：1-3、2-3、1-5、4-6、5-6\n\n数据冒险（hazard）：1-3、2-3、4-6、5-6"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
+      },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3）在上述流水线中，执行阶段包含了访问数据存储的时间。对于如下的Y86程序段，指令间存在哪些数据\n相关（dependence），会引起哪些数据冒险（hazard）？（5分）\nProg:\n```\nirmovl$128, %edx    #instr1\nirmovl$3, %ecx      #instr2\n```\nrmmovl  %ecx, 0(%edx)  #instr3\n```\nirmovl$10, %ebx   #instr4\n```\nmrmovl  0(%edx), %eax  #instr5\n```\naddl    %ebx, %eax    #instr6\n```",
+        "prompt": "3）在上述流水线中，执行阶段包含了访问数据存储的时间。对于如下的Y86程序段，指令间存在哪些数据\n相关（dependence），会引起哪些数据冒险（hazard）？（5分）\nProg:\n```asm\nirmovl $128, %edx       # instr1\nirmovl $3, %ecx         # instr2\nrmmovl %ecx, 0(%edx)    # instr3\nirmovl $10, %ebx        # instr4\nmrmovl 0(%edx), %eax    # instr5\naddl %ebx, %eax         # instr6\n```",
         "answer": "答案：各指令的含义（原卷红色标注）：1、dx = 128；2、cx = 3；3、[dx] = cx；4、bx = 10；5、ax = [dx]；6、bx = bx + ax。\n\n数据相关（dependence）：1-3、2-3、1-5、4-6、5-6\n\n数据冒险（hazard）：1-3、2-3、4-6、5-6"
+      },
+      "group": {
+        "id": "p-d0ae6162300a90de:2013-mid-q5",
+        "questionId": "q-d167b837a24ec9b4",
+        "title": "第五题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -433,17 +662,9 @@
       "exam": "2013期中",
       "questionNo": "第五题 4)",
       "summary": "转发通路解决方案（含答案与流水线结构图）",
-      "content": "![四级流水线各流水级的工作内容和延迟](assets/期中/2013期中-带答案/p10-pipeline-structure.png)\n\n4）以上的数据冒险，可以通过转发（forward）的方法解决。请结合上述程序代码和流水线结构图逐个说明\n解决方案。（2分）\n答案：\n1）1000/(280 + 20) = 1000/300 = 3.33GIPS\n2）1000/(80 +60 +280 + 60 +20) = 1000/ 500 = 2 GIPS\n3）\nProg：\nirmovl`$128`, %edx     ; 1、dx= 128\nirmovl`$3`, %ecx      ; 2、cx= 3\nrmmovl  %ecx, 0(%edx)  ; 3、[dx] = cx\nirmovl`$10`, %ebx   ; 4、bx= 10\nmrmovl  0(%edx), %eax  ; 5、ax= [dx]\naddl    %ebx, %eax    ; 6、bx = bx + ax\n相关：1-3，2-3, 1-5，4-6，5-6\n冒险：1-3，2-3，4-6，5-6\n4）2-3，5-6：执行到译码的转发通路解决；1-3,4-6：写回到译码的转发通路解决。\n10\n\n![图](assets/期中/2013期中-带答案/p10-img9.jpg)\n![图](assets/期中/2013期中-带答案/p10-img10.jpg)\n![图](assets/期中/2013期中-带答案/p10-img11.jpg)\n![图](assets/期中/2013期中-带答案/p10-img12.jpg)\n![图](assets/期中/2013期中-带答案/p10-img13.jpg)\n![图](assets/期中/2013期中-带答案/p10-img14.jpg)\n![图](assets/期中/2013期中-带答案/p10-img15.jpg)\n![图](assets/期中/2013期中-带答案/p10-img16.jpg)",
+      "content": "![四级流水线各流水级的工作内容和延迟](assets/期中/2013期中-带答案/p10-pipeline-structure.png)\n\n4）以上的数据冒险，可以通过转发（forward）的方法解决。请结合上述程序代码和流水线结构图逐个说明\n解决方案。（2分）\n答案：\n2）2-3和5-6通过执行阶段到译码阶段的转发通路解决；1-3和4-6通过写回阶段到译码阶段的转发通路解决。",
       "assets": [
-        "assets/期中/2013期中-带答案/p10-pipeline-structure.png",
-        "assets/期中/2013期中-带答案/p10-img9.jpg",
-        "assets/期中/2013期中-带答案/p10-img10.jpg",
-        "assets/期中/2013期中-带答案/p10-img11.jpg",
-        "assets/期中/2013期中-带答案/p10-img12.jpg",
-        "assets/期中/2013期中-带答案/p10-img13.jpg",
-        "assets/期中/2013期中-带答案/p10-img14.jpg",
-        "assets/期中/2013期中-带答案/p10-img15.jpg",
-        "assets/期中/2013期中-带答案/p10-img16.jpg"
+        "assets/期中/2013期中-带答案/p10-pipeline-structure.png"
       ],
       "formatted": true,
       "answer": {
@@ -465,16 +686,27 @@
         "selection": null,
         "stem": "![四级流水线各流水级的工作内容和延迟](assets/期中/2013期中-带答案/p10-pipeline-structure.png)\n\n4）以上的数据冒险，可以通过转发（forward）的方法解决。请结合上述程序代码和流水线结构图逐个说明\n解决方案。（2分）",
         "choices": [],
-        "answer": "答案：\n1）1000/(280 + 20) = 1000/300 = 3.33GIPS\n2）1000/(80 +60 +280 + 60 +20) = 1000/ 500 = 2 GIPS\n3）\nProg：\nirmovl`$128`, %edx     ; 1、dx= 128\nirmovl`$3`, %ecx      ; 2、cx= 3\nrmmovl  %ecx, 0(%edx)  ; 3、[dx] = cx\nirmovl`$10`, %ebx   ; 4、bx= 10\nmrmovl  0(%edx), %eax  ; 5、ax= [dx]\naddl    %ebx, %eax    ; 6、bx = bx + ax\n相关：1-3，2-3, 1-5，4-6，5-6\n冒险：1-3，2-3，4-6，5-6\n4）2-3，5-6：执行到译码的转发通路解决；1-3,4-6：写回到译码的转发通路解决。\n10\n\n![图](assets/期中/2013期中-带答案/p10-img9.jpg)\n![图](assets/期中/2013期中-带答案/p10-img10.jpg)\n![图](assets/期中/2013期中-带答案/p10-img11.jpg)\n![图](assets/期中/2013期中-带答案/p10-img12.jpg)\n![图](assets/期中/2013期中-带答案/p10-img13.jpg)\n![图](assets/期中/2013期中-带答案/p10-img14.jpg)\n![图](assets/期中/2013期中-带答案/p10-img15.jpg)\n![图](assets/期中/2013期中-带答案/p10-img16.jpg)"
+        "answer": "答案：\n2）2-3和5-6通过执行阶段到译码阶段的转发通路解决；1-3和4-6通过写回阶段到译码阶段的转发通路解决。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "![四级流水线各流水级的工作内容和延迟](assets/期中/2013期中-带答案/p10-pipeline-structure.png)\n\n4）以上的数据冒险，可以通过转发（forward）的方法解决。请结合上述程序代码和流水线结构图逐个说明\n解决方案。（2分）",
-        "answer": "答案：\n1）1000/(280 + 20) = 1000/300 = 3.33GIPS\n2）1000/(80 +60 +280 + 60 +20) = 1000/ 500 = 2 GIPS\n3）\nProg：\nirmovl`$128`, %edx     ; 1、dx= 128\nirmovl`$3`, %ecx      ; 2、cx= 3\nrmmovl  %ecx, 0(%edx)  ; 3、[dx] = cx\nirmovl`$10`, %ebx   ; 4、bx= 10\nmrmovl  0(%edx), %eax  ; 5、ax= [dx]\naddl    %ebx, %eax    ; 6、bx = bx + ax\n相关：1-3，2-3, 1-5，4-6，5-6\n冒险：1-3，2-3，4-6，5-6\n4）2-3，5-6：执行到译码的转发通路解决；1-3,4-6：写回到译码的转发通路解决。\n10\n\n![图](assets/期中/2013期中-带答案/p10-img9.jpg)\n![图](assets/期中/2013期中-带答案/p10-img10.jpg)\n![图](assets/期中/2013期中-带答案/p10-img11.jpg)\n![图](assets/期中/2013期中-带答案/p10-img12.jpg)\n![图](assets/期中/2013期中-带答案/p10-img13.jpg)\n![图](assets/期中/2013期中-带答案/p10-img14.jpg)\n![图](assets/期中/2013期中-带答案/p10-img15.jpg)\n![图](assets/期中/2013期中-带答案/p10-img16.jpg)"
+        "answer": "答案：\n2）2-3和5-6通过执行阶段到译码阶段的转发通路解决；1-3和4-6通过写回阶段到译码阶段的转发通路解决。"
+      },
+      "group": {
+        "id": "p-d0ae6162300a90de:2013-mid-q5",
+        "questionId": "q-d167b837a24ec9b4",
+        "title": "第五题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -1031,7 +1263,7 @@
       "exam": "2015期中",
       "questionNo": "选择题 12",
       "summary": "组合逻辑+寄存器的最短延时与吞吐",
-      "content": "12. 一个功能模块包含组合逻辑和寄存器，组合逻辑单元的总延迟是 100ps，单\n个寄存器的延时是20ps，该功能模块执行一次并保存执行结果，理论上能达\n到的最短延时和最大吞吐分别是多少？\nA. 20ns, 50GIPS\nB. 120ns，50GIPS\nC. 120ns，10GIPS\nD. 20ps,10GIPS\n答案：B，主要考察延时和吞吐的区别，延时最小是 logic + 1 个 register，\n吞吐最高时是把 logic 划分成无穷多份， 每一级需要 20ps, 1000/20ps =\n50GIPS",
+      "content": "12. 一个功能模块包含组合逻辑和寄存器，组合逻辑单元的总延迟是 100ps，单\n个寄存器的延时是20ps，该功能模块执行一次并保存执行结果，理论上能达\n到的最短延时和最大吞吐分别是多少？\nA. 20ns, 50GIPS\nB. 120ps，50GIPS（原卷此选项单位误作 ns）\nC. 120ns，10GIPS\nD. 20ps,10GIPS\n答案：B，主要考察延时和吞吐的区别，延时最小是 logic + 1 个 register，\n吞吐最高时是把 logic 划分成无穷多份， 每一级需要 20ps, 1000/20ps =\n50GIPS",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1061,7 +1293,7 @@
           },
           {
             "key": "B",
-            "content": "120ns，50GIPS"
+            "content": "120ps，50GIPS（原卷此选项单位误作 ns）"
           },
           {
             "key": "C",
@@ -1084,7 +1316,7 @@
           },
           {
             "id": "B",
-            "content": "120ns，50GIPS"
+            "content": "120ps，50GIPS（原卷此选项单位误作 ns）"
           },
           {
             "id": "C",
@@ -1297,7 +1529,7 @@
       "exam": "2015期中",
       "questionNo": "第四题 1",
       "summary": "新增 NewJE 指令在 SEQ 各阶段的操作",
-      "content": "第四题（20分）\n请分析Y86 ISA中新加入的一条指令：NewJE，其格式如下。\nNewJE  C  0  rA  rB  Dest\n其功能为：如果R[rA]= R[rB]，则跳转到Dest继续执行，否则顺序执行。\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\n```\n（红字处每行1分，共5分）\n答案：NewJE rA, rB, Dest 在 SEQ 各阶段的操作（红字处每行 1 分，共 5 分）：\n\nStage  NewJE rA, rB, Dest\nicode:ifun  M1[PC]\nFetch  rA:rB  M1[PC+1]\nvalC  M4[PC+2]\nvalP  PC+6\nvalA  R[rA]\nDecode  valB  R[rB]\nvalE  valA – valB\n```\nExecute  （注：也可以是valB - valA）\n```\nMemory  none\nWrite back  none\nPC update  PC  valE==0 ? valC : valP",
+      "content": "第四题（20分）\n请分析Y86 ISA中新加入的一条指令：NewJE，其格式如下。\nNewJE  C  0  rA  rB  Dest\n其功能为：如果R[rA]= R[rB]，则跳转到Dest继续执行，否则顺序执行。\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n请填写各阶段操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | ______ |\n| Decode | ______ |\n| Execute | ______ |\n| Memory | ______ |\n| Write back | ______ |\n| PC update | ______ |\n答案：NewJE rA, rB, Dest 在 SEQ 各阶段的操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`; `rA:rB ← M1[PC+1]`; `valC ← M4[PC+2]`; `valP ← PC+6` |\n| Decode | `valA ← R[rA]`; `valB ← R[rB]`; `valE ← valA − valB` |\n| Execute | none |\n| Memory | none |\n| Write back | none |\n| PC update | `PC ← (valE == 0) ? valC : valP` |\n\nExecute 中比较也可以写成 `valB − valA`，因为这里只检查结果是否为 0。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1319,9 +1551,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "第四题（20分）\n请分析Y86 ISA中新加入的一条指令：NewJE，其格式如下。\nNewJE  C  0  rA  rB  Dest\n其功能为：如果R[rA]= R[rB]，则跳转到Dest继续执行，否则顺序执行。\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\n```\n（红字处每行1分，共5分）",
+        "stem": "第四题（20分）\n请分析Y86 ISA中新加入的一条指令：NewJE，其格式如下。\nNewJE  C  0  rA  rB  Dest\n其功能为：如果R[rA]= R[rB]，则跳转到Dest继续执行，否则顺序执行。\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n请填写各阶段操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | ______ |\n| Decode | ______ |\n| Execute | ______ |\n| Memory | ______ |\n| Write back | ______ |\n| PC update | ______ |",
         "choices": [],
-        "answer": "答案：NewJE rA, rB, Dest 在 SEQ 各阶段的操作（红字处每行 1 分，共 5 分）：\n\nStage  NewJE rA, rB, Dest\nicode:ifun  M1[PC]\nFetch  rA:rB  M1[PC+1]\nvalC  M4[PC+2]\nvalP  PC+6\nvalA  R[rA]\nDecode  valB  R[rB]\nvalE  valA – valB\n```\nExecute  （注：也可以是valB - valA）\n```\nMemory  none\nWrite back  none\nPC update  PC  valE==0 ? valC : valP"
+        "answer": "答案：NewJE rA, rB, Dest 在 SEQ 各阶段的操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`; `rA:rB ← M1[PC+1]`; `valC ← M4[PC+2]`; `valP ← PC+6` |\n| Decode | `valA ← R[rA]`; `valB ← R[rB]`; `valE ← valA − valB` |\n| Execute | none |\n| Memory | none |\n| Write back | none |\n| PC update | `PC ← (valE == 0) ? valC : valP` |\n\nExecute 中比较也可以写成 `valB − valA`，因为这里只检查结果是否为 0。"
       },
       "interaction": {
         "kind": "short-answer",
@@ -1329,8 +1561,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题（20分）\n请分析Y86 ISA中新加入的一条指令：NewJE，其格式如下。\nNewJE  C  0  rA  rB  Dest\n其功能为：如果R[rA]= R[rB]，则跳转到Dest继续执行，否则顺序执行。\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\n```\n（红字处每行1分，共5分）",
-        "answer": "答案：NewJE rA, rB, Dest 在 SEQ 各阶段的操作（红字处每行 1 分，共 5 分）：\n\nStage  NewJE rA, rB, Dest\nicode:ifun  M1[PC]\nFetch  rA:rB  M1[PC+1]\nvalC  M4[PC+2]\nvalP  PC+6\nvalA  R[rA]\nDecode  valB  R[rB]\nvalE  valA – valB\n```\nExecute  （注：也可以是valB - valA）\n```\nMemory  none\nWrite back  none\nPC update  PC  valE==0 ? valC : valP"
+        "prompt": "第四题（20分）\n请分析Y86 ISA中新加入的一条指令：NewJE，其格式如下。\nNewJE  C  0  rA  rB  Dest\n其功能为：如果R[rA]= R[rB]，则跳转到Dest继续执行，否则顺序执行。\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n请填写各阶段操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | ______ |\n| Decode | ______ |\n| Execute | ______ |\n| Memory | ______ |\n| Write back | ______ |\n| PC update | ______ |",
+        "answer": "答案：NewJE rA, rB, Dest 在 SEQ 各阶段的操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`; `rA:rB ← M1[PC+1]`; `valC ← M4[PC+2]`; `valP ← PC+6` |\n| Decode | `valA ← R[rA]`; `valB ← R[rB]`; `valE ← valA − valB` |\n| Execute | none |\n| Memory | none |\n| Write back | none |\n| PC update | `PC ← (valE == 0) ? valC : valP` |\n\nExecute 中比较也可以写成 `valB − valA`，因为这里只检查结果是否为 0。"
       },
       "presentation": {
         "status": "ready",
@@ -1347,7 +1579,7 @@
       "exam": "2015期中",
       "questionNo": "第四题 2",
       "summary": "PIPE 中跳转条件不满足时错误执行条数",
-      "content": "2.若在教材所描述的PIPE处理器上执行NewJE指令，如果跳转条件不满足，一共\n\n\n会错误执行______条指令。\n为了减小错误预测的代价，现将教材所描述的PIPE处理器做如下改进：在\nDecode阶段增加一个比较器，用于判断（R[rA] = R[rB]）条件，比较器的输\n出信号为d_equal。如果相等，则d_equal = 1，反之 d_equal = 0。\n此时，如果执行NewJE指令时跳转条件不满足，一共会错误执行______条指令。\n（每空1分，共2分）\n答案：如果跳转条件不满足，一共会错误执行 2 条指令；在 Decode 阶段增加比较器（输出 d_equal）后，一共会错误执行 1 条指令。",
+      "content": "2. 若在教材所描述的 PIPE 处理器上执行 NewJE 指令，如果跳转条件不满足，一共会错误执行{{blank:original-pipe}}条指令。\n为了减小错误预测的代价，现将教材所描述的PIPE处理器做如下改进：在\nDecode阶段增加一个比较器，用于判断（R[rA] = R[rB]）条件，比较器的输\n出信号为d_equal。如果相等，则d_equal = 1，反之 d_equal = 0。\n此时，如果执行 NewJE 指令时跳转条件不满足，一共会错误执行{{blank:decode-compare}}条指令。\n（每空1分，共2分）\n答案：如果跳转条件不满足，一共会错误执行 2 条指令；在 Decode 阶段增加比较器（输出 d_equal）后，一共会错误执行 1 条指令。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1369,17 +1601,53 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2.若在教材所描述的PIPE处理器上执行NewJE指令，如果跳转条件不满足，一共\n\n\n会错误执行______条指令。\n为了减小错误预测的代价，现将教材所描述的PIPE处理器做如下改进：在\nDecode阶段增加一个比较器，用于判断（R[rA] = R[rB]）条件，比较器的输\n出信号为d_equal。如果相等，则d_equal = 1，反之 d_equal = 0。\n此时，如果执行NewJE指令时跳转条件不满足，一共会错误执行______条指令。\n（每空1分，共2分）",
+        "stem": "2. 若在教材所描述的 PIPE 处理器上执行 NewJE 指令，如果跳转条件不满足，一共会错误执行{{blank:original-pipe}}条指令。\n为了减小错误预测的代价，现将教材所描述的PIPE处理器做如下改进：在\nDecode阶段增加一个比较器，用于判断（R[rA] = R[rB]）条件，比较器的输\n出信号为d_equal。如果相等，则d_equal = 1，反之 d_equal = 0。\n此时，如果执行 NewJE 指令时跳转条件不满足，一共会错误执行{{blank:decode-compare}}条指令。\n（每空1分，共2分）",
         "choices": [],
-        "answer": "答案：如果跳转条件不满足，一共会错误执行 2 条指令；在 Decode 阶段增加比较器（输出 d_equal）后，一共会错误执行 1 条指令。"
+        "answer": "答案：如果跳转条件不满足，一共会错误执行 2 条指令；在 Decode 阶段增加比较器（输出 d_equal）后，一共会错误执行 1 条指令。",
+        "blankAnswers": [
+          {
+            "id": "original-pipe",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "decode-compare",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "original-pipe",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "decode-compare",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.若在教材所描述的PIPE处理器上执行NewJE指令，如果跳转条件不满足，一共\n\n\n会错误执行______条指令。\n为了减小错误预测的代价，现将教材所描述的PIPE处理器做如下改进：在\nDecode阶段增加一个比较器，用于判断（R[rA] = R[rB]）条件，比较器的输\n出信号为d_equal。如果相等，则d_equal = 1，反之 d_equal = 0。\n此时，如果执行NewJE指令时跳转条件不满足，一共会错误执行______条指令。\n（每空1分，共2分）",
+        "prompt": "2. 若在教材所描述的 PIPE 处理器上执行 NewJE 指令，如果跳转条件不满足，一共会错误执行{{blank:original-pipe}}条指令。\n为了减小错误预测的代价，现将教材所描述的PIPE处理器做如下改进：在\nDecode阶段增加一个比较器，用于判断（R[rA] = R[rB]）条件，比较器的输\n出信号为d_equal。如果相等，则d_equal = 1，反之 d_equal = 0。\n此时，如果执行 NewJE 指令时跳转条件不满足，一共会错误执行{{blank:decode-compare}}条指令。\n（每空1分，共2分）",
         "answer": "答案：如果跳转条件不满足，一共会错误执行 2 条指令；在 Decode 阶段增加比较器（输出 d_equal）后，一共会错误执行 1 条指令。"
       },
       "presentation": {
@@ -1397,7 +1665,7 @@
       "exam": "2015期中",
       "questionNo": "第四题 3",
       "summary": "NewJE 预测错误的判断条件与控制信号",
-      "content": "3.在教材所描述的PIPE处理器上执行JXX指令时，发生转移预测错误的判断条件\n和各级流水线寄存器的控制信号如下所示：\n```\nCondition  Trigger\nMispredicted Branch  E_icode = IJXX & !e_Cnd\nCondition  F  D  E  M  W\nMispredicted normal  bubble  bubble  normal  normal\nBranch\n```\n在第（2）小题所述的改进后的处理器上执行NewJE指令，发生转移预测错误的判\n断条件和各级流水线寄存器的控制信号应如何设置？\n（每空1分，共5分）\n答案：发生转移预测错误的判断条件和各级流水线寄存器的控制信号为\n```\nCondition  Trigger\nMispredicted Branch  D_icode = INewJE & !d_equal\nCondition  F  D  E  M  W\nMispredicted normal  bubble  normal  normal  normal\nBranch\n```\n（每空 1 分，共 5 分）",
+      "content": "3.在教材所描述的PIPE处理器上执行JXX指令时，发生转移预测错误的判断条件\n和各级流水线寄存器的控制信号如下所示：\n```\nCondition  Trigger\nMispredicted Branch  E_icode = IJXX & !e_Cnd\nCondition  F  D  E  M  W\nMispredicted normal  bubble  bubble  normal  normal\nBranch\n```\n在第（2）小题所述的改进后的处理器上执行 NewJE 指令，发生转移预测错误的判断条件和各级流水线寄存器的控制信号应如何设置？（每空 1 分，共 5 分）\n\n| Condition | Trigger |\n| --- | --- |\n| Mispredicted Branch | {{blank:trigger}} |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Mispredicted Branch | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | {{blank:memory-control}} | normal |\n答案：触发条件为 `D_icode = INewJE & !d_equal`；流水线寄存器控制信号为 F = bubble，D = normal，E = normal，M = normal，W = normal。（原卷答案表中只识别出 F 至 M 四项，W 未明确录出；按未控制时保持 normal 填入。）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1419,18 +1687,102 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3.在教材所描述的PIPE处理器上执行JXX指令时，发生转移预测错误的判断条件\n和各级流水线寄存器的控制信号如下所示：\n```\nCondition  Trigger\nMispredicted Branch  E_icode = IJXX & !e_Cnd\nCondition  F  D  E  M  W\nMispredicted normal  bubble  bubble  normal  normal\nBranch\n```\n在第（2）小题所述的改进后的处理器上执行NewJE指令，发生转移预测错误的判\n断条件和各级流水线寄存器的控制信号应如何设置？\n（每空1分，共5分）",
+        "stem": "3.在教材所描述的PIPE处理器上执行JXX指令时，发生转移预测错误的判断条件\n和各级流水线寄存器的控制信号如下所示：\n```\nCondition  Trigger\nMispredicted Branch  E_icode = IJXX & !e_Cnd\nCondition  F  D  E  M  W\nMispredicted normal  bubble  bubble  normal  normal\nBranch\n```\n在第（2）小题所述的改进后的处理器上执行 NewJE 指令，发生转移预测错误的判断条件和各级流水线寄存器的控制信号应如何设置？（每空 1 分，共 5 分）\n\n| Condition | Trigger |\n| --- | --- |\n| Mispredicted Branch | {{blank:trigger}} |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Mispredicted Branch | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | {{blank:memory-control}} | normal |",
         "choices": [],
-        "answer": "答案：发生转移预测错误的判断条件和各级流水线寄存器的控制信号为\n```\nCondition  Trigger\nMispredicted Branch  D_icode = INewJE & !d_equal\nCondition  F  D  E  M  W\nMispredicted normal  bubble  normal  normal  normal\nBranch\n```\n（每空 1 分，共 5 分）"
+        "answer": "答案：触发条件为 `D_icode = INewJE & !d_equal`；流水线寄存器控制信号为 F = bubble，D = normal，E = normal，M = normal，W = normal。（原卷答案表中只识别出 F 至 M 四项，W 未明确录出；按未控制时保持 normal 填入。）",
+        "blankAnswers": [
+          {
+            "id": "trigger",
+            "acceptedAnswers": [
+              "D_icode = INewJE & !d_equal"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fetch-control",
+            "acceptedAnswers": [
+              "bubble"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "decode-control",
+            "acceptedAnswers": [
+              "normal"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "execute-control",
+            "acceptedAnswers": [
+              "normal"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "memory-control",
+            "acceptedAnswers": [
+              "normal"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "trigger",
+            "acceptedAnswers": [
+              "D_icode = INewJE & !d_equal"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fetch-control",
+            "acceptedAnswers": [
+              "bubble"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "decode-control",
+            "acceptedAnswers": [
+              "normal"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "execute-control",
+            "acceptedAnswers": [
+              "normal"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "memory-control",
+            "acceptedAnswers": [
+              "normal"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3.在教材所描述的PIPE处理器上执行JXX指令时，发生转移预测错误的判断条件\n和各级流水线寄存器的控制信号如下所示：\n```\nCondition  Trigger\nMispredicted Branch  E_icode = IJXX & !e_Cnd\nCondition  F  D  E  M  W\nMispredicted normal  bubble  bubble  normal  normal\nBranch\n```\n在第（2）小题所述的改进后的处理器上执行NewJE指令，发生转移预测错误的判\n断条件和各级流水线寄存器的控制信号应如何设置？\n（每空1分，共5分）",
-        "answer": "答案：发生转移预测错误的判断条件和各级流水线寄存器的控制信号为\n```\nCondition  Trigger\nMispredicted Branch  D_icode = INewJE & !d_equal\nCondition  F  D  E  M  W\nMispredicted normal  bubble  normal  normal  normal\nBranch\n```\n（每空 1 分，共 5 分）"
+        "prompt": "3.在教材所描述的PIPE处理器上执行JXX指令时，发生转移预测错误的判断条件\n和各级流水线寄存器的控制信号如下所示：\n```\nCondition  Trigger\nMispredicted Branch  E_icode = IJXX & !e_Cnd\nCondition  F  D  E  M  W\nMispredicted normal  bubble  bubble  normal  normal\nBranch\n```\n在第（2）小题所述的改进后的处理器上执行 NewJE 指令，发生转移预测错误的判断条件和各级流水线寄存器的控制信号应如何设置？（每空 1 分，共 5 分）\n\n| Condition | Trigger |\n| --- | --- |\n| Mispredicted Branch | {{blank:trigger}} |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Mispredicted Branch | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | {{blank:memory-control}} | normal |",
+        "answer": "答案：触发条件为 `D_icode = INewJE & !d_equal`；流水线寄存器控制信号为 F = bubble，D = normal，E = normal，M = normal，W = normal。（原卷答案表中只识别出 F 至 M 四项，W 未明确录出；按未控制时保持 normal 填入。）"
       },
       "presentation": {
         "status": "ready",
@@ -1447,7 +1799,7 @@
       "exam": "2015期中",
       "questionNo": "第四题 4",
       "summary": "load-use 与误预测组合冒险的控制信号",
-      "content": "4.在第（2）小题所述的改进后的处理器上执行如下代码，\n```\n0x000:    mrmovl 0(%eax), %edx\n0x006:    NewJE %edx, %eax, t\n0x00c:    irmovl $1, %eax    # Fall through\n0x012:    nop\n0x013:    nop\n0x014:    nop\n0x015:    halt\n0x016: t:irmovl $3, %edx    # Target (Should not execute)\n0x01c:    irmovl $4, %ecx    # Should not execute\n0x022:    irmovl $5, %edx    # Should not execute\n```\n会发生load-use 和misprediction组合的hazard情况, 如下图所示\n\n![图](assets/期中/2015期中-带答案/p17-hazard-timing.png)\n\n请问此时，各级流水线寄存器的控制信号应如何设置？\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Combination C |  |  |  |  |  |\n\n（每空1分，共3分）\n答案：发生 load-use 和 misprediction 组合的 hazard 时（Condition = Combination C）：\nF = stall，D = stall，E = bubble，M = normal，W = normal。\n（每空 1 分，共 3 分）",
+      "content": "4.在第（2）小题所述的改进后的处理器上执行如下代码，\n```\n0x000:    mrmovl 0(%eax), %edx\n0x006:    NewJE %edx, %eax, t\n0x00c:    irmovl $1, %eax    # Fall through\n0x012:    nop\n0x013:    nop\n0x014:    nop\n0x015:    halt\n0x016: t:irmovl $3, %edx    # Target (Should not execute)\n0x01c:    irmovl $4, %ecx    # Should not execute\n0x022:    irmovl $5, %edx    # Should not execute\n```\n会发生load-use 和misprediction组合的hazard情况, 如下图所示\n\n![图](assets/期中/2015期中-带答案/p17-hazard-timing.png)\n\n请问此时，各级流水线寄存器的控制信号应如何设置？\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Combination C | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | normal | normal |\n\n（每空1分，共3分）\n答案：发生 load-use 和 misprediction 组合的 hazard 时（Condition = Combination C）：\nF = stall，D = stall，E = bubble，M = normal，W = normal。\n（每空 1 分，共 3 分）",
       "assets": [
         "assets/期中/2015期中-带答案/p17-hazard-timing.png"
       ],
@@ -1471,17 +1823,69 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "4.在第（2）小题所述的改进后的处理器上执行如下代码，\n```\n0x000:    mrmovl 0(%eax), %edx\n0x006:    NewJE %edx, %eax, t\n0x00c:    irmovl $1, %eax    # Fall through\n0x012:    nop\n0x013:    nop\n0x014:    nop\n0x015:    halt\n0x016: t:irmovl $3, %edx    # Target (Should not execute)\n0x01c:    irmovl $4, %ecx    # Should not execute\n0x022:    irmovl $5, %edx    # Should not execute\n```\n会发生load-use 和misprediction组合的hazard情况, 如下图所示\n\n![图](assets/期中/2015期中-带答案/p17-hazard-timing.png)\n\n请问此时，各级流水线寄存器的控制信号应如何设置？\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Combination C |  |  |  |  |  |\n\n（每空1分，共3分）",
+        "stem": "4.在第（2）小题所述的改进后的处理器上执行如下代码，\n```\n0x000:    mrmovl 0(%eax), %edx\n0x006:    NewJE %edx, %eax, t\n0x00c:    irmovl $1, %eax    # Fall through\n0x012:    nop\n0x013:    nop\n0x014:    nop\n0x015:    halt\n0x016: t:irmovl $3, %edx    # Target (Should not execute)\n0x01c:    irmovl $4, %ecx    # Should not execute\n0x022:    irmovl $5, %edx    # Should not execute\n```\n会发生load-use 和misprediction组合的hazard情况, 如下图所示\n\n![图](assets/期中/2015期中-带答案/p17-hazard-timing.png)\n\n请问此时，各级流水线寄存器的控制信号应如何设置？\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Combination C | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | normal | normal |\n\n（每空1分，共3分）",
         "choices": [],
-        "answer": "答案：发生 load-use 和 misprediction 组合的 hazard 时（Condition = Combination C）：\nF = stall，D = stall，E = bubble，M = normal，W = normal。\n（每空 1 分，共 3 分）"
+        "answer": "答案：发生 load-use 和 misprediction 组合的 hazard 时（Condition = Combination C）：\nF = stall，D = stall，E = bubble，M = normal，W = normal。\n（每空 1 分，共 3 分）",
+        "blankAnswers": [
+          {
+            "id": "fetch-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "decode-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "execute-control",
+            "acceptedAnswers": [
+              "bubble"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "fetch-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "decode-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "execute-control",
+            "acceptedAnswers": [
+              "bubble"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4.在第（2）小题所述的改进后的处理器上执行如下代码，\n```\n0x000:    mrmovl 0(%eax), %edx\n0x006:    NewJE %edx, %eax, t\n0x00c:    irmovl $1, %eax    # Fall through\n0x012:    nop\n0x013:    nop\n0x014:    nop\n0x015:    halt\n0x016: t:irmovl $3, %edx    # Target (Should not execute)\n0x01c:    irmovl $4, %ecx    # Should not execute\n0x022:    irmovl $5, %edx    # Should not execute\n```\n会发生load-use 和misprediction组合的hazard情况, 如下图所示\n\n![图](assets/期中/2015期中-带答案/p17-hazard-timing.png)\n\n请问此时，各级流水线寄存器的控制信号应如何设置？\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Combination C |  |  |  |  |  |\n\n（每空1分，共3分）",
+        "prompt": "4.在第（2）小题所述的改进后的处理器上执行如下代码，\n```\n0x000:    mrmovl 0(%eax), %edx\n0x006:    NewJE %edx, %eax, t\n0x00c:    irmovl $1, %eax    # Fall through\n0x012:    nop\n0x013:    nop\n0x014:    nop\n0x015:    halt\n0x016: t:irmovl $3, %edx    # Target (Should not execute)\n0x01c:    irmovl $4, %ecx    # Should not execute\n0x022:    irmovl $5, %edx    # Should not execute\n```\n会发生load-use 和misprediction组合的hazard情况, 如下图所示\n\n![图](assets/期中/2015期中-带答案/p17-hazard-timing.png)\n\n请问此时，各级流水线寄存器的控制信号应如何设置？\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Combination C | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | normal | normal |\n\n（每空1分，共3分）",
         "answer": "答案：发生 load-use 和 misprediction 组合的 hazard 时（Condition = Combination C）：\nF = stall，D = stall，E = bubble，M = normal，W = normal。\n（每空 1 分，共 3 分）"
       },
       "presentation": {
@@ -1499,7 +1903,7 @@
       "exam": "2015期中",
       "questionNo": "第四题 5",
       "summary": "data miss 时的各级流水线控制信号",
-      "content": "5.在教材 PIPE 处理器设计中，data memory 实际是高速缓存(cache)。假设\n在执行上述(4)中代码时，0x000 指令中的 0(%eax)地址中的数据不在 data\nmemory 中，则data memory会将输出信号 m_datamiss置为1，直到数据从\n内存中取回到 data memory，再将 m_datamiss置为 0。（m_datamiss的默\n认值为0）\n这种情况的判断条件如下，请问各级流水线寄存器的控制信号应如何设置？\n\n| Condition | Trigger |\n| --- | --- |\n| Data Miss | M_icode in { IMRMOVL, IPOPL } && m_datamiss |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Data Miss |  |  |  |  |  |\n\n（每空1分，共5分）\n答案：发生 data miss 时（Condition = Data Miss）：\nF = stall，D = stall，E = stall，M = stall，W = bubble。\n（每空 1 分，共 5 分）",
+      "content": "5.在教材 PIPE 处理器设计中，data memory 实际是高速缓存(cache)。假设\n在执行上述(4)中代码时，0x000 指令中的 0(%eax)地址中的数据不在 data\nmemory 中，则data memory会将输出信号 m_datamiss置为1，直到数据从\n内存中取回到 data memory，再将 m_datamiss置为 0。（m_datamiss的默\n认值为0）\n这种情况的判断条件如下，请问各级流水线寄存器的控制信号应如何设置？\n\n| Condition | Trigger |\n| --- | --- |\n| Data Miss | M_icode in { IMRMOVL, IPOPL } && m_datamiss |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Data Miss | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | {{blank:memory-control}} | {{blank:writeback-control}} |\n\n（每空1分，共5分）\n答案：发生 data miss 时（Condition = Data Miss）：\nF = stall，D = stall，E = stall，M = stall，W = bubble。\n（每空 1 分，共 5 分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1521,17 +1925,101 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "5.在教材 PIPE 处理器设计中，data memory 实际是高速缓存(cache)。假设\n在执行上述(4)中代码时，0x000 指令中的 0(%eax)地址中的数据不在 data\nmemory 中，则data memory会将输出信号 m_datamiss置为1，直到数据从\n内存中取回到 data memory，再将 m_datamiss置为 0。（m_datamiss的默\n认值为0）\n这种情况的判断条件如下，请问各级流水线寄存器的控制信号应如何设置？\n\n| Condition | Trigger |\n| --- | --- |\n| Data Miss | M_icode in { IMRMOVL, IPOPL } && m_datamiss |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Data Miss |  |  |  |  |  |\n\n（每空1分，共5分）",
+        "stem": "5.在教材 PIPE 处理器设计中，data memory 实际是高速缓存(cache)。假设\n在执行上述(4)中代码时，0x000 指令中的 0(%eax)地址中的数据不在 data\nmemory 中，则data memory会将输出信号 m_datamiss置为1，直到数据从\n内存中取回到 data memory，再将 m_datamiss置为 0。（m_datamiss的默\n认值为0）\n这种情况的判断条件如下，请问各级流水线寄存器的控制信号应如何设置？\n\n| Condition | Trigger |\n| --- | --- |\n| Data Miss | M_icode in { IMRMOVL, IPOPL } && m_datamiss |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Data Miss | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | {{blank:memory-control}} | {{blank:writeback-control}} |\n\n（每空1分，共5分）",
         "choices": [],
-        "answer": "答案：发生 data miss 时（Condition = Data Miss）：\nF = stall，D = stall，E = stall，M = stall，W = bubble。\n（每空 1 分，共 5 分）"
+        "answer": "答案：发生 data miss 时（Condition = Data Miss）：\nF = stall，D = stall，E = stall，M = stall，W = bubble。\n（每空 1 分，共 5 分）",
+        "blankAnswers": [
+          {
+            "id": "fetch-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "decode-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "execute-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "memory-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "writeback-control",
+            "acceptedAnswers": [
+              "bubble"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "fetch-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "decode-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "execute-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "memory-control",
+            "acceptedAnswers": [
+              "stall"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "writeback-control",
+            "acceptedAnswers": [
+              "bubble"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5.在教材 PIPE 处理器设计中，data memory 实际是高速缓存(cache)。假设\n在执行上述(4)中代码时，0x000 指令中的 0(%eax)地址中的数据不在 data\nmemory 中，则data memory会将输出信号 m_datamiss置为1，直到数据从\n内存中取回到 data memory，再将 m_datamiss置为 0。（m_datamiss的默\n认值为0）\n这种情况的判断条件如下，请问各级流水线寄存器的控制信号应如何设置？\n\n| Condition | Trigger |\n| --- | --- |\n| Data Miss | M_icode in { IMRMOVL, IPOPL } && m_datamiss |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Data Miss |  |  |  |  |  |\n\n（每空1分，共5分）",
+        "prompt": "5.在教材 PIPE 处理器设计中，data memory 实际是高速缓存(cache)。假设\n在执行上述(4)中代码时，0x000 指令中的 0(%eax)地址中的数据不在 data\nmemory 中，则data memory会将输出信号 m_datamiss置为1，直到数据从\n内存中取回到 data memory，再将 m_datamiss置为 0。（m_datamiss的默\n认值为0）\n这种情况的判断条件如下，请问各级流水线寄存器的控制信号应如何设置？\n\n| Condition | Trigger |\n| --- | --- |\n| Data Miss | M_icode in { IMRMOVL, IPOPL } && m_datamiss |\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Data Miss | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | {{blank:memory-control}} | {{blank:writeback-control}} |\n\n（每空1分，共5分）",
         "answer": "答案：发生 data miss 时（Condition = Data Miss）：\nF = stall，D = stall，E = stall，M = stall，W = bubble。\n（每空 1 分，共 5 分）"
       },
       "presentation": {
@@ -4570,7 +5058,7 @@
       "exam": "2021期中",
       "questionNo": "第一题 10",
       "summary": "SEQ 现有信号通路能否实现新指令",
-      "content": "10. 在书中Y86的SEQ实现下，以下哪一条指令是现有信号通路能完成的：\n存器rA\n地址\n\n\nA和B还是比较显然的，D中涉及两次valE的写，这是做不到的，两写只能一个是valE，\n一个是valM。\nA. iaddq rA, V：将立即数V与R[rA]相加，其中rB域设为F，结果存入寄\nB. mmmovq rA, rB：将R[rA]存的地址开始的8字节数据，移动到R[rB]存的\nC. leave：相当于先执行rrmovq %rbp, %rsp，再执行popq %rbp\nD. enter：相当于先执行pushq %rbp，再执行rrmovq %rsp, %rbp\n答案：C",
+      "content": "10. 在书中Y86的SEQ实现下，以下哪一条指令是现有信号通路能完成的：\nA. `iaddq rA, V`：将立即数 V 与 `R[rA]` 相加，其中 `rB` 域设为 F，结果存入寄存器 `rA`\nB. `mmmovq rA, rB`：将 `R[rA]` 存的地址开始的 8 字节数据，移动到 `R[rB]` 存的地址\nC. leave：相当于先执行rrmovq %rbp, %rsp，再执行popq %rbp\nD. enter：相当于先执行pushq %rbp，再执行rrmovq %rsp, %rbp\n答案：C",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4595,15 +5083,15 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "10. 在书中Y86的SEQ实现下，以下哪一条指令是现有信号通路能完成的：\n存器rA\n地址\n\n\nA和B还是比较显然的，D中涉及两次valE的写，这是做不到的，两写只能一个是valE，\n一个是valM。",
+        "stem": "10. 在书中Y86的SEQ实现下，以下哪一条指令是现有信号通路能完成的：",
         "choices": [
           {
             "key": "A",
-            "content": "iaddq rA, V：将立即数V与R[rA]相加，其中rB域设为F，结果存入寄"
+            "content": "`iaddq rA, V`：将立即数 V 与 `R[rA]` 相加，其中 `rB` 域设为 F，结果存入寄存器 `rA`"
           },
           {
             "key": "B",
-            "content": "mmmovq rA, rB：将R[rA]存的地址开始的8字节数据，移动到R[rB]存的"
+            "content": "`mmmovq rA, rB`：将 `R[rA]` 存的地址开始的 8 字节数据，移动到 `R[rB]` 存的地址"
           },
           {
             "key": "C",
@@ -4622,11 +5110,11 @@
         "choices": [
           {
             "id": "A",
-            "content": "iaddq rA, V：将立即数V与R[rA]相加，其中rB域设为F，结果存入寄"
+            "content": "`iaddq rA, V`：将立即数 V 与 `R[rA]` 相加，其中 `rB` 域设为 F，结果存入寄存器 `rA`"
           },
           {
             "id": "B",
-            "content": "mmmovq rA, rB：将R[rA]存的地址开始的8字节数据，移动到R[rB]存的"
+            "content": "`mmmovq rA, rB`：将 `R[rA]` 存的地址开始的 8 字节数据，移动到 `R[rB]` 存的地址"
           },
           {
             "id": "C",
@@ -4643,7 +5131,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "10. 在书中Y86的SEQ实现下，以下哪一条指令是现有信号通路能完成的：\n存器rA\n地址\n\n\nA和B还是比较显然的，D中涉及两次valE的写，这是做不到的，两写只能一个是valE，\n一个是valM。",
+        "prompt": "10. 在书中Y86的SEQ实现下，以下哪一条指令是现有信号通路能完成的：",
         "answer": "答案：C"
       },
       "presentation": {
@@ -4661,7 +5149,7 @@
       "exam": "2021期中",
       "questionNo": "第一题 15",
       "summary": "Y86-64 PIPE 上片段总周期数与结果",
-      "content": "15. 请阅读下面的Y86-64代码，并计算它在PIPE（书中图4.52）流水线处\n理器上运行所需要的总周期数以及运行结束后%rax的值。假设分支预测默认为\n跳转。只用统计从MAIN函数的第一条指令进入PIPE到ret执行完毕所需要的\n周期数。\n执行周期数和%rax的值（10进制）是：\n```\n.align 8\nArray:\n    .quad 0x0\n    .quad 0x2\n    .quad 0x3\n    .quad 0x5\nMAIN:\nirmovq   Array,   %rdi\nirmovq    $4,    %rsi\nirmovq    $8,    %r10\nirmovq    $0,    %rax\nirmovq    $1,    %r8\nLOOP:\nmrmovq   (%rdi),  %rdx\nrrmovq    %rdx,   %r9\nsubq      %rsi,    %r9\njg         AD\n  addq      %rdx,   %rax\n    jmp       CHECK\nAD:\n  addq      %rsi,    %rax\nCHECK:\n  addq      %r10,   %rdi\n  subq      %r8,    %rsi\n  jne         LOOP\nret\n```\nA. 56, 10\nB. 55, 10\nC. 57, 9\nD. 55, 9\n答案：C\n(本题无效)",
+      "content": "15. 请阅读下面的Y86-64代码，并计算它在PIPE（书中图4.52）流水线处\n理器上运行所需要的总周期数以及运行结束后%rax的值。假设分支预测默认为\n跳转。只用统计从MAIN函数的第一条指令进入PIPE到ret执行完毕所需要的\n周期数。\n执行周期数和%rax的值（10进制）是：\n（本题无效）\n```\n.align 8\nArray:\n    .quad 0x0\n    .quad 0x2\n    .quad 0x3\n    .quad 0x5\nMAIN:\nirmovq   Array,   %rdi\nirmovq    $4,    %rsi\nirmovq    $8,    %r10\nirmovq    $0,    %rax\nirmovq    $1,    %r8\nLOOP:\nmrmovq   (%rdi),  %rdx\nrrmovq    %rdx,   %r9\nsubq      %rsi,    %r9\njg         AD\n  addq      %rdx,   %rax\n    jmp       CHECK\nAD:\n  addq      %rsi,    %rax\nCHECK:\n  addq      %r10,   %rdi\n  subq      %r8,    %rsi\n  jne         LOOP\nret\n```\nA. 56, 10\nB. 55, 10\nC. 57, 9\nD. 55, 9\n答案：C\n(本题无效)",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4686,7 +5174,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "15. 请阅读下面的Y86-64代码，并计算它在PIPE（书中图4.52）流水线处\n理器上运行所需要的总周期数以及运行结束后%rax的值。假设分支预测默认为\n跳转。只用统计从MAIN函数的第一条指令进入PIPE到ret执行完毕所需要的\n周期数。\n执行周期数和%rax的值（10进制）是：\n```\n.align 8\nArray:\n    .quad 0x0\n    .quad 0x2\n    .quad 0x3\n    .quad 0x5\nMAIN:\nirmovq   Array,   %rdi\nirmovq    $4,    %rsi\nirmovq    $8,    %r10\nirmovq    $0,    %rax\nirmovq    $1,    %r8\nLOOP:\nmrmovq   (%rdi),  %rdx\nrrmovq    %rdx,   %r9\nsubq      %rsi,    %r9\njg         AD\n  addq      %rdx,   %rax\n    jmp       CHECK\nAD:\n  addq      %rsi,    %rax\nCHECK:\n  addq      %r10,   %rdi\n  subq      %r8,    %rsi\n  jne         LOOP\nret\n```",
+        "stem": "15. 请阅读下面的Y86-64代码，并计算它在PIPE（书中图4.52）流水线处\n理器上运行所需要的总周期数以及运行结束后%rax的值。假设分支预测默认为\n跳转。只用统计从MAIN函数的第一条指令进入PIPE到ret执行完毕所需要的\n周期数。\n执行周期数和%rax的值（10进制）是：\n（本题无效）\n```\n.align 8\nArray:\n    .quad 0x0\n    .quad 0x2\n    .quad 0x3\n    .quad 0x5\nMAIN:\nirmovq   Array,   %rdi\nirmovq    $4,    %rsi\nirmovq    $8,    %r10\nirmovq    $0,    %rax\nirmovq    $1,    %r8\nLOOP:\nmrmovq   (%rdi),  %rdx\nrrmovq    %rdx,   %r9\nsubq      %rsi,    %r9\njg         AD\n  addq      %rdx,   %rax\n    jmp       CHECK\nAD:\n  addq      %rsi,    %rax\nCHECK:\n  addq      %r10,   %rdi\n  subq      %r8,    %rsi\n  jne         LOOP\nret\n```",
         "choices": [
           {
             "key": "A",
@@ -4734,7 +5222,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "15. 请阅读下面的Y86-64代码，并计算它在PIPE（书中图4.52）流水线处\n理器上运行所需要的总周期数以及运行结束后%rax的值。假设分支预测默认为\n跳转。只用统计从MAIN函数的第一条指令进入PIPE到ret执行完毕所需要的\n周期数。\n执行周期数和%rax的值（10进制）是：\n```\n.align 8\nArray:\n    .quad 0x0\n    .quad 0x2\n    .quad 0x3\n    .quad 0x5\nMAIN:\nirmovq   Array,   %rdi\nirmovq    $4,    %rsi\nirmovq    $8,    %r10\nirmovq    $0,    %rax\nirmovq    $1,    %r8\nLOOP:\nmrmovq   (%rdi),  %rdx\nrrmovq    %rdx,   %r9\nsubq      %rsi,    %r9\njg         AD\n  addq      %rdx,   %rax\n    jmp       CHECK\nAD:\n  addq      %rsi,    %rax\nCHECK:\n  addq      %r10,   %rdi\n  subq      %r8,    %rsi\n  jne         LOOP\nret\n```",
+        "prompt": "15. 请阅读下面的Y86-64代码，并计算它在PIPE（书中图4.52）流水线处\n理器上运行所需要的总周期数以及运行结束后%rax的值。假设分支预测默认为\n跳转。只用统计从MAIN函数的第一条指令进入PIPE到ret执行完毕所需要的\n周期数。\n执行周期数和%rax的值（10进制）是：\n（本题无效）\n```\n.align 8\nArray:\n    .quad 0x0\n    .quad 0x2\n    .quad 0x3\n    .quad 0x5\nMAIN:\nirmovq   Array,   %rdi\nirmovq    $4,    %rsi\nirmovq    $8,    %r10\nirmovq    $0,    %rax\nirmovq    $1,    %r8\nLOOP:\nmrmovq   (%rdi),  %rdx\nrrmovq    %rdx,   %r9\nsubq      %rsi,    %r9\njg         AD\n  addq      %rdx,   %rax\n    jmp       CHECK\nAD:\n  addq      %rsi,    %rax\nCHECK:\n  addq      %r10,   %rdi\n  subq      %r8,    %rsi\n  jne         LOOP\nret\n```",
         "answer": "答案：C\n(本题无效)"
       },
       "presentation": {
@@ -4752,7 +5240,7 @@
       "exam": "2021期中",
       "questionNo": "第四题 1",
       "summary": "间接跳转指令 jxx *rB 的 SEQ 阶段补全",
-      "content": "第四题（15分）\n请分析Y86-64 ISA中加入的一族间接跳转指令：jxx *rB，其格式如下：\nC  Fn  F  rB\n该指令的功能是跳转到寄存器 R[rB] 所存放的地址。类似于直接跳转指令，间\n接跳转指令也包括无条件跳转和条件跳转，通过不同的功能码Fn来指示。为了\n和直接跳转区别，icode为IJREGXX。时钟周期适当进行延长，在不修改原有\n的硬件线路和信号设置的前提下，只增加和新指令有关的逻辑，回答以下问题。\n1. 在教材中的SEQ处理器上实现该指令，请补全下表中每个阶段的操作。需要\n说明的信号可能有：icode, ifun, rA, rB, valA, valB, valC, valE,\n```\nvalP, Cnd, R[], M[], PC, CC\nStage  jxx *rB\nFetch  icode : ifun ← M1[PC]\nDecode\nExecute\nMemory\nWrite Back\nUpdate PC  PC <- Cnd ? valE: valP\n```\n答案：\n1.\n```\nStage  jxx *rB\nFetch  icode : ifun ← M1[PC]\nrA : rB <- M1[PC+1]\nvalP <- PC+2\nDecode  valB <- R[rB]\nExecute  valE <- valB + 0\nCnd = Cond(CC, ifun)\nMemory  /\nWrite Back  /\nUpdate PC  PC <- Cnd ? valE: valP\n```",
+      "content": "第四题（15分）\n请分析Y86-64 ISA中加入的一族间接跳转指令：jxx *rB，其格式如下：\nC  Fn  F  rB\n该指令的功能是跳转到寄存器 R[rB] 所存放的地址。类似于直接跳转指令，间\n接跳转指令也包括无条件跳转和条件跳转，通过不同的功能码Fn来指示。为了\n和直接跳转区别，icode为IJREGXX。时钟周期适当进行延长，在不修改原有\n的硬件线路和信号设置的前提下，只增加和新指令有关的逻辑，回答以下问题。\n1. 在教材中的SEQ处理器上实现该指令，请补全下表中每个阶段的操作。需要\n说明的信号可能有：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd, R[], M[], PC, CC\n\n| 阶段 | `jxx *rB` 操作 |\n| --- | --- |\n| Fetch | `icode : ifun ← M1[PC]`；`rA : rB ← M1[PC+1]`；`valP ← PC+2` |\n| Decode | {{blank:q1-decode}} |\n| Execute | {{blank:q1-execute}} |\n| Memory | {{blank:q1-memory}} |\n| Write Back | {{blank:q1-writeback}} |\n| Update PC | `PC ← Cnd ? valE : valP` |\n答案：\n1.\n```\nStage  jxx *rB\nFetch  icode : ifun ← M1[PC]\nrA : rB <- M1[PC+1]\nvalP <- PC+2\nDecode  valB <- R[rB]\nExecute  valE <- valB + 0\nCnd = Cond(CC, ifun)\nMemory  /\nWrite Back  /\nUpdate PC  PC <- Cnd ? valE: valP\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4777,7 +5265,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第四题（15分）\n请分析Y86-64 ISA中加入的一族间接跳转指令：jxx *rB，其格式如下：\nC  Fn  F  rB\n该指令的功能是跳转到寄存器 R[rB] 所存放的地址。类似于直接跳转指令，间\n接跳转指令也包括无条件跳转和条件跳转，通过不同的功能码Fn来指示。为了\n和直接跳转区别，icode为IJREGXX。时钟周期适当进行延长，在不修改原有\n的硬件线路和信号设置的前提下，只增加和新指令有关的逻辑，回答以下问题。\n1. 在教材中的SEQ处理器上实现该指令，请补全下表中每个阶段的操作。需要\n说明的信号可能有：icode, ifun, rA, rB, valA, valB, valC, valE,\n```\nvalP, Cnd, R[], M[], PC, CC\nStage  jxx *rB\nFetch  icode : ifun ← M1[PC]\nDecode\nExecute\nMemory\nWrite Back\nUpdate PC  PC <- Cnd ? valE: valP\n```",
+        "stem": "第四题（15分）\n请分析Y86-64 ISA中加入的一族间接跳转指令：jxx *rB，其格式如下：\nC  Fn  F  rB\n该指令的功能是跳转到寄存器 R[rB] 所存放的地址。类似于直接跳转指令，间\n接跳转指令也包括无条件跳转和条件跳转，通过不同的功能码Fn来指示。为了\n和直接跳转区别，icode为IJREGXX。时钟周期适当进行延长，在不修改原有\n的硬件线路和信号设置的前提下，只增加和新指令有关的逻辑，回答以下问题。\n1. 在教材中的SEQ处理器上实现该指令，请补全下表中每个阶段的操作。需要\n说明的信号可能有：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd, R[], M[], PC, CC\n\n| 阶段 | `jxx *rB` 操作 |\n| --- | --- |\n| Fetch | `icode : ifun ← M1[PC]`；`rA : rB ← M1[PC+1]`；`valP ← PC+2` |\n| Decode | {{blank:q1-decode}} |\n| Execute | {{blank:q1-execute}} |\n| Memory | {{blank:q1-memory}} |\n| Write Back | {{blank:q1-writeback}} |\n| Update PC | `PC ← Cnd ? valE : valP` |",
         "choices": [],
         "answer": "答案：\n1.\n```\nStage  jxx *rB\nFetch  icode : ifun ← M1[PC]\nrA : rB <- M1[PC+1]\nvalP <- PC+2\nDecode  valB <- R[rB]\nExecute  valE <- valB + 0\nCnd = Cond(CC, ifun)\nMemory  /\nWrite Back  /\nUpdate PC  PC <- Cnd ? valE: valP\n```"
       },
@@ -4792,7 +5280,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题（15分）\n请分析Y86-64 ISA中加入的一族间接跳转指令：jxx *rB，其格式如下：\nC  Fn  F  rB\n该指令的功能是跳转到寄存器 R[rB] 所存放的地址。类似于直接跳转指令，间\n接跳转指令也包括无条件跳转和条件跳转，通过不同的功能码Fn来指示。为了\n和直接跳转区别，icode为IJREGXX。时钟周期适当进行延长，在不修改原有\n的硬件线路和信号设置的前提下，只增加和新指令有关的逻辑，回答以下问题。\n1. 在教材中的SEQ处理器上实现该指令，请补全下表中每个阶段的操作。需要\n说明的信号可能有：icode, ifun, rA, rB, valA, valB, valC, valE,\n```\nvalP, Cnd, R[], M[], PC, CC\nStage  jxx *rB\nFetch  icode : ifun ← M1[PC]\nDecode\nExecute\nMemory\nWrite Back\nUpdate PC  PC <- Cnd ? valE: valP\n```",
+        "prompt": "第四题（15分）\n请分析Y86-64 ISA中加入的一族间接跳转指令：jxx *rB，其格式如下：\nC  Fn  F  rB\n该指令的功能是跳转到寄存器 R[rB] 所存放的地址。类似于直接跳转指令，间\n接跳转指令也包括无条件跳转和条件跳转，通过不同的功能码Fn来指示。为了\n和直接跳转区别，icode为IJREGXX。时钟周期适当进行延长，在不修改原有\n的硬件线路和信号设置的前提下，只增加和新指令有关的逻辑，回答以下问题。\n1. 在教材中的SEQ处理器上实现该指令，请补全下表中每个阶段的操作。需要\n说明的信号可能有：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd, R[], M[], PC, CC\n\n| 阶段 | `jxx *rB` 操作 |\n| --- | --- |\n| Fetch | `icode : ifun ← M1[PC]`；`rA : rB ← M1[PC+1]`；`valP ← PC+2` |\n| Decode | {{blank:q1-decode}} |\n| Execute | {{blank:q1-execute}} |\n| Memory | {{blank:q1-memory}} |\n| Write Back | {{blank:q1-writeback}} |\n| Update PC | `PC ← Cnd ? valE : valP` |",
         "answer": "答案：\n1.\n```\nStage  jxx *rB\nFetch  icode : ifun ← M1[PC]\nrA : rB <- M1[PC+1]\nvalP <- PC+2\nDecode  valB <- R[rB]\nExecute  valE <- valB + 0\nCnd = Cond(CC, ifun)\nMemory  /\nWrite Back  /\nUpdate PC  PC <- Cnd ? valE: valP\n```"
       },
       "group": {
@@ -4816,7 +5304,7 @@
       "exam": "2021期中",
       "questionNo": "第四题 2",
       "summary": "PIPE 预测下一条 PC 的旁路与 HCL 修改",
-      "content": "2. 考虑在教材中的Pipeline处理器上实现该指令，采用总是选择分支（预测\n下一条指令时使用跳转地址R[rB]）的预测策略。\n  d\n  _val\n由于R[rB]需要到译码阶段才能得到，需要增加一条从Fwd B输出信号d_valB\n到Select PC的旁路通路，增加线路如图所示。增加旁路后，为了预测jxx\n*rB的下一条PC，________（需要/不需要）在该指令和下一条指令间插入气\n泡。\n\n![增加 d_valB 到 Select PC 旁路通路后的流水线结构](assets/期中/2021期中-带答案/p17-bypass-path.png)\n\nSelect PC的HCL代码如下图所示：\nword f_pc = [\n ①\n```\n (M_icode == IJXX || M_icode == IJREGXX) && !M_cnd :\nM_valA;\n```\n ②\n W_icode == IRET : W_valM;\n ③\n 1 : F_predPC;\n ④\n]\n为了预测下一条PC，需要修改Select PC的HCL代码，增加一行 _______ :\n________，增加的位置可以是 _________ （写出所有可能的位置，错填不得\n分，漏填可得部分分）\n答案：\n2. 不需要。间接跳转在decode阶段时SelectPC正好利用最新转发的valB\n的值作为预测地址访问指令内存。\n1 2 3 处都可以插入。插入的内容见下。④是无效的插入位置。注意，原来的\nM_XXX条件和W_XXX条件互斥，所以其顺序任意，但它们都不会和新加入的条\n件冲突。例如mispredict发生时，Decode阶段的指令已经被清空，所以最终\n不会导致多个条件成立。\n```\nword f_pc = [\n// D_icode == IJREGXX: d_valB;\n(M_icode == IJXX || M_icode == IJREGXX) && !M_cnd : M_valA;\n// D_icode == IJREGXX: d_valB;\nW_icode == IRET : W_valM;\nD_icode == IJREGXX: d_valB;\n1 : F_predPC;\n④\n]\n```",
+      "content": "2. 考虑在教材中的Pipeline处理器上实现该指令，采用总是选择分支（预测\n下一条指令时使用跳转地址R[rB]）的预测策略。\n由于R[rB]需要到译码阶段才能得到，需要增加一条从Fwd B输出信号d_valB\n到Select PC的旁路通路，增加线路如图所示。增加旁路后，为了预测jxx\n*rB的下一条PC，{{blank:q2-bubble}}（填“需要”或“不需要”）在该指令和下一条指令间插入气\n泡。\n\n![增加 d_valB 到 Select PC 旁路通路后的流水线结构](assets/期中/2021期中-带答案/p17-bypass-path.png)\n\nSelect PC的HCL代码如下图所示：\nword f_pc = [\n ①\n```\n (M_icode == IJXX || M_icode == IJREGXX) && !M_cnd :\nM_valA;\n```\n ②\n W_icode == IRET : W_valM;\n ③\n 1 : F_predPC;\n ④\n]\n为了预测下一条PC，需要修改Select PC的HCL代码，增加一行 {{blank:q2-hcl-condition}} :\n{{blank:q2-hcl-value}}，增加的位置可以是 {{blank:q2-hcl-position}} （写出所有可能的位置，错填不得\n分，漏填可得部分分）\n答案：\n2. 不需要。间接跳转在decode阶段时SelectPC正好利用最新转发的valB\n的值作为预测地址访问指令内存。\n1 2 3 处都可以插入。插入的内容见下。④是无效的插入位置。注意，原来的\nM_XXX条件和W_XXX条件互斥，所以其顺序任意，但它们都不会和新加入的条\n件冲突。例如mispredict发生时，Decode阶段的指令已经被清空，所以最终\n不会导致多个条件成立。\n```\nword f_pc = [\n// D_icode == IJREGXX: d_valB;\n(M_icode == IJXX || M_icode == IJREGXX) && !M_cnd : M_valA;\n// D_icode == IJREGXX: d_valB;\nW_icode == IRET : W_valM;\nD_icode == IJREGXX: d_valB;\n1 : F_predPC;\n④\n]\n```",
       "assets": [
         "assets/期中/2021期中-带答案/p17-bypass-path.png"
       ],
@@ -4843,7 +5331,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2. 考虑在教材中的Pipeline处理器上实现该指令，采用总是选择分支（预测\n下一条指令时使用跳转地址R[rB]）的预测策略。\n  d\n  _val\n由于R[rB]需要到译码阶段才能得到，需要增加一条从Fwd B输出信号d_valB\n到Select PC的旁路通路，增加线路如图所示。增加旁路后，为了预测jxx\n*rB的下一条PC，________（需要/不需要）在该指令和下一条指令间插入气\n泡。\n\n![增加 d_valB 到 Select PC 旁路通路后的流水线结构](assets/期中/2021期中-带答案/p17-bypass-path.png)\n\nSelect PC的HCL代码如下图所示：\nword f_pc = [\n ①\n```\n (M_icode == IJXX || M_icode == IJREGXX) && !M_cnd :\nM_valA;\n```\n ②\n W_icode == IRET : W_valM;\n ③\n 1 : F_predPC;\n ④\n]\n为了预测下一条PC，需要修改Select PC的HCL代码，增加一行 _______ :\n________，增加的位置可以是 _________ （写出所有可能的位置，错填不得\n分，漏填可得部分分）",
+        "stem": "2. 考虑在教材中的Pipeline处理器上实现该指令，采用总是选择分支（预测\n下一条指令时使用跳转地址R[rB]）的预测策略。\n由于R[rB]需要到译码阶段才能得到，需要增加一条从Fwd B输出信号d_valB\n到Select PC的旁路通路，增加线路如图所示。增加旁路后，为了预测jxx\n*rB的下一条PC，{{blank:q2-bubble}}（填“需要”或“不需要”）在该指令和下一条指令间插入气\n泡。\n\n![增加 d_valB 到 Select PC 旁路通路后的流水线结构](assets/期中/2021期中-带答案/p17-bypass-path.png)\n\nSelect PC的HCL代码如下图所示：\nword f_pc = [\n ①\n```\n (M_icode == IJXX || M_icode == IJREGXX) && !M_cnd :\nM_valA;\n```\n ②\n W_icode == IRET : W_valM;\n ③\n 1 : F_predPC;\n ④\n]\n为了预测下一条PC，需要修改Select PC的HCL代码，增加一行 {{blank:q2-hcl-condition}} :\n{{blank:q2-hcl-value}}，增加的位置可以是 {{blank:q2-hcl-position}} （写出所有可能的位置，错填不得\n分，漏填可得部分分）",
         "choices": [],
         "answer": "答案：\n2. 不需要。间接跳转在decode阶段时SelectPC正好利用最新转发的valB\n的值作为预测地址访问指令内存。\n1 2 3 处都可以插入。插入的内容见下。④是无效的插入位置。注意，原来的\nM_XXX条件和W_XXX条件互斥，所以其顺序任意，但它们都不会和新加入的条\n件冲突。例如mispredict发生时，Decode阶段的指令已经被清空，所以最终\n不会导致多个条件成立。\n```\nword f_pc = [\n// D_icode == IJREGXX: d_valB;\n(M_icode == IJXX || M_icode == IJREGXX) && !M_cnd : M_valA;\n// D_icode == IJREGXX: d_valB;\nW_icode == IRET : W_valM;\nD_icode == IJREGXX: d_valB;\n1 : F_predPC;\n④\n]\n```"
       },
@@ -4858,7 +5346,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. 考虑在教材中的Pipeline处理器上实现该指令，采用总是选择分支（预测\n下一条指令时使用跳转地址R[rB]）的预测策略。\n  d\n  _val\n由于R[rB]需要到译码阶段才能得到，需要增加一条从Fwd B输出信号d_valB\n到Select PC的旁路通路，增加线路如图所示。增加旁路后，为了预测jxx\n*rB的下一条PC，________（需要/不需要）在该指令和下一条指令间插入气\n泡。\n\n![增加 d_valB 到 Select PC 旁路通路后的流水线结构](assets/期中/2021期中-带答案/p17-bypass-path.png)\n\nSelect PC的HCL代码如下图所示：\nword f_pc = [\n ①\n```\n (M_icode == IJXX || M_icode == IJREGXX) && !M_cnd :\nM_valA;\n```\n ②\n W_icode == IRET : W_valM;\n ③\n 1 : F_predPC;\n ④\n]\n为了预测下一条PC，需要修改Select PC的HCL代码，增加一行 _______ :\n________，增加的位置可以是 _________ （写出所有可能的位置，错填不得\n分，漏填可得部分分）",
+        "prompt": "2. 考虑在教材中的Pipeline处理器上实现该指令，采用总是选择分支（预测\n下一条指令时使用跳转地址R[rB]）的预测策略。\n由于R[rB]需要到译码阶段才能得到，需要增加一条从Fwd B输出信号d_valB\n到Select PC的旁路通路，增加线路如图所示。增加旁路后，为了预测jxx\n*rB的下一条PC，{{blank:q2-bubble}}（填“需要”或“不需要”）在该指令和下一条指令间插入气\n泡。\n\n![增加 d_valB 到 Select PC 旁路通路后的流水线结构](assets/期中/2021期中-带答案/p17-bypass-path.png)\n\nSelect PC的HCL代码如下图所示：\nword f_pc = [\n ①\n```\n (M_icode == IJXX || M_icode == IJREGXX) && !M_cnd :\nM_valA;\n```\n ②\n W_icode == IRET : W_valM;\n ③\n 1 : F_predPC;\n ④\n]\n为了预测下一条PC，需要修改Select PC的HCL代码，增加一行 {{blank:q2-hcl-condition}} :\n{{blank:q2-hcl-value}}，增加的位置可以是 {{blank:q2-hcl-position}} （写出所有可能的位置，错填不得\n分，漏填可得部分分）",
         "answer": "答案：\n2. 不需要。间接跳转在decode阶段时SelectPC正好利用最新转发的valB\n的值作为预测地址访问指令内存。\n1 2 3 处都可以插入。插入的内容见下。④是无效的插入位置。注意，原来的\nM_XXX条件和W_XXX条件互斥，所以其顺序任意，但它们都不会和新加入的条\n件冲突。例如mispredict发生时，Decode阶段的指令已经被清空，所以最终\n不会导致多个条件成立。\n```\nword f_pc = [\n// D_icode == IJREGXX: d_valB;\n(M_icode == IJXX || M_icode == IJREGXX) && !M_cnd : M_valA;\n// D_icode == IJREGXX: d_valB;\nW_icode == IRET : W_valM;\nD_icode == IJREGXX: d_valB;\n1 : F_predPC;\n④\n]\n```"
       },
       "group": {
@@ -4882,7 +5370,7 @@
       "exam": "2021期中",
       "questionNo": "第四题 3",
       "summary": "预测错误触发条件与流水线控制逻辑",
-      "content": "3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。\n触发条件：（如果有多种可能请任写一种）\n_______ == IJREGXX && ______\n控制逻辑：（如果有多种可能请任写一种）\nF  D  E  M  W\n答案：\n3. E_icode == IJREGXX && !e_Cnd\n```\nF  D  E  M  W\nnormal/stall bubble  bubble  normal  normal\n```\n分析方法同IJXX。注意，触发条件是在E阶段，因为E阶段结束、M阶段开始\n时就要控制流水线寄存器。",
+      "content": "3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。\n触发条件：（如果有多种可能请任写一种）\n{{blank:q3-condition-a}} == IJREGXX && {{blank:q3-condition-b}}\n控制逻辑：（如果有多种可能请任写一种）\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:q3-f}} | {{blank:q3-d}} | {{blank:q3-e}} | {{blank:q3-m}} | {{blank:q3-w}} |\n答案：\n3. E_icode == IJREGXX && !e_Cnd\n```\nF  D  E  M  W\nnormal/stall bubble  bubble  normal  normal\n```\n分析方法同IJXX。注意，触发条件是在E阶段，因为E阶段结束、M阶段开始\n时就要控制流水线寄存器。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4907,7 +5395,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。\n触发条件：（如果有多种可能请任写一种）\n_______ == IJREGXX && ______\n控制逻辑：（如果有多种可能请任写一种）\nF  D  E  M  W",
+        "stem": "3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。\n触发条件：（如果有多种可能请任写一种）\n{{blank:q3-condition-a}} == IJREGXX && {{blank:q3-condition-b}}\n控制逻辑：（如果有多种可能请任写一种）\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:q3-f}} | {{blank:q3-d}} | {{blank:q3-e}} | {{blank:q3-m}} | {{blank:q3-w}} |",
         "choices": [],
         "answer": "答案：\n3. E_icode == IJREGXX && !e_Cnd\n```\nF  D  E  M  W\nnormal/stall bubble  bubble  normal  normal\n```\n分析方法同IJXX。注意，触发条件是在E阶段，因为E阶段结束、M阶段开始\n时就要控制流水线寄存器。"
       },
@@ -4922,7 +5410,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。\n触发条件：（如果有多种可能请任写一种）\n_______ == IJREGXX && ______\n控制逻辑：（如果有多种可能请任写一种）\nF  D  E  M  W",
+        "prompt": "3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。\n触发条件：（如果有多种可能请任写一种）\n{{blank:q3-condition-a}} == IJREGXX && {{blank:q3-condition-b}}\n控制逻辑：（如果有多种可能请任写一种）\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:q3-f}} | {{blank:q3-d}} | {{blank:q3-e}} | {{blank:q3-m}} | {{blank:q3-w}} |",
         "answer": "答案：\n3. E_icode == IJREGXX && !e_Cnd\n```\nF  D  E  M  W\nnormal/stall bubble  bubble  normal  normal\n```\n分析方法同IJXX。注意，触发条件是在E阶段，因为E阶段结束、M阶段开始\n时就要控制流水线寄存器。"
       },
       "group": {
@@ -4946,7 +5434,7 @@
       "exam": "2021期中",
       "questionNo": "第四题 4",
       "summary": "改造后 PIPE 上 foo 的周期数（分支/load-use）",
-      "content": "4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# Array of 3 elements\narray:\n.quad return\n.quad L1\n.quad L2\n# void foo(long n, long *arr)\n# n in %rdi, arr in %rsi\nfoo:\nrrmovq %rdi, %rdx           # line 1\naddq %rdx, %rdx             # line 2\naddq %rdx, %rdx             # line 3\naddq %rdx, %rdx             # line 4\nirmovq array, %rcx          # line 5\naddq %rdx, %rcx             # line 6\nandq %rdi, %rdi             # line 7\njge *%rcx                    # line 8\nreturn:                       #\nret                       # line 9\nL2: #\nmrmovq 16(%rsi), %rcx      # line 10\nrmmovq %rcx, 8(%rsi)       # line 11\nL1:                            #\nmrmovq 8(%rsi), %rcx       # line 12\nrmmovq %rcx, (%rsi)        # line 13\njmp return                   # line 14\n```\n\n\n在foo函数运行过程中，计算以下情况foo函数的执行周期数。（周期数计算从\n执行foo第一条指令开始，直到其返回指令ret完全通过流水线为止。另外假设\nfoo函数开始的若干条指令不会和foo函数体外的指令形成冒险。）\nn=-1：________；n=0：_________；n=2：_________\n答案：n=-1：15；n=0：13；n=2：20\nn == -1: line 8分支预测错误，惩罚2个周期。一共9 + 2 + 4\n(trailing cycles for ret) = 15。\nn == 0: 一共9 + 4 (trailing cycles for ret) = 13。\nn == 1: line 12和13发生load/use hazard （不考虑加载转发），惩\n罚1个周期。一共12 + 1 + 4 (trailing cycles for ret) = 17。\nn == 2: line 12 和 line 13，以及line 10 和 line 11 各发生一次\nload/use hazard，共惩罚2个周期。一共14 + 2 + 4 (trailing\ncycles for ret) = 20。",
+      "content": "4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# Array of 3 elements\narray:\n.quad return\n.quad L1\n.quad L2\n# void foo(long n, long *arr)\n# n in %rdi, arr in %rsi\nfoo:\nrrmovq %rdi, %rdx           # line 1\naddq %rdx, %rdx             # line 2\naddq %rdx, %rdx             # line 3\naddq %rdx, %rdx             # line 4\nirmovq array, %rcx          # line 5\naddq %rdx, %rcx             # line 6\nandq %rdi, %rdi             # line 7\njge *%rcx                    # line 8\nreturn:                       #\nret                       # line 9\nL2: #\nmrmovq 16(%rsi), %rcx      # line 10\nrmmovq %rcx, 8(%rsi)       # line 11\nL1:                            #\nmrmovq 8(%rsi), %rcx       # line 12\nrmmovq %rcx, (%rsi)        # line 13\njmp return                   # line 14\n```\n\n\n在foo函数运行过程中，计算以下情况foo函数的执行周期数。（周期数计算从\n执行foo第一条指令开始，直到其返回指令ret完全通过流水线为止。另外假设\nfoo函数开始的若干条指令不会和foo函数体外的指令形成冒险。）\nn=-1：{{blank:q4-n-negative-one}}；n=0：{{blank:q4-n-zero}}；n=2：{{blank:q4-n-two}}\n答案：n=-1：15；n=0：13；n=2：20\nn == -1: line 8分支预测错误，惩罚2个周期。一共9 + 2 + 4\n(trailing cycles for ret) = 15。\nn == 0: 一共9 + 4 (trailing cycles for ret) = 13。\nn == 1: line 12和13发生load/use hazard （不考虑加载转发），惩\n罚1个周期。一共12 + 1 + 4 (trailing cycles for ret) = 17。\nn == 2: line 12 和 line 13，以及line 10 和 line 11 各发生一次\nload/use hazard，共惩罚2个周期。一共14 + 2 + 4 (trailing\ncycles for ret) = 20。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4971,7 +5459,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# Array of 3 elements\narray:\n.quad return\n.quad L1\n.quad L2\n# void foo(long n, long *arr)\n# n in %rdi, arr in %rsi\nfoo:\nrrmovq %rdi, %rdx           # line 1\naddq %rdx, %rdx             # line 2\naddq %rdx, %rdx             # line 3\naddq %rdx, %rdx             # line 4\nirmovq array, %rcx          # line 5\naddq %rdx, %rcx             # line 6\nandq %rdi, %rdi             # line 7\njge *%rcx                    # line 8\nreturn:                       #\nret                       # line 9\nL2: #\nmrmovq 16(%rsi), %rcx      # line 10\nrmmovq %rcx, 8(%rsi)       # line 11\nL1:                            #\nmrmovq 8(%rsi), %rcx       # line 12\nrmmovq %rcx, (%rsi)        # line 13\njmp return                   # line 14\n```\n\n\n在foo函数运行过程中，计算以下情况foo函数的执行周期数。（周期数计算从\n执行foo第一条指令开始，直到其返回指令ret完全通过流水线为止。另外假设\nfoo函数开始的若干条指令不会和foo函数体外的指令形成冒险。）\nn=-1：________；n=0：_________；n=2：_________",
+        "stem": "4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# Array of 3 elements\narray:\n.quad return\n.quad L1\n.quad L2\n# void foo(long n, long *arr)\n# n in %rdi, arr in %rsi\nfoo:\nrrmovq %rdi, %rdx           # line 1\naddq %rdx, %rdx             # line 2\naddq %rdx, %rdx             # line 3\naddq %rdx, %rdx             # line 4\nirmovq array, %rcx          # line 5\naddq %rdx, %rcx             # line 6\nandq %rdi, %rdi             # line 7\njge *%rcx                    # line 8\nreturn:                       #\nret                       # line 9\nL2: #\nmrmovq 16(%rsi), %rcx      # line 10\nrmmovq %rcx, 8(%rsi)       # line 11\nL1:                            #\nmrmovq 8(%rsi), %rcx       # line 12\nrmmovq %rcx, (%rsi)        # line 13\njmp return                   # line 14\n```\n\n\n在foo函数运行过程中，计算以下情况foo函数的执行周期数。（周期数计算从\n执行foo第一条指令开始，直到其返回指令ret完全通过流水线为止。另外假设\nfoo函数开始的若干条指令不会和foo函数体外的指令形成冒险。）\nn=-1：{{blank:q4-n-negative-one}}；n=0：{{blank:q4-n-zero}}；n=2：{{blank:q4-n-two}}",
         "choices": [],
         "answer": "答案：n=-1：15；n=0：13；n=2：20\nn == -1: line 8分支预测错误，惩罚2个周期。一共9 + 2 + 4\n(trailing cycles for ret) = 15。\nn == 0: 一共9 + 4 (trailing cycles for ret) = 13。\nn == 1: line 12和13发生load/use hazard （不考虑加载转发），惩\n罚1个周期。一共12 + 1 + 4 (trailing cycles for ret) = 17。\nn == 2: line 12 和 line 13，以及line 10 和 line 11 各发生一次\nload/use hazard，共惩罚2个周期。一共14 + 2 + 4 (trailing\ncycles for ret) = 20。"
       },
@@ -4986,7 +5474,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# Array of 3 elements\narray:\n.quad return\n.quad L1\n.quad L2\n# void foo(long n, long *arr)\n# n in %rdi, arr in %rsi\nfoo:\nrrmovq %rdi, %rdx           # line 1\naddq %rdx, %rdx             # line 2\naddq %rdx, %rdx             # line 3\naddq %rdx, %rdx             # line 4\nirmovq array, %rcx          # line 5\naddq %rdx, %rcx             # line 6\nandq %rdi, %rdi             # line 7\njge *%rcx                    # line 8\nreturn:                       #\nret                       # line 9\nL2: #\nmrmovq 16(%rsi), %rcx      # line 10\nrmmovq %rcx, 8(%rsi)       # line 11\nL1:                            #\nmrmovq 8(%rsi), %rcx       # line 12\nrmmovq %rcx, (%rsi)        # line 13\njmp return                   # line 14\n```\n\n\n在foo函数运行过程中，计算以下情况foo函数的执行周期数。（周期数计算从\n执行foo第一条指令开始，直到其返回指令ret完全通过流水线为止。另外假设\nfoo函数开始的若干条指令不会和foo函数体外的指令形成冒险。）\nn=-1：________；n=0：_________；n=2：_________",
+        "prompt": "4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# Array of 3 elements\narray:\n.quad return\n.quad L1\n.quad L2\n# void foo(long n, long *arr)\n# n in %rdi, arr in %rsi\nfoo:\nrrmovq %rdi, %rdx           # line 1\naddq %rdx, %rdx             # line 2\naddq %rdx, %rdx             # line 3\naddq %rdx, %rdx             # line 4\nirmovq array, %rcx          # line 5\naddq %rdx, %rcx             # line 6\nandq %rdi, %rdi             # line 7\njge *%rcx                    # line 8\nreturn:                       #\nret                       # line 9\nL2: #\nmrmovq 16(%rsi), %rcx      # line 10\nrmmovq %rcx, 8(%rsi)       # line 11\nL1:                            #\nmrmovq 8(%rsi), %rcx       # line 12\nrmmovq %rcx, (%rsi)        # line 13\njmp return                   # line 14\n```\n\n\n在foo函数运行过程中，计算以下情况foo函数的执行周期数。（周期数计算从\n执行foo第一条指令开始，直到其返回指令ret完全通过流水线为止。另外假设\nfoo函数开始的若干条指令不会和foo函数体外的指令形成冒险。）\nn=-1：{{blank:q4-n-negative-one}}；n=0：{{blank:q4-n-zero}}；n=2：{{blank:q4-n-two}}",
         "answer": "答案：n=-1：15；n=0：13；n=2：20\nn == -1: line 8分支预测错误，惩罚2个周期。一共9 + 2 + 4\n(trailing cycles for ret) = 15。\nn == 0: 一共9 + 4 (trailing cycles for ret) = 13。\nn == 1: line 12和13发生load/use hazard （不考虑加载转发），惩\n罚1个周期。一共12 + 1 + 4 (trailing cycles for ret) = 17。\nn == 2: line 12 和 line 13，以及line 10 和 line 11 各发生一次\nload/use hazard，共惩罚2个周期。一共14 + 2 + 4 (trailing\ncycles for ret) = 20。"
       },
       "group": {
@@ -5010,7 +5498,7 @@
       "exam": "2022期中",
       "questionNo": "第一题 11",
       "summary": "RISC/CISC的ISA特征描述",
-      "content": "11.下列 4 组对于 ISA 的描述, 它们分别符合(a)_____, (b)______,\n(c)______, (d)______, 的特点.\n(a) 某ISA中, 所有指令均不采用条件码\n(b) 某ISA中, 只有基址和偏移量寻址\n(c) 某ISA中, 执行一些指令需要经过复杂的译码电路\n(d) 某ISA中, 指令长度最短1字节, 最长15字节以上\nA. RISC, CISC, CISC, RISC\nB. RISC, RISC, CISC, CISC\nC. CISC, RISC, RISC, CISC\nD. CISC, CISC, RISC, RISC\n答案：B\n5\n\n\n不采用条件码, 符合RISC指令的特征. 只有基址和偏移量寻址, 寻址模式单一, 也\n符合RISC的描述. 具有复杂指令且需要经过复杂译码电路, 符合CISC的特征. 指\n令长度可变并且变化范围达到最少1字节最长15字节, 只能是CISC",
+      "content": "11.下列 4 组对于 ISA 的描述, 它们分别符合(a)_____, (b)______,\n(c)______, (d)______, 的特点.\n(a) 某ISA中, 所有指令均不采用条件码\n(b) 某ISA中, 只有基址和偏移量寻址\n(c) 某ISA中, 执行一些指令需要经过复杂的译码电路\n(d) 某ISA中, 指令长度最短1字节, 最长15字节以上\nA. RISC, CISC, CISC, RISC\nB. RISC, RISC, CISC, CISC\nC. CISC, RISC, RISC, CISC\nD. CISC, CISC, RISC, RISC\n答案：B\n不采用条件码, 符合RISC指令的特征. 只有基址和偏移量寻址, 寻址模式单一, 也\n符合RISC的描述. 具有复杂指令且需要经过复杂译码电路, 符合CISC的特征. 指\n令长度可变并且变化范围达到最少1字节最长15字节, 只能是CISC",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5055,7 +5543,7 @@
             "content": "CISC, CISC, RISC, RISC"
           }
         ],
-        "answer": "答案：B\n5\n\n\n不采用条件码, 符合RISC指令的特征. 只有基址和偏移量寻址, 寻址模式单一, 也\n符合RISC的描述. 具有复杂指令且需要经过复杂译码电路, 符合CISC的特征. 指\n令长度可变并且变化范围达到最少1字节最长15字节, 只能是CISC"
+        "answer": "答案：B\n不采用条件码, 符合RISC指令的特征. 只有基址和偏移量寻址, 寻址模式单一, 也\n符合RISC的描述. 具有复杂指令且需要经过复杂译码电路, 符合CISC的特征. 指\n令长度可变并且变化范围达到最少1字节最长15字节, 只能是CISC"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5085,7 +5573,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "11.下列 4 组对于 ISA 的描述, 它们分别符合(a)_____, (b)______,\n(c)______, (d)______, 的特点.\n(a) 某ISA中, 所有指令均不采用条件码\n(b) 某ISA中, 只有基址和偏移量寻址\n(c) 某ISA中, 执行一些指令需要经过复杂的译码电路\n(d) 某ISA中, 指令长度最短1字节, 最长15字节以上",
-        "answer": "答案：B\n5\n\n\n不采用条件码, 符合RISC指令的特征. 只有基址和偏移量寻址, 寻址模式单一, 也\n符合RISC的描述. 具有复杂指令且需要经过复杂译码电路, 符合CISC的特征. 指\n令长度可变并且变化范围达到最少1字节最长15字节, 只能是CISC"
+        "answer": "答案：B\n不采用条件码, 符合RISC指令的特征. 只有基址和偏移量寻址, 寻址模式单一, 也\n符合RISC的描述. 具有复杂指令且需要经过复杂译码电路, 符合CISC的特征. 指\n令长度可变并且变化范围达到最少1字节最长15字节, 只能是CISC"
       },
       "presentation": {
         "status": "ready",
@@ -5102,8 +5590,10 @@
       "exam": "2022期中",
       "questionNo": "第一题 12",
       "summary": "组合逻辑电路对应的HCL表达式",
-      "content": "12.对应下述组合电路的正确HCL表达式为：\nA. Bool out = ( a && b) || (!a && c)\nB. Bool out = (!a && b) || ( a && c)\nC. Bool out = ( a || b) && ( a || c)\nD. Bool out = ( a || b) && (!a || c)\n答案：D；本体主要考察组合逻辑电路和HCL表达式。逻辑电路由2个或门、1个\n与门、1个反向器构成，难度较易。",
-      "assets": [],
+      "content": "12.对应下述组合电路的正确HCL表达式为：\n\n![组合电路图](assets/期中/2022期中-带答案/p6-img1.jpg)\nA. Bool out = ( a && b) || (!a && c)\nB. Bool out = (!a && b) || ( a && c)\nC. Bool out = ( a || b) && ( a || c)\nD. Bool out = ( a || b) && (!a || c)\n答案：D；本体主要考察组合逻辑电路和HCL表达式。逻辑电路由2个或门、1个\n与门、1个反向器构成，难度较易。",
+      "assets": [
+        "assets/期中/2022期中-带答案/p6-img1.jpg"
+      ],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -5128,7 +5618,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "12.对应下述组合电路的正确HCL表达式为：",
+        "stem": "12.对应下述组合电路的正确HCL表达式为：\n\n![组合电路图](assets/期中/2022期中-带答案/p6-img1.jpg)",
         "choices": [
           {
             "key": "A",
@@ -5176,7 +5666,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "12.对应下述组合电路的正确HCL表达式为：",
+        "prompt": "12.对应下述组合电路的正确HCL表达式为：\n\n![组合电路图](assets/期中/2022期中-带答案/p6-img1.jpg)",
         "answer": "答案：D；本体主要考察组合逻辑电路和HCL表达式。逻辑电路由2个或门、1个\n与门、1个反向器构成，难度较易。"
       },
       "presentation": {
@@ -5286,10 +5776,8 @@
       "exam": "2022期中",
       "questionNo": "第一题 14",
       "summary": "SEQ新增条件传送立即数指令（行218附图归属存疑）",
-      "content": "14.如果在SEQ中添加一条新的指令ircmovq，其作用是根据当前处理器的条件\n码来判断是否需要将一个立即数传送到寄存器内，则下列叙述错误的是：\nA． 需要增加一个新的icode标识符\nB． 该指令的长度为10字节\nC． 只需要修改SEQ处理器的执行阶段的硬件逻辑\nD． 在执行阶段valE信号的值会被赋值为valC的值\n答案：C，可以和rrmovq指令共用一个icode\n6\n\n![图](assets/期中/2022期中-带答案/p6-img1.jpg)",
-      "assets": [
-        "assets/期中/2022期中-带答案/p6-img1.jpg"
-      ],
+      "content": "14.如果在SEQ中添加一条新的指令ircmovq，其作用是根据当前处理器的条件\n码来判断是否需要将一个立即数传送到寄存器内，则下列叙述错误的是：\nA． 需要增加一个新的icode标识符\nB． 该指令的长度为10字节\nC． 只需要修改SEQ处理器的执行阶段的硬件逻辑\nD． 在执行阶段valE信号的值会被赋值为valC的值\n答案：C，可以和rrmovq指令共用一个icode",
+      "assets": [],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -5333,7 +5821,7 @@
             "content": "在执行阶段valE信号的值会被赋值为valC的值"
           }
         ],
-        "answer": "答案：C，可以和rrmovq指令共用一个icode\n6\n\n![图](assets/期中/2022期中-带答案/p6-img1.jpg)"
+        "answer": "答案：C，可以和rrmovq指令共用一个icode"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5363,7 +5851,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "14.如果在SEQ中添加一条新的指令ircmovq，其作用是根据当前处理器的条件\n码来判断是否需要将一个立即数传送到寄存器内，则下列叙述错误的是：",
-        "answer": "答案：C，可以和rrmovq指令共用一个icode\n6\n\n![图](assets/期中/2022期中-带答案/p6-img1.jpg)"
+        "answer": "答案：C，可以和rrmovq指令共用一个icode"
       },
       "presentation": {
         "status": "ready",
@@ -5380,7 +5868,7 @@
       "exam": "2022期中",
       "questionNo": "第四题",
       "summary": "Y86-64新增cpopqXX条件POP指令（SEQ/PIPE与冒险）",
-      "content": "第四题 请分析Y86-64 ISA中新加入的一组条件POP指令：cpopqXX，cpopqXX\n和popq指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组cpopqXX指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器rA中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对rA、栈指针都无影响。\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\nStage  cpopqXX rA\nicode:ifun\nM1[PC]\nFetch  rA:rB\nM1[PC+1]\nvalP\nPC+2\nDecode\nExecute\nMemory\nWrite back\nPC update  PC\nvalP\n```\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\nrA和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```\nword e_dstE = [\n  (E_icode in {IRRMOVQ, ①\n) : RNONE;\n  1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == ①\n) : RNONE;\n    1 :  E_dstM;\n]\n```\n3.和popq与mrmovq相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了cpopqXX 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件：E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {     ,      }\n控制逻辑：（选填stall, bubble和normal）\n```\nF  D  E  M  W\n      normal  normal\n```\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xor  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n```\n\n\n```\n    jne  L1  # Line 9\nret    # Line 10\n```\n假设条件分支总是预测跳转, 计算在输入的n值取1和3时，函数foo执行的周期\n止。另外在调用foo之前，处理器已经执行过足够多的nop指令。）\nn为1时候需要执行          个周期；n为3时候需要执行          个周期。\n\n\n\n\n4\n} && ②\n&& ②\n数。\n（周期数计算从执行foo第一条指令开始，直到其返回指令ret完全通过流水线为",
+      "content": "第四题 请分析 Y86-64 ISA 中新加入的一组条件 POP 指令 cpopqXX。cpopqXX 和 popq 指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组cpopqXX指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器rA中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对rA、栈指针都无影响。\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\nStage  cpopqXX rA\nicode:ifun\nM1[PC]\nFetch  rA:rB\nM1[PC+1]\nvalP\nPC+2\nDecode\nExecute\nMemory\nWrite back\nPC update  PC\nvalP\n```\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\nrA和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```\nword e_dstE = [\n  (E_icode in {IRRMOVQ, ①\n) : RNONE;\n  1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == ①\n) : RNONE;\n    1 :  E_dstM;\n]\n```\n3.和popq与mrmovq相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了cpopqXX 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件：E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {     ,      }\n控制逻辑：（选填stall, bubble和normal）\n```\nF  D  E  M  W\n      normal  normal\n```\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xor  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n```\n\n\n```\n    jne  L1  # Line 9\nret    # Line 10\n```\n假设条件分支总是预测跳转, 计算在输入的n值取1和3时，函数foo执行的周期\n止。另外在调用foo之前，处理器已经执行过足够多的nop指令。）\nn为1时候需要执行          个周期；n为3时候需要执行          个周期。\n1. **SEQ 处理器：**\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`；`rA:rB ← M1[PC+1]`；`valP ← PC+2` |\n| Decode | `valB ← R[%rsp]`；`valA ← R[%rsp]` |\n| Execute | `valE ← valB + 8`；`Cnd ← Cond(CC, ifun)` |\n| Memory | `valM ← M8[valA]` |\n| Write back | 若 `Cnd`，则 `R[%rsp] ← valE`；若 `Cnd`，则 `R[rA] ← valM` |\n| PC update | `PC ← valP` |\n\n（每空 1 分，共 7 分）\n\n2. ① `ICPOPQXX`（原卷答案键写作 `IPOPQ`，并注明 `ICPOPQXX` 也算对）；② `!e_Cnd`。（每空 1 分，共 2 分）\n\n3. 触发条件：`E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {d_srcA, d_srcB}`。\n\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| stall | stall | bubble | normal | normal |\n\n（共 3 分。）\n\n4. `n=1` 时需要执行 17 个周期；`n=3` 时需要执行 29 个周期。\n\n原卷解析：循环过程为 Line 4–9，共 6 条。`n=3` 时为 `4 + 3 + 6×3 + 1 + 2 + 1 = 29`；`n=1` 时为 `4 + 3 + 6 + 1 + 2 + 1 = 17`。周期数从执行 `foo` 第一条指令开始，直到返回指令 `ret` 完全通过流水线为止。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5406,9 +5894,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "第四题 请分析Y86-64 ISA中新加入的一组条件POP指令：cpopqXX，cpopqXX\n和popq指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组cpopqXX指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器rA中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对rA、栈指针都无影响。\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\nStage  cpopqXX rA\nicode:ifun\nM1[PC]\nFetch  rA:rB\nM1[PC+1]\nvalP\nPC+2\nDecode\nExecute\nMemory\nWrite back\nPC update  PC\nvalP\n```\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\nrA和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```\nword e_dstE = [\n  (E_icode in {IRRMOVQ, ①\n) : RNONE;\n  1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == ①\n) : RNONE;\n    1 :  E_dstM;\n]\n```\n3.和popq与mrmovq相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了cpopqXX 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件：E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {     ,      }\n控制逻辑：（选填stall, bubble和normal）\n```\nF  D  E  M  W\n      normal  normal\n```\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xor  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n```\n\n\n```\n    jne  L1  # Line 9\nret    # Line 10\n```\n假设条件分支总是预测跳转, 计算在输入的n值取1和3时，函数foo执行的周期\n止。另外在调用foo之前，处理器已经执行过足够多的nop指令。）\nn为1时候需要执行          个周期；n为3时候需要执行          个周期。",
+        "stem": "第四题 请分析 Y86-64 ISA 中新加入的一组条件 POP 指令 cpopqXX。cpopqXX 和 popq 指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组cpopqXX指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器rA中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对rA、栈指针都无影响。\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\nStage  cpopqXX rA\nicode:ifun\nM1[PC]\nFetch  rA:rB\nM1[PC+1]\nvalP\nPC+2\nDecode\nExecute\nMemory\nWrite back\nPC update  PC\nvalP\n```\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\nrA和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```\nword e_dstE = [\n  (E_icode in {IRRMOVQ, ①\n) : RNONE;\n  1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == ①\n) : RNONE;\n    1 :  E_dstM;\n]\n```\n3.和popq与mrmovq相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了cpopqXX 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件：E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {     ,      }\n控制逻辑：（选填stall, bubble和normal）\n```\nF  D  E  M  W\n      normal  normal\n```\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xor  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n```\n\n\n```\n    jne  L1  # Line 9\nret    # Line 10\n```\n假设条件分支总是预测跳转, 计算在输入的n值取1和3时，函数foo执行的周期\n止。另外在调用foo之前，处理器已经执行过足够多的nop指令。）\nn为1时候需要执行          个周期；n为3时候需要执行          个周期。",
         "choices": [],
-        "answer": "\n\n\n\n4\n} && ②\n&& ②\n数。\n（周期数计算从执行foo第一条指令开始，直到其返回指令ret完全通过流水线为"
+        "answer": "1. **SEQ 处理器：**\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`；`rA:rB ← M1[PC+1]`；`valP ← PC+2` |\n| Decode | `valB ← R[%rsp]`；`valA ← R[%rsp]` |\n| Execute | `valE ← valB + 8`；`Cnd ← Cond(CC, ifun)` |\n| Memory | `valM ← M8[valA]` |\n| Write back | 若 `Cnd`，则 `R[%rsp] ← valE`；若 `Cnd`，则 `R[rA] ← valM` |\n| PC update | `PC ← valP` |\n\n（每空 1 分，共 7 分）\n\n2. ① `ICPOPQXX`（原卷答案键写作 `IPOPQ`，并注明 `ICPOPQXX` 也算对）；② `!e_Cnd`。（每空 1 分，共 2 分）\n\n3. 触发条件：`E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {d_srcA, d_srcB}`。\n\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| stall | stall | bubble | normal | normal |\n\n（共 3 分。）\n\n4. `n=1` 时需要执行 17 个周期；`n=3` 时需要执行 29 个周期。\n\n原卷解析：循环过程为 Line 4–9，共 6 条。`n=3` 时为 `4 + 3 + 6×3 + 1 + 2 + 1 = 29`；`n=1` 时为 `4 + 3 + 6 + 1 + 2 + 1 = 17`。周期数从执行 `foo` 第一条指令开始，直到返回指令 `ret` 完全通过流水线为止。"
       },
       "interaction": {
         "kind": "short-answer",
@@ -5416,8 +5904,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题 请分析Y86-64 ISA中新加入的一组条件POP指令：cpopqXX，cpopqXX\n和popq指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组cpopqXX指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器rA中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对rA、栈指针都无影响。\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\nStage  cpopqXX rA\nicode:ifun\nM1[PC]\nFetch  rA:rB\nM1[PC+1]\nvalP\nPC+2\nDecode\nExecute\nMemory\nWrite back\nPC update  PC\nvalP\n```\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\nrA和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```\nword e_dstE = [\n  (E_icode in {IRRMOVQ, ①\n) : RNONE;\n  1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == ①\n) : RNONE;\n    1 :  E_dstM;\n]\n```\n3.和popq与mrmovq相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了cpopqXX 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件：E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {     ,      }\n控制逻辑：（选填stall, bubble和normal）\n```\nF  D  E  M  W\n      normal  normal\n```\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xor  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n```\n\n\n```\n    jne  L1  # Line 9\nret    # Line 10\n```\n假设条件分支总是预测跳转, 计算在输入的n值取1和3时，函数foo执行的周期\n止。另外在调用foo之前，处理器已经执行过足够多的nop指令。）\nn为1时候需要执行          个周期；n为3时候需要执行          个周期。",
-        "answer": "\n\n\n\n4\n} && ②\n&& ②\n数。\n（周期数计算从执行foo第一条指令开始，直到其返回指令ret完全通过流水线为"
+        "prompt": "第四题 请分析 Y86-64 ISA 中新加入的一组条件 POP 指令 cpopqXX。cpopqXX 和 popq 指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组cpopqXX指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器rA中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对rA、栈指针都无影响。\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\nStage  cpopqXX rA\nicode:ifun\nM1[PC]\nFetch  rA:rB\nM1[PC+1]\nvalP\nPC+2\nDecode\nExecute\nMemory\nWrite back\nPC update  PC\nvalP\n```\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\nrA和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```\nword e_dstE = [\n  (E_icode in {IRRMOVQ, ①\n) : RNONE;\n  1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == ①\n) : RNONE;\n    1 :  E_dstM;\n]\n```\n3.和popq与mrmovq相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了cpopqXX 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件：E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {     ,      }\n控制逻辑：（选填stall, bubble和normal）\n```\nF  D  E  M  W\n      normal  normal\n```\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xor  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n```\n\n\n```\n    jne  L1  # Line 9\nret    # Line 10\n```\n假设条件分支总是预测跳转, 计算在输入的n值取1和3时，函数foo执行的周期\n止。另外在调用foo之前，处理器已经执行过足够多的nop指令。）\nn为1时候需要执行          个周期；n为3时候需要执行          个周期。",
+        "answer": "1. **SEQ 处理器：**\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`；`rA:rB ← M1[PC+1]`；`valP ← PC+2` |\n| Decode | `valB ← R[%rsp]`；`valA ← R[%rsp]` |\n| Execute | `valE ← valB + 8`；`Cnd ← Cond(CC, ifun)` |\n| Memory | `valM ← M8[valA]` |\n| Write back | 若 `Cnd`，则 `R[%rsp] ← valE`；若 `Cnd`，则 `R[rA] ← valM` |\n| PC update | `PC ← valP` |\n\n（每空 1 分，共 7 分）\n\n2. ① `ICPOPQXX`（原卷答案键写作 `IPOPQ`，并注明 `ICPOPQXX` 也算对）；② `!e_Cnd`。（每空 1 分，共 2 分）\n\n3. 触发条件：`E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {d_srcA, d_srcB}`。\n\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| stall | stall | bubble | normal | normal |\n\n（共 3 分。）\n\n4. `n=1` 时需要执行 17 个周期；`n=3` 时需要执行 29 个周期。\n\n原卷解析：循环过程为 Line 4–9，共 6 条。`n=3` 时为 `4 + 3 + 6×3 + 1 + 2 + 1 = 29`；`n=1` 时为 `4 + 3 + 6 + 1 + 2 + 1 = 17`。周期数从执行 `foo` 第一条指令开始，直到返回指令 `ret` 完全通过流水线为止。"
       },
       "presentation": {
         "status": "ready",
@@ -5434,7 +5922,7 @@
       "exam": "2023期中",
       "questionNo": "第一题 11",
       "summary": "用MUX4实现HCL表达式",
-      "content": "11. 采用下列的四选一（MUX4）实现HCL表达式：out=（A || C）&& （B ||\nC），连接正确的是：\n```\nWord out =  [ !s1&& !s0: I0;   I0\n!s1:       I1;  I1\n```\n!s0:       I2;  I2 M4U:1X out\n1 :        I3  I3\n]；  S1 S0\nA.S1=A, S0=C, I0= 0, I1= 1，I2=B，I3=0；\nB.S1=B, S0=C, I0= 0, I1= 0，I2=A，I3=1；\n\n\nC.S1=A, S0=B, I0= C, I1= C，I2=C，I3=1；\nD.S1=A, S0=B, I0= C, I1= C，I2=C，I3=0。\n答案：C",
+      "content": "11. 采用下列的四选一（MUX4）实现HCL表达式：out=（A || C）&& （B ||\nC），连接正确的是：\n```\nWord out = [\n    !s1 && !s0: I0;\n    !s1:        I1;\n    !s0:        I2;\n    1:          I3;\n];\n```\nA.S1=A, S0=C, I0= 0, I1= 1，I2=B，I3=0；\nB.S1=B, S0=C, I0= 0, I1= 0，I2=A，I3=1；\n\n\nC.S1=A, S0=B, I0= C, I1= C，I2=C，I3=1；\nD.S1=A, S0=B, I0= C, I1= C，I2=C，I3=0。\n答案：C",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5459,7 +5947,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "11. 采用下列的四选一（MUX4）实现HCL表达式：out=（A || C）&& （B ||\nC），连接正确的是：\n```\nWord out =  [ !s1&& !s0: I0;   I0\n!s1:       I1;  I1\n```\n!s0:       I2;  I2 M4U:1X out\n1 :        I3  I3\n]；  S1 S0",
+        "stem": "11. 采用下列的四选一（MUX4）实现HCL表达式：out=（A || C）&& （B ||\nC），连接正确的是：\n```\nWord out = [\n    !s1 && !s0: I0;\n    !s1:        I1;\n    !s0:        I2;\n    1:          I3;\n];\n```",
         "choices": [
           {
             "key": "A",
@@ -5507,7 +5995,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "11. 采用下列的四选一（MUX4）实现HCL表达式：out=（A || C）&& （B ||\nC），连接正确的是：\n```\nWord out =  [ !s1&& !s0: I0;   I0\n!s1:       I1;  I1\n```\n!s0:       I2;  I2 M4U:1X out\n1 :        I3  I3\n]；  S1 S0",
+        "prompt": "11. 采用下列的四选一（MUX4）实现HCL表达式：out=（A || C）&& （B ||\nC），连接正确的是：\n```\nWord out = [\n    !s1 && !s0: I0;\n    !s1:        I1;\n    !s0:        I2;\n    1:          I3;\n];\n```",
         "answer": "答案：C"
       },
       "presentation": {
@@ -5961,7 +6449,7 @@
       "exam": "2024期中",
       "questionNo": "第四题",
       "summary": "PIPE前递HCL补全、Load/Use冒险与新数据通路",
-      "content": "第四题（20分）\n(a)\n\n![Y86-64 简单流水线处理器（PIPE）实现图（图(a)）](assets/期中/2024期中-带答案/p18-pipe-impl-a.png)\n\n图(a)是在教材中 Y86-64 的简单流水线处理器（PIPE）实现图。其中部分展示\n了通过数据前递（forwarding）解决数据冒险(hazard)的流程。\n1.  （7分）若当前指令从内存中加载了数据至一个寄存器中，且该寄存器是下一\n条指令的源寄存器，那么通过数据前递的方式可以减少流水线的暂停（stall）。\n请根据前递的工作原理，补全下列HCL描述语句，以实现正确的d_valA的\n选择。\n```\nword d_valA = [\n      D_icode in {ICALL,IJXX } : ___(1)___;\n      d_srcA == e_dstE : ___(2)___;\n      d_srcA == M_dstM : ___(3)___;\n      d_srcA == M_dstE : ___(4)___;\n      d_srcA == W_dstM : ___(5)___;\n      d_srcA == W_dstE : ___(6)___;\n      1 : ___(7)___;\n]\n```\n2.  （3分）考虑如下两条Y86-64指令系统的指令顺序完成执行：\n```\n1    mrmovq 0(%rcx),%rdx\n2    pushq %rdx\n```\n这两条指令的执行会导致流水线中出现Load/Use数据冒险。当指令1执行到(8)\n阶段时，会获得对应内存地址中的数据，该数据将会以信号(9)            进\n行数据前递。此时按照图(a)的方式，仍然需要停顿来正确执行指令2，流水线需\n要停顿(10)             个周期来保证程序执行正确。\n3.  （3分）针对第2小题中的问题，可以通过设计一条额外的数据通路(path)\n进行前递的方式来解决这种冲突，从而使得指令1、2之间无需插入气泡。这\n条数据通路应当从(11)              阶段将数据前递至(12)\n阶段，用于选择流水线寄存器(13)                 的值。\n4.  （3分）补充通路后的流水线处理器局部如图(b)所示\n\n![补充数据通路后的流水线处理器局部（图(b)）](assets/期中/2024期中-带答案/p20-pipe-local-b.png)\n\n请根据图示和设计逻辑，补全下列HCL描述语句，以实现正确的e_valA的选择。\n```\nword e_valA = [\n      E_icode in { IPUSHQ, IRMMOVQ } && E_srcA ==\n___(14)__        _  :    (15)              ;\n1 :   (16)                ;\n]\n```\n5.  （4分）在补充了第4小题中的功能后，流水线依然存在需要暂停才可以处理\n的数据冒险情况。例如，下两条指令顺序执行：\n```\n3    popq %rdx\n4    rmmovq %rax,0(%rdx)\n```\n这两条指令会导致流水线中出现 Load/Use 数据冒险，请用 stall、bubble、\nnormal 填写下面的控制信号条件表，说明当前流水线对于这种冒险的处理方式。\n```\nFetch  Decode  Execute  Memory  Write back\n(17)  (18)  (19)  (20)  normal\n```\n8\n9",
+      "content": "第四题（20分）\n(a)\n\n![Y86-64 简单流水线处理器（PIPE）实现图（图(a)）](assets/期中/2024期中-带答案/p18-pipe-impl-a.png)\n\n图(a)是在教材中 Y86-64 的简单流水线处理器（PIPE）实现图。其中部分展示\n了通过数据前递（forwarding）解决数据冒险(hazard)的流程。\n1.  （7分）若当前指令从内存中加载了数据至一个寄存器中，且该寄存器是下一\n条指令的源寄存器，那么通过数据前递的方式可以减少流水线的暂停（stall）。\n请根据前递的工作原理，补全下列HCL描述语句，以实现正确的d_valA的\n选择。\n```\nword d_valA = [\n      D_icode in {ICALL,IJXX } : ___(1)___;\n      d_srcA == e_dstE : ___(2)___;\n      d_srcA == M_dstM : ___(3)___;\n      d_srcA == M_dstE : ___(4)___;\n      d_srcA == W_dstM : ___(5)___;\n      d_srcA == W_dstE : ___(6)___;\n      1 : ___(7)___;\n]\n```\n2.  （3分）考虑如下两条Y86-64指令系统的指令顺序完成执行：\n```\n1    mrmovq 0(%rcx),%rdx\n2    pushq %rdx\n```\n这两条指令的执行会导致流水线中出现Load/Use数据冒险。当指令1执行到(8)\n阶段时，会获得对应内存地址中的数据，该数据将会以信号(9)            进\n行数据前递。此时按照图(a)的方式，仍然需要停顿来正确执行指令2，流水线需\n要停顿(10)             个周期来保证程序执行正确。\n3.  （3分）针对第2小题中的问题，可以通过设计一条额外的数据通路(path)\n进行前递的方式来解决这种冲突，从而使得指令1、2之间无需插入气泡。这\n条数据通路应当从(11)              阶段将数据前递至(12)\n阶段，用于选择流水线寄存器(13)                 的值。\n4.  （3分）补充通路后的流水线处理器局部如图(b)所示\n\n![补充数据通路后的流水线处理器局部（图(b)）](assets/期中/2024期中-带答案/p20-pipe-local-b.png)\n\n请根据图示和设计逻辑，补全下列HCL描述语句，以实现正确的e_valA的选择。\n```\nword e_valA = [\n      E_icode in { IPUSHQ, IRMMOVQ } && E_srcA ==\n___(14)__        _  :    (15)              ;\n1 :   (16)                ;\n]\n```\n5.  （4分）在补充了第4小题中的功能后，流水线依然存在需要暂停才可以处理\n的数据冒险情况。例如，下两条指令顺序执行：\n```\n3    popq %rdx\n4    rmmovq %rax,0(%rdx)\n```\n这两条指令会导致流水线中出现 Load/Use 数据冒险，请用 stall、bubble、\nnormal 填写下面的控制信号条件表，说明当前流水线对于这种冒险的处理方式。\n```\nFetch  Decode  Execute  Memory  Write back\n(17)  (18)  (19)  (20)  normal\n```\n1. （1）`D_valP`；（2）`e_valE`；（3）`m_valM`；（4）`M_valE`；（5）`W_valM`；（6）`W_valE`；（7）`d_rvalA`。\n2. （8）Memory（访存）；（9）`m_valM`；（10）1。\n3. （11）Memory（访存）；（12）Execute（执行）；（13）`M_valA`。\n4. （14）`M_dstM`；（15）`m_valM`；（16）`E_valA`。\n5. （17）stall；（18）stall；（19）bubble；（20）normal；Write back 为 normal。",
       "assets": [
         "assets/期中/2024期中-带答案/p18-pipe-impl-a.png",
         "assets/期中/2024期中-带答案/p20-pipe-local-b.png"
@@ -5991,7 +6479,7 @@
         "selection": null,
         "stem": "第四题（20分）\n(a)\n\n![Y86-64 简单流水线处理器（PIPE）实现图（图(a)）](assets/期中/2024期中-带答案/p18-pipe-impl-a.png)\n\n图(a)是在教材中 Y86-64 的简单流水线处理器（PIPE）实现图。其中部分展示\n了通过数据前递（forwarding）解决数据冒险(hazard)的流程。\n1.  （7分）若当前指令从内存中加载了数据至一个寄存器中，且该寄存器是下一\n条指令的源寄存器，那么通过数据前递的方式可以减少流水线的暂停（stall）。\n请根据前递的工作原理，补全下列HCL描述语句，以实现正确的d_valA的\n选择。\n```\nword d_valA = [\n      D_icode in {ICALL,IJXX } : ___(1)___;\n      d_srcA == e_dstE : ___(2)___;\n      d_srcA == M_dstM : ___(3)___;\n      d_srcA == M_dstE : ___(4)___;\n      d_srcA == W_dstM : ___(5)___;\n      d_srcA == W_dstE : ___(6)___;\n      1 : ___(7)___;\n]\n```\n2.  （3分）考虑如下两条Y86-64指令系统的指令顺序完成执行：\n```\n1    mrmovq 0(%rcx),%rdx\n2    pushq %rdx\n```\n这两条指令的执行会导致流水线中出现Load/Use数据冒险。当指令1执行到(8)\n阶段时，会获得对应内存地址中的数据，该数据将会以信号(9)            进\n行数据前递。此时按照图(a)的方式，仍然需要停顿来正确执行指令2，流水线需\n要停顿(10)             个周期来保证程序执行正确。\n3.  （3分）针对第2小题中的问题，可以通过设计一条额外的数据通路(path)\n进行前递的方式来解决这种冲突，从而使得指令1、2之间无需插入气泡。这\n条数据通路应当从(11)              阶段将数据前递至(12)\n阶段，用于选择流水线寄存器(13)                 的值。\n4.  （3分）补充通路后的流水线处理器局部如图(b)所示\n\n![补充数据通路后的流水线处理器局部（图(b)）](assets/期中/2024期中-带答案/p20-pipe-local-b.png)\n\n请根据图示和设计逻辑，补全下列HCL描述语句，以实现正确的e_valA的选择。\n```\nword e_valA = [\n      E_icode in { IPUSHQ, IRMMOVQ } && E_srcA ==\n___(14)__        _  :    (15)              ;\n1 :   (16)                ;\n]\n```\n5.  （4分）在补充了第4小题中的功能后，流水线依然存在需要暂停才可以处理\n的数据冒险情况。例如，下两条指令顺序执行：\n```\n3    popq %rdx\n4    rmmovq %rax,0(%rdx)\n```\n这两条指令会导致流水线中出现 Load/Use 数据冒险，请用 stall、bubble、\nnormal 填写下面的控制信号条件表，说明当前流水线对于这种冒险的处理方式。\n```\nFetch  Decode  Execute  Memory  Write back\n(17)  (18)  (19)  (20)  normal\n```",
         "choices": [],
-        "answer": "8\n9"
+        "answer": "1. （1）`D_valP`；（2）`e_valE`；（3）`m_valM`；（4）`M_valE`；（5）`W_valM`；（6）`W_valE`；（7）`d_rvalA`。\n2. （8）Memory（访存）；（9）`m_valM`；（10）1。\n3. （11）Memory（访存）；（12）Execute（执行）；（13）`M_valA`。\n4. （14）`M_dstM`；（15）`m_valM`；（16）`E_valA`。\n5. （17）stall；（18）stall；（19）bubble；（20）normal；Write back 为 normal。"
       },
       "interaction": {
         "kind": "fill",
@@ -6000,7 +6488,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "第四题（20分）\n(a)\n\n![Y86-64 简单流水线处理器（PIPE）实现图（图(a)）](assets/期中/2024期中-带答案/p18-pipe-impl-a.png)\n\n图(a)是在教材中 Y86-64 的简单流水线处理器（PIPE）实现图。其中部分展示\n了通过数据前递（forwarding）解决数据冒险(hazard)的流程。\n1.  （7分）若当前指令从内存中加载了数据至一个寄存器中，且该寄存器是下一\n条指令的源寄存器，那么通过数据前递的方式可以减少流水线的暂停（stall）。\n请根据前递的工作原理，补全下列HCL描述语句，以实现正确的d_valA的\n选择。\n```\nword d_valA = [\n      D_icode in {ICALL,IJXX } : ___(1)___;\n      d_srcA == e_dstE : ___(2)___;\n      d_srcA == M_dstM : ___(3)___;\n      d_srcA == M_dstE : ___(4)___;\n      d_srcA == W_dstM : ___(5)___;\n      d_srcA == W_dstE : ___(6)___;\n      1 : ___(7)___;\n]\n```\n2.  （3分）考虑如下两条Y86-64指令系统的指令顺序完成执行：\n```\n1    mrmovq 0(%rcx),%rdx\n2    pushq %rdx\n```\n这两条指令的执行会导致流水线中出现Load/Use数据冒险。当指令1执行到(8)\n阶段时，会获得对应内存地址中的数据，该数据将会以信号(9)            进\n行数据前递。此时按照图(a)的方式，仍然需要停顿来正确执行指令2，流水线需\n要停顿(10)             个周期来保证程序执行正确。\n3.  （3分）针对第2小题中的问题，可以通过设计一条额外的数据通路(path)\n进行前递的方式来解决这种冲突，从而使得指令1、2之间无需插入气泡。这\n条数据通路应当从(11)              阶段将数据前递至(12)\n阶段，用于选择流水线寄存器(13)                 的值。\n4.  （3分）补充通路后的流水线处理器局部如图(b)所示\n\n![补充数据通路后的流水线处理器局部（图(b)）](assets/期中/2024期中-带答案/p20-pipe-local-b.png)\n\n请根据图示和设计逻辑，补全下列HCL描述语句，以实现正确的e_valA的选择。\n```\nword e_valA = [\n      E_icode in { IPUSHQ, IRMMOVQ } && E_srcA ==\n___(14)__        _  :    (15)              ;\n1 :   (16)                ;\n]\n```\n5.  （4分）在补充了第4小题中的功能后，流水线依然存在需要暂停才可以处理\n的数据冒险情况。例如，下两条指令顺序执行：\n```\n3    popq %rdx\n4    rmmovq %rax,0(%rdx)\n```\n这两条指令会导致流水线中出现 Load/Use 数据冒险，请用 stall、bubble、\nnormal 填写下面的控制信号条件表，说明当前流水线对于这种冒险的处理方式。\n```\nFetch  Decode  Execute  Memory  Write back\n(17)  (18)  (19)  (20)  normal\n```",
-        "answer": "8\n9"
+        "answer": "1. （1）`D_valP`；（2）`e_valE`；（3）`m_valM`；（4）`M_valE`；（5）`W_valM`；（6）`W_valE`；（7）`d_rvalA`。\n2. （8）Memory（访存）；（9）`m_valM`；（10）1。\n3. （11）Memory（访存）；（12）Execute（执行）；（13）`M_valA`。\n4. （14）`M_dstM`；（15）`m_valM`；（16）`E_valA`。\n5. （17）stall；（18）stall；（19）bubble；（20）normal；Write back 为 normal。"
       },
       "presentation": {
         "status": "ready",
@@ -6381,7 +6869,7 @@
       "exam": "2013期末",
       "questionNo": "第三题",
       "summary": "组合逻辑单元流水化与吞吐率计算",
-      "content": "第三题 （12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入在CD间（1分）\n1000/(80+40+60+20) = 1000/200= 5GIPS（过程1分，结果1分）\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入在BC间和DE间（1分）\n1000/(80+40+20) = 1000/140 = 7.143 GIPS（过程1分，结果1分）\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入AB间、CD间、DE间（1分）\n1000/(100+20) = 1000/120 = 8.33 GIPS（过程1分，结果1分）\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。\n至少划分成5级（1分）\n1000/(80+20) = 10 GIPS（过程1分，结果1分）\n11\n\n![图](assets/期末/2013期末-带答案/p11-img1.jpg)\n1）插入在CD间（1分）\n1000/(80+40+60+20) = 1000/200= 5GIPS（过程1分，结果1分）\n2）插入在BC间和DE间（1分）\n1000/(80+40+20) = 1000/140 = 7.143 GIPS（过程1分，结果1分）\n3）插入AB间、CD间、DE间（1分）\n1000/(100+20) = 1000/120 = 8.33 GIPS（过程1分，结果1分）\n4）至少划分成5级（1分）\n1000/(80+20) = 10 GIPS（过程1分，结果1分）",
+      "content": "第三题 （12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。（3分）\n\n![图](assets/期末/2013期末-带答案/p11-img1.jpg)\n1）插入在CD间（1分）\n1000/(80+40+60+20) = 1000/200= 5GIPS（过程1分，结果1分）\n2）插入在BC间和DE间（1分）\n1000/(80+40+20) = 1000/140 = 7.143 GIPS（过程1分，结果1分）\n3）插入AB间、CD间、DE间（1分）\n1000/(100+20) = 1000/120 = 8.33 GIPS（过程1分，结果1分）\n4）至少划分成5级（1分）\n1000/(80+20) = 10 GIPS（过程1分，结果1分）",
       "assets": [
         "assets/期末/2013期末-带答案/p11-img1.jpg"
       ],
@@ -6403,7 +6891,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "第三题 （12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入在CD间（1分）\n1000/(80+40+60+20) = 1000/200= 5GIPS（过程1分，结果1分）\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入在BC间和DE间（1分）\n1000/(80+40+20) = 1000/140 = 7.143 GIPS（过程1分，结果1分）\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入AB间、CD间、DE间（1分）\n1000/(100+20) = 1000/120 = 8.33 GIPS（过程1分，结果1分）\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。\n至少划分成5级（1分）\n1000/(80+20) = 10 GIPS（过程1分，结果1分）\n11\n\n![图](assets/期末/2013期末-带答案/p11-img1.jpg)",
+        "stem": "第三题 （12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。（3分）\n\n![图](assets/期末/2013期末-带答案/p11-img1.jpg)",
         "choices": [],
         "answer": "1）插入在CD间（1分）\n1000/(80+40+60+20) = 1000/200= 5GIPS（过程1分，结果1分）\n2）插入在BC间和DE间（1分）\n1000/(80+40+20) = 1000/140 = 7.143 GIPS（过程1分，结果1分）\n3）插入AB间、CD间、DE间（1分）\n1000/(100+20) = 1000/120 = 8.33 GIPS（过程1分，结果1分）\n4）至少划分成5级（1分）\n1000/(80+20) = 10 GIPS（过程1分，结果1分）"
       },
@@ -6413,7 +6901,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第三题 （12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入在CD间（1分）\n1000/(80+40+60+20) = 1000/200= 5GIPS（过程1分，结果1分）\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入在BC间和DE间（1分）\n1000/(80+40+20) = 1000/140 = 7.143 GIPS（过程1分，结果1分）\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。\n插入AB间、CD间、DE间（1分）\n1000/(100+20) = 1000/120 = 8.33 GIPS（过程1分，结果1分）\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。\n至少划分成5级（1分）\n1000/(80+20) = 10 GIPS（过程1分，结果1分）\n11\n\n![图](assets/期末/2013期末-带答案/p11-img1.jpg)",
+        "prompt": "第三题 （12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。（3分）\n\n![图](assets/期末/2013期末-带答案/p11-img1.jpg)",
         "answer": "1）插入在CD间（1分）\n1000/(80+40+60+20) = 1000/200= 5GIPS（过程1分，结果1分）\n2）插入在BC间和DE间（1分）\n1000/(80+40+20) = 1000/140 = 7.143 GIPS（过程1分，结果1分）\n3）插入AB间、CD间、DE间（1分）\n1000/(100+20) = 1000/120 = 8.33 GIPS（过程1分，结果1分）\n4）至少划分成5级（1分）\n1000/(80+20) = 10 GIPS（过程1分，结果1分）"
       },
       "presentation": {
@@ -7621,7 +8109,7 @@
       "exam": "2020期末",
       "questionNo": "第二题 2)",
       "summary": "Y86-64 代码在前递与分支预测下的周期数",
-      "content": "2） 需要执行如下Y86-64汇编代码，寄存器的初始状态如右下表格所示：\n```\n0x000  t:  mrmovq   (%rdi), %rbx\n0x002      addq     %rbx, %rax\n0x004      addq     $8, %rdi\n0x006      addq     $1, %rcx\n0x008      xorq     $8, %rcx\n0x00a      jne      t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| %rdi | 0x8008 |\n| %rax | 0 |\n| %rbx | 0 |\n| %rcx | 0 |\n\n流水线支持课上讲的数据前递（data forwarding），分支预测设计为“始终跳转（” predicted\nas taken），请问执行上述代码，需要 ______ 个时钟周期？\n答案：60 个时钟周期（来源：2019、2020期末-答案解析）\n解析：8 次循环，每轮 6 条指令且出现 1 次数据冒险需停 1 个周期 → 每轮 7 周期，8×7 = 56；分支预测错误（predicted taken）的 2 个周期惩罚已包含在 4 个 trailing cycle 中，共 60 个周期。",
+      "content": "2） 需要执行如下Y86-64汇编代码，寄存器的初始状态如右下表格所示：\n```\n0x000  t:  mrmovq   (%rdi), %rbx\n0x002      addq     %rbx, %rax\n0x004      addq     $8, %rdi\n0x006      addq     $1, %rcx\n0x008      xorq     $8, %rcx\n0x00a      jne      t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| %rdi | 0x8008 |\n| %rax | 0 |\n| %rbx | 0 |\n| %rcx | 0 |\n\n流水线支持课上讲的数据前递（data forwarding），分支预测设计为“始终跳转”（predicted\nas taken），请问执行上述代码，需要 ______ 个时钟周期？\n答案：60 个时钟周期（来源：2019、2020期末-答案解析）\n解析：8 次循环，每轮 6 条指令且出现 1 次数据冒险需停 1 个周期 → 每轮 7 周期，8×7 = 56；分支预测错误（predicted taken）的 2 个周期惩罚已包含在 4 个 trailing cycle 中，共 60 个周期。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7644,7 +8132,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2） 需要执行如下Y86-64汇编代码，寄存器的初始状态如右下表格所示：\n```\n0x000  t:  mrmovq   (%rdi), %rbx\n0x002      addq     %rbx, %rax\n0x004      addq     $8, %rdi\n0x006      addq     $1, %rcx\n0x008      xorq     $8, %rcx\n0x00a      jne      t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| %rdi | 0x8008 |\n| %rax | 0 |\n| %rbx | 0 |\n| %rcx | 0 |\n\n流水线支持课上讲的数据前递（data forwarding），分支预测设计为“始终跳转（” predicted\nas taken），请问执行上述代码，需要 ______ 个时钟周期？",
+        "stem": "2） 需要执行如下Y86-64汇编代码，寄存器的初始状态如右下表格所示：\n```\n0x000  t:  mrmovq   (%rdi), %rbx\n0x002      addq     %rbx, %rax\n0x004      addq     $8, %rdi\n0x006      addq     $1, %rcx\n0x008      xorq     $8, %rcx\n0x00a      jne      t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| %rdi | 0x8008 |\n| %rax | 0 |\n| %rbx | 0 |\n| %rcx | 0 |\n\n流水线支持课上讲的数据前递（data forwarding），分支预测设计为“始终跳转”（predicted\nas taken），请问执行上述代码，需要 ______ 个时钟周期？",
         "choices": [],
         "answer": "答案：60 个时钟周期（来源：2019、2020期末-答案解析）\n解析：8 次循环，每轮 6 条指令且出现 1 次数据冒险需停 1 个周期 → 每轮 7 周期，8×7 = 56；分支预测错误（predicted taken）的 2 个周期惩罚已包含在 4 个 trailing cycle 中，共 60 个周期。"
       },
@@ -7659,7 +8147,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2） 需要执行如下Y86-64汇编代码，寄存器的初始状态如右下表格所示：\n```\n0x000  t:  mrmovq   (%rdi), %rbx\n0x002      addq     %rbx, %rax\n0x004      addq     $8, %rdi\n0x006      addq     $1, %rcx\n0x008      xorq     $8, %rcx\n0x00a      jne      t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| %rdi | 0x8008 |\n| %rax | 0 |\n| %rbx | 0 |\n| %rcx | 0 |\n\n流水线支持课上讲的数据前递（data forwarding），分支预测设计为“始终跳转（” predicted\nas taken），请问执行上述代码，需要 ______ 个时钟周期？",
+        "prompt": "2） 需要执行如下Y86-64汇编代码，寄存器的初始状态如右下表格所示：\n```\n0x000  t:  mrmovq   (%rdi), %rbx\n0x002      addq     %rbx, %rax\n0x004      addq     $8, %rdi\n0x006      addq     $1, %rcx\n0x008      xorq     $8, %rcx\n0x00a      jne      t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| %rdi | 0x8008 |\n| %rax | 0 |\n| %rbx | 0 |\n| %rcx | 0 |\n\n流水线支持课上讲的数据前递（data forwarding），分支预测设计为“始终跳转”（predicted\nas taken），请问执行上述代码，需要 ______ 个时钟周期？",
         "answer": "答案：60 个时钟周期（来源：2019、2020期末-答案解析）\n解析：8 次循环，每轮 6 条指令且出现 1 次数据冒险需停 1 个周期 → 每轮 7 周期，8×7 = 56；分支预测错误（predicted taken）的 2 个周期惩罚已包含在 4 个 trailing cycle 中，共 60 个周期。"
       },
       "group": {
@@ -8424,14 +8912,25 @@
         "choices": [],
         "answer": "答案：E_icode；d_srcA；d_srcB"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "(1) 要解决\"load-use\"冒险，首先要能检测出来。根据下面的处理器信号连接图，补全检测\"load-use\"冒险的 HCL 表达式。（每空 1 分）\n\n![图](assets/期末/2022期末-无答案/page-04.png)\n\n　　____________ in { IMRMOVQ, IPOPQ } && E_dstM in { __________, __________ }",
         "answer": "答案：E_icode；d_srcA；d_srcB"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q2",
+        "questionId": "q-80560a1ecf2223dd",
+        "title": "第二题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -8475,14 +8974,25 @@
         "choices": [],
         "answer": "答案：D: stall；E: bubble；M: normal"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "(2) 检测到\"load-use\"冒险后，各流水级应该如何设置？在下表中填入 normal/stall/bubble。（每空 1 分）\n\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| stall |  |  |  | normal |",
         "answer": "答案：D: stall；E: bubble；M: normal"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q2",
+        "questionId": "q-80560a1ecf2223dd",
+        "title": "第二题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -8528,14 +9038,25 @@
         "choices": [],
         "answer": "答案：D_icode；E_icode；M_icode"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "![图](assets/期末/2022期末-无答案/page-04.png)\n\n图为 Y86 流水线处理器的信号连接图（教材 HCL 图）：左侧标注 Execute、Decode 等阶段，包含 ALU A/ALU B、CC、Set_cc、e_dstE、dstE/dstM/srcA/srcB、Register file（Write back / Read ports）、d_srcA/d_srcB/d_rvalA/d_rvalB、Instr valid/need_regids/need_valC 等信号块，右侧一列为各阶段的状态码。\n\n(3) ret 指令因为在流水线很晚阶段才能获得转移目标地址，所以也要特殊处理。参考上面的处理器信号连接图（注意：图中信号可能不完整，但足够推测出所需的信号），补全检测 ret 指令处理时机的 HCL 表达式。（每空 1 分）\n\n　　IRET in { __________, __________, __________ }",
         "answer": "答案：D_icode；E_icode；M_icode"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q2",
+        "questionId": "q-80560a1ecf2223dd",
+        "title": "第二题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -8579,14 +9100,25 @@
         "choices": [],
         "answer": "答案：D: bubble；E: normal；M: normal"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "(4) 检测到需要处理的 ret 指令后，各流水级应该如何设置？在下表中填入 normal/stall/bubble。（每空 1 分）\n\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| stall |  |  |  | normal |",
         "answer": "答案：D: bubble；E: normal；M: normal"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q2",
+        "questionId": "q-80560a1ecf2223dd",
+        "title": "第二题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -8630,14 +9162,25 @@
         "choices": [],
         "answer": "答案：3"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "(5) 执行 ret 指令时，其会插入______个周期的 bubble。（1 分）",
         "answer": "答案：3"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q2",
+        "questionId": "q-80560a1ecf2223dd",
+        "title": "第二题",
+        "order": 5
       },
       "presentation": {
         "status": "ready",
@@ -8681,14 +9224,25 @@
         "choices": [],
         "answer": "答案：前一条指令从内存中加载数据到寄存器 rsp 中，后面紧跟了一条 ret 指令"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "(6) 什么场景下，上面提到的 load-use 和 ret 需要处理的情况会同时出现？（2 分）\n\n________________________________________________________________________________",
         "answer": "答案：前一条指令从内存中加载数据到寄存器 rsp 中，后面紧跟了一条 ret 指令"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q2",
+        "questionId": "q-80560a1ecf2223dd",
+        "title": "第二题",
+        "order": 6
       },
       "presentation": {
         "status": "ready",
@@ -8977,7 +9531,7 @@
       "exam": "2024期末",
       "questionNo": "第二题",
       "summary": "Y86-64 SEQ/PIPE 新增 cdeclXX 与周期数",
-      "content": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\nC  Fn  0xF  rB\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\njne     Lo\n    ret\n```\n周期数计算从执行bar第一条指令开始，直到其返回指令ret完全通过流水线为\n止。在调用bar之前，处理器已经执行过足够多的nop指令。\n当函数bar的参数 x=0 时，需要执行______个周期；x=3 时需要执行______\n个周期。（每空2分，共4分）\n参考答案\n1）① M1[PC + 1]\n② valP ← PC + 2\n③ valE ← (-1) + valB（写valB + (-1)亦可，但valB – 1扣1分）\n④ if(Cnd) R[rB] ← valE\n2）① ！M_Cnd\n```\n② M_valA\n③ W_valM\n3) 15; 35\n```\n12\n13",
+      "content": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\nC  Fn  0xF  rB\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\njne     Lo\n    ret\n```\n周期数计算从执行bar第一条指令开始，直到其返回指令ret完全通过流水线为\n止。在调用bar之前，处理器已经执行过足够多的nop指令。\n当函数bar的参数 x=0 时，需要执行______个周期；x=3 时需要执行______\n个周期。（每空2分，共4分）\n1）① `M1[PC + 1]`；② `valP ← PC + 2`；③ `valE ← (-1) + valB`（写 `valB + (-1)` 亦可，但 `valB - 1` 扣 1 分）；④ `if (Cnd) R[rB] ← valE`。\n2）① `!M_Cnd`；② `M_valA`；③ `W_valM`。\n3）`x=0` 时 15 个周期；`x=3` 时 35 个周期。",
       "assets": [
         "assets/期末/2024期末-带答案/p13-pipe-diagram.png"
       ],
@@ -9003,9 +9557,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\nC  Fn  0xF  rB\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\njne     Lo\n    ret\n```\n周期数计算从执行bar第一条指令开始，直到其返回指令ret完全通过流水线为\n止。在调用bar之前，处理器已经执行过足够多的nop指令。\n当函数bar的参数 x=0 时，需要执行______个周期；x=3 时需要执行______\n个周期。（每空2分，共4分）\n参考答案\n1）① M1[PC + 1]\n② valP ← PC + 2\n③ valE ← (-1) + valB（写valB + (-1)亦可，但valB – 1扣1分）\n④ if(Cnd) R[rB] ← valE\n2）① ！M_Cnd\n```\n② M_valA\n③ W_valM\n3) 15; 35\n```",
+        "stem": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\nC  Fn  0xF  rB\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\njne     Lo\n    ret\n```\n周期数计算从执行bar第一条指令开始，直到其返回指令ret完全通过流水线为\n止。在调用bar之前，处理器已经执行过足够多的nop指令。\n当函数bar的参数 x=0 时，需要执行______个周期；x=3 时需要执行______\n个周期。（每空2分，共4分）",
         "choices": [],
-        "answer": "12\n13"
+        "answer": "1）① `M1[PC + 1]`；② `valP ← PC + 2`；③ `valE ← (-1) + valB`（写 `valB + (-1)` 亦可，但 `valB - 1` 扣 1 分）；④ `if (Cnd) R[rB] ← valE`。\n2）① `!M_Cnd`；② `M_valA`；③ `W_valM`。\n3）`x=0` 时 15 个周期；`x=3` 时 35 个周期。"
       },
       "interaction": {
         "kind": "fill",
@@ -9013,8 +9567,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\nC  Fn  0xF  rB\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\njne     Lo\n    ret\n```\n周期数计算从执行bar第一条指令开始，直到其返回指令ret完全通过流水线为\n止。在调用bar之前，处理器已经执行过足够多的nop指令。\n当函数bar的参数 x=0 时，需要执行______个周期；x=3 时需要执行______\n个周期。（每空2分，共4分）\n参考答案\n1）① M1[PC + 1]\n② valP ← PC + 2\n③ valE ← (-1) + valB（写valB + (-1)亦可，但valB – 1扣1分）\n④ if(Cnd) R[rB] ← valE\n2）① ！M_Cnd\n```\n② M_valA\n③ W_valM\n3) 15; 35\n```",
-        "answer": "12\n13"
+        "prompt": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\nC  Fn  0xF  rB\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\njne     Lo\n    ret\n```\n周期数计算从执行bar第一条指令开始，直到其返回指令ret完全通过流水线为\n止。在调用bar之前，处理器已经执行过足够多的nop指令。\n当函数bar的参数 x=0 时，需要执行______个周期；x=3 时需要执行______\n个周期。（每空2分，共4分）",
+        "answer": "1）① `M1[PC + 1]`；② `valP ← PC + 2`；③ `valE ← (-1) + valB`（写 `valB + (-1)` 亦可，但 `valB - 1` 扣 1 分）；④ `if (Cnd) R[rB] ← valE`。\n2）① `!M_Cnd`；② `M_valA`；③ `W_valM`。\n3）`x=0` 时 15 个周期；`x=3` 时 35 个周期。"
       },
       "presentation": {
         "status": "ready",
@@ -9385,8 +9939,11 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第9讲 3",
       "summary": "由 HCL 布尔表达式补全组合逻辑电路图",
-      "content": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n\n(2)bool out = (s&&a)||(!s&&b)\n答案：\n（1）`eq = (a&&b)||(!a&&!b)`：用 **2 个与门 + 1 个或门**（a、b 各取反后进与门）实现。\n　　a 分两路：一路直接接第一个与门的输入，另一路经**非门**得到 `!a` 接第二个与门的输入；b 分两路：一路直接接第一个与门的另一个输入，另一路经**非门**得到 `!b` 接第二个与门的另一个输入。两个与门的输出接同一个**或门**，或门的输出就是 `eq`。\n（2）`out = (s&&a)||(!s&&b)`：用 **2 个与门 + 1 个或门 + 1 个非门** 实现。\n　　s 分两路：一路经**非门**得到 `!s`，接上面那个与门的输入；另一路直接接下面那个与门的输入。`a` 接下面与门的另一个输入，`b` 接上面与门的另一个输入。两个与门的输出接**或门**，或门输出即 `out`（图上两个与门一上一下、或门在右侧）。它就是一个 2 选 1 的多路选择器：s=1 时 out=a，s=0 时 out=b。\n\n解析：\n\n1. HCL 与门电路的对应关系：`&&` = 与门（AND），`||` = 或门（OR），`!` = 非门（NOT，三角形加小圆圈）；信号线上的黑点表示把同一信号分支接到多个门的输入。原卷答案就是按这个对应关系把表达式「翻译」成门级电路。\n2. 第（1）问：表达式是两个乘积项 `(a&&b)` 与 `(!a&&!b)` 的或，所以需要两个与门加一个或门；`!a`、`!b` 各需要一个非门（原卷图里 a 用独立的非门符号，b 用的是一条带小圆圈的取反缓冲）。真值表：a=b=1 → 1，a=b=0 → 1，其余为 0，也就是「a 与 b 相等时输出 1」，对应教材图 4.10 的 **Bit equal**（一位相等比较器）。\n3. 第（2）问：展开两项可知 s=1 时 `s&&a` 这一项生效（此时 `!s&&b`=0）→ out=a；s=0 时 `(!s&&b)` 生效 → out=b。所以它就是受 s 控制的多路选择器，对应教材图 4.11 的 **Bit MUX**。注意两条数据通路的接法不能颠倒（把 a、b 对调就变成「s=1 选 b」）；`!s` 也可以画成第二个与门输入端的取反小圆圈，只要逻辑等价即可。\n4. 画图检查清单：输入信号名（a、b、s）在左、输出（eq/out）在右；与门/或门/非门的符号方向一致；每个门的每个输入都有信号线接入（不能悬空）；分支点画黑点；门数分别为 (1) 2 与门+1 或门+2 非门、(2) 2 与门+1 或门+1 非门。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 3 页上的两幅红字电路图（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-03.png`：上图为第 (1) 问的 Bit equal，下图为第 (2) 问的 Bit MUX；原卷文字层的「答案：」是空的，答案只以红图形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
-      "assets": [],
+      "content": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n![第（1）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part1-prompt.png)\n\n(2)bool out = (s&&a)||(!s&&b)\n\n![第（2）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part2-prompt.png)\n答案：\n（1）`eq = (a&&b)||(!a&&!b)`：用 **2 个与门 + 1 个或门**（a、b 各取反后进与门）实现。\n　　a 分两路：一路直接接第一个与门的输入，另一路经**非门**得到 `!a` 接第二个与门的输入；b 分两路：一路直接接第一个与门的另一个输入，另一路经**非门**得到 `!b` 接第二个与门的另一个输入。两个与门的输出接同一个**或门**，或门的输出就是 `eq`。\n（2）`out = (s&&a)||(!s&&b)`：用 **2 个与门 + 1 个或门 + 1 个非门** 实现。\n　　s 分两路：一路经**非门**得到 `!s`，接上面那个与门的输入；另一路直接接下面那个与门的输入。`a` 接下面与门的另一个输入，`b` 接上面与门的另一个输入。两个与门的输出接**或门**，或门输出即 `out`（图上两个与门一上一下、或门在右侧）。它就是一个 2 选 1 的多路选择器：s=1 时 out=a，s=0 时 out=b。\n\n解析：\n\n1. HCL 与门电路的对应关系：`&&` = 与门（AND），`||` = 或门（OR），`!` = 非门（NOT，三角形加小圆圈）；信号线上的黑点表示把同一信号分支接到多个门的输入。原卷答案就是按这个对应关系把表达式「翻译」成门级电路。\n2. 第（1）问：表达式是两个乘积项 `(a&&b)` 与 `(!a&&!b)` 的或，所以需要两个与门加一个或门；`!a`、`!b` 各需要一个非门（原卷图里 a 用独立的非门符号，b 用的是一条带小圆圈的取反缓冲）。真值表：a=b=1 → 1，a=b=0 → 1，其余为 0，也就是「a 与 b 相等时输出 1」，对应教材图 4.10 的 **Bit equal**（一位相等比较器）。\n3. 第（2）问：展开两项可知 s=1 时 `s&&a` 这一项生效（此时 `!s&&b`=0）→ out=a；s=0 时 `(!s&&b)` 生效 → out=b。所以它就是受 s 控制的多路选择器，对应教材图 4.11 的 **Bit MUX**。注意两条数据通路的接法不能颠倒（把 a、b 对调就变成「s=1 选 b」）；`!s` 也可以画成第二个与门输入端的取反小圆圈，只要逻辑等价即可。\n4. 画图检查清单：输入信号名（a、b、s）在左、输出（eq/out）在右；与门/或门/非门的符号方向一致；每个门的每个输入都有信号线接入（不能悬空）；分支点画黑点；门数分别为 (1) 2 与门+1 或门+2 非门、(2) 2 与门+1 或门+1 非门。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 3 页上的两幅红字电路图（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-03.png`：上图为第 (1) 问的 Bit equal，下图为第 (2) 问的 Bit MUX；原卷文字层的「答案：」是空的，答案只以红图形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+      "assets": [
+        "assets/阶段测验/2025第2次阶段测验-带答案/q3-part1-prompt.png",
+        "assets/阶段测验/2025第2次阶段测验-带答案/q3-part2-prompt.png"
+      ],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -9405,7 +9962,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n\n(2)bool out = (s&&a)||(!s&&b)",
+        "stem": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n![第（1）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part1-prompt.png)\n\n(2)bool out = (s&&a)||(!s&&b)\n\n![第（2）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part2-prompt.png)",
         "choices": [],
         "answer": "答案：\n（1）`eq = (a&&b)||(!a&&!b)`：用 **2 个与门 + 1 个或门**（a、b 各取反后进与门）实现。\n　　a 分两路：一路直接接第一个与门的输入，另一路经**非门**得到 `!a` 接第二个与门的输入；b 分两路：一路直接接第一个与门的另一个输入，另一路经**非门**得到 `!b` 接第二个与门的另一个输入。两个与门的输出接同一个**或门**，或门的输出就是 `eq`。\n（2）`out = (s&&a)||(!s&&b)`：用 **2 个与门 + 1 个或门 + 1 个非门** 实现。\n　　s 分两路：一路经**非门**得到 `!s`，接上面那个与门的输入；另一路直接接下面那个与门的输入。`a` 接下面与门的另一个输入，`b` 接上面与门的另一个输入。两个与门的输出接**或门**，或门输出即 `out`（图上两个与门一上一下、或门在右侧）。它就是一个 2 选 1 的多路选择器：s=1 时 out=a，s=0 时 out=b。\n\n解析：\n\n1. HCL 与门电路的对应关系：`&&` = 与门（AND），`||` = 或门（OR），`!` = 非门（NOT，三角形加小圆圈）；信号线上的黑点表示把同一信号分支接到多个门的输入。原卷答案就是按这个对应关系把表达式「翻译」成门级电路。\n2. 第（1）问：表达式是两个乘积项 `(a&&b)` 与 `(!a&&!b)` 的或，所以需要两个与门加一个或门；`!a`、`!b` 各需要一个非门（原卷图里 a 用独立的非门符号，b 用的是一条带小圆圈的取反缓冲）。真值表：a=b=1 → 1，a=b=0 → 1，其余为 0，也就是「a 与 b 相等时输出 1」，对应教材图 4.10 的 **Bit equal**（一位相等比较器）。\n3. 第（2）问：展开两项可知 s=1 时 `s&&a` 这一项生效（此时 `!s&&b`=0）→ out=a；s=0 时 `(!s&&b)` 生效 → out=b。所以它就是受 s 控制的多路选择器，对应教材图 4.11 的 **Bit MUX**。注意两条数据通路的接法不能颠倒（把 a、b 对调就变成「s=1 选 b」）；`!s` 也可以画成第二个与门输入端的取反小圆圈，只要逻辑等价即可。\n4. 画图检查清单：输入信号名（a、b、s）在左、输出（eq/out）在右；与门/或门/非门的符号方向一致；每个门的每个输入都有信号线接入（不能悬空）；分支点画黑点；门数分别为 (1) 2 与门+1 或门+2 非门、(2) 2 与门+1 或门+1 非门。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 3 页上的两幅红字电路图（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-03.png`：上图为第 (1) 问的 Bit equal，下图为第 (2) 问的 Bit MUX；原卷文字层的「答案：」是空的，答案只以红图形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
@@ -9415,7 +9972,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n\n(2)bool out = (s&&a)||(!s&&b)",
+        "prompt": "3. （各3分，共6分）根据HCL表达式补全电路图\n(1)bool eq = (a&&b)||(!a&&!b)\n\n![第（1）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part1-prompt.png)\n\n(2)bool out = (s&&a)||(!s&&b)\n\n![第（2）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part2-prompt.png)",
         "answer": "答案：\n（1）`eq = (a&&b)||(!a&&!b)`：用 **2 个与门 + 1 个或门**（a、b 各取反后进与门）实现。\n　　a 分两路：一路直接接第一个与门的输入，另一路经**非门**得到 `!a` 接第二个与门的输入；b 分两路：一路直接接第一个与门的另一个输入，另一路经**非门**得到 `!b` 接第二个与门的另一个输入。两个与门的输出接同一个**或门**，或门的输出就是 `eq`。\n（2）`out = (s&&a)||(!s&&b)`：用 **2 个与门 + 1 个或门 + 1 个非门** 实现。\n　　s 分两路：一路经**非门**得到 `!s`，接上面那个与门的输入；另一路直接接下面那个与门的输入。`a` 接下面与门的另一个输入，`b` 接上面与门的另一个输入。两个与门的输出接**或门**，或门输出即 `out`（图上两个与门一上一下、或门在右侧）。它就是一个 2 选 1 的多路选择器：s=1 时 out=a，s=0 时 out=b。\n\n解析：\n\n1. HCL 与门电路的对应关系：`&&` = 与门（AND），`||` = 或门（OR），`!` = 非门（NOT，三角形加小圆圈）；信号线上的黑点表示把同一信号分支接到多个门的输入。原卷答案就是按这个对应关系把表达式「翻译」成门级电路。\n2. 第（1）问：表达式是两个乘积项 `(a&&b)` 与 `(!a&&!b)` 的或，所以需要两个与门加一个或门；`!a`、`!b` 各需要一个非门（原卷图里 a 用独立的非门符号，b 用的是一条带小圆圈的取反缓冲）。真值表：a=b=1 → 1，a=b=0 → 1，其余为 0，也就是「a 与 b 相等时输出 1」，对应教材图 4.10 的 **Bit equal**（一位相等比较器）。\n3. 第（2）问：展开两项可知 s=1 时 `s&&a` 这一项生效（此时 `!s&&b`=0）→ out=a；s=0 时 `(!s&&b)` 生效 → out=b。所以它就是受 s 控制的多路选择器，对应教材图 4.11 的 **Bit MUX**。注意两条数据通路的接法不能颠倒（把 a、b 对调就变成「s=1 选 b」）；`!s` 也可以画成第二个与门输入端的取反小圆圈，只要逻辑等价即可。\n4. 画图检查清单：输入信号名（a、b、s）在左、输出（eq/out）在右；与门/或门/非门的符号方向一致；每个门的每个输入都有信号线接入（不能悬空）；分支点画黑点；门数分别为 (1) 2 与门+1 或门+2 非门、(2) 2 与门+1 或门+1 非门。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 3 页上的两幅红字电路图（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-03.png`：上图为第 (1) 问的 Bit equal，下图为第 (2) 问的 Bit MUX；原卷文字层的「答案：」是空的，答案只以红图形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "presentation": {
@@ -9433,8 +9990,10 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第9讲 4",
       "summary": "根据电路图补全时序图中 Out 信号值",
-      "content": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）\n答案：1 4 9 7 16 27",
-      "assets": [],
+      "content": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）\n\n![题目电路图和待补全的时序图](assets/阶段测验/2025第2次阶段测验-带答案/p3-q4-logic-timing.png)\n答案：1 4 9 7 16 27",
+      "assets": [
+        "assets/阶段测验/2025第2次阶段测验-带答案/p3-q4-logic-timing.png"
+      ],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -9453,7 +10012,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）",
+        "stem": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）\n\n![题目电路图和待补全的时序图](assets/阶段测验/2025第2次阶段测验-带答案/p3-q4-logic-timing.png)",
         "choices": [],
         "answer": "答案：1 4 9 7 16 27"
       },
@@ -9463,7 +10022,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）",
+        "prompt": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）\n\n![题目电路图和待补全的时序图](assets/阶段测验/2025第2次阶段测验-带答案/p3-q4-logic-timing.png)",
         "answer": "答案：1 4 9 7 16 27"
       },
       "presentation": {

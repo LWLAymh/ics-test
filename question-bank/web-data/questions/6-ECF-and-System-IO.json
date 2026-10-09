@@ -189,7 +189,7 @@
       "exam": "2013期末",
       "questionNo": "第一题 15",
       "summary": "open/read/write 后文件偏移与内容",
-      "content": "15、考虑如下代码，假设result.txt的初始内容是“123”。\n```\nint main(int argc, char** argv)\n{\nint fd1 = open(\"result.txt\", O_RDWR);\nchar str[] = \"abc\";\nchar c;\nwrite(fd1, str, 1);\nread(fd1, &c, 1);\nwrite(fd1, &c, 1);\nreturn 0;\n}\n```\n在这段代码执行完毕之后，result.txt 的内容是什么？（假设所有的系\n统调用都会成功）答：（      ）\nA. A．a22\nB. B．a21\nC. C．a13\nD. D．abb\n答案：A。考察文件操作过程中指针的移动情况。",
+      "content": "15、考虑如下代码，假设result.txt的初始内容是“123”。\n```\nint main(int argc, char** argv)\n{\nint fd1 = open(\"result.txt\", O_RDWR);\nchar str[] = \"abc\";\nchar c;\nwrite(fd1, str, 1);\nread(fd1, &c, 1);\nwrite(fd1, &c, 1);\nreturn 0;\n}\n```\n在这段代码执行完毕之后，result.txt 的内容是什么？（假设所有的系\n统调用都会成功）答：（      ）\nA. a22\nB. a21\nC. a13\nD. abb\n答案：A。考察文件操作过程中指针的移动情况。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -213,19 +213,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "A．a22"
+            "content": "a22"
           },
           {
             "key": "B",
-            "content": "B．a21"
+            "content": "a21"
           },
           {
             "key": "C",
-            "content": "C．a13"
+            "content": "a13"
           },
           {
             "key": "D",
-            "content": "D．abb"
+            "content": "abb"
           }
         ],
         "answer": "答案：A。考察文件操作过程中指针的移动情况。"
@@ -236,19 +236,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "A．a22"
+            "content": "a22"
           },
           {
             "id": "B",
-            "content": "B．a21"
+            "content": "a21"
           },
           {
             "id": "C",
-            "content": "C．a13"
+            "content": "a13"
           },
           {
             "id": "D",
-            "content": "D．abb"
+            "content": "abb"
           }
         ],
         "correctChoiceIds": [
@@ -275,7 +275,7 @@
       "exam": "2013期末",
       "questionNo": "第一题 16",
       "summary": "open 与 dup 的文件描述符/open file table",
-      "content": "16、已知如下代码段\n```\nwrite(fd1, str1, strlen(str1));\nwrite(fd2, str2, strlen(str2));\n```\n可以在原本为空的文件ICS.txt中写下字符串 I love ICS!\n对于下面这些对于变量fd1, fd2, str1, str2的定义：\n```\n(1)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = open(\"ICS.txt\", O_RDWR);\nchar *str1 = \"I love \";\nchar *str2 = \"ICS!\";\n(2)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\n```\n\n\n```\nchar *str1 = \"I love \";\nchar *str2 = \"ICS!\";\n(3)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = open(\"ICS.txt\", O_RDWR);\nchar *str1 = \"I love \";\nchar *str2 = \"I love ICS!\";\n(4)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\nchar *str1 = \"I love \";\nchar *str2 = \"I love ICS!\";\n```\n下面哪一个组合是正确的：（       ）\nA. A．(1)(4)\nB. B．(2)(3)\nC. C．(1)(2)(3)(4)\nD. D．都不正确\n答案：B\n说明：考察两种不同文件描述符指向同一文件v的不同，一种是指向了同一的open\nfile table，一种是指向了同一的v-node table。",
+      "content": "16、已知如下代码段\n```\nwrite(fd1, str1, strlen(str1));\nwrite(fd2, str2, strlen(str2));\n```\n可以在原本为空的文件ICS.txt中写下字符串 I love ICS!\n对于下面这些对于变量fd1, fd2, str1, str2的定义：\n```\n(1)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = open(\"ICS.txt\", O_RDWR);\nchar *str1 = \"I love \";\nchar *str2 = \"ICS!\";\n(2)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\n```\n\n\n```\nchar *str1 = \"I love \";\nchar *str2 = \"ICS!\";\n(3)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = open(\"ICS.txt\", O_RDWR);\nchar *str1 = \"I love \";\nchar *str2 = \"I love ICS!\";\n(4)\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\nchar *str1 = \"I love \";\nchar *str2 = \"I love ICS!\";\n```\n下面哪一个组合是正确的：（       ）\nA. (1)(4)\nB. (2)(3)\nC. (1)(2)(3)(4)\nD. 都不正确\n答案：B\n说明：考察两种不同文件描述符指向同一文件v的不同，一种是指向了同一的open\nfile table，一种是指向了同一的v-node table。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -299,19 +299,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "A．(1)(4)"
+            "content": "(1)(4)"
           },
           {
             "key": "B",
-            "content": "B．(2)(3)"
+            "content": "(2)(3)"
           },
           {
             "key": "C",
-            "content": "C．(1)(2)(3)(4)"
+            "content": "(1)(2)(3)(4)"
           },
           {
             "key": "D",
-            "content": "D．都不正确"
+            "content": "都不正确"
           }
         ],
         "answer": "答案：B\n说明：考察两种不同文件描述符指向同一文件v的不同，一种是指向了同一的open\nfile table，一种是指向了同一的v-node table。"
@@ -322,19 +322,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "A．(1)(4)"
+            "content": "(1)(4)"
           },
           {
             "id": "B",
-            "content": "B．(2)(3)"
+            "content": "(2)(3)"
           },
           {
             "id": "C",
-            "content": "C．(1)(2)(3)(4)"
+            "content": "(1)(2)(3)(4)"
           },
           {
             "id": "D",
-            "content": "D．都不正确"
+            "content": "都不正确"
           }
         ],
         "correctChoiceIds": [
@@ -361,7 +361,7 @@
       "exam": "2013期末",
       "questionNo": "第五题 Part I",
       "summary": "fork 与父子进程输出交错的可能顺序",
-      "content": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行）：\n```\nint main() {\n  printf(\"A\\n\");\n  if (fork() == 0) {\n    printf(\"B\\n\");\n  }\n  else {\n    printf(\"C\\n\");\n    A\n  }\n  printf(“D\\n\");\n  exit(0);\n}\n```\n（1）如果程序中的A位置的代码为空，列出所有可能的输出结果：（1分）\n4个：分别是ABDCD ABCDD ACBDD ACDBD（错一个扣半分，多了也扣半分，最\n多扣1分）\n（2）如果程序中的A位置的代码为：\nwaitpid(-1, NULL, 0);\n列出所有可能的输出结果：（2分）\n3个：分别是ABDCD ABCDD ACBDD（每个半分，多了扣一分，最多扣2分）\n（3）如果程序中的A位置的代码为：\nprintf(“E\\n”);\n列出所有可能的输出结果：（2分）\n7个：分别是ABDCED ABCEDD ACEBDD ACEDBD ACBEDD ACBDED ABCDED（错\n一个扣半分，多了扣一分）\n（1）可能的输出（1分）：4个，分别是 ABDCD、ABCDD、ACBDD、ACDBD\n（2）可能的输出（2分）：3个，分别是 ABDCD、ABCDD、ACBDD\n（3）可能的输出（2分）：7个，分别是 ABDCED、ABCEDD、ACEBDD、ACEDBD、\nACBEDD、ACBDED、ABCDED",
+      "content": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行）：\n\n```c\nint main() {\n    printf(\"A\\n\");\n    if (fork() == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        A\n    }\n    printf(\"D\\n\");\n    exit(0);\n}\n```\n\n（1）如果程序中的A位置的代码为空，列出所有可能的输出结果。（1分）\n\n（2）如果程序中的A位置的代码为`waitpid(-1, NULL, 0);`，列出所有可能的输出结果。（2分）\n\n（3）如果程序中的A位置的代码为`printf(\"E\\n\");`，列出所有可能的输出结果。（2分）\n（1）可能的输出（1分）：4个，分别是 ABDCD、ABCDD、ACBDD、ACDBD（错一个扣半分，多了也扣半分，最多扣1分）。\n\n（2）可能的输出（2分）：3个，分别是 ABDCD、ABCDD、ACBDD（每个半分，多了扣一分，最多扣2分）。\n\n（3）可能的输出（2分）：7个，分别是 ABDCED、ABCEDD、ACEBDD、ACEDBD、ACBEDD、ACBDED、ABCDED（错一个扣半分，多了扣一分）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -379,20 +379,31 @@
         "curated": "_curated/期末/2013期末-带答案/469.md"
       },
       "layout": {
-        "mode": "fill",
+        "mode": "short",
         "selection": null,
-        "stem": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行）：\n```\nint main() {\n  printf(\"A\\n\");\n  if (fork() == 0) {\n    printf(\"B\\n\");\n  }\n  else {\n    printf(\"C\\n\");\n    A\n  }\n  printf(“D\\n\");\n  exit(0);\n}\n```\n（1）如果程序中的A位置的代码为空，列出所有可能的输出结果：（1分）\n4个：分别是ABDCD ABCDD ACBDD ACDBD（错一个扣半分，多了也扣半分，最\n多扣1分）\n（2）如果程序中的A位置的代码为：\nwaitpid(-1, NULL, 0);\n列出所有可能的输出结果：（2分）\n3个：分别是ABDCD ABCDD ACBDD（每个半分，多了扣一分，最多扣2分）\n（3）如果程序中的A位置的代码为：\nprintf(“E\\n”);\n列出所有可能的输出结果：（2分）\n7个：分别是ABDCED ABCEDD ACEBDD ACEDBD ACBEDD ACBDED ABCDED（错\n一个扣半分，多了扣一分）",
+        "stem": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行）：\n\n```c\nint main() {\n    printf(\"A\\n\");\n    if (fork() == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        A\n    }\n    printf(\"D\\n\");\n    exit(0);\n}\n```\n\n（1）如果程序中的A位置的代码为空，列出所有可能的输出结果。（1分）\n\n（2）如果程序中的A位置的代码为`waitpid(-1, NULL, 0);`，列出所有可能的输出结果。（2分）\n\n（3）如果程序中的A位置的代码为`printf(\"E\\n\");`，列出所有可能的输出结果。（2分）",
         "choices": [],
-        "answer": "（1）可能的输出（1分）：4个，分别是 ABDCD、ABCDD、ACBDD、ACDBD\n（2）可能的输出（2分）：3个，分别是 ABDCD、ABCDD、ACBDD\n（3）可能的输出（2分）：7个，分别是 ABDCED、ABCEDD、ACEBDD、ACEDBD、\nACBEDD、ACBDED、ABCDED"
+        "answer": "（1）可能的输出（1分）：4个，分别是 ABDCD、ABCDD、ACBDD、ACDBD（错一个扣半分，多了也扣半分，最多扣1分）。\n\n（2）可能的输出（2分）：3个，分别是 ABDCD、ABCDD、ACBDD（每个半分，多了扣一分，最多扣2分）。\n\n（3）可能的输出（2分）：7个，分别是 ABDCED、ABCEDD、ACEBDD、ACEDBD、ACBEDD、ACBDED、ABCDED（错一个扣半分，多了扣一分）。"
+      },
+      "partInteraction": {
+        "kind": "short-answer",
+        "declared": true
       },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行）：\n```\nint main() {\n  printf(\"A\\n\");\n  if (fork() == 0) {\n    printf(\"B\\n\");\n  }\n  else {\n    printf(\"C\\n\");\n    A\n  }\n  printf(“D\\n\");\n  exit(0);\n}\n```\n（1）如果程序中的A位置的代码为空，列出所有可能的输出结果：（1分）\n4个：分别是ABDCD ABCDD ACBDD ACDBD（错一个扣半分，多了也扣半分，最\n多扣1分）\n（2）如果程序中的A位置的代码为：\nwaitpid(-1, NULL, 0);\n列出所有可能的输出结果：（2分）\n3个：分别是ABDCD ABCDD ACBDD（每个半分，多了扣一分，最多扣2分）\n（3）如果程序中的A位置的代码为：\nprintf(“E\\n”);\n列出所有可能的输出结果：（2分）\n7个：分别是ABDCED ABCEDD ACEBDD ACEDBD ACBEDD ACBDED ABCDED（错\n一个扣半分，多了扣一分）",
-        "answer": "（1）可能的输出（1分）：4个，分别是 ABDCD、ABCDD、ACBDD、ACDBD\n（2）可能的输出（2分）：3个，分别是 ABDCD、ABCDD、ACBDD\n（3）可能的输出（2分）：7个，分别是 ABDCED、ABCEDD、ACEBDD、ACEDBD、\nACBEDD、ACBDED、ABCDED"
+        "prompt": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行）：\n\n```c\nint main() {\n    printf(\"A\\n\");\n    if (fork() == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        A\n    }\n    printf(\"D\\n\");\n    exit(0);\n}\n```\n\n（1）如果程序中的A位置的代码为空，列出所有可能的输出结果。（1分）\n\n（2）如果程序中的A位置的代码为`waitpid(-1, NULL, 0);`，列出所有可能的输出结果。（2分）\n\n（3）如果程序中的A位置的代码为`printf(\"E\\n\");`，列出所有可能的输出结果。（2分）",
+        "answer": "（1）可能的输出（1分）：4个，分别是 ABDCD、ABCDD、ACBDD、ACDBD（错一个扣半分，多了也扣半分，最多扣1分）。\n\n（2）可能的输出（2分）：3个，分别是 ABDCD、ABCDD、ACBDD（每个半分，多了扣一分，最多扣2分）。\n\n（3）可能的输出（2分）：7个，分别是 ABDCED、ABCEDD、ACEBDD、ACEDBD、ACBEDD、ACBDED、ABCDED（错一个扣半分，多了扣一分）。"
+      },
+      "group": {
+        "id": "p-ac5fea2cf89e5bed:2013-final-q5",
+        "questionId": "q-a694e52c9a6493d6",
+        "title": "第五题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -409,7 +420,7 @@
       "exam": "2013期末",
       "questionNo": "第五题 Part II",
       "summary": "signal/kill 驱动 handler 输出 Fibonacci",
-      "content": "Part II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\npid_t pid;  1). 完成程序，使得程序在输出前20个\nint even = 0;  斐波那契(Fibonacci)数列，即 F0=0,\nint counter1 = 0;  F1=1, …, Fn=Fn-1+Fn-2。（如果存在对本\nint counter2 = 1;  次程序执行结果没有影响的语句，请在相\nvoid handler1(int sig) {\n  if (even % 2 == 0) {  应位置填写“无关”）（3分）\n```\n  printf(“%d\\n”,\ncounter1);    A: ___counter1 + counter2__\n    counter1 =      A       ;\n    } else {    B: ___counter1 + counter2__\n  printf(“%d\\n”,\ncounter2);    C: ___even + 1____________\n    counter2 =      B      ;\n```\n    }    D: ____无关__________\n```\n    even =      C      ;\n}    E: ___SIGUSR1___________\nvoid handler2(int sig) {\n    if (_____D_____) {    F: ___SIGUSR1___________\n    counter1 = even * even;\n```\n    } else {  2). 完成程序，其中A, B处保持不变，\n    counter2 = even * even;  使得程序可以分别输出前几个奇数或偶\n    }  数的平方和。（如果存在对本次程序执行\n}  结果没有影响的语句，请在相应位置填写\nint main() {\nsignal(SIGUSR1, handler1);  “无关”）（2分）\nsignal(SIGUSR2, handler2);  其中：\nif ((pid = fork()) == 0) {    若要输出奇数的平方和：even的初\nwhile (1) {};  始值为3；\n    }    若要输出偶数的平方和，even的初\n    while (even < 20) {  始值为2。\n```\n      kill(pid,     E   );\n      sleep(1);    C: ____even + 2__________\n      kill(pid,     F   );\n      sleep(1);    D: ____even % 2 == 1______\n      even += 2;\n    }    E: ____SIGUSR2__________\nkill(pid, SIGKILL);\nexit(0);    F: ____SIGUSR1__________\n}\n```\n答案：\n1). A: counter1 + counter2\nB: counter1 + counter2\nC: even + 1\nD: 无关\nE: SIGUSR1\nF: SIGUSR1\n2). C: even + 2\nD: even % 2 == 1\nE: SIGUSR2\nF: SIGUSR1",
+      "content": "第五题（10分）\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且每条语句都是原子动作）。\n\n（1）完成程序，使其输出前20个斐波那契数，即`F0=0`、`F1=1`、…、`Fn=Fn-1+Fn-2`。如果存在对本次程序执行结果没有影响的语句，请在相应位置填写“无关”。（3分）\n\n```c\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\n\nvoid handler1(int sig) {\n    if (even % 2 == 0) {\n        printf(\"%d\\n\", counter1);\n        counter1 = {{blank:p1_a}};\n    } else {\n        printf(\"%d\\n\", counter2);\n        counter2 = {{blank:p1_b}};\n    }\n    even = {{blank:p1_c}};\n}\n\nvoid handler2(int sig) {\n    if ({{blank:p1_d}}) {\n        counter1 = even * even;\n    } else {\n        counter2 = even * even;\n    }\n}\n\nint main() {\n    signal(SIGUSR1, handler1);\n    signal(SIGUSR2, handler2);\n    if ((pid = fork()) == 0) {\n        while (1) {}\n    }\n    while (even < 20) {\n        kill(pid, {{blank:p1_e}});\n        sleep(1);\n        kill(pid, {{blank:p1_f}});\n        sleep(1);\n        even += 2;\n    }\n    kill(pid, SIGKILL);\n    exit(0);\n}\n```\n\n（2）完成程序，其中（1）的A、B处保持不变，使程序可以分别输出前几个奇数或偶数的平方和。如果存在对本次程序执行结果没有影响的语句，请在相应位置填写“无关”。若要输出奇数的平方和，`even`的初值为3；若要输出偶数的平方和，`even`的初值为2。（2分）\n\n```c\nvoid handler2(int sig) {\n    if ({{blank:p2_d}}) {\n        counter1 = even * even;\n    } else {\n        counter2 = even * even;\n    }\n}\n\nwhile (even < 20) {\n    kill(pid, {{blank:p2_e}});\n    sleep(1);\n    kill(pid, {{blank:p2_f}});\n    sleep(1);\n    even = {{blank:p2_c}};\n}\n```\n（1）A：`counter1 + counter2`；B：`counter1 + counter2`；C：`even + 1`；D：`无关`；E：`SIGUSR1`；F：`SIGUSR1`。\n\n（2）C：`even + 2`；D：`even % 2 == 1`；E：`SIGUSR2`；F：`SIGUSR1`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -429,18 +440,193 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "Part II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\npid_t pid;  1). 完成程序，使得程序在输出前20个\nint even = 0;  斐波那契(Fibonacci)数列，即 F0=0,\nint counter1 = 0;  F1=1, …, Fn=Fn-1+Fn-2。（如果存在对本\nint counter2 = 1;  次程序执行结果没有影响的语句，请在相\nvoid handler1(int sig) {\n  if (even % 2 == 0) {  应位置填写“无关”）（3分）\n```\n  printf(“%d\\n”,\ncounter1);    A: ___counter1 + counter2__\n    counter1 =      A       ;\n    } else {    B: ___counter1 + counter2__\n  printf(“%d\\n”,\ncounter2);    C: ___even + 1____________\n    counter2 =      B      ;\n```\n    }    D: ____无关__________\n```\n    even =      C      ;\n}    E: ___SIGUSR1___________\nvoid handler2(int sig) {\n    if (_____D_____) {    F: ___SIGUSR1___________\n    counter1 = even * even;\n```\n    } else {  2). 完成程序，其中A, B处保持不变，\n    counter2 = even * even;  使得程序可以分别输出前几个奇数或偶\n    }  数的平方和。（如果存在对本次程序执行\n}  结果没有影响的语句，请在相应位置填写\nint main() {\nsignal(SIGUSR1, handler1);  “无关”）（2分）\nsignal(SIGUSR2, handler2);  其中：\nif ((pid = fork()) == 0) {    若要输出奇数的平方和：even的初\nwhile (1) {};  始值为3；\n    }    若要输出偶数的平方和，even的初\n    while (even < 20) {  始值为2。\n```\n      kill(pid,     E   );\n      sleep(1);    C: ____even + 2__________\n      kill(pid,     F   );\n      sleep(1);    D: ____even % 2 == 1______\n      even += 2;\n    }    E: ____SIGUSR2__________\nkill(pid, SIGKILL);\nexit(0);    F: ____SIGUSR1__________\n}\n```",
+        "stem": "第五题（10分）\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且每条语句都是原子动作）。\n\n（1）完成程序，使其输出前20个斐波那契数，即`F0=0`、`F1=1`、…、`Fn=Fn-1+Fn-2`。如果存在对本次程序执行结果没有影响的语句，请在相应位置填写“无关”。（3分）\n\n```c\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\n\nvoid handler1(int sig) {\n    if (even % 2 == 0) {\n        printf(\"%d\\n\", counter1);\n        counter1 = {{blank:p1_a}};\n    } else {\n        printf(\"%d\\n\", counter2);\n        counter2 = {{blank:p1_b}};\n    }\n    even = {{blank:p1_c}};\n}\n\nvoid handler2(int sig) {\n    if ({{blank:p1_d}}) {\n        counter1 = even * even;\n    } else {\n        counter2 = even * even;\n    }\n}\n\nint main() {\n    signal(SIGUSR1, handler1);\n    signal(SIGUSR2, handler2);\n    if ((pid = fork()) == 0) {\n        while (1) {}\n    }\n    while (even < 20) {\n        kill(pid, {{blank:p1_e}});\n        sleep(1);\n        kill(pid, {{blank:p1_f}});\n        sleep(1);\n        even += 2;\n    }\n    kill(pid, SIGKILL);\n    exit(0);\n}\n```\n\n（2）完成程序，其中（1）的A、B处保持不变，使程序可以分别输出前几个奇数或偶数的平方和。如果存在对本次程序执行结果没有影响的语句，请在相应位置填写“无关”。若要输出奇数的平方和，`even`的初值为3；若要输出偶数的平方和，`even`的初值为2。（2分）\n\n```c\nvoid handler2(int sig) {\n    if ({{blank:p2_d}}) {\n        counter1 = even * even;\n    } else {\n        counter2 = even * even;\n    }\n}\n\nwhile (even < 20) {\n    kill(pid, {{blank:p2_e}});\n    sleep(1);\n    kill(pid, {{blank:p2_f}});\n    sleep(1);\n    even = {{blank:p2_c}};\n}\n```",
         "choices": [],
-        "answer": "答案：\n1). A: counter1 + counter2\nB: counter1 + counter2\nC: even + 1\nD: 无关\nE: SIGUSR1\nF: SIGUSR1\n2). C: even + 2\nD: even % 2 == 1\nE: SIGUSR2\nF: SIGUSR1"
+        "answer": "（1）A：`counter1 + counter2`；B：`counter1 + counter2`；C：`even + 1`；D：`无关`；E：`SIGUSR1`；F：`SIGUSR1`。\n\n（2）C：`even + 2`；D：`even % 2 == 1`；E：`SIGUSR2`；F：`SIGUSR1`。",
+        "blankAnswers": [
+          {
+            "id": "p1_a",
+            "acceptedAnswers": [
+              "counter1 + counter2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_b",
+            "acceptedAnswers": [
+              "counter1 + counter2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_c",
+            "acceptedAnswers": [
+              "even + 1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_d",
+            "acceptedAnswers": [
+              "无关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_e",
+            "acceptedAnswers": [
+              "SIGUSR1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_f",
+            "acceptedAnswers": [
+              "SIGUSR1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p2_c",
+            "acceptedAnswers": [
+              "even + 2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p2_d",
+            "acceptedAnswers": [
+              "even % 2 == 1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p2_e",
+            "acceptedAnswers": [
+              "SIGUSR2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p2_f",
+            "acceptedAnswers": [
+              "SIGUSR1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "p1_a",
+            "acceptedAnswers": [
+              "counter1 + counter2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_b",
+            "acceptedAnswers": [
+              "counter1 + counter2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_c",
+            "acceptedAnswers": [
+              "even + 1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_d",
+            "acceptedAnswers": [
+              "无关"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_e",
+            "acceptedAnswers": [
+              "SIGUSR1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p1_f",
+            "acceptedAnswers": [
+              "SIGUSR1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p2_c",
+            "acceptedAnswers": [
+              "even + 2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p2_d",
+            "acceptedAnswers": [
+              "even % 2 == 1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p2_e",
+            "acceptedAnswers": [
+              "SIGUSR2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "p2_f",
+            "acceptedAnswers": [
+              "SIGUSR1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "Part II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\npid_t pid;  1). 完成程序，使得程序在输出前20个\nint even = 0;  斐波那契(Fibonacci)数列，即 F0=0,\nint counter1 = 0;  F1=1, …, Fn=Fn-1+Fn-2。（如果存在对本\nint counter2 = 1;  次程序执行结果没有影响的语句，请在相\nvoid handler1(int sig) {\n  if (even % 2 == 0) {  应位置填写“无关”）（3分）\n```\n  printf(“%d\\n”,\ncounter1);    A: ___counter1 + counter2__\n    counter1 =      A       ;\n    } else {    B: ___counter1 + counter2__\n  printf(“%d\\n”,\ncounter2);    C: ___even + 1____________\n    counter2 =      B      ;\n```\n    }    D: ____无关__________\n```\n    even =      C      ;\n}    E: ___SIGUSR1___________\nvoid handler2(int sig) {\n    if (_____D_____) {    F: ___SIGUSR1___________\n    counter1 = even * even;\n```\n    } else {  2). 完成程序，其中A, B处保持不变，\n    counter2 = even * even;  使得程序可以分别输出前几个奇数或偶\n    }  数的平方和。（如果存在对本次程序执行\n}  结果没有影响的语句，请在相应位置填写\nint main() {\nsignal(SIGUSR1, handler1);  “无关”）（2分）\nsignal(SIGUSR2, handler2);  其中：\nif ((pid = fork()) == 0) {    若要输出奇数的平方和：even的初\nwhile (1) {};  始值为3；\n    }    若要输出偶数的平方和，even的初\n    while (even < 20) {  始值为2。\n```\n      kill(pid,     E   );\n      sleep(1);    C: ____even + 2__________\n      kill(pid,     F   );\n      sleep(1);    D: ____even % 2 == 1______\n      even += 2;\n    }    E: ____SIGUSR2__________\nkill(pid, SIGKILL);\nexit(0);    F: ____SIGUSR1__________\n}\n```",
-        "answer": "答案：\n1). A: counter1 + counter2\nB: counter1 + counter2\nC: even + 1\nD: 无关\nE: SIGUSR1\nF: SIGUSR1\n2). C: even + 2\nD: even % 2 == 1\nE: SIGUSR2\nF: SIGUSR1"
+        "prompt": "第五题（10分）\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且每条语句都是原子动作）。\n\n（1）完成程序，使其输出前20个斐波那契数，即`F0=0`、`F1=1`、…、`Fn=Fn-1+Fn-2`。如果存在对本次程序执行结果没有影响的语句，请在相应位置填写“无关”。（3分）\n\n```c\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\n\nvoid handler1(int sig) {\n    if (even % 2 == 0) {\n        printf(\"%d\\n\", counter1);\n        counter1 = {{blank:p1_a}};\n    } else {\n        printf(\"%d\\n\", counter2);\n        counter2 = {{blank:p1_b}};\n    }\n    even = {{blank:p1_c}};\n}\n\nvoid handler2(int sig) {\n    if ({{blank:p1_d}}) {\n        counter1 = even * even;\n    } else {\n        counter2 = even * even;\n    }\n}\n\nint main() {\n    signal(SIGUSR1, handler1);\n    signal(SIGUSR2, handler2);\n    if ((pid = fork()) == 0) {\n        while (1) {}\n    }\n    while (even < 20) {\n        kill(pid, {{blank:p1_e}});\n        sleep(1);\n        kill(pid, {{blank:p1_f}});\n        sleep(1);\n        even += 2;\n    }\n    kill(pid, SIGKILL);\n    exit(0);\n}\n```\n\n（2）完成程序，其中（1）的A、B处保持不变，使程序可以分别输出前几个奇数或偶数的平方和。如果存在对本次程序执行结果没有影响的语句，请在相应位置填写“无关”。若要输出奇数的平方和，`even`的初值为3；若要输出偶数的平方和，`even`的初值为2。（2分）\n\n```c\nvoid handler2(int sig) {\n    if ({{blank:p2_d}}) {\n        counter1 = even * even;\n    } else {\n        counter2 = even * even;\n    }\n}\n\nwhile (even < 20) {\n    kill(pid, {{blank:p2_e}});\n    sleep(1);\n    kill(pid, {{blank:p2_f}});\n    sleep(1);\n    even = {{blank:p2_c}};\n}\n```",
+        "answer": "（1）A：`counter1 + counter2`；B：`counter1 + counter2`；C：`even + 1`；D：`无关`；E：`SIGUSR1`；F：`SIGUSR1`。\n\n（2）C：`even + 2`；D：`even % 2 == 1`；E：`SIGUSR2`；F：`SIGUSR1`。"
+      },
+      "group": {
+        "id": "p-ac5fea2cf89e5bed:2013-final-q5",
+        "questionId": "q-a694e52c9a6493d6",
+        "title": "第五题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -1461,7 +1647,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "8.  下列说法正确的是：",
         "choices": [
           {
@@ -1484,8 +1670,8 @@
         "answer": "答案：B\nA：SIGTSTP可以被忽略；既不能被捕获又不能被忽略的是SIGKILL和SIGSTOP\nC：系统调用可以被中断，如read这样的慢速系统调用\nD：可以通过kill(0, …)给整个组的进程发送信号"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -1528,7 +1714,7 @@
       "exam": "2015期末",
       "questionNo": "第一题 9",
       "summary": "嵌套 fork 的输出可能",
-      "content": "9.  在系统调用成功的情况下，下面哪个输出是可能的？\n```\nint main() {\n  intpid = fork();\n  if (pid == 0) {\n    printf(\"A\");\n  } else {\n    pid = fork();\n    if (pid == 0) {\n      printf(\"A\");\n    } else {\n      printf(\"B\");\n    }\n  }\n  exit(0);\n}\n```\nA. AAB\nB. AAA\nC. AABB\nD. AA\n答案：A\n总共产生3个子进程，共输出2个A和1个B",
+      "content": "9.  在系统调用成功的情况下，下面哪个输出是可能的？\n```\nint main() {\n  int pid = fork();\n  if (pid == 0) {\n    printf(\"A\");\n  } else {\n    pid = fork();\n    if (pid == 0) {\n      printf(\"A\");\n    } else {\n      printf(\"B\");\n    }\n  }\n  exit(0);\n}\n```\nA. AAB\nB. AAA\nC. AABB\nD. AA\n答案：A\n总共有3个进程（父进程和两个子进程），共输出2个A和1个B。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1550,7 +1736,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "9.  在系统调用成功的情况下，下面哪个输出是可能的？\n```\nint main() {\n  intpid = fork();\n  if (pid == 0) {\n    printf(\"A\");\n  } else {\n    pid = fork();\n    if (pid == 0) {\n      printf(\"A\");\n    } else {\n      printf(\"B\");\n    }\n  }\n  exit(0);\n}\n```",
+        "stem": "9.  在系统调用成功的情况下，下面哪个输出是可能的？\n```\nint main() {\n  int pid = fork();\n  if (pid == 0) {\n    printf(\"A\");\n  } else {\n    pid = fork();\n    if (pid == 0) {\n      printf(\"A\");\n    } else {\n      printf(\"B\");\n    }\n  }\n  exit(0);\n}\n```",
         "choices": [
           {
             "key": "A",
@@ -1569,7 +1755,7 @@
             "content": "AA"
           }
         ],
-        "answer": "答案：A\n总共产生3个子进程，共输出2个A和1个B"
+        "answer": "答案：A\n总共有3个进程（父进程和两个子进程），共输出2个A和1个B。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -1598,8 +1784,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "9.  在系统调用成功的情况下，下面哪个输出是可能的？\n```\nint main() {\n  intpid = fork();\n  if (pid == 0) {\n    printf(\"A\");\n  } else {\n    pid = fork();\n    if (pid == 0) {\n      printf(\"A\");\n    } else {\n      printf(\"B\");\n    }\n  }\n  exit(0);\n}\n```",
-        "answer": "答案：A\n总共产生3个子进程，共输出2个A和1个B"
+        "prompt": "9.  在系统调用成功的情况下，下面哪个输出是可能的？\n```\nint main() {\n  int pid = fork();\n  if (pid == 0) {\n    printf(\"A\");\n  } else {\n    pid = fork();\n    if (pid == 0) {\n      printf(\"A\");\n    } else {\n      printf(\"B\");\n    }\n  }\n  exit(0);\n}\n```",
+        "answer": "答案：A\n总共有3个进程（父进程和两个子进程），共输出2个A和1个B。"
       },
       "presentation": {
         "status": "ready",
@@ -1792,7 +1978,7 @@
       "exam": "2015期末",
       "questionNo": "第五题",
       "summary": "fork/signal/sigprocmask/管道中信号处理的输出",
-      "content": "第五题（10分）异常\n以下程序运行时系统调用全部正确执行，且每个信号都被处理到。请给出代码运行\n后所有可能的输出结果。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <signal.h>\nint c = 1;\nvoid handler1(int sig) {\n  c++;\n  printf(\"%d\", c);\n}\nint main() {\n  signal(SIGUSR1, handler1);\n  sigset_t s;\n  sigemptyset(&s);\n  sigaddset(&s, SIGUSR1);\n  sigprocmask(SIG_BLOCK, &s, 0);\n  intpid = fork()?fork():fork();\n  if (pid == 0) {\nkill(getppid(), SIGUSR1);\n    printf(\"S\");\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    exit(0);\n  } else {\n```\n\n\n```\n    while (waitpid(-1, NULL, 0) != -1);\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    printf(\"P\");\n  }\n  return 0;\n}\n```\n答：\n答案：\n共5种：\n```\nS2PS2P\nSS2P2P\nS2S2PP\nS2SP2P\nSS22PP\n```",
+      "content": "第五题（10分）异常\n以下程序运行时系统调用全部正确执行，且每个信号都被处理到。请给出代码运行\n后所有可能的输出结果。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <signal.h>\n#include <sys/wait.h>\nint c = 1;\nvoid handler1(int sig) {\n  c++;\n  printf(\"%d\", c);\n}\nint main() {\n  signal(SIGUSR1, handler1);\n  sigset_t s;\n  sigemptyset(&s);\n  sigaddset(&s, SIGUSR1);\n  sigprocmask(SIG_BLOCK, &s, 0);\n  int pid = fork() ? fork() : fork();\n  if (pid == 0) {\n    kill(getppid(), SIGUSR1);\n    printf(\"S\");\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    exit(0);\n  } else {\n    while (waitpid(-1, NULL, 0) != -1);\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    printf(\"P\");\n  }\n  return 0;\n}\n```\n答：\n答案：\n共5种：\n```\nS2PS2P\nSS2P2P\nS2S2PP\nS2SP2P\nSS22PP\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1812,19 +1998,19 @@
         "curated": "_curated/期末/2015期末-20160104-带答案/617.md"
       },
       "layout": {
-        "mode": "fill",
+        "mode": "short",
         "selection": null,
-        "stem": "第五题（10分）异常\n以下程序运行时系统调用全部正确执行，且每个信号都被处理到。请给出代码运行\n后所有可能的输出结果。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <signal.h>\nint c = 1;\nvoid handler1(int sig) {\n  c++;\n  printf(\"%d\", c);\n}\nint main() {\n  signal(SIGUSR1, handler1);\n  sigset_t s;\n  sigemptyset(&s);\n  sigaddset(&s, SIGUSR1);\n  sigprocmask(SIG_BLOCK, &s, 0);\n  intpid = fork()?fork():fork();\n  if (pid == 0) {\nkill(getppid(), SIGUSR1);\n    printf(\"S\");\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    exit(0);\n  } else {\n```\n\n\n```\n    while (waitpid(-1, NULL, 0) != -1);\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    printf(\"P\");\n  }\n  return 0;\n}\n```\n答：",
+        "stem": "第五题（10分）异常\n以下程序运行时系统调用全部正确执行，且每个信号都被处理到。请给出代码运行\n后所有可能的输出结果。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <signal.h>\n#include <sys/wait.h>\nint c = 1;\nvoid handler1(int sig) {\n  c++;\n  printf(\"%d\", c);\n}\nint main() {\n  signal(SIGUSR1, handler1);\n  sigset_t s;\n  sigemptyset(&s);\n  sigaddset(&s, SIGUSR1);\n  sigprocmask(SIG_BLOCK, &s, 0);\n  int pid = fork() ? fork() : fork();\n  if (pid == 0) {\n    kill(getppid(), SIGUSR1);\n    printf(\"S\");\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    exit(0);\n  } else {\n    while (waitpid(-1, NULL, 0) != -1);\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    printf(\"P\");\n  }\n  return 0;\n}\n```\n答：",
         "choices": [],
         "answer": "答案：\n共5种：\n```\nS2PS2P\nSS2P2P\nS2S2PP\nS2SP2P\nSS22PP\n```"
       },
       "interaction": {
-        "kind": "fill",
+        "kind": "short-answer",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第五题（10分）异常\n以下程序运行时系统调用全部正确执行，且每个信号都被处理到。请给出代码运行\n后所有可能的输出结果。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <signal.h>\nint c = 1;\nvoid handler1(int sig) {\n  c++;\n  printf(\"%d\", c);\n}\nint main() {\n  signal(SIGUSR1, handler1);\n  sigset_t s;\n  sigemptyset(&s);\n  sigaddset(&s, SIGUSR1);\n  sigprocmask(SIG_BLOCK, &s, 0);\n  intpid = fork()?fork():fork();\n  if (pid == 0) {\nkill(getppid(), SIGUSR1);\n    printf(\"S\");\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    exit(0);\n  } else {\n```\n\n\n```\n    while (waitpid(-1, NULL, 0) != -1);\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    printf(\"P\");\n  }\n  return 0;\n}\n```\n答：",
+        "prompt": "第五题（10分）异常\n以下程序运行时系统调用全部正确执行，且每个信号都被处理到。请给出代码运行\n后所有可能的输出结果。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <signal.h>\n#include <sys/wait.h>\nint c = 1;\nvoid handler1(int sig) {\n  c++;\n  printf(\"%d\", c);\n}\nint main() {\n  signal(SIGUSR1, handler1);\n  sigset_t s;\n  sigemptyset(&s);\n  sigaddset(&s, SIGUSR1);\n  sigprocmask(SIG_BLOCK, &s, 0);\n  int pid = fork() ? fork() : fork();\n  if (pid == 0) {\n    kill(getppid(), SIGUSR1);\n    printf(\"S\");\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    exit(0);\n  } else {\n    while (waitpid(-1, NULL, 0) != -1);\n    sigprocmask(SIG_UNBLOCK, &s, 0);\n    printf(\"P\");\n  }\n  return 0;\n}\n```\n答：",
         "answer": "答案：\n共5种：\n```\nS2PS2P\nSS2P2P\nS2S2PP\nS2SP2P\nSS22PP\n```"
       },
       "presentation": {
@@ -3422,7 +3608,7 @@
       "exam": "2020期末",
       "questionNo": "第一题 9",
       "summary": "fork() && fork() 的进程数与输出",
-      "content": "9.  C语言中的代码如下：\n```c\nfork() && fork();\nprintf(“-“);\nfork() || fork();\nprintf(“-“);\n```\n这段代码一共输出（ ）个“-”字符。\nA.  12\nB.  18\nC.  20\nD.  32\n答案：B（来源：2019、2020期末-答案解析）\n解析：fork()&&fork() 只有父进程再 fork，fork()||fork() 只有子进程再 fork，实质上一次产生 3 个进程；printf 是行缓冲、缓冲区被复制，最后一次性输出，共 3×6 = 18 个「-」。（不考虑缓冲区则为 12。）",
+      "content": "9.  C语言中的代码如下：\n```c\nfork() && fork();\nprintf(\"-\");\nfork() || fork();\nprintf(\"-\");\n```\n这段代码一共输出（ ）个“-”字符。\nA.  12\nB.  18\nC.  20\nD.  32\n答案：B（来源：2019、2020期末-答案解析）\n解析：fork()&&fork() 只有父进程再 fork，fork()||fork() 只有子进程再 fork，实质上一次产生 3 个进程；printf 是行缓冲、缓冲区被复制，最后一次性输出，共 3×6 = 18 个「-」。（不考虑缓冲区则为 12。）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3445,7 +3631,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "9.  C语言中的代码如下：\n```c\nfork() && fork();\nprintf(“-“);\nfork() || fork();\nprintf(“-“);\n```\n这段代码一共输出（ ）个“-”字符。",
+        "stem": "9.  C语言中的代码如下：\n```c\nfork() && fork();\nprintf(\"-\");\nfork() || fork();\nprintf(\"-\");\n```\n这段代码一共输出（ ）个“-”字符。",
         "choices": [
           {
             "key": "A",
@@ -3493,7 +3679,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "9.  C语言中的代码如下：\n```c\nfork() && fork();\nprintf(“-“);\nfork() || fork();\nprintf(“-“);\n```\n这段代码一共输出（ ）个“-”字符。",
+        "prompt": "9.  C语言中的代码如下：\n```c\nfork() && fork();\nprintf(\"-\");\nfork() || fork();\nprintf(\"-\");\n```\n这段代码一共输出（ ）个“-”字符。",
         "answer": "答案：B（来源：2019、2020期末-答案解析）\n解析：fork()&&fork() 只有父进程再 fork，fork()||fork() 只有子进程再 fork，实质上一次产生 3 个进程；printf 是行缓冲、缓冲区被复制，最后一次性输出，共 3×6 = 18 个「-」。（不考虑缓冲区则为 12。）"
       },
       "presentation": {
@@ -4182,7 +4368,7 @@
       "exam": "2021期末",
       "questionNo": "第四题",
       "summary": "fork/信号/waitpid 的顺序输出与信号处理",
-      "content": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 pid 是\n相邻的。\nint N;\nint nxt; //表示该子进程下一个需要输出的数\nint pid_1 = 0; //第一次fork出的子进程pid\nint pid_2 = 0; //第二次fork出的子进程pid\n```\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n```\n    ________A________ // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n```\n}\nint main(int argc, char* argv[]) {\n```\n  ________B________ //将handler1绑定到SIGUSR1上\n```\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n```\n    ________C_______;  // 设置nxt的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  //跳转并等待子进程结束\n```\n    }\n  }\n```\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n```\n  wait_til_end:\n  int status;\n```\n  while (_______D_______)  // 用waitpid等待子进程结束，注意\n```\nstatus\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n\n\nPART B. 阅读如下 C 代码，回答问题\n```\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n________（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到n个相同信号，那么\n进程实际会处理几个信号？________（1分）\nA.1\nB.1到n之间的随机数值\nC.n\n3.如果N=2，所有可能的输出为：________\n（全部选对得2分，部分选对得1分，选错不得分）\nA.CC\nB.CC1\nC.CC12\nD. C1C2\n4.如果 N=2，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n________\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\nB.CC1\nC.CC1R2\nD.C1RC2\nE.C1CR2\n答案：\nPART A.\nA: kill(pid_1, SIGUSR1); 或 kill(getpid()−1, SIGUSR1);\nB: signal(SIGUSR1, handler1);\nC: nxt = 2;\nD: waitpid(0, &status, 0) > 0 或 waitpid(−1, &status, 0) > 0\n\nPART B.\n1. C\n2. A\n3. BCD（CC1, C1C2, CC12）\n4. A（CC）",
+      "content": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 pid 是\n相邻的。\nint N;\nint nxt; //表示该子进程下一个需要输出的数\nint pid_1 = 0; //第一次fork出的子进程pid\nint pid_2 = 0; //第二次fork出的子进程pid\n```\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n```\n    {{blank:q4-A}} // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n```\n}\nint main(int argc, char* argv[]) {\n```\n  {{blank:q4-B}} //将 handler1 绑定到 SIGUSR1 上\n```\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n```\n    {{blank:q4-C}};  // 设置 nxt 的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  //跳转并等待子进程结束\n```\n    }\n  }\n```\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n```\n  wait_til_end:\n  int status;\n```\n  while ({{blank:q4-D}})  // 用 waitpid 等待子进程结束，注意\n```\nstatus\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n\n\nPART B. 阅读如下 C 代码，回答问题\n```\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n{{blank:q4-B-1}}（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到n个相同信号，那么\n进程实际会处理几个信号？{{blank:q4-B-2}}（1分）\nA.1\nB.1到n之间的随机数值\nC.n\n3.如果 N=2，所有可能的输出为：{{blank:q4-B-3}}\n（全部选对得2分，部分选对得1分，选错不得分）\nA.CC\nB.CC1\nC.CC12\nD. C1C2\n4.如果 N=2，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n{{blank:q4-B-4}}\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\nB.CC1\nC.CC1R2\nD.C1RC2\nE.C1CR2\n答案：\nPART A.\nA: kill(pid_1, SIGUSR1); 或 kill(getpid()−1, SIGUSR1);\nB: signal(SIGUSR1, handler1);\nC: nxt = 2;\nD: waitpid(0, &status, 0) > 0 或 waitpid(−1, &status, 0) > 0\n\nPART B.\n1. C\n2. A\n3. BCD（CC1, C1C2, CC12）\n4. A（CC）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4204,7 +4390,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 pid 是\n相邻的。\nint N;\nint nxt; //表示该子进程下一个需要输出的数\nint pid_1 = 0; //第一次fork出的子进程pid\nint pid_2 = 0; //第二次fork出的子进程pid\n```\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n```\n    ________A________ // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n```\n}\nint main(int argc, char* argv[]) {\n```\n  ________B________ //将handler1绑定到SIGUSR1上\n```\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n```\n    ________C_______;  // 设置nxt的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  //跳转并等待子进程结束\n```\n    }\n  }\n```\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n```\n  wait_til_end:\n  int status;\n```\n  while (_______D_______)  // 用waitpid等待子进程结束，注意\n```\nstatus\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n\n\nPART B. 阅读如下 C 代码，回答问题\n```\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n________（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到n个相同信号，那么\n进程实际会处理几个信号？________（1分）\nA.1\nB.1到n之间的随机数值\nC.n\n3.如果N=2，所有可能的输出为：________\n（全部选对得2分，部分选对得1分，选错不得分）\nA.CC\nB.CC1\nC.CC12\nD. C1C2\n4.如果 N=2，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n________\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\nB.CC1\nC.CC1R2\nD.C1RC2\nE.C1CR2",
+        "stem": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 pid 是\n相邻的。\nint N;\nint nxt; //表示该子进程下一个需要输出的数\nint pid_1 = 0; //第一次fork出的子进程pid\nint pid_2 = 0; //第二次fork出的子进程pid\n```\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n```\n    {{blank:q4-A}} // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n```\n}\nint main(int argc, char* argv[]) {\n```\n  {{blank:q4-B}} //将 handler1 绑定到 SIGUSR1 上\n```\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n```\n    {{blank:q4-C}};  // 设置 nxt 的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  //跳转并等待子进程结束\n```\n    }\n  }\n```\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n```\n  wait_til_end:\n  int status;\n```\n  while ({{blank:q4-D}})  // 用 waitpid 等待子进程结束，注意\n```\nstatus\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n\n\nPART B. 阅读如下 C 代码，回答问题\n```\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n{{blank:q4-B-1}}（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到n个相同信号，那么\n进程实际会处理几个信号？{{blank:q4-B-2}}（1分）\nA.1\nB.1到n之间的随机数值\nC.n\n3.如果 N=2，所有可能的输出为：{{blank:q4-B-3}}\n（全部选对得2分，部分选对得1分，选错不得分）\nA.CC\nB.CC1\nC.CC12\nD. C1C2\n4.如果 N=2，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n{{blank:q4-B-4}}\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\nB.CC1\nC.CC1R2\nD.C1RC2\nE.C1CR2",
         "choices": [],
         "answer": "答案：\nPART A.\nA: kill(pid_1, SIGUSR1); 或 kill(getpid()−1, SIGUSR1);\nB: signal(SIGUSR1, handler1);\nC: nxt = 2;\nD: waitpid(0, &status, 0) > 0 或 waitpid(−1, &status, 0) > 0\n\nPART B.\n1. C\n2. A\n3. BCD（CC1, C1C2, CC12）\n4. A（CC）"
       },
@@ -4214,7 +4400,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 pid 是\n相邻的。\nint N;\nint nxt; //表示该子进程下一个需要输出的数\nint pid_1 = 0; //第一次fork出的子进程pid\nint pid_2 = 0; //第二次fork出的子进程pid\n```\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n```\n    ________A________ // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n```\n}\nint main(int argc, char* argv[]) {\n```\n  ________B________ //将handler1绑定到SIGUSR1上\n```\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n```\n    ________C_______;  // 设置nxt的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  //跳转并等待子进程结束\n```\n    }\n  }\n```\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n```\n  wait_til_end:\n  int status;\n```\n  while (_______D_______)  // 用waitpid等待子进程结束，注意\n```\nstatus\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n\n\nPART B. 阅读如下 C 代码，回答问题\n```\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n________（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到n个相同信号，那么\n进程实际会处理几个信号？________（1分）\nA.1\nB.1到n之间的随机数值\nC.n\n3.如果N=2，所有可能的输出为：________\n（全部选对得2分，部分选对得1分，选错不得分）\nA.CC\nB.CC1\nC.CC12\nD. C1C2\n4.如果 N=2，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n________\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\nB.CC1\nC.CC1R2\nD.C1RC2\nE.C1CR2",
+        "prompt": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 fork 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 pid 是\n相邻的。\nint N;\nint nxt; //表示该子进程下一个需要输出的数\nint pid_1 = 0; //第一次fork出的子进程pid\nint pid_2 = 0; //第二次fork出的子进程pid\n```\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n```\n    {{blank:q4-A}} // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n```\n}\nint main(int argc, char* argv[]) {\n```\n  {{blank:q4-B}} //将 handler1 绑定到 SIGUSR1 上\n```\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n```\n    {{blank:q4-C}};  // 设置 nxt 的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  //跳转并等待子进程结束\n```\n    }\n  }\n```\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n```\n  wait_til_end:\n  int status;\n```\n  while ({{blank:q4-D}})  // 用 waitpid 等待子进程结束，注意\n```\nstatus\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n\n\nPART B. 阅读如下 C 代码，回答问题\n```\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n{{blank:q4-B-1}}（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到n个相同信号，那么\n进程实际会处理几个信号？{{blank:q4-B-2}}（1分）\nA.1\nB.1到n之间的随机数值\nC.n\n3.如果 N=2，所有可能的输出为：{{blank:q4-B-3}}\n（全部选对得2分，部分选对得1分，选错不得分）\nA.CC\nB.CC1\nC.CC12\nD. C1C2\n4.如果 N=2，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n{{blank:q4-B-4}}\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\nB.CC1\nC.CC1R2\nD.C1RC2\nE.C1CR2",
         "answer": "答案：\nPART A.\nA: kill(pid_1, SIGUSR1); 或 kill(getpid()−1, SIGUSR1);\nB: signal(SIGUSR1, handler1);\nC: nxt = 2;\nD: waitpid(0, &status, 0) > 0 或 waitpid(−1, &status, 0) > 0\n\nPART B.\n1. C\n2. A\n3. BCD（CC1, C1C2, CC12）\n4. A（CC）"
       },
       "presentation": {
@@ -5333,14 +5519,25 @@
         "choices": [],
         "answer": "答案：\nA: 0\nB: 1\nC: Sigprocmask\nD: &mask_all\nE: Sigsuspend\nF: 1"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "信号是实现进程间通信的一种重要方式。以下程序中，父进程借助信号把一个随机数传给子进程。\n\n```c\n 1. #include \"csapp.h\"\n 2. volatile int acc = 0;\n 3. volatile int count = 0;\n 4. void sigusr1_handler(int sig) {\n 5.         ______________G______________\n 6.     acc = acc * 2 + __A__;\n 7.     Kill(getppid(), SIGCONT);\n 8. }\n 9. void sigusr2_handler(int sig) {\n10.         ______________H______________\n11.     acc = acc * 2 + __B__;\n12.     Kill(getppid(), SIGCONT);\n13. }\n14. void sigcont_handler(int sig) {}\n15. int main() {\n16.     sigset_t mask_all, mask_father, mask_child;\n17.     Sigfillset(&mask_all);\n18.     Sigfillset(&mask_father);\n19.     Sigfillset(&mask_child);\n20.     Sigdelset(&mask_father, SIGCONT);\n21.     Sigdelset(&mask_child, SIGUSR1);\n22.     Sigdelset(&mask_child, SIGUSR2);\n23.     Signal(SIGUSR1, sigusr1_handler);\n24.     Signal(SIGUSR2, sigusr2_handler);\n25.     Signal(SIGCONT, sigcont_handler);\n26.     __C__(SIG_SETMASK, __D__, NULL);\n27.\n28.     pid_t pid = Fork();\n```\n\n\n```c\n29.     if (pid == 0) {\n30.         for (int i = 0; i < sizeof(int) * 8; i++)\n31.             __E__(&mask_child);\n32.         printf(\"child:0x%x\\n\", acc);\n33.     }\n34.     else {\n35.         srand(time(NULL));\n36.         int r = rand();\n37.         printf(\"father:0x%x\\n\", r);\n38.         for (int i = 0; i < sizeof(int) * 8; i++) {\n39.             if (r & (__F__ << 31 - i))\n40.                 Kill(pid, SIGUSR2);\n41.             else\n42.                 Kill(pid, SIGUSR1);\n43.             __E__(&mask_father);\n44.         }\n45.         Wait(NULL);\n46.     }\n47. }\n```\n\n1. 假设 G. H 处都为空，该程序需要使得父进程和子进程的输出相同。（共 6 分，每空 1 分）\n\n   (1) 程序填空：\n\n\n   A:________________________________\n\n   B:________________________________\n\n   C:________________________________\n\n   D:________________________________\n\n   E:________________________________\n\n   F:________________________________",
         "answer": "答案：\nA: 0\nB: 1\nC: Sigprocmask\nD: &mask_all\nE: Sigsuspend\nF: 1"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q4",
+        "questionId": "q-0534efd83d6a6a83",
+        "title": "第四题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -5384,14 +5581,25 @@
         "choices": [],
         "answer": "答案：是。\n（否则可能会 1) 父进程向子进程发送多个同类信号，而子进程只接受到 1 个，子进程死循环；2) 子进程处理 SIGUSR1 和 SIGUSR2 的顺序与父进程发信号的顺序不一致。两个情况都会导致出错。）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "   (2) 第 43 行的代码是必须的吗？如果\"是\"，请用一句话描述去掉了这一行代码会发生什么。（2 分）",
         "answer": "答案：是。\n（否则可能会 1) 父进程向子进程发送多个同类信号，而子进程只接受到 1 个，子进程死循环；2) 子进程处理 SIGUSR1 和 SIGUSR2 的顺序与父进程发信号的顺序不一致。两个情况都会导致出错。）"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q4",
+        "questionId": "q-0534efd83d6a6a83",
+        "title": "第四题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -5435,14 +5643,25 @@
         "choices": [],
         "answer": "答案：不会输出。\n（答案键注：此小题按原题目应有错。在 sigusr_handler 中如果 G 为真就执行 return，那么就不会发送 SIGCONT 给父进程，父进程阻塞在 Sigsuspend，所以子进程也会阻塞，导致没有输出。）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "2. 假设 G 处填写 if (count % 3 == 0) return; 在 H 处填写 count++;\n\n   如果第 36 行生成的随机数是 0xaaaaaaaa，则子进程的输出是 child:0x____________ （1 分），简要说明理由。（1 分）",
         "answer": "答案：不会输出。\n（答案键注：此小题按原题目应有错。在 sigusr_handler 中如果 G 为真就执行 return，那么就不会发送 SIGCONT 给父进程，父进程阻塞在 Sigsuspend，所以子进程也会阻塞，导致没有输出。）"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q4",
+        "questionId": "q-0534efd83d6a6a83",
+        "title": "第四题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -5933,7 +6152,7 @@
       "exam": "2024期末",
       "questionNo": "第三题 Part C",
       "summary": "fork 父子进程 buffer 与文件写结果",
-      "content": "Part C: 分析下面这段代码的行为，假设file.txt文件存在且初始内容为空，\n并且不需要考虑open()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main() {\nchar *numbers = \"0123456789\";\nchar buffer[100];\nbuffer[0] = '\\0';\npid_t father_pid = getpid();\nfor (int i = 0; i < 10; ++i){\nif (fork() != 0) {\nstrncat(buffer, numbers + i, 1);\n}\n}\nint fd = open(\"./file.txt\", O_RDWR , 0);\nwrite(fd, buffer, strlen(buffer));\nwhile(wait(NULL) != -1){}\nif (getpid() == father_pid) {\nclose(fd);\nfd = open(\"./file.txt\", O_RDONLY, 0);\nchar content[100];\nread(fd, content, 100);\nprintf(\"%c\\n\", content[3]);\nprintf(\"%c\\n\", content[6]);\n}\nexit(0);\n}\n```\n\n\n如果你不清楚string.h中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\ndest，一个源字符串src和最大追加的字符数n。在src的长度至少为n时，这个函数将\nsrc的前n个字符拼接到dest字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为            ，\n第二行的内容可能为            。（ 你 需 要 列 出所有可能出现的 输 出， 每种 可能\n性用逗号隔开，每空1分）\n2） 在运行这段代码之后，file.txt中的内容有            种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）\n7",
+      "content": "Part C: 分析下面这段代码的行为，假设file.txt文件存在且初始内容为空，\n并且不需要考虑open()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main() {\nchar *numbers = \"0123456789\";\nchar buffer[100];\nbuffer[0] = '\\0';\npid_t father_pid = getpid();\nfor (int i = 0; i < 10; ++i){\nif (fork() != 0) {\nstrncat(buffer, numbers + i, 1);\n}\n}\nint fd = open(\"./file.txt\", O_RDWR , 0);\nwrite(fd, buffer, strlen(buffer));\nwhile(wait(NULL) != -1){}\nif (getpid() == father_pid) {\nclose(fd);\nfd = open(\"./file.txt\", O_RDONLY, 0);\nchar content[100];\nread(fd, content, 100);\nprintf(\"%c\\n\", content[3]);\nprintf(\"%c\\n\", content[6]);\n}\nexit(0);\n}\n```\n\n\n如果你不清楚string.h中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\ndest，一个源字符串src和最大追加的字符数n。在src的长度至少为n时，这个函数将\nsrc的前n个字符拼接到dest字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为            ，\n第二行的内容可能为            。（ 你 需 要 列 出所有可能出现的 输 出， 每种 可能\n性用逗号隔开，每空1分）\n2） 在运行这段代码之后，file.txt中的内容有            种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）\n1）第一行可能输出：`3, 4, 5, 6, 7, 8, 9`；第二行可能输出：`6, 7, 8, 9`。\n2）file.txt 的内容有 `10!` 种可能结果。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5959,7 +6178,7 @@
         "selection": null,
         "stem": "Part C: 分析下面这段代码的行为，假设file.txt文件存在且初始内容为空，\n并且不需要考虑open()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main() {\nchar *numbers = \"0123456789\";\nchar buffer[100];\nbuffer[0] = '\\0';\npid_t father_pid = getpid();\nfor (int i = 0; i < 10; ++i){\nif (fork() != 0) {\nstrncat(buffer, numbers + i, 1);\n}\n}\nint fd = open(\"./file.txt\", O_RDWR , 0);\nwrite(fd, buffer, strlen(buffer));\nwhile(wait(NULL) != -1){}\nif (getpid() == father_pid) {\nclose(fd);\nfd = open(\"./file.txt\", O_RDONLY, 0);\nchar content[100];\nread(fd, content, 100);\nprintf(\"%c\\n\", content[3]);\nprintf(\"%c\\n\", content[6]);\n}\nexit(0);\n}\n```\n\n\n如果你不清楚string.h中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\ndest，一个源字符串src和最大追加的字符数n。在src的长度至少为n时，这个函数将\nsrc的前n个字符拼接到dest字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为            ，\n第二行的内容可能为            。（ 你 需 要 列 出所有可能出现的 输 出， 每种 可能\n性用逗号隔开，每空1分）\n2） 在运行这段代码之后，file.txt中的内容有            种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）",
         "choices": [],
-        "answer": "7"
+        "answer": "1）第一行可能输出：`3, 4, 5, 6, 7, 8, 9`；第二行可能输出：`6, 7, 8, 9`。\n2）file.txt 的内容有 `10!` 种可能结果。"
       },
       "interaction": {
         "kind": "fill",
@@ -5968,7 +6187,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "Part C: 分析下面这段代码的行为，假设file.txt文件存在且初始内容为空，\n并且不需要考虑open()函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main() {\nchar *numbers = \"0123456789\";\nchar buffer[100];\nbuffer[0] = '\\0';\npid_t father_pid = getpid();\nfor (int i = 0; i < 10; ++i){\nif (fork() != 0) {\nstrncat(buffer, numbers + i, 1);\n}\n}\nint fd = open(\"./file.txt\", O_RDWR , 0);\nwrite(fd, buffer, strlen(buffer));\nwhile(wait(NULL) != -1){}\nif (getpid() == father_pid) {\nclose(fd);\nfd = open(\"./file.txt\", O_RDONLY, 0);\nchar content[100];\nread(fd, content, 100);\nprintf(\"%c\\n\", content[3]);\nprintf(\"%c\\n\", content[6]);\n}\nexit(0);\n}\n```\n\n\n如果你不清楚string.h中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\ndest，一个源字符串src和最大追加的字符数n。在src的长度至少为n时，这个函数将\nsrc的前n个字符拼接到dest字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为            ，\n第二行的内容可能为            。（ 你 需 要 列 出所有可能出现的 输 出， 每种 可能\n性用逗号隔开，每空1分）\n2） 在运行这段代码之后，file.txt中的内容有            种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）",
-        "answer": "7"
+        "answer": "1）第一行可能输出：`3, 4, 5, 6, 7, 8, 9`；第二行可能输出：`6, 7, 8, 9`。\n2）file.txt 的内容有 `10!` 种可能结果。"
       },
       "presentation": {
         "status": "ready",
@@ -6368,7 +6587,7 @@
       "exam": "2025期末",
       "questionNo": "二 19",
       "summary": "阻塞信号 pending 不排队与 sigprocmask",
-      "content": "19. 观察下面的 C 程序代码。假设程序运行期间没有收到外部发送的 `SIGINT`：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？\nA. `count` 一定为 0\nB. `count` 一定为 1\nC. `count` 可能为 2\nD. 在解除阻塞之前，handler 可能会运行\nE. 在设置阻塞之前，handler 可能会运行\n答案：B\n\n普通信号不排队。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次，因此 `count` 为 1。题面明确排除了外部 `SIGINT`，从而消除原答案稿对选项 E 的歧义。",
+      "content": "19. 观察下面的 C 程序代码：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？\nA. `count` 一定为 0\nB. `count` 一定为 1\nC. `count` 可能为 2\nD. 在解除阻塞之前，handler 可能会运行\nE. 在设置阻塞之前，handler 可能会运行\n答案：B\n\n答案册给出 B。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次。原卷没有说明是否会在设置阻塞前收到外部 `SIGINT`：若收到，handler 可先运行一次，解除阻塞后还会处理一次待决信号，因此题面存在歧义；答案册的 B 隐含了“不考虑外部信号”的假设。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6388,7 +6607,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "19. 观察下面的 C 程序代码。假设程序运行期间没有收到外部发送的 `SIGINT`：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？",
+        "stem": "19. 观察下面的 C 程序代码：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
@@ -6411,7 +6630,7 @@
             "content": "在设置阻塞之前，handler 可能会运行"
           }
         ],
-        "answer": "答案：B\n\n普通信号不排队。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次，因此 `count` 为 1。题面明确排除了外部 `SIGINT`，从而消除原答案稿对选项 E 的歧义。"
+        "answer": "答案：B\n\n答案册给出 B。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次。原卷没有说明是否会在设置阻塞前收到外部 `SIGINT`：若收到，handler 可先运行一次，解除阻塞后还会处理一次待决信号，因此题面存在歧义；答案册的 B 隐含了“不考虑外部信号”的假设。"
       },
       "interaction": {
         "kind": "multiple-choice",
@@ -6444,8 +6663,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "19. 观察下面的 C 程序代码。假设程序运行期间没有收到外部发送的 `SIGINT`：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？",
-        "answer": "答案：B\n\n普通信号不排队。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次，因此 `count` 为 1。题面明确排除了外部 `SIGINT`，从而消除原答案稿对选项 E 的歧义。"
+        "prompt": "19. 观察下面的 C 程序代码：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？",
+        "answer": "答案：B\n\n答案册给出 B。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次。原卷没有说明是否会在设置阻塞前收到外部 `SIGINT`：若收到，handler 可先运行一次，解除阻塞后还会处理一次待决信号，因此题面存在歧义；答案册的 B 隐含了“不考虑外部信号”的假设。"
       },
       "presentation": {
         "status": "ready",
@@ -6597,16 +6816,16 @@
       }
     },
     {
-      "id": "q-33c792b0b109d321",
+      "id": "q-299cfc11fecaff44",
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 23,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第2次）",
-      "questionNo": "第16/17讲 23",
-      "summary": "fork 程序的输出次数与输出顺序判断",
-      "content": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）\n3 次\n10\n不确定\n√",
+      "questionNo": "第16/17讲 23 (1)",
+      "summary": "fork 程序输出 D 的次数",
+      "content": "23.（3分）阅读下面这段程序：\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n\n（1）程序正常运行后，会输出几次 `D`？{{blank:q23-d-count}}\n答案：3 次",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6618,7 +6837,7 @@
         "document": "原文/阶段测验/2025第2次阶段测验-带答案.md",
         "lines": {
           "start": 302,
-          "end": 326
+          "end": 320
         },
         "aliases": [],
         "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/302.md"
@@ -6626,18 +6845,49 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）",
+        "stem": "23.（3分）阅读下面这段程序：\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n\n（1）程序正常运行后，会输出几次 `D`？{{blank:q23-d-count}}",
         "choices": [],
-        "answer": "3 次\n10\n不确定\n√"
+        "answer": "答案：3 次",
+        "blankAnswers": [
+          {
+            "id": "q23-d-count",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q23-d-count",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）",
-        "answer": "3 次\n10\n不确定\n√"
+        "prompt": "23.（3分）阅读下面这段程序：\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n\n（1）程序正常运行后，会输出几次 `D`？{{blank:q23-d-count}}",
+        "answer": "答案：3 次"
+      },
+      "group": {
+        "id": "p-0439188e8c4bdac1:2025-stage2-q23",
+        "questionId": "q-f0b98b6dbd158843",
+        "title": "第16/17讲 23",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -6645,16 +6895,180 @@
       }
     },
     {
-      "id": "q-0f1a987b675f2222",
+      "id": "q-da401d06b08a07ee",
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 24,
       "moduleId": "ecf_and_system_io",
       "year": 2025,
       "examType": "阶段测验",
       "exam": "2025阶段测验（第2次）",
-      "questionNo": "第16/17讲 24",
-      "summary": "含 fork/wait/sleep 的程序进程数与输出行数",
-      "content": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定\n3\n6\nD",
+      "questionNo": "第16/17讲 23 (2)",
+      "summary": "fork 后 B 与 C 的输出顺序",
+      "content": "（2）`B` 和 `C` 哪个先输出？{{blank:q23-bc-order}}\n答案：不确定",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第2次阶段测验-带答案.md",
+        "lines": {
+          "start": 325,
+          "end": 325
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/325.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "（2）`B` 和 `C` 哪个先输出？{{blank:q23-bc-order}}",
+        "choices": [],
+        "answer": "答案：不确定",
+        "blankAnswers": [
+          {
+            "id": "q23-bc-order",
+            "acceptedAnswers": [
+              "不确定",
+              "无法确定",
+              "都可能"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q23-bc-order",
+            "acceptedAnswers": [
+              "不确定",
+              "无法确定",
+              "都可能"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（2）`B` 和 `C` 哪个先输出？{{blank:q23-bc-order}}",
+        "answer": "答案：不确定"
+      },
+      "group": {
+        "id": "p-0439188e8c4bdac1:2025-stage2-q23",
+        "questionId": "q-f0b98b6dbd158843",
+        "title": "第16/17讲 23",
+        "order": 2
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-c6a0365de9075c10",
+      "paperId": "p-0439188e8c4bdac1",
+      "paperOrder": 25,
+      "moduleId": "ecf_and_system_io",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第2次）",
+      "questionNo": "第16/17讲 23 (3)",
+      "summary": "判断给定并发输出序列是否可能",
+      "content": "（3）`ACDBDD` 这个输出序列是否可能？\nA. 是\nB. 否\n答案：A",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第2次阶段测验-带答案.md",
+        "lines": {
+          "start": 326,
+          "end": 326
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/326.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "（3）`ACDBDD` 这个输出序列是否可能？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "是"
+          },
+          {
+            "key": "B",
+            "content": "否"
+          }
+        ],
+        "answer": "答案：A"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "是"
+          },
+          {
+            "id": "B",
+            "content": "否"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（3）`ACDBDD` 这个输出序列是否可能？",
+        "answer": "答案：A"
+      },
+      "group": {
+        "id": "p-0439188e8c4bdac1:2025-stage2-q23",
+        "questionId": "q-f0b98b6dbd158843",
+        "title": "第16/17讲 23",
+        "order": 3
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-50a647f5a470d688",
+      "paperId": "p-0439188e8c4bdac1",
+      "paperOrder": 26,
+      "moduleId": "ecf_and_system_io",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第2次）",
+      "questionNo": "第16/17讲 24 (1)",
+      "summary": "含 fork/wait/sleep 的程序进程数",
+      "content": "24.（6分）阅读下面这段程序：\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\n\nint x = 1;\n\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n\n（1）（2分）这个程序正常运行，会产生几个进程？{{blank:q24-process-count}}\n答案：3 个进程",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6666,7 +7080,7 @@
         "document": "原文/阶段测验/2025第2次阶段测验-带答案.md",
         "lines": {
           "start": 327,
-          "end": 361
+          "end": 358
         },
         "aliases": [],
         "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/327.md"
@@ -6674,18 +7088,241 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定",
+        "stem": "24.（6分）阅读下面这段程序：\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\n\nint x = 1;\n\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n\n（1）（2分）这个程序正常运行，会产生几个进程？{{blank:q24-process-count}}",
         "choices": [],
-        "answer": "3\n6\nD"
+        "answer": "答案：3 个进程",
+        "blankAnswers": [
+          {
+            "id": "q24-process-count",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q24-process-count",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定",
-        "answer": "3\n6\nD"
+        "prompt": "24.（6分）阅读下面这段程序：\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\n\nint x = 1;\n\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n\n（1）（2分）这个程序正常运行，会产生几个进程？{{blank:q24-process-count}}",
+        "answer": "答案：3 个进程"
+      },
+      "group": {
+        "id": "p-0439188e8c4bdac1:2025-stage2-q24",
+        "questionId": "q-2d91d3370d28d2d1",
+        "title": "第16/17讲 24",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-a255defea0f15cf2",
+      "paperId": "p-0439188e8c4bdac1",
+      "paperOrder": 27,
+      "moduleId": "ecf_and_system_io",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第2次）",
+      "questionNo": "第16/17讲 24 (2)",
+      "summary": "程序输出总行数",
+      "content": "（2）（2分）总共会输出多少行？{{blank:q24-output-lines}}\n答案：6 行",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第2次阶段测验-带答案.md",
+        "lines": {
+          "start": 359,
+          "end": 359
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/359.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "（2）（2分）总共会输出多少行？{{blank:q24-output-lines}}",
+        "choices": [],
+        "answer": "答案：6 行",
+        "blankAnswers": [
+          {
+            "id": "q24-output-lines",
+            "acceptedAnswers": [
+              "6"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q24-output-lines",
+            "acceptedAnswers": [
+              "6"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（2）（2分）总共会输出多少行？{{blank:q24-output-lines}}",
+        "answer": "答案：6 行"
+      },
+      "group": {
+        "id": "p-0439188e8c4bdac1:2025-stage2-q24",
+        "questionId": "q-2d91d3370d28d2d1",
+        "title": "第16/17讲 24",
+        "order": 2
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-8c64e5287043dc94",
+      "paperId": "p-0439188e8c4bdac1",
+      "paperOrder": 28,
+      "moduleId": "ecf_and_system_io",
+      "year": 2025,
+      "examType": "阶段测验",
+      "exam": "2025阶段测验（第2次）",
+      "questionNo": "第16/17讲 24 (3)",
+      "summary": "程序最后一行输出",
+      "content": "（3）（2分）最后一行输出是：\nA. `x = 2`\nB. `x = 3`\nC. `x = 4`\nD. `x = 5`\nE. `x = 6`\nF. 不确定\n答案：D",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/阶段测验/2025第2次阶段测验-带答案.md",
+        "lines": {
+          "start": 360,
+          "end": 361
+        },
+        "aliases": [],
+        "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/360.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "（3）（2分）最后一行输出是：",
+        "choices": [
+          {
+            "key": "A",
+            "content": "`x = 2`"
+          },
+          {
+            "key": "B",
+            "content": "`x = 3`"
+          },
+          {
+            "key": "C",
+            "content": "`x = 4`"
+          },
+          {
+            "key": "D",
+            "content": "`x = 5`"
+          },
+          {
+            "key": "E",
+            "content": "`x = 6`"
+          },
+          {
+            "key": "F",
+            "content": "不确定"
+          }
+        ],
+        "answer": "答案：D"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "`x = 2`"
+          },
+          {
+            "id": "B",
+            "content": "`x = 3`"
+          },
+          {
+            "id": "C",
+            "content": "`x = 4`"
+          },
+          {
+            "id": "D",
+            "content": "`x = 5`"
+          },
+          {
+            "id": "E",
+            "content": "`x = 6`"
+          },
+          {
+            "id": "F",
+            "content": "不确定"
+          }
+        ],
+        "correctChoiceIds": [
+          "D"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "（3）（2分）最后一行输出是：",
+        "answer": "答案：D"
+      },
+      "group": {
+        "id": "p-0439188e8c4bdac1:2025-stage2-q24",
+        "questionId": "q-2d91d3370d28d2d1",
+        "title": "第16/17讲 24",
+        "order": 3
       },
       "presentation": {
         "status": "ready",

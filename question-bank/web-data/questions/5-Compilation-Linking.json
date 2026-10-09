@@ -103,10 +103,8 @@
       "exam": "2012期中",
       "questionNo": "Problem F A",
       "summary": "链接：全局符号强弱、作用域与 ELF 段归属",
-      "content": "**Problem F – Linking (12 pts)**\n\nFor each of the following code snippets, write down all symbols in the resulting object files from\ncompilation. Write whether it is a weak global, strong global, or local variable, and what section\nof the final compiled ELF binary the variable will go into. Fill in the value if you have enough\ninformation to determine the value.\n\n   **A.**\n\n![图](assets/期中/2012期中-带答案/page-13.png)\n\n> 上图为本页的作答表格（符号强度/作用域、取值、所在 ELF 段），红色为参考答案；foo.o 最后两行为空白行。\n\n```c\n/* main.c */\n#include <stdio.h>\n\nint x;\nint y;\nint z = 0;\n\nint main() {\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  x = 0xdeadbeef;\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  return 0;\n}\n```\n\n```c\n/* foo.c */\nshort x = 5;\nshort y = 2;\n```\n答案：A.（原卷红色参考答案）\n\n| File | Symbol | Strength / scope | Value | ELF Section |\n| --- | --- | --- | --- | --- |\n| Main.o | X | Weak global | - | .data |\n| Main.o | Y | Weak global | - | .data |\n| Main.o | Z | Strong global | 0 | .data |\n| Main.o | Main | Strong global | - | .text |\n| foo.o | X | Strong global | 5 | .data |\n| foo.o | Y | Strong global | 2 | .data |\n| foo.o | | | | |\n| foo.o | | | | |",
-      "assets": [
-        "assets/期中/2012期中-带答案/page-13.png"
-      ],
+      "content": "**Problem F – Linking (12 pts)**\n\nFor each of the following code snippets, write down all symbols in the resulting object files from\ncompilation. Write whether it is a weak global, strong global, or local variable, and what section\nof the final compiled ELF binary the variable will go into. Fill in the value if you have enough\ninformation to determine the value.\n\n   **A.**\n\n```c\n/* main.c */\n#include <stdio.h>\n\nint x;\nint y;\nint z = 0;\n\nint main() {\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  x = 0xdeadbeef;\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  return 0;\n}\n```\n\n```c\n/* foo.c */\nshort x = 5;\nshort y = 2;\n```\n\n| File | Symbol | Strength / scope | Value | ELF Section |\n| --- | --- | --- | --- | --- |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n答案：A.（原卷红色参考答案）\n\n| File | Symbol | Strength / scope | Value | ELF Section |\n| --- | --- | --- | --- | --- |\n| Main.o | X | Weak global | - | .data |\n| Main.o | Y | Weak global | - | .data |\n| Main.o | Z | Strong global | 0 | .data |\n| Main.o | Main | Strong global | - | .text |\n| foo.o | X | Strong global | 5 | .data |\n| foo.o | Y | Strong global | 2 | .data |\n| foo.o | | | | |\n| foo.o | | | | |",
+      "assets": [],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -125,7 +123,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "**Problem F – Linking (12 pts)**\n\nFor each of the following code snippets, write down all symbols in the resulting object files from\ncompilation. Write whether it is a weak global, strong global, or local variable, and what section\nof the final compiled ELF binary the variable will go into. Fill in the value if you have enough\ninformation to determine the value.\n\n   **A.**\n\n![图](assets/期中/2012期中-带答案/page-13.png)\n\n> 上图为本页的作答表格（符号强度/作用域、取值、所在 ELF 段），红色为参考答案；foo.o 最后两行为空白行。\n\n```c\n/* main.c */\n#include <stdio.h>\n\nint x;\nint y;\nint z = 0;\n\nint main() {\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  x = 0xdeadbeef;\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  return 0;\n}\n```\n\n```c\n/* foo.c */\nshort x = 5;\nshort y = 2;\n```",
+        "stem": "**Problem F – Linking (12 pts)**\n\nFor each of the following code snippets, write down all symbols in the resulting object files from\ncompilation. Write whether it is a weak global, strong global, or local variable, and what section\nof the final compiled ELF binary the variable will go into. Fill in the value if you have enough\ninformation to determine the value.\n\n   **A.**\n\n```c\n/* main.c */\n#include <stdio.h>\n\nint x;\nint y;\nint z = 0;\n\nint main() {\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  x = 0xdeadbeef;\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  return 0;\n}\n```\n\n```c\n/* foo.c */\nshort x = 5;\nshort y = 2;\n```\n\n| File | Symbol | Strength / scope | Value | ELF Section |\n| --- | --- | --- | --- | --- |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |",
         "choices": [],
         "answer": "答案：A.（原卷红色参考答案）\n\n| File | Symbol | Strength / scope | Value | ELF Section |\n| --- | --- | --- | --- | --- |\n| Main.o | X | Weak global | - | .data |\n| Main.o | Y | Weak global | - | .data |\n| Main.o | Z | Strong global | 0 | .data |\n| Main.o | Main | Strong global | - | .text |\n| foo.o | X | Strong global | 5 | .data |\n| foo.o | Y | Strong global | 2 | .data |\n| foo.o | | | | |\n| foo.o | | | | |"
       },
@@ -135,7 +133,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "**Problem F – Linking (12 pts)**\n\nFor each of the following code snippets, write down all symbols in the resulting object files from\ncompilation. Write whether it is a weak global, strong global, or local variable, and what section\nof the final compiled ELF binary the variable will go into. Fill in the value if you have enough\ninformation to determine the value.\n\n   **A.**\n\n![图](assets/期中/2012期中-带答案/page-13.png)\n\n> 上图为本页的作答表格（符号强度/作用域、取值、所在 ELF 段），红色为参考答案；foo.o 最后两行为空白行。\n\n```c\n/* main.c */\n#include <stdio.h>\n\nint x;\nint y;\nint z = 0;\n\nint main() {\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  x = 0xdeadbeef;\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  return 0;\n}\n```\n\n```c\n/* foo.c */\nshort x = 5;\nshort y = 2;\n```",
+        "prompt": "**Problem F – Linking (12 pts)**\n\nFor each of the following code snippets, write down all symbols in the resulting object files from\ncompilation. Write whether it is a weak global, strong global, or local variable, and what section\nof the final compiled ELF binary the variable will go into. Fill in the value if you have enough\ninformation to determine the value.\n\n   **A.**\n\n```c\n/* main.c */\n#include <stdio.h>\n\nint x;\nint y;\nint z = 0;\n\nint main() {\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  x = 0xdeadbeef;\n  printf(\"%x\\n\", x);\n  printf(\"%x\\n\", y);\n  return 0;\n}\n```\n\n```c\n/* foo.c */\nshort x = 5;\nshort y = 2;\n```\n\n| File | Symbol | Strength / scope | Value | ELF Section |\n| --- | --- | --- | --- | --- |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| Main.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |\n| foo.o | ____ | ____ | ____ | ____ |",
         "answer": "答案：A.（原卷红色参考答案）\n\n| File | Symbol | Strength / scope | Value | ELF Section |\n| --- | --- | --- | --- | --- |\n| Main.o | X | Weak global | - | .data |\n| Main.o | Y | Weak global | - | .data |\n| Main.o | Z | Strong global | 0 | .data |\n| Main.o | Main | Strong global | - | .text |\n| foo.o | X | Strong global | 5 | .data |\n| foo.o | Y | Strong global | 2 | .data |\n| foo.o | | | | |\n| foo.o | | | | |"
       },
       "presentation": {
@@ -153,7 +151,7 @@
       "exam": "2013期中",
       "questionNo": "选择题 14",
       "summary": "程序优化与分支预测的正确性",
-      "content": "14、下面哪些选项是错误的？答：（      ）\nA. 同一个任务采用时间复杂度为O(logN)算法一定比采用复杂度为O(N)算法的执行时间短\n3\n\n\nB. 编译器进行程序优化时，总是可以使用算数结合律来减少计算量\nC. 增大循环展开（loop unrolling）的级数，有可能降低程序的执行性能（即增加执行时间）\nD. 分支预测时，“总是预测不跳转”（branch not taken）一定比“总是预测跳转”（branch taken）\n预测准确率高\n答案：ABD",
+      "content": "14、下面哪些选项是错误的？答：（      ）\nA. 同一个任务采用时间复杂度为O(logN)算法一定比采用复杂度为O(N)算法的执行时间短\n\n\nB. 编译器进行程序优化时，总是可以使用算数结合律来减少计算量\nC. 增大循环展开（loop unrolling）的级数，有可能降低程序的执行性能（即增加执行时间）\nD. 分支预测时，“总是预测不跳转”（branch not taken）一定比“总是预测跳转”（branch taken）\n预测准确率高\n答案：ABD",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -177,7 +175,7 @@
         "choices": [
           {
             "key": "A",
-            "content": "同一个任务采用时间复杂度为O(logN)算法一定比采用复杂度为O(N)算法的执行时间短\n3"
+            "content": "同一个任务采用时间复杂度为O(logN)算法一定比采用复杂度为O(N)算法的执行时间短"
           },
           {
             "key": "B",
@@ -200,7 +198,7 @@
         "choices": [
           {
             "id": "A",
-            "content": "同一个任务采用时间复杂度为O(logN)算法一定比采用复杂度为O(N)算法的执行时间短\n3"
+            "content": "同一个任务采用时间复杂度为O(logN)算法一定比采用复杂度为O(N)算法的执行时间短"
           },
           {
             "id": "B",
@@ -328,7 +326,7 @@
       "exam": "2013期中",
       "questionNo": "第七题 2)3)",
       "summary": "CPE 下限与循环展开优化填空",
-      "content": "2）假设读写访存指令延迟为20个时钟周期，其他指令延迟为2个时钟周期，所有分支预测都成功。同时\nCPU包含足够多的部件来实现指令集并行，那么在最理想情况下CPE最低应该是多少（2分）？为什么（2\n分）？\n3）已知src对应字符串中每个字符c都满足0<c<=80且0<=delta<=5。通过下面的改写，可以把transform\n程序CPE的理论下限降低一半，请填空。假设程序运行在小端法机器上。（每空1分）\nvoid transform(char* src, char* tgt, char delta) {\n  short x = ______________;\n  while(*src && ____________) {\n    *(short*)tgt = *(short*)src + x;\n    src += 2;\n    tgt += 2;\n  }\n  *(short*)tgt = __________ ? *(short*)src + delta : *(short*)tgt &_____________;\n}\n答案：\n（1）  {while(*src) *tgt++ = *src++ + delta; *tgt = 0;}\n（2）  42\n每次循环的关键路径为 读内存、做加法、写内存，该路径需要42个时钟周期。\n本题陷阱：同学可能会受书上的例子误导认为做加法可以和下一个时钟周期的读内存并行，使得\nCPE降到40，但实际上因为src和tgt指向的位置可能重叠，我们不能把下一次迭代的读操作移动\n到这一次的写操作之前。\n（3）  (((short) delta) << 8) + delta\n*(src+1)\n0xFF00\n*src",
+      "content": "2）假设读写访存指令延迟为20个时钟周期，其他指令延迟为2个时钟周期，所有分支预测都成功。同时\nCPU包含足够多的部件来实现指令集并行，那么在最理想情况下CPE最低应该是多少？为什么？（共4分）\nCPE：{{blank:cpe-value}}；原因：{{blank:cpe-reason}}\n3）已知src对应字符串中每个字符c都满足0<c<=80且0<=delta<=5。通过下面的改写，可以把transform\n程序CPE的理论下限降低一半，请填空。假设程序运行在小端法机器上。（每空1分）\nvoid transform(char* src, char* tgt, char delta) {\n  short x = {{blank:packed-delta}};\n  while(*src && {{blank:second-char}}) {\n    *(short*)tgt = *(short*)src + x;\n    src += 2;\n    tgt += 2;\n  }\n  *(short*)tgt = {{blank:source-nonzero}} ? *(short*)src + delta : *(short*)tgt & {{blank:mask}};\n}\n答案：\n（2） 42\n每次循环的关键路径为 读内存、做加法、写内存，该路径需要42个时钟周期。\n本题陷阱：同学可能会受书上的例子误导认为做加法可以和下一个时钟周期的读内存并行，使得\nCPE降到40，但实际上因为src和tgt指向的位置可能重叠，我们不能把下一次迭代的读操作移动\n到这一次的写操作之前。\n（3）\n(((short) delta) << 8) + delta\n*(src+1)\n0xFF00\n*src",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -348,18 +346,29 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2）假设读写访存指令延迟为20个时钟周期，其他指令延迟为2个时钟周期，所有分支预测都成功。同时\nCPU包含足够多的部件来实现指令集并行，那么在最理想情况下CPE最低应该是多少（2分）？为什么（2\n分）？\n3）已知src对应字符串中每个字符c都满足0<c<=80且0<=delta<=5。通过下面的改写，可以把transform\n程序CPE的理论下限降低一半，请填空。假设程序运行在小端法机器上。（每空1分）\nvoid transform(char* src, char* tgt, char delta) {\n  short x = ______________;\n  while(*src && ____________) {\n    *(short*)tgt = *(short*)src + x;\n    src += 2;\n    tgt += 2;\n  }\n  *(short*)tgt = __________ ? *(short*)src + delta : *(short*)tgt &_____________;\n}",
+        "stem": "2）假设读写访存指令延迟为20个时钟周期，其他指令延迟为2个时钟周期，所有分支预测都成功。同时\nCPU包含足够多的部件来实现指令集并行，那么在最理想情况下CPE最低应该是多少？为什么？（共4分）\nCPE：{{blank:cpe-value}}；原因：{{blank:cpe-reason}}\n3）已知src对应字符串中每个字符c都满足0<c<=80且0<=delta<=5。通过下面的改写，可以把transform\n程序CPE的理论下限降低一半，请填空。假设程序运行在小端法机器上。（每空1分）\nvoid transform(char* src, char* tgt, char delta) {\n  short x = {{blank:packed-delta}};\n  while(*src && {{blank:second-char}}) {\n    *(short*)tgt = *(short*)src + x;\n    src += 2;\n    tgt += 2;\n  }\n  *(short*)tgt = {{blank:source-nonzero}} ? *(short*)src + delta : *(short*)tgt & {{blank:mask}};\n}",
         "choices": [],
-        "answer": "答案：\n（1）  {while(*src) *tgt++ = *src++ + delta; *tgt = 0;}\n（2）  42\n每次循环的关键路径为 读内存、做加法、写内存，该路径需要42个时钟周期。\n本题陷阱：同学可能会受书上的例子误导认为做加法可以和下一个时钟周期的读内存并行，使得\nCPE降到40，但实际上因为src和tgt指向的位置可能重叠，我们不能把下一次迭代的读操作移动\n到这一次的写操作之前。\n（3）  (((short) delta) << 8) + delta\n*(src+1)\n0xFF00\n*src"
+        "answer": "答案：\n（2） 42\n每次循环的关键路径为 读内存、做加法、写内存，该路径需要42个时钟周期。\n本题陷阱：同学可能会受书上的例子误导认为做加法可以和下一个时钟周期的读内存并行，使得\nCPE降到40，但实际上因为src和tgt指向的位置可能重叠，我们不能把下一次迭代的读操作移动\n到这一次的写操作之前。\n（3）\n(((short) delta) << 8) + delta\n*(src+1)\n0xFF00\n*src"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2）假设读写访存指令延迟为20个时钟周期，其他指令延迟为2个时钟周期，所有分支预测都成功。同时\nCPU包含足够多的部件来实现指令集并行，那么在最理想情况下CPE最低应该是多少（2分）？为什么（2\n分）？\n3）已知src对应字符串中每个字符c都满足0<c<=80且0<=delta<=5。通过下面的改写，可以把transform\n程序CPE的理论下限降低一半，请填空。假设程序运行在小端法机器上。（每空1分）\nvoid transform(char* src, char* tgt, char delta) {\n  short x = ______________;\n  while(*src && ____________) {\n    *(short*)tgt = *(short*)src + x;\n    src += 2;\n    tgt += 2;\n  }\n  *(short*)tgt = __________ ? *(short*)src + delta : *(short*)tgt &_____________;\n}",
-        "answer": "答案：\n（1）  {while(*src) *tgt++ = *src++ + delta; *tgt = 0;}\n（2）  42\n每次循环的关键路径为 读内存、做加法、写内存，该路径需要42个时钟周期。\n本题陷阱：同学可能会受书上的例子误导认为做加法可以和下一个时钟周期的读内存并行，使得\nCPE降到40，但实际上因为src和tgt指向的位置可能重叠，我们不能把下一次迭代的读操作移动\n到这一次的写操作之前。\n（3）  (((short) delta) << 8) + delta\n*(src+1)\n0xFF00\n*src"
+        "prompt": "2）假设读写访存指令延迟为20个时钟周期，其他指令延迟为2个时钟周期，所有分支预测都成功。同时\nCPU包含足够多的部件来实现指令集并行，那么在最理想情况下CPE最低应该是多少？为什么？（共4分）\nCPE：{{blank:cpe-value}}；原因：{{blank:cpe-reason}}\n3）已知src对应字符串中每个字符c都满足0<c<=80且0<=delta<=5。通过下面的改写，可以把transform\n程序CPE的理论下限降低一半，请填空。假设程序运行在小端法机器上。（每空1分）\nvoid transform(char* src, char* tgt, char delta) {\n  short x = {{blank:packed-delta}};\n  while(*src && {{blank:second-char}}) {\n    *(short*)tgt = *(short*)src + x;\n    src += 2;\n    tgt += 2;\n  }\n  *(short*)tgt = {{blank:source-nonzero}} ? *(short*)src + delta : *(short*)tgt & {{blank:mask}};\n}",
+        "answer": "答案：\n（2） 42\n每次循环的关键路径为 读内存、做加法、写内存，该路径需要42个时钟周期。\n本题陷阱：同学可能会受书上的例子误导认为做加法可以和下一个时钟周期的读内存并行，使得\nCPE降到40，但实际上因为src和tgt指向的位置可能重叠，我们不能把下一次迭代的读操作移动\n到这一次的写操作之前。\n（3）\n(((short) delta) << 8) + delta\n*(src+1)\n0xFF00\n*src"
+      },
+      "group": {
+        "id": "p-d0ae6162300a90de:2013-mid-q7",
+        "questionId": "q-2d3657e2f402ef3b",
+        "title": "第七题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -464,10 +473,8 @@
       "exam": "2014期中",
       "questionNo": "第一题 14",
       "summary": "编译器总是自动进行的代码优化",
-      "content": "14、仅考虑以下代码，哪些程序优化总是被编译器自动进行？（假设 int i, int\n\n\nj, int A[N], int B[N], int m, int *p 都是局部变量，N 是一个整数型常量，int foo(int) 是一个函数）\n\n![图](assets/期中/2014期中-带答案/p7-img1.png)\n\n（图：第14题的\"优化前 / 优化后\"对照表，含 A、B、C、D 四组代码变换）\n\n| | 优化前 | 优化后 |\n| --- | --- | --- |\n| A. | `for (j = 0 ; j < N ; j ++)`<br>`    B[i] *= A[j];` | `int temp = B[i];`<br>`for (j = 0 ; j < N ; j ++)`<br>`    temp *= A[j];`<br>`B[i] = temp;` |\n| B. | `for (j = 0 ; j < N ; j ++)`<br>`    m += i*N*j;` | `int temp = i*N;`<br>`for (j = 0 ; j < N ; j ++)`<br>`    m += temp * j;` |\n| C. | `i = foo(N);`<br>`j = foo(N);`<br>`if (*p != 0)`<br>`    m = j ;` | `j = foo(N);`<br>`if (*p != 0)`<br>`    m = j ;` |\n| D. | `for (j = 0 ; j < foo(N) ; j ++)`<br>`    m ++;` | `int temp = foo(N);`<br>`for (j= 0 ; j < temp ; j ++)`<br>`    m ++;` |\n\n答：（　　　）\n答案：B",
-      "assets": [
-        "assets/期中/2014期中-带答案/p7-img1.png"
-      ],
+      "content": "14、仅考虑以下代码，哪些程序优化总是被编译器自动进行？（假设 int i, int\n\n\nj, int A[N], int B[N], int m, int *p 都是局部变量，N 是一个整数型常量，int foo(int) 是一个函数）\nA. 优化前：\n```c\nfor (j = 0; j < N; j++)\n    B[i] *= A[j];\n```\n优化后：\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\n    temp *= A[j];\nB[i] = temp;\n```\nB. 优化前：\n```c\nfor (j = 0; j < N; j++)\n    m += i * N * j;\n```\n优化后：\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\n    m += temp * j;\n```\nC. 优化前：\n```c\ni = foo(N);\nj = foo(N);\nif (*p != 0)\n    m = j;\n```\n优化后：\n```c\nj = foo(N);\nif (*p != 0)\n    m = j;\n```\nD. 优化前：\n```c\nfor (j = 0; j < foo(N); j++)\n    m++;\n```\n优化后：\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\n    m++;\n```\n答案：B",
+      "assets": [],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -486,19 +493,57 @@
         "curated": "_curated/期中/2014期中-带答案/241.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "14、仅考虑以下代码，哪些程序优化总是被编译器自动进行？（假设 int i, int\n\n\nj, int A[N], int B[N], int m, int *p 都是局部变量，N 是一个整数型常量，int foo(int) 是一个函数）\n\n![图](assets/期中/2014期中-带答案/p7-img1.png)\n\n（图：第14题的\"优化前 / 优化后\"对照表，含 A、B、C、D 四组代码变换）\n\n| | 优化前 | 优化后 |\n| --- | --- | --- |\n| A. | `for (j = 0 ; j < N ; j ++)`<br>`    B[i] *= A[j];` | `int temp = B[i];`<br>`for (j = 0 ; j < N ; j ++)`<br>`    temp *= A[j];`<br>`B[i] = temp;` |\n| B. | `for (j = 0 ; j < N ; j ++)`<br>`    m += i*N*j;` | `int temp = i*N;`<br>`for (j = 0 ; j < N ; j ++)`<br>`    m += temp * j;` |\n| C. | `i = foo(N);`<br>`j = foo(N);`<br>`if (*p != 0)`<br>`    m = j ;` | `j = foo(N);`<br>`if (*p != 0)`<br>`    m = j ;` |\n| D. | `for (j = 0 ; j < foo(N) ; j ++)`<br>`    m ++;` | `int temp = foo(N);`<br>`for (j= 0 ; j < temp ; j ++)`<br>`    m ++;` |\n\n答：（　　　）",
-        "choices": [],
+        "mode": "choice",
+        "selection": "single",
+        "stem": "14、仅考虑以下代码，哪些程序优化总是被编译器自动进行？（假设 int i, int\n\n\nj, int A[N], int B[N], int m, int *p 都是局部变量，N 是一个整数型常量，int foo(int) 是一个函数）",
+        "choices": [
+          {
+            "key": "A",
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\nB[i] *= A[j];\n```\n优化后：\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\ntemp *= A[j];\nB[i] = temp;\n```"
+          },
+          {
+            "key": "B",
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\nm += i * N * j;\n```\n优化后：\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\nm += temp * j;\n```"
+          },
+          {
+            "key": "C",
+            "content": "优化前：\n```c\ni = foo(N);\nj = foo(N);\nif (*p != 0)\nm = j;\n```\n优化后：\n```c\nj = foo(N);\nif (*p != 0)\nm = j;\n```"
+          },
+          {
+            "key": "D",
+            "content": "优化前：\n```c\nfor (j = 0; j < foo(N); j++)\nm++;\n```\n优化后：\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\nm++;\n```"
+          }
+        ],
         "answer": "答案：B"
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\nB[i] *= A[j];\n```\n优化后：\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\ntemp *= A[j];\nB[i] = temp;\n```"
+          },
+          {
+            "id": "B",
+            "content": "优化前：\n```c\nfor (j = 0; j < N; j++)\nm += i * N * j;\n```\n优化后：\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\nm += temp * j;\n```"
+          },
+          {
+            "id": "C",
+            "content": "优化前：\n```c\ni = foo(N);\nj = foo(N);\nif (*p != 0)\nm = j;\n```\n优化后：\n```c\nj = foo(N);\nif (*p != 0)\nm = j;\n```"
+          },
+          {
+            "id": "D",
+            "content": "优化前：\n```c\nfor (j = 0; j < foo(N); j++)\nm++;\n```\n优化后：\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\nm++;\n```"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "14、仅考虑以下代码，哪些程序优化总是被编译器自动进行？（假设 int i, int\n\n\nj, int A[N], int B[N], int m, int *p 都是局部变量，N 是一个整数型常量，int foo(int) 是一个函数）\n\n![图](assets/期中/2014期中-带答案/p7-img1.png)\n\n（图：第14题的\"优化前 / 优化后\"对照表，含 A、B、C、D 四组代码变换）\n\n| | 优化前 | 优化后 |\n| --- | --- | --- |\n| A. | `for (j = 0 ; j < N ; j ++)`<br>`    B[i] *= A[j];` | `int temp = B[i];`<br>`for (j = 0 ; j < N ; j ++)`<br>`    temp *= A[j];`<br>`B[i] = temp;` |\n| B. | `for (j = 0 ; j < N ; j ++)`<br>`    m += i*N*j;` | `int temp = i*N;`<br>`for (j = 0 ; j < N ; j ++)`<br>`    m += temp * j;` |\n| C. | `i = foo(N);`<br>`j = foo(N);`<br>`if (*p != 0)`<br>`    m = j ;` | `j = foo(N);`<br>`if (*p != 0)`<br>`    m = j ;` |\n| D. | `for (j = 0 ; j < foo(N) ; j ++)`<br>`    m ++;` | `int temp = foo(N);`<br>`for (j= 0 ; j < temp ; j ++)`<br>`    m ++;` |\n\n答：（　　　）",
+        "prompt": "14、仅考虑以下代码，哪些程序优化总是被编译器自动进行？（假设 int i, int\n\n\nj, int A[N], int B[N], int m, int *p 都是局部变量，N 是一个整数型常量，int foo(int) 是一个函数）",
         "answer": "答案：B"
       },
       "presentation": {
@@ -516,7 +561,7 @@
       "exam": "2014期中",
       "questionNo": "第七题 1）",
       "summary": "循环条件中重复调用 length 的效率问题与修改",
-      "content": "第七题（10 分）\n\n如下是使用 C 语言描述的链表结构的声明，链表的结尾使用空指针来表示。同时使用函数 int length (List *p) 来计算链表的长度。为简化起见，假设该链表是非循环的。\n\n```c\ntypedef struct LIST {\n    struct LIST *next;\n    int data;\n} List;\n```\n\n1）函数 count_pos1 用来计算链表中 data 为正数的元素个数，并将结果存放在地址 k。以下的程序可能存在问题导致效率很低或程序出错，请指出并修改。（4 分）\n\n```c\nvoid count_pos1 (List *p, int *k) {\n    int i;\n    for (i = 0; i < length(p); i++) {\n        if (p->data > 0)\n            *k++;\n        p = p->next;\n    }\n}\n```\n答案：原程序每轮循环都调用 `length(p)`（复杂度 O(n²)），且 `*k++` 递增的是指针而不是计数；原卷参考答案（4 分）：\n```c\nvoid count_pos1 (List *p, int *k) {\n    int l, num=0, len;\n    len = length(p);\n    for (i = 0; i < len; i++) {\n        if (p->data > 0)\n            num++;\n        p = p->next;\n    }\n    *k = num;\n}\n```",
+      "content": "第七题（10 分）\n\n如下是使用 C 语言描述的链表结构的声明，链表的结尾使用空指针来表示。同时使用函数 int length (List *p) 来计算链表的长度。为简化起见，假设该链表是非循环的。\n\n```c\ntypedef struct LIST {\n    struct LIST *next;\n    int data;\n} List;\n```\n\n1）函数 count_pos1 用来计算链表中 data 为正数的元素个数，并将结果存放在地址 k。以下的程序可能存在问题导致效率很低或程序出错，请指出并修改。（4 分）\n\n```c\nvoid count_pos1 (List *p, int *k) {\n    int i;\n    for (i = 0; i < length(p); i++) {\n        if (p->data > 0)\n            *k++;\n        p = p->next;\n    }\n}\n```\n答案：原程序每轮循环都调用 `length(p)`（复杂度 O(n²)），且 `*k++` 递增的是指针而不是计数；原卷参考答案（4 分）：\n```c\nvoid count_pos1 (List *p, int *k) {\n    int i, num=0, len;\n    len = length(p);\n    for (i = 0; i < len; i++) {\n        if (p->data > 0)\n            num++;\n        p = p->next;\n    }\n    *k = num;\n}\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -540,7 +585,7 @@
         "selection": null,
         "stem": "第七题（10 分）\n\n如下是使用 C 语言描述的链表结构的声明，链表的结尾使用空指针来表示。同时使用函数 int length (List *p) 来计算链表的长度。为简化起见，假设该链表是非循环的。\n\n```c\ntypedef struct LIST {\n    struct LIST *next;\n    int data;\n} List;\n```\n\n1）函数 count_pos1 用来计算链表中 data 为正数的元素个数，并将结果存放在地址 k。以下的程序可能存在问题导致效率很低或程序出错，请指出并修改。（4 分）\n\n```c\nvoid count_pos1 (List *p, int *k) {\n    int i;\n    for (i = 0; i < length(p); i++) {\n        if (p->data > 0)\n            *k++;\n        p = p->next;\n    }\n}\n```",
         "choices": [],
-        "answer": "答案：原程序每轮循环都调用 `length(p)`（复杂度 O(n²)），且 `*k++` 递增的是指针而不是计数；原卷参考答案（4 分）：\n```c\nvoid count_pos1 (List *p, int *k) {\n    int l, num=0, len;\n    len = length(p);\n    for (i = 0; i < len; i++) {\n        if (p->data > 0)\n            num++;\n        p = p->next;\n    }\n    *k = num;\n}\n```"
+        "answer": "答案：原程序每轮循环都调用 `length(p)`（复杂度 O(n²)），且 `*k++` 递增的是指针而不是计数；原卷参考答案（4 分）：\n```c\nvoid count_pos1 (List *p, int *k) {\n    int i, num=0, len;\n    len = length(p);\n    for (i = 0; i < len; i++) {\n        if (p->data > 0)\n            num++;\n        p = p->next;\n    }\n    *k = num;\n}\n```"
       },
       "interaction": {
         "kind": "short-answer",
@@ -549,7 +594,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "第七题（10 分）\n\n如下是使用 C 语言描述的链表结构的声明，链表的结尾使用空指针来表示。同时使用函数 int length (List *p) 来计算链表的长度。为简化起见，假设该链表是非循环的。\n\n```c\ntypedef struct LIST {\n    struct LIST *next;\n    int data;\n} List;\n```\n\n1）函数 count_pos1 用来计算链表中 data 为正数的元素个数，并将结果存放在地址 k。以下的程序可能存在问题导致效率很低或程序出错，请指出并修改。（4 分）\n\n```c\nvoid count_pos1 (List *p, int *k) {\n    int i;\n    for (i = 0; i < length(p); i++) {\n        if (p->data > 0)\n            *k++;\n        p = p->next;\n    }\n}\n```",
-        "answer": "答案：原程序每轮循环都调用 `length(p)`（复杂度 O(n²)），且 `*k++` 递增的是指针而不是计数；原卷参考答案（4 分）：\n```c\nvoid count_pos1 (List *p, int *k) {\n    int l, num=0, len;\n    len = length(p);\n    for (i = 0; i < len; i++) {\n        if (p->data > 0)\n            num++;\n        p = p->next;\n    }\n    *k = num;\n}\n```"
+        "answer": "答案：原程序每轮循环都调用 `length(p)`（复杂度 O(n²)），且 `*k++` 递增的是指针而不是计数；原卷参考答案（4 分）：\n```c\nvoid count_pos1 (List *p, int *k) {\n    int i, num=0, len;\n    len = length(p);\n    for (i = 0; i < len; i++) {\n        if (p->data > 0)\n            num++;\n        p = p->next;\n    }\n    *k = num;\n}\n```"
       },
       "presentation": {
         "status": "ready",
@@ -616,7 +661,7 @@
       "exam": "2014期中",
       "questionNo": "第七题 3）",
       "summary": "给定访存延时求内层循环 CPE 下限",
-      "content": "3）上述程序内层循环的汇编片段如下所示。假设该链表不为空且大部分数据都为正数，转移预测全部正确，设计中有足够多的部件来实现指令并行。其中访存操作全部 cache 命中，时延为 3 cycle，其他指令时延为 1cycle。请计算以下程序的 CPE 下限，并给出文字说明。（4 分）\n\n```\n.L1:\n    movl   4(%eax), %ecx\n    testl      %ecx, %ecx\n    jle    .L2\n    incl       %edx\n.L2:\n```\n\n\n```\n    movl   (%eax), %eax\n    testl  %eax, %eax\n    jne    .L1\n```\n答案：L1 和 L2 的代码没有数据依赖，完全可以并行。（2 分）\n\nCPE 的下限为 3+1=4。（2 分）",
+      "content": "3）上述程序内层循环的汇编片段如下所示。假设该链表不为空且大部分数据都为正数，转移预测全部正确，设计中有足够多的部件来实现指令并行。其中访存操作全部 cache 命中，时延为 3 cycle，其他指令时延为 1cycle。请计算以下程序的 CPE 下限，并给出文字说明。（4 分）\n\n```\n.L1:\n    movl   4(%eax), %ecx\n    testl      %ecx, %ecx\n    jle    .L2\n    incl       %edx\n.L2:\n    movl   (%eax), %eax\n    testl  %eax, %eax\n    jne    .L1\n```\n答案：L1 和 L2 的代码没有数据依赖，完全可以并行。（2 分）\n\nCPE 的下限为 3+1=4。（2 分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -638,7 +683,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "3）上述程序内层循环的汇编片段如下所示。假设该链表不为空且大部分数据都为正数，转移预测全部正确，设计中有足够多的部件来实现指令并行。其中访存操作全部 cache 命中，时延为 3 cycle，其他指令时延为 1cycle。请计算以下程序的 CPE 下限，并给出文字说明。（4 分）\n\n```\n.L1:\n    movl   4(%eax), %ecx\n    testl      %ecx, %ecx\n    jle    .L2\n    incl       %edx\n.L2:\n```\n\n\n```\n    movl   (%eax), %eax\n    testl  %eax, %eax\n    jne    .L1\n```",
+        "stem": "3）上述程序内层循环的汇编片段如下所示。假设该链表不为空且大部分数据都为正数，转移预测全部正确，设计中有足够多的部件来实现指令并行。其中访存操作全部 cache 命中，时延为 3 cycle，其他指令时延为 1cycle。请计算以下程序的 CPE 下限，并给出文字说明。（4 分）\n\n```\n.L1:\n    movl   4(%eax), %ecx\n    testl      %ecx, %ecx\n    jle    .L2\n    incl       %edx\n.L2:\n    movl   (%eax), %eax\n    testl  %eax, %eax\n    jne    .L1\n```",
         "choices": [],
         "answer": "答案：L1 和 L2 的代码没有数据依赖，完全可以并行。（2 分）\n\nCPE 的下限为 3+1=4。（2 分）"
       },
@@ -648,7 +693,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3）上述程序内层循环的汇编片段如下所示。假设该链表不为空且大部分数据都为正数，转移预测全部正确，设计中有足够多的部件来实现指令并行。其中访存操作全部 cache 命中，时延为 3 cycle，其他指令时延为 1cycle。请计算以下程序的 CPE 下限，并给出文字说明。（4 分）\n\n```\n.L1:\n    movl   4(%eax), %ecx\n    testl      %ecx, %ecx\n    jle    .L2\n    incl       %edx\n.L2:\n```\n\n\n```\n    movl   (%eax), %eax\n    testl  %eax, %eax\n    jne    .L1\n```",
+        "prompt": "3）上述程序内层循环的汇编片段如下所示。假设该链表不为空且大部分数据都为正数，转移预测全部正确，设计中有足够多的部件来实现指令并行。其中访存操作全部 cache 命中，时延为 3 cycle，其他指令时延为 1cycle。请计算以下程序的 CPE 下限，并给出文字说明。（4 分）\n\n```\n.L1:\n    movl   4(%eax), %ecx\n    testl      %ecx, %ecx\n    jle    .L2\n    incl       %edx\n.L2:\n    movl   (%eax), %eax\n    testl  %eax, %eax\n    jne    .L1\n```",
         "answer": "答案：L1 和 L2 的代码没有数据依赖，完全可以并行。（2 分）\n\nCPE 的下限为 3+1=4。（2 分）"
       },
       "presentation": {
@@ -666,7 +711,7 @@
       "exam": "2015期中",
       "questionNo": "选择题 20",
       "summary": "编译器自动优化变换（别名/精度）",
-      "content": "20. 以下哪些程序优化编译器总是可以自动进行？（假设int i, int j, int\nA[N], int B[N], float m都是局部变量，N是一个整数型常量，int\nfoo(int) 是一个函数）\n  优化前  优化后\n```\n   m + = i*N*j;  for (j= 0 ; j < N ; j ++)\n   m + = temp * j;\n```\n\n\n```\n   B[i] *= A[j];  for (j= 0 ; j < N ; j ++)\n   temp *= A[j];\nB[i] = temp;\n   m = (m + A[j]) + B[j];     m = m + (A[j] + B[j]);\n++)  for (j= 0 ; j < temp ; j ++)\n   m++;     m++;\n```\nA. for (j = 0 ; j < N ; j ++)  int temp = i*N;\nB. for (j = 0 ; j < N ; j ++)  int temp = B[i];\nC. for (j = 0 ; j < N ; j ++)  for (j = 0 ; j < N ; j ++)\nD. for (j = 0 ; j < foo(N) ; j  int temp = foo(N);\n答案：A\n说明：考察procedure, memory aliasing，和floating 的精度问题",
+      "content": "20. 以下哪些程序优化编译器总是可以自动进行？（假设int i, int j, int\nA[N], int B[N], float m都是局部变量，N是一个整数型常量，int\nfoo(int) 是一个函数）\n请判断下列哪一项“优化前”到“优化后”的转换总是可以自动进行。\nA.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    m += i * N * j;\n```\n\n优化后：\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\n    m += temp * j;\n```\nB.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    B[i] *= A[j];\n```\n\n优化后：\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\n    temp *= A[j];\nB[i] = temp;\n```\n\nC.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    m = (m + A[j]) + B[j];\n```\n\n优化后：\n```c\nfor (j = 0; j < N; j++)\n    m = m + (A[j] + B[j]);\n```\n\nD.\n\n优化前：\n```c\nfor (j = 0; j < foo(N); j++)\n    m++;\n```\n\n优化后：\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\n    m++;\n```\nA. 第一项转换\nB. 第二项转换\nC. 第三项转换\nD. 第四项转换\n原卷答案：A\n\n原卷说明：考察 procedure、memory aliasing 和 floating 的精度问题。\n\n> ⚠️ 原题存在歧义：题干明确把 `A[N]` 与 `B[N]` 写成两个局部数组，按 C\n> 语言中不同数组对象互不重叠的字面理解，B 项将 `B[i]` 暂存在局部变量中也可能被认为\n> 是安全的。这里仍按原卷公布的答案 A 判分；这条说明用于提示题目本身的假设与官方解释\n> 并不完全一致。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -688,26 +733,26 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "20. 以下哪些程序优化编译器总是可以自动进行？（假设int i, int j, int\nA[N], int B[N], float m都是局部变量，N是一个整数型常量，int\nfoo(int) 是一个函数）\n  优化前  优化后\n```\n   m + = i*N*j;  for (j= 0 ; j < N ; j ++)\n   m + = temp * j;\n```\n\n\n```\n   B[i] *= A[j];  for (j= 0 ; j < N ; j ++)\n   temp *= A[j];\nB[i] = temp;\n   m = (m + A[j]) + B[j];     m = m + (A[j] + B[j]);\n++)  for (j= 0 ; j < temp ; j ++)\n   m++;     m++;\n```",
+        "stem": "20. 以下哪些程序优化编译器总是可以自动进行？（假设int i, int j, int\nA[N], int B[N], float m都是局部变量，N是一个整数型常量，int\nfoo(int) 是一个函数）\n请判断下列哪一项“优化前”到“优化后”的转换总是可以自动进行。\nA.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    m += i * N * j;\n```\n\n优化后：\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\n    m += temp * j;\n```\nB.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    B[i] *= A[j];\n```\n\n优化后：\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\n    temp *= A[j];\nB[i] = temp;\n```\n\nC.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    m = (m + A[j]) + B[j];\n```\n\n优化后：\n```c\nfor (j = 0; j < N; j++)\n    m = m + (A[j] + B[j]);\n```\n\nD.\n\n优化前：\n```c\nfor (j = 0; j < foo(N); j++)\n    m++;\n```\n\n优化后：\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\n    m++;\n```",
         "choices": [
           {
             "key": "A",
-            "content": "for (j = 0 ; j < N ; j ++)  int temp = i*N;"
+            "content": "第一项转换"
           },
           {
             "key": "B",
-            "content": "for (j = 0 ; j < N ; j ++)  int temp = B[i];"
+            "content": "第二项转换"
           },
           {
             "key": "C",
-            "content": "for (j = 0 ; j < N ; j ++)  for (j = 0 ; j < N ; j ++)"
+            "content": "第三项转换"
           },
           {
             "key": "D",
-            "content": "for (j = 0 ; j < foo(N) ; j  int temp = foo(N);"
+            "content": "第四项转换"
           }
         ],
-        "answer": "答案：A\n说明：考察procedure, memory aliasing，和floating 的精度问题"
+        "answer": "原卷答案：A\n\n原卷说明：考察 procedure、memory aliasing 和 floating 的精度问题。\n\n> ⚠️ 原题存在歧义：题干明确把 `A[N]` 与 `B[N]` 写成两个局部数组，按 C\n> 语言中不同数组对象互不重叠的字面理解，B 项将 `B[i]` 暂存在局部变量中也可能被认为\n> 是安全的。这里仍按原卷公布的答案 A 判分；这条说明用于提示题目本身的假设与官方解释\n> 并不完全一致。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -715,19 +760,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "for (j = 0 ; j < N ; j ++)  int temp = i*N;"
+            "content": "第一项转换"
           },
           {
             "id": "B",
-            "content": "for (j = 0 ; j < N ; j ++)  int temp = B[i];"
+            "content": "第二项转换"
           },
           {
             "id": "C",
-            "content": "for (j = 0 ; j < N ; j ++)  for (j = 0 ; j < N ; j ++)"
+            "content": "第三项转换"
           },
           {
             "id": "D",
-            "content": "for (j = 0 ; j < foo(N) ; j  int temp = foo(N);"
+            "content": "第四项转换"
           }
         ],
         "correctChoiceIds": [
@@ -736,8 +781,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "20. 以下哪些程序优化编译器总是可以自动进行？（假设int i, int j, int\nA[N], int B[N], float m都是局部变量，N是一个整数型常量，int\nfoo(int) 是一个函数）\n  优化前  优化后\n```\n   m + = i*N*j;  for (j= 0 ; j < N ; j ++)\n   m + = temp * j;\n```\n\n\n```\n   B[i] *= A[j];  for (j= 0 ; j < N ; j ++)\n   temp *= A[j];\nB[i] = temp;\n   m = (m + A[j]) + B[j];     m = m + (A[j] + B[j]);\n++)  for (j= 0 ; j < temp ; j ++)\n   m++;     m++;\n```",
-        "answer": "答案：A\n说明：考察procedure, memory aliasing，和floating 的精度问题"
+        "prompt": "20. 以下哪些程序优化编译器总是可以自动进行？（假设int i, int j, int\nA[N], int B[N], float m都是局部变量，N是一个整数型常量，int\nfoo(int) 是一个函数）\n请判断下列哪一项“优化前”到“优化后”的转换总是可以自动进行。\nA.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    m += i * N * j;\n```\n\n优化后：\n```c\nint temp = i * N;\nfor (j = 0; j < N; j++)\n    m += temp * j;\n```\nB.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    B[i] *= A[j];\n```\n\n优化后：\n```c\nint temp = B[i];\nfor (j = 0; j < N; j++)\n    temp *= A[j];\nB[i] = temp;\n```\n\nC.\n\n优化前：\n```c\nfor (j = 0; j < N; j++)\n    m = (m + A[j]) + B[j];\n```\n\n优化后：\n```c\nfor (j = 0; j < N; j++)\n    m = m + (A[j] + B[j]);\n```\n\nD.\n\n优化前：\n```c\nfor (j = 0; j < foo(N); j++)\n    m++;\n```\n\n优化后：\n```c\nint temp = foo(N);\nfor (j = 0; j < temp; j++)\n    m++;\n```",
+        "answer": "原卷答案：A\n\n原卷说明：考察 procedure、memory aliasing 和 floating 的精度问题。\n\n> ⚠️ 原题存在歧义：题干明确把 `A[N]` 与 `B[N]` 写成两个局部数组，按 C\n> 语言中不同数组对象互不重叠的字面理解，B 项将 `B[i]` 暂存在局部变量中也可能被认为\n> 是安全的。这里仍按原卷公布的答案 A 判分；这条说明用于提示题目本身的假设与官方解释\n> 并不完全一致。"
       },
       "presentation": {
         "status": "ready",
@@ -1454,7 +1499,7 @@
       "exam": "2021期中",
       "questionNo": "第六题 4",
       "summary": "2x2 循环展开的两个累积变量改写",
-      "content": "4. 在学习了循环展开后，同学I想对func函数进行优化。他决定尝试模仿书上\n$2 \\times 2$ 循环展开的方法，使用两个累积变量以提高代码并行性，请补全他改进后的函\n数 `func1` 的代码。（$1 \\times 4 = 4$ 分）\n```\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && ____①____){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += _____②_____;      //line 4\n        p = _____③______;        //line 5\n    }\n    if(_____④______)          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① ________________\n② ________________\n③ ________________\n④ ________________\n```\n答案：① `p->next`　② `p->next->u1.f`　③ `p->next->next`　④ `p`\n\n解析（本题的 `s_element` 是一个链表结点：`union u_inner u1` 里放 `float f`，另有 `next` 指向下一个结点；原函数 `func` 就是遍历链表把每个结点的 `u1.f` 累加）：\n\n1. ① 循环条件必须保证「还有**两个**结点可以处理」，否则第 4 行访问 `p->next->u1.f` 会解引用空指针 → 填 `p->next`（完整写法 `p && p->next`）。\n2. ② 第 3 行已经把本轮第一个结点的 `p->u1.f` 加进 `ans1`，第二个累积变量对应本轮第二个结点 → 填 `p->next->u1.f`。\n3. ③ 一轮吃掉两个结点，指针要一次前进两格 → 填 `p->next->next`。\n4. ④ 退出循环时只可能剩下两种情况：结点数为偶数（两个两个处理完，`p == NULL`）或为奇数（还剩最后一个结点，`p != NULL`）。第 6–7 行就是把可能剩下的那个结点补加到 `ans1`，所以条件填 `p`（等价于 `p != NULL`）。若写成 `p->next`，当 `p` 是最后一个结点时会漏加，而 `p` 为 NULL 时还会解引用空指针。\n5. 累加口径：`ans1` 收第 0、2、4… 个结点，`ans2` 收第 1、3、5… 个结点，最后 `ans1 + ans2` 就是全部结点之和 —— 功能上与原 `func` 等价。但注意：这里改变了浮点加法的结合次序，结果可能与原 `func` 不同（这正是下一小问的考点）。\n\n> 📌 答案有官方来源：原卷参考答案「4）① p->next ② p->next->u1.f ③ p->next->next ④ p」（原文/期中/2021期中-带答案.md 第 866–869 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+      "content": "4. 在学习了循环展开后，同学I想对func函数进行优化。他决定尝试模仿书上\n$2 \\times 2$ 循环展开的方法，使用两个累积变量以提高代码并行性，请补全他改进后的函\n数 `func1` 的代码。（$1 \\times 4 = 4$ 分）\n```\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && {{blank:q6-4-1}}){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += {{blank:q6-4-2}};      //line 4\n        p = {{blank:q6-4-3}};        //line 5\n    }\n    if({{blank:q6-4-4}})          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① {{blank:q6-4-1}}\n② {{blank:q6-4-2}}\n③ {{blank:q6-4-3}}\n④ {{blank:q6-4-4}}\n```\n答案：① `p->next`　② `p->next->u1.f`　③ `p->next->next`　④ `p`\n\n解析（本题的 `s_element` 是一个链表结点：`union u_inner u1` 里放 `float f`，另有 `next` 指向下一个结点；原函数 `func` 就是遍历链表把每个结点的 `u1.f` 累加）：\n\n1. ① 循环条件必须保证「还有**两个**结点可以处理」，否则第 4 行访问 `p->next->u1.f` 会解引用空指针 → 填 `p->next`（完整写法 `p && p->next`）。\n2. ② 第 3 行已经把本轮第一个结点的 `p->u1.f` 加进 `ans1`，第二个累积变量对应本轮第二个结点 → 填 `p->next->u1.f`。\n3. ③ 一轮吃掉两个结点，指针要一次前进两格 → 填 `p->next->next`。\n4. ④ 退出循环时只可能剩下两种情况：结点数为偶数（两个两个处理完，`p == NULL`）或为奇数（还剩最后一个结点，`p != NULL`）。第 6–7 行就是把可能剩下的那个结点补加到 `ans1`，所以条件填 `p`（等价于 `p != NULL`）。若写成 `p->next`，当 `p` 是最后一个结点时会漏加，而 `p` 为 NULL 时还会解引用空指针。\n5. 累加口径：`ans1` 收第 0、2、4… 个结点，`ans2` 收第 1、3、5… 个结点，最后 `ans1 + ans2` 就是全部结点之和 —— 功能上与原 `func` 等价。但注意：这里改变了浮点加法的结合次序，结果可能与原 `func` 不同（这正是下一小问的考点）。\n\n> 📌 答案有官方来源：原卷参考答案「4）① p->next ② p->next->u1.f ③ p->next->next ④ p」（原文/期中/2021期中-带答案.md 第 866–869 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1479,7 +1524,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "4. 在学习了循环展开后，同学I想对func函数进行优化。他决定尝试模仿书上\n$2 \\times 2$ 循环展开的方法，使用两个累积变量以提高代码并行性，请补全他改进后的函\n数 `func1` 的代码。（$1 \\times 4 = 4$ 分）\n```\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && ____①____){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += _____②_____;      //line 4\n        p = _____③______;        //line 5\n    }\n    if(_____④______)          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① ________________\n② ________________\n③ ________________\n④ ________________\n```",
+        "stem": "4. 在学习了循环展开后，同学I想对func函数进行优化。他决定尝试模仿书上\n$2 \\times 2$ 循环展开的方法，使用两个累积变量以提高代码并行性，请补全他改进后的函\n数 `func1` 的代码。（$1 \\times 4 = 4$ 分）\n```\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && {{blank:q6-4-1}}){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += {{blank:q6-4-2}};      //line 4\n        p = {{blank:q6-4-3}};        //line 5\n    }\n    if({{blank:q6-4-4}})          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① {{blank:q6-4-1}}\n② {{blank:q6-4-2}}\n③ {{blank:q6-4-3}}\n④ {{blank:q6-4-4}}\n```",
         "choices": [],
         "answer": "答案：① `p->next`　② `p->next->u1.f`　③ `p->next->next`　④ `p`\n\n解析（本题的 `s_element` 是一个链表结点：`union u_inner u1` 里放 `float f`，另有 `next` 指向下一个结点；原函数 `func` 就是遍历链表把每个结点的 `u1.f` 累加）：\n\n1. ① 循环条件必须保证「还有**两个**结点可以处理」，否则第 4 行访问 `p->next->u1.f` 会解引用空指针 → 填 `p->next`（完整写法 `p && p->next`）。\n2. ② 第 3 行已经把本轮第一个结点的 `p->u1.f` 加进 `ans1`，第二个累积变量对应本轮第二个结点 → 填 `p->next->u1.f`。\n3. ③ 一轮吃掉两个结点，指针要一次前进两格 → 填 `p->next->next`。\n4. ④ 退出循环时只可能剩下两种情况：结点数为偶数（两个两个处理完，`p == NULL`）或为奇数（还剩最后一个结点，`p != NULL`）。第 6–7 行就是把可能剩下的那个结点补加到 `ans1`，所以条件填 `p`（等价于 `p != NULL`）。若写成 `p->next`，当 `p` 是最后一个结点时会漏加，而 `p` 为 NULL 时还会解引用空指针。\n5. 累加口径：`ans1` 收第 0、2、4… 个结点，`ans2` 收第 1、3、5… 个结点，最后 `ans1 + ans2` 就是全部结点之和 —— 功能上与原 `func` 等价。但注意：这里改变了浮点加法的结合次序，结果可能与原 `func` 不同（这正是下一小问的考点）。\n\n> 📌 答案有官方来源：原卷参考答案「4）① p->next ② p->next->u1.f ③ p->next->next ④ p」（原文/期中/2021期中-带答案.md 第 866–869 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
@@ -1494,7 +1539,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4. 在学习了循环展开后，同学I想对func函数进行优化。他决定尝试模仿书上\n$2 \\times 2$ 循环展开的方法，使用两个累积变量以提高代码并行性，请补全他改进后的函\n数 `func1` 的代码。（$1 \\times 4 = 4$ 分）\n```\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && ____①____){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += _____②_____;      //line 4\n        p = _____③______;        //line 5\n    }\n    if(_____④______)          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① ________________\n② ________________\n③ ________________\n④ ________________\n```",
+        "prompt": "4. 在学习了循环展开后，同学I想对func函数进行优化。他决定尝试模仿书上\n$2 \\times 2$ 循环展开的方法，使用两个累积变量以提高代码并行性，请补全他改进后的函\n数 `func1` 的代码。（$1 \\times 4 = 4$ 分）\n```\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && {{blank:q6-4-1}}){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += {{blank:q6-4-2}};      //line 4\n        p = {{blank:q6-4-3}};        //line 5\n    }\n    if({{blank:q6-4-4}})          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① {{blank:q6-4-1}}\n② {{blank:q6-4-2}}\n③ {{blank:q6-4-3}}\n④ {{blank:q6-4-4}}\n```",
         "answer": "答案：① `p->next`　② `p->next->u1.f`　③ `p->next->next`　④ `p`\n\n解析（本题的 `s_element` 是一个链表结点：`union u_inner u1` 里放 `float f`，另有 `next` 指向下一个结点；原函数 `func` 就是遍历链表把每个结点的 `u1.f` 累加）：\n\n1. ① 循环条件必须保证「还有**两个**结点可以处理」，否则第 4 行访问 `p->next->u1.f` 会解引用空指针 → 填 `p->next`（完整写法 `p && p->next`）。\n2. ② 第 3 行已经把本轮第一个结点的 `p->u1.f` 加进 `ans1`，第二个累积变量对应本轮第二个结点 → 填 `p->next->u1.f`。\n3. ③ 一轮吃掉两个结点，指针要一次前进两格 → 填 `p->next->next`。\n4. ④ 退出循环时只可能剩下两种情况：结点数为偶数（两个两个处理完，`p == NULL`）或为奇数（还剩最后一个结点，`p != NULL`）。第 6–7 行就是把可能剩下的那个结点补加到 `ans1`，所以条件填 `p`（等价于 `p != NULL`）。若写成 `p->next`，当 `p` 是最后一个结点时会漏加，而 `p` 为 NULL 时还会解引用空指针。\n5. 累加口径：`ans1` 收第 0、2、4… 个结点，`ans2` 收第 1、3、5… 个结点，最后 `ans1 + ans2` 就是全部结点之和 —— 功能上与原 `func` 等价。但注意：这里改变了浮点加法的结合次序，结果可能与原 `func` 不同（这正是下一小问的考点）。\n\n> 📌 答案有官方来源：原卷参考答案「4）① p->next ② p->next->u1.f ③ p->next->next ④ p」（原文/期中/2021期中-带答案.md 第 866–869 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "group": {
@@ -1518,7 +1563,7 @@
       "exam": "2021期中",
       "questionNo": "第六题 5",
       "summary": "浮点加法不满足结合律导致的错误",
-      "content": "5. 此时，同学C指出同学I的做法会导致新的错误，原因是_______________。\n（2分）\n答案：浮点数加法不满足结合律；`func1` 用两个累积变量改变了相加的次序（重新结合），舍入结果可能不同，于是 `func1` 的返回值可能与原 `func` 不相等。\n\n解析：\n\n1. 原 `func` 用**一个**变量按链表顺序累加：`((f0 + f1) + f2) + f3 + …`，相加次序就是链表顺序。\n2. `func1` 把结点按奇偶分成两路：`ans1 = f0 + f2 + f4 + …`，`ans2 = f1 + f3 + f5 + …`，最后才做一次 `ans1 + ans2`。这是典型的「重新结合（reassociation）」——相邻元素的加法次序被换掉了。\n3. IEEE 754 浮点加法有舍入，**不满足结合律**，即 `(a+b)+c` 与 `a+(b+c)` 可能不相等。例如单精度下取 `a = 1e20f`、`b = -1e20f`、`c = 1.0f`：`(a+b)+c = 0 + 1 = 1.0f`；而 `b+c` 舍入后仍是 `-1e20f`，`a+(b+c) = 0.0f`。链表越长、各元素量级差别越大，出现差异的机会越多。\n4. 所以把单一累积变量拆成多个（循环展开提高并行性的常用手法）时，必须确认这段浮点计算允许改变结合次序；这也是编译器在未开启 `-ffast-math` 之类选项时不会对浮点做这种重结合的原因（教材 5.8 节「重新结合变换」的限制，同时呼应书上 2×2 展开只用于整数/可结合运算的例子）。\n5. 补充：差异并非必然出现——若链表只有一两个结点，或各级部分和都能被浮点精确表示，两者结果相同；但隐患是真实存在的，这就是同学 C 指出的「新的错误」。\n\n> 📌 答案有官方来源：原卷参考答案「5）浮点数加法不满足结合律，可能会导致func1和func函数结果不同」（原文/期中/2021期中-带答案.md 第 870–871 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+      "content": "5. 此时，同学 C 指出同学 I 的做法会导致新的错误，原因是 {{blank:q6-5-reason}}。\n（2分）\n答案：浮点数加法不满足结合律；`func1` 用两个累积变量改变了相加的次序（重新结合），舍入结果可能不同，于是 `func1` 的返回值可能与原 `func` 不相等。\n\n解析：\n\n1. 原 `func` 用**一个**变量按链表顺序累加：`((f0 + f1) + f2) + f3 + …`，相加次序就是链表顺序。\n2. `func1` 把结点按奇偶分成两路：`ans1 = f0 + f2 + f4 + …`，`ans2 = f1 + f3 + f5 + …`，最后才做一次 `ans1 + ans2`。这是典型的「重新结合（reassociation）」——相邻元素的加法次序被换掉了。\n3. IEEE 754 浮点加法有舍入，**不满足结合律**，即 `(a+b)+c` 与 `a+(b+c)` 可能不相等。例如单精度下取 `a = 1e20f`、`b = -1e20f`、`c = 1.0f`：`(a+b)+c = 0 + 1 = 1.0f`；而 `b+c` 舍入后仍是 `-1e20f`，`a+(b+c) = 0.0f`。链表越长、各元素量级差别越大，出现差异的机会越多。\n4. 所以把单一累积变量拆成多个（循环展开提高并行性的常用手法）时，必须确认这段浮点计算允许改变结合次序；这也是编译器在未开启 `-ffast-math` 之类选项时不会对浮点做这种重结合的原因（教材 5.8 节「重新结合变换」的限制，同时呼应书上 2×2 展开只用于整数/可结合运算的例子）。\n5. 补充：差异并非必然出现——若链表只有一两个结点，或各级部分和都能被浮点精确表示，两者结果相同；但隐患是真实存在的，这就是同学 C 指出的「新的错误」。\n\n> 📌 答案有官方来源：原卷参考答案「5）浮点数加法不满足结合律，可能会导致func1和func函数结果不同」（原文/期中/2021期中-带答案.md 第 870–871 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1543,7 +1588,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "5. 此时，同学C指出同学I的做法会导致新的错误，原因是_______________。\n（2分）",
+        "stem": "5. 此时，同学 C 指出同学 I 的做法会导致新的错误，原因是 {{blank:q6-5-reason}}。\n（2分）",
         "choices": [],
         "answer": "答案：浮点数加法不满足结合律；`func1` 用两个累积变量改变了相加的次序（重新结合），舍入结果可能不同，于是 `func1` 的返回值可能与原 `func` 不相等。\n\n解析：\n\n1. 原 `func` 用**一个**变量按链表顺序累加：`((f0 + f1) + f2) + f3 + …`，相加次序就是链表顺序。\n2. `func1` 把结点按奇偶分成两路：`ans1 = f0 + f2 + f4 + …`，`ans2 = f1 + f3 + f5 + …`，最后才做一次 `ans1 + ans2`。这是典型的「重新结合（reassociation）」——相邻元素的加法次序被换掉了。\n3. IEEE 754 浮点加法有舍入，**不满足结合律**，即 `(a+b)+c` 与 `a+(b+c)` 可能不相等。例如单精度下取 `a = 1e20f`、`b = -1e20f`、`c = 1.0f`：`(a+b)+c = 0 + 1 = 1.0f`；而 `b+c` 舍入后仍是 `-1e20f`，`a+(b+c) = 0.0f`。链表越长、各元素量级差别越大，出现差异的机会越多。\n4. 所以把单一累积变量拆成多个（循环展开提高并行性的常用手法）时，必须确认这段浮点计算允许改变结合次序；这也是编译器在未开启 `-ffast-math` 之类选项时不会对浮点做这种重结合的原因（教材 5.8 节「重新结合变换」的限制，同时呼应书上 2×2 展开只用于整数/可结合运算的例子）。\n5. 补充：差异并非必然出现——若链表只有一两个结点，或各级部分和都能被浮点精确表示，两者结果相同；但隐患是真实存在的，这就是同学 C 指出的「新的错误」。\n\n> 📌 答案有官方来源：原卷参考答案「5）浮点数加法不满足结合律，可能会导致func1和func函数结果不同」（原文/期中/2021期中-带答案.md 第 870–871 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
@@ -1558,7 +1603,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5. 此时，同学C指出同学I的做法会导致新的错误，原因是_______________。\n（2分）",
+        "prompt": "5. 此时，同学 C 指出同学 I 的做法会导致新的错误，原因是 {{blank:q6-5-reason}}。\n（2分）",
         "answer": "答案：浮点数加法不满足结合律；`func1` 用两个累积变量改变了相加的次序（重新结合），舍入结果可能不同，于是 `func1` 的返回值可能与原 `func` 不相等。\n\n解析：\n\n1. 原 `func` 用**一个**变量按链表顺序累加：`((f0 + f1) + f2) + f3 + …`，相加次序就是链表顺序。\n2. `func1` 把结点按奇偶分成两路：`ans1 = f0 + f2 + f4 + …`，`ans2 = f1 + f3 + f5 + …`，最后才做一次 `ans1 + ans2`。这是典型的「重新结合（reassociation）」——相邻元素的加法次序被换掉了。\n3. IEEE 754 浮点加法有舍入，**不满足结合律**，即 `(a+b)+c` 与 `a+(b+c)` 可能不相等。例如单精度下取 `a = 1e20f`、`b = -1e20f`、`c = 1.0f`：`(a+b)+c = 0 + 1 = 1.0f`；而 `b+c` 舍入后仍是 `-1e20f`，`a+(b+c) = 0.0f`。链表越长、各元素量级差别越大，出现差异的机会越多。\n4. 所以把单一累积变量拆成多个（循环展开提高并行性的常用手法）时，必须确认这段浮点计算允许改变结合次序；这也是编译器在未开启 `-ffast-math` 之类选项时不会对浮点做这种重结合的原因（教材 5.8 节「重新结合变换」的限制，同时呼应书上 2×2 展开只用于整数/可结合运算的例子）。\n5. 补充：差异并非必然出现——若链表只有一两个结点，或各级部分和都能被浮点精确表示，两者结果相同；但隐患是真实存在的，这就是同学 C 指出的「新的错误」。\n\n> 📌 答案有官方来源：原卷参考答案「5）浮点数加法不满足结合律，可能会导致func1和func函数结果不同」（原文/期中/2021期中-带答案.md 第 870–871 行）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "group": {
@@ -1582,7 +1627,7 @@
       "exam": "2021期中",
       "questionNo": "第六题 6",
       "summary": "k*k 展开中 k 过大导致寄存器溢出",
-      "content": "6. 同学S从书上读到，k * k循环展开在k很大时反而可能获得较差的效果，\n这是因为k很大时会导致___________________。\n（2分）",
+      "content": "6. 同学S从书上读到，k * k循环展开在k很大时反而可能获得较差的效果，\n这是因为 k 很大时会导致 {{blank:q6-6-reason}}。\n（2分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1607,7 +1652,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "6. 同学S从书上读到，k * k循环展开在k很大时反而可能获得较差的效果，\n这是因为k很大时会导致___________________。",
+        "stem": "6. 同学S从书上读到，k * k循环展开在k很大时反而可能获得较差的效果，\n这是因为 k 很大时会导致 {{blank:q6-6-reason}}。",
         "choices": [],
         "answer": "（2分）"
       },
@@ -1622,7 +1667,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "6. 同学S从书上读到，k * k循环展开在k很大时反而可能获得较差的效果，\n这是因为k很大时会导致___________________。",
+        "prompt": "6. 同学S从书上读到，k * k循环展开在k很大时反而可能获得较差的效果，\n这是因为 k 很大时会导致 {{blank:q6-6-reason}}。",
         "answer": "（2分）"
       },
       "group": {
@@ -1920,10 +1965,8 @@
       "exam": "2013期末",
       "questionNo": "第一题 7",
       "summary": "同名全局变量导致的链接错误",
-      "content": "7、下列程序运行的结果是什么？答：（       ）\n```\n/* main.c */\nint i=0;\nint main()\n{\n  foo();\n  return 0;\n}\n```\n\n![图](assets/期末/2013期末-带答案/p3-img1.jpg)\n\n\n```\n/* foo.c */\nint i=1;\nvoid foo()\n{\n  printf(“%d”, i);\n}\n```\nA. 编译错误\nB. 链接错误\nC. 段错误\nD. 有时打印输出1，有时打印输出0；\n答案：B考点：链接的基本概念，符号解析的原则；\n注：由于印刷版中引号的问题（现已修正），本题选A也算对",
-      "assets": [
-        "assets/期末/2013期末-带答案/p3-img1.jpg"
-      ],
+      "content": "7、下列程序运行的结果是什么？答：（       ）\n```\n/* main.c */\nint i=0;\nint main()\n{\n  foo();\n  return 0;\n}\n```\n\n```\n/* foo.c */\nint i=1;\nvoid foo()\n{\n  printf(“%d”, i);\n}\n```\nA. 编译错误\nB. 链接错误\nC. 段错误\nD. 有时打印输出1，有时打印输出0；\n答案：B考点：链接的基本概念，符号解析的原则；\n注：由于印刷版中引号的问题（现已修正），本题选A也算对",
+      "assets": [],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -1942,7 +1985,7 @@
       "layout": {
         "mode": "choice",
         "selection": null,
-        "stem": "7、下列程序运行的结果是什么？答：（       ）\n```\n/* main.c */\nint i=0;\nint main()\n{\n  foo();\n  return 0;\n}\n```\n\n![图](assets/期末/2013期末-带答案/p3-img1.jpg)\n\n\n```\n/* foo.c */\nint i=1;\nvoid foo()\n{\n  printf(“%d”, i);\n}\n```",
+        "stem": "7、下列程序运行的结果是什么？答：（       ）\n```\n/* main.c */\nint i=0;\nint main()\n{\n  foo();\n  return 0;\n}\n```\n\n```\n/* foo.c */\nint i=1;\nvoid foo()\n{\n  printf(“%d”, i);\n}\n```",
         "choices": [
           {
             "key": "A",
@@ -1990,7 +2033,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "7、下列程序运行的结果是什么？答：（       ）\n```\n/* main.c */\nint i=0;\nint main()\n{\n  foo();\n  return 0;\n}\n```\n\n![图](assets/期末/2013期末-带答案/p3-img1.jpg)\n\n\n```\n/* foo.c */\nint i=1;\nvoid foo()\n{\n  printf(“%d”, i);\n}\n```",
+        "prompt": "7、下列程序运行的结果是什么？答：（       ）\n```\n/* main.c */\nint i=0;\nint main()\n{\n  foo();\n  return 0;\n}\n```\n\n```\n/* foo.c */\nint i=1;\nvoid foo()\n{\n  printf(“%d”, i);\n}\n```",
         "answer": "答案：B考点：链接的基本概念，符号解析的原则；\n注：由于印刷版中引号的问题（现已修正），本题选A也算对"
       },
       "presentation": {
@@ -2094,7 +2137,7 @@
       "exam": "2013期末",
       "questionNo": "第四题",
       "summary": "弱/强符号属性、ELF section 与链接解析",
-      "content": "第四题（10分）\n考虑如下两个程序（fact1.c和fact2.c）：\n```\n/* fact1.c */\n#define MAXNUM 12\nint table[MAXNUM];\nint fact(int n);\nint main(int argc, char **argv) {\n    int n;\n    table[0] = 0;\ntable[1] = 1;\nif (argc == 1) {\n  printf(\"Error: missing argument\\n\");\n  exit (0);\n}\nargv++;\nif (sscanf(*argv, \"%d\", &n) != 1 || n < 0 || n >= MAXNUM)\n{\n    printf (\"Error: %s not an int or out of range\\n\",\n*argv);\n    exit (0);\n}\nprintf(\"fact(%d) = %d\\n\", n, fact(n));\n}\n/* fact2.c */\nint* table;\nint fact(int n) {\n    static int num = 2;\n    if (n >= num) {\n        int i = num;\n        while (i <= n) {\n            table[i] = table[i-1] * i;\n            i++;\n```\n\n\n```\n        }\n        num = i;\n    }\n    return table[n];\n}\n```\n（1）对于每个程序中的相应符号，给出它的属性（局部变量、强全局变量或弱全\n局变量），以及它在链接后位于ELF文件中的什么位置？（提示：如果某表项中的\n内容无法确定，请画X）（6分）\nfact1.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  weak global  X（或.bss）\n```\nnum  X  X\nfact2.c\n```\n变量  类型  ELF Section\n```\ntable  weak global  .bss\nfact  strong global  .text\nnum  local  .data\n```\n（2）对上述两个文件进行链接之后，会对每个符号进行解析。请给出链接后下列\n符号被定义的模块（fact1 or fact2）。（2分）\n  定义模块\ntable  不确定\n```\nfact  fact2\nnum  fact2\n```\n（3）使用gcc（命令：gcc -o fact fact1.c fact2.c）来编译之后得到的\n可执行文件是否能够正确执行？为什么？（2分）\n不一定能正确执行。因为 table 在两个文件中都是 weak global，因此链\n接器会任选一个定义来解析 table。而因为在 fact2 模块中只给 table 预留了\n一个单字（4 字节）空间，因此如果选择了 fact2 来解析 table 的话，会出现\nsegmentation fault。【该问题已经过编译检查确认。】\n考察知识点：linking的基本概念、符号属性、链接的过程、符号的解析等。\n（1）\nfact1.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  weak global  X（或.bss）\nnum  X  X\nfact2.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  strong global  .text\nnum  local  .data\n（2）\n定义模块\ntable  不确定\nfact  fact2\nnum  fact2\n（3）不一定能正确执行。因为 table 在两个文件中都是 weak global，因此链\n接器会任选一个定义来解析 table。而因为在 fact2 模块中只给 table 预留了\n一个单字（4 字节）空间，因此如果选择了 fact2 来解析 table 的话，会出现\nsegmentation fault。【该问题已经过编译检查确认。】\n考察知识点：linking的基本概念、符号属性、链接的过程、符号的解析等。",
+      "content": "第四题（10分）\n考虑如下两个程序（fact1.c和fact2.c）：\n\n```c\n/* fact1.c */\n#define MAXNUM 12\nint table[MAXNUM];\nint fact(int n);\nint main(int argc, char **argv) {\n    int n;\n    table[0] = 0;\n    table[1] = 1;\n    if (argc == 1) {\n        printf(\"Error: missing argument\\n\");\n        exit(0);\n    }\n    argv++;\n    if (sscanf(*argv, \"%d\", &n) != 1 || n < 0 || n >= MAXNUM) {\n        printf(\"Error: %s not an int or out of range\\n\", *argv);\n        exit(0);\n    }\n    printf(\"fact(%d) = %d\\n\", n, fact(n));\n}\n```\n\n```c\n/* fact2.c */\nint* table;\nint fact(int n) {\n    static int num = 2;\n    if (n >= num) {\n        int i = num;\n        while (i <= n) {\n            table[i] = table[i-1] * i;\n            i++;\n        }\n        num = i;\n    }\n    return table[n];\n}\n```\n\n（1）对于每个程序中的相应符号，给出它的属性（局部变量、强全局变量或弱全局变量），以及它在链接后位于ELF文件中的什么位置？如果某表项中的内容无法确定，请画X。（6分）\n\n| 源文件 | 符号 | 类型 | ELF Section |\n| --- | --- | --- | --- |\n| fact1.c | table |  |  |\n| fact1.c | fact |  |  |\n| fact1.c | num |  |  |\n| fact2.c | table |  |  |\n| fact2.c | fact |  |  |\n| fact2.c | num |  |  |\n\n（2）对上述两个文件进行链接之后，会对每个符号进行解析。请给出链接后下列符号被定义的模块（fact1或fact2）。（2分）\n\n| 符号 | 定义模块 |\n| --- | --- |\n| table |  |\n| fact |  |\n| num |  |\n\n（3）使用`gcc -o fact fact1.c fact2.c`来编译之后得到的可执行文件是否能够正确执行？为什么？（2分）\n（1）\n\n| 源文件 | 符号 | 类型 | ELF Section |\n| --- | --- | --- | --- |\n| fact1.c | table | weak global | .bss |\n| fact1.c | fact | weak global | X（或.bss） |\n| fact1.c | num | X | X |\n| fact2.c | table | weak global | .bss |\n| fact2.c | fact | strong global | .text |\n| fact2.c | num | local | .data |\n\n（2）\n\n| 符号 | 定义模块 |\n| --- | --- |\n| table | 不确定 |\n| fact | fact2 |\n| num | fact2 |\n\n（3）不一定能正确执行。因为table在两个文件中都是weak global，因此链接器会任选一个定义来解析table。而fact2.c只给table预留了一个单字（4字节）空间；如果链接器选择fact2.c中的定义，就会出现segmentation fault。【该问题已经过编译检查确认。】",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2112,20 +2155,20 @@
         "curated": "_curated/期末/2013期末-带答案/387.md"
       },
       "layout": {
-        "mode": "fill",
+        "mode": "short",
         "selection": null,
-        "stem": "第四题（10分）\n考虑如下两个程序（fact1.c和fact2.c）：\n```\n/* fact1.c */\n#define MAXNUM 12\nint table[MAXNUM];\nint fact(int n);\nint main(int argc, char **argv) {\n    int n;\n    table[0] = 0;\ntable[1] = 1;\nif (argc == 1) {\n  printf(\"Error: missing argument\\n\");\n  exit (0);\n}\nargv++;\nif (sscanf(*argv, \"%d\", &n) != 1 || n < 0 || n >= MAXNUM)\n{\n    printf (\"Error: %s not an int or out of range\\n\",\n*argv);\n    exit (0);\n}\nprintf(\"fact(%d) = %d\\n\", n, fact(n));\n}\n/* fact2.c */\nint* table;\nint fact(int n) {\n    static int num = 2;\n    if (n >= num) {\n        int i = num;\n        while (i <= n) {\n            table[i] = table[i-1] * i;\n            i++;\n```\n\n\n```\n        }\n        num = i;\n    }\n    return table[n];\n}\n```\n（1）对于每个程序中的相应符号，给出它的属性（局部变量、强全局变量或弱全\n局变量），以及它在链接后位于ELF文件中的什么位置？（提示：如果某表项中的\n内容无法确定，请画X）（6分）\nfact1.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  weak global  X（或.bss）\n```\nnum  X  X\nfact2.c\n```\n变量  类型  ELF Section\n```\ntable  weak global  .bss\nfact  strong global  .text\nnum  local  .data\n```\n（2）对上述两个文件进行链接之后，会对每个符号进行解析。请给出链接后下列\n符号被定义的模块（fact1 or fact2）。（2分）\n  定义模块\ntable  不确定\n```\nfact  fact2\nnum  fact2\n```\n（3）使用gcc（命令：gcc -o fact fact1.c fact2.c）来编译之后得到的\n可执行文件是否能够正确执行？为什么？（2分）\n不一定能正确执行。因为 table 在两个文件中都是 weak global，因此链\n接器会任选一个定义来解析 table。而因为在 fact2 模块中只给 table 预留了\n一个单字（4 字节）空间，因此如果选择了 fact2 来解析 table 的话，会出现\nsegmentation fault。【该问题已经过编译检查确认。】\n考察知识点：linking的基本概念、符号属性、链接的过程、符号的解析等。",
+        "stem": "第四题（10分）\n考虑如下两个程序（fact1.c和fact2.c）：\n\n```c\n/* fact1.c */\n#define MAXNUM 12\nint table[MAXNUM];\nint fact(int n);\nint main(int argc, char **argv) {\n    int n;\n    table[0] = 0;\n    table[1] = 1;\n    if (argc == 1) {\n        printf(\"Error: missing argument\\n\");\n        exit(0);\n    }\n    argv++;\n    if (sscanf(*argv, \"%d\", &n) != 1 || n < 0 || n >= MAXNUM) {\n        printf(\"Error: %s not an int or out of range\\n\", *argv);\n        exit(0);\n    }\n    printf(\"fact(%d) = %d\\n\", n, fact(n));\n}\n```\n\n```c\n/* fact2.c */\nint* table;\nint fact(int n) {\n    static int num = 2;\n    if (n >= num) {\n        int i = num;\n        while (i <= n) {\n            table[i] = table[i-1] * i;\n            i++;\n        }\n        num = i;\n    }\n    return table[n];\n}\n```\n\n（1）对于每个程序中的相应符号，给出它的属性（局部变量、强全局变量或弱全局变量），以及它在链接后位于ELF文件中的什么位置？如果某表项中的内容无法确定，请画X。（6分）\n\n| 源文件 | 符号 | 类型 | ELF Section |\n| --- | --- | --- | --- |\n| fact1.c | table |  |  |\n| fact1.c | fact |  |  |\n| fact1.c | num |  |  |\n| fact2.c | table |  |  |\n| fact2.c | fact |  |  |\n| fact2.c | num |  |  |\n\n（2）对上述两个文件进行链接之后，会对每个符号进行解析。请给出链接后下列符号被定义的模块（fact1或fact2）。（2分）\n\n| 符号 | 定义模块 |\n| --- | --- |\n| table |  |\n| fact |  |\n| num |  |\n\n（3）使用`gcc -o fact fact1.c fact2.c`来编译之后得到的可执行文件是否能够正确执行？为什么？（2分）",
         "choices": [],
-        "answer": "（1）\nfact1.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  weak global  X（或.bss）\nnum  X  X\nfact2.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  strong global  .text\nnum  local  .data\n（2）\n定义模块\ntable  不确定\nfact  fact2\nnum  fact2\n（3）不一定能正确执行。因为 table 在两个文件中都是 weak global，因此链\n接器会任选一个定义来解析 table。而因为在 fact2 模块中只给 table 预留了\n一个单字（4 字节）空间，因此如果选择了 fact2 来解析 table 的话，会出现\nsegmentation fault。【该问题已经过编译检查确认。】\n考察知识点：linking的基本概念、符号属性、链接的过程、符号的解析等。"
+        "answer": "（1）\n\n| 源文件 | 符号 | 类型 | ELF Section |\n| --- | --- | --- | --- |\n| fact1.c | table | weak global | .bss |\n| fact1.c | fact | weak global | X（或.bss） |\n| fact1.c | num | X | X |\n| fact2.c | table | weak global | .bss |\n| fact2.c | fact | strong global | .text |\n| fact2.c | num | local | .data |\n\n（2）\n\n| 符号 | 定义模块 |\n| --- | --- |\n| table | 不确定 |\n| fact | fact2 |\n| num | fact2 |\n\n（3）不一定能正确执行。因为table在两个文件中都是weak global，因此链接器会任选一个定义来解析table。而fact2.c只给table预留了一个单字（4字节）空间；如果链接器选择fact2.c中的定义，就会出现segmentation fault。【该问题已经过编译检查确认。】"
       },
       "interaction": {
-        "kind": "fill",
+        "kind": "short-answer",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题（10分）\n考虑如下两个程序（fact1.c和fact2.c）：\n```\n/* fact1.c */\n#define MAXNUM 12\nint table[MAXNUM];\nint fact(int n);\nint main(int argc, char **argv) {\n    int n;\n    table[0] = 0;\ntable[1] = 1;\nif (argc == 1) {\n  printf(\"Error: missing argument\\n\");\n  exit (0);\n}\nargv++;\nif (sscanf(*argv, \"%d\", &n) != 1 || n < 0 || n >= MAXNUM)\n{\n    printf (\"Error: %s not an int or out of range\\n\",\n*argv);\n    exit (0);\n}\nprintf(\"fact(%d) = %d\\n\", n, fact(n));\n}\n/* fact2.c */\nint* table;\nint fact(int n) {\n    static int num = 2;\n    if (n >= num) {\n        int i = num;\n        while (i <= n) {\n            table[i] = table[i-1] * i;\n            i++;\n```\n\n\n```\n        }\n        num = i;\n    }\n    return table[n];\n}\n```\n（1）对于每个程序中的相应符号，给出它的属性（局部变量、强全局变量或弱全\n局变量），以及它在链接后位于ELF文件中的什么位置？（提示：如果某表项中的\n内容无法确定，请画X）（6分）\nfact1.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  weak global  X（或.bss）\n```\nnum  X  X\nfact2.c\n```\n变量  类型  ELF Section\n```\ntable  weak global  .bss\nfact  strong global  .text\nnum  local  .data\n```\n（2）对上述两个文件进行链接之后，会对每个符号进行解析。请给出链接后下列\n符号被定义的模块（fact1 or fact2）。（2分）\n  定义模块\ntable  不确定\n```\nfact  fact2\nnum  fact2\n```\n（3）使用gcc（命令：gcc -o fact fact1.c fact2.c）来编译之后得到的\n可执行文件是否能够正确执行？为什么？（2分）\n不一定能正确执行。因为 table 在两个文件中都是 weak global，因此链\n接器会任选一个定义来解析 table。而因为在 fact2 模块中只给 table 预留了\n一个单字（4 字节）空间，因此如果选择了 fact2 来解析 table 的话，会出现\nsegmentation fault。【该问题已经过编译检查确认。】\n考察知识点：linking的基本概念、符号属性、链接的过程、符号的解析等。",
-        "answer": "（1）\nfact1.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  weak global  X（或.bss）\nnum  X  X\nfact2.c\n变量  类型  ELF Section\ntable  weak global  .bss\nfact  strong global  .text\nnum  local  .data\n（2）\n定义模块\ntable  不确定\nfact  fact2\nnum  fact2\n（3）不一定能正确执行。因为 table 在两个文件中都是 weak global，因此链\n接器会任选一个定义来解析 table。而因为在 fact2 模块中只给 table 预留了\n一个单字（4 字节）空间，因此如果选择了 fact2 来解析 table 的话，会出现\nsegmentation fault。【该问题已经过编译检查确认。】\n考察知识点：linking的基本概念、符号属性、链接的过程、符号的解析等。"
+        "prompt": "第四题（10分）\n考虑如下两个程序（fact1.c和fact2.c）：\n\n```c\n/* fact1.c */\n#define MAXNUM 12\nint table[MAXNUM];\nint fact(int n);\nint main(int argc, char **argv) {\n    int n;\n    table[0] = 0;\n    table[1] = 1;\n    if (argc == 1) {\n        printf(\"Error: missing argument\\n\");\n        exit(0);\n    }\n    argv++;\n    if (sscanf(*argv, \"%d\", &n) != 1 || n < 0 || n >= MAXNUM) {\n        printf(\"Error: %s not an int or out of range\\n\", *argv);\n        exit(0);\n    }\n    printf(\"fact(%d) = %d\\n\", n, fact(n));\n}\n```\n\n```c\n/* fact2.c */\nint* table;\nint fact(int n) {\n    static int num = 2;\n    if (n >= num) {\n        int i = num;\n        while (i <= n) {\n            table[i] = table[i-1] * i;\n            i++;\n        }\n        num = i;\n    }\n    return table[n];\n}\n```\n\n（1）对于每个程序中的相应符号，给出它的属性（局部变量、强全局变量或弱全局变量），以及它在链接后位于ELF文件中的什么位置？如果某表项中的内容无法确定，请画X。（6分）\n\n| 源文件 | 符号 | 类型 | ELF Section |\n| --- | --- | --- | --- |\n| fact1.c | table |  |  |\n| fact1.c | fact |  |  |\n| fact1.c | num |  |  |\n| fact2.c | table |  |  |\n| fact2.c | fact |  |  |\n| fact2.c | num |  |  |\n\n（2）对上述两个文件进行链接之后，会对每个符号进行解析。请给出链接后下列符号被定义的模块（fact1或fact2）。（2分）\n\n| 符号 | 定义模块 |\n| --- | --- |\n| table |  |\n| fact |  |\n| num |  |\n\n（3）使用`gcc -o fact fact1.c fact2.c`来编译之后得到的可执行文件是否能够正确执行？为什么？（2分）",
+        "answer": "（1）\n\n| 源文件 | 符号 | 类型 | ELF Section |\n| --- | --- | --- | --- |\n| fact1.c | table | weak global | .bss |\n| fact1.c | fact | weak global | X（或.bss） |\n| fact1.c | num | X | X |\n| fact2.c | table | weak global | .bss |\n| fact2.c | fact | strong global | .text |\n| fact2.c | num | local | .data |\n\n（2）\n\n| 符号 | 定义模块 |\n| --- | --- |\n| table | 不确定 |\n| fact | fact2 |\n| num | fact2 |\n\n（3）不一定能正确执行。因为table在两个文件中都是weak global，因此链接器会任选一个定义来解析table。而fact2.c只给table预留了一个单字（4字节）空间；如果链接器选择fact2.c中的定义，就会出现segmentation fault。【该问题已经过编译检查确认。】"
       },
       "presentation": {
         "status": "ready",
@@ -2469,7 +2512,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "single",
         "stem": "4.  以下关于静态库链接的描述中，正确的是：",
         "choices": [
           {
@@ -2492,8 +2535,8 @@
         "answer": "答案：C。\n解释：A: 链接时只需拷贝用到的目标模块；B：静态库也可以放在目标文件的前面；C: 正确；D：如果相互调用的库，在命令行必须重复出现。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -2536,7 +2579,7 @@
       "exam": "2015期末",
       "questionNo": "第一题 5",
       "summary": "字符串常量被放入哪个 ELF 节",
-      "content": "5.  在foo.c文件中包含如下代码：\n```\nint foo(void) {\nint error = printf(\"You ran into a problem!\\n\");\nreturn error;\n}\n```\n经过编译和链接之后，字符串\"You ran into a problem!\\n\"会出现在哪个\n段中？\nA. .bss\nB. .data\nC. .rodata\nD. .text\n答案：C。",
+      "content": "5.  在foo.c文件中包含如下代码：\n```\nint foo(void) {\n  int error = printf(\"You ran into a problem!\\n\");\n  return error;\n}\n```\n经过编译和链接之后，字符串\"You ran into a problem!\\n\"会出现在哪个\n段中？\nA. .bss\nB. .data\nC. .rodata\nD. .text\n答案：C。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2557,8 +2600,8 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
-        "stem": "5.  在foo.c文件中包含如下代码：\n```\nint foo(void) {\nint error = printf(\"You ran into a problem!\\n\");\nreturn error;\n}\n```\n经过编译和链接之后，字符串\"You ran into a problem!\\n\"会出现在哪个\n段中？",
+        "selection": "single",
+        "stem": "5.  在foo.c文件中包含如下代码：\n```\nint foo(void) {\n  int error = printf(\"You ran into a problem!\\n\");\n  return error;\n}\n```\n经过编译和链接之后，字符串\"You ran into a problem!\\n\"会出现在哪个\n段中？",
         "choices": [
           {
             "key": "A",
@@ -2580,8 +2623,8 @@
         "answer": "答案：C。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "single-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -2606,7 +2649,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5.  在foo.c文件中包含如下代码：\n```\nint foo(void) {\nint error = printf(\"You ran into a problem!\\n\");\nreturn error;\n}\n```\n经过编译和链接之后，字符串\"You ran into a problem!\\n\"会出现在哪个\n段中？",
+        "prompt": "5.  在foo.c文件中包含如下代码：\n```\nint foo(void) {\n  int error = printf(\"You ran into a problem!\\n\");\n  return error;\n}\n```\n经过编译和链接之后，字符串\"You ran into a problem!\\n\"会出现在哪个\n段中？",
         "answer": "答案：C。"
       },
       "presentation": {
@@ -2712,7 +2755,7 @@
       "exam": "2015期末",
       "questionNo": "第四题",
       "summary": "符号强弱属性、类型声明冲突与数据布局",
-      "content": "第四题（10分）链接\n在x86_64环境下，考虑如下2个文件：main.c和foo.c：\n```\n/* main.c */\n#include <stdio.h>\nlonglong ________________________;\nconst char* foo(int);\nint main(intargc, char **argv){\n  int n = 0;\n  sscanf(argv[1], \"%d\", &n);\n  printf(foo(n));\n  printf(\"%llx\\n\", a);\n}\n/* foo.c */\n#include <stdio.h>\nint a[2];\nstatic void swapper(intnum){\n  int swapper;\n  if (num % 2){\n    swapper = a[0];\n    a[0] = a[1];\n    a[1] = swapper;\n  }\n}\nconst char* foo(intnum){\nstatic char out_buf[50];\n  swapper(num);\n```\n\n\n```\n  sprintf(out_buf, \"%x\\n\", ________________________);\n  returnout_buf;\n}\n```\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n（提示：如果某表项中的内容无法确定，请画X。）\nmain.c\n  局部或全局？  强或弱？\n```\na\nfoo\nfoo.c\n```\n  局部或全局？  强或弱？\n```\na\nfoo\nout_buf\n```\n2. 根据如下的程序运行结果，补全程序【在程序空白处填空即可】。\n```\n$ gcc -o test main.cfoo.c\n$ ./test 1\nbffedead\ncafebffedeadbeef\n$ ./test 2\nbeefcafe\ndeadbeefcafebffe\n```\n3. 现在有一位程序员要为这个程序编写头文件。假设新的头文件名称为 foo.h，\n内容如下：\n```\nextern long long a;\nextern char *foo(int);\n```\n然后在 main.c和 foo.c中分别引用该头文件，请问编译链接能通过吗？请\n说明理由。\n答案：\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n（每格0.5分）\nmain.c\n  局部或全局？  强或弱？\nA  全局  强\nfoo  全局  弱\nfoo.c\n  局部或全局？  强或弱？\nA  全局  弱\nfoo  全局  强\nout_buf  局部  X\n2. （3分）根据程序运行结果，补全程序\nlong longa = 0xdeadbeefcafebffe; （1分）\n*(int*)((unsigned long long)a + 2) （2分）\n3. 请问编译链接能通过吗？请说明理由。\n不能。无论如何声明a的类型都会造成在至少一个文件内引起声明和定义冲突。\n结论1分，理由2分。（结论错不得分）",
+      "content": "第四题（10分）链接\n在x86_64环境下，考虑如下2个文件：main.c和foo.c：\n```\n/* main.c */\n#include <stdio.h>\nlong long {{blank:q4-global-a}};\nconst char* foo(int);\nint main(int argc, char **argv){\n  int n = 0;\n  sscanf(argv[1], \"%d\", &n);\n  printf(foo(n));\n  printf(\"%llx\\n\", a);\n}\n/* foo.c */\n#include <stdio.h>\nint a[2];\nstatic void swapper(int num){\n  int swapper;\n  if (num % 2){\n    swapper = a[0];\n    a[0] = a[1];\n    a[1] = swapper;\n  }\n}\nconst char* foo(int num){\n  static char out_buf[50];\n  swapper(num);\n  sprintf(out_buf, \"%x\\n\", {{blank:q4-sprintf-value}});\n  return out_buf;\n}\n```\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）。\n（提示：如果某表项中的内容无法确定，请画 X。）\n\nmain.c\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| a | {{blank:q4-maina-scope}} | {{blank:q4-maina-binding}} |\n| foo | {{blank:q4-mainfoo-scope}} | {{blank:q4-mainfoo-binding}} |\n\nfoo.c\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| a | {{blank:q4-fooa-scope}} | {{blank:q4-fooa-binding}} |\n| foo | {{blank:q4-foofoo-scope}} | {{blank:q4-foofoo-binding}} |\n| out_buf | {{blank:q4-outbuf-scope}} | {{blank:q4-outbuf-binding}} |\n2. 根据如下的程序运行结果，补全程序【在程序空白处填空即可】。\n```\n$ gcc -o test main.c foo.c\n$ ./test 1\nbffedead\ncafebffedeadbeef\n$ ./test 2\nbeefcafe\ndeadbeefcafebffe\n```\n3. 现在有一位程序员要为这个程序编写头文件。假设新的头文件名称为 foo.h，\n内容如下：\n```\nextern long long a;\nextern char *foo(int);\n```\n然后在 main.c和 foo.c中分别引用该头文件，请问编译链接能通过吗？请\n说明理由。\n答案：\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n（每格0.5分）\nmain.c\n  局部或全局？  强或弱？\na  全局  强\nfoo  全局  弱\nfoo.c\n  局部或全局？  强或弱？\na  全局  弱\nfoo  全局  强\nout_buf  局部  X\n2. （3分）根据程序运行结果，补全程序\nlong long a = 0xdeadbeefcafebffe; （1分）\n*(int *)((unsigned long long)a + 2) （2分）\n3. 请问编译链接能通过吗？请说明理由。\n不能。无论如何声明a的类型都会造成在至少一个文件内引起声明和定义冲突。\n结论1分，理由2分。（结论错不得分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2734,18 +2777,220 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第四题（10分）链接\n在x86_64环境下，考虑如下2个文件：main.c和foo.c：\n```\n/* main.c */\n#include <stdio.h>\nlonglong ________________________;\nconst char* foo(int);\nint main(intargc, char **argv){\n  int n = 0;\n  sscanf(argv[1], \"%d\", &n);\n  printf(foo(n));\n  printf(\"%llx\\n\", a);\n}\n/* foo.c */\n#include <stdio.h>\nint a[2];\nstatic void swapper(intnum){\n  int swapper;\n  if (num % 2){\n    swapper = a[0];\n    a[0] = a[1];\n    a[1] = swapper;\n  }\n}\nconst char* foo(intnum){\nstatic char out_buf[50];\n  swapper(num);\n```\n\n\n```\n  sprintf(out_buf, \"%x\\n\", ________________________);\n  returnout_buf;\n}\n```\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n（提示：如果某表项中的内容无法确定，请画X。）\nmain.c\n  局部或全局？  强或弱？\n```\na\nfoo\nfoo.c\n```\n  局部或全局？  强或弱？\n```\na\nfoo\nout_buf\n```\n2. 根据如下的程序运行结果，补全程序【在程序空白处填空即可】。\n```\n$ gcc -o test main.cfoo.c\n$ ./test 1\nbffedead\ncafebffedeadbeef\n$ ./test 2\nbeefcafe\ndeadbeefcafebffe\n```\n3. 现在有一位程序员要为这个程序编写头文件。假设新的头文件名称为 foo.h，\n内容如下：\n```\nextern long long a;\nextern char *foo(int);\n```\n然后在 main.c和 foo.c中分别引用该头文件，请问编译链接能通过吗？请\n说明理由。",
+        "stem": "第四题（10分）链接\n在x86_64环境下，考虑如下2个文件：main.c和foo.c：\n```\n/* main.c */\n#include <stdio.h>\nlong long {{blank:q4-global-a}};\nconst char* foo(int);\nint main(int argc, char **argv){\n  int n = 0;\n  sscanf(argv[1], \"%d\", &n);\n  printf(foo(n));\n  printf(\"%llx\\n\", a);\n}\n/* foo.c */\n#include <stdio.h>\nint a[2];\nstatic void swapper(int num){\n  int swapper;\n  if (num % 2){\n    swapper = a[0];\n    a[0] = a[1];\n    a[1] = swapper;\n  }\n}\nconst char* foo(int num){\n  static char out_buf[50];\n  swapper(num);\n  sprintf(out_buf, \"%x\\n\", {{blank:q4-sprintf-value}});\n  return out_buf;\n}\n```\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）。\n（提示：如果某表项中的内容无法确定，请画 X。）\n\nmain.c\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| a | {{blank:q4-maina-scope}} | {{blank:q4-maina-binding}} |\n| foo | {{blank:q4-mainfoo-scope}} | {{blank:q4-mainfoo-binding}} |\n\nfoo.c\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| a | {{blank:q4-fooa-scope}} | {{blank:q4-fooa-binding}} |\n| foo | {{blank:q4-foofoo-scope}} | {{blank:q4-foofoo-binding}} |\n| out_buf | {{blank:q4-outbuf-scope}} | {{blank:q4-outbuf-binding}} |\n2. 根据如下的程序运行结果，补全程序【在程序空白处填空即可】。\n```\n$ gcc -o test main.c foo.c\n$ ./test 1\nbffedead\ncafebffedeadbeef\n$ ./test 2\nbeefcafe\ndeadbeefcafebffe\n```\n3. 现在有一位程序员要为这个程序编写头文件。假设新的头文件名称为 foo.h，\n内容如下：\n```\nextern long long a;\nextern char *foo(int);\n```\n然后在 main.c和 foo.c中分别引用该头文件，请问编译链接能通过吗？请\n说明理由。",
         "choices": [],
-        "answer": "答案：\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n（每格0.5分）\nmain.c\n  局部或全局？  强或弱？\nA  全局  强\nfoo  全局  弱\nfoo.c\n  局部或全局？  强或弱？\nA  全局  弱\nfoo  全局  强\nout_buf  局部  X\n2. （3分）根据程序运行结果，补全程序\nlong longa = 0xdeadbeefcafebffe; （1分）\n*(int*)((unsigned long long)a + 2) （2分）\n3. 请问编译链接能通过吗？请说明理由。\n不能。无论如何声明a的类型都会造成在至少一个文件内引起声明和定义冲突。\n结论1分，理由2分。（结论错不得分）"
+        "answer": "答案：\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n（每格0.5分）\nmain.c\n  局部或全局？  强或弱？\na  全局  强\nfoo  全局  弱\nfoo.c\n  局部或全局？  强或弱？\na  全局  弱\nfoo  全局  强\nout_buf  局部  X\n2. （3分）根据程序运行结果，补全程序\nlong long a = 0xdeadbeefcafebffe; （1分）\n*(int *)((unsigned long long)a + 2) （2分）\n3. 请问编译链接能通过吗？请说明理由。\n不能。无论如何声明a的类型都会造成在至少一个文件内引起声明和定义冲突。\n结论1分，理由2分。（结论错不得分）",
+        "blankAnswers": [
+          {
+            "id": "q4-global-a",
+            "acceptedAnswers": [
+              "a = 0xdeadbeefcafebffe",
+              "a=0xdeadbeefcafebffe"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-sprintf-value",
+            "acceptedAnswers": [
+              "*(int *)((unsigned long long)a + 2)",
+              "*(int*)((unsigned long long)a+2)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-maina-scope",
+            "acceptedAnswers": [
+              "全局"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-maina-binding",
+            "acceptedAnswers": [
+              "强"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-mainfoo-scope",
+            "acceptedAnswers": [
+              "全局"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-mainfoo-binding",
+            "acceptedAnswers": [
+              "弱"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-fooa-scope",
+            "acceptedAnswers": [
+              "全局"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-fooa-binding",
+            "acceptedAnswers": [
+              "弱"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-foofoo-scope",
+            "acceptedAnswers": [
+              "全局"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-foofoo-binding",
+            "acceptedAnswers": [
+              "强"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-outbuf-scope",
+            "acceptedAnswers": [
+              "局部"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-outbuf-binding",
+            "acceptedAnswers": [
+              "X",
+              "x"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q4-global-a",
+            "acceptedAnswers": [
+              "a = 0xdeadbeefcafebffe",
+              "a=0xdeadbeefcafebffe"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-sprintf-value",
+            "acceptedAnswers": [
+              "*(int *)((unsigned long long)a + 2)",
+              "*(int*)((unsigned long long)a+2)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-maina-scope",
+            "acceptedAnswers": [
+              "全局"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-maina-binding",
+            "acceptedAnswers": [
+              "强"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-mainfoo-scope",
+            "acceptedAnswers": [
+              "全局"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-mainfoo-binding",
+            "acceptedAnswers": [
+              "弱"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-fooa-scope",
+            "acceptedAnswers": [
+              "全局"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-fooa-binding",
+            "acceptedAnswers": [
+              "弱"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-foofoo-scope",
+            "acceptedAnswers": [
+              "全局"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-foofoo-binding",
+            "acceptedAnswers": [
+              "强"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-outbuf-scope",
+            "acceptedAnswers": [
+              "局部"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q4-outbuf-binding",
+            "acceptedAnswers": [
+              "X",
+              "x"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第四题（10分）链接\n在x86_64环境下，考虑如下2个文件：main.c和foo.c：\n```\n/* main.c */\n#include <stdio.h>\nlonglong ________________________;\nconst char* foo(int);\nint main(intargc, char **argv){\n  int n = 0;\n  sscanf(argv[1], \"%d\", &n);\n  printf(foo(n));\n  printf(\"%llx\\n\", a);\n}\n/* foo.c */\n#include <stdio.h>\nint a[2];\nstatic void swapper(intnum){\n  int swapper;\n  if (num % 2){\n    swapper = a[0];\n    a[0] = a[1];\n    a[1] = swapper;\n  }\n}\nconst char* foo(intnum){\nstatic char out_buf[50];\n  swapper(num);\n```\n\n\n```\n  sprintf(out_buf, \"%x\\n\", ________________________);\n  returnout_buf;\n}\n```\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）\n（提示：如果某表项中的内容无法确定，请画X。）\nmain.c\n  局部或全局？  强或弱？\n```\na\nfoo\nfoo.c\n```\n  局部或全局？  强或弱？\n```\na\nfoo\nout_buf\n```\n2. 根据如下的程序运行结果，补全程序【在程序空白处填空即可】。\n```\n$ gcc -o test main.cfoo.c\n$ ./test 1\nbffedead\ncafebffedeadbeef\n$ ./test 2\nbeefcafe\ndeadbeefcafebffe\n```\n3. 现在有一位程序员要为这个程序编写头文件。假设新的头文件名称为 foo.h，\n内容如下：\n```\nextern long long a;\nextern char *foo(int);\n```\n然后在 main.c和 foo.c中分别引用该头文件，请问编译链接能通过吗？请\n说明理由。",
-        "answer": "答案：\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n（每格0.5分）\nmain.c\n  局部或全局？  强或弱？\nA  全局  强\nfoo  全局  弱\nfoo.c\n  局部或全局？  强或弱？\nA  全局  弱\nfoo  全局  强\nout_buf  局部  X\n2. （3分）根据程序运行结果，补全程序\nlong longa = 0xdeadbeefcafebffe; （1分）\n*(int*)((unsigned long long)a + 2) （2分）\n3. 请问编译链接能通过吗？请说明理由。\n不能。无论如何声明a的类型都会造成在至少一个文件内引起声明和定义冲突。\n结论1分，理由2分。（结论错不得分）"
+        "prompt": "第四题（10分）链接\n在x86_64环境下，考虑如下2个文件：main.c和foo.c：\n```\n/* main.c */\n#include <stdio.h>\nlong long {{blank:q4-global-a}};\nconst char* foo(int);\nint main(int argc, char **argv){\n  int n = 0;\n  sscanf(argv[1], \"%d\", &n);\n  printf(foo(n));\n  printf(\"%llx\\n\", a);\n}\n/* foo.c */\n#include <stdio.h>\nint a[2];\nstatic void swapper(int num){\n  int swapper;\n  if (num % 2){\n    swapper = a[0];\n    a[0] = a[1];\n    a[1] = swapper;\n  }\n}\nconst char* foo(int num){\n  static char out_buf[50];\n  swapper(num);\n  sprintf(out_buf, \"%x\\n\", {{blank:q4-sprintf-value}});\n  return out_buf;\n}\n```\n1. 对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或弱符号）。\n（提示：如果某表项中的内容无法确定，请画 X。）\n\nmain.c\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| a | {{blank:q4-maina-scope}} | {{blank:q4-maina-binding}} |\n| foo | {{blank:q4-mainfoo-scope}} | {{blank:q4-mainfoo-binding}} |\n\nfoo.c\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| a | {{blank:q4-fooa-scope}} | {{blank:q4-fooa-binding}} |\n| foo | {{blank:q4-foofoo-scope}} | {{blank:q4-foofoo-binding}} |\n| out_buf | {{blank:q4-outbuf-scope}} | {{blank:q4-outbuf-binding}} |\n2. 根据如下的程序运行结果，补全程序【在程序空白处填空即可】。\n```\n$ gcc -o test main.c foo.c\n$ ./test 1\nbffedead\ncafebffedeadbeef\n$ ./test 2\nbeefcafe\ndeadbeefcafebffe\n```\n3. 现在有一位程序员要为这个程序编写头文件。假设新的头文件名称为 foo.h，\n内容如下：\n```\nextern long long a;\nextern char *foo(int);\n```\n然后在 main.c和 foo.c中分别引用该头文件，请问编译链接能通过吗？请\n说明理由。",
+        "answer": "答案：\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n（每格0.5分）\nmain.c\n  局部或全局？  强或弱？\na  全局  强\nfoo  全局  弱\nfoo.c\n  局部或全局？  强或弱？\na  全局  弱\nfoo  全局  强\nout_buf  局部  X\n2. （3分）根据程序运行结果，补全程序\nlong long a = 0xdeadbeefcafebffe; （1分）\n*(int *)((unsigned long long)a + 2) （2分）\n3. 请问编译链接能通过吗？请说明理由。\n不能。无论如何声明a的类型都会造成在至少一个文件内引起声明和定义冲突。\n结论1分，理由2分。（结论错不得分）"
       },
       "presentation": {
         "status": "ready",
@@ -4205,7 +4450,7 @@
       "exam": "2021期末",
       "questionNo": "第三题",
       "summary": "符号表节归属、重定位与程序入口点（Part C 兼 ECF）",
-      "content": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有以下三个 c 文件 hd.h f1.c f2.c。使用gcc -c f1.c f2.c; gcc\nf1.o f2.o 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及\n的符号所对应的变量已在代码中加粗。本大题无需理解代码的含义。\n```\nf1.c  #include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\nfor (iter = 0; iter < total; ++iter) {\nrand_point(&pnt);\ncount += if_inside(&pnt);\n}\nprintf(\"Integral on [0,1] is %lf.\\n\",\n1.0 * count / total);\n}\nhd.h  typedef struct {\ndouble x;\ndouble y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\nf2.c  #include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\nstatic int seed = 0;\nif (!seed) {\nsrand((unsigned)time(NULL));\nseed = 1;\n}\nptr->x = 1.0 * rand() / RAND_MAX;\nptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\nreturn 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n符号名  iter  pnt  Point  total  seed\n在符号表中？（填是/否）\n定义所在节\nPart B. (每空1分，共3分) 使用objdump -dx f1.o f2.o 看到如下\n几条代码。这里可以将重定位类型 R_X86_64_PLT32和 R_X86_64_PC32 同\n等看待。\n# objdump 重定位条目格式：\n```\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n# 所有数值均以十六进制表示\n```\n# f1.o\n0000000000000000 <main>:\n```\n... # 省略无关代码\n```\n17: e8 00 00 00 00.          callq  1c <main+0x1c>\n          18: R_X86_64_PLT32      rand_point-0x4\n1c: 48 8d 3d 00 00 00 00    lea 0x0(%rip),%rdi\n          1f: R_X86_64_PC32       .bss+0xc\n23: e8 00 00 00 00           callq  28 <main+0x28>\n          24: R_X86_64_PLT32      if_inside-0x4\n28: 89 c2                      mov %eax,%edx\n```\n... # 省略无关代码\n```\n# f2.o\n0000000000000000 <rand_point>:\n```\n... # 省略无关代码\n0000000000000074 <if_inside>:\n... # 省略无关代码\n据 此 可 以 确 定  <main+0x1f>  处 的 重 定 位 条 目 是 针 对 符 号\n_______________(填写符号名，不要填写.bss这个节名)的重定位。同时该\n符 号 定 义 的 位 置 在 f1.o 中 相 对 于 .bss 节 的 偏 移 量 是\n0x__________________。\n现已知 a.out 文件中 <main+0x17> 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <main+0x23> 行将变成\n```\n11ad: e8 ___________          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 使用execve加载a.out并执行时，其中第\n一个被执行的语句默认是_______(单选)函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在_______态下\n(填 用户/内核)。\nA. _init     B.main     C.__libc_start_main    D._start\n答案：\nPart A.\n| 符号名 | iter | pnt | Point | total | seed |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？ | 是 | 是 | 否 | 是 | 否 |\n| 定义所在节 | .bss | .bss | / | .rodata（改卷时 .data 与 .rodata 均给分） | / |\n\nPart B. pnt；0x10；d1 00 00 00\n\nPart C. D（_start）；用户态",
+      "content": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有以下三个 c 文件 hd.h f1.c f2.c。使用gcc -c f1.c f2.c; gcc\nf1.o f2.o 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及\n的符号所对应的变量已在代码中加粗。本大题无需理解代码的含义。\n```\nf1.c  #include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\nfor (iter = 0; iter < total; ++iter) {\nrand_point(&pnt);\ncount += if_inside(&pnt);\n}\nprintf(\"Integral on [0,1] is %lf.\\n\",\n1.0 * count / total);\n}\nhd.h  typedef struct {\ndouble x;\ndouble y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\nf2.c  #include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\nstatic int seed = 0;\nif (!seed) {\nsrand((unsigned)time(NULL));\nseed = 1;\n}\nptr->x = 1.0 * rand() / RAND_MAX;\nptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\nreturn 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n| 项目 | iter | pnt | Point | total | seed |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？（填是/否） | {{blank:q3-A-iter-present}} | {{blank:q3-A-pnt-present}} | {{blank:q3-A-Point-present}} | {{blank:q3-A-total-present}} | {{blank:q3-A-seed-present}} |\n| 定义所在节 | {{blank:q3-A-iter-section}} | {{blank:q3-A-pnt-section}} | {{blank:q3-A-Point-section}} | {{blank:q3-A-total-section}} | {{blank:q3-A-seed-section}} |\nPart B. (每空1分，共3分) 使用objdump -dx f1.o f2.o 看到如下\n几条代码。这里可以将重定位类型 R_X86_64_PLT32和 R_X86_64_PC32 同\n等看待。\n# objdump 重定位条目格式：\n```\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n# 所有数值均以十六进制表示\n```\n# f1.o\n0000000000000000 <main>:\n```\n... # 省略无关代码\n```\n17: e8 00 00 00 00.          callq  1c <main+0x1c>\n          18: R_X86_64_PLT32      rand_point-0x4\n1c: 48 8d 3d 00 00 00 00    lea 0x0(%rip),%rdi\n          1f: R_X86_64_PC32       .bss+0xc\n23: e8 00 00 00 00           callq  28 <main+0x28>\n          24: R_X86_64_PLT32      if_inside-0x4\n28: 89 c2                      mov %eax,%edx\n```\n... # 省略无关代码\n```\n# f2.o\n0000000000000000 <rand_point>:\n```\n... # 省略无关代码\n0000000000000074 <if_inside>:\n... # 省略无关代码\n据 此 可 以 确 定  <main+0x1f>  处 的 重 定 位 条 目 是 针 对 符 号\n{{blank:q3-B-relocation-symbol}}（填写符号名，不要填写 .bss 这个节名）的重定位。同时该\n符号定义的位置在 f1.o 中相对于 .bss 节的偏移量是\n0x{{blank:q3-B-bss-offset}}。\n现已知 a.out 文件中 <main+0x17> 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <main+0x23> 行将变成\n```\n11ad: e8 {{blank:q3-B-call-displacement}}          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 使用 execve 加载 a.out 并执行时，其中第\n一个被执行的语句默认是 {{blank:q3-C-entry-function}}（单选）函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在 {{blank:q3-C-mode}} 态下\n(填 用户/内核)。\nA. _init     B.main     C.__libc_start_main    D._start\n答案：\nPart A.\n| 符号名 | iter | pnt | Point | total | seed |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？ | 是 | 是 | 否 | 是 | 否 |\n| 定义所在节 | .bss | .bss | / | .rodata（改卷时 .data 与 .rodata 均给分） | / |\n\nPart B. pnt；0x10；d1 00 00 00\n\nPart C. D（_start）；用户态",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4227,7 +4472,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有以下三个 c 文件 hd.h f1.c f2.c。使用gcc -c f1.c f2.c; gcc\nf1.o f2.o 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及\n的符号所对应的变量已在代码中加粗。本大题无需理解代码的含义。\n```\nf1.c  #include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\nfor (iter = 0; iter < total; ++iter) {\nrand_point(&pnt);\ncount += if_inside(&pnt);\n}\nprintf(\"Integral on [0,1] is %lf.\\n\",\n1.0 * count / total);\n}\nhd.h  typedef struct {\ndouble x;\ndouble y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\nf2.c  #include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\nstatic int seed = 0;\nif (!seed) {\nsrand((unsigned)time(NULL));\nseed = 1;\n}\nptr->x = 1.0 * rand() / RAND_MAX;\nptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\nreturn 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n符号名  iter  pnt  Point  total  seed\n在符号表中？（填是/否）\n定义所在节\nPart B. (每空1分，共3分) 使用objdump -dx f1.o f2.o 看到如下\n几条代码。这里可以将重定位类型 R_X86_64_PLT32和 R_X86_64_PC32 同\n等看待。\n# objdump 重定位条目格式：\n```\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n# 所有数值均以十六进制表示\n```\n# f1.o\n0000000000000000 <main>:\n```\n... # 省略无关代码\n```\n17: e8 00 00 00 00.          callq  1c <main+0x1c>\n          18: R_X86_64_PLT32      rand_point-0x4\n1c: 48 8d 3d 00 00 00 00    lea 0x0(%rip),%rdi\n          1f: R_X86_64_PC32       .bss+0xc\n23: e8 00 00 00 00           callq  28 <main+0x28>\n          24: R_X86_64_PLT32      if_inside-0x4\n28: 89 c2                      mov %eax,%edx\n```\n... # 省略无关代码\n```\n# f2.o\n0000000000000000 <rand_point>:\n```\n... # 省略无关代码\n0000000000000074 <if_inside>:\n... # 省略无关代码\n据 此 可 以 确 定  <main+0x1f>  处 的 重 定 位 条 目 是 针 对 符 号\n_______________(填写符号名，不要填写.bss这个节名)的重定位。同时该\n符 号 定 义 的 位 置 在 f1.o 中 相 对 于 .bss 节 的 偏 移 量 是\n0x__________________。\n现已知 a.out 文件中 <main+0x17> 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <main+0x23> 行将变成\n```\n11ad: e8 ___________          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 使用execve加载a.out并执行时，其中第\n一个被执行的语句默认是_______(单选)函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在_______态下\n(填 用户/内核)。\nA. _init     B.main     C.__libc_start_main    D._start",
+        "stem": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有以下三个 c 文件 hd.h f1.c f2.c。使用gcc -c f1.c f2.c; gcc\nf1.o f2.o 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及\n的符号所对应的变量已在代码中加粗。本大题无需理解代码的含义。\n```\nf1.c  #include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\nfor (iter = 0; iter < total; ++iter) {\nrand_point(&pnt);\ncount += if_inside(&pnt);\n}\nprintf(\"Integral on [0,1] is %lf.\\n\",\n1.0 * count / total);\n}\nhd.h  typedef struct {\ndouble x;\ndouble y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\nf2.c  #include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\nstatic int seed = 0;\nif (!seed) {\nsrand((unsigned)time(NULL));\nseed = 1;\n}\nptr->x = 1.0 * rand() / RAND_MAX;\nptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\nreturn 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n| 项目 | iter | pnt | Point | total | seed |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？（填是/否） | {{blank:q3-A-iter-present}} | {{blank:q3-A-pnt-present}} | {{blank:q3-A-Point-present}} | {{blank:q3-A-total-present}} | {{blank:q3-A-seed-present}} |\n| 定义所在节 | {{blank:q3-A-iter-section}} | {{blank:q3-A-pnt-section}} | {{blank:q3-A-Point-section}} | {{blank:q3-A-total-section}} | {{blank:q3-A-seed-section}} |\nPart B. (每空1分，共3分) 使用objdump -dx f1.o f2.o 看到如下\n几条代码。这里可以将重定位类型 R_X86_64_PLT32和 R_X86_64_PC32 同\n等看待。\n# objdump 重定位条目格式：\n```\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n# 所有数值均以十六进制表示\n```\n# f1.o\n0000000000000000 <main>:\n```\n... # 省略无关代码\n```\n17: e8 00 00 00 00.          callq  1c <main+0x1c>\n          18: R_X86_64_PLT32      rand_point-0x4\n1c: 48 8d 3d 00 00 00 00    lea 0x0(%rip),%rdi\n          1f: R_X86_64_PC32       .bss+0xc\n23: e8 00 00 00 00           callq  28 <main+0x28>\n          24: R_X86_64_PLT32      if_inside-0x4\n28: 89 c2                      mov %eax,%edx\n```\n... # 省略无关代码\n```\n# f2.o\n0000000000000000 <rand_point>:\n```\n... # 省略无关代码\n0000000000000074 <if_inside>:\n... # 省略无关代码\n据 此 可 以 确 定  <main+0x1f>  处 的 重 定 位 条 目 是 针 对 符 号\n{{blank:q3-B-relocation-symbol}}（填写符号名，不要填写 .bss 这个节名）的重定位。同时该\n符号定义的位置在 f1.o 中相对于 .bss 节的偏移量是\n0x{{blank:q3-B-bss-offset}}。\n现已知 a.out 文件中 <main+0x17> 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <main+0x23> 行将变成\n```\n11ad: e8 {{blank:q3-B-call-displacement}}          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 使用 execve 加载 a.out 并执行时，其中第\n一个被执行的语句默认是 {{blank:q3-C-entry-function}}（单选）函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在 {{blank:q3-C-mode}} 态下\n(填 用户/内核)。\nA. _init     B.main     C.__libc_start_main    D._start",
         "choices": [],
         "answer": "答案：\nPart A.\n| 符号名 | iter | pnt | Point | total | seed |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？ | 是 | 是 | 否 | 是 | 否 |\n| 定义所在节 | .bss | .bss | / | .rodata（改卷时 .data 与 .rodata 均给分） | / |\n\nPart B. pnt；0x10；d1 00 00 00\n\nPart C. D（_start）；用户态"
       },
@@ -4237,7 +4482,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有以下三个 c 文件 hd.h f1.c f2.c。使用gcc -c f1.c f2.c; gcc\nf1.o f2.o 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及\n的符号所对应的变量已在代码中加粗。本大题无需理解代码的含义。\n```\nf1.c  #include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\nfor (iter = 0; iter < total; ++iter) {\nrand_point(&pnt);\ncount += if_inside(&pnt);\n}\nprintf(\"Integral on [0,1] is %lf.\\n\",\n1.0 * count / total);\n}\nhd.h  typedef struct {\ndouble x;\ndouble y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\nf2.c  #include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\nstatic int seed = 0;\nif (!seed) {\nsrand((unsigned)time(NULL));\nseed = 1;\n}\nptr->x = 1.0 * rand() / RAND_MAX;\nptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\nreturn 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n符号名  iter  pnt  Point  total  seed\n在符号表中？（填是/否）\n定义所在节\nPart B. (每空1分，共3分) 使用objdump -dx f1.o f2.o 看到如下\n几条代码。这里可以将重定位类型 R_X86_64_PLT32和 R_X86_64_PC32 同\n等看待。\n# objdump 重定位条目格式：\n```\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n# 所有数值均以十六进制表示\n```\n# f1.o\n0000000000000000 <main>:\n```\n... # 省略无关代码\n```\n17: e8 00 00 00 00.          callq  1c <main+0x1c>\n          18: R_X86_64_PLT32      rand_point-0x4\n1c: 48 8d 3d 00 00 00 00    lea 0x0(%rip),%rdi\n          1f: R_X86_64_PC32       .bss+0xc\n23: e8 00 00 00 00           callq  28 <main+0x28>\n          24: R_X86_64_PLT32      if_inside-0x4\n28: 89 c2                      mov %eax,%edx\n```\n... # 省略无关代码\n```\n# f2.o\n0000000000000000 <rand_point>:\n```\n... # 省略无关代码\n0000000000000074 <if_inside>:\n... # 省略无关代码\n据 此 可 以 确 定  <main+0x1f>  处 的 重 定 位 条 目 是 针 对 符 号\n_______________(填写符号名，不要填写.bss这个节名)的重定位。同时该\n符 号 定 义 的 位 置 在 f1.o 中 相 对 于 .bss 节 的 偏 移 量 是\n0x__________________。\n现已知 a.out 文件中 <main+0x17> 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <main+0x23> 行将变成\n```\n11ad: e8 ___________          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 使用execve加载a.out并执行时，其中第\n一个被执行的语句默认是_______(单选)函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在_______态下\n(填 用户/内核)。\nA. _init     B.main     C.__libc_start_main    D._start",
+        "prompt": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有以下三个 c 文件 hd.h f1.c f2.c。使用gcc -c f1.c f2.c; gcc\nf1.o f2.o 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及\n的符号所对应的变量已在代码中加粗。本大题无需理解代码的含义。\n```\nf1.c  #include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\nfor (iter = 0; iter < total; ++iter) {\nrand_point(&pnt);\ncount += if_inside(&pnt);\n}\nprintf(\"Integral on [0,1] is %lf.\\n\",\n1.0 * count / total);\n}\nhd.h  typedef struct {\ndouble x;\ndouble y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\nf2.c  #include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\nstatic int seed = 0;\nif (!seed) {\nsrand((unsigned)time(NULL));\nseed = 1;\n}\nptr->x = 1.0 * rand() / RAND_MAX;\nptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\nreturn 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n| 项目 | iter | pnt | Point | total | seed |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？（填是/否） | {{blank:q3-A-iter-present}} | {{blank:q3-A-pnt-present}} | {{blank:q3-A-Point-present}} | {{blank:q3-A-total-present}} | {{blank:q3-A-seed-present}} |\n| 定义所在节 | {{blank:q3-A-iter-section}} | {{blank:q3-A-pnt-section}} | {{blank:q3-A-Point-section}} | {{blank:q3-A-total-section}} | {{blank:q3-A-seed-section}} |\nPart B. (每空1分，共3分) 使用objdump -dx f1.o f2.o 看到如下\n几条代码。这里可以将重定位类型 R_X86_64_PLT32和 R_X86_64_PC32 同\n等看待。\n# objdump 重定位条目格式：\n```\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n# 所有数值均以十六进制表示\n```\n# f1.o\n0000000000000000 <main>:\n```\n... # 省略无关代码\n```\n17: e8 00 00 00 00.          callq  1c <main+0x1c>\n          18: R_X86_64_PLT32      rand_point-0x4\n1c: 48 8d 3d 00 00 00 00    lea 0x0(%rip),%rdi\n          1f: R_X86_64_PC32       .bss+0xc\n23: e8 00 00 00 00           callq  28 <main+0x28>\n          24: R_X86_64_PLT32      if_inside-0x4\n28: 89 c2                      mov %eax,%edx\n```\n... # 省略无关代码\n```\n# f2.o\n0000000000000000 <rand_point>:\n```\n... # 省略无关代码\n0000000000000074 <if_inside>:\n... # 省略无关代码\n据 此 可 以 确 定  <main+0x1f>  处 的 重 定 位 条 目 是 针 对 符 号\n{{blank:q3-B-relocation-symbol}}（填写符号名，不要填写 .bss 这个节名）的重定位。同时该\n符号定义的位置在 f1.o 中相对于 .bss 节的偏移量是\n0x{{blank:q3-B-bss-offset}}。\n现已知 a.out 文件中 <main+0x17> 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <main+0x23> 行将变成\n```\n11ad: e8 {{blank:q3-B-call-displacement}}          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 使用 execve 加载 a.out 并执行时，其中第\n一个被执行的语句默认是 {{blank:q3-C-entry-function}}（单选）函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在 {{blank:q3-C-mode}} 态下\n(填 用户/内核)。\nA. _init     B.main     C.__libc_start_main    D._start",
         "answer": "答案：\nPart A.\n| 符号名 | iter | pnt | Point | total | seed |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？ | 是 | 是 | 否 | 是 | 否 |\n| 定义所在节 | .bss | .bss | / | .rodata（改卷时 .data 与 .rodata 均给分） | / |\n\nPart B. pnt；0x10；d1 00 00 00\n\nPart C. D（_start）；用户态"
       },
       "presentation": {
@@ -4865,14 +5110,25 @@
         "choices": [],
         "answer": "答案：\n| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| x | 是 | 全局 | main.o | .data |\n| y | 否 | / | / | / |\n| z | 是 | 全局 | main.o | COMMON |\n| n | 否 | / | / | / |\n| addvec | 是 | 外部 | addvec.o | .text |\n\n（答案键注：最后一列填的是\"此符号在定义该符号的模块中的节\"。addvec 在 addvec.o 中是在 .text，在 main.o 中是在 UND 中。）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "本题基于下列 c 语言文件所编译生成的 main.o 和 addvec.o，编译和运行在 X86-64/Linux 下完成，编译过程未加优化选项。\n\n```c\n//main.c\n#include <stdio.h>\n#include \"vector.h\"\nint x[2] = {1, 2};\nint z[2];\nint main(int argc, char** argv){\n  int y[2] = {3, 4};\n  int n=2;\n  addvec(x,y,z,n);\n  printf(\"z=[%d %d]\\n\", z[0], z[1]);\n  return 0;\n}\n```\n\n```c\n//addvec.c\nvoid addvec(int *x, int *y,\n            int *z, int n) {\n    int i;\n    for (i = 0; i < n; i++)\n        z[i] = x[i] + y[i];\n}\n```\n\n(1) 对于每个下表中给出的符号，请用\"是\"或\"否\"指出它是否在模块 main.o 的 .symtab 节中有符号表条目。如果存在条目，则请指出该符号的符号类型（局部、全局或外部）。并进一步指出定义该符号的模块（main.o 或 addvec.o）、以及此符号在该模块中所处的节名或伪节名；如果不存在条目，则请将该行后继空白处标记为\"/\"。\n\n| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| x |  |  |  |  |\n| y |  |  |  |  |\n| z |  |  |  |  |\n| n |  |  |  |  |\n| addvec |  |  |  |  |",
         "answer": "答案：\n| 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| x | 是 | 全局 | main.o | .data |\n| y | 否 | / | / | / |\n| z | 是 | 全局 | main.o | COMMON |\n| n | 否 | / | / | / |\n| addvec | 是 | 外部 | addvec.o | .text |\n\n（答案键注：最后一列填的是\"此符号在定义该符号的模块中的节\"。addvec 在 addvec.o 中是在 .text，在 main.o 中是在 UND 中。）"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q3",
+        "questionId": "q-c448153415e0dd8d",
+        "title": "第三题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -4916,14 +5172,25 @@
         "choices": [],
         "answer": "答案：\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ③ | r.offset = 0x26　r.symbol = x　r.type = R_X86_64_32　r.addend = 0 | 20 10 60 00 |\n| ① | r.offset = 0x2b　r.symbol = addvec　r.type = R_X86_64_PC32　r.addend = -4 | 25 00 00 00 |"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "(2) 基于 main.o 和 addvec.o 生成可执行程序 m 的时候，会进行若干重定位。下述代码是对可执行程序 m 执行 objdump -D m 以后的片段结果，请根据相关信息进行填空。\n\n```asm\n0000000000400228 <.interp>:\n  400228:\t2f                   \t(bad)\n  400229:\t6c                   \tinsb   (%dx),%es:(%rdi)\n  40022a:\t69 62 36 34 2f 6c 64 \timul   $0x646c2f34,0x36(%rdx),%esp\n  400231:\t2d 6c 69 6e 75       \tsub    $0x756e692c,%eax\n  400236:\t78 2d                \tjs     400265 <_init-0x153>\n  400238:\t78 38                \tjs     400272 <_init-0x146>\n  40023a:\t36                   \tss\n  40023b:\t2d 36 34 2e 73       \tsub    $0x732e342d,%eax\n  400240:\t6f                   \toutsl  %ds:(%rsi),(%dx)\n  400241:\t2e 32 00             \txor    %cs:(%rax),%al\n  ...\n\n00000000004003e0 <printf@plt-0x10>:\n  4003e0:\tff 35 0a 0c 20 00    \tpushq  0x200c0a(%rip)        # 600ff0 <_GLOBAL_OFFSET_TABLE_+0x8>\n  4003e6:\tff 25 0c 0c 20 00    \tjmpq   *0x200c0c(%rip)        # 600ff8 <_GLOBAL_OFFSET_TABLE_+0x10>\n  4003ec:\t0f 1f 40 00          \tnopl   0x0(%rax)\n\n00000000004003f0 <printf@plt>:\n  4003f0:\tff 25 0a 0c 20 00    \tjmpq   *0x200c0a(%rip)        # 601000 <_GLOBAL_OFFSET_TABLE_+0x18>\n  4003f6:\t68 00 00 00 00       \tpushq  $0x0\n  4003fb:\te9 e0 ff ff ff       \tjmpq   4003e0 <_init+0x18>\n\n0000000000400400 <__libc_start_main@plt>:\n  400400:\tff 25 02 0c 20 00    \tjmpq   *0x200c02(%rip)        # 601008 <_GLOBAL_OFFSET_TABLE_+0x20>\n  400406:\t68 01 00 00 00       \tpushq  $0x1\n  40040b:\te9 d0 ff ff ff       \tjmpq   4003e0 <_init+0x18>\n  ...\n\n0000000000400528 <main>:\n  400528:\t55                   \tpush   %rbp\n  400529:\t48 89 e5             \tmov    %rsp,%rbp\n  40052c:\t48 83 ec 20          \tsub    $0x20,%rsp\n  400530:\t89 7d ec             \tmov    %edi,-0x14(%rbp)\n```\n\n\n```asm\n  400533:\t48 89 75 e0          \tmov    %rsi,-0x20(%rbp)\n  400537:\tc7 45 fc 02 00 00 00 \tmovl   $0x2,-0x4(%rbp)\n  40053e:\t8b 45 fc             \tmov    -0x4(%rbp),%eax\n  400541:\t89 c1                \tmov    %eax,%ecx\n  400543:\tba （1）______________\tmov    $__________,%edx\n  400548:\tbe （2）______________\tmov    $__________,%esi\n  40054d:\tbf （3）______________\tmov    $__________,%edi\n  400552:\te8 （4）______________\tcallq  __________________\n  400557:\t8b 15 （5）____________\tmov    __________(%rip),%edx\n  40055d:\t8b 05 （6）____________\tmov    __________(%rip),%eax\n  400563:\t89 c6                \tmov    %eax,%esi\n  400565:\tbf （7）______________\tmov    $__________,%edi\n  40056a:\tb8 00 00 00 00       \tmov    $0x0,%eax\n  40056f:\te8 （8）______________\tcallq  __________________ <printf@plt>\n  400574:\tb8 00 00 00 00       \tmov    $0x0,%eax\n  400579:\tc9                   \tleaveq\n  40057a:\tc3                   \tretq\n  40057b:\t90                   \tnop\n\n000000000040057c <addvec>:\n  40057c:\t55                   \tpush   %rbp\n  40057d:\t48 89 e5             \tmov    %rsp,%rbp\n  400580:\t48 89 7d e8          \tmov    %rdi,-0x18(%rbp)\n  400584:\t48 89 75 e0          \tmov    %rsi,-0x20(%rbp)\n  400588:\t48 89 55 d8          \tmov    %rdx,-0x28(%rbp)\n  40058c:\t89 4d d4             \tmov    %ecx,-0x2c(%rbp)\n  40058f:\tc7 45 fc 00 00 00 00 \tmovl   $0x0,-0x4(%rbp)\n  400596:\teb 4a                \tjmp    4005e2 <addvec+0x66>\n  400598:\t8b 45 fc             \tmov    -0x4(%rbp),%eax\n  40059b:\t48 98                \tcltq\n  40059d:\t48 8d 14 85 00 00 00 \tlea    0x0(,%rax,4),%rdx\n  4005a4:\t00\n  ...\n\n0000000000600fe0 <.got>:\n  ...\n\n0000000000600fe8 <_GLOBAL_OFFSET_TABLE_>:\n  600fe8:\t10 0e                \tadc    %cl,(%rsi)\n  600fea:\t60                   \t(bad)\n  ...\n  600fff:\t00 f6                \tadd    %dh,%dh\n  601001:\t03 40 00             \tadd    0x0(%rax),%eax\n  601004:\t00 00                \tadd    %al,(%rax)\n  601006:\t00 00                \tadd    %al,(%rax)\n  601008:\t06                   \t(bad)\n  601009:\t04 40                \tadd    $0x40,%al\n  60100b:\t00 00                \tadd    %al,(%rax)\n  60100d:\t00 00                \tadd    %al,(%rax)\n  ...\n0000000000601020 <x>:\n  601020:\t01 00                \tadd    %eax,(%rax)\n  601022:\t00 00                \tadd    %al,(%rax)\n  601024:\t02 00                \tadd    (%rax),%al\n  ...\n0000000000601028 <y.2304>:\n  601028:\t03 00                \tadd    (%rax),%eax\n  60102a:\t00 00                \tadd    %al,(%rax)\n  60102c:\t04 00                \tadd    $0x0,%al\n  ...\n0000000000601038 <z>:\n  ...\n```\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ③ | r.offset = 0x26　　　　r.symbol = x<br>r.type = R_X86_64_32　　r.addend = 0 |  |\n| ① | r.offset = 0x2b　　　　r.symbol = addvec<br>r.type = R_X86_64_PC32　　r.addend = -4 |  |",
         "answer": "答案：\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ③ | r.offset = 0x26　r.symbol = x　r.type = R_X86_64_32　r.addend = 0 | 20 10 60 00 |\n| ① | r.offset = 0x2b　r.symbol = addvec　r.type = R_X86_64_PC32　r.addend = -4 | 25 00 00 00 |"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q3",
+        "questionId": "q-c448153415e0dd8d",
+        "title": "第三题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -4984,7 +5251,7 @@
         ],
         "answer": "答案：A\n（.interp 节的内容其实就是一个字符串，为动态链接器的路径。把 .interp 节的所有字节一个一个地翻译成字符，就得到 /lib64/ld-linux-x86-64.so.2。'0' 的 ASCII 的 16 进制是 0x30。）"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "single-choice",
         "declared": true,
         "choices": [
@@ -5009,10 +5276,21 @@
           "A"
         ]
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
       "contentV3": {
         "format": "markdown",
         "prompt": "(3) 基于你对代码的分析，生成该可执行程序的操作系统的动态链接器的路径是（　　）",
         "answer": "答案：A\n（.interp 节的内容其实就是一个字符串，为动态链接器的路径。把 .interp 节的所有字节一个一个地翻译成字符，就得到 /lib64/ld-linux-x86-64.so.2。'0' 的 ASCII 的 16 进制是 0x30。）"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q3",
+        "questionId": "q-c448153415e0dd8d",
+        "title": "第三题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -5056,14 +5334,25 @@
         "choices": [],
         "answer": "答案：PLT[1]；GOT[3]"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "fill",
         "declared": true
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
         "prompt": "(4) 程序中 printf 的 PLT 表条目是 PLT[______]，GOT 表条目是 GOT[______]。（填写数字即可）",
         "answer": "答案：PLT[1]；GOT[3]"
+      },
+      "group": {
+        "id": "p-7016510094998ec2:2022-final-q3",
+        "questionId": "q-c448153415e0dd8d",
+        "title": "第三题",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -5260,7 +5549,7 @@
       "exam": "2025期末",
       "questionNo": "二 14",
       "summary": "全局符号强/弱定义与重复定义",
-      "content": "二 不定项选择题（下）（36分）\n\n14.三个C程序文件，下面仅观察其中的全局符号g：\n\n```c\n// a.c\nint g = 1;\n```\n\n```c\n// b.c\nint g;\n```\n\n```c\n// main.c\nextern int g;\nint main() {\n    return g;\n}\n```\n\n关于链接行为，下列说法哪些正确？\nA. 链接成功，main 中引用的 g 解析到 a.c 的定义\nB. 链接失败，因为 g 在 a.c 与 b.c 中被“重复定义”\nC. 若把 a.c 改为 int g;，与 b.c 一样，则链接仍可成功，最终只分配一个 g\nD. 若把 b.c 改为 int g = 2;，则链接失败\nE. 若把 a.c 中 g 定义改成 double g = 1.0;，main.c中声明 extern int g; 并\n使用，链接器会报“类型不匹配”错误\n答案：ACD\n解析：int g=1 是强定义；int g; 是“弱/共同（common）”风格，强胜弱，因此 A 对、B 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会出问题）。",
+      "content": "二 不定项选择题（下）（36分）\n\n14.三个C程序文件，下面仅观察其中的全局符号g：\n\n```c\n// a.c\nint g = 1;\n```\n\n```c\n// b.c\nint g;\n```\n\n```c\n// main.c\nextern int g;\nint main() {\n    return g;\n}\n```\n\n关于链接行为，下列说法哪些正确？\nA. 链接成功，main 中引用的 g 解析到 a.c 的定义\nB. 链接失败，因为 g 在 a.c 与 b.c 中被“重复定义”\nC. 若把 a.c 改为 int g;，与 b.c 一样，则链接仍可成功，最终只分配一个 g\nD. 若把 b.c 改为 int g = 2;，则链接失败\nE. 若把 a.c 中 g 定义改成 double g = 1.0;，main.c中声明 extern int g; 并\n使用，链接器会报“类型不匹配”错误\n答案：ACD\n解析：int g=1 是强定义；int g; 是“弱/共同（common）”风格，强胜弱，因此 A 对、B 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会出问题）。\n\n校对说明：上述答案依赖课程采用 common 符号的链接规则（例如 GCC 使用 `-fcommon`）。题面没有给出该编译选项；使用 GCC 默认的 `-fno-common` 时，多个翻译单元中的暂定定义可能导致链接失败，故此处保留答案册答案并标记环境假设。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5303,7 +5592,7 @@
             "content": "若把 a.c 中 g 定义改成 double g = 1.0;，main.c中声明 extern int g; 并\n使用，链接器会报“类型不匹配”错误"
           }
         ],
-        "answer": "答案：ACD\n解析：int g=1 是强定义；int g; 是“弱/共同（common）”风格，强胜弱，因此 A 对、B 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会出问题）。"
+        "answer": "答案：ACD\n解析：int g=1 是强定义；int g; 是“弱/共同（common）”风格，强胜弱，因此 A 对、B 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会出问题）。\n\n校对说明：上述答案依赖课程采用 common 符号的链接规则（例如 GCC 使用 `-fcommon`）。题面没有给出该编译选项；使用 GCC 默认的 `-fno-common` 时，多个翻译单元中的暂定定义可能导致链接失败，故此处保留答案册答案并标记环境假设。"
       },
       "interaction": {
         "kind": "multiple-choice",
@@ -5339,7 +5628,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "二 不定项选择题（下）（36分）\n\n14.三个C程序文件，下面仅观察其中的全局符号g：\n\n```c\n// a.c\nint g = 1;\n```\n\n```c\n// b.c\nint g;\n```\n\n```c\n// main.c\nextern int g;\nint main() {\n    return g;\n}\n```\n\n关于链接行为，下列说法哪些正确？",
-        "answer": "答案：ACD\n解析：int g=1 是强定义；int g; 是“弱/共同（common）”风格，强胜弱，因此 A 对、B 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会出问题）。"
+        "answer": "答案：ACD\n解析：int g=1 是强定义；int g; 是“弱/共同（common）”风格，强胜弱，因此 A 对、B 错。两个强定义会报错（D 对）。链接器通常不做类型一致性检查，E 错（但运行行为会出问题）。\n\n校对说明：上述答案依赖课程采用 common 符号的链接规则（例如 GCC 使用 `-fcommon`）。题面没有给出该编译选项；使用 GCC 默认的 `-fno-common` 时，多个翻译单元中的暂定定义可能导致链接失败，故此处保留答案册答案并标记环境假设。"
       },
       "presentation": {
         "status": "ready",
@@ -5356,7 +5645,7 @@
       "exam": "2025期末",
       "questionNo": "三 1",
       "summary": "main.o 的 .symtab 符号表条目与所在节",
-      "content": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```c\n// main.c\n#include <stdio.h>\nextern int sum_array(int *arr, int n);\nint arr[5] = {1, 2, 3, 4, 5}, result;\nstatic int fix = 2010;\nint main() {\n    result = sum_array(arr, 5)+fix;\n    printf(\"sum = %d\\n\", res1);\n    return 0;\n}\n```\n\n```c\n// sum.c\nint sum_array(int *arr, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += arr[i];\n    }\n    return sum;\n}\n```\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```text\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```\n答案：\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| arr | 是 | 全局 | main.o | .data |\n| result | 是 | 全局 | main.o | .bss |\n| fix | 是 | 局部 | main.o | .data |\n| sum_array | 是 | 外部 | sum.o | .text |\n| i | 否 | / | / | / |\n| sum | 否 | / | / | / |\n| printf | 是 | 外部 | libc.so | .text |",
+      "content": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```c\n// main.c\n#include <stdio.h>\nextern int sum_array(int *arr, int n);\nint arr[5] = {1, 2, 3, 4, 5}, result;\nstatic int fix = 2010;\nint main() {\n    result = sum_array(arr, 5)+fix;\n    printf(\"sum = %d\\n\", result);\n    return 0;\n}\n```\n\n```c\n// sum.c\nint sum_array(int *arr, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += arr[i];\n    }\n    return sum;\n}\n```\n校对说明：原卷该处印作 `res1`，但前文声明并赋值的是 `result`；按上下文校为 `result`，原卷疑似笔误。\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```text\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```\n答案：\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| arr | 是 | 全局 | main.o | .data |\n| result | 是 | 全局 | main.o | .bss |\n| fix | 是 | 局部 | main.o | .data |\n| sum_array | 是 | 外部 | sum.o | .text |\n| i | 否 | / | / | / |\n| sum | 否 | / | / | / |\n| printf | 是 | 外部 | libc.so | .text |",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5376,7 +5665,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```c\n// main.c\n#include <stdio.h>\nextern int sum_array(int *arr, int n);\nint arr[5] = {1, 2, 3, 4, 5}, result;\nstatic int fix = 2010;\nint main() {\n    result = sum_array(arr, 5)+fix;\n    printf(\"sum = %d\\n\", res1);\n    return 0;\n}\n```\n\n```c\n// sum.c\nint sum_array(int *arr, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += arr[i];\n    }\n    return sum;\n}\n```\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```text\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```",
+        "stem": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```c\n// main.c\n#include <stdio.h>\nextern int sum_array(int *arr, int n);\nint arr[5] = {1, 2, 3, 4, 5}, result;\nstatic int fix = 2010;\nint main() {\n    result = sum_array(arr, 5)+fix;\n    printf(\"sum = %d\\n\", result);\n    return 0;\n}\n```\n\n```c\n// sum.c\nint sum_array(int *arr, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += arr[i];\n    }\n    return sum;\n}\n```\n校对说明：原卷该处印作 `res1`，但前文声明并赋值的是 `result`；按上下文校为 `result`，原卷疑似笔误。\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```text\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```",
         "choices": [],
         "answer": "答案：\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| arr | 是 | 全局 | main.o | .data |\n| result | 是 | 全局 | main.o | .bss |\n| fix | 是 | 局部 | main.o | .data |\n| sum_array | 是 | 外部 | sum.o | .text |\n| i | 否 | / | / | / |\n| sum | 否 | / | / | / |\n| printf | 是 | 外部 | libc.so | .text |"
       },
@@ -5386,7 +5675,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```c\n// main.c\n#include <stdio.h>\nextern int sum_array(int *arr, int n);\nint arr[5] = {1, 2, 3, 4, 5}, result;\nstatic int fix = 2010;\nint main() {\n    result = sum_array(arr, 5)+fix;\n    printf(\"sum = %d\\n\", res1);\n    return 0;\n}\n```\n\n```c\n// sum.c\nint sum_array(int *arr, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += arr[i];\n    }\n    return sum;\n}\n```\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```text\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```",
+        "prompt": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 main.o 和 sum.o，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```c\n// main.c\n#include <stdio.h>\nextern int sum_array(int *arr, int n);\nint arr[5] = {1, 2, 3, 4, 5}, result;\nstatic int fix = 2010;\nint main() {\n    result = sum_array(arr, 5)+fix;\n    printf(\"sum = %d\\n\", result);\n    return 0;\n}\n```\n\n```c\n// sum.c\nint sum_array(int *arr, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += arr[i];\n    }\n    return sum;\n}\n```\n校对说明：原卷该处印作 `res1`，但前文声明并赋值的是 `result`；按上下文校为 `result`，原卷疑似笔误。\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 main.o 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（main.o、sum.o、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n符号 .symtab有条目? 符号类型 定义符号的模块 节或伪节名\n```text\n1 arr\n2 result\n3 fix\n4 sum_array\n5 i\n6 sum\n7 printf\n```",
         "answer": "答案：\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| arr | 是 | 全局 | main.o | .data |\n| result | 是 | 全局 | main.o | .bss |\n| fix | 是 | 局部 | main.o | .data |\n| sum_array | 是 | 外部 | sum.o | .text |\n| i | 否 | / | / | / |\n| sum | 否 | / | / | / |\n| printf | 是 | 外部 | libc.so | .text |"
       },
       "presentation": {
@@ -5404,7 +5693,7 @@
       "exam": "2025期末",
       "questionNo": "三 2",
       "summary": "重定位条目与 32 位小端机器码",
-      "content": "2.重定位分析（2分）\n\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段（部分地址和内容为示意）\n\n```asm\n0000000000001149 <main>:\n    1149: 55                  push    %rbp\n    114a: 48 89 e5            mov     %rsp, %rbp\n    114d: be 05 00 00 00      mov     $0x5, %esi\n    1152: bf __ __ __ __      mov     $_______, %edi   ; arr 的地址\n    1157: e8 __ __ __ __      callq   _____________    ; sum_array\n```\n\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。（注：在答题纸上画出下面表格的第1列和第3列）\n\n| 编号 | 重定位条目信息 | 重定位引用值 32 位编码（参照代码中的 16 进制形式） |\n| --- | --- | --- |\n| ① | r.offset = 0x09　　r.symbol = arr<br>r.type = R_X86_64_32　　r.addend = 0 |  |\n| ② | r.offset = 0x0e　　r.symbol = sum_array<br>r.type = R_X86_64_PC32　　r.addend = -4 |  |\n\n此处假设 arr 在可执行文件中的地址为 0x402010，sum_array 的地址为 0x1180，result 的地址为 0x404018，main 中 call 指令的下一指令地址为 0x115c。\n答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00",
+      "content": "2.重定位分析（2分）\n\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段（部分地址和内容为示意）\n\n```asm\n0000000000001149 <main>:\n    1149: 55                  push    %rbp\n    114a: 48 89 e5            mov     %rsp, %rbp\n    114d: be 05 00 00 00      mov     $0x5, %esi\n    1152: bf __ __ __ __      mov     $_______, %edi   ; arr 的地址\n    1157: e8 __ __ __ __      callq   _____________    ; sum_array\n```\n\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。（注：在答题纸上画出下面表格的第1列和第3列）\n\n| 编号 | 重定位条目信息 | 重定位引用值 32 位编码（参照代码中的 16 进制形式） |\n| --- | --- | --- |\n| ① | r.offset = 0x09　　r.symbol = arr<br>r.type = R_X86_64_32　　r.addend = 0 |  |\n| ② | r.offset = 0x0e　　r.symbol = sum_array<br>r.type = R_X86_64_PC32　　r.addend = -4 |  |\n\n此处假设 arr 在可执行文件中的地址为 0x402010，sum_array 的地址为 0x1180，result 的地址为 0x404018，main 中 call 指令的下一指令地址为 0x115c。\n答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00\n\n校对说明：原卷给出的 `r.offset = 0x0e` 指向 `callq` 的 `e8` 操作码；32 位重定位字段从下一字节开始，按标准 ELF 位置应为 `0x0f`。答案册给出的 `25 00 00 00` 与把 `P` 取为 `0x1157`（操作码地址）一致；按重定位字段地址 `P = 0x1158` 计算则为 `24 00 00 00`。保留原卷数据和答案册答案，待确认课程采用的约定。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5426,7 +5715,7 @@
         "selection": null,
         "stem": "2.重定位分析（2分）\n\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段（部分地址和内容为示意）\n\n```asm\n0000000000001149 <main>:\n    1149: 55                  push    %rbp\n    114a: 48 89 e5            mov     %rsp, %rbp\n    114d: be 05 00 00 00      mov     $0x5, %esi\n    1152: bf __ __ __ __      mov     $_______, %edi   ; arr 的地址\n    1157: e8 __ __ __ __      callq   _____________    ; sum_array\n```\n\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。（注：在答题纸上画出下面表格的第1列和第3列）\n\n| 编号 | 重定位条目信息 | 重定位引用值 32 位编码（参照代码中的 16 进制形式） |\n| --- | --- | --- |\n| ① | r.offset = 0x09　　r.symbol = arr<br>r.type = R_X86_64_32　　r.addend = 0 |  |\n| ② | r.offset = 0x0e　　r.symbol = sum_array<br>r.type = R_X86_64_PC32　　r.addend = -4 |  |\n\n此处假设 arr 在可执行文件中的地址为 0x402010，sum_array 的地址为 0x1180，result 的地址为 0x404018，main 中 call 指令的下一指令地址为 0x115c。",
         "choices": [],
-        "answer": "答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00"
+        "answer": "答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00\n\n校对说明：原卷给出的 `r.offset = 0x0e` 指向 `callq` 的 `e8` 操作码；32 位重定位字段从下一字节开始，按标准 ELF 位置应为 `0x0f`。答案册给出的 `25 00 00 00` 与把 `P` 取为 `0x1157`（操作码地址）一致；按重定位字段地址 `P = 0x1158` 计算则为 `24 00 00 00`。保留原卷数据和答案册答案，待确认课程采用的约定。"
       },
       "interaction": {
         "kind": "fill",
@@ -5435,7 +5724,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "2.重定位分析（2分）\n\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段（部分地址和内容为示意）\n\n```asm\n0000000000001149 <main>:\n    1149: 55                  push    %rbp\n    114a: 48 89 e5            mov     %rsp, %rbp\n    114d: be 05 00 00 00      mov     $0x5, %esi\n    1152: bf __ __ __ __      mov     $_______, %edi   ; arr 的地址\n    1157: e8 __ __ __ __      callq   _____________    ; sum_array\n```\n\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。（注：在答题纸上画出下面表格的第1列和第3列）\n\n| 编号 | 重定位条目信息 | 重定位引用值 32 位编码（参照代码中的 16 进制形式） |\n| --- | --- | --- |\n| ① | r.offset = 0x09　　r.symbol = arr<br>r.type = R_X86_64_32　　r.addend = 0 |  |\n| ② | r.offset = 0x0e　　r.symbol = sum_array<br>r.type = R_X86_64_PC32　　r.addend = -4 |  |\n\n此处假设 arr 在可执行文件中的地址为 0x402010，sum_array 的地址为 0x1180，result 的地址为 0x404018，main 中 call 指令的下一指令地址为 0x115c。",
-        "answer": "答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00"
+        "answer": "答案：\n① r.offset = 0x09　r.symbol = arr　r.type = R_X86_64_32　r.addend = 0 → 10 20 40 00\n② r.offset = 0x0e　r.symbol = sum_array　r.type = R_X86_64_PC32　r.addend = -4 → 25 00 00 00\n\n校对说明：原卷给出的 `r.offset = 0x0e` 指向 `callq` 的 `e8` 操作码；32 位重定位字段从下一字节开始，按标准 ELF 位置应为 `0x0f`。答案册给出的 `25 00 00 00` 与把 `P` 取为 `0x1157`（操作码地址）一致；按重定位字段地址 `P = 0x1158` 计算则为 `24 00 00 00`。保留原卷数据和答案册答案，待确认课程采用的约定。"
       },
       "presentation": {
         "status": "ready",

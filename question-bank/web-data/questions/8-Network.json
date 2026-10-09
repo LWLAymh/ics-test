@@ -103,7 +103,7 @@
       "exam": "2013期末",
       "questionNo": "第一题 18",
       "summary": "client-server connection socket pair",
-      "content": "18、在 client-server 模型中，一个连接（connection）可以由 IP 地址，\n\n\n端口号的组合来表示。假设一个访问网页服务器的应用，客户端 IP 地址为\n128.2.194.242，目标服务器端 IP 地址为 208.216.181.15，用户设置的代\n理服务器 IP 地址为 155.232.108.39。目标服务器同时提供网页服务（默认端\n口80），和邮件服务（默认端口25）。当客户端向目标服务器发送访问网页的请求\n时，下面connection socket pairs 正确的一组是？答：（       ）\n  客户端请求  代理请求\n```\n(128.2.194.242:25,  (128.2.194.242:51213,\nA  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:51213,  (128.2.194.242:12306,\nB  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:25,  (155.232.108.39:51213,\nC  208.216.181.15:80)  208.216.181.15:80)\nD  (128.2.194.242:51213,  (155.232.108.39:12306,\n208.216.181.15:80)  208.216.181.15:80)\n```\n答案：D\n解释：考察所有三部分内容\n（客户端请求）这一段，客户端发送的请求，源地址是客户自己地址\n128.2.194.242，端口号是临时端口号；目标地址仍是服务器地址\n208.216.181.15:80默认端口80\n（代理请求）这一段，代理发送的请求，源地址是代理自己地址155.232.108.39，\n端口号是临时端口号；目标地址仍是服务器地址208.216.181.15:80默认端口\n80。\n所以，选项D正确。\n（选项A/B中，目标地址不是代理的地址，而是目标服务器的地址。）\n（选项C中，端口号25属于电子邮件应用默认端口号，不作为客户端的临时端口\n号。）",
+      "content": "18、在client-server模型中，一个连接（connection）可以由IP地址、端口号的组合来表示。假设一个访问网页服务器的应用，客户端IP地址为128.2.194.242，目标服务器端IP地址为208.216.181.15，用户设置的代理服务器IP地址为155.232.108.39。目标服务器同时提供网页服务（默认端口80）和邮件服务（默认端口25）。当客户端向目标服务器发送访问网页的请求时，下面connection socket pairs正确的一组是？\nA. 客户端(128.2.194.242:25, 155.232.108.39:80)；代理(128.2.194.242:51213, 208.216.181.15:80)\nB. 客户端(128.2.194.242:51213, 155.232.108.39:80)；代理(128.2.194.242:12306, 208.216.181.15:80)\nC. 客户端(128.2.194.242:25, 208.216.181.15:80)；代理(155.232.108.39:51213, 208.216.181.15:80)\nD. 客户端(128.2.194.242:51213, 208.216.181.15:80)；代理(155.232.108.39:12306, 208.216.181.15:80)\n答案：D\n解释：考察所有三部分内容\n（客户端请求）这一段，客户端发送的请求，源地址是客户自己地址\n128.2.194.242，端口号是临时端口号；目标地址仍是服务器地址\n208.216.181.15:80默认端口80\n（代理请求）这一段，代理发送的请求，源地址是代理自己地址155.232.108.39，\n端口号是临时端口号；目标地址仍是服务器地址208.216.181.15:80默认端口\n80。\n所以，选项D正确。\n（选项A/B中，目标地址不是代理的地址，而是目标服务器的地址。）\n（选项C中，端口号25属于电子邮件应用默认端口号，不作为客户端的临时端口\n号。）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -121,19 +121,57 @@
         "curated": "_curated/期末/2013期末-带答案/253.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "18、在 client-server 模型中，一个连接（connection）可以由 IP 地址，\n\n\n端口号的组合来表示。假设一个访问网页服务器的应用，客户端 IP 地址为\n128.2.194.242，目标服务器端 IP 地址为 208.216.181.15，用户设置的代\n理服务器 IP 地址为 155.232.108.39。目标服务器同时提供网页服务（默认端\n口80），和邮件服务（默认端口25）。当客户端向目标服务器发送访问网页的请求\n时，下面connection socket pairs 正确的一组是？答：（       ）\n  客户端请求  代理请求\n```\n(128.2.194.242:25,  (128.2.194.242:51213,\nA  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:51213,  (128.2.194.242:12306,\nB  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:25,  (155.232.108.39:51213,\nC  208.216.181.15:80)  208.216.181.15:80)\nD  (128.2.194.242:51213,  (155.232.108.39:12306,\n208.216.181.15:80)  208.216.181.15:80)\n```",
-        "choices": [],
+        "mode": "choice",
+        "selection": "single",
+        "stem": "18、在client-server模型中，一个连接（connection）可以由IP地址、端口号的组合来表示。假设一个访问网页服务器的应用，客户端IP地址为128.2.194.242，目标服务器端IP地址为208.216.181.15，用户设置的代理服务器IP地址为155.232.108.39。目标服务器同时提供网页服务（默认端口80）和邮件服务（默认端口25）。当客户端向目标服务器发送访问网页的请求时，下面connection socket pairs正确的一组是？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "客户端(128.2.194.242:25, 155.232.108.39:80)；代理(128.2.194.242:51213, 208.216.181.15:80)"
+          },
+          {
+            "key": "B",
+            "content": "客户端(128.2.194.242:51213, 155.232.108.39:80)；代理(128.2.194.242:12306, 208.216.181.15:80)"
+          },
+          {
+            "key": "C",
+            "content": "客户端(128.2.194.242:25, 208.216.181.15:80)；代理(155.232.108.39:51213, 208.216.181.15:80)"
+          },
+          {
+            "key": "D",
+            "content": "客户端(128.2.194.242:51213, 208.216.181.15:80)；代理(155.232.108.39:12306, 208.216.181.15:80)"
+          }
+        ],
         "answer": "答案：D\n解释：考察所有三部分内容\n（客户端请求）这一段，客户端发送的请求，源地址是客户自己地址\n128.2.194.242，端口号是临时端口号；目标地址仍是服务器地址\n208.216.181.15:80默认端口80\n（代理请求）这一段，代理发送的请求，源地址是代理自己地址155.232.108.39，\n端口号是临时端口号；目标地址仍是服务器地址208.216.181.15:80默认端口\n80。\n所以，选项D正确。\n（选项A/B中，目标地址不是代理的地址，而是目标服务器的地址。）\n（选项C中，端口号25属于电子邮件应用默认端口号，不作为客户端的临时端口\n号。）"
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "客户端(128.2.194.242:25, 155.232.108.39:80)；代理(128.2.194.242:51213, 208.216.181.15:80)"
+          },
+          {
+            "id": "B",
+            "content": "客户端(128.2.194.242:51213, 155.232.108.39:80)；代理(128.2.194.242:12306, 208.216.181.15:80)"
+          },
+          {
+            "id": "C",
+            "content": "客户端(128.2.194.242:25, 208.216.181.15:80)；代理(155.232.108.39:51213, 208.216.181.15:80)"
+          },
+          {
+            "id": "D",
+            "content": "客户端(128.2.194.242:51213, 208.216.181.15:80)；代理(155.232.108.39:12306, 208.216.181.15:80)"
+          }
+        ],
+        "correctChoiceIds": [
+          "D"
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "18、在 client-server 模型中，一个连接（connection）可以由 IP 地址，\n\n\n端口号的组合来表示。假设一个访问网页服务器的应用，客户端 IP 地址为\n128.2.194.242，目标服务器端 IP 地址为 208.216.181.15，用户设置的代\n理服务器 IP 地址为 155.232.108.39。目标服务器同时提供网页服务（默认端\n口80），和邮件服务（默认端口25）。当客户端向目标服务器发送访问网页的请求\n时，下面connection socket pairs 正确的一组是？答：（       ）\n  客户端请求  代理请求\n```\n(128.2.194.242:25,  (128.2.194.242:51213,\nA  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:51213,  (128.2.194.242:12306,\nB  155.232.108.39:80)  208.216.181.15:80)\n(128.2.194.242:25,  (155.232.108.39:51213,\nC  208.216.181.15:80)  208.216.181.15:80)\nD  (128.2.194.242:51213,  (155.232.108.39:12306,\n208.216.181.15:80)  208.216.181.15:80)\n```",
+        "prompt": "18、在client-server模型中，一个连接（connection）可以由IP地址、端口号的组合来表示。假设一个访问网页服务器的应用，客户端IP地址为128.2.194.242，目标服务器端IP地址为208.216.181.15，用户设置的代理服务器IP地址为155.232.108.39。目标服务器同时提供网页服务（默认端口80）和邮件服务（默认端口25）。当客户端向目标服务器发送访问网页的请求时，下面connection socket pairs正确的一组是？",
         "answer": "答案：D\n解释：考察所有三部分内容\n（客户端请求）这一段，客户端发送的请求，源地址是客户自己地址\n128.2.194.242，端口号是临时端口号；目标地址仍是服务器地址\n208.216.181.15:80默认端口80\n（代理请求）这一段，代理发送的请求，源地址是代理自己地址155.232.108.39，\n端口号是临时端口号；目标地址仍是服务器地址208.216.181.15:80默认端口\n80。\n所以，选项D正确。\n（选项A/B中，目标地址不是代理的地址，而是目标服务器的地址。）\n（选项C中，端口号25属于电子邮件应用默认端口号，不作为客户端的临时端口\n号。）"
       },
       "presentation": {
@@ -507,8 +545,10 @@
       "exam": "2014期末",
       "questionNo": "第八题",
       "summary": "socket 数量、Connection socket pair、Echo/Tiny Server",
-      "content": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听______个来自一个客户端独\n立的 socket 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。HTTP服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（Server）\n通过 socket进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其Open_clientfd命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给Server端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 Server 端相\n应代码行画一条单向箭头。\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```\n答案：1）4×2¹⁶ − 4 = 262140　2）客户端 IP 不能写内网地址，应写 162.105.192.178；服务器端口 25 应为 80　3）见下方箭头表　4）a. filename　b. 动态　c. 需要加入并发处理能力\n\n原卷在每个小问之后直接印出了答案，下面是整理后的原卷答案与推导。\n\n**1．（1 分）最多再监听多少个连接。**\n原卷答案：`4*216 – 4`（原文转写把指数 2¹⁶ 写成了 216），即 **4 × 2¹⁶ − 4 = 262140**。\n一条 TCP 连接由四元组 `(客户端 IP, 客户端端口, 服务器 IP, 服务器端口)` 唯一确定：\n- 服务器有 4 个独立固定 IP，任选其一进入四元组 ⇒ 4 种；\n- 服务器端口固定为 web 端口 80；\n- 客户端只有一个固定 IP，只有它的 16 位端口号可变 ⇒ 2¹⁶ 种；\n- 但每个服务器 IP 上的 80 端口本身已被监听套接字（`listenfd`）占用，故每个 IP 减 1。\n原卷另附更保守的口径「（4×2¹⁶ − 4×well-known 端口数）」，即连客户端的知名端口也不许用。\n\n**2．（2 分）socket pair 错在哪。**\n- 客户端 IP：`192.168.100.121` 是 NAT 后面的**内网地址**，不能出现在连接四元组里，\n  应写参与连接的公网地址 **162.105.192.178**；\n- 服务器端口：HTTP 服务器默认监听 **80**，题中写的 25 是 SMTP 的端口。\n  （原卷答案：`192.168.100.121不对，原因：不能用内网IP；25应该是80，原因：网页浏览器应用的默认监听端口是80端口。`）\n\n**3．（4 分）Echo Server 的交互箭头。**\n| 步骤 | 方向 | 对应代码 |\n| --- | --- | --- |\n| 建立连接 | client → server | `clientfd = Open_clientfd(host, port)` ⇒ `connfd = Accept(listenfd, …)` |\n| 发送请求 | client → server | `Rio_writen(clientfd, buf, strlen(buf))` ⇒ `while((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0)` |\n| 接收应答 | server → client | `Rio_writen(connfd, buf, n)` ⇒ `Rio_readlineb(&rio, buf, MAXLINE)` |\n| 关闭连接 | client → server | `Close(clientfd)` ⇒ `Close(connfd)` |\n\n（原卷在同一代码块上用 `--------à` / `ß-----------` 标出了这四条单向箭头。）\n\n**4．（3 分）Tiny Server。**\na. **filename** —— `Execve(filename, emptylist, environ)` 把它当作要运行的程序路径。\nb. **动态** —— 走的是 CGI 分支（`setenv(\"QUERY_STRING\", …)` + `Dup2(fd, STDOUT_FILENO)` + `Execve`），\n   内容由 `filename` 这个程序在运行时生成；静态内容则直接由 `rio_readn`/`mmap` 把磁盘文件送回。\nc. 需要加入**并发处理能力** —— 对每个 `Accept` 返回的 `connfd` fork 子进程、开线程，\n   或用 I/O 多路复用（select/poll/epoll）在单进程内轮转。\n   （原卷答案：`可以通过多进程、多线程或IO多路复用进行更改`。）\n\n> 📌 本题答案来自原卷（带答案版）每小问后印出的参考答案。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
-      "assets": [],
+      "content": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听 {{blank:max-connections}} 个来自一个客户端独\n立的 socket 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。HTTP服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（Server）\n通过 socket进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其Open_clientfd命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给Server端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 Server 端相\n应代码行画一条单向箭头。\n\n![Echo Client 与 Echo Server 代码（原卷题面，不含答案）](assets/期末/2014期末-带答案/page-24-question.svg)\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```\n答案：1）4×2¹⁶ − 4 = 262140　2）客户端 IP 不能写内网地址，应写 162.105.192.178；服务器端口 25 应为 80　3）见下方箭头表　4）a. filename　b. 动态　c. 需要加入并发处理能力\n\n原卷在每个小问之后直接印出了答案，下面是整理后的原卷答案与推导。\n\n**1．（1 分）最多再监听多少个连接。**\n原卷答案：`4*216 – 4`（原文转写把指数 2¹⁶ 写成了 216），即 **4 × 2¹⁶ − 4 = 262140**。\n一条 TCP 连接由四元组 `(客户端 IP, 客户端端口, 服务器 IP, 服务器端口)` 唯一确定：\n- 服务器有 4 个独立固定 IP，任选其一进入四元组 ⇒ 4 种；\n- 服务器端口固定为 web 端口 80；\n- 客户端只有一个固定 IP，只有它的 16 位端口号可变 ⇒ 2¹⁶ 种；\n- 但每个服务器 IP 上的 80 端口本身已被监听套接字（`listenfd`）占用，故每个 IP 减 1。\n原卷另附更保守的口径「（4×2¹⁶ − 4×well-known 端口数）」，即连客户端的知名端口也不许用。\n\n**2．（2 分）socket pair 错在哪。**\n- 客户端 IP：`192.168.100.121` 是 NAT 后面的**内网地址**，不能出现在连接四元组里，\n  应写参与连接的公网地址 **162.105.192.178**；\n- 服务器端口：HTTP 服务器默认监听 **80**，题中写的 25 是 SMTP 的端口。\n  （原卷答案：`192.168.100.121不对，原因：不能用内网IP；25应该是80，原因：网页浏览器应用的默认监听端口是80端口。`）\n\n**3．（4 分）Echo Server 的交互箭头。**\n| 步骤 | 方向 | 对应代码 |\n| --- | --- | --- |\n| 建立连接 | client → server | `clientfd = Open_clientfd(host, port)` ⇒ `connfd = Accept(listenfd, …)` |\n| 发送请求 | client → server | `Rio_writen(clientfd, buf, strlen(buf))` ⇒ `while((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0)` |\n| 接收应答 | server → client | `Rio_writen(connfd, buf, n)` ⇒ `Rio_readlineb(&rio, buf, MAXLINE)` |\n| 关闭连接 | client → server | `Close(clientfd)` ⇒ `Close(connfd)` |\n\n（原卷在同一代码块上用 `--------à` / `ß-----------` 标出了这四条单向箭头。）\n\n**4．（3 分）Tiny Server。**\na. **filename** —— `Execve(filename, emptylist, environ)` 把它当作要运行的程序路径。\nb. **动态** —— 走的是 CGI 分支（`setenv(\"QUERY_STRING\", …)` + `Dup2(fd, STDOUT_FILENO)` + `Execve`），\n   内容由 `filename` 这个程序在运行时生成；静态内容则直接由 `rio_readn`/`mmap` 把磁盘文件送回。\nc. 需要加入**并发处理能力** —— 对每个 `Accept` 返回的 `connfd` fork 子进程、开线程，\n   或用 I/O 多路复用（select/poll/epoll）在单进程内轮转。\n   （原卷答案：`可以通过多进程、多线程或IO多路复用进行更改`。）\n\n> 📌 本题答案来自原卷（带答案版）每小问后印出的参考答案。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+      "assets": [
+        "assets/期末/2014期末-带答案/page-24-question.svg"
+      ],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -527,17 +567,41 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听______个来自一个客户端独\n立的 socket 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。HTTP服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（Server）\n通过 socket进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其Open_clientfd命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给Server端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 Server 端相\n应代码行画一条单向箭头。\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```",
+        "stem": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听 {{blank:max-connections}} 个来自一个客户端独\n立的 socket 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。HTTP服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（Server）\n通过 socket进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其Open_clientfd命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给Server端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 Server 端相\n应代码行画一条单向箭头。\n\n![Echo Client 与 Echo Server 代码（原卷题面，不含答案）](assets/期末/2014期末-带答案/page-24-question.svg)\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```",
         "choices": [],
-        "answer": "答案：1）4×2¹⁶ − 4 = 262140　2）客户端 IP 不能写内网地址，应写 162.105.192.178；服务器端口 25 应为 80　3）见下方箭头表　4）a. filename　b. 动态　c. 需要加入并发处理能力\n\n原卷在每个小问之后直接印出了答案，下面是整理后的原卷答案与推导。\n\n**1．（1 分）最多再监听多少个连接。**\n原卷答案：`4*216 – 4`（原文转写把指数 2¹⁶ 写成了 216），即 **4 × 2¹⁶ − 4 = 262140**。\n一条 TCP 连接由四元组 `(客户端 IP, 客户端端口, 服务器 IP, 服务器端口)` 唯一确定：\n- 服务器有 4 个独立固定 IP，任选其一进入四元组 ⇒ 4 种；\n- 服务器端口固定为 web 端口 80；\n- 客户端只有一个固定 IP，只有它的 16 位端口号可变 ⇒ 2¹⁶ 种；\n- 但每个服务器 IP 上的 80 端口本身已被监听套接字（`listenfd`）占用，故每个 IP 减 1。\n原卷另附更保守的口径「（4×2¹⁶ − 4×well-known 端口数）」，即连客户端的知名端口也不许用。\n\n**2．（2 分）socket pair 错在哪。**\n- 客户端 IP：`192.168.100.121` 是 NAT 后面的**内网地址**，不能出现在连接四元组里，\n  应写参与连接的公网地址 **162.105.192.178**；\n- 服务器端口：HTTP 服务器默认监听 **80**，题中写的 25 是 SMTP 的端口。\n  （原卷答案：`192.168.100.121不对，原因：不能用内网IP；25应该是80，原因：网页浏览器应用的默认监听端口是80端口。`）\n\n**3．（4 分）Echo Server 的交互箭头。**\n| 步骤 | 方向 | 对应代码 |\n| --- | --- | --- |\n| 建立连接 | client → server | `clientfd = Open_clientfd(host, port)` ⇒ `connfd = Accept(listenfd, …)` |\n| 发送请求 | client → server | `Rio_writen(clientfd, buf, strlen(buf))` ⇒ `while((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0)` |\n| 接收应答 | server → client | `Rio_writen(connfd, buf, n)` ⇒ `Rio_readlineb(&rio, buf, MAXLINE)` |\n| 关闭连接 | client → server | `Close(clientfd)` ⇒ `Close(connfd)` |\n\n（原卷在同一代码块上用 `--------à` / `ß-----------` 标出了这四条单向箭头。）\n\n**4．（3 分）Tiny Server。**\na. **filename** —— `Execve(filename, emptylist, environ)` 把它当作要运行的程序路径。\nb. **动态** —— 走的是 CGI 分支（`setenv(\"QUERY_STRING\", …)` + `Dup2(fd, STDOUT_FILENO)` + `Execve`），\n   内容由 `filename` 这个程序在运行时生成；静态内容则直接由 `rio_readn`/`mmap` 把磁盘文件送回。\nc. 需要加入**并发处理能力** —— 对每个 `Accept` 返回的 `connfd` fork 子进程、开线程，\n   或用 I/O 多路复用（select/poll/epoll）在单进程内轮转。\n   （原卷答案：`可以通过多进程、多线程或IO多路复用进行更改`。）\n\n> 📌 本题答案来自原卷（带答案版）每小问后印出的参考答案。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+        "answer": "答案：1）4×2¹⁶ − 4 = 262140　2）客户端 IP 不能写内网地址，应写 162.105.192.178；服务器端口 25 应为 80　3）见下方箭头表　4）a. filename　b. 动态　c. 需要加入并发处理能力\n\n原卷在每个小问之后直接印出了答案，下面是整理后的原卷答案与推导。\n\n**1．（1 分）最多再监听多少个连接。**\n原卷答案：`4*216 – 4`（原文转写把指数 2¹⁶ 写成了 216），即 **4 × 2¹⁶ − 4 = 262140**。\n一条 TCP 连接由四元组 `(客户端 IP, 客户端端口, 服务器 IP, 服务器端口)` 唯一确定：\n- 服务器有 4 个独立固定 IP，任选其一进入四元组 ⇒ 4 种；\n- 服务器端口固定为 web 端口 80；\n- 客户端只有一个固定 IP，只有它的 16 位端口号可变 ⇒ 2¹⁶ 种；\n- 但每个服务器 IP 上的 80 端口本身已被监听套接字（`listenfd`）占用，故每个 IP 减 1。\n原卷另附更保守的口径「（4×2¹⁶ − 4×well-known 端口数）」，即连客户端的知名端口也不许用。\n\n**2．（2 分）socket pair 错在哪。**\n- 客户端 IP：`192.168.100.121` 是 NAT 后面的**内网地址**，不能出现在连接四元组里，\n  应写参与连接的公网地址 **162.105.192.178**；\n- 服务器端口：HTTP 服务器默认监听 **80**，题中写的 25 是 SMTP 的端口。\n  （原卷答案：`192.168.100.121不对，原因：不能用内网IP；25应该是80，原因：网页浏览器应用的默认监听端口是80端口。`）\n\n**3．（4 分）Echo Server 的交互箭头。**\n| 步骤 | 方向 | 对应代码 |\n| --- | --- | --- |\n| 建立连接 | client → server | `clientfd = Open_clientfd(host, port)` ⇒ `connfd = Accept(listenfd, …)` |\n| 发送请求 | client → server | `Rio_writen(clientfd, buf, strlen(buf))` ⇒ `while((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0)` |\n| 接收应答 | server → client | `Rio_writen(connfd, buf, n)` ⇒ `Rio_readlineb(&rio, buf, MAXLINE)` |\n| 关闭连接 | client → server | `Close(clientfd)` ⇒ `Close(connfd)` |\n\n（原卷在同一代码块上用 `--------à` / `ß-----------` 标出了这四条单向箭头。）\n\n**4．（3 分）Tiny Server。**\na. **filename** —— `Execve(filename, emptylist, environ)` 把它当作要运行的程序路径。\nb. **动态** —— 走的是 CGI 分支（`setenv(\"QUERY_STRING\", …)` + `Dup2(fd, STDOUT_FILENO)` + `Execve`），\n   内容由 `filename` 这个程序在运行时生成；静态内容则直接由 `rio_readn`/`mmap` 把磁盘文件送回。\nc. 需要加入**并发处理能力** —— 对每个 `Accept` 返回的 `connfd` fork 子进程、开线程，\n   或用 I/O 多路复用（select/poll/epoll）在单进程内轮转。\n   （原卷答案：`可以通过多进程、多线程或IO多路复用进行更改`。）\n\n> 📌 本题答案来自原卷（带答案版）每小问后印出的参考答案。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+        "blankAnswers": [
+          {
+            "id": "max-connections",
+            "acceptedAnswers": [
+              "262140",
+              "4*2^16-4",
+              "4×2^16-4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "max-connections",
+            "acceptedAnswers": [
+              "262140",
+              "4*2^16-4",
+              "4×2^16-4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听______个来自一个客户端独\n立的 socket 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。HTTP服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（Server）\n通过 socket进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其Open_clientfd命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给Server端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 Server 端相\n应代码行画一条单向箭头。\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```",
+        "prompt": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听 {{blank:max-connections}} 个来自一个客户端独\n立的 socket 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。HTTP服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（Server）\n通过 socket进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其Open_clientfd命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给Server端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 Server 端相\n应代码行画一条单向箭头。\n\n![Echo Client 与 Echo Server 代码（原卷题面，不含答案）](assets/期末/2014期末-带答案/page-24-question.svg)\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```",
         "answer": "答案：1）4×2¹⁶ − 4 = 262140　2）客户端 IP 不能写内网地址，应写 162.105.192.178；服务器端口 25 应为 80　3）见下方箭头表　4）a. filename　b. 动态　c. 需要加入并发处理能力\n\n原卷在每个小问之后直接印出了答案，下面是整理后的原卷答案与推导。\n\n**1．（1 分）最多再监听多少个连接。**\n原卷答案：`4*216 – 4`（原文转写把指数 2¹⁶ 写成了 216），即 **4 × 2¹⁶ − 4 = 262140**。\n一条 TCP 连接由四元组 `(客户端 IP, 客户端端口, 服务器 IP, 服务器端口)` 唯一确定：\n- 服务器有 4 个独立固定 IP，任选其一进入四元组 ⇒ 4 种；\n- 服务器端口固定为 web 端口 80；\n- 客户端只有一个固定 IP，只有它的 16 位端口号可变 ⇒ 2¹⁶ 种；\n- 但每个服务器 IP 上的 80 端口本身已被监听套接字（`listenfd`）占用，故每个 IP 减 1。\n原卷另附更保守的口径「（4×2¹⁶ − 4×well-known 端口数）」，即连客户端的知名端口也不许用。\n\n**2．（2 分）socket pair 错在哪。**\n- 客户端 IP：`192.168.100.121` 是 NAT 后面的**内网地址**，不能出现在连接四元组里，\n  应写参与连接的公网地址 **162.105.192.178**；\n- 服务器端口：HTTP 服务器默认监听 **80**，题中写的 25 是 SMTP 的端口。\n  （原卷答案：`192.168.100.121不对，原因：不能用内网IP；25应该是80，原因：网页浏览器应用的默认监听端口是80端口。`）\n\n**3．（4 分）Echo Server 的交互箭头。**\n| 步骤 | 方向 | 对应代码 |\n| --- | --- | --- |\n| 建立连接 | client → server | `clientfd = Open_clientfd(host, port)` ⇒ `connfd = Accept(listenfd, …)` |\n| 发送请求 | client → server | `Rio_writen(clientfd, buf, strlen(buf))` ⇒ `while((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0)` |\n| 接收应答 | server → client | `Rio_writen(connfd, buf, n)` ⇒ `Rio_readlineb(&rio, buf, MAXLINE)` |\n| 关闭连接 | client → server | `Close(clientfd)` ⇒ `Close(connfd)` |\n\n（原卷在同一代码块上用 `--------à` / `ß-----------` 标出了这四条单向箭头。）\n\n**4．（3 分）Tiny Server。**\na. **filename** —— `Execve(filename, emptylist, environ)` 把它当作要运行的程序路径。\nb. **动态** —— 走的是 CGI 分支（`setenv(\"QUERY_STRING\", …)` + `Dup2(fd, STDOUT_FILENO)` + `Execve`），\n   内容由 `filename` 这个程序在运行时生成；静态内容则直接由 `rio_readn`/`mmap` 把磁盘文件送回。\nc. 需要加入**并发处理能力** —— 对每个 `Accept` 返回的 `connfd` fork 子进程、开线程，\n   或用 I/O 多路复用（select/poll/epoll）在单进程内轮转。\n   （原卷答案：`可以通过多进程、多线程或IO多路复用进行更改`。）\n\n> 📌 本题答案来自原卷（带答案版）每小问后印出的参考答案。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "presentation": {
@@ -555,7 +619,7 @@
       "exam": "2015期末",
       "questionNo": "第一题 17",
       "summary": "HTTP 命令与静态/动态内容",
-      "content": "17. HTTP协议中，哪个命令可以用来获取动态内容？\nA.  HEAD\nB.  GET\nC.  POST\nD.  PUT\n答案：B或C都正确\n说明：POST只能用于获得静态内容",
+      "content": "17. HTTP协议中，哪个命令可以用来获取动态内容？\nA.  HEAD\nB.  GET\nC.  POST\nD.  PUT\n答案：B或C都正确\n说明：GET 和 POST 都可以请求动态内容；POST 常用于提交数据并触发服务器端处理。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -576,7 +640,7 @@
       },
       "layout": {
         "mode": "choice",
-        "selection": null,
+        "selection": "multiple",
         "stem": "17. HTTP协议中，哪个命令可以用来获取动态内容？",
         "choices": [
           {
@@ -596,11 +660,11 @@
             "content": "PUT"
           }
         ],
-        "answer": "答案：B或C都正确\n说明：POST只能用于获得静态内容"
+        "answer": "答案：B或C都正确\n说明：GET 和 POST 都可以请求动态内容；POST 常用于提交数据并触发服务器端处理。"
       },
       "interaction": {
-        "kind": "choice",
-        "declared": false,
+        "kind": "multiple-choice",
+        "declared": true,
         "choices": [
           {
             "id": "A",
@@ -626,7 +690,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "17. HTTP协议中，哪个命令可以用来获取动态内容？",
-        "answer": "答案：B或C都正确\n说明：POST只能用于获得静态内容"
+        "answer": "答案：B或C都正确\n说明：GET 和 POST 都可以请求动态内容；POST 常用于提交数据并触发服务器端处理。"
       },
       "presentation": {
         "status": "ready",
@@ -731,7 +795,7 @@
       "exam": "2015期末",
       "questionNo": "第七题",
       "summary": "协议栈数据包类型与软件实现、互联网概念",
-      "content": "第七题（10分）网络\n1. 请根据 web 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP, K\nernel code, User code\n```\n协议  数据包类型  软件实现\nHTTP\n\n\n2. 以下关于互联网的说法中哪些是正确的？并简要说明原因\nA. 在client-server模型中，server通常使用监听套接字listenfd和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n答：\n说明：server会为每一个client单独创建一个套接字进行通信；Web是一种基\n于HTTP协议的互联网应用；一个域名可以对应多个IP地址，一个IP地址也可\n以对应多个域名\n答案：（1 每空1分共8分；2 全对得2分，有错得0分，部分对得1分）\n(1) \n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | Web content | User code |\n| TCP | Streams (end to end) | Kernel code |\n| IP | Datagrams | Kernel code |\n\n(2) 正确的是 **B、C、F**（原卷答案「B, C, F」）。\n- B：套接字在 Unix 里就是一个文件描述符（文件标识符）。\n- C：IP 地址标识的是主机的网络适配器（network interface card），\n  一台主机有多个适配器就有多个 IP 地址。\n- F：Internet（因特网）是一个特定的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n解析：\n**(1) 协议栈自上而下的对应关系（原卷答案，见 `原文` 第 783–789 行）**\n- **HTTP** 是应用层协议，它传输的「数据包类型」就是 **web content**\n  （网页内容），其实现完全在**用户态**（User code，浏览器/服务器进程里的库与\n  应用程序代码）。\n- **TCP** 是传输层协议，向上提供**端到端的字节流**（Streams (end to end)），\n  其实现位于**内核**（Kernel code，TCP/IP 协议栈在内核里）。\n- **IP** 是网络层协议，提供的是**数据报**（Datagrams）服务，同样在**内核**里实现。\n- 关键词里 `UDP` 也是传输层/数据报式，但题目只让填 web 应用自上而下的三层\n  （HTTP/TCP/IP），故不填；`Kernel code` 与 `User code` 各自可被多次填入。\n\n**(2) 六个选项判断**\n- **A. 错。** 服务器是用 `listenfd`（监听套接字）**接受**连接：每 `accept` 一次\n  会返回一个**新的 connfd**，真正与该 client 通信的是这个 connfd。\n  「用 listenfd 和多个 client 同时通信」的说法不准确（listenfd 只负责接受连接）。\n- **B. 对。** socket 在 Unix/Linux 里就是文件描述符（`open`/`accept` 都返回\n  文件描述符），可以用 Unix I/O 读写。\n- **C. 对。** 准确地说，IP 地址标识的是**网络适配器**（网卡/NIC），不是主机本身\n  —— 一台主机可以有多张网卡、多个 IP 地址。\n- **D. 错。** Web 是**基于 HTTP 协议的互联网应用**（应用/服务），\n  HTTP 才是协议；Web 本身不是协议。\n- **E. 错。** 域名与 IP 不是一一对应：一个域名可以对应多个 IP（如负载均衡），\n  一个 IP 也可以对应多个域名（虚拟主机、一个 IP 上跑多个站点）。\n- **F. 对。** 专有名词 Internet（因特网）是一个具体的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n> 说明：原卷把两小问的答案分行印在题面之后（`原文` 第 783–789、800 行）；\n> 本文件把散在题面中间的答案集中到 `%%% answer` 段，答案文字与原卷一致\n> （原卷写「B, C, F」，此处规范成 `答案：B、C、F`）。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+      "content": "第七题（10分）网络\n1. 请根据 web 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP,\nKernel code, User code\n```\n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | {{blank:q7-http-data}} | {{blank:q7-http-code}} |\n| TCP | {{blank:q7-tcp-data}} | {{blank:q7-tcp-code}} |\n| IP | {{blank:q7-ip-data}} | {{blank:q7-ip-code}} |\n\n\n2. 以下关于互联网的说法中哪些是正确的？\nA. 在client-server模型中，server通常使用监听套接字listenfd和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n正确选项：{{blank:q7-correct-options}}。请简要说明原因；说明部分提交后对照解析。\n答案：（1 每空1分共8分；2 全对得2分，有错得0分，部分对得1分）\n(1) \n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | Web content | User code |\n| TCP | Streams (end to end) | Kernel code |\n| IP | Datagrams | Kernel code |\n\n(2) 正确的是 **B、C、F**（原卷答案「B, C, F」）。\n- B：套接字在 Unix 里就是一个文件描述符（文件标识符）。\n- C：IP 地址标识的是主机的网络适配器（network interface card），\n  一台主机有多个适配器就有多个 IP 地址。\n- F：Internet（因特网）是一个特定的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n解析：\n**(1) 协议栈自上而下的对应关系（原卷答案，见 `原文` 第 783–789 行）**\n- **HTTP** 是应用层协议，它传输的「数据包类型」就是 **web content**\n  （网页内容），其实现完全在**用户态**（User code，浏览器/服务器进程里的库与\n  应用程序代码）。\n- **TCP** 是传输层协议，向上提供**端到端的字节流**（Streams (end to end)），\n  其实现位于**内核**（Kernel code，TCP/IP 协议栈在内核里）。\n- **IP** 是网络层协议，提供的是**数据报**（Datagrams）服务，同样在**内核**里实现。\n- 关键词里 `UDP` 也是传输层/数据报式，但题目只让填 web 应用自上而下的三层\n  （HTTP/TCP/IP），故不填；`Kernel code` 与 `User code` 各自可被多次填入。\n\n**(2) 六个选项判断**\n- **A. 错。** 服务器是用 `listenfd`（监听套接字）**接受**连接：每 `accept` 一次\n  会返回一个**新的 connfd**，真正与该 client 通信的是这个 connfd。\n  「用 listenfd 和多个 client 同时通信」的说法不准确（listenfd 只负责接受连接）。\n- **B. 对。** socket 在 Unix/Linux 里就是文件描述符（`open`/`accept` 都返回\n  文件描述符），可以用 Unix I/O 读写。\n- **C. 对。** 准确地说，IP 地址标识的是**网络适配器**（网卡/NIC），不是主机本身\n  —— 一台主机可以有多张网卡、多个 IP 地址。\n- **D. 错。** Web 是**基于 HTTP 协议的互联网应用**（应用/服务），\n  HTTP 才是协议；Web 本身不是协议。\n- **E. 错。** 域名与 IP 不是一一对应：一个域名可以对应多个 IP（如负载均衡），\n  一个 IP 也可以对应多个域名（虚拟主机、一个 IP 上跑多个站点）。\n- **F. 对。** 专有名词 Internet（因特网）是一个具体的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n> 说明：原卷把两小问的答案分行印在题面之后（`原文` 第 783–789、800 行）；\n> 本文件把散在题面中间的答案集中到 `%%% answer` 段，答案文字与原卷一致\n> （原卷写「B, C, F」，此处规范成 `答案：B、C、F`）。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -751,19 +815,153 @@
         "curated": "_curated/期末/2015期末-20160104-带答案/773.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "第七题（10分）网络\n1. 请根据 web 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP, K\nernel code, User code\n```\n协议  数据包类型  软件实现\nHTTP\n\n\n2. 以下关于互联网的说法中哪些是正确的？并简要说明原因\nA. 在client-server模型中，server通常使用监听套接字listenfd和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n答：\n说明：server会为每一个client单独创建一个套接字进行通信；Web是一种基\n于HTTP协议的互联网应用；一个域名可以对应多个IP地址，一个IP地址也可\n以对应多个域名",
+        "stem": "第七题（10分）网络\n1. 请根据 web 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP,\nKernel code, User code\n```\n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | {{blank:q7-http-data}} | {{blank:q7-http-code}} |\n| TCP | {{blank:q7-tcp-data}} | {{blank:q7-tcp-code}} |\n| IP | {{blank:q7-ip-data}} | {{blank:q7-ip-code}} |\n\n\n2. 以下关于互联网的说法中哪些是正确的？\nA. 在client-server模型中，server通常使用监听套接字listenfd和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n正确选项：{{blank:q7-correct-options}}。请简要说明原因；说明部分提交后对照解析。",
         "choices": [],
-        "answer": "答案：（1 每空1分共8分；2 全对得2分，有错得0分，部分对得1分）\n(1) \n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | Web content | User code |\n| TCP | Streams (end to end) | Kernel code |\n| IP | Datagrams | Kernel code |\n\n(2) 正确的是 **B、C、F**（原卷答案「B, C, F」）。\n- B：套接字在 Unix 里就是一个文件描述符（文件标识符）。\n- C：IP 地址标识的是主机的网络适配器（network interface card），\n  一台主机有多个适配器就有多个 IP 地址。\n- F：Internet（因特网）是一个特定的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n解析：\n**(1) 协议栈自上而下的对应关系（原卷答案，见 `原文` 第 783–789 行）**\n- **HTTP** 是应用层协议，它传输的「数据包类型」就是 **web content**\n  （网页内容），其实现完全在**用户态**（User code，浏览器/服务器进程里的库与\n  应用程序代码）。\n- **TCP** 是传输层协议，向上提供**端到端的字节流**（Streams (end to end)），\n  其实现位于**内核**（Kernel code，TCP/IP 协议栈在内核里）。\n- **IP** 是网络层协议，提供的是**数据报**（Datagrams）服务，同样在**内核**里实现。\n- 关键词里 `UDP` 也是传输层/数据报式，但题目只让填 web 应用自上而下的三层\n  （HTTP/TCP/IP），故不填；`Kernel code` 与 `User code` 各自可被多次填入。\n\n**(2) 六个选项判断**\n- **A. 错。** 服务器是用 `listenfd`（监听套接字）**接受**连接：每 `accept` 一次\n  会返回一个**新的 connfd**，真正与该 client 通信的是这个 connfd。\n  「用 listenfd 和多个 client 同时通信」的说法不准确（listenfd 只负责接受连接）。\n- **B. 对。** socket 在 Unix/Linux 里就是文件描述符（`open`/`accept` 都返回\n  文件描述符），可以用 Unix I/O 读写。\n- **C. 对。** 准确地说，IP 地址标识的是**网络适配器**（网卡/NIC），不是主机本身\n  —— 一台主机可以有多张网卡、多个 IP 地址。\n- **D. 错。** Web 是**基于 HTTP 协议的互联网应用**（应用/服务），\n  HTTP 才是协议；Web 本身不是协议。\n- **E. 错。** 域名与 IP 不是一一对应：一个域名可以对应多个 IP（如负载均衡），\n  一个 IP 也可以对应多个域名（虚拟主机、一个 IP 上跑多个站点）。\n- **F. 对。** 专有名词 Internet（因特网）是一个具体的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n> 说明：原卷把两小问的答案分行印在题面之后（`原文` 第 783–789、800 行）；\n> 本文件把散在题面中间的答案集中到 `%%% answer` 段，答案文字与原卷一致\n> （原卷写「B, C, F」，此处规范成 `答案：B、C、F`）。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+        "answer": "答案：（1 每空1分共8分；2 全对得2分，有错得0分，部分对得1分）\n(1) \n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | Web content | User code |\n| TCP | Streams (end to end) | Kernel code |\n| IP | Datagrams | Kernel code |\n\n(2) 正确的是 **B、C、F**（原卷答案「B, C, F」）。\n- B：套接字在 Unix 里就是一个文件描述符（文件标识符）。\n- C：IP 地址标识的是主机的网络适配器（network interface card），\n  一台主机有多个适配器就有多个 IP 地址。\n- F：Internet（因特网）是一个特定的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n解析：\n**(1) 协议栈自上而下的对应关系（原卷答案，见 `原文` 第 783–789 行）**\n- **HTTP** 是应用层协议，它传输的「数据包类型」就是 **web content**\n  （网页内容），其实现完全在**用户态**（User code，浏览器/服务器进程里的库与\n  应用程序代码）。\n- **TCP** 是传输层协议，向上提供**端到端的字节流**（Streams (end to end)），\n  其实现位于**内核**（Kernel code，TCP/IP 协议栈在内核里）。\n- **IP** 是网络层协议，提供的是**数据报**（Datagrams）服务，同样在**内核**里实现。\n- 关键词里 `UDP` 也是传输层/数据报式，但题目只让填 web 应用自上而下的三层\n  （HTTP/TCP/IP），故不填；`Kernel code` 与 `User code` 各自可被多次填入。\n\n**(2) 六个选项判断**\n- **A. 错。** 服务器是用 `listenfd`（监听套接字）**接受**连接：每 `accept` 一次\n  会返回一个**新的 connfd**，真正与该 client 通信的是这个 connfd。\n  「用 listenfd 和多个 client 同时通信」的说法不准确（listenfd 只负责接受连接）。\n- **B. 对。** socket 在 Unix/Linux 里就是文件描述符（`open`/`accept` 都返回\n  文件描述符），可以用 Unix I/O 读写。\n- **C. 对。** 准确地说，IP 地址标识的是**网络适配器**（网卡/NIC），不是主机本身\n  —— 一台主机可以有多张网卡、多个 IP 地址。\n- **D. 错。** Web 是**基于 HTTP 协议的互联网应用**（应用/服务），\n  HTTP 才是协议；Web 本身不是协议。\n- **E. 错。** 域名与 IP 不是一一对应：一个域名可以对应多个 IP（如负载均衡），\n  一个 IP 也可以对应多个域名（虚拟主机、一个 IP 上跑多个站点）。\n- **F. 对。** 专有名词 Internet（因特网）是一个具体的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n> 说明：原卷把两小问的答案分行印在题面之后（`原文` 第 783–789、800 行）；\n> 本文件把散在题面中间的答案集中到 `%%% answer` 段，答案文字与原卷一致\n> （原卷写「B, C, F」，此处规范成 `答案：B、C、F`）。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+        "blankAnswers": [
+          {
+            "id": "q7-http-data",
+            "acceptedAnswers": [
+              "web content",
+              "Web content"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-http-code",
+            "acceptedAnswers": [
+              "User code",
+              "user code"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-tcp-data",
+            "acceptedAnswers": [
+              "Streams (end to end)",
+              "streams (end to end)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-tcp-code",
+            "acceptedAnswers": [
+              "Kernel code",
+              "kernel code"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-ip-data",
+            "acceptedAnswers": [
+              "Datagrams",
+              "datagrams"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-ip-code",
+            "acceptedAnswers": [
+              "Kernel code",
+              "kernel code"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-correct-options",
+            "acceptedAnswers": [
+              "B、C、F",
+              "B,C,F",
+              "B C F",
+              "BCF"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q7-http-data",
+            "acceptedAnswers": [
+              "web content",
+              "Web content"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-http-code",
+            "acceptedAnswers": [
+              "User code",
+              "user code"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-tcp-data",
+            "acceptedAnswers": [
+              "Streams (end to end)",
+              "streams (end to end)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-tcp-code",
+            "acceptedAnswers": [
+              "Kernel code",
+              "kernel code"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-ip-data",
+            "acceptedAnswers": [
+              "Datagrams",
+              "datagrams"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-ip-code",
+            "acceptedAnswers": [
+              "Kernel code",
+              "kernel code"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q7-correct-options",
+            "acceptedAnswers": [
+              "B、C、F",
+              "B,C,F",
+              "B C F",
+              "BCF"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第七题（10分）网络\n1. 请根据 web 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP, K\nernel code, User code\n```\n协议  数据包类型  软件实现\nHTTP\n\n\n2. 以下关于互联网的说法中哪些是正确的？并简要说明原因\nA. 在client-server模型中，server通常使用监听套接字listenfd和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n答：\n说明：server会为每一个client单独创建一个套接字进行通信；Web是一种基\n于HTTP协议的互联网应用；一个域名可以对应多个IP地址，一个IP地址也可\n以对应多个域名",
+        "prompt": "第七题（10分）网络\n1. 请根据 web 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP,\nKernel code, User code\n```\n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | {{blank:q7-http-data}} | {{blank:q7-http-code}} |\n| TCP | {{blank:q7-tcp-data}} | {{blank:q7-tcp-code}} |\n| IP | {{blank:q7-ip-data}} | {{blank:q7-ip-code}} |\n\n\n2. 以下关于互联网的说法中哪些是正确的？\nA. 在client-server模型中，server通常使用监听套接字listenfd和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n正确选项：{{blank:q7-correct-options}}。请简要说明原因；说明部分提交后对照解析。",
         "answer": "答案：（1 每空1分共8分；2 全对得2分，有错得0分，部分对得1分）\n(1) \n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | Web content | User code |\n| TCP | Streams (end to end) | Kernel code |\n| IP | Datagrams | Kernel code |\n\n(2) 正确的是 **B、C、F**（原卷答案「B, C, F」）。\n- B：套接字在 Unix 里就是一个文件描述符（文件标识符）。\n- C：IP 地址标识的是主机的网络适配器（network interface card），\n  一台主机有多个适配器就有多个 IP 地址。\n- F：Internet（因特网）是一个特定的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n解析：\n**(1) 协议栈自上而下的对应关系（原卷答案，见 `原文` 第 783–789 行）**\n- **HTTP** 是应用层协议，它传输的「数据包类型」就是 **web content**\n  （网页内容），其实现完全在**用户态**（User code，浏览器/服务器进程里的库与\n  应用程序代码）。\n- **TCP** 是传输层协议，向上提供**端到端的字节流**（Streams (end to end)），\n  其实现位于**内核**（Kernel code，TCP/IP 协议栈在内核里）。\n- **IP** 是网络层协议，提供的是**数据报**（Datagrams）服务，同样在**内核**里实现。\n- 关键词里 `UDP` 也是传输层/数据报式，但题目只让填 web 应用自上而下的三层\n  （HTTP/TCP/IP），故不填；`Kernel code` 与 `User code` 各自可被多次填入。\n\n**(2) 六个选项判断**\n- **A. 错。** 服务器是用 `listenfd`（监听套接字）**接受**连接：每 `accept` 一次\n  会返回一个**新的 connfd**，真正与该 client 通信的是这个 connfd。\n  「用 listenfd 和多个 client 同时通信」的说法不准确（listenfd 只负责接受连接）。\n- **B. 对。** socket 在 Unix/Linux 里就是文件描述符（`open`/`accept` 都返回\n  文件描述符），可以用 Unix I/O 读写。\n- **C. 对。** 准确地说，IP 地址标识的是**网络适配器**（网卡/NIC），不是主机本身\n  —— 一台主机可以有多张网卡、多个 IP 地址。\n- **D. 错。** Web 是**基于 HTTP 协议的互联网应用**（应用/服务），\n  HTTP 才是协议；Web 本身不是协议。\n- **E. 错。** 域名与 IP 不是一一对应：一个域名可以对应多个 IP（如负载均衡），\n  一个 IP 也可以对应多个域名（虚拟主机、一个 IP 上跑多个站点）。\n- **F. 对。** 专有名词 Internet（因特网）是一个具体的 internet（互连网络），\n  即「Internet 是一种 internet」。\n\n> 说明：原卷把两小问的答案分行印在题面之后（`原文` 第 783–789、800 行）；\n> 本文件把散在题面中间的答案集中到 `%%% answer` 段，答案文字与原卷一致\n> （原卷写「B, C, F」，此处规范成 `答案：B、C、F`）。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "presentation": {
