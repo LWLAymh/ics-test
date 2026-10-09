@@ -10,7 +10,7 @@
     {
       "id": "q-b36754705d0dccdc",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 9,
+      "paperOrder": 12,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -96,7 +96,7 @@
     {
       "id": "q-7e030ca4847f5c97",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 10,
+      "paperOrder": 13,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -182,7 +182,7 @@
     {
       "id": "q-c13a84ea6f371a05",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 15,
+      "paperOrder": 18,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -268,7 +268,7 @@
     {
       "id": "q-9b2f8dcfd7a389fd",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 16,
+      "paperOrder": 19,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -354,7 +354,7 @@
     {
       "id": "q-f53b15929aeee7a3",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 24,
+      "paperOrder": 27,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -402,7 +402,7 @@
     {
       "id": "q-6dd4034787785d68",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 25,
+      "paperOrder": 28,
       "moduleId": "ecf_and_system_io",
       "year": 2013,
       "examType": "期末",
@@ -974,16 +974,16 @@
       }
     },
     {
-      "id": "q-36fa689016e6c33e",
+      "id": "q-cc44657cf1bca7a5",
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 28,
       "moduleId": "ecf_and_system_io",
       "year": 2014,
       "examType": "期末",
       "exam": "2014期末",
-      "questionNo": "第七题",
-      "summary": "描述符表/打开文件表/v-node 表与 dup2",
-      "content": "第七题（10分）系统I/O\n（用作试卷题目时，请把红字和红色箭头全部删去）\n请阅读下面的代码：\n```\n1:  int main(int argc, char** argv) {\n2:  int  fd1  =  open(\"ICS.txt\",  O_CREAT|O_RDWR,\n3:  S_IRUSR|S_IWUSR);\n4:  write(fd1, \"abc\", 3);\n5:\n6:      int fd2 = fd1;\n7:      int fd3 = dup(fd2);\n8:      int fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\n9:      write(fd2, \"defghi\", 6);\n10:      write(fd4, \"xyz\", 3);\n11:\n12:      int fd5 = fd4;\n13:      dup2(fd3, fd5);\n14:      write(fd4, \"pqr\", 3);\n15:\n16:      close(fd1);\n17:\n18:      return 0;\n19:  }\n```\n1.请填写在第16行代码刚刚执行完之后，下面的打开文件表和v-node表中表项\n的部分值，并画出表项之间的指向关系。（6分）\n初始时，ICS.txt文件不存在。程序执行时，所有的系统调用均会成功，所有\n表项均会从上到下依次分配，描述符表一开始被占用掉前3个表项。对于已经释放\n的打开文件表表项，请填写释放前那一刻的值和指向的v-node表表项。\n对于多余的表项，请直接忽略。\n\n\n描述符表  打开文件表    v-node表\nDescriptor table  Open file table  v-node table\n...    pos  refcnt  释放？    文件名\n```\n3  12  2  N  ICS.txt\n4  12  0  Y\n5\n6\n7\n```\n说明：考查三层表结构的基本概念，以及Unix I/O的基本用法。因为第8章\n出题会融合第10章内容，所以没涉及到第8章内容。\n错一空或者多/少填一空，扣1分。多画/少画一个箭头扣1分。扣完为止。\n2.请填写在第16行代码刚刚执行完之后，下列变量的值（2分）\n```\nfd1  fd2  fd3  fd4  fd5\n3  3  4  5  5\n```\n  说明：错1空扣1分，扣完为止。\n3.请写出程序执行完之后，ICS.txt文件中的内容（2分）\nabcdefghipqr\n说明：写成abcxyzghipqr给1分，出现此错误是因为不熟悉O_APPEND用\n法。\n答案：\n1.\n```\n描述符表  打开文件表  v-node表\n...    pos  refcnt  释放？    文件名\n3  12  2  N  ICS.txt\n4  12  0  Y\n5\n6\n7\n```\n说明：考查三层表结构的基本概念，以及Unix I/O的基本用法。因为第8章\n出题会融合第10章内容，所以没涉及到第8章内容。\n错一空或者多/少填一空，扣1分。多画/少画一个箭头扣1分。扣完为止。\n2.\n```\nfd1  fd2  fd3  fd4  fd5\n3  3  4  5  5\n```\n   说明：锑1空扣1分，扣完为止。\n3. 程序执行完之后，ICS.txt 文件中的内容：\nabcdefghipqr\n说明：写成 abcxyzghipqr 给1分，出现此错误是因为不熟悉O_APPEND用\n法。",
+      "questionNo": "第七题 1",
+      "summary": "描述符表、打开文件表和 v-node 表的指向关系",
+      "content": "第七题（10分）系统 I/O\n\n请阅读下面的代码：\n\n```c\nint main(int argc, char **argv) {\n    int fd1 = open(\"ICS.txt\", O_CREAT | O_RDWR,\n                   S_IRUSR | S_IWUSR);\n    write(fd1, \"abc\", 3);\n\n    int fd2 = fd1;\n    int fd3 = dup(fd2);\n    int fd4 = open(\"ICS.txt\", O_APPEND | O_RDWR);\n    write(fd2, \"defghi\", 6);\n    write(fd4, \"xyz\", 3);\n\n    int fd5 = fd4;\n    dup2(fd3, fd5);\n    write(fd4, \"pqr\", 3);\n\n    close(fd1);\n    return 0;\n}\n```\n\n1. 在 `close(fd1)` 刚执行完后，请填写打开文件表和 v-node 表中有关表项的 `pos`、`refcnt`、是否释放等信息，并画出描述符表、打开文件表和 v-node 表之间的指向关系。（6分）\n\n初始时 `ICS.txt` 不存在；所有系统调用均成功；表项从上到下依次分配；描述符表的前 3 个表项初始已被占用。对于已经释放的打开文件表项，请填写其释放前一刻的值和所指向的 v-node 表项。\n参考答案：\n\n- 描述符 `3` 已关闭。\n- 描述符 `4`、`5` 都指向第一次 `open` 创建的打开文件表项；该表项 `pos = 12`、`refcnt = 2`，未释放，并指向 `ICS.txt` 的 v-node 表项。\n- 第二次 `open` 创建的打开文件表项在 `dup2(fd3, fd5)` 时被释放；释放前 `pos = 12`、`refcnt = 0`，也指向 `ICS.txt` 的同一个 v-node 表项。\n\n关键关系如下：\n\n| 描述符 | 打开文件表项 | `pos` | `refcnt` | 已释放 | v-node |\n| ---: | --- | ---: | ---: | --- | --- |\n| 4 | 表项 1 | 12 | 2 | 否 | `ICS.txt` |\n| 5 | 表项 1 | 12 | 2 | 否 | `ICS.txt` |\n| — | 表项 2 | 12 | 0 | 是 | `ICS.txt` |\n\n请根据表项数值与指向关系自评。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -995,7 +995,7 @@
         "document": "原文/期末/2014期末-带答案.md",
         "lines": {
           "start": 767,
-          "end": 823
+          "end": 813
         },
         "aliases": [],
         "curated": "_curated/期末/2014期末-带答案/767.md"
@@ -1003,18 +1003,251 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "第七题（10分）系统I/O\n（用作试卷题目时，请把红字和红色箭头全部删去）\n请阅读下面的代码：\n```\n1:  int main(int argc, char** argv) {\n2:  int  fd1  =  open(\"ICS.txt\",  O_CREAT|O_RDWR,\n3:  S_IRUSR|S_IWUSR);\n4:  write(fd1, \"abc\", 3);\n5:\n6:      int fd2 = fd1;\n7:      int fd3 = dup(fd2);\n8:      int fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\n9:      write(fd2, \"defghi\", 6);\n10:      write(fd4, \"xyz\", 3);\n11:\n12:      int fd5 = fd4;\n13:      dup2(fd3, fd5);\n14:      write(fd4, \"pqr\", 3);\n15:\n16:      close(fd1);\n17:\n18:      return 0;\n19:  }\n```\n1.请填写在第16行代码刚刚执行完之后，下面的打开文件表和v-node表中表项\n的部分值，并画出表项之间的指向关系。（6分）\n初始时，ICS.txt文件不存在。程序执行时，所有的系统调用均会成功，所有\n表项均会从上到下依次分配，描述符表一开始被占用掉前3个表项。对于已经释放\n的打开文件表表项，请填写释放前那一刻的值和指向的v-node表表项。\n对于多余的表项，请直接忽略。\n\n\n描述符表  打开文件表    v-node表\nDescriptor table  Open file table  v-node table\n...    pos  refcnt  释放？    文件名\n```\n3  12  2  N  ICS.txt\n4  12  0  Y\n5\n6\n7\n```\n说明：考查三层表结构的基本概念，以及Unix I/O的基本用法。因为第8章\n出题会融合第10章内容，所以没涉及到第8章内容。\n错一空或者多/少填一空，扣1分。多画/少画一个箭头扣1分。扣完为止。\n2.请填写在第16行代码刚刚执行完之后，下列变量的值（2分）\n```\nfd1  fd2  fd3  fd4  fd5\n3  3  4  5  5\n```\n  说明：错1空扣1分，扣完为止。\n3.请写出程序执行完之后，ICS.txt文件中的内容（2分）\nabcdefghipqr\n说明：写成abcxyzghipqr给1分，出现此错误是因为不熟悉O_APPEND用\n法。",
+        "stem": "第七题（10分）系统 I/O\n\n请阅读下面的代码：\n\n```c\nint main(int argc, char **argv) {\n    int fd1 = open(\"ICS.txt\", O_CREAT | O_RDWR,\n                   S_IRUSR | S_IWUSR);\n    write(fd1, \"abc\", 3);\n\n    int fd2 = fd1;\n    int fd3 = dup(fd2);\n    int fd4 = open(\"ICS.txt\", O_APPEND | O_RDWR);\n    write(fd2, \"defghi\", 6);\n    write(fd4, \"xyz\", 3);\n\n    int fd5 = fd4;\n    dup2(fd3, fd5);\n    write(fd4, \"pqr\", 3);\n\n    close(fd1);\n    return 0;\n}\n```\n\n1. 在 `close(fd1)` 刚执行完后，请填写打开文件表和 v-node 表中有关表项的 `pos`、`refcnt`、是否释放等信息，并画出描述符表、打开文件表和 v-node 表之间的指向关系。（6分）\n\n初始时 `ICS.txt` 不存在；所有系统调用均成功；表项从上到下依次分配；描述符表的前 3 个表项初始已被占用。对于已经释放的打开文件表项，请填写其释放前一刻的值和所指向的 v-node 表项。",
         "choices": [],
-        "answer": "答案：\n1.\n```\n描述符表  打开文件表  v-node表\n...    pos  refcnt  释放？    文件名\n3  12  2  N  ICS.txt\n4  12  0  Y\n5\n6\n7\n```\n说明：考查三层表结构的基本概念，以及Unix I/O的基本用法。因为第8章\n出题会融合第10章内容，所以没涉及到第8章内容。\n错一空或者多/少填一空，扣1分。多画/少画一个箭头扣1分。扣完为止。\n2.\n```\nfd1  fd2  fd3  fd4  fd5\n3  3  4  5  5\n```\n   说明：锑1空扣1分，扣完为止。\n3. 程序执行完之后，ICS.txt 文件中的内容：\nabcdefghipqr\n说明：写成 abcxyzghipqr 给1分，出现此错误是因为不熟悉O_APPEND用\n法。"
+        "answer": "参考答案：\n\n- 描述符 `3` 已关闭。\n- 描述符 `4`、`5` 都指向第一次 `open` 创建的打开文件表项；该表项 `pos = 12`、`refcnt = 2`，未释放，并指向 `ICS.txt` 的 v-node 表项。\n- 第二次 `open` 创建的打开文件表项在 `dup2(fd3, fd5)` 时被释放；释放前 `pos = 12`、`refcnt = 0`，也指向 `ICS.txt` 的同一个 v-node 表项。\n\n关键关系如下：\n\n| 描述符 | 打开文件表项 | `pos` | `refcnt` | 已释放 | v-node |\n| ---: | --- | ---: | ---: | --- | --- |\n| 4 | 表项 1 | 12 | 2 | 否 | `ICS.txt` |\n| 5 | 表项 1 | 12 | 2 | 否 | `ICS.txt` |\n| — | 表项 2 | 12 | 0 | 是 | `ICS.txt` |\n\n请根据表项数值与指向关系自评。"
       },
-      "interaction": {
+      "partInteraction": {
         "kind": "short-answer",
         "declared": true
       },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
+      },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第七题（10分）系统I/O\n（用作试卷题目时，请把红字和红色箭头全部删去）\n请阅读下面的代码：\n```\n1:  int main(int argc, char** argv) {\n2:  int  fd1  =  open(\"ICS.txt\",  O_CREAT|O_RDWR,\n3:  S_IRUSR|S_IWUSR);\n4:  write(fd1, \"abc\", 3);\n5:\n6:      int fd2 = fd1;\n7:      int fd3 = dup(fd2);\n8:      int fd4 = open(\"ICS.txt\", O_APPEND|O_RDWR);\n9:      write(fd2, \"defghi\", 6);\n10:      write(fd4, \"xyz\", 3);\n11:\n12:      int fd5 = fd4;\n13:      dup2(fd3, fd5);\n14:      write(fd4, \"pqr\", 3);\n15:\n16:      close(fd1);\n17:\n18:      return 0;\n19:  }\n```\n1.请填写在第16行代码刚刚执行完之后，下面的打开文件表和v-node表中表项\n的部分值，并画出表项之间的指向关系。（6分）\n初始时，ICS.txt文件不存在。程序执行时，所有的系统调用均会成功，所有\n表项均会从上到下依次分配，描述符表一开始被占用掉前3个表项。对于已经释放\n的打开文件表表项，请填写释放前那一刻的值和指向的v-node表表项。\n对于多余的表项，请直接忽略。\n\n\n描述符表  打开文件表    v-node表\nDescriptor table  Open file table  v-node table\n...    pos  refcnt  释放？    文件名\n```\n3  12  2  N  ICS.txt\n4  12  0  Y\n5\n6\n7\n```\n说明：考查三层表结构的基本概念，以及Unix I/O的基本用法。因为第8章\n出题会融合第10章内容，所以没涉及到第8章内容。\n错一空或者多/少填一空，扣1分。多画/少画一个箭头扣1分。扣完为止。\n2.请填写在第16行代码刚刚执行完之后，下列变量的值（2分）\n```\nfd1  fd2  fd3  fd4  fd5\n3  3  4  5  5\n```\n  说明：错1空扣1分，扣完为止。\n3.请写出程序执行完之后，ICS.txt文件中的内容（2分）\nabcdefghipqr\n说明：写成abcxyzghipqr给1分，出现此错误是因为不熟悉O_APPEND用\n法。",
-        "answer": "答案：\n1.\n```\n描述符表  打开文件表  v-node表\n...    pos  refcnt  释放？    文件名\n3  12  2  N  ICS.txt\n4  12  0  Y\n5\n6\n7\n```\n说明：考查三层表结构的基本概念，以及Unix I/O的基本用法。因为第8章\n出题会融合第10章内容，所以没涉及到第8章内容。\n错一空或者多/少填一空，扣1分。多画/少画一个箭头扣1分。扣完为止。\n2.\n```\nfd1  fd2  fd3  fd4  fd5\n3  3  4  5  5\n```\n   说明：锑1空扣1分，扣完为止。\n3. 程序执行完之后，ICS.txt 文件中的内容：\nabcdefghipqr\n说明：写成 abcxyzghipqr 给1分，出现此错误是因为不熟悉O_APPEND用\n法。"
+        "prompt": "第七题（10分）系统 I/O\n\n请阅读下面的代码：\n\n```c\nint main(int argc, char **argv) {\n    int fd1 = open(\"ICS.txt\", O_CREAT | O_RDWR,\n                   S_IRUSR | S_IWUSR);\n    write(fd1, \"abc\", 3);\n\n    int fd2 = fd1;\n    int fd3 = dup(fd2);\n    int fd4 = open(\"ICS.txt\", O_APPEND | O_RDWR);\n    write(fd2, \"defghi\", 6);\n    write(fd4, \"xyz\", 3);\n\n    int fd5 = fd4;\n    dup2(fd3, fd5);\n    write(fd4, \"pqr\", 3);\n\n    close(fd1);\n    return 0;\n}\n```\n\n1. 在 `close(fd1)` 刚执行完后，请填写打开文件表和 v-node 表中有关表项的 `pos`、`refcnt`、是否释放等信息，并画出描述符表、打开文件表和 v-node 表之间的指向关系。（6分）\n\n初始时 `ICS.txt` 不存在；所有系统调用均成功；表项从上到下依次分配；描述符表的前 3 个表项初始已被占用。对于已经释放的打开文件表项，请填写其释放前一刻的值和所指向的 v-node 表项。",
+        "answer": "参考答案：\n\n- 描述符 `3` 已关闭。\n- 描述符 `4`、`5` 都指向第一次 `open` 创建的打开文件表项；该表项 `pos = 12`、`refcnt = 2`，未释放，并指向 `ICS.txt` 的 v-node 表项。\n- 第二次 `open` 创建的打开文件表项在 `dup2(fd3, fd5)` 时被释放；释放前 `pos = 12`、`refcnt = 0`，也指向 `ICS.txt` 的同一个 v-node 表项。\n\n关键关系如下：\n\n| 描述符 | 打开文件表项 | `pos` | `refcnt` | 已释放 | v-node |\n| ---: | --- | ---: | ---: | --- | --- |\n| 4 | 表项 1 | 12 | 2 | 否 | `ICS.txt` |\n| 5 | 表项 1 | 12 | 2 | 否 | `ICS.txt` |\n| — | 表项 2 | 12 | 0 | 是 | `ICS.txt` |\n\n请根据表项数值与指向关系自评。"
+      },
+      "group": {
+        "id": "p-089627b27e9b5e79:2014-final-q7",
+        "questionId": "q-bdf00ae3b8f09094",
+        "title": "第七题",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-d22a47b8639d39e3",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 29,
+      "moduleId": "ecf_and_system_io",
+      "year": 2014,
+      "examType": "期末",
+      "exam": "2014期末",
+      "questionNo": "第七题 2",
+      "summary": "open、dup 和 dup2 后的文件描述符值",
+      "content": "2. 在 `close(fd1)` 刚执行完后，各变量的值为（2分）：\n\n`fd1 =` {{blank:fd1}}，`fd2 =` {{blank:fd2}}，`fd3 =` {{blank:fd3}}，`fd4 =` {{blank:fd4}}，`fd5 =` {{blank:fd5}}。\n答案：`fd1 = 3`，`fd2 = 3`，`fd3 = 4`，`fd4 = 5`，`fd5 = 5`。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2014期末-带答案.md",
+        "lines": {
+          "start": 814,
+          "end": 819
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2014期末-带答案/814.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "2. 在 `close(fd1)` 刚执行完后，各变量的值为（2分）：\n\n`fd1 =` {{blank:fd1}}，`fd2 =` {{blank:fd2}}，`fd3 =` {{blank:fd3}}，`fd4 =` {{blank:fd4}}，`fd5 =` {{blank:fd5}}。",
+        "choices": [],
+        "answer": "答案：`fd1 = 3`，`fd2 = 3`，`fd3 = 4`，`fd4 = 5`，`fd5 = 5`。",
+        "blankAnswers": [
+          {
+            "id": "fd1",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd2",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd3",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd4",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd5",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "fd1",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd2",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd3",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd4",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "fd5",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2. 在 `close(fd1)` 刚执行完后，各变量的值为（2分）：\n\n`fd1 =` {{blank:fd1}}，`fd2 =` {{blank:fd2}}，`fd3 =` {{blank:fd3}}，`fd4 =` {{blank:fd4}}，`fd5 =` {{blank:fd5}}。",
+        "answer": "答案：`fd1 = 3`，`fd2 = 3`，`fd3 = 4`，`fd4 = 5`，`fd5 = 5`。"
+      },
+      "group": {
+        "id": "p-089627b27e9b5e79:2014-final-q7",
+        "questionId": "q-bdf00ae3b8f09094",
+        "title": "第七题",
+        "order": 2
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-3853d43cd0c59fdd",
+      "paperId": "p-089627b27e9b5e79",
+      "paperOrder": 30,
+      "moduleId": "ecf_and_system_io",
+      "year": 2014,
+      "examType": "期末",
+      "exam": "2014期末",
+      "questionNo": "第七题 3",
+      "summary": "O_APPEND 与共享文件位置决定的文件内容",
+      "content": "3. 程序执行完后，`ICS.txt` 文件中的内容为 {{blank:file-content}}。（2分）\n答案：`abcdefghipqr`。\n\n若写成 `abcxyzghipqr`，说明没有正确考虑 `O_APPEND` 以及 `dup2` 后共享打开文件表项的文件位置。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2014期末-带答案.md",
+        "lines": {
+          "start": 820,
+          "end": 823
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2014期末-带答案/820.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "3. 程序执行完后，`ICS.txt` 文件中的内容为 {{blank:file-content}}。（2分）",
+        "choices": [],
+        "answer": "答案：`abcdefghipqr`。\n\n若写成 `abcxyzghipqr`，说明没有正确考虑 `O_APPEND` 以及 `dup2` 后共享打开文件表项的文件位置。",
+        "blankAnswers": [
+          {
+            "id": "file-content",
+            "acceptedAnswers": [
+              "abcdefghipqr"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "file-content",
+            "acceptedAnswers": [
+              "abcdefghipqr"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "3. 程序执行完后，`ICS.txt` 文件中的内容为 {{blank:file-content}}。（2分）",
+        "answer": "答案：`abcdefghipqr`。\n\n若写成 `abcxyzghipqr`，说明没有正确考虑 `O_APPEND` 以及 `dup2` 后共享打开文件表项的文件位置。"
+      },
+      "group": {
+        "id": "p-089627b27e9b5e79:2014-final-q7",
+        "questionId": "q-bdf00ae3b8f09094",
+        "title": "第七题",
+        "order": 3
       },
       "presentation": {
         "status": "ready",
@@ -1471,7 +1704,7 @@
       "exam": "2015期末",
       "questionNo": "第一题 11",
       "summary": "printf 缓冲与 write 无缓冲的输出顺序",
-      "content": "11. 下面是一段C程序代码：\n```\n#include <stdio.h>\n#include \"csapp.h\"\nint main()\n{\n  printf(\"2\");\n  if (Fork())\n  {\n    printf(\"33\");\n    Write(STDOUT_FILENO, \"lol\", 3);\n  }\n  else\n  {\n    Sleep(1);\n    printf(\"233\");\n    Write(STDOUT_FILENO, \"hhhh\", 4);\n```\n\n\n```\n  }\n  fflush(stdout);\n  return 0;\n}\n```\n编译后运行程序，程序正常退出。那么程序的输出是：\nA.  233lol233hhhh\nB.  lol233hhhh2233\nC.  233lol2233hhhh\nD.  2lol33hhhh233\n答案：B。\n说明：printf 所属的标准 IO 是有缓冲区的，直到关闭文件、遇到换行符或者\nfflush时才会输出；write则没有缓冲区立刻输出。",
+      "content": "11. 下面是一段C程序代码：\n```\n#include <stdio.h>\n#include \"csapp.h\"\nint main()\n{\n  printf(\"2\");\n  if (Fork())\n  {\n    printf(\"33\");\n    Write(STDOUT_FILENO, \"lol\", 3);\n  }\n  else\n  {\n    Sleep(1);\n    printf(\"233\");\n    Write(STDOUT_FILENO, \"hhhh\", 4);\n  }\n  fflush(stdout);\n  return 0;\n}\n```\n编译后运行程序，程序正常退出。那么程序的输出是：\nA.  233lol233hhhh\nB.  lol233hhhh2233\nC.  233lol2233hhhh\nD.  2lol33hhhh233\n答案：B。\n说明：printf 所属的标准 IO 是有缓冲区的，直到关闭文件、遇到换行符或者\nfflush时才会输出；write则没有缓冲区立刻输出。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1493,7 +1726,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "11. 下面是一段C程序代码：\n```\n#include <stdio.h>\n#include \"csapp.h\"\nint main()\n{\n  printf(\"2\");\n  if (Fork())\n  {\n    printf(\"33\");\n    Write(STDOUT_FILENO, \"lol\", 3);\n  }\n  else\n  {\n    Sleep(1);\n    printf(\"233\");\n    Write(STDOUT_FILENO, \"hhhh\", 4);\n```\n\n\n```\n  }\n  fflush(stdout);\n  return 0;\n}\n```\n编译后运行程序，程序正常退出。那么程序的输出是：",
+        "stem": "11. 下面是一段C程序代码：\n```\n#include <stdio.h>\n#include \"csapp.h\"\nint main()\n{\n  printf(\"2\");\n  if (Fork())\n  {\n    printf(\"33\");\n    Write(STDOUT_FILENO, \"lol\", 3);\n  }\n  else\n  {\n    Sleep(1);\n    printf(\"233\");\n    Write(STDOUT_FILENO, \"hhhh\", 4);\n  }\n  fflush(stdout);\n  return 0;\n}\n```\n编译后运行程序，程序正常退出。那么程序的输出是：",
         "choices": [
           {
             "key": "A",
@@ -1541,7 +1774,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "11. 下面是一段C程序代码：\n```\n#include <stdio.h>\n#include \"csapp.h\"\nint main()\n{\n  printf(\"2\");\n  if (Fork())\n  {\n    printf(\"33\");\n    Write(STDOUT_FILENO, \"lol\", 3);\n  }\n  else\n  {\n    Sleep(1);\n    printf(\"233\");\n    Write(STDOUT_FILENO, \"hhhh\", 4);\n```\n\n\n```\n  }\n  fflush(stdout);\n  return 0;\n}\n```\n编译后运行程序，程序正常退出。那么程序的输出是：",
+        "prompt": "11. 下面是一段C程序代码：\n```\n#include <stdio.h>\n#include \"csapp.h\"\nint main()\n{\n  printf(\"2\");\n  if (Fork())\n  {\n    printf(\"33\");\n    Write(STDOUT_FILENO, \"lol\", 3);\n  }\n  else\n  {\n    Sleep(1);\n    printf(\"233\");\n    Write(STDOUT_FILENO, \"hhhh\", 4);\n  }\n  fflush(stdout);\n  return 0;\n}\n```\n编译后运行程序，程序正常退出。那么程序的输出是：",
         "answer": "答案：B。\n说明：printf 所属的标准 IO 是有缓冲区的，直到关闭文件、遇到换行符或者\nfflush时才会输出；write则没有缓冲区立刻输出。"
       },
       "presentation": {
@@ -4204,16 +4437,16 @@
       }
     },
     {
-      "id": "q-6d88ff602b10bbb2",
+      "id": "q-6d5194cb1b419dbd",
       "paperId": "p-e5f44fa32922fc59",
       "paperOrder": 4,
       "moduleId": "ecf_and_system_io",
       "year": 2021,
       "examType": "期末",
       "exam": "2021期末（第 8 讲）",
-      "questionNo": "大题 PART B",
-      "summary": "信号检测时机、相同信号只记一次、结合处理器给出可能输出",
-      "content": "> **PART B.** 阅读如下 C 代码，回答问题\n>\n> 1.（难度：简单）进程在何时检查待处理信号，并调用相应的signal handler处理信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n>\n> 2.（难度：简单）在两次检查并处理信号量的时间间隙中，如果进程接收到n个**<u>相同</u>**信号，那么进程实际会处理几个信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.1\nB.1到n之间的随机数值\nC.n\n>\n> 3.（难度：中等）如果N=2，所有可能的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A.CC\nB.CC1\nC. CC12\nD. C1C2\n>\n> 4.（难度：难）如果 N=2，并且取消hanlder1中的注释（第7行），所有**<u>不可能</u>**的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A. CC\nB. CC1\nC. CC1R2\nD. C1RC2\nE. C1CR2\n答案：1. C\n2. A\n3. BCD：CC1、C1C2、CC12\n4. A：CC\n\n解题要点：\n1. 进程只在内核态切换到用户态时检测并处理信号\n2. 在处理信号之前相同信号接收到多次，只按照一次计算\n3. 注意子进程可以比父进程先结束，父进程将无法发送信号给子进程",
+      "questionNo": "大题 PART B 1",
+      "summary": "进程检查待处理信号的时机",
+      "content": "1. 进程在何时检查待处理信号，并调用相应的 signal handler 处理信号？\nA. 随时\nB. 从用户态切换到内核态时\nC. 从内核态切换到用户态时\n答案：C。\n\n进程从内核态返回用户态前会检查待处理信号，并在返回用户态前转去执行相应的信号处理函数。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4229,26 +4462,372 @@
         "document": "原文/期末/2021期末-带答案/chap 8 解析.md",
         "lines": {
           "start": 57,
-          "end": 77
+          "end": 61
         },
         "aliases": [],
         "curated": "_curated/期末/chap 8 解析/57.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "> **PART B.** 阅读如下 C 代码，回答问题\n>\n> 1.（难度：简单）进程在何时检查待处理信号，并调用相应的signal handler处理信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n>\n> 2.（难度：简单）在两次检查并处理信号量的时间间隙中，如果进程接收到n个**<u>相同</u>**信号，那么进程实际会处理几个信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.1\nB.1到n之间的随机数值\nC.n\n>\n> 3.（难度：中等）如果N=2，所有可能的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A.CC\nB.CC1\nC. CC12\nD. C1C2\n>\n> 4.（难度：难）如果 N=2，并且取消hanlder1中的注释（第7行），所有**<u>不可能</u>**的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A. CC\nB. CC1\nC. CC1R2\nD. C1RC2\nE. C1CR2",
-        "choices": [],
-        "answer": "答案：1. C\n2. A\n3. BCD：CC1、C1C2、CC12\n4. A：CC\n\n解题要点：\n1. 进程只在内核态切换到用户态时检测并处理信号\n2. 在处理信号之前相同信号接收到多次，只按照一次计算\n3. 注意子进程可以比父进程先结束，父进程将无法发送信号给子进程"
+        "mode": "choice",
+        "selection": "single",
+        "stem": "1. 进程在何时检查待处理信号，并调用相应的 signal handler 处理信号？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "随时"
+          },
+          {
+            "key": "B",
+            "content": "从用户态切换到内核态时"
+          },
+          {
+            "key": "C",
+            "content": "从内核态切换到用户态时"
+          }
+        ],
+        "answer": "答案：C。\n\n进程从内核态返回用户态前会检查待处理信号，并在返回用户态前转去执行相应的信号处理函数。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "随时"
+          },
+          {
+            "id": "B",
+            "content": "从用户态切换到内核态时"
+          },
+          {
+            "id": "C",
+            "content": "从内核态切换到用户态时"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "> **PART B.** 阅读如下 C 代码，回答问题\n>\n> 1.（难度：简单）进程在何时检查待处理信号，并调用相应的signal handler处理信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n>\n> 2.（难度：简单）在两次检查并处理信号量的时间间隙中，如果进程接收到n个**<u>相同</u>**信号，那么进程实际会处理几个信号？\\_\\_\\_\\_\\_\\_\\_\\_（1分）\n>\n> A.1\nB.1到n之间的随机数值\nC.n\n>\n> 3.（难度：中等）如果N=2，所有可能的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A.CC\nB.CC1\nC. CC12\nD. C1C2\n>\n> 4.（难度：难）如果 N=2，并且取消hanlder1中的注释（第7行），所有**<u>不可能</u>**的输出为：\\_\\_\\_\\_\\_\\_\\_\\_\n>\n> （全部选对得 2 分，部分选对得 1 分，选错不得分）\n>\n> A. CC\nB. CC1\nC. CC1R2\nD. C1RC2\nE. C1CR2",
-        "answer": "答案：1. C\n2. A\n3. BCD：CC1、C1C2、CC12\n4. A：CC\n\n解题要点：\n1. 进程只在内核态切换到用户态时检测并处理信号\n2. 在处理信号之前相同信号接收到多次，只按照一次计算\n3. 注意子进程可以比父进程先结束，父进程将无法发送信号给子进程"
+        "prompt": "1. 进程在何时检查待处理信号，并调用相应的 signal handler 处理信号？",
+        "answer": "答案：C。\n\n进程从内核态返回用户态前会检查待处理信号，并在返回用户态前转去执行相应的信号处理函数。"
+      },
+      "group": {
+        "id": "p-e5f44fa32922fc59:2021-final-chap8-part-b",
+        "questionId": "q-179a905b323659d5",
+        "title": "大题 PART B",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-2961eaea167bf027",
+      "paperId": "p-e5f44fa32922fc59",
+      "paperOrder": 5,
+      "moduleId": "ecf_and_system_io",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "2021期末（第 8 讲）",
+      "questionNo": "大题 PART B 2",
+      "summary": "相同信号的待处理语义",
+      "content": "2. 在两次检查并处理信号的时间间隙中，如果进程接收到 $n$ 个**相同**的信号，那么进程实际会处理几个该信号？\nA. 1 个\nB. 1 到 $n$ 之间的随机个数\nC. $n$ 个\n答案：A。\n\n同一类型的常规信号在待处理集合中只占一位，不会排队累计。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": [
+          "a-e2bad4b12688fdec",
+          "a-0ef4415524ead07c",
+          "a-639397f3f1538556"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 8 解析.md",
+        "lines": {
+          "start": 63,
+          "end": 65
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 8 解析/63.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "2. 在两次检查并处理信号的时间间隙中，如果进程接收到 $n$ 个**相同**的信号，那么进程实际会处理几个该信号？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "1 个"
+          },
+          {
+            "key": "B",
+            "content": "1 到 $n$ 之间的随机个数"
+          },
+          {
+            "key": "C",
+            "content": "$n$ 个"
+          }
+        ],
+        "answer": "答案：A。\n\n同一类型的常规信号在待处理集合中只占一位，不会排队累计。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "1 个"
+          },
+          {
+            "id": "B",
+            "content": "1 到 $n$ 之间的随机个数"
+          },
+          {
+            "id": "C",
+            "content": "$n$ 个"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2. 在两次检查并处理信号的时间间隙中，如果进程接收到 $n$ 个**相同**的信号，那么进程实际会处理几个该信号？",
+        "answer": "答案：A。\n\n同一类型的常规信号在待处理集合中只占一位，不会排队累计。"
+      },
+      "group": {
+        "id": "p-e5f44fa32922fc59:2021-final-chap8-part-b",
+        "questionId": "q-179a905b323659d5",
+        "title": "大题 PART B",
+        "order": 2
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-0256d58ecc4558e0",
+      "paperId": "p-e5f44fa32922fc59",
+      "paperOrder": 6,
+      "moduleId": "ecf_and_system_io",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "2021期末（第 8 讲）",
+      "questionNo": "大题 PART B 3",
+      "summary": "N=2 时程序的可能输出",
+      "content": "3. 如果 `N = 2`，下列哪些是程序所有可能的输出？（多选；全部选对得 2 分，部分选对得 1 分，选错不得分）\nA. `CC`\nB. `CC1`\nC. `CC12`\nD. `C1C2`\n答案：B、C、D。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": [
+          "a-e2bad4b12688fdec",
+          "a-0ef4415524ead07c",
+          "a-639397f3f1538556"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 8 解析.md",
+        "lines": {
+          "start": 67,
+          "end": 71
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 8 解析/67.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "multiple",
+        "stem": "3. 如果 `N = 2`，下列哪些是程序所有可能的输出？（多选；全部选对得 2 分，部分选对得 1 分，选错不得分）",
+        "choices": [
+          {
+            "key": "A",
+            "content": "`CC`"
+          },
+          {
+            "key": "B",
+            "content": "`CC1`"
+          },
+          {
+            "key": "C",
+            "content": "`CC12`"
+          },
+          {
+            "key": "D",
+            "content": "`C1C2`"
+          }
+        ],
+        "answer": "答案：B、C、D。"
+      },
+      "partInteraction": {
+        "kind": "multiple-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "`CC`"
+          },
+          {
+            "id": "B",
+            "content": "`CC1`"
+          },
+          {
+            "id": "C",
+            "content": "`CC12`"
+          },
+          {
+            "id": "D",
+            "content": "`C1C2`"
+          }
+        ],
+        "correctChoiceIds": [
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "multiple-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "3. 如果 `N = 2`，下列哪些是程序所有可能的输出？（多选；全部选对得 2 分，部分选对得 1 分，选错不得分）",
+        "answer": "答案：B、C、D。"
+      },
+      "group": {
+        "id": "p-e5f44fa32922fc59:2021-final-chap8-part-b",
+        "questionId": "q-179a905b323659d5",
+        "title": "大题 PART B",
+        "order": 3
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-c36fd896a1758c57",
+      "paperId": "p-e5f44fa32922fc59",
+      "paperOrder": 7,
+      "moduleId": "ecf_and_system_io",
+      "year": 2021,
+      "examType": "期末",
+      "exam": "2021期末（第 8 讲）",
+      "questionNo": "大题 PART B 4",
+      "summary": "取消注释后不可能出现的输出",
+      "content": "4. 如果 `N = 2`，并取消 `handler1` 中第 7 行的注释，下列哪一种输出**不可能**出现？\nA. `CC`\nB. `CC1`\nC. `CC1R2`\nD. `C1RC2`\nE. `C1CR2`\n答案：A。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": [
+          "a-e2bad4b12688fdec",
+          "a-0ef4415524ead07c",
+          "a-639397f3f1538556"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2021期末-带答案/chap 8 解析.md",
+        "lines": {
+          "start": 73,
+          "end": 77
+        },
+        "aliases": [],
+        "curated": "_curated/期末/chap 8 解析/73.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "4. 如果 `N = 2`，并取消 `handler1` 中第 7 行的注释，下列哪一种输出**不可能**出现？",
+        "choices": [
+          {
+            "key": "A",
+            "content": "`CC`"
+          },
+          {
+            "key": "B",
+            "content": "`CC1`"
+          },
+          {
+            "key": "C",
+            "content": "`CC1R2`"
+          },
+          {
+            "key": "D",
+            "content": "`C1RC2`"
+          },
+          {
+            "key": "E",
+            "content": "`C1CR2`"
+          }
+        ],
+        "answer": "答案：A。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "`CC`"
+          },
+          {
+            "id": "B",
+            "content": "`CC1`"
+          },
+          {
+            "id": "C",
+            "content": "`CC1R2`"
+          },
+          {
+            "id": "D",
+            "content": "`C1RC2`"
+          },
+          {
+            "id": "E",
+            "content": "`C1CR2`"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "4. 如果 `N = 2`，并取消 `handler1` 中第 7 行的注释，下列哪一种输出**不可能**出现？",
+        "answer": "答案：A。"
+      },
+      "group": {
+        "id": "p-e5f44fa32922fc59:2021-final-chap8-part-b",
+        "questionId": "q-179a905b323659d5",
+        "title": "大题 PART B",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -4801,16 +5380,16 @@
       }
     },
     {
-      "id": "q-5c38fe1cccec5866",
+      "id": "q-1aa9bebc1b718737",
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 18,
       "moduleId": "ecf_and_system_io",
       "year": 2024,
       "examType": "期末",
       "exam": "2024期末",
-      "questionNo": "第三题 Part B",
-      "summary": "信号处理函数注册、kill 与 sigprocmask",
-      "content": "Part B:分析下列代码的行为，其功能是利用信号处理函数输出数列内容。\n```\n#include <csapp.h>\n#define N 10\nint flag = 0;\nvoid handler1() {\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n```\n\n\n```\n    }\n    flag++;\n}\nvoid handler2() {\n    for (int i = 1; i < N; i += 2){\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\nint main() {\n    pid_t pid = fork();\n    if (pid == 0) {\n        signal(SIGUSR1, handler1);\n        signal(SIGUSR2, handler2);\n        while (flag < 2)\n            sleep(1);\n    }\nelse{\n    kill(pid, SIGUSR1);\n        kill(pid, SIGUSR2);\n        wait(NULL);\n    }\n    return 0;\n}\n```\n1） 运行这段代码后，发现程序没有输出，且陷入死循环。请简要指出其原因，并\n给出解决方案。（2分）\n2） 在解决上述问题之后，第一次运行得到“1\t3\t5\t7\t9\t0\t2\t4\t6\t8”；但再次运行得到\n的却是“1\t3\t0\t2\t4\t6\t8\t5\t7\t9”，与期望不符。请结合“编写信号处理函数”的知识，补\n全handler1()函数中缺失的代码，以保证运行结果的正确性。（3分）\n```\nvoid handler1(){\nsigset_t mask, prev_mask;\n      A      (       B       );\n      C      (       D      , &mask, &prev_mask);\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n}\nflag++;\n      E      (       F      , &prev_mask);\n}\n```\n基于下列选项选择序号填写：\n\n\n```\n① Sigfillset;   ② Sigpromask;   ③ Sigemptyset;\n④ SIG_BLOCK;    ⑤ SIG_UNBLOCK;   ⑥ SIG_SETMASK;\n⑦ &mask;         ⑧ &prev_mask;    ⑨ NULL;\nA:\nB:\nC:\nD:\nE:\nF:\n```\n5\n6",
+      "questionNo": "第三题 Part B 1",
+      "summary": "信号处理函数注册与父子进程同步",
+      "content": "Part B：分析下列利用信号处理函数输出数列的程序。\n\n```c\n#include \"csapp.h\"\n#define N 10\n\nint flag = 0;\n\nvoid handler1() {\n    for (int i = 0; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\n\nvoid handler2() {\n    for (int i = 1; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\n\nint main() {\n    pid_t pid = fork();\n    if (pid == 0) {\n        signal(SIGUSR1, handler1);\n        signal(SIGUSR2, handler2);\n        while (flag < 2)\n            sleep(1);\n    } else {\n        kill(pid, SIGUSR1);\n        kill(pid, SIGUSR2);\n        wait(NULL);\n    }\n    return 0;\n}\n```\n\n1. 运行后发现程序没有输出，且陷入死循环。请简要指出原因，并给出解决方案。（2分）\n参考要点：\n\n- `flag` 会被异步信号处理函数修改，应声明为 `volatile sig_atomic_t flag = 0;`，避免主流程反复读取到编译器缓存的旧值。\n- 还应避免父进程在子进程安装处理函数前发送信号；可在 `fork` 前阻塞 `SIGUSR1`、`SIGUSR2`，子进程安装好处理函数后再解除阻塞，或使用可靠的父子同步机制。\n\n请根据是否指出关键原因并给出可行的同步/可见性修复自评。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4826,26 +5405,216 @@
         "document": "原文/期末/2024期末-带答案.md",
         "lines": {
           "start": 499,
-          "end": 572
+          "end": 544
         },
         "aliases": [],
         "curated": "_curated/期末/2024期末-带答案/499.md"
       },
       "layout": {
-        "mode": "fill",
+        "mode": "short",
         "selection": null,
-        "stem": "Part B:分析下列代码的行为，其功能是利用信号处理函数输出数列内容。\n```\n#include <csapp.h>\n#define N 10\nint flag = 0;\nvoid handler1() {\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n```\n\n\n```\n    }\n    flag++;\n}\nvoid handler2() {\n    for (int i = 1; i < N; i += 2){\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\nint main() {\n    pid_t pid = fork();\n    if (pid == 0) {\n        signal(SIGUSR1, handler1);\n        signal(SIGUSR2, handler2);\n        while (flag < 2)\n            sleep(1);\n    }\nelse{\n    kill(pid, SIGUSR1);\n        kill(pid, SIGUSR2);\n        wait(NULL);\n    }\n    return 0;\n}\n```\n1） 运行这段代码后，发现程序没有输出，且陷入死循环。请简要指出其原因，并\n给出解决方案。（2分）\n2） 在解决上述问题之后，第一次运行得到“1\t3\t5\t7\t9\t0\t2\t4\t6\t8”；但再次运行得到\n的却是“1\t3\t0\t2\t4\t6\t8\t5\t7\t9”，与期望不符。请结合“编写信号处理函数”的知识，补\n全handler1()函数中缺失的代码，以保证运行结果的正确性。（3分）\n```\nvoid handler1(){\nsigset_t mask, prev_mask;\n      A      (       B       );\n      C      (       D      , &mask, &prev_mask);\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n}\nflag++;\n      E      (       F      , &prev_mask);\n}\n```\n基于下列选项选择序号填写：\n\n\n```\n① Sigfillset;   ② Sigpromask;   ③ Sigemptyset;\n④ SIG_BLOCK;    ⑤ SIG_UNBLOCK;   ⑥ SIG_SETMASK;\n⑦ &mask;         ⑧ &prev_mask;    ⑨ NULL;\nA:\nB:\nC:\nD:\nE:\nF:\n```",
+        "stem": "Part B：分析下列利用信号处理函数输出数列的程序。\n\n```c\n#include \"csapp.h\"\n#define N 10\n\nint flag = 0;\n\nvoid handler1() {\n    for (int i = 0; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\n\nvoid handler2() {\n    for (int i = 1; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\n\nint main() {\n    pid_t pid = fork();\n    if (pid == 0) {\n        signal(SIGUSR1, handler1);\n        signal(SIGUSR2, handler2);\n        while (flag < 2)\n            sleep(1);\n    } else {\n        kill(pid, SIGUSR1);\n        kill(pid, SIGUSR2);\n        wait(NULL);\n    }\n    return 0;\n}\n```\n\n1. 运行后发现程序没有输出，且陷入死循环。请简要指出原因，并给出解决方案。（2分）",
         "choices": [],
-        "answer": "5\n6"
+        "answer": "参考要点：\n\n- `flag` 会被异步信号处理函数修改，应声明为 `volatile sig_atomic_t flag = 0;`，避免主流程反复读取到编译器缓存的旧值。\n- 还应避免父进程在子进程安装处理函数前发送信号；可在 `fork` 前阻塞 `SIGUSR1`、`SIGUSR2`，子进程安装好处理函数后再解除阻塞，或使用可靠的父子同步机制。\n\n请根据是否指出关键原因并给出可行的同步/可见性修复自评。"
+      },
+      "partInteraction": {
+        "kind": "short-answer",
+        "declared": true
       },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "short-answer"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "Part B:分析下列代码的行为，其功能是利用信号处理函数输出数列内容。\n```\n#include <csapp.h>\n#define N 10\nint flag = 0;\nvoid handler1() {\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n```\n\n\n```\n    }\n    flag++;\n}\nvoid handler2() {\n    for (int i = 1; i < N; i += 2){\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\nint main() {\n    pid_t pid = fork();\n    if (pid == 0) {\n        signal(SIGUSR1, handler1);\n        signal(SIGUSR2, handler2);\n        while (flag < 2)\n            sleep(1);\n    }\nelse{\n    kill(pid, SIGUSR1);\n        kill(pid, SIGUSR2);\n        wait(NULL);\n    }\n    return 0;\n}\n```\n1） 运行这段代码后，发现程序没有输出，且陷入死循环。请简要指出其原因，并\n给出解决方案。（2分）\n2） 在解决上述问题之后，第一次运行得到“1\t3\t5\t7\t9\t0\t2\t4\t6\t8”；但再次运行得到\n的却是“1\t3\t0\t2\t4\t6\t8\t5\t7\t9”，与期望不符。请结合“编写信号处理函数”的知识，补\n全handler1()函数中缺失的代码，以保证运行结果的正确性。（3分）\n```\nvoid handler1(){\nsigset_t mask, prev_mask;\n      A      (       B       );\n      C      (       D      , &mask, &prev_mask);\n    for (int i = 0; i < N; i += 2){\n        printf(\"%d \", i)\n        fflush(stdout);\n}\nflag++;\n      E      (       F      , &prev_mask);\n}\n```\n基于下列选项选择序号填写：\n\n\n```\n① Sigfillset;   ② Sigpromask;   ③ Sigemptyset;\n④ SIG_BLOCK;    ⑤ SIG_UNBLOCK;   ⑥ SIG_SETMASK;\n⑦ &mask;         ⑧ &prev_mask;    ⑨ NULL;\nA:\nB:\nC:\nD:\nE:\nF:\n```",
-        "answer": "5\n6"
+        "prompt": "Part B：分析下列利用信号处理函数输出数列的程序。\n\n```c\n#include \"csapp.h\"\n#define N 10\n\nint flag = 0;\n\nvoid handler1() {\n    for (int i = 0; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\n\nvoid handler2() {\n    for (int i = 1; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n}\n\nint main() {\n    pid_t pid = fork();\n    if (pid == 0) {\n        signal(SIGUSR1, handler1);\n        signal(SIGUSR2, handler2);\n        while (flag < 2)\n            sleep(1);\n    } else {\n        kill(pid, SIGUSR1);\n        kill(pid, SIGUSR2);\n        wait(NULL);\n    }\n    return 0;\n}\n```\n\n1. 运行后发现程序没有输出，且陷入死循环。请简要指出原因，并给出解决方案。（2分）",
+        "answer": "参考要点：\n\n- `flag` 会被异步信号处理函数修改，应声明为 `volatile sig_atomic_t flag = 0;`，避免主流程反复读取到编译器缓存的旧值。\n- 还应避免父进程在子进程安装处理函数前发送信号；可在 `fork` 前阻塞 `SIGUSR1`、`SIGUSR2`，子进程安装好处理函数后再解除阻塞，或使用可靠的父子同步机制。\n\n请根据是否指出关键原因并给出可行的同步/可见性修复自评。"
+      },
+      "group": {
+        "id": "p-ae9ab20d09974cf3:2024-final-q3-part-b",
+        "questionId": "q-226325586bcfc18b",
+        "title": "第三题 Part B",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-5d199a2b3087a536",
+      "paperId": "p-ae9ab20d09974cf3",
+      "paperOrder": 19,
+      "moduleId": "ecf_and_system_io",
+      "year": 2024,
+      "examType": "期末",
+      "exam": "2024期末",
+      "questionNo": "第三题 Part B 2",
+      "summary": "用 sigprocmask 保护信号处理函数",
+      "content": "2. 解决上一问的问题后，一次运行得到 `1 3 5 7 9 0 2 4 6 8`，另一次却得到 `1 3 0 2 4 6 8 5 7 9`。请补全 `handler1`，使其在执行期间阻塞其他信号，并在返回前恢复原信号掩码。（3分）\n\n```c\nvoid handler1() {\n    sigset_t mask, prev_mask;\n    {{blank:A}}({{blank:B}});\n    {{blank:C}}({{blank:D}}, &mask, &prev_mask);\n    for (int i = 0; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n    {{blank:E}}({{blank:F}}, &prev_mask, NULL);\n}\n```\n\n请从下列选项中选择名称或序号填写：\n\n1. `Sigfillset`\n2. `Sigprocmask`\n3. `Sigemptyset`\n4. `SIG_BLOCK`\n5. `SIG_UNBLOCK`\n6. `SIG_SETMASK`\n7. `&mask`\n8. `&prev_mask`\n9. `NULL`\n答案：A=1（`Sigfillset`），B=7（`&mask`），C=2（`Sigprocmask`），D=4（`SIG_BLOCK`），E=2（`Sigprocmask`），F=6（`SIG_SETMASK`）。\n\n恢复信号掩码时，完整调用为 `Sigprocmask(SIG_SETMASK, &prev_mask, NULL)`。",
+      "assets": [],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": [
+          "a-544cd966469e852a",
+          "a-0f691532afb6eb95",
+          "a-fdb17b8c00c7e81c"
+        ]
+      },
+      "source": {
+        "document": "原文/期末/2024期末-带答案.md",
+        "lines": {
+          "start": 545,
+          "end": 572
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2024期末-带答案/545.md"
+      },
+      "layout": {
+        "mode": "fill",
+        "selection": null,
+        "stem": "2. 解决上一问的问题后，一次运行得到 `1 3 5 7 9 0 2 4 6 8`，另一次却得到 `1 3 0 2 4 6 8 5 7 9`。请补全 `handler1`，使其在执行期间阻塞其他信号，并在返回前恢复原信号掩码。（3分）\n\n```c\nvoid handler1() {\n    sigset_t mask, prev_mask;\n    {{blank:A}}({{blank:B}});\n    {{blank:C}}({{blank:D}}, &mask, &prev_mask);\n    for (int i = 0; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n    {{blank:E}}({{blank:F}}, &prev_mask, NULL);\n}\n```\n\n请从下列选项中选择名称或序号填写：\n\n1. `Sigfillset`\n2. `Sigprocmask`\n3. `Sigemptyset`\n4. `SIG_BLOCK`\n5. `SIG_UNBLOCK`\n6. `SIG_SETMASK`\n7. `&mask`\n8. `&prev_mask`\n9. `NULL`",
+        "choices": [],
+        "answer": "答案：A=1（`Sigfillset`），B=7（`&mask`），C=2（`Sigprocmask`），D=4（`SIG_BLOCK`），E=2（`Sigprocmask`），F=6（`SIG_SETMASK`）。\n\n恢复信号掩码时，完整调用为 `Sigprocmask(SIG_SETMASK, &prev_mask, NULL)`。",
+        "blankAnswers": [
+          {
+            "id": "A",
+            "acceptedAnswers": [
+              "1",
+              "Sigfillset"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "B",
+            "acceptedAnswers": [
+              "7",
+              "&mask"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "C",
+            "acceptedAnswers": [
+              "2",
+              "Sigprocmask",
+              "sigprocmask"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "D",
+            "acceptedAnswers": [
+              "4",
+              "SIG_BLOCK"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "E",
+            "acceptedAnswers": [
+              "2",
+              "Sigprocmask",
+              "sigprocmask"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "F",
+            "acceptedAnswers": [
+              "6",
+              "SIG_SETMASK"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "A",
+            "acceptedAnswers": [
+              "1",
+              "Sigfillset"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "B",
+            "acceptedAnswers": [
+              "7",
+              "&mask"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "C",
+            "acceptedAnswers": [
+              "2",
+              "Sigprocmask",
+              "sigprocmask"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "D",
+            "acceptedAnswers": [
+              "4",
+              "SIG_BLOCK"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "E",
+            "acceptedAnswers": [
+              "2",
+              "Sigprocmask",
+              "sigprocmask"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "F",
+            "acceptedAnswers": [
+              "6",
+              "SIG_SETMASK"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "2. 解决上一问的问题后，一次运行得到 `1 3 5 7 9 0 2 4 6 8`，另一次却得到 `1 3 0 2 4 6 8 5 7 9`。请补全 `handler1`，使其在执行期间阻塞其他信号，并在返回前恢复原信号掩码。（3分）\n\n```c\nvoid handler1() {\n    sigset_t mask, prev_mask;\n    {{blank:A}}({{blank:B}});\n    {{blank:C}}({{blank:D}}, &mask, &prev_mask);\n    for (int i = 0; i < N; i += 2) {\n        printf(\"%d \", i);\n        fflush(stdout);\n    }\n    flag++;\n    {{blank:E}}({{blank:F}}, &prev_mask, NULL);\n}\n```\n\n请从下列选项中选择名称或序号填写：\n\n1. `Sigfillset`\n2. `Sigprocmask`\n3. `Sigemptyset`\n4. `SIG_BLOCK`\n5. `SIG_UNBLOCK`\n6. `SIG_SETMASK`\n7. `&mask`\n8. `&prev_mask`\n9. `NULL`",
+        "answer": "答案：A=1（`Sigfillset`），B=7（`&mask`），C=2（`Sigprocmask`），D=4（`SIG_BLOCK`），E=2（`Sigprocmask`），F=6（`SIG_SETMASK`）。\n\n恢复信号掩码时，完整调用为 `Sigprocmask(SIG_SETMASK, &prev_mask, NULL)`。"
+      },
+      "group": {
+        "id": "p-ae9ab20d09974cf3:2024-final-q3-part-b",
+        "questionId": "q-226325586bcfc18b",
+        "title": "第三题 Part B",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -4855,7 +5624,7 @@
     {
       "id": "q-f106961e4b86af22",
       "paperId": "p-ae9ab20d09974cf3",
-      "paperOrder": 19,
+      "paperOrder": 20,
       "moduleId": "ecf_and_system_io",
       "year": 2024,
       "examType": "期末",

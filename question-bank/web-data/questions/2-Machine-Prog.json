@@ -2424,7 +2424,7 @@
       "exam": "2016期中",
       "questionNo": "第一题 1",
       "summary": "会改变条件码 CF 的指令辨析",
-      "content": "1.  在下列指令中，其执行会影响条件码中的CF位的是：\n```\n```\nA. A. jmp NEXT\nB. B. jc NEXT\nC. C. inc %bx\nD. D. shl $1,%ax\n答案：D",
+      "content": "1. 在下列指令中，其执行会影响条件码中的 CF 位的是：\nA. `jmp NEXT`\nB. `jc NEXT`\nC. `inc %bx`\nD. `shl $1, %ax`\n答案：D",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2447,23 +2447,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "1.  在下列指令中，其执行会影响条件码中的CF位的是：\n```\n```",
+        "stem": "1. 在下列指令中，其执行会影响条件码中的 CF 位的是：",
         "choices": [
           {
             "key": "A",
-            "content": "A. jmp NEXT"
+            "content": "`jmp NEXT`"
           },
           {
             "key": "B",
-            "content": "B. jc NEXT"
+            "content": "`jc NEXT`"
           },
           {
             "key": "C",
-            "content": "C. inc %bx"
+            "content": "`inc %bx`"
           },
           {
             "key": "D",
-            "content": "D. shl $1,%ax"
+            "content": "`shl $1, %ax`"
           }
         ],
         "answer": "答案：D"
@@ -2474,19 +2474,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "A. jmp NEXT"
+            "content": "`jmp NEXT`"
           },
           {
             "id": "B",
-            "content": "B. jc NEXT"
+            "content": "`jc NEXT`"
           },
           {
             "id": "C",
-            "content": "C. inc %bx"
+            "content": "`inc %bx`"
           },
           {
             "id": "D",
-            "content": "D. shl $1,%ax"
+            "content": "`shl $1, %ax`"
           }
         ],
         "correctChoiceIds": [
@@ -2495,7 +2495,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1.  在下列指令中，其执行会影响条件码中的CF位的是：\n```\n```",
+        "prompt": "1. 在下列指令中，其执行会影响条件码中的 CF 位的是：",
         "answer": "答案：D"
       },
       "presentation": {
@@ -9434,7 +9434,7 @@
       "exam": "2025期末",
       "questionNo": "一 6",
       "summary": "栈帧布局、%rsp 对齐与 leave 语义",
-      "content": "6. 观察下面的汇编代码片段：\n```asm\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？\nA. 0(%rbp) 处保存的是调用者的旧 %rbp\nB. 8(%rbp) 处保存的是返回地址\nC. 紧挨着执行 callq qux 之前，%rsp ≡ 8 (mod16)\nD. subq `$48`,%rsp 为局部数据预留了 48 字节（不含保存的%rbp和返回地址）\nE. 这里的 leave 等价于 addq `$48`,%rsp; popq %rbp（假设 %rbp 未被改写）\n答案：ABDE\n解析：push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，所以 C 错。leave 语义是 mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把 %rsp 加回 48 再弹出 %rbp。",
+      "content": "6. 观察下面的汇编代码片段：\n```asm\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？\nA. `0(%rbp)` 处保存的是调用者的旧 `%rbp`\nB. `8(%rbp)` 处保存的是返回地址\nC. 紧挨着执行 `callq qux` 之前，`%rsp` ≡ 8 (mod 16)\nD. `subq $48, %rsp` 为局部数据预留了 48 字节（不含保存的 `%rbp` 和返回地址）\nE. 这里的 `leave` 等价于 `addq $48, %rsp; popq %rbp`（假设 `%rbp` 未被改写）\n答案：ABDE\n解析：push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，所以 C 错。leave 语义是 mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把 %rsp 加回 48 再弹出 %rbp。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9458,23 +9458,23 @@
         "choices": [
           {
             "key": "A",
-            "content": "0(%rbp) 处保存的是调用者的旧 %rbp"
+            "content": "`0(%rbp)` 处保存的是调用者的旧 `%rbp`"
           },
           {
             "key": "B",
-            "content": "8(%rbp) 处保存的是返回地址"
+            "content": "`8(%rbp)` 处保存的是返回地址"
           },
           {
             "key": "C",
-            "content": "紧挨着执行 callq qux 之前，%rsp ≡ 8 (mod16)"
+            "content": "紧挨着执行 `callq qux` 之前，`%rsp` ≡ 8 (mod 16)"
           },
           {
             "key": "D",
-            "content": "subq `$48`,%rsp 为局部数据预留了 48 字节（不含保存的%rbp和返回地址）"
+            "content": "`subq $48, %rsp` 为局部数据预留了 48 字节（不含保存的 `%rbp` 和返回地址）"
           },
           {
             "key": "E",
-            "content": "这里的 leave 等价于 addq `$48`,%rsp; popq %rbp（假设 %rbp 未被改写）"
+            "content": "这里的 `leave` 等价于 `addq $48, %rsp; popq %rbp`（假设 `%rbp` 未被改写）"
           }
         ],
         "answer": "答案：ABDE\n解析：push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，所以 C 错。leave 语义是 mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把 %rsp 加回 48 再弹出 %rbp。"
@@ -9485,23 +9485,23 @@
         "choices": [
           {
             "id": "A",
-            "content": "0(%rbp) 处保存的是调用者的旧 %rbp"
+            "content": "`0(%rbp)` 处保存的是调用者的旧 `%rbp`"
           },
           {
             "id": "B",
-            "content": "8(%rbp) 处保存的是返回地址"
+            "content": "`8(%rbp)` 处保存的是返回地址"
           },
           {
             "id": "C",
-            "content": "紧挨着执行 callq qux 之前，%rsp ≡ 8 (mod16)"
+            "content": "紧挨着执行 `callq qux` 之前，`%rsp` ≡ 8 (mod 16)"
           },
           {
             "id": "D",
-            "content": "subq `$48`,%rsp 为局部数据预留了 48 字节（不含保存的%rbp和返回地址）"
+            "content": "`subq $48, %rsp` 为局部数据预留了 48 字节（不含保存的 `%rbp` 和返回地址）"
           },
           {
             "id": "E",
-            "content": "这里的 leave 等价于 addq `$48`,%rsp; popq %rbp（假设 %rbp 未被改写）"
+            "content": "这里的 `leave` 等价于 `addq $48, %rsp; popq %rbp`（假设 `%rbp` 未被改写）"
           }
         ],
         "correctChoiceIds": [

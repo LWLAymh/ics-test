@@ -28,11 +28,35 @@
     },
     {
       "start": 57,
+      "end": 61,
+      "module": "ECF and System IO",
+      "qno": "大题 PART B 1",
+      "note": "进程检查待处理信号的时机",
+      "curated": "期末/chap 8 解析/57.md"
+    },
+    {
+      "start": 63,
+      "end": 65,
+      "module": "ECF and System IO",
+      "qno": "大题 PART B 2",
+      "note": "相同信号的待处理语义",
+      "curated": "期末/chap 8 解析/63.md"
+    },
+    {
+      "start": 67,
+      "end": 71,
+      "module": "ECF and System IO",
+      "qno": "大题 PART B 3",
+      "note": "N=2 时程序的可能输出",
+      "curated": "期末/chap 8 解析/67.md"
+    },
+    {
+      "start": 73,
       "end": 77,
       "module": "ECF and System IO",
-      "qno": "大题 PART B",
-      "note": "信号检测时机、相同信号只记一次、结合处理器给出可能输出",
-      "curated": "期末/chap 8 解析/57.md"
+      "qno": "大题 PART B 4",
+      "note": "取消注释后不可能出现的输出",
+      "curated": "期末/chap 8 解析/73.md"
     }
   ],
   "answer_sections": [

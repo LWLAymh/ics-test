@@ -10,7 +10,7 @@
     {
       "id": "q-74ce55f602b96943",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 17,
+      "paperOrder": 20,
       "moduleId": "network",
       "year": 2013,
       "examType": "期末",
@@ -96,7 +96,7 @@
     {
       "id": "q-d9d9b65f12990fcc",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 18,
+      "paperOrder": 21,
       "moduleId": "network",
       "year": 2013,
       "examType": "期末",
@@ -144,14 +144,14 @@
     {
       "id": "q-fa6afdda8f92ace2",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 27,
+      "paperOrder": 30,
       "moduleId": "network",
       "year": 2013,
       "examType": "期末",
       "exam": "2013期末",
       "questionNo": "第七题",
       "summary": "socket 连接数上限与 listenfd/connfd 填空",
-      "content": "第七题（10分）\n（1） 一个服务器拥有两个独立的固定IP地址，那么它在web应用端口80上最\n多可以监听多少个独立的 socket 连接？（2分）\n（2） 该服务器在所有有web应用端口上最多可以监听多少个独立的 socket 连\n接？（2分）\n（3） 在下图中连线上填入正确的目标服务器的socket 标识符（2分）\n\n\n4) 在Echo server 范例中，server端通过accept函数接受了一个 client\n的连接请求，从而将网络描述符与该网络连接、socket绑定，然后进行网络数据\n传输。在下面的空格处填写正确的网络描述符，每个空填写listenfd 或connfd\n（共4分，每空1分）。\n```\nint main(int argc, char **argv) {\nint listenfd, connfd, port, clientlen;\nstruct sockaddr_in clientaddr;\nstruct hostent *hp;\nchar *haddrp;\nunsigned short client_port;\n…………\nwhile (1) {\nclientlen = sizeof(clientaddr);\n_________ = Accept(_________, (SA *)&clientaddr,\n&clientlen);\nhp = Gethostbyaddr((const char*)\n&clientaddr.sin_addr.s_addr,\nsizeof(clientaddr.sin_addr.s_addr), AF_INET);\nhaddrp = inet_ntoa(clientaddr.sin_addr);\nclient_port = ntohs(clientaddr.sin_port);\nprintf(\"server connected to %s (%s), port %u\\n\",\nhp->h_name, haddrp, client_port);\necho(_________);\nClose(_________);\n    }\n}\n```\n答案：（1）2*248\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*232+16\n任 意 16 位   port\nnumber\n（2）2*264\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*216+32+16\n任意16位port number  任 意 16 位   port\nnumber\n（3）\n```\n128.2.194.242:80\n128.2.194.242:7\n```\n4) connfd, listenfd, connfd, connfd\naccept 之后把参数里的listenfd 转交给 connfd\nserver 无法支持多个 connections，因为只有一个文件描述符（listenfd）\n考察学生对 网络文件描述符、listenfd、connfd的理解。",
+      "content": "第七题（10分）\n\n（1）一个服务器拥有两个独立的固定 IP 地址，那么它在 Web 应用端口 80 上最多可以监听 {{blank:listen-port80}} 个独立的 socket 连接。（2分）\n\n（2）该服务器在所有 Web 应用端口上最多可以监听 {{blank:listen-all-ports}} 个独立的 socket 连接。（2分）\n\n（3）服务器的固定 IP 地址为 `128.2.194.242`。请填写两种客户端请求对应的目标服务器 socket 标识符。（2分）\n\n| 客户端请求 | 服务器端口 | 目标 socket 标识符 |\n| --- | ---: | --- |\n| Web client | 80 | {{blank:web-socket}} |\n| Echo client | 7 | {{blank:echo-socket}} |\n\n（4）在 Echo server 范例中，server 端通过 `accept` 接受 client 的连接请求。请在下面的空格中填写 `listenfd` 或 `connfd`。（4分，每空1分）\n\n```c\nint main(int argc, char **argv) {\n    int listenfd, connfd, port, clientlen;\n    struct sockaddr_in clientaddr;\n    struct hostent *hp;\n    char *haddrp;\n    unsigned short client_port;\n    /* ... */\n    while (1) {\n        clientlen = sizeof(clientaddr);\n        {{blank:accept-result}} = Accept({{blank:accept-listen}},\n            (SA *)&clientaddr, &clientlen);\n        hp = Gethostbyaddr((const char *)&clientaddr.sin_addr.s_addr,\n            sizeof(clientaddr.sin_addr.s_addr), AF_INET);\n        haddrp = inet_ntoa(clientaddr.sin_addr);\n        client_port = ntohs(clientaddr.sin_port);\n        printf(\"server connected to %s (%s), port %u\\n\",\n            hp->h_name, haddrp, client_port);\n        echo({{blank:echo-fd}});\n        Close({{blank:close-fd}});\n    }\n}\n```\n答案：\n\n1. $2\\times 2^{48}$\n2. $2\\times 2^{64}$\n3. `128.2.194.242:80`；`128.2.194.242:7`\n4. `connfd`、`listenfd`、`connfd`、`connfd`\n\n`Accept` 在监听描述符 `listenfd` 上接收连接，并返回已连接描述符 `connfd`；后续数据传输与关闭操作都使用 `connfd`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -171,18 +171,154 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第七题（10分）\n（1） 一个服务器拥有两个独立的固定IP地址，那么它在web应用端口80上最\n多可以监听多少个独立的 socket 连接？（2分）\n（2） 该服务器在所有有web应用端口上最多可以监听多少个独立的 socket 连\n接？（2分）\n（3） 在下图中连线上填入正确的目标服务器的socket 标识符（2分）\n\n\n4) 在Echo server 范例中，server端通过accept函数接受了一个 client\n的连接请求，从而将网络描述符与该网络连接、socket绑定，然后进行网络数据\n传输。在下面的空格处填写正确的网络描述符，每个空填写listenfd 或connfd\n（共4分，每空1分）。\n```\nint main(int argc, char **argv) {\nint listenfd, connfd, port, clientlen;\nstruct sockaddr_in clientaddr;\nstruct hostent *hp;\nchar *haddrp;\nunsigned short client_port;\n…………\nwhile (1) {\nclientlen = sizeof(clientaddr);\n_________ = Accept(_________, (SA *)&clientaddr,\n&clientlen);\nhp = Gethostbyaddr((const char*)\n&clientaddr.sin_addr.s_addr,\nsizeof(clientaddr.sin_addr.s_addr), AF_INET);\nhaddrp = inet_ntoa(clientaddr.sin_addr);\nclient_port = ntohs(clientaddr.sin_port);\nprintf(\"server connected to %s (%s), port %u\\n\",\nhp->h_name, haddrp, client_port);\necho(_________);\nClose(_________);\n    }\n}\n```",
+        "stem": "第七题（10分）\n\n（1）一个服务器拥有两个独立的固定 IP 地址，那么它在 Web 应用端口 80 上最多可以监听 {{blank:listen-port80}} 个独立的 socket 连接。（2分）\n\n（2）该服务器在所有 Web 应用端口上最多可以监听 {{blank:listen-all-ports}} 个独立的 socket 连接。（2分）\n\n（3）服务器的固定 IP 地址为 `128.2.194.242`。请填写两种客户端请求对应的目标服务器 socket 标识符。（2分）\n\n| 客户端请求 | 服务器端口 | 目标 socket 标识符 |\n| --- | ---: | --- |\n| Web client | 80 | {{blank:web-socket}} |\n| Echo client | 7 | {{blank:echo-socket}} |\n\n（4）在 Echo server 范例中，server 端通过 `accept` 接受 client 的连接请求。请在下面的空格中填写 `listenfd` 或 `connfd`。（4分，每空1分）\n\n```c\nint main(int argc, char **argv) {\n    int listenfd, connfd, port, clientlen;\n    struct sockaddr_in clientaddr;\n    struct hostent *hp;\n    char *haddrp;\n    unsigned short client_port;\n    /* ... */\n    while (1) {\n        clientlen = sizeof(clientaddr);\n        {{blank:accept-result}} = Accept({{blank:accept-listen}},\n            (SA *)&clientaddr, &clientlen);\n        hp = Gethostbyaddr((const char *)&clientaddr.sin_addr.s_addr,\n            sizeof(clientaddr.sin_addr.s_addr), AF_INET);\n        haddrp = inet_ntoa(clientaddr.sin_addr);\n        client_port = ntohs(clientaddr.sin_port);\n        printf(\"server connected to %s (%s), port %u\\n\",\n            hp->h_name, haddrp, client_port);\n        echo({{blank:echo-fd}});\n        Close({{blank:close-fd}});\n    }\n}\n```",
         "choices": [],
-        "answer": "答案：（1）2*248\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*232+16\n任 意 16 位   port\nnumber\n（2）2*264\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*216+32+16\n任意16位port number  任 意 16 位   port\nnumber\n（3）\n```\n128.2.194.242:80\n128.2.194.242:7\n```\n4) connfd, listenfd, connfd, connfd\naccept 之后把参数里的listenfd 转交给 connfd\nserver 无法支持多个 connections，因为只有一个文件描述符（listenfd）\n考察学生对 网络文件描述符、listenfd、connfd的理解。"
+        "answer": "答案：\n\n1. $2\\times 2^{48}$\n2. $2\\times 2^{64}$\n3. `128.2.194.242:80`；`128.2.194.242:7`\n4. `connfd`、`listenfd`、`connfd`、`connfd`\n\n`Accept` 在监听描述符 `listenfd` 上接收连接，并返回已连接描述符 `connfd`；后续数据传输与关闭操作都使用 `connfd`。",
+        "blankAnswers": [
+          {
+            "id": "listen-port80",
+            "acceptedAnswers": [
+              "2*2^48",
+              "2^49"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "listen-all-ports",
+            "acceptedAnswers": [
+              "2*2^64",
+              "2^65"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "web-socket",
+            "acceptedAnswers": [
+              "128.2.194.242:80"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "echo-socket",
+            "acceptedAnswers": [
+              "128.2.194.242:7"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "accept-result",
+            "acceptedAnswers": [
+              "connfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "accept-listen",
+            "acceptedAnswers": [
+              "listenfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "echo-fd",
+            "acceptedAnswers": [
+              "connfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "close-fd",
+            "acceptedAnswers": [
+              "connfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "listen-port80",
+            "acceptedAnswers": [
+              "2*2^48",
+              "2^49"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "listen-all-ports",
+            "acceptedAnswers": [
+              "2*2^64",
+              "2^65"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "web-socket",
+            "acceptedAnswers": [
+              "128.2.194.242:80"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "echo-socket",
+            "acceptedAnswers": [
+              "128.2.194.242:7"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "accept-result",
+            "acceptedAnswers": [
+              "connfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "accept-listen",
+            "acceptedAnswers": [
+              "listenfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "echo-fd",
+            "acceptedAnswers": [
+              "connfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "close-fd",
+            "acceptedAnswers": [
+              "connfd"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第七题（10分）\n（1） 一个服务器拥有两个独立的固定IP地址，那么它在web应用端口80上最\n多可以监听多少个独立的 socket 连接？（2分）\n（2） 该服务器在所有有web应用端口上最多可以监听多少个独立的 socket 连\n接？（2分）\n（3） 在下图中连线上填入正确的目标服务器的socket 标识符（2分）\n\n\n4) 在Echo server 范例中，server端通过accept函数接受了一个 client\n的连接请求，从而将网络描述符与该网络连接、socket绑定，然后进行网络数据\n传输。在下面的空格处填写正确的网络描述符，每个空填写listenfd 或connfd\n（共4分，每空1分）。\n```\nint main(int argc, char **argv) {\nint listenfd, connfd, port, clientlen;\nstruct sockaddr_in clientaddr;\nstruct hostent *hp;\nchar *haddrp;\nunsigned short client_port;\n…………\nwhile (1) {\nclientlen = sizeof(clientaddr);\n_________ = Accept(_________, (SA *)&clientaddr,\n&clientlen);\nhp = Gethostbyaddr((const char*)\n&clientaddr.sin_addr.s_addr,\nsizeof(clientaddr.sin_addr.s_addr), AF_INET);\nhaddrp = inet_ntoa(clientaddr.sin_addr);\nclient_port = ntohs(clientaddr.sin_port);\nprintf(\"server connected to %s (%s), port %u\\n\",\nhp->h_name, haddrp, client_port);\necho(_________);\nClose(_________);\n    }\n}\n```",
-        "answer": "答案：（1）2*248\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*232+16\n任 意 16 位   port\nnumber\n（2）2*264\n服务器端  客户端  结果\n2个独立固定IP  任意32位IP  2*216+32+16\n任意16位port number  任 意 16 位   port\nnumber\n（3）\n```\n128.2.194.242:80\n128.2.194.242:7\n```\n4) connfd, listenfd, connfd, connfd\naccept 之后把参数里的listenfd 转交给 connfd\nserver 无法支持多个 connections，因为只有一个文件描述符（listenfd）\n考察学生对 网络文件描述符、listenfd、connfd的理解。"
+        "prompt": "第七题（10分）\n\n（1）一个服务器拥有两个独立的固定 IP 地址，那么它在 Web 应用端口 80 上最多可以监听 {{blank:listen-port80}} 个独立的 socket 连接。（2分）\n\n（2）该服务器在所有 Web 应用端口上最多可以监听 {{blank:listen-all-ports}} 个独立的 socket 连接。（2分）\n\n（3）服务器的固定 IP 地址为 `128.2.194.242`。请填写两种客户端请求对应的目标服务器 socket 标识符。（2分）\n\n| 客户端请求 | 服务器端口 | 目标 socket 标识符 |\n| --- | ---: | --- |\n| Web client | 80 | {{blank:web-socket}} |\n| Echo client | 7 | {{blank:echo-socket}} |\n\n（4）在 Echo server 范例中，server 端通过 `accept` 接受 client 的连接请求。请在下面的空格中填写 `listenfd` 或 `connfd`。（4分，每空1分）\n\n```c\nint main(int argc, char **argv) {\n    int listenfd, connfd, port, clientlen;\n    struct sockaddr_in clientaddr;\n    struct hostent *hp;\n    char *haddrp;\n    unsigned short client_port;\n    /* ... */\n    while (1) {\n        clientlen = sizeof(clientaddr);\n        {{blank:accept-result}} = Accept({{blank:accept-listen}},\n            (SA *)&clientaddr, &clientlen);\n        hp = Gethostbyaddr((const char *)&clientaddr.sin_addr.s_addr,\n            sizeof(clientaddr.sin_addr.s_addr), AF_INET);\n        haddrp = inet_ntoa(clientaddr.sin_addr);\n        client_port = ntohs(clientaddr.sin_port);\n        printf(\"server connected to %s (%s), port %u\\n\",\n            hp->h_name, haddrp, client_port);\n        echo({{blank:echo-fd}});\n        Close({{blank:close-fd}});\n    }\n}\n```",
+        "answer": "答案：\n\n1. $2\\times 2^{48}$\n2. $2\\times 2^{64}$\n3. `128.2.194.242:80`；`128.2.194.242:7`\n4. `connfd`、`listenfd`、`connfd`、`connfd`\n\n`Accept` 在监听描述符 `listenfd` 上接收连接，并返回已连接描述符 `connfd`；后续数据传输与关闭操作都使用 `connfd`。"
       },
       "presentation": {
         "status": "ready",
@@ -364,7 +500,7 @@
     {
       "id": "q-00a8b5c318a16492",
       "paperId": "p-089627b27e9b5e79",
-      "paperOrder": 29,
+      "paperOrder": 31,
       "moduleId": "network",
       "year": 2014,
       "examType": "期末",

@@ -893,10 +893,8 @@
       "exam": "2014期中",
       "questionNo": "第六题",
       "summary": "Y86 新增 caddXX 指令在 SEQ 各阶段的操作",
-      "content": "第六题（10 分）\n\n请分析Y86 ISA中新加入的一条指令： caddXX，条件加法。其功能可以参考add和cmovXX两条指令。\n\n![图](assets/期中/2014期中-带答案/page-15.png)\n\n（图：Y86 新增指令 caddXX 的指令编码格式，字段依次为 C、fn、rA、rB）\n\n```\ncaddXX | C | fn | rA | rB |\n```\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n![图](assets/期中/2014期中-带答案/page-15.png)\n\n（图：第六题 SEQ 各阶段操作填写表，行为 Fetch / Decode / Execute / Memory / Write back / PC update）\n\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 R[rB] ← Cnd? valE: valB\n答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← M<sub>1</sub>[PC]<br>rA:rB ← M<sub>1</sub>[PC+1]<br>valP ← PC+2 |\n| Decode | valA ← R[rA]<br>valB ← R[rB] |\n| Execute | valE ← valA+valB<br>Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | if(Cnd) R[rB] ← valE |\n| PC update | PC ← valP |",
-      "assets": [
-        "assets/期中/2014期中-带答案/page-15.png"
-      ],
+      "content": "第六题（10 分）\n\n请分析 Y86 ISA 中新加入的一条指令 `caddXX`（条件加法）。其功能可以参考 `add` 和 `cmovXX` 两条指令。\n\n| 指令 | 第 1 字节高 4 位 | 第 1 字节低 4 位 | 第 2 字节高 4 位 | 第 2 字节低 4 位 |\n| --- | --- | --- | --- | --- |\n| `caddXX rA, rB` | `C` | `fn` | `rA` | `rB` |\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 R[rB] ← Cnd? valE: valB\n答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← M<sub>1</sub>[PC]<br>rA:rB ← M<sub>1</sub>[PC+1]<br>valP ← PC+2 |\n| Decode | valA ← R[rA]<br>valB ← R[rB] |\n| Execute | valE ← valA+valB<br>Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | if(Cnd) R[rB] ← valE |\n| PC update | PC ← valP |",
+      "assets": [],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -917,7 +915,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "第六题（10 分）\n\n请分析Y86 ISA中新加入的一条指令： caddXX，条件加法。其功能可以参考add和cmovXX两条指令。\n\n![图](assets/期中/2014期中-带答案/page-15.png)\n\n（图：Y86 新增指令 caddXX 的指令编码格式，字段依次为 C、fn、rA、rB）\n\n```\ncaddXX | C | fn | rA | rB |\n```\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n![图](assets/期中/2014期中-带答案/page-15.png)\n\n（图：第六题 SEQ 各阶段操作填写表，行为 Fetch / Decode / Execute / Memory / Write back / PC update）\n\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 R[rB] ← Cnd? valE: valB",
+        "stem": "第六题（10 分）\n\n请分析 Y86 ISA 中新加入的一条指令 `caddXX`（条件加法）。其功能可以参考 `add` 和 `cmovXX` 两条指令。\n\n| 指令 | 第 1 字节高 4 位 | 第 1 字节低 4 位 | 第 2 字节高 4 位 | 第 2 字节低 4 位 |\n| --- | --- | --- | --- | --- |\n| `caddXX rA, rB` | `C` | `fn` | `rA` | `rB` |\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 R[rB] ← Cnd? valE: valB",
         "choices": [],
         "answer": "答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← M<sub>1</sub>[PC]<br>rA:rB ← M<sub>1</sub>[PC+1]<br>valP ← PC+2 |\n| Decode | valA ← R[rA]<br>valB ← R[rB] |\n| Execute | valE ← valA+valB<br>Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | if(Cnd) R[rB] ← valE |\n| PC update | PC ← valP |"
       },
@@ -927,7 +925,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第六题（10 分）\n\n请分析Y86 ISA中新加入的一条指令： caddXX，条件加法。其功能可以参考add和cmovXX两条指令。\n\n![图](assets/期中/2014期中-带答案/page-15.png)\n\n（图：Y86 新增指令 caddXX 的指令编码格式，字段依次为 C、fn、rA、rB）\n\n```\ncaddXX | C | fn | rA | rB |\n```\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n![图](assets/期中/2014期中-带答案/page-15.png)\n\n（图：第六题 SEQ 各阶段操作填写表，行为 Fetch / Decode / Execute / Memory / Write back / PC update）\n\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 R[rB] ← Cnd? valE: valB",
+        "prompt": "第六题（10 分）\n\n请分析 Y86 ISA 中新加入的一条指令 `caddXX`（条件加法）。其功能可以参考 `add` 和 `cmovXX` 两条指令。\n\n| 指令 | 第 1 字节高 4 位 | 第 1 字节低 4 位 | 第 2 字节高 4 位 | 第 2 字节低 4 位 |\n| --- | --- | --- | --- | --- |\n| `caddXX rA, rB` | `C` | `fn` | `rA` | `rB` |\n\n若在教材所描述的SEQ处理器上执行这条指令，请按下表填写每个阶段进行的操作。需说明的信号包括： icode, ifun, rA, rB, valA, valB, valC, valE, valP, Cnd； the register file R[], data memory M[], Program counter PC, condition codes CC。其中对存储器的引用必须标明字节数。如果在某一阶段没有任何操作，请填写none指明。\n\n（每个操作 1 分）\n\n注：Execute 阶段可以写上 if(Cnd) Set CC，不计分，但如果只写了 Set CC 是要扣分的。Write back 阶段的操作不可以写成 R[rB] ← Cnd? valE: valB",
         "answer": "答案：caddXX rA, rB 在 SEQ 各阶段的操作（每个操作 1 分）：\n\n| Stage | caddXX rA, rB |\n| --- | --- |\n| Fetch | icode:ifun ← M<sub>1</sub>[PC]<br>rA:rB ← M<sub>1</sub>[PC+1]<br>valP ← PC+2 |\n| Decode | valA ← R[rA]<br>valB ← R[rB] |\n| Execute | valE ← valA+valB<br>Cnd ← Cond(CC,ifun) |\n| Memory | none |\n| Write back | if(Cnd) R[rB] ← valE |\n| PC update | PC ← valP |"
       },
       "presentation": {
@@ -5074,16 +5072,16 @@
       }
     },
     {
-      "id": "q-920ade3eed89c7bb",
+      "id": "q-62255a22a4ea1e74",
       "paperId": "p-ac5fea2cf89e5bed",
       "paperOrder": 4,
       "moduleId": "processor_arch",
       "year": 2013,
       "examType": "期末",
       "exam": "2013期末",
-      "questionNo": "第一题 4",
-      "summary": "Y86 SEQ 中 PC 更新的 HCL 数据来源",
-      "content": "4、 在Y86的SEQ实现中，PC（Program Counter，程序计数器）更新的逻辑\n结构如下图所示，请根据HCL描述为①②③④选择正确的数据来源。\n\n![PC 更新逻辑的 HCL 描述与 New_PC 结构图](assets/期末/2013期末-带答案/p3-pc-update-logic.png)\n\n其中：Icode为指令类型，Cnd为条件是否成立，valC表示指令中的常数值，valM\n表示来自返回栈的数据，valP表示PC自增。\n①    A ：A）valC  B）valM   C）valP\n②    A ：A）valC  B）valM   C）valP\n③    B ：A）valC  B）valM   C）valP\n④    C ：A）valC  B）valM   C）valP\n① A：A）valC  ② A：A）valC  ③ B：B）valM  ④ C：C）valP",
+      "questionNo": "第一题 4（1）",
+      "summary": "Y86 SEQ 中 PC 更新的数据源①",
+      "content": "4. 在 Y86 的 SEQ 实现中，PC 更新逻辑根据 `icode` 与 `Cnd`，从 `valC`、`valM`、`valP` 中选择下一条指令地址。图中的数据源 ① 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)\nA. `valC`\nB. `valM`\nC. `valP`\n答案：A（`valC`）。",
       "assets": [
         "assets/期末/2013期末-带答案/p3-pc-update-logic.png"
       ],
@@ -5097,26 +5095,340 @@
         "document": "原文/期末/2013期末-带答案.md",
         "lines": {
           "start": 65,
-          "end": 76
+          "end": 73
         },
         "aliases": [],
         "curated": "_curated/期末/2013期末-带答案/65.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "4、 在Y86的SEQ实现中，PC（Program Counter，程序计数器）更新的逻辑\n结构如下图所示，请根据HCL描述为①②③④选择正确的数据来源。\n\n![PC 更新逻辑的 HCL 描述与 New_PC 结构图](assets/期末/2013期末-带答案/p3-pc-update-logic.png)\n\n其中：Icode为指令类型，Cnd为条件是否成立，valC表示指令中的常数值，valM\n表示来自返回栈的数据，valP表示PC自增。\n①    A ：A）valC  B）valM   C）valP\n②    A ：A）valC  B）valM   C）valP\n③    B ：A）valC  B）valM   C）valP\n④    C ：A）valC  B）valM   C）valP",
-        "choices": [],
-        "answer": "① A：A）valC  ② A：A）valC  ③ B：B）valM  ④ C：C）valP"
+        "mode": "choice",
+        "selection": "single",
+        "stem": "4. 在 Y86 的 SEQ 实现中，PC 更新逻辑根据 `icode` 与 `Cnd`，从 `valC`、`valM`、`valP` 中选择下一条指令地址。图中的数据源 ① 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)",
+        "choices": [
+          {
+            "key": "A",
+            "content": "`valC`"
+          },
+          {
+            "key": "B",
+            "content": "`valM`"
+          },
+          {
+            "key": "C",
+            "content": "`valP`"
+          }
+        ],
+        "answer": "答案：A（`valC`）。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "`valC`"
+          },
+          {
+            "id": "B",
+            "content": "`valM`"
+          },
+          {
+            "id": "C",
+            "content": "`valP`"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4、 在Y86的SEQ实现中，PC（Program Counter，程序计数器）更新的逻辑\n结构如下图所示，请根据HCL描述为①②③④选择正确的数据来源。\n\n![PC 更新逻辑的 HCL 描述与 New_PC 结构图](assets/期末/2013期末-带答案/p3-pc-update-logic.png)\n\n其中：Icode为指令类型，Cnd为条件是否成立，valC表示指令中的常数值，valM\n表示来自返回栈的数据，valP表示PC自增。\n①    A ：A）valC  B）valM   C）valP\n②    A ：A）valC  B）valM   C）valP\n③    B ：A）valC  B）valM   C）valP\n④    C ：A）valC  B）valM   C）valP",
-        "answer": "① A：A）valC  ② A：A）valC  ③ B：B）valM  ④ C：C）valP"
+        "prompt": "4. 在 Y86 的 SEQ 实现中，PC 更新逻辑根据 `icode` 与 `Cnd`，从 `valC`、`valM`、`valP` 中选择下一条指令地址。图中的数据源 ① 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)",
+        "answer": "答案：A（`valC`）。"
+      },
+      "group": {
+        "id": "p-ac5fea2cf89e5bed:2013-final-q1-4",
+        "questionId": "q-66f2c548dbe1ef9e",
+        "title": "第一题 4",
+        "order": 1
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-75c36f88f1c3c806",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 5,
+      "moduleId": "processor_arch",
+      "year": 2013,
+      "examType": "期末",
+      "exam": "2013期末",
+      "questionNo": "第一题 4（2）",
+      "summary": "Y86 SEQ 中 PC 更新的数据源②",
+      "content": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ② 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)\nA. `valC`\nB. `valM`\nC. `valP`\n答案：A（`valC`）。",
+      "assets": [
+        "assets/期末/2013期末-带答案/p3-pc-update-logic.png"
+      ],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2013期末-带答案.md",
+        "lines": {
+          "start": 74,
+          "end": 74
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2013期末-带答案/74.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ② 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)",
+        "choices": [
+          {
+            "key": "A",
+            "content": "`valC`"
+          },
+          {
+            "key": "B",
+            "content": "`valM`"
+          },
+          {
+            "key": "C",
+            "content": "`valP`"
+          }
+        ],
+        "answer": "答案：A（`valC`）。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "`valC`"
+          },
+          {
+            "id": "B",
+            "content": "`valM`"
+          },
+          {
+            "id": "C",
+            "content": "`valP`"
+          }
+        ],
+        "correctChoiceIds": [
+          "A"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ② 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)",
+        "answer": "答案：A（`valC`）。"
+      },
+      "group": {
+        "id": "p-ac5fea2cf89e5bed:2013-final-q1-4",
+        "questionId": "q-66f2c548dbe1ef9e",
+        "title": "第一题 4",
+        "order": 2
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-7a22222d757afa82",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 6,
+      "moduleId": "processor_arch",
+      "year": 2013,
+      "examType": "期末",
+      "exam": "2013期末",
+      "questionNo": "第一题 4（3）",
+      "summary": "Y86 SEQ 中 PC 更新的数据源③",
+      "content": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ③ 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)\nA. `valC`\nB. `valM`\nC. `valP`\n答案：B（`valM`）。",
+      "assets": [
+        "assets/期末/2013期末-带答案/p3-pc-update-logic.png"
+      ],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2013期末-带答案.md",
+        "lines": {
+          "start": 75,
+          "end": 75
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2013期末-带答案/75.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ③ 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)",
+        "choices": [
+          {
+            "key": "A",
+            "content": "`valC`"
+          },
+          {
+            "key": "B",
+            "content": "`valM`"
+          },
+          {
+            "key": "C",
+            "content": "`valP`"
+          }
+        ],
+        "answer": "答案：B（`valM`）。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "`valC`"
+          },
+          {
+            "id": "B",
+            "content": "`valM`"
+          },
+          {
+            "id": "C",
+            "content": "`valP`"
+          }
+        ],
+        "correctChoiceIds": [
+          "B"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ③ 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)",
+        "answer": "答案：B（`valM`）。"
+      },
+      "group": {
+        "id": "p-ac5fea2cf89e5bed:2013-final-q1-4",
+        "questionId": "q-66f2c548dbe1ef9e",
+        "title": "第一题 4",
+        "order": 3
+      },
+      "presentation": {
+        "status": "ready",
+        "issues": []
+      }
+    },
+    {
+      "id": "q-e4d86201d3caab9a",
+      "paperId": "p-ac5fea2cf89e5bed",
+      "paperOrder": 7,
+      "moduleId": "processor_arch",
+      "year": 2013,
+      "examType": "期末",
+      "exam": "2013期末",
+      "questionNo": "第一题 4（4）",
+      "summary": "Y86 SEQ 中 PC 更新的数据源④",
+      "content": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ④ 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)\nA. `valC`\nB. `valM`\nC. `valP`\n答案：C（`valP`）。",
+      "assets": [
+        "assets/期末/2013期末-带答案/p3-pc-update-logic.png"
+      ],
+      "formatted": true,
+      "answer": {
+        "inline": true,
+        "status": "verified",
+        "relatedBlockIds": []
+      },
+      "source": {
+        "document": "原文/期末/2013期末-带答案.md",
+        "lines": {
+          "start": 76,
+          "end": 76
+        },
+        "aliases": [],
+        "curated": "_curated/期末/2013期末-带答案/76.md"
+      },
+      "layout": {
+        "mode": "choice",
+        "selection": "single",
+        "stem": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ④ 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)",
+        "choices": [
+          {
+            "key": "A",
+            "content": "`valC`"
+          },
+          {
+            "key": "B",
+            "content": "`valM`"
+          },
+          {
+            "key": "C",
+            "content": "`valP`"
+          }
+        ],
+        "answer": "答案：C（`valP`）。"
+      },
+      "partInteraction": {
+        "kind": "single-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "`valC`"
+          },
+          {
+            "id": "B",
+            "content": "`valM`"
+          },
+          {
+            "id": "C",
+            "content": "`valP`"
+          }
+        ],
+        "correctChoiceIds": [
+          "C"
+        ]
+      },
+      "interaction": {
+        "kind": "composite",
+        "declared": true,
+        "partKind": "single-choice"
+      },
+      "contentV3": {
+        "format": "markdown",
+        "prompt": "在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ④ 应为：\n\n![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)",
+        "answer": "答案：C（`valP`）。"
+      },
+      "group": {
+        "id": "p-ac5fea2cf89e5bed:2013-final-q1-4",
+        "questionId": "q-66f2c548dbe1ef9e",
+        "title": "第一题 4",
+        "order": 4
       },
       "presentation": {
         "status": "ready",
@@ -5126,7 +5438,7 @@
     {
       "id": "q-214498ca68ff174f",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 22,
+      "paperOrder": 25,
       "moduleId": "processor_arch",
       "year": 2013,
       "examType": "期末",
@@ -6371,7 +6683,7 @@
       "exam": "2021期末",
       "questionNo": "第一题 4",
       "summary": "PIPE 中无前递时的数据冒险判定",
-      "content": "4. 在Y86-64 PIPE处理器中（不考虑数据前递），以下哪个指令序列会造成\n数据冒险？\nA.\nirmovq $10, %rdx\naddq %rdx, %rax\nB.\nirmovq $10, %rdx\nnop\naddq %rdx, %rax\nC.\nirmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax\nD. 以上三个选项都会引发数据冒险\n答案：D",
+      "content": "4. 在Y86-64 PIPE处理器中（不考虑数据前递），以下哪个指令序列会造成\n数据冒险？\nA.\n```asm\nirmovq $10, %rdx\naddq %rdx, %rax\n```\nB.\n```asm\nirmovq $10, %rdx\nnop\naddq %rdx, %rax\n```\nC.\n```asm\nirmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax\n```\nD. 以上三个选项都会引发数据冒险\n答案：D",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6397,15 +6709,15 @@
         "choices": [
           {
             "key": "A",
-            "content": "irmovq $10, %rdx\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\naddq %rdx, %rax\n```"
           },
           {
             "key": "B",
-            "content": "irmovq $10, %rdx\nnop\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\nnop\naddq %rdx, %rax\n```"
           },
           {
             "key": "C",
-            "content": "irmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax\n```"
           },
           {
             "key": "D",
@@ -6420,15 +6732,15 @@
         "choices": [
           {
             "id": "A",
-            "content": "irmovq $10, %rdx\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\naddq %rdx, %rax\n```"
           },
           {
             "id": "B",
-            "content": "irmovq $10, %rdx\nnop\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\nnop\naddq %rdx, %rax\n```"
           },
           {
             "id": "C",
-            "content": "irmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax\n```"
           },
           {
             "id": "D",
@@ -6726,7 +7038,7 @@
       "exam": "2021期末（第 2–6 讲）",
       "questionNo": "第一题 6",
       "summary": "Y86-64 PIPE 数据冒险与所需 nop 指令条数",
-      "content": "6.在Y86-64 PIPE处理器中（不考虑数据前递），以下哪个指令序列会造成数据冒险？\nA.\n\nirmovq \\$10, %rdx\n\naddq %rdx, %rax\n\nB.\n\nirmovq \\$10, %rdx\n\nnop\n\naddq %rdx, %rax\n\nC.\n\nirmovq \\$10, %rdx\n\nnop\n\nnop\n\naddq %rdx, %rax\n\nD. 以上三个选项都会引发数据冒险\n答案：D。答案：D。要想不引起数据冒险，需要改变数据的指令在使用数据的指令进入译码阶段时已经完成写回阶段。因此至少需要插入3个nop指令。\n\n书本P295",
+      "content": "6.在Y86-64 PIPE处理器中（不考虑数据前递），以下哪个指令序列会造成数据冒险？\nA.\n```asm\nirmovq $10, %rdx\naddq %rdx, %rax\n```\nB.\n```asm\nirmovq $10, %rdx\nnop\naddq %rdx, %rax\n```\nC.\n```asm\nirmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax\n```\nD. 以上三个选项都会引发数据冒险\n答案：D。答案：D。要想不引起数据冒险，需要改变数据的指令在使用数据的指令进入译码阶段时已经完成写回阶段。因此至少需要插入3个nop指令。\n\n书本P295",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6753,15 +7065,15 @@
         "choices": [
           {
             "key": "A",
-            "content": "irmovq \\$10, %rdx\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\naddq %rdx, %rax\n```"
           },
           {
             "key": "B",
-            "content": "irmovq \\$10, %rdx\nnop\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\nnop\naddq %rdx, %rax\n```"
           },
           {
             "key": "C",
-            "content": "irmovq \\$10, %rdx\nnop\nnop\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax\n```"
           },
           {
             "key": "D",
@@ -6776,15 +7088,15 @@
         "choices": [
           {
             "id": "A",
-            "content": "irmovq \\$10, %rdx\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\naddq %rdx, %rax\n```"
           },
           {
             "id": "B",
-            "content": "irmovq \\$10, %rdx\nnop\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\nnop\naddq %rdx, %rax\n```"
           },
           {
             "id": "C",
-            "content": "irmovq \\$10, %rdx\nnop\nnop\naddq %rdx, %rax"
+            "content": "```asm\nirmovq $10, %rdx\nnop\nnop\naddq %rdx, %rax\n```"
           },
           {
             "id": "D",

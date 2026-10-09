@@ -28,11 +28,35 @@
     },
     {
       "start": 65,
+      "end": 73,
+      "module": "Processor Arch",
+      "qno": "第一题 4（1）",
+      "note": "Y86 SEQ 中 PC 更新的数据源①",
+      "curated": "期末/2013期末-带答案/65.md"
+    },
+    {
+      "start": 74,
+      "end": 74,
+      "module": "Processor Arch",
+      "qno": "第一题 4（2）",
+      "note": "Y86 SEQ 中 PC 更新的数据源②",
+      "curated": "期末/2013期末-带答案/74.md"
+    },
+    {
+      "start": 75,
+      "end": 75,
+      "module": "Processor Arch",
+      "qno": "第一题 4（3）",
+      "note": "Y86 SEQ 中 PC 更新的数据源③",
+      "curated": "期末/2013期末-带答案/75.md"
+    },
+    {
+      "start": 76,
       "end": 76,
       "module": "Processor Arch",
-      "qno": "第一题 4",
-      "note": "Y86 SEQ 中 PC 更新的 HCL 数据来源",
-      "curated": "期末/2013期末-带答案/65.md"
+      "qno": "第一题 4（4）",
+      "note": "Y86 SEQ 中 PC 更新的数据源④",
+      "curated": "期末/2013期末-带答案/76.md"
     },
     {
       "start": 77,

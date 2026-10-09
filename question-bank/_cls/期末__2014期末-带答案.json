@@ -220,11 +220,27 @@
     },
     {
       "start": 767,
+      "end": 813,
+      "module": "ECF and System IO",
+      "qno": "第七题 1",
+      "note": "描述符表、打开文件表和 v-node 表的指向关系",
+      "curated": "期末/2014期末-带答案/767.md"
+    },
+    {
+      "start": 814,
+      "end": 819,
+      "module": "ECF and System IO",
+      "qno": "第七题 2",
+      "note": "open、dup 和 dup2 后的文件描述符值",
+      "curated": "期末/2014期末-带答案/814.md"
+    },
+    {
+      "start": 820,
       "end": 823,
       "module": "ECF and System IO",
-      "qno": "第七题",
-      "note": "描述符表/打开文件表/v-node 表与 dup2",
-      "curated": "期末/2014期末-带答案/767.md"
+      "qno": "第七题 3",
+      "note": "O_APPEND 与共享文件位置决定的文件内容",
+      "curated": "期末/2014期末-带答案/820.md"
     },
     {
       "start": 829,

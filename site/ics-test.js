@@ -58,9 +58,10 @@
     return rendererInstance;
   }
   const md = createMarkdownRenderer(false);
-  // `_curated/*.md` 是人工排版后的最终题面，换行必须逐字忠实呈现，不能再按
-  // PDF 折行启发式合并。旧数据兜底路径仍使用 breaks=false。
-  const formattedMd = createMarkdownRenderer(true);
+  // `_curated/*.md` 使用标准 Markdown 换行语义：普通单换行只是源码折行，
+  // 空行才分段；需要保留的换行应写成代码围栏或 Markdown 硬换行。
+  // 不能启用 breaks=true，否则 PDF/人工录入留下的行尾会在宽屏上提前断句。
+  const formattedMd = createMarkdownRenderer(false);
 
   function escapeHtml(value) {
     return String(value == null ? '' : value)
@@ -138,18 +139,29 @@
     return renderMarkdown(String(source || '').trim());
   }
 
+  // Markdown 的 softbreak 在 HTML 中会折叠成一个空格。英文需要这个空格，
+  // 中文 PDF 折行则不应凭空插入空格；围栏代码与显式硬换行保持原样。
+  function normalizeLayoutMarkdown(source) {
+    return String(source || '').replace(/\r\n?/g, '\n')
+      .split(/(```+[\s\S]*?```+|~~~+[\s\S]*?~~~+)/g)
+      .map(function (part, index) {
+        if (index % 2 === 1) return part;
+        return part.replace(/([\u3000-\u303f\u3400-\u9fff\uff00-\uff65])\n(?=[\u3000-\u303f\u3400-\u9fff\uff00-\uff65])/g, '$1');
+      }).join('');
+  }
+
   // 新路径（formatted）：题库已经给出结构化 layout，前端**一点不猜**。
   // 该是代码就写反引号、该是公式就写 $…$、都不写就是普通文本 —— 同一题内不可能
   // 再出现「一个选项等宽、兄弟选项普通文本」的观感割裂。
   // 注意：这两个函数必须留在 ics-check.js 抽取的片段内（escapeHtml..secureShuffle），
   // 否则体检脚本里的 Function 构造会报 not defined。
   function renderLayoutStem(text) {
-    const clean = String(text || '').replace(/\r\n?/g, '\n');
+    const clean = normalizeLayoutMarkdown(text);
     return formattedMd ? formattedMd.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';
   }
 
   function renderLayoutChoice(text) {
-    const clean = String(text || '').replace(/\r\n?/g, '\n').trim();
+    const clean = normalizeLayoutMarkdown(text).trim();
     // 选项本身也允许是完整的人工 Markdown（表格、围栏代码、图片等），
     // 不能用 renderInline 把块级结构当成普通字符显示。
     return formattedMd ? formattedMd.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';

@@ -183,6 +183,12 @@
   white-space: pre;
   overflow-wrap: normal;
 }
+.ics-question-content mjx-container:not([display="true"]),
+.ics-choice-content mjx-container:not([display="true"]),
+.ics-reference mjx-container:not([display="true"]) {
+  /* MathJax 默认把行内公式放大到约 113%，会与中文正文显得断裂。 */
+  font-size: 1em !important;
+}
 .ics-question-content mjx-container[display="true"],
 .ics-choice-content mjx-container[display="true"],
 .ics-reference mjx-container[display="true"] {

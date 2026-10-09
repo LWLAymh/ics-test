@@ -733,7 +733,7 @@
       "exam": "2012期中",
       "questionNo": "Problem B 3",
       "summary": "利用双精度规格化加速 float→int（加 2^52 取低 32 位）",
-      "content": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in\n   hardware. A clever technique uses the normalization step in double-precision floats. Imagine if\n   you could normalize a (non-negative) floating point number so that the low-order significant bit\n   represents $2^0$. Then the significant would be an integer. **(8 pts) (f-f09 7)**\n\n   Assume a double where, after taking the exponent into account, the low-order bit represents 1\n   ($2^0$). What does the “implied leading 1” of the significant represent?\n   ______\n\n   Now, assume a double x is known to be in the range 0<=x<$2^32$. To force the low-order bit of x to\n   represent 1($2^0$), you should add by ____________?\n\n   After this operation, you can store the double to memory and read the (circle one:)\n   ● *Upper 32 bits (the end with the sign bit == 0)*, or\n   ● *Lower 32 bits (the other end)*\n\n   as an unsigned integer to get the integer value of the original double. This algorithm will round\n   (circle one)\n   ● *toward zero,*\n   ● *up,*\n   ● *down,*\n   ● *to the nearest even.*\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```\n答案：1) “implied leading 1” 代表 $2^52$；2) 应当加 $2^52$；3) 取回 **Lower 32 bits（低 32 位）**；4) 该算法按 **to the nearest even（向最近的偶数舍入）** 取整。\n（原卷红色标注：implied leading 1 = 2^52；add by 2^52；圆选 Lower 32 bits；圆选 to the nearest even。）",
+      "content": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts) (f-f09 7)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```\n答案：1) “implied leading 1” 代表 $2^{52}$；2) 应当加 $2^{52}$；3) 取回 **Lower 32 bits（低 32 位）**；4) 按 **to the nearest even（向偶数舍入）** 取整。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -753,18 +753,106 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in\n   hardware. A clever technique uses the normalization step in double-precision floats. Imagine if\n   you could normalize a (non-negative) floating point number so that the low-order significant bit\n   represents $2^0$. Then the significant would be an integer. **(8 pts) (f-f09 7)**\n\n   Assume a double where, after taking the exponent into account, the low-order bit represents 1\n   ($2^0$). What does the “implied leading 1” of the significant represent?\n   ______\n\n   Now, assume a double x is known to be in the range 0<=x<$2^32$. To force the low-order bit of x to\n   represent 1($2^0$), you should add by ____________?\n\n   After this operation, you can store the double to memory and read the (circle one:)\n   ● *Upper 32 bits (the end with the sign bit == 0)*, or\n   ● *Lower 32 bits (the other end)*\n\n   as an unsigned integer to get the integer value of the original double. This algorithm will round\n   (circle one)\n   ● *toward zero,*\n   ● *up,*\n   ● *down,*\n   ● *to the nearest even.*\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```",
+        "stem": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts) (f-f09 7)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```",
         "choices": [],
-        "answer": "答案：1) “implied leading 1” 代表 $2^52$；2) 应当加 $2^52$；3) 取回 **Lower 32 bits（低 32 位）**；4) 该算法按 **to the nearest even（向最近的偶数舍入）** 取整。\n（原卷红色标注：implied leading 1 = 2^52；add by 2^52；圆选 Lower 32 bits；圆选 to the nearest even。）"
+        "answer": "答案：1) “implied leading 1” 代表 $2^{52}$；2) 应当加 $2^{52}$；3) 取回 **Lower 32 bits（低 32 位）**；4) 按 **to the nearest even（向偶数舍入）** 取整。",
+        "blankAnswers": [
+          {
+            "id": "leading-one",
+            "acceptedAnswers": [
+              "2^52",
+              "2**52",
+              "4503599627370496"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "add-value",
+            "acceptedAnswers": [
+              "2^52",
+              "2**52",
+              "4503599627370496"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "word-half",
+            "acceptedAnswers": [
+              "Lower 32 bits",
+              "lower 32 bits",
+              "低32位",
+              "低 32 位"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "rounding",
+            "acceptedAnswers": [
+              "to the nearest even",
+              "nearest even",
+              "向最近的偶数舍入",
+              "向偶数舍入"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "leading-one",
+            "acceptedAnswers": [
+              "2^52",
+              "2**52",
+              "4503599627370496"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "add-value",
+            "acceptedAnswers": [
+              "2^52",
+              "2**52",
+              "4503599627370496"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "word-half",
+            "acceptedAnswers": [
+              "Lower 32 bits",
+              "lower 32 bits",
+              "低32位",
+              "低 32 位"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "rounding",
+            "acceptedAnswers": [
+              "to the nearest even",
+              "nearest even",
+              "向最近的偶数舍入",
+              "向偶数舍入"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in\n   hardware. A clever technique uses the normalization step in double-precision floats. Imagine if\n   you could normalize a (non-negative) floating point number so that the low-order significant bit\n   represents $2^0$. Then the significant would be an integer. **(8 pts) (f-f09 7)**\n\n   Assume a double where, after taking the exponent into account, the low-order bit represents 1\n   ($2^0$). What does the “implied leading 1” of the significant represent?\n   ______\n\n   Now, assume a double x is known to be in the range 0<=x<$2^32$. To force the low-order bit of x to\n   represent 1($2^0$), you should add by ____________?\n\n   After this operation, you can store the double to memory and read the (circle one:)\n   ● *Upper 32 bits (the end with the sign bit == 0)*, or\n   ● *Lower 32 bits (the other end)*\n\n   as an unsigned integer to get the integer value of the original double. This algorithm will round\n   (circle one)\n   ● *toward zero,*\n   ● *up,*\n   ● *down,*\n   ● *to the nearest even.*\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```",
-        "answer": "答案：1) “implied leading 1” 代表 $2^52$；2) 应当加 $2^52$；3) 取回 **Lower 32 bits（低 32 位）**；4) 该算法按 **to the nearest even（向最近的偶数舍入）** 取整。\n（原卷红色标注：implied leading 1 = 2^52；add by 2^52；圆选 Lower 32 bits；圆选 to the nearest even。）"
+        "prompt": "3. Conversion from float to int is a notoriously expensive operation. Not all processors do this in hardware. A clever technique uses the normalization step in double-precision floats. Imagine if you could normalize a non-negative floating-point number so that the low-order significant bit represents $2^0$. Then the significand would be an integer. **(8 pts) (f-f09 7)**\n\nAssume a `double` where, after taking the exponent into account, the low-order bit represents $2^0$. The “implied leading 1” of the significand represents {{blank:leading-one}}.\n\nNow assume a `double x` is known to satisfy $0\\le x<2^{32}$. To force the low-order bit of `x` to represent $2^0$, add {{blank:add-value}}.\n\nAfter this operation, store the `double` to memory and read {{blank:word-half}} as an unsigned integer to obtain the integer value of the original `double`（填 `Upper 32 bits` 或 `Lower 32 bits`）。\n\nThis algorithm rounds {{blank:rounding}}（从 `toward zero`、`up`、`down`、`to the nearest even` 中选择）。\n\n   ***Hints:***\n\n```\ndouble-precision significant has 52 bits\ndouble-precision exponent has 11 bits\ndouble-precision sign-bit is (of course) 1 bit\n```",
+        "answer": "答案：1) “implied leading 1” 代表 $2^{52}$；2) 应当加 $2^{52}$；3) 取回 **Lower 32 bits（低 32 位）**；4) 按 **to the nearest even（向偶数舍入）** 取整。"
       },
       "presentation": {
         "status": "ready",
@@ -1186,7 +1274,7 @@
       "exam": "2014期中",
       "questionNo": "第一题 1",
       "summary": "有符号/无符号比较、取负、左移与乘 16",
-      "content": "1、假设下列 unsigned 和 int 数均为 32 位，\n\n```c\nunsigned x = 0x00000001;\nint y = 0x80000000;\nint z = 0x80000001;\n```\n\n以下表达式正确的是\nA. (-1) < x\nB. (- y) > -1\nC. ~y + y == -1\nD. $(z<<4)$ > (z*16)\n\n答：（　　　）\n答案：C\n\nA 错误 signed (-1) 和 unsigned x 比较，都按照 unsigned，所以强制类型转换后 (-1) 很大\n\nB 错误 int 中 0x80000000 的相反数还是自己，是最小的负数\n\nC 正确 相等关系；~y + y == 0xFFFFFFFF 是 -1 的补码表示\n\nD 错误 应该是相等关系 unsigned，signed 左移 4 位 相当于 *16",
+      "content": "1、假设下列 unsigned 和 int 数均为 32 位，\n\n```c\nunsigned x = 0x00000001;\nint y = 0x80000000;\nint z = 0x80000001;\n```\n\n以下表达式正确的是\nA. `(-1) < x`\nB. `(-y) > -1`\nC. `~y + y == -1`\nD. `(z << 4) > (z * 16)`\n答案：C\n\nA 错误 signed (-1) 和 unsigned x 比较，都按照 unsigned，所以强制类型转换后 (-1) 很大\n\nB 错误 int 中 0x80000000 的相反数还是自己，是最小的负数\n\nC 正确 相等关系；~y + y == 0xFFFFFFFF 是 -1 的补码表示\n\nD 错误 应该是相等关系 unsigned，signed 左移 4 位 相当于 *16",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1212,19 +1300,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "(-1) < x"
+            "content": "`(-1) < x`"
           },
           {
             "key": "B",
-            "content": "(- y) > -1"
+            "content": "`(-y) > -1`"
           },
           {
             "key": "C",
-            "content": "~y + y == -1"
+            "content": "`~y + y == -1`"
           },
           {
             "key": "D",
-            "content": "$(z<<4)$ > (z*16)\n答：（　　　）"
+            "content": "`(z << 4) > (z * 16)`"
           }
         ],
         "answer": "答案：C\n\nA 错误 signed (-1) 和 unsigned x 比较，都按照 unsigned，所以强制类型转换后 (-1) 很大\n\nB 错误 int 中 0x80000000 的相反数还是自己，是最小的负数\n\nC 正确 相等关系；~y + y == 0xFFFFFFFF 是 -1 的补码表示\n\nD 错误 应该是相等关系 unsigned，signed 左移 4 位 相当于 *16"
@@ -1235,19 +1323,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "(-1) < x"
+            "content": "`(-1) < x`"
           },
           {
             "id": "B",
-            "content": "(- y) > -1"
+            "content": "`(-y) > -1`"
           },
           {
             "id": "C",
-            "content": "~y + y == -1"
+            "content": "`~y + y == -1`"
           },
           {
             "id": "D",
-            "content": "$(z<<4)$ > (z*16)\n答：（　　　）"
+            "content": "`(z << 4) > (z * 16)`"
           }
         ],
         "correctChoiceIds": [
@@ -2630,7 +2718,7 @@
       "exam": "2016期中",
       "questionNo": "第一题 17",
       "summary": "IEEE 单精度表示 -8.25",
-      "content": "17. 若按IEEE浮点标准的单精度浮点数（符号位1位，阶码字段exp占据8位，\n5\n\n\n小数字段frac占据23位）表示-8.25，结果是__________（用16进制\n表示）\n答案：C1040000\n解析： 8.25(1)*23*(1 1)\n32\n      符号位：1\n      阶码字段：1000 0010(127+3=130)\n      小数字段：000 0100 0000 0000 0000 0000(1/32)\n      结果：1100 0001 0000 0100 0000 0000 0000 0000",
+      "content": "17. 若按 IEEE 754 单精度浮点格式（符号位 1 位、阶码字段 `exp` 8 位、小数字段 `frac` 23 位）表示 $-8.25$，其十六进制表示为 {{blank:ieee-hex}}。\n答案：`0xC1040000`。\n\n解析：\n\n$$\n-8.25=(-1)\\times 2^3\\times\\left(1+\\frac{1}{32}\\right)\n$$\n\n- 符号位：`1`\n- 阶码字段：`10000010`（$127+3=130$）\n- 小数字段：`00001000000000000000000`\n- 完整位串：`11000001000001000000000000000000`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2653,18 +2741,44 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "17. 若按IEEE浮点标准的单精度浮点数（符号位1位，阶码字段exp占据8位，\n5\n\n\n小数字段frac占据23位）表示-8.25，结果是__________（用16进制\n表示）",
+        "stem": "17. 若按 IEEE 754 单精度浮点格式（符号位 1 位、阶码字段 `exp` 8 位、小数字段 `frac` 23 位）表示 $-8.25$，其十六进制表示为 {{blank:ieee-hex}}。",
         "choices": [],
-        "answer": "答案：C1040000\n解析： 8.25(1)*23*(1 1)\n32\n      符号位：1\n      阶码字段：1000 0010(127+3=130)\n      小数字段：000 0100 0000 0000 0000 0000(1/32)\n      结果：1100 0001 0000 0100 0000 0000 0000 0000"
+        "answer": "答案：`0xC1040000`。\n\n解析：\n\n$$\n-8.25=(-1)\\times 2^3\\times\\left(1+\\frac{1}{32}\\right)\n$$\n\n- 符号位：`1`\n- 阶码字段：`10000010`（$127+3=130$）\n- 小数字段：`00001000000000000000000`\n- 完整位串：`11000001000001000000000000000000`",
+        "blankAnswers": [
+          {
+            "id": "ieee-hex",
+            "acceptedAnswers": [
+              "C1040000",
+              "0xC1040000",
+              "c1040000",
+              "0xc1040000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "ieee-hex",
+            "acceptedAnswers": [
+              "C1040000",
+              "0xC1040000",
+              "c1040000",
+              "0xc1040000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "17. 若按IEEE浮点标准的单精度浮点数（符号位1位，阶码字段exp占据8位，\n5\n\n\n小数字段frac占据23位）表示-8.25，结果是__________（用16进制\n表示）",
-        "answer": "答案：C1040000\n解析： 8.25(1)*23*(1 1)\n32\n      符号位：1\n      阶码字段：1000 0010(127+3=130)\n      小数字段：000 0100 0000 0000 0000 0000(1/32)\n      结果：1100 0001 0000 0100 0000 0000 0000 0000"
+        "prompt": "17. 若按 IEEE 754 单精度浮点格式（符号位 1 位、阶码字段 `exp` 8 位、小数字段 `frac` 23 位）表示 $-8.25$，其十六进制表示为 {{blank:ieee-hex}}。",
+        "answer": "答案：`0xC1040000`。\n\n解析：\n\n$$\n-8.25=(-1)\\times 2^3\\times\\left(1+\\frac{1}{32}\\right)\n$$\n\n- 符号位：`1`\n- 阶码字段：`10000010`（$127+3=130$）\n- 小数字段：`00001000000000000000000`\n- 完整位串：`11000001000001000000000000000000`"
       },
       "presentation": {
         "status": "ready",
@@ -6265,7 +6379,7 @@
       "exam": "2024期中",
       "questionNo": "第一题 1",
       "summary": "32位有符号整数位运算表达式的恒真判断",
-      "content": "1.在 x86-64 机器上，产生随机的 32 位有符号整数x和y，则下列表达式中不\n恒为真的是：\nA. ($(x >> 1)$ << 1) <= x\nB. ((x | -x) >> 31) + 1 == !x\nC. (-x < y) == (-y < x)\nD. ($x ^ y$ ^ ((~x) – y)) == ($y ^ x$ ^ ((~y) – x))\n答案：C，一个反例是 x = Tmin，y = 0。",
+      "content": "1. 在 x86-64 机器上，令 `x` 和 `y` 为任意 32 位有符号整数，则下列表达式中不恒为真的是：\nA. `((x >> 1) << 1) <= x`\nB. `((x | -x) >> 31) + 1 == !x`\nC. `(-x < y) == (-y < x)`\nD. `(x ^ y ^ ((~x) - y)) == (y ^ x ^ ((~y) - x))`\n答案：C，一个反例是 x = Tmin，y = 0。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6290,23 +6404,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "1.在 x86-64 机器上，产生随机的 32 位有符号整数x和y，则下列表达式中不\n恒为真的是：",
+        "stem": "1. 在 x86-64 机器上，令 `x` 和 `y` 为任意 32 位有符号整数，则下列表达式中不恒为真的是：",
         "choices": [
           {
             "key": "A",
-            "content": "($(x >> 1)$ << 1) <= x"
+            "content": "`((x >> 1) << 1) <= x`"
           },
           {
             "key": "B",
-            "content": "((x | -x) >> 31) + 1 == !x"
+            "content": "`((x | -x) >> 31) + 1 == !x`"
           },
           {
             "key": "C",
-            "content": "(-x < y) == (-y < x)"
+            "content": "`(-x < y) == (-y < x)`"
           },
           {
             "key": "D",
-            "content": "($x ^ y$ ^ ((~x) – y)) == ($y ^ x$ ^ ((~y) – x))"
+            "content": "`(x ^ y ^ ((~x) - y)) == (y ^ x ^ ((~y) - x))`"
           }
         ],
         "answer": "答案：C，一个反例是 x = Tmin，y = 0。"
@@ -6317,19 +6431,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "($(x >> 1)$ << 1) <= x"
+            "content": "`((x >> 1) << 1) <= x`"
           },
           {
             "id": "B",
-            "content": "((x | -x) >> 31) + 1 == !x"
+            "content": "`((x | -x) >> 31) + 1 == !x`"
           },
           {
             "id": "C",
-            "content": "(-x < y) == (-y < x)"
+            "content": "`(-x < y) == (-y < x)`"
           },
           {
             "id": "D",
-            "content": "($x ^ y$ ^ ((~x) – y)) == ($y ^ x$ ^ ((~y) – x))"
+            "content": "`(x ^ y ^ ((~x) - y)) == (y ^ x ^ ((~y) - x))`"
           }
         ],
         "correctChoiceIds": [
@@ -6338,7 +6452,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1.在 x86-64 机器上，产生随机的 32 位有符号整数x和y，则下列表达式中不\n恒为真的是：",
+        "prompt": "1. 在 x86-64 机器上，令 `x` 和 `y` 为任意 32 位有符号整数，则下列表达式中不恒为真的是：",
         "answer": "答案：C，一个反例是 x = Tmin，y = 0。"
       },
       "presentation": {
@@ -6447,7 +6561,7 @@
       "exam": "2024期中",
       "questionNo": "第一题 3",
       "summary": "float阶码/小数位位数与可表示实数数量",
-      "content": "3.我们熟悉的标准浮点格式float共有32位，其阶码字段和小数字段分别为k=8\n位和n=23位。如果我们维持float的总位数不变，但阶码字段变为k'=10位，\n则下列说法中，正确的是：\n2\nA. 修改后能表示的实数值的数量更多了\nB. 修改后能表示的实数值的数量不变\nC. 修改后能表示的实数值的数量更少了\nD. 无法确定\n答案：A。\n修改后，阶码字段增加，小数字段减少，可以表示的NaN的数量减少，所以能表示\n的实数值增多。",
+      "content": "3. 我们熟悉的标准浮点格式 `float` 共有 32 位，其阶码字段和小数字段分别为 $k=8$ 位和 $n=23$ 位。如果保持 `float` 的总位数不变，但将阶码字段改为 $k'=10$ 位，则下列说法中正确的是：\nA. 修改后能表示的实数值的数量更多了\nB. 修改后能表示的实数值的数量不变\nC. 修改后能表示的实数值的数量更少了\nD. 无法确定\n答案：A。\n修改后，阶码字段增加，小数字段减少，可以表示的NaN的数量减少，所以能表示\n的实数值增多。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6472,7 +6586,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "3.我们熟悉的标准浮点格式float共有32位，其阶码字段和小数字段分别为k=8\n位和n=23位。如果我们维持float的总位数不变，但阶码字段变为k'=10位，\n则下列说法中，正确的是：\n2",
+        "stem": "3. 我们熟悉的标准浮点格式 `float` 共有 32 位，其阶码字段和小数字段分别为 $k=8$ 位和 $n=23$ 位。如果保持 `float` 的总位数不变，但将阶码字段改为 $k'=10$ 位，则下列说法中正确的是：",
         "choices": [
           {
             "key": "A",
@@ -6520,7 +6634,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3.我们熟悉的标准浮点格式float共有32位，其阶码字段和小数字段分别为k=8\n位和n=23位。如果我们维持float的总位数不变，但阶码字段变为k'=10位，\n则下列说法中，正确的是：\n2",
+        "prompt": "3. 我们熟悉的标准浮点格式 `float` 共有 32 位，其阶码字段和小数字段分别为 $k=8$ 位和 $n=23$ 位。如果保持 `float` 的总位数不变，但将阶码字段改为 $k'=10$ 位，则下列说法中正确的是：",
         "answer": "答案：A。\n修改后，阶码字段增加，小数字段减少，可以表示的NaN的数量减少，所以能表示\n的实数值增多。"
       },
       "presentation": {
@@ -6785,7 +6899,7 @@
     {
       "id": "q-dc4e632066c6ca4a",
       "paperId": "p-ac5fea2cf89e5bed",
-      "paperOrder": 21,
+      "paperOrder": 24,
       "moduleId": "data_representation",
       "year": 2013,
       "examType": "期末",

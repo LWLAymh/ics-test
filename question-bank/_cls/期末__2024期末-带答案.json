@@ -140,11 +140,19 @@
     },
     {
       "start": 499,
+      "end": 544,
+      "module": "ECF and System IO",
+      "qno": "第三题 Part B 1",
+      "note": "信号处理函数注册与父子进程同步",
+      "curated": "期末/2024期末-带答案/499.md"
+    },
+    {
+      "start": 545,
       "end": 572,
       "module": "ECF and System IO",
-      "qno": "第三题 Part B",
-      "note": "信号处理函数注册、kill 与 sigprocmask",
-      "curated": "期末/2024期末-带答案/499.md"
+      "qno": "第三题 Part B 2",
+      "note": "用 sigprocmask 保护信号处理函数",
+      "curated": "期末/2024期末-带答案/545.md"
     },
     {
       "start": 574,
