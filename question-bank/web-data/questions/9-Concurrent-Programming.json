@@ -323,7 +323,7 @@
       "exam": "2014期末",
       "questionNo": "第一题 20",
       "summary": "并发轨迹线安全/不安全判定",
-      "content": "20. 两个线程中共享如下一段C代码：\n```\n         for (j = 0;  j < N;  j++)\n                count + = 2;\n```\n假设其对应的汇编代码如下：\n```\n    movq  (%rdi), %rcx\n    testq %rcx,%rcx\n    jle   .L2                       Hi\n    movl  $0, %eax\n.L3:\n    movq  count(%rip),%rdx       Li\n    addq  $2, %rdx                 Ui\n    movq  %rdx, count(%rip)      Si\naddq  $1, %rax\n    cmpq  %rcx, %rax              Ti\n    jne   .L3\n.L2:\n```\n请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )\nA. H1，H2，L2，L1，U2，U1，S1，S2，T1，T2\nB. H1，L1，U1，H2，L2，S1，T1，U2，S2，T2\nC. H2，L2，U2，H1，S2，L1，T2，U1，S1，T1\nD. H2，L2，H1，L1，U1，U2，S2，T2，S1，T1\n【答案】Ｃ\n【说明】考查两个并发线程指令执行序列是否会导致不安全轨迹线。\n答案：C\n考查两个并发线程指令执行序列是否会导致不安全轨迹线。",
+      "content": "20. 两个线程中共享如下一段C代码：\n```\n         for (j = 0;  j < N;  j++)\n                count += 2;\n```\n假设其对应的汇编代码如下：\n```\n    movq  (%rdi), %rcx\n    testq %rcx,%rcx\n    jle   .L2                       Hi\n    movl  $0, %eax\n.L3:\n    movq  count(%rip),%rdx       Li\n    addq  $2, %rdx                 Ui\n    movq  %rdx, count(%rip)      Si\n    addq  $1, %rax\n    cmpq  %rcx, %rax              Ti\n    jne   .L3\n.L2:\n```\n请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )\nA. H1，H2，L2，L1，U2，U1，S1，S2，T1，T2\nB. H1，L1，U1，H2，L2，S1，T1，U2，S2，T2\nC. H2，L2，U2，H1，S2，L1，T2，U1，S1，T1\nD. H2，L2，H1，L1，U1，U2，S2，T2，S1，T1\n【答案】Ｃ\n【说明】考查两个并发线程指令执行序列是否会导致不安全轨迹线。\n答案：C\n考查两个并发线程指令执行序列是否会导致不安全轨迹线。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -343,7 +343,7 @@
       "layout": {
         "mode": "choice",
         "selection": null,
-        "stem": "20. 两个线程中共享如下一段C代码：\n```\n         for (j = 0;  j < N;  j++)\n                count + = 2;\n```\n假设其对应的汇编代码如下：\n```\n    movq  (%rdi), %rcx\n    testq %rcx,%rcx\n    jle   .L2                       Hi\n    movl  $0, %eax\n.L3:\n    movq  count(%rip),%rdx       Li\n    addq  $2, %rdx                 Ui\n    movq  %rdx, count(%rip)      Si\naddq  $1, %rax\n    cmpq  %rcx, %rax              Ti\n    jne   .L3\n.L2:\n```\n请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )",
+        "stem": "20. 两个线程中共享如下一段C代码：\n```\n         for (j = 0;  j < N;  j++)\n                count += 2;\n```\n假设其对应的汇编代码如下：\n```\n    movq  (%rdi), %rcx\n    testq %rcx,%rcx\n    jle   .L2                       Hi\n    movl  $0, %eax\n.L3:\n    movq  count(%rip),%rdx       Li\n    addq  $2, %rdx                 Ui\n    movq  %rdx, count(%rip)      Si\n    addq  $1, %rax\n    cmpq  %rcx, %rax              Ti\n    jne   .L3\n.L2:\n```\n请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )",
         "choices": [
           {
             "key": "A",
@@ -391,7 +391,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "20. 两个线程中共享如下一段C代码：\n```\n         for (j = 0;  j < N;  j++)\n                count + = 2;\n```\n假设其对应的汇编代码如下：\n```\n    movq  (%rdi), %rcx\n    testq %rcx,%rcx\n    jle   .L2                       Hi\n    movl  $0, %eax\n.L3:\n    movq  count(%rip),%rdx       Li\n    addq  $2, %rdx                 Ui\n    movq  %rdx, count(%rip)      Si\naddq  $1, %rax\n    cmpq  %rcx, %rax              Ti\n    jne   .L3\n.L2:\n```\n请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )",
+        "prompt": "20. 两个线程中共享如下一段C代码：\n```\n         for (j = 0;  j < N;  j++)\n                count += 2;\n```\n假设其对应的汇编代码如下：\n```\n    movq  (%rdi), %rcx\n    testq %rcx,%rcx\n    jle   .L2                       Hi\n    movl  $0, %eax\n.L3:\n    movq  count(%rip),%rdx       Li\n    addq  $2, %rdx                 Ui\n    movq  %rdx, count(%rip)      Si\n    addq  $1, %rax\n    cmpq  %rcx, %rax              Ti\n    jne   .L3\n.L2:\n```\n请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )",
         "answer": "答案：C\n考查两个并发线程指令执行序列是否会导致不安全轨迹线。"
       },
       "presentation": {
@@ -409,7 +409,7 @@
       "exam": "2014期末",
       "questionNo": "第九题",
       "summary": "水果盘问题的信号量设计与 PV 填空",
-      "content": "第九题（10分）并发\n桌子上有一个水果盘，能容纳一个水果。一家四口人：爸爸、妈妈、儿子、女\n儿。爸爸专门往盘子里放苹果，妈妈专门往盘子里放桔子；儿子专等盘子里的苹果\n吃，女儿专等盘子里的桔子吃。\n```\ndad() {\n   while(1) {\n```\n      准备好一个苹果；\n          ①\n      往果盘中放苹果；\n          ②\n```\n   }\n}\nmom() {\n   while(1) {\n```\n      准备好一个桔子；\n          ③\n      往果盘中放桔子；\n          ④\n```\n   }\n}\nboy() {\n   while(1) {\n```\n          ⑤\n      从果盘中拿走苹果；\n          ⑥\n      吃苹果；\n```\n   }\n}\ngirl() {\n   while(1) {\n```\n          ⑦\n      从果盘中拿走桔子；\n          ⑧\n      吃桔子；\n```\n   }\n}\n```\n\n\n1．(2分)请设计若干信号量，给出每一个信号量的作用和初值。\n参考答案（答对两条给2分）：\nplate：互斥信号量，标识能否往果盘中放入水果，其初值为1。\napple：信号量，标识果盘中是否有苹果，其初值为0。\norange：信号量，标识果盘中是否有桔子，其初值为0。\n2．(8分)请将信号量上对应的PV操作填写在代码中适当位置。\n  参考答案：\n①P(plate)；\n②V(apple)；\n③P(plate)；\n④V(orange)；\n⑤P(apple)；\n⑥V(plate)；\n⑦P(orange)；\n⑧V(Plate)；",
+      "content": "第九题（10分）并发\n桌子上有一个水果盘，能容纳一个水果。一家四口人：爸爸、妈妈、儿子、女\n儿。爸爸专门往盘子里放苹果，妈妈专门往盘子里放桔子；儿子专等盘子里的苹果\n吃，女儿专等盘子里的桔子吃。\n```\ndad() {\n    while (1) {\n        准备好一个苹果；\n        ①\n        往果盘中放苹果；\n        ②\n    }\n}\nmom() {\n    while (1) {\n        准备好一个桔子；\n        ③\n        往果盘中放桔子；\n        ④\n    }\n}\nboy() {\n    while (1) {\n        ⑤\n        从果盘中拿走苹果；\n        ⑥\n        吃苹果；\n    }\n}\ngirl() {\n    while (1) {\n        ⑦\n        从果盘中拿走桔子；\n        ⑧\n        吃桔子；\n    }\n}\n```\n\n\n1．(2分)请设计若干信号量，给出每一个信号量的作用和初值。\n参考答案（答对两条给2分）：\nplate：互斥信号量，标识能否往果盘中放入水果，其初值为1。\napple：信号量，标识果盘中是否有苹果，其初值为0。\norange：信号量，标识果盘中是否有桔子，其初值为0。\n2．(8分)请将信号量上对应的PV操作填写在代码中适当位置。\n  参考答案：\n①P(plate)；\n②V(apple)；\n③P(plate)；\n④V(orange)；\n⑤P(apple)；\n⑥V(plate)；\n⑦P(orange)；\n⑧V(plate)；",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -429,9 +429,9 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第九题（10分）并发\n桌子上有一个水果盘，能容纳一个水果。一家四口人：爸爸、妈妈、儿子、女\n儿。爸爸专门往盘子里放苹果，妈妈专门往盘子里放桔子；儿子专等盘子里的苹果\n吃，女儿专等盘子里的桔子吃。\n```\ndad() {\n   while(1) {\n```\n      准备好一个苹果；\n          ①\n      往果盘中放苹果；\n          ②\n```\n   }\n}\nmom() {\n   while(1) {\n```\n      准备好一个桔子；\n          ③\n      往果盘中放桔子；\n          ④\n```\n   }\n}\nboy() {\n   while(1) {\n```\n          ⑤\n      从果盘中拿走苹果；\n          ⑥\n      吃苹果；\n```\n   }\n}\ngirl() {\n   while(1) {\n```\n          ⑦\n      从果盘中拿走桔子；\n          ⑧\n      吃桔子；\n```\n   }\n}\n```\n\n\n1．(2分)请设计若干信号量，给出每一个信号量的作用和初值。\n参考答案（答对两条给2分）：\nplate：互斥信号量，标识能否往果盘中放入水果，其初值为1。\napple：信号量，标识果盘中是否有苹果，其初值为0。\norange：信号量，标识果盘中是否有桔子，其初值为0。\n2．(8分)请将信号量上对应的PV操作填写在代码中适当位置。",
+        "stem": "第九题（10分）并发\n桌子上有一个水果盘，能容纳一个水果。一家四口人：爸爸、妈妈、儿子、女\n儿。爸爸专门往盘子里放苹果，妈妈专门往盘子里放桔子；儿子专等盘子里的苹果\n吃，女儿专等盘子里的桔子吃。\n```\ndad() {\n    while (1) {\n        准备好一个苹果；\n        ①\n        往果盘中放苹果；\n        ②\n    }\n}\nmom() {\n    while (1) {\n        准备好一个桔子；\n        ③\n        往果盘中放桔子；\n        ④\n    }\n}\nboy() {\n    while (1) {\n        ⑤\n        从果盘中拿走苹果；\n        ⑥\n        吃苹果；\n    }\n}\ngirl() {\n    while (1) {\n        ⑦\n        从果盘中拿走桔子；\n        ⑧\n        吃桔子；\n    }\n}\n```\n\n\n1．(2分)请设计若干信号量，给出每一个信号量的作用和初值。\n参考答案（答对两条给2分）：\nplate：互斥信号量，标识能否往果盘中放入水果，其初值为1。\napple：信号量，标识果盘中是否有苹果，其初值为0。\norange：信号量，标识果盘中是否有桔子，其初值为0。\n2．(8分)请将信号量上对应的PV操作填写在代码中适当位置。",
         "choices": [],
-        "answer": "  参考答案：\n①P(plate)；\n②V(apple)；\n③P(plate)；\n④V(orange)；\n⑤P(apple)；\n⑥V(plate)；\n⑦P(orange)；\n⑧V(Plate)；"
+        "answer": "  参考答案：\n①P(plate)；\n②V(apple)；\n③P(plate)；\n④V(orange)；\n⑤P(apple)；\n⑥V(plate)；\n⑦P(orange)；\n⑧V(plate)；"
       },
       "interaction": {
         "kind": "fill",
@@ -439,8 +439,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第九题（10分）并发\n桌子上有一个水果盘，能容纳一个水果。一家四口人：爸爸、妈妈、儿子、女\n儿。爸爸专门往盘子里放苹果，妈妈专门往盘子里放桔子；儿子专等盘子里的苹果\n吃，女儿专等盘子里的桔子吃。\n```\ndad() {\n   while(1) {\n```\n      准备好一个苹果；\n          ①\n      往果盘中放苹果；\n          ②\n```\n   }\n}\nmom() {\n   while(1) {\n```\n      准备好一个桔子；\n          ③\n      往果盘中放桔子；\n          ④\n```\n   }\n}\nboy() {\n   while(1) {\n```\n          ⑤\n      从果盘中拿走苹果；\n          ⑥\n      吃苹果；\n```\n   }\n}\ngirl() {\n   while(1) {\n```\n          ⑦\n      从果盘中拿走桔子；\n          ⑧\n      吃桔子；\n```\n   }\n}\n```\n\n\n1．(2分)请设计若干信号量，给出每一个信号量的作用和初值。\n参考答案（答对两条给2分）：\nplate：互斥信号量，标识能否往果盘中放入水果，其初值为1。\napple：信号量，标识果盘中是否有苹果，其初值为0。\norange：信号量，标识果盘中是否有桔子，其初值为0。\n2．(8分)请将信号量上对应的PV操作填写在代码中适当位置。",
-        "answer": "  参考答案：\n①P(plate)；\n②V(apple)；\n③P(plate)；\n④V(orange)；\n⑤P(apple)；\n⑥V(plate)；\n⑦P(orange)；\n⑧V(Plate)；"
+        "prompt": "第九题（10分）并发\n桌子上有一个水果盘，能容纳一个水果。一家四口人：爸爸、妈妈、儿子、女\n儿。爸爸专门往盘子里放苹果，妈妈专门往盘子里放桔子；儿子专等盘子里的苹果\n吃，女儿专等盘子里的桔子吃。\n```\ndad() {\n    while (1) {\n        准备好一个苹果；\n        ①\n        往果盘中放苹果；\n        ②\n    }\n}\nmom() {\n    while (1) {\n        准备好一个桔子；\n        ③\n        往果盘中放桔子；\n        ④\n    }\n}\nboy() {\n    while (1) {\n        ⑤\n        从果盘中拿走苹果；\n        ⑥\n        吃苹果；\n    }\n}\ngirl() {\n    while (1) {\n        ⑦\n        从果盘中拿走桔子；\n        ⑧\n        吃桔子；\n    }\n}\n```\n\n\n1．(2分)请设计若干信号量，给出每一个信号量的作用和初值。\n参考答案（答对两条给2分）：\nplate：互斥信号量，标识能否往果盘中放入水果，其初值为1。\napple：信号量，标识果盘中是否有苹果，其初值为0。\norange：信号量，标识果盘中是否有桔子，其初值为0。\n2．(8分)请将信号量上对应的PV操作填写在代码中适当位置。",
+        "answer": "  参考答案：\n①P(plate)；\n②V(apple)；\n③P(plate)；\n④V(orange)；\n⑤P(apple)；\n⑥V(plate)；\n⑦P(orange)；\n⑧V(plate)；"
       },
       "presentation": {
         "status": "ready",

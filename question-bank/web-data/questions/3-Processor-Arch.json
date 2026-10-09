@@ -629,7 +629,7 @@
       "exam": "2014期中",
       "questionNo": "第一题 10",
       "summary": "三级流水线执行 10 条指令所需时间",
-      "content": "10、若处理器实现了三级流水线，每一级流水线实际需要的运行时间分别为 2ns、2ns 和 1ns，则此处理器不停顿地执行完毕 10 条指令需要的时间为：\nA. 21ns\nB. 22ns\nC. 23ns\nD. 24ns\n\n答：（　　　）\n答案：D\n\n2+2+2*10 = 24",
+      "content": "10、若处理器实现了三级流水线，每一级流水线实际需要的运行时间分别为 2ns、2ns 和 1ns，则此处理器不停顿地执行完毕 10 条指令需要的时间为：\nA. 21ns\nB. 22ns\nC. 23ns\nD. 24ns\n\n答：（　　　）\n答案：D\n\n$2 + 2 + 2 \\times 10 = 24$",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -670,7 +670,7 @@
             "content": "24ns\n答：（　　　）"
           }
         ],
-        "answer": "答案：D\n\n2+2+2*10 = 24"
+        "answer": "答案：D\n\n$2 + 2 + 2 \\times 10 = 24$"
       },
       "interaction": {
         "kind": "single-choice",
@@ -700,7 +700,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "10、若处理器实现了三级流水线，每一级流水线实际需要的运行时间分别为 2ns、2ns 和 1ns，则此处理器不停顿地执行完毕 10 条指令需要的时间为：",
-        "answer": "答案：D\n\n2+2+2*10 = 24"
+        "answer": "答案：D\n\n$2 + 2 + 2 \\times 10 = 24$"
       },
       "presentation": {
         "status": "ready",
@@ -1905,7 +1905,7 @@
       "exam": "2016期中",
       "questionNo": "第一题 12",
       "summary": "三级流水线执行时间计算",
-      "content": "12. 若处理器实现了三级流水线，每一级流水线实际需要的运行时间分别为 1ns、\n2ns 和 3ns，则此处理器不停顿地执行完毕 10 条指令需要的时间为：\n\n![图](assets/期中/2016期中-带答案/p4-img1.jpg)\n![图](assets/期中/2016期中-带答案/p4-img2.jpg)\nA. 21 ns\nB. 12 ns\nC. 24 ns\nD. 36 ns\n答案：D\n3+3+10*3 = 36 ns（流水线时钟取最长的一级 3 ns，填满流水线 3 个周期后，10 条指令共需 3*3 + 9*3 = 36 ns）",
+      "content": "12. 若处理器实现了三级流水线，每一级流水线实际需要的运行时间分别为 1ns、\n2ns 和 3ns，则此处理器不停顿地执行完毕 10 条指令需要的时间为：\n\n![图](assets/期中/2016期中-带答案/p4-img1.jpg)\n![图](assets/期中/2016期中-带答案/p4-img2.jpg)\nA. 21 ns\nB. 12 ns\nC. 24 ns\nD. 36 ns\n答案：D\n$3 + 3 + 10 \\times 3 = 36\\ \\mathrm{ns}$（流水线时钟取最长的一级 $3\\ \\mathrm{ns}$，填满流水线 3 个周期后，10 条指令共需 $3 \\times 3 + 9 \\times 3 = 36\\ \\mathrm{ns}$）",
       "assets": [
         "assets/期中/2016期中-带答案/p4-img1.jpg",
         "assets/期中/2016期中-带答案/p4-img2.jpg"
@@ -1950,7 +1950,7 @@
             "content": "36 ns"
           }
         ],
-        "answer": "答案：D\n3+3+10*3 = 36 ns（流水线时钟取最长的一级 3 ns，填满流水线 3 个周期后，10 条指令共需 3*3 + 9*3 = 36 ns）"
+        "answer": "答案：D\n$3 + 3 + 10 \\times 3 = 36\\ \\mathrm{ns}$（流水线时钟取最长的一级 $3\\ \\mathrm{ns}$，填满流水线 3 个周期后，10 条指令共需 $3 \\times 3 + 9 \\times 3 = 36\\ \\mathrm{ns}$）"
       },
       "interaction": {
         "kind": "single-choice",
@@ -1980,7 +1980,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "12. 若处理器实现了三级流水线，每一级流水线实际需要的运行时间分别为 1ns、\n2ns 和 3ns，则此处理器不停顿地执行完毕 10 条指令需要的时间为：\n\n![图](assets/期中/2016期中-带答案/p4-img1.jpg)\n![图](assets/期中/2016期中-带答案/p4-img2.jpg)",
-        "answer": "答案：D\n3+3+10*3 = 36 ns（流水线时钟取最长的一级 3 ns，填满流水线 3 个周期后，10 条指令共需 3*3 + 9*3 = 36 ns）"
+        "answer": "答案：D\n$3 + 3 + 10 \\times 3 = 36\\ \\mathrm{ns}$（流水线时钟取最长的一级 $3\\ \\mathrm{ns}$，填满流水线 3 个周期后，10 条指令共需 $3 \\times 3 + 9 \\times 3 = 36\\ \\mathrm{ns}$）"
       },
       "presentation": {
         "status": "ready",

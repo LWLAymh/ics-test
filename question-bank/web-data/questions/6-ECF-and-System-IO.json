@@ -715,7 +715,7 @@
       "exam": "2014期末",
       "questionNo": "第一题 15",
       "summary": "open/dup/read/write 与文件长度",
-      "content": "15. ICS.txt中包含3000个字符，考虑如下代码段：\n```\nint main(int argc, char** argv) {\nint fd = open(\"ICS.txt\", O_CREAT | O_RDWR, S_IRUSR |\nS_IWUSR);\nwrite(fd, \"ICS\", 3);\nchar buf[128];\nint i;\nfor (i = 0; i < 10; i++) {\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\nint cnt = read(fd1, buf, 128);\nwrite(fd2, buf, cnt);\n}\nreturn 0;\n}\n```\n上述代码执行完后，ICS.txt 中包含多少个字符（假设所有系统调用都成功）？\n（     ）\nA. A．3\nB. B．256\nC. C．3000\nD. D．3072\n答案：C\n主要考查open函数的用法。open不像fopen，不设置O_TRUNC并不\n会清空文件。所以只会反复把文件中字符1-128写到字符129-256，字符数不变。\n几个干扰项分别考查dup的作用以及 buf大小对于程序功能的影响。",
+      "content": "15. ICS.txt中包含3000个字符，考虑如下代码段：\n```\nint main(int argc, char** argv) {\nint fd = open(\"ICS.txt\", O_CREAT | O_RDWR, S_IRUSR |\nS_IWUSR);\nwrite(fd, \"ICS\", 3);\nchar buf[128];\nint i;\nfor (i = 0; i < 10; i++) {\nint fd1 = open(\"ICS.txt\", O_RDWR);\nint fd2 = dup(fd1);\nint cnt = read(fd1, buf, 128);\nwrite(fd2, buf, cnt);\n}\nreturn 0;\n}\n```\n上述代码执行完后，ICS.txt 中包含多少个字符（假设所有系统调用都成功）？\n（     ）\nA. 3\nB. 256\nC. 3000\nD. 3072\n答案：C\n主要考查open函数的用法。open不像fopen，不设置O_TRUNC并不\n会清空文件。所以只会反复把文件中字符1-128写到字符129-256，字符数不变。\n几个干扰项分别考查dup的作用以及 buf大小对于程序功能的影响。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -739,19 +739,19 @@
         "choices": [
           {
             "key": "A",
-            "content": "A．3"
+            "content": "3"
           },
           {
             "key": "B",
-            "content": "B．256"
+            "content": "256"
           },
           {
             "key": "C",
-            "content": "C．3000"
+            "content": "3000"
           },
           {
             "key": "D",
-            "content": "D．3072"
+            "content": "3072"
           }
         ],
         "answer": "答案：C\n主要考查open函数的用法。open不像fopen，不设置O_TRUNC并不\n会清空文件。所以只会反复把文件中字符1-128写到字符129-256，字符数不变。\n几个干扰项分别考查dup的作用以及 buf大小对于程序功能的影响。"
@@ -762,19 +762,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "A．3"
+            "content": "3"
           },
           {
             "id": "B",
-            "content": "B．256"
+            "content": "256"
           },
           {
             "id": "C",
-            "content": "C．3000"
+            "content": "3000"
           },
           {
             "id": "D",
-            "content": "D．3072"
+            "content": "3072"
           }
         ],
         "correctChoiceIds": [
@@ -2194,7 +2194,7 @@
       "exam": "2016期末",
       "questionNo": "第五题",
       "summary": "fork/exit 输出排列与信号处理程序填空",
-      "content": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\n```\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（\n关”）\nA:                          counter1+1\nB:                         counter2*2\nC:                              1\nD:                             无关\nE:                         SIGUSR1\nF:                         SIGUSR1\nG:                              2\n若某个位置中的程序内容，对本次程序执行结果没有影响，请在相应位置填写“无\n（7分）7个，对1个给1分",
+      "content": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\nprintf执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    A:   printf(\"C\");\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\n```\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n  if (even % 2 == 0) {\n  printf(\"%d\\n\", counter1);\n    counter1 =      A       ;\n    } else {\n    printf(\"%d\\n\", counter2);\n      counter2 =      B      ;\n    }\n    even = even+    C       ;\n  }\nvoid handler2(int sig) {\n    if (_____D_____) {\n    counter1 = even*even;\n    } else {\n    counter2 = even*even;\n    }\n}\nint main() {\nsignal(SIGUSR1, handler1);\nsignal(SIGUSR2, handler2);\nif ((pid = fork()) == 0) {\nwhile (1) {};\n  }\n    while (even < 30) {\n      kill(pid,     E   );\n      sleep(1);\n      kill(pid,     F   );\n      sleep(1);\n      even = even+    G      ;\n    }\nkill(pid, SIGKILL);\nexit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n𝑄𝑛+1,   n%2=0\n𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)\n（\n关”）\nA:                          counter1+1\nB:                         `counter2 * 2`\nC:                              1\nD:                             无关\nE:                         SIGUSR1\nF:                         SIGUSR1\nG:                              2\n若某个位置中的程序内容，对本次程序执行结果没有影响，请在相应位置填写“无\n（7分）7个，对1个给1分",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2224,7 +2224,7 @@
           },
           {
             "key": "B",
-            "content": "counter2*2"
+            "content": "`counter2 * 2`"
           },
           {
             "key": "C",
