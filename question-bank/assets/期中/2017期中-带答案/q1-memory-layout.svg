@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img" aria-labelledby="title desc">
+  <title id="title">4N Byte 整数的大端内存排列</title>
+  <desc id="desc">从左到右地址由高到低，X 位于靠近低地址一侧的一个字节，图中标出连续的 4N Byte 范围。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L6,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <g fill="#f8fafc" stroke="#334155" stroke-width="2">
+    <rect x="180" y="45" width="70" height="58"/>
+    <rect x="250" y="45" width="70" height="58"/>
+    <rect x="320" y="45" width="70" height="58"/>
+    <rect x="390" y="45" width="140" height="58"/>
+    <rect x="530" y="45" width="70" height="58"/>
+    <rect x="600" y="45" width="70" height="58"/>
+    <rect x="670" y="45" width="70" height="58"/>
+  </g>
+  <text x="460" y="82" text-anchor="middle" font-family="sans-serif" font-size="30" fill="#334155">……</text>
+  <text x="635" y="84" text-anchor="middle" font-family="sans-serif" font-size="32" font-weight="700" fill="#0f172a">X</text>
+  <path d="M320 122 v18 h350 v-18" fill="none" stroke="#334155" stroke-width="2"/>
+  <text x="495" y="178" text-anchor="middle" font-family="sans-serif" font-size="27" font-weight="600" fill="#0f172a">4N Byte</text>
+  <text x="75" y="92" font-family="sans-serif" font-size="27" font-weight="600" fill="#0f172a">高地址</text>
+  <line x1="165" y1="84" x2="110" y2="84" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="760" y="92" font-family="sans-serif" font-size="27" font-weight="600" fill="#0f172a">低地址</text>
+  <line x1="745" y1="84" x2="795" y2="84" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>

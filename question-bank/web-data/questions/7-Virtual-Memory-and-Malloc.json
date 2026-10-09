@@ -4709,7 +4709,7 @@
       "exam": "2025期末",
       "questionNo": "二 21",
       "summary": "fork 后地址空间与 COW 缺页（兼 fork 语义）",
-      "content": "21.执行下面的C程序代码\n```\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) { *p = 20; _exit(0); }\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？\nA. 输出一定为 20\nB. 输出一定为 10\nC. 输出有可能是10，也有可能是20，取决于进程调度顺序\nD. fork之后，父进程由于Copy-on-Write可能会发生缺页异常\nE. fork之后，子进程由于Copy-on-Write可能会发生缺页异常\n答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。",
+      "content": "21.执行下面的C程序代码\n```c\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) {\n    *p = 20;\n    _exit(0);\n}\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？\nA. 输出一定为 20\nB. 输出一定为 10\nC. 输出有可能是10，也有可能是20，取决于进程调度顺序\nD. fork之后，父进程由于Copy-on-Write可能会发生缺页异常\nE. fork之后，子进程由于Copy-on-Write可能会发生缺页异常\n答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4729,7 +4729,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "21.执行下面的C程序代码\n```\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) { *p = 20; _exit(0); }\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？",
+        "stem": "21.执行下面的C程序代码\n```c\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) {\n    *p = 20;\n    _exit(0);\n}\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
@@ -4786,7 +4786,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "21.执行下面的C程序代码\n```\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) { *p = 20; _exit(0); }\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？",
+        "prompt": "21.执行下面的C程序代码\n```c\nint *p = malloc(sizeof(int));\n*p = 10;\npid_t pid = fork();\nif (pid == 0) {\n    *p = 20;\n    _exit(0);\n}\nwait(NULL);\nprintf(\"%d\\n\", *p);\n```\n下列说法哪些正确？",
         "answer": "答案：BE\n解析：fork 后父子地址空间逻辑上独立，但常用 COW 让它们先共享物理页；一方写入时再复制，因此父仍读到 10，而子写可能触发一次“为了复制而产生”的 fault。改成共享匿名映射则写入可见。"
       },
       "presentation": {

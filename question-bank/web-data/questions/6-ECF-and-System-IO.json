@@ -5106,7 +5106,7 @@
       "exam": "2025期末",
       "questionNo": "二 17",
       "summary": "fork 后共享文件偏移下的 read 结果",
-      "content": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n```\nint main(void){\nint fd = open(\"t.txt\", O_RDONLY);\nchar x, y;\nfork();\nread(fd, &x, 1);\nread(fd, &y, 1);\nprintf(\"%c%c\\n\", x, y);\nreturn 0;\n}\n```\n下列哪些可能作为某一次 printf 打印出的那一行内容出现？\nA. ab\nB. bd\nC. ca\nD. aa\nE. cd\n答案：ABE\n解析：父子进程共享同一个 open file description，因此 4 次 read 总体按顺序消耗 a,b,c,d。某个进程读到的两字节一定是“先后顺序递增”的组合（如 ab/ac/bd/cd/...），但不可能倒序（ca）或重复（aa）。",
+      "content": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n```c\nint main(void){\n    int fd = open(\"t.txt\", O_RDONLY);\n    char x, y;\n    fork();\n    read(fd, &x, 1);\n    read(fd, &y, 1);\n    printf(\"%c%c\\n\", x, y);\n    return 0;\n}\n```\n下列哪些可能作为某一次 printf 打印出的那一行内容出现？\nA. ab\nB. bd\nC. ca\nD. aa\nE. cd\n答案：ABE\n解析：父子进程共享同一个 open file description，因此 4 次 read 总体按顺序消耗 a,b,c,d。某个进程读到的两字节一定是“先后顺序递增”的组合（如 ab/ac/bd/cd/...），但不可能倒序（ca）或重复（aa）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5126,7 +5126,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n```\nint main(void){\nint fd = open(\"t.txt\", O_RDONLY);\nchar x, y;\nfork();\nread(fd, &x, 1);\nread(fd, &y, 1);\nprintf(\"%c%c\\n\", x, y);\nreturn 0;\n}\n```\n下列哪些可能作为某一次 printf 打印出的那一行内容出现？",
+        "stem": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n```c\nint main(void){\n    int fd = open(\"t.txt\", O_RDONLY);\n    char x, y;\n    fork();\n    read(fd, &x, 1);\n    read(fd, &y, 1);\n    printf(\"%c%c\\n\", x, y);\n    return 0;\n}\n```\n下列哪些可能作为某一次 printf 打印出的那一行内容出现？",
         "choices": [
           {
             "key": "A",
@@ -5184,7 +5184,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n```\nint main(void){\nint fd = open(\"t.txt\", O_RDONLY);\nchar x, y;\nfork();\nread(fd, &x, 1);\nread(fd, &y, 1);\nprintf(\"%c%c\\n\", x, y);\nreturn 0;\n}\n```\n下列哪些可能作为某一次 printf 打印出的那一行内容出现？",
+        "prompt": "17.文件t.txt的内容恰好是4字节：abcd（示意）\n```c\nint main(void){\n    int fd = open(\"t.txt\", O_RDONLY);\n    char x, y;\n    fork();\n    read(fd, &x, 1);\n    read(fd, &y, 1);\n    printf(\"%c%c\\n\", x, y);\n    return 0;\n}\n```\n下列哪些可能作为某一次 printf 打印出的那一行内容出现？",
         "answer": "答案：ABE\n解析：父子进程共享同一个 open file description，因此 4 次 read 总体按顺序消耗 a,b,c,d。某个进程读到的两字节一定是“先后顺序递增”的组合（如 ab/ac/bd/cd/...），但不可能倒序（ca）或重复（aa）。"
       },
       "presentation": {
@@ -5202,7 +5202,7 @@
       "exam": "2025期末",
       "questionNo": "二 18",
       "summary": "SIGCHLD 不排队、waitpid 回收与 zombie",
-      "content": "18.观察下面的C程序代码\n```\nvolatile sig_atomic_t reap = 0;\nvoid handler(int sig){\nwhile (waitpid(-1, NULL, WNOHANG) > 0)\nreap++;\n}\nint main(void){\nSignal(SIGCHLD, handler);\nfor (int i = 0; i < 2; i++)\nif (fork() == 0) _exit(0);\nwhile (reap < 2) ;\nprintf(\"OK\\n\");\n}\n```\n下列说法哪些正确？\nA. handler 可能只被调用 1 次，但 reap 最终仍可能变为 2\nB. 程序打印 OK 时，通常不会残留 zombie 子进程\nC. 因为 SIGCHLD 不排队，reap 最大只能到 1\nD. 若把 handler 里的 while 改为只调用一次 waitpid，则一定不会留下 zombie\nE. OK 可能在任意时刻打印（包括在子进程尚未退出时）\n答案：AB\n解析：SIGCHLD 可能合并递送；一次进入 handler 用 while(waitpid...) 可回收多个已退出子进程，因此 A 对。reap==2 意味着两个子都已被回收，通常不会有 zombie（B 对）。C/D/E 都不成立。",
+      "content": "18. 观察下面的 C 程序代码：\n\n```c\nvolatile sig_atomic_t reap = 0;\n\nvoid handler(int sig) {\n    while (waitpid(-1, NULL, WNOHANG) > 0) {\n        reap++;\n    }\n}\n\nint main(void) {\n    Signal(SIGCHLD, handler);\n    for (int i = 0; i < 2; i++) {\n        if (fork() == 0) {\n            _exit(0);\n        }\n    }\n    while (reap < 2) {\n        ;\n    }\n    printf(\"OK\\n\");\n}\n```\n\n下列说法哪些正确？\nA. `handler` 可能只被调用 1 次，但 `reap` 最终仍可能变为 2\nB. 程序打印 `OK` 时，通常不会残留 zombie 子进程\nC. 因为 `SIGCHLD` 不排队，`reap` 最大只能到 1\nD. 若把 `handler` 里的 `while` 改为只调用一次 `waitpid`，则一定不会留下 zombie\nE. `OK` 可能在任意时刻打印，包括子进程尚未退出时\n答案：A、B\n\n`SIGCHLD` 可能合并递送；一次进入 `handler` 时，循环调用 `waitpid` 可以回收多个已经退出的子进程，所以 A 正确。`reap == 2` 表示两个子进程均已被回收，所以 B 正确。C、D、E 均不成立。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5222,30 +5222,30 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "18.观察下面的C程序代码\n```\nvolatile sig_atomic_t reap = 0;\nvoid handler(int sig){\nwhile (waitpid(-1, NULL, WNOHANG) > 0)\nreap++;\n}\nint main(void){\nSignal(SIGCHLD, handler);\nfor (int i = 0; i < 2; i++)\nif (fork() == 0) _exit(0);\nwhile (reap < 2) ;\nprintf(\"OK\\n\");\n}\n```\n下列说法哪些正确？",
+        "stem": "18. 观察下面的 C 程序代码：\n\n```c\nvolatile sig_atomic_t reap = 0;\n\nvoid handler(int sig) {\n    while (waitpid(-1, NULL, WNOHANG) > 0) {\n        reap++;\n    }\n}\n\nint main(void) {\n    Signal(SIGCHLD, handler);\n    for (int i = 0; i < 2; i++) {\n        if (fork() == 0) {\n            _exit(0);\n        }\n    }\n    while (reap < 2) {\n        ;\n    }\n    printf(\"OK\\n\");\n}\n```\n\n下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
-            "content": "handler 可能只被调用 1 次，但 reap 最终仍可能变为 2"
+            "content": "`handler` 可能只被调用 1 次，但 `reap` 最终仍可能变为 2"
           },
           {
             "key": "B",
-            "content": "程序打印 OK 时，通常不会残留 zombie 子进程"
+            "content": "程序打印 `OK` 时，通常不会残留 zombie 子进程"
           },
           {
             "key": "C",
-            "content": "因为 SIGCHLD 不排队，reap 最大只能到 1"
+            "content": "因为 `SIGCHLD` 不排队，`reap` 最大只能到 1"
           },
           {
             "key": "D",
-            "content": "若把 handler 里的 while 改为只调用一次 waitpid，则一定不会留下 zombie"
+            "content": "若把 `handler` 里的 `while` 改为只调用一次 `waitpid`，则一定不会留下 zombie"
           },
           {
             "key": "E",
-            "content": "OK 可能在任意时刻打印（包括在子进程尚未退出时）"
+            "content": "`OK` 可能在任意时刻打印，包括子进程尚未退出时"
           }
         ],
-        "answer": "答案：AB\n解析：SIGCHLD 可能合并递送；一次进入 handler 用 while(waitpid...) 可回收多个已退出子进程，因此 A 对。reap==2 意味着两个子都已被回收，通常不会有 zombie（B 对）。C/D/E 都不成立。"
+        "answer": "答案：A、B\n\n`SIGCHLD` 可能合并递送；一次进入 `handler` 时，循环调用 `waitpid` 可以回收多个已经退出的子进程，所以 A 正确。`reap == 2` 表示两个子进程均已被回收，所以 B 正确。C、D、E 均不成立。"
       },
       "interaction": {
         "kind": "multiple-choice",
@@ -5253,23 +5253,23 @@
         "choices": [
           {
             "id": "A",
-            "content": "handler 可能只被调用 1 次，但 reap 最终仍可能变为 2"
+            "content": "`handler` 可能只被调用 1 次，但 `reap` 最终仍可能变为 2"
           },
           {
             "id": "B",
-            "content": "程序打印 OK 时，通常不会残留 zombie 子进程"
+            "content": "程序打印 `OK` 时，通常不会残留 zombie 子进程"
           },
           {
             "id": "C",
-            "content": "因为 SIGCHLD 不排队，reap 最大只能到 1"
+            "content": "因为 `SIGCHLD` 不排队，`reap` 最大只能到 1"
           },
           {
             "id": "D",
-            "content": "若把 handler 里的 while 改为只调用一次 waitpid，则一定不会留下 zombie"
+            "content": "若把 `handler` 里的 `while` 改为只调用一次 `waitpid`，则一定不会留下 zombie"
           },
           {
             "id": "E",
-            "content": "OK 可能在任意时刻打印（包括在子进程尚未退出时）"
+            "content": "`OK` 可能在任意时刻打印，包括子进程尚未退出时"
           }
         ],
         "correctChoiceIds": [
@@ -5279,8 +5279,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "18.观察下面的C程序代码\n```\nvolatile sig_atomic_t reap = 0;\nvoid handler(int sig){\nwhile (waitpid(-1, NULL, WNOHANG) > 0)\nreap++;\n}\nint main(void){\nSignal(SIGCHLD, handler);\nfor (int i = 0; i < 2; i++)\nif (fork() == 0) _exit(0);\nwhile (reap < 2) ;\nprintf(\"OK\\n\");\n}\n```\n下列说法哪些正确？",
-        "answer": "答案：AB\n解析：SIGCHLD 可能合并递送；一次进入 handler 用 while(waitpid...) 可回收多个已退出子进程，因此 A 对。reap==2 意味着两个子都已被回收，通常不会有 zombie（B 对）。C/D/E 都不成立。"
+        "prompt": "18. 观察下面的 C 程序代码：\n\n```c\nvolatile sig_atomic_t reap = 0;\n\nvoid handler(int sig) {\n    while (waitpid(-1, NULL, WNOHANG) > 0) {\n        reap++;\n    }\n}\n\nint main(void) {\n    Signal(SIGCHLD, handler);\n    for (int i = 0; i < 2; i++) {\n        if (fork() == 0) {\n            _exit(0);\n        }\n    }\n    while (reap < 2) {\n        ;\n    }\n    printf(\"OK\\n\");\n}\n```\n\n下列说法哪些正确？",
+        "answer": "答案：A、B\n\n`SIGCHLD` 可能合并递送；一次进入 `handler` 时，循环调用 `waitpid` 可以回收多个已经退出的子进程，所以 A 正确。`reap == 2` 表示两个子进程均已被回收，所以 B 正确。C、D、E 均不成立。"
       },
       "presentation": {
         "status": "ready",
@@ -5297,7 +5297,7 @@
       "exam": "2025期末",
       "questionNo": "二 19",
       "summary": "阻塞信号 pending 不排队与 sigprocmask",
-      "content": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？\nA. count 一定为 0\nB. count 一定为 1\nC. count 可能为 2\nD. 在解除阻塞之前，handler可能会运行\nE. 在设置阻塞之前，handler可能会运行\n答案：B（原答案行）。注意：带答案卷的解析同时标注“B/E 对”；若允许阻塞前收到外部 SIGINT，则 E 可能成立、且 B 不再必然。题目未明确是否排除外部信号，因此原材料的答案与解析存在冲突，需向出题方确认默认假设。",
+      "content": "19. 观察下面的 C 程序代码。假设程序运行期间没有收到外部发送的 `SIGINT`：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？\nA. `count` 一定为 0\nB. `count` 一定为 1\nC. `count` 可能为 2\nD. 在解除阻塞之前，handler 可能会运行\nE. 在设置阻塞之前，handler 可能会运行\n答案：B\n\n普通信号不排队。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次，因此 `count` 为 1。题面明确排除了外部 `SIGINT`，从而消除原答案稿对选项 E 的歧义。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5317,30 +5317,30 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
+        "stem": "19. 观察下面的 C 程序代码。假设程序运行期间没有收到外部发送的 `SIGINT`：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
-            "content": "count 一定为 0"
+            "content": "`count` 一定为 0"
           },
           {
             "key": "B",
-            "content": "count 一定为 1"
+            "content": "`count` 一定为 1"
           },
           {
             "key": "C",
-            "content": "count 可能为 2"
+            "content": "`count` 可能为 2"
           },
           {
             "key": "D",
-            "content": "在解除阻塞之前，handler可能会运行"
+            "content": "在解除阻塞之前，handler 可能会运行"
           },
           {
             "key": "E",
-            "content": "在设置阻塞之前，handler可能会运行"
+            "content": "在设置阻塞之前，handler 可能会运行"
           }
         ],
-        "answer": "答案：B（原答案行）。注意：带答案卷的解析同时标注“B/E 对”；若允许阻塞前收到外部 SIGINT，则 E 可能成立、且 B 不再必然。题目未明确是否排除外部信号，因此原材料的答案与解析存在冲突，需向出题方确认默认假设。"
+        "answer": "答案：B\n\n普通信号不排队。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次，因此 `count` 为 1。题面明确排除了外部 `SIGINT`，从而消除原答案稿对选项 E 的歧义。"
       },
       "interaction": {
         "kind": "multiple-choice",
@@ -5348,23 +5348,23 @@
         "choices": [
           {
             "id": "A",
-            "content": "count 一定为 0"
+            "content": "`count` 一定为 0"
           },
           {
             "id": "B",
-            "content": "count 一定为 1"
+            "content": "`count` 一定为 1"
           },
           {
             "id": "C",
-            "content": "count 可能为 2"
+            "content": "`count` 可能为 2"
           },
           {
             "id": "D",
-            "content": "在解除阻塞之前，handler可能会运行"
+            "content": "在解除阻塞之前，handler 可能会运行"
           },
           {
             "id": "E",
-            "content": "在设置阻塞之前，handler可能会运行"
+            "content": "在设置阻塞之前，handler 可能会运行"
           }
         ],
         "correctChoiceIds": [
@@ -5373,8 +5373,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "19.观察下面的C程序代码：\n```\nvolatile sig_atomic_t count = 0;\nvoid h(int sig){ count++; }\nint main(void){\nsigset_t m;\nsigemptyset(&m);\nsigaddset(&m, SIGINT);\nSignal(SIGINT, h);\nsigprocmask(SIG_BLOCK, &m, NULL);\nraise(SIGINT);// raise()用于向当前进程发出指定信号\nraise(SIGINT);\nsigprocmask(SIG_UNBLOCK, &m, NULL);\nprintf(\"%d\\n\", (int)count);\n}\n```\n该程序正常执行完，下列说法哪些正确？",
-        "answer": "答案：B（原答案行）。注意：带答案卷的解析同时标注“B/E 对”；若允许阻塞前收到外部 SIGINT，则 E 可能成立、且 B 不再必然。题目未明确是否排除外部信号，因此原材料的答案与解析存在冲突，需向出题方确认默认假设。"
+        "prompt": "19. 观察下面的 C 程序代码。假设程序运行期间没有收到外部发送的 `SIGINT`：\n\n```c\nvolatile sig_atomic_t count = 0;\n\nvoid h(int sig) {\n    count++;\n}\n\nint main(void) {\n    sigset_t m;\n    sigemptyset(&m);\n    sigaddset(&m, SIGINT);\n    Signal(SIGINT, h);\n    sigprocmask(SIG_BLOCK, &m, NULL);\n    raise(SIGINT);  // raise() 向当前进程发送指定信号\n    raise(SIGINT);\n    sigprocmask(SIG_UNBLOCK, &m, NULL);\n    printf(\"%d\\n\", (int)count);\n}\n```\n\n该程序正常执行完，下列说法哪些正确？",
+        "answer": "答案：B\n\n普通信号不排队。阻塞期间连续两次 `raise(SIGINT)` 只留下一个待处理的 `SIGINT`；解除阻塞后 handler 执行一次，因此 `count` 为 1。题面明确排除了外部 `SIGINT`，从而消除原答案稿对选项 E 的歧义。"
       },
       "presentation": {
         "status": "ready",
@@ -5535,7 +5535,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第16/17讲 23",
       "summary": "fork 程序的输出次数与输出顺序判断",
-      "content": "23.（3分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\nint main() {\nprintf(\"A\\n\");\npid_t pid = fork();\nif (pid == 0) {\nprintf(\"B\\n\");\n} else {\nprintf(\"C\\n\");\nfork();\n}\nprintf(\"D\\n\");\nreturn 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）\n3 次\n10\n不确定\n√",
+      "content": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）\n3 次\n10\n不确定\n√",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5555,7 +5555,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "23.（3分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\nint main() {\nprintf(\"A\\n\");\npid_t pid = fork();\nif (pid == 0) {\nprintf(\"B\\n\");\n} else {\nprintf(\"C\\n\");\nfork();\n}\nprintf(\"D\\n\");\nreturn 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）",
+        "stem": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）",
         "choices": [],
         "answer": "3 次\n10\n不确定\n√"
       },
@@ -5565,7 +5565,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "23.（3分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\nint main() {\nprintf(\"A\\n\");\npid_t pid = fork();\nif (pid == 0) {\nprintf(\"B\\n\");\n} else {\nprintf(\"C\\n\");\nfork();\n}\nprintf(\"D\\n\");\nreturn 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）",
+        "prompt": "23.（3分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n该程序正常运行后，问\n（1）会输出几次 D：\n\n\n（2）B和C哪个先输出：\n（3）ACDBDD这个输出序列是否可能：是（\n）否（ ）",
         "answer": "3 次\n10\n不确定\n√"
       },
       "presentation": {
@@ -5583,7 +5583,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第16/17讲 24",
       "summary": "含 fork/wait/sleep 的程序进程数与输出行数",
-      "content": "24.（6分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\nprintf(\"start: x = %d\\n\", x);\npid_t pid1 = fork();\nif (pid1 == 0) {\nx += 1;\nprintf(\"x = %d\\n\", x);\nsleep(1);\npid_t pid2 = fork();\nif (pid2 == 0) {\nx += 2;\nprintf(\"x = %d\\n\", x);\n} else {\nx += 3;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\n}\n} else {\nx += 4;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\nprintf(\"x = %d\\n\", x);\n}\nreturn 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定\n3\n6\nD",
+      "content": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定\n3\n6\nD",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5603,7 +5603,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "24.（6分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\nprintf(\"start: x = %d\\n\", x);\npid_t pid1 = fork();\nif (pid1 == 0) {\nx += 1;\nprintf(\"x = %d\\n\", x);\nsleep(1);\npid_t pid2 = fork();\nif (pid2 == 0) {\nx += 2;\nprintf(\"x = %d\\n\", x);\n} else {\nx += 3;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\n}\n} else {\nx += 4;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\nprintf(\"x = %d\\n\", x);\n}\nreturn 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定",
+        "stem": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定",
         "choices": [],
         "answer": "3\n6\nD"
       },
@@ -5613,7 +5613,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "24.（6分）阅读下面这段程序\n```\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\nprintf(\"start: x = %d\\n\", x);\npid_t pid1 = fork();\nif (pid1 == 0) {\nx += 1;\nprintf(\"x = %d\\n\", x);\nsleep(1);\npid_t pid2 = fork();\nif (pid2 == 0) {\nx += 2;\nprintf(\"x = %d\\n\", x);\n} else {\nx += 3;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\n}\n} else {\nx += 4;\nprintf(\"x = %d\\n\", x);\nwait(NULL);\nprintf(\"x = %d\\n\", x);\n}\nreturn 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定",
+        "prompt": "24.（6分）阅读下面这段程序\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\nint x = 1;\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n（1）（2分）这个程序正常运行，会产生几个进程？（\n）\n（2）（2分）总共会输出多少行？（\n）\n（3）（2分）最后一行输出是：\nA.x=2 B.x=3 C.x=4 D.x=5 E.x=6 F.不确定",
         "answer": "3\n6\nD"
       },
       "presentation": {

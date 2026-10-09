@@ -7761,7 +7761,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第12讲 15",
       "summary": "数组求和代码中的时间/空间局部性分析",
-      "content": "15.（4分）下面这段代码哪些地方体现了局部性原理？分别体现了什么类型的局部性。\n```\nint sum_array_rows(int a[M][N])\n{\nint i, j, sum = 0;\nfor (i = 0; i < M; i++)\nfor (j = 0; j < N; j++)\nsum += a[i][j];\nreturn sum;\n}\n```\n答：共四种情况：指令、数据；空间、时间局部性。各1分:1）顺序执行的指令序列，\n体现空间局部性；2）循环内部指令会反复执行，体现时间局部性；3）sum等变量反复被\n读写，体现时间局部性；4）数组a中的数据按地址依次被读取，体现空间局部性。",
+      "content": "15.（4分）下面这段代码哪些地方体现了局部性原理？分别体现了什么类型的局部性。\n```c\nint sum_array_rows(int a[M][N])\n{\n    int i, j, sum = 0;\n    for (i = 0; i < M; i++)\n        for (j = 0; j < N; j++)\n            sum += a[i][j];\n    return sum;\n}\n```\n答：共四种情况：指令、数据；空间、时间局部性。各1分:1）顺序执行的指令序列，\n体现空间局部性；2）循环内部指令会反复执行，体现时间局部性；3）sum等变量反复被\n读写，体现时间局部性；4）数组a中的数据按地址依次被读取，体现空间局部性。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7781,7 +7781,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "15.（4分）下面这段代码哪些地方体现了局部性原理？分别体现了什么类型的局部性。\n```\nint sum_array_rows(int a[M][N])\n{\nint i, j, sum = 0;\nfor (i = 0; i < M; i++)\nfor (j = 0; j < N; j++)\nsum += a[i][j];\nreturn sum;\n}\n```",
+        "stem": "15.（4分）下面这段代码哪些地方体现了局部性原理？分别体现了什么类型的局部性。\n```c\nint sum_array_rows(int a[M][N])\n{\n    int i, j, sum = 0;\n    for (i = 0; i < M; i++)\n        for (j = 0; j < N; j++)\n            sum += a[i][j];\n    return sum;\n}\n```",
         "choices": [],
         "answer": "答：共四种情况：指令、数据；空间、时间局部性。各1分:1）顺序执行的指令序列，\n体现空间局部性；2）循环内部指令会反复执行，体现时间局部性；3）sum等变量反复被\n读写，体现时间局部性；4）数组a中的数据按地址依次被读取，体现空间局部性。"
       },
@@ -7791,7 +7791,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "15.（4分）下面这段代码哪些地方体现了局部性原理？分别体现了什么类型的局部性。\n```\nint sum_array_rows(int a[M][N])\n{\nint i, j, sum = 0;\nfor (i = 0; i < M; i++)\nfor (j = 0; j < N; j++)\nsum += a[i][j];\nreturn sum;\n}\n```",
+        "prompt": "15.（4分）下面这段代码哪些地方体现了局部性原理？分别体现了什么类型的局部性。\n```c\nint sum_array_rows(int a[M][N])\n{\n    int i, j, sum = 0;\n    for (i = 0; i < M; i++)\n        for (j = 0; j < N; j++)\n            sum += a[i][j];\n    return sum;\n}\n```",
         "answer": "答：共四种情况：指令、数据；空间、时间局部性。各1分:1）顺序执行的指令序列，\n体现空间局部性；2）循环内部指令会反复执行，体现时间局部性；3）sum等变量反复被\n读写，体现时间局部性；4）数组a中的数据按地址依次被读取，体现空间局部性。"
       },
       "presentation": {

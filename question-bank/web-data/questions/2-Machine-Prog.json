@@ -4822,7 +4822,7 @@
       "exam": "2020期中",
       "questionNo": "第三题 1",
       "summary": "C 与 x86-64 汇编填空：递归、参数传递",
-      "content": "请分析下面的C语言程序和对应的x86-64汇编代码。\n1.其中，有一部分缺失的代码（用标号标出），请在标号对应的横线上填写缺失的\n内容。注:汇编与机器码中的数字用 16 进制数填写。\n（1-11每空1分，共11分）\nC语言代码如下：\n```\ntypedef struct _parameters {\n    int n;\n    int product;\n} parameters;\nint bar(parameters *params, int x) {\n    params->product *= x;\n}\nvoid foo (parameters *params) {\n    if (params->n <= 1)\n```\n        ___（1）___                        （1）____________\n    bar(params,    （2）   );             （2）____________\n```\n    params->n--;\n    foo(params);\n}\n```\nx86-64汇编代码如下（为简单起见，函数内指令地址只给出后四位，需要时可补\n全）：\n0x0000555555555189 <bar>：\n```\n    5189: f3 0f 1e fa    endbr64\n    518d: 55            push   %rbp\n    518e: 48 89 e5       mov    %rsp,%rbp\n    5191: 48 89 7d f8   mov    _（3）_,-0x8(%rbp)  （3）_________\n    5195: 89 75 f4       mov    %esi,-0xc(%rbp)\n    5198: 48 8b 45 f8   mov    -0x8(%rbp),%rax\n    519c: 8b 40 04        mov    0x4(%rax),%eax\n    519f: 0f af 45 f4   imul   _（4）_(%rbp),%eax  （4）_________\n    51a3: 89 c2           mov    %eax,%edx\n    51a5: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n\n    51a9: 89 50 04       mov    %edx,0x4(%rax)\n    51ac: 90              nop\n    51ad: 5d              pop    _（5）_            （5）_________\n    51ae: c3              retq\n```\n00005555555551af <foo>:\n```\n    51af: f3 0f 1e fa  endbr64\n    51b3: 55               push   %rbp\n    51b4: 48 89 e5        mov    %rsp,%rbp\n51b7: 48 83 ec 10    _（6）_  $0x10,%rsp        （6）_________\n51bb: 48 89 7d f8   mov    %rdi,-0x8(%rbp)\n    51bf: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51c3: 8b 00           mov    (%rax),%eax\n    51c5: 83 f8 01        cmp    $0x1,%eax\n    51c8: 7e 31           _（7）_ 51fb <foo+0x4c>   （7）_________\n    51ca: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51ce: 8b 10           mov    (%rax),%edx\n    51d0: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51d4: 89 d6           mov    %edx,%esi\n    51d6: 48 89 c7        mov    %rax,%rdi\n    51d9: e8 ab ff ff ff  callq  0x0000555555555189 <bar>\n    51de: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51e2: 8b 00           mov    (%rax),%eax\n    51e4: 8d 50 ff        lea  -0x1(_（8）_),%edx    （8）_________\n    51e7: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51eb: 89 10          mov   _（9）_,(%rax)       （9）__________\n    51ed: 48 8b 45 f8   mov  _（10）_ ,%rax       （10）_________\n    51f1: 48 89 c7       mov    %rax,%rdi\n    51f4: e8 b6 ff ff ff    callq   _（11）_       （11）_________\n    51f9: eb 01           jmp    51fc <foo+0x4d>\n    51fb: 90               nop\n    51fc: c9               leaveq\n    51fd: c3               retq\n```\n（",
+      "content": "第三题（20 分）\n\n请分析下面的 C 程序和对应的 x86-64 汇编代码，填写标号对应的缺失内容。汇编与机器码中的数字用十六进制填写。\n\n```c\ntypedef struct _parameters {\n    int n;\n    int product;\n} parameters;\n\nint bar(parameters *params, int x) {\n    params->product *= x;\n}\n\nvoid foo(parameters *params) {\n    if (params->n <= 1) {\n        {{blank:q3-1}}\n    }\n    bar(params, {{blank:q3-2}});\n    params->n--;\n    foo(params);\n}\n```\n\n为简洁起见，函数内的指令地址只给出后四位：\n\n```asm\n0x0000555555555189 <bar>:\n    5189: f3 0f 1e fa       endbr64\n    518d: 55                push   %rbp\n    518e: 48 89 e5          mov    %rsp,%rbp\n    5191: 48 89 7d f8       mov    {{blank:q3-3}},-0x8(%rbp)\n    5195: 89 75 f4          mov    %esi,-0xc(%rbp)\n    5198: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    519c: 8b 40 04          mov    0x4(%rax),%eax\n    519f: 0f af 45 f4       imul   {{blank:q3-4}}(%rbp),%eax\n    51a3: 89 c2             mov    %eax,%edx\n    51a5: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51a9: 89 50 04          mov    %edx,0x4(%rax)\n    51ac: 90                nop\n    51ad: 5d                pop    {{blank:q3-5}}\n    51ae: c3                retq\n\n0x00005555555551af <foo>:\n    51af: f3 0f 1e fa       endbr64\n    51b3: 55                push   %rbp\n    51b4: 48 89 e5          mov    %rsp,%rbp\n    51b7: 48 83 ec 10       {{blank:q3-6}} $0x10,%rsp\n    51bb: 48 89 7d f8       mov    %rdi,-0x8(%rbp)\n    51bf: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51c3: 8b 00             mov    (%rax),%eax\n    51c5: 83 f8 01          cmp    $0x1,%eax\n    51c8: 7e 31             {{blank:q3-7}} 51fb <foo+0x4c>\n    51ca: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51ce: 8b 10             mov    (%rax),%edx\n    51d0: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51d4: 89 d6             mov    %edx,%esi\n    51d6: 48 89 c7          mov    %rax,%rdi\n    51d9: e8 ab ff ff ff    callq  0x0000555555555189 <bar>\n    51de: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51e2: 8b 00             mov    (%rax),%eax\n    51e4: 8d 50 ff          lea    -0x1({{blank:q3-8}}),%edx\n    51e7: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51eb: 89 10             mov    {{blank:q3-9}},(%rax)\n    51ed: 48 8b 45 f8       mov    {{blank:q3-10}},%rax\n    51f1: 48 89 c7          mov    %rax,%rdi\n    51f4: e8 b6 ff ff ff    callq  {{blank:q3-11}}\n    51f9: eb 01             jmp    51fc <foo+0x4d>\n    51fb: 90                nop\n    51fc: c9                leaveq\n    51fd: c3                retq\n```\n1. `return;`\n2. `params->n`\n3. `%rdi`\n4. `-0xc`\n5. `%rbp`\n6. `sub`（`subq` 也可）\n7. `jle`\n8. `%rax`\n9. `%edx`\n10. `-0x8(%rbp)`\n11. `0x00005555555551af <foo>`（只写地址或 `foo` 也可）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4844,13 +4844,203 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "请分析下面的C语言程序和对应的x86-64汇编代码。\n1.其中，有一部分缺失的代码（用标号标出），请在标号对应的横线上填写缺失的\n内容。注:汇编与机器码中的数字用 16 进制数填写。\n（1-11每空1分，共11分）\nC语言代码如下：\n```\ntypedef struct _parameters {\n    int n;\n    int product;\n} parameters;\nint bar(parameters *params, int x) {\n    params->product *= x;\n}\nvoid foo (parameters *params) {\n    if (params->n <= 1)\n```\n        ___（1）___                        （1）____________\n    bar(params,    （2）   );             （2）____________\n```\n    params->n--;\n    foo(params);\n}\n```\nx86-64汇编代码如下（为简单起见，函数内指令地址只给出后四位，需要时可补\n全）：\n0x0000555555555189 <bar>：\n```\n    5189: f3 0f 1e fa    endbr64\n    518d: 55            push   %rbp\n    518e: 48 89 e5       mov    %rsp,%rbp\n    5191: 48 89 7d f8   mov    _（3）_,-0x8(%rbp)  （3）_________\n    5195: 89 75 f4       mov    %esi,-0xc(%rbp)\n    5198: 48 8b 45 f8   mov    -0x8(%rbp),%rax\n    519c: 8b 40 04        mov    0x4(%rax),%eax\n    519f: 0f af 45 f4   imul   _（4）_(%rbp),%eax  （4）_________\n    51a3: 89 c2           mov    %eax,%edx\n    51a5: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n\n    51a9: 89 50 04       mov    %edx,0x4(%rax)\n    51ac: 90              nop\n    51ad: 5d              pop    _（5）_            （5）_________\n    51ae: c3              retq\n```\n00005555555551af <foo>:\n```\n    51af: f3 0f 1e fa  endbr64\n    51b3: 55               push   %rbp\n    51b4: 48 89 e5        mov    %rsp,%rbp\n51b7: 48 83 ec 10    _（6）_  $0x10,%rsp        （6）_________\n51bb: 48 89 7d f8   mov    %rdi,-0x8(%rbp)\n    51bf: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51c3: 8b 00           mov    (%rax),%eax\n    51c5: 83 f8 01        cmp    $0x1,%eax\n    51c8: 7e 31           _（7）_ 51fb <foo+0x4c>   （7）_________\n    51ca: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51ce: 8b 10           mov    (%rax),%edx\n    51d0: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51d4: 89 d6           mov    %edx,%esi\n    51d6: 48 89 c7        mov    %rax,%rdi\n    51d9: e8 ab ff ff ff  callq  0x0000555555555189 <bar>\n    51de: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51e2: 8b 00           mov    (%rax),%eax\n    51e4: 8d 50 ff        lea  -0x1(_（8）_),%edx    （8）_________\n    51e7: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51eb: 89 10          mov   _（9）_,(%rax)       （9）__________\n    51ed: 48 8b 45 f8   mov  _（10）_ ,%rax       （10）_________\n    51f1: 48 89 c7       mov    %rax,%rdi\n    51f4: e8 b6 ff ff ff    callq   _（11）_       （11）_________\n    51f9: eb 01           jmp    51fc <foo+0x4d>\n    51fb: 90               nop\n    51fc: c9               leaveq\n    51fd: c3               retq\n```",
+        "stem": "第三题（20 分）\n\n请分析下面的 C 程序和对应的 x86-64 汇编代码，填写标号对应的缺失内容。汇编与机器码中的数字用十六进制填写。\n\n```c\ntypedef struct _parameters {\n    int n;\n    int product;\n} parameters;\n\nint bar(parameters *params, int x) {\n    params->product *= x;\n}\n\nvoid foo(parameters *params) {\n    if (params->n <= 1) {\n        {{blank:q3-1}}\n    }\n    bar(params, {{blank:q3-2}});\n    params->n--;\n    foo(params);\n}\n```\n\n为简洁起见，函数内的指令地址只给出后四位：\n\n```asm\n0x0000555555555189 <bar>:\n    5189: f3 0f 1e fa       endbr64\n    518d: 55                push   %rbp\n    518e: 48 89 e5          mov    %rsp,%rbp\n    5191: 48 89 7d f8       mov    {{blank:q3-3}},-0x8(%rbp)\n    5195: 89 75 f4          mov    %esi,-0xc(%rbp)\n    5198: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    519c: 8b 40 04          mov    0x4(%rax),%eax\n    519f: 0f af 45 f4       imul   {{blank:q3-4}}(%rbp),%eax\n    51a3: 89 c2             mov    %eax,%edx\n    51a5: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51a9: 89 50 04          mov    %edx,0x4(%rax)\n    51ac: 90                nop\n    51ad: 5d                pop    {{blank:q3-5}}\n    51ae: c3                retq\n\n0x00005555555551af <foo>:\n    51af: f3 0f 1e fa       endbr64\n    51b3: 55                push   %rbp\n    51b4: 48 89 e5          mov    %rsp,%rbp\n    51b7: 48 83 ec 10       {{blank:q3-6}} $0x10,%rsp\n    51bb: 48 89 7d f8       mov    %rdi,-0x8(%rbp)\n    51bf: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51c3: 8b 00             mov    (%rax),%eax\n    51c5: 83 f8 01          cmp    $0x1,%eax\n    51c8: 7e 31             {{blank:q3-7}} 51fb <foo+0x4c>\n    51ca: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51ce: 8b 10             mov    (%rax),%edx\n    51d0: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51d4: 89 d6             mov    %edx,%esi\n    51d6: 48 89 c7          mov    %rax,%rdi\n    51d9: e8 ab ff ff ff    callq  0x0000555555555189 <bar>\n    51de: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51e2: 8b 00             mov    (%rax),%eax\n    51e4: 8d 50 ff          lea    -0x1({{blank:q3-8}}),%edx\n    51e7: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51eb: 89 10             mov    {{blank:q3-9}},(%rax)\n    51ed: 48 8b 45 f8       mov    {{blank:q3-10}},%rax\n    51f1: 48 89 c7          mov    %rax,%rdi\n    51f4: e8 b6 ff ff ff    callq  {{blank:q3-11}}\n    51f9: eb 01             jmp    51fc <foo+0x4d>\n    51fb: 90                nop\n    51fc: c9                leaveq\n    51fd: c3                retq\n```",
         "choices": [],
-        "answer": "（"
+        "answer": "1. `return;`\n2. `params->n`\n3. `%rdi`\n4. `-0xc`\n5. `%rbp`\n6. `sub`（`subq` 也可）\n7. `jle`\n8. `%rax`\n9. `%edx`\n10. `-0x8(%rbp)`\n11. `0x00005555555551af <foo>`（只写地址或 `foo` 也可）",
+        "blankAnswers": [
+          {
+            "id": "q3-1",
+            "acceptedAnswers": [
+              "return",
+              "return;"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-2",
+            "acceptedAnswers": [
+              "params->n"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-3",
+            "acceptedAnswers": [
+              "%rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-4",
+            "acceptedAnswers": [
+              "-0xc"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-5",
+            "acceptedAnswers": [
+              "%rbp"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-6",
+            "acceptedAnswers": [
+              "sub",
+              "subq"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-7",
+            "acceptedAnswers": [
+              "jle"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-8",
+            "acceptedAnswers": [
+              "%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-9",
+            "acceptedAnswers": [
+              "%edx"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-10",
+            "acceptedAnswers": [
+              "-0x8(%rbp)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-11",
+            "acceptedAnswers": [
+              "0x00005555555551af",
+              "5555555551af",
+              "foo",
+              "<foo>"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "partInteraction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q3-1",
+            "acceptedAnswers": [
+              "return",
+              "return;"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-2",
+            "acceptedAnswers": [
+              "params->n"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-3",
+            "acceptedAnswers": [
+              "%rdi"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-4",
+            "acceptedAnswers": [
+              "-0xc"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-5",
+            "acceptedAnswers": [
+              "%rbp"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-6",
+            "acceptedAnswers": [
+              "sub",
+              "subq"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-7",
+            "acceptedAnswers": [
+              "jle"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-8",
+            "acceptedAnswers": [
+              "%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-9",
+            "acceptedAnswers": [
+              "%edx"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-10",
+            "acceptedAnswers": [
+              "-0x8(%rbp)"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q3-11",
+            "acceptedAnswers": [
+              "0x00005555555551af",
+              "5555555551af",
+              "foo",
+              "<foo>"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "composite",
@@ -4859,8 +5049,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "请分析下面的C语言程序和对应的x86-64汇编代码。\n1.其中，有一部分缺失的代码（用标号标出），请在标号对应的横线上填写缺失的\n内容。注:汇编与机器码中的数字用 16 进制数填写。\n（1-11每空1分，共11分）\nC语言代码如下：\n```\ntypedef struct _parameters {\n    int n;\n    int product;\n} parameters;\nint bar(parameters *params, int x) {\n    params->product *= x;\n}\nvoid foo (parameters *params) {\n    if (params->n <= 1)\n```\n        ___（1）___                        （1）____________\n    bar(params,    （2）   );             （2）____________\n```\n    params->n--;\n    foo(params);\n}\n```\nx86-64汇编代码如下（为简单起见，函数内指令地址只给出后四位，需要时可补\n全）：\n0x0000555555555189 <bar>：\n```\n    5189: f3 0f 1e fa    endbr64\n    518d: 55            push   %rbp\n    518e: 48 89 e5       mov    %rsp,%rbp\n    5191: 48 89 7d f8   mov    _（3）_,-0x8(%rbp)  （3）_________\n    5195: 89 75 f4       mov    %esi,-0xc(%rbp)\n    5198: 48 8b 45 f8   mov    -0x8(%rbp),%rax\n    519c: 8b 40 04        mov    0x4(%rax),%eax\n    519f: 0f af 45 f4   imul   _（4）_(%rbp),%eax  （4）_________\n    51a3: 89 c2           mov    %eax,%edx\n    51a5: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n\n    51a9: 89 50 04       mov    %edx,0x4(%rax)\n    51ac: 90              nop\n    51ad: 5d              pop    _（5）_            （5）_________\n    51ae: c3              retq\n```\n00005555555551af <foo>:\n```\n    51af: f3 0f 1e fa  endbr64\n    51b3: 55               push   %rbp\n    51b4: 48 89 e5        mov    %rsp,%rbp\n51b7: 48 83 ec 10    _（6）_  $0x10,%rsp        （6）_________\n51bb: 48 89 7d f8   mov    %rdi,-0x8(%rbp)\n    51bf: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51c3: 8b 00           mov    (%rax),%eax\n    51c5: 83 f8 01        cmp    $0x1,%eax\n    51c8: 7e 31           _（7）_ 51fb <foo+0x4c>   （7）_________\n    51ca: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51ce: 8b 10           mov    (%rax),%edx\n    51d0: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51d4: 89 d6           mov    %edx,%esi\n    51d6: 48 89 c7        mov    %rax,%rdi\n    51d9: e8 ab ff ff ff  callq  0x0000555555555189 <bar>\n    51de: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51e2: 8b 00           mov    (%rax),%eax\n    51e4: 8d 50 ff        lea  -0x1(_（8）_),%edx    （8）_________\n    51e7: 48 8b 45 f8    mov    -0x8(%rbp),%rax\n    51eb: 89 10          mov   _（9）_,(%rax)       （9）__________\n    51ed: 48 8b 45 f8   mov  _（10）_ ,%rax       （10）_________\n    51f1: 48 89 c7       mov    %rax,%rdi\n    51f4: e8 b6 ff ff ff    callq   _（11）_       （11）_________\n    51f9: eb 01           jmp    51fc <foo+0x4d>\n    51fb: 90               nop\n    51fc: c9               leaveq\n    51fd: c3               retq\n```",
-        "answer": "（"
+        "prompt": "第三题（20 分）\n\n请分析下面的 C 程序和对应的 x86-64 汇编代码，填写标号对应的缺失内容。汇编与机器码中的数字用十六进制填写。\n\n```c\ntypedef struct _parameters {\n    int n;\n    int product;\n} parameters;\n\nint bar(parameters *params, int x) {\n    params->product *= x;\n}\n\nvoid foo(parameters *params) {\n    if (params->n <= 1) {\n        {{blank:q3-1}}\n    }\n    bar(params, {{blank:q3-2}});\n    params->n--;\n    foo(params);\n}\n```\n\n为简洁起见，函数内的指令地址只给出后四位：\n\n```asm\n0x0000555555555189 <bar>:\n    5189: f3 0f 1e fa       endbr64\n    518d: 55                push   %rbp\n    518e: 48 89 e5          mov    %rsp,%rbp\n    5191: 48 89 7d f8       mov    {{blank:q3-3}},-0x8(%rbp)\n    5195: 89 75 f4          mov    %esi,-0xc(%rbp)\n    5198: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    519c: 8b 40 04          mov    0x4(%rax),%eax\n    519f: 0f af 45 f4       imul   {{blank:q3-4}}(%rbp),%eax\n    51a3: 89 c2             mov    %eax,%edx\n    51a5: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51a9: 89 50 04          mov    %edx,0x4(%rax)\n    51ac: 90                nop\n    51ad: 5d                pop    {{blank:q3-5}}\n    51ae: c3                retq\n\n0x00005555555551af <foo>:\n    51af: f3 0f 1e fa       endbr64\n    51b3: 55                push   %rbp\n    51b4: 48 89 e5          mov    %rsp,%rbp\n    51b7: 48 83 ec 10       {{blank:q3-6}} $0x10,%rsp\n    51bb: 48 89 7d f8       mov    %rdi,-0x8(%rbp)\n    51bf: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51c3: 8b 00             mov    (%rax),%eax\n    51c5: 83 f8 01          cmp    $0x1,%eax\n    51c8: 7e 31             {{blank:q3-7}} 51fb <foo+0x4c>\n    51ca: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51ce: 8b 10             mov    (%rax),%edx\n    51d0: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51d4: 89 d6             mov    %edx,%esi\n    51d6: 48 89 c7          mov    %rax,%rdi\n    51d9: e8 ab ff ff ff    callq  0x0000555555555189 <bar>\n    51de: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51e2: 8b 00             mov    (%rax),%eax\n    51e4: 8d 50 ff          lea    -0x1({{blank:q3-8}}),%edx\n    51e7: 48 8b 45 f8       mov    -0x8(%rbp),%rax\n    51eb: 89 10             mov    {{blank:q3-9}},(%rax)\n    51ed: 48 8b 45 f8       mov    {{blank:q3-10}},%rax\n    51f1: 48 89 c7          mov    %rax,%rdi\n    51f4: e8 b6 ff ff ff    callq  {{blank:q3-11}}\n    51f9: eb 01             jmp    51fc <foo+0x4d>\n    51fb: 90                nop\n    51fc: c9                leaveq\n    51fd: c3                retq\n```",
+        "answer": "1. `return;`\n2. `params->n`\n3. `%rdi`\n4. `-0xc`\n5. `%rbp`\n6. `sub`（`subq` 也可）\n7. `jle`\n8. `%rax`\n9. `%edx`\n10. `-0x8(%rbp)`\n11. `0x00005555555551af <foo>`（只写地址或 `foo` 也可）"
       },
       "group": {
         "id": "p-d72f88c4198cf267:2020-mid-q3",
@@ -4883,7 +5073,7 @@
       "exam": "2020期中",
       "questionNo": "第三题 2",
       "summary": "断点处栈帧地址与存储值的推断",
-      "content": "2.在程序执行到0x000055555555518e时（该指令还未执行），此时的栈帧如下，\n请填写空格中对应的值。\n地址  值\n```\n0x7fffffffe308  0xffffe340\n0x7fffffffe304  0x00000000\n0x7fffffffe300  0x00000000\n0x7fffffffe2fc  0x00005555\n```\n0x7fffffffe2f8  （12）_________\n```\n0x7fffffffe2f4  0x00007fff\n0x7fffffffe2f0  0xffffe310\n0x7fffffffe2ec  0x00007fff\n0x7fffffffe2e8  0xffffe340\n0x7fffffffe2e4  0x00000004\n0x7fffffffe2e0  0xffffe350\n0x7fffffffe2dc  0x00005555\n```\n0x7fffffffe2d8  （13）_________\n0x7fffffffe2d4  0x00007fff\n0x7fffffffe2d0  （14）_________\n（每空2分，共6分）",
+      "content": "2. 程序执行到 `0x000055555555518e` 时（该指令尚未执行），栈帧如下。请填写三个空：\n\n| 地址 | 值 |\n| --- | --- |\n| `0x7fffffffe308` | `0xffffe340` |\n| `0x7fffffffe304` | `0x00000000` |\n| `0x7fffffffe300` | `0x00000000` |\n| `0x7fffffffe2fc` | `0x00005555` |\n| `0x7fffffffe2f8` | {{blank:stack-12}} |\n| `0x7fffffffe2f4` | `0x00007fff` |\n| `0x7fffffffe2f0` | `0xffffe310` |\n| `0x7fffffffe2ec` | `0x00007fff` |\n| `0x7fffffffe2e8` | `0xffffe340` |\n| `0x7fffffffe2e4` | `0x00000004` |\n| `0x7fffffffe2e0` | `0xffffe350` |\n| `0x7fffffffe2dc` | `0x00005555` |\n| `0x7fffffffe2d8` | {{blank:stack-13}} |\n| `0x7fffffffe2d4` | `0x00007fff` |\n| `0x7fffffffe2d0` | {{blank:stack-14}} |\n12. `0x555551f9`\n13. `0x555551de`\n14. `0xffffe2f0`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4905,13 +5095,71 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2.在程序执行到0x000055555555518e时（该指令还未执行），此时的栈帧如下，\n请填写空格中对应的值。\n地址  值\n```\n0x7fffffffe308  0xffffe340\n0x7fffffffe304  0x00000000\n0x7fffffffe300  0x00000000\n0x7fffffffe2fc  0x00005555\n```\n0x7fffffffe2f8  （12）_________\n```\n0x7fffffffe2f4  0x00007fff\n0x7fffffffe2f0  0xffffe310\n0x7fffffffe2ec  0x00007fff\n0x7fffffffe2e8  0xffffe340\n0x7fffffffe2e4  0x00000004\n0x7fffffffe2e0  0xffffe350\n0x7fffffffe2dc  0x00005555\n```\n0x7fffffffe2d8  （13）_________\n0x7fffffffe2d4  0x00007fff\n0x7fffffffe2d0  （14）_________",
+        "stem": "2. 程序执行到 `0x000055555555518e` 时（该指令尚未执行），栈帧如下。请填写三个空：\n\n| 地址 | 值 |\n| --- | --- |\n| `0x7fffffffe308` | `0xffffe340` |\n| `0x7fffffffe304` | `0x00000000` |\n| `0x7fffffffe300` | `0x00000000` |\n| `0x7fffffffe2fc` | `0x00005555` |\n| `0x7fffffffe2f8` | {{blank:stack-12}} |\n| `0x7fffffffe2f4` | `0x00007fff` |\n| `0x7fffffffe2f0` | `0xffffe310` |\n| `0x7fffffffe2ec` | `0x00007fff` |\n| `0x7fffffffe2e8` | `0xffffe340` |\n| `0x7fffffffe2e4` | `0x00000004` |\n| `0x7fffffffe2e0` | `0xffffe350` |\n| `0x7fffffffe2dc` | `0x00005555` |\n| `0x7fffffffe2d8` | {{blank:stack-13}} |\n| `0x7fffffffe2d4` | `0x00007fff` |\n| `0x7fffffffe2d0` | {{blank:stack-14}} |",
         "choices": [],
-        "answer": "（每空2分，共6分）"
+        "answer": "12. `0x555551f9`\n13. `0x555551de`\n14. `0xffffe2f0`",
+        "blankAnswers": [
+          {
+            "id": "stack-12",
+            "acceptedAnswers": [
+              "0x555551f9",
+              "555551f9"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stack-13",
+            "acceptedAnswers": [
+              "0x555551de",
+              "555551de"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stack-14",
+            "acceptedAnswers": [
+              "0xffffe2f0",
+              "ffffe2f0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "partInteraction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "stack-12",
+            "acceptedAnswers": [
+              "0x555551f9",
+              "555551f9"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stack-13",
+            "acceptedAnswers": [
+              "0x555551de",
+              "555551de"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "stack-14",
+            "acceptedAnswers": [
+              "0xffffe2f0",
+              "ffffe2f0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "composite",
@@ -4920,8 +5168,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.在程序执行到0x000055555555518e时（该指令还未执行），此时的栈帧如下，\n请填写空格中对应的值。\n地址  值\n```\n0x7fffffffe308  0xffffe340\n0x7fffffffe304  0x00000000\n0x7fffffffe300  0x00000000\n0x7fffffffe2fc  0x00005555\n```\n0x7fffffffe2f8  （12）_________\n```\n0x7fffffffe2f4  0x00007fff\n0x7fffffffe2f0  0xffffe310\n0x7fffffffe2ec  0x00007fff\n0x7fffffffe2e8  0xffffe340\n0x7fffffffe2e4  0x00000004\n0x7fffffffe2e0  0xffffe350\n0x7fffffffe2dc  0x00005555\n```\n0x7fffffffe2d8  （13）_________\n0x7fffffffe2d4  0x00007fff\n0x7fffffffe2d0  （14）_________",
-        "answer": "（每空2分，共6分）"
+        "prompt": "2. 程序执行到 `0x000055555555518e` 时（该指令尚未执行），栈帧如下。请填写三个空：\n\n| 地址 | 值 |\n| --- | --- |\n| `0x7fffffffe308` | `0xffffe340` |\n| `0x7fffffffe304` | `0x00000000` |\n| `0x7fffffffe300` | `0x00000000` |\n| `0x7fffffffe2fc` | `0x00005555` |\n| `0x7fffffffe2f8` | {{blank:stack-12}} |\n| `0x7fffffffe2f4` | `0x00007fff` |\n| `0x7fffffffe2f0` | `0xffffe310` |\n| `0x7fffffffe2ec` | `0x00007fff` |\n| `0x7fffffffe2e8` | `0xffffe340` |\n| `0x7fffffffe2e4` | `0x00000004` |\n| `0x7fffffffe2e0` | `0xffffe350` |\n| `0x7fffffffe2dc` | `0x00005555` |\n| `0x7fffffffe2d8` | {{blank:stack-13}} |\n| `0x7fffffffe2d4` | `0x00007fff` |\n| `0x7fffffffe2d0` | {{blank:stack-14}} |",
+        "answer": "12. `0x555551f9`\n13. `0x555551de`\n14. `0xffffe2f0`"
       },
       "group": {
         "id": "p-d72f88c4198cf267:2020-mid-q3",
@@ -4944,7 +5192,7 @@
       "exam": "2020期中",
       "questionNo": "第三题 3",
       "summary": "递归函数 foo 的功能",
-      "content": "3.当params={n,1}时，foo(&params)函数的功能是什么？\n（3分）",
+      "content": "3. 当 `params = {n, 1}` 时，`foo(&params)` 的功能是什么？\n计算 `n` 的阶乘。函数从 `n` 开始递归，将 `product` 依次乘以当前的 `n`，直到 `n <= 1` 时返回；若初始 `product = 1`，最终 `product = n!`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4966,9 +5214,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "3.当params={n,1}时，foo(&params)函数的功能是什么？",
+        "stem": "3. 当 `params = {n, 1}` 时，`foo(&params)` 的功能是什么？",
         "choices": [],
-        "answer": "（3分）"
+        "answer": "计算 `n` 的阶乘。函数从 `n` 开始递归，将 `product` 依次乘以当前的 `n`，直到 `n <= 1` 时返回；若初始 `product = 1`，最终 `product = n!`。"
       },
       "partInteraction": {
         "kind": "short-answer",
@@ -4981,8 +5229,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3.当params={n,1}时，foo(&params)函数的功能是什么？",
-        "answer": "（3分）"
+        "prompt": "3. 当 `params = {n, 1}` 时，`foo(&params)` 的功能是什么？",
+        "answer": "计算 `n` 的阶乘。函数从 `n` 开始递归，将 `product` 依次乘以当前的 `n`，直到 `n <= 1` 时返回；若初始 `product = 1`，最终 `product = n!`。"
       },
       "group": {
         "id": "p-d72f88c4198cf267:2020-mid-q3",
@@ -8302,7 +8550,7 @@
       "exam": "2017期末",
       "questionNo": "第二题 1",
       "summary": "结构体偏移与浮点汇编代码填空",
-      "content": "第二题（12分）\n假设程序运行在x86-64的小端法机器上，编译器按照标准规则对齐，并且有nan\n参与的算术比较运算都返回0。请回答下列问题：\n1. 请根据左边C程序和右边对应的汇编代码，填写空白处的代码。\n```\nstruct a {  ……\n  char c[2][3];  proc1:\n  int i;    ……\n};  movss  (%rcx), %xmm1\nstruct b {    movss  .LC0(%rip), %xmm0\n  float f;    addss  %xmm1, %xmm0\n  struct a a;    cvtss2sd  %xmm0, %xmm2\n  char c;    movsd  %xmm2, -8(%rbp)\n};    movss  (%rcx), %xmm0\nunion c {    cvtss2sd  %xmm0, %xmm0\n  struct a a;    movsd  .LC1(%rip), %xmm1\n  struct b b;    addsd  %xmm1, %xmm0\n  struct b* pb;    movq  %xmm0, -16(%rbp)\n};  ……\nvoid proc1(union c* u){  proc2:\n  double a = u->b.f          ;  ……\n  double b = u->b.f          ;  proc3:\n  printf(\"%d\\n\", a==b);    ……\n}\n    movb  %al, -1(%rbp)\nvoid proc2(union c* u){    movzbl  2(%rcx), %eax\n  char* a = u->a.c[1] + 1;    movb  %al, -2(%rbp)\n  char* b = (u->a.c + 1)[1];  ……\n  printf(\"%d\\n\", b - a);   proc4:\n}      ……\n    movl  8(%rcx), %eax\nvoid proc3(union c* u){    movl  %eax, -4(%rbp)\n  char x = u->a.c[1][0];    movzbl  16(%rcx), %eax\n\n  char y =                 ;    movsbl  %al, %eax\n  if (x == 0x7F && (y & 0x80) == 0x80)     movl  %eax, -8(%rbp)\n    printf(\"%d\\n\", (u->b.f < u->a.i));      ……\n  else  main:\n    printf(\"0\\n\");      ……\n}    leaq 32(%rsp), %rbx\n    movq  %rbx, %rcx\nvoid proc4(union c* u){    call proc1\n  int x = u->a.i;    movq  %rbx, %rcx\n  int y =              ;    call proc2\n  printf(\"%d\\n\", (x > y) != (-x<-y));     movq  %rbx, %rcx\n}    call proc3\n    movq  %rbx, %rcx\nvoid main(){    call proc4\n  unsigned int i;      ……\n  printf(\"%d\\n\", sizeof(struct a));    .align 4\n  printf(\"%d\\n\", sizeof(struct b));  .LC0:\n  printf(\"%d\\n\", sizeof(union c));    .long  1048576000\n  //十六进制3E800000\n  union c u;    .align 8\n```\n  …… //随机初始化u  .LC1:\n  proc1(&u);    .long  0\n  proc2(&u);    .long  1070596096\n  proc3(&u);  //十六进制 3FD00000\n```\n  proc4(&u);\n}\n```\n答案：\n(1) `a = u->b.f + 0.25f`（即空白处填 `+ 0.25f`）\n(2) `b = u->b.f + 0.25`（即空白处填 `+ 0.25`，常量是 double）\n(3) `y = u->b.c`（即空白处填 `u->b.c`；写成 `*((char*)u + 16)` 等价）\n\n第 2 小问（程序共 7 行输出，每行可能的值）：\n第一行：0, 1\n第二行：0, 1\n第三行：0\n第四行：0, 1\n第五行：0, 1\n第六行：0\n第七行：0\n\n解析：\n**结构体布局**（x86-64，标准对齐，小端）：`struct a` 偏移 0..5 是 `char c[2][3]`，\n偏移 8..11 是 `int i`，对齐 4 ⇒ `sizeof(struct a) = 12`；`struct b` 偏移 0 是 `float f`，\n偏移 4..15 是 `struct a a`（内部 4..7 是填充），偏移 16 是 `char c`，偏移 24 是\n`struct b* pb`，对齐 8 ⇒ `sizeof(struct b) = 32`；`union c` 取三者最大值 ⇒ 32。\n\n**proc1**：`.LC0` 处 `.long 1048576000 = 0x3E800000`，按 IEEE 754 单精度分解：\n符号 0、阶码 0x7D = 125 ⇒ 125−127 = −2、尾数 1.0 ⇒ 1×2⁻² = **0.25**（不是 2.5！）。\n`.LC1` 处 `.long 0, 1070596096 = 0x3FD0000000000000`，按双精度分解：阶码 0x3FD = 1021\n⇒ 1021−1023 = −2、尾数 1.0 ⇒ **0.25**。于是同一个 0.25 因常量类型不同走了两条不同\n路径：一条先 `addss`（单精度加法，再 `cvtss2sd` 提升为 double），另一条先 `cvtss2sd`\n再用 `addsd`（双精度加法）。所以两空分别是 `+ 0.25f` 与 `+ 0.25`。\n两空若写成同一类型就只会产生一份代码，无法解释汇编里的 `addss`+`addsd` 并存。\n\n**proc3**：`x = u->a.c[1][0]` 读的是字节 3（汇编 `movzbl 2(%rcx)` 与之相邻的字节 3，\n即 `c[1][0]`）。`y` 处汇编是 `movzbl 16(%rcx), %eax` 读 1 字节、`movsbl %al, %eax`\n符号扩展后存入 int，说明 y 是取自偏移 16 的**有符号 char**，而偏移 16 正是\n`struct b` 的 `char c` ⇒ `y = u->b.c`。\n\n**proc4**：`x = u->a.i` 是偏移 8 的 int（`movl 8(%rcx), %eax`）；偏移 16 处再取一个\nchar（`movzbl 16(%rcx), %eax` ⇒ `movsbl`），即 `y = u->b.c`。\n\n**7 行输出的推导**（每行的输出都来自 `printf`，顺序为 proc1、proc2、proc3、proc4）：\n- 第 1 行 `a==b`：`a = (double)(float)(f + 0.25f)`，`b = (double)f + 0.25`。0.25 是\n  2⁻²，故 f+0.25 时阶码最多升 2。设 f 无溢出时阶码为 E：(i) E ≤ 21 ⇒ 间距 ≤ 2⁻²，\n  f+0.25 可精确表示，两条路径都得精确值 ⇒ **1**；(ii) E ≥ 22 ⇒ f 的间距 ≥ 0.5 > 0.25，\n  f+0.25 舍入到 f 或 f+间距，单精度结果 ≠ 双精度结果 ⇒ **0**；(iii) f 是 NaN（或 ±Inf）\n  ⇒ `a==b` 为假 ⇒ **0**。随机初始化能取到 (i)(ii)(iii)，所以可能值为 0 和 1。\n- 第 2 行同 proc1 另一空：同样可能是 0 或 1。\n- 第 3 行 `b - a`（两个 `char*`）：`u->a.c[1] + 1` 与 `(u->a.c + 1)[1]` 都表示\n  `&c[1][1]`，恒等于 ⇒ 恒为 **0**。\n- 第 4 行（proc3）：`x` 是 `u->a.i` 的低位字节，`y` 是同一个 int 的**次低字节**\n  （`u->a.i` 占字节 8..11，低位在 8，小端 ⇒ 字节 9 就是 `(i >> 8) & 0xFF`）。\n  - `x ≠ 0x7F` 或 `(y & 0x80) != 0x80` ⇒ 走 else，打印 **0**；\n  - 两者都成立时，float f 的 4 个字节是 `7F y b10 b11`（小端组装），\n    `f < i` 前 C 会把 int 转成 float：`y ≥ 0x80` 时是负数（比较用同一个 i 的真值，\n    只有 int→float 的舍入误差，不影响符号），与同为负的 i 比较；`y < 0x80` 时是\n    正的小数（次正规/极小正规数），必然小于巨大的负数 i ⇒ 该比较为真，打印 **1**。\n  即条件里 `y & 0x80` 这一半恰好决定了比较结果，第 4 行可能打印 0 或 1。\n- 第 5 行 `(x > y) != (-x < -y)`：令 t = (x > y)。若 x ≠ INT_MIN，则 −x 无溢出，\n  (−x < −y) 恰为 ¬t，两式不等 ⇒ **1**；若 x == INT_MIN，则 −x == INT_MIN，两式同为\n  (INT_MIN > y) ⇒ 相等 ⇒ **0**。随机初始化两种情况都能取到 ⇒ {0, 1}。\n- 第 6 行 `b - a`（proc2）恒为 **0**。\n- 第 7 行 proc3 恒打印 **0**（见上）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "第二题（12 分）\n\n假设程序运行在 x86-64 小端机器上，编译器按照标准规则对齐，并且有 NaN 参与的算术比较均返回 0。请根据 C 程序与右侧汇编所反映的操作，填写四处缺失的 C 表达式。\n\n```c\nstruct a {\n    char c[2][3];\n    int i;\n};\n\nstruct b {\n    float f;\n    struct a a;\n    char c;\n};\n\nunion c {\n    struct a a;\n    struct b b;\n    struct b *pb;\n};\n\nvoid proc1(union c *u) {\n    double a = u->b.f {{blank:proc1-a}};\n    double b = u->b.f {{blank:proc1-b}};\n    printf(\"%d\\n\", a == b);\n}\n\nvoid proc2(union c *u) {\n    char *a = u->a.c[1] + 1;\n    char *b = (u->a.c + 1)[1];\n    printf(\"%d\\n\", (int)(b - a));\n}\n\nvoid proc3(union c *u) {\n    char x = u->a.c[1][0];\n    char y = {{blank:proc3-y}};\n    if (x == 0x7F && (y & 0x80) == 0x80) {\n        printf(\"%d\\n\", u->b.f < u->a.i);\n    } else {\n        printf(\"0\\n\");\n    }\n}\n\nvoid proc4(union c *u) {\n    int x = u->a.i;\n    int y = {{blank:proc4-y}};\n    printf(\"%d\\n\", (x > y) != (-x < -y));\n}\n\nint main(void) {\n    printf(\"%zu\\n\", sizeof(struct a));\n    printf(\"%zu\\n\", sizeof(struct b));\n    printf(\"%zu\\n\", sizeof(union c));\n\n    union c u;\n    /* 随机初始化 u */\n    proc1(&u);\n    proc2(&u);\n    proc3(&u);\n    proc4(&u);\n}\n```\n\n与四个空相关的汇编片段如下：\n\n```asm\n# proc1：第一条路径先做单精度加法，第二条路径先扩展为双精度\nmovss      (%rcx), %xmm1\nmovss      .LC0(%rip), %xmm0\naddss      %xmm1, %xmm0\ncvtss2sd   %xmm0, %xmm2\n\nmovss      (%rcx), %xmm0\ncvtss2sd   %xmm0, %xmm0\nmovsd      .LC1(%rip), %xmm1\naddsd      %xmm1, %xmm0\n\n# proc3 / proc4：从 union 起始地址偏移 16 字节处读取有符号 char\nmovzbl     16(%rcx), %eax\nmovsbl     %al, %eax\n\n.LC0:\n    .long 1048576000          # 0x3E800000，单精度 0.25\n.LC1:\n    .long 0\n    .long 1070596096          # 0x3FD00000，双精度 0.25 的高 32 位\n```\n1. `+ 0.25f`\n2. `+ 0.25`\n3. `u->b.c`\n4. `u->b.c`\n\n第一条路径先在单精度中加上 `0.25f`，第二条路径先把 `float` 扩展为 `double`，再加上双精度常量 `0.25`。偏移 16 字节处是 `struct b` 的成员 `c`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8322,18 +8570,101 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二题（12分）\n假设程序运行在x86-64的小端法机器上，编译器按照标准规则对齐，并且有nan\n参与的算术比较运算都返回0。请回答下列问题：\n1. 请根据左边C程序和右边对应的汇编代码，填写空白处的代码。\n```\nstruct a {  ……\n  char c[2][3];  proc1:\n  int i;    ……\n};  movss  (%rcx), %xmm1\nstruct b {    movss  .LC0(%rip), %xmm0\n  float f;    addss  %xmm1, %xmm0\n  struct a a;    cvtss2sd  %xmm0, %xmm2\n  char c;    movsd  %xmm2, -8(%rbp)\n};    movss  (%rcx), %xmm0\nunion c {    cvtss2sd  %xmm0, %xmm0\n  struct a a;    movsd  .LC1(%rip), %xmm1\n  struct b b;    addsd  %xmm1, %xmm0\n  struct b* pb;    movq  %xmm0, -16(%rbp)\n};  ……\nvoid proc1(union c* u){  proc2:\n  double a = u->b.f          ;  ……\n  double b = u->b.f          ;  proc3:\n  printf(\"%d\\n\", a==b);    ……\n}\n    movb  %al, -1(%rbp)\nvoid proc2(union c* u){    movzbl  2(%rcx), %eax\n  char* a = u->a.c[1] + 1;    movb  %al, -2(%rbp)\n  char* b = (u->a.c + 1)[1];  ……\n  printf(\"%d\\n\", b - a);   proc4:\n}      ……\n    movl  8(%rcx), %eax\nvoid proc3(union c* u){    movl  %eax, -4(%rbp)\n  char x = u->a.c[1][0];    movzbl  16(%rcx), %eax\n\n  char y =                 ;    movsbl  %al, %eax\n  if (x == 0x7F && (y & 0x80) == 0x80)     movl  %eax, -8(%rbp)\n    printf(\"%d\\n\", (u->b.f < u->a.i));      ……\n  else  main:\n    printf(\"0\\n\");      ……\n}    leaq 32(%rsp), %rbx\n    movq  %rbx, %rcx\nvoid proc4(union c* u){    call proc1\n  int x = u->a.i;    movq  %rbx, %rcx\n  int y =              ;    call proc2\n  printf(\"%d\\n\", (x > y) != (-x<-y));     movq  %rbx, %rcx\n}    call proc3\n    movq  %rbx, %rcx\nvoid main(){    call proc4\n  unsigned int i;      ……\n  printf(\"%d\\n\", sizeof(struct a));    .align 4\n  printf(\"%d\\n\", sizeof(struct b));  .LC0:\n  printf(\"%d\\n\", sizeof(union c));    .long  1048576000\n  //十六进制3E800000\n  union c u;    .align 8\n```\n  …… //随机初始化u  .LC1:\n  proc1(&u);    .long  0\n  proc2(&u);    .long  1070596096\n  proc3(&u);  //十六进制 3FD00000\n```\n  proc4(&u);\n}\n```",
+        "stem": "第二题（12 分）\n\n假设程序运行在 x86-64 小端机器上，编译器按照标准规则对齐，并且有 NaN 参与的算术比较均返回 0。请根据 C 程序与右侧汇编所反映的操作，填写四处缺失的 C 表达式。\n\n```c\nstruct a {\n    char c[2][3];\n    int i;\n};\n\nstruct b {\n    float f;\n    struct a a;\n    char c;\n};\n\nunion c {\n    struct a a;\n    struct b b;\n    struct b *pb;\n};\n\nvoid proc1(union c *u) {\n    double a = u->b.f {{blank:proc1-a}};\n    double b = u->b.f {{blank:proc1-b}};\n    printf(\"%d\\n\", a == b);\n}\n\nvoid proc2(union c *u) {\n    char *a = u->a.c[1] + 1;\n    char *b = (u->a.c + 1)[1];\n    printf(\"%d\\n\", (int)(b - a));\n}\n\nvoid proc3(union c *u) {\n    char x = u->a.c[1][0];\n    char y = {{blank:proc3-y}};\n    if (x == 0x7F && (y & 0x80) == 0x80) {\n        printf(\"%d\\n\", u->b.f < u->a.i);\n    } else {\n        printf(\"0\\n\");\n    }\n}\n\nvoid proc4(union c *u) {\n    int x = u->a.i;\n    int y = {{blank:proc4-y}};\n    printf(\"%d\\n\", (x > y) != (-x < -y));\n}\n\nint main(void) {\n    printf(\"%zu\\n\", sizeof(struct a));\n    printf(\"%zu\\n\", sizeof(struct b));\n    printf(\"%zu\\n\", sizeof(union c));\n\n    union c u;\n    /* 随机初始化 u */\n    proc1(&u);\n    proc2(&u);\n    proc3(&u);\n    proc4(&u);\n}\n```\n\n与四个空相关的汇编片段如下：\n\n```asm\n# proc1：第一条路径先做单精度加法，第二条路径先扩展为双精度\nmovss      (%rcx), %xmm1\nmovss      .LC0(%rip), %xmm0\naddss      %xmm1, %xmm0\ncvtss2sd   %xmm0, %xmm2\n\nmovss      (%rcx), %xmm0\ncvtss2sd   %xmm0, %xmm0\nmovsd      .LC1(%rip), %xmm1\naddsd      %xmm1, %xmm0\n\n# proc3 / proc4：从 union 起始地址偏移 16 字节处读取有符号 char\nmovzbl     16(%rcx), %eax\nmovsbl     %al, %eax\n\n.LC0:\n    .long 1048576000          # 0x3E800000，单精度 0.25\n.LC1:\n    .long 0\n    .long 1070596096          # 0x3FD00000，双精度 0.25 的高 32 位\n```",
         "choices": [],
-        "answer": "答案：\n(1) `a = u->b.f + 0.25f`（即空白处填 `+ 0.25f`）\n(2) `b = u->b.f + 0.25`（即空白处填 `+ 0.25`，常量是 double）\n(3) `y = u->b.c`（即空白处填 `u->b.c`；写成 `*((char*)u + 16)` 等价）\n\n第 2 小问（程序共 7 行输出，每行可能的值）：\n第一行：0, 1\n第二行：0, 1\n第三行：0\n第四行：0, 1\n第五行：0, 1\n第六行：0\n第七行：0\n\n解析：\n**结构体布局**（x86-64，标准对齐，小端）：`struct a` 偏移 0..5 是 `char c[2][3]`，\n偏移 8..11 是 `int i`，对齐 4 ⇒ `sizeof(struct a) = 12`；`struct b` 偏移 0 是 `float f`，\n偏移 4..15 是 `struct a a`（内部 4..7 是填充），偏移 16 是 `char c`，偏移 24 是\n`struct b* pb`，对齐 8 ⇒ `sizeof(struct b) = 32`；`union c` 取三者最大值 ⇒ 32。\n\n**proc1**：`.LC0` 处 `.long 1048576000 = 0x3E800000`，按 IEEE 754 单精度分解：\n符号 0、阶码 0x7D = 125 ⇒ 125−127 = −2、尾数 1.0 ⇒ 1×2⁻² = **0.25**（不是 2.5！）。\n`.LC1` 处 `.long 0, 1070596096 = 0x3FD0000000000000`，按双精度分解：阶码 0x3FD = 1021\n⇒ 1021−1023 = −2、尾数 1.0 ⇒ **0.25**。于是同一个 0.25 因常量类型不同走了两条不同\n路径：一条先 `addss`（单精度加法，再 `cvtss2sd` 提升为 double），另一条先 `cvtss2sd`\n再用 `addsd`（双精度加法）。所以两空分别是 `+ 0.25f` 与 `+ 0.25`。\n两空若写成同一类型就只会产生一份代码，无法解释汇编里的 `addss`+`addsd` 并存。\n\n**proc3**：`x = u->a.c[1][0]` 读的是字节 3（汇编 `movzbl 2(%rcx)` 与之相邻的字节 3，\n即 `c[1][0]`）。`y` 处汇编是 `movzbl 16(%rcx), %eax` 读 1 字节、`movsbl %al, %eax`\n符号扩展后存入 int，说明 y 是取自偏移 16 的**有符号 char**，而偏移 16 正是\n`struct b` 的 `char c` ⇒ `y = u->b.c`。\n\n**proc4**：`x = u->a.i` 是偏移 8 的 int（`movl 8(%rcx), %eax`）；偏移 16 处再取一个\nchar（`movzbl 16(%rcx), %eax` ⇒ `movsbl`），即 `y = u->b.c`。\n\n**7 行输出的推导**（每行的输出都来自 `printf`，顺序为 proc1、proc2、proc3、proc4）：\n- 第 1 行 `a==b`：`a = (double)(float)(f + 0.25f)`，`b = (double)f + 0.25`。0.25 是\n  2⁻²，故 f+0.25 时阶码最多升 2。设 f 无溢出时阶码为 E：(i) E ≤ 21 ⇒ 间距 ≤ 2⁻²，\n  f+0.25 可精确表示，两条路径都得精确值 ⇒ **1**；(ii) E ≥ 22 ⇒ f 的间距 ≥ 0.5 > 0.25，\n  f+0.25 舍入到 f 或 f+间距，单精度结果 ≠ 双精度结果 ⇒ **0**；(iii) f 是 NaN（或 ±Inf）\n  ⇒ `a==b` 为假 ⇒ **0**。随机初始化能取到 (i)(ii)(iii)，所以可能值为 0 和 1。\n- 第 2 行同 proc1 另一空：同样可能是 0 或 1。\n- 第 3 行 `b - a`（两个 `char*`）：`u->a.c[1] + 1` 与 `(u->a.c + 1)[1]` 都表示\n  `&c[1][1]`，恒等于 ⇒ 恒为 **0**。\n- 第 4 行（proc3）：`x` 是 `u->a.i` 的低位字节，`y` 是同一个 int 的**次低字节**\n  （`u->a.i` 占字节 8..11，低位在 8，小端 ⇒ 字节 9 就是 `(i >> 8) & 0xFF`）。\n  - `x ≠ 0x7F` 或 `(y & 0x80) != 0x80` ⇒ 走 else，打印 **0**；\n  - 两者都成立时，float f 的 4 个字节是 `7F y b10 b11`（小端组装），\n    `f < i` 前 C 会把 int 转成 float：`y ≥ 0x80` 时是负数（比较用同一个 i 的真值，\n    只有 int→float 的舍入误差，不影响符号），与同为负的 i 比较；`y < 0x80` 时是\n    正的小数（次正规/极小正规数），必然小于巨大的负数 i ⇒ 该比较为真，打印 **1**。\n  即条件里 `y & 0x80` 这一半恰好决定了比较结果，第 4 行可能打印 0 或 1。\n- 第 5 行 `(x > y) != (-x < -y)`：令 t = (x > y)。若 x ≠ INT_MIN，则 −x 无溢出，\n  (−x < −y) 恰为 ¬t，两式不等 ⇒ **1**；若 x == INT_MIN，则 −x == INT_MIN，两式同为\n  (INT_MIN > y) ⇒ 相等 ⇒ **0**。随机初始化两种情况都能取到 ⇒ {0, 1}。\n- 第 6 行 `b - a`（proc2）恒为 **0**。\n- 第 7 行 proc3 恒打印 **0**（见上）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "1. `+ 0.25f`\n2. `+ 0.25`\n3. `u->b.c`\n4. `u->b.c`\n\n第一条路径先在单精度中加上 `0.25f`，第二条路径先把 `float` 扩展为 `double`，再加上双精度常量 `0.25`。偏移 16 字节处是 `struct b` 的成员 `c`。",
+        "blankAnswers": [
+          {
+            "id": "proc1-a",
+            "acceptedAnswers": [
+              "+ 0.25f",
+              "+0.25f"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "proc1-b",
+            "acceptedAnswers": [
+              "+ 0.25",
+              "+0.25"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "proc3-y",
+            "acceptedAnswers": [
+              "u->b.c"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "proc4-y",
+            "acceptedAnswers": [
+              "u->b.c"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "proc1-a",
+            "acceptedAnswers": [
+              "+ 0.25f",
+              "+0.25f"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "proc1-b",
+            "acceptedAnswers": [
+              "+ 0.25",
+              "+0.25"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "proc3-y",
+            "acceptedAnswers": [
+              "u->b.c"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "proc4-y",
+            "acceptedAnswers": [
+              "u->b.c"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（12分）\n假设程序运行在x86-64的小端法机器上，编译器按照标准规则对齐，并且有nan\n参与的算术比较运算都返回0。请回答下列问题：\n1. 请根据左边C程序和右边对应的汇编代码，填写空白处的代码。\n```\nstruct a {  ……\n  char c[2][3];  proc1:\n  int i;    ……\n};  movss  (%rcx), %xmm1\nstruct b {    movss  .LC0(%rip), %xmm0\n  float f;    addss  %xmm1, %xmm0\n  struct a a;    cvtss2sd  %xmm0, %xmm2\n  char c;    movsd  %xmm2, -8(%rbp)\n};    movss  (%rcx), %xmm0\nunion c {    cvtss2sd  %xmm0, %xmm0\n  struct a a;    movsd  .LC1(%rip), %xmm1\n  struct b b;    addsd  %xmm1, %xmm0\n  struct b* pb;    movq  %xmm0, -16(%rbp)\n};  ……\nvoid proc1(union c* u){  proc2:\n  double a = u->b.f          ;  ……\n  double b = u->b.f          ;  proc3:\n  printf(\"%d\\n\", a==b);    ……\n}\n    movb  %al, -1(%rbp)\nvoid proc2(union c* u){    movzbl  2(%rcx), %eax\n  char* a = u->a.c[1] + 1;    movb  %al, -2(%rbp)\n  char* b = (u->a.c + 1)[1];  ……\n  printf(\"%d\\n\", b - a);   proc4:\n}      ……\n    movl  8(%rcx), %eax\nvoid proc3(union c* u){    movl  %eax, -4(%rbp)\n  char x = u->a.c[1][0];    movzbl  16(%rcx), %eax\n\n  char y =                 ;    movsbl  %al, %eax\n  if (x == 0x7F && (y & 0x80) == 0x80)     movl  %eax, -8(%rbp)\n    printf(\"%d\\n\", (u->b.f < u->a.i));      ……\n  else  main:\n    printf(\"0\\n\");      ……\n}    leaq 32(%rsp), %rbx\n    movq  %rbx, %rcx\nvoid proc4(union c* u){    call proc1\n  int x = u->a.i;    movq  %rbx, %rcx\n  int y =              ;    call proc2\n  printf(\"%d\\n\", (x > y) != (-x<-y));     movq  %rbx, %rcx\n}    call proc3\n    movq  %rbx, %rcx\nvoid main(){    call proc4\n  unsigned int i;      ……\n  printf(\"%d\\n\", sizeof(struct a));    .align 4\n  printf(\"%d\\n\", sizeof(struct b));  .LC0:\n  printf(\"%d\\n\", sizeof(union c));    .long  1048576000\n  //十六进制3E800000\n  union c u;    .align 8\n```\n  …… //随机初始化u  .LC1:\n  proc1(&u);    .long  0\n  proc2(&u);    .long  1070596096\n  proc3(&u);  //十六进制 3FD00000\n```\n  proc4(&u);\n}\n```",
-        "answer": "答案：\n(1) `a = u->b.f + 0.25f`（即空白处填 `+ 0.25f`）\n(2) `b = u->b.f + 0.25`（即空白处填 `+ 0.25`，常量是 double）\n(3) `y = u->b.c`（即空白处填 `u->b.c`；写成 `*((char*)u + 16)` 等价）\n\n第 2 小问（程序共 7 行输出，每行可能的值）：\n第一行：0, 1\n第二行：0, 1\n第三行：0\n第四行：0, 1\n第五行：0, 1\n第六行：0\n第七行：0\n\n解析：\n**结构体布局**（x86-64，标准对齐，小端）：`struct a` 偏移 0..5 是 `char c[2][3]`，\n偏移 8..11 是 `int i`，对齐 4 ⇒ `sizeof(struct a) = 12`；`struct b` 偏移 0 是 `float f`，\n偏移 4..15 是 `struct a a`（内部 4..7 是填充），偏移 16 是 `char c`，偏移 24 是\n`struct b* pb`，对齐 8 ⇒ `sizeof(struct b) = 32`；`union c` 取三者最大值 ⇒ 32。\n\n**proc1**：`.LC0` 处 `.long 1048576000 = 0x3E800000`，按 IEEE 754 单精度分解：\n符号 0、阶码 0x7D = 125 ⇒ 125−127 = −2、尾数 1.0 ⇒ 1×2⁻² = **0.25**（不是 2.5！）。\n`.LC1` 处 `.long 0, 1070596096 = 0x3FD0000000000000`，按双精度分解：阶码 0x3FD = 1021\n⇒ 1021−1023 = −2、尾数 1.0 ⇒ **0.25**。于是同一个 0.25 因常量类型不同走了两条不同\n路径：一条先 `addss`（单精度加法，再 `cvtss2sd` 提升为 double），另一条先 `cvtss2sd`\n再用 `addsd`（双精度加法）。所以两空分别是 `+ 0.25f` 与 `+ 0.25`。\n两空若写成同一类型就只会产生一份代码，无法解释汇编里的 `addss`+`addsd` 并存。\n\n**proc3**：`x = u->a.c[1][0]` 读的是字节 3（汇编 `movzbl 2(%rcx)` 与之相邻的字节 3，\n即 `c[1][0]`）。`y` 处汇编是 `movzbl 16(%rcx), %eax` 读 1 字节、`movsbl %al, %eax`\n符号扩展后存入 int，说明 y 是取自偏移 16 的**有符号 char**，而偏移 16 正是\n`struct b` 的 `char c` ⇒ `y = u->b.c`。\n\n**proc4**：`x = u->a.i` 是偏移 8 的 int（`movl 8(%rcx), %eax`）；偏移 16 处再取一个\nchar（`movzbl 16(%rcx), %eax` ⇒ `movsbl`），即 `y = u->b.c`。\n\n**7 行输出的推导**（每行的输出都来自 `printf`，顺序为 proc1、proc2、proc3、proc4）：\n- 第 1 行 `a==b`：`a = (double)(float)(f + 0.25f)`，`b = (double)f + 0.25`。0.25 是\n  2⁻²，故 f+0.25 时阶码最多升 2。设 f 无溢出时阶码为 E：(i) E ≤ 21 ⇒ 间距 ≤ 2⁻²，\n  f+0.25 可精确表示，两条路径都得精确值 ⇒ **1**；(ii) E ≥ 22 ⇒ f 的间距 ≥ 0.5 > 0.25，\n  f+0.25 舍入到 f 或 f+间距，单精度结果 ≠ 双精度结果 ⇒ **0**；(iii) f 是 NaN（或 ±Inf）\n  ⇒ `a==b` 为假 ⇒ **0**。随机初始化能取到 (i)(ii)(iii)，所以可能值为 0 和 1。\n- 第 2 行同 proc1 另一空：同样可能是 0 或 1。\n- 第 3 行 `b - a`（两个 `char*`）：`u->a.c[1] + 1` 与 `(u->a.c + 1)[1]` 都表示\n  `&c[1][1]`，恒等于 ⇒ 恒为 **0**。\n- 第 4 行（proc3）：`x` 是 `u->a.i` 的低位字节，`y` 是同一个 int 的**次低字节**\n  （`u->a.i` 占字节 8..11，低位在 8，小端 ⇒ 字节 9 就是 `(i >> 8) & 0xFF`）。\n  - `x ≠ 0x7F` 或 `(y & 0x80) != 0x80` ⇒ 走 else，打印 **0**；\n  - 两者都成立时，float f 的 4 个字节是 `7F y b10 b11`（小端组装），\n    `f < i` 前 C 会把 int 转成 float：`y ≥ 0x80` 时是负数（比较用同一个 i 的真值，\n    只有 int→float 的舍入误差，不影响符号），与同为负的 i 比较；`y < 0x80` 时是\n    正的小数（次正规/极小正规数），必然小于巨大的负数 i ⇒ 该比较为真，打印 **1**。\n  即条件里 `y & 0x80` 这一半恰好决定了比较结果，第 4 行可能打印 0 或 1。\n- 第 5 行 `(x > y) != (-x < -y)`：令 t = (x > y)。若 x ≠ INT_MIN，则 −x 无溢出，\n  (−x < −y) 恰为 ¬t，两式不等 ⇒ **1**；若 x == INT_MIN，则 −x == INT_MIN，两式同为\n  (INT_MIN > y) ⇒ 相等 ⇒ **0**。随机初始化两种情况都能取到 ⇒ {0, 1}。\n- 第 6 行 `b - a`（proc2）恒为 **0**。\n- 第 7 行 proc3 恒打印 **0**（见上）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "prompt": "第二题（12 分）\n\n假设程序运行在 x86-64 小端机器上，编译器按照标准规则对齐，并且有 NaN 参与的算术比较均返回 0。请根据 C 程序与右侧汇编所反映的操作，填写四处缺失的 C 表达式。\n\n```c\nstruct a {\n    char c[2][3];\n    int i;\n};\n\nstruct b {\n    float f;\n    struct a a;\n    char c;\n};\n\nunion c {\n    struct a a;\n    struct b b;\n    struct b *pb;\n};\n\nvoid proc1(union c *u) {\n    double a = u->b.f {{blank:proc1-a}};\n    double b = u->b.f {{blank:proc1-b}};\n    printf(\"%d\\n\", a == b);\n}\n\nvoid proc2(union c *u) {\n    char *a = u->a.c[1] + 1;\n    char *b = (u->a.c + 1)[1];\n    printf(\"%d\\n\", (int)(b - a));\n}\n\nvoid proc3(union c *u) {\n    char x = u->a.c[1][0];\n    char y = {{blank:proc3-y}};\n    if (x == 0x7F && (y & 0x80) == 0x80) {\n        printf(\"%d\\n\", u->b.f < u->a.i);\n    } else {\n        printf(\"0\\n\");\n    }\n}\n\nvoid proc4(union c *u) {\n    int x = u->a.i;\n    int y = {{blank:proc4-y}};\n    printf(\"%d\\n\", (x > y) != (-x < -y));\n}\n\nint main(void) {\n    printf(\"%zu\\n\", sizeof(struct a));\n    printf(\"%zu\\n\", sizeof(struct b));\n    printf(\"%zu\\n\", sizeof(union c));\n\n    union c u;\n    /* 随机初始化 u */\n    proc1(&u);\n    proc2(&u);\n    proc3(&u);\n    proc4(&u);\n}\n```\n\n与四个空相关的汇编片段如下：\n\n```asm\n# proc1：第一条路径先做单精度加法，第二条路径先扩展为双精度\nmovss      (%rcx), %xmm1\nmovss      .LC0(%rip), %xmm0\naddss      %xmm1, %xmm0\ncvtss2sd   %xmm0, %xmm2\n\nmovss      (%rcx), %xmm0\ncvtss2sd   %xmm0, %xmm0\nmovsd      .LC1(%rip), %xmm1\naddsd      %xmm1, %xmm0\n\n# proc3 / proc4：从 union 起始地址偏移 16 字节处读取有符号 char\nmovzbl     16(%rcx), %eax\nmovsbl     %al, %eax\n\n.LC0:\n    .long 1048576000          # 0x3E800000，单精度 0.25\n.LC1:\n    .long 0\n    .long 1070596096          # 0x3FD00000，双精度 0.25 的高 32 位\n```",
+        "answer": "1. `+ 0.25f`\n2. `+ 0.25`\n3. `u->b.c`\n4. `u->b.c`\n\n第一条路径先在单精度中加上 `0.25f`，第二条路径先把 `float` 扩展为 `double`，再加上双精度常量 `0.25`。偏移 16 字节处是 `struct b` 的成员 `c`。"
+      },
+      "group": {
+        "id": "p-382bf3b10bc8d35a:2017-final-q2",
+        "questionId": "q-a52d536a178598a6",
+        "title": "第二题",
+        "order": 1
       },
       "presentation": {
         "status": "ready",
@@ -9007,7 +9338,7 @@
       "exam": "2025期末",
       "questionNo": "一 5",
       "summary": "addl 执行结果与 CF/ZF/OF 标志",
-      "content": "5. 观察下面的汇编代码：\n```\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？\nA. 执行后 %rax == 0x0000000000000000\nB. 执行后 %rax == 0x1234567800000000\nC. 执行后 CF=1\nD. 执行后 ZF=1\nE. 执行后 OF=1\n答案：ACD\n解析：addl 是 32 位加法：%eax=0xFFFFFFFF + 1 -> 0x00000000（低 32 位回绕）。写 %eax 会把 %rax 的高 32 位清零，所以 %rax 变为全 0。回绕产生进位所以 CF=1；结果为 0 所以 ZF=1；有符号角度是 -1 + 1 = 0 不溢出，OF=0。",
+      "content": "5. 观察下面的汇编代码：\n```asm\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？\nA. 执行后 %rax == 0x0000000000000000\nB. 执行后 %rax == 0x1234567800000000\nC. 执行后 CF=1\nD. 执行后 ZF=1\nE. 执行后 OF=1\n答案：ACD\n解析：addl 是 32 位加法：%eax=0xFFFFFFFF + 1 -> 0x00000000（低 32 位回绕）。写 %eax 会把 %rax 的高 32 位清零，所以 %rax 变为全 0。回绕产生进位所以 CF=1；结果为 0 所以 ZF=1；有符号角度是 -1 + 1 = 0 不溢出，OF=0。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9027,7 +9358,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "5. 观察下面的汇编代码：\n```\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？",
+        "stem": "5. 观察下面的汇编代码：\n```asm\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？",
         "choices": [
           {
             "key": "A",
@@ -9085,7 +9416,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5. 观察下面的汇编代码：\n```\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？",
+        "prompt": "5. 观察下面的汇编代码：\n```asm\nmovq $0x12345678FFFFFFFF, %rax\nmovq $0x0000000000000001, %rcx\naddl %ecx, %eax\n```\n下列哪些说法正确？",
         "answer": "答案：ACD\n解析：addl 是 32 位加法：%eax=0xFFFFFFFF + 1 -> 0x00000000（低 32 位回绕）。写 %eax 会把 %rax 的高 32 位清零，所以 %rax 变为全 0。回绕产生进位所以 CF=1；结果为 0 所以 ZF=1；有符号角度是 -1 + 1 = 0 不溢出，OF=0。"
       },
       "presentation": {
@@ -9103,7 +9434,7 @@
       "exam": "2025期末",
       "questionNo": "一 6",
       "summary": "栈帧布局、%rsp 对齐与 leave 语义",
-      "content": "6. 观察下面的汇编代码片段：\n```\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？\nA. 0(%rbp) 处保存的是调用者的旧 %rbp\nB. 8(%rbp) 处保存的是返回地址\nC. 紧挨着执行 callq qux 之前，%rsp ≡ 8 (mod16)\nD. subq `$48`,%rsp 为局部数据预留了 48 字节（不含保存的%rbp和返回地址）\nE. 这里的 leave 等价于 addq `$48`,%rsp; popq %rbp（假设 %rbp 未被改写）\n答案：ABDE\n解析：push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，所以 C 错。leave 语义是 mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把 %rsp 加回 48 再弹出 %rbp。",
+      "content": "6. 观察下面的汇编代码片段：\n```asm\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？\nA. 0(%rbp) 处保存的是调用者的旧 %rbp\nB. 8(%rbp) 处保存的是返回地址\nC. 紧挨着执行 callq qux 之前，%rsp ≡ 8 (mod16)\nD. subq `$48`,%rsp 为局部数据预留了 48 字节（不含保存的%rbp和返回地址）\nE. 这里的 leave 等价于 addq `$48`,%rsp; popq %rbp（假设 %rbp 未被改写）\n答案：ABDE\n解析：push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，所以 C 错。leave 语义是 mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把 %rsp 加回 48 再弹出 %rbp。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9123,7 +9454,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "6. 观察下面的汇编代码片段：\n```\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？",
+        "stem": "6. 观察下面的汇编代码片段：\n```asm\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
@@ -9182,7 +9513,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "6. 观察下面的汇编代码片段：\n```\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？",
+        "prompt": "6. 观察下面的汇编代码片段：\n```asm\nbaz:\npushq %rbp\nmovq %rsp, %rbp\nsubq $48, %rsp\n...\ncallq qux\n...\nleave\nretq\n```\n下列说法哪些正确？",
         "answer": "答案：ABDE\n解析：push %rbp; mov %rsp,%rbp 后，%rbp 指向保存的旧%rbp，其上方 8 字节是返回地址。入口通常 8(mod16)，push 后变 0(mod16)，再 sub48 仍为 0(mod16)，所以 C 错。leave 语义是 mov %rbp,%rsp; pop %rbp，在该帧结构下等价于先把 %rsp 加回 48 再弹出 %rbp。"
       },
       "presentation": {
@@ -9200,7 +9531,7 @@
       "exam": "2025期末",
       "questionNo": "一 7",
       "summary": "8 个 long 参数的寄存器/栈传递与 ABI",
-      "content": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？\nA. 在 f 的入口处（尚未动 %rsp），a7 位于 8(%rsp)\nB. 若把两条 push 顺序改为先 push a7 再 push a8，则 f 看到的 a7/a8 会互换\nC. 应当由caller回收栈上的传参空间（用 addq `$16`,%rsp）\nD. a7,a8也可以放在%r10,%r11中传递\nE. 因为用了栈传参，所以f中必须设置和管理%rbp帧指针\n答案：ABC\n解析：超过 6 个整数参数后，其余从栈上传递；在被调函数入口，0(%rsp) 是返回地址，因此第 7 个参数在 8(%rsp)，第 8 个在 16(%rsp)。caller 负责把自己 push 的参数空间收回。%r10/%r11 不是传参寄存器；是否用 %rbp 是编译器选择，不是 ABI 强制。",
+      "content": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？\nA. 在 f 的入口处（尚未动 %rsp），a7 位于 8(%rsp)\nB. 若把两条 push 顺序改为先 push a7 再 push a8，则 f 看到的 a7/a8 会互换\nC. 应当由caller回收栈上的传参空间（用 addq `$16`,%rsp）\nD. a7,a8也可以放在%r10,%r11中传递\nE. 因为用了栈传参，所以f中必须设置和管理%rbp帧指针\n答案：ABC\n解析：超过 6 个整数参数后，其余从栈上传递；在被调函数入口，0(%rsp) 是返回地址，因此第 7 个参数在 8(%rsp)，第 8 个在 16(%rsp)。caller 负责把自己 push 的参数空间收回。%r10/%r11 不是传参寄存器；是否用 %rbp 是编译器选择，不是 ABI 强制。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9220,7 +9551,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
+        "stem": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
@@ -9278,7 +9609,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
+        "prompt": "7. 调用一个有 8 个 long 参数的函数 f(a1,...,a8)，调用点使用如下汇编代码序列\n（省略取值细节）：\n```asm\nmovq a1, %rdi\nmovq a2, %rsi\nmovq a3, %rdx\nmovq a4, %rcx\nmovq a5, %r8\nmovq a6, %r9\npushq a8\npushq a7\ncallq f\naddq $16, %rsp\n```\n下列说法哪些正确？",
         "answer": "答案：ABC\n解析：超过 6 个整数参数后，其余从栈上传递；在被调函数入口，0(%rsp) 是返回地址，因此第 7 个参数在 8(%rsp)，第 8 个在 16(%rsp)。caller 负责把自己 push 的参数空间收回。%r10/%r11 不是传参寄存器；是否用 %rbp 是编译器选择，不是 ABI 强制。"
       },
       "presentation": {
@@ -9344,7 +9675,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第4讲 8",
       "summary": "swap 汇编中寄存器与内存访问次数统计",
-      "content": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```\n8 次通用寄存器访问，有 4",
+      "content": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```asm\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```\n8 次通用寄存器访问，有 4",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9364,7 +9695,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```",
+        "stem": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```asm\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```",
         "choices": [],
         "answer": "8 次通用寄存器访问，有 4"
       },
@@ -9374,7 +9705,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```",
+        "prompt": "8. 以下代码中，有\n次内存访问（均不含取指令相关操作）。\n```asm\nswap:\nmovq (%rdi), %rax\nmovq (%rsi), %rdx\nmovq %rdx, (%rdi)\nmovq %rax, (%rsi)\n```",
         "answer": "8 次通用寄存器访问，有 4"
       },
       "presentation": {
@@ -9392,7 +9723,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第4讲 9",
       "summary": "比例变址寻址方式地址计算",
-      "content": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```\n0xC810\n0x60030",
+      "content": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```asm\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```\n0xC810\n0x60030",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9412,7 +9743,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```",
+        "stem": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```asm\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```",
         "choices": [],
         "answer": "0xC810\n0x60030"
       },
@@ -9422,7 +9753,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```",
+        "prompt": "9. 若寄存器内容为rdx:0xc000,rcx:0x0200,则计算下列地址的值（十六进制表示）：\n```asm\n0x10(%rdx,%rcx,4):\n0x30(,%rdx,8):\n```",
         "answer": "0xC810\n0x60030"
       },
       "presentation": {
@@ -9440,7 +9771,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第5讲 10",
       "summary": "cmp/test 与 sub/and 的等价关系",
-      "content": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```\nsubq %rbx,%rax\nandq %rbx,%rax",
+      "content": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```asm\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```\n```asm\nsubq %rbx,%rax\nandq %rbx,%rax\n```",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9460,9 +9791,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```",
+        "stem": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```asm\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```",
         "choices": [],
-        "answer": "subq %rbx,%rax\nandq %rbx,%rax"
+        "answer": "```asm\nsubq %rbx,%rax\nandq %rbx,%rax\n```"
       },
       "interaction": {
         "kind": "short-answer",
@@ -9470,8 +9801,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```",
-        "answer": "subq %rbx,%rax\nandq %rbx,%rax"
+        "prompt": "10.对于以下汇编指令，给出与之内在操作流程相同、只是会修改目的寄存器的指令：\n```asm\ncmpq %rbx,%rax →\ntestq %rbx,%rax →\n```",
+        "answer": "```asm\nsubq %rbx,%rax\nandq %rbx,%rax\n```"
       },
       "presentation": {
         "status": "ready",
@@ -9488,7 +9819,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第5讲 11",
       "summary": "cmp+set 指令补全汇编，movzbl 功能与高位清零",
-      "content": "11.下面的C语言代码与汇编语言代码对应\n\n\n```\nintcmpxy(longx,longy) cmpq %rsi, %rdi\n{ setg %al\nreturn x > y; movzbl %al, %eax\n} ret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```\nintcmpxy(longx,longy) cmpq %rsi, %rdi\n{\nreturn x <= y; movzbl %al, %eax\n} ret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：\nsetle %al\n：从源操作数取出1个字节，零扩展为32位后存\n入 目的操作数\n将目的操作数寄存器（这个程序里\n是rax） 的高32位清零",
+      "content": "11.下面的C语言代码与汇编语言代码对应\n\n\n```c\nint cmpxy(long x, long y)\n{\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```c\nint cmpxy(long x, long y)\n{\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：\n```asm\nsetle %al\n```\n\n`movzbl` 从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数；在 x86-64 中，写入 32 位寄存器还会将对应寄存器的高 32 位清零（这里是 `%rax`）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9508,18 +9839,38 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "11.下面的C语言代码与汇编语言代码对应\n\n\n```\nintcmpxy(longx,longy) cmpq %rsi, %rdi\n{ setg %al\nreturn x > y; movzbl %al, %eax\n} ret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```\nintcmpxy(longx,longy) cmpq %rsi, %rdi\n{\nreturn x <= y; movzbl %al, %eax\n} ret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：",
+        "stem": "11.下面的C语言代码与汇编语言代码对应\n\n\n```c\nint cmpxy(long x, long y)\n{\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```c\nint cmpxy(long x, long y)\n{\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：",
         "choices": [],
-        "answer": "setle %al\n：从源操作数取出1个字节，零扩展为32位后存\n入 目的操作数\n将目的操作数寄存器（这个程序里\n是rax） 的高32位清零"
+        "answer": "```asm\nsetle %al\n```\n\n`movzbl` 从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数；在 x86-64 中，写入 32 位寄存器还会将对应寄存器的高 32 位清零（这里是 `%rax`）。",
+        "blankAnswers": [
+          {
+            "id": "q11-set-condition",
+            "acceptedAnswers": [
+              "setle %al"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q11-set-condition",
+            "acceptedAnswers": [
+              "setle %al"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "11.下面的C语言代码与汇编语言代码对应\n\n\n```\nintcmpxy(longx,longy) cmpq %rsi, %rdi\n{ setg %al\nreturn x > y; movzbl %al, %eax\n} ret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```\nintcmpxy(longx,longy) cmpq %rsi, %rdi\n{\nreturn x <= y; movzbl %al, %eax\n} ret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：",
-        "answer": "setle %al\n：从源操作数取出1个字节，零扩展为32位后存\n入 目的操作数\n将目的操作数寄存器（这个程序里\n是rax） 的高32位清零"
+        "prompt": "11.下面的C语言代码与汇编语言代码对应\n\n\n```c\nint cmpxy(long x, long y)\n{\n    return x > y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\nsetg %al\nmovzbl %al, %eax\nret\n```\n（1）修改C语言代码如下，相应补全汇编语言代码\n```c\nint cmpxy(long x, long y)\n{\n    return x <= y;\n}\n```\n\n```asm\ncmpq %rsi, %rdi\n{{blank:q11-set-condition}}\nmovzbl %al, %eax\nret\n```\n（2）movzbl指令本身的功能是：\n（3）在x86-64中，这条movzbl隐含操作还有：",
+        "answer": "```asm\nsetle %al\n```\n\n`movzbl` 从源操作数取出 1 个字节，零扩展为 32 位后存入目的操作数；在 x86-64 中，写入 32 位寄存器还会将对应寄存器的高 32 位清零（这里是 `%rax`）。"
       },
       "presentation": {
         "status": "ready",
@@ -9536,7 +9887,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第5讲 12",
       "summary": "absdiff 分支实现与条件传送 cmov 实现对比",
-      "content": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```\nlong absdiff(long x, long y) absdiff:\n{ cmpq %rsi, %rdi\nlong result;\nif (x <= y) movq %rdi, %rax\nresult = x-y; subq %rsi, %rax\nelse\nresult = y-x; .L4:\nreturn result; movq %rsi, %rax\n} subq %rdi, %rax\nret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```\nabsdiff:\nmovq %rdi, %rax\nsubq %rsi, %rax\nmovq %rsi, %rdx\nsubq %rdi, %rdx\ncmpq %rsi, %rdi\ncmovg %rdx, %rax\nret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用\njg .L4\nret\n把条件成立和不成",
+      "content": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```c\nlong absdiff(long x, long y)\n{\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    cmpq %rsi, %rdi\n    cmovg %rdx, %rax\n    ret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用\n（1）\n```asm\njg .L4\nret\n```\n\n（4）条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能有副作用。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9556,18 +9907,54 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```\nlong absdiff(long x, long y) absdiff:\n{ cmpq %rsi, %rdi\nlong result;\nif (x <= y) movq %rdi, %rax\nresult = x-y; subq %rsi, %rax\nelse\nresult = y-x; .L4:\nreturn result; movq %rsi, %rax\n} subq %rdi, %rax\nret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```\nabsdiff:\nmovq %rdi, %rax\nsubq %rsi, %rax\nmovq %rsi, %rdx\nsubq %rdi, %rdx\ncmpq %rsi, %rdi\ncmovg %rdx, %rax\nret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用",
+        "stem": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```c\nlong absdiff(long x, long y)\n{\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    cmpq %rsi, %rdi\n    cmovg %rdx, %rax\n    ret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用",
         "choices": [],
-        "answer": "jg .L4\nret\n把条件成立和不成"
+        "answer": "（1）\n```asm\njg .L4\nret\n```\n\n（4）条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能有副作用。",
+        "blankAnswers": [
+          {
+            "id": "q12-branch",
+            "acceptedAnswers": [
+              "jg .L4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q12-ret-before-else",
+            "acceptedAnswers": [
+              "ret"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q12-branch",
+            "acceptedAnswers": [
+              "jg .L4"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "q12-ret-before-else",
+            "acceptedAnswers": [
+              "ret"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```\nlong absdiff(long x, long y) absdiff:\n{ cmpq %rsi, %rdi\nlong result;\nif (x <= y) movq %rdi, %rax\nresult = x-y; subq %rsi, %rax\nelse\nresult = y-x; .L4:\nreturn result; movq %rsi, %rax\n} subq %rdi, %rax\nret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```\nabsdiff:\nmovq %rdi, %rax\nsubq %rsi, %rax\nmovq %rsi, %rdx\nsubq %rdi, %rdx\ncmpq %rsi, %rdi\ncmovg %rdx, %rax\nret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用",
-        "answer": "jg .L4\nret\n把条件成立和不成"
+        "prompt": "12.下面的C语言代码与汇编语言代码对应，补全汇编代码\n```c\nlong absdiff(long x, long y)\n{\n    long result;\n    if (x <= y)\n        result = x-y;\n    else\n        result = y-x;\n    return result;\n}\n```\n\n```asm\nabsdiff:\n    cmpq %rsi, %rdi\n    {{blank:q12-branch}}\n    movq %rdi, %rax\n    subq %rsi, %rax\n    {{blank:q12-ret-before-else}}\n.L4:\n    movq %rsi, %rax\n    subq %rdi, %rax\n    ret\n```\n（2）如果用条件传送指令实现上述功能，对应汇编语言代码如下，补全缺失的代码，\n（注意要符合编译器生成代码的常规情况）：\n```asm\nabsdiff:\n    movq %rdi, %rax\n    subq %rsi, %rax\n    movq %rsi, %rdx\n    subq %rdi, %rdx\n    cmpq %rsi, %rdi\n    cmovg %rdx, %rax\n    ret\n```\n（4）有些情况不适合使用条件传送指令，因为条件传送指令需要：\n\n\n立的两种情况都提前计算出来，会增加计算量，还有可能有副作用",
+        "answer": "（1）\n```asm\njg .L4\nret\n```\n\n（4）条件传送指令需要把条件成立和不成立的两种情况都提前计算出来，会增加计算量，还有可能有副作用。"
       },
       "presentation": {
         "status": "ready",
@@ -9720,7 +10107,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第5讲 14",
       "summary": "跳转表 jmp *.L1(,%rdi,8) 的目标计算",
-      "content": "14.考虑下面汇编代码片段：\n```\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。\n1 ; mask != 0 ; mask = mask<<n\nx&mask\n（第14题） .L13",
+      "content": "14.考虑下面汇编代码片段：\n```asm\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。\n1 ; mask != 0 ; mask = mask<<n\nx&mask\n（第14题） .L13",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9740,7 +10127,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "14.考虑下面汇编代码片段：\n```\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。",
+        "stem": "14.考虑下面汇编代码片段：\n```asm\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。",
         "choices": [],
         "answer": "1 ; mask != 0 ; mask = mask<<n\nx&mask\n（第14题） .L13"
       },
@@ -9750,7 +10137,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "14.考虑下面汇编代码片段：\n```\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。",
+        "prompt": "14.考虑下面汇编代码片段：\n```asm\n.section .rodata\n.align 8\n.L1:\n.quad .L11\n.quad .L12\n.quad .L13\n.quad .L14\n...\njmp *.L1(,%rdi,8)\n```\n若执行到jmp指令时，rdi的值为2，则该指令会跳转到 指向的位置。",
         "answer": "1 ; mask != 0 ; mask = mask<<n\nx&mask\n（第14题） .L13"
       },
       "presentation": {
@@ -9816,7 +10203,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第6讲 16",
       "summary": "过程调用栈帧、callq/ret、参数寄存器与被调用者保存",
-      "content": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？\n（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。",
+      "content": "16.以下两组对应的C语言代码和汇编语言代码：\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？\n（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9836,7 +10223,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？",
+        "stem": "16.以下两组对应的C语言代码和汇编语言代码：\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？",
         "choices": [],
         "answer": "（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。"
       },
@@ -9846,7 +10233,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "16.以下两组对应的C语言代码和汇编语言代码：\n```\n0000000000400640 <multstore>:\nvoid multstore (long x, long y,\n400640: push %rbx\nlong *dest)\n400641: mov %rdx,%rbx\n{\n400644: callq 400650 <mult2>\nlong t = mult2(x, y);\n400649: mov %rax,(%rbx)\n*dest = t;\n40064c: pop %rbx\n}\n40064d: retq\nlong mult2 (long a, long b)\n0000000000400650 <mult2>:\n{\n400650: mov %rdi,%rax\nlong s = a * b;\n400653: imul %rsi,%rax\nreturn s;\n400657: retq\n}\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？",
+        "prompt": "16.以下两组对应的C语言代码和汇编语言代码：\n```c\nvoid multstore(long x, long y, long *dest)\n{\n    long t = mult2(x, y);\n    *dest = t;\n}\n```\n\n```asm\n0000000000400640 <multstore>:\n    400640: push %rbx\n    400641: mov %rdx,%rbx\n    400644: callq 400650 <mult2>\n    400649: mov %rax,(%rbx)\n    40064c: pop %rbx\n    40064d: retq\n```\n\n```c\nlong mult2(long a, long b)\n{\n    long s = a * b;\n    return s;\n}\n```\n\n```asm\n0000000000400650 <mult2>:\n    400650: mov %rdi,%rax\n    400653: imul %rsi,%rax\n    400657: retq\n```\n（1）假设准备执行 callq 指令时，%rsp 内容为 0x110。执行完 callq 指令后，%rsp 内容、%rsp 指向的内存中的数值，以及随后执行完地址 400657 处的 retq 指令后 %rsp 的内容分别是什么？（均为十六进制）\n（2）C代码中的下列变量分别保存在哪个寄存器中：\nx：____　y：____　a：____　b：____　s：____\n（3）汇编代码中，地址400641的指令修改了%rbx，地址400649的指令使用了%rbx，\n而二者中间有过程调用call，是什么机制保证了%rbx不会被修改：\n（4）如果把 C 代码中的 mult2(x,y) 改为 mult2(y,x)，汇编代码会有什么变化？",
         "answer": "（1）0x108；%rsp 指向的内存中的数值为 0x400649；随后执行完地址 400657 处的 retq 指令后，%rsp 内容为 0x110。\n（2）x：%rdi；y：%rsi；a：%rdi；b：%rsi；s：%rax。\n（3）ABI 中规定的寄存器保存规则，要求 %rbx 是被调用者保存寄存器。\n（4）需要在 call 指令之前交换 %rdi 和 %rsi 的内容。"
       },
       "presentation": {
@@ -9912,7 +10299,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 18",
       "summary": "二维数组 arr_data[x][y] 寻址补全汇编",
-      "content": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4, {{blank:q18-shift-register}}\nmovl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```\n依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。",
+      "content": "18.考虑下面的C语言代码:\n```c\n#define CNT 4\nint arr_data[CNT][CNT] =\n    {{900, 901, 902, 903},\n     {910, 911, 912, 913},\n     {920, 921, 922, 923},\n     {930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\n    return arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```asm\nget_digit:\n    shlq $4, {{blank:q18-shift-register}}\n    movl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```\n依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9932,7 +10319,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4, {{blank:q18-shift-register}}\nmovl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```",
+        "stem": "18.考虑下面的C语言代码:\n```c\n#define CNT 4\nint arr_data[CNT][CNT] =\n    {{900, 901, 902, 903},\n     {910, 911, 912, 913},\n     {920, 921, 922, 923},\n     {930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\n    return arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```asm\nget_digit:\n    shlq $4, {{blank:q18-shift-register}}\n    movl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```",
         "choices": [],
         "answer": "依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。"
       },
@@ -9942,7 +10329,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "18.考虑下面的C语言代码:\n```\n#define CNT 4\nint arr_data[CNT][CNT] =\n{{900, 901, 902, 903},\n{910, 911, 912, 913},\n{920, 921, 922, 923},\n{930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\nreturn arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```\nget_digit:\nshlq $4, {{blank:q18-shift-register}}\nmovl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```",
+        "prompt": "18.考虑下面的C语言代码:\n```c\n#define CNT 4\nint arr_data[CNT][CNT] =\n    {{900, 901, 902, 903},\n     {910, 911, 912, 913},\n     {920, 921, 922, 923},\n     {930, 931, 932, 933}};\nint get_digit(int x, int y)\n{\n    return arr_data[x][y];\n}\n```\n补全对应的汇编代码：\n```asm\nget_digit:\n    shlq $4, {{blank:q18-shift-register}}\n    movl arr_data({{blank:q18-base}}, {{blank:q18-index}}, 4), {{blank:q18-destination}}\n```",
         "answer": "依次为：`%rdi`；`%rdi`；`%rsi`；`%eax`。"
       },
       "presentation": {
@@ -10048,7 +10435,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 20",
       "summary": "汇编代码输出结果（原文 OCR 列错行，内容难辨）",
-      "content": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},\n{1, 5, 2, 2, 1}};\nint *linear_zip = (int *) pgh;\nint *zip1 = (int *) pgh[1];\nint result =\n    pgh[2][3] +\n    linear_zip[14] +\n    *(linear_zip + 16) +\n    zip1[4];\nprintf(\"result: %d\\n\", result);\n}\n```\n16",
+      "content": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n\n```c\n#define ZLEN 5\n#define PCOUNT 4\n\ntypedef int zip_dig[ZLEN];\n\nint main(void) {\n    zip_dig pgh[PCOUNT] = {\n        {1, 5, 2, 0, 6},\n        {1, 5, 2, 1, 3},\n        {1, 5, 2, 1, 7},\n        {1, 5, 2, 2, 1}\n    };\n\n    int *linear_zip = (int *)pgh;\n    int *zip1 = (int *)pgh[1];\n    int result =\n        pgh[2][3] +\n        linear_zip[14] +\n        *(linear_zip + 16) +\n        zip1[4];\n\n    printf(\"result: %d\\n\", result);\n}\n```\n答案：`16`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10068,18 +10455,38 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},\n{1, 5, 2, 2, 1}};\nint *linear_zip = (int *) pgh;\nint *zip1 = (int *) pgh[1];\nint result =\n    pgh[2][3] +\n    linear_zip[14] +\n    *(linear_zip + 16) +\n    zip1[4];\nprintf(\"result: %d\\n\", result);\n}\n```",
+        "stem": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n\n```c\n#define ZLEN 5\n#define PCOUNT 4\n\ntypedef int zip_dig[ZLEN];\n\nint main(void) {\n    zip_dig pgh[PCOUNT] = {\n        {1, 5, 2, 0, 6},\n        {1, 5, 2, 1, 3},\n        {1, 5, 2, 1, 7},\n        {1, 5, 2, 2, 1}\n    };\n\n    int *linear_zip = (int *)pgh;\n    int *zip1 = (int *)pgh[1];\n    int result =\n        pgh[2][3] +\n        linear_zip[14] +\n        *(linear_zip + 16) +\n        zip1[4];\n\n    printf(\"result: %d\\n\", result);\n}\n```",
         "choices": [],
-        "answer": "16"
+        "answer": "答案：`16`",
+        "blankAnswers": [
+          {
+            "id": "q20-result",
+            "acceptedAnswers": [
+              "16"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "q20-result",
+            "acceptedAnswers": [
+              "16"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n```\n#define ZLEN 5\n#define PCOUNT 4\ntypedef int zip_dig[ZLEN];\nint main() {\nzip_dig pgh[PCOUNT] =\n{{1, 5, 2, 0, 6},\n{1, 5, 2, 1, 3},\n{1, 5, 2, 1, 7},\n{1, 5, 2, 2, 1}};\nint *linear_zip = (int *) pgh;\nint *zip1 = (int *) pgh[1];\nint result =\n    pgh[2][3] +\n    linear_zip[14] +\n    *(linear_zip + 16) +\n    zip1[4];\nprintf(\"result: %d\\n\", result);\n}\n```",
-        "answer": "16"
+        "prompt": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n\n```c\n#define ZLEN 5\n#define PCOUNT 4\n\ntypedef int zip_dig[ZLEN];\n\nint main(void) {\n    zip_dig pgh[PCOUNT] = {\n        {1, 5, 2, 0, 6},\n        {1, 5, 2, 1, 3},\n        {1, 5, 2, 1, 7},\n        {1, 5, 2, 2, 1}\n    };\n\n    int *linear_zip = (int *)pgh;\n    int *zip1 = (int *)pgh[1];\n    int result =\n        pgh[2][3] +\n        linear_zip[14] +\n        *(linear_zip + 16) +\n        zip1[4];\n\n    printf(\"result: %d\\n\", result);\n}\n```",
+        "answer": "答案：`16`"
       },
       "presentation": {
         "status": "ready",
@@ -10096,7 +10503,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 21",
       "summary": "数组循环 C 代码与汇编，求常量 A、B（OCR 错行）",
-      "content": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}\nA：9；B：5",
+      "content": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}\nA：9；B：5",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10116,7 +10523,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}",
+        "stem": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}",
         "choices": [],
         "answer": "A：9；B：5"
       },
@@ -10126,7 +10533,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```\ntypedef struct {\nint x[A][B]; /* Unknown constants A and B */\nlong y;\n} str1;\ntypedef struct {\nchar array[B];\nint t;\nshort s[A];\nlong u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\nlong v1 = q->t;\nlong v2 = q->u;\np->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```\n# p in %rdi, q in %rsi\nsetVal:\nmovslq 8(%rsi), %rax\naddq 32(%rsi), %rax\nmovq %rax, 184(%rdi)\nret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}",
+        "prompt": "21.考虑下面的代码，A 和 B 是用 #define 定义的常数：\n```c\ntypedef struct {\n    int x[A][B]; /* Unknown constants A and B */\n    long y;\n} str1;\ntypedef struct {\n    char array[B];\n    int t;\n    short s[A];\n    long u;\n} str2;\nvoid setVal(str1 *p, str2 *q) {\n    long v1 = q->t;\n    long v2 = q->u;\n    p->y = v1 + v2;\n}\n```\nGCC 为 setVal 产生如下汇编代码（x86-64 System V 调用约定）：\n```asm\n# p in %rdi, q in %rsi\nsetVal:\n    movslq 8(%rsi), %rax\n    addq 32(%rsi), %rax\n    movq %rax, 184(%rdi)\n    ret\n```\n求 A 和 B 的值是多少？\nA：{{blank:q21-a}}　B：{{blank:q21-b}}",
         "answer": "A：9；B：5"
       },
       "presentation": {
@@ -10144,7 +10551,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 22",
       "summary": "浮点参数经 xmm 寄存器传递的汇编分析",
-      "content": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```\ndouble mix_compute(long *a, double *b, float c) {\ndouble result = *a + *b + c;\nreturn result;\n}\nmix_compute:\nmovsd (%rsi), %xmm1\nmovq (%rdi), %rax\ncvtsi2sd %rax, %xmm2\naddsd %xmm1, %xmm2\ncvtss2sd %xmm0, %xmm0\naddsd %xmm2, %xmm0\nret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:\n%rsi c:%xmm0 result:%xmm0",
+      "content": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:\n%rsi c:%xmm0 result:%xmm0",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -10164,7 +10571,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```\ndouble mix_compute(long *a, double *b, float c) {\ndouble result = *a + *b + c;\nreturn result;\n}\nmix_compute:\nmovsd (%rsi), %xmm1\nmovq (%rdi), %rax\ncvtsi2sd %rax, %xmm2\naddsd %xmm1, %xmm2\ncvtss2sd %xmm0, %xmm0\naddsd %xmm2, %xmm0\nret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:",
+        "stem": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:",
         "choices": [],
         "answer": "%rsi c:%xmm0 result:%xmm0"
       },
@@ -10174,7 +10581,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```\ndouble mix_compute(long *a, double *b, float c) {\ndouble result = *a + *b + c;\nreturn result;\n}\nmix_compute:\nmovsd (%rsi), %xmm1\nmovq (%rdi), %rax\ncvtsi2sd %rax, %xmm2\naddsd %xmm1, %xmm2\ncvtss2sd %xmm0, %xmm0\naddsd %xmm2, %xmm0\nret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:",
+        "prompt": "22.考虑下面的C语言代码和对应的汇编语言代码：\n```c\ndouble mix_compute(long *a, double *b, float c) {\n    double result = *a + *b + c;\n    return result;\n}\n```\n\n```asm\nmix_compute:\n    movsd (%rsi), %xmm1\n    movq (%rdi), %rax\n    cvtsi2sd %rax, %xmm2\n    addsd %xmm1, %xmm2\n    cvtss2sd %xmm0, %xmm0\n    addsd %xmm2, %xmm0\n    ret\n```\nC代码中的下列变量，分别在哪个寄存器中：\nb:",
         "answer": "%rsi c:%xmm0 result:%xmm0"
       },
       "presentation": {

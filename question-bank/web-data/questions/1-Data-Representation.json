@@ -2266,7 +2266,7 @@
       "exam": "2015期中",
       "questionNo": "第二题 2",
       "summary": "12-bit IEEE 浮点表示与个数",
-      "content": "2.考虑一种 12-bit 长的浮点数，此浮点数遵循IEEE 浮点数格式，请回答下列\n问题。\n注：浮点数的字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：4-bit；小数字段（frac）：7-bit。\n1) 请写出在下列区间中包含多少个用上面规则精确表示的浮点数（每空2分，\n共4分）\n\nA： [1,2)\nB:  [2,3)\n2) 请写出下面浮点数的二进制表示（每空1分，共6分）\n数字  二进制表示\n最小的正规格化数\n最大的非规格化数\n1\n1716\n9\n\n\n1\n-  8192\n3\n```\n20  8\n-∞\n```\n答案：\n1. 1)D     2)D    3)B,D    4) E    5)A,D\n6)E  当两个数绝对值都很小时，相乘以后由于精度不够会变成0\n```\n7)C    8)C\n2. 1) A.128     B.64\n2)\n```\n数字  二进制表示\n最小的正规格化数  0 0001 0000000\n最大的非规格化数  0 0000 1111111\n```\n1 0 1011 0001000\n17  16\n1 1 0000 0000001\n```\n-  8192\n```\n3 0 1010 0100110\n10  8\n-∞  1 1111 0000000\n```",
+      "content": "2. 考虑一种 12 位浮点数。它遵循 IEEE 浮点数格式，字段划分为：符号位 `s` 1 位、阶码字段 `exp` 4 位、小数字段 `frac` 7 位。\n\n1. 写出下列区间中可由该格式精确表示的浮点数个数：\n\n| 区间 | 个数 |\n| --- | --- |\n| $[1, 2)$ | {{blank:count-1-2}} |\n| $[2, 3)$ | {{blank:count-2-3}} |\n\n2. 写出下列数值的 12 位二进制表示。请按“符号位 阶码 小数字段”的顺序填写：\n\n| 数值 | 二进制表示 |\n| --- | --- |\n| 最小的正规格化正数 | {{blank:min-normal}} |\n| 最大的非规格化数 | {{blank:max-denormal}} |\n| $1$ | {{blank:value-1}} |\n| $17/16$ | {{blank:value-17-16}} |\n| $-1/8192$ | {{blank:value-neg-1-8192}} |\n| $10\\frac{3}{8}$ | {{blank:value-10-3-8}} |\n| $-\\infty$ | {{blank:neg-infinity}} |\n1. $[1, 2)$ 中有 128 个，$[2, 3)$ 中有 64 个。\n\n2. 二进制表示如下：\n\n| 数值 | 二进制表示 |\n| --- | --- |\n| 最小的正规格化正数 | `0 0001 0000000` |\n| 最大的非规格化数 | `0 0000 1111111` |\n| $1$ | `0 0111 0000000` |\n| $17/16$ | `0 0111 0001000` |\n| $-1/8192$ | `1 0000 0000001` |\n| $10\\frac{3}{8}$ | `0 1010 0100110` |\n| $-\\infty$ | `1 1111 0000000` |",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -2288,18 +2288,180 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2.考虑一种 12-bit 长的浮点数，此浮点数遵循IEEE 浮点数格式，请回答下列\n问题。\n注：浮点数的字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：4-bit；小数字段（frac）：7-bit。\n1) 请写出在下列区间中包含多少个用上面规则精确表示的浮点数（每空2分，\n共4分）\n\nA： [1,2)\nB:  [2,3)\n2) 请写出下面浮点数的二进制表示（每空1分，共6分）\n数字  二进制表示\n最小的正规格化数\n最大的非规格化数\n1\n1716\n9\n\n\n1\n-  8192\n3\n```\n20  8\n-∞\n```",
+        "stem": "2. 考虑一种 12 位浮点数。它遵循 IEEE 浮点数格式，字段划分为：符号位 `s` 1 位、阶码字段 `exp` 4 位、小数字段 `frac` 7 位。\n\n1. 写出下列区间中可由该格式精确表示的浮点数个数：\n\n| 区间 | 个数 |\n| --- | --- |\n| $[1, 2)$ | {{blank:count-1-2}} |\n| $[2, 3)$ | {{blank:count-2-3}} |\n\n2. 写出下列数值的 12 位二进制表示。请按“符号位 阶码 小数字段”的顺序填写：\n\n| 数值 | 二进制表示 |\n| --- | --- |\n| 最小的正规格化正数 | {{blank:min-normal}} |\n| 最大的非规格化数 | {{blank:max-denormal}} |\n| $1$ | {{blank:value-1}} |\n| $17/16$ | {{blank:value-17-16}} |\n| $-1/8192$ | {{blank:value-neg-1-8192}} |\n| $10\\frac{3}{8}$ | {{blank:value-10-3-8}} |\n| $-\\infty$ | {{blank:neg-infinity}} |",
         "choices": [],
-        "answer": "答案：\n1. 1)D     2)D    3)B,D    4) E    5)A,D\n6)E  当两个数绝对值都很小时，相乘以后由于精度不够会变成0\n```\n7)C    8)C\n2. 1) A.128     B.64\n2)\n```\n数字  二进制表示\n最小的正规格化数  0 0001 0000000\n最大的非规格化数  0 0000 1111111\n```\n1 0 1011 0001000\n17  16\n1 1 0000 0000001\n```\n-  8192\n```\n3 0 1010 0100110\n10  8\n-∞  1 1111 0000000\n```"
+        "answer": "1. $[1, 2)$ 中有 128 个，$[2, 3)$ 中有 64 个。\n\n2. 二进制表示如下：\n\n| 数值 | 二进制表示 |\n| --- | --- |\n| 最小的正规格化正数 | `0 0001 0000000` |\n| 最大的非规格化数 | `0 0000 1111111` |\n| $1$ | `0 0111 0000000` |\n| $17/16$ | `0 0111 0001000` |\n| $-1/8192$ | `1 0000 0000001` |\n| $10\\frac{3}{8}$ | `0 1010 0100110` |\n| $-\\infty$ | `1 1111 0000000` |",
+        "blankAnswers": [
+          {
+            "id": "count-1-2",
+            "acceptedAnswers": [
+              "128"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "count-2-3",
+            "acceptedAnswers": [
+              "64"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "min-normal",
+            "acceptedAnswers": [
+              "0 0001 0000000",
+              "000010000000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "max-denormal",
+            "acceptedAnswers": [
+              "0 0000 1111111",
+              "000001111111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "value-1",
+            "acceptedAnswers": [
+              "0 0111 0000000",
+              "001110000000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "value-17-16",
+            "acceptedAnswers": [
+              "0 0111 0001000",
+              "001110001000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "value-neg-1-8192",
+            "acceptedAnswers": [
+              "1 0000 0000001",
+              "100000000001"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "value-10-3-8",
+            "acceptedAnswers": [
+              "0 1010 0100110",
+              "010100100110"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "neg-infinity",
+            "acceptedAnswers": [
+              "1 1111 0000000",
+              "111110000000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "count-1-2",
+            "acceptedAnswers": [
+              "128"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "count-2-3",
+            "acceptedAnswers": [
+              "64"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "min-normal",
+            "acceptedAnswers": [
+              "0 0001 0000000",
+              "000010000000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "max-denormal",
+            "acceptedAnswers": [
+              "0 0000 1111111",
+              "000001111111"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "value-1",
+            "acceptedAnswers": [
+              "0 0111 0000000",
+              "001110000000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "value-17-16",
+            "acceptedAnswers": [
+              "0 0111 0001000",
+              "001110001000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "value-neg-1-8192",
+            "acceptedAnswers": [
+              "1 0000 0000001",
+              "100000000001"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "value-10-3-8",
+            "acceptedAnswers": [
+              "0 1010 0100110",
+              "010100100110"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "neg-infinity",
+            "acceptedAnswers": [
+              "1 1111 0000000",
+              "111110000000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.考虑一种 12-bit 长的浮点数，此浮点数遵循IEEE 浮点数格式，请回答下列\n问题。\n注：浮点数的字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：4-bit；小数字段（frac）：7-bit。\n1) 请写出在下列区间中包含多少个用上面规则精确表示的浮点数（每空2分，\n共4分）\n\nA： [1,2)\nB:  [2,3)\n2) 请写出下面浮点数的二进制表示（每空1分，共6分）\n数字  二进制表示\n最小的正规格化数\n最大的非规格化数\n1\n1716\n9\n\n\n1\n-  8192\n3\n```\n20  8\n-∞\n```",
-        "answer": "答案：\n1. 1)D     2)D    3)B,D    4) E    5)A,D\n6)E  当两个数绝对值都很小时，相乘以后由于精度不够会变成0\n```\n7)C    8)C\n2. 1) A.128     B.64\n2)\n```\n数字  二进制表示\n最小的正规格化数  0 0001 0000000\n最大的非规格化数  0 0000 1111111\n```\n1 0 1011 0001000\n17  16\n1 1 0000 0000001\n```\n-  8192\n```\n3 0 1010 0100110\n10  8\n-∞  1 1111 0000000\n```"
+        "prompt": "2. 考虑一种 12 位浮点数。它遵循 IEEE 浮点数格式，字段划分为：符号位 `s` 1 位、阶码字段 `exp` 4 位、小数字段 `frac` 7 位。\n\n1. 写出下列区间中可由该格式精确表示的浮点数个数：\n\n| 区间 | 个数 |\n| --- | --- |\n| $[1, 2)$ | {{blank:count-1-2}} |\n| $[2, 3)$ | {{blank:count-2-3}} |\n\n2. 写出下列数值的 12 位二进制表示。请按“符号位 阶码 小数字段”的顺序填写：\n\n| 数值 | 二进制表示 |\n| --- | --- |\n| 最小的正规格化正数 | {{blank:min-normal}} |\n| 最大的非规格化数 | {{blank:max-denormal}} |\n| $1$ | {{blank:value-1}} |\n| $17/16$ | {{blank:value-17-16}} |\n| $-1/8192$ | {{blank:value-neg-1-8192}} |\n| $10\\frac{3}{8}$ | {{blank:value-10-3-8}} |\n| $-\\infty$ | {{blank:neg-infinity}} |",
+        "answer": "1. $[1, 2)$ 中有 128 个，$[2, 3)$ 中有 64 个。\n\n2. 二进制表示如下：\n\n| 数值 | 二进制表示 |\n| --- | --- |\n| 最小的正规格化正数 | `0 0001 0000000` |\n| 最大的非规格化数 | `0 0000 1111111` |\n| $1$ | `0 0111 0000000` |\n| $17/16$ | `0 0111 0001000` |\n| $-1/8192$ | `1 0000 0000001` |\n| $10\\frac{3}{8}$ | `0 1010 0100110` |\n| $-\\infty$ | `1 1111 0000000` |"
       },
       "presentation": {
         "status": "ready",
@@ -2672,8 +2834,10 @@
       "exam": "2017期中",
       "questionNo": "第一题 1",
       "summary": "大端法下最小负数的字节内容",
-      "content": "1.  假定一个特殊设计的计算机，将 int 型数据的长度从 4-Byte 扩展为\n4N-Byte，采用大端法（Big Endian）。现将该int型所能表示的最小负数\n写入内存中，如下图所示。其中每个小矩形代表一个Byte，请问X位置这个\nByte中的值是多少？\nA. A. 000000002\nB. B. 011111112\nC. C. 100000002\nD. D. 111111112\n答案：C\n解析：最小的负数为 1000000… ，大端法将最高位放到最低地址",
-      "assets": [],
+      "content": "1. 假定一个特殊设计的计算机将 `int` 型数据的长度从 4 Byte 扩展为 4N Byte，并采用大端法（Big Endian）。现将该 `int` 型所能表示的最小负数写入内存，如下图所示。每个小矩形代表一个 Byte，请问 X 位置这个 Byte 中的值是多少？\n\n![4N Byte 整数在大端内存中的排列示意图，X 位于靠近低地址一侧的指定字节](assets/期中/2017期中-带答案/q1-memory-layout.svg)\nA. $00000000_2$\nB. $01111111_2$\nC. $10000000_2$\nD. $11111111_2$\n答案：C\n\n最小负数的二进制表示为最高位是 1、其余位均为 0。大端法把最高有效字节放在最低地址，因此 X 所在字节为 $10000000_2$。",
+      "assets": [
+        "assets/期中/2017期中-带答案/q1-memory-layout.svg"
+      ],
       "formatted": true,
       "answer": {
         "inline": true,
@@ -2692,26 +2856,26 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "1.  假定一个特殊设计的计算机，将 int 型数据的长度从 4-Byte 扩展为\n4N-Byte，采用大端法（Big Endian）。现将该int型所能表示的最小负数\n写入内存中，如下图所示。其中每个小矩形代表一个Byte，请问X位置这个\nByte中的值是多少？",
+        "stem": "1. 假定一个特殊设计的计算机将 `int` 型数据的长度从 4 Byte 扩展为 4N Byte，并采用大端法（Big Endian）。现将该 `int` 型所能表示的最小负数写入内存，如下图所示。每个小矩形代表一个 Byte，请问 X 位置这个 Byte 中的值是多少？\n\n![4N Byte 整数在大端内存中的排列示意图，X 位于靠近低地址一侧的指定字节](assets/期中/2017期中-带答案/q1-memory-layout.svg)",
         "choices": [
           {
             "key": "A",
-            "content": "A. 000000002"
+            "content": "$00000000_2$"
           },
           {
             "key": "B",
-            "content": "B. 011111112"
+            "content": "$01111111_2$"
           },
           {
             "key": "C",
-            "content": "C. 100000002"
+            "content": "$10000000_2$"
           },
           {
             "key": "D",
-            "content": "D. 111111112"
+            "content": "$11111111_2$"
           }
         ],
-        "answer": "答案：C\n解析：最小的负数为 1000000… ，大端法将最高位放到最低地址"
+        "answer": "答案：C\n\n最小负数的二进制表示为最高位是 1、其余位均为 0。大端法把最高有效字节放在最低地址，因此 X 所在字节为 $10000000_2$。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -2719,19 +2883,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "A. 000000002"
+            "content": "$00000000_2$"
           },
           {
             "id": "B",
-            "content": "B. 011111112"
+            "content": "$01111111_2$"
           },
           {
             "id": "C",
-            "content": "C. 100000002"
+            "content": "$10000000_2$"
           },
           {
             "id": "D",
-            "content": "D. 111111112"
+            "content": "$11111111_2$"
           }
         ],
         "correctChoiceIds": [
@@ -2740,8 +2904,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "1.  假定一个特殊设计的计算机，将 int 型数据的长度从 4-Byte 扩展为\n4N-Byte，采用大端法（Big Endian）。现将该int型所能表示的最小负数\n写入内存中，如下图所示。其中每个小矩形代表一个Byte，请问X位置这个\nByte中的值是多少？",
-        "answer": "答案：C\n解析：最小的负数为 1000000… ，大端法将最高位放到最低地址"
+        "prompt": "1. 假定一个特殊设计的计算机将 `int` 型数据的长度从 4 Byte 扩展为 4N Byte，并采用大端法（Big Endian）。现将该 `int` 型所能表示的最小负数写入内存，如下图所示。每个小矩形代表一个 Byte，请问 X 位置这个 Byte 中的值是多少？\n\n![4N Byte 整数在大端内存中的排列示意图，X 位于靠近低地址一侧的指定字节](assets/期中/2017期中-带答案/q1-memory-layout.svg)",
+        "answer": "答案：C\n\n最小负数的二进制表示为最高位是 1、其余位均为 0。大端法把最高有效字节放在最低地址，因此 X 所在字节为 $10000000_2$。"
       },
       "presentation": {
         "status": "ready",
@@ -3236,7 +3400,7 @@
       "exam": "2018期中",
       "questionNo": "第一题 3",
       "summary": "异或交换的位运算与按值传参",
-      "content": "3.  考虑如下函数\n```c\nvoid XOR(int x, int y) {\n      y = x ^ y;\n      x = x ^ y;\n      y = x ^ y;\n    printf(x, y);\n}\n```\nXOR(a,b)的输出结果为？\nA. A) a, b\nB. B) b, a\nC. C) b,0\nD. D) b, $a^b$\n答案：C\n本题考查xor的特殊用法，x xor x = 0 , 0 xor x = x ;\n答案修订：应为B，该代码将x, y值进行交换。另外，题面应为printf(“%d, %d”,\nx, y);",
+      "content": "3. 考虑如下函数：\n\n```c\nvoid XOR(int x, int y) {\n    y = x ^ y;\n    x = x ^ y;\n    y = x ^ y;\n    printf(\"%d, %d\", x, y);\n}\n```\n\n`XOR(a, b)` 的输出结果为？\nA. `a, b`\nB. `b, a`\nC. `b, 0`\nD. `b, a ^ b`\n答案：B\n\n三次异或运算交换了 `x` 和 `y` 的值，因此输出 `b, a`。原卷题面中的 `printf(x, y)` 为笔误，这里按答案稿的修订写为 `printf(\"%d, %d\", x, y)`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3256,26 +3420,26 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "3.  考虑如下函数\n```c\nvoid XOR(int x, int y) {\n      y = x ^ y;\n      x = x ^ y;\n      y = x ^ y;\n    printf(x, y);\n}\n```\nXOR(a,b)的输出结果为？",
+        "stem": "3. 考虑如下函数：\n\n```c\nvoid XOR(int x, int y) {\n    y = x ^ y;\n    x = x ^ y;\n    y = x ^ y;\n    printf(\"%d, %d\", x, y);\n}\n```\n\n`XOR(a, b)` 的输出结果为？",
         "choices": [
           {
             "key": "A",
-            "content": "A) a, b"
+            "content": "`a, b`"
           },
           {
             "key": "B",
-            "content": "B) b, a"
+            "content": "`b, a`"
           },
           {
             "key": "C",
-            "content": "C) b,0"
+            "content": "`b, 0`"
           },
           {
             "key": "D",
-            "content": "D) b, $a^b$"
+            "content": "`b, a ^ b`"
           }
         ],
-        "answer": "答案：C\n本题考查xor的特殊用法，x xor x = 0 , 0 xor x = x ;\n答案修订：应为B，该代码将x, y值进行交换。另外，题面应为printf(“%d, %d”,\nx, y);"
+        "answer": "答案：B\n\n三次异或运算交换了 `x` 和 `y` 的值，因此输出 `b, a`。原卷题面中的 `printf(x, y)` 为笔误，这里按答案稿的修订写为 `printf(\"%d, %d\", x, y)`。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -3283,29 +3447,29 @@
         "choices": [
           {
             "id": "A",
-            "content": "A) a, b"
+            "content": "`a, b`"
           },
           {
             "id": "B",
-            "content": "B) b, a"
+            "content": "`b, a`"
           },
           {
             "id": "C",
-            "content": "C) b,0"
+            "content": "`b, 0`"
           },
           {
             "id": "D",
-            "content": "D) b, $a^b$"
+            "content": "`b, a ^ b`"
           }
         ],
         "correctChoiceIds": [
-          "C"
+          "B"
         ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3.  考虑如下函数\n```c\nvoid XOR(int x, int y) {\n      y = x ^ y;\n      x = x ^ y;\n      y = x ^ y;\n    printf(x, y);\n}\n```\nXOR(a,b)的输出结果为？",
-        "answer": "答案：C\n本题考查xor的特殊用法，x xor x = 0 , 0 xor x = x ;\n答案修订：应为B，该代码将x, y值进行交换。另外，题面应为printf(“%d, %d”,\nx, y);"
+        "prompt": "3. 考虑如下函数：\n\n```c\nvoid XOR(int x, int y) {\n    y = x ^ y;\n    x = x ^ y;\n    y = x ^ y;\n    printf(\"%d, %d\", x, y);\n}\n```\n\n`XOR(a, b)` 的输出结果为？",
+        "answer": "答案：B\n\n三次异或运算交换了 `x` 和 `y` 的值，因此输出 `b, a`。原卷题面中的 `printf(x, y)` 为笔误，这里按答案稿的修订写为 `printf(\"%d, %d\", x, y)`。"
       },
       "presentation": {
         "status": "ready",
@@ -3981,7 +4145,7 @@
       "exam": "2020期中",
       "questionNo": "第二题 第一段",
       "summary": "union 中 double 的位模式与 IEEE 浮点解释",
-      "content": "第二题（20分）\n分析两段在x86-64 CPU上运行的程序代码，回答相关问题。\n第一段代码：\n```\n#include<stdio.h>\ntypedef struct\n{\n  int x;\n  int y;\n}struct_e;\ntypedef union\n{\n  struct_e s;\n  double d;\n}union_e;\nint main () {\n  union_e test;\n  test.s.x = 0;\n  test.s.y = -1;\n  printf(\"%lf\\n\", test.d);\n  test.s.y = 0x3ff00000;\n  printf(\"%lf\\n\", test.d);\n}\n```\n（1）以上程序的两次输出分别是 ___\n。\n（2） sizeof(union_e) = _\n（3）如果某次程序输出的 test.d 是最大的负非规格化数，则\n   此时从test的起始地址开始的8个字节（用16进制表示）依次是:\n6\n\n\ntest.s.x = ______\ntest.s.y = ___\nNaN   _（2分）， _    1  ___（2分）\n8___。（2分）\n（4分，\n全对才得分,否则0分）\n01  00  00  00  00  00  00  80\n此时\n1______（2分）\n-2147483648 (-2**31)___（2分）",
+      "content": "第二题（20 分）\n\n分析两段在 x86-64 CPU 上运行的程序代码并回答问题。第一段代码如下：\n\n```c\n#include <stdio.h>\n\ntypedef struct {\n    int x;\n    int y;\n} struct_e;\n\ntypedef union {\n    struct_e s;\n    double d;\n} union_e;\n\nint main(void) {\n    union_e test;\n    test.s.x = 0;\n    test.s.y = -1;\n    printf(\"%lf\\n\", test.d);\n\n    test.s.y = 0x3ff00000;\n    printf(\"%lf\\n\", test.d);\n}\n```\n\n1. 两次输出依次为 {{blank:output-1}} 和 {{blank:output-2}}。\n2. `sizeof(union_e)` 为 {{blank:union-size}}。\n3. 如果某次输出的 `test.d` 是最大的负非规格化数，则从 `test` 起始地址开始的 8 个字节（十六进制）依次为 {{blank:bytes}}；此时 `test.s.x` 为 {{blank:struct-x}}，`test.s.y` 为 {{blank:struct-y}}。\n1. 两次输出依次为 `NaN` 和 `1`。\n2. `sizeof(union_e) = 8`。\n3. 八个字节依次为 `01 00 00 00 00 00 00 80`；`test.s.x = 1`，`test.s.y = -2147483648`（即 $-2^{31}$）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4003,13 +4167,123 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二题（20分）\n分析两段在x86-64 CPU上运行的程序代码，回答相关问题。\n第一段代码：\n```\n#include<stdio.h>\ntypedef struct\n{\n  int x;\n  int y;\n}struct_e;\ntypedef union\n{\n  struct_e s;\n  double d;\n}union_e;\nint main () {\n  union_e test;\n  test.s.x = 0;\n  test.s.y = -1;\n  printf(\"%lf\\n\", test.d);\n  test.s.y = 0x3ff00000;\n  printf(\"%lf\\n\", test.d);\n}\n```\n（1）以上程序的两次输出分别是 ___\n。\n（2） sizeof(union_e) = _\n（3）如果某次程序输出的 test.d 是最大的负非规格化数，则\n   此时从test的起始地址开始的8个字节（用16进制表示）依次是:\n6\n\n\ntest.s.x = ______\ntest.s.y = ___",
+        "stem": "第二题（20 分）\n\n分析两段在 x86-64 CPU 上运行的程序代码并回答问题。第一段代码如下：\n\n```c\n#include <stdio.h>\n\ntypedef struct {\n    int x;\n    int y;\n} struct_e;\n\ntypedef union {\n    struct_e s;\n    double d;\n} union_e;\n\nint main(void) {\n    union_e test;\n    test.s.x = 0;\n    test.s.y = -1;\n    printf(\"%lf\\n\", test.d);\n\n    test.s.y = 0x3ff00000;\n    printf(\"%lf\\n\", test.d);\n}\n```\n\n1. 两次输出依次为 {{blank:output-1}} 和 {{blank:output-2}}。\n2. `sizeof(union_e)` 为 {{blank:union-size}}。\n3. 如果某次输出的 `test.d` 是最大的负非规格化数，则从 `test` 起始地址开始的 8 个字节（十六进制）依次为 {{blank:bytes}}；此时 `test.s.x` 为 {{blank:struct-x}}，`test.s.y` 为 {{blank:struct-y}}。",
         "choices": [],
-        "answer": "NaN   _（2分）， _    1  ___（2分）\n8___。（2分）\n（4分，\n全对才得分,否则0分）\n01  00  00  00  00  00  00  80\n此时\n1______（2分）\n-2147483648 (-2**31)___（2分）"
+        "answer": "1. 两次输出依次为 `NaN` 和 `1`。\n2. `sizeof(union_e) = 8`。\n3. 八个字节依次为 `01 00 00 00 00 00 00 80`；`test.s.x = 1`，`test.s.y = -2147483648`（即 $-2^{31}$）。",
+        "blankAnswers": [
+          {
+            "id": "output-1",
+            "acceptedAnswers": [
+              "nan",
+              "-nan"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "output-2",
+            "acceptedAnswers": [
+              "1",
+              "1.000000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "union-size",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "bytes",
+            "acceptedAnswers": [
+              "01 00 00 00 00 00 00 80",
+              "0100000000000080"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "struct-x",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "struct-y",
+            "acceptedAnswers": [
+              "-2147483648",
+              "-2**31",
+              "-2^31"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "partInteraction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "output-1",
+            "acceptedAnswers": [
+              "nan",
+              "-nan"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "output-2",
+            "acceptedAnswers": [
+              "1",
+              "1.000000"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "union-size",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "bytes",
+            "acceptedAnswers": [
+              "01 00 00 00 00 00 00 80",
+              "0100000000000080"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "struct-x",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "struct-y",
+            "acceptedAnswers": [
+              "-2147483648",
+              "-2**31",
+              "-2^31"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "composite",
@@ -4018,8 +4292,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（20分）\n分析两段在x86-64 CPU上运行的程序代码，回答相关问题。\n第一段代码：\n```\n#include<stdio.h>\ntypedef struct\n{\n  int x;\n  int y;\n}struct_e;\ntypedef union\n{\n  struct_e s;\n  double d;\n}union_e;\nint main () {\n  union_e test;\n  test.s.x = 0;\n  test.s.y = -1;\n  printf(\"%lf\\n\", test.d);\n  test.s.y = 0x3ff00000;\n  printf(\"%lf\\n\", test.d);\n}\n```\n（1）以上程序的两次输出分别是 ___\n。\n（2） sizeof(union_e) = _\n（3）如果某次程序输出的 test.d 是最大的负非规格化数，则\n   此时从test的起始地址开始的8个字节（用16进制表示）依次是:\n6\n\n\ntest.s.x = ______\ntest.s.y = ___",
-        "answer": "NaN   _（2分）， _    1  ___（2分）\n8___。（2分）\n（4分，\n全对才得分,否则0分）\n01  00  00  00  00  00  00  80\n此时\n1______（2分）\n-2147483648 (-2**31)___（2分）"
+        "prompt": "第二题（20 分）\n\n分析两段在 x86-64 CPU 上运行的程序代码并回答问题。第一段代码如下：\n\n```c\n#include <stdio.h>\n\ntypedef struct {\n    int x;\n    int y;\n} struct_e;\n\ntypedef union {\n    struct_e s;\n    double d;\n} union_e;\n\nint main(void) {\n    union_e test;\n    test.s.x = 0;\n    test.s.y = -1;\n    printf(\"%lf\\n\", test.d);\n\n    test.s.y = 0x3ff00000;\n    printf(\"%lf\\n\", test.d);\n}\n```\n\n1. 两次输出依次为 {{blank:output-1}} 和 {{blank:output-2}}。\n2. `sizeof(union_e)` 为 {{blank:union-size}}。\n3. 如果某次输出的 `test.d` 是最大的负非规格化数，则从 `test` 起始地址开始的 8 个字节（十六进制）依次为 {{blank:bytes}}；此时 `test.s.x` 为 {{blank:struct-x}}，`test.s.y` 为 {{blank:struct-y}}。",
+        "answer": "1. 两次输出依次为 `NaN` 和 `1`。\n2. `sizeof(union_e) = 8`。\n3. 八个字节依次为 `01 00 00 00 00 00 00 80`；`test.s.x = 1`，`test.s.y = -2147483648`（即 $-2^{31}$）。"
       },
       "group": {
         "id": "p-d72f88c4198cf267:2020-mid-q2",
@@ -4042,7 +4316,7 @@
       "exam": "2020期中",
       "questionNo": "第二题 第二段",
       "summary": "float 精度、(int) 截断与不可精确表示的数",
-      "content": "第二段代码：\n```\nint a = 33554442; // 2^25+10\nint b = a + 5;\nfor (; a < b; a++) {\n  float f = a;\n  printf(\"%d \", (int)f - a);\n}\n```\n（1） 这段代码的运行输出结果是（若有多个输出结果，用逗号分隔表示）：\n_ __________\n（2）进一步分析，float类型不可以精确表示的最小正整数是 ___\n___。\n_ -2，1，0，-1，2_________ __（3分，全对才得分）\n2**24+1\n（3分）",
+      "content": "第二段代码如下：\n\n```c\nint a = 33554442;  // 2^25 + 10\nint b = a + 5;\n\nfor (; a < b; a++) {\n    float f = a;\n    printf(\"%d \", (int)f - a);\n}\n```\n\n1. 程序的输出依次为 {{blank:outputs}}。\n2. `float` 类型不能精确表示的最小正整数为 {{blank:first-inexact-int}}。\n1. 输出依次为 `-2, 1, 0, -1, 2`。\n2. 最小正整数为 $2^{24}+1=16777217$。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4064,13 +4338,57 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "第二段代码：\n```\nint a = 33554442; // 2^25+10\nint b = a + 5;\nfor (; a < b; a++) {\n  float f = a;\n  printf(\"%d \", (int)f - a);\n}\n```\n（1） 这段代码的运行输出结果是（若有多个输出结果，用逗号分隔表示）：\n_ __________\n（2）进一步分析，float类型不可以精确表示的最小正整数是 ___\n___。",
+        "stem": "第二段代码如下：\n\n```c\nint a = 33554442;  // 2^25 + 10\nint b = a + 5;\n\nfor (; a < b; a++) {\n    float f = a;\n    printf(\"%d \", (int)f - a);\n}\n```\n\n1. 程序的输出依次为 {{blank:outputs}}。\n2. `float` 类型不能精确表示的最小正整数为 {{blank:first-inexact-int}}。",
         "choices": [],
-        "answer": "_ -2，1，0，-1，2_________ __（3分，全对才得分）\n2**24+1\n（3分）"
+        "answer": "1. 输出依次为 `-2, 1, 0, -1, 2`。\n2. 最小正整数为 $2^{24}+1=16777217$。",
+        "blankAnswers": [
+          {
+            "id": "outputs",
+            "acceptedAnswers": [
+              "-2, 1, 0, -1, 2",
+              "-2 1 0 -1 2",
+              "-2，1，0，-1，2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "first-inexact-int",
+            "acceptedAnswers": [
+              "16777217",
+              "2**24+1",
+              "2^24+1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "partInteraction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "outputs",
+            "acceptedAnswers": [
+              "-2, 1, 0, -1, 2",
+              "-2 1 0 -1 2",
+              "-2，1，0，-1，2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "first-inexact-int",
+            "acceptedAnswers": [
+              "16777217",
+              "2**24+1",
+              "2^24+1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "composite",
@@ -4079,8 +4397,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二段代码：\n```\nint a = 33554442; // 2^25+10\nint b = a + 5;\nfor (; a < b; a++) {\n  float f = a;\n  printf(\"%d \", (int)f - a);\n}\n```\n（1） 这段代码的运行输出结果是（若有多个输出结果，用逗号分隔表示）：\n_ __________\n（2）进一步分析，float类型不可以精确表示的最小正整数是 ___\n___。",
-        "answer": "_ -2，1，0，-1，2_________ __（3分，全对才得分）\n2**24+1\n（3分）"
+        "prompt": "第二段代码如下：\n\n```c\nint a = 33554442;  // 2^25 + 10\nint b = a + 5;\n\nfor (; a < b; a++) {\n    float f = a;\n    printf(\"%d \", (int)f - a);\n}\n```\n\n1. 程序的输出依次为 {{blank:outputs}}。\n2. `float` 类型不能精确表示的最小正整数为 {{blank:first-inexact-int}}。",
+        "answer": "1. 输出依次为 `-2, 1, 0, -1, 2`。\n2. 最小正整数为 $2^{24}+1=16777217$。"
       },
       "group": {
         "id": "p-d72f88c4198cf267:2020-mid-q2",
@@ -5348,7 +5666,7 @@
       "exam": "2023期中",
       "questionNo": "第一题 2",
       "summary": "整型运算规则：乘法溢出、右移与lowbit",
-      "content": "2.下列说法中，正确的是：\nA．对于int类型的变量x，y，z，在执行z = x * y后可以用z / x == y\n来判断乘法运算是否没有发生溢出\nB．对于int类型的变量x，$(x >> 1)$ <= x总为真\nC．对于int类型的变量x，$(x >> 1)$ == (x / 2)总为真\nD．对于int类型的变量x，总存在一个k，使得x & (-x)的结果等于1 << k\n2\n答案：D\n考察整型的运算规则。\nA 错误。x的值可能为0，需要特别判断。\nB 错误。x的值小于-1时，不等式为假，比如(-2)>>1的结果为-1。\nC 错误。用算术右移做除法时，结果会往下取整，但除法本身向零取整，比如(-\n1)>>1的值是-1，但(-1)/2的值是0。\nD 正确。-x等于(~x) + 1，如果x低位有连续k个0，~x的低位就有连续k个\n1，-x低位就同样是连续k个0。-x除去低位的k+1位后与~x相同，与x相反。\n所以x & (-x)等于1 << k。",
+      "content": "2. 下列说法中，正确的是：\nA. 对于 `int` 类型的变量 `x`、`y`、`z`，在执行 `z = x * y` 后，可以用 `z / x == y` 判断乘法运算是否没有发生溢出\nB. 对于 `int` 类型的变量 `x`，`(x >> 1) <= x` 总为真\nC. 对于 `int` 类型的变量 `x`，`(x >> 1) == (x / 2)` 总为真\nD. 对于 `int` 类型的变量 `x`，总存在一个 `k`，使得 `x & (-x)` 的结果等于 `1 << k`\n答案：D\n\nA 错误：`x` 可能为 0，表达式 `z / x` 此时无效。\n\nB 错误：当 `x < -1` 时不成立，例如 `(-2) >> 1` 的结果为 `-1`。\n\nC 错误：算术右移向下取整，而整数除法向零取整，例如 `(-1) >> 1` 为 `-1`，`(-1) / 2` 为 `0`。\n\nD 正确：若 `x` 的低位有连续 `k` 个 0，则 `x & (-x)` 仅保留最低的 1，结果为 `1 << k`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5373,26 +5691,26 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "2.下列说法中，正确的是：",
+        "stem": "2. 下列说法中，正确的是：",
         "choices": [
           {
             "key": "A",
-            "content": "对于int类型的变量x，y，z，在执行z = x * y后可以用z / x == y\n来判断乘法运算是否没有发生溢出"
+            "content": "对于 `int` 类型的变量 `x`、`y`、`z`，在执行 `z = x * y` 后，可以用 `z / x == y` 判断乘法运算是否没有发生溢出"
           },
           {
             "key": "B",
-            "content": "对于int类型的变量x，$(x >> 1)$ <= x总为真"
+            "content": "对于 `int` 类型的变量 `x`，`(x >> 1) <= x` 总为真"
           },
           {
             "key": "C",
-            "content": "对于int类型的变量x，$(x >> 1)$ == (x / 2)总为真"
+            "content": "对于 `int` 类型的变量 `x`，`(x >> 1) == (x / 2)` 总为真"
           },
           {
             "key": "D",
-            "content": "对于int类型的变量x，总存在一个k，使得x & (-x)的结果等于1 << k\n2"
+            "content": "对于 `int` 类型的变量 `x`，总存在一个 `k`，使得 `x & (-x)` 的结果等于 `1 << k`"
           }
         ],
-        "answer": "答案：D\n考察整型的运算规则。\nA 错误。x的值可能为0，需要特别判断。\nB 错误。x的值小于-1时，不等式为假，比如(-2)>>1的结果为-1。\nC 错误。用算术右移做除法时，结果会往下取整，但除法本身向零取整，比如(-\n1)>>1的值是-1，但(-1)/2的值是0。\nD 正确。-x等于(~x) + 1，如果x低位有连续k个0，~x的低位就有连续k个\n1，-x低位就同样是连续k个0。-x除去低位的k+1位后与~x相同，与x相反。\n所以x & (-x)等于1 << k。"
+        "answer": "答案：D\n\nA 错误：`x` 可能为 0，表达式 `z / x` 此时无效。\n\nB 错误：当 `x < -1` 时不成立，例如 `(-2) >> 1` 的结果为 `-1`。\n\nC 错误：算术右移向下取整，而整数除法向零取整，例如 `(-1) >> 1` 为 `-1`，`(-1) / 2` 为 `0`。\n\nD 正确：若 `x` 的低位有连续 `k` 个 0，则 `x & (-x)` 仅保留最低的 1，结果为 `1 << k`。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -5400,19 +5718,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "对于int类型的变量x，y，z，在执行z = x * y后可以用z / x == y\n来判断乘法运算是否没有发生溢出"
+            "content": "对于 `int` 类型的变量 `x`、`y`、`z`，在执行 `z = x * y` 后，可以用 `z / x == y` 判断乘法运算是否没有发生溢出"
           },
           {
             "id": "B",
-            "content": "对于int类型的变量x，$(x >> 1)$ <= x总为真"
+            "content": "对于 `int` 类型的变量 `x`，`(x >> 1) <= x` 总为真"
           },
           {
             "id": "C",
-            "content": "对于int类型的变量x，$(x >> 1)$ == (x / 2)总为真"
+            "content": "对于 `int` 类型的变量 `x`，`(x >> 1) == (x / 2)` 总为真"
           },
           {
             "id": "D",
-            "content": "对于int类型的变量x，总存在一个k，使得x & (-x)的结果等于1 << k\n2"
+            "content": "对于 `int` 类型的变量 `x`，总存在一个 `k`，使得 `x & (-x)` 的结果等于 `1 << k`"
           }
         ],
         "correctChoiceIds": [
@@ -5421,8 +5739,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.下列说法中，正确的是：",
-        "answer": "答案：D\n考察整型的运算规则。\nA 错误。x的值可能为0，需要特别判断。\nB 错误。x的值小于-1时，不等式为假，比如(-2)>>1的结果为-1。\nC 错误。用算术右移做除法时，结果会往下取整，但除法本身向零取整，比如(-\n1)>>1的值是-1，但(-1)/2的值是0。\nD 正确。-x等于(~x) + 1，如果x低位有连续k个0，~x的低位就有连续k个\n1，-x低位就同样是连续k个0。-x除去低位的k+1位后与~x相同，与x相反。\n所以x & (-x)等于1 << k。"
+        "prompt": "2. 下列说法中，正确的是：",
+        "answer": "答案：D\n\nA 错误：`x` 可能为 0，表达式 `z / x` 此时无效。\n\nB 错误：当 `x < -1` 时不成立，例如 `(-2) >> 1` 的结果为 `-1`。\n\nC 错误：算术右移向下取整，而整数除法向零取整，例如 `(-1) >> 1` 为 `-1`，`(-1) / 2` 为 `0`。\n\nD 正确：若 `x` 的低位有连续 `k` 个 0，则 `x & (-x)` 仅保留最低的 1，结果为 `1 << k`。"
       },
       "presentation": {
         "status": "ready",
@@ -6474,7 +6792,7 @@
       "exam": "2013期末",
       "questionNo": "第二题",
       "summary": "自定义短浮点格式填表（含舍入）",
-      "content": "第二题（8分）\n考虑一种新的遵从IEEE规范的浮点的格式，包含3位指数位，4位小数位和\n1位符号位。请填写下面的表格。\n描述  十进制数(或分数)  二进制表示\nBias  3  --------\n最小的正数  1/64  0 000 0001\n最小的有限数  -15.5  1 110 1111\n最小规格正数  1/4  0 001 0000\n```\n---  -11/32  1 001 0110\n---  7/2  0 100 1100\n---  63/128  0 010 0000\n---  13.25  0 110 1010\n```\n每行1分\n考察学生对浮点数的掌握程度，包括舍入。\n描述  十进制数(或分数)  二进制表示\nBias  3  --------\n最小的正数  1/64  0 000 0001\n最小的有限数  -15.5  1 110 1111\n最小规格正数  1/4  0 001 0000\n---  -11/32  1 001 0110\n---  7/2  0 100 1100\n---  63/128  0 010 0000\n---  13.25  0 110 1010\n每行1分\n考察学生对浮点数的掌握程度，包括舍入。",
+      "content": "第二题（8 分）\n\n考虑一种遵从 IEEE 规范的新浮点格式，它包含 1 位符号位、3 位指数位和 4 位小数位。请填写下表中的空项：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | 3 | — |\n| 最小的正数 | $1/64$ | `0 000 0001` |\n| 最小的有限数 | $-15.5$ | `1 110 1111` |\n| 最小规格正数 | $1/4$ | `0 001 0000` |\n| （填写描述） | $-11/32$ | `1 001 0110` |\n| （填写描述） | $7/2$ | `0 100 1100` |\n| （填写描述） | $63/128$ | `0 010 0000` |\n| （填写描述） | $13.25$ | `0 110 1010` |\n\n每行 1 分。\n参考表格：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | 3 | — |\n| 最小的正数 | $1/64$ | `0 000 0001` |\n| 最小的有限数 | $-15.5$ | `1 110 1111` |\n| 最小规格正数 | $1/4$ | `0 001 0000` |\n| — | $-11/32$ | `1 001 0110` |\n| — | $7/2$ | `0 100 1100` |\n| — | $63/128$ | `0 010 0000` |\n| — | $13.25$ | `0 110 1010` |\n\n考查对浮点数编码与舍入的掌握。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -6494,9 +6812,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "第二题（8分）\n考虑一种新的遵从IEEE规范的浮点的格式，包含3位指数位，4位小数位和\n1位符号位。请填写下面的表格。\n描述  十进制数(或分数)  二进制表示\nBias  3  --------\n最小的正数  1/64  0 000 0001\n最小的有限数  -15.5  1 110 1111\n最小规格正数  1/4  0 001 0000\n```\n---  -11/32  1 001 0110\n---  7/2  0 100 1100\n---  63/128  0 010 0000\n---  13.25  0 110 1010\n```\n每行1分\n考察学生对浮点数的掌握程度，包括舍入。",
+        "stem": "第二题（8 分）\n\n考虑一种遵从 IEEE 规范的新浮点格式，它包含 1 位符号位、3 位指数位和 4 位小数位。请填写下表中的空项：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | 3 | — |\n| 最小的正数 | $1/64$ | `0 000 0001` |\n| 最小的有限数 | $-15.5$ | `1 110 1111` |\n| 最小规格正数 | $1/4$ | `0 001 0000` |\n| （填写描述） | $-11/32$ | `1 001 0110` |\n| （填写描述） | $7/2$ | `0 100 1100` |\n| （填写描述） | $63/128$ | `0 010 0000` |\n| （填写描述） | $13.25$ | `0 110 1010` |\n\n每行 1 分。",
         "choices": [],
-        "answer": "描述  十进制数(或分数)  二进制表示\nBias  3  --------\n最小的正数  1/64  0 000 0001\n最小的有限数  -15.5  1 110 1111\n最小规格正数  1/4  0 001 0000\n---  -11/32  1 001 0110\n---  7/2  0 100 1100\n---  63/128  0 010 0000\n---  13.25  0 110 1010\n每行1分\n考察学生对浮点数的掌握程度，包括舍入。"
+        "answer": "参考表格：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | 3 | — |\n| 最小的正数 | $1/64$ | `0 000 0001` |\n| 最小的有限数 | $-15.5$ | `1 110 1111` |\n| 最小规格正数 | $1/4$ | `0 001 0000` |\n| — | $-11/32$ | `1 001 0110` |\n| — | $7/2$ | `0 100 1100` |\n| — | $63/128$ | `0 010 0000` |\n| — | $13.25$ | `0 110 1010` |\n\n考查对浮点数编码与舍入的掌握。"
       },
       "interaction": {
         "kind": "short-answer",
@@ -6504,8 +6822,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "第二题（8分）\n考虑一种新的遵从IEEE规范的浮点的格式，包含3位指数位，4位小数位和\n1位符号位。请填写下面的表格。\n描述  十进制数(或分数)  二进制表示\nBias  3  --------\n最小的正数  1/64  0 000 0001\n最小的有限数  -15.5  1 110 1111\n最小规格正数  1/4  0 001 0000\n```\n---  -11/32  1 001 0110\n---  7/2  0 100 1100\n---  63/128  0 010 0000\n---  13.25  0 110 1010\n```\n每行1分\n考察学生对浮点数的掌握程度，包括舍入。",
-        "answer": "描述  十进制数(或分数)  二进制表示\nBias  3  --------\n最小的正数  1/64  0 000 0001\n最小的有限数  -15.5  1 110 1111\n最小规格正数  1/4  0 001 0000\n---  -11/32  1 001 0110\n---  7/2  0 100 1100\n---  63/128  0 010 0000\n---  13.25  0 110 1010\n每行1分\n考察学生对浮点数的掌握程度，包括舍入。"
+        "prompt": "第二题（8 分）\n\n考虑一种遵从 IEEE 规范的新浮点格式，它包含 1 位符号位、3 位指数位和 4 位小数位。请填写下表中的空项：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | 3 | — |\n| 最小的正数 | $1/64$ | `0 000 0001` |\n| 最小的有限数 | $-15.5$ | `1 110 1111` |\n| 最小规格正数 | $1/4$ | `0 001 0000` |\n| （填写描述） | $-11/32$ | `1 001 0110` |\n| （填写描述） | $7/2$ | `0 100 1100` |\n| （填写描述） | $63/128$ | `0 010 0000` |\n| （填写描述） | $13.25$ | `0 110 1010` |\n\n每行 1 分。",
+        "answer": "参考表格：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | 3 | — |\n| 最小的正数 | $1/64$ | `0 000 0001` |\n| 最小的有限数 | $-15.5$ | `1 110 1111` |\n| 最小规格正数 | $1/4$ | `0 001 0000` |\n| — | $-11/32$ | `1 001 0110` |\n| — | $7/2$ | `0 100 1100` |\n| — | $63/128$ | `0 010 0000` |\n| — | $13.25$ | `0 110 1010` |\n\n考查对浮点数编码与舍入的掌握。"
       },
       "presentation": {
         "status": "ready",
@@ -7092,7 +7410,7 @@
       "exam": "2017期末",
       "questionNo": "第二题 2",
       "summary": "浮点位模式、对齐与比较运算的七行输出",
-      "content": "2. 程序执行会产生7行输出。请写出每一行所有可能的输出值，不同可能性之间\n逗号分隔\n第一行：_____________________________________________________\n第二行：_____________________________________________________\n第三行：_____________________________________________________\n第四行：_____________________________________________________\n第五行：_____________________________________________________\n第六行：_____________________________________________________\n第七行：_____________________________________________________\n答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "2. 上述程序会产生 7 行输出。请写出每一行所有可能的输出值；一行有多种可能时，用逗号分隔。\n\n| 输出行 | 所有可能的值 |\n| --- | --- |\n| 第一行 | {{blank:line-1}} |\n| 第二行 | {{blank:line-2}} |\n| 第三行 | {{blank:line-3}} |\n| 第四行 | {{blank:line-4}} |\n| 第五行 | {{blank:line-5}} |\n| 第六行 | {{blank:line-6}} |\n| 第七行 | {{blank:line-7}} |\n| 输出行 | 所有可能的值 |\n| --- | --- |\n| 第一行 | `12` |\n| 第二行 | `20` |\n| 第三行 | `20` |\n| 第四行 | `0, 1` |\n| 第五行 | `2` |\n| 第六行 | `0, 1` |\n| 第七行 | `0, 1` |\n\n前三行分别是 `sizeof(struct a)`、`sizeof(struct b)` 和 `sizeof(union c)`。第五行中，两个指针相差 2 个 `char`。第四、六、七行会随随机初始化的数据和第一问填写的表达式而变化。\n\n> 原卷无官方答案；这里保留现有人工推导结论，仍建议后续由助教复核。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7112,18 +7430,175 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2. 程序执行会产生7行输出。请写出每一行所有可能的输出值，不同可能性之间\n逗号分隔\n第一行：_____________________________________________________\n第二行：_____________________________________________________\n第三行：_____________________________________________________\n第四行：_____________________________________________________\n第五行：_____________________________________________________\n第六行：_____________________________________________________\n第七行：_____________________________________________________",
+        "stem": "2. 上述程序会产生 7 行输出。请写出每一行所有可能的输出值；一行有多种可能时，用逗号分隔。\n\n| 输出行 | 所有可能的值 |\n| --- | --- |\n| 第一行 | {{blank:line-1}} |\n| 第二行 | {{blank:line-2}} |\n| 第三行 | {{blank:line-3}} |\n| 第四行 | {{blank:line-4}} |\n| 第五行 | {{blank:line-5}} |\n| 第六行 | {{blank:line-6}} |\n| 第七行 | {{blank:line-7}} |",
         "choices": [],
-        "answer": "答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "answer": "| 输出行 | 所有可能的值 |\n| --- | --- |\n| 第一行 | `12` |\n| 第二行 | `20` |\n| 第三行 | `20` |\n| 第四行 | `0, 1` |\n| 第五行 | `2` |\n| 第六行 | `0, 1` |\n| 第七行 | `0, 1` |\n\n前三行分别是 `sizeof(struct a)`、`sizeof(struct b)` 和 `sizeof(union c)`。第五行中，两个指针相差 2 个 `char`。第四、六、七行会随随机初始化的数据和第一问填写的表达式而变化。\n\n> 原卷无官方答案；这里保留现有人工推导结论，仍建议后续由助教复核。",
+        "blankAnswers": [
+          {
+            "id": "line-1",
+            "acceptedAnswers": [
+              "12"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-2",
+            "acceptedAnswers": [
+              "20"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-3",
+            "acceptedAnswers": [
+              "20"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-4",
+            "acceptedAnswers": [
+              "0, 1",
+              "0 1",
+              "0，1",
+              "1, 0",
+              "1 0",
+              "1，0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-5",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-6",
+            "acceptedAnswers": [
+              "0, 1",
+              "0 1",
+              "0，1",
+              "1, 0",
+              "1 0",
+              "1，0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-7",
+            "acceptedAnswers": [
+              "0, 1",
+              "0 1",
+              "0，1",
+              "1, 0",
+              "1 0",
+              "1，0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
+      },
+      "partInteraction": {
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "line-1",
+            "acceptedAnswers": [
+              "12"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-2",
+            "acceptedAnswers": [
+              "20"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-3",
+            "acceptedAnswers": [
+              "20"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-4",
+            "acceptedAnswers": [
+              "0, 1",
+              "0 1",
+              "0，1",
+              "1, 0",
+              "1 0",
+              "1，0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-5",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-6",
+            "acceptedAnswers": [
+              "0, 1",
+              "0 1",
+              "0，1",
+              "1, 0",
+              "1 0",
+              "1，0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "line-7",
+            "acceptedAnswers": [
+              "0, 1",
+              "0 1",
+              "0，1",
+              "1, 0",
+              "1 0",
+              "1，0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "fill",
-        "declared": true
+        "kind": "composite",
+        "declared": true,
+        "partKind": "fill"
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. 程序执行会产生7行输出。请写出每一行所有可能的输出值，不同可能性之间\n逗号分隔\n第一行：_____________________________________________________\n第二行：_____________________________________________________\n第三行：_____________________________________________________\n第四行：_____________________________________________________\n第五行：_____________________________________________________\n第六行：_____________________________________________________\n第七行：_____________________________________________________",
-        "answer": "答案：第 1~3 行依次为 12、20、20；第 5 行恒为 2；第 4、6、7 行可能为 0 或 1\n逐行说明：\n- 第 1 行 12：`struct a` 中 `char c[2][3]` 占 6 字节，`int i` 对齐到偏移 8，共 12 字节。\n- 第 2 行 20：`struct b` 中 `float f` 占 0~3，`struct a` 对齐到偏移 4 占 4~15，`char c` 在偏移 16，补齐到 4 的倍数得 20。\n- 第 3 行 20：`sizeof(union c)` = max(12, 20) = 20。\n- 第 4 行 0 或 1：proc1 比较「先做 float 加法再转 double」与「转 double 后做 double 加法」的结果是否相等。\n- 第 5 行 2：proc2 中 a = &c[1][1]（偏移 4），b = (c+1)[1] = c[2]（偏移 6），b-a 恒为 2。\n- 第 6、7 行 0 或 1：取决于第 1 问中 y 的填空内容。\n（第 1~3 行确定性高；第 4~7 行属部分推导。）\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+        "prompt": "2. 上述程序会产生 7 行输出。请写出每一行所有可能的输出值；一行有多种可能时，用逗号分隔。\n\n| 输出行 | 所有可能的值 |\n| --- | --- |\n| 第一行 | {{blank:line-1}} |\n| 第二行 | {{blank:line-2}} |\n| 第三行 | {{blank:line-3}} |\n| 第四行 | {{blank:line-4}} |\n| 第五行 | {{blank:line-5}} |\n| 第六行 | {{blank:line-6}} |\n| 第七行 | {{blank:line-7}} |",
+        "answer": "| 输出行 | 所有可能的值 |\n| --- | --- |\n| 第一行 | `12` |\n| 第二行 | `20` |\n| 第三行 | `20` |\n| 第四行 | `0, 1` |\n| 第五行 | `2` |\n| 第六行 | `0, 1` |\n| 第七行 | `0, 1` |\n\n前三行分别是 `sizeof(struct a)`、`sizeof(struct b)` 和 `sizeof(union c)`。第五行中，两个指针相差 2 个 `char`。第四、六、七行会随随机初始化的数据和第一问填写的表达式而变化。\n\n> 原卷无官方答案；这里保留现有人工推导结论，仍建议后续由助教复核。"
+      },
+      "group": {
+        "id": "p-382bf3b10bc8d35a:2017-final-q2",
+        "questionId": "q-a52d536a178598a6",
+        "title": "第二题",
+        "order": 2
       },
       "presentation": {
         "status": "ready",
@@ -7903,7 +8378,7 @@
       "exam": "2025期末",
       "questionNo": "一 1",
       "summary": "有符号/无符号转换、模回绕与比较",
-      "content": "一 不定项选择题（上）（39分）\n1. 观察下面的C程序代码：\n```\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？\nA. u 的十六进制表示为 0xFFFFFFEC\nB. v 的值为 30\nC. 表达式 (x < u) 的值为 1\nD. 表达式 (x == u) 的值为 1\nE. 表达式 (v < u) 的值为 1\n答案：A, B, D, E\n解析：（x 与 u 比较时会把 x 转成无符号；u+50 发生模 2^{32} 回绕）",
+      "content": "一 不定项选择题（上）（39分）\n1. 观察下面的C程序代码：\n```c\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？\nA. u 的十六进制表示为 0xFFFFFFEC\nB. v 的值为 30\nC. 表达式 (x < u) 的值为 1\nD. 表达式 (x == u) 的值为 1\nE. 表达式 (v < u) 的值为 1\n答案：A, B, D, E\n解析：（x 与 u 比较时会把 x 转成无符号；u+50 发生模 2^{32} 回绕）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7923,7 +8398,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "一 不定项选择题（上）（39分）\n1. 观察下面的C程序代码：\n```\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？",
+        "stem": "一 不定项选择题（上）（39分）\n1. 观察下面的C程序代码：\n```c\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
@@ -7982,7 +8457,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "一 不定项选择题（上）（39分）\n1. 观察下面的C程序代码：\n```\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？",
+        "prompt": "一 不定项选择题（上）（39分）\n1. 观察下面的C程序代码：\n```c\nint x = -20;\nunsigned u = (unsigned)x;\nunsigned v = u + 50u;\n```\n下列说法哪些正确？",
         "answer": "答案：A, B, D, E\n解析：（x 与 u 比较时会把 x 转成无符号；u+50 发生模 2^{32} 回绕）"
       },
       "presentation": {
@@ -8000,7 +8475,7 @@
       "exam": "2025期末",
       "questionNo": "一 2",
       "summary": "int↔float 转换精度与舍入",
-      "content": "2. 对任意 非负 int x，执行：\n```\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）\nA. 若 0 <= x <= 16777216，则一定有 y == x\nB. 若 x == 16777217，则一定有 y == 16777216\nC. 对任意 x，一定有 y == x\nD. 存在某个 x 使得 y > x\nE. 若 x 为偶数，则一定有 y == x\n答案：A, B, D\n解析：（float 只有 24 位有效精度；超过 2^{24} 后相邻可表示整数间隔变大，可能向上舍入）",
+      "content": "2. 对任意 非负 int x，执行：\n```c\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）\nA. 若 0 <= x <= 16777216，则一定有 y == x\nB. 若 x == 16777217，则一定有 y == 16777216\nC. 对任意 x，一定有 y == x\nD. 存在某个 x 使得 y > x\nE. 若 x 为偶数，则一定有 y == x\n答案：A, B, D\n解析：（float 只有 24 位有效精度；超过 2^{24} 后相邻可表示整数间隔变大，可能向上舍入）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8020,7 +8495,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "2. 对任意 非负 int x，执行：\n```\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）",
+        "stem": "2. 对任意 非负 int x，执行：\n```c\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）",
         "choices": [
           {
             "key": "A",
@@ -8078,7 +8553,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. 对任意 非负 int x，执行：\n```\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）",
+        "prompt": "2. 对任意 非负 int x，执行：\n```c\nfloat f = (float)x;\nint y = (int)f;\n```\n下列说法哪些正确？\n（注：float 的有效精度为 24 位；$2^{24}=16777216$）",
         "answer": "答案：A, B, D\n解析：（float 只有 24 位有效精度；超过 2^{24} 后相邻可表示整数间隔变大，可能向上舍入）"
       },
       "presentation": {
@@ -8096,7 +8571,7 @@
       "exam": "2025期末",
       "questionNo": "一 3",
       "summary": "右移左移清零低 5 位",
-      "content": "3. 对任意 unsigned int x，定义：\nunsigned int y = $(x >> 5)$ << 5;\n下列说法哪些正确？\nA. y == (x & ~31u)\nB. y <= x\nC. x - y 的取值一定在 [0, 31]\nD. 若 x 是 32 的倍数，则 y == x\nE. 若 x 不是 32 的倍数，则 y == x + 1\n答案：A, B, C, D\n解析：（清零低 5 位；E 错在不是 +1 而是减去低 5 位形成的余数）",
+      "content": "3. 对任意 `unsigned int x`，定义：\n\n```c\nunsigned int y = (x >> 5) << 5;\n```\n\n下列说法哪些正确？\nA. `y == (x & ~31u)`\nB. `y <= x`\nC. `x - y` 的取值一定在 `[0, 31]`\nD. 若 `x` 是 32 的倍数，则 `y == x`\nE. 若 `x` 不是 32 的倍数，则 `y == x + 1`\n答案：A、B、C、D\n\n表达式会清零 `x` 的低 5 位，因此 E 错误：`y` 是 `x` 减去其低 5 位表示的余数，而不是 `x + 1`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8116,30 +8591,30 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "3. 对任意 unsigned int x，定义：\nunsigned int y = $(x >> 5)$ << 5;\n下列说法哪些正确？",
+        "stem": "3. 对任意 `unsigned int x`，定义：\n\n```c\nunsigned int y = (x >> 5) << 5;\n```\n\n下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
-            "content": "y == (x & ~31u)"
+            "content": "`y == (x & ~31u)`"
           },
           {
             "key": "B",
-            "content": "y <= x"
+            "content": "`y <= x`"
           },
           {
             "key": "C",
-            "content": "x - y 的取值一定在 [0, 31]"
+            "content": "`x - y` 的取值一定在 `[0, 31]`"
           },
           {
             "key": "D",
-            "content": "若 x 是 32 的倍数，则 y == x"
+            "content": "若 `x` 是 32 的倍数，则 `y == x`"
           },
           {
             "key": "E",
-            "content": "若 x 不是 32 的倍数，则 y == x + 1"
+            "content": "若 `x` 不是 32 的倍数，则 `y == x + 1`"
           }
         ],
-        "answer": "答案：A, B, C, D\n解析：（清零低 5 位；E 错在不是 +1 而是减去低 5 位形成的余数）"
+        "answer": "答案：A、B、C、D\n\n表达式会清零 `x` 的低 5 位，因此 E 错误：`y` 是 `x` 减去其低 5 位表示的余数，而不是 `x + 1`。"
       },
       "interaction": {
         "kind": "multiple-choice",
@@ -8147,23 +8622,23 @@
         "choices": [
           {
             "id": "A",
-            "content": "y == (x & ~31u)"
+            "content": "`y == (x & ~31u)`"
           },
           {
             "id": "B",
-            "content": "y <= x"
+            "content": "`y <= x`"
           },
           {
             "id": "C",
-            "content": "x - y 的取值一定在 [0, 31]"
+            "content": "`x - y` 的取值一定在 `[0, 31]`"
           },
           {
             "id": "D",
-            "content": "若 x 是 32 的倍数，则 y == x"
+            "content": "若 `x` 是 32 的倍数，则 `y == x`"
           },
           {
             "id": "E",
-            "content": "若 x 不是 32 的倍数，则 y == x + 1"
+            "content": "若 `x` 不是 32 的倍数，则 `y == x + 1`"
           }
         ],
         "correctChoiceIds": [
@@ -8175,8 +8650,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. 对任意 unsigned int x，定义：\nunsigned int y = $(x >> 5)$ << 5;\n下列说法哪些正确？",
-        "answer": "答案：A, B, C, D\n解析：（清零低 5 位；E 错在不是 +1 而是减去低 5 位形成的余数）"
+        "prompt": "3. 对任意 `unsigned int x`，定义：\n\n```c\nunsigned int y = (x >> 5) << 5;\n```\n\n下列说法哪些正确？",
+        "answer": "答案：A、B、C、D\n\n表达式会清零 `x` 的低 5 位，因此 E 错误：`y` 是 `x` 减去其低 5 位表示的余数，而不是 `x + 1`。"
       },
       "presentation": {
         "status": "ready",
@@ -8193,7 +8668,7 @@
       "exam": "2025期末",
       "questionNo": "一 4",
       "summary": "结构体对齐、offsetof 与 sizeof",
-      "content": "4. 在 x86-64 常见对齐规则下，给定：\n```\nstruct S {\nchar c;\nint i;\nshort s;\ndouble d;\n};\n```\n下列说法哪些正确？\nA. offsetof(struct S, i) == 4\nB. offsetof(struct S, s) == 8\nC. offsetof(struct S, d) == 10\nD. sizeof(struct S) == 24\nE. 若改为字段顺序 double d; int i; short s; char c;，则该结构体大小应该会\n变为16\n答案：A, B, D, E\n解析：（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）",
+      "content": "4. 在 x86-64 常见对齐规则下，给定：\n```c\nstruct S {\n    char c;\n    int i;\n    short s;\n    double d;\n};\n```\n下列说法哪些正确？\nA. offsetof(struct S, i) == 4\nB. offsetof(struct S, s) == 8\nC. offsetof(struct S, d) == 10\nD. sizeof(struct S) == 24\nE. 若改为字段顺序 double d; int i; short s; char c;，则该结构体大小应该会\n变为16\n答案：A, B, D, E\n解析：（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8213,7 +8688,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "4. 在 x86-64 常见对齐规则下，给定：\n```\nstruct S {\nchar c;\nint i;\nshort s;\ndouble d;\n};\n```\n下列说法哪些正确？",
+        "stem": "4. 在 x86-64 常见对齐规则下，给定：\n```c\nstruct S {\n    char c;\n    int i;\n    short s;\n    double d;\n};\n```\n下列说法哪些正确？",
         "choices": [
           {
             "key": "A",
@@ -8272,7 +8747,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4. 在 x86-64 常见对齐规则下，给定：\n```\nstruct S {\nchar c;\nint i;\nshort s;\ndouble d;\n};\n```\n下列说法哪些正确？",
+        "prompt": "4. 在 x86-64 常见对齐规则下，给定：\n```c\nstruct S {\n    char c;\n    int i;\n    short s;\n    double d;\n};\n```\n下列说法哪些正确？",
         "answer": "答案：A, B, D, E\n解析：（d 需要 8 对齐，导致 s 后面填充到 16；重排可显著减少填充）"
       },
       "presentation": {
@@ -8386,7 +8861,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第2讲 3",
       "summary": "short 转 int 符号扩展与首字节（字节序）",
-      "content": "3. 分析下面的C语言代码\n```\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：\n0xFF",
+      "content": "3. 分析下面的C语言代码\n```c\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：\n0xFF",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8406,7 +8881,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "3. 分析下面的C语言代码\n```\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：",
+        "stem": "3. 分析下面的C语言代码\n```c\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：",
         "choices": [],
         "answer": "0xFF"
       },
@@ -8416,7 +8891,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3. 分析下面的C语言代码\n```\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：",
+        "prompt": "3. 分析下面的C语言代码\n```c\nshort int y = -12;\nint iy = (int) y;\n```\niy首字节的值为（用十六进制表示）：",
         "answer": "0xFF"
       },
       "presentation": {
@@ -8530,7 +9005,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第3讲 6",
       "summary": "float/double 运算的结合律与除法性质判断",
-      "content": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：\n是\n是\n否\n否",
+      "content": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，给出简要说明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：\n是\n是\n否\n否",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8550,7 +9025,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：",
+        "stem": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，给出简要说明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：",
         "choices": [],
         "answer": "是\n是\n否\n否"
       },
@@ -8560,7 +9035,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "6. 在一个 int 类型为 32 位补码表示的机器上运行程序。float 类型的值使用 32 位\n2\n\n\nIEEE 格式，而 double 类型的值使用 64 位 IEEE 格式，该机器上没有80位扩展\n精度。以下C代码产生随机整数 x、y、z，并把它们转换成 double 类型的值：\n```\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列的每个 C 表达式，指出表达式是否总是为 True。若为“否”，给出简要说\n明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：",
+        "prompt": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，给出简要说明。\n（每项作答“是/否”；若为“否”，再写简要说明。）\nA. (float) x == (float) dx：\nB. (dx + dy) + dz == dx + (dy + dz)：\nC. (dx * dy) * dz == dx * (dy * dz)：\nD. dx/dx == dz/dz：",
         "answer": "是\n是\n否\n否"
       },
       "presentation": {
@@ -8578,7 +9053,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第8讲 23",
       "summary": "union 与大端字节序下的输出结果",
-      "content": "23.考虑下面的C语言代码：\n```\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\nint j;\nfor (j = 0; j < 8; j++)\ndw.c[j] = 0xC0 + j;\nprintf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]\n0xC0C1C2C3,0xC4C5C6C7",
+      "content": "23.考虑下面的C语言代码：\n```c\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\n    int j;\n    for (j = 0; j < 8; j++)\n        dw.c[j] = 0xC0 + j;\n    printf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]\n0xC0C1C2C3,0xC4C5C6C7",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8598,7 +9073,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "23.考虑下面的C语言代码：\n```\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\nint j;\nfor (j = 0; j < 8; j++)\ndw.c[j] = 0xC0 + j;\nprintf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]",
+        "stem": "23.考虑下面的C语言代码：\n```c\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\n    int j;\n    for (j = 0; j < 8; j++)\n        dw.c[j] = 0xC0 + j;\n    printf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]",
         "choices": [],
         "answer": "0xC0C1C2C3,0xC4C5C6C7"
       },
@@ -8608,7 +9083,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "23.考虑下面的C语言代码：\n```\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\nint j;\nfor (j = 0; j < 8; j++)\ndw.c[j] = 0xC0 + j;\nprintf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]",
+        "prompt": "23.考虑下面的C语言代码：\n```c\nunion {\nunsigned char c[8];\nunsigned int i[2];\n} dw;\n    int j;\n    for (j = 0; j < 8; j++)\n        dw.c[j] = 0xC0 + j;\n    printf(\"Ints 0-1 == [0x%x,0x%x]\\n\", dw.i[0], dw.i[1]);\n```\n如果在大端模式的计算机（如Sun）上运行，输出结果是：\nInts 0-1 == [\n]",
         "answer": "0xC0C1C2C3,0xC4C5C6C7"
       },
       "presentation": {

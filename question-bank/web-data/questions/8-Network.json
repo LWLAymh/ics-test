@@ -3560,7 +3560,7 @@
       "exam": "2025期末",
       "questionNo": "二 24",
       "summary": "并发网络服务器 listenfd/connfd 与 SIGCHLD",
-      "content": "24.并发网络服务器的这段程序代码：\n```\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\nint connfd = accept(listenfd, NULL, NULL);\nif (fork() == 0) {\necho(connfd);\nexit(0);\n}\nclose(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？\nA. 子进程在 echo(connfd) 前应 close(listenfd)\nB. 父进程在 fork 后应 close(listenfd)\nC. 父进程应处理 SIGCHLD（或循环 waitpid）以回收子进程，避免 zombie\nD. 父进程不应 close(connfd)，否则子进程会立即断开\nE. while循环的判断条件应该加上连接出错时跳出循环\n答案：AC\n解析：fork 后两边都持有 listenfd/connfd，子进程应关 listenfd 防泄漏；父进程应回收子进程避免僵尸。父进程关 connfd 不影响子进程持有的 connfd（D 错）。E 错误，网络服务要一直运行。",
+      "content": "24.并发网络服务器的这段程序代码：\n```c\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\n    int connfd = accept(listenfd, NULL, NULL);\n    if (fork() == 0) {\n        echo(connfd);\n        exit(0);\n    }\n    close(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？\nA. 子进程在 echo(connfd) 前应 close(listenfd)\nB. 父进程在 fork 后应 close(listenfd)\nC. 父进程应处理 SIGCHLD（或循环 waitpid）以回收子进程，避免 zombie\nD. 父进程不应 close(connfd)，否则子进程会立即断开\nE. while循环的判断条件应该加上连接出错时跳出循环\n答案：AC\n解析：fork 后两边都持有 listenfd/connfd，子进程应关 listenfd 防泄漏；父进程应回收子进程避免僵尸。父进程关 connfd 不影响子进程持有的 connfd（D 错）。E 错误，网络服务要一直运行。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3580,7 +3580,7 @@
       "layout": {
         "mode": "choice",
         "selection": "multiple",
-        "stem": "24.并发网络服务器的这段程序代码：\n```\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\nint connfd = accept(listenfd, NULL, NULL);\nif (fork() == 0) {\necho(connfd);\nexit(0);\n}\nclose(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？",
+        "stem": "24.并发网络服务器的这段程序代码：\n```c\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\n    int connfd = accept(listenfd, NULL, NULL);\n    if (fork() == 0) {\n        echo(connfd);\n        exit(0);\n    }\n    close(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？",
         "choices": [
           {
             "key": "A",
@@ -3637,7 +3637,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "24.并发网络服务器的这段程序代码：\n```\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\nint connfd = accept(listenfd, NULL, NULL);\nif (fork() == 0) {\necho(connfd);\nexit(0);\n}\nclose(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？",
+        "prompt": "24.并发网络服务器的这段程序代码：\n```c\nint listenfd = open_listenfd(\"8080\");\nwhile (1) {\n    int connfd = accept(listenfd, NULL, NULL);\n    if (fork() == 0) {\n        echo(connfd);\n        exit(0);\n    }\n    close(connfd);\n}\n```\n为使该程序更“正确/健壮”，下列哪些修改是必要或强烈建议的？",
         "answer": "答案：AC\n解析：fork 后两边都持有 listenfd/connfd，子进程应关 listenfd 防泄漏；父进程应回收子进程避免僵尸。父进程关 connfd 不影响子进程持有的 connfd（D 错）。E 错误，网络服务要一直运行。"
       },
       "presentation": {

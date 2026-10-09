@@ -3241,7 +3241,7 @@
       "exam": "2025期末",
       "questionNo": "四 1",
       "summary": "多线程代码中的共享变量识别",
-      "content": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr。哪几个是共享变量？\n答：\n```\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\nlong niters;\npthread_t tid1, tid2;\nint local_main = 0;\nif(argc!=2) {\nprintf(\"usage: %s <niters>\\n\", argv[0]);\nexit(0);\n}\nniters = atoi(argv[1]);\ndynamic_ptr = (int*)malloc(N * sizeof(int));\nif(dynamic_ptr == NULL) {\nprintf(\"Memory allocation failed\\n\");\nexit(1);\n}\nfor(int i = 0; i < N; i++) {\nshared_array[i] = i;\n}\nint thread_arg = niters;\npthread_create(&tid1, NULL, thread, &thread_arg);\npthread_create(&tid2, NULL, thread, &thread_arg);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nif (cnt != 2 * niters) {\nprintf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n} else {\nprintf(\"OK cnt = %ld\\n\", cnt);\n}\nfree(dynamic_ptr);\nexit(0);\n}\nvoid* thread(void *arg) {\nlong i;\nint niters = *(int *)arg;\nint local_thread = 0;\nstatic int static_local = 0;\nfor(i = 0; i < niters; i++) {\ncnt++;\nint index = i % N;\nshared_array[index]++;\ndynamic_ptr[index]++;\nstatic_local++;\nlocal_thread++;\n}\nprintf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\nlocal_thread, static_local);\nreturn NULL;\n}\n```\n答案：static_local；cnt；shared_array；dynamic_ptr（每个 1 分）",
+      "content": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr。哪几个是共享变量？\n答：\n```c\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\n    long niters;\n    pthread_t tid1, tid2;\n    int local_main = 0;\n    if(argc!=2) {\n        printf(\"usage: %s <niters>\\n\", argv[0]);\n        exit(0);\n    }\n    niters = atoi(argv[1]);\n    dynamic_ptr = (int*)malloc(N * sizeof(int));\n    if(dynamic_ptr == NULL) {\n        printf(\"Memory allocation failed\\n\");\n        exit(1);\n    }\n    for(int i = 0; i < N; i++) {\n        shared_array[i] = i;\n    }\n    int thread_arg = niters;\n    pthread_create(&tid1, NULL, thread, &thread_arg);\n    pthread_create(&tid2, NULL, thread, &thread_arg);\n    pthread_join(tid1, NULL);\n    pthread_join(tid2, NULL);\n    if (cnt != 2 * niters) {\n        printf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n    } else {\n        printf(\"OK cnt = %ld\\n\", cnt);\n    }\n    free(dynamic_ptr);\n    exit(0);\n}\nvoid* thread(void *arg) {\n    long i;\n    int niters = *(int *)arg;\n    int local_thread = 0;\n    static int static_local = 0;\n    for(i = 0; i < niters; i++) {\n        cnt++;\n        int index = i % N;\n        shared_array[index]++;\n        dynamic_ptr[index]++;\n        static_local++;\n        local_thread++;\n    }\n    printf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\n           local_thread, static_local);\n    return NULL;\n}\n```\n答案：static_local；cnt；shared_array；dynamic_ptr（每个 1 分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3261,7 +3261,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr。哪几个是共享变量？\n答：\n```\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\nlong niters;\npthread_t tid1, tid2;\nint local_main = 0;\nif(argc!=2) {\nprintf(\"usage: %s <niters>\\n\", argv[0]);\nexit(0);\n}\nniters = atoi(argv[1]);\ndynamic_ptr = (int*)malloc(N * sizeof(int));\nif(dynamic_ptr == NULL) {\nprintf(\"Memory allocation failed\\n\");\nexit(1);\n}\nfor(int i = 0; i < N; i++) {\nshared_array[i] = i;\n}\nint thread_arg = niters;\npthread_create(&tid1, NULL, thread, &thread_arg);\npthread_create(&tid2, NULL, thread, &thread_arg);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nif (cnt != 2 * niters) {\nprintf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n} else {\nprintf(\"OK cnt = %ld\\n\", cnt);\n}\nfree(dynamic_ptr);\nexit(0);\n}\nvoid* thread(void *arg) {\nlong i;\nint niters = *(int *)arg;\nint local_thread = 0;\nstatic int static_local = 0;\nfor(i = 0; i < niters; i++) {\ncnt++;\nint index = i % N;\nshared_array[index]++;\ndynamic_ptr[index]++;\nstatic_local++;\nlocal_thread++;\n}\nprintf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\nlocal_thread, static_local);\nreturn NULL;\n}\n```",
+        "stem": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr。哪几个是共享变量？\n答：\n```c\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\n    long niters;\n    pthread_t tid1, tid2;\n    int local_main = 0;\n    if(argc!=2) {\n        printf(\"usage: %s <niters>\\n\", argv[0]);\n        exit(0);\n    }\n    niters = atoi(argv[1]);\n    dynamic_ptr = (int*)malloc(N * sizeof(int));\n    if(dynamic_ptr == NULL) {\n        printf(\"Memory allocation failed\\n\");\n        exit(1);\n    }\n    for(int i = 0; i < N; i++) {\n        shared_array[i] = i;\n    }\n    int thread_arg = niters;\n    pthread_create(&tid1, NULL, thread, &thread_arg);\n    pthread_create(&tid2, NULL, thread, &thread_arg);\n    pthread_join(tid1, NULL);\n    pthread_join(tid2, NULL);\n    if (cnt != 2 * niters) {\n        printf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n    } else {\n        printf(\"OK cnt = %ld\\n\", cnt);\n    }\n    free(dynamic_ptr);\n    exit(0);\n}\nvoid* thread(void *arg) {\n    long i;\n    int niters = *(int *)arg;\n    int local_thread = 0;\n    static int static_local = 0;\n    for(i = 0; i < niters; i++) {\n        cnt++;\n        int index = i % N;\n        shared_array[index]++;\n        dynamic_ptr[index]++;\n        static_local++;\n        local_thread++;\n    }\n    printf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\n           local_thread, static_local);\n    return NULL;\n}\n```",
         "choices": [],
         "answer": "答案：static_local；cnt；shared_array；dynamic_ptr（每个 1 分）"
       },
@@ -3271,7 +3271,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr。哪几个是共享变量？\n答：\n```\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\nlong niters;\npthread_t tid1, tid2;\nint local_main = 0;\nif(argc!=2) {\nprintf(\"usage: %s <niters>\\n\", argv[0]);\nexit(0);\n}\nniters = atoi(argv[1]);\ndynamic_ptr = (int*)malloc(N * sizeof(int));\nif(dynamic_ptr == NULL) {\nprintf(\"Memory allocation failed\\n\");\nexit(1);\n}\nfor(int i = 0; i < N; i++) {\nshared_array[i] = i;\n}\nint thread_arg = niters;\npthread_create(&tid1, NULL, thread, &thread_arg);\npthread_create(&tid2, NULL, thread, &thread_arg);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nif (cnt != 2 * niters) {\nprintf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n} else {\nprintf(\"OK cnt = %ld\\n\", cnt);\n}\nfree(dynamic_ptr);\nexit(0);\n}\nvoid* thread(void *arg) {\nlong i;\nint niters = *(int *)arg;\nint local_thread = 0;\nstatic int static_local = 0;\nfor(i = 0; i < niters; i++) {\ncnt++;\nint index = i % N;\nshared_array[index]++;\ndynamic_ptr[index]++;\nstatic_local++;\nlocal_thread++;\n}\nprintf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\nlocal_thread, static_local);\nreturn NULL;\n}\n```",
+        "prompt": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于thread函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\ndynamic_ptr。哪几个是共享变量？\n答：\n```c\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\n    long niters;\n    pthread_t tid1, tid2;\n    int local_main = 0;\n    if(argc!=2) {\n        printf(\"usage: %s <niters>\\n\", argv[0]);\n        exit(0);\n    }\n    niters = atoi(argv[1]);\n    dynamic_ptr = (int*)malloc(N * sizeof(int));\n    if(dynamic_ptr == NULL) {\n        printf(\"Memory allocation failed\\n\");\n        exit(1);\n    }\n    for(int i = 0; i < N; i++) {\n        shared_array[i] = i;\n    }\n    int thread_arg = niters;\n    pthread_create(&tid1, NULL, thread, &thread_arg);\n    pthread_create(&tid2, NULL, thread, &thread_arg);\n    pthread_join(tid1, NULL);\n    pthread_join(tid2, NULL);\n    if (cnt != 2 * niters) {\n        printf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n    } else {\n        printf(\"OK cnt = %ld\\n\", cnt);\n    }\n    free(dynamic_ptr);\n    exit(0);\n}\nvoid* thread(void *arg) {\n    long i;\n    int niters = *(int *)arg;\n    int local_thread = 0;\n    static int static_local = 0;\n    for(i = 0; i < niters; i++) {\n        cnt++;\n        int index = i % N;\n        shared_array[index]++;\n        dynamic_ptr[index]++;\n        static_local++;\n        local_thread++;\n    }\n    printf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\n           local_thread, static_local);\n    return NULL;\n}\n```",
         "answer": "答案：static_local；cnt；shared_array；dynamic_ptr（每个 1 分）"
       },
       "presentation": {
@@ -3368,7 +3368,7 @@
       "exam": "2025期末",
       "questionNo": "四 2（2）",
       "summary": "Lightswitch 读者-写者：给定到达时刻的并发状态选择",
-      "content": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```\nA. (9),(8),(4),(2),(11)\nB. (11),(8),(3),(3),(8)\nC. (11),(11),(3),(2),(8)\nD. (9),(11),(4),(3),(11)\n答案：C（2分）",
+      "content": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```c\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\n    int counter;\n    sem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\n    ls->counter = 0;\n    sem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\n    P(&ls->mutex);\n    ls->counter += 1;\n    if (ls->counter == 1) {\n        P(semaphore);\n    }\n    V(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\n    P(&ls->mutex);\n    ls->counter -= 1;\n    if (ls->counter == 0) {\n        V(semaphore);\n    }\n    V(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\n    sem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n    (1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n        (2) P(&empty);\n        (3) P(&wmutex);\n        (4) // writing here, need 8 time unit\n        (5) V(&wmutex);\n        (6) V(&empty);\n    }\n    return NULL;\n}\nvoid* reader(void* arg) {\n    (7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n        (8) P(&empty);\n        (9) lock(&reader_switch, &wmutex);\n        (10) V(&empty);\n        (11) // reading here, need 7 time unit\n        (12) unlock(&reader_switch, &wmutex);\n    }\n    return NULL;\n}\nint main() {\n    pthread_t readers[NUM_READERS];\n    pthread_t writers[NUM_WRITERS];\n    sem_init(&wmutex, 0, 1);\n    sem_init(&empty, 0, 1);\n    lightswitch_init(&reader_switch);\n    for (int i = 0; i < NUM_READERS; i++)\n        pthread_create(&readers[i], NULL, reader, NULL);\n    for (int i = 0; i < NUM_WRITERS; i++)\n        pthread_create(&writers[i], NULL, writer, NULL);\n    for (int i = 0; i < NUM_READERS; i++)\n        pthread_join(readers[i], NULL);\n    for (int i = 0; i < NUM_WRITERS; i++)\n        pthread_join(writers[i], NULL);\n    sem_destroy(&wmutex);\n    sem_destroy(&empty);\n    lightswitch_destroy(&reader_switch);\n    return 0;\n}\n```\nA. (9),(8),(4),(2),(11)\nB. (11),(8),(3),(3),(8)\nC. (11),(11),(3),(2),(8)\nD. (9),(11),(4),(3),(11)\n答案：C（2分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3388,7 +3388,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```",
+        "stem": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```c\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\n    int counter;\n    sem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\n    ls->counter = 0;\n    sem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\n    P(&ls->mutex);\n    ls->counter += 1;\n    if (ls->counter == 1) {\n        P(semaphore);\n    }\n    V(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\n    P(&ls->mutex);\n    ls->counter -= 1;\n    if (ls->counter == 0) {\n        V(semaphore);\n    }\n    V(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\n    sem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n    (1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n        (2) P(&empty);\n        (3) P(&wmutex);\n        (4) // writing here, need 8 time unit\n        (5) V(&wmutex);\n        (6) V(&empty);\n    }\n    return NULL;\n}\nvoid* reader(void* arg) {\n    (7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n        (8) P(&empty);\n        (9) lock(&reader_switch, &wmutex);\n        (10) V(&empty);\n        (11) // reading here, need 7 time unit\n        (12) unlock(&reader_switch, &wmutex);\n    }\n    return NULL;\n}\nint main() {\n    pthread_t readers[NUM_READERS];\n    pthread_t writers[NUM_WRITERS];\n    sem_init(&wmutex, 0, 1);\n    sem_init(&empty, 0, 1);\n    lightswitch_init(&reader_switch);\n    for (int i = 0; i < NUM_READERS; i++)\n        pthread_create(&readers[i], NULL, reader, NULL);\n    for (int i = 0; i < NUM_WRITERS; i++)\n        pthread_create(&writers[i], NULL, writer, NULL);\n    for (int i = 0; i < NUM_READERS; i++)\n        pthread_join(readers[i], NULL);\n    for (int i = 0; i < NUM_WRITERS; i++)\n        pthread_join(writers[i], NULL);\n    sem_destroy(&wmutex);\n    sem_destroy(&empty);\n    lightswitch_destroy(&reader_switch);\n    return 0;\n}\n```",
         "choices": [
           {
             "key": "A",
@@ -3441,7 +3441,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\nint counter;\nsem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\nls->counter = 0;\nsem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter += 1;\nif (ls->counter == 1) {\nP(semaphore);\n}\nV(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\nP(&ls->mutex);\nls->counter -= 1;\nif (ls->counter == 0) {\nV(semaphore);\n}\nV(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\nsem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n(1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(2) P(&empty);\n(3) P(&wmutex);\n(4) // writing here, need 8 time unit\n(5) V(&wmutex);\n(6) V(&empty);\n}\nreturn NULL;\n}\nvoid* reader(void* arg) {\n(7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n(8) P(&empty);\n(9) lock(&reader_switch, &wmutex);\n(10) V(&empty);\n(11) // reading here, need 7 time unit\n(12) unlock(&reader_switch, &wmutex);\n}\nreturn NULL;\n}\nint main() {\npthread_t readers[NUM_READERS];\npthread_t writers[NUM_WRITERS];\nsem_init(&wmutex, 0, 1);\nsem_init(&empty, 0, 1);\nlightswitch_init(&reader_switch);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_create(&readers[i], NULL, reader, NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_create(&writers[i], NULL, writer, NULL);\nfor (int i = 0; i < NUM_READERS; i++)\npthread_join(readers[i], NULL);\nfor (int i = 0; i < NUM_WRITERS; i++)\npthread_join(writers[i], NULL);\nsem_destroy(&wmutex);\nsem_destroy(&empty);\nlightswitch_destroy(&reader_switch);\nreturn 0;\n}\n```",
+        "prompt": "（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：答：（ ）\n（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）\n```c\n#include “csapp.h”\n#define NUM_READERS 5\n#define NUM_WRITERS 10\n#define NUM_OPERATIONS 100\ntypedef struct {\n    int counter;\n    sem_t mutex;\n} Lightswitch;\nvoid lightswitch_init(Lightswitch* ls) {\n    ls->counter = 0;\n    sem_init(&ls->mutex, 0, 1);\n}\nvoid lock(Lightswitch* ls, sem_t* semaphore) {\n    P(&ls->mutex);\n    ls->counter += 1;\n    if (ls->counter == 1) {\n        P(semaphore);\n    }\n    V(&ls->mutex);\n}\nvoid unlock(Lightswitch* ls, sem_t* semaphore) {\n    P(&ls->mutex);\n    ls->counter -= 1;\n    if (ls->counter == 0) {\n        V(semaphore);\n    }\n    V(&ls->mutex);\n}\nvoid lightswitch_destroy(Lightswitch* ls) {\n    sem_destroy(&ls->mutex);\n}\nsem_t wmutex;\nsem_t empty;\nLightswitch reader_switch;\nvoid* writer(void* arg) {\n    (1) for (int i = 0; i < NUM_OPERATIONS; i++) {\n        (2) P(&empty);\n        (3) P(&wmutex);\n        (4) // writing here, need 8 time unit\n        (5) V(&wmutex);\n        (6) V(&empty);\n    }\n    return NULL;\n}\nvoid* reader(void* arg) {\n    (7) for (int i = 0; i < NUM_OPERATIONS; i++) {\n        (8) P(&empty);\n        (9) lock(&reader_switch, &wmutex);\n        (10) V(&empty);\n        (11) // reading here, need 7 time unit\n        (12) unlock(&reader_switch, &wmutex);\n    }\n    return NULL;\n}\nint main() {\n    pthread_t readers[NUM_READERS];\n    pthread_t writers[NUM_WRITERS];\n    sem_init(&wmutex, 0, 1);\n    sem_init(&empty, 0, 1);\n    lightswitch_init(&reader_switch);\n    for (int i = 0; i < NUM_READERS; i++)\n        pthread_create(&readers[i], NULL, reader, NULL);\n    for (int i = 0; i < NUM_WRITERS; i++)\n        pthread_create(&writers[i], NULL, writer, NULL);\n    for (int i = 0; i < NUM_READERS; i++)\n        pthread_join(readers[i], NULL);\n    for (int i = 0; i < NUM_WRITERS; i++)\n        pthread_join(writers[i], NULL);\n    sem_destroy(&wmutex);\n    sem_destroy(&empty);\n    lightswitch_destroy(&reader_switch);\n    return 0;\n}\n```",
         "answer": "答案：C（2分）"
       },
       "group": {
@@ -3465,7 +3465,7 @@
       "exam": "2025期末",
       "questionNo": "四 3",
       "summary": "服务员-厨师订单缓冲区的生产者-消费者",
-      "content": "3.（8分）在现代餐饮行业中，高效的订单处理系统至关重要。小红设计了一个模拟在线餐\n厅的订单处理流程，其中服务员接收顾客订单，厨师处理这些订单。为最大化效率，餐厅雇\n佣了多个服务员和厨师同时工作，他们通过一个共享的订单缓冲区进行协作。该场景遵循以\n下规则：\n 服务员有NUM_WAITERS名，厨师有NUM_COOKS名（NUM_WAITERS和NUM_COOKS\n都大于1），服务员和厨师使用同一个共享订单缓冲区；\n 每个服务员独立工作，每次将接收到的一个顾客订单放入共享的订单缓冲区内，当缓冲\n区满时，服务员必须等待，直到有空闲位置才能放入新订单；\n 每个厨师独立工作，每次从共享订单缓冲区内取出一个订单进行烹饪处理，当缓冲区为\n空时，厨师必须等待，直到有新的订单被放入；\n 订单缓冲区的容量为BUF_SIZE（BUF_SIZE大于0），用于存放待处理的订单，且初\n始情况下订单缓冲区为空。\n下面代码中，waiter函数为服务员线程，cook函数为厨师线程，init_buffer函\n数为初始化函数，会在系统启动时调用一次，略去其他部分代码和无关逻辑。\n请填写程序中对应空白处的代码：\n#define NUM_WAITERS 4 // 服务员数量\n#define NUM_COOKS 2 // 厨师数量\n#define BUF_SIZE 5 // 订单缓冲区容量\n```\ntypedef struct {\nchar* orders[BUF_SIZE];\nint in;\nint out;\nsem_t mutex;\nsem_t empty;\nsem_t full;\n} Buffer;\nBuffer buffer;\nvoid init_buffer() {\nbuffer.in = 0;\nbuffer.out = 0;\nsem_init(&buffer.mutex, 0, ______(1)_______);\nsem_init(&buffer.empty, 0, _______(2)_______);\nsem_init(&buffer.full, 0, 0);\n}\nvoid* waiter(void* arg) {\nwhile(1) {\n```\n// 接单逻辑\nchar* order = xxxx;\n// 将订单放入缓冲区\n```\n______(3)______;\n______(4)______;\nbuffer.orders[buffer.in] = order;\nbuffer.in = (buffer.in+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(5)______;\n```\n// 其他逻辑略去\n```\n}\n}\nvoid* cook(void* arg) {\nwhile(1) {\n```\n// 从缓冲区取出订单\n```\n______(6)______;\n______(7)______;\nchar* order = buffer.orders[buffer.out];\nbuffer.out = (buffer.out+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(8)______;\n```\n// 其他逻辑略去\n```\n}\n}\n```\n答案（每项 1 分）：\n(1) 1\n(2) BUF_SIZE\n(3) P(&buffer.empty)\n(4) P(&buffer.mutex)\n(5) V(&buffer.full)\n(6) P(&buffer.full)\n(7) P(&buffer.mutex)\n(8) V(&buffer.empty)",
+      "content": "3.（8 分）在现代餐饮行业中，服务员线程接收顾客订单，厨师线程处理订单。所有线程通过一个共享订单缓冲区协作：\n\n- 有 `NUM_WAITERS` 名服务员和 `NUM_COOKS` 名厨师，二者都大于 1；\n- 每个服务员每次向共享缓冲区放入一个订单；缓冲区满时必须等待；\n- 每个厨师每次从共享缓冲区取出一个订单；缓冲区空时必须等待；\n- 缓冲区容量为 `BUF_SIZE`，初始为空。\n\n下面的 `waiter` 是服务员线程，`cook` 是厨师线程，`init_buffer` 会在系统启动时调用一次。请填写代码中的八个空：\n\n```c\n#define NUM_WAITERS 4\n#define NUM_COOKS 2\n#define BUF_SIZE 5\n\ntypedef struct {\n    char *orders[BUF_SIZE];\n    int in;\n    int out;\n    sem_t mutex;\n    sem_t empty;\n    sem_t full;\n} Buffer;\n\nBuffer buffer;\n\nvoid init_buffer(void) {\n    buffer.in = 0;\n    buffer.out = 0;\n    sem_init(&buffer.mutex, 0, {{blank:init-mutex}});\n    sem_init(&buffer.empty, 0, {{blank:init-empty}});\n    sem_init(&buffer.full, 0, 0);\n}\n\nvoid *waiter(void *arg) {\n    while (1) {\n        /* 接单逻辑 */\n        char *order = xxxx;\n\n        /* 将订单放入缓冲区 */\n        {{blank:waiter-empty}};\n        {{blank:waiter-mutex}};\n        buffer.orders[buffer.in] = order;\n        buffer.in = (buffer.in + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:waiter-full}};\n\n        /* 其他逻辑略去 */\n    }\n}\n\nvoid *cook(void *arg) {\n    while (1) {\n        /* 从缓冲区取出订单 */\n        {{blank:cook-full}};\n        {{blank:cook-mutex}};\n        char *order = buffer.orders[buffer.out];\n        buffer.out = (buffer.out + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:cook-empty}};\n\n        /* 其他逻辑略去 */\n    }\n}\n```\n答案（每项 1 分）：\n\n1. `1`\n2. `BUF_SIZE`\n3. `P(&buffer.empty)`\n4. `P(&buffer.mutex)`\n5. `V(&buffer.full)`\n6. `P(&buffer.full)`\n7. `P(&buffer.mutex)`\n8. `V(&buffer.empty)`",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3485,18 +3485,162 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "3.（8分）在现代餐饮行业中，高效的订单处理系统至关重要。小红设计了一个模拟在线餐\n厅的订单处理流程，其中服务员接收顾客订单，厨师处理这些订单。为最大化效率，餐厅雇\n佣了多个服务员和厨师同时工作，他们通过一个共享的订单缓冲区进行协作。该场景遵循以\n下规则：\n 服务员有NUM_WAITERS名，厨师有NUM_COOKS名（NUM_WAITERS和NUM_COOKS\n都大于1），服务员和厨师使用同一个共享订单缓冲区；\n 每个服务员独立工作，每次将接收到的一个顾客订单放入共享的订单缓冲区内，当缓冲\n区满时，服务员必须等待，直到有空闲位置才能放入新订单；\n 每个厨师独立工作，每次从共享订单缓冲区内取出一个订单进行烹饪处理，当缓冲区为\n空时，厨师必须等待，直到有新的订单被放入；\n 订单缓冲区的容量为BUF_SIZE（BUF_SIZE大于0），用于存放待处理的订单，且初\n始情况下订单缓冲区为空。\n下面代码中，waiter函数为服务员线程，cook函数为厨师线程，init_buffer函\n数为初始化函数，会在系统启动时调用一次，略去其他部分代码和无关逻辑。\n请填写程序中对应空白处的代码：\n#define NUM_WAITERS 4 // 服务员数量\n#define NUM_COOKS 2 // 厨师数量\n#define BUF_SIZE 5 // 订单缓冲区容量\n```\ntypedef struct {\nchar* orders[BUF_SIZE];\nint in;\nint out;\nsem_t mutex;\nsem_t empty;\nsem_t full;\n} Buffer;\nBuffer buffer;\nvoid init_buffer() {\nbuffer.in = 0;\nbuffer.out = 0;\nsem_init(&buffer.mutex, 0, ______(1)_______);\nsem_init(&buffer.empty, 0, _______(2)_______);\nsem_init(&buffer.full, 0, 0);\n}\nvoid* waiter(void* arg) {\nwhile(1) {\n```\n// 接单逻辑\nchar* order = xxxx;\n// 将订单放入缓冲区\n```\n______(3)______;\n______(4)______;\nbuffer.orders[buffer.in] = order;\nbuffer.in = (buffer.in+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(5)______;\n```\n// 其他逻辑略去\n```\n}\n}\nvoid* cook(void* arg) {\nwhile(1) {\n```\n// 从缓冲区取出订单\n```\n______(6)______;\n______(7)______;\nchar* order = buffer.orders[buffer.out];\nbuffer.out = (buffer.out+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(8)______;\n```\n// 其他逻辑略去\n```\n}\n}\n```",
+        "stem": "3.（8 分）在现代餐饮行业中，服务员线程接收顾客订单，厨师线程处理订单。所有线程通过一个共享订单缓冲区协作：\n\n- 有 `NUM_WAITERS` 名服务员和 `NUM_COOKS` 名厨师，二者都大于 1；\n- 每个服务员每次向共享缓冲区放入一个订单；缓冲区满时必须等待；\n- 每个厨师每次从共享缓冲区取出一个订单；缓冲区空时必须等待；\n- 缓冲区容量为 `BUF_SIZE`，初始为空。\n\n下面的 `waiter` 是服务员线程，`cook` 是厨师线程，`init_buffer` 会在系统启动时调用一次。请填写代码中的八个空：\n\n```c\n#define NUM_WAITERS 4\n#define NUM_COOKS 2\n#define BUF_SIZE 5\n\ntypedef struct {\n    char *orders[BUF_SIZE];\n    int in;\n    int out;\n    sem_t mutex;\n    sem_t empty;\n    sem_t full;\n} Buffer;\n\nBuffer buffer;\n\nvoid init_buffer(void) {\n    buffer.in = 0;\n    buffer.out = 0;\n    sem_init(&buffer.mutex, 0, {{blank:init-mutex}});\n    sem_init(&buffer.empty, 0, {{blank:init-empty}});\n    sem_init(&buffer.full, 0, 0);\n}\n\nvoid *waiter(void *arg) {\n    while (1) {\n        /* 接单逻辑 */\n        char *order = xxxx;\n\n        /* 将订单放入缓冲区 */\n        {{blank:waiter-empty}};\n        {{blank:waiter-mutex}};\n        buffer.orders[buffer.in] = order;\n        buffer.in = (buffer.in + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:waiter-full}};\n\n        /* 其他逻辑略去 */\n    }\n}\n\nvoid *cook(void *arg) {\n    while (1) {\n        /* 从缓冲区取出订单 */\n        {{blank:cook-full}};\n        {{blank:cook-mutex}};\n        char *order = buffer.orders[buffer.out];\n        buffer.out = (buffer.out + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:cook-empty}};\n\n        /* 其他逻辑略去 */\n    }\n}\n```",
         "choices": [],
-        "answer": "答案（每项 1 分）：\n(1) 1\n(2) BUF_SIZE\n(3) P(&buffer.empty)\n(4) P(&buffer.mutex)\n(5) V(&buffer.full)\n(6) P(&buffer.full)\n(7) P(&buffer.mutex)\n(8) V(&buffer.empty)"
+        "answer": "答案（每项 1 分）：\n\n1. `1`\n2. `BUF_SIZE`\n3. `P(&buffer.empty)`\n4. `P(&buffer.mutex)`\n5. `V(&buffer.full)`\n6. `P(&buffer.full)`\n7. `P(&buffer.mutex)`\n8. `V(&buffer.empty)`",
+        "blankAnswers": [
+          {
+            "id": "init-mutex",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "init-empty",
+            "acceptedAnswers": [
+              "BUF_SIZE"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "waiter-empty",
+            "acceptedAnswers": [
+              "P(&buffer.empty)",
+              "P(&buffer.empty);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "waiter-mutex",
+            "acceptedAnswers": [
+              "P(&buffer.mutex)",
+              "P(&buffer.mutex);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "waiter-full",
+            "acceptedAnswers": [
+              "V(&buffer.full)",
+              "V(&buffer.full);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "cook-full",
+            "acceptedAnswers": [
+              "P(&buffer.full)",
+              "P(&buffer.full);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "cook-mutex",
+            "acceptedAnswers": [
+              "P(&buffer.mutex)",
+              "P(&buffer.mutex);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "cook-empty",
+            "acceptedAnswers": [
+              "V(&buffer.empty)",
+              "V(&buffer.empty);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "init-mutex",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "init-empty",
+            "acceptedAnswers": [
+              "BUF_SIZE"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "waiter-empty",
+            "acceptedAnswers": [
+              "P(&buffer.empty)",
+              "P(&buffer.empty);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "waiter-mutex",
+            "acceptedAnswers": [
+              "P(&buffer.mutex)",
+              "P(&buffer.mutex);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "waiter-full",
+            "acceptedAnswers": [
+              "V(&buffer.full)",
+              "V(&buffer.full);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "cook-full",
+            "acceptedAnswers": [
+              "P(&buffer.full)",
+              "P(&buffer.full);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "cook-mutex",
+            "acceptedAnswers": [
+              "P(&buffer.mutex)",
+              "P(&buffer.mutex);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "cook-empty",
+            "acceptedAnswers": [
+              "V(&buffer.empty)",
+              "V(&buffer.empty);"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3.（8分）在现代餐饮行业中，高效的订单处理系统至关重要。小红设计了一个模拟在线餐\n厅的订单处理流程，其中服务员接收顾客订单，厨师处理这些订单。为最大化效率，餐厅雇\n佣了多个服务员和厨师同时工作，他们通过一个共享的订单缓冲区进行协作。该场景遵循以\n下规则：\n 服务员有NUM_WAITERS名，厨师有NUM_COOKS名（NUM_WAITERS和NUM_COOKS\n都大于1），服务员和厨师使用同一个共享订单缓冲区；\n 每个服务员独立工作，每次将接收到的一个顾客订单放入共享的订单缓冲区内，当缓冲\n区满时，服务员必须等待，直到有空闲位置才能放入新订单；\n 每个厨师独立工作，每次从共享订单缓冲区内取出一个订单进行烹饪处理，当缓冲区为\n空时，厨师必须等待，直到有新的订单被放入；\n 订单缓冲区的容量为BUF_SIZE（BUF_SIZE大于0），用于存放待处理的订单，且初\n始情况下订单缓冲区为空。\n下面代码中，waiter函数为服务员线程，cook函数为厨师线程，init_buffer函\n数为初始化函数，会在系统启动时调用一次，略去其他部分代码和无关逻辑。\n请填写程序中对应空白处的代码：\n#define NUM_WAITERS 4 // 服务员数量\n#define NUM_COOKS 2 // 厨师数量\n#define BUF_SIZE 5 // 订单缓冲区容量\n```\ntypedef struct {\nchar* orders[BUF_SIZE];\nint in;\nint out;\nsem_t mutex;\nsem_t empty;\nsem_t full;\n} Buffer;\nBuffer buffer;\nvoid init_buffer() {\nbuffer.in = 0;\nbuffer.out = 0;\nsem_init(&buffer.mutex, 0, ______(1)_______);\nsem_init(&buffer.empty, 0, _______(2)_______);\nsem_init(&buffer.full, 0, 0);\n}\nvoid* waiter(void* arg) {\nwhile(1) {\n```\n// 接单逻辑\nchar* order = xxxx;\n// 将订单放入缓冲区\n```\n______(3)______;\n______(4)______;\nbuffer.orders[buffer.in] = order;\nbuffer.in = (buffer.in+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(5)______;\n```\n// 其他逻辑略去\n```\n}\n}\nvoid* cook(void* arg) {\nwhile(1) {\n```\n// 从缓冲区取出订单\n```\n______(6)______;\n______(7)______;\nchar* order = buffer.orders[buffer.out];\nbuffer.out = (buffer.out+1) % BUF_SIZE;\nV(&buffer.mutex);\n______(8)______;\n```\n// 其他逻辑略去\n```\n}\n}\n```",
-        "answer": "答案（每项 1 分）：\n(1) 1\n(2) BUF_SIZE\n(3) P(&buffer.empty)\n(4) P(&buffer.mutex)\n(5) V(&buffer.full)\n(6) P(&buffer.full)\n(7) P(&buffer.mutex)\n(8) V(&buffer.empty)"
+        "prompt": "3.（8 分）在现代餐饮行业中，服务员线程接收顾客订单，厨师线程处理订单。所有线程通过一个共享订单缓冲区协作：\n\n- 有 `NUM_WAITERS` 名服务员和 `NUM_COOKS` 名厨师，二者都大于 1；\n- 每个服务员每次向共享缓冲区放入一个订单；缓冲区满时必须等待；\n- 每个厨师每次从共享缓冲区取出一个订单；缓冲区空时必须等待；\n- 缓冲区容量为 `BUF_SIZE`，初始为空。\n\n下面的 `waiter` 是服务员线程，`cook` 是厨师线程，`init_buffer` 会在系统启动时调用一次。请填写代码中的八个空：\n\n```c\n#define NUM_WAITERS 4\n#define NUM_COOKS 2\n#define BUF_SIZE 5\n\ntypedef struct {\n    char *orders[BUF_SIZE];\n    int in;\n    int out;\n    sem_t mutex;\n    sem_t empty;\n    sem_t full;\n} Buffer;\n\nBuffer buffer;\n\nvoid init_buffer(void) {\n    buffer.in = 0;\n    buffer.out = 0;\n    sem_init(&buffer.mutex, 0, {{blank:init-mutex}});\n    sem_init(&buffer.empty, 0, {{blank:init-empty}});\n    sem_init(&buffer.full, 0, 0);\n}\n\nvoid *waiter(void *arg) {\n    while (1) {\n        /* 接单逻辑 */\n        char *order = xxxx;\n\n        /* 将订单放入缓冲区 */\n        {{blank:waiter-empty}};\n        {{blank:waiter-mutex}};\n        buffer.orders[buffer.in] = order;\n        buffer.in = (buffer.in + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:waiter-full}};\n\n        /* 其他逻辑略去 */\n    }\n}\n\nvoid *cook(void *arg) {\n    while (1) {\n        /* 从缓冲区取出订单 */\n        {{blank:cook-full}};\n        {{blank:cook-mutex}};\n        char *order = buffer.orders[buffer.out];\n        buffer.out = (buffer.out + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:cook-empty}};\n\n        /* 其他逻辑略去 */\n    }\n}\n```",
+        "answer": "答案（每项 1 分）：\n\n1. `1`\n2. `BUF_SIZE`\n3. `P(&buffer.empty)`\n4. `P(&buffer.mutex)`\n5. `V(&buffer.full)`\n6. `P(&buffer.full)`\n7. `P(&buffer.mutex)`\n8. `V(&buffer.empty)`"
       },
       "presentation": {
         "status": "ready",

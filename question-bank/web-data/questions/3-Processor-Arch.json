@@ -3095,7 +3095,7 @@
       "exam": "2020期中",
       "questionNo": "第一题 6",
       "summary": "PIPE 中 mem_addr 的 HCL 描述",
-      "content": "6、在Y86-64的PIPE实现中，仅考虑ICALL、IPOPQ、IPUSHQ、IRET指令，\n对mem_addr的HCL描述正确的是：\n```\n word mem_addr = [\n      M_icode in { ①, ② } : M_valE;\nalA;\n ];\n```\nA. ①IPUSHQ  ②ICALL  ③IPOPQ  ④IRET\nB. ①IPUSHQ  ②IRET   ③ICALL  ④IRET\nC. ①IPUSHQ  ②IPOPQ  ③IRET  ④ICALL\nD. ①IPUSHQ  ②IRET  ③IPOPQ  ④ICALL\n答案：A",
+      "content": "6. 在 Y86-64 的 PIPE 实现中，仅考虑 `ICALL`、`IPOPQ`、`IPUSHQ`、`IRET` 指令，对 `mem_addr` 的 HCL 描述如下：\n\n```hcl\nword mem_addr = [\n    M_icode in { ①, ② } : M_valE;\n    M_icode in { ③, ④ } : M_valA;\n];\n```\n\n其中四个空应如何填写？\nA. ① `IPUSHQ`　② `ICALL`　③ `IPOPQ`　④ `IRET`\nB. ① `IPUSHQ`　② `IRET`　③ `ICALL`　④ `IRET`\nC. ① `IPUSHQ`　② `IPOPQ`　③ `IRET`　④ `ICALL`\nD. ① `IPUSHQ`　② `IRET`　③ `IPOPQ`　④ `ICALL`\n答案：A",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3117,23 +3117,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "6、在Y86-64的PIPE实现中，仅考虑ICALL、IPOPQ、IPUSHQ、IRET指令，\n对mem_addr的HCL描述正确的是：\n```\n word mem_addr = [\n      M_icode in { ①, ② } : M_valE;\nalA;\n ];\n```",
+        "stem": "6. 在 Y86-64 的 PIPE 实现中，仅考虑 `ICALL`、`IPOPQ`、`IPUSHQ`、`IRET` 指令，对 `mem_addr` 的 HCL 描述如下：\n\n```hcl\nword mem_addr = [\n    M_icode in { ①, ② } : M_valE;\n    M_icode in { ③, ④ } : M_valA;\n];\n```\n\n其中四个空应如何填写？",
         "choices": [
           {
             "key": "A",
-            "content": "①IPUSHQ  ②ICALL  ③IPOPQ  ④IRET"
+            "content": "① `IPUSHQ`　② `ICALL`　③ `IPOPQ`　④ `IRET`"
           },
           {
             "key": "B",
-            "content": "①IPUSHQ  ②IRET   ③ICALL  ④IRET"
+            "content": "① `IPUSHQ`　② `IRET`　③ `ICALL`　④ `IRET`"
           },
           {
             "key": "C",
-            "content": "①IPUSHQ  ②IPOPQ  ③IRET  ④ICALL"
+            "content": "① `IPUSHQ`　② `IPOPQ`　③ `IRET`　④ `ICALL`"
           },
           {
             "key": "D",
-            "content": "①IPUSHQ  ②IRET  ③IPOPQ  ④ICALL"
+            "content": "① `IPUSHQ`　② `IRET`　③ `IPOPQ`　④ `ICALL`"
           }
         ],
         "answer": "答案：A"
@@ -3144,19 +3144,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "①IPUSHQ  ②ICALL  ③IPOPQ  ④IRET"
+            "content": "① `IPUSHQ`　② `ICALL`　③ `IPOPQ`　④ `IRET`"
           },
           {
             "id": "B",
-            "content": "①IPUSHQ  ②IRET   ③ICALL  ④IRET"
+            "content": "① `IPUSHQ`　② `IRET`　③ `ICALL`　④ `IRET`"
           },
           {
             "id": "C",
-            "content": "①IPUSHQ  ②IPOPQ  ③IRET  ④ICALL"
+            "content": "① `IPUSHQ`　② `IPOPQ`　③ `IRET`　④ `ICALL`"
           },
           {
             "id": "D",
-            "content": "①IPUSHQ  ②IRET  ③IPOPQ  ④ICALL"
+            "content": "① `IPUSHQ`　② `IRET`　③ `IPOPQ`　④ `ICALL`"
           }
         ],
         "correctChoiceIds": [
@@ -3165,7 +3165,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "6、在Y86-64的PIPE实现中，仅考虑ICALL、IPOPQ、IPUSHQ、IRET指令，\n对mem_addr的HCL描述正确的是：\n```\n word mem_addr = [\n      M_icode in { ①, ② } : M_valE;\nalA;\n ];\n```",
+        "prompt": "6. 在 Y86-64 的 PIPE 实现中，仅考虑 `ICALL`、`IPOPQ`、`IPUSHQ`、`IRET` 指令，对 `mem_addr` 的 HCL 描述如下：\n\n```hcl\nword mem_addr = [\n    M_icode in { ①, ② } : M_valE;\n    M_icode in { ③, ④ } : M_valA;\n];\n```\n\n其中四个空应如何填写？",
         "answer": "答案：A"
       },
       "presentation": {
@@ -3183,7 +3183,7 @@
       "exam": "2020期中",
       "questionNo": "第一题 7",
       "summary": "SEQ/PIPE 预测策略、CPI 与流水线划分",
-      "content": "7、下列说法正确的是：\n选择（never taken）的策略要略好。\n选项A，SEQ机器无所谓转移预测\n选项D，rrmovq会带来潜在的数据相关\nA. 在SEQ机器中，我们采用预测跳转总是选择（always taken）的策略比从\nB. 流水级划分应尽量均衡，不均衡的流水线会增加控制冒险。\nC.  如果一台机器的CPI小于1，则它必然不是普通流水线结构。\nD.  由于rrmovq %rax, %rax不影响标记位，所以可使用其代替nop指令。\n答案：C",
+      "content": "7. 下列说法正确的是：\nA. 在 SEQ 机器中，采用预测跳转总是选择（always taken）的策略，比从不选择（never taken）的策略要略好\nB. 流水级划分应尽量均衡，不均衡的流水线会增加控制冒险\nC. 如果一台机器的 CPI 小于 1，则它必然不是普通流水线结构\nD. 由于 `rrmovq %rax, %rax` 不影响标记位，所以可使用其代替 `nop` 指令\n答案：C\n\nSEQ 机器不涉及分支预测，故 A 错；流水级不均衡主要限制时钟周期，不会直接增加控制冒险，故 B 错；普通标量流水线每周期至多完成一条指令，CPI 不小于 1，故 C 正确；`rrmovq` 仍会读写寄存器并引入数据相关，不能等同于 `nop`，故 D 错。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3205,26 +3205,26 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "7、下列说法正确的是：\n选择（never taken）的策略要略好。\n选项A，SEQ机器无所谓转移预测\n选项D，rrmovq会带来潜在的数据相关",
+        "stem": "7. 下列说法正确的是：",
         "choices": [
           {
             "key": "A",
-            "content": "在SEQ机器中，我们采用预测跳转总是选择（always taken）的策略比从"
+            "content": "在 SEQ 机器中，采用预测跳转总是选择（always taken）的策略，比从不选择（never taken）的策略要略好"
           },
           {
             "key": "B",
-            "content": "流水级划分应尽量均衡，不均衡的流水线会增加控制冒险。"
+            "content": "流水级划分应尽量均衡，不均衡的流水线会增加控制冒险"
           },
           {
             "key": "C",
-            "content": "如果一台机器的CPI小于1，则它必然不是普通流水线结构。"
+            "content": "如果一台机器的 CPI 小于 1，则它必然不是普通流水线结构"
           },
           {
             "key": "D",
-            "content": "由于rrmovq %rax, %rax不影响标记位，所以可使用其代替nop指令。"
+            "content": "由于 `rrmovq %rax, %rax` 不影响标记位，所以可使用其代替 `nop` 指令"
           }
         ],
-        "answer": "答案：C"
+        "answer": "答案：C\n\nSEQ 机器不涉及分支预测，故 A 错；流水级不均衡主要限制时钟周期，不会直接增加控制冒险，故 B 错；普通标量流水线每周期至多完成一条指令，CPI 不小于 1，故 C 正确；`rrmovq` 仍会读写寄存器并引入数据相关，不能等同于 `nop`，故 D 错。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -3232,19 +3232,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "在SEQ机器中，我们采用预测跳转总是选择（always taken）的策略比从"
+            "content": "在 SEQ 机器中，采用预测跳转总是选择（always taken）的策略，比从不选择（never taken）的策略要略好"
           },
           {
             "id": "B",
-            "content": "流水级划分应尽量均衡，不均衡的流水线会增加控制冒险。"
+            "content": "流水级划分应尽量均衡，不均衡的流水线会增加控制冒险"
           },
           {
             "id": "C",
-            "content": "如果一台机器的CPI小于1，则它必然不是普通流水线结构。"
+            "content": "如果一台机器的 CPI 小于 1，则它必然不是普通流水线结构"
           },
           {
             "id": "D",
-            "content": "由于rrmovq %rax, %rax不影响标记位，所以可使用其代替nop指令。"
+            "content": "由于 `rrmovq %rax, %rax` 不影响标记位，所以可使用其代替 `nop` 指令"
           }
         ],
         "correctChoiceIds": [
@@ -3253,8 +3253,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "7、下列说法正确的是：\n选择（never taken）的策略要略好。\n选项A，SEQ机器无所谓转移预测\n选项D，rrmovq会带来潜在的数据相关",
-        "answer": "答案：C"
+        "prompt": "7. 下列说法正确的是：",
+        "answer": "答案：C\n\nSEQ 机器不涉及分支预测，故 A 错；流水级不均衡主要限制时钟周期，不会直接增加控制冒险，故 B 错；普通标量流水线每周期至多完成一条指令，CPI 不小于 1，故 C 正确；`rrmovq` 仍会读写寄存器并引入数据相关，不能等同于 `nop`，故 D 错。"
       },
       "presentation": {
         "status": "ready",
@@ -7937,7 +7937,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第9讲 2",
       "summary": "Y86-64 mrmovq 为何不写成 D(rA),rB（指令编码设计）",
-      "content": "2. （2分）Y86-64中的这两条指令：\n```\nrmmovq rA,D(rB)\nmrmovq D(rB),rA\n```\n第2条指令为什么不设计成mrmovq D(rA),rB？这样都是rA在前rB在后，看起来\n更加规整。\n答：\n硬件电路上都通过rB的通路计算出地址，电路更为简单",
+      "content": "2. （2分）Y86-64中的这两条指令：\n```asm\nrmmovq rA,D(rB)\nmrmovq D(rB),rA\n```\n第2条指令为什么不设计成mrmovq D(rA),rB？这样都是rA在前rB在后，看起来\n更加规整。\n答：\n硬件电路上都通过rB的通路计算出地址，电路更为简单",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -7957,7 +7957,7 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "2. （2分）Y86-64中的这两条指令：\n```\nrmmovq rA,D(rB)\nmrmovq D(rB),rA\n```\n第2条指令为什么不设计成mrmovq D(rA),rB？这样都是rA在前rB在后，看起来\n更加规整。\n答：",
+        "stem": "2. （2分）Y86-64中的这两条指令：\n```asm\nrmmovq rA,D(rB)\nmrmovq D(rB),rA\n```\n第2条指令为什么不设计成mrmovq D(rA),rB？这样都是rA在前rB在后，看起来\n更加规整。\n答：",
         "choices": [],
         "answer": "硬件电路上都通过rB的通路计算出地址，电路更为简单"
       },
@@ -7967,7 +7967,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2. （2分）Y86-64中的这两条指令：\n```\nrmmovq rA,D(rB)\nmrmovq D(rB),rA\n```\n第2条指令为什么不设计成mrmovq D(rA),rB？这样都是rA在前rB在后，看起来\n更加规整。\n答：",
+        "prompt": "2. （2分）Y86-64中的这两条指令：\n```asm\nrmmovq rA,D(rB)\nmrmovq D(rB),rA\n```\n第2条指令为什么不设计成mrmovq D(rA),rB？这样都是rA在前rB在后，看起来\n更加规整。\n答：",
         "answer": "硬件电路上都通过rB的通路计算出地址，电路更为简单"
       },
       "presentation": {
@@ -8081,7 +8081,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第10讲 5",
       "summary": "Y86-64 popq 指令编码格式与操作步骤补全",
-      "content": "5. （8分）Y86-64 的 `popq rA` 指令编码为 `b 0 rA 8`。根据 popq 指令的操作，补全下表（共需填 8 行 9 空）：\n\n| 阶段 | 计算（popq rA） |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`（已给） |\n|  | `rA:rB ← M1[{{blank:q5-fetch-address}}]` |\n|  | `valP ← PC+2`（已给） |\n| Decode | `valA ← R[{{blank:q5-src-a}}]` |\n|  | `valB ← R[{{blank:q5-src-b}}]` |\n| Execute | `valE ← {{blank:q5-alu-a}} + {{blank:q5-alu-b}}` |\n| Memory | `{{blank:q5-memory-result}} ← M8[valA]` |\n| Write back | `R[{{blank:q5-dst-e}}] ← valE` |\n|  | `R[{{blank:q5-dst-m}}] ← valM` |\n| PC update | `PC ← {{blank:q5-next-pc}}` |\n答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+      "content": "5. （8分）Y86-64 的 `popq rA` 指令编码为 `b 0 rA 8`。根据 popq 指令的操作，补全下表（共需填 8 行 9 空）：\n\n| 阶段 | 计算（popq rA） |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`（已给） |\n|  | `rA:rB ← M1[{{blank:q5-fetch-address}}]` |\n|  | `valP ← PC+2`（已给） |\n| Decode | `valA ← R[{{blank:q5-src-a}}]` |\n|  | `valB ← R[{{blank:q5-src-b}}]` |\n| Execute | `valE ← {{blank:q5-alu-a}} + {{blank:q5-alu-b}}` |\n| Memory | `{{blank:q5-memory-result}} ← M8[valA]` |\n| Write back | `R[{{blank:q5-dst-e}}] ← valE` |\n|  | `R[{{blank:q5-dst-m}}] ← valM` |\n| PC update | `PC ← {{blank:q5-next-pc}}` |\n答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```text\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8103,7 +8103,7 @@
         "selection": null,
         "stem": "5. （8分）Y86-64 的 `popq rA` 指令编码为 `b 0 rA 8`。根据 popq 指令的操作，补全下表（共需填 8 行 9 空）：\n\n| 阶段 | 计算（popq rA） |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`（已给） |\n|  | `rA:rB ← M1[{{blank:q5-fetch-address}}]` |\n|  | `valP ← PC+2`（已给） |\n| Decode | `valA ← R[{{blank:q5-src-a}}]` |\n|  | `valB ← R[{{blank:q5-src-b}}]` |\n| Execute | `valE ← {{blank:q5-alu-a}} + {{blank:q5-alu-b}}` |\n| Memory | `{{blank:q5-memory-result}} ← M8[valA]` |\n| Write back | `R[{{blank:q5-dst-e}}] ← valE` |\n|  | `R[{{blank:q5-dst-m}}] ← valM` |\n| PC update | `PC ← {{blank:q5-next-pc}}` |",
         "choices": [],
-        "answer": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+        "answer": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```text\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "interaction": {
         "kind": "fill",
@@ -8112,7 +8112,7 @@
       "contentV3": {
         "format": "markdown",
         "prompt": "5. （8分）Y86-64 的 `popq rA` 指令编码为 `b 0 rA 8`。根据 popq 指令的操作，补全下表（共需填 8 行 9 空）：\n\n| 阶段 | 计算（popq rA） |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`（已给） |\n|  | `rA:rB ← M1[{{blank:q5-fetch-address}}]` |\n|  | `valP ← PC+2`（已给） |\n| Decode | `valA ← R[{{blank:q5-src-a}}]` |\n|  | `valB ← R[{{blank:q5-src-b}}]` |\n| Execute | `valE ← {{blank:q5-alu-a}} + {{blank:q5-alu-b}}` |\n| Memory | `{{blank:q5-memory-result}} ← M8[valA]` |\n| Write back | `R[{{blank:q5-dst-e}}] ← valE` |\n|  | `R[{{blank:q5-dst-m}}] ← valM` |\n| PC update | `PC ← {{blank:q5-next-pc}}` |",
-        "answer": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+        "answer": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```text\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 popq rA 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。popq 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：popq 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
       },
       "presentation": {
         "status": "ready",
@@ -8129,7 +8129,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第10讲 6",
       "summary": "SEQ 中 aluA 信号生成逻辑的 HCL 补全",
-      "content": "6. （8分）以下是SEQ处理器中ALU的A口输入端信号（aluA）生成逻辑的分析，只列\n出了部分指令。根据各指令功能，并参考下面已经给出的信息，补全空缺（表格中2\n空，HCL代码中6空）。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p5-q6-aluseq-table.png)\n\n```\nint aluA = [\nicode in { IRRMOVQ,\n} : valA;\nicode in { IIRMOVQ,\n, IMRMOVQ } : valC;\nicode in {\n;\nicode in {\n;\n# Other instructions don't need ALU\n];\n```\nIOPQ\nIRMMOVQ\nICALL, IPUSHQ } : -8\nIRET, IPOPQ } : 8",
+      "content": "6. （8分）以下是SEQ处理器中ALU的A口输入端信号（aluA）生成逻辑的分析，只列\n出了部分指令。根据各指令功能，并参考下面已经给出的信息，补全空缺（表格中2\n空，HCL代码中6空）。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p5-q6-aluseq-table.png)\n\n```c\nint aluA = [\n    icode in { IRRMOVQ,\n    } : valA;\n    icode in { IIRMOVQ,\n    , IMRMOVQ } : valC;\n    icode in {\n    ;\n    icode in {\n    ;\n    # Other instructions don't need ALU\n];\n```\n```c\nIOPQ\nIRMMOVQ\nICALL, IPUSHQ } : -8\nIRET, IPOPQ } : 8\n```",
       "assets": [
         "assets/阶段测验/2025第2次阶段测验-带答案/p5-q6-aluseq-table.png"
       ],
@@ -8151,9 +8151,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "6. （8分）以下是SEQ处理器中ALU的A口输入端信号（aluA）生成逻辑的分析，只列\n出了部分指令。根据各指令功能，并参考下面已经给出的信息，补全空缺（表格中2\n空，HCL代码中6空）。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p5-q6-aluseq-table.png)\n\n```\nint aluA = [\nicode in { IRRMOVQ,\n} : valA;\nicode in { IIRMOVQ,\n, IMRMOVQ } : valC;\nicode in {\n;\nicode in {\n;\n# Other instructions don't need ALU\n];\n```",
+        "stem": "6. （8分）以下是SEQ处理器中ALU的A口输入端信号（aluA）生成逻辑的分析，只列\n出了部分指令。根据各指令功能，并参考下面已经给出的信息，补全空缺（表格中2\n空，HCL代码中6空）。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p5-q6-aluseq-table.png)\n\n```c\nint aluA = [\n    icode in { IRRMOVQ,\n    } : valA;\n    icode in { IIRMOVQ,\n    , IMRMOVQ } : valC;\n    icode in {\n    ;\n    icode in {\n    ;\n    # Other instructions don't need ALU\n];\n```",
         "choices": [],
-        "answer": "IOPQ\nIRMMOVQ\nICALL, IPUSHQ } : -8\nIRET, IPOPQ } : 8"
+        "answer": "```c\nIOPQ\nIRMMOVQ\nICALL, IPUSHQ } : -8\nIRET, IPOPQ } : 8\n```"
       },
       "interaction": {
         "kind": "short-answer",
@@ -8161,8 +8161,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "6. （8分）以下是SEQ处理器中ALU的A口输入端信号（aluA）生成逻辑的分析，只列\n出了部分指令。根据各指令功能，并参考下面已经给出的信息，补全空缺（表格中2\n空，HCL代码中6空）。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p5-q6-aluseq-table.png)\n\n```\nint aluA = [\nicode in { IRRMOVQ,\n} : valA;\nicode in { IIRMOVQ,\n, IMRMOVQ } : valC;\nicode in {\n;\nicode in {\n;\n# Other instructions don't need ALU\n];\n```",
-        "answer": "IOPQ\nIRMMOVQ\nICALL, IPUSHQ } : -8\nIRET, IPOPQ } : 8"
+        "prompt": "6. （8分）以下是SEQ处理器中ALU的A口输入端信号（aluA）生成逻辑的分析，只列\n出了部分指令。根据各指令功能，并参考下面已经给出的信息，补全空缺（表格中2\n空，HCL代码中6空）。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p5-q6-aluseq-table.png)\n\n```c\nint aluA = [\n    icode in { IRRMOVQ,\n    } : valA;\n    icode in { IIRMOVQ,\n    , IMRMOVQ } : valC;\n    icode in {\n    ;\n    icode in {\n    ;\n    # Other instructions don't need ALU\n];\n```",
+        "answer": "```c\nIOPQ\nIRMMOVQ\nICALL, IPUSHQ } : -8\nIRET, IPOPQ } : 8\n```"
       },
       "presentation": {
         "status": "ready",
@@ -8229,7 +8229,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第11讲 8",
       "summary": "PIPE 上 addq 的数据冒险检测与数据前递",
-      "content": "8. （6分）阅读下面这段Y86-64汇编代码\n```\n1 irmovq $1,%rax\n2 irmovq $2,%rax\n3 irmovq $3,%rdx\n4 addq %rax,%rdx\n```\n当这段代码在 PIPE 处理器上运行时，当 addq 指令在流水级 {{blank:q8-detect-stage}} 阶段时，会检测到数据冒险。此时运用了数据前递技术，其中在流水级 {{blank:q8-forward-stage}} 阶段的指令前递数据 {{blank:q8-forward-value}}，作为操作数 %rax 的值。\n译码（D/Decode）；M；2",
+      "content": "8. （6分）阅读下面这段Y86-64汇编代码\n```asm\n    1 irmovq $1,%rax\n    2 irmovq $2,%rax\n    3 irmovq $3,%rdx\n    4 addq %rax,%rdx\n```\n当这段代码在 PIPE 处理器上运行时，当 addq 指令在流水级 {{blank:q8-detect-stage}} 阶段时，会检测到数据冒险。此时运用了数据前递技术，其中在流水级 {{blank:q8-forward-stage}} 阶段的指令前递数据 {{blank:q8-forward-value}}，作为操作数 %rax 的值。\n译码（D/Decode）；M；2",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8249,7 +8249,7 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "8. （6分）阅读下面这段Y86-64汇编代码\n```\n1 irmovq $1,%rax\n2 irmovq $2,%rax\n3 irmovq $3,%rdx\n4 addq %rax,%rdx\n```\n当这段代码在 PIPE 处理器上运行时，当 addq 指令在流水级 {{blank:q8-detect-stage}} 阶段时，会检测到数据冒险。此时运用了数据前递技术，其中在流水级 {{blank:q8-forward-stage}} 阶段的指令前递数据 {{blank:q8-forward-value}}，作为操作数 %rax 的值。",
+        "stem": "8. （6分）阅读下面这段Y86-64汇编代码\n```asm\n    1 irmovq $1,%rax\n    2 irmovq $2,%rax\n    3 irmovq $3,%rdx\n    4 addq %rax,%rdx\n```\n当这段代码在 PIPE 处理器上运行时，当 addq 指令在流水级 {{blank:q8-detect-stage}} 阶段时，会检测到数据冒险。此时运用了数据前递技术，其中在流水级 {{blank:q8-forward-stage}} 阶段的指令前递数据 {{blank:q8-forward-value}}，作为操作数 %rax 的值。",
         "choices": [],
         "answer": "译码（D/Decode）；M；2"
       },
@@ -8259,7 +8259,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "8. （6分）阅读下面这段Y86-64汇编代码\n```\n1 irmovq $1,%rax\n2 irmovq $2,%rax\n3 irmovq $3,%rdx\n4 addq %rax,%rdx\n```\n当这段代码在 PIPE 处理器上运行时，当 addq 指令在流水级 {{blank:q8-detect-stage}} 阶段时，会检测到数据冒险。此时运用了数据前递技术，其中在流水级 {{blank:q8-forward-stage}} 阶段的指令前递数据 {{blank:q8-forward-value}}，作为操作数 %rax 的值。",
+        "prompt": "8. （6分）阅读下面这段Y86-64汇编代码\n```asm\n    1 irmovq $1,%rax\n    2 irmovq $2,%rax\n    3 irmovq $3,%rdx\n    4 addq %rax,%rdx\n```\n当这段代码在 PIPE 处理器上运行时，当 addq 指令在流水级 {{blank:q8-detect-stage}} 阶段时，会检测到数据冒险。此时运用了数据前递技术，其中在流水级 {{blank:q8-forward-stage}} 阶段的指令前递数据 {{blank:q8-forward-value}}，作为操作数 %rax 的值。",
         "answer": "译码（D/Decode）；M；2"
       },
       "presentation": {
@@ -8277,7 +8277,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第11讲 9",
       "summary": "写 Load-use 相关代码并说明前递能否解决",
-      "content": "9. （4分）写出一段存在Load-use相关的Y86-64汇编代码（要求代码简洁明了），\n并说明能否用数据前递技术解决，为什么？\n```\n```\n答：代码示例如下（2分）：\nmrmovq 0(%rdx),%rax\naddq %rbx,%rax\n注意：代码不用一模一样，关键点是前一条指令读内存到某个寄存器（这里是rax)，后一条指令要\n读取这个寄存器\n“Load-use”不能用数据前递技术解决，因为上面的add指令在译码阶段就要“use”，\n这时前一条指令还在执行阶段，还有一个周期才能到访存阶段进行“load”。（2分）\n注意：如果回答用数据前递技术可以部分解决，也算对。",
+      "content": "9. （4分）写出一段存在Load-use相关的Y86-64汇编代码（要求代码简洁明了），\n并说明能否用数据前递技术解决，为什么？\n答：代码示例如下（2分）：\n```asm\nmrmovq 0(%rdx),%rax\naddq %rbx,%rax\n```\n注意：代码不用一模一样，关键点是前一条指令读内存到某个寄存器（这里是rax)，后一条指令要\n读取这个寄存器\n“Load-use”不能用数据前递技术解决，因为上面的add指令在译码阶段就要“use”，\n这时前一条指令还在执行阶段，还有一个周期才能到访存阶段进行“load”。（2分）\n注意：如果回答用数据前递技术可以部分解决，也算对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8297,9 +8297,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "9. （4分）写出一段存在Load-use相关的Y86-64汇编代码（要求代码简洁明了），\n并说明能否用数据前递技术解决，为什么？\n```\n```",
+        "stem": "9. （4分）写出一段存在Load-use相关的Y86-64汇编代码（要求代码简洁明了），\n并说明能否用数据前递技术解决，为什么？",
         "choices": [],
-        "answer": "答：代码示例如下（2分）：\nmrmovq 0(%rdx),%rax\naddq %rbx,%rax\n注意：代码不用一模一样，关键点是前一条指令读内存到某个寄存器（这里是rax)，后一条指令要\n读取这个寄存器\n“Load-use”不能用数据前递技术解决，因为上面的add指令在译码阶段就要“use”，\n这时前一条指令还在执行阶段，还有一个周期才能到访存阶段进行“load”。（2分）\n注意：如果回答用数据前递技术可以部分解决，也算对。"
+        "answer": "答：代码示例如下（2分）：\n```asm\nmrmovq 0(%rdx),%rax\naddq %rbx,%rax\n```\n注意：代码不用一模一样，关键点是前一条指令读内存到某个寄存器（这里是rax)，后一条指令要\n读取这个寄存器\n“Load-use”不能用数据前递技术解决，因为上面的add指令在译码阶段就要“use”，\n这时前一条指令还在执行阶段，还有一个周期才能到访存阶段进行“load”。（2分）\n注意：如果回答用数据前递技术可以部分解决，也算对。"
       },
       "interaction": {
         "kind": "short-answer",
@@ -8307,8 +8307,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "9. （4分）写出一段存在Load-use相关的Y86-64汇编代码（要求代码简洁明了），\n并说明能否用数据前递技术解决，为什么？\n```\n```",
-        "answer": "答：代码示例如下（2分）：\nmrmovq 0(%rdx),%rax\naddq %rbx,%rax\n注意：代码不用一模一样，关键点是前一条指令读内存到某个寄存器（这里是rax)，后一条指令要\n读取这个寄存器\n“Load-use”不能用数据前递技术解决，因为上面的add指令在译码阶段就要“use”，\n这时前一条指令还在执行阶段，还有一个周期才能到访存阶段进行“load”。（2分）\n注意：如果回答用数据前递技术可以部分解决，也算对。"
+        "prompt": "9. （4分）写出一段存在Load-use相关的Y86-64汇编代码（要求代码简洁明了），\n并说明能否用数据前递技术解决，为什么？",
+        "answer": "答：代码示例如下（2分）：\n```asm\nmrmovq 0(%rdx),%rax\naddq %rbx,%rax\n```\n注意：代码不用一模一样，关键点是前一条指令读内存到某个寄存器（这里是rax)，后一条指令要\n读取这个寄存器\n“Load-use”不能用数据前递技术解决，因为上面的add指令在译码阶段就要“use”，\n这时前一条指令还在执行阶段，还有一个周期才能到访存阶段进行“load”。（2分）\n注意：如果回答用数据前递技术可以部分解决，也算对。"
       },
       "presentation": {
         "status": "ready",
@@ -8325,7 +8325,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第11讲 10",
       "summary": "写 Load-use 与 ret 组合的 Y86-64 代码",
-      "content": "10.（2分）写出一段存在Load-use相关和ret组合的Y86-64汇编代码（要求代码简\n洁明了）。\n```\n```\n答：代码示例如下（2分）：\nmrmovq 0(%rdx),%rsp\nret\n注意：代码不用一模一样，关键点是前一条指令读内存到rsp寄存器，后一条指令是ret",
+      "content": "10.（2分）写出一段存在Load-use相关和ret组合的Y86-64汇编代码（要求代码简\n洁明了）。\n答：代码示例如下（2分）：\n```asm\nmrmovq 0(%rdx),%rsp\nret\n```\n注意：代码不用一模一样，关键点是前一条指令读内存到rsp寄存器，后一条指令是ret",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -8345,9 +8345,9 @@
       "layout": {
         "mode": "short",
         "selection": null,
-        "stem": "10.（2分）写出一段存在Load-use相关和ret组合的Y86-64汇编代码（要求代码简\n洁明了）。\n```\n```",
+        "stem": "10.（2分）写出一段存在Load-use相关和ret组合的Y86-64汇编代码（要求代码简\n洁明了）。",
         "choices": [],
-        "answer": "答：代码示例如下（2分）：\nmrmovq 0(%rdx),%rsp\nret\n注意：代码不用一模一样，关键点是前一条指令读内存到rsp寄存器，后一条指令是ret"
+        "answer": "答：代码示例如下（2分）：\n```asm\nmrmovq 0(%rdx),%rsp\nret\n```\n注意：代码不用一模一样，关键点是前一条指令读内存到rsp寄存器，后一条指令是ret"
       },
       "interaction": {
         "kind": "short-answer",
@@ -8355,8 +8355,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "10.（2分）写出一段存在Load-use相关和ret组合的Y86-64汇编代码（要求代码简\n洁明了）。\n```\n```",
-        "answer": "答：代码示例如下（2分）：\nmrmovq 0(%rdx),%rsp\nret\n注意：代码不用一模一样，关键点是前一条指令读内存到rsp寄存器，后一条指令是ret"
+        "prompt": "10.（2分）写出一段存在Load-use相关和ret组合的Y86-64汇编代码（要求代码简\n洁明了）。",
+        "answer": "答：代码示例如下（2分）：\n```asm\nmrmovq 0(%rdx),%rsp\nret\n```\n注意：代码不用一模一样，关键点是前一条指令读内存到rsp寄存器，后一条指令是ret"
       },
       "presentation": {
         "status": "ready",
