@@ -447,7 +447,7 @@
       "exam": "2012期中",
       "questionNo": "Problem A 13",
       "summary": "mov 0x10(%rax,%rcx,4),%rdx 的 C 等价形式",
-      "content": "13. What is the C equivalent of `mov 0x10 (%rax,%rcx,4), %rdx`　**(2pts)**\n   a) rdx = rax + rcx + 4 + 10\n   b) *(rax + rcx + 4 + 10) = rdx\n   c) rdx = \\*(rax + rcx\\*4 + 0x10)\n   d) rdx = *(rax + rcx + 4 + 0x10)\n**答案：C**",
+      "content": "13. What is the C equivalent of `mov 0x10(%rax,%rcx,4), %rdx`? **(2pts)**\nA. `rdx = rax + rcx + 4 + 10`\nB. `*(rax + rcx + 4 + 10) = rdx`\nC. `rdx = *(rax + rcx*4 + 0x10)`\nD. `rdx = *(rax + rcx + 4 + 0x10)`\n答案：C\n\n解析：源操作数读取地址 `rax + rcx*4 + 0x10` 处的内存，再把读取的值写入 `rdx`。这里的 `*` 是解引用或乘法运算符。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -467,26 +467,26 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "13. What is the C equivalent of `mov 0x10 (%rax,%rcx,4), %rdx`　**(2pts)**",
+        "stem": "13. What is the C equivalent of `mov 0x10(%rax,%rcx,4), %rdx`? **(2pts)**",
         "choices": [
           {
             "key": "A",
-            "content": "rdx = rax + rcx + 4 + 10"
+            "content": "`rdx = rax + rcx + 4 + 10`"
           },
           {
             "key": "B",
-            "content": "*(rax + rcx + 4 + 10) = rdx"
+            "content": "`*(rax + rcx + 4 + 10) = rdx`"
           },
           {
             "key": "C",
-            "content": "rdx = \\*(rax + rcx\\*4 + 0x10)"
+            "content": "`rdx = *(rax + rcx*4 + 0x10)`"
           },
           {
             "key": "D",
-            "content": "rdx = *(rax + rcx + 4 + 0x10)"
+            "content": "`rdx = *(rax + rcx + 4 + 0x10)`"
           }
         ],
-        "answer": "**答案：C**"
+        "answer": "答案：C\n\n解析：源操作数读取地址 `rax + rcx*4 + 0x10` 处的内存，再把读取的值写入 `rdx`。这里的 `*` 是解引用或乘法运算符。"
       },
       "interaction": {
         "kind": "single-choice",
@@ -494,19 +494,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "rdx = rax + rcx + 4 + 10"
+            "content": "`rdx = rax + rcx + 4 + 10`"
           },
           {
             "id": "B",
-            "content": "*(rax + rcx + 4 + 10) = rdx"
+            "content": "`*(rax + rcx + 4 + 10) = rdx`"
           },
           {
             "id": "C",
-            "content": "rdx = \\*(rax + rcx\\*4 + 0x10)"
+            "content": "`rdx = *(rax + rcx*4 + 0x10)`"
           },
           {
             "id": "D",
-            "content": "rdx = *(rax + rcx + 4 + 0x10)"
+            "content": "`rdx = *(rax + rcx + 4 + 0x10)`"
           }
         ],
         "correctChoiceIds": [
@@ -515,8 +515,8 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "13. What is the C equivalent of `mov 0x10 (%rax,%rcx,4), %rdx`　**(2pts)**",
-        "answer": "**答案：C**"
+        "prompt": "13. What is the C equivalent of `mov 0x10(%rax,%rcx,4), %rdx`? **(2pts)**",
+        "answer": "答案：C\n\n解析：源操作数读取地址 `rax + rcx*4 + 0x10` 处的内存，再把读取的值写入 `rdx`。这里的 `*` 是解引用或乘法运算符。"
       },
       "presentation": {
         "status": "ready",
@@ -13559,7 +13559,7 @@
       "exam": "2025Lab测验",
       "questionNo": "Lab 任务 19",
       "summary": "BombLab phase_2 反汇编（数列递推）分析",
-      "content": "19. （2分）下面是 `phase_2` 函数的反汇编代码。下列哪个输入不会使 `bomb` 爆炸？\n```\n00000000000027bc <phase_2>:\n    27bc:  f3 0f 1e fa           endbr64\n    27c0:  53                    push   %rbx\n    27c1:  48 83 ec 20           sub    $0x20,%rsp\n    27c5:  64 48 8b 04 25 28 00  mov    %fs:0x28,%rax\n    27cc:  00 00\n    27ce:  48 89 44 24 18        mov    %rax,0x18(%rsp)\n    27d3:  31 c0                 xor    %eax,%eax\n    27d5:  48 89 e6              mov    %rsp,%rsi\n    27d8:  e8 d0 06 00 00        call   2ead <read_six_numbers>\n    27dd:  83 3c 24 00           cmpl   $0x0,(%rsp)\n    27e1:  78 07                 js     27ea <phase_2+0x2e>\n    27e3:  bb 01 00 00 00        mov    $0x1,%ebx\n    27e8:  eb 0a                 jmp    27f4 <phase_2+0x38>\n    27ea:  e8 92 06 00 00        call   2e81 <explode_bomb>\n    27ef:  eb f2                 jmp    27e3 <phase_2+0x27>\n    27f1:  83 c3 01              add    $0x1,%ebx\n    27f4:  83 fb 05              cmp    $0x5,%ebx\n    27f7:  7f 1c                 jg     2815 <phase_2+0x59>\n    27f9:  48 63 c3              movslq %ebx,%rax\n    27fc:  8d 53 ff              lea    -0x1(%rbx),%edx\n    27ff:  48 63 d2              movslq %edx,%rdx\n    2802:  8b 14 94              mov    (%rsp,%rdx,4),%edx\n    2805:  8d 54 12 ff           lea    -0x1(%rdx,%rdx,1),%edx\n    2809:  39 14 84              cmp    %edx,(%rsp,%rax,4)\n    280c:  74 e3                 je     27f1 <phase_2+0x35>\n    280e:  e8 6e 06 00 00        call   2e81 <explode_bomb>\n    2813:  eb dc                 jmp    27f1 <phase_2+0x35>\n    2815:  48 8b 44 24 18        mov    0x18(%rsp),%rax\n    281a:  64 48 2b 04 25 28 00  sub    %fs:0x28,%rax\n    2821:  00 00\n    2823:  75 06                 jne    282b <phase_2+0x6f>\n    2825:  48 83 c4 20           add    $0x20,%rsp\n    2829:  5b                    pop    %rbx\n    282a:  c3                    ret\n    282b:  e8 60 fa ff ff        call   2290 <__stack_chk_fail@plt>\n```\nA. 0 1 1 2 3 5\nB. 0 1 1 3 5 11\nC. 2 3 5 8 12 17\nD. 2 3 5 9 17 33\n答案：D\n\n解析：先要求 `a[0] >= 0`（`cmpl $0x0,(%rsp)` 之后是 `js explode_bomb`），再对 `i = 1..5` 要求 `a[i] = 2*a[i-1] - 1`。逐项代入，只有 D 的 `2 3 5 9 17 33` 满足完整递推，因此不会爆炸。\n\n> 勘误：原题题面漏印了“不”字。若按“使 `bomb` 爆炸”理解，A、B、C 都会爆炸，题目便没有唯一答案；此处按单选题本意修正为“不会使 `bomb` 爆炸”。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
+      "content": "19. （2分）下面是 `phase_2` 函数的反汇编代码。下列哪个输入不会使 `bomb` 爆炸？\n```asm\n00000000000027bc <phase_2>:\n    27bc:  f3 0f 1e fa           endbr64\n    27c0:  53                    push   %rbx\n    27c1:  48 83 ec 20           sub    $0x20,%rsp\n    27c5:  64 48 8b 04 25 28 00  mov    %fs:0x28,%rax\n    27cc:  00 00\n    27ce:  48 89 44 24 18        mov    %rax,0x18(%rsp)\n    27d3:  31 c0                 xor    %eax,%eax\n    27d5:  48 89 e6              mov    %rsp,%rsi\n    27d8:  e8 d0 06 00 00        call   2ead <read_six_numbers>\n    27dd:  83 3c 24 00           cmpl   $0x0,(%rsp)\n    27e1:  78 07                 js     27ea <phase_2+0x2e>\n    27e3:  bb 01 00 00 00        mov    $0x1,%ebx\n    27e8:  eb 0a                 jmp    27f4 <phase_2+0x38>\n    27ea:  e8 92 06 00 00        call   2e81 <explode_bomb>\n    27ef:  eb f2                 jmp    27e3 <phase_2+0x27>\n    27f1:  83 c3 01              add    $0x1,%ebx\n    27f4:  83 fb 05              cmp    $0x5,%ebx\n    27f7:  7f 1c                 jg     2815 <phase_2+0x59>\n    27f9:  48 63 c3              movslq %ebx,%rax\n    27fc:  8d 53 ff              lea    -0x1(%rbx),%edx\n    27ff:  48 63 d2              movslq %edx,%rdx\n    2802:  8b 14 94              mov    (%rsp,%rdx,4),%edx\n    2805:  8d 54 12 ff           lea    -0x1(%rdx,%rdx,1),%edx\n    2809:  39 14 84              cmp    %edx,(%rsp,%rax,4)\n    280c:  74 e3                 je     27f1 <phase_2+0x35>\n    280e:  e8 6e 06 00 00        call   2e81 <explode_bomb>\n    2813:  eb dc                 jmp    27f1 <phase_2+0x35>\n    2815:  48 8b 44 24 18        mov    0x18(%rsp),%rax\n    281a:  64 48 2b 04 25 28 00  sub    %fs:0x28,%rax\n    2821:  00 00\n    2823:  75 06                 jne    282b <phase_2+0x6f>\n    2825:  48 83 c4 20           add    $0x20,%rsp\n    2829:  5b                    pop    %rbx\n    282a:  c3                    ret\n    282b:  e8 60 fa ff ff        call   2290 <__stack_chk_fail@plt>\n```\nA. `0 1 1 2 3 5`\nB. `0 1 1 3 5 11`\nC. `2 3 5 8 12 17`\nD. `2 3 5 9 17 33`\n答案：D\n\n解析：先要求 `a[0] >= 0`（`cmpl $0x0,(%rsp)` 之后是 `js explode_bomb`），再对 `i = 1..5` 要求 `a[i] = 2*a[i-1] - 1`。逐项代入，只有 D 的 `2 3 5 9 17 33` 满足完整递推，因此不会爆炸。\n\n> 勘误：原题题面漏印了“不”字。若按“使 `bomb` 爆炸”理解，A、B、C 都会爆炸，题目便没有唯一答案；此处按单选题本意修正为“不会使 `bomb` 爆炸”。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -13579,23 +13579,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "19. （2分）下面是 `phase_2` 函数的反汇编代码。下列哪个输入不会使 `bomb` 爆炸？\n```\n00000000000027bc <phase_2>:\n    27bc:  f3 0f 1e fa           endbr64\n    27c0:  53                    push   %rbx\n    27c1:  48 83 ec 20           sub    $0x20,%rsp\n    27c5:  64 48 8b 04 25 28 00  mov    %fs:0x28,%rax\n    27cc:  00 00\n    27ce:  48 89 44 24 18        mov    %rax,0x18(%rsp)\n    27d3:  31 c0                 xor    %eax,%eax\n    27d5:  48 89 e6              mov    %rsp,%rsi\n    27d8:  e8 d0 06 00 00        call   2ead <read_six_numbers>\n    27dd:  83 3c 24 00           cmpl   $0x0,(%rsp)\n    27e1:  78 07                 js     27ea <phase_2+0x2e>\n    27e3:  bb 01 00 00 00        mov    $0x1,%ebx\n    27e8:  eb 0a                 jmp    27f4 <phase_2+0x38>\n    27ea:  e8 92 06 00 00        call   2e81 <explode_bomb>\n    27ef:  eb f2                 jmp    27e3 <phase_2+0x27>\n    27f1:  83 c3 01              add    $0x1,%ebx\n    27f4:  83 fb 05              cmp    $0x5,%ebx\n    27f7:  7f 1c                 jg     2815 <phase_2+0x59>\n    27f9:  48 63 c3              movslq %ebx,%rax\n    27fc:  8d 53 ff              lea    -0x1(%rbx),%edx\n    27ff:  48 63 d2              movslq %edx,%rdx\n    2802:  8b 14 94              mov    (%rsp,%rdx,4),%edx\n    2805:  8d 54 12 ff           lea    -0x1(%rdx,%rdx,1),%edx\n    2809:  39 14 84              cmp    %edx,(%rsp,%rax,4)\n    280c:  74 e3                 je     27f1 <phase_2+0x35>\n    280e:  e8 6e 06 00 00        call   2e81 <explode_bomb>\n    2813:  eb dc                 jmp    27f1 <phase_2+0x35>\n    2815:  48 8b 44 24 18        mov    0x18(%rsp),%rax\n    281a:  64 48 2b 04 25 28 00  sub    %fs:0x28,%rax\n    2821:  00 00\n    2823:  75 06                 jne    282b <phase_2+0x6f>\n    2825:  48 83 c4 20           add    $0x20,%rsp\n    2829:  5b                    pop    %rbx\n    282a:  c3                    ret\n    282b:  e8 60 fa ff ff        call   2290 <__stack_chk_fail@plt>\n```",
+        "stem": "19. （2分）下面是 `phase_2` 函数的反汇编代码。下列哪个输入不会使 `bomb` 爆炸？\n```asm\n00000000000027bc <phase_2>:\n    27bc:  f3 0f 1e fa           endbr64\n    27c0:  53                    push   %rbx\n    27c1:  48 83 ec 20           sub    $0x20,%rsp\n    27c5:  64 48 8b 04 25 28 00  mov    %fs:0x28,%rax\n    27cc:  00 00\n    27ce:  48 89 44 24 18        mov    %rax,0x18(%rsp)\n    27d3:  31 c0                 xor    %eax,%eax\n    27d5:  48 89 e6              mov    %rsp,%rsi\n    27d8:  e8 d0 06 00 00        call   2ead <read_six_numbers>\n    27dd:  83 3c 24 00           cmpl   $0x0,(%rsp)\n    27e1:  78 07                 js     27ea <phase_2+0x2e>\n    27e3:  bb 01 00 00 00        mov    $0x1,%ebx\n    27e8:  eb 0a                 jmp    27f4 <phase_2+0x38>\n    27ea:  e8 92 06 00 00        call   2e81 <explode_bomb>\n    27ef:  eb f2                 jmp    27e3 <phase_2+0x27>\n    27f1:  83 c3 01              add    $0x1,%ebx\n    27f4:  83 fb 05              cmp    $0x5,%ebx\n    27f7:  7f 1c                 jg     2815 <phase_2+0x59>\n    27f9:  48 63 c3              movslq %ebx,%rax\n    27fc:  8d 53 ff              lea    -0x1(%rbx),%edx\n    27ff:  48 63 d2              movslq %edx,%rdx\n    2802:  8b 14 94              mov    (%rsp,%rdx,4),%edx\n    2805:  8d 54 12 ff           lea    -0x1(%rdx,%rdx,1),%edx\n    2809:  39 14 84              cmp    %edx,(%rsp,%rax,4)\n    280c:  74 e3                 je     27f1 <phase_2+0x35>\n    280e:  e8 6e 06 00 00        call   2e81 <explode_bomb>\n    2813:  eb dc                 jmp    27f1 <phase_2+0x35>\n    2815:  48 8b 44 24 18        mov    0x18(%rsp),%rax\n    281a:  64 48 2b 04 25 28 00  sub    %fs:0x28,%rax\n    2821:  00 00\n    2823:  75 06                 jne    282b <phase_2+0x6f>\n    2825:  48 83 c4 20           add    $0x20,%rsp\n    2829:  5b                    pop    %rbx\n    282a:  c3                    ret\n    282b:  e8 60 fa ff ff        call   2290 <__stack_chk_fail@plt>\n```",
         "choices": [
           {
             "key": "A",
-            "content": "0 1 1 2 3 5"
+            "content": "`0 1 1 2 3 5`"
           },
           {
             "key": "B",
-            "content": "0 1 1 3 5 11"
+            "content": "`0 1 1 3 5 11`"
           },
           {
             "key": "C",
-            "content": "2 3 5 8 12 17"
+            "content": "`2 3 5 8 12 17`"
           },
           {
             "key": "D",
-            "content": "2 3 5 9 17 33"
+            "content": "`2 3 5 9 17 33`"
           }
         ],
         "answer": "答案：D\n\n解析：先要求 `a[0] >= 0`（`cmpl $0x0,(%rsp)` 之后是 `js explode_bomb`），再对 `i = 1..5` 要求 `a[i] = 2*a[i-1] - 1`。逐项代入，只有 D 的 `2 3 5 9 17 33` 满足完整递推，因此不会爆炸。\n\n> 勘误：原题题面漏印了“不”字。若按“使 `bomb` 爆炸”理解，A、B、C 都会爆炸，题目便没有唯一答案；此处按单选题本意修正为“不会使 `bomb` 爆炸”。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
@@ -13606,19 +13606,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "0 1 1 2 3 5"
+            "content": "`0 1 1 2 3 5`"
           },
           {
             "id": "B",
-            "content": "0 1 1 3 5 11"
+            "content": "`0 1 1 3 5 11`"
           },
           {
             "id": "C",
-            "content": "2 3 5 8 12 17"
+            "content": "`2 3 5 8 12 17`"
           },
           {
             "id": "D",
-            "content": "2 3 5 9 17 33"
+            "content": "`2 3 5 9 17 33`"
           }
         ],
         "correctChoiceIds": [
@@ -13627,7 +13627,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "19. （2分）下面是 `phase_2` 函数的反汇编代码。下列哪个输入不会使 `bomb` 爆炸？\n```\n00000000000027bc <phase_2>:\n    27bc:  f3 0f 1e fa           endbr64\n    27c0:  53                    push   %rbx\n    27c1:  48 83 ec 20           sub    $0x20,%rsp\n    27c5:  64 48 8b 04 25 28 00  mov    %fs:0x28,%rax\n    27cc:  00 00\n    27ce:  48 89 44 24 18        mov    %rax,0x18(%rsp)\n    27d3:  31 c0                 xor    %eax,%eax\n    27d5:  48 89 e6              mov    %rsp,%rsi\n    27d8:  e8 d0 06 00 00        call   2ead <read_six_numbers>\n    27dd:  83 3c 24 00           cmpl   $0x0,(%rsp)\n    27e1:  78 07                 js     27ea <phase_2+0x2e>\n    27e3:  bb 01 00 00 00        mov    $0x1,%ebx\n    27e8:  eb 0a                 jmp    27f4 <phase_2+0x38>\n    27ea:  e8 92 06 00 00        call   2e81 <explode_bomb>\n    27ef:  eb f2                 jmp    27e3 <phase_2+0x27>\n    27f1:  83 c3 01              add    $0x1,%ebx\n    27f4:  83 fb 05              cmp    $0x5,%ebx\n    27f7:  7f 1c                 jg     2815 <phase_2+0x59>\n    27f9:  48 63 c3              movslq %ebx,%rax\n    27fc:  8d 53 ff              lea    -0x1(%rbx),%edx\n    27ff:  48 63 d2              movslq %edx,%rdx\n    2802:  8b 14 94              mov    (%rsp,%rdx,4),%edx\n    2805:  8d 54 12 ff           lea    -0x1(%rdx,%rdx,1),%edx\n    2809:  39 14 84              cmp    %edx,(%rsp,%rax,4)\n    280c:  74 e3                 je     27f1 <phase_2+0x35>\n    280e:  e8 6e 06 00 00        call   2e81 <explode_bomb>\n    2813:  eb dc                 jmp    27f1 <phase_2+0x35>\n    2815:  48 8b 44 24 18        mov    0x18(%rsp),%rax\n    281a:  64 48 2b 04 25 28 00  sub    %fs:0x28,%rax\n    2821:  00 00\n    2823:  75 06                 jne    282b <phase_2+0x6f>\n    2825:  48 83 c4 20           add    $0x20,%rsp\n    2829:  5b                    pop    %rbx\n    282a:  c3                    ret\n    282b:  e8 60 fa ff ff        call   2290 <__stack_chk_fail@plt>\n```",
+        "prompt": "19. （2分）下面是 `phase_2` 函数的反汇编代码。下列哪个输入不会使 `bomb` 爆炸？\n```asm\n00000000000027bc <phase_2>:\n    27bc:  f3 0f 1e fa           endbr64\n    27c0:  53                    push   %rbx\n    27c1:  48 83 ec 20           sub    $0x20,%rsp\n    27c5:  64 48 8b 04 25 28 00  mov    %fs:0x28,%rax\n    27cc:  00 00\n    27ce:  48 89 44 24 18        mov    %rax,0x18(%rsp)\n    27d3:  31 c0                 xor    %eax,%eax\n    27d5:  48 89 e6              mov    %rsp,%rsi\n    27d8:  e8 d0 06 00 00        call   2ead <read_six_numbers>\n    27dd:  83 3c 24 00           cmpl   $0x0,(%rsp)\n    27e1:  78 07                 js     27ea <phase_2+0x2e>\n    27e3:  bb 01 00 00 00        mov    $0x1,%ebx\n    27e8:  eb 0a                 jmp    27f4 <phase_2+0x38>\n    27ea:  e8 92 06 00 00        call   2e81 <explode_bomb>\n    27ef:  eb f2                 jmp    27e3 <phase_2+0x27>\n    27f1:  83 c3 01              add    $0x1,%ebx\n    27f4:  83 fb 05              cmp    $0x5,%ebx\n    27f7:  7f 1c                 jg     2815 <phase_2+0x59>\n    27f9:  48 63 c3              movslq %ebx,%rax\n    27fc:  8d 53 ff              lea    -0x1(%rbx),%edx\n    27ff:  48 63 d2              movslq %edx,%rdx\n    2802:  8b 14 94              mov    (%rsp,%rdx,4),%edx\n    2805:  8d 54 12 ff           lea    -0x1(%rdx,%rdx,1),%edx\n    2809:  39 14 84              cmp    %edx,(%rsp,%rax,4)\n    280c:  74 e3                 je     27f1 <phase_2+0x35>\n    280e:  e8 6e 06 00 00        call   2e81 <explode_bomb>\n    2813:  eb dc                 jmp    27f1 <phase_2+0x35>\n    2815:  48 8b 44 24 18        mov    0x18(%rsp),%rax\n    281a:  64 48 2b 04 25 28 00  sub    %fs:0x28,%rax\n    2821:  00 00\n    2823:  75 06                 jne    282b <phase_2+0x6f>\n    2825:  48 83 c4 20           add    $0x20,%rsp\n    2829:  5b                    pop    %rbx\n    282a:  c3                    ret\n    282b:  e8 60 fa ff ff        call   2290 <__stack_chk_fail@plt>\n```",
         "answer": "答案：D\n\n解析：先要求 `a[0] >= 0`（`cmpl $0x0,(%rsp)` 之后是 `js explode_bomb`），再对 `i = 1..5` 要求 `a[i] = 2*a[i-1] - 1`。逐项代入，只有 D 的 `2 3 5 9 17 33` 满足完整递推，因此不会爆炸。\n\n> 勘误：原题题面漏印了“不”字。若按“使 `bomb` 爆炸”理解，A、B、C 都会爆炸，题目便没有唯一答案；此处按单选题本意修正为“不会使 `bomb` 爆炸”。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
       },
       "presentation": {

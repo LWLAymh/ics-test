@@ -222,7 +222,8 @@ def presentation_for(layout, interaction):
         score += 2 if "{" in scored or "}" in scored else 0
         score += 2 if ASSEMBLY_LINE.search(scored) else 0
         score += 1 if CODE_DECLARATION.search(scored) else 0
-        score += 1 if re.search(r"(?m)^\s{2,}\S", scored) else 0
+        # 只统计一行开头的水平缩进；\s 会跨过空行，把普通段落误当代码。
+        score += 1 if re.search(r"(?m)^[ \t]{2,}\S", scored) else 0
         if score >= 3:
             issues.append("code-like-content-without-fence")
     return {"status": "needs-review" if issues else "ready", "issues": issues}

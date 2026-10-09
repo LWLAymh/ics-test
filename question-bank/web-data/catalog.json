@@ -12,7 +12,7 @@
       "questionCount": 124,
       "choiceQuestionCount": 76,
       "declaredQuestionCount": 124,
-      "publishedQuestionCount": 123,
+      "publishedQuestionCount": 124,
       "paperCount": 26,
       "questionFile": "questions/1-Data-Representation.json"
     },
@@ -139,10 +139,10 @@
   },
   "stats": {
     "questions": 861,
-    "publishedChoiceQuestions": 481,
-    "withheldChoiceQuestions": 1,
-    "publishedQuestions": 835,
-    "withheldQuestions": 1,
+    "publishedChoiceQuestions": 482,
+    "withheldChoiceQuestions": 0,
+    "publishedQuestions": 836,
+    "withheldQuestions": 0,
     "papers": 28,
     "answerBlocks": 55
   },
