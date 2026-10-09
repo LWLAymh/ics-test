@@ -145,6 +145,15 @@
 .ics-question-content > p, .ics-reference > p { margin: .75rem 0; }
 .ics-question-content hr, .ics-reference hr { margin: 1.8rem 0; border: 0; border-top: 1px solid var(--border); }
 .ics-question-content table, .ics-reference table { display: block; max-width: 100%; overflow-x: auto; }
+.ics-choice-content table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+.ics-choice-content th, .ics-choice-content td {
+  padding: .55rem .65rem;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  text-align: left;
+}
+.ics-choice-content th { background: var(--bg-soft); color: var(--text-muted); font-size: .82rem; }
+.ics-choice-content td code { white-space: normal; overflow-wrap: anywhere; }
 .ics-question-content img, .ics-choice-content img, .ics-reference img {
   display: block;
   width: auto;
@@ -241,6 +250,37 @@
 .ics-choice-content > :last-child { margin-bottom: 0; }
 .ics-choice-list.needs-choice .ics-choice { border-color: color-mix(in srgb, var(--ics-danger) 58%, var(--border)); }
 .ics-answer-actions { justify-content: flex-end; margin-top: .8rem; }
+
+.ics-composite-part {
+  margin: 1rem 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-elevated);
+}
+.ics-composite-part > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-soft);
+}
+.ics-composite-part > header span {
+  padding: .18rem .55rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: .76rem;
+  font-weight: 750;
+}
+.ics-composite-body { padding: 1rem; }
+.ics-composite-body > :first-child { margin-top: 0; }
+.ics-composite-body > :last-child { margin-bottom: 0; }
+.ics-composite-choices { display: grid; gap: .65rem; margin-top: 1rem; }
+.ics-composite-choices.needs-choice .ics-choice { border-color: color-mix(in srgb, var(--ics-danger) 58%, var(--border)); }
+.ics-composite-note { color: var(--text-muted); font-size: .88rem; }
 
 .ics-inline-blank {
   display: inline-flex;

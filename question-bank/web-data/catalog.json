@@ -58,7 +58,7 @@
       "name": "Compilation (Program optimization and linking)",
       "title": "编译系统（程序优化与链接）",
       "questionCount": 81,
-      "choiceQuestionCount": 36,
+      "choiceQuestionCount": 37,
       "declaredQuestionCount": 73,
       "publishedQuestionCount": 73,
       "paperCount": 29,
@@ -139,7 +139,7 @@
   },
   "stats": {
     "questions": 837,
-    "publishedChoiceQuestions": 469,
+    "publishedChoiceQuestions": 470,
     "withheldChoiceQuestions": 0,
     "publishedQuestions": 803,
     "withheldQuestions": 0,

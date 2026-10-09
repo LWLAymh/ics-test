@@ -4558,7 +4558,7 @@
       "exam": "2020期中",
       "questionNo": "第一题 3",
       "summary": "静态数组与指针数组的地址计算",
-      "content": "3、假定静态int型二维数组a和指针数组pa的声明如下：\n```\nstatic int a[4][4]={ {3, 8, -2, 6}, {2, 1, -5, 3 }, {1, 18, 4,\n10},{4, -2, 0, 8}};\n```\n\n\nstatic int *pa[4]={a[0], a[1], a[2], a[3]};\n若a的首地址为0x601080，则&pa[0]和pa[1]分别是:\nA. 0x6010c0、0x601090\nB. 0x6010e0、0x601090\nC. 0x6010c0、0x6010a0\nD. 0x6010e0、0x6010a0\nA",
+      "content": "3. 假定静态 `int` 型二维数组 `a` 和指针数组 `pa` 的声明如下：\n\n```c\nstatic int a[4][4] = {\n    {3, 8, -2, 6},\n    {2, 1, -5, 3},\n    {1, 18, 4, 10},\n    {4, -2, 0, 8}\n};\nstatic int *pa[4] = {a[0], a[1], a[2], a[3]};\n```\n\n若 `a` 的首地址为 `0x601080`，则 `&pa[0]` 和 `pa[1]` 分别是：\nA. 0x6010c0、0x601090\nB. 0x6010e0、0x601090\nC. 0x6010c0、0x6010a0\nD. 0x6010e0、0x6010a0\nA",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4580,7 +4580,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "3、假定静态int型二维数组a和指针数组pa的声明如下：\n```\nstatic int a[4][4]={ {3, 8, -2, 6}, {2, 1, -5, 3 }, {1, 18, 4,\n10},{4, -2, 0, 8}};\n```\n\n\nstatic int *pa[4]={a[0], a[1], a[2], a[3]};\n若a的首地址为0x601080，则&pa[0]和pa[1]分别是:",
+        "stem": "3. 假定静态 `int` 型二维数组 `a` 和指针数组 `pa` 的声明如下：\n\n```c\nstatic int a[4][4] = {\n    {3, 8, -2, 6},\n    {2, 1, -5, 3},\n    {1, 18, 4, 10},\n    {4, -2, 0, 8}\n};\nstatic int *pa[4] = {a[0], a[1], a[2], a[3]};\n```\n\n若 `a` 的首地址为 `0x601080`，则 `&pa[0]` 和 `pa[1]` 分别是：",
         "choices": [
           {
             "key": "A",
@@ -4628,7 +4628,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "3、假定静态int型二维数组a和指针数组pa的声明如下：\n```\nstatic int a[4][4]={ {3, 8, -2, 6}, {2, 1, -5, 3 }, {1, 18, 4,\n10},{4, -2, 0, 8}};\n```\n\n\nstatic int *pa[4]={a[0], a[1], a[2], a[3]};\n若a的首地址为0x601080，则&pa[0]和pa[1]分别是:",
+        "prompt": "3. 假定静态 `int` 型二维数组 `a` 和指针数组 `pa` 的声明如下：\n\n```c\nstatic int a[4][4] = {\n    {3, 8, -2, 6},\n    {2, 1, -5, 3},\n    {1, 18, 4, 10},\n    {4, -2, 0, 8}\n};\nstatic int *pa[4] = {a[0], a[1], a[2], a[3]};\n```\n\n若 `a` 的首地址为 `0x601080`，则 `&pa[0]` 和 `pa[1]` 分别是：",
         "answer": "A"
       },
       "presentation": {
@@ -4646,7 +4646,7 @@
       "exam": "2020期中",
       "questionNo": "第一题 4",
       "summary": "x86-64 过程调用与栈帧释放",
-      "content": "4、下列关于x86-64过程调用的叙述中，哪一个是不正确的？\n指令的地址\nA. 每次递归调用都会生成一个新的栈帧，空间开销大\nB. 当传递给被调用函数的参数少于6个时，可以通过通用寄存器传递\nC. 被调用函数要为局部变量分配空间，返回时无需释放这些空间\nD. 过程调用返回时，向程序计数器中推送的地址是调用函数中调用指令的下一\n答案：C",
+      "content": "4. 下列关于 x86-64 过程调用的叙述中，哪一个是不正确的？\nA. 每次递归调用都会生成一个新的栈帧，空间开销大\nB. 当传递给被调用函数的参数少于6个时，可以通过通用寄存器传递\nC. 被调用函数要为局部变量分配空间，返回时无需释放这些空间\nD. 过程调用返回时，向程序计数器中推送的地址是调用函数中调用指令的下一条指令的地址\n答案：C",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4668,7 +4668,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "4、下列关于x86-64过程调用的叙述中，哪一个是不正确的？\n指令的地址",
+        "stem": "4. 下列关于 x86-64 过程调用的叙述中，哪一个是不正确的？",
         "choices": [
           {
             "key": "A",
@@ -4684,7 +4684,7 @@
           },
           {
             "key": "D",
-            "content": "过程调用返回时，向程序计数器中推送的地址是调用函数中调用指令的下一"
+            "content": "过程调用返回时，向程序计数器中推送的地址是调用函数中调用指令的下一条指令的地址"
           }
         ],
         "answer": "答案：C"
@@ -4707,7 +4707,7 @@
           },
           {
             "id": "D",
-            "content": "过程调用返回时，向程序计数器中推送的地址是调用函数中调用指令的下一"
+            "content": "过程调用返回时，向程序计数器中推送的地址是调用函数中调用指令的下一条指令的地址"
           }
         ],
         "correctChoiceIds": [
@@ -4716,7 +4716,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "4、下列关于x86-64过程调用的叙述中，哪一个是不正确的？\n指令的地址",
+        "prompt": "4. 下列关于 x86-64 过程调用的叙述中，哪一个是不正确的？",
         "answer": "答案：C"
       },
       "presentation": {
@@ -4734,7 +4734,7 @@
       "exam": "2020期中",
       "questionNo": "第一题 5",
       "summary": "结构体成员偏移与 movl/leaq 选择",
-      "content": "5、假设结构体类型student_info的声明如下：\n```\nstruct student_info {\n        char id[8];\n        char name[16];\n        unsigned zip;\n        char address[50];\n        char phone[20];\n}x;\n```\n若x的首地址在%rdx中，则“unsigned xzip=x.zip;”所对应的汇编指令\n为:\nA. movl 0x24(%rdx), %eax\nB. movl 0x18(%rdx), %eax\nC. leaq 0x24(%rdx), %rax\nD. leaq 0x18(%rdx), %rax\nB",
+      "content": "5. 假设结构体类型 `student_info` 的声明如下：\n\n```c\nstruct student_info {\n        char id[8];\n        char name[16];\n        unsigned zip;\n        char address[50];\n        char phone[20];\n}x;\n```\n\n若 `x` 的首地址在 `%rdx` 中，则 `unsigned xzip = x.zip;` 所对应的汇编指令为：\nA. movl 0x24(%rdx), %eax\nB. movl 0x18(%rdx), %eax\nC. leaq 0x24(%rdx), %rax\nD. leaq 0x18(%rdx), %rax\nB",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -4756,7 +4756,7 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "5、假设结构体类型student_info的声明如下：\n```\nstruct student_info {\n        char id[8];\n        char name[16];\n        unsigned zip;\n        char address[50];\n        char phone[20];\n}x;\n```\n若x的首地址在%rdx中，则“unsigned xzip=x.zip;”所对应的汇编指令\n为:",
+        "stem": "5. 假设结构体类型 `student_info` 的声明如下：\n\n```c\nstruct student_info {\n        char id[8];\n        char name[16];\n        unsigned zip;\n        char address[50];\n        char phone[20];\n}x;\n```\n\n若 `x` 的首地址在 `%rdx` 中，则 `unsigned xzip = x.zip;` 所对应的汇编指令为：",
         "choices": [
           {
             "key": "A",
@@ -4804,7 +4804,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "5、假设结构体类型student_info的声明如下：\n```\nstruct student_info {\n        char id[8];\n        char name[16];\n        unsigned zip;\n        char address[50];\n        char phone[20];\n}x;\n```\n若x的首地址在%rdx中，则“unsigned xzip=x.zip;”所对应的汇编指令\n为:",
+        "prompt": "5. 假设结构体类型 `student_info` 的声明如下：\n\n```c\nstruct student_info {\n        char id[8];\n        char name[16];\n        unsigned zip;\n        char address[50];\n        char phone[20];\n}x;\n```\n\n若 `x` 的首地址在 `%rdx` 中，则 `unsigned xzip = x.zip;` 所对应的汇编指令为：",
         "answer": "B"
       },
       "presentation": {
@@ -9584,7 +9584,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第5讲 13",
       "summary": "loopy 循环汇编补全对应 C 代码",
-      "content": "13.考虑下面的汇编代码：\n```\n1 loop:\n2 movl %esi, %ecx\n3 movl $1, %edx\n4 movl $0, %eax\n5 jmp .L2\n6 .L3:\n7 movq %rdi, %r8\n8 andq %rdx, %r8\n9 orq %r8, %rax\n10 salq %cl, %rdx\n11 .L2:\n12 testq %rdx, %rdx\n13 jne .L3\n14 rep; ret\n```\n补全下面对应的C语言代码：\n```\nlong loop(long x, int n)\n{\nlong result =\n;\nlong mask;\n```\n0",
+      "content": "13. 考虑下面的汇编代码：\n\n```asm\nloop:\n    movl %esi, %ecx\n    movl $1, %edx\n    movl $0, %eax\n    jmp .L2\n.L3:\n    movq %rdi, %r8\n    andq %rdx, %r8\n    orq %r8, %rax\n    salq %cl, %rdx\n.L2:\n    testq %rdx, %rdx\n    jne .L3\n    rep; ret\n```\n\n补全下面对应的 C 语言代码：\n\n```c\nlong loop(long x, int n)\n{\n    long result = {{blank:result-init}};\n    long mask;\n    for (mask = {{blank:mask-init}};\n         mask != {{blank:mask-condition}};\n         mask = {{blank:mask-update}}) {\n        result |= {{blank:selected-bits}};\n    }\n    return result;\n}\n```\n答案：\n\n1. `0`\n2. `1`\n3. `0`\n4. `mask << n`\n5. `x & mask`\n\n补全后的循环从最低位开始，每次把掩码左移 `n` 位，并把 `x` 中对应的位合并进 `result`。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9602,20 +9602,108 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/166.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "13.考虑下面的汇编代码：\n```\n1 loop:\n2 movl %esi, %ecx\n3 movl $1, %edx\n4 movl $0, %eax\n5 jmp .L2\n6 .L3:\n7 movq %rdi, %r8\n8 andq %rdx, %r8\n9 orq %r8, %rax\n10 salq %cl, %rdx\n11 .L2:\n12 testq %rdx, %rdx\n13 jne .L3\n14 rep; ret\n```\n补全下面对应的C语言代码：\n```\nlong loop(long x, int n)\n{\nlong result =\n;\nlong mask;\n```",
+        "stem": "13. 考虑下面的汇编代码：\n\n```asm\nloop:\n    movl %esi, %ecx\n    movl $1, %edx\n    movl $0, %eax\n    jmp .L2\n.L3:\n    movq %rdi, %r8\n    andq %rdx, %r8\n    orq %r8, %rax\n    salq %cl, %rdx\n.L2:\n    testq %rdx, %rdx\n    jne .L3\n    rep; ret\n```\n\n补全下面对应的 C 语言代码：\n\n```c\nlong loop(long x, int n)\n{\n    long result = {{blank:result-init}};\n    long mask;\n    for (mask = {{blank:mask-init}};\n         mask != {{blank:mask-condition}};\n         mask = {{blank:mask-update}}) {\n        result |= {{blank:selected-bits}};\n    }\n    return result;\n}\n```",
         "choices": [],
-        "answer": "0"
+        "answer": "答案：\n\n1. `0`\n2. `1`\n3. `0`\n4. `mask << n`\n5. `x & mask`\n\n补全后的循环从最低位开始，每次把掩码左移 `n` 位，并把 `x` 中对应的位合并进 `result`。",
+        "blankAnswers": [
+          {
+            "id": "result-init",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "mask-init",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "mask-condition",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "mask-update",
+            "acceptedAnswers": [
+              "mask << n",
+              "mask<<n"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "selected-bits",
+            "acceptedAnswers": [
+              "x & mask",
+              "x&mask"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "result-init",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "mask-init",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "mask-condition",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "mask-update",
+            "acceptedAnswers": [
+              "mask << n",
+              "mask<<n"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "selected-bits",
+            "acceptedAnswers": [
+              "x & mask",
+              "x&mask"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "13.考虑下面的汇编代码：\n```\n1 loop:\n2 movl %esi, %ecx\n3 movl $1, %edx\n4 movl $0, %eax\n5 jmp .L2\n6 .L3:\n7 movq %rdi, %r8\n8 andq %rdx, %r8\n9 orq %r8, %rax\n10 salq %cl, %rdx\n11 .L2:\n12 testq %rdx, %rdx\n13 jne .L3\n14 rep; ret\n```\n补全下面对应的C语言代码：\n```\nlong loop(long x, int n)\n{\nlong result =\n;\nlong mask;\n```",
-        "answer": "0"
+        "prompt": "13. 考虑下面的汇编代码：\n\n```asm\nloop:\n    movl %esi, %ecx\n    movl $1, %edx\n    movl $0, %eax\n    jmp .L2\n.L3:\n    movq %rdi, %r8\n    andq %rdx, %r8\n    orq %r8, %rax\n    salq %cl, %rdx\n.L2:\n    testq %rdx, %rdx\n    jne .L3\n    rep; ret\n```\n\n补全下面对应的 C 语言代码：\n\n```c\nlong loop(long x, int n)\n{\n    long result = {{blank:result-init}};\n    long mask;\n    for (mask = {{blank:mask-init}};\n         mask != {{blank:mask-condition}};\n         mask = {{blank:mask-update}}) {\n        result |= {{blank:selected-bits}};\n    }\n    return result;\n}\n```",
+        "answer": "答案：\n\n1. `0`\n2. `1`\n3. `0`\n4. `mask << n`\n5. `x & mask`\n\n补全后的循环从最低位开始，每次把掩码左移 `n` 位，并把 `x` 中对应的位合并进 `result`。"
       },
       "presentation": {
         "status": "ready",
@@ -9872,7 +9960,7 @@
       "exam": "2025阶段测验（第1次）",
       "questionNo": "第7讲 19",
       "summary": "变长二维数组 var_ele 的参数传递与寻址",
-      "content": "19.C语言中传参n×n二维数组时，如果n是变量，应该如何传递？补全下面的汇编代码。\n```\n# int var_ele(size_t n, int a[n][n], size_t i, size_t j)\n# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\n```\n```\nvar_ele:\n\tmovq\t%rdx, %rax\n\t________________, %rax\n\t________________, %rax\n\tmovl\t(%rsi,%rax,4), %eax\n\tret\n```\n答案：\n① `imulq %rdi, %rax`\n② `addq %rcx, %rax`\n\n补全后的完整代码：\n```\n# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\nvar_ele:\n\tmovq\t%rdx, %rax\n\timulq\t%rdi, %rax\n\taddq\t%rcx, %rax\n\tmovl\t(%rsi,%rax,4), %eax\n\tret\n```\n\n解析：\n\n1. 参数寄存器（题面 `# hint:` 已给出）：`%rdi = n`、`%rsi = a`、`%rdx = i`、`%rcx = j`。\n2. 传参方式：C 语言里把「n×n 的二维数组」作为参数传递时，数组名退化为**首元素指针** `int (*)[n]`，函数实际拿到的只是一个地址（即 `&a[0][0]`，存在 `%rsi`）；行宽 n 不是编译期常量，**必须作为第一个参数显式传进来**。这正是本题与定长二维数组（如 `arr_data[4][4]`，可以直接 `shlq $4, %rdi` 用移位算偏移）的区别——n 是变量时只能用乘法。\n3. 寻址公式：`a[i][j]` 按行优先存放，其元素下标为 `i * n + j`，字节偏移再乘 `sizeof(int)=4`。\n4. 于是三条算术指令的作用是：\n   - `movq %rdx, %rax` → `%rax = i`；\n   - ① `imulq %rdi, %rax` → `%rax = i * n`（64 位有符号乘法，结果取低 64 位放回 `%rax`）；\n   - ② `addq %rcx, %rax` → `%rax = i * n + j`，得到元素下标；\n   - `movl (%rsi,%rax,4), %eax` → 用「基址 + 变址×比例」寻址读取 4 字节：基址 `%rsi` 是数组首地址，比例 4 是 `sizeof(int)`。\n5. 易错点：①处不能像定长数组那样用 `shlq`（n 未知）；两条指令的顺序不能颠倒（必须先乘 n 再加 j）；末尾寻址的比例是 4 而不是 8（元素是 `int`）；写成 `addq %rax, %rcx`（把结果放进 `%rcx`）会与后续 `%rax` 的用法对不上。\n\n> 📌 答案有官方来源：原卷红色参考答案（见 `_audit/pages/阶段测验/2025第1次阶段测验-带答案/page-08.png`，红字为 `imulq %rdi, %rax` 与 `addq %rcx, %rax` 两行）；题干中带空白的汇编代码取自无答案版（原文/阶段测验/2025第1次阶段测验-无答案.md 第 293–310 行，本卷 `_cls` 切片 (296,300) 未覆盖到该代码块）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。",
+      "content": "19. C 语言中传参 $n\\times n$ 二维数组时，如果 `n` 是变量，应该如何传递？补全下面的汇编代码。\n\n```asm\n# int var_ele(size_t n, int a[n][n], size_t i, size_t j)\n# { return a[i][j]; }\n# 参数寄存器：%rdi, %rsi, %rdx, %rcx\n\nvar_ele:\n    movq %rdx, %rax\n    {{blank:multiply-index}}\n    {{blank:add-column}}\n    movl (%rsi,%rax,4), %eax\n    ret\n```\n答案：\n\n1. `imulq %rdi, %rax`\n2. `addq %rcx, %rax`\n\n数组按行优先存放，`a[i][j]` 的元素下标为 `i * n + j`。因此先计算 `%rax = i * n`，再加上 `j`；最后用比例因子 4 读取 `int` 元素。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -9890,20 +9978,60 @@
         "curated": "_curated/阶段测验/2025第1次阶段测验-带答案/296.md"
       },
       "layout": {
-        "mode": "short",
+        "mode": "fill",
         "selection": null,
-        "stem": "19.C语言中传参n×n二维数组时，如果n是变量，应该如何传递？补全下面的汇编代码。\n```\n# int var_ele(size_t n, int a[n][n], size_t i, size_t j)\n# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\n```\n```\nvar_ele:\n\tmovq\t%rdx, %rax\n\t________________, %rax\n\t________________, %rax\n\tmovl\t(%rsi,%rax,4), %eax\n\tret\n```",
+        "stem": "19. C 语言中传参 $n\\times n$ 二维数组时，如果 `n` 是变量，应该如何传递？补全下面的汇编代码。\n\n```asm\n# int var_ele(size_t n, int a[n][n], size_t i, size_t j)\n# { return a[i][j]; }\n# 参数寄存器：%rdi, %rsi, %rdx, %rcx\n\nvar_ele:\n    movq %rdx, %rax\n    {{blank:multiply-index}}\n    {{blank:add-column}}\n    movl (%rsi,%rax,4), %eax\n    ret\n```",
         "choices": [],
-        "answer": "答案：\n① `imulq %rdi, %rax`\n② `addq %rcx, %rax`\n\n补全后的完整代码：\n```\n# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\nvar_ele:\n\tmovq\t%rdx, %rax\n\timulq\t%rdi, %rax\n\taddq\t%rcx, %rax\n\tmovl\t(%rsi,%rax,4), %eax\n\tret\n```\n\n解析：\n\n1. 参数寄存器（题面 `# hint:` 已给出）：`%rdi = n`、`%rsi = a`、`%rdx = i`、`%rcx = j`。\n2. 传参方式：C 语言里把「n×n 的二维数组」作为参数传递时，数组名退化为**首元素指针** `int (*)[n]`，函数实际拿到的只是一个地址（即 `&a[0][0]`，存在 `%rsi`）；行宽 n 不是编译期常量，**必须作为第一个参数显式传进来**。这正是本题与定长二维数组（如 `arr_data[4][4]`，可以直接 `shlq $4, %rdi` 用移位算偏移）的区别——n 是变量时只能用乘法。\n3. 寻址公式：`a[i][j]` 按行优先存放，其元素下标为 `i * n + j`，字节偏移再乘 `sizeof(int)=4`。\n4. 于是三条算术指令的作用是：\n   - `movq %rdx, %rax` → `%rax = i`；\n   - ① `imulq %rdi, %rax` → `%rax = i * n`（64 位有符号乘法，结果取低 64 位放回 `%rax`）；\n   - ② `addq %rcx, %rax` → `%rax = i * n + j`，得到元素下标；\n   - `movl (%rsi,%rax,4), %eax` → 用「基址 + 变址×比例」寻址读取 4 字节：基址 `%rsi` 是数组首地址，比例 4 是 `sizeof(int)`。\n5. 易错点：①处不能像定长数组那样用 `shlq`（n 未知）；两条指令的顺序不能颠倒（必须先乘 n 再加 j）；末尾寻址的比例是 4 而不是 8（元素是 `int`）；写成 `addq %rax, %rcx`（把结果放进 `%rcx`）会与后续 `%rax` 的用法对不上。\n\n> 📌 答案有官方来源：原卷红色参考答案（见 `_audit/pages/阶段测验/2025第1次阶段测验-带答案/page-08.png`，红字为 `imulq %rdi, %rax` 与 `addq %rcx, %rax` 两行）；题干中带空白的汇编代码取自无答案版（原文/阶段测验/2025第1次阶段测验-无答案.md 第 293–310 行，本卷 `_cls` 切片 (296,300) 未覆盖到该代码块）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+        "answer": "答案：\n\n1. `imulq %rdi, %rax`\n2. `addq %rcx, %rax`\n\n数组按行优先存放，`a[i][j]` 的元素下标为 `i * n + j`。因此先计算 `%rax = i * n`，再加上 `j`；最后用比例因子 4 读取 `int` 元素。",
+        "blankAnswers": [
+          {
+            "id": "multiply-index",
+            "acceptedAnswers": [
+              "imulq %rdi, %rax",
+              "imulq %rdi,%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "add-column",
+            "acceptedAnswers": [
+              "addq %rcx, %rax",
+              "addq %rcx,%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "fill",
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "multiply-index",
+            "acceptedAnswers": [
+              "imulq %rdi, %rax",
+              "imulq %rdi,%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          },
+          {
+            "id": "add-column",
+            "acceptedAnswers": [
+              "addq %rcx, %rax",
+              "addq %rcx,%rax"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "19.C语言中传参n×n二维数组时，如果n是变量，应该如何传递？补全下面的汇编代码。\n```\n# int var_ele(size_t n, int a[n][n], size_t i, size_t j)\n# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\n```\n```\nvar_ele:\n\tmovq\t%rdx, %rax\n\t________________, %rax\n\t________________, %rax\n\tmovl\t(%rsi,%rax,4), %eax\n\tret\n```",
-        "answer": "答案：\n① `imulq %rdi, %rax`\n② `addq %rcx, %rax`\n\n补全后的完整代码：\n```\n# { return a[i][j]; }\n# hint: %rdi,%rsi,%rdx,%rcx\nvar_ele:\n\tmovq\t%rdx, %rax\n\timulq\t%rdi, %rax\n\taddq\t%rcx, %rax\n\tmovl\t(%rsi,%rax,4), %eax\n\tret\n```\n\n解析：\n\n1. 参数寄存器（题面 `# hint:` 已给出）：`%rdi = n`、`%rsi = a`、`%rdx = i`、`%rcx = j`。\n2. 传参方式：C 语言里把「n×n 的二维数组」作为参数传递时，数组名退化为**首元素指针** `int (*)[n]`，函数实际拿到的只是一个地址（即 `&a[0][0]`，存在 `%rsi`）；行宽 n 不是编译期常量，**必须作为第一个参数显式传进来**。这正是本题与定长二维数组（如 `arr_data[4][4]`，可以直接 `shlq $4, %rdi` 用移位算偏移）的区别——n 是变量时只能用乘法。\n3. 寻址公式：`a[i][j]` 按行优先存放，其元素下标为 `i * n + j`，字节偏移再乘 `sizeof(int)=4`。\n4. 于是三条算术指令的作用是：\n   - `movq %rdx, %rax` → `%rax = i`；\n   - ① `imulq %rdi, %rax` → `%rax = i * n`（64 位有符号乘法，结果取低 64 位放回 `%rax`）；\n   - ② `addq %rcx, %rax` → `%rax = i * n + j`，得到元素下标；\n   - `movl (%rsi,%rax,4), %eax` → 用「基址 + 变址×比例」寻址读取 4 字节：基址 `%rsi` 是数组首地址，比例 4 是 `sizeof(int)`。\n5. 易错点：①处不能像定长数组那样用 `shlq`（n 未知）；两条指令的顺序不能颠倒（必须先乘 n 再加 j）；末尾寻址的比例是 4 而不是 8（元素是 `int`）；写成 `addq %rax, %rcx`（把结果放进 `%rcx`）会与后续 `%rax` 的用法对不上。\n\n> 📌 答案有官方来源：原卷红色参考答案（见 `_audit/pages/阶段测验/2025第1次阶段测验-带答案/page-08.png`，红字为 `imulq %rdi, %rax` 与 `addq %rcx, %rax` 两行）；题干中带空白的汇编代码取自无答案版（原文/阶段测验/2025第1次阶段测验-无答案.md 第 293–310 行，本卷 `_cls` 切片 (296,300) 未覆盖到该代码块）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+        "prompt": "19. C 语言中传参 $n\\times n$ 二维数组时，如果 `n` 是变量，应该如何传递？补全下面的汇编代码。\n\n```asm\n# int var_ele(size_t n, int a[n][n], size_t i, size_t j)\n# { return a[i][j]; }\n# 参数寄存器：%rdi, %rsi, %rdx, %rcx\n\nvar_ele:\n    movq %rdx, %rax\n    {{blank:multiply-index}}\n    {{blank:add-column}}\n    movl (%rsi,%rax,4), %eax\n    ret\n```",
+        "answer": "答案：\n\n1. `imulq %rdi, %rax`\n2. `addq %rcx, %rax`\n\n数组按行优先存放，`a[i][j]` 的元素下标为 `i * n + j`。因此先计算 `%rax = i * n`，再加上 `j`；最后用比例因子 4 读取 `int` 元素。"
       },
       "presentation": {
         "status": "ready",

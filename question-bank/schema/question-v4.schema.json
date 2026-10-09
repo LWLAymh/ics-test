@@ -40,9 +40,10 @@
       },
       "additionalProperties": false
     },
-    "type": {"enum": ["single-choice", "multiple-choice", "fill", "short-answer"]},
+    "type": {"enum": ["single-choice", "multiple-choice", "fill", "short-answer", "composite"]},
     "stem": {"$ref": "#/$defs/content"},
     "options": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/option"}},
+    "parts": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/questionPart"}},
     "solution": {"$ref": "#/$defs/solution"},
     "source": {"$ref": "#/$defs/source"}
   },
@@ -138,6 +139,53 @@
       },
       "additionalProperties": false
     },
+    "questionPart": {
+      "type": "object",
+      "required": ["id", "label", "type", "stem", "solution"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+        "label": {"type": "string", "minLength": 1},
+        "type": {"enum": ["single-choice", "multiple-choice", "fill", "short-answer"]},
+        "stem": {"$ref": "#/$defs/content"},
+        "options": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/option"}},
+        "solution": {"$ref": "#/$defs/solution"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice"]}}},
+          "then": {"required": ["options"]}
+        },
+        {
+          "if": {"properties": {"type": {"enum": ["fill", "short-answer"]}}},
+          "then": {"not": {"required": ["options"]}}
+        },
+        {
+          "if": {"properties": {"type": {"const": "fill"}}},
+          "then": {
+            "properties": {
+              "stem": {
+                "properties": {
+                  "blocks": {"contains": {"$ref": "#/$defs/blankBlock"}}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice", "short-answer"]}}},
+          "then": {
+            "properties": {
+              "stem": {
+                "properties": {
+                  "blocks": {"not": {"contains": {"$ref": "#/$defs/blankBlock"}}}
+                }
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
     "source": {
       "type": "object",
       "required": ["document"],
@@ -178,6 +226,14 @@
       "then": {"not": {"required": ["options"]}}
     },
     {
+      "if": {"properties": {"type": {"const": "composite"}}},
+      "then": {"required": ["parts"], "not": {"required": ["options"]}}
+    },
+    {
+      "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice", "fill", "short-answer"]}}},
+      "then": {"not": {"required": ["parts"]}}
+    },
+    {
       "if": {"properties": {"type": {"const": "fill"}}},
       "then": {
         "properties": {
@@ -190,7 +246,7 @@
       }
     },
     {
-      "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice", "short-answer"]}}},
+      "if": {"properties": {"type": {"enum": ["single-choice", "multiple-choice", "short-answer", "composite"]}}},
       "then": {
         "properties": {
           "stem": {

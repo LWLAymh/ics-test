@@ -18,6 +18,7 @@
 - `%%% mode: choice|fill|short` 是**显式题型**，取代运行时的猜测；
 - `%%% provenance: verbatim|reflow|rewritten` 决定校验强度；
 - `%%% group` / `group_title` / `group_order` 显式声明同一大题的多个片段；
+- `%%% blank_answer: <blank-id> = <答案1> || <答案2>` 为填空显式声明可接受答案；
 - `%%% answer` 段**保留 `答案：` 字面前缀**（前端 `simpleExpected()` 的正则依赖它）；
   没有该段 = 本题无内联答案 -> `answer.inline = false`；
 - `build_content()` 按 stem+choices+answer **原样**拼接（用解析出的原始段文本，
@@ -53,6 +54,7 @@ def parse(text):
     group = None
     group_title = None
     group_order = None
+    blank_answers = []
     cur = None
     order = []
     sections = {"stem": [], "choices": [], "answer": []}
@@ -94,6 +96,27 @@ def parse(text):
                         raise ValueError
                 except ValueError:
                     problems.append("group_order 必须是正整数: %r" % val)
+            elif key == "blank_answer":
+                blank_match = re.match(
+                    r"^([A-Za-z][A-Za-z0-9_-]*)\s*=\s*(.+)$", val)
+                if not blank_match:
+                    problems.append(
+                        "blank_answer 格式应为 <blank-id> = <答案1> || <答案2>: %r" % val)
+                else:
+                    blank_id = blank_match.group(1)
+                    accepted = [item.strip() for item in
+                                blank_match.group(2).split("||") if item.strip()]
+                    if not accepted:
+                        problems.append("blank_answer 至少需要一个非空答案: %r" % val)
+                    elif any(item["id"] == blank_id for item in blank_answers):
+                        problems.append("blank_answer ID 重复: %s" % blank_id)
+                    else:
+                        blank_answers.append({
+                            "id": blank_id,
+                            "acceptedAnswers": accepted,
+                            "caseSensitive": False,
+                            "trimWhitespace": True,
+                        })
             else:
                 problems.append("未知控制项: %s" % key)
             continue
@@ -135,6 +158,7 @@ def parse(text):
 
     return {"mode": mode, "selection": selection, "provenance": provenance,
             "group": group, "group_title": group_title, "group_order": group_order,
+            "blank_answers": blank_answers,
             "stem": stem, "choices": choices, "answer": answer,
             "choices_text": choices_text,
             "order": order or ["stem", "choices", "answer"],
@@ -155,7 +179,7 @@ def build_content(p):
 
 def build_layout(p):
     """结构化 layout，供前端零猜测渲染。"""
-    return {
+    layout = {
         "mode": p["mode"],
         "selection": p.get("selection"),
         "stem": p["stem"],
@@ -163,6 +187,9 @@ def build_layout(p):
                     for c in p["choices"]],
         "answer": p["answer"],
     }
+    if p.get("blank_answers"):
+        layout["blankAnswers"] = list(p["blank_answers"])
+    return layout
 
 
 def check_assertions(p):
@@ -178,6 +205,17 @@ def check_assertions(p):
                 errs.append("choice 的 key 必须是连续的 A,B,C…，实际 %r" % (keys,))
     elif p.get("selection"):
         errs.append("只有 mode=choice 可以设置 selection")
+    blank_markers = re.findall(
+        r"\{\{blank:([A-Za-z][A-Za-z0-9_-]*)\}\}", p.get("stem", ""))
+    declared_blank_ids = [item["id"] for item in p.get("blank_answers", [])]
+    if declared_blank_ids and p["mode"] != "fill":
+        errs.append("只有 mode=fill 可以设置 blank_answer")
+    if declared_blank_ids:
+        if len(blank_markers) != len(set(blank_markers)):
+            errs.append("题面中的 blank ID 必须唯一")
+        if set(blank_markers) != set(declared_blank_ids):
+            errs.append("blank_answer 必须与题面中的 {{blank:id}} 一一对应: markers=%r answers=%r" % (
+                blank_markers, declared_blank_ids))
     for field in ("stem", "answer", "choices_text"):
         for ln in (p[field] or "").splitlines():
             if ln.lstrip().startswith("%%%"):

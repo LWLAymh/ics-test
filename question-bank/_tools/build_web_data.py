@@ -191,11 +191,14 @@ def interaction_for(layout):
         if answer_match:
             interaction["correctChoiceIds"] = list(answer_match)
         return interaction
-    return {"kind": {
+    interaction = {"kind": {
         "fill": "fill",
         "short": "short-answer",
         "composite": "composite",
     }.get(mode, "legacy"), "declared": True}
+    if mode == "fill" and layout.get("blankAnswers"):
+        interaction["blankAnswers"] = list(layout["blankAnswers"])
+    return interaction
 
 
 def presentation_for(layout, interaction):

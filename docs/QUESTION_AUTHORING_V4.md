@@ -101,7 +101,7 @@ jg target
 | `schema_version` | 整数 | 固定为 `4` |
 | `id` | 字符串 | 稳定题目 ID，格式 `q-` 加 16 位小写十六进制；排版修改不能改变 |
 | `status` | 字符串 | `draft`、`review` 或 `published` |
-| `type` | 字符串 | `single-choice`、`multiple-choice`、`fill` 或 `short-answer` |
+| `type` | 字符串 | `single-choice`、`multiple-choice`、`fill`、`short-answer` 或 `composite` |
 | `paper_id` | 字符串 | 稳定试卷 ID |
 | `paper_order` | 整数 | 在原卷中的顺序，从 1 开始 |
 | `number_display` | 字符串 | 原卷显示题号，只展示，不参与排序 |
@@ -143,6 +143,41 @@ trim_whitespace = true
 
 简答题没有 `correct_options`、`[[blanks]]` 或选项段。页面只显示题面；学生点击“显示参考答案”后查看 `solution` 并自评，不出现大文本框。
 
+### 4.5 复合题字段
+
+一道原卷大题包含不同交互方式的小问时使用 `type = "composite"`。顶层不写 `correct_options` 或 `[[blanks]]`；每个小问用 `[[parts]]` 显式声明，数组顺序就是原卷顺序：
+
+```toml
+type = "composite"
+
+[[parts]]
+id = "condition"
+label = "（1）"
+type = "multiple-choice"
+correct_options = ["A", "C"]
+
+[[parts]]
+id = "result"
+label = "（2）"
+type = "fill"
+
+[[parts.blanks]]
+id = "value"
+label = "结果"
+placeholder = "十进制整数"
+width = "short"
+accepted_answers = ["42"]
+case_sensitive = false
+trim_whitespace = true
+
+[[parts]]
+id = "reason"
+label = "（3）"
+type = "short-answer"
+```
+
+part 的 `type` 只能是四种基础题型，不允许再次嵌套 `composite`。每个 part 都必须有自己的题面和解析；选择 part 需要选项与 `correct_options`，填空 part 需要 `[[parts.blanks]]`，简答 part 不得声明选项或填空。
+
 ## 5. 正文段
 
 控制行必须独占一行，当前只允许：
@@ -152,12 +187,20 @@ trim_whitespace = true
 %%% option: A
 %%% blank: offset
 %%% solution
+%%% part-stem: condition
+%%% part-option: condition A
+%%% part-blank: result value
+%%% part-solution: reason
 ```
 
 - `stem`：题面 Markdown。填空题可以有多个 `stem` 段，以便在段间插入空。
 - `option`：一个独立选项的 Markdown。选项可包含多段文字、图片、表格和围栏代码；解析器不按行拆选项。
 - `blank`：填空位置，无正文，ID 对应 `[[blanks]]`。
 - `solution`：完整解析 Markdown。正确选项等机器判分数据放在 TOML，不从解析文字中提取。
+- `part-stem: <part-id>`：复合题某个小问的题面，可像普通 `stem` 一样重复出现。
+- `part-option: <part-id> <option-id>`：复合题选择小问的独立选项。
+- `part-blank: <part-id> <blank-id>`：复合题填空小问的原位输入位置，无正文。
+- `part-solution: <part-id>`：该小问自己的答案与解析。顶层 `solution` 只用于跨小问的总解析，可以省略正文内容。
 
 段内 Markdown 除去段边界的空行后原样保留。以 `%%%` 开头的行保留给接口控制，不应作为正文使用。
 

@@ -1117,7 +1117,7 @@
       "exam": "2020期中",
       "questionNo": "第一题 8",
       "summary": "编译器可行优化与别名/副作用限制",
-      "content": "8、仅考虑以下代码，哪个或哪些代码片段在当前主流编译器的标准优化选项下一定会被优化？（假设 int i, int j, int A[N], int B[N], int *p 都是局部变量，int foo(int) 是一个函数）\nA. | 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0 ; j < N ; j++)`<br>`    B[i] *= A[j];` | `int temp = B[i];`<br>`for (j= 0 ; j < N ; j++)`<br>`    temp *= A[j];`<br>`B[i] = temp;` |\nB. | 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0 ; j < N ; j++)`<br>`    m + = i*N*j;` | `temp = i*N;`<br>`for (j= 0 ; j < N ; j++)`<br>`    m + = temp * j;` |\nC. | 优化前 | 优化后 |\n| --- | --- |\n| `i = foo(N);`<br>`j = foo(N)+1;`<br>`if (i != j)`<br>`  m = j ;` | `m = j ;` |\nD. | 优化前 | 优化后 |\n| --- | --- |\n| `if(m==1){`<br>`   i=3;j=4;`<br>`}else{`<br>`   i=4;j=3;`<br>`}`<br>`m=i+j;` | `m = 7;` |\nB",
+      "content": "8. 仅考虑以下代码，哪个或哪些代码片段在当前主流编译器的标准优化选项下一定会被优化？（假设 `int i`、`int j`、`int A[N]`、`int B[N]`、`int *p` 都是局部变量，`int foo(int)` 是一个函数。）\nA.\n| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0; j < N; j++) { B[i] *= A[j]; }` | `int temp = B[i]; for (j = 0; j < N; j++) { temp *= A[j]; } B[i] = temp;` |\n\nB.\n| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0; j < N; j++) { m += i*N*j; }` | `temp = i*N; for (j = 0; j < N; j++) { m += temp*j; }` |\n\nC.\n| 优化前 | 优化后 |\n| --- | --- |\n| `i = foo(N); j = foo(N)+1; if (i != j) { m = j; }` | `m = j;` |\n\nD.\n| 优化前 | 优化后 |\n| --- | --- |\n| `if (m == 1) { i=3; j=4; } else { i=4; j=3; } m=i+j;` | `m = 7;` |\nB",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -1139,23 +1139,23 @@
       "layout": {
         "mode": "choice",
         "selection": "single",
-        "stem": "8、仅考虑以下代码，哪个或哪些代码片段在当前主流编译器的标准优化选项下一定会被优化？（假设 int i, int j, int A[N], int B[N], int *p 都是局部变量，int foo(int) 是一个函数）",
+        "stem": "8. 仅考虑以下代码，哪个或哪些代码片段在当前主流编译器的标准优化选项下一定会被优化？（假设 `int i`、`int j`、`int A[N]`、`int B[N]`、`int *p` 都是局部变量，`int foo(int)` 是一个函数。）",
         "choices": [
           {
             "key": "A",
-            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0 ; j < N ; j++)`<br>`    B[i] *= A[j];` | `int temp = B[i];`<br>`for (j= 0 ; j < N ; j++)`<br>`    temp *= A[j];`<br>`B[i] = temp;` |"
+            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0; j < N; j++) { B[i] *= A[j]; }` | `int temp = B[i]; for (j = 0; j < N; j++) { temp *= A[j]; } B[i] = temp;` |"
           },
           {
             "key": "B",
-            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0 ; j < N ; j++)`<br>`    m + = i*N*j;` | `temp = i*N;`<br>`for (j= 0 ; j < N ; j++)`<br>`    m + = temp * j;` |"
+            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0; j < N; j++) { m += i*N*j; }` | `temp = i*N; for (j = 0; j < N; j++) { m += temp*j; }` |"
           },
           {
             "key": "C",
-            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `i = foo(N);`<br>`j = foo(N)+1;`<br>`if (i != j)`<br>`  m = j ;` | `m = j ;` |"
+            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `i = foo(N); j = foo(N)+1; if (i != j) { m = j; }` | `m = j;` |"
           },
           {
             "key": "D",
-            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `if(m==1){`<br>`   i=3;j=4;`<br>`}else{`<br>`   i=4;j=3;`<br>`}`<br>`m=i+j;` | `m = 7;` |"
+            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `if (m == 1) { i=3; j=4; } else { i=4; j=3; } m=i+j;` | `m = 7;` |"
           }
         ],
         "answer": "B"
@@ -1166,19 +1166,19 @@
         "choices": [
           {
             "id": "A",
-            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0 ; j < N ; j++)`<br>`    B[i] *= A[j];` | `int temp = B[i];`<br>`for (j= 0 ; j < N ; j++)`<br>`    temp *= A[j];`<br>`B[i] = temp;` |"
+            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0; j < N; j++) { B[i] *= A[j]; }` | `int temp = B[i]; for (j = 0; j < N; j++) { temp *= A[j]; } B[i] = temp;` |"
           },
           {
             "id": "B",
-            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0 ; j < N ; j++)`<br>`    m + = i*N*j;` | `temp = i*N;`<br>`for (j= 0 ; j < N ; j++)`<br>`    m + = temp * j;` |"
+            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `for (j = 0; j < N; j++) { m += i*N*j; }` | `temp = i*N; for (j = 0; j < N; j++) { m += temp*j; }` |"
           },
           {
             "id": "C",
-            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `i = foo(N);`<br>`j = foo(N)+1;`<br>`if (i != j)`<br>`  m = j ;` | `m = j ;` |"
+            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `i = foo(N); j = foo(N)+1; if (i != j) { m = j; }` | `m = j;` |"
           },
           {
             "id": "D",
-            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `if(m==1){`<br>`   i=3;j=4;`<br>`}else{`<br>`   i=4;j=3;`<br>`}`<br>`m=i+j;` | `m = 7;` |"
+            "content": "| 优化前 | 优化后 |\n| --- | --- |\n| `if (m == 1) { i=3; j=4; } else { i=4; j=3; } m=i+j;` | `m = 7;` |"
           }
         ],
         "correctChoiceIds": [
@@ -1187,7 +1187,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "8、仅考虑以下代码，哪个或哪些代码片段在当前主流编译器的标准优化选项下一定会被优化？（假设 int i, int j, int A[N], int B[N], int *p 都是局部变量，int foo(int) 是一个函数）",
+        "prompt": "8. 仅考虑以下代码，哪个或哪些代码片段在当前主流编译器的标准优化选项下一定会被优化？（假设 `int i`、`int j`、`int A[N]`、`int B[N]`、`int *p` 都是局部变量，`int foo(int)` 是一个函数。）",
         "answer": "B"
       },
       "presentation": {
@@ -5304,7 +5304,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第14/15讲 19",
       "summary": "编译优化的过程调用限制与存储器别名限制",
-      "content": "19.（4分）编译优化时会有两种限制情况，分别解释说明原因。\n（1）为什么有“过程调用”限制：\n（2）为什么有“存储器别名”限制：\n两个看起来不同的内存引用，可能指向相同的内存位置（1分）；一些编程语言（如C\n语言）允许这样的操作存在或者不检查这样的问题（1分）。\n答：\n过程调用可能存在“边带效应”的操作，例如改变某些全局变量或静态变量的值（1分）；\n即使给定相同参数，过程调用的返回值可能会不同，如受全局变量影响等（1分）。",
+      "content": "19.（4分）编译优化时会有两种限制情况，分别解释说明原因。\n\n1. 为什么有“过程调用”限制？\n2. 为什么有“存储器别名”限制？\n答案：\n\n1. 过程调用可能存在边带效应，例如改变全局变量或静态变量的值；即使参数相同，调用的返回值也可能受全局状态影响而不同。\n2. 两个看起来不同的内存引用可能指向同一内存位置；C 等语言允许这种别名存在，编译器不能随意假设两个引用互不影响。",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5322,20 +5322,20 @@
         "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/228.md"
       },
       "layout": {
-        "mode": "fill",
+        "mode": "short",
         "selection": null,
-        "stem": "19.（4分）编译优化时会有两种限制情况，分别解释说明原因。\n（1）为什么有“过程调用”限制：\n（2）为什么有“存储器别名”限制：\n两个看起来不同的内存引用，可能指向相同的内存位置（1分）；一些编程语言（如C\n语言）允许这样的操作存在或者不检查这样的问题（1分）。",
+        "stem": "19.（4分）编译优化时会有两种限制情况，分别解释说明原因。\n\n1. 为什么有“过程调用”限制？\n2. 为什么有“存储器别名”限制？",
         "choices": [],
-        "answer": "答：\n过程调用可能存在“边带效应”的操作，例如改变某些全局变量或静态变量的值（1分）；\n即使给定相同参数，过程调用的返回值可能会不同，如受全局变量影响等（1分）。"
+        "answer": "答案：\n\n1. 过程调用可能存在边带效应，例如改变全局变量或静态变量的值；即使参数相同，调用的返回值也可能受全局状态影响而不同。\n2. 两个看起来不同的内存引用可能指向同一内存位置；C 等语言允许这种别名存在，编译器不能随意假设两个引用互不影响。"
       },
       "interaction": {
-        "kind": "fill",
+        "kind": "short-answer",
         "declared": true
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "19.（4分）编译优化时会有两种限制情况，分别解释说明原因。\n（1）为什么有“过程调用”限制：\n（2）为什么有“存储器别名”限制：\n两个看起来不同的内存引用，可能指向相同的内存位置（1分）；一些编程语言（如C\n语言）允许这样的操作存在或者不检查这样的问题（1分）。",
-        "answer": "答：\n过程调用可能存在“边带效应”的操作，例如改变某些全局变量或静态变量的值（1分）；\n即使给定相同参数，过程调用的返回值可能会不同，如受全局变量影响等（1分）。"
+        "prompt": "19.（4分）编译优化时会有两种限制情况，分别解释说明原因。\n\n1. 为什么有“过程调用”限制？\n2. 为什么有“存储器别名”限制？",
+        "answer": "答案：\n\n1. 过程调用可能存在边带效应，例如改变全局变量或静态变量的值；即使参数相同，调用的返回值也可能受全局状态影响而不同。\n2. 两个看起来不同的内存引用可能指向同一内存位置；C 等语言允许这种别名存在，编译器不能随意假设两个引用互不影响。"
       },
       "presentation": {
         "status": "ready",
@@ -5352,7 +5352,7 @@
       "exam": "2025阶段测验（第2次）",
       "questionNo": "第14/15讲 20",
       "summary": "不定项：链接器需要解析的符号",
-      "content": "20.（不定项选择，2分）下面这段代码中，属于链接器要解析的符号包括：\n\nA.include B.stdio.h C.int D.cnt  \nE.print_value F.x G.main H.val\n\n```\n#include <stdio.h>\nint cnt = 10;\nextern void print_value(int x);\nint main() {\n    int val = 5;\n    print_value(val + cnt);\n    return 0;\n}\n```\nADEG",
+      "content": "20.（不定项选择，2分）下面这段代码中，属于链接器要解析的符号包括：\n\n```c\n#include <stdio.h>\n\nint cnt = 10;\nextern void print_value(int x);\n\nint main(void) {\n    int val = 5;\n    print_value(val + cnt);\n    return 0;\n}\n```\nA. `include`\nB. `stdio.h`\nC. `int`\nD. `cnt`\nE. `print_value`\nF. `x`\nG. `main`\nH. `val`\n答案：ADEG",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -5370,20 +5370,93 @@
         "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/236.md"
       },
       "layout": {
-        "mode": "short",
-        "selection": null,
-        "stem": "20.（不定项选择，2分）下面这段代码中，属于链接器要解析的符号包括：\n\nA.include B.stdio.h C.int D.cnt  \nE.print_value F.x G.main H.val\n\n```\n#include <stdio.h>\nint cnt = 10;\nextern void print_value(int x);\nint main() {\n    int val = 5;\n    print_value(val + cnt);\n    return 0;\n}\n```",
-        "choices": [],
-        "answer": "ADEG"
+        "mode": "choice",
+        "selection": "multiple",
+        "stem": "20.（不定项选择，2分）下面这段代码中，属于链接器要解析的符号包括：\n\n```c\n#include <stdio.h>\n\nint cnt = 10;\nextern void print_value(int x);\n\nint main(void) {\n    int val = 5;\n    print_value(val + cnt);\n    return 0;\n}\n```",
+        "choices": [
+          {
+            "key": "A",
+            "content": "`include`"
+          },
+          {
+            "key": "B",
+            "content": "`stdio.h`"
+          },
+          {
+            "key": "C",
+            "content": "`int`"
+          },
+          {
+            "key": "D",
+            "content": "`cnt`"
+          },
+          {
+            "key": "E",
+            "content": "`print_value`"
+          },
+          {
+            "key": "F",
+            "content": "`x`"
+          },
+          {
+            "key": "G",
+            "content": "`main`"
+          },
+          {
+            "key": "H",
+            "content": "`val`"
+          }
+        ],
+        "answer": "答案：ADEG"
       },
       "interaction": {
-        "kind": "short-answer",
-        "declared": true
+        "kind": "multiple-choice",
+        "declared": true,
+        "choices": [
+          {
+            "id": "A",
+            "content": "`include`"
+          },
+          {
+            "id": "B",
+            "content": "`stdio.h`"
+          },
+          {
+            "id": "C",
+            "content": "`int`"
+          },
+          {
+            "id": "D",
+            "content": "`cnt`"
+          },
+          {
+            "id": "E",
+            "content": "`print_value`"
+          },
+          {
+            "id": "F",
+            "content": "`x`"
+          },
+          {
+            "id": "G",
+            "content": "`main`"
+          },
+          {
+            "id": "H",
+            "content": "`val`"
+          }
+        ],
+        "correctChoiceIds": [
+          "A",
+          "D",
+          "E",
+          "G"
+        ]
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "20.（不定项选择，2分）下面这段代码中，属于链接器要解析的符号包括：\n\nA.include B.stdio.h C.int D.cnt  \nE.print_value F.x G.main H.val\n\n```\n#include <stdio.h>\nint cnt = 10;\nextern void print_value(int x);\nint main() {\n    int val = 5;\n    print_value(val + cnt);\n    return 0;\n}\n```",
-        "answer": "ADEG"
+        "prompt": "20.（不定项选择，2分）下面这段代码中，属于链接器要解析的符号包括：\n\n```c\n#include <stdio.h>\n\nint cnt = 10;\nextern void print_value(int x);\n\nint main(void) {\n    int val = 5;\n    print_value(val + cnt);\n    return 0;\n}\n```",
+        "answer": "答案：ADEG"
       },
       "presentation": {
         "status": "ready",

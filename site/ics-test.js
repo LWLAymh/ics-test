@@ -31,7 +31,7 @@
     catalog: null, papers: [], questions: [], index: 0, score: 0, records: [], answerBlocks: new Map(), currentMode: '',
     supabase: null, statsChannel: null, currentStats: null, statsQuestionId: '', statsRevealed: false,
     issueChannel: null, reportedIssues: [], issueQuestionIndex: new Map(), issueIndexLoaded: false,
-    reportedThisSession: new Set(), issueReloadTimer: null,
+    reportedThisSession: new Set(), issueReloadTimer: null, pendingCompositeGrade: null,
   };
   const PUBLISHED_QUESTION_KINDS = new Set([
     'single-choice', 'multiple-choice', 'fill', 'short-answer', 'composite',
@@ -150,7 +150,9 @@
 
   function renderLayoutChoice(text) {
     const clean = String(text || '').replace(/\r\n?/g, '\n').trim();
-    return formattedMd ? formattedMd.renderInline(clean) : escapeHtml(clean);
+    // 选项本身也允许是完整的人工 Markdown（表格、围栏代码、图片等），
+    // 不能用 renderInline 把块级结构当成普通字符显示。
+    return formattedMd ? formattedMd.render(clean) : '<pre>' + escapeHtml(clean) + '</pre>';
   }
 
   function typeset(element) {
@@ -553,6 +555,22 @@
       return (heading ? '### ' + heading + '\n\n' : '') + answer;
     }).join('\n\n---\n\n');
     const answerAvailable = ordered.every(function (question) { return question.answerAvailable; });
+    const compositeParts = ordered.map(function (question, index) {
+      const partInteraction = question.partInteraction || question.interaction || {};
+      return {
+        id: question.id,
+        label: String(question.questionNo || '').trim() || ('第 ' + (index + 1) + ' 小问'),
+        kind: partInteraction.kind || 'short-answer',
+        stem: String(question.prompt || '').trim(),
+        choices: Array.isArray(question.layoutChoices) ? question.layoutChoices : [],
+        correctChoiceIds: Array.isArray(partInteraction.correctChoiceIds)
+          ? partInteraction.correctChoiceIds : [],
+        blankAnswers: Array.isArray(partInteraction.blankAnswers)
+          ? partInteraction.blankAnswers : [],
+        answer: String(question.directAnswer || '').trim(),
+        answerAvailable: question.answerAvailable,
+      };
+    });
     const assets = [];
     ordered.forEach(function (question) {
       (question.assets || []).forEach(function (asset) {
@@ -573,6 +591,7 @@
       layout: { mode: 'composite', selection: null, stem: prompt, choices: [], answer: directAnswer },
       interaction: { kind: 'composite', declared: true },
       layoutChoices: null,
+      compositeParts: compositeParts,
       assets: assets,
       groupMembers: ordered.map(function (question) { return question.id; }),
     });
@@ -684,27 +703,77 @@
 
   function parseFillQuestion(source) {
     let gapCount = 0;
-    const gapPattern = /\{\{blank:[A-Za-z][A-Za-z0-9_-]*\}\}|_+\s*(?:\(\d{1,2}\)|[①②③④⑤⑥⑦⑧⑨⑩])\s*_+|_{2,}|＿{2,}|（[\s　]{2,}）|\([\s　]{2,}\)/g;
+    const gaps = [];
+    const gapPattern = /\{\{blank:([A-Za-z][A-Za-z0-9_-]*)\}\}|_+\s*(?:\(\d{1,2}\)|[①②③④⑤⑥⑦⑧⑨⑩])\s*_+|_{2,}|＿{2,}|（[\s　]{2,}）|\([\s　]{2,}\)/g;
     // 空位必须由人工 Markdown 显式写出；不猜测题意。代码补全题的空位通常
     // 正在 fenced code block 内，因此也要替换成占位 token，等 Markdown 渲染
     // 完成后再把 token 换成逐空输入框。
-    const markdown = String(source || '').replace(gapPattern, function () {
+    const markdown = String(source || '').replace(gapPattern, function (_, explicitId) {
       const token = 'ICSGAP' + gapCount + 'X';
+      gaps.push({ id: explicitId || ('legacy-gap-' + gapCount), explicit: Boolean(explicitId) });
       gapCount += 1;
       return token;
     });
-    return gapCount ? { markdown: markdown, count: gapCount } : null;
+    return gapCount ? { markdown: markdown, count: gapCount, gaps: gaps } : null;
   }
 
-  function renderFillQuestion(fillQuestion, formatted) {
+  function renderFillQuestion(fillQuestion, formatted, partIndex) {
     let html = formatted ? renderLayoutStem(fillQuestion.markdown) : renderMarkdown(fillQuestion.markdown);
     for (let i = 0; i < fillQuestion.count; i += 1) {
+      const gap = fillQuestion.gaps[i];
       const input = '<span class="ics-inline-blank"><span class="ics-blank-number">' + (i + 1) + '</span>' +
-        '<input class="ics-blank-input" name="blank-' + i + '" data-gap="' + i + '" ' +
+        '<input class="ics-blank-input" name="blank-' + (partIndex == null ? 'root' : partIndex) + '-' + i + '" ' +
+        'data-gap="' + i + '" data-blank-id="' + escapeHtml(gap.id) + '" ' +
+        (partIndex == null ? '' : 'data-part-index="' + partIndex + '" ') +
         'form="ics-answer-form" aria-label="第 ' + (i + 1) + ' 空" autocomplete="off" required></span>';
       html = html.replace('ICSGAP' + i + 'X', input);
     }
     return html;
+  }
+
+  function gradeFillInputs(inputs, blankAnswers) {
+    const configs = new Map((blankAnswers || []).map(function (item) { return [item.id, item]; }));
+    if (!inputs.length || inputs.some(function (input) { return !configs.has(input.dataset.blankId); })) return null;
+    return inputs.every(function (input) {
+      const config = configs.get(input.dataset.blankId);
+      let actual = input.value;
+      if (config.trimWhitespace !== false) actual = actual.trim();
+      if (!config.caseSensitive) actual = actual.toLocaleLowerCase();
+      return (config.acceptedAnswers || []).some(function (candidate) {
+        let expected = String(candidate);
+        if (config.trimWhitespace !== false) expected = expected.trim();
+        if (!config.caseSensitive) expected = expected.toLocaleLowerCase();
+        return actual === expected;
+      });
+    });
+  }
+
+  function renderCompositeQuestion(question) {
+    return (question.compositeParts || []).map(function (part, index) {
+      const kind = part.kind;
+      const kindLabel = kind === 'single-choice' ? '单选' : kind === 'multiple-choice' ? '多选'
+        : kind === 'fill' ? '填空' : '简答';
+      let body = '';
+      if (kind === 'fill') {
+        const fill = parseFillQuestion(part.stem);
+        body = fill ? renderFillQuestion(fill, true, index) : renderLayoutStem(part.stem);
+      } else {
+        body = renderLayoutStem(part.stem);
+      }
+      if (kind === 'single-choice' || kind === 'multiple-choice') {
+        body += '<div class="ics-composite-choices" data-part-index="' + index + '" data-multiple="' +
+          (kind === 'multiple-choice' ? 'true' : 'false') + '">' + (part.choices || []).map(function (choice) {
+            return '<button class="ics-choice" type="button" data-composite-choice="' + escapeHtml(choice.key) +
+              '" aria-pressed="false"><span class="ics-choice-key">' + escapeHtml(choice.key) + '</span>' +
+              '<span class="ics-choice-content post-content">' + renderLayoutChoice(choice.content) + '</span></button>';
+          }).join('') + '</div>';
+      } else if (kind === 'short-answer') {
+        body += '<p class="ics-composite-note">本小问思考完成后，在整题提交时查看参考答案并自评。</p>';
+      }
+      return '<section class="ics-composite-part" data-composite-part="' + index + '">' +
+        '<header><strong>' + escapeHtml(part.label || ('第 ' + (index + 1) + ' 小问')) + '</strong>' +
+        '<span>' + kindLabel + '</span></header><div class="ics-composite-body">' + body + '</div></section>';
+    }).join('');
   }
 
   function secureShuffle(items) {
@@ -865,6 +934,7 @@
 
   function renderQuestion() {
     const q = state.questions[state.index];
+    state.pendingCompositeGrade = null;
     const number = state.index + 1;
     const expected = simpleExpected(q.directAnswer);
     let choiceQuestion = null;
@@ -906,6 +976,7 @@
     ui.questionContent.innerHTML = choiceQuestion
       ? (q.formatted ? renderLayoutStem(choiceQuestion.stem) : renderMarkdown(choiceQuestion.stem))
       : fillQuestion ? renderFillQuestion(fillQuestion, q.formatted)
+        : compositeQuestion && Array.isArray(q.compositeParts) ? renderCompositeQuestion(q)
         : (q.formatted ? renderLayoutStem(q.prompt) : renderMarkdown(q.prompt));
     ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false; ui.skip.disabled = false;
     const alreadyReported = state.reportedThisSession.has(q.id);
@@ -920,18 +991,18 @@
       : state.currentMode === 'choice'
       ? '选择答案'
       : state.currentMode === 'fill' ? '填写答案'
-        : state.currentMode === 'composite' ? '整道大题完成后查看参考答案'
+        : state.currentMode === 'composite' ? '按小问完成作答'
           : '思考完成后查看参考答案';
     ui.answerHint.textContent = state.currentMode === 'unavailable'
       ? '题目仍按原卷顺序展示，本题不会计入成绩'
       : state.currentMode === 'choice'
       ? (choiceQuestion.multiple ? '可选择多个选项' : '点击一个选项')
       : state.currentMode === 'fill' ? '每个空格单独填写'
-        : state.currentMode === 'composite' ? '各小题共享题面与上下文，统一查看答案后自评'
+        : state.currentMode === 'composite' ? '选择与填空自动核对；简答显示答案后自评'
           : '本题查看答案后自评';
     ui.submit.textContent = state.currentMode === 'unavailable' ? '跳过并继续'
       : (state.currentMode === 'short' || state.currentMode === 'composite')
-        ? (state.currentMode === 'composite' ? '显示整题参考答案' : '显示参考答案')
+        ? (state.currentMode === 'composite' ? '提交整题' : '显示参考答案')
         : '提交答案';
     if (choiceQuestion) {
       ui.choiceList.dataset.multiple = choiceQuestion.multiple ? 'true' : 'false';
@@ -970,6 +1041,69 @@
     ui.next.textContent = state.index === state.questions.length - 1 ? '查看成绩' : '下一题';
   }
 
+  function evaluateComposite(question) {
+    const answers = [];
+    let objectiveCorrect = 0;
+    let objectiveCount = 0;
+    let subjectiveCount = 0;
+    let firstMissing = null;
+    (question.compositeParts || []).forEach(function (part, index) {
+      const root = ui.questionContent.querySelector('[data-composite-part="' + index + '"]');
+      if (!root) return;
+      if (part.kind === 'single-choice' || part.kind === 'multiple-choice') {
+        const list = root.querySelector('.ics-composite-choices');
+        const selected = Array.from(list.querySelectorAll('.selected'))
+          .map(function (button) { return button.dataset.compositeChoice; }).sort();
+        if (!selected.length) {
+          list.classList.add('needs-choice');
+          if (!firstMissing) firstMissing = list;
+          return;
+        }
+        const expected = (part.correctChoiceIds || []).slice().sort();
+        answers.push(part.label + '：' + selected.join(''));
+        if (expected.length) {
+          objectiveCount += 1;
+          if (selected.join('|') === expected.join('|')) objectiveCorrect += 1;
+        } else {
+          subjectiveCount += 1;
+        }
+      } else if (part.kind === 'fill') {
+        const inputs = Array.from(root.querySelectorAll('.ics-blank-input'));
+        const missing = inputs.find(function (input) { return !input.value.trim(); });
+        if (missing) {
+          missing.classList.add('missing');
+          if (!firstMissing) firstMissing = missing;
+          return;
+        }
+        answers.push(part.label + '：' + inputs.map(function (input) {
+          return input.dataset.blankId + '=' + input.value.trim();
+        }).join('；'));
+        const fillResult = gradeFillInputs(inputs, part.blankAnswers);
+        if (fillResult === null) subjectiveCount += 1;
+        else {
+          objectiveCount += 1;
+          if (fillResult) objectiveCorrect += 1;
+        }
+      } else {
+        subjectiveCount += 1;
+        answers.push(part.label + '：查看答案后自评');
+      }
+    });
+    if (firstMissing) {
+      if (firstMissing.focus) firstMissing.focus();
+      return null;
+    }
+    ui.questionContent.querySelectorAll('button, input').forEach(function (control) {
+      control.disabled = true;
+    });
+    return {
+      answers: answers,
+      objectiveCorrect: objectiveCorrect,
+      objectiveCount: objectiveCount,
+      subjectiveCount: subjectiveCount,
+    };
+  }
+
   function submitAnswer(event) {
     event.preventDefault();
     if (state.currentMode === 'unavailable') {
@@ -986,6 +1120,7 @@
       ui.choiceList.classList.add('needs-choice');
       return;
     }
+    let compositeResult = null;
     if (state.currentMode === 'fill') {
       const inputs = Array.from(ui.questionContent.querySelectorAll('.ics-blank-input'));
       const missing = inputs.find(function (input) { return !input.value.trim(); });
@@ -994,13 +1129,24 @@
         input.disabled = true;
         return '第 ' + (index + 1) + ' 空：' + input.value.trim();
       }).join('；');
-    } else if (state.currentMode === 'short' || state.currentMode === 'composite') {
+    } else if (state.currentMode === 'composite') {
+      const q = state.questions[state.index];
+      compositeResult = evaluateComposite(q);
+      if (!compositeResult) return;
+      ui.answer.value = compositeResult.answers.join('；');
+    } else if (state.currentMode === 'short') {
       ui.answer.value = '查看参考答案后自评';
     }
     ui.skip.disabled = true;
     const q = state.questions[state.index];
     const expected = simpleExpected(q.directAnswer);
-    const result = state.currentMode === 'choice' ? autoGrade(ui.answer.value, expected) : null;
+    const fillInputs = state.currentMode === 'fill'
+      ? Array.from(ui.questionContent.querySelectorAll('.ics-blank-input')) : [];
+    const result = state.currentMode === 'choice' ? autoGrade(ui.answer.value, expected)
+      : state.currentMode === 'fill' ? gradeFillInputs(fillInputs,
+        (q.interaction && q.interaction.blankAnswers) || [])
+        : state.currentMode === 'composite' && compositeResult.subjectiveCount === 0 && compositeResult.objectiveCount
+          ? compositeResult.objectiveCorrect === compositeResult.objectiveCount : null;
     ui.answer.disabled = true; ui.submit.disabled = true; ui.feedback.hidden = false;
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
     ui.reference.innerHTML = q.formatted
@@ -1016,10 +1162,14 @@
       recordGrade(0, 'auto');
     } else {
       ui.verdict.textContent = state.currentMode === 'fill'
-        ? '已显示各空的参考内容，请核对后完成自评。'
+        ? '本题尚未配置可安全自动核对的逐空答案，已显示参考内容，请核对后自评。'
         : state.currentMode === 'composite'
-          ? '已显示整道大题的参考答案 / 解析，请整体完成自评。'
+          ? '客观小问自动核对：' + compositeResult.objectiveCorrect + ' / ' + compositeResult.objectiveCount +
+            '；其余 ' + compositeResult.subjectiveCount + ' 个小问请对照答案自评。'
           : '已显示参考答案 / 解析，请根据关键点完成自评。';
+      if (state.currentMode === 'composite') {
+        state.pendingCompositeGrade = compositeResult;
+      }
       ui.selfGrade.hidden = false;
     }
   }
@@ -1119,13 +1269,45 @@
     ui.answer.value = Array.from(ui.choiceList.querySelectorAll('.selected'))
       .map(function (item) { return item.dataset.choice; }).sort().join('');
   });
+  ui.questionContent.addEventListener('click', function (event) {
+    const button = event.target.closest('[data-composite-choice]');
+    if (!button || button.disabled) return;
+    const list = button.closest('.ics-composite-choices');
+    const multiple = list.dataset.multiple === 'true';
+    if (!multiple) {
+      list.querySelectorAll('[data-composite-choice]').forEach(function (item) {
+        const selected = item === button;
+        item.classList.toggle('selected', selected);
+        item.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+    } else {
+      const selected = !button.classList.contains('selected');
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    }
+    list.classList.remove('needs-choice');
+  });
+  ui.questionContent.addEventListener('input', function (event) {
+    if (event.target.matches('.ics-blank-input')) event.target.classList.remove('missing');
+  });
   ui.selfGrade.addEventListener('click', function (event) {
     const button = event.target.closest('[data-grade]');
     if (!button) return;
     const points = Number(button.dataset.grade);
-    ui.verdict.className = 'ics-verdict ' + (points === 1 ? 'correct' : points === 0 ? 'incorrect' : '');
-    ui.verdict.textContent = '已自评：本题 ' + points + ' 分。';
-    recordGrade(points, 'self');
+    let finalPoints = points;
+    if (state.currentMode === 'composite' && state.pendingCompositeGrade) {
+      const pending = state.pendingCompositeGrade;
+      const denominator = pending.objectiveCount + pending.subjectiveCount;
+      finalPoints = denominator
+        ? (pending.objectiveCorrect + points * pending.subjectiveCount) / denominator : points;
+      finalPoints = Math.round(finalPoints * 100) / 100;
+      state.pendingCompositeGrade = null;
+      ui.verdict.textContent = '已完成简答自评；合并客观小问后，本题得 ' + finalPoints + ' 分。';
+    } else {
+      ui.verdict.textContent = '已自评：本题 ' + points + ' 分。';
+    }
+    ui.verdict.className = 'ics-verdict ' + (finalPoints === 1 ? 'correct' : finalPoints === 0 ? 'incorrect' : '');
+    recordGrade(finalPoints, state.currentMode === 'composite' ? 'mixed' : 'self');
   });
   ui.next.addEventListener('click', advanceQuestion);
   ui.skip.addEventListener('click', skipCurrentQuestion);

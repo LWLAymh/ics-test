@@ -152,7 +152,7 @@ powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1 -Paper
 
 ## v4 的核心原则
 
-1. **题型只读字段，不猜正文。** 前端只根据 `type` 渲染 `single-choice`、`multiple-choice`、`fill` 或 `short-answer`。
+1. **题型只读字段，不猜正文。** 前端只根据 `type` 渲染 `single-choice`、`multiple-choice`、`fill`、`short-answer` 或 `composite`；复合题的每个 `part.type` 同样必须显式声明。
 2. **题面由有顺序的内容块组成。** 文字、公式、代码、图片和填空位在题面中的位置都是接口的一部分。
 3. **选项是独立结构。** 每个选项有稳定 ID，并且自身也能包含 Markdown、代码、公式或图片。
 4. **试卷身份与题号结构化。** “哪场考试、第几大题、第几小题、卷内第几道、属于哪个模块”不能从文件名或题面猜。
@@ -310,12 +310,12 @@ web-data/
 }
 ```
 
-- 填空块只允许出现在 `type: fill` 的 `stem.blocks` 中。
+- 填空块只允许出现在 `type: fill` 的 `stem.blocks`，或 `type: composite` 中某个 `part.type: fill` 的 `part.stem.blocks` 中。
 - `id` 在同一道题内唯一，并在题目生命周期内保持稳定。
 - `width` 为 `short`、`medium` 或 `long`，仅控制展示宽度，不改变答案语义。
 - 每个填空块生成一个独立输入框；禁止把多空题退化成一个大文本框。
 
-## 四种题型
+## 五种题型
 
 ### 单选题 `single-choice`
 
@@ -423,6 +423,63 @@ web-data/
 
 简答题不显示输入框。页面只提供“显示参考答案”，显示后提供“需要复习 / 部分正确 / 回答正确”三个自评按钮，并始终保留“下一题”。
 
+### 复合题 `composite`
+
+当原卷的一道大题按顺序混合选择、填空和解释题时，必须保留为一个 `composite`，不得为了适配页面而拆成多次测试。顶层 `stem` 保存所有小问共享的材料；`parts` 保存按原卷顺序排列的小问。每个 part 都有稳定 ID、原始标签、独立题型、题面和答案：
+
+```json
+{
+  "type": "composite",
+  "stem": {"blocks": [{"type": "markdown", "content": "阅读下列程序，回答（1）至（3）。"}]},
+  "parts": [
+    {
+      "id": "condition",
+      "label": "（1）",
+      "type": "multiple-choice",
+      "stem": {"blocks": [{"type": "markdown", "content": "可能成立的是："}]},
+      "options": [
+        {"id": "A", "content": [{"type": "markdown", "content": "情况 A"}]},
+        {"id": "B", "content": [{"type": "markdown", "content": "情况 B"}]}
+      ],
+      "solution": {
+        "status": "verified", "correctOptionIds": ["A", "B"], "blankAnswers": [],
+        "referenceAnswer": {"blocks": [{"type": "markdown", "content": "A、B 均可成立。"}]}
+      }
+    },
+    {
+      "id": "result",
+      "label": "（2）",
+      "type": "fill",
+      "stem": {"blocks": [
+        {"type": "markdown", "content": "最终结果为 "},
+        {"type": "blank", "id": "value", "label": "结果", "width": "short"}
+      ]},
+      "solution": {
+        "status": "verified", "correctOptionIds": [],
+        "blankAnswers": [{"blankId": "value", "acceptedAnswers": ["42"], "caseSensitive": false, "trimWhitespace": true}],
+        "referenceAnswer": {"blocks": [{"type": "markdown", "content": "结果为 42。"}]}
+      }
+    },
+    {
+      "id": "reason",
+      "label": "（3）",
+      "type": "short-answer",
+      "stem": {"blocks": [{"type": "markdown", "content": "解释出现该结果的原因。"}]},
+      "solution": {
+        "status": "verified", "correctOptionIds": [], "blankAnswers": [],
+        "referenceAnswer": {"blocks": [{"type": "markdown", "content": "这里写人工核对的解释。"}]}
+      }
+    }
+  ],
+  "solution": {"status": "verified", "correctOptionIds": [], "blankAnswers": [], "referenceAnswer": {"blocks": []}}
+}
+```
+
+- `parts` 至少两个，part ID 在题内唯一且永久稳定；顺序就是原卷顺序。
+- part 只能是单选、多选、填空或简答，不允许递归嵌套复合题。
+- 选择 part 按选项集合自动判分；填空 part 逐空按 `acceptedAnswers` 自动核对；简答 part 显示参考答案后自评。
+- 顶层 `solution` 只放跨小问的总解析；每个小问自己的答案必须放在对应 part 内，避免答案错位。
+
 ## 答案状态
 
 `solution.status` 只有三种：
@@ -524,6 +581,7 @@ Markdown 图片在构建时转换为显式 image 块并保留原位置。选项�
 | `multiple-choice` | 顺序渲染 blocks | 复选选项 | 按集合判分、统计、下一题 |
 | `fill` | blank 块原位变输入框 | 一个空一个输入框 | 自动判分或揭示答案自评、下一题 |
 | `short-answer` | 顺序渲染 blocks | 不显示输入框 | 显示答案、自评、下一题 |
+| `composite` | 先渲染共享 stem，再按顺序渲染 parts | 每个 part 使用自己的选择、填空或简答交互 | 客观 part 自动判分，简答 part 自评，合并后下一题 |
 
 任一题在“提交答案”或“显示参考答案”后都必须出现清晰的下一题入口；自评未完成时允许“跳过自评，下一题”。
 
@@ -547,6 +605,7 @@ Supabase 中的作答记录也使用稳定 ID，不存题面副本：
 - 单选/多选写 `selectedOptionIds`；多选每个选项的人数和整题正确率分开统计。
 - 填空写 `blankValues`，键必须是 blank ID；公开统计只展示聚合结果，不展示原始自由文本。
 - 简答只写是否揭示答案及 `selfRating`，不伪造客观正确率。
+- 复合题按 part ID 分别记录 `selectedOptionIds`、`blankValues` 与 `selfRating`，同时记录整题聚合分；不得把不同 part 的答案拼成一个不可解析字符串作为长期接口。
 - 题型改变或选项含义改变时应创建新 question ID；仅修正排版和错别字时保留原 ID。
 
 ## 构建期必须阻止的问题
@@ -558,7 +617,7 @@ v4 校验器必须让下列情况直接构建失败：
 3. 单选题没有且仅有一个正确选项，或正确答案引用不存在的选项；
 4. 多选题未显式声明、选项不足，或正确答案引用不存在的选项；
 5. 填空题没有 blank 块、答案遗漏某个 blank ID，或多出不存在的 blank ID；
-6. 简答题含 `options`、blank 块或大文本输入配置；
+6. 简答题含 `options`、blank 块或大文本输入配置；复合题少于两个 part、part ID 重复、part 自身违反对应题型约束；
 7. 图片不存在、越出 `assets/`、缺少 alt 文本，或答案图被放进题面；
 8. Markdown 代码围栏不配对；
 9. `verified` 却没有可用答案；
@@ -580,6 +639,19 @@ v4 校验器必须让下列情况直接构建失败：
 
 人工复核过的 v3 填空题也应在题面中显式写出 `{{blank:<稳定局部 ID>}}`。该标记可以出现在普通 Markdown、表格或 fenced code 中，前端会在原位为每个标记生成一个独立输入框。旧题中的 `____` 仅作为历史兼容保留；新录入或人工修订时不得再依赖下划线、空括号或题号去猜空位。
 
+需要自动核对的空必须紧邻题型控制项显式声明可接受答案：
+
+```markdown
+%%% mode: fill
+%%% blank_answer: carry-flag = 1 || true
+%%% stem
+进位标志为 {{blank:carry-flag}}。
+```
+
+- `blank_answer` 的左侧 ID 必须与题面里的 `{{blank:id}}` 一一对应；同一 ID 不得重复。
+- `||` 分隔多个明确等价的答案。系统默认忽略首尾空白和英文大小写，但不会猜表达式等价、单位换算或近似值。
+- 没有 `blank_answer` 的旧填空题仍可作答，但提交后只能查看答案并自评，不会假装自动判分。
+
 ### 当前接口：把同一大题的多个文件合并为一次作答
 
 如果原卷中的一个大题因为来源文件切片而对应多个 `_curated/*.md`，必须在这些文件中人工写入同一组分组字段。前端不会根据“第二题”“接上题”等文字猜测关联关系。
@@ -597,8 +669,9 @@ v4 校验器必须让下列情况直接构建失败：
 - `group`：同一张试卷内稳定且唯一的小写标识；不同试卷即使题号相同也不能复用来表达同一组。
 - `group_title`：答题页显示的原卷大题号，不得自拟概括性标题。
 - `group_order`：该文件在整道大题内的顺序，从 `1` 开始且不可重复。
-- 三个字段必须同时出现。构建器为整组生成稳定的组合题 ID；题面和答案按 `group_order` 连接，整道大题只进入测试队列一次，并统一显示答案后自评。
-- 分组不会改变各片段自身的 `mode`。每个片段的题型仍应按原卷正确填写，便于后续迁移到 v4 内容块接口。
+- 三个字段必须同时出现。构建器为整组生成稳定的组合题 ID；整道大题只进入测试队列一次。
+- 分组不会改变各片段自身的 `mode`。同一道大题可以按原卷顺序混合单选、多选、填空和简答；前端为每个片段渲染对应控件。选择题按选项集合自动判分，配置了 `blank_answer` 的填空逐空自动核对，简答显示参考答案后自评。
+- 组合题的总分按各小问等权合并：客观小问使用自动判分结果，所有简答或尚未配置安全答案的填空由用户统一自评。题面、选项和答案仍必须人工写入各自的 Markdown 文件，构建器不会从文字猜小问类型。
 
 ### 当前接口：换行与图片
 

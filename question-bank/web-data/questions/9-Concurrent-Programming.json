@@ -3289,7 +3289,7 @@
       "exam": "2025期末",
       "questionNo": "四 2（1）",
       "summary": "Lightswitch 读者-写者：调整信号量操作后的竞争/死锁判断",
-      "content": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty); 两行，是否会导致竞争或死锁问题？答：（  ）[是/否]\n答案：（1）否（1分）",
+      "content": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）\n答案：（1）否（1分）",
       "assets": [],
       "formatted": true,
       "answer": {
@@ -3309,13 +3309,33 @@
       "layout": {
         "mode": "fill",
         "selection": null,
-        "stem": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty); 两行，是否会导致竞争或死锁问题？答：（  ）[是/否]",
+        "stem": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）",
         "choices": [],
-        "answer": "答案：（1）否（1分）"
+        "answer": "答案：（1）否（1分）",
+        "blankAnswers": [
+          {
+            "id": "swap-result",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "partInteraction": {
         "kind": "fill",
-        "declared": true
+        "declared": true,
+        "blankAnswers": [
+          {
+            "id": "swap-result",
+            "acceptedAnswers": [
+              "否"
+            ],
+            "caseSensitive": false,
+            "trimWhitespace": true
+          }
+        ]
       },
       "interaction": {
         "kind": "composite",
@@ -3324,7 +3344,7 @@
       },
       "contentV3": {
         "format": "markdown",
-        "prompt": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换reader函数里的 lock(&reader_switch, &wmutex); 和 V(&empty); 两行，是否会导致竞争或死锁问题？答：（  ）[是/否]",
+        "prompt": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注reader和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）",
         "answer": "答案：（1）否（1分）"
       },
       "group": {

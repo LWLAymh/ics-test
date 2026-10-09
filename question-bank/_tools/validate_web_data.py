@@ -67,6 +67,19 @@ def main():
                     errors.append("%s 的 correctChoiceIds 引用了不存在的选项" % qid)
                 if kind == "single-choice" and len(correct_ids) > 1:
                     errors.append("%s 声明为单选但有多个正确选项" % qid)
+            if kind == "fill":
+                blank_answers = interaction.get("blankAnswers", [])
+                answer_ids = [item.get("id") for item in blank_answers]
+                if len(answer_ids) != len(set(answer_ids)):
+                    errors.append("%s 的 blankAnswers ID 重复" % qid)
+                stem = (q.get("layout") or {}).get("stem", "")
+                for blank_id in answer_ids:
+                    marker = "{{blank:%s}}" % blank_id
+                    if stem.count(marker) != 1:
+                        errors.append("%s 的 %s 未在题面中恰好出现一次" % (qid, marker))
+                for item in blank_answers:
+                    if not item.get("acceptedAnswers"):
+                        errors.append("%s 的填空 %s 没有可接受答案" % (qid, item.get("id")))
             for asset in q.get("assets", []):
                 if not asset.startswith("assets/") or ".." in asset.split("/"):
                     errors.append("%s 资源路径越界: %s" % (qid, asset))
