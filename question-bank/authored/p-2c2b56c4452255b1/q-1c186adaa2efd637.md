@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-1c186adaa2efd637",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-2c2b56c4452255b1",
   "paperOrder": 4,
   "number": {
@@ -99,21 +99,21 @@
 答案：D
 %%% option: A
 ```asm
-irmovq $10, %rdx
-addq %rdx, %rax
+    irmovq $10, %rdx
+    addq %rdx, %rax
 ```
 %%% option: B
 ```asm
-irmovq $10, %rdx
-nop
-addq %rdx, %rax
+    irmovq $10, %rdx
+    nop
+    addq %rdx, %rax
 ```
 %%% option: C
 ```asm
-irmovq $10, %rdx
-nop
-nop
-addq %rdx, %rax
+    irmovq $10, %rdx
+    nop
+    nop
+    addq %rdx, %rax
 ```
 %%% option: D
 以上三个选项都会引发数据冒险

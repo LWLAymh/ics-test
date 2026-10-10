@@ -50,7 +50,42 @@ async function run() {
     await page.route('**/rest/v1/**',route=>route.abort());
     await page.goto(process.env.ICS_TEST_URL || 'http://127.0.0.1:4186/');
     await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
-    assert.equal(await page.locator('#ics-paper option').count(),29);
+    const initialPapers=await page.evaluate(()=>window.__test.state.papers);
+    assert.equal(await page.locator('#ics-paper option').count(),initialPapers.length+1);
+    assert.equal(await page.locator('#ics-source-picker input:checked').count(),2);
+    assert.equal(initialPapers.filter(p=>p.sourceCollection==='csapp-textbook').length,11);
+    for(const collection of ['csapp-textbook','pku-exam']){
+      const other=collection==='pku-exam'?'csapp-textbook':'pku-exam';
+      await page.check('#ics-source-picker input[value="'+collection+'"]');
+      await page.uncheck('#ics-source-picker input[value="'+other+'"]');
+      const expectedPapers=initialPapers.filter(p=>p.sourceCollection===collection);
+      assert.deepEqual(await page.locator('#ics-paper option[value^="p-"]').evaluateAll(options=>options.map(o=>o.value)),expectedPapers.map(p=>p.id));
+      await page.check('input[value="random"]');await page.selectOption('#ics-count','50');await page.click('#ics-start');
+      await page.waitForFunction(()=>!document.querySelector('#ics-quiz').hidden);
+      assert(await page.evaluate(source=>{const {state}=window.__test;return state.questions.length>0&&state.questions.every(q=>state.papers.find(p=>p.id===q.paperId).sourceCollection===source);},collection));
+      await page.click('#ics-abandon');
+      await page.check('input[value="module-all"]');
+      await page.check('#ics-modules input[value="data_representation"]');await page.click('#ics-start');
+      await page.waitForFunction(()=>!document.querySelector('#ics-quiz').hidden);
+      const selectedIds=new Set(expectedPapers.flatMap(p=>p.questionIds));
+      const moduleIds=all.filter(q=>selectedIds.has(q.id)&&q.classification.moduleIds.includes('data_representation')).map(q=>q.id).sort();
+      assert.deepEqual((await page.evaluate(()=>window.__test.state.questions.map(q=>q.id))).sort(),moduleIds);
+      await page.click('#ics-abandon');
+    }
+    await page.check('input[value="exam"]');
+    await page.selectOption('#ics-paper',initialPapers.find(p=>p.sourceCollection==='pku-exam').id);
+    await page.uncheck('#ics-source-picker input[value="pku-exam"]');
+    assert.equal(await page.locator('#ics-paper').inputValue(),'');
+    assert.equal(await page.locator('#ics-paper option').count(),1);
+    await page.click('#ics-start');assert.match(await page.locator('#ics-setup-error').innerText(),/至少选择一个题目来源/);
+    await page.check('#ics-source-picker input[value="csapp-textbook"]');
+    await page.check('input[value="random"]');
+    assert.equal(await page.locator('#ics-exam-type option').count(),2);
+    await page.selectOption('#ics-exam-type','练习');
+    await page.check('#ics-source-picker input[value="pku-exam"]');
+    await page.uncheck('#ics-source-picker input[value="csapp-textbook"]');
+    assert.equal(await page.locator('#ics-exam-type').inputValue(),'');
+    await page.check('#ics-source-picker input[value="csapp-textbook"]');
     // Reported questions: actual math rendering, intact C blocks, and mirrored
     // assembly operands. These checks exercise source repairs, not heuristics.
     const minimum = all.find(q=>q.id==='q-96276f24280880cd');

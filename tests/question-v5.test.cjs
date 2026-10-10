@@ -4,6 +4,32 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('source collections are explicit with a legacy v5 default', () => {
+  assert.equal(api.paperCollection({sourceCollection:'csapp-textbook'}),'csapp-textbook');
+  assert.equal(api.paperCollection({sourceCollection:'pku-exam'}),'pku-exam');
+  assert.equal(api.paperCollection({}),'pku-exam');
+});
+
+test('hand-authored assembly keeps labels at column zero and instructions indented', () => {
+  const q=bank.find(q=>q.id==='q-cb30db95322d3051');
+  const loop=q.parts.find(p=>p.id==='q-4284650c2063ef72').stem.text;
+  assert.match(loop,/\nLOOP:\n    movl \(%eax\),%eax\n    add \$1,%ecx/);
+  assert.match(loop,/\nLOOP:\n    mrmovl \(%eax\),%eax/);
+  const code=q.parts.find(p=>p.id==='q-135a936b527da7c1').stem.text;
+  assert.match(code,/movl %edx,\(%ecx\)\n```\n\n```c\nvoid process/);
+  const mixed=bank.find(q=>q.id==='q-d5d56ae86119aa5f');
+  assert.match(mixed.stem.text,/\n    a\[i\]\[__C__ - i\] = 1;\n```\n\n```asm\n    leaq/);
+  const reads=bank.find(q=>q.id==='q-f224f477623e889f');
+  assert.equal((reads.stem.text.match(/```c\n/g)||[]).length,2);
+});
+
+test('CSAPP explicitly accepts zero constants and states float-format assumptions', () => {
+  const macro=bank.find(q=>q.id==='q-c2a9a2f0bcb68b70');
+  assert.equal(api.gradeBlanks({nr:'3*n+0',nc:'4*n+1'},macro.solution),true);
+  assert.equal(api.gradeBlanks({nr:'3 * n + 0',nc:'4 * n + 1'},macro.solution),true);
+  assert.match(bank.find(q=>q.id==='q-72f5f49722d45dcc').stem.text,/2\\le n\\le B/);
+});
+
 test('reported invalid questions remain backed up with an explicit non-publishable state', () => {
   for (const id of ['q-f39f4e62d028f8d6','q-3376fb77c2e3a398']) {
     const question = bank.find(q=>q.id===id);

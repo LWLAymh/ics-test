@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-bc9df96c65fdf526",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ffd1f5f688babe1b",
   "paperOrder": 1,
   "number": {
@@ -94,15 +94,15 @@
 +++
 %%% stem
 1. 考虑如下代码在x86-64处理器上的运行情况：
-```
-union U{
-char x[12];
-char *p;
-}u;
+```c
+union U {
+    char x[12];
+    char *p;
+} u;
 int main() {
-strcpy(u.x, "I love ICS!");
-printf("%p\n", u.p);
-return 0;
+    strcpy(u.x, "I love ICS!");
+    printf("%p\n", u.p);
+    return 0;
 }
 ```
 提示：

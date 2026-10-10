@@ -32,6 +32,10 @@
       "type": "string",
       "minLength": 1
     },
+    "sourceCollection": {
+      "enum": ["pku-exam", "csapp-textbook"],
+      "description": "题目集合来源，用于组卷筛选。旧 v5 省略时兼容为 pku-exam；新登记必须显式填写。"
+    },
     "title": {
       "type": [
         "string",

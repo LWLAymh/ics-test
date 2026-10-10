@@ -310,10 +310,12 @@ def validate_links(questions, papers):
     seen = set()
     for paper in papers:
         PAPER_VALIDATOR.validate(paper)
-        for order, qid in enumerate(paper["questionIds"], 1):
+        previous_order = 0
+        for qid in paper["questionIds"]:
             question = by_id.get(qid)
-            if not question or question["paperId"] != paper["id"] or question["paperOrder"] != order:
+            if not question or question["paperId"] != paper["id"] or question["paperOrder"] <= previous_order:
                 raise ValueError("paper membership/order mismatch: " + qid)
+            previous_order = question["paperOrder"]
             if qid in seen:
                 raise ValueError("question appears in multiple papers: " + qid)
             seen.add(qid)

@@ -7,6 +7,7 @@
   const $ = (id) => document.getElementById(id);
   const ui = {
     setup: $('ics-setup'), modules: $('ics-modules'), bankSummary: $('ics-bank-summary'),
+    sourcePicker: $('ics-source-picker'),
     modePicker: $('ics-mode-picker'), moduleFieldset: $('ics-module-fieldset'), moduleLegend: $('ics-module-legend'),
     selectToggle: $('ics-select-toggle'), count: $('ics-count'), countField: $('ics-count-field'),
     examType: $('ics-exam-type'), examTypeField: $('ics-exam-type-field'),
@@ -514,11 +515,56 @@
   }
 
   function selectedModuleIds() {
-    return Array.from(ui.modules.querySelectorAll('input:checked')).map(function (input) { return input.value; });
+    return Array.from(ui.modules.querySelectorAll('input:checked:not(:disabled)')).map(function (input) { return input.value; });
+  }
+
+  function selectedSourceCollections() {
+    return Array.from(ui.sourcePicker.querySelectorAll('input:checked')).map(function (input) { return input.value; });
+  }
+
+  function renderSourceFilters() {
+    const sources = selectedSourceCollections();
+    const papers = state.papers.filter(function (paper) { return sources.includes(contract.paperCollection(paper)); });
+    const questionIds = new Set(papers.flatMap(function (paper) { return paper.questionIds; }));
+    const oldBoxes = Array.from(ui.modules.querySelectorAll('input:not(:disabled)'));
+    const oldModules = new Set(selectedModuleIds());
+    const keepAll = !oldBoxes.length || oldBoxes.every(function (box) { return box.checked; });
+    ui.modules.innerHTML = state.catalog.modules.map(function (module) {
+      const count = module.questionIds.filter(function (id) { return questionIds.has(id); }).length;
+      return '<label class="ics-module-card"><input type="checkbox" value="' + escapeHtml(module.id) + '"' +
+        (count && (keepAll || oldModules.has(module.id)) ? ' checked' : '') + (count ? '' : ' disabled') + '>' +
+        '<span><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
+        '<small>' + count + ' 道题</small></span></label>';
+    }).join('');
+    const examType = ui.examType.value;
+    ui.examType.innerHTML = '<option value="">全部类型</option>';
+    Array.from(new Set(papers.map(function (paper) { return contract.EXAM_LABELS[paper.examKind]; }))).forEach(function (type) {
+      const option = document.createElement('option'); option.value = type; option.textContent = type; ui.examType.appendChild(option);
+    });
+    if (Array.from(ui.examType.options).some(function (option) { return option.value === examType; })) ui.examType.value = examType;
+    const previousPaper = ui.paper.value;
+    ui.paper.innerHTML = '<option value="">请选择试卷或章节</option>';
+    [['pku-exam', 'PKU 真题'], ['csapp-textbook', 'CSAPP 章节习题']].forEach(function (group) {
+      const items = papers.filter(function (paper) { return contract.paperCollection(paper) === group[0]; });
+      if (!items.length) return;
+      const optgroup = document.createElement('optgroup'); optgroup.label = group[1];
+      items.forEach(function (paper) {
+        const option = document.createElement('option'); option.value = paper.id;
+        option.textContent = paper.displayName + '（' + paper.stats.quizQuestionCount + ' 题）'; optgroup.appendChild(option);
+      });
+      ui.paper.appendChild(optgroup);
+    });
+    if (papers.some(function (paper) { return paper.id === previousPaper; })) ui.paper.value = previousPaper;
+    const pkuCount = papers.filter(function (paper) { return contract.paperCollection(paper) === 'pku-exam'; }).length;
+    const chapterCount = papers.length - pkuCount;
+    ui.bankSummary.textContent = questionIds.size + ' 道练习题 · ' + pkuCount + ' 份真题 · ' + chapterCount + ' 章课本习题';
+    updateModeUi();
+    updatePaperStatus();
+    if (!sources.length) showSetupError('请至少选择一个题目来源。');
   }
 
   function updateSelectToggle() {
-    const boxes = Array.from(ui.modules.querySelectorAll('input'));
+    const boxes = Array.from(ui.modules.querySelectorAll('input:not(:disabled)'));
     ui.selectToggle.textContent = boxes.length && boxes.every(function (box) { return box.checked; }) ? '取消全选' : '全选';
   }
 
@@ -538,7 +584,7 @@
     ui.moduleLegend.textContent = isAll ? '选择一个知识模块' : '知识模块（可多选）';
 
     if (isAll) {
-      const boxes = Array.from(ui.modules.querySelectorAll('input'));
+      const boxes = Array.from(ui.modules.querySelectorAll('input:not(:disabled)'));
       const selected = boxes.filter(function (box) { return box.checked; });
       const keep = selected[0] || boxes[0];
       boxes.forEach(function (box) { box.checked = box === keep; });
@@ -558,7 +604,8 @@
     const stats = paper.stats;
     ui.paperStatus.textContent = stats.quizQuestionCount + ' 道独立题目 · 单选 ' + stats.singleChoiceCount +
       ' · 多选 ' + stats.multipleChoiceCount + ' · 填空 ' + stats.fillCount +
-      ' · 简答 ' + stats.shortAnswerCount + ' · 综合 ' + stats.compositeCount;
+      ' · 简答 ' + stats.shortAnswerCount + ' · 综合 ' + stats.compositeCount +
+      (contract.paperCollection(paper) === 'csapp-textbook' ? '。' + paper.coverage.note : '');
   }
 
   async function init() {
@@ -570,24 +617,7 @@
       state.papers = (paperPayload.papers || []).filter(function (paper) {
         return Number(paper.stats.publishedQuestionCount || 0) > 0;
       });
-      ui.bankSummary.textContent = Number(state.catalog.stats.quizQuestions || state.catalog.stats.publishedQuestions) +
-        ' 道练习题 · ' + state.papers.length + ' 份试卷 · ' + state.catalog.modules.length + ' 个知识模块';
-      ui.modules.innerHTML = state.catalog.modules.filter(function (module) {
-        return Number(module.publishedQuestionCount || 0) > 0;
-      }).map(function (module) {
-        return '<label class="ics-module-card"><input type="checkbox" value="' + escapeHtml(module.id) + '" checked>' +
-          '<span><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
-          '<small>' + Number(module.quizQuestionCount || module.publishedQuestionCount) + ' 道题</small></span></label>';
-      }).join('');
-      (state.catalog.filters.examTypes || []).forEach(function (type) {
-        const option = document.createElement('option'); option.value = type; option.textContent = type; ui.examType.appendChild(option);
-      });
-      state.papers.forEach(function (paper) {
-        const option = document.createElement('option');
-        option.value = paper.id;
-        option.textContent = paper.displayName + '（' + paper.stats.quizQuestionCount + ' 题）';
-        ui.paper.appendChild(option);
-      });
+      renderSourceFilters();
       initSupabase();
       await loadReportedIssues();
       startIssueSubscription();
@@ -629,11 +659,13 @@
 
   async function startQuiz() {
     const mode = quizMode();
+    const sources = selectedSourceCollections();
+    if (!sources.length) { showSetupError('请至少选择一个题目来源。'); return; }
     const ids = mode === 'exam' ? state.catalog.modules.map(function (module) { return module.id; }) : selectedModuleIds();
     if (!ids.length) { showSetupError('请至少选择一个知识模块。'); return; }
     if (mode === 'module-all' && ids.length !== 1) { showSetupError('模块全练一次只能选择一个知识模块。'); return; }
     if (mode === 'exam' && !ui.paper.value) {
-      showSetupError('整卷练习需要选择一份具体试卷。'); return;
+      showSetupError('请选择一份具体试卷或一个 CSAPP 章节。'); return;
     }
     showSetupError('');
     ui.start.disabled = true; ui.start.textContent = mode === 'mistakes' ? '正在读取错误率…' : '正在准备…';
@@ -642,7 +674,8 @@
       const examType = mode === 'module-all' || mode === 'exam' ? '' : ui.examType.value;
       let pool = bank.filter(function (question) {
         const paper = paperFor(question);
-        return isPublishedQuestion(question) && question.classification.moduleIds.some(function (id) { return ids.includes(id); }) &&
+        return isPublishedQuestion(question) && paper && sources.includes(contract.paperCollection(paper)) &&
+          question.classification.moduleIds.some(function (id) { return ids.includes(id); }) &&
           (!examType || (paper && contract.EXAM_LABELS[paper.examKind] === examType)) &&
           (mode !== 'exam' || question.paperId === ui.paper.value);
       }).map(function (question) { return Object.assign({}, question); });
@@ -1067,6 +1100,7 @@
   }
 
   ui.modePicker.addEventListener('change', updateModeUi);
+  ui.sourcePicker.addEventListener('change', function () { if (state.catalog) renderSourceFilters(); });
   ui.paper.addEventListener('change', updatePaperStatus);
   ui.modules.addEventListener('change', function (event) {
     if (quizMode() === 'module-all' && event.target.matches('input')) {
@@ -1075,7 +1109,7 @@
     updateSelectToggle();
   });
   ui.selectToggle.addEventListener('click', function () {
-    const boxes = Array.from(ui.modules.querySelectorAll('input'));
+    const boxes = Array.from(ui.modules.querySelectorAll('input:not(:disabled)'));
     const allSelected = boxes.length && boxes.every(function (box) { return box.checked; });
     boxes.forEach(function (box) { box.checked = !allSelected; }); updateSelectToggle();
   });

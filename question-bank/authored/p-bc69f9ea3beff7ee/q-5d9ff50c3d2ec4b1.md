@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-5d9ff50c3d2ec4b1",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-bc69f9ea3beff7ee",
   "paperOrder": 21,
   "number": {
@@ -109,7 +109,7 @@ myfunction:
 提示：32位汇编使用栈来传递所有参数，参数压栈顺序为从右至左。
 1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。注意，每行一
 条语句；不能定义新的变量。
-```
+```c
 int myfunction(int a[], int b[], int c[], int d) {
   int i;
   for (i = 0; i <       ; i++) {
@@ -121,16 +121,16 @@ int myfunction(int a[], int b[], int c[], int d) {
 }
 ```
 2. 请给出以下程序的输出结果。
-```
+```c
 int main( )
 {
-int a[5] = {1, 2, 3, 4, 5};
-int b[5] = {9, 8, 5, 6, 4};
-int c[5] = {7, 9, 8, 10, 11};
-int d = 5;
-int ret = myfunction(a, b, c, d);
-printf("%d\n", ret);
-return 0;
+    int a[5] = {1, 2, 3, 4, 5};
+    int b[5] = {9, 8, 5, 6, 4};
+    int c[5] = {7, 9, 8, 10, 11};
+    int d = 5;
+    int ret = myfunction(a, b, c, d);
+    printf("%d\n", ret);
+    return 0;
 }
 ```
 %%% reference

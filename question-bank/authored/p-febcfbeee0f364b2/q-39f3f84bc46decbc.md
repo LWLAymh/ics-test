@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-39f3f84bc46decbc",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-febcfbeee0f364b2",
   "paperOrder": 12,
   "number": {
@@ -277,9 +277,9 @@ absdiff:
 答案：
 
 ```asm
-jg .L4
-ret
-cmpq %rsi, %rdi
+    jg .L4
+    ret
+    cmpq %rsi, %rdi
 ```
 %%% part-stem: q-60f6356d0e6b5538
 （4）有些情况不适合使用条件传送指令。原因是什么？

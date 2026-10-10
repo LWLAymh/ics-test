@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-4521377acbabad7a",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ea869cda0eb89689",
   "paperOrder": 19,
   "number": {
@@ -245,28 +245,20 @@ loop1_check:
 void mystery_sort (long* array, long len)
 {
     long a, b, tmp;
-
     while (_____ > _____)
     {
-
         a = _____;
-
         for (b = _____; b > _____; b--)
         {
-
             if (array[_____] > array[_____])
             {
-
                 _____ = _____;
             }
         }
 
         len--;
-
         tmp = array[_____];
-
         array[_____] = array[_____];
-
         array[_____] = tmp;
     }
 }

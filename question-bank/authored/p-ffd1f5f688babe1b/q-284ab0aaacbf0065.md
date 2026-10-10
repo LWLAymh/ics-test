@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-284ab0aaacbf0065",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ffd1f5f688babe1b",
   "paperOrder": 3,
   "number": {
@@ -94,10 +94,10 @@
 +++
 %%% stem
 3.阅读如下一段代码
-```
+```c
 int s = 0;
 for (int i = 0; i < 32; i++)
-s = s ^ i;
+    s = s ^ i;
 printf("%d", s);
 ```
 问运行这段代码后的输出是什么:

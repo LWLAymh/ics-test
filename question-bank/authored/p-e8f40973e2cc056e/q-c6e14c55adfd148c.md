@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c6e14c55adfd148c",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-e8f40973e2cc056e",
   "paperOrder": 7,
   "number": {
@@ -104,16 +104,16 @@
 7. 调用一个有 8 个 `long` 参数的函数 `f(a1,...,a8)`，调用点使用如下汇编代码序列
 （省略取值细节）：
 ```asm
-movq a1, %rdi
-movq a2, %rsi
-movq a3, %rdx
-movq a4, %rcx
-movq a5, %r8
-movq a6, %r9
-pushq a8
-pushq a7
-callq f
-addq $16, %rsp
+    movq a1, %rdi
+    movq a2, %rsi
+    movq a3, %rdx
+    movq a4, %rcx
+    movq a5, %r8
+    movq a6, %r9
+    pushq a8
+    pushq a7
+    callq f
+    addq $16, %rsp
 ```
 下列说法哪些正确？
 %%% reference

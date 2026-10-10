@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-bcf23ec71ae6c080",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-ffd1f5f688babe1b",
   "paperOrder": 21,
   "number": {
@@ -729,29 +729,29 @@ normal/stall bubble  bubble  normal  normal
 ```
 # Array of 3 elements
 array:
-.quad return
-.quad L1
-.quad L2
+    .quad return
+    .quad L1
+    .quad L2
 # void foo(long n, long *arr)
 # n in %rdi, arr in %rsi
 foo:
-rrmovq %rdi, %rdx           # line 1
-addq %rdx, %rdx             # line 2
-addq %rdx, %rdx             # line 3
-addq %rdx, %rdx             # line 4
-irmovq array, %rcx          # line 5
-addq %rdx, %rcx             # line 6
-andq %rdi, %rdi             # line 7
-jge *%rcx                    # line 8
+    rrmovq %rdi, %rdx           # line 1
+    addq %rdx, %rdx             # line 2
+    addq %rdx, %rdx             # line 3
+    addq %rdx, %rdx             # line 4
+    irmovq array, %rcx          # line 5
+    addq %rdx, %rcx             # line 6
+    andq %rdi, %rdi             # line 7
+    jge *%rcx                    # line 8
 return:                       #
-ret                       # line 9
+    ret                       # line 9
 L2: #
-mrmovq 16(%rsi), %rcx      # line 10
-rmmovq %rcx, 8(%rsi)       # line 11
+    mrmovq 16(%rsi), %rcx      # line 10
+    rmmovq %rcx, 8(%rsi)       # line 11
 L1:                            #
-mrmovq 8(%rsi), %rcx       # line 12
-rmmovq %rcx, (%rsi)        # line 13
-jmp return                   # line 14
+    mrmovq 8(%rsi), %rcx       # line 12
+    rmmovq %rcx, (%rsi)        # line 13
+    jmp return                   # line 14
 ```
 
 

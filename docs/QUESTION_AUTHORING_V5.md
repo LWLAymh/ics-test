@@ -53,7 +53,7 @@ B 的 Markdown
 | id | `q-` 加 16 位小写十六进制；随机生成、全局唯一、永久稳定 |
 | revision | 正整数；修题时递增 |
 | paperId | 所属试卷稳定 ID，必须在 papers.json 中登记 |
-| paperOrder | 当前原卷顺序，从 1 连续排列，与 paper.questionIds 对应 |
+| paperOrder | 正整数排序键；同一试卷/章节内唯一，按 paper.questionIds 严格递增，允许精选题目留下间隔；不等于界面进度编号 |
 | number | 原题号结构，见下节，不承担排序功能 |
 | classification | primaryModuleId、moduleIds、tags；主模块必须在模块数组内 |
 | type | single-choice、multiple-choice、fill、short-answer、composite、unclassified-choice |
@@ -269,6 +269,18 @@ publication 必需字段：
 ```
 
 state 为 draft/review/published，仅 published 进入部署。新人工发布时 basis:human-review，必须填写真实 reviewer 与 ISO 日期 reviewedAt。legacy-migration 仅用于承接已有发布范围，不伪造审核记录；修订并完成审核后应切换 human-review、递增 revision 并更新审核信息。
+
+`source-import` 表示按可追溯题源逐题录入后发布，不声称经过人工审核；没有真实审核者时 reviewer/reviewedAt 均为 null。它不是答案可靠性的证明，答案出处仍由 solution.provenance 独立记录。CSAPP 家庭作业的自行推导参考答案使用 ai-derived / crossChecked:false，不能写为 official。
+
+### 题目来源集合与章节组卷
+
+`authored/papers.json` 中的 `sourceCollection` 显式区分 `pku-exam`（PKU 真题）与 `csapp-textbook`（CSAPP 习题）。兼容旧 v5 时省略字段视为 pku-exam；当前登记均显式填写。前端只读取此字段，不根据题目标题、正文或标签猜来源。
+
+CSAPP 第 N 章的练习题和精选家庭作业共用一个 paper，displayName 为 `CSAPP SecN · 章节名`，examKind 为 practice，year 为 null，coverage.state 为 partial。原题号 N.M 放入 number；paperOrder 使用原小题号 M，保留被排除题目的间隔，questionIds 按此键排序。没有合适题目的章节不创建空 paper。
+
+组卷来源是两个独立、默认选中的复选项；模块数量、试卷/章节列表、考试类型、随机抽题、模块全练及高错题排序均遵守来源筛选。至少选择一个来源；已选试卷若不属于新来源范围应清空，避免残留隐性筛选。
+
+以上是 v5 的兼容扩展：新增可选来源枚举、source-import 发布依据，并允许有间隔但严格递增的 paperOrder。旧 v5 文件仍可校验；不改变任何 Markdown 渲染或评分规则。
 
 sources 记录真实来源 document、provenance（verbatim/reflow/rewritten/unknown），可选行号、legacyId、curated 路径、aliases 和 editorNote。editorNote 只供维护，不渲染为答题标题。来源行号倒序会失败。
 

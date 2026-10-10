@@ -32,7 +32,7 @@ def generated_payloads(modules, papers, questions):
                  "compositeCount": counts["composite"]}
         paper_entries.append(dict(paper, stats=stats))
     catalog = {
-        "schemaVersion": VERSION, "title": "PKU ICS 历年题题库", "contentFormat": "Markdown",
+        "schemaVersion": VERSION, "title": "PKU ICS 真题与 CSAPP 习题", "contentFormat": "Markdown",
         "questionsFile": "questions.json", "papersFile": "papers.json", "assetBase": "./web-data/",
         "modules": module_entries,
         "filters": {"examTypes": sorted({EXAM_LABELS[p["examKind"]] for p in papers}),

@@ -14,6 +14,10 @@
     return payload;
   }
 
+  function paperCollection(paper) {
+    return paper && paper.sourceCollection || 'pku-exam';
+  }
+
   function blankSpans(content) {
     const spans = (content.blanks || []).map(function (blank) {
       let start = -1;
@@ -59,6 +63,6 @@
     });
   }
 
-  return { VERSION: VERSION, EXAM_LABELS: EXAM_LABELS, assertVersion: assertVersion,
+  return { VERSION: VERSION, EXAM_LABELS: EXAM_LABELS, assertVersion: assertVersion, paperCollection: paperCollection,
     blankSpans: blankSpans, gradeChoice: gradeChoice, gradeBlanks: gradeBlanks };
 }));

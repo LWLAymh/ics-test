@@ -4,7 +4,7 @@
     {
       "schemaVersion": "5",
       "id": "p-e8f40973e2cc056e",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2025期末",
       "title": null,
       "year": 2025,
@@ -50,6 +50,7 @@
       "sourceDocuments": [
         "原文/期末/2025期末-无答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 29,
         "publishedQuestionCount": 29,
@@ -65,7 +66,7 @@
     {
       "schemaVersion": "5",
       "id": "p-febcfbeee0f364b2",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2025阶段测验（第1次）",
       "title": null,
       "year": 2025,
@@ -106,6 +107,7 @@
       "sourceDocuments": [
         "原文/阶段测验/2025第1次阶段测验-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 24,
         "publishedQuestionCount": 24,
@@ -121,7 +123,7 @@
     {
       "schemaVersion": "5",
       "id": "p-0439188e8c4bdac1",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2025阶段测验（第2次）",
       "title": null,
       "year": 2025,
@@ -162,6 +164,7 @@
       "sourceDocuments": [
         "原文/阶段测验/2025第2次阶段测验-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 24,
         "publishedQuestionCount": 24,
@@ -177,7 +180,7 @@
     {
       "schemaVersion": "5",
       "id": "p-9c11139ca386240d",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2025Lab测验",
       "title": null,
       "year": 2025,
@@ -244,6 +247,7 @@
       "sourceDocuments": [
         "原文/Lab测验/2025Lab测验-无答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 50,
         "publishedQuestionCount": 50,
@@ -259,7 +263,7 @@
     {
       "schemaVersion": "5",
       "id": "p-0fe6817c7f881573",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2024期中",
       "title": null,
       "year": 2024,
@@ -295,6 +299,7 @@
       "sourceDocuments": [
         "原文/期中/2024期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 19,
         "publishedQuestionCount": 19,
@@ -310,7 +315,7 @@
     {
       "schemaVersion": "5",
       "id": "p-ae9ab20d09974cf3",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2024期末",
       "title": null,
       "year": 2024,
@@ -350,6 +355,7 @@
       "sourceDocuments": [
         "原文/期末/2024期末-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 23,
         "publishedQuestionCount": 23,
@@ -365,7 +371,7 @@
     {
       "schemaVersion": "5",
       "id": "p-bed4802d7c36448b",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2023期中",
       "title": null,
       "year": 2023,
@@ -408,6 +414,7 @@
       "sourceDocuments": [
         "原文/期中/2023期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 26,
         "publishedQuestionCount": 26,
@@ -423,7 +430,7 @@
     {
       "schemaVersion": "5",
       "id": "p-12950876262955d9",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2022期中",
       "title": null,
       "year": 2022,
@@ -464,6 +471,7 @@
       "sourceDocuments": [
         "原文/期中/2022期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 24,
         "publishedQuestionCount": 23,
@@ -479,7 +487,7 @@
     {
       "schemaVersion": "5",
       "id": "p-7016510094998ec2",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2022期末",
       "title": null,
       "year": 2022,
@@ -517,6 +525,7 @@
       "sourceDocuments": [
         "原文/期末/2022期末-无答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 21,
         "publishedQuestionCount": 21,
@@ -532,7 +541,7 @@
     {
       "schemaVersion": "5",
       "id": "p-ffd1f5f688babe1b",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2021期中",
       "title": null,
       "year": 2021,
@@ -572,6 +581,7 @@
       "sourceDocuments": [
         "原文/期中/2021期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 23,
         "publishedQuestionCount": 23,
@@ -587,7 +597,7 @@
     {
       "schemaVersion": "5",
       "id": "p-2c2b56c4452255b1",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2021期末",
       "title": null,
       "year": 2021,
@@ -670,6 +680,7 @@
         "原文/期末/2021期末-带答案/chap 8 解析.md",
         "原文/期末/2021期末-带答案/chap 9 题目.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 60,
         "publishedQuestionCount": 60,
@@ -685,7 +696,7 @@
     {
       "schemaVersion": "5",
       "id": "p-d72f88c4198cf267",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2020期中",
       "title": null,
       "year": 2020,
@@ -718,6 +729,7 @@
       "sourceDocuments": [
         "原文/期中/2020期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 16,
         "publishedQuestionCount": 16,
@@ -733,7 +745,7 @@
     {
       "schemaVersion": "5",
       "id": "p-f99ca20e1a729e32",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2020期末",
       "title": null,
       "year": 2020,
@@ -780,6 +792,7 @@
       "sourceDocuments": [
         "原文/期末/2020期末-无答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 30,
         "publishedQuestionCount": 30,
@@ -795,7 +808,7 @@
     {
       "schemaVersion": "5",
       "id": "p-a12b4c73bf0c30d2",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2019期中",
       "title": null,
       "year": 2019,
@@ -833,6 +846,7 @@
       "sourceDocuments": [
         "原文/期中/2019期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 21,
         "publishedQuestionCount": 21,
@@ -848,7 +862,7 @@
     {
       "schemaVersion": "5",
       "id": "p-98acf19964247e22",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2019期末",
       "title": null,
       "year": 2019,
@@ -891,6 +905,7 @@
       "sourceDocuments": [
         "原文/期末/2019期末-无答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 26,
         "publishedQuestionCount": 26,
@@ -906,7 +921,7 @@
     {
       "schemaVersion": "5",
       "id": "p-eaef0ab4d19e72c9",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2018期中",
       "title": null,
       "year": 2018,
@@ -943,6 +958,7 @@
       "sourceDocuments": [
         "原文/期中/2018期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 20,
         "publishedQuestionCount": 19,
@@ -958,7 +974,7 @@
     {
       "schemaVersion": "5",
       "id": "p-e3f869956fc29bd8",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2018期末",
       "title": null,
       "year": 2018,
@@ -997,6 +1013,7 @@
       "sourceDocuments": [
         "原文/期末/2018期末-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 22,
         "publishedQuestionCount": 22,
@@ -1012,7 +1029,7 @@
     {
       "schemaVersion": "5",
       "id": "p-5e37064fe519258d",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2017期中",
       "title": null,
       "year": 2017,
@@ -1048,6 +1065,7 @@
       "sourceDocuments": [
         "原文/期中/2017期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 19,
         "publishedQuestionCount": 18,
@@ -1063,7 +1081,7 @@
     {
       "schemaVersion": "5",
       "id": "p-382bf3b10bc8d35a",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2017期末",
       "title": null,
       "year": 2017,
@@ -1109,6 +1127,7 @@
       "sourceDocuments": [
         "原文/期末/2017期末-无答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 29,
         "publishedQuestionCount": 29,
@@ -1124,7 +1143,7 @@
     {
       "schemaVersion": "5",
       "id": "p-662d741f28b2bed0",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2016期中",
       "title": null,
       "year": 2016,
@@ -1167,6 +1186,7 @@
       "sourceDocuments": [
         "原文/期中/2016期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 26,
         "publishedQuestionCount": 26,
@@ -1182,7 +1202,7 @@
     {
       "schemaVersion": "5",
       "id": "p-bc69f9ea3beff7ee",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2016期末",
       "title": null,
       "year": 2016,
@@ -1226,6 +1246,7 @@
       "sourceDocuments": [
         "原文/期末/2016期末-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 27,
         "publishedQuestionCount": 22,
@@ -1241,7 +1262,7 @@
     {
       "schemaVersion": "5",
       "id": "p-89e8b793519e36c6",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2015期中",
       "title": null,
       "year": 2015,
@@ -1284,6 +1305,7 @@
       "sourceDocuments": [
         "原文/期中/2015期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 26,
         "publishedQuestionCount": 26,
@@ -1299,7 +1321,7 @@
     {
       "schemaVersion": "5",
       "id": "p-08e665c0f6e47348",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2015期末",
       "title": null,
       "year": 2015,
@@ -1343,6 +1365,7 @@
       "sourceDocuments": [
         "原文/期末/2015期末-20160104-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 27,
         "publishedQuestionCount": 27,
@@ -1358,7 +1381,7 @@
     {
       "schemaVersion": "5",
       "id": "p-4486554924f4e320",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2014期中",
       "title": null,
       "year": 2014,
@@ -1399,6 +1422,7 @@
       "sourceDocuments": [
         "原文/期中/2014期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 24,
         "publishedQuestionCount": 24,
@@ -1414,7 +1438,7 @@
     {
       "schemaVersion": "5",
       "id": "p-089627b27e9b5e79",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2014期末",
       "title": null,
       "year": 2014,
@@ -1460,6 +1484,7 @@
       "sourceDocuments": [
         "原文/期末/2014期末-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 29,
         "publishedQuestionCount": 16,
@@ -1475,7 +1500,7 @@
     {
       "schemaVersion": "5",
       "id": "p-d0ae6162300a90de",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2013期中",
       "title": null,
       "year": 2013,
@@ -1515,6 +1540,7 @@
       "sourceDocuments": [
         "原文/期中/2013期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 23,
         "publishedQuestionCount": 23,
@@ -1530,7 +1556,7 @@
     {
       "schemaVersion": "5",
       "id": "p-ac5fea2cf89e5bed",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2013期末",
       "title": null,
       "year": 2013,
@@ -1574,6 +1600,7 @@
       "sourceDocuments": [
         "原文/期末/2013期末-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 27,
         "publishedQuestionCount": 20,
@@ -1589,7 +1616,7 @@
     {
       "schemaVersion": "5",
       "id": "p-ea869cda0eb89689",
-      "revision": 1,
+      "revision": 2,
       "displayName": "2012期中",
       "title": null,
       "year": 2012,
@@ -1629,6 +1656,7 @@
       "sourceDocuments": [
         "原文/期中/2012期中-带答案.md"
       ],
+      "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 23,
         "publishedQuestionCount": 23,
@@ -1639,6 +1667,484 @@
         "fillCount": 4,
         "shortAnswerCount": 1,
         "compositeCount": 3
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-f4835e390ee6ce49",
+      "revision": 1,
+      "displayName": "CSAPP Sec2 · 信息的表示和处理",
+      "sourceCollection": "csapp-textbook",
+      "title": "信息的表示和处理",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-55312298cd5561c9",
+        "q-14bd226433913679",
+        "q-40eae851d24907df",
+        "q-06d8adc2438d633d",
+        "q-72f5f49722d45dcc",
+        "q-f056683b1b65eedc",
+        "q-891259272b9c30b2",
+        "q-663d8a321c079baf",
+        "q-0957a01aa1c7af9f",
+        "q-3e41fd24ac20c647",
+        "q-96a266cdbb9db246"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/homework/2.82-2.91-floating-point-basics.md"
+      ],
+      "stats": {
+        "questionCount": 11,
+        "publishedQuestionCount": 11,
+        "quizQuestionCount": 11,
+        "verifiedAnswerCount": 11,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 4,
+        "shortAnswerCount": 5,
+        "compositeCount": 1
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-f7485360f6c6060d",
+      "revision": 1,
+      "displayName": "CSAPP Sec3 · 程序的机器级表示",
+      "sourceCollection": "csapp-textbook",
+      "title": "程序的机器级表示",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-9ad128c39d15c8ef",
+        "q-00fd59705ea47ab2",
+        "q-612092e69e1b921d",
+        "q-386987c9307bd84b",
+        "q-e99de6be6bcc7042",
+        "q-c2a9a2f0bcb68b70",
+        "q-775da05d618f67c8",
+        "q-4115df441ce2be40",
+        "q-cc225ba7cc1417ad",
+        "q-40a597ce05d95c45"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/homework/3.58-3.63-arithmetic-and-control-flow.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/homework/3.64-3.69-arrays-and-structures.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/homework/3.70-3.75-unions-stack-and-floating-point.md"
+      ],
+      "stats": {
+        "questionCount": 10,
+        "publishedQuestionCount": 10,
+        "quizQuestionCount": 10,
+        "verifiedAnswerCount": 10,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 4,
+        "shortAnswerCount": 3,
+        "compositeCount": 2
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-e855951134d0e9f7",
+      "revision": 1,
+      "displayName": "CSAPP Sec4 · 处理器体系结构",
+      "sourceCollection": "csapp-textbook",
+      "title": "处理器体系结构",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-805315e5d479d411",
+        "q-88d2db0a30f24496"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第04章-处理器体系结构/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第04章-处理器体系结构/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第04章-处理器体系结构/homework/4.51-4.57-processor-control.md"
+      ],
+      "stats": {
+        "questionCount": 2,
+        "publishedQuestionCount": 2,
+        "quizQuestionCount": 2,
+        "verifiedAnswerCount": 2,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 0,
+        "shortAnswerCount": 1,
+        "compositeCount": 0
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-0db63d22232f572c",
+      "revision": 1,
+      "displayName": "CSAPP Sec5 · 优化程序性能",
+      "sourceCollection": "csapp-textbook",
+      "title": "优化程序性能",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-8de02946fff9a230"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第05章-优化程序性能/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第05章-优化程序性能/练习题答案.md"
+      ],
+      "stats": {
+        "questionCount": 1,
+        "publishedQuestionCount": 1,
+        "quizQuestionCount": 1,
+        "verifiedAnswerCount": 1,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 0,
+        "shortAnswerCount": 0,
+        "compositeCount": 0
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-c039f10f0dbe7e3e",
+      "revision": 1,
+      "displayName": "CSAPP Sec6 · 存储器层次结构",
+      "sourceCollection": "csapp-textbook",
+      "title": "存储器层次结构",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-b8378621681fb01a",
+        "q-9e8e0f44bbf0df0e",
+        "q-3918da43fd0f2705",
+        "q-a6290729b21f28cc",
+        "q-648ff478198a0aab",
+        "q-f944b313f0622053",
+        "q-f5605f3009d40dc5",
+        "q-5806de49ca1af9ce",
+        "q-9b4b302d390c38b5",
+        "q-bdbfe53bb26f3f23",
+        "q-ca5f55956d03145c",
+        "q-47b69e3b61cd3a23",
+        "q-a280af9a9921d9b1",
+        "q-59b8b0ce14f01d6e",
+        "q-fc9b5ebf93b37432",
+        "q-7851d48fd43fa8c7",
+        "q-792e6893a3c496f2",
+        "q-bc908234f1e08260",
+        "q-cdff9df45e2136bb",
+        "q-05b4c656fcf1ad07",
+        "q-6865caf05518e6ba",
+        "q-850a2640dd55bf52",
+        "q-2acbedcb62e2d75b"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/homework/6.22-6.30-disks-and-cache-basics.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/6.4/6.4.4-fully-associative-caches.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/homework/6.31-6.37-cache-addressing-and-transpose.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/homework/6.38-6.46-cache-locality-and-optimization.md"
+      ],
+      "stats": {
+        "questionCount": 23,
+        "publishedQuestionCount": 23,
+        "quizQuestionCount": 23,
+        "verifiedAnswerCount": 23,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 21,
+        "shortAnswerCount": 0,
+        "compositeCount": 1
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-e8af86f345a050ee",
+      "revision": 1,
+      "displayName": "CSAPP Sec7 · 链接",
+      "sourceCollection": "csapp-textbook",
+      "title": "链接",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-7ca21ebde142bd2e",
+        "q-1acb19897e46192d",
+        "q-f993b7d7723ec769",
+        "q-0243b02e85eba5ce",
+        "q-921d7d42b875fe49",
+        "q-485c31012a670956",
+        "q-d57b27992fe08d7d"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/homework/7.6-7.13-linking-and-object-files.md"
+      ],
+      "stats": {
+        "questionCount": 7,
+        "publishedQuestionCount": 7,
+        "quizQuestionCount": 7,
+        "verifiedAnswerCount": 7,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 2,
+        "shortAnswerCount": 4,
+        "compositeCount": 0
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-146f52a44a7f14ec",
+      "revision": 1,
+      "displayName": "CSAPP Sec8 · 异常控制流",
+      "sourceCollection": "csapp-textbook",
+      "title": "异常控制流",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-b48ebb1ac5f7f48a",
+        "q-ed23c53608b10bd0",
+        "q-b6133702293b28c7",
+        "q-ea7005680e372c05",
+        "q-f11269369f2a8bdc",
+        "q-8d15aec921e12043",
+        "q-6ca244f85fe85fab",
+        "q-09c50b559c59c6fd",
+        "q-e70504f6b9e42492",
+        "q-ed0e5bc669f9a846",
+        "q-f8705aa5cefeddfd",
+        "q-c6dac96523e72112",
+        "q-3981fee2d56eb83b",
+        "q-9f8b6e8e45f9b9b6"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/homework/8.9-8.15-processes-and-fork.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/homework/8.16-8.21-process-graphs-and-waiting.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/homework/8.22-8.26-signals-and-shell.md"
+      ],
+      "stats": {
+        "questionCount": 14,
+        "publishedQuestionCount": 14,
+        "quizQuestionCount": 14,
+        "verifiedAnswerCount": 14,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 1,
+        "fillCount": 8,
+        "shortAnswerCount": 4,
+        "compositeCount": 0
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-5d1091f10c242495",
+      "revision": 1,
+      "displayName": "CSAPP Sec9 · 虚拟内存",
+      "sourceCollection": "csapp-textbook",
+      "title": "虚拟内存",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-5aaf382af9d9f858",
+        "q-43ce2610bb3f6245",
+        "q-cd0265acf56a6fab",
+        "q-77b2af49394019df",
+        "q-1f45a702c4ea1814",
+        "q-b618e9b2501d9315",
+        "q-580fa185a7e36442"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/homework/9.11-9.13-address-translation.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/homework/9.14-9.20-memory-mapping-and-allocation.md"
+      ],
+      "stats": {
+        "questionCount": 7,
+        "publishedQuestionCount": 7,
+        "quizQuestionCount": 7,
+        "verifiedAnswerCount": 7,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 6,
+        "shortAnswerCount": 0,
+        "compositeCount": 0
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-c081961b91de6e5c",
+      "revision": 1,
+      "displayName": "CSAPP Sec10 · 系统级 I/O",
+      "sourceCollection": "csapp-textbook",
+      "title": "系统级 I/O",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-59d17769e8300691",
+        "q-ac707fe3d952e2e1",
+        "q-e4025cbdaa78b15e"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/homework/10.6-10.10-system-level-io.md"
+      ],
+      "stats": {
+        "questionCount": 3,
+        "publishedQuestionCount": 3,
+        "quizQuestionCount": 3,
+        "verifiedAnswerCount": 3,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 1,
+        "shortAnswerCount": 1,
+        "compositeCount": 0
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-46c262dc3df0f9e1",
+      "revision": 1,
+      "displayName": "CSAPP Sec11 · 网络编程",
+      "sourceCollection": "csapp-textbook",
+      "title": "网络编程",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-a6a1811b8c984602"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第11章-网络编程/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第11章-网络编程/练习题答案.md"
+      ],
+      "stats": {
+        "questionCount": 1,
+        "publishedQuestionCount": 1,
+        "quizQuestionCount": 1,
+        "verifiedAnswerCount": 1,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 0,
+        "shortAnswerCount": 0,
+        "compositeCount": 0
+      }
+    },
+    {
+      "schemaVersion": "5",
+      "id": "p-0854288fe48c1276",
+      "revision": 1,
+      "displayName": "CSAPP Sec12 · 并发编程",
+      "sourceCollection": "csapp-textbook",
+      "title": "并发编程",
+      "year": null,
+      "academicYear": null,
+      "term": "unknown",
+      "examKind": "practice",
+      "sequence": null,
+      "questionIds": [
+        "q-2b8b77844036d027",
+        "q-9d79e1fae3025ef4",
+        "q-7a93e11483c8b03d",
+        "q-b62930709c10ca7c",
+        "q-330a03ec6bb48432",
+        "q-9a6489100605fcb5",
+        "q-d3bfff8fb116c31c",
+        "q-17b51998a11d7f35"
+      ],
+      "coverage": {
+        "state": "partial",
+        "note": "章节精选，非完整收录；不收录完整编程、画图或实验题。参考答案请留意各题来源标注。"
+      },
+      "sourceDocuments": [
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/chapter.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/练习题答案.md",
+        "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/homework/12.16-12.39-concurrent-programming.md"
+      ],
+      "stats": {
+        "questionCount": 8,
+        "publishedQuestionCount": 8,
+        "quizQuestionCount": 8,
+        "verifiedAnswerCount": 8,
+        "singleChoiceCount": 1,
+        "multipleChoiceCount": 0,
+        "fillCount": 1,
+        "shortAnswerCount": 6,
+        "compositeCount": 0
       }
     }
   ]

@@ -1,0 +1,32 @@
++++json
+{"schemaVersion":"5","id":"q-cdff9df45e2136bb","revision":1,"paperId":"p-c039f10f0dbe7e3e","paperOrder":39,"number":{"display":"6.39","major":{"display":"第 6 章","value":"6"},"minor":{"display":"6.39","value":"39"},"parts":[]},"classification":{"primaryModuleId":"memory_hierarchy","moduleIds":["memory_hierarchy"],"tags":["csapp","homework","chapter-6"]},"type":"fill","stem":{"format":"markdown","blanks":[{"id":"writes","marker":"{{blank:writes}}","occurrence":0,"width":"short","label":"写总数"},{"id":"misses","marker":"{{blank:misses}}","occurrence":0,"width":"short","label":"写不命中数"},{"id":"rate","marker":"{{blank:rate}}","occurrence":0,"width":"short","label":"不命中百分比"}]},"solution":{"state":"available","grading":"blanks","blankAnswers":[{"blankId":"writes","method":"exact","acceptedAnswers":["1024"],"normalize":{"trimWhitespace":true,"caseSensitive":true}},{"blankId":"misses","method":"exact","acceptedAnswers":["256"],"normalize":{"trimWhitespace":true,"caseSensitive":true}},{"blankId":"rate","method":"exact","acceptedAnswers":["25","25.0"],"normalize":{"trimWhitespace":true,"caseSensitive":true}}],"reference":{"format":"markdown"},"provenance":{"origin":"ai-derived","crossChecked":false,"attribution":"AI推导，非官方解析"}},"publication":{"state":"published","basis":"source-import","reviewer":null,"reviewedAt":null,"issues":[]},"sources":[{"document":"https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/homework/6.38-6.46-cache-locality-and-optimization.md#L45","provenance":"rewritten","editorNote":"CSAPP3e家庭作业；补齐6.38条件，写分配模型；非官方解析。"}]}
++++
+%%% stem
+沿用6.38的条件：缓存2048字节、直接映射、块32字节、写分配，初始为空。`sizeof(int)==4`，square从地址0开始，唯一内存访问为square元素，i、j在寄存器。定义及本题代码如下：
+
+```c
+struct point_color {
+    int c;
+    int m;
+    int y;
+    int k;
+};
+struct point_color square[16][16];
+int i, j;
+for (i = 0; i < 16; i++) {
+    for (j = 0; j < 16; j++) {
+        square[j][i].c = 0;
+        square[j][i].m = 0;
+        square[j][i].y = 1;
+        square[j][i].k = 0;
+    }
+}
+```
+
+A. 写总数：{{blank:writes}}。
+
+B. 写不命中总数：{{blank:misses}}。
+
+C. 不命中率：{{blank:rate}}%（只填数值）。
+%%% reference
+写总数1024。按列访问点，每次跨256字节，行j与j+8映射到同一缓存行；下一列重用之前已经被驱逐。因此每个点的c写不命中，随后m、y、k命中，共256次不命中，不命中率25%。

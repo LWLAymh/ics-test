@@ -7,14 +7,14 @@
 (function(){try{var t=localStorage.getItem('lwl-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <title>ICS 练习</title>
-<meta name="description" content="从 PKU ICS 历年题中按知识模块随机组卷并评分。">
+<meta name="description" content="从 PKU ICS 真题与 CSAPP 课本习题中按知识模块组卷练习。">
 <meta name="author" content="LWLAymh">
 <link rel="canonical" href="https://LWLAymh.github.io/ics-test/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ICS 练习">
 <meta property="og:url" content="https://LWLAymh.github.io/ics-test/">
 <meta property="og:title" content="ICS 练习">
-<meta property="og:description" content="从 PKU ICS 历年题中按知识模块随机组卷并评分。">
+<meta property="og:description" content="从 PKU ICS 真题与 CSAPP 课本习题中按知识模块组卷练习。">
 <link rel="icon" href="./images/favicon.jpg">
 <link rel="apple-touch-icon" href="./images/favicon.jpg">
 <script>
@@ -47,12 +47,19 @@ window.MathJax = {
     <div class="ics-panel-head">
       <div><p class="ics-eyebrow">开始练习</p><h2>选择你的练习范围</h2><p id="ics-bank-summary">正在读取题库…</p></div>
     </div>
+    <fieldset class="ics-source-fieldset">
+      <legend>题目来源</legend>
+      <div class="ics-source-picker" id="ics-source-picker">
+        <label><input type="checkbox" value="pku-exam" checked><span>PKU 真题</span></label>
+        <label><input type="checkbox" value="csapp-textbook" checked><span>CSAPP 习题</span></label>
+      </div>
+    </fieldset>
     <fieldset class="ics-mode-fieldset">
       <legend>练习方式</legend>
       <div class="ics-mode-grid" id="ics-mode-picker">
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="random" checked><span><strong>模块随机</strong><small>从一个或多个模块随机抽题</small></span></label>
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="module-all"><span><strong>模块全练</strong><small>完成一个模块的全部可用题目</small></span></label>
-        <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="exam"><span><strong>按卷练习</strong><small>按原顺序完成一份试卷中的可用题目</small></span></label>
+        <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="exam"><span><strong>按卷 / 章节</strong><small>按顺序完成一份真题或一章课本习题</small></span></label>
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="mistakes"><span><strong>高错题优先</strong><small>按大家的错误率从高到低练习</small></span></label>
       </div>
     </fieldset>
@@ -75,8 +82,8 @@ window.MathJax = {
       <label class="ics-field" id="ics-exam-type-field">考试类型
         <select id="ics-exam-type"><option value="">全部类型</option></select>
       </label>
-      <label class="ics-field ics-paper-field" id="ics-paper-field" hidden>具体试卷
-        <select id="ics-paper"><option value="">请选择试卷</option></select>
+      <label class="ics-field ics-paper-field" id="ics-paper-field" hidden>试卷 / 章节
+        <select id="ics-paper"><option value="">请选择试卷或章节</option></select>
         <small id="ics-paper-status"></small>
       </label>
       <label class="ics-field" id="ics-min-attempts-field" hidden>最低作答人数

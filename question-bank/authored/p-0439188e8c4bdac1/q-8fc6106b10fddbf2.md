@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-8fc6106b10fddbf2",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-0439188e8c4bdac1",
   "paperOrder": 10,
   "number": {
@@ -69,7 +69,7 @@
 %%% reference
 答：代码示例如下（2分）：
 ```asm
-mrmovq 0(%rdx),%rsp
-ret
+    mrmovq 0(%rdx),%rsp
+    ret
 ```
 注意：代码不用一模一样，关键点是前一条指令读内存到`rsp`寄存器，后一条指令是`ret`

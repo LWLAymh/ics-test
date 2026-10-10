@@ -139,6 +139,34 @@ class ContractTests(unittest.TestCase):
         q["publication"].update(state="published", basis="human-review", reviewer=None, reviewedAt=None)
         self.invalid(q)
 
+    def test_source_import_does_not_claim_human_review(self):
+        q = self.example("short-answer")
+        q["publication"].update(state="published", basis="source-import", reviewer=None, reviewedAt=None)
+        validate_question(q)
+
+    def test_selected_chapters_keep_gaps_but_reject_reordered_or_duplicate_keys(self):
+        papers = copy.deepcopy(self.papers)
+        questions = copy.deepcopy(self.questions)
+        by_id = {q["id"]: q for q in questions}
+        ids = papers[0]["questionIds"]
+        for i, qid in enumerate(ids, 1):
+            by_id[qid]["paperOrder"] = i * 10
+        validate_links(questions, papers)
+        by_id[ids[1]]["paperOrder"] = by_id[ids[0]]["paperOrder"]
+        with self.assertRaises(ValueError):
+            validate_links(questions, papers)
+
+    def test_collections_and_textbook_provenance_are_explicit(self):
+        collections = {p["id"]: p["sourceCollection"] for p in self.papers}
+        self.assertEqual(set(collections.values()), {"pku-exam", "csapp-textbook"})
+        textbook = [q for q in self.questions if collections[q["paperId"]] == "csapp-textbook"]
+        self.assertGreaterEqual(len(textbook), 11)
+        for q in textbook:
+            self.assertEqual(q["publication"]["basis"], "source-import")
+            self.assertIsNone(q["publication"]["reviewer"])
+            self.assertIsNone(q["publication"]["reviewedAt"])
+            self.assertTrue(all("7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66" in s["document"] for s in q["sources"]))
+
     def test_unclassified_choices_not_publishable(self):
         q = self.example("unclassified-choice")
         q["publication"]["state"] = "published"
