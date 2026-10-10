@@ -46603,7 +46603,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b8edc298950e949d",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 4,
       "number": {
@@ -46626,11 +46626,13 @@
         "tags": []
       },
       "publication": {
-        "state": "published",
+        "state": "review",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
         "issues": [
+          "retired-invalid-question",
+          "source-answer-disputed",
           "原卷答案为 B（3 条），原卷亦注明「这个条件相当于 !(a==0 || a==1 || a==-1)」。线上有读者反馈「理论最小值是 1」：若先用 setcc 无分支地算出谓词、再跳一次，条件转移可减到 1 条；用条件传送（cmov）甚至可以做到 0 条。题干问的是「至少包含几条」，而标准编译输出与理论下界并不相同，本题问法本身有歧义。按维护约定保留原卷答案 B 并在此记录争议，不擅自改判。"
         ]
       },
@@ -114398,7 +114400,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ddc156550a8238c1",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ea869cda0eb89689",
       "paperOrder": 21,
       "number": {
@@ -114479,7 +114481,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "**Problem D Stack (10 pts)**\n\nStack discipline. Consider the following C code and assembly code for a recursive function . **10pts**\n\n\n```c\nint gcd(int a, int b)\n{\n    if (!b)\n    {\n        return a;\n    }\n\n    return gcd(b, a % b);\n}\n```\n\n```asm\n0x08048394 <+0>:     push   %ebp\n0x08048395 <+1>:     mov    %esp,%ebp\n0x08048397 <+3>:     sub    $0x10,%esp\n0x0804839a <+6>:     mov    0x8(%ebp),%eax\n0x0804839d <+9>:     mov    0xc(%ebp),%ecx\n0x080483a0 <+12>:    test   %ecx,%ecx\n0x080483a2 <+14>:    je     0x80483b7 <gcd+35>\n0x080483a4 <+16>:    mov    %eax,%edx\n0x080483a6 <+18>:    sar    $0x1f,%edx\n0x080483a9 <+21>:    idiv   %ecx\n0x080483ab <+23>:    mov    %eax,0x4(%esp)\n0x080483af <+27>:    mov    %ecx,(%esp)\n0x080483b2 <+30>:    call   0x8048394 <gcd>\n0x080483b7 <+35>:    leave\n0x080483b8 <+36>:    ret\n```\n\nImagine that a program makes the procedure call gcd(213, 18). Also imagine that prior to the\ninvocation, the value of %esp is 0xffff1000—that is, 0xffff1000 is the value of %esp immediately\nbefore the execution of the call instruction.\n\n**A.** Note that the call gcd(213, 18) will result in the following function invocations: gcd(213, 18),\ngcd(18, 15), gcd(15, 3), and gcd(3, 0). Using the provided code and your knowledge of IA32 stack\ndiscipline, fill in the stack diagram with the values that would be present immediately before the\nexecution of the leave instruction for gcd(15, 3). Supply numerical values wherever possible, and\ncross out each blank for which there is insufficient information to complete with a numerical\nvalue.\n\n**Hints:** The following set of C style statements describes an approximation of the operation of\nthe instruction idiv %ecx, where ’/’ is the division operator and ’%’ is the modulo operator:\n\n```\n%eax = %eax / %ecx\n\n%edx = %eax % %ecx\n```\n\nAlso, recall that leave is equivalent to movl %ebp, %esp; popl %ebp\n\n***Part A:***\n\n| 地址 | 填答 |\n| --- | --- |\n| `0xffff1008` | ________ |\n| `0xffff1004` | ________ |\n| `0xffff1000` | ________ |\n| `0xffff0ffc` | ________ |\n| `0xffff0ff8` | ________ |\n| `0xffff0ff4` | ________ |\n| `0xffff0ff0` | ________ |\n| `0xffff0fec` | ________ |\n| `0xffff0fe8` | ________ |\n| `0xffff0fe4` | ________ |\n| `0xffff0fe0` | ________ |\n| `0xffff0fdc` | ________ |\n| `0xffff0fd8` | ________ |\n| `0xffff0fd4` | ________ |\n| `0xffff0fd0` | ________ |\n| `0xffff0fcc` | ________ |\n| `0xffff0fc8` | ________ |\n| `0xffff0fc4` | ________ |\n| `0xffff0fc0` | ________ |\n| `0xffff0fbc` | ________ |\n| `0xffff0fb8` | ________ |\n| `0xffff0fb4` | ________ |\n| `0xffff0fb0` | ________ |"
+            "text": "**Problem D Stack (10 pts)**\n\nStack discipline. Consider the following C code and assembly code for a recursive function . **10pts**\n\n\n```c\nint gcd(int a, int b)\n{\n    if (!b)\n    {\n        return a;\n    }\n\n    return gcd(b, a % b);\n}\n```\n\n```asm\n0x08048394 <+0>:     push   %ebp\n0x08048395 <+1>:     mov    %esp,%ebp\n0x08048397 <+3>:     sub    $0x10,%esp\n0x0804839a <+6>:     mov    0x8(%ebp),%eax\n0x0804839d <+9>:     mov    0xc(%ebp),%ecx\n0x080483a0 <+12>:    test   %ecx,%ecx\n0x080483a2 <+14>:    je     0x80483b7 <gcd+35>\n0x080483a4 <+16>:    mov    %eax,%edx\n0x080483a6 <+18>:    sar    $0x1f,%edx\n0x080483a9 <+21>:    idiv   %ecx\n0x080483ab <+23>:    mov    %eax,0x4(%esp)\n0x080483af <+27>:    mov    %ecx,(%esp)\n0x080483b2 <+30>:    call   0x8048394 <gcd>\n0x080483b7 <+35>:    leave\n0x080483b8 <+36>:    ret\n```\n\nImagine that a program makes the procedure call gcd(213, 18). Also imagine that prior to the\ninvocation, the value of `%esp` is 0xffff1000—that is, 0xffff1000 is the value of `%esp` immediately\nbefore the execution of the call instruction.\n\n**A.** Note that the call gcd(213, 18) will result in the following function invocations: gcd(213, 18),\ngcd(18, 15), gcd(15, 3), and gcd(3, 0). Using the provided code and your knowledge of IA32 stack\ndiscipline, fill in the stack diagram with the values that would be present immediately before the\nexecution of the leave instruction for gcd(15, 3). Supply numerical values wherever possible, and\ncross out each blank for which there is insufficient information to complete with a numerical\nvalue.\n\n**Hints:** The following set of C style statements describes an approximation of the operation of\nthe instruction idiv `%ecx`, where ’/’ is the division operator and ’%’ is the modulo operator:\n\n```\n%eax = %eax / %ecx\n\n%edx = %eax % %ecx\n```\n\nAlso, recall that leave is equivalent to movl `%ebp`, `%esp`; popl `%ebp`\n\n***Part A:***\n\n| 地址 | 填答 |\n| --- | --- |\n| `0xffff1008` | ________ |\n| `0xffff1004` | ________ |\n| `0xffff1000` | ________ |\n| `0xffff0ffc` | ________ |\n| `0xffff0ff8` | ________ |\n| `0xffff0ff4` | ________ |\n| `0xffff0ff0` | ________ |\n| `0xffff0fec` | ________ |\n| `0xffff0fe8` | ________ |\n| `0xffff0fe4` | ________ |\n| `0xffff0fe0` | ________ |\n| `0xffff0fdc` | ________ |\n| `0xffff0fd8` | ________ |\n| `0xffff0fd4` | ________ |\n| `0xffff0fd0` | ________ |\n| `0xffff0fcc` | ________ |\n| `0xffff0fc8` | ________ |\n| `0xffff0fc4` | ________ |\n| `0xffff0fc0` | ________ |\n| `0xffff0fbc` | ________ |\n| `0xffff0fb8` | ________ |\n| `0xffff0fb4` | ________ |\n| `0xffff0fb0` | ________ |"
           },
           "solution": {
             "state": "available",
