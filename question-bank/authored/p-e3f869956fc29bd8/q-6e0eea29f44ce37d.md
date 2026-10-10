@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-6e0eea29f44ce37d",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-e3f869956fc29bd8",
   "paperOrder": 21,
   "number": {
@@ -81,25 +81,13 @@
       "stem": {
         "format": "markdown",
         "blanks": [
-          {
-            "id": "legacy-gap-0",
-            "marker": "__",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
+                    {
             "id": "legacy-gap-1",
             "marker": "__",
             "occurrence": 1,
             "width": "medium"
           },
-          {
-            "id": "legacy-gap-2",
-            "marker": "__",
-            "occurrence": 2,
-            "width": "medium"
-          },
-          {
+                    {
             "id": "legacy-gap-3",
             "marker": "__",
             "occurrence": 3,
@@ -119,19 +107,11 @@
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
         },
         "blankAnswers": [
-          {
-            "blankId": "legacy-gap-0",
-            "method": "self"
-          },
-          {
+                    {
             "blankId": "legacy-gap-1",
             "method": "self"
           },
-          {
-            "blankId": "legacy-gap-2",
-            "method": "self"
-          },
-          {
+                    {
             "blankId": "legacy-gap-3",
             "method": "self"
           }
@@ -174,25 +154,13 @@
       "stem": {
         "format": "markdown",
         "blanks": [
-          {
-            "id": "legacy-gap-0",
-            "marker": "__",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
+                    {
             "id": "legacy-gap-1",
             "marker": "__",
             "occurrence": 1,
             "width": "medium"
           },
-          {
-            "id": "legacy-gap-2",
-            "marker": "__",
-            "occurrence": 2,
-            "width": "medium"
-          },
-          {
+                    {
             "id": "legacy-gap-3",
             "marker": "__",
             "occurrence": 3,
@@ -230,19 +198,11 @@
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
         },
         "blankAnswers": [
-          {
-            "blankId": "legacy-gap-0",
-            "method": "self"
-          },
-          {
+                    {
             "blankId": "legacy-gap-1",
             "method": "self"
           },
-          {
-            "blankId": "legacy-gap-2",
-            "method": "self"
-          },
-          {
+                    {
             "blankId": "legacy-gap-3",
             "method": "self"
           },
@@ -334,10 +294,12 @@ return 0;
 （写错任意一个不得分）
 %%% part-stem: q-c36c9b861c58b521
 2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。
-(a) 2000, 2000
-(b) 1500, 1500
-(c) 1000, 1000
-(d) 2, 2
+
+    - (a) 2000, 2000
+    - (b) 1500, 1500
+    - (c) 1000, 1000
+    - (d) 2, 2
+
 3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，
 于是对程序进行了如下改写。
 ```c
@@ -369,22 +331,20 @@ return 0;
         26. V(&si);
         27. V(&sj);
         28. }
-
-```
-
 29. return NULL;
 30. }
-31. `int main() {`
+31. int main() {
 32. pthread_t tid1, tid2;
 33. Sem_init(&si, 0, 1);
 34. Sem_init(&sj, 0, 1);
-35. `pthread_create(&tid1, NULL, do_stuff1, NULL)`;
-36. `pthread_create(&tid2, NULL, do_stuff2, NULL)`;
-37. `pthread_join(tid1, NULL)`;
-38. `pthread_join(tid2, NULL)`;
-39. `printf("%d\n", i)`;
+35. pthread_create(&tid1, NULL, do_stuff1, NULL);
+36. pthread_create(&tid2, NULL, do_stuff2, NULL);
+37. pthread_join(tid1, NULL);
+38. pthread_join(tid2, NULL);
+39. printf("%d\n", i);
 40. return 0;
 41. }
+```
 请问卜廷江同学的程序有什么潜在问题？为什么？
 4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保
 证输出结果稳定为2000, 2000，应该如何改动？
