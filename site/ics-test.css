@@ -1,10 +1,22 @@
+/* Circled digits ①–⑳ are used all over the paper listings to tag relocation
+   entries and answer rows. Cascadia Code does contain them, but at a much
+   narrower advance than the surrounding code, so they render shrunken and are
+   hard to match against the answer table. Route only that Unicode range to a
+   font that draws them at full width; every other character still falls
+   through to the mono stack untouched. If none of the local faces exist this
+   is a no-op and behaviour is unchanged. */
+@font-face {
+  font-family: "ics-circled";
+  src: local("Microsoft YaHei"), local("Noto Sans CJK SC"), local("SimSun"), local("Yu Gothic");
+  unicode-range: U+2460-24FF, U+2776-2793, U+3251-325F;
+}
 :root {
   color-scheme: light;
   --bg: #f5f6f8; --surface: #fff; --bg-soft: #f1f3f5; --border: #e0e4e9;
   --text: #20252d; --text-muted: #656e7c; --accent: #254c7b; --accent-soft: #eef3f9;
   --ics-success: #247053; --ics-danger: #ac4141; --ics-warn: #926f24;
   --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-  --font-mono: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+  --font-mono: "ics-circled", "Cascadia Code", Consolas, "SFMono-Regular", monospace;
 }
 [data-theme="dark"] {
   color-scheme: dark;
