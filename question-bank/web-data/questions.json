@@ -59519,7 +59519,7 @@
     {
       "schemaVersion": "5",
       "id": "q-96576bae25379ede",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 22,
       "number": {
@@ -60058,9 +60058,45 @@
                 }
               ]
             }
+          },
+          {
+            "id": "def-bufp0",
+            "marker": "{{blank:def-bufp0}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "def-bufp1",
+            "marker": "{{blank:def-bufp1}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "reloc-1",
+            "marker": "{{blank:reloc-1}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "reloc-2",
+            "marker": "{{blank:reloc-2}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "reloc-6",
+            "marker": "{{blank:reloc-6}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "reloc-9",
+            "marker": "{{blank:reloc-9}}",
+            "occurrence": 0,
+            "width": "medium"
           }
         ],
-        "text": "第三题（10分）\n本题基于下列 `m.c` 及 `foo.c` 文件编译生成的 `m.o` 和 `foo.o`。编译和运行在 x86-64/Linux 下完成，编译过程未加优化选项。\n```c\n//m.c\nvoid myswap();\nchar buf[2] = {1, 2};\nvoid *bufp0;\nvoid *bufp1;\nchar temp;\nint main(){\n    ......//略去题目无关代码\n    myswap(temp);\n    ......//略去题目无关代码\n    return 0;\n}\n```\n\n```c\n//foo.c\nextern int buf[];\nchar *bufp0;\n......//略去题目无关代码\nchar *bufp1 = &buf[1];\nvoid myswap(char temp){\n    static int count = 0;\n    ......//略去题目无关代码\n    bufp0 = &buf[0];\n    temp = *bufp0;\n    ......//略去题目无关代码\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    ......//略去题目无关代码\n    count++;\n}\n```\n### （1）\n\n对于每个 `foo.o` 中定义和引用的符号，请用“是”或“否”指出它是否在模块 `foo.o` 的 .symtab 节中有符号表条目。如果存在条目，请指出其符号类型（局部、全局或外部）、在 `foo.o` 中所处的节（.data、.text、.bss 或 COMMON）以及强弱信息（强、弱、非强非弱）；如果不存在条目，请将该行后继空白处标记为“/”（请将下表画到答题纸上）。\n\n| 符号 | .symtab 条目? | 符号类型 | 节 | 强弱 |\n| --- | --- | --- | --- | --- |\n| `bufp1` | 是 | 全局 | .data | 强 |\n| `buf` | {{blank:buf-present}} | {{blank:buf-type}} | {{blank:buf-section}} | {{blank:buf-binding}} |\n| `bufp0` | {{blank:bufp0-present}} | {{blank:bufp0-type}} | {{blank:bufp0-section}} | {{blank:bufp0-binding}} |\n| `temp` | {{blank:temp-present}} | {{blank:temp-type}} | {{blank:temp-section}} | {{blank:temp-binding}} |\n| `count` | {{blank:count-present}} | {{blank:count-type}} | {{blank:count-section}} | {{blank:count-binding}} |\n\n### （2）\n\n我们使用 `REF(myswap.m)->DEF(myswap.foo)` 表示链接器将把模块 `m` 中对符号 `myswap` 的任意引用与模块 `foo` 中对 `myswap` 的定义关联起来。请用这种方法说明链接器如何解析下面各模块对多重定义符号的引用。如果链接时出错，请标记“错误”；如果链接器从定义中任意选择一个，请标记“未知”。\n\n- a) `REF(bufp0.m) -> DEF(________________)`\n- b) `REF(bufp1.m) -> DEF(________________)`\n\n### （3）\n\n下面分别给出 `m.o` 和 `foo.o` 的反汇编，以及采用某个配置链接后的可执行程序反汇编。根据答题需要，部分信息略有删减。\n\n目标文件 `m.o` / `foo.o` 的反汇编：\n\n```asm\n0000000000......<main>:\n55                 push   %rbp\n48 89 e5           mov    %rsp,%rbp\n48 83 ec 10         sub    $0x10,%rsp\n......\nb8 00 00 00 00     mov    $0x0,%eax\ne8 00 00 00 00     callq  1a <main+0x1a>     # ①\n......\nc9                 leaveq\nc3                 retq\n\n0000000000......<myswap>:\n55                 push   %rbp\n48 89 e5            mov    %rsp,%rbp\n......\n48 c7 05 00 00 00 00 00 00 00 00\n    movq   $0x0,0x0(%rip)        ③②\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n④\n0f b6 00              movzbl (%rax),%eax\n88 45 fc              mov    %al,-0x4(%rbp)\n......\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n⑤\n48 8b 15 00 00 00 00 mov     0x0(%rip),%rdx\n⑥\n0f b6 12              movzbl (%rdx),%edx\n88 10                 mov    %dl,(%rax)\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n⑦\n0f b6 55 fc          movzbl -0x4(%rbp),%edx\n88 10                 mov    %dl,(%rax)\n......\n8b 05 00 00 00 00     mov    0x0(%rip),%eax\n⑧\n83 c0 01              add    $0x1,%eax\n89 05 00 00 00 00     mov    %eax,0x0(%rip)\n⑨\n90                     nop\n5d                     pop    %rbp\nc3                     retq\n\n```\n\n链接后的可执行文件反汇编：\n\n```asm\n0000000000000f28 <main>:\nf28: 55                  push    %rbp\nf29: 48 89 e5            mov     %rsp,%rbp\nf2c: 48 83 ec 10         sub     $0x10,%rsp\n......略去部分和答题无关的信息......\nf38: b8 00 00 00 00      mov     $0x0,%eax\nf3d: e8 ①                callq   1000 <myswap>\n......略去部分和答题无关的信息......\nffd: c9                  leaveq\nffe: c3                  retq\n......略去部分和答题无关的信息......\n0000000000001000 <myswap>:\n1000: 55                  push    %rbp\n1001: 48 89 e5            mov     %rsp,%rbp\n......略去部分和答题无关的信息......\n100d: 48 c7 05 ?? ?? ?? ?? ?? ?? ?? ??\n      movq     ②,0x????(%rip)\n1018: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n101f: 0f b6 00             movzbl (%rax),%eax\n1018: 88 45 fc             mov      %eax,-0x4(%rbp)\n......略去部分和答题无关的信息......\n1035: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n103c: 48 8b 15 ?? ?? ?? ?? mov      ⑥(%rip),%rdx\n1043: 0f b6 12             movzbl  (%rdx),%edx\n1046: 88 10                mov      %dl,(%rax)\n1048: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n104f: 0f b6 55 fc          movzbl  -0x4(%rbp),%edx\n1053: 88 10                mov      %dl,(%rax)\n......略去部分和答题无关的信息......\n1057: 8b 05 ?? ?? ?? ??    mov      0x????(%rip),%eax\n105d: 83 c0 01             add      $0x1,%eax\n1060: 89 05 ?? ?? ?? ??    mov      %eax,⑨(%rip)\n1066: 90                  nop\n1067: 5d                  pop      %rbp\n1068: c3                  retq\n......略去部分和答题无关的信息......\n000000000000a000 <buf>:\n......略去部分和答题无关的信息......\n000000000000a050 <bufp1>:\n......略去部分和答题无关的信息......\n000000000000cb24 <count.1837>:\n......略去部分和答题无关的信息......\n000000000000cb28 <bufp0>:\n```\n\n注：原卷的链接后反汇编在 `myswap` 中将 `88 45 fc` 一行标为 `1018`，与前一条 `1018` 地址重复。此处依原卷保留。\n\n以上反汇编中用①至⑨标记了相关重定位条目。请根据下表中的重定位信息，计算引用值并填写下表。（请将下表的第1列和第3列画到答题纸上）\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ① | `r.offset = 0x16`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ② | `r.offset = 0x14`　　`r.symbol = buf` `r.type = R_X86_64_32`　　`r.addend = +0` |  |\n| ⑥ | `r.offset = 0x3f`　　`r.symbol = bufp1` `r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ⑨ | `r.offset = 0x62`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |"
+        "text": "第三题（10分）\n本题基于下列 `m.c` 及 `foo.c` 文件编译生成的 `m.o` 和 `foo.o`。编译和运行在 x86-64/Linux 下完成，编译过程未加优化选项。\n```c\n//m.c\nvoid myswap();\nchar buf[2] = {1, 2};\nvoid *bufp0;\nvoid *bufp1;\nchar temp;\nint main(){\n    ......//略去题目无关代码\n    myswap(temp);\n    ......//略去题目无关代码\n    return 0;\n}\n```\n\n```c\n//foo.c\nextern int buf[];\nchar *bufp0;\n......//略去题目无关代码\nchar *bufp1 = &buf[1];\nvoid myswap(char temp){\n    static int count = 0;\n    ......//略去题目无关代码\n    bufp0 = &buf[0];\n    temp = *bufp0;\n    ......//略去题目无关代码\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    ......//略去题目无关代码\n    count++;\n}\n```\n### （1）\n\n对于每个 `foo.o` 中定义和引用的符号，请用“是”或“否”指出它是否在模块 `foo.o` 的 .symtab 节中有符号表条目。如果存在条目，请指出其符号类型（局部、全局或外部）、在 `foo.o` 中所处的节（.data、.text、.bss 或 COMMON）以及强弱信息（强、弱、非强非弱）；如果不存在条目，请将该行后继空白处标记为“/”（请将下表画到答题纸上）。\n\n| 符号 | .symtab 条目? | 符号类型 | 节 | 强弱 |\n| --- | --- | --- | --- | --- |\n| `bufp1` | 是 | 全局 | .data | 强 |\n| `buf` | {{blank:buf-present}} | {{blank:buf-type}} | {{blank:buf-section}} | {{blank:buf-binding}} |\n| `bufp0` | {{blank:bufp0-present}} | {{blank:bufp0-type}} | {{blank:bufp0-section}} | {{blank:bufp0-binding}} |\n| `temp` | {{blank:temp-present}} | {{blank:temp-type}} | {{blank:temp-section}} | {{blank:temp-binding}} |\n| `count` | {{blank:count-present}} | {{blank:count-type}} | {{blank:count-section}} | {{blank:count-binding}} |\n\n### （2）\n\n我们使用 `REF(myswap.m)->DEF(myswap.foo)` 表示链接器将把模块 `m` 中对符号 `myswap` 的任意引用与模块 `foo` 中对 `myswap` 的定义关联起来。请用这种方法说明链接器如何解析下面各模块对多重定义符号的引用。如果链接时出错，请标记“错误”；如果链接器从定义中任意选择一个，请标记“未知”。\n\n- a) `REF(bufp0.m) -> DEF(`{{blank:def-bufp0}}`)`\n- b) `REF(bufp1.m) -> DEF(`{{blank:def-bufp1}}`)`\n\n### （3）\n\n下面分别给出 `m.o` 和 `foo.o` 的反汇编，以及采用某个配置链接后的可执行程序反汇编。根据答题需要，部分信息略有删减。\n\n目标文件 `m.o` / `foo.o` 的反汇编：\n\n```asm\n0000000000......<main>:\n55                 push   %rbp\n48 89 e5           mov    %rsp,%rbp\n48 83 ec 10         sub    $0x10,%rsp\n......\nb8 00 00 00 00     mov    $0x0,%eax\ne8 00 00 00 00     callq  1a <main+0x1a>     # ①\n......\nc9                 leaveq\nc3                 retq\n\n0000000000......<myswap>:\n55                 push   %rbp\n48 89 e5            mov    %rsp,%rbp\n......\n48 c7 05 00 00 00 00 00 00 00 00\n    movq   $0x0,0x0(%rip)        ③②\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n④\n0f b6 00              movzbl (%rax),%eax\n88 45 fc              mov    %al,-0x4(%rbp)\n......\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n⑤\n48 8b 15 00 00 00 00 mov     0x0(%rip),%rdx\n⑥\n0f b6 12              movzbl (%rdx),%edx\n88 10                 mov    %dl,(%rax)\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n⑦\n0f b6 55 fc          movzbl -0x4(%rbp),%edx\n88 10                 mov    %dl,(%rax)\n......\n8b 05 00 00 00 00     mov    0x0(%rip),%eax\n⑧\n83 c0 01              add    $0x1,%eax\n89 05 00 00 00 00     mov    %eax,0x0(%rip)\n⑨\n90                     nop\n5d                     pop    %rbp\nc3                     retq\n\n```\n\n链接后的可执行文件反汇编：\n\n```asm\n0000000000000f28 <main>:\nf28: 55                  push    %rbp\nf29: 48 89 e5            mov     %rsp,%rbp\nf2c: 48 83 ec 10         sub     $0x10,%rsp\n......略去部分和答题无关的信息......\nf38: b8 00 00 00 00      mov     $0x0,%eax\nf3d: e8 ①                callq   1000 <myswap>\n......略去部分和答题无关的信息......\nffd: c9                  leaveq\nffe: c3                  retq\n......略去部分和答题无关的信息......\n0000000000001000 <myswap>:\n1000: 55                  push    %rbp\n1001: 48 89 e5            mov     %rsp,%rbp\n......略去部分和答题无关的信息......\n100d: 48 c7 05 ?? ?? ?? ?? ?? ?? ?? ??\n      movq     ②,0x????(%rip)\n1018: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n101f: 0f b6 00             movzbl (%rax),%eax\n1018: 88 45 fc             mov      %eax,-0x4(%rbp)\n......略去部分和答题无关的信息......\n1035: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n103c: 48 8b 15 ?? ?? ?? ?? mov      ⑥(%rip),%rdx\n1043: 0f b6 12             movzbl  (%rdx),%edx\n1046: 88 10                mov      %dl,(%rax)\n1048: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n104f: 0f b6 55 fc          movzbl  -0x4(%rbp),%edx\n1053: 88 10                mov      %dl,(%rax)\n......略去部分和答题无关的信息......\n1057: 8b 05 ?? ?? ?? ??    mov      0x????(%rip),%eax\n105d: 83 c0 01             add      $0x1,%eax\n1060: 89 05 ?? ?? ?? ??    mov      %eax,⑨(%rip)\n1066: 90                  nop\n1067: 5d                  pop      %rbp\n1068: c3                  retq\n......略去部分和答题无关的信息......\n000000000000a000 <buf>:\n......略去部分和答题无关的信息......\n000000000000a050 <bufp1>:\n......略去部分和答题无关的信息......\n000000000000cb24 <count.1837>:\n......略去部分和答题无关的信息......\n000000000000cb28 <bufp0>:\n```\n\n注：原卷的链接后反汇编在 `myswap` 中将 `88 45 fc` 一行标为 `1018`，与前一条 `1018` 地址重复。此处依原卷保留。\n\n以上反汇编中用①至⑨标记了相关重定位条目。请根据下表中的重定位信息，计算引用值并填写下表。（请将下表的第1列和第3列画到答题纸上）\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ① | `r.offset = 0x16`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` | {{blank:reloc-1}} |\n| ② | `r.offset = 0x14`　　`r.symbol = buf` `r.type = R_X86_64_32`　　`r.addend = +0` | {{blank:reloc-2}} |\n| ⑥ | `r.offset = 0x3f`　　`r.symbol = bufp1` `r.type = R_X86_64_PC32`　　`r.addend = -4` | {{blank:reloc-6}} |\n| ⑨ | `r.offset = 0x62`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` | {{blank:reloc-9}} |"
       },
       "solution": {
         "state": "available",
@@ -60138,6 +60174,86 @@
           {
             "blankId": "count-binding",
             "method": "self"
+          },
+          {
+            "blankId": "def-bufp0",
+            "method": "exact",
+            "acceptedAnswers": [
+              "未知",
+              "未知（任意选择一个）"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "def-bufp1",
+            "method": "exact",
+            "acceptedAnswers": [
+              "bufp1.foo",
+              "`bufp1.foo`"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "reloc-1",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x000000be",
+              "0xbe",
+              "be",
+              "000000be"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "reloc-2",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x0000a000",
+              "0xa000",
+              "a000",
+              "0000a000"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "reloc-6",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x0000900d",
+              "0x900d",
+              "900d",
+              "0000900d"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "reloc-9",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x0000babe",
+              "0xbabe",
+              "babe",
+              "0000babe"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
           }
         ]
       }
