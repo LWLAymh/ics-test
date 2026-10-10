@@ -120541,7 +120541,7 @@
     {
       "schemaVersion": "5",
       "id": "q-207c8ae536b149fd",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f4835e390ee6ce49",
       "paperOrder": 20,
       "number": {
@@ -120570,14 +120570,14 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "练习题 2.20 请说明等式（2.5）如何应用到练习题 2.19 的各项。为便于独立作答，相关定义和数据如下。\n\n`T2U_w(x)` 将一个 `w` 位补码数保持位模式不变、重新解释成无符号数；等式（2.5）为：\n\n$$\nT2U_w(x)=\\begin{cases}x+2^w,&x<0,\\\\x,&x\\ge 0.\\end{cases}\n$$\n\n练习题 2.19 的 `w = 4`，六个补码数依次为 `-8, -3, -2, -1, 0, 5`。请逐项指出使用哪个分支，并说明它得到的无符号值。"
+        "text": "练习题 2.20 请说明等式（2.5）如何应用到练习题 2.19 的各项。为便于独立作答，相关定义和数据如下。\n\n`T2U_w(x)` 将一个 `w` 位补码数保持位模式不变、重新解释成无符号数；等式（2.5）为：\n\n$$\n\\mathrm{T2U}_{w}(x) = \\begin{cases}\nx + 2^{w}, & x < 0, \\\\\\\\\nx, & x \\ge 0.\n\\end{cases}\n$$\n\n练习题 2.19 的 `w = 4`，六个补码数依次为 `-8, -3, -2, -1, 0, 5`。请逐项指出使用哪个分支，并说明它得到的无符号值。"
       },
       "solution": {
         "state": "available",
         "grading": "self",
         "reference": {
           "format": "markdown",
-          "text": "表中前四项的 x 为负数，使用等式（2.5）的 x < 0 分支，即 `T2U₄(x) = x + 2⁴`。后两项 x 为非负数，使用 x ≥ 0 分支，即 `T2U₄(x) = x`。因此对应结果依次为 8、13、14、15、0、5。"
+          "text": "本题 `w = 4`，所以 $2^{w} = 16$。负数使用 $x + 16$ 分支，非负数使用 $x$ 分支：\n\n| 补码数 $x$ | 使用的分支 | 无符号值 |\n| --- | --- | --- |\n| $-8$ | $x + 16$ | $8$ |\n| $-3$ | $x + 16$ | $13$ |\n| $-2$ | $x + 16$ | $14$ |\n| $-1$ | $x + 16$ | $15$ |\n| $0$ | $x$ | $0$ |\n| $5$ | $x$ | $5$ |\n\n转换只改变数值的解释方式，不改变原有的 4 位位模式。"
         },
         "provenance": {
           "origin": "unknown",
@@ -138062,7 +138062,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0300000000000028",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f7485360f6c6060d",
       "paperOrder": 28,
       "number": {
@@ -138091,7 +138091,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": "练习题 3.28 函数 `fun_b` 有如下整体结构：\n\n```c\nlong fun_b(unsigned long x) {\n    long val = 0;\n    long i;\n    for (...; ...; ...) {\n        ...\n    }\n    return val;\n}\n```\n\nGCC C 编译器产生如下汇编代码：\n\n```text\nlong fun_b(unsigned long x)\nx in %rdi\n\n1  fun_b:\n2      movl  $64, %edx\n3      movl  $0, %eax\n4  .L10:\n5      movq  %rdi, %rcx\n6      andl  $1, %ecx\n7      addq  %rax, %rax\n8      orq   %rcx, %rax\n9      shrq  %rdi             Shift right by 1\n10     subq  $1, %rdx\n11     jne   .L10\n12     rep; ret\n```\n\n逆向工程这段代码的操作，然后完成下面的工作："
+        "text": "练习题 3.28 函数 `fun_b` 有如下整体结构：\n\n```c\nlong fun_b(unsigned long x) {\n    long val = 0;\n    long i;\n    for (...; ...; ...) {\n        ...\n    }\n    return val;\n}\n```\n\nGCC C 编译器产生如下汇编代码，其中参数 `x` 放在 `%rdi` 中：\n\n```asm\nfun_b:\n    movl  $64, %edx\n    movl  $0, %eax\n.L10:\n    movq  %rdi, %rcx\n    andl  $1, %ecx\n    addq  %rax, %rax\n    orq   %rcx, %rax\n    shrq  %rdi          # 逻辑右移 1 位\n    subq  $1, %rdx\n    jne   .L10\n    rep; ret\n```\n\n逆向工程这段代码的操作，然后完成下面的工作："
       },
       "parts": [
         {
@@ -138147,7 +138147,7 @@
                 "label": "循环体第 2 条语句"
               }
             ],
-            "text": "A. 根据汇编代码版本填写 C 代码中缺失的部分（循环体部分有两个空，每空填一条语句）。\n\n```c\nlong fun_b(unsigned long x) {\n    long val = 0;\n    long i;\n    for ({{blank:init}}; {{blank:test}}; {{blank:upd}}) {\n        {{blank:st1}};\n        {{blank:st2}};\n    }\n    return val;\n}\n```"
+            "text": "根据汇编代码填写 C 代码中缺失的部分。前三空分别是 `for` 的初始化、测试和更新表达式；后两空分别填一条循环体语句。分号已经给出，不必在输入框内重复填写。\n\n```c\nlong fun_b(unsigned long x) {\n    long val = 0;\n    long i;\n    for ({{blank:init}}; {{blank:test}}; {{blank:upd}}) {\n        {{blank:st1}};\n        {{blank:st2}};\n    }\n    return val;\n}\n```"
           },
           "solution": {
             "state": "available",
@@ -138259,14 +138259,14 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "B. 解释循环前为什么没有初始测试也没有初始跳转到循环内部的测试部分。"
+            "text": "解释循环前为什么没有初始测试，也没有初始跳转到循环内部的测试部分。"
           },
           "solution": {
             "state": "available",
             "grading": "self",
             "reference": {
               "format": "markdown",
-              "text": "这段代码是用 guarded-do 变换生成的，但是编译器发现因为 i 初始化成了 64，所以一定会满足测试 i ≠ 0，因此初始的测试是没必要的。"
+              "text": "这段代码采用 guarded-do 形式：编译器已知 `i` 初始化为 `64`，第一次执行循环前必定满足 `i != 0`，因此可以省略初始测试，直接进入循环体。每次执行循环体后再递减计数器并判断是否继续。"
             },
             "provenance": {
               "origin": "unknown",
@@ -138302,14 +138302,14 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "C. 用自然语言描述这个函数是计算什么的。"
+            "text": "用自然语言描述这个函数计算什么。"
           },
           "solution": {
             "state": "available",
             "grading": "self",
             "reference": {
               "format": "markdown",
-              "text": "这段代码把 x 中的位反过来，创造一个镜像。实现的方法是：将 x 的位从左往右移，然后再填入这些位，就像是把 val 从右往左移。"
+              "text": "函数将 `x` 的 64 位位模式逐位反转，得到其镜像：原来的最低位变成结果的最高位，原来的最高位变成结果的最低位。\n\n每次迭代取 `x` 的最低位，把 `val` **左移**一位后将该位放入 `val` 的最低位，再将无符号的 `x` **逻辑右移**一位。共迭代 64 次，完成全部位的反转。这里讨论返回结果的位模式。"
             },
             "provenance": {
               "origin": "unknown",
@@ -154134,7 +154134,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c14b1d06d6cfa8ba",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-febcfbeee0f364b2",
       "paperOrder": 17,
       "number": {
@@ -154262,14 +154262,14 @@
             }
           }
         ],
-        "text": "17. 考虑以下 C 语言代码：\n```c\nlong bit_not1(long a) {\n    long x = ~p;\n    return x;\n}\nlong bit_not2(long *p) {\n    long x = *p;\n    long y = ~x\n    return y;\n}\nlong call_bitnot() {\n    long v0 = 1010;\n    long v1 = 1010;\n    long v2 = bit_not1(v0);\n    long v3 = bit_not2(&v1);\n    return v2+v3;\n}\n```\n下列变量分别存放在寄存器还是内存中？\n`v0`：{{blank:q17-v0}}　`v1`：{{blank:q17-v1}}　`v2`：{{blank:q17-v2}}　`v3`：{{blank:q17-v3}}"
+        "text": "17. 考虑以下 C 语言代码：\n\n```c\nlong bit_not1(long a) {\n    long x = ~a;\n    return x;\n}\n\nlong bit_not2(long *p) {\n    long x = *p;\n    long y = ~x;\n    return y;\n}\n\nlong call_bitnot() {\n    long v0 = 1010;\n    long v1 = 1010;\n    long v2 = bit_not1(v0);\n    long v3 = bit_not2(&v1);\n    return v2 + v3;\n}\n```\n\n下列变量分别存放在寄存器还是内存中？\n`v0`：{{blank:q17-v0}}　`v1`：{{blank:q17-v1}}　`v2`：{{blank:q17-v2}}　`v3`：{{blank:q17-v3}}"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "`v0`：寄存器；`v1`：内存；`v2`：寄存器；`v3`：寄存器。\n\n注：原卷将 `long x = ~p;`（预期应为 `~a`）以及 `long y = ~x`（缺少分号）印成笔误；此处保留原题写法。"
+          "text": "`v0`：寄存器；`v1`：内存；`v2`：寄存器；`v3`：寄存器。\n\n勘误：题面已将原卷的 `long x = ~p;` 改为 `long x = ~a;`，并为 `long y = ~x;` 补齐分号。两处均为代码笔误修正，不改变本题考点和参考答案。"
         },
         "provenance": {
           "origin": "unknown",

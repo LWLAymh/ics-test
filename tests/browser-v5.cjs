@@ -292,6 +292,36 @@ async function run() {
     await fixture(page,[{...composite,parts:composite.parts.slice(0,2)}]);
     await page.click('[data-composite-choice="A"]');await page.locator('.ics-blank-input').first().fill('42');await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.score),0.5);
+    // Current live reports: real MathJax case rows, compilable parameter names,
+    // intact assembly, and complete automatic/self grading of the loop question.
+    const cases = all.find(q=>q.id==='q-207c8ae536b149fd');
+    await fixture(page,[cases]);
+    await page.waitForFunction(()=>document.querySelectorAll('#ics-question-content mjx-mtr').length===2);
+    assert.equal(await page.locator('#ics-question-content mjx-merror').count(),0);
+    assert(!(await page.locator('#ics-question-content').innerText()).includes('\\x'));
+    if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,cases.id+'-repaired.png'),fullPage:true});
+    await page.click('#ics-submit');
+    assert.equal(await page.locator('#ics-reference tbody tr').count(),6);
+    const bitnot = all.find(q=>q.id==='q-c14b1d06d6cfa8ba');
+    await fixture(page,[bitnot]);
+    assert.match(await page.locator('#ics-question-content pre').innerText(),/long x = ~a;/);
+    for(const [index,value] of ['register','memory','register','register'].entries())
+      await page.locator('select.ics-blank-input').nth(index).selectOption(value);
+    await page.click('#ics-submit');
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    const loop = all.find(q=>q.id==='q-0300000000000028');
+    await fixture(page,[loop]);
+    assert.match(await page.locator('#ics-question-content code.language-asm').innerText(),/^\.L10:\n    movq/m);
+    for(const answer of loop.parts[0].solution.blankAnswers)
+      await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(answer.acceptedAnswers[0]);
+    if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,loop.id+'-repaired.png'),fullPage:true});
+    await page.click('#ics-submit');await page.click('[data-grade="1"]');
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    assert.match(await page.locator('#ics-reference').innerText(),/逻辑右移/);
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,loop.id+'-repaired-mobile.png'),fullPage:true});
+    await page.setViewportSize({width:1280,height:900});
     // Explicit select widgets: repeated anchors, exact sets, exclusivity, drafts,
     // missing-value focus, keyboard close, table/code placement and submitted locks.
     const dropdown = all.find(q=>q.id==='q-1737c983c32fea14');

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c14b1d06d6cfa8ba",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-febcfbeee0f364b2",
   "paperOrder": 17,
   "number": {
@@ -177,27 +177,31 @@
 +++
 %%% stem
 17. 考虑以下 C 语言代码：
+
 ```c
 long bit_not1(long a) {
-    long x = ~p;
+    long x = ~a;
     return x;
 }
+
 long bit_not2(long *p) {
     long x = *p;
-    long y = ~x
+    long y = ~x;
     return y;
 }
+
 long call_bitnot() {
     long v0 = 1010;
     long v1 = 1010;
     long v2 = bit_not1(v0);
     long v3 = bit_not2(&v1);
-    return v2+v3;
+    return v2 + v3;
 }
 ```
+
 下列变量分别存放在寄存器还是内存中？
 `v0`：{{blank:q17-v0}}　`v1`：{{blank:q17-v1}}　`v2`：{{blank:q17-v2}}　`v3`：{{blank:q17-v3}}
 %%% reference
 `v0`：寄存器；`v1`：内存；`v2`：寄存器；`v3`：寄存器。
 
-注：原卷将 `long x = ~p;`（预期应为 `~a`）以及 `long y = ~x`（缺少分号）印成笔误；此处保留原题写法。
+勘误：题面已将原卷的 `long x = ~p;` 改为 `long x = ~a;`，并为 `long y = ~x;` 补齐分号。两处均为代码笔误修正，不改变本题考点和参考答案。

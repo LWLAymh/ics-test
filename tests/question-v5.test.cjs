@@ -4,6 +4,30 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('October issue repairs retain two-row math and correct parameter names and shift directions', () => {
+  const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false});
+  const conversions=bank.find(q=>q.id==='q-207c8ae536b149fd');
+  const rendered=md.render(conversions.stem.text);
+  // Markdown consumes one level of backslash escaping; MathJax must still
+  // receive two backslashes, not the undefined command \\x.
+  assert(rendered.includes('\\\\\nx,'));
+  assert(rendered.includes('\\begin{cases}'));
+  assert.equal(md.parse(conversions.solution.reference.text,{}).filter(t=>t.type==='tr_open').length,7);
+  const bitnot=bank.find(q=>q.id==='q-c14b1d06d6cfa8ba');
+  const code=md.parse(bitnot.stem.text,{}).find(t=>t.type==='fence').content;
+  assert.match(code,/long bit_not1\(long a\) \{\n    long x = ~a;/);
+  assert.match(code,/long y = ~x;/);
+  assert(!code.includes('~p'));
+  assert.equal(api.gradeBlanks({'q17-v0':'register','q17-v1':'memory','q17-v2':'register','q17-v3':'register'},bitnot.solution),true);
+  const reversal=bank.find(q=>q.id==='q-0300000000000028');
+  const assembly=md.parse(reversal.stem.text,{}).find(t=>t.type==='fence'&&t.info==='asm').content;
+  assert.match(assembly,/^fun_b:\n    movl/m);
+  assert.match(assembly,/^\.L10:\n    movq/m);
+  assert.match(assembly,/shrq  %rdi\s+#/);
+  assert.match(reversal.parts[2].solution.reference.text,/val` \*\*左移\*\*/);
+  assert.match(reversal.parts[2].solution.reference.text,/x` \*\*逻辑右移\*\*/);
+});
+
 test('Markdown rendering preserves every declared blank, including table cells containing operators', () => {
   const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false,linkify:false,typographer:false});
   for(const question of bank) for(const unit of question.parts||[question]) {
