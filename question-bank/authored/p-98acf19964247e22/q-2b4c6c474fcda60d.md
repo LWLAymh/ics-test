@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-2b4c6c474fcda60d",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-98acf19964247e22",
   "paperOrder": 25,
   "number": {
@@ -238,8 +238,14 @@
 第六题（10分）
 下图是一个基于`echo`服务器的client-server框架
 （1）  请给图中的编号填写相应的函数名。
+
+![图](../../assets/期末/2019期末-无答案/p14-img1.jpg)
+
+图中编号①—⑦依次为：{{blank:diagram-1}}、{{blank:diagram-2}}、{{blank:diagram-3}}、{{blank:diagram-4}}、{{blank:diagram-5}}、{{blank:diagram-6}}、{{blank:diagram-7}}。
+
 （2）  请补全下面`server`端`open_listenfd`函数中缺失的操作（Line 21, Line
 26和Line 34）
+
 ```
 Line 1:  int open_listenfd(char *port)
 Line 2:  {
@@ -251,14 +257,6 @@ Line 7:     hints.ai_socktype = SOCK_STREAM;
 Line 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;
 Line 9:     hints.ai_flags |= AI_NUMERICSERV;
 Line 10:    Getaddrinfo(NULL, port, &hints, &listp);
-```
-
-![图](../../assets/期末/2019期末-无答案/p14-img1.jpg)
-
-图中编号①—⑦依次为：{{blank:diagram-1}}、{{blank:diagram-2}}、{{blank:diagram-3}}、{{blank:diagram-4}}、{{blank:diagram-5}}、{{blank:diagram-6}}、{{blank:diagram-7}}。
-
-
-```
 Line 11:
 Line 12:     for (p = listp; p; p = p->ai_next) {
 Line 13:         /* Create a socket descriptor */
