@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-b04eecbfa5be0f56",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 21,
   "number": {
@@ -241,10 +241,6 @@ void reader(void)
 
 void writer(void)
 {
-```
-
-
-```c
   while (1) {
     /* {{blank:r7}} */
 
