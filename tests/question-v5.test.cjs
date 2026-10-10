@@ -192,6 +192,13 @@ test('CSAPP explicitly accepts zero constants and states float-format assumption
   assert.match(bank.find(q=>q.id==='q-72f5f49722d45dcc').stem.text,/2\\le n\\le B/);
 });
 
+test('2018 midterm Q1.5 states byte-order and char-signedness uncertainty before answering', () => {
+  const question=bank.find(q=>q.id==='q-e35ce7e3697036eb');
+  assert.match(question.stem.text,/提示：本题未规定大小端，也未规定 `char` 是 `signed` 还是 `unsigned`。/);
+  assert.equal(question.type,'multiple-choice');
+  assert.deepEqual(question.solution.correctOptionIds,['A','B','C']);
+});
+
 test('reported invalid questions remain backed up with an explicit non-publishable state', () => {
   for (const id of ['q-f39f4e62d028f8d6','q-3376fb77c2e3a398','q-45d24dbc19ab7615',
     'q-b8edc298950e949d','q-19c4d964d98fc677']) {

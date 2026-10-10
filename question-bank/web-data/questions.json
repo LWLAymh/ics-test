@@ -118645,7 +118645,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e35ce7e3697036eb",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-eaef0ab4d19e72c9",
       "paperOrder": 5,
       "number": {
@@ -118691,7 +118691,7 @@
       "type": "multiple-choice",
       "stem": {
         "format": "markdown",
-        "text": "5.  以下代码的输出结果是\n```c\nunion {\n    double d;\n    struct {\n        int i;\n        char c[4];\n    } s;\n} u;\nu.d = 1;\nprintf(\"%d\\n\", u.s.c[2]);\n```"
+        "text": "5.  以下代码的输出结果是\n```c\nunion {\n    double d;\n    struct {\n        int i;\n        char c[4];\n    } s;\n} u;\nu.d = 1;\nprintf(\"%d\\n\", u.s.c[2]);\n```\n\n提示：本题未规定大小端，也未规定 `char` 是 `signed` 还是 `unsigned`。"
       },
       "solution": {
         "state": "available",
