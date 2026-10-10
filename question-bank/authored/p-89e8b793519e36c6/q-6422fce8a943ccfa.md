@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-6422fce8a943ccfa",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-89e8b793519e36c6",
   "paperOrder": 26,
   "number": {
@@ -77,16 +77,30 @@
         },
         "parts": []
       },
-      "type": "short-answer",
+      "type": "fill",
       "moduleIds": [
         "memory_hierarchy"
       ],
       "stem": {
-        "format": "markdown"
+        "format": "markdown",
+        "blanks": [
+        {"id": "miss-1a", "marker": "{{blank:miss-1a}}", "occurrence": 0, "width": "short"},
+        {"id": "miss-1b", "marker": "{{blank:miss-1b}}", "occurrence": 0, "width": "short"},
+        {"id": "desc-1", "marker": "{{blank:desc-1}}", "occurrence": 0, "width": "short"},
+        {"id": "miss-1c", "marker": "{{blank:miss-1c}}", "occurrence": 0, "width": "short"},
+        {"id": "state-1", "marker": "{{blank:state-1}}", "occurrence": 0, "width": "long"}
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+        {"blankId": "miss-1a", "method": "exact", "acceptedAnswers": ["4", "4次", "4 次"], "normalize": {"trimWhitespace": true, "caseSensitive": false}},
+        {"blankId": "miss-1b", "method": "exact", "acceptedAnswers": ["16", "16次", "16 次"], "normalize": {"trimWhitespace": true, "caseSensitive": false}},
+        {"blankId": "desc-1", "method": "exact", "acceptedAnswers": ["A", "A）", "a"], "normalize": {"trimWhitespace": true, "caseSensitive": false}},
+        {"blankId": "miss-1c", "method": "exact", "acceptedAnswers": ["14", "14次", "14 次"], "normalize": {"trimWhitespace": true, "caseSensitive": false}},
+        {"blankId": "state-1", "method": "self"}
+        ],
         "reference": {
           "format": "markdown"
         },
@@ -128,16 +142,30 @@
         },
         "parts": []
       },
-      "type": "short-answer",
+      "type": "fill",
       "moduleIds": [
         "memory_hierarchy"
       ],
       "stem": {
-        "format": "markdown"
+        "format": "markdown",
+        "blanks": [
+        {"id": "tag-bits", "marker": "{{blank:tag-bits}}", "occurrence": 0, "width": "short"},
+        {"id": "miss-2a", "marker": "{{blank:miss-2a}}", "occurrence": 0, "width": "short"},
+        {"id": "miss-2b", "marker": "{{blank:miss-2b}}", "occurrence": 0, "width": "short"},
+        {"id": "desc-2", "marker": "{{blank:desc-2}}", "occurrence": 0, "width": "short"},
+        {"id": "state-2", "marker": "{{blank:state-2}}", "occurrence": 0, "width": "long"}
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+        {"blankId": "tag-bits", "method": "exact", "acceptedAnswers": ["6", "6位", "6 位"], "normalize": {"trimWhitespace": true, "caseSensitive": false}},
+        {"blankId": "miss-2a", "method": "exact", "acceptedAnswers": ["4", "4次", "4 次"], "normalize": {"trimWhitespace": true, "caseSensitive": false}},
+        {"blankId": "miss-2b", "method": "exact", "acceptedAnswers": ["4", "4次", "4 次"], "normalize": {"trimWhitespace": true, "caseSensitive": false}},
+        {"blankId": "desc-2", "method": "exact", "acceptedAnswers": ["C", "C）", "c"], "normalize": {"trimWhitespace": true, "caseSensitive": false}},
+        {"blankId": "state-2", "method": "self"}
+        ],
         "reference": {
           "format": "markdown"
         },
@@ -202,18 +230,19 @@ void clear4x4 ( char array[LENGTH][LENGTH] )  {
   }
 }
 ```
-1)  以上程序执行会引起多少次失效？
-______
-2)  如果`LENGTH`改为16，会引起多少次失效？
-______
-3)  如果`LENGTH`变为17，与2)相比，下面描述正确的是：______，会引起 ______ 次
-失效。
-A） 16×16 比17×17产生更多的失效次数
-B） 16×16 和17×17产生的失效次数相同
-C） 16×16 比17×17产生更少的失效次数
-4)  请画出3）运行后cache中set0和set1的最终状态。
+1)  以上程序执行会引起多少次失效？{{blank:miss-1a}}
 
-（3）运行后 cache 中 set0 和 set1 的最终状态见答案）
+2)  如果`LENGTH`改为16，会引起多少次失效？{{blank:miss-1b}}
+
+3)  如果`LENGTH`变为17，与2)相比，下面描述正确的是：{{blank:desc-1}}，会引起 {{blank:miss-1c}} 次失效。
+
+A） 16×16 比17×17产生更多的失效次数
+
+B） 16×16 和17×17产生的失效次数相同
+
+C） 16×16 比17×17产生更少的失效次数
+
+4)  请画出3）运行后cache中set0和set1的最终状态。{{blank:state-1}}
 %%% part-reference: q-6acdab44e2b32dd2
 答案：1) 4 次失效
 2) 16 次失效
@@ -229,18 +258,21 @@ C） 16×16 比17×17产生更少的失效次数
 •  地址宽度为8，数组的起始地址为`0x10000000`
 •  Cache容量为16 Byte，`Block Size = 4 Byte`，全相联Cache
 •  替换算法为 LRU（最近最少使用）
-1)  Tag的位数为 ______
-2)  如果执行上述程序，当`LENGTH=8`时，会引起多少次失效？
-______
-3)  如果`LENGTH`改为16，会引起多少次失效？
-______
-4)  如果`LENGTH`变为17，与3)相比，下面描述正确的是：______
-A） 16×16 比17×17产生更多的失效次数
-B） 16×16 和17×17产生的失效次数相同
-C） 16×16 比17×17产生更少的失效次数
-5)  请画出4）执行后cache的最终状态
+1)  Tag的位数为 {{blank:tag-bits}}
 
-（4）执行后 cache 的最终状态见答案）
+2)  如果执行上述程序，当`LENGTH=8`时，会引起多少次失效？{{blank:miss-2a}}
+
+3)  如果`LENGTH`改为16，会引起多少次失效？{{blank:miss-2b}}
+
+4)  如果`LENGTH`变为17，与3)相比，下面描述正确的是：{{blank:desc-2}}
+
+A） 16×16 比17×17产生更多的失效次数
+
+B） 16×16 和17×17产生的失效次数相同
+
+C） 16×16 比17×17产生更少的失效次数
+
+5)  请画出4）执行后cache的最终状态{{blank:state-2}}
 %%% part-reference: q-80c11cfc4df40242
 答案：1) Tag 的位数为 6
 2) `LENGTH=8` 时，会引起 4 次失效

@@ -55577,7 +55577,7 @@
     {
       "schemaVersion": "5",
       "id": "q-6422fce8a943ccfa",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 26,
       "number": {
@@ -55653,17 +55653,107 @@
             },
             "parts": []
           },
-          "type": "short-answer",
+          "type": "fill",
           "moduleIds": [
             "memory_hierarchy"
           ],
           "stem": {
             "format": "markdown",
-            "text": "第五题（20分）\n (每个填空和选择1分，表格每相邻两格1分)\n\n1.仔细阅读下面的程序，根据条件回答下列各题（10分）\n•  地址宽度为7，数组的起始地址为`0x1000000`\n•  `Block Size = 4 Byte`，`Set = 4`，两路组相连.\n•  替换算法为 LRU（最近最少使用）\n```\n#define LENGTH 8\nvoid clear4x4 ( char array[LENGTH][LENGTH] )  {\n  int row, col ;\n  for ( col = 0 ; col < 4; col++ ) {\n    for ( row = 0; row < 4 ; row++ ) {\n      array[ row] [ col] = 0;\n    }\n  }\n}\n```\n1)  以上程序执行会引起多少次失效？\n______\n2)  如果`LENGTH`改为16，会引起多少次失效？\n______\n3)  如果`LENGTH`变为17，与2)相比，下面描述正确的是：______，会引起 ______ 次\n失效。\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n4)  请画出3）运行后cache中set0和set1的最终状态。\n\n（3）运行后 cache 中 set0 和 set1 的最终状态见答案）"
+            "blanks": [
+              {
+                "id": "miss-1a",
+                "marker": "{{blank:miss-1a}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "miss-1b",
+                "marker": "{{blank:miss-1b}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "desc-1",
+                "marker": "{{blank:desc-1}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "miss-1c",
+                "marker": "{{blank:miss-1c}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "state-1",
+                "marker": "{{blank:state-1}}",
+                "occurrence": 0,
+                "width": "long"
+              }
+            ],
+            "text": "第五题（20分）\n (每个填空和选择1分，表格每相邻两格1分)\n\n1.仔细阅读下面的程序，根据条件回答下列各题（10分）\n•  地址宽度为7，数组的起始地址为`0x1000000`\n•  `Block Size = 4 Byte`，`Set = 4`，两路组相连.\n•  替换算法为 LRU（最近最少使用）\n```\n#define LENGTH 8\nvoid clear4x4 ( char array[LENGTH][LENGTH] )  {\n  int row, col ;\n  for ( col = 0 ; col < 4; col++ ) {\n    for ( row = 0; row < 4 ; row++ ) {\n      array[ row] [ col] = 0;\n    }\n  }\n}\n```\n1)  以上程序执行会引起多少次失效？{{blank:miss-1a}}\n\n2)  如果`LENGTH`改为16，会引起多少次失效？{{blank:miss-1b}}\n\n3)  如果`LENGTH`变为17，与2)相比，下面描述正确的是：{{blank:desc-1}}，会引起 {{blank:miss-1c}} 次失效。\n\nA） 16×16 比17×17产生更多的失效次数\n\nB） 16×16 和17×17产生的失效次数相同\n\nC） 16×16 比17×17产生更少的失效次数\n\n4)  请画出3）运行后cache中set0和set1的最终状态。{{blank:state-1}}"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "miss-1a",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "4",
+                  "4次",
+                  "4 次"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "miss-1b",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "16",
+                  "16次",
+                  "16 次"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "desc-1",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "A",
+                  "A）",
+                  "a"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "miss-1c",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "14",
+                  "14次",
+                  "14 次"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "state-1",
+                "method": "self"
+              }
+            ],
             "reference": {
               "format": "markdown",
               "text": "答案：1) 4 次失效\n2) 16 次失效\n3) A；会引起 14 次失效\n4) 3) 运行后 cache 的最终状态：\n\n|  | V | Tag | Data | V | Tag | Data |\n| --- | --- | --- | --- | --- | --- | --- |\n| set0 | 1 | 101 | `Array[1][0]~Array[1][3]` | 1 | 100 | `Array[0][0]~Array[0][3]` |\n| set1 | 1 | 110 | `Array[2][0]~Array[2][3]` | 1 | 111 | `Array[3][0]~Array[3][3]` |"
@@ -55706,17 +55796,107 @@
             },
             "parts": []
           },
-          "type": "short-answer",
+          "type": "fill",
           "moduleIds": [
             "memory_hierarchy"
           ],
           "stem": {
             "format": "markdown",
-            "text": "2.改变假设条件，回答下列各题（10分）\n•  地址宽度为8，数组的起始地址为`0x10000000`\n•  Cache容量为16 Byte，`Block Size = 4 Byte`，全相联Cache\n•  替换算法为 LRU（最近最少使用）\n1)  Tag的位数为 ______\n2)  如果执行上述程序，当`LENGTH=8`时，会引起多少次失效？\n______\n3)  如果`LENGTH`改为16，会引起多少次失效？\n______\n4)  如果`LENGTH`变为17，与3)相比，下面描述正确的是：______\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n5)  请画出4）执行后cache的最终状态\n\n（4）执行后 cache 的最终状态见答案）"
+            "blanks": [
+              {
+                "id": "tag-bits",
+                "marker": "{{blank:tag-bits}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "miss-2a",
+                "marker": "{{blank:miss-2a}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "miss-2b",
+                "marker": "{{blank:miss-2b}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "desc-2",
+                "marker": "{{blank:desc-2}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "state-2",
+                "marker": "{{blank:state-2}}",
+                "occurrence": 0,
+                "width": "long"
+              }
+            ],
+            "text": "2.改变假设条件，回答下列各题（10分）\n•  地址宽度为8，数组的起始地址为`0x10000000`\n•  Cache容量为16 Byte，`Block Size = 4 Byte`，全相联Cache\n•  替换算法为 LRU（最近最少使用）\n1)  Tag的位数为 {{blank:tag-bits}}\n\n2)  如果执行上述程序，当`LENGTH=8`时，会引起多少次失效？{{blank:miss-2a}}\n\n3)  如果`LENGTH`改为16，会引起多少次失效？{{blank:miss-2b}}\n\n4)  如果`LENGTH`变为17，与3)相比，下面描述正确的是：{{blank:desc-2}}\n\nA） 16×16 比17×17产生更多的失效次数\n\nB） 16×16 和17×17产生的失效次数相同\n\nC） 16×16 比17×17产生更少的失效次数\n\n5)  请画出4）执行后cache的最终状态{{blank:state-2}}"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "tag-bits",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "6",
+                  "6位",
+                  "6 位"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "miss-2a",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "4",
+                  "4次",
+                  "4 次"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "miss-2b",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "4",
+                  "4次",
+                  "4 次"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "desc-2",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "C",
+                  "C）",
+                  "c"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "state-2",
+                "method": "self"
+              }
+            ],
             "reference": {
               "format": "markdown",
               "text": "答案：1) Tag 的位数为 6\n2) `LENGTH=8` 时，会引起 4 次失效\n3) `LENGTH` 改为 16 时，会引起 4 次失效\n4) C（16×16 比 17×17 产生更少的失效次数）\n5) 4) 执行后 cache 的最终状态：\n\n| | V | Tag | Data |\n| --- | --- | --- | --- |\n| | 1 | 100000 | `Array[0][0]~Array[0][3]` |\n| | 1 | 100101 | `Array[1][0]~Array[1][3]` |\n| | 1 | 101001 | `Array[2][0]~Array[2][3]` |\n| | 1 | 101101 | `Array[3][0]~Array[3][3]` |"
