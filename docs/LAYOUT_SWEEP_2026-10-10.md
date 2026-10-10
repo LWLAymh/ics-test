@@ -503,3 +503,68 @@ README 已在两道先例（`q-622ae65ab616a110`、`q-45d24dbc19ab7615`）之后
 - `compile-bank` / `check` / `build` 全绿（1001 题 authored，971 发布）
 - 全量真实浏览器回归：`{"success":true,"questions":1001,"sections":1238,"assets":57}`，退出码 0
 - 抽查 4 道：输入框 8 / 3 / 6 / 6，无页面报错
+
+---
+
+## 第十二轮：遗留账第 3、2、4 项
+
+### 第 3 项：两个「看着像填空、实则自评」的小问
+
+**`q-61bd7ec829d2642e` 第四题 1.（SEQ 各阶段操作表，6 行）**
+
+原是 `short-answer`/`self`，读者只拿到一段自由文本框，而题面是 6 行 `______`。
+改为 `fill`/`blanks` + 6 个空：
+
+| 行 | 答案来源 | 判分 |
+| --- | --- | --- |
+| Fetch / Decode / PC update | 参考里是多子句 HCL，语序与分隔符不唯一 | `self` |
+| Execute / Memory / Write back | 参考明确写 `none` | `exact`（接受 none/None/无/无操作） |
+
+因为含 self 规则，该 part 整体仍是自评（项目规则：任一空自评则整题自评），但读者从 1 个文本框变成 6 个独立空位。
+
+**`q-9acce0371658f35f` 第四题 2.(1)（HCL 前递块）——查证后不是「缺空位」**
+
+这道是关键：题面 HCL 块里的 5 个 `________`，原卷是让读者**从 ○1–○5 五个编号里挑着填**，
+但**转写时把 ○1–○5 那五行定义整个丢了**——所以不论是这 5 个空还是 A–D 选项，读者都无从作答。
+
+原卷第 613–617 行补回定义：
+
+```
+○1 d_srcA == e_dstE : e_valE
+○2 d_srcA == M_dstE : M_valE
+○3 d_srcA == M_dstM : m_valM
+○4 d_srcA == W_dstE : W_valE
+○5 d_srcA == W_dstM : W_valM
+```
+
+该 part 保持 `single-choice`（题干是「请**选出**」、原卷印 A–D），5 个 `________` 是同一道题的
+作答示意，不做成输入框以免重复提问。
+
+### 第 2 项：按选项判分
+
+| part | 处理 |
+| --- | --- |
+| `q-9acce0371658f35f` part 6957f246589b063b | 参考答案为 B（`空白处依次填入 ○1 ○3 ○2 ○5 ○4`）→ `grading: choice` + `correctOptionIds: ["B"]`，并清掉该 part 的 `answer-key-unresolved` |
+| `q-13c961451563b43b` part d93abf1fc2d6d51a | **保留 `self`**：核实其参考为「选择含有 C 但不含 A、不含 B 的组合，或单选 G」——这是一个**规则**而非单一选项集（共 8 种组合 + 单选 G），无法用 `correctOptionIds` 表达。原判断有误，已纠正 |
+
+### 第 4 项：清掉过期的 `blank-positions-unresolved`
+
+`format_v5.py:235` 只在「声明 fill 却无空位」时才要求该标记。四道题仍挂着它，但它们的 fill 节点
+现在都有空位，标记描述的状态已不存在：
+
+| 题 | 已声明空 | 移除后 issues |
+| --- | ---: | --- |
+| `q-48830bbf91e759fa` | 9 | `[]` |
+| `q-80560a1ecf2223dd` | 14 | `[]` |
+| `q-c448153415e0dd8d` | 38 | `[]` |
+| `q-9acce0371658f35f` | 3 | `["answer-key-unresolved"]`（保留，该标记仍成立） |
+
+移除后校验器可继续对未来的编辑强制这条规则。全库「fill 却无空位」节点：**0**。
+
+### 验证
+
+- 全库 **2739 个声明的空位**全部可解析：**0 问题**
+- 裸下划线 marker：**0**；fill 无空位：**0**
+- `compile-bank` / `check` / `build` 全绿（1001 题 authored，971 发布）
+- 全量真实浏览器回归：`{"success":true,"questions":1001,"sections":1238,"assets":57}`，退出码 0
+- 抽查 3 道：输入框 21 / 3 / 9，无页面报错

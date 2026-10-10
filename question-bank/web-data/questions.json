@@ -15581,7 +15581,7 @@
     {
       "schemaVersion": "5",
       "id": "q-48830bbf91e759fa",
-      "revision": 5,
+      "revision": 6,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 16,
       "number": {
@@ -15605,9 +15605,7 @@
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "blank-positions-unresolved"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -49278,7 +49276,7 @@
     {
       "schemaVersion": "5",
       "id": "q-80560a1ecf2223dd",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 16,
       "number": {
@@ -49302,9 +49300,7 @@
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "blank-positions-unresolved"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -51666,7 +51662,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c448153415e0dd8d",
-      "revision": 5,
+      "revision": 6,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 17,
       "number": {
@@ -51690,9 +51686,7 @@
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "blank-positions-unresolved"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -54642,7 +54636,7 @@
     {
       "schemaVersion": "5",
       "id": "q-61bd7ec829d2642e",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 25,
       "number": {
@@ -54760,17 +54754,114 @@
             },
             "parts": []
           },
-          "type": "short-answer",
+          "type": "fill",
           "moduleIds": [
             "processor_arch"
           ],
           "stem": {
             "format": "markdown",
-            "text": "第四题（20分）\n请分析Y86 ISA中新加入的一条指令：NewJE，其格式如下。\nNewJE  C  0  rA  rB  Dest\n其功能为：如果`R[rA]= R[rB]`，则跳转到Dest继续执行，否则顺序执行。\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n请填写各阶段操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | ______ |\n| Decode | ______ |\n| Execute | ______ |\n| Memory | ______ |\n| Write back | ______ |\n| PC update | ______ |"
+            "blanks": [
+              {
+                "id": "stage-fetch",
+                "marker": "{{blank:stage-fetch}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "stage-decode",
+                "marker": "{{blank:stage-decode}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "stage-execute",
+                "marker": "{{blank:stage-execute}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "stage-memory",
+                "marker": "{{blank:stage-memory}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "stage-writeback",
+                "marker": "{{blank:stage-writeback}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "stage-pc",
+                "marker": "{{blank:stage-pc}}",
+                "occurrence": 0,
+                "width": "medium"
+              }
+            ],
+            "text": "第四题（20分）\n请分析Y86 ISA中新加入的一条指令：NewJE，其格式如下。\nNewJE  C  0  rA  rB  Dest\n其功能为：如果`R[rA]= R[rB]`，则跳转到Dest继续执行，否则顺序执行。\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n请填写各阶段操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | {{blank:stage-fetch}} |\n| Decode | {{blank:stage-decode}} |\n| Execute | {{blank:stage-execute}} |\n| Memory | {{blank:stage-memory}} |\n| Write back | {{blank:stage-writeback}} |\n| PC update | {{blank:stage-pc}} |"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "stage-fetch",
+                "method": "self"
+              },
+              {
+                "blankId": "stage-decode",
+                "method": "self"
+              },
+              {
+                "blankId": "stage-execute",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "none",
+                  "None",
+                  "NONE",
+                  "无",
+                  "无操作"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stage-memory",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "none",
+                  "None",
+                  "NONE",
+                  "无",
+                  "无操作"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stage-writeback",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "none",
+                  "None",
+                  "NONE",
+                  "无",
+                  "无操作"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stage-pc",
+                "method": "self"
+              }
+            ],
             "reference": {
               "format": "markdown",
               "text": "答案：NewJE rA, rB, Dest 在 SEQ 各阶段的操作（红字处每行 1 分，共 5 分）：\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`; `rA:rB ← M1[PC+1]`; `valC ← M4[PC+2]`; `valP ← PC+6` |\n| Decode | `valA ← R[rA]`; `valB ← R[rB]`; `valE ← valA − valB` |\n| Execute | none |\n| Memory | none |\n| Write back | none |\n| PC update | `PC ← (valE == 0) ? valC : valP` |\n\nExecute 中比较也可以写成 `valB − valA`，因为这里只检查结果是否为 0。"
@@ -67651,7 +67742,7 @@
     {
       "schemaVersion": "5",
       "id": "q-9acce0371658f35f",
-      "revision": 3,
+      "revision": 5,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 19,
       "number": {
@@ -67676,8 +67767,7 @@
         "reviewer": null,
         "reviewedAt": null,
         "issues": [
-          "answer-key-unresolved",
-          "blank-positions-unresolved"
+          "answer-key-unresolved"
         ]
       },
       "sources": [
@@ -67807,11 +67897,14 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "2.考虑如下一段Y86-64代码片段：\n```\nLoop:  mrmovq (%rdi), %r10   # line 1\n    rmmovq %r10, (%rsi)   # line 2\n    andq %r10, %r10      # line 3\n    jle Npos          # line 4\n    irmovq $1, %r10      # line 5\n    addq %r10, %rax      # line 6\nNpos:  irmovq $1, %r10      # line 7\n    subq %r10, %rdx      # line 8\n    irmovq $8, %r10      # line 9\n    addq %r10, %rdi      # line 10\n    addq %r10, %rsi      # line 11\n    andq %rdx, %rdx      # line 12\n    jg Loop          # line 13\n    ret           # line 14\n```\n（1）这段代码中存在一些指令间的数据相关，其中行5与行6的数据相关可以采\n用数据前递（Forwarding）技术解决，在下图中体现在Sel+FwdA和FwdB部件\n上。前者输出的信号会存到流水线寄存器E的valA域（即E_valA信号），请选\n出该信号正确的HCL语言描述：______（2分）\n\n![E 级数据前递通路（Sel+FwdA 与 FwdB 部件）](assets/期中/2019期中-带答案/p17-e-stage-datapath.png)\n\n\n```\nlong d_valA = [\n  D_icode in { ICALL, IJXX }: D_valP;\n  ________;\n  ________;\n  ________;\n  ________;\n  ________;\n  1: d_rvalA;\n]\n```"
+            "text": "2.考虑如下一段Y86-64代码片段：\n```\nLoop:  mrmovq (%rdi), %r10   # line 1\n    rmmovq %r10, (%rsi)   # line 2\n    andq %r10, %r10      # line 3\n    jle Npos          # line 4\n    irmovq $1, %r10      # line 5\n    addq %r10, %rax      # line 6\nNpos:  irmovq $1, %r10      # line 7\n    subq %r10, %rdx      # line 8\n    irmovq $8, %r10      # line 9\n    addq %r10, %rdi      # line 10\n    addq %r10, %rsi      # line 11\n    andq %rdx, %rdx      # line 12\n    jg Loop          # line 13\n    ret           # line 14\n```\n（1）这段代码中存在一些指令间的数据相关，其中行5与行6的数据相关可以采\n用数据前递（Forwarding）技术解决，在下图中体现在Sel+FwdA和FwdB部件\n上。前者输出的信号会存到流水线寄存器E的valA域（即E_valA信号），请选\n出该信号正确的HCL语言描述：______（2分）\n\n![E 级数据前递通路（Sel+FwdA 与 FwdB 部件）](assets/期中/2019期中-带答案/p17-e-stage-datapath.png)\n\n\n```\nlong d_valA = [\n  D_icode in { ICALL, IJXX }: D_valP;\n  ________;\n  ________;\n  ________;\n  ________;\n  ________;\n  1: d_rvalA;\n]\n```\n\n○1 d_srcA == e_dstE : e_valE\n\n○2 d_srcA == M_dstE : M_valE\n\n○3 d_srcA == M_dstM : m_valM\n\n○4 d_srcA == W_dstE : W_valE\n\n○5 d_srcA == W_dstM : W_valM\n"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "choice",
+            "correctOptionIds": [
+              "B"
+            ],
             "reference": {
               "format": "markdown",
               "text": "答案：(1) B（2分）\n`○1 d_srcA == e_dstE : e_valE`\n`○2 d_srcA == M_dstE : M_valE`\n`○3 d_srcA == M_dstM : m_valM`\n`○4 d_srcA == W_dstE : W_valE`\n`○5 d_srcA == W_dstM : W_valM`\n\n空白处依次填入 ○1 ○3 ○2 ○5 ○4（即选项 B）。"
@@ -67836,9 +67929,7 @@
               "editorNote": "数据前递与 E_valA 的 HCL 描述"
             }
           ],
-          "issues": [
-            "answer-key-unresolved"
-          ],
+          "issues": [],
           "options": [
             {
               "id": "A",
