@@ -7503,7 +7503,7 @@
     {
       "schemaVersion": "5",
       "id": "q-8c4d8b2b8d02717d",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 21,
       "number": {
@@ -7540,7 +7540,7 @@
           "curated": "_curated/期末/2015期末-20160104-带答案/350.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "由汇编/输出结果补全 C 代码与汇编填空"
+          "editorNote": "逐项对照原卷 PDF 第11–14页校订：第8空原键0x40导致循环越界，应为40字节即0x28；printf调用参数按System V x86-64普通printf对齐。原始PDF和历史转写保留，不批量改题。"
         }
       ],
       "type": "fill",
@@ -7620,19 +7620,20 @@
             "width": "medium"
           }
         ],
-        "text": "第二题（12分）汇编\n下面分别是一个程序的C语言代码、汇编语言代码，以及其执行结果，请根据其逻\n辑分别填写空出来的内容：\n1. C语言代码\n```\n#include <stdio.h>\nlong f1(long x, long y)\n{\n  return {{blank:q2-f1}};\n}\nlong f2(long x, long y)\n{\n  return {{blank:q2-f2}};\n}\nlong a[6] = {1, 0, 0, 0, 0, 0};\nvoid foo(void)\n{\n  long (*f)(long, long);\n  {{blank:q2-f3}} long count = 0;\n  long i;\n  for (i=0; i<{{blank:q2-f4}}; i++) {\n    if ((count % 2) == 0)\n      f = f1;\n    else\n      f = f2;\n    a[i+1] = f(a[i], {{blank:q2-f5}});\n    count ++;\n  }\n  for (i=0; i<6; i++) {\n    printf(\"%ld\\n\", a[i]);\n  }\n}\nint main()\n{\n  foo();\n  foo();\n}\n```\n2. 汇编语言代码\n```\n.LC0:\n.string       {{blank:q2-f6}}\nf1:\n  leaq  (%rdi,%rsi), %rax\n  ret\nf2:\n  movq  %rdi, %rax\n  imulq %rsi, %rax\n  ret\nfoo:\n  pushq %r12\n  pushq %rbp\n       {{blank:q2-f7}}\n  movl  $a, %ebx\n  movl  $a + {{blank:q2-f8}}, %r12d\n  movl  $f1, %ebp\n.L5:\n  movq  count, %rsi\n  movq  %rsi, %rax\n  andl  $1, %eax\n  movl  $f2, %eax\n  cmove %rbp, %rax\n  movq  (%rbx), %rdi\n  call  *%rax\n  movq  %{{blank:q2-f9}}, 8(%rbx)\n  addq  $1, count\n  addq  $8, %rbx\n  cmpq  %r12, %rbx\n  jne .L5\n  movl  $0, %ebx\n.L6:\n  movq  a(,%rbx,8), %rdx\n  movl  $.LC0, %esi\n  movl  $1, %edi\n  movl  $0, %eax\n  call  printf\n  addq  $1, %rbx\n  cmpq  $6, %rbx\n  jne .L6\n  popq  %rbx\n  popq  %rbp\n       {{blank:q2-f10}}\n  ret\n```\n3. 输出结果\n```\n1\n1\n1\n3\n{{blank:q2-f11}}\n13\n1\n5\n11\n77\n85\n{{blank:q2-f12}}\n```"
+        "text": "下面分别是一个程序的 C 代码、x86-64 汇编代码及其执行结果，请填写各空。假定 `long` 为 8 字节，采用 System V x86-64 调用约定，代码按非 PIE 地址形式书写。第 8 空填字节偏移，可写十进制或带 `0x` 的十六进制。\n\n维护说明：本题按 C 程序与给定输出统一了汇编循环边界和 `printf` 调用；原卷参考存在不一致，具体勘误在提交后的参考说明中列出。\n\n### 1. C 代码\n\n```c\n#include <stdio.h>\nlong f1(long x, long y)\n{\n  return {{blank:q2-f1}};\n}\nlong f2(long x, long y)\n{\n  return {{blank:q2-f2}};\n}\nlong a[6] = {1, 0, 0, 0, 0, 0};\nvoid foo(void)\n{\n  long (*f)(long, long);\n  {{blank:q2-f3}} long count = 0;\n  long i;\n  for (i=0; i<{{blank:q2-f4}}; i++) {\n    if ((count % 2) == 0)\n      f = f1;\n    else\n      f = f2;\n    a[i+1] = f(a[i], {{blank:q2-f5}});\n    count ++;\n  }\n  for (i=0; i<6; i++) {\n    printf(\"%ld\\n\", a[i]);\n  }\n}\nint main()\n{\n  foo();\n  foo();\n}\n```\n### 2. 汇编代码\n\n```asm\n.LC0:\n.string       {{blank:q2-f6}}\nf1:\n  leaq  (%rdi,%rsi), %rax\n  ret\nf2:\n  movq  %rdi, %rax\n  imulq %rsi, %rax\n  ret\nfoo:\n  pushq %r12\n  pushq %rbp\n       {{blank:q2-f7}}\n  movl  $a, %ebx\n  movl  $a + {{blank:q2-f8}}, %r12d\n  movl  $f1, %ebp\n.L5:\n  movq  count, %rsi\n  movq  %rsi, %rax\n  andl  $1, %eax\n  movl  $f2, %eax\n  cmove %rbp, %rax\n  movq  (%rbx), %rdi\n  call  *%rax\n  movq  %{{blank:q2-f9}}, 8(%rbx)\n  addq  $1, count\n  addq  $8, %rbx\n  cmpq  %r12, %rbx\n  jne .L5\n  movl  $0, %ebx\n.L6:\n  movq  a(,%rbx,8), %rsi\n  movl  $.LC0, %edi\n  movl  $0, %eax\n  call  printf\n  addq  $1, %rbx\n  cmpq  $6, %rbx\n  jne .L6\n  popq  %rbx\n  popq  %rbp\n       {{blank:q2-f10}}\n  ret\n```\n### 3. 输出结果\n\n```text\n1\n1\n1\n3\n{{blank:q2-f11}}\n13\n1\n5\n11\n77\n85\n{{blank:q2-f12}}\n```"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：（每空一分）\n```\n1) (x + y)\n2) (x * y)\n3) static\n4) 5\n5) count\n```\n6) `\"%ld\\n\"`（必需有引号）\n```\n7)pushq  %rbx\n```\n8) `0x40`或者64（40也可给分，因为汇编默认是16进制）\n```\n9) rax\n10)popq  %r12\n11) 9\n12) 765\n```"
+          "text": "| 空位 | 校订后参考答案 |\n| --- | --- |\n| 1 | `x + y` |\n| 2 | `x * y` |\n| 3 | `static` |\n| 4 | `5` |\n| 5 | `count` |\n| 6 | `\"%ld\\n\"`（包含双引号与一个反斜杠） |\n| 7 | `pushq %rbx` |\n| 8 | `40` 或 `0x28` |\n| 9 | `rax` |\n| 10 | `popq %r12` |\n| 11 | `9` |\n| 12 | `765` |\n\n第 8 空勘误：计算循环运行 5 次，每次将 `%rbx` 增加 8 字节，因此结束地址是 `a + 5 * 8`，即 `a + 40`（`0x28`）。原参考写的 `0x40/64` 会运行 8 次，写出 `a[6]`、`a[7]`、`a[8]`，与数组长度、C 循环和输出均冲突。AT&T/GAS 的不带前缀整数并非默认十六进制。\n\n调用勘误：普通 `printf` 的格式串在 `%rdi`、首个可变参数在 `%rsi`。原卷放在 `%rsi/%rdx` 且令 `%edi = 1`，却仍写 `call printf`，两者不匹配；现已统一为普通 `printf` 的传参方式。\n\n`static count` 在两次 `foo()` 调用之间保留值。第一次输出 `1, 1, 1, 3, 9, 13`，第二次输出 `1, 5, 11, 77, 85, 765`。"
         },
         "provenance": {
-          "origin": "unknown",
-          "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
+          "origin": "ai-derived",
+          "crossChecked": false,
+          "attribution": "Codex：2026-10-10 维护校订，原卷对照与机器模型推导",
+          "note": "第8空及printf调用由AI按题面C程序、输出和调用约定校订，推导写在参考答案；其余答案对照原卷第14页。并非完整照抄原参考答案。"
         },
         "blankAnswers": [
           {
@@ -7640,7 +7641,9 @@
             "method": "exact",
             "acceptedAnswers": [
               "x + y",
-              "(x + y)"
+              "(x + y)",
+              "x+y",
+              "(x+y)"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -7652,7 +7655,9 @@
             "method": "exact",
             "acceptedAnswers": [
               "x * y",
-              "(x * y)"
+              "(x * y)",
+              "x*y",
+              "(x*y)"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -7696,7 +7701,6 @@
             "blankId": "q2-f6",
             "method": "exact",
             "acceptedAnswers": [
-              "\"%ld\\\\n\"",
               "\"%ld\\n\""
             ],
             "normalize": {
@@ -7720,8 +7724,7 @@
             "blankId": "q2-f8",
             "method": "exact",
             "acceptedAnswers": [
-              "0x40",
-              "64",
+              "0x28",
               "40"
             ],
             "normalize": {
@@ -30085,7 +30088,7 @@
     {
       "schemaVersion": "5",
       "id": "q-622ae65ab616a110",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-5e37064fe519258d",
       "paperOrder": 6,
       "number": {
@@ -30108,11 +30111,14 @@
         "tags": []
       },
       "publication": {
-        "state": "published",
+        "state": "review",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": []
+        "issues": [
+          "retired-invalid-question",
+          "alternative-correct-answers-not-a-multiple-choice-set"
+        ]
       },
       "sources": [
         {
@@ -30125,7 +30131,7 @@
           "curated": "_curated/期中/2017期中-带答案/91.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "函数指针的过程调用指令"
+          "editorNote": "2026-10-10 按用户要求停用并保留备份。原卷 A/D 是视编译优化而定的替代实现，不是要求同时选择的集合；旧判分只接受 A，与参考说明不一致。此记录禁止发布，原题面、选项及旧答案保留供追溯。"
         }
       ],
       "type": "multiple-choice",
@@ -92014,7 +92020,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b0ef359a9e930155",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ffd1f5f688babe1b",
       "paperOrder": 23,
       "number": {
@@ -92131,7 +92137,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": ""
+        "text": "以下各小问共用这段链表代码。按课程机器模型，`float` 为 4 字节，`short` 为 2 字节，指针为 8 字节；最后一问按大端字节序解释联合体中的机器表示。\n\n```cpp\nstruct s_element {\n    union u_inner {\n        float f;\n        short s[2];\n    } u1;\n    s_element *next;\n};\nfloat func(s_element *p) {\n    float ans = 0;\n    while (p) {\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```"
       },
       "parts": [
         {
@@ -92162,14 +92168,14 @@
                 "width": "medium"
               }
             ],
-            "text": "第六题（15分）\n```\nstruct s_element{\nunion u_inner{\n    float f;\n    short s[2];\n} u1;\n    s_element* next;\n};\nfloat func(s_element* p){\n    float ans = 0;\n    while( p ){\n        ans += p->u1.f;\n        p = p->next;\n    }\n    return ans;\n}\n```\n1.  若 `tmp` 是一个 `s_element` 类型的变量 ,  则 `sizeof  (tmp.u1)`  =\n{{blank:q6-1-sizeof}}。"
+            "text": "1. 若 `tmp` 是一个 `s_element` 类型的变量，则 `sizeof(tmp.u1)` = {{blank:q6-1-sizeof}} 字节。"
           },
           "solution": {
             "state": "available",
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "（1分）"
+              "text": "答案：`4`。\n\n联合体的大小由最大成员及对齐要求决定。`float f` 和 `short s[2]` 都占 4 字节；这里问的是 `tmp.u1`，不是包含指针的整个结构体。"
             },
             "provenance": {
               "origin": "unknown",
@@ -92179,7 +92185,14 @@
             "blankAnswers": [
               {
                 "blankId": "q6-1-sizeof",
-                "method": "self"
+                "method": "exact",
+                "acceptedAnswers": [
+                  "4"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
               }
             ]
           },
@@ -92226,7 +92239,7 @@
             "grading": "self",
             "reference": {
               "format": "markdown",
-              "text": "（2分）"
+              "text": "答案：`func` 遍历以 `p` 为首结点的链表，累加所有结点的 `u1.f` 并返回；空链表返回 `0`。"
             },
             "provenance": {
               "origin": "unknown",
@@ -92278,14 +92291,14 @@
                 "width": "medium"
               }
             ],
-            "text": "3. 函数func循环部分的汇编代码如下，补全汇编代码：\n提示：vaddss S1, S2, D实现单精度浮点数加法D ← S1+S2\n```\nL1:\n  vaddss   (%rdx), %xmm0, %xmm0\n{{blank:q6-3-assembly}}\nL2:\n  testq    %rdx, %rdx\n  jne L1\n```"
+            "text": "3. `func` 循环部分的汇编如下，请补全代码。\n\n提示：`vaddss S1, S2, D` 实现单精度浮点加法 `D ← S1 + S2`。\n\n```asm\nL1:\n  vaddss   (%rdx), %xmm0, %xmm0\n{{blank:q6-3-assembly}}\nL2:\n  testq    %rdx, %rdx\n  jne L1\n```"
           },
           "solution": {
             "state": "available",
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "（2分）"
+              "text": "答案：\n\n```asm\nmovq 8(%rdx), %rdx\n```\n\n`u1` 占 4 字节，但 8 字节指针要按 8 字节对齐，故 `next` 的偏移为 8。指令读取 `p->next`，而不是立即数，不加 `$`。"
             },
             "provenance": {
               "origin": "unknown",
@@ -92295,7 +92308,17 @@
             "blankAnswers": [
               {
                 "blankId": "q6-3-assembly",
-                "method": "self"
+                "method": "exact",
+                "acceptedAnswers": [
+                  "movq 8(%rdx), %rdx",
+                  "movq 8(%rdx),%rdx",
+                  "movq  8(%rdx), %rdx",
+                  "movq  8(%rdx),%rdx"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
               }
             ]
           },
@@ -92385,7 +92408,7 @@
                 "width": "medium"
               }
             ],
-            "text": "4. 在学习了循环展开后，同学I想对`func`函数进行优化。他决定尝试模仿书上\n$2 \\times 2$ 循环展开的方法，使用两个累积变量以提高代码并行性，请补全他改进后的函\n数 `func1` 的代码。（$1 \\times 4 = 4$ 分）\n```\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && {{blank:q6-4-1}}){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += {{blank:q6-4-2}};      //line 4\n        p = {{blank:q6-4-3}};        //line 5\n    }\n    if({{blank:q6-4-4}})          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① {{blank:q6-4-1}}\n② {{blank:q6-4-2}}\n③ {{blank:q6-4-3}}\n④ {{blank:q6-4-4}}\n```"
+            "text": "4. 同学 I 模仿书上 $2 \\times 2$ 循环展开的方法，使用两个累积变量以提高代码并行性，请补全 `func1`。（原卷本小问共 4 分）\n\n```cpp\nfloat func1(s_element* p){\n    float ans1 = 0, ans2 = 0;      //line 1\n    while( p && {{blank:q6-4-1}}){      //line 2\n        ans1 += p->u1.f;            //line 3\n        ans2 += {{blank:q6-4-2}};      //line 4\n        p = {{blank:q6-4-3}};        //line 5\n    }\n    if({{blank:q6-4-4}})          //line 6\n        ans1 += p->u1.f;       //line 7\n    return ans1 + ans2;       //line 8\n}\n```\n将要补全的代码填在下面：\n```\n① {{blank:q6-4-1}}\n② {{blank:q6-4-2}}\n③ {{blank:q6-4-3}}\n④ {{blank:q6-4-4}}\n```"
           },
           "solution": {
             "state": "available",
@@ -92402,19 +92425,58 @@
             "blankAnswers": [
               {
                 "blankId": "q6-4-1",
-                "method": "self"
+                "method": "exact",
+                "acceptedAnswers": [
+                  "p->next",
+                  "(p->next)",
+                  "p->next != NULL",
+                  "p->next!=NULL",
+                  "p->next != nullptr"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
               },
               {
                 "blankId": "q6-4-2",
-                "method": "self"
+                "method": "exact",
+                "acceptedAnswers": [
+                  "p->next->u1.f",
+                  "(p->next->u1.f)"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
               },
               {
                 "blankId": "q6-4-3",
-                "method": "self"
+                "method": "exact",
+                "acceptedAnswers": [
+                  "p->next->next",
+                  "(p->next->next)"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
               },
               {
                 "blankId": "q6-4-4",
-                "method": "self"
+                "method": "exact",
+                "acceptedAnswers": [
+                  "p",
+                  "(p)",
+                  "p != NULL",
+                  "p!=NULL",
+                  "p != nullptr",
+                  "p!=nullptr"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
               }
             ]
           },
@@ -92527,14 +92589,14 @@
                 "width": "medium"
               }
             ],
-            "text": "6. 同学S从书上读到，k * k循环展开在k很大时反而可能获得较差的效果，\n这是因为 k 很大时会导致 {{blank:q6-6-reason}}。"
+            "text": "6. 同学 S 从书上读到，`k * k` 循环展开在 `k` 很大时反而可能获得较差的效果，这是因为 {{blank:q6-6-reason}}。"
           },
           "solution": {
             "state": "available",
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "（2分）"
+              "text": "答案：寄存器溢出（register spilling），过多的活跃变量无法全部放入寄存器，部分变量被分配到栈上，增加内存读写。\n\n这是寄存器压力引起的性能下降，不是数值运算产生的算术溢出。含义相同的解释可自评为正确。"
             },
             "provenance": {
               "origin": "unknown",
@@ -92586,20 +92648,28 @@
             "format": "markdown",
             "blanks": [
               {
-                "id": "q6-7-output",
-                "marker": "{{blank:q6-7-output}}",
+                "id": "q6-7-hex",
+                "marker": "{{blank:q6-7-hex}}",
                 "occurrence": 0,
-                "width": "medium"
+                "width": "short",
+                "label": "十六进制输出（含0x）"
+              },
+              {
+                "id": "q6-7-distance",
+                "marker": "{{blank:q6-7-distance}}",
+                "occurrence": 0,
+                "width": "short",
+                "label": "指针差的十进制输出"
               }
             ],
-            "text": "7. 同学B使用了同学I改进后的`func1`函数实现下面这段代码，并在大端法机\n器上运行，最终得到的输出是：{{blank:q6-7-output}}。\n```\ns_element x, y, z;\n    x.u1.f = 1.2;\n    y.u1.f = 3.55;\n    x.next = &y;\n    y.next = nullptr;\n    z.u1.f = func1(&x);\n    printf(\"0x%x  %d\\n\",  z.u1.s[0]-z.u1.s[1],  &z.u1.s[0]-\n&z.u1.s[1]);\n```"
+            "text": "7. 同学 B 使用改进后的 `func1` 执行下面的代码。按课程的联合体机器表示模型，在大端机器上解释两个 `short`，填写输出。\n\n```cpp\ns_element x, y, z;\nx.u1.f = 1.2;\ny.u1.f = 3.55;\nx.next = &y;\ny.next = nullptr;\nz.u1.f = func1(&x);\nprintf(\"0x%x  %td\\n\",\n       (unsigned int)(z.u1.s[0] - z.u1.s[1]),\n       &z.u1.s[0] - &z.u1.s[1]);\n```\n\n十六进制数：{{blank:q6-7-hex}}；指针差：{{blank:q6-7-distance}}。\n\n维护说明：为避免格式符类型不匹配，输出指针差使用 `%td`，十六进制实参显式转换为 `unsigned int`；不改变原题考查的字节序与同类型指针之差。"
           },
           "solution": {
             "state": "available",
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "（2分）"
+              "text": "答案：`0x4098  -1`。\n\n`1.2f + 3.55f` 舍入后为 `4.75f`，单精度位模式为 `0x40980000`。大端机器中 `s[0] = 0x4098`、`s[1] = 0`，相减输出 `0x4098`。两个同类型指针相减按元素计数，`&s[0] - &s[1] = -1`，不是 `-2`。"
             },
             "provenance": {
               "origin": "unknown",
@@ -92608,8 +92678,26 @@
             },
             "blankAnswers": [
               {
-                "blankId": "q6-7-output",
-                "method": "self"
+                "blankId": "q6-7-hex",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0x4098"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "q6-7-distance",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "-1"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
               }
             ]
           },
@@ -92635,7 +92723,7 @@
         "grading": "parts",
         "reference": {
           "format": "markdown",
-          "text": ""
+          "text": "参考答案对照原卷第 26 页补全。数值与代码空按显式答案核对；第 2、5、6 小问仍需按文字含义自评。不能将第 6 问的“寄存器溢出”理解成整数算术溢出。"
         },
         "provenance": {
           "origin": "unknown",

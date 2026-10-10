@@ -1050,11 +1050,11 @@
       ],
       "stats": {
         "questionCount": 19,
-        "publishedQuestionCount": 19,
-        "quizQuestionCount": 19,
+        "publishedQuestionCount": 18,
+        "quizQuestionCount": 18,
         "verifiedAnswerCount": 19,
         "singleChoiceCount": 13,
-        "multipleChoiceCount": 2,
+        "multipleChoiceCount": 1,
         "fillCount": 4,
         "shortAnswerCount": 0,
         "compositeCount": 0

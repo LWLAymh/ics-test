@@ -144,6 +144,23 @@ class ContractTests(unittest.TestCase):
         q["publication"]["state"] = "published"
         self.invalid(q)
 
+    def test_retired_invalid_question_is_backed_up_but_not_deployed(self):
+        from build_web_data import deployed_payloads
+        retired = next(q for q in self.questions if q["id"] == "q-622ae65ab616a110")
+        self.assertEqual(retired["publication"]["state"], "review")
+        self.assertIn("retired-invalid-question", retired["publication"]["issues"])
+        self.assertIn("p = func;", retired["stem"]["text"])
+        self.assertEqual([o["id"] for o in retired["options"]], ["A", "B", "C", "D"])
+        deployed = deployed_payloads(self.modules, self.papers, self.questions)
+        self.assertNotIn(retired["id"], [q["id"] for q in deployed["questions.json"]["questions"]])
+        for paper in deployed["papers.json"]["papers"]:
+            self.assertNotIn(retired["id"], paper["questionIds"])
+        for module in deployed["catalog.json"]["modules"]:
+            self.assertNotIn(retired["id"], module["questionIds"])
+        bad = copy.deepcopy(retired)
+        bad["publication"]["state"] = "published"
+        self.invalid(bad)
+
     def test_duplicate_paper_order_fails(self):
         papers = copy.deepcopy(self.papers)
         papers[0]["questionIds"].append(papers[0]["questionIds"][0])

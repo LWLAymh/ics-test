@@ -249,6 +249,9 @@ def validate_response(node):
 
 def validate_question(question, modules=None):
     QUESTION_VALIDATOR.validate(question)
+    if ("retired-invalid-question" in question["publication"]["issues"]
+            and question["publication"]["state"] == "published"):
+        raise ValueError("retired invalid question must not be published")
     validate_response(question)
     classification = question["classification"]
     module_ids = set(classification["moduleIds"])

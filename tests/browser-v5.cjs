@@ -149,6 +149,36 @@ async function run() {
     assert(await page.locator('#ics-submit').isVisible());
     await page.evaluate(()=>{window.__rows={a:{question_id:'a',total_answers:10,correct_answers:1},b:{question_id:'b',total_answers:20,correct_answers:2}}});
     assert.deepEqual(await page.evaluate(async()=>{document.querySelector('#ics-min-attempts').value='5';return (await window.__test.rankByErrorRate([{id:'a'},{id:'b'}])).map(q=>q.id)}),['b','a']);
+    // Real reported questions: corrected keys, restored references and explicit retirement.
+    const deployedIds = await page.evaluate(async()=> (await (await fetch('./web-data/questions.json')).json()).questions.map(q=>q.id));
+    assert(!deployedIds.includes('q-622ae65ab616a110'));
+    assert.equal(deployedIds.length,all.filter(q=>q.publication.state==='published').length);
+    const final2015 = all.find(q=>q.id==='q-8c4d8b2b8d02717d');
+    await fixture(page,[final2015]);
+    assert.equal(await page.locator('#ics-question-content pre').count(),3);
+    for(const answer of final2015.solution.blankAnswers){
+      await page.locator('.ics-blank-input[data-blank-id="'+answer.blankId+'"]').fill(answer.acceptedAnswers[0]);
+    }
+    await page.click('#ics-submit');
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    assert.match(await page.locator('#ics-reference').innerText(),/0x28/);
+    const mid2021 = all.find(q=>q.id==='q-b0ef359a9e930155');
+    await fixture(page,[mid2021]);
+    assert.equal(await page.locator('[data-composite-part]').count(),7);
+    assert.match(await page.locator('#ics-question-content > pre').innerText(),/struct s_element/);
+    for(let i=0;i<mid2021.parts.length;i++){
+      for(const answer of mid2021.parts[i].solution.blankAnswers||[]){
+        await page.locator('[data-composite-part="'+i+'"] .ics-blank-input[data-blank-id="'+answer.blankId+'"]')
+          .first().fill(answer.method==='exact' ? answer.acceptedAnswers[0] : '解释草稿，按参考含义自评');
+      }
+    }
+    await page.click('#ics-submit');
+    assert(await page.locator('#ics-self-grade').isVisible());
+    assert.match(await page.locator('#ics-verdict').innerText(),/4 \/ 4/);
+    assert.match(await page.locator('#ics-reference').innerText(),/寄存器溢出/);
+    assert.match(await page.locator('#ics-reference').innerText(),/0x4098/);
+    await page.click('[data-grade="1"]');
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
     // Full bank browser parse, including withheld questions' Markdown, all options/references.
     const result=await page.evaluate(questions=>{
       window.MathJax=undefined;
