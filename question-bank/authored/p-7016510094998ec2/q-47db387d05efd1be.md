@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-47db387d05efd1be",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 5,
   "number": {
@@ -51,14 +51,14 @@
     "blanks": [
       {
         "id": "legacy-gap-0",
-        "marker": "________________",
+        "marker": "{{blank:legacy-gap-0}}",
         "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-1",
-        "marker": "________________",
-        "occurrence": 1,
+        "marker": "{{blank:legacy-gap-1}}",
+        "occurrence": 0,
         "width": "medium"
       }
     ]
@@ -88,6 +88,6 @@
 }
 +++
 %%% stem
-5. 在当前的 Linux 系统中，延迟绑定是通过两个数据结构之间的交互来实现的，这两个重要的数据结构分别是________________和________________。
+5. 在当前的 Linux 系统中，延迟绑定是通过两个数据结构之间的交互来实现的，这两个重要的数据结构分别是{{blank:legacy-gap-0}}和{{blank:legacy-gap-1}}。
 %%% reference
 答案：GOT；PLT

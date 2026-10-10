@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-4521377acbabad7a",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-ea869cda0eb89689",
   "paperOrder": 19,
   "number": {
@@ -51,80 +51,80 @@
     "blanks": [
       {
         "id": "legacy-gap-0",
-        "marker": "_____",
+        "marker": "{{blank:legacy-gap-0}}",
         "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-1",
-        "marker": "_____",
-        "occurrence": 1,
+        "marker": "{{blank:legacy-gap-1}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-2",
-        "marker": "_____",
-        "occurrence": 2,
+        "marker": "{{blank:legacy-gap-2}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-3",
-        "marker": "_____",
-        "occurrence": 3,
+        "marker": "{{blank:legacy-gap-3}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-4",
-        "marker": "_____",
-        "occurrence": 4,
+        "marker": "{{blank:legacy-gap-4}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-5",
-        "marker": "_____",
-        "occurrence": 5,
+        "marker": "{{blank:legacy-gap-5}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-6",
-        "marker": "_____",
-        "occurrence": 6,
+        "marker": "{{blank:legacy-gap-6}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-7",
-        "marker": "_____",
-        "occurrence": 7,
+        "marker": "{{blank:legacy-gap-7}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-8",
-        "marker": "_____",
-        "occurrence": 8,
+        "marker": "{{blank:legacy-gap-8}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-9",
-        "marker": "_____",
-        "occurrence": 9,
+        "marker": "{{blank:legacy-gap-9}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-10",
-        "marker": "_____",
-        "occurrence": 10,
+        "marker": "{{blank:legacy-gap-10}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-11",
-        "marker": "_____",
-        "occurrence": 11,
+        "marker": "{{blank:legacy-gap-11}}",
+        "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-12",
-        "marker": "_____",
-        "occurrence": 12,
+        "marker": "{{blank:legacy-gap-12}}",
+        "occurrence": 0,
         "width": "medium"
       }
     ]
@@ -245,21 +245,21 @@ loop1_check:
 void mystery_sort (long* array, long len)
 {
     long a, b, tmp;
-    while (_____ > _____)
+    while ({{blank:legacy-gap-0}} > {{blank:legacy-gap-1}})
     {
-        a = _____;
-        for (b = _____; b > _____; b--)
+        a = {{blank:legacy-gap-2}};
+        for (b = {{blank:legacy-gap-3}}; b > {{blank:legacy-gap-4}}; b--)
         {
-            if (array[_____] > array[_____])
+            if (array[{{blank:legacy-gap-5}}] > array[{{blank:legacy-gap-6}}])
             {
-                _____ = _____;
+                {{blank:legacy-gap-7}} = {{blank:legacy-gap-8}};
             }
         }
 
         len--;
-        tmp = array[_____];
-        array[_____] = array[_____];
-        array[_____] = tmp;
+        tmp = array[{{blank:legacy-gap-9}}];
+        array[{{blank:legacy-gap-10}}] = array[{{blank:legacy-gap-11}}];
+        array[{{blank:legacy-gap-12}}] = tmp;
     }
 }
 ```

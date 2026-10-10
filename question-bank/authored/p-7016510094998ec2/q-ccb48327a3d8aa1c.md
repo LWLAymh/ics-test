@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ccb48327a3d8aa1c",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 10,
   "number": {
@@ -51,7 +51,7 @@
     "blanks": [
       {
         "id": "legacy-gap-0",
-        "marker": "________________________",
+        "marker": "{{blank:legacy-gap-0}}",
         "occurrence": 0,
         "width": "medium"
       }
@@ -113,7 +113,7 @@
     | 0E | 17 | 1 |
     | 0F | 0D | 1 |
 
-    如果 CPU 执行取到一条虚拟地址为 `0x0395`，经地址翻译后，该虚拟地址对应的物理地址是________________________。
+    如果 CPU 执行取到一条虚拟地址为 `0x0395`，经地址翻译后，该虚拟地址对应的物理地址是{{blank:legacy-gap-0}}。
 %%% reference
 答案页给出的答案为 `0x5d5`。
 

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-268e962dcaaba41a",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 3,
   "number": {
@@ -51,14 +51,14 @@
     "blanks": [
       {
         "id": "legacy-gap-0",
-        "marker": "______",
+        "marker": "{{blank:legacy-gap-0}}",
         "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-1",
-        "marker": "______",
-        "occurrence": 1,
+        "marker": "{{blank:legacy-gap-1}}",
+        "occurrence": 0,
         "width": "medium"
       }
     ]
@@ -92,6 +92,6 @@
 }
 +++
 %%% stem
-3. 在 x86-64/Linux 的约定中，函数传递参数的前两个分别放在______和______寄存器。
+3. 在 x86-64/Linux 的约定中，函数传递参数的前两个分别放在{{blank:legacy-gap-0}}和{{blank:legacy-gap-1}}寄存器。
 %%% reference
 答案：rdi；rsi

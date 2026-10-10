@@ -8823,7 +8823,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e7e0b2274550651e",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 24,
       "number": {
@@ -8869,7 +8869,7 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium",
             "input": {
@@ -8893,26 +8893,26 @@
           },
           {
             "id": "legacy-gap-1",
-            "marker": "______",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-2",
-            "marker": "_______________",
+            "marker": "{{blank:legacy-gap-2}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-3",
-            "marker": "______________",
-            "occurrence": 2,
+            "marker": "{{blank:legacy-gap-3}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-4",
-            "marker": "______________",
-            "occurrence": 3,
+            "marker": "{{blank:legacy-gap-4}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
@@ -8936,7 +8936,7 @@
             }
           }
         ],
-        "text": "第五题（10分）虚拟存储\nIntel的IA32 体系结构采用小端法和二级页表。其中两级页表的大小相同，\n页大小为4KB。一级页表和二级页表的表项结构相同，其中页表项后六位的含义如\n下。\n\n| 位 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 标志 | — | D | A | CD | WT | U | W | P |\n\nD：Dirty（在页目录项中为0）；A：Accessed；CD：Cache Disabled；WT：1为\nWrite-through，0为Write-back；U：User；W：Writable；P：Present。\n\n已知一级页表的地址为`0x0c23b000`，物理内存中的部分内容如下图所示。\n地址  内容  地址  内容  地址  内容  地址  内容\n```\n00023000  E0  00023001  BE   00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n00023FF8  29  00023FF9  FF  00023FFA  DE  00023FFB  BC\n00055004  03  00055005  D0  00055006  74  00055007  89\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055460  97  00055461  D2  00055462  7B  00055463  45\n00055464  97  00055465  E2  00055466  7B  00055467  45\n0C23B020  55  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  55  0C23B041  AB  0C23B042  2A  0C23B043  01\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n0C23B09D  05  0C23B09E  D3  0C23B09F  F2  0C23B0A0  0F\n0C23B274  05  0C23B275  3D  0C23B276  02  0C23B277  00\n0C23B9FC  25  0C23B9FD  D2  0C23B9FE  14  0C23B9FF  23\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n2314D4A0  BD  2314D4A1  BC  2314D4A2  88  2314D4A3  D3\n2314D890  00  2314D891  2D  2314D892  B3  2314D893  00\n24AEE001  07  24AEE002  A0  24AEE003  37  24AEE004  C2\n24AEE520  D1  24AEE521  DA  24AEE522  8C  24AEE523  B5\n29DE2504  02  29DE2505  AD  29DE2506  FF  29DE2507  56\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n29DE9402  00  29DE9403  20  29DE9404  73  29DE9405  D4\n29DEE500  B0  29DEE501  CD  29DEE502  23  29DEE503  1A\n```\nTLB采用直接映射，TLB的内容如下所示。\n索引  TLB标记  内容  有效位\n```\n0  0x08001  2314d220  1\n1  0x01000  24aee520  0\n2  0x005AE  00055004  0\n3  0x016BA  0c23b09d  1\n4  0x0AA00  0005545c  1\n5  0x0000A  29dee500  0\n6  0x5AE82  00023320  1\n7  0x28DFC  00023000  1\n```\n1. （2分）某用户态进程试图写入虚拟地址：`0x080016ba`。该访问的最后结果\n是______。\n\n(a) 该进程成功写入，未触发异常\n\n(b) 该进程触发了一个缺页异常\n\n(c) 该进程触发了一个非法访问异常\n\n2.下面描述了具体的访问过程，请填空。如果某个空在访问过程中已不可用，请\n填入“--”\n\n2.1 TLB的索引为______，访问为 {{blank:tlb-hit}}（(a) 命中；(b) 不命中）（2分）\n\n2.2一级页表表项地址为_______________。（2分）\n\n2.3二级页表表项地址为______________。（2分）\n\n2.4最后物理地址为______________。（2分）"
+        "text": "第五题（10分）虚拟存储\nIntel的IA32 体系结构采用小端法和二级页表。其中两级页表的大小相同，\n页大小为4KB。一级页表和二级页表的表项结构相同，其中页表项后六位的含义如\n下。\n\n| 位 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 标志 | — | D | A | CD | WT | U | W | P |\n\nD：Dirty（在页目录项中为0）；A：Accessed；CD：Cache Disabled；WT：1为\nWrite-through，0为Write-back；U：User；W：Writable；P：Present。\n\n已知一级页表的地址为`0x0c23b000`，物理内存中的部分内容如下图所示。\n地址  内容  地址  内容  地址  内容  地址  内容\n```\n00023000  E0  00023001  BE   00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n00023FF8  29  00023FF9  FF  00023FFA  DE  00023FFB  BC\n00055004  03  00055005  D0  00055006  74  00055007  89\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055460  97  00055461  D2  00055462  7B  00055463  45\n00055464  97  00055465  E2  00055466  7B  00055467  45\n0C23B020  55  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  55  0C23B041  AB  0C23B042  2A  0C23B043  01\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n0C23B09D  05  0C23B09E  D3  0C23B09F  F2  0C23B0A0  0F\n0C23B274  05  0C23B275  3D  0C23B276  02  0C23B277  00\n0C23B9FC  25  0C23B9FD  D2  0C23B9FE  14  0C23B9FF  23\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n2314D4A0  BD  2314D4A1  BC  2314D4A2  88  2314D4A3  D3\n2314D890  00  2314D891  2D  2314D892  B3  2314D893  00\n24AEE001  07  24AEE002  A0  24AEE003  37  24AEE004  C2\n24AEE520  D1  24AEE521  DA  24AEE522  8C  24AEE523  B5\n29DE2504  02  29DE2505  AD  29DE2506  FF  29DE2507  56\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n29DE9402  00  29DE9403  20  29DE9404  73  29DE9405  D4\n29DEE500  B0  29DEE501  CD  29DEE502  23  29DEE503  1A\n```\nTLB采用直接映射，TLB的内容如下所示。\n索引  TLB标记  内容  有效位\n```\n0  0x08001  2314d220  1\n1  0x01000  24aee520  0\n2  0x005AE  00055004  0\n3  0x016BA  0c23b09d  1\n4  0x0AA00  0005545c  1\n5  0x0000A  29dee500  0\n6  0x5AE82  00023320  1\n7  0x28DFC  00023000  1\n```\n1. （2分）某用户态进程试图写入虚拟地址：`0x080016ba`。该访问的最后结果\n是{{blank:legacy-gap-0}}。\n\n(a) 该进程成功写入，未触发异常\n\n(b) 该进程触发了一个缺页异常\n\n(c) 该进程触发了一个非法访问异常\n\n2.下面描述了具体的访问过程，请填空。如果某个空在访问过程中已不可用，请\n填入“--”\n\n2.1 TLB的索引为{{blank:legacy-gap-1}}，访问为 {{blank:tlb-hit}}（(a) 命中；(b) 不命中）（2分）\n\n2.2一级页表表项地址为{{blank:legacy-gap-2}}。（2分）\n\n2.3二级页表表项地址为{{blank:legacy-gap-3}}。（2分）\n\n2.4最后物理地址为{{blank:legacy-gap-4}}。（2分）"
       },
       "solution": {
         "state": "available",
@@ -18226,7 +18226,7 @@
     {
       "schemaVersion": "5",
       "id": "q-398fe9f606ec567b",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-12950876262955d9",
       "paperOrder": 24,
       "number": {
@@ -18307,14 +18307,14 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "______",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium",
                 "input": {
                   "kind": "select",
@@ -18333,18 +18333,18 @@
               },
               {
                 "id": "legacy-gap-2",
-                "marker": "______",
-                "occurrence": 2,
+                "marker": "{{blank:legacy-gap-2}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-3",
-                "marker": "______",
-                "occurrence": 3,
+                "marker": "{{blank:legacy-gap-3}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "1.在一个8-bit地址空间的机器上，考虑如下的高速缓存：此高速缓存共有4组\n（`S=4`），为二路组相联（`E=2`），`Tag`段的大小为3-bit（`t=3`），替换策略为LRU。\n初始状态下各组的有效位（V）和`Tag`位如下表所示：\n```\n  V  Tag  V  Tag\nSET 0  1  000  0  001\nSET 1  0  001  1  110\nSET 2  0  110  1  101\nSET 3  1  010  0  001\n```\n（1）此 cache 所能存储的数据总容量为 `C = ______ Bytes`。（3 分）\n\n（2）现要读取地址空间 `0xd2` 处的数据，此访存是否命中 cache？______（填“是”或“否”）。（2 分）请在下表中写出经过此次访存后更新的 cache 有效位（V）和 `Tag` 位。仅写出有修改的部分即可；如果认为没有修改，此表可以为空。（2 分）\n\n| Set | V | `Tag` | V | `Tag` |\n| --- | --- | --- | --- | --- |\n| 0 |  |  |  |  |\n| 1 |  |  |  |  |\n| 2 |  |  |  |  |\n| 3 |  |  |  |  |\n\n（3）在（2）访存的基础上，考虑如下访存序列：`0xc8, 0x16, 0x01, 0xb5`（均读取一个字节）。这四次数据访问的命中率（hit rate）为______。（2 分）假设 cache 的命中时间（hit time）为 10 个周期，不命中处罚（miss penalty）为 190 个周期，则总延迟为______周期。（2 分）"
+            "text": "1.在一个8-bit地址空间的机器上，考虑如下的高速缓存：此高速缓存共有4组\n（`S=4`），为二路组相联（`E=2`），`Tag`段的大小为3-bit（`t=3`），替换策略为LRU。\n初始状态下各组的有效位（V）和`Tag`位如下表所示：\n```\n  V  Tag  V  Tag\nSET 0  1  000  0  001\nSET 1  0  001  1  110\nSET 2  0  110  1  101\nSET 3  1  010  0  001\n```\n（1）此 cache 所能存储的数据总容量为 `C = {{blank:legacy-gap-0}} Bytes`。（3 分）\n\n（2）现要读取地址空间 `0xd2` 处的数据，此访存是否命中 cache？{{blank:legacy-gap-1}}（填“是”或“否”）。（2 分）请在下表中写出经过此次访存后更新的 cache 有效位（V）和 `Tag` 位。仅写出有修改的部分即可；如果认为没有修改，此表可以为空。（2 分）\n\n| Set | V | `Tag` | V | `Tag` |\n| --- | --- | --- | --- | --- |\n| 0 |  |  |  |  |\n| 1 |  |  |  |  |\n| 2 |  |  |  |  |\n| 3 |  |  |  |  |\n\n（3）在（2）访存的基础上，考虑如下访存序列：`0xc8, 0x16, 0x01, 0xb5`（均读取一个字节）。这四次数据访问的命中率（hit rate）为{{blank:legacy-gap-2}}。（2 分）假设 cache 的命中时间（hit time）为 10 个周期，不命中处罚（miss penalty）为 190 个周期，则总延迟为{{blank:legacy-gap-3}}周期。（2 分）"
           },
           "solution": {
             "state": "available",
@@ -18419,7 +18419,7 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "__________",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium",
                 "input": {
@@ -18439,18 +18439,18 @@
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "__________",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-2",
-                "marker": "___________",
+                "marker": "{{blank:legacy-gap-2}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "2.下面我们将考虑实际程序中发生的访存行为。考虑一个 32-bit 地址空间的机\n器，并有如下的高速缓存：总大小为16 Bytes，每个cache block的大小为4\nBytes，组织结构为全相联（`S=1`），替换策略为LRU。\n在此机器上运行如下C语言代码。假设初始时cache为空，只考虑读写数据引起\n的cache访问，不考虑编译优化，临时变量a, b, c, i均储存在寄存器中，`int`\n数据类型的大小为4 Bytes，`f`数组的起始地址为`0x10000000`。回答下列问题：\n```\n1: # define N 20\n2: int f[N + 2];\n3: f[0] = 1;\n4: f[1] = 1;\n5: for(int i = 0; i < N; i++) {\n6:    int a = f[i];\n7:    int b = f[i + 1];\n8:    int c = a + b;\n9:    f[i + 2] = c;\n10: }\n```\n（1）假设cache在写命中时采用直写(write-through) 策略，在写不命中时\n采用非写分配(not-write-allocate) 策略，则当程序第一次运行到第6行时，\n所发生的访存是否命中cache？__________（填“是”或“否”）。（2分）整个\n程序的执行过程共命中cache __________次。（1分）\n\n（2）假设cache在写命中时采用写回(write-back) 策略，在写不命中时采用\n写分配(write-allocate) 策略，整个程序的执行过程共命中 cache\n___________次。（1分）"
+            "text": "2.下面我们将考虑实际程序中发生的访存行为。考虑一个 32-bit 地址空间的机\n器，并有如下的高速缓存：总大小为16 Bytes，每个cache block的大小为4\nBytes，组织结构为全相联（`S=1`），替换策略为LRU。\n在此机器上运行如下C语言代码。假设初始时cache为空，只考虑读写数据引起\n的cache访问，不考虑编译优化，临时变量a, b, c, i均储存在寄存器中，`int`\n数据类型的大小为4 Bytes，`f`数组的起始地址为`0x10000000`。回答下列问题：\n```\n1: # define N 20\n2: int f[N + 2];\n3: f[0] = 1;\n4: f[1] = 1;\n5: for(int i = 0; i < N; i++) {\n6:    int a = f[i];\n7:    int b = f[i + 1];\n8:    int c = a + b;\n9:    f[i + 2] = c;\n10: }\n```\n（1）假设cache在写命中时采用直写(write-through) 策略，在写不命中时\n采用非写分配(not-write-allocate) 策略，则当程序第一次运行到第6行时，\n所发生的访存是否命中cache？{{blank:legacy-gap-0}}（填“是”或“否”）。（2分）整个\n程序的执行过程共命中cache {{blank:legacy-gap-1}}次。（1分）\n\n（2）假设cache在写命中时采用写回(write-back) 策略，在写不命中时采用\n写分配(write-allocate) 策略，整个程序的执行过程共命中 cache\n{{blank:legacy-gap-2}}次。（1分）"
           },
           "solution": {
             "state": "available",
@@ -45079,7 +45079,7 @@
     {
       "schemaVersion": "5",
       "id": "q-25dbe016122b4a0d",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 23,
       "number": {
@@ -45128,42 +45128,42 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "__________________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "__________________",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-2",
-            "marker": "__________________",
-            "occurrence": 2,
+            "marker": "{{blank:legacy-gap-2}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-3",
-            "marker": "__________________",
-            "occurrence": 3,
+            "marker": "{{blank:legacy-gap-3}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-4",
-            "marker": "__________________",
-            "occurrence": 4,
+            "marker": "{{blank:legacy-gap-4}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-5",
-            "marker": "__________________",
-            "occurrence": 5,
+            "marker": "{{blank:legacy-gap-5}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从`rsp`中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```"
+        "text": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从`rsp`中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x{{blank:legacy-gap-0}} 0x{{blank:legacy-gap-1}}\n0x4006a0: 0x{{blank:legacy-gap-2}} 0x{{blank:legacy-gap-3}}\n0x4006b0: 0x{{blank:legacy-gap-4}} 0x{{blank:legacy-gap-5}}\n```"
       },
       "solution": {
         "state": "available",
@@ -48089,7 +48089,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0534efd83d6a6a83",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 18,
       "number": {
@@ -48181,109 +48181,43 @@
             "format": "markdown",
             "blanks": [
               {
-                "id": "legacy-gap-0",
-                "marker": "______________",
-                "occurrence": 0,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-1",
-                "marker": "______________",
-                "occurrence": 1,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-3",
-                "marker": "__",
-                "occurrence": 27,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-4",
-                "marker": "______________",
-                "occurrence": 2,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-5",
-                "marker": "______________",
-                "occurrence": 3,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-7",
-                "marker": "__",
-                "occurrence": 55,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-9",
-                "marker": "__",
-                "occurrence": 57,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-11",
-                "marker": "__",
-                "occurrence": 59,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-13",
-                "marker": "__",
-                "occurrence": 61,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-15",
-                "marker": "__",
-                "occurrence": 63,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-17",
-                "marker": "__",
-                "occurrence": 65,
-                "width": "medium"
-              },
-              {
                 "id": "legacy-gap-18",
-                "marker": "________________________________",
+                "marker": "{{blank:legacy-gap-18}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-19",
-                "marker": "________________________________",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-19}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-20",
-                "marker": "________________________________",
-                "occurrence": 2,
+                "marker": "{{blank:legacy-gap-20}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-21",
-                "marker": "________________________________",
-                "occurrence": 3,
+                "marker": "{{blank:legacy-gap-21}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-22",
-                "marker": "________________________________",
-                "occurrence": 4,
+                "marker": "{{blank:legacy-gap-22}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-23",
-                "marker": "________________________________",
-                "occurrence": 5,
+                "marker": "{{blank:legacy-gap-23}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "信号是实现进程间通信的一种重要方式。以下程序中，父进程借助信号把一个随机数传给子进程。\n\n```c\n 1. #include \"csapp.h\"\n 2. volatile int acc = 0;\n 3. volatile int count = 0;\n 4. void sigusr1_handler(int sig) {\n 5.         ______________G______________\n 6.     acc = acc * 2 + __A__;\n 7.     Kill(getppid(), SIGCONT);\n 8. }\n 9. void sigusr2_handler(int sig) {\n10.         ______________H______________\n11.     acc = acc * 2 + __B__;\n12.     Kill(getppid(), SIGCONT);\n13. }\n14. void sigcont_handler(int sig) {}\n15. int main() {\n16.     sigset_t mask_all, mask_father, mask_child;\n17.     Sigfillset(&mask_all);\n18.     Sigfillset(&mask_father);\n19.     Sigfillset(&mask_child);\n20.     Sigdelset(&mask_father, SIGCONT);\n21.     Sigdelset(&mask_child, SIGUSR1);\n22.     Sigdelset(&mask_child, SIGUSR2);\n23.     Signal(SIGUSR1, sigusr1_handler);\n24.     Signal(SIGUSR2, sigusr2_handler);\n25.     Signal(SIGCONT, sigcont_handler);\n26.     __C__(SIG_SETMASK, __D__, NULL);\n27.\n28.     pid_t pid = Fork();\n29.     if (pid == 0) {\n    30.         for (int i = 0; i < sizeof(int) * 8; i++)\n    31.             __E__(&mask_child);\n    32.         printf(\"child:0x%x\\n\", acc);\n    33.     }\n34.     else {\n    35.         srand(time(NULL));\n    36.         int r = rand();\n    37.         printf(\"father:0x%x\\n\", r);\n    38.         for (int i = 0; i < sizeof(int) * 8; i++) {\n        39.             if (r & (__F__ << 31 - i))\n        40.                 Kill(pid, SIGUSR2);\n        41.             else\n        42.                 Kill(pid, SIGUSR1);\n        43.             __E__(&mask_father);\n        44.         }\n    45.         Wait(NULL);\n    46.     }\n47. }\n```\n\n1. 假设 G. H 处都为空，该程序需要使得父进程和子进程的输出相同。（共 6 分，每空 1 分）\n\n   (1) 程序填空：\n\n\n   A:________________________________\n\n   B:________________________________\n\n   C:________________________________\n\n   D:________________________________\n\n   E:________________________________\n\n   F:________________________________"
+            "text": "信号是实现进程间通信的一种重要方式。以下程序中，父进程借助信号把一个随机数传给子进程。\n\n```c\n 1. #include \"csapp.h\"\n 2. volatile int acc = 0;\n 3. volatile int count = 0;\n 4. void sigusr1_handler(int sig) {\n 5.         ______________G______________\n 6.     acc = acc * 2 + __A__;\n 7.     Kill(getppid(), SIGCONT);\n 8. }\n 9. void sigusr2_handler(int sig) {\n10.         ______________H______________\n11.     acc = acc * 2 + __B__;\n12.     Kill(getppid(), SIGCONT);\n13. }\n14. void sigcont_handler(int sig) {}\n15. int main() {\n16.     sigset_t mask_all, mask_father, mask_child;\n17.     Sigfillset(&mask_all);\n18.     Sigfillset(&mask_father);\n19.     Sigfillset(&mask_child);\n20.     Sigdelset(&mask_father, SIGCONT);\n21.     Sigdelset(&mask_child, SIGUSR1);\n22.     Sigdelset(&mask_child, SIGUSR2);\n23.     Signal(SIGUSR1, sigusr1_handler);\n24.     Signal(SIGUSR2, sigusr2_handler);\n25.     Signal(SIGCONT, sigcont_handler);\n26.     __C__(SIG_SETMASK, __D__, NULL);\n27.\n28.     pid_t pid = Fork();\n29.     if (pid == 0) {\n    30.         for (int i = 0; i < sizeof(int) * 8; i++)\n    31.             __E__(&mask_child);\n    32.         printf(\"child:0x%x\\n\", acc);\n    33.     }\n34.     else {\n    35.         srand(time(NULL));\n    36.         int r = rand();\n    37.         printf(\"father:0x%x\\n\", r);\n    38.         for (int i = 0; i < sizeof(int) * 8; i++) {\n        39.             if (r & (__F__ << 31 - i))\n        40.                 Kill(pid, SIGUSR2);\n        41.             else\n        42.                 Kill(pid, SIGUSR1);\n        43.             __E__(&mask_father);\n        44.         }\n    45.         Wait(NULL);\n    46.     }\n47. }\n```\n\n1. 假设 G. H 处都为空，该程序需要使得父进程和子进程的输出相同。（共 6 分，每空 1 分）\n\n   (1) 程序填空：\n\n\n   A:{{blank:legacy-gap-18}}\n\n   B:{{blank:legacy-gap-19}}\n\n   C:{{blank:legacy-gap-20}}\n\n   D:{{blank:legacy-gap-21}}\n\n   E:{{blank:legacy-gap-22}}\n\n   F:{{blank:legacy-gap-23}}"
           },
           "solution": {
             "state": "available",
@@ -48298,50 +48232,6 @@
               "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
             },
             "blankAnswers": [
-              {
-                "blankId": "legacy-gap-0",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-1",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-3",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-4",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-5",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-7",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-9",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-11",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-13",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-15",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-17",
-                "method": "self"
-              },
               {
                 "blankId": "legacy-gap-18",
                 "method": "self"
@@ -48486,12 +48376,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "____________",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "2. 假设 G 处填写 `if (count % 3 == 0) return`; 在 H 处填写 count++;\n\n   如果第 36 行生成的随机数是 `0xaaaaaaaa`，则子进程的输出是 child:0x____________ （1 分），简要说明理由。（1 分）"
+            "text": "2. 假设 G 处填写 `if (count % 3 == 0) return`; 在 H 处填写 count++;\n\n   如果第 36 行生成的随机数是 `0xaaaaaaaa`，则子进程的输出是 child:0x{{blank:legacy-gap-0}} （1 分），简要说明理由。（1 分）"
           },
           "solution": {
             "state": "available",
@@ -48545,7 +48435,7 @@
     {
       "schemaVersion": "5",
       "id": "q-06261ab318fa9bb5",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 6,
       "number": {
@@ -48594,18 +48484,18 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "________________________________________________________________________________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "________________________________________________________________________________",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "6. a 和 b 表示当前目录中的目标模块或者静态库，而 a—>b 表示 a 依赖于 b，也就是说 b 定义了一个被 a 占用的符号。对于下面的每种场景，请给出最小的命令行（即一个含有最少数量的目标文件和库参数的命令），使得静态链接器能解析所有的符号引用。\n\n   ① `p.o` —>`libx.a` —> `liby.a`\n\n   ________________________________________________________________________________\n\n   ② `p.o` —>`libx.a` —>`liby.a` 且 `liby.a` —> `libx.a` —> `p.o`\n\n   ________________________________________________________________________________"
+        "text": "6. a 和 b 表示当前目录中的目标模块或者静态库，而 a—>b 表示 a 依赖于 b，也就是说 b 定义了一个被 a 占用的符号。对于下面的每种场景，请给出最小的命令行（即一个含有最少数量的目标文件和库参数的命令），使得静态链接器能解析所有的符号引用。\n\n   ① `p.o` —>`libx.a` —> `liby.a`\n\n   {{blank:legacy-gap-0}}\n\n   ② `p.o` —>`libx.a` —>`liby.a` 且 `liby.a` —> `libx.a` —> `p.o`\n\n   {{blank:legacy-gap-1}}"
       },
       "solution": {
         "state": "available",
@@ -48634,7 +48524,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1dfdad28c97b66ac",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 12,
       "number": {
@@ -48683,12 +48573,12 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "________________________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "12. IP 地址可以用十六进制表示，也可以用点分十进制表示。请写出 IPv4 地址`0x24982c5f`的点分十进制表示：________________________。"
+        "text": "12. IP 地址可以用十六进制表示，也可以用点分十进制表示。请写出 IPv4 地址`0x24982c5f`的点分十进制表示：{{blank:legacy-gap-0}}。"
       },
       "solution": {
         "state": "available",
@@ -48720,7 +48610,7 @@
     {
       "schemaVersion": "5",
       "id": "q-268e962dcaaba41a",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 3,
       "number": {
@@ -48769,18 +48659,18 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "______",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "3. 在 x86-64/Linux 的约定中，函数传递参数的前两个分别放在______和______寄存器。"
+        "text": "3. 在 x86-64/Linux 的约定中，函数传递参数的前两个分别放在{{blank:legacy-gap-0}}和{{blank:legacy-gap-1}}寄存器。"
       },
       "solution": {
         "state": "available",
@@ -48825,7 +48715,7 @@
     {
       "schemaVersion": "5",
       "id": "q-37e4fa1acf9d6c42",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 9,
       "number": {
@@ -48880,12 +48770,12 @@
           },
           {
             "id": "legacy-gap-1",
-            "marker": "__________",
+            "marker": "{{blank:legacy-gap-1}}",
             "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "9. 在支持虚拟地址空间的系统中，CPU 取到虚拟地址后，发给______①______，由①将虚拟地址转换为物理地址。为了加快地址翻译速度，需要在①中引入②__________。"
+        "text": "9. 在支持虚拟地址空间的系统中，CPU 取到虚拟地址后，发给______①______，由①将虚拟地址转换为物理地址。为了加快地址翻译速度，需要在①中引入②{{blank:legacy-gap-1}}。"
       },
       "solution": {
         "state": "available",
@@ -48914,7 +48804,7 @@
     {
       "schemaVersion": "5",
       "id": "q-47bec7eb7572de63",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 11,
       "number": {
@@ -48963,12 +48853,12 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "____________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "11. Linux 中可以一个磁盘上的文件与虚拟内存中的区域关联起来，这一过程称为____________。"
+        "text": "11. Linux 中可以一个磁盘上的文件与虚拟内存中的区域关联起来，这一过程称为{{blank:legacy-gap-0}}。"
       },
       "solution": {
         "state": "available",
@@ -49001,7 +48891,7 @@
     {
       "schemaVersion": "5",
       "id": "q-47db387d05efd1be",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 5,
       "number": {
@@ -49050,18 +48940,18 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "________________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "________________",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "5. 在当前的 Linux 系统中，延迟绑定是通过两个数据结构之间的交互来实现的，这两个重要的数据结构分别是________________和________________。"
+        "text": "5. 在当前的 Linux 系统中，延迟绑定是通过两个数据结构之间的交互来实现的，这两个重要的数据结构分别是{{blank:legacy-gap-0}}和{{blank:legacy-gap-1}}。"
       },
       "solution": {
         "state": "available",
@@ -49090,7 +48980,7 @@
     {
       "schemaVersion": "5",
       "id": "q-50ebd81e30dc512c",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 2,
       "number": {
@@ -49139,12 +49029,12 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "____________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "2. 这是一个 IEEE754 标准的单精度浮点数的十六进制形式：(41 20 00 00)₁₆。该数转换成十进制是____________。（提示：指数域有 8 比特）"
+        "text": "2. 这是一个 IEEE754 标准的单精度浮点数的十六进制形式：(41 20 00 00)₁₆。该数转换成十进制是{{blank:legacy-gap-0}}。（提示：指数域有 8 比特）"
       },
       "solution": {
         "state": "available",
@@ -49176,7 +49066,7 @@
     {
       "schemaVersion": "5",
       "id": "q-71e2271cf5cdd47d",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 7,
       "number": {
@@ -49225,18 +49115,18 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "________________________________________________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "________________________________________________",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "7. 请根据下图所示流程完成填空。\n\n   ① 处发生了什么？________________________________________________。\n\n   ② 执行的代码是什么？________________________________________________。\n\n   ![图](assets/期末/2022期末-无答案/page-02.png)\n\n   图为进程切换流程示意：左右两栏分别为\"进程 A\"与\"进程 B\"的代码执行时序，由\"用户代码\"\"内核代码\"色块交替组成，右侧两处括注\"上下文切换\"；左上角文字\"有信号发送给进程 A\"，①、② 分别指向内核代码中的两个位置。"
+        "text": "7. 请根据下图所示流程完成填空。\n\n   ① 处发生了什么？{{blank:legacy-gap-0}}。\n\n   ② 执行的代码是什么？{{blank:legacy-gap-1}}。\n\n   ![图](assets/期末/2022期末-无答案/page-02.png)\n\n   图为进程切换流程示意：左右两栏分别为\"进程 A\"与\"进程 B\"的代码执行时序，由\"用户代码\"\"内核代码\"色块交替组成，右侧两处括注\"上下文切换\"；左上角文字\"有信号发送给进程 A\"，①、② 分别指向内核代码中的两个位置。"
       },
       "solution": {
         "state": "available",
@@ -49265,7 +49155,7 @@
     {
       "schemaVersion": "5",
       "id": "q-7d2a26a53d81e35c",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 1,
       "number": {
@@ -49314,7 +49204,7 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "____________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium",
             "input": {
@@ -49334,8 +49224,8 @@
           },
           {
             "id": "legacy-gap-1",
-            "marker": "____________",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -49353,7 +49243,7 @@
             }
           }
         ],
-        "text": "1. 对比指令系统体系结构（ISA）的两大类别，____________通常比____________的指令数量和寻址方式都少。"
+        "text": "1. 对比指令系统体系结构（ISA）的两大类别，{{blank:legacy-gap-0}}通常比{{blank:legacy-gap-1}}的指令数量和寻址方式都少。"
       },
       "solution": {
         "state": "available",
@@ -49388,7 +49278,7 @@
     {
       "schemaVersion": "5",
       "id": "q-80560a1ecf2223dd",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 16,
       "number": {
@@ -49519,24 +49409,24 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "____________",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "__________",
-                "occurrence": 3,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-2",
-                "marker": "__________",
-                "occurrence": 4,
+                "marker": "{{blank:legacy-gap-2}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "(1) 要解决\"load-use\"冒险，首先要能检测出来。根据下面的处理器信号连接图，补全检测\"load-use\"冒险的 HCL 表达式。（每空 1 分）\n\n![图](assets/期末/2022期末-无答案/page-04.png)\n\n　　____________ in { IMRMOVQ, IPOPQ } && E_dstM in { __________, __________ }"
+            "text": "(1) 要解决\"load-use\"冒险，首先要能检测出来。根据下面的处理器信号连接图，补全检测\"load-use\"冒险的 HCL 表达式。（每空 1 分）\n\n![图](assets/期末/2022期末-无答案/page-04.png)\n\n　　{{blank:legacy-gap-0}} in { IMRMOVQ, IPOPQ } && E_dstM in { {{blank:legacy-gap-1}}, {{blank:legacy-gap-2}} }"
           },
           "solution": {
             "state": "available",
@@ -49752,24 +49642,24 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "__________",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "__________",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-2",
-                "marker": "__________",
-                "occurrence": 2,
+                "marker": "{{blank:legacy-gap-2}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "![图](assets/期末/2022期末-无答案/page-04.png)\n\n图为 Y86 流水线处理器的信号连接图（教材 HCL 图）：左侧标注 Execute、Decode 等阶段，包含 ALU A/ALU B、CC、Set_cc、e_dstE、dstE/dstM/srcA/srcB、Register file（Write back / Read ports）、d_srcA/d_srcB/d_rvalA/d_rvalB、Instr valid/need_regids/need_valC 等信号块，右侧一列为各阶段的状态码。\n\n(3) ret 指令因为在流水线很晚阶段才能获得转移目标地址，所以也要特殊处理。参考上面的处理器信号连接图（注意：图中信号可能不完整，但足够推测出所需的信号），补全检测 `ret` 指令处理时机的 HCL 表达式。（每空 1 分）\n\n　　IRET in { __________, __________, __________ }"
+            "text": "![图](assets/期末/2022期末-无答案/page-04.png)\n\n图为 Y86 流水线处理器的信号连接图（教材 HCL 图）：左侧标注 Execute、Decode 等阶段，包含 ALU A/ALU B、CC、Set_cc、e_dstE、dstE/dstM/srcA/srcB、Register file（Write back / Read ports）、d_srcA/d_srcB/d_rvalA/d_rvalB、Instr valid/need_regids/need_valC 等信号块，右侧一列为各阶段的状态码。\n\n(3) ret 指令因为在流水线很晚阶段才能获得转移目标地址，所以也要特殊处理。参考上面的处理器信号连接图（注意：图中信号可能不完整，但足够推测出所需的信号），补全检测 `ret` 指令处理时机的 HCL 表达式。（每空 1 分）\n\n　　IRET in { {{blank:legacy-gap-0}}, {{blank:legacy-gap-1}}, {{blank:legacy-gap-2}} }"
           },
           "solution": {
             "state": "available",
@@ -49985,12 +49875,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "(5) 执行 `ret` 指令时，其会插入______个周期的 bubble。（1 分）"
+            "text": "(5) 执行 `ret` 指令时，其会插入{{blank:legacy-gap-0}}个周期的 bubble。（1 分）"
           },
           "solution": {
             "state": "available",
@@ -50050,12 +49940,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "________________________________________________________________________________",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "(6) 什么场景下，上面提到的 load-use 和 `ret` 需要处理的情况会同时出现？（2 分）\n\n________________________________________________________________________________"
+            "text": "(6) 什么场景下，上面提到的 load-use 和 `ret` 需要处理的情况会同时出现？（2 分）\n\n{{blank:legacy-gap-0}}"
           },
           "solution": {
             "state": "available",
@@ -50109,7 +49999,7 @@
     {
       "schemaVersion": "5",
       "id": "q-923088b4fef4799c",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 13,
       "number": {
@@ -50158,7 +50048,7 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium",
             "input": {
@@ -50185,7 +50075,7 @@
             }
           }
         ],
-        "text": "13. 下图给出了一个典型的客户端-服务器套接字交互流程。应当填在空(2)处的函数名称是：______（accept / bind / listen / socket）。\n\n    ![客户端-服务器套接字交互流程图](assets/期末/2022期末-无答案/p03-img1.png)\n\n    图左为客户端流程（自上而下：getaddrinfo → socket → connect → rio_written → rio_readlineb → close），图右为服务器流程（自上而下：getaddrinfo → (1) → (2) → (3) → (4) → rio_readlineb → rio_written → rio_readlineb → close），客户端与服务器之间由\"连接请求\"与 EOF 箭头相连；右侧括注有\"open_clientfd\"\"open_listenfd\"以及\"等待来自下一个客户端的连接请求\"。"
+        "text": "13. 下图给出了一个典型的客户端-服务器套接字交互流程。应当填在空(2)处的函数名称是：{{blank:legacy-gap-0}}（accept / bind / listen / socket）。\n\n    ![客户端-服务器套接字交互流程图](assets/期末/2022期末-无答案/p03-img1.png)\n\n    图左为客户端流程（自上而下：getaddrinfo → socket → connect → rio_written → rio_readlineb → close），图右为服务器流程（自上而下：getaddrinfo → (1) → (2) → (3) → (4) → rio_readlineb → rio_written → rio_readlineb → close），客户端与服务器之间由\"连接请求\"与 EOF 箭头相连；右侧括注有\"open_clientfd\"\"open_listenfd\"以及\"等待来自下一个客户端的连接请求\"。"
       },
       "solution": {
         "state": "available",
@@ -50213,7 +50103,7 @@
     {
       "schemaVersion": "5",
       "id": "q-9eb1f8b0e041bbe7",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 20,
       "number": {
@@ -50342,7 +50232,7 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium",
                 "input": {
@@ -50361,7 +50251,7 @@
                 }
               }
             ],
-            "text": "学完《网络编程》一章，小明迫不及待地想搭建自己的游戏服务器。他根据课本上代码写出的《网络乒乓》服务器代码如下。他在 Class Machine 上运行代码，TCP 等协议都采用默认设置。请你根据代码回答问题。\n\n```c\n 1  #include \"csapp.h\"\n 2  #include \"stdlib.h\"\n 3  #include \"stdio.h\"\n 4  #define GOAL 100\n 5\n 6  int main(int argc, char **argv)\n 7  {\n 8      int listenfd, connfd;\n 9      socklen_t clientlen;\n10      struct sockaddr_storage clientaddr;\n11      char client_hostname[MAXLINE], client_port[MAXLINE], buf[MAXLINE];\n12      if (argc != 2) {\n13          fprintf(stderr, \"usage: %s <port>\\n\", argv[0]);\n14          exit(0);\n15      }\n16      listenfd = Open_listenfd(argv[1]); // Open listen socket\n17      int ball_cnt = 0;\n18      while (1){\n19          clientlen = sizeof(struct sockaddr_storage);\n20          connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); // Accept connection\n21          Getnameinfo((SA *)&clientaddr, clientlen, client_hostname, MAXLINE,\n22                      client_port, MAXLINE, 0);\n23          printf(\"Connected to (%s, %s)\\n\", client_hostname, client_port);\n24\n25          rio_t rio;\n26          Rio_readinitb(&rio, connfd);\n27          Rio_readlineb(&rio, buf, MAXLINE);\n28          int recv_num = atoi(buf);\n29          if (recv_num == ball_cnt){\n30              if (ball_cnt == GOAL){\n31                  sprintf(buf, \"You win!\\n\");\n32                  Rio_writen(connfd, buf, strlen(buf));\n33                  ball_cnt = 0;\n34              }\n35              else {\n36                  sprintf(buf, \"%d\\n\", ball_cnt+1);\n37                  Rio_writen(connfd, buf, strlen(buf));\n38                  ball_cnt += 2;\n39              }\n40          }\n41          Close(connfd); // Close the connection\n42      }\n43      exit(0);\n44  }\n```\n\n\n1. 函数 `Open_listenfd` 要建立的是可靠的TCP连接。因此，里面有一行代码设置了 hints.ai_socktype = ______；（SOCK_STREAM / SOCK_DGRAM）。（1分）"
+            "text": "学完《网络编程》一章，小明迫不及待地想搭建自己的游戏服务器。他根据课本上代码写出的《网络乒乓》服务器代码如下。他在 Class Machine 上运行代码，TCP 等协议都采用默认设置。请你根据代码回答问题。\n\n```c\n 1  #include \"csapp.h\"\n 2  #include \"stdlib.h\"\n 3  #include \"stdio.h\"\n 4  #define GOAL 100\n 5\n 6  int main(int argc, char **argv)\n 7  {\n 8      int listenfd, connfd;\n 9      socklen_t clientlen;\n10      struct sockaddr_storage clientaddr;\n11      char client_hostname[MAXLINE], client_port[MAXLINE], buf[MAXLINE];\n12      if (argc != 2) {\n13          fprintf(stderr, \"usage: %s <port>\\n\", argv[0]);\n14          exit(0);\n15      }\n16      listenfd = Open_listenfd(argv[1]); // Open listen socket\n17      int ball_cnt = 0;\n18      while (1){\n19          clientlen = sizeof(struct sockaddr_storage);\n20          connfd = Accept(listenfd, (SA *)&clientaddr, &clientlen); // Accept connection\n21          Getnameinfo((SA *)&clientaddr, clientlen, client_hostname, MAXLINE,\n22                      client_port, MAXLINE, 0);\n23          printf(\"Connected to (%s, %s)\\n\", client_hostname, client_port);\n24\n25          rio_t rio;\n26          Rio_readinitb(&rio, connfd);\n27          Rio_readlineb(&rio, buf, MAXLINE);\n28          int recv_num = atoi(buf);\n29          if (recv_num == ball_cnt){\n30              if (ball_cnt == GOAL){\n31                  sprintf(buf, \"You win!\\n\");\n32                  Rio_writen(connfd, buf, strlen(buf));\n33                  ball_cnt = 0;\n34              }\n35              else {\n36                  sprintf(buf, \"%d\\n\", ball_cnt+1);\n37                  Rio_writen(connfd, buf, strlen(buf));\n38                  ball_cnt += 2;\n39              }\n40          }\n41          Close(connfd); // Close the connection\n42      }\n43      exit(0);\n44  }\n```\n\n\n1. 函数 `Open_listenfd` 要建立的是可靠的TCP连接。因此，里面有一行代码设置了 hints.ai_socktype = {{blank:legacy-gap-0}}；（SOCK_STREAM / SOCK_DGRAM）。（1分）"
           },
           "solution": {
             "state": "available",
@@ -50424,7 +50314,7 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium",
                 "input": {
@@ -50443,7 +50333,7 @@
                 }
               }
             ],
-            "text": "2. 函数 Getnameinfo 的用途是查询输入的______（主机名对应的IP地址 / IP地址对应的主机名）。（1分）"
+            "text": "2. 函数 Getnameinfo 的用途是查询输入的{{blank:legacy-gap-0}}（主机名对应的IP地址 / IP地址对应的主机名）。（1分）"
           },
           "solution": {
             "state": "available",
@@ -50506,18 +50396,18 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "______",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "3. 小明的朋友们对他的游戏都不感兴趣，小明只好自己写了一个客户端来玩自己的游戏。他的客户端代码如下：\n\n```c\n 1  #include \"csapp.h\"\n 2  #define GOAL 100\n 3\n 4  int main(int argc, char **argv){\n 5      int clientfd;\n 6      char *host, *port, buf[MAXLINE];\n 7      rio_t rio;\n 8\n 9      if (argc != 3){\n10          fprintf(stderr, \"usage: %s <host> <port>\\n\", argv[0]);\n11          exit(0);\n12      }\n13      host = argv[1];\n14      port = argv[2];\n15\n16      for (int ball_cnt=0; ball_cnt<=GOAL; ball_cnt+=2){\n17          clientfd = Open_clientfd(host, port);\n18          Rio_readinitb(&rio, clientfd);\n19          sprintf(buf, \"%d\\n\", ball_cnt);\n20          Rio_writen(clientfd, buf, strlen(buf));\n21          Rio_readlineb(&rio, buf, MAXLINE);\n22          Fputs(buf, stdout);\n23      }\n24      exit(0);\n25  }\n```\n\n他在同一台主机上运行服务器和客户端。他的操作流程是：\n\n```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client ______ ______\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是 Connected to (localhost, 33580)。请填入小明操作流程中缺失的两处信息。（2分）"
+            "text": "3. 小明的朋友们对他的游戏都不感兴趣，小明只好自己写了一个客户端来玩自己的游戏。他的客户端代码如下：\n\n```c\n 1  #include \"csapp.h\"\n 2  #define GOAL 100\n 3\n 4  int main(int argc, char **argv){\n 5      int clientfd;\n 6      char *host, *port, buf[MAXLINE];\n 7      rio_t rio;\n 8\n 9      if (argc != 3){\n10          fprintf(stderr, \"usage: %s <host> <port>\\n\", argv[0]);\n11          exit(0);\n12      }\n13      host = argv[1];\n14      port = argv[2];\n15\n16      for (int ball_cnt=0; ball_cnt<=GOAL; ball_cnt+=2){\n17          clientfd = Open_clientfd(host, port);\n18          Rio_readinitb(&rio, clientfd);\n19          sprintf(buf, \"%d\\n\", ball_cnt);\n20          Rio_writen(clientfd, buf, strlen(buf));\n21          Rio_readlineb(&rio, buf, MAXLINE);\n22          Fputs(buf, stdout);\n23      }\n24      exit(0);\n25  }\n```\n\n他在同一台主机上运行服务器和客户端。他的操作流程是：\n\n```text\ncd pingpong\nnohup ./server 50000 > log.out &\n./client {{blank:legacy-gap-0}} {{blank:legacy-gap-1}}\n```\n\n程序正常运行完毕，\"You win！\"出现在了他的屏幕上。小明查看 log.out，里面的第一行是 Connected to (localhost, 33580)。请填入小明操作流程中缺失的两处信息。（2分）"
           },
           "solution": {
             "state": "available",
@@ -50632,18 +50522,18 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "______",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "5. 请在客户端中添加一行代码，使得 #define GOAL 100000 时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）"
+            "text": "5. 请在客户端中添加一行代码，使得 #define GOAL 100000 时也能正常运行。你添加的位置是现在的第{{blank:legacy-gap-0}}行之后，添加的代码内容是{{blank:legacy-gap-1}}。（2分）"
           },
           "solution": {
             "state": "available",
@@ -50778,7 +50668,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ad12aab7f4702415",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 15,
       "number": {
@@ -50827,12 +50717,12 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "15. 以提供互斥为目的的二元信号量常常也称为______："
+        "text": "15. 以提供互斥为目的的二元信号量常常也称为{{blank:legacy-gap-0}}："
       },
       "solution": {
         "state": "available",
@@ -51687,7 +51577,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c3142744ad792b5b",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 4,
       "number": {
@@ -51736,18 +51626,18 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "________________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "________________",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "4. 为了构造可执行文件，静态链接器必须完成________________和________________这两个主要任务。"
+        "text": "4. 为了构造可执行文件，静态链接器必须完成{{blank:legacy-gap-0}}和{{blank:legacy-gap-1}}这两个主要任务。"
       },
       "solution": {
         "state": "available",
@@ -51776,7 +51666,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c448153415e0dd8d",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 17,
       "number": {
@@ -52678,102 +52568,102 @@
             "blanks": [
               {
                 "id": "legacy-gap-1",
-                "marker": "______________",
+                "marker": "{{blank:legacy-gap-1}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-2",
-                "marker": "__________",
-                "occurrence": 5,
+                "marker": "{{blank:legacy-gap-2}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-3",
-                "marker": "______________",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-3}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-4",
-                "marker": "__________",
-                "occurrence": 11,
+                "marker": "{{blank:legacy-gap-4}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-5",
-                "marker": "______________",
-                "occurrence": 2,
+                "marker": "{{blank:legacy-gap-5}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-6",
-                "marker": "__________",
-                "occurrence": 17,
+                "marker": "{{blank:legacy-gap-6}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-7",
-                "marker": "______________",
-                "occurrence": 3,
+                "marker": "{{blank:legacy-gap-7}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-8",
-                "marker": "__________________",
+                "marker": "{{blank:legacy-gap-8}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-9",
-                "marker": "____________",
-                "occurrence": 19,
+                "marker": "{{blank:legacy-gap-9}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-10",
-                "marker": "__________",
-                "occurrence": 35,
+                "marker": "{{blank:legacy-gap-10}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-11",
-                "marker": "____________",
-                "occurrence": 20,
+                "marker": "{{blank:legacy-gap-11}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-12",
-                "marker": "__________",
-                "occurrence": 39,
+                "marker": "{{blank:legacy-gap-12}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-13",
-                "marker": "______________",
-                "occurrence": 9,
+                "marker": "{{blank:legacy-gap-13}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-14",
-                "marker": "__________",
-                "occurrence": 45,
+                "marker": "{{blank:legacy-gap-14}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-15",
-                "marker": "______________",
-                "occurrence": 10,
+                "marker": "{{blank:legacy-gap-15}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-16",
-                "marker": "__________________",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-16}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "(2) 基于 `main.o` 和 `addvec.o` 生成可执行程序 m 的时候，会进行若干重定位。下述代码是对可执行程序 m 执行 objdump -D m 以后的片段结果，请根据相关信息进行填空。\n\n```asm\n0000000000400228 <.interp>:\n  400228:\t2f                   \t(bad)\n  400229:\t6c                   \tinsb   (%dx),%es:(%rdi)\n  40022a:\t69 62 36 34 2f 6c 64 \timul   $0x646c2f34,0x36(%rdx),%esp\n  400231:\t2d 6c 69 6e 75       \tsub    $0x756e692c,%eax\n  400236:\t78 2d                \tjs     400265 <_init-0x153>\n  400238:\t78 38                \tjs     400272 <_init-0x146>\n  40023a:\t36                   \tss\n  40023b:\t2d 36 34 2e 73       \tsub    $0x732e342d,%eax\n  400240:\t6f                   \toutsl  %ds:(%rsi),(%dx)\n  400241:\t2e 32 00             \txor    %cs:(%rax),%al\n  ...\n\n00000000004003e0 <printf@plt-0x10>:\n  4003e0:\tff 35 0a 0c 20 00    \tpushq  0x200c0a(%rip)        # 600ff0 <_GLOBAL_OFFSET_TABLE_+0x8>\n  4003e6:\tff 25 0c 0c 20 00    \tjmpq   *0x200c0c(%rip)        # 600ff8 <_GLOBAL_OFFSET_TABLE_+0x10>\n  4003ec:\t0f 1f 40 00          \tnopl   0x0(%rax)\n\n00000000004003f0 <printf@plt>:\n  4003f0:\tff 25 0a 0c 20 00    \tjmpq   *0x200c0a(%rip)        # 601000 <_GLOBAL_OFFSET_TABLE_+0x18>\n  4003f6:\t68 00 00 00 00       \tpushq  $0x0\n  4003fb:\te9 e0 ff ff ff       \tjmpq   4003e0 <_init+0x18>\n\n0000000000400400 <__libc_start_main@plt>:\n  400400:\tff 25 02 0c 20 00    \tjmpq   *0x200c02(%rip)        # 601008 <_GLOBAL_OFFSET_TABLE_+0x20>\n  400406:\t68 01 00 00 00       \tpushq  $0x1\n  40040b:\te9 d0 ff ff ff       \tjmpq   4003e0 <_init+0x18>\n  ...\n\n0000000000400528 <main>:\n  400528:\t55                   \tpush   %rbp\n  400529:\t48 89 e5             \tmov    %rsp,%rbp\n  40052c:\t48 83 ec 20          \tsub    $0x20,%rsp\n  400530:\t89 7d ec             \tmov    %edi,-0x14(%rbp)\n```\n\n\n```asm\n  400533:  48 89 75 e0           mov    %rsi,-0x20(%rbp)\n  400537:  c7 45 fc 02 00 00 00  movl   $0x2,-0x4(%rbp)\n  40053e:  8b 45 fc              mov    -0x4(%rbp),%eax\n  400541:  89 c1                 mov    %eax,%ecx\n  400543:  ba                    （1）______________\tmov    $__________,%edx\n  400548:  be                    （2）______________\tmov    $__________,%esi\n  40054d:  bf                    （3）______________\tmov    $__________,%edi\n  400552:  e8                    （4）______________\tcallq  __________________\n  400557:  8b 15                 （5）____________\tmov    __________(%rip),%edx\n  40055d:  8b 05                 （6）____________\tmov    __________(%rip),%eax\n  400563:  89 c6                 mov    %eax,%esi\n  400565:  bf                    （7）______________\tmov    $__________,%edi\n  40056a:  b8 00 00 00 00        mov    $0x0,%eax\n  40056f:  e8                    （8）______________\tcallq  __________________ <printf@plt>\n  400574:  b8 00 00 00 00        mov    $0x0,%eax\n  400579:  c9                    leaveq\n  40057a:  c3                    retq\n  40057b:  90                    nop\n\n000000000040057c <addvec>:\n  40057c:  55                    push   %rbp\n  40057d:  48 89 e5              mov    %rsp,%rbp\n  400580:  48 89 7d e8           mov    %rdi,-0x18(%rbp)\n  400584:  48 89 75 e0           mov    %rsi,-0x20(%rbp)\n  400588:  48 89 55 d8           mov    %rdx,-0x28(%rbp)\n  40058c:  89 4d d4              mov    %ecx,-0x2c(%rbp)\n  40058f:  c7 45 fc 00 00 00 00  movl   $0x0,-0x4(%rbp)\n  400596:  eb 4a                 jmp    4005e2 <addvec+0x66>\n  400598:  8b 45 fc              mov    -0x4(%rbp),%eax\n  40059b:  48 98                 cltq\n  40059d:  48 8d 14 85 00 00 00  lea    0x0(,%rax,4),%rdx\n  4005a4:  00\n  ...\n\n0000000000600fe0 <.got>:\n  ...\n\n0000000000600fe8 <_GLOBAL_OFFSET_TABLE_>:\n  600fe8:  10 0e                 adc    %cl,(%rsi)\n  600fea:  60                    (bad)\n  ...\n  600fff:  00 f6                 add    %dh,%dh\n  601001:  03 40 00              add    0x0(%rax),%eax\n  601004:  00 00                 add    %al,(%rax)\n  601006:  00 00                 add    %al,(%rax)\n  601008:  06                    (bad)\n  601009:  04 40                 add    $0x40,%al\n  60100b:  00 00                 add    %al,(%rax)\n  60100d:  00 00                 add    %al,(%rax)\n  ...\n0000000000601020 <x>:\n  601020:  01 00                 add    %eax,(%rax)\n  601022:  00 00                 add    %al,(%rax)\n  601024:  02 00                 add    (%rax),%al\n  ...\n0000000000601028 <y.2304>:\n  601028:  03 00                 add    (%rax),%eax\n  60102a:  00 00                 add    %al,(%rax)\n  60102c:  04 00                 add    $0x0,%al\n  ...\n0000000000601038 <z>:\n  ...\n```\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ③ | `r.offset = 0x26`　　　　`r.symbol = x` `r.type = R_X86_64_32`　　`r.addend = 0` |  |\n| ① | `r.offset = 0x2b`　　　　`r.symbol = addvec` `r.type = R_X86_64_PC32`　　`r.addend = -4` |  |"
+            "text": "(2) 基于 `main.o` 和 `addvec.o` 生成可执行程序 m 的时候，会进行若干重定位。下述代码是对可执行程序 m 执行 objdump -D m 以后的片段结果，请根据相关信息进行填空。\n\n```asm\n0000000000400228 <.interp>:\n  400228:\t2f                   \t(bad)\n  400229:\t6c                   \tinsb   (%dx),%es:(%rdi)\n  40022a:\t69 62 36 34 2f 6c 64 \timul   $0x646c2f34,0x36(%rdx),%esp\n  400231:\t2d 6c 69 6e 75       \tsub    $0x756e692c,%eax\n  400236:\t78 2d                \tjs     400265 <_init-0x153>\n  400238:\t78 38                \tjs     400272 <_init-0x146>\n  40023a:\t36                   \tss\n  40023b:\t2d 36 34 2e 73       \tsub    $0x732e342d,%eax\n  400240:\t6f                   \toutsl  %ds:(%rsi),(%dx)\n  400241:\t2e 32 00             \txor    %cs:(%rax),%al\n  ...\n\n00000000004003e0 <printf@plt-0x10>:\n  4003e0:\tff 35 0a 0c 20 00    \tpushq  0x200c0a(%rip)        # 600ff0 <_GLOBAL_OFFSET_TABLE_+0x8>\n  4003e6:\tff 25 0c 0c 20 00    \tjmpq   *0x200c0c(%rip)        # 600ff8 <_GLOBAL_OFFSET_TABLE_+0x10>\n  4003ec:\t0f 1f 40 00          \tnopl   0x0(%rax)\n\n00000000004003f0 <printf@plt>:\n  4003f0:\tff 25 0a 0c 20 00    \tjmpq   *0x200c0a(%rip)        # 601000 <_GLOBAL_OFFSET_TABLE_+0x18>\n  4003f6:\t68 00 00 00 00       \tpushq  $0x0\n  4003fb:\te9 e0 ff ff ff       \tjmpq   4003e0 <_init+0x18>\n\n0000000000400400 <__libc_start_main@plt>:\n  400400:\tff 25 02 0c 20 00    \tjmpq   *0x200c02(%rip)        # 601008 <_GLOBAL_OFFSET_TABLE_+0x20>\n  400406:\t68 01 00 00 00       \tpushq  $0x1\n  40040b:\te9 d0 ff ff ff       \tjmpq   4003e0 <_init+0x18>\n  ...\n\n0000000000400528 <main>:\n  400528:\t55                   \tpush   %rbp\n  400529:\t48 89 e5             \tmov    %rsp,%rbp\n  40052c:\t48 83 ec 20          \tsub    $0x20,%rsp\n  400530:\t89 7d ec             \tmov    %edi,-0x14(%rbp)\n```\n\n\n```asm\n  400533:  48 89 75 e0           mov    %rsi,-0x20(%rbp)\n  400537:  c7 45 fc 02 00 00 00  movl   $0x2,-0x4(%rbp)\n  40053e:  8b 45 fc              mov    -0x4(%rbp),%eax\n  400541:  89 c1                 mov    %eax,%ecx\n  400543:  ba                    （1）{{blank:legacy-gap-1}}\tmov    ${{blank:legacy-gap-2}},%edx\n  400548:  be                    （2）{{blank:legacy-gap-3}}\tmov    ${{blank:legacy-gap-4}},%esi\n  40054d:  bf                    （3）{{blank:legacy-gap-5}}\tmov    ${{blank:legacy-gap-6}},%edi\n  400552:  e8                    （4）{{blank:legacy-gap-7}}\tcallq  {{blank:legacy-gap-8}}\n  400557:  8b 15                 （5）{{blank:legacy-gap-9}}\tmov    {{blank:legacy-gap-10}}(%rip),%edx\n  40055d:  8b 05                 （6）{{blank:legacy-gap-11}}\tmov    {{blank:legacy-gap-12}}(%rip),%eax\n  400563:  89 c6                 mov    %eax,%esi\n  400565:  bf                    （7）{{blank:legacy-gap-13}}\tmov    ${{blank:legacy-gap-14}},%edi\n  40056a:  b8 00 00 00 00        mov    $0x0,%eax\n  40056f:  e8                    （8）{{blank:legacy-gap-15}}\tcallq  {{blank:legacy-gap-16}} <printf@plt>\n  400574:  b8 00 00 00 00        mov    $0x0,%eax\n  400579:  c9                    leaveq\n  40057a:  c3                    retq\n  40057b:  90                    nop\n\n000000000040057c <addvec>:\n  40057c:  55                    push   %rbp\n  40057d:  48 89 e5              mov    %rsp,%rbp\n  400580:  48 89 7d e8           mov    %rdi,-0x18(%rbp)\n  400584:  48 89 75 e0           mov    %rsi,-0x20(%rbp)\n  400588:  48 89 55 d8           mov    %rdx,-0x28(%rbp)\n  40058c:  89 4d d4              mov    %ecx,-0x2c(%rbp)\n  40058f:  c7 45 fc 00 00 00 00  movl   $0x0,-0x4(%rbp)\n  400596:  eb 4a                 jmp    4005e2 <addvec+0x66>\n  400598:  8b 45 fc              mov    -0x4(%rbp),%eax\n  40059b:  48 98                 cltq\n  40059d:  48 8d 14 85 00 00 00  lea    0x0(,%rax,4),%rdx\n  4005a4:  00\n  ...\n\n0000000000600fe0 <.got>:\n  ...\n\n0000000000600fe8 <_GLOBAL_OFFSET_TABLE_>:\n  600fe8:  10 0e                 adc    %cl,(%rsi)\n  600fea:  60                    (bad)\n  ...\n  600fff:  00 f6                 add    %dh,%dh\n  601001:  03 40 00              add    0x0(%rax),%eax\n  601004:  00 00                 add    %al,(%rax)\n  601006:  00 00                 add    %al,(%rax)\n  601008:  06                    (bad)\n  601009:  04 40                 add    $0x40,%al\n  60100b:  00 00                 add    %al,(%rax)\n  60100d:  00 00                 add    %al,(%rax)\n  ...\n0000000000601020 <x>:\n  601020:  01 00                 add    %eax,(%rax)\n  601022:  00 00                 add    %al,(%rax)\n  601024:  02 00                 add    (%rax),%al\n  ...\n0000000000601028 <y.2304>:\n  601028:  03 00                 add    (%rax),%eax\n  60102a:  00 00                 add    %al,(%rax)\n  60102c:  04 00                 add    $0x0,%al\n  ...\n0000000000601038 <z>:\n  ...\n```\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ③ | `r.offset = 0x26`　　　　`r.symbol = x` `r.type = R_X86_64_32`　　`r.addend = 0` |  |\n| ① | `r.offset = 0x2b`　　　　`r.symbol = addvec` `r.type = R_X86_64_PC32`　　`r.addend = -4` |  |"
           },
           "solution": {
             "state": "available",
@@ -52977,18 +52867,18 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "______",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "(4) 程序中 printf 的 PLT 表条目是 PLT[______]，GOT 表条目是 GOT[______]。（填写数字即可）"
+            "text": "(4) 程序中 printf 的 PLT 表条目是 PLT[{{blank:legacy-gap-0}}]，GOT 表条目是 GOT[{{blank:legacy-gap-1}}]。（填写数字即可）"
           },
           "solution": {
             "state": "available",
@@ -53046,7 +52936,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ccb48327a3d8aa1c",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 10,
       "number": {
@@ -53095,12 +52985,12 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "________________________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "10. 假设一个小型系统：内存按字节寻址，内存访问按 1 个字节完成：虚拟地址空间为 2²⁴，物理内存空间为 2²²，页面大小为 2⁸。TLB 是 4 路组相联，有 16 个条目。页表是一级页表。\n\n    TLB 内如下表所示：\n\n    | Set | Tag | PPN | `Valid` | Tag | PPN | `Valid` | Tag | PPN | `Valid` | Tag | PPN | `Valid` |\n    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n    | 0 | 03 | — | 0 | 09 | 0D | 1 | 00 | — | 0 | 07 | 02 | 1 |\n    | 1 | 03 | 2D | 1 | 02 | — | 0 | 04 | — | 0 | 0A | — | 0 |\n    | 2 | 02 | — | 0 | 08 | — | 0 | 06 | — | 0 | 03 | — | 0 |\n    | 3 | 07 | — | 0 | 03 | 0D | 0 | 0A | 34 | 1 | 02 | — | 0 |\n\n    页表的前 16 项如下表所示：\n\n    | VPN | PPN | `Valid` |\n    | --- | --- | --- |\n    | 00 | 28 | 1 |\n    | 01 | — | 0 |\n    | 02 | 33 | 1 |\n    | 03 | 02 | 1 |\n    | 04 | — | 0 |\n    | 05 | 16 | 1 |\n    | 06 | — | 0 |\n    | 07 | — | 0 |\n\n    | VPN | PPN | `Valid` |\n    | --- | --- | --- |\n    | 08 | 13 | 1 |\n    | 09 | 17 | 1 |\n    | 0A | 09 | 1 |\n    | 0B | — | 0 |\n    | 0C | — | 0 |\n    | 0D | 2D | 1 |\n    | 0E | 17 | 1 |\n    | 0F | 0D | 1 |\n\n    如果 CPU 执行取到一条虚拟地址为 `0x0395`，经地址翻译后，该虚拟地址对应的物理地址是________________________。"
+        "text": "10. 假设一个小型系统：内存按字节寻址，内存访问按 1 个字节完成：虚拟地址空间为 2²⁴，物理内存空间为 2²²，页面大小为 2⁸。TLB 是 4 路组相联，有 16 个条目。页表是一级页表。\n\n    TLB 内如下表所示：\n\n    | Set | Tag | PPN | `Valid` | Tag | PPN | `Valid` | Tag | PPN | `Valid` | Tag | PPN | `Valid` |\n    | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n    | 0 | 03 | — | 0 | 09 | 0D | 1 | 00 | — | 0 | 07 | 02 | 1 |\n    | 1 | 03 | 2D | 1 | 02 | — | 0 | 04 | — | 0 | 0A | — | 0 |\n    | 2 | 02 | — | 0 | 08 | — | 0 | 06 | — | 0 | 03 | — | 0 |\n    | 3 | 07 | — | 0 | 03 | 0D | 0 | 0A | 34 | 1 | 02 | — | 0 |\n\n    页表的前 16 项如下表所示：\n\n    | VPN | PPN | `Valid` |\n    | --- | --- | --- |\n    | 00 | 28 | 1 |\n    | 01 | — | 0 |\n    | 02 | 33 | 1 |\n    | 03 | 02 | 1 |\n    | 04 | — | 0 |\n    | 05 | 16 | 1 |\n    | 06 | — | 0 |\n    | 07 | — | 0 |\n\n    | VPN | PPN | `Valid` |\n    | --- | --- | --- |\n    | 08 | 13 | 1 |\n    | 09 | 17 | 1 |\n    | 0A | 09 | 1 |\n    | 0B | — | 0 |\n    | 0C | — | 0 |\n    | 0D | 2D | 1 |\n    | 0E | 17 | 1 |\n    | 0F | 0D | 1 |\n\n    如果 CPU 执行取到一条虚拟地址为 `0x0395`，经地址翻译后，该虚拟地址对应的物理地址是{{blank:legacy-gap-0}}。"
       },
       "solution": {
         "state": "available",
@@ -53125,7 +53015,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e834855ad8c927b2",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 14,
       "number": {
@@ -53174,12 +53064,12 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "____________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "14. 多线程的执行模型在某些方面和进程的执行模型是相似的。每个进程开始生命周期时都是单一进程，这个线程称为主线程（main thread）。在某一时刻，主线程创建一个____________，从这个时间点开始，两个线程就并发地运行。"
+        "text": "14. 多线程的执行模型在某些方面和进程的执行模型是相似的。每个进程开始生命周期时都是单一进程，这个线程称为主线程（main thread）。在某一时刻，主线程创建一个{{blank:legacy-gap-0}}，从这个时间点开始，两个线程就并发地运行。"
       },
       "solution": {
         "state": "available",
@@ -58682,7 +58572,7 @@
     {
       "schemaVersion": "5",
       "id": "q-5f2d2b416c72e83f",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 21,
       "number": {
@@ -58801,12 +58691,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "_____",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax\n    addq    $8, %rdi\n    addq    $1, %rcx\n    cmpq    $8, %rcx\n    jl     .L2\n```\n初始寄存器值：`%rdi = 0x8008`，`%rax = 0`，`%rbx = 0`，`%rcx = 0`。\n\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```"
+            "text": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax\n    addq    $8, %rdi\n    addq    $1, %rcx\n    cmpq    $8, %rcx\n    jl     .L2\n```\n初始寄存器值：`%rdi = 0x8008`，`%rax = 0`，`%rbx = 0`，`%rcx = 0`。\n\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<{{blank:legacy-gap-0}} ; i++)\n  {\n    sum=sum+a[i];\n  }\n```"
           },
           "solution": {
             "state": "available",
@@ -66383,7 +66273,7 @@
     {
       "schemaVersion": "5",
       "id": "q-09e5c0e61848d20a",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 21,
       "number": {
@@ -66429,60 +66319,60 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "______",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-2",
-            "marker": "______",
-            "occurrence": 2,
+            "marker": "{{blank:legacy-gap-2}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-3",
-            "marker": "______",
-            "occurrence": 3,
+            "marker": "{{blank:legacy-gap-3}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-4",
-            "marker": "______",
-            "occurrence": 4,
+            "marker": "{{blank:legacy-gap-4}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-5",
-            "marker": "______",
-            "occurrence": 5,
+            "marker": "{{blank:legacy-gap-5}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-6",
-            "marker": "______",
-            "occurrence": 6,
+            "marker": "{{blank:legacy-gap-6}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-7",
-            "marker": "______",
-            "occurrence": 7,
+            "marker": "{{blank:legacy-gap-7}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-8",
-            "marker": "______",
-            "occurrence": 8,
+            "marker": "{{blank:legacy-gap-8}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "第六题（15分）\n下面这段代码可以用于评测计算机系统的存储系统性能。在某款现代的个人计算机\n上，采用该评测程序的不同的配置参数（数据集大小和访问步长），得到了如下图\n所示的性能表现。\n\n![图](assets/期中/2019期中-带答案/p21-memory-mountain.png)\n\n```\nlong data[MAXELEMS];  /* Global array to traverse */\n/* test - Iterate over first \"elems\" elements of\n *        array “data” with stride of \"stride\", using\n *        using 4x4 loop unrolling.\n */\nint test(int elems, int stride) {\n    long i, sx2=stride*2, sx3=stride*3, sx4=stride*4;\n    long acc0 = 0, acc1 = 0, acc2 = 0, acc3 = 0;\n    long length = elems, limit = length - sx4;\n    /* Combine 4 elements at a time */\n    for (i = 0; i < limit; i += sx4) {\n        acc0 = acc0 + data[i];\n        acc1 = acc1 + data[i+stride];\n        acc2 = acc2 + data[i+sx2];\n        acc3 = acc3 + data[i+sx3];\n    }\n    /* Finish any remaining elements */\n    for (; i < length; i++) {\n        acc0 = acc0 + data[i];\n    }\n    return ((acc0 + acc1) + (acc2 + acc3));\n}\n```\n（1）图中 A1-D1 这几个点有一些较为平缓的“平台”，这主要体现了访存行为的什么特性？ ______（2分）\n\n（2）如果图中D1体现了内存的性能，那A1、B1、C1分别体现存储层次结构中\n的什么部件的性能：A1：______、B1: ______、C1: ______。\n(每空1分)\n其中，B1所体现的部件，容量可能是多大？ ______（2分）\n\n  a. 32KB  b. 256KB    c.1MB    d.8MB\nC1所体现的部件，容量可能是多大？ ______（2分）\n\n  a. 32KB  b. 256KB    c.1MB    d.8MB\n\n（3）图中B2和B1、C2和C1之间的“斜坡”，这主要是由于访存行为的什么特\n性导致的？ ______（2分）\n\n（4）图中B2和C2的性能指标差别不大，不像B1和C1之间的差距那么大，主\n要是什么原因导致的？ ______（2分）\n\n（5）实际评测时，需要把 `test()`函数先运行一遍，然后再运行一次获取评测数\n据，这是为了避免什么现象的影响？ ______(2分)"
+        "text": "第六题（15分）\n下面这段代码可以用于评测计算机系统的存储系统性能。在某款现代的个人计算机\n上，采用该评测程序的不同的配置参数（数据集大小和访问步长），得到了如下图\n所示的性能表现。\n\n![图](assets/期中/2019期中-带答案/p21-memory-mountain.png)\n\n```\nlong data[MAXELEMS];  /* Global array to traverse */\n/* test - Iterate over first \"elems\" elements of\n *        array “data” with stride of \"stride\", using\n *        using 4x4 loop unrolling.\n */\nint test(int elems, int stride) {\n    long i, sx2=stride*2, sx3=stride*3, sx4=stride*4;\n    long acc0 = 0, acc1 = 0, acc2 = 0, acc3 = 0;\n    long length = elems, limit = length - sx4;\n    /* Combine 4 elements at a time */\n    for (i = 0; i < limit; i += sx4) {\n        acc0 = acc0 + data[i];\n        acc1 = acc1 + data[i+stride];\n        acc2 = acc2 + data[i+sx2];\n        acc3 = acc3 + data[i+sx3];\n    }\n    /* Finish any remaining elements */\n    for (; i < length; i++) {\n        acc0 = acc0 + data[i];\n    }\n    return ((acc0 + acc1) + (acc2 + acc3));\n}\n```\n（1）图中 A1-D1 这几个点有一些较为平缓的“平台”，这主要体现了访存行为的什么特性？ {{blank:legacy-gap-0}}（2分）\n\n（2）如果图中D1体现了内存的性能，那A1、B1、C1分别体现存储层次结构中\n的什么部件的性能：A1：{{blank:legacy-gap-1}}、B1: {{blank:legacy-gap-2}}、C1: {{blank:legacy-gap-3}}。\n(每空1分)\n其中，B1所体现的部件，容量可能是多大？ {{blank:legacy-gap-4}}（2分）\n\n  a. 32KB  b. 256KB    c.1MB    d.8MB\nC1所体现的部件，容量可能是多大？ {{blank:legacy-gap-5}}（2分）\n\n  a. 32KB  b. 256KB    c.1MB    d.8MB\n\n（3）图中B2和B1、C2和C1之间的“斜坡”，这主要是由于访存行为的什么特\n性导致的？ {{blank:legacy-gap-6}}（2分）\n\n（4）图中B2和C2的性能指标差别不大，不像B1和C1之间的差距那么大，主\n要是什么原因导致的？ {{blank:legacy-gap-7}}（2分）\n\n（5）实际评测时，需要把 `test()`函数先运行一遍，然后再运行一次获取评测数\n据，这是为了避免什么现象的影响？ {{blank:legacy-gap-8}}(2分)"
       },
       "solution": {
         "state": "available",
@@ -67761,7 +67651,7 @@
     {
       "schemaVersion": "5",
       "id": "q-9acce0371658f35f",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 19,
       "number": {
@@ -68076,18 +67966,18 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "______",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "（3）假设该代码片段在教材所描述的PIPE处理器上运行，不考虑该片段代码前\n后代码的影响以及高速缓存（cache）失效的情况，假设`%rdx`初值为10，`%rdi`\n指向的内存中数组的元素均为正数，处理器设计使用总是选择（always taken）\n的预测策略。该代码片段预计运行______周期，若使用新增加的irOpq指令来优化\n这段代码，可以节省______周期的运行时间。（4分）"
+            "text": "（3）假设该代码片段在教材所描述的PIPE处理器上运行，不考虑该片段代码前\n后代码的影响以及高速缓存（cache）失效的情况，假设`%rdx`初值为10，`%rdi`\n指向的内存中数组的元素均为正数，处理器设计使用总是选择（always taken）\n的预测策略。该代码片段预计运行{{blank:legacy-gap-0}}周期，若使用新增加的irOpq指令来优化\n这段代码，可以节省{{blank:legacy-gap-1}}周期的运行时间。（4分）"
           },
           "solution": {
             "state": "available",
@@ -73654,7 +73544,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0324b364e9cc3917",
-      "revision": 3,
+      "revision": 5,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 16,
       "number": {
@@ -73699,37 +73589,43 @@
         "format": "markdown",
         "blanks": [
           {
-            "id": "legacy-gap-0",
-            "marker": "_______\n②____________",
+            "id": "cdecl-fetch-a",
+            "marker": "{{blank:cdecl-fetch-a}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
-            "id": "legacy-gap-1",
-            "marker": "____________",
-            "occurrence": 1,
+            "id": "cdecl-fetch-b",
+            "marker": "{{blank:cdecl-fetch-b}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
-            "id": "legacy-gap-2",
-            "marker": "____________",
-            "occurrence": 2,
+            "id": "cdecl-execute",
+            "marker": "{{blank:cdecl-execute}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
-            "id": "legacy-gap-3",
-            "marker": "______",
-            "occurrence": 23,
+            "id": "cdecl-writeback",
+            "marker": "{{blank:cdecl-writeback}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
-            "id": "legacy-gap-4",
-            "marker": "______",
-            "occurrence": 24,
+            "id": "cycles-x0",
+            "marker": "{{blank:cycles-x0}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "cycles-x3",
+            "marker": "{{blank:cycles-x3}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\n`C  Fn  0xF  rB`\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\n    jne     Lo\n    ret\n```\n周期数计算从执行`bar`第一条指令开始，直到其返回指令`ret`完全通过流水线为\n止。在调用`bar`之前，处理器已经执行过足够多的`nop`指令。\n当函数`bar`的参数 `x=0` 时，需要执行______个周期；`x=3` 时需要执行______\n个周期。（每空2分，共4分）"
+        "text": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\n`C  Fn  0xF  rB`\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①{{blank:cdecl-fetch-a}}\n②{{blank:cdecl-fetch-b}}\nDecode  valB ← R[rB]\nExecute  ③{{blank:cdecl-execute}}\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④{{blank:cdecl-writeback}}\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\n    jne     Lo\n    ret\n```\n周期数计算从执行`bar`第一条指令开始，直到其返回指令`ret`完全通过流水线为\n止。在调用`bar`之前，处理器已经执行过足够多的`nop`指令。\n当函数`bar`的参数 `x=0` 时，需要执行{{blank:cycles-x0}}个周期；`x=3` 时需要执行{{blank:cycles-x3}}\n个周期。（每空2分，共4分）"
       },
       "solution": {
         "state": "available",
@@ -73745,23 +73641,27 @@
         },
         "blankAnswers": [
           {
-            "blankId": "legacy-gap-0",
+            "blankId": "cdecl-fetch-a",
             "method": "self"
           },
           {
-            "blankId": "legacy-gap-1",
+            "blankId": "cdecl-fetch-b",
             "method": "self"
           },
           {
-            "blankId": "legacy-gap-2",
+            "blankId": "cdecl-execute",
             "method": "self"
           },
           {
-            "blankId": "legacy-gap-3",
+            "blankId": "cdecl-writeback",
             "method": "self"
           },
           {
-            "blankId": "legacy-gap-4",
+            "blankId": "cycles-x0",
+            "method": "self"
+          },
+          {
+            "blankId": "cycles-x3",
             "method": "self"
           }
         ]
@@ -76922,7 +76822,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c686bf5ca67f4ed8",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 23,
       "number": {
@@ -76973,14 +76873,14 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "_______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "_______",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -76999,8 +76899,8 @@
           },
           {
             "id": "legacy-gap-2",
-            "marker": "_______",
-            "occurrence": 2,
+            "marker": "{{blank:legacy-gap-2}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -77019,8 +76919,8 @@
           },
           {
             "id": "legacy-gap-3",
-            "marker": "_______",
-            "occurrence": 3,
+            "marker": "{{blank:legacy-gap-3}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -77039,8 +76939,8 @@
           },
           {
             "id": "legacy-gap-4",
-            "marker": "_______",
-            "occurrence": 4,
+            "marker": "{{blank:legacy-gap-4}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -77059,8 +76959,8 @@
           },
           {
             "id": "legacy-gap-5",
-            "marker": "_______",
-            "occurrence": 5,
+            "marker": "{{blank:legacy-gap-5}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -77087,8 +76987,8 @@
           },
           {
             "id": "legacy-gap-6",
-            "marker": "_______",
-            "occurrence": 6,
+            "marker": "{{blank:legacy-gap-6}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -77115,8 +77015,8 @@
           },
           {
             "id": "legacy-gap-7",
-            "marker": "_______",
-            "occurrence": 7,
+            "marker": "{{blank:legacy-gap-7}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -77142,7 +77042,7 @@
             }
           }
         ],
-        "text": "### Part B（8分）\n\n完全人格，首在体育。小北同学近日遇到了考入某体育强校的李华同学，但二者就谁是体育世一大产生了争执，因此决定通过拔河比赛一决胜负。为了确保公平性，小北和李华各自找来了自己的学长作为裁判进行比赛计分。作为计算机专业的同学，你希望编写一个运行在 Linux 内核上的 C 程序模拟这个场景，以分析小北是否遥遥领先。\n\n为了模拟上述场景，我们用进程表示选手团和裁判团，每个进程中又用两个线程去模拟两位选手和两位裁判。每个“选手”线程通过信号将自己视角下的比赛情况发给对应的“裁判”线程，“裁判”线程将比赛结果记录在文件里以便最后登记分数。\n补充说明：\n\n- 在 POSIX 语义下，多线程进程接收信号时会随机指定一个线程接收。\n  - 但在 Linux 系统下，通过在主线程中 BLOCK 某信号、在对等线程中 UNBLOCK 该信号，可以强制指定该对等线程接收该信号。\n  - 本题利用这种方法，使线程 `judger1` 和 `judger2` 分别处理进程收到的 `SIGUSR1` 和 `SIGUSR2` 信号。\n- `volatile` 修饰关键词要求编译器对指定变量的每次读写都必须使用内存中的值。\n- `register` 修饰关键词要求编译器必须将指定变量分配在寄存器上。\n- 题目在 Ubuntu 24.04.1 上使用 gcc 13.3.0（Ubuntu 13.3.0-6ubuntu2~24.04）编译，命令为 `gcc input.c csapp.c -o input`。题目环境的内核版本为 5.15.167.4。解决本题无需课程内容以外的知识；提供这些信息仅为避免臆想不必要的情况。\n\n\n```c\n// input.c\n#include \"csapp.h\"\nvoid signal_handler(int signo) {\n    if (signo == SIGUSR1) printf(\"A\\n\");\n    if (signo == SIGUSR2) printf(\"B\\r\");\n}\nvoid *judger(void *num) {\n    ...\n    //在省略的代码中使用pthread_sigmask分别取消对SIGUSR1和SIGUSR2信号的阻塞\n    //(int)num为1则取消 SIGUSR1的阻塞，(int)num为2则取消SIGUSR2的阻塞\n    for (;;);\n}\nint judger_pid = 0;\nvoid *player(void *arg) {\n    int num = (int)(uint64_t)arg;\n    volatile static int flag = 0;\n    register int val = 0;\n    for (int i = 1; i <= 10; i++) {\n        val = flag; // *2\n        if (num == 1) {\n            if (val <= 0) ++val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val, \"_A\"[val > 0]);\n            if (val > 0) kill(judger_pid, SIGUSR1);\n        } else {\n            if (val >= 0) --val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val, \"_B\"[val < 0]);\n            if (val < 0) kill(judger_pid, SIGUSR2);\n        }\n    }\n}\nint main() {\n    ...\n    // 在省略的代码中使用pthread_sigmask阻塞SIGUSR1和SIGUSR2信号\n    // 并设置SIGUSR1和SIGUSR2的信号处理函数为signal_handler\n    pid_t player_pid;\n    if (player_pid = fork()) { // *1\n        freopen(\"game.out\", \"wb\", stdout); //题目保证硬盘空间足够\n        setvbuf(stdout, NULL, _IOLBF, 1024);\n        // 裁判团\n        pthread_t judger1, judger2;\n        pthread_create(&judger1, NULL, judger, (void *)1);\n        pthread_create(&judger2, NULL, judger, (void *)2);\n        waitpid(player_pid, NULL, 0);\n        sleep(1); // 题目保证此时所有pending信号均处理完成\n        _exit(0);\n    } else {\n        sleep(1); // 题目保证此时信号处理程序已按要求生效\n        // 玩家团\n        judger_pid = getppid();\n        pthread_t player1, player2;\n        pthread_create(&player1, NULL, player, (void *)1);\n        pthread_create(&player2, NULL, player, (void *)2);\n        pthread_join(player1, NULL);\n        pthread_join(player2, NULL);\n        return 0;\n    }\n}\n```\n#### 1）\n\n在 `player` 函数中，使用了_______个共享变量？（同一个变量多次出现算 1 个）（1分）\n\n#### 2）\n\n信号处理程序里使用了不安全的 `printf` 函数。老师在课堂上讲过著名的“灵魂出窍”死锁案例，而题目的程序同时在 `main` 函数和信号处理程序中使用 `printf`。\n\n题目中的程序_______（会/不会）出现死锁？原因包括：\n\n- `printf` _______（是/不是）异步信号安全的；\n- `printf` _______（是/不是）线程安全的；\n- 在题目的程序中，`signal_handler` 中的 `printf` _______（可能/不会）被打断。\n\n（本小问共 4 分）\n\n#### 3）\n\n下面是上面代码某次运行时的输出结果。\n\n`stdout`：\n\n```text\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 2: 0 _\nPlayer 2: 0 _\nPlayer 2: -1 B\nPlayer 1: 1 A\nPlayer 1: 0 _\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\n```\n\n`game.out`：\n\n```text\nA\nA\nA\nA\nB\nA\n```\n\n① 下列哪一项不是导致本题程序多次运行结果不同的原因？_______（1分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 操作系统调度进程具有不确定性 |\n| B | 操作系统调度线程具有不确定性 |\n| C | 操作系统下发信号的时机具有不确定性 |\n| D | 操作系统处理系统调用具有不确定性 |\n\n② 下列哪一选项会导致上面的运行结果中，`game.out` 的 A 比 `stdout` 的少？_______（1分）\n\n除此之外，还有哪一选项会导致上面的运行结果中，`game.out` 的 B 比 `stdout` 的少？_______（1分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 多个到达的信号可能只被处理一次 |\n| B | 后面的字符可能在缓冲区内覆盖前面的字符 |\n| C | 缓冲区内的字符没有刷新到文件，程序就退出了 |\n| D | 多次相同的 `kill` 可能只有一次进入内核 |\n| E | 父进程中的两个线程产生 race condition |\n| F | 子进程中的两个线程产生 race condition |\n| G | 由于磁盘太慢等原因，产生写不足 |"
+        "text": "### Part B（8分）\n\n完全人格，首在体育。小北同学近日遇到了考入某体育强校的李华同学，但二者就谁是体育世一大产生了争执，因此决定通过拔河比赛一决胜负。为了确保公平性，小北和李华各自找来了自己的学长作为裁判进行比赛计分。作为计算机专业的同学，你希望编写一个运行在 Linux 内核上的 C 程序模拟这个场景，以分析小北是否遥遥领先。\n\n为了模拟上述场景，我们用进程表示选手团和裁判团，每个进程中又用两个线程去模拟两位选手和两位裁判。每个“选手”线程通过信号将自己视角下的比赛情况发给对应的“裁判”线程，“裁判”线程将比赛结果记录在文件里以便最后登记分数。\n补充说明：\n\n- 在 POSIX 语义下，多线程进程接收信号时会随机指定一个线程接收。\n  - 但在 Linux 系统下，通过在主线程中 BLOCK 某信号、在对等线程中 UNBLOCK 该信号，可以强制指定该对等线程接收该信号。\n  - 本题利用这种方法，使线程 `judger1` 和 `judger2` 分别处理进程收到的 `SIGUSR1` 和 `SIGUSR2` 信号。\n- `volatile` 修饰关键词要求编译器对指定变量的每次读写都必须使用内存中的值。\n- `register` 修饰关键词要求编译器必须将指定变量分配在寄存器上。\n- 题目在 Ubuntu 24.04.1 上使用 gcc 13.3.0（Ubuntu 13.3.0-6ubuntu2~24.04）编译，命令为 `gcc input.c csapp.c -o input`。题目环境的内核版本为 5.15.167.4。解决本题无需课程内容以外的知识；提供这些信息仅为避免臆想不必要的情况。\n\n\n```c\n// input.c\n#include \"csapp.h\"\nvoid signal_handler(int signo) {\n    if (signo == SIGUSR1) printf(\"A\\n\");\n    if (signo == SIGUSR2) printf(\"B\\r\");\n}\nvoid *judger(void *num) {\n    ...\n    //在省略的代码中使用pthread_sigmask分别取消对SIGUSR1和SIGUSR2信号的阻塞\n    //(int)num为1则取消 SIGUSR1的阻塞，(int)num为2则取消SIGUSR2的阻塞\n    for (;;);\n}\nint judger_pid = 0;\nvoid *player(void *arg) {\n    int num = (int)(uint64_t)arg;\n    volatile static int flag = 0;\n    register int val = 0;\n    for (int i = 1; i <= 10; i++) {\n        val = flag; // *2\n        if (num == 1) {\n            if (val <= 0) ++val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val, \"_A\"[val > 0]);\n            if (val > 0) kill(judger_pid, SIGUSR1);\n        } else {\n            if (val >= 0) --val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val, \"_B\"[val < 0]);\n            if (val < 0) kill(judger_pid, SIGUSR2);\n        }\n    }\n}\nint main() {\n    ...\n    // 在省略的代码中使用pthread_sigmask阻塞SIGUSR1和SIGUSR2信号\n    // 并设置SIGUSR1和SIGUSR2的信号处理函数为signal_handler\n    pid_t player_pid;\n    if (player_pid = fork()) { // *1\n        freopen(\"game.out\", \"wb\", stdout); //题目保证硬盘空间足够\n        setvbuf(stdout, NULL, _IOLBF, 1024);\n        // 裁判团\n        pthread_t judger1, judger2;\n        pthread_create(&judger1, NULL, judger, (void *)1);\n        pthread_create(&judger2, NULL, judger, (void *)2);\n        waitpid(player_pid, NULL, 0);\n        sleep(1); // 题目保证此时所有pending信号均处理完成\n        _exit(0);\n    } else {\n        sleep(1); // 题目保证此时信号处理程序已按要求生效\n        // 玩家团\n        judger_pid = getppid();\n        pthread_t player1, player2;\n        pthread_create(&player1, NULL, player, (void *)1);\n        pthread_create(&player2, NULL, player, (void *)2);\n        pthread_join(player1, NULL);\n        pthread_join(player2, NULL);\n        return 0;\n    }\n}\n```\n#### 1）\n\n在 `player` 函数中，使用了{{blank:legacy-gap-0}}个共享变量？（同一个变量多次出现算 1 个）（1分）\n\n#### 2）\n\n信号处理程序里使用了不安全的 `printf` 函数。老师在课堂上讲过著名的“灵魂出窍”死锁案例，而题目的程序同时在 `main` 函数和信号处理程序中使用 `printf`。\n\n题目中的程序{{blank:legacy-gap-1}}（会/不会）出现死锁？原因包括：\n\n- `printf` {{blank:legacy-gap-2}}（是/不是）异步信号安全的；\n- `printf` {{blank:legacy-gap-3}}（是/不是）线程安全的；\n- 在题目的程序中，`signal_handler` 中的 `printf` {{blank:legacy-gap-4}}（可能/不会）被打断。\n\n（本小问共 4 分）\n\n#### 3）\n\n下面是上面代码某次运行时的输出结果。\n\n`stdout`：\n\n```text\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 2: 0 _\nPlayer 2: 0 _\nPlayer 2: -1 B\nPlayer 1: 1 A\nPlayer 1: 0 _\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\n```\n\n`game.out`：\n\n```text\nA\nA\nA\nA\nB\nA\n```\n\n① 下列哪一项不是导致本题程序多次运行结果不同的原因？{{blank:legacy-gap-5}}（1分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 操作系统调度进程具有不确定性 |\n| B | 操作系统调度线程具有不确定性 |\n| C | 操作系统下发信号的时机具有不确定性 |\n| D | 操作系统处理系统调用具有不确定性 |\n\n② 下列哪一选项会导致上面的运行结果中，`game.out` 的 A 比 `stdout` 的少？{{blank:legacy-gap-6}}（1分）\n\n除此之外，还有哪一选项会导致上面的运行结果中，`game.out` 的 B 比 `stdout` 的少？{{blank:legacy-gap-7}}（1分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 多个到达的信号可能只被处理一次 |\n| B | 后面的字符可能在缓冲区内覆盖前面的字符 |\n| C | 缓冲区内的字符没有刷新到文件，程序就退出了 |\n| D | 多次相同的 `kill` 可能只有一次进入内核 |\n| E | 父进程中的两个线程产生 race condition |\n| F | 子进程中的两个线程产生 race condition |\n| G | 由于磁盘太慢等原因，产生写不足 |"
       },
       "solution": {
         "state": "available",
@@ -79643,7 +79543,7 @@
     {
       "schemaVersion": "5",
       "id": "q-bd20070420641526",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-bc69f9ea3beff7ee",
       "paperOrder": 24,
       "number": {
@@ -79689,18 +79589,18 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "_____",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "_____",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\n`printf`执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    `A:   printf(\"C\")`;\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\n```\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```c\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n    if (even % 2 == 0) {\n        printf(\"%d\\n\", counter1);\n        counter1 =      A       ;\n    } else {\n        printf(\"%d\\n\", counter2);\n        counter2 =      B      ;\n    }\n    even = even+    C       ;\n}\nvoid handler2(int sig) {\n    if (_____D_____) {\n        counter1 = even*even;\n    } else {\n        counter2 = even*even;\n    }\n}\nint main() {\n    signal(SIGUSR1, handler1);\n    signal(SIGUSR2, handler2);\n    if ((pid = fork()) == 0) {\n        while (1) {};\n    }\n    while (even < 30) {\n        kill(pid,     E   );\n        sleep(1);\n        kill(pid,     F   );\n        sleep(1);\n        even = even+    G      ;\n    }\n    kill(pid, SIGKILL);\n    exit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n`𝑄𝑛+1,   n%2=0`\n`𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)`\n（\n关”）"
+        "text": "第五题（10分）\nPart I\n请阅读以下程序，然后回答问题。假设程序中的函数调用都可以正确执行，并默认\n`printf`执行完会调用fflush。\n```\nint main() {\n  int cnt=1;\n  int pid_1,pid_2;\n  pid_1=fork();\n  if(pid_1==0)  {\n    pid_2=fork();\n    if(pid_2!=0)   {\n      wait(pid_2,NULL,0);\n      printf(\"B\");\n    }\n    printf(\"F\");\n    exit(0);\n  }\n  else {\n    A\n    B\n    wait(pid_1,NULL,0);\n    pid_2=fork();\n    if(pid_2==0)   {\n      printf(\"D\");\n      cnt-=1;\n    }\n    if(cnt==0)\n       printf(\"E\");\n    else\n      printf(\"G\");\n    exit(0);\n  }\n}\n```\n（1）如果程序中的A、B位置的代码为空，列出所有可能的输出结果：\n（1分）3个，全对才得分\n```\nFBFGDE\nFBFDGE\nFBFDEG\n```\n（2）如果程序中的A、B位置的代码为：\n\n\n    `A:   printf(\"C\")`;\n    B：   exit(0);\n列出所有可能的输出结果：\n（2分）4个，对1~3个给1分，全对给2分\n```\nCFBF\nFCBF\nFBCF\nFBFC\n```\nPart II\n请阅读以下程序，然后回答问题（假设程序中的函数调用都可以正确执行，且\n每条语句都是原子动作）：\n```c\npid_t pid;\nint even = 0;\nint counter1 = 0;\nint counter2 = 1;\nvoid handler1(int sig) {\n    if (even % 2 == 0) {\n        printf(\"%d\\n\", counter1);\n        counter1 =      A       ;\n    } else {\n        printf(\"%d\\n\", counter2);\n        counter2 =      B      ;\n    }\n    even = even+    C       ;\n}\nvoid handler2(int sig) {\n    if ({{blank:legacy-gap-0}}D{{blank:legacy-gap-1}}) {\n        counter1 = even*even;\n    } else {\n        counter2 = even*even;\n    }\n}\nint main() {\n    signal(SIGUSR1, handler1);\n    signal(SIGUSR2, handler2);\n    if ((pid = fork()) == 0) {\n        while (1) {};\n    }\n    while (even < 30) {\n        kill(pid,     E   );\n        sleep(1);\n        kill(pid,     F   );\n        sleep(1);\n        even = even+    G      ;\n    }\n    kill(pid, SIGKILL);\n    exit(0);\n}\n```\n（1）完成程序，使得程序在输出的数字为以下Q队列的前30项，Q队列定义如下：\n`𝑄𝑛+1,   n%2=0`\n`𝑄0=0, 𝑄1=1, 𝑄𝑛+2={𝑄𝑛×2,   n%2≠0    (𝑛=0,1,2,3,...)`\n（\n关”）"
       },
       "solution": {
         "state": "available",
@@ -80531,7 +80431,7 @@
     {
       "schemaVersion": "5",
       "id": "q-db3a91f2e38825a2",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-bc69f9ea3beff7ee",
       "paperOrder": 23,
       "number": {
@@ -80577,66 +80477,66 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "_____",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "_____",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-2",
-            "marker": "_____",
-            "occurrence": 2,
+            "marker": "{{blank:legacy-gap-2}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-3",
-            "marker": "_____",
-            "occurrence": 3,
+            "marker": "{{blank:legacy-gap-3}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-4",
-            "marker": "_____",
-            "occurrence": 4,
+            "marker": "{{blank:legacy-gap-4}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-5",
-            "marker": "_____",
-            "occurrence": 5,
+            "marker": "{{blank:legacy-gap-5}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-6",
-            "marker": "_____",
-            "occurrence": 6,
+            "marker": "{{blank:legacy-gap-6}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-7",
-            "marker": "_____",
-            "occurrence": 7,
+            "marker": "{{blank:legacy-gap-7}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-8",
-            "marker": "_____",
-            "occurrence": 8,
+            "marker": "{{blank:legacy-gap-8}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-9",
-            "marker": "_____",
-            "occurrence": 9,
+            "marker": "{{blank:legacy-gap-9}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "第四题（10分）\n在x86_64环境下，考虑如下4个文件（main.c, value.c, f1.c, f2.c）：\n```\n/* main.c */\n#include <stdio.h>\nextern void f_void_void();\nextern int f_int_void();\nvoid *f;\nint main()\n{\n    int a = 1, b, c;\n    f = (void *)f_void_void;\n    ((void (*)(int))f)(a);\n    b = ((int (*)())f)();\n    printf(\"b = %d\\n\", b);\n    f = (void *)f_int_void;\n    ((void (*)())f)(a);\n    c = ((int (*)(int))f)(a);\n    printf(\"c = %d\\n\", c);\n    return 0;\n}\n/* value.c */\nint BIG;\n/* f1.c */\n#include <stdio.h>\nextern int BIG;\nint small = 1;\nvoid f_void_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n}\n```\n```\n/* f2.c*/\n#include <stdio.h>\nextern int BIG;\nstatic int small;\nint f_int_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n    return small + 1;\n}\n```\n使用命令\ngcc -o main main.c f1.c f2.c value.c\n编译这四个文件。\n使用\n`./main`\n运行编译好的程序。\n1. 对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱符号），不\n确定的请画X。\n源文件      符号名      局部或全局？    强符号或弱符号？\n```\nmain.c     f\nvalue.c     BIG\nf1.c       small\nf2.c       small\n```\n2. 请补全程序运行的输出，不确定的请画X。\n```\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nb = _____\nsmall = _____, BIG = _____\nsmall = _____, BIG = _____\nc = _____\n```"
+        "text": "第四题（10分）\n在x86_64环境下，考虑如下4个文件（main.c, value.c, f1.c, f2.c）：\n```\n/* main.c */\n#include <stdio.h>\nextern void f_void_void();\nextern int f_int_void();\nvoid *f;\nint main()\n{\n    int a = 1, b, c;\n    f = (void *)f_void_void;\n    ((void (*)(int))f)(a);\n    b = ((int (*)())f)();\n    printf(\"b = %d\\n\", b);\n    f = (void *)f_int_void;\n    ((void (*)())f)(a);\n    c = ((int (*)(int))f)(a);\n    printf(\"c = %d\\n\", c);\n    return 0;\n}\n/* value.c */\nint BIG;\n/* f1.c */\n#include <stdio.h>\nextern int BIG;\nint small = 1;\nvoid f_void_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n}\n```\n```\n/* f2.c*/\n#include <stdio.h>\nextern int BIG;\nstatic int small;\nint f_int_void() {\n    small += 1;\n    BIG += 1;\n    printf(\"small = %d, BIG = %d\\n\", small, BIG);\n    return small + 1;\n}\n```\n使用命令\ngcc -o main main.c f1.c f2.c value.c\n编译这四个文件。\n使用\n`./main`\n运行编译好的程序。\n1. 对于程序中的相应符号，请给出它的属性（局部或全局，强符号或弱符号），不\n确定的请画X。\n源文件      符号名      局部或全局？    强符号或弱符号？\n```\nmain.c     f\nvalue.c     BIG\nf1.c       small\nf2.c       small\n```\n2. 请补全程序运行的输出，不确定的请画X。\n```\nsmall = {{blank:legacy-gap-0}}, BIG = {{blank:legacy-gap-1}}\nsmall = {{blank:legacy-gap-2}}, BIG = {{blank:legacy-gap-3}}\nb = {{blank:legacy-gap-4}}\nsmall = {{blank:legacy-gap-5}}, BIG = {{blank:legacy-gap-6}}\nsmall = {{blank:legacy-gap-7}}, BIG = {{blank:legacy-gap-8}}\nc = {{blank:legacy-gap-9}}\n```"
       },
       "solution": {
         "state": "available",
@@ -82758,7 +82658,7 @@
     {
       "schemaVersion": "5",
       "id": "q-67f217d16c378540",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 23,
       "number": {
@@ -82804,62 +82704,62 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "__________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "__________",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-2",
-            "marker": "__________",
-            "occurrence": 2,
+            "marker": "{{blank:legacy-gap-2}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-3",
-            "marker": "_______________________",
+            "marker": "{{blank:legacy-gap-3}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-4",
-            "marker": "_______________________",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-4}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-5",
-            "marker": "_______________________",
-            "occurrence": 2,
+            "marker": "{{blank:legacy-gap-5}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-6",
-            "marker": "_______________________",
-            "occurrence": 3,
+            "marker": "{{blank:legacy-gap-6}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-7",
-            "marker": "_______________________",
-            "occurrence": 4,
+            "marker": "{{blank:legacy-gap-7}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-8",
-            "marker": "_______________",
-            "occurrence": 45,
+            "marker": "{{blank:legacy-gap-8}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-9",
-            "marker": "__________________",
-            "occurrence": 30,
+            "marker": "{{blank:legacy-gap-9}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -82882,8 +82782,8 @@
           },
           {
             "id": "legacy-gap-10",
-            "marker": "_________________",
-            "occurrence": 37,
+            "marker": "{{blank:legacy-gap-10}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -82906,8 +82806,8 @@
           },
           {
             "id": "legacy-gap-11",
-            "marker": "__________________",
-            "occurrence": 31,
+            "marker": "{{blank:legacy-gap-11}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -82930,8 +82830,8 @@
           },
           {
             "id": "legacy-gap-12",
-            "marker": "____________________",
-            "occurrence": 20,
+            "marker": "{{blank:legacy-gap-12}}",
+            "occurrence": 0,
             "width": "medium",
             "input": {
               "kind": "select",
@@ -82953,7 +82853,7 @@
             }
           }
         ],
-        "text": "第四题（15分）\n\n![图](assets/期中/2023期中-带答案/p19-figs-ab.png)\n\n1） 为实现PC相对地址的条件控制转移指令，增加Bxx指令（其中xx为条件码），\n跳转目标地址等于当前指令执行时的PC加上偏移offset，编码如下。\n```\n0xC  fn  Offset\n```\n请为该指令补全下面的HCL描述语句，以正确选择可能的PC来源（2分）。\n```\nword new_pc = [\n    icode == ICALL :      略            ;\n    icode == IJxx && Cnd :      略     ;\n    icode == IBxx && Cnd : (1) __________     ;\n    icode == IRET :      略            ;\n    1  :       略            ;\n];\n```\n2） 为实现更长距离的灵活的间接跳转，增加JxxR指令（其中xx为条件码），\n从寄存器中直接获得跳转目标地址，编码如下。\n```\n0xD  fn  rA  0xF\n```\n请为该指令补全下面的HCL描述语句，以正确选择可能的PC来源（2分）。\n```\nword new_pc = [\n    icode == ICALL :      略            ;\n    icode == IJxx && Cnd :      略     ;\n    icode == IJxxR && Cnd: (2)  __________  ;\n    icode == IRET :      略            ;\n    1  :       略            ;\n];\n```\n3）在Y86-64的PIPE实现中，采用前递（forwarding）技术解决程序执行过\n程中存在的数据冒险（hazard），请为该流水线控制信号设计补全下面的HCL描\n述语句，填写在括号中：(7分，每空1分)\n```\nword d_valA = [\n D_icode in { ICALL, IJXX } : (3)  __________\nd_srcA == e_dstE : (4) _______________________\nd_srcA == M_dstM : (5) _______________________\nd_srcA == M_dstE : (6) _______________________\nd_srcA == W_dstM : (7) _______________________\nd_srcA == W_dstE : (8) _______________________\n1  : (9) _______________\n]；\n```\n4）如下图所示的流水线时空图中，假设第5个周期时，指令4发生了指令译码错\n误遇到非法指令（INS），此时流水线寄存器 D 的控制信号应该是\n\n(10)__________________。流水线寄存器 E 的控制信号应该是\n\n(11)_________________。（请在暂停/Stall、气泡/Bubble、正常/Normal\n中选择）。（2分）\n\n![图](assets/期中/2023期中-带答案/p21-timing.png)\n\n5）参考4）中的流水线时空图，这次其它指令正常执行，但在第5个周期时，指\n令2在访存阶段遇到了一级高速缓存未命中（后续二级高速缓存访问命中），此时\n流水线寄存器D的控制信号应该是(12)__________________，流水线寄存器\nM 的控制信号应该是(13)____________________（请在暂停/Stall、气泡\n/Bubble、正常/Normal中选择）。（2分）"
+        "text": "第四题（15分）\n\n![图](assets/期中/2023期中-带答案/p19-figs-ab.png)\n\n1） 为实现PC相对地址的条件控制转移指令，增加Bxx指令（其中xx为条件码），\n跳转目标地址等于当前指令执行时的PC加上偏移offset，编码如下。\n```\n0xC  fn  Offset\n```\n请为该指令补全下面的HCL描述语句，以正确选择可能的PC来源（2分）。\n```\nword new_pc = [\n    icode == ICALL :      略            ;\n    icode == IJxx && Cnd :      略     ;\n    icode == IBxx && Cnd : (1) {{blank:legacy-gap-0}}     ;\n    icode == IRET :      略            ;\n    1  :       略            ;\n];\n```\n2） 为实现更长距离的灵活的间接跳转，增加JxxR指令（其中xx为条件码），\n从寄存器中直接获得跳转目标地址，编码如下。\n```\n0xD  fn  rA  0xF\n```\n请为该指令补全下面的HCL描述语句，以正确选择可能的PC来源（2分）。\n```\nword new_pc = [\n    icode == ICALL :      略            ;\n    icode == IJxx && Cnd :      略     ;\n    icode == IJxxR && Cnd: (2)  {{blank:legacy-gap-1}}  ;\n    icode == IRET :      略            ;\n    1  :       略            ;\n];\n```\n3）在Y86-64的PIPE实现中，采用前递（forwarding）技术解决程序执行过\n程中存在的数据冒险（hazard），请为该流水线控制信号设计补全下面的HCL描\n述语句，填写在括号中：(7分，每空1分)\n```\nword d_valA = [\n D_icode in { ICALL, IJXX } : (3)  {{blank:legacy-gap-2}}\nd_srcA == e_dstE : (4) {{blank:legacy-gap-3}}\nd_srcA == M_dstM : (5) {{blank:legacy-gap-4}}\nd_srcA == M_dstE : (6) {{blank:legacy-gap-5}}\nd_srcA == W_dstM : (7) {{blank:legacy-gap-6}}\nd_srcA == W_dstE : (8) {{blank:legacy-gap-7}}\n1  : (9) {{blank:legacy-gap-8}}\n]；\n```\n4）如下图所示的流水线时空图中，假设第5个周期时，指令4发生了指令译码错\n误遇到非法指令（INS），此时流水线寄存器 D 的控制信号应该是\n\n(10){{blank:legacy-gap-9}}。流水线寄存器 E 的控制信号应该是\n\n(11){{blank:legacy-gap-10}}。（请在暂停/Stall、气泡/Bubble、正常/Normal\n中选择）。（2分）\n\n![图](assets/期中/2023期中-带答案/p21-timing.png)\n\n5）参考4）中的流水线时空图，这次其它指令正常执行，但在第5个周期时，指\n令2在访存阶段遇到了一级高速缓存未命中（后续二级高速缓存访问命中），此时\n流水线寄存器D的控制信号应该是(12){{blank:legacy-gap-11}}，流水线寄存器\nM 的控制信号应该是(13){{blank:legacy-gap-12}}（请在暂停/Stall、气泡\n/Bubble、正常/Normal中选择）。（2分）"
       },
       "solution": {
         "state": "available",
@@ -83591,7 +83491,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d1c9c9315f98a1c4",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 24,
       "number": {
@@ -83640,18 +83540,18 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "____",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "_____",
+            "marker": "{{blank:legacy-gap-1}}",
             "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "第五题（15分）\n\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n\n（1） ____ 局部性：\n\n（2）_____ 局部性："
+        "text": "第五题（15分）\n\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n\n（1） {{blank:legacy-gap-0}} 局部性：\n\n（2）{{blank:legacy-gap-1}} 局部性："
       },
       "solution": {
         "state": "available",
@@ -96849,7 +96749,7 @@
     {
       "schemaVersion": "5",
       "id": "q-521d76fb06b284d2",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-d72f88c4198cf267",
       "paperOrder": 16,
       "number": {
@@ -96942,12 +96842,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "第五题（16分）\n现有一个直接映射（Direct-mapped）的高速缓存（cache），其总容量为16字\n节，每个高速缓存块（cache block）为 4 字节（`B=4Byte/block`）。Cache\n的初始状态为空。\n\n（1）经过如下地址访问序列后，请填写cache第2组（即Set 2，注：从0开\n始编号）的状态。数据块用10进制表示，举例：`M[4-7]`表示地址4-7的数据。\n地址序列全部为读访存, 每次读取2个字节，地址单位为字节。\n（提示：一次访存可能访问多个高速缓存块。）\n（6分，v/Tag/Block，每空2分）\n\n| 访问 | 地址 |\n| --- | --- |\n| R | 0 [000000_{2}] |\n| R | 1 [000001_{2}] |\n| R | 7 [000111_{2}] |\n| R | 4 [000100_{2}] |\n| R | 0 [000000_{2}] |\n\n| Set 2 | v | Tag | Block |\n| --- | --- | --- | --- |\n|  |  |  |  |\n\n本次访存序列，共发生 ______ 次高速缓存缺失(miss)? （2分）\n（提示：一次访存可能引发多次高速缓存缺失。）"
+            "text": "第五题（16分）\n现有一个直接映射（Direct-mapped）的高速缓存（cache），其总容量为16字\n节，每个高速缓存块（cache block）为 4 字节（`B=4Byte/block`）。Cache\n的初始状态为空。\n\n（1）经过如下地址访问序列后，请填写cache第2组（即Set 2，注：从0开\n始编号）的状态。数据块用10进制表示，举例：`M[4-7]`表示地址4-7的数据。\n地址序列全部为读访存, 每次读取2个字节，地址单位为字节。\n（提示：一次访存可能访问多个高速缓存块。）\n（6分，v/Tag/Block，每空2分）\n\n| 访问 | 地址 |\n| --- | --- |\n| R | 0 [000000_{2}] |\n| R | 1 [000001_{2}] |\n| R | 7 [000111_{2}] |\n| R | 4 [000100_{2}] |\n| R | 0 [000000_{2}] |\n\n| Set 2 | v | Tag | Block |\n| --- | --- | --- | --- |\n|  |  |  |  |\n\n本次访存序列，共发生 {{blank:legacy-gap-0}} 次高速缓存缺失(miss)? （2分）\n（提示：一次访存可能引发多次高速缓存缺失。）"
           },
           "solution": {
             "state": "available",
@@ -97007,12 +96907,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "_______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。\n\n| 访问 | 地址 | Set 1：v | `Tag` | `Block` |\n| --- | --- | --- | --- | --- |\n| R | 0 [000000_{2}] |  |  |  |\n| R | 1 [000001_{2}] |  |  |  |\n| W | 7 [000111_{2}] |  |  |  |\n| R | 12 [001100_{2}] |  |  |  |\n| R | 9 [001001_{2}] |  |  |  |\n\n本次访存序列，共发生 _______ 次高速缓存命中（hit）？\n\n> 接上题的条件：直接映射（Direct-mapped）的高速缓存，总容量 16 字节，每个高速缓存块 4 字节（`B=4Byte/block`），Cache 初始状态为空。"
+            "text": "（2）接上题，高速缓存重新清空后，执行如下访问序列，同时包含读访存（R）\n和写访存（W）操作，每次读/写 2 个字节，高速缓存采用 write back +\nno-write-allocate的管理策略，其他配置不变。请填写访存后cache第1组\n（Set 1）的状态。\n\n| 访问 | 地址 | Set 1：v | `Tag` | `Block` |\n| --- | --- | --- | --- | --- |\n| R | 0 [000000_{2}] |  |  |  |\n| R | 1 [000001_{2}] |  |  |  |\n| W | 7 [000111_{2}] |  |  |  |\n| R | 12 [001100_{2}] |  |  |  |\n| R | 9 [001001_{2}] |  |  |  |\n\n本次访存序列，共发生 {{blank:legacy-gap-0}} 次高速缓存命中（hit）？\n\n> 接上题的条件：直接映射（Direct-mapped）的高速缓存，总容量 16 字节，每个高速缓存块 4 字节（`B=4Byte/block`），Cache 初始状态为空。"
           },
           "solution": {
             "state": "available",
@@ -97072,12 +96972,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "（3）为了提升高速缓存的效率，设计师提出两种修改方案\na)  将高速缓存块增大到 8 字节（`B=8Byte/block`），其他配置不变，每次\n访存命中（hit）的时间开销为4个时钟周期；\nb)  将高速缓存变为全相连（fully-associative，即`S=1`），其他配置不\n变，每次访存命中（hit）的时间开销为2个时钟周期；\n对于如下访问序列，分别采用两种修改方案的访存时间总开销相等，请问每次\n高速缓存缺失（miss）的时间开销是______时钟周期？（给 4\n分）\n访问序列：\n\n| 访问 | 地址 |\n| --- | --- |\n| R | 0 [000000_{2}] |\n| R | 1 [000001_{2}] |\n| R | 7 [000111_{2}] |\n| R | 8 [001000_{2}] |\n| R | 9 [001001_{2}] |\n\n提示：修改高速缓存配置不会影响高速缓存缺失的时间开销"
+            "text": "（3）为了提升高速缓存的效率，设计师提出两种修改方案\na)  将高速缓存块增大到 8 字节（`B=8Byte/block`），其他配置不变，每次\n访存命中（hit）的时间开销为4个时钟周期；\nb)  将高速缓存变为全相连（fully-associative，即`S=1`），其他配置不\n变，每次访存命中（hit）的时间开销为2个时钟周期；\n对于如下访问序列，分别采用两种修改方案的访存时间总开销相等，请问每次\n高速缓存缺失（miss）的时间开销是{{blank:legacy-gap-0}}时钟周期？（给 4\n分）\n访问序列：\n\n| 访问 | 地址 |\n| --- | --- |\n| R | 0 [000000_{2}] |\n| R | 1 [000001_{2}] |\n| R | 7 [000111_{2}] |\n| R | 8 [001000_{2}] |\n| R | 9 [001001_{2}] |\n\n提示：修改高速缓存配置不会影响高速缓存缺失的时间开销"
           },
           "solution": {
             "state": "available",
@@ -100516,7 +100416,7 @@
     {
       "schemaVersion": "5",
       "id": "q-6e0eea29f44ce37d",
-      "revision": 2,
+      "revision": 5,
       "paperId": "p-e3f869956fc29bd8",
       "paperOrder": 21,
       "number": {
@@ -100589,31 +100489,18 @@
             },
             "parts": []
           },
-          "type": "fill",
+          "type": "short-answer",
           "moduleIds": [
             "machine_prog"
           ],
           "stem": {
             "format": "markdown",
-            "blanks": [
-              {
-                "id": "legacy-gap-1",
-                "marker": "__",
-                "occurrence": 1,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-3",
-                "marker": "__",
-                "occurrence": 3,
-                "width": "medium"
-              }
-            ],
+            "blanks": [],
             "text": "第七题（10分）\n给定如下程序：\n```\n#include <stdio.h>\n#include <pthread.h>\nint i = 0;\nint j = 0;\nvoid *do_stuff1(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{i++; j++;}\nreturn NULL;\n}\nvoid *do_stuff2(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{j++; i++;}\nreturn NULL;\n}\nint main() {\npthread_t tid1, tid2;\npthread_create(&tid1, NULL, do_stuff1, NULL);\npthread_create(&tid2, NULL, do_stuff2, NULL);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nprintf(\"%d, %d\\n\", i, j);\nreturn 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1, %eax`"
           },
           "solution": {
             "state": "available",
-            "grading": "blanks",
+            "grading": "self",
             "reference": {
               "format": "markdown",
               "text": "1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）"
@@ -100622,17 +100509,7 @@
               "origin": "unknown",
               "crossChecked": null,
               "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-            },
-            "blankAnswers": [
-              {
-                "blankId": "legacy-gap-1",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-3",
-                "method": "self"
-              }
-            ]
+            }
           },
           "sources": [
             {
@@ -100672,37 +100549,25 @@
             "format": "markdown",
             "blanks": [
               {
-                "id": "legacy-gap-1",
-                "marker": "__",
-                "occurrence": 1,
-                "width": "medium"
-              },
-              {
-                "id": "legacy-gap-3",
-                "marker": "__",
-                "occurrence": 3,
-                "width": "medium"
-              },
-              {
                 "id": "legacy-gap-4",
-                "marker": "_____",
+                "marker": "{{blank:legacy-gap-4}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-5",
-                "marker": "_________",
+                "marker": "{{blank:legacy-gap-5}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-6",
-                "marker": "__________",
+                "marker": "{{blank:legacy-gap-6}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n\n    - (a) 2000, 2000\n    - (b) 1500, 1500\n    - (c) 1000, 1000\n    - (d) 2, 2\n\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n    8.  int a;\n    9.    for (a = 0; a < 1000; a++) {\n        10. P(&si);\n        11. P(&sj);\n        12. i++;\n        13. j++;\n        14. V(&si);\n        15. V(&sj);\n        16. }\n    17. return NULL;\n    18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n    20. int a;\n    21. for (a = 0; a < 1000; a++) {\n        22. P(&sj);\n        23. P(&si);\n        24. j++;\n        25. i++;\n        26. V(&si);\n        27. V(&sj);\n        28. }\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n```\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。"
+            "text": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n\n    - (a) 2000, 2000\n    - (b) 1500, 1500\n    - (c) 1000, 1000\n    - (d) 2, 2\n\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n    8.  int a;\n    9.    for (a = 0; a < 1000; a++) {\n        10. P(&si);\n        11. P(&sj);\n        12. i++;\n        13. j++;\n        14. V(&si);\n        15. V(&sj);\n        16. }\n    17. return NULL;\n    18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n    20. int a;\n    21. for (a = 0; a < 1000; a++) {\n        22. P(&sj);\n        23. P(&si);\n        24. j++;\n        25. i++;\n        26. V(&si);\n        27. V(&sj);\n        28. }\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n```\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将{{blank:legacy-gap-4}}（填行号）行的{{blank:legacy-gap-5}}（填数字）改为{{blank:legacy-gap-6}}（填数字）。"
           },
           "solution": {
             "state": "available",
@@ -100717,14 +100582,6 @@
               "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
             },
             "blankAnswers": [
-              {
-                "blankId": "legacy-gap-1",
-                "method": "self"
-              },
-              {
-                "blankId": "legacy-gap-3",
-                "method": "self"
-              },
               {
                 "blankId": "legacy-gap-4",
                 "method": "self"
@@ -109237,7 +109094,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c799f2158ed1e841",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 26,
       "number": {
@@ -110477,66 +110334,66 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "__",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "__",
-                "occurrence": 1,
+                "marker": "{{blank:legacy-gap-1}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-2",
-                "marker": "__",
-                "occurrence": 2,
+                "marker": "{{blank:legacy-gap-2}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-3",
-                "marker": "__",
-                "occurrence": 3,
+                "marker": "{{blank:legacy-gap-3}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-4",
-                "marker": "_______",
+                "marker": "{{blank:legacy-gap-4}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-5",
-                "marker": "__",
-                "occurrence": 10,
+                "marker": "{{blank:legacy-gap-5}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-6",
-                "marker": "__",
-                "occurrence": 11,
+                "marker": "{{blank:legacy-gap-6}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-7",
-                "marker": "__",
-                "occurrence": 12,
+                "marker": "{{blank:legacy-gap-7}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-8",
-                "marker": "__",
-                "occurrence": 13,
+                "marker": "{{blank:legacy-gap-8}}",
+                "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-9",
-                "marker": "_____________",
+                "marker": "{{blank:legacy-gap-9}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "2.重定位分析（2分）\n\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段（部分地址和内容为示意）\n\n```asm\n0000000000001149 <main>:\n    1149:  55              push    %rbp\n    114a:  48 89 e5        mov     %rsp, %rbp\n    114d:  be 05 00 00 00  mov     $0x5, %esi\n    1152:  bf              __ __ __ __      mov     $_______, %edi   ; arr 的地址\n    1157:  e8              __ __ __ __      callq   _____________    ; sum_array\n```\n\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。（注：在答题纸上画出下面表格的第1列和第3列）\n\n| 编号 | 重定位条目信息 | 重定位引用值 32 位编码（参照代码中的 16 进制形式） |\n| --- | --- | --- |\n| ① | `r.offset = 0x09`　　`r.symbol = arr` `r.type = R_X86_64_32`　　`r.addend = 0` |  |\n| ② | `r.offset = 0x0e`　　`r.symbol = sum_array` `r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n\n此处假设 `arr` 在可执行文件中的地址为 `0x402010`，`sum_array` 的地址为 `0x1180`，result 的地址为 `0x404018`，`main` 中 `call` 指令的下一指令地址为 `0x115c`。"
+            "text": "2.重定位分析（2分）\n\n下面是链接后生成的可执行文件 m 使用 objdump -D 反汇编的片段（部分地址和内容为示意）\n\n```asm\n0000000000001149 <main>:\n    1149:  55              push    %rbp\n    114a:  48 89 e5        mov     %rsp, %rbp\n    114d:  be 05 00 00 00  mov     $0x5, %esi\n    1152:  bf              {{blank:legacy-gap-0}} {{blank:legacy-gap-1}} {{blank:legacy-gap-2}} {{blank:legacy-gap-3}}      mov     ${{blank:legacy-gap-4}}, %edi   ; arr 的地址\n    1157:  e8              {{blank:legacy-gap-5}} {{blank:legacy-gap-6}} {{blank:legacy-gap-7}} {{blank:legacy-gap-8}}      callq   {{blank:legacy-gap-9}}    ; sum_array\n```\n\n已知以下重定位条目信息。请根据重定位信息填写空白处的机器码（32位小端编码）。（注：在答题纸上画出下面表格的第1列和第3列）\n\n| 编号 | 重定位条目信息 | 重定位引用值 32 位编码（参照代码中的 16 进制形式） |\n| --- | --- | --- |\n| ① | `r.offset = 0x09`　　`r.symbol = arr` `r.type = R_X86_64_32`　　`r.addend = 0` |  |\n| ② | `r.offset = 0x0e`　　`r.symbol = sum_array` `r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n\n此处假设 `arr` 在可执行文件中的地址为 `0x402010`，`sum_array` 的地址为 `0x1180`，result 的地址为 `0x404018`，`main` 中 `call` 指令的下一指令地址为 `0x115c`。"
           },
           "solution": {
             "state": "available",
@@ -112932,7 +112789,7 @@
     {
       "schemaVersion": "5",
       "id": "q-4521377acbabad7a",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-ea869cda0eb89689",
       "paperOrder": 19,
       "number": {
@@ -112981,84 +112838,84 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "_____",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "_____",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-2",
-            "marker": "_____",
-            "occurrence": 2,
+            "marker": "{{blank:legacy-gap-2}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-3",
-            "marker": "_____",
-            "occurrence": 3,
+            "marker": "{{blank:legacy-gap-3}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-4",
-            "marker": "_____",
-            "occurrence": 4,
+            "marker": "{{blank:legacy-gap-4}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-5",
-            "marker": "_____",
-            "occurrence": 5,
+            "marker": "{{blank:legacy-gap-5}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-6",
-            "marker": "_____",
-            "occurrence": 6,
+            "marker": "{{blank:legacy-gap-6}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-7",
-            "marker": "_____",
-            "occurrence": 7,
+            "marker": "{{blank:legacy-gap-7}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-8",
-            "marker": "_____",
-            "occurrence": 8,
+            "marker": "{{blank:legacy-gap-8}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-9",
-            "marker": "_____",
-            "occurrence": 9,
+            "marker": "{{blank:legacy-gap-9}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-10",
-            "marker": "_____",
-            "occurrence": 10,
+            "marker": "{{blank:legacy-gap-10}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-11",
-            "marker": "_____",
-            "occurrence": 11,
+            "marker": "{{blank:legacy-gap-11}}",
+            "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-12",
-            "marker": "_____",
-            "occurrence": 12,
+            "marker": "{{blank:legacy-gap-12}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ],
-        "text": "1. The function below is hand-written assembly code for a sorting algorithm. Fill in the blanks\n   on the next page by converting this assembly to C code　**(13pts)**\n\n\n```asm\n\t.globl mystery_sort\t# exports the symbol so other .c files\n\t\t\t\t# can call the function\n\nmystery_sort:\n\tjmp\tloop1_check\n\nloop1:\n\txor\t%rdx, %rdx\n\tmov\t%rsi, %rcx\n\tjmp\tloop2_check\n\nloop2:\n\tmov\t(%rdi, %rcx, 8), %rax\n\tcmp\t%rax, (%rdi, %rdx, 8)\n\tjg\tloop2_check\n\tmov\t%rcx, %rdx\n\nloop2_check:\n\tdec\t%rcx\n\ttest\t%rcx, %rcx\n\tjnz\tloop2\n\n\tdec\t%rsi\n\tmov\t(%rdi, %rsi, 8), %rax\n\tmov\t(%rdi, %rdx, 8), %rcx\n\tmov\t%rcx, (%rdi, %rsi, 8)\n\tmov\t%rax, (%rdi, %rdx, 8)\n\nloop1_check:\n\ttest\t%rsi, %rsi\n\tjnz\tloop1\n\n\tret\n```\n\n\n\n\n```c\nvoid mystery_sort (long* array, long len)\n{\n    long a, b, tmp;\n    while (_____ > _____)\n    {\n        a = _____;\n        for (b = _____; b > _____; b--)\n        {\n            if (array[_____] > array[_____])\n            {\n                _____ = _____;\n            }\n        }\n\n        len--;\n        tmp = array[_____];\n        array[_____] = array[_____];\n        array[_____] = tmp;\n    }\n}\n```"
+        "text": "1. The function below is hand-written assembly code for a sorting algorithm. Fill in the blanks\n   on the next page by converting this assembly to C code　**(13pts)**\n\n\n```asm\n\t.globl mystery_sort\t# exports the symbol so other .c files\n\t\t\t\t# can call the function\n\nmystery_sort:\n\tjmp\tloop1_check\n\nloop1:\n\txor\t%rdx, %rdx\n\tmov\t%rsi, %rcx\n\tjmp\tloop2_check\n\nloop2:\n\tmov\t(%rdi, %rcx, 8), %rax\n\tcmp\t%rax, (%rdi, %rdx, 8)\n\tjg\tloop2_check\n\tmov\t%rcx, %rdx\n\nloop2_check:\n\tdec\t%rcx\n\ttest\t%rcx, %rcx\n\tjnz\tloop2\n\n\tdec\t%rsi\n\tmov\t(%rdi, %rsi, 8), %rax\n\tmov\t(%rdi, %rdx, 8), %rcx\n\tmov\t%rcx, (%rdi, %rsi, 8)\n\tmov\t%rax, (%rdi, %rdx, 8)\n\nloop1_check:\n\ttest\t%rsi, %rsi\n\tjnz\tloop1\n\n\tret\n```\n\n\n\n\n```c\nvoid mystery_sort (long* array, long len)\n{\n    long a, b, tmp;\n    while ({{blank:legacy-gap-0}} > {{blank:legacy-gap-1}})\n    {\n        a = {{blank:legacy-gap-2}};\n        for (b = {{blank:legacy-gap-3}}; b > {{blank:legacy-gap-4}}; b--)\n        {\n            if (array[{{blank:legacy-gap-5}}] > array[{{blank:legacy-gap-6}}])\n            {\n                {{blank:legacy-gap-7}} = {{blank:legacy-gap-8}};\n            }\n        }\n\n        len--;\n        tmp = array[{{blank:legacy-gap-9}}];\n        array[{{blank:legacy-gap-10}}] = array[{{blank:legacy-gap-11}}];\n        array[{{blank:legacy-gap-12}}] = tmp;\n    }\n}\n```"
       },
       "solution": {
         "state": "available",
@@ -147920,7 +147777,7 @@
     {
       "schemaVersion": "5",
       "id": "q-19c4d964d98fc677",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 26,
       "number": {
@@ -148014,12 +147871,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "_______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "有一个五级流水线处理器，和课程中的PIPE处理器类似，包含：取指（F）、译码（D）、执\n行（E）、访存（M）、写回（W）五级，\n1） 在理想设计情况下，流水线每一级的电路处理时间如下表所示，每两级流水线阶段之间\n插入的寄存器耗时为1ns\n  F  D  E  M  W\n处理时间（`ns`）  8  5  9  8  4\n  请问流水线运行的时钟周期，最快为 _______ ns"
+            "text": "有一个五级流水线处理器，和课程中的PIPE处理器类似，包含：取指（F）、译码（D）、执\n行（E）、访存（M）、写回（W）五级，\n1） 在理想设计情况下，流水线每一级的电路处理时间如下表所示，每两级流水线阶段之间\n插入的寄存器耗时为1ns\n  F  D  E  M  W\n处理时间（`ns`）  8  5  9  8  4\n  请问流水线运行的时钟周期，最快为 {{blank:legacy-gap-0}} ns"
           },
           "solution": {
             "state": "available",
@@ -148079,12 +147936,12 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "______",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "2） 需要执行如下Y86-64汇编代码，寄存器的初始状态如右下表格所示：\n```\n0x000  t:  mrmovq   (%rdi), %rbx\n0x002      addq     %rbx, %rax\n0x004      addq     $8, %rdi\n0x006      addq     $1, %rcx\n0x008      xorq     $8, %rcx\n0x00a      jne      t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| `%rdi` | `0x8008` |\n| `%rax` | 0 |\n| `%rbx` | 0 |\n| `%rcx` | 0 |\n\n流水线支持课上讲的数据前递（data forwarding），分支预测设计为“始终跳转”（predicted\nas taken），请问执行上述代码，需要 ______ 个时钟周期？"
+            "text": "2） 需要执行如下Y86-64汇编代码，寄存器的初始状态如右下表格所示：\n```\n0x000  t:  mrmovq   (%rdi), %rbx\n0x002      addq     %rbx, %rax\n0x004      addq     $8, %rdi\n0x006      addq     $1, %rcx\n0x008      xorq     $8, %rcx\n0x00a      jne      t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| `%rdi` | `0x8008` |\n| `%rax` | 0 |\n| `%rbx` | 0 |\n| `%rcx` | 0 |\n\n流水线支持课上讲的数据前递（data forwarding），分支预测设计为“始终跳转”（predicted\nas taken），请问执行上述代码，需要 {{blank:legacy-gap-0}} 个时钟周期？"
           },
           "solution": {
             "state": "available",
@@ -148144,24 +148001,24 @@
             "blanks": [
               {
                 "id": "legacy-gap-0",
-                "marker": "____",
+                "marker": "{{blank:legacy-gap-0}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-1",
-                "marker": "_______",
+                "marker": "{{blank:legacy-gap-1}}",
                 "occurrence": 0,
                 "width": "medium"
               },
               {
                 "id": "legacy-gap-2",
-                "marker": "______",
-                "occurrence": 2,
+                "marker": "{{blank:legacy-gap-2}}",
+                "occurrence": 0,
                 "width": "medium"
               }
             ],
-            "text": "3） 现需要考虑实际执行时，存储层次对于流水线执行时间的影响：\n•  该处理器包含一个L1指令缓存（I-cache）和一个L1数据缓存（D-cache）；\n•  I-cache是一个直接映射（direct-mapped，`E=1`）缓存，总容量32KB，每个缓存块\n的大小是32Byte，代码执行前I-cache全部为空；\n•  D-cache也是一个直接映射（direct-mapped，`E=1`）缓存，总容量32KB，每个缓\n存块的大小是32Byte，代码执行前D-cache全部为空；\n•  取指（F）阶段，如果指令在I-cache中，则需要1个周期，否则需要10个周期；\n•  访存（M）阶段，如果数据在D-cache中，则需要1个周期，否则需要10个周期；\n请问执行上述代码I-cache缓存命中____次、D-cache缓存命中_______次?\n在存储层次的影响下，执行完代码需要 ______ 个时钟周期？"
+            "text": "3） 现需要考虑实际执行时，存储层次对于流水线执行时间的影响：\n•  该处理器包含一个L1指令缓存（I-cache）和一个L1数据缓存（D-cache）；\n•  I-cache是一个直接映射（direct-mapped，`E=1`）缓存，总容量32KB，每个缓存块\n的大小是32Byte，代码执行前I-cache全部为空；\n•  D-cache也是一个直接映射（direct-mapped，`E=1`）缓存，总容量32KB，每个缓\n存块的大小是32Byte，代码执行前D-cache全部为空；\n•  取指（F）阶段，如果指令在I-cache中，则需要1个周期，否则需要10个周期；\n•  访存（M）阶段，如果数据在D-cache中，则需要1个周期，否则需要10个周期；\n请问执行上述代码I-cache缓存命中{{blank:legacy-gap-0}}次、D-cache缓存命中{{blank:legacy-gap-1}}次?\n在存储层次的影响下，执行完代码需要 {{blank:legacy-gap-2}} 个时钟周期？"
           },
           "solution": {
             "state": "available",

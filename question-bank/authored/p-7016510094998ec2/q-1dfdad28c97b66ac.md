@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-1dfdad28c97b66ac",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 12,
   "number": {
@@ -51,7 +51,7 @@
     "blanks": [
       {
         "id": "legacy-gap-0",
-        "marker": "________________________",
+        "marker": "{{blank:legacy-gap-0}}",
         "occurrence": 0,
         "width": "medium"
       }
@@ -80,6 +80,6 @@
 }
 +++
 %%% stem
-12. IP 地址可以用十六进制表示，也可以用点分十进制表示。请写出 IPv4 地址`0x24982c5f`的点分十进制表示：________________________。
+12. IP 地址可以用十六进制表示，也可以用点分十进制表示。请写出 IPv4 地址`0x24982c5f`的点分十进制表示：{{blank:legacy-gap-0}}。
 %%% reference
 答案：36.152.44.95

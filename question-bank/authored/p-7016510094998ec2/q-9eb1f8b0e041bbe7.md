@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-9eb1f8b0e041bbe7",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 20,
   "number": {
@@ -130,7 +130,7 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium",
             "input": {
@@ -210,7 +210,7 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium",
             "input": {
@@ -290,14 +290,14 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "______",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ]
@@ -412,14 +412,14 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "______",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "______",
-            "occurrence": 1,
+            "marker": "{{blank:legacy-gap-1}}",
+            "occurrence": 0,
             "width": "medium"
           }
         ]
@@ -603,11 +603,11 @@
 ```
 
 
-1. 函数 `Open_listenfd` 要建立的是可靠的TCP连接。因此，里面有一行代码设置了 hints.ai_socktype = ______；（SOCK_STREAM / SOCK_DGRAM）。（1分）
+1. 函数 `Open_listenfd` 要建立的是可靠的TCP连接。因此，里面有一行代码设置了 hints.ai_socktype = {{blank:legacy-gap-0}}；（SOCK_STREAM / SOCK_DGRAM）。（1分）
 %%% part-reference: q-35b31dd6c25ebe73
 答案：SOCK_STREAM
 %%% part-stem: q-9839dd0d198535d7
-2. 函数 Getnameinfo 的用途是查询输入的______（主机名对应的IP地址 / IP地址对应的主机名）。（1分）
+2. 函数 Getnameinfo 的用途是查询输入的{{blank:legacy-gap-0}}（主机名对应的IP地址 / IP地址对应的主机名）。（1分）
 %%% part-reference: q-9839dd0d198535d7
 答案：IP地址对应的主机名
 %%% part-stem: q-8ef75472241f3c98
@@ -646,7 +646,7 @@
 ```text
 cd pingpong
 nohup ./server 50000 > log.out &
-./client ______ ______
+./client {{blank:legacy-gap-0}} {{blank:legacy-gap-1}}
 ```
 
 程序正常运行完毕，"You win！"出现在了他的屏幕上。小明查看 log.out，里面的第一行是 Connected to (localhost, 33580)。请填入小明操作流程中缺失的两处信息。（2分）
@@ -657,7 +657,7 @@ nohup ./server 50000 > log.out &
 %%% part-reference: q-d1c53aa2285305a2
 答案：每次循环都打开了一个新的 clientfd 而没有关闭，导致文件数量过多，耗尽系统资源
 %%% part-stem: q-9173da3272ca94be
-5. 请在客户端中添加一行代码，使得 #define GOAL 100000 时也能正常运行。你添加的位置是现在的第______行之后，添加的代码内容是______。（2分）
+5. 请在客户端中添加一行代码，使得 #define GOAL 100000 时也能正常运行。你添加的位置是现在的第{{blank:legacy-gap-0}}行之后，添加的代码内容是{{blank:legacy-gap-1}}。（2分）
 %%% part-reference: q-9173da3272ca94be
 答案：第 22 行之后；Close(clientfd);
 %%% part-stem: q-2caa71db00b101fa

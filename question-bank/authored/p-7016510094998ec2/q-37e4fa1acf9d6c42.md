@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-37e4fa1acf9d6c42",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 9,
   "number": {
@@ -57,7 +57,7 @@
       },
       {
         "id": "legacy-gap-1",
-        "marker": "__________",
+        "marker": "{{blank:legacy-gap-1}}",
         "occurrence": 0,
         "width": "medium"
       }
@@ -88,6 +88,6 @@
 }
 +++
 %%% stem
-9. 在支持虚拟地址空间的系统中，CPU 取到虚拟地址后，发给______①______，由①将虚拟地址转换为物理地址。为了加快地址翻译速度，需要在①中引入②__________。
+9. 在支持虚拟地址空间的系统中，CPU 取到虚拟地址后，发给______①______，由①将虚拟地址转换为物理地址。为了加快地址翻译速度，需要在①中引入②{{blank:legacy-gap-1}}。
 %%% reference
 答案：MMU；TLB

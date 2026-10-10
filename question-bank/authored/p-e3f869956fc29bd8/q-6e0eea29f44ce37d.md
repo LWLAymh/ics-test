@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-6e0eea29f44ce37d",
-  "revision": 2,
+  "revision": 5,
   "paperId": "p-e3f869956fc29bd8",
   "paperOrder": 21,
   "number": {
@@ -74,30 +74,19 @@
         },
         "parts": []
       },
-      "type": "fill",
+      "type": "short-answer",
       "moduleIds": [
         "machine_prog"
       ],
       "stem": {
         "format": "markdown",
         "blanks": [
-                    {
-            "id": "legacy-gap-1",
-            "marker": "__",
-            "occurrence": 1,
-            "width": "medium"
-          },
-                    {
-            "id": "legacy-gap-3",
-            "marker": "__",
-            "occurrence": 3,
-            "width": "medium"
-          }
+
         ]
       },
       "solution": {
         "state": "available",
-        "grading": "blanks",
+        "grading": "self",
         "reference": {
           "format": "markdown"
         },
@@ -105,17 +94,7 @@
           "origin": "unknown",
           "crossChecked": null,
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        },
-        "blankAnswers": [
-                    {
-            "blankId": "legacy-gap-1",
-            "method": "self"
-          },
-                    {
-            "blankId": "legacy-gap-3",
-            "method": "self"
-          }
-        ]
+        }
       },
       "sources": [
         {
@@ -154,33 +133,21 @@
       "stem": {
         "format": "markdown",
         "blanks": [
-                    {
-            "id": "legacy-gap-1",
-            "marker": "__",
-            "occurrence": 1,
-            "width": "medium"
-          },
-                    {
-            "id": "legacy-gap-3",
-            "marker": "__",
-            "occurrence": 3,
-            "width": "medium"
-          },
-          {
+                                                  {
             "id": "legacy-gap-4",
-            "marker": "_____",
+            "marker": "{{blank:legacy-gap-4}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-5",
-            "marker": "_________",
+            "marker": "{{blank:legacy-gap-5}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-6",
-            "marker": "__________",
+            "marker": "{{blank:legacy-gap-6}}",
             "occurrence": 0,
             "width": "medium"
           }
@@ -198,15 +165,7 @@
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
         },
         "blankAnswers": [
-                    {
-            "blankId": "legacy-gap-1",
-            "method": "self"
-          },
-                    {
-            "blankId": "legacy-gap-3",
-            "method": "self"
-          },
-          {
+                                                  {
             "blankId": "legacy-gap-4",
             "method": "self"
           },
@@ -348,7 +307,7 @@ return 0;
 请问卜廷江同学的程序有什么潜在问题？为什么？
 4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保
 证输出结果稳定为2000, 2000，应该如何改动？
-回答：将_____（填行号）行的_________（填数字）改为__________（填数字）。
+回答：将{{blank:legacy-gap-4}}（填行号）行的{{blank:legacy-gap-5}}（填数字）改为{{blank:legacy-gap-6}}（填数字）。
 %%% part-reference: q-c36c9b861c58b521
 2.  (a) 可能，do_stuff俩函数全串行执行即可
 (b) 可能，`do_stuff1`先执行了读取`i`的操作，然后`do_stuff2`执行500次循

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c686bf5ca67f4ed8",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-ae9ab20d09974cf3",
   "paperOrder": 23,
   "number": {
@@ -53,14 +53,14 @@
     "blanks": [
       {
         "id": "legacy-gap-0",
-        "marker": "_______",
+        "marker": "{{blank:legacy-gap-0}}",
         "occurrence": 0,
         "width": "medium"
       },
       {
         "id": "legacy-gap-1",
-        "marker": "_______",
-        "occurrence": 1,
+        "marker": "{{blank:legacy-gap-1}}",
+        "occurrence": 0,
         "width": "medium",
         "input": {
           "kind": "select",
@@ -79,8 +79,8 @@
       },
       {
         "id": "legacy-gap-2",
-        "marker": "_______",
-        "occurrence": 2,
+        "marker": "{{blank:legacy-gap-2}}",
+        "occurrence": 0,
         "width": "medium",
         "input": {
           "kind": "select",
@@ -99,8 +99,8 @@
       },
       {
         "id": "legacy-gap-3",
-        "marker": "_______",
-        "occurrence": 3,
+        "marker": "{{blank:legacy-gap-3}}",
+        "occurrence": 0,
         "width": "medium",
         "input": {
           "kind": "select",
@@ -119,8 +119,8 @@
       },
       {
         "id": "legacy-gap-4",
-        "marker": "_______",
-        "occurrence": 4,
+        "marker": "{{blank:legacy-gap-4}}",
+        "occurrence": 0,
         "width": "medium",
         "input": {
           "kind": "select",
@@ -139,8 +139,8 @@
       },
       {
         "id": "legacy-gap-5",
-        "marker": "_______",
-        "occurrence": 5,
+        "marker": "{{blank:legacy-gap-5}}",
+        "occurrence": 0,
         "width": "medium",
         "input": {
           "kind": "select",
@@ -167,8 +167,8 @@
       },
       {
         "id": "legacy-gap-6",
-        "marker": "_______",
-        "occurrence": 6,
+        "marker": "{{blank:legacy-gap-6}}",
+        "occurrence": 0,
         "width": "medium",
         "input": {
           "kind": "select",
@@ -195,8 +195,8 @@
       },
       {
         "id": "legacy-gap-7",
-        "marker": "_______",
-        "occurrence": 7,
+        "marker": "{{blank:legacy-gap-7}}",
+        "occurrence": 0,
         "width": "medium",
         "input": {
           "kind": "select",
@@ -373,17 +373,17 @@ int main() {
 ```
 #### 1）
 
-在 `player` 函数中，使用了_______个共享变量？（同一个变量多次出现算 1 个）（1分）
+在 `player` 函数中，使用了{{blank:legacy-gap-0}}个共享变量？（同一个变量多次出现算 1 个）（1分）
 
 #### 2）
 
 信号处理程序里使用了不安全的 `printf` 函数。老师在课堂上讲过著名的“灵魂出窍”死锁案例，而题目的程序同时在 `main` 函数和信号处理程序中使用 `printf`。
 
-题目中的程序_______（会/不会）出现死锁？原因包括：
+题目中的程序{{blank:legacy-gap-1}}（会/不会）出现死锁？原因包括：
 
-- `printf` _______（是/不是）异步信号安全的；
-- `printf` _______（是/不是）线程安全的；
-- 在题目的程序中，`signal_handler` 中的 `printf` _______（可能/不会）被打断。
+- `printf` {{blank:legacy-gap-2}}（是/不是）异步信号安全的；
+- `printf` {{blank:legacy-gap-3}}（是/不是）线程安全的；
+- 在题目的程序中，`signal_handler` 中的 `printf` {{blank:legacy-gap-4}}（可能/不会）被打断。
 
 （本小问共 4 分）
 
@@ -426,7 +426,7 @@ B
 A
 ```
 
-① 下列哪一项不是导致本题程序多次运行结果不同的原因？_______（1分）
+① 下列哪一项不是导致本题程序多次运行结果不同的原因？{{blank:legacy-gap-5}}（1分）
 
 | 选项 | 描述 |
 | --- | --- |
@@ -435,9 +435,9 @@ A
 | C | 操作系统下发信号的时机具有不确定性 |
 | D | 操作系统处理系统调用具有不确定性 |
 
-② 下列哪一选项会导致上面的运行结果中，`game.out` 的 A 比 `stdout` 的少？_______（1分）
+② 下列哪一选项会导致上面的运行结果中，`game.out` 的 A 比 `stdout` 的少？{{blank:legacy-gap-6}}（1分）
 
-除此之外，还有哪一选项会导致上面的运行结果中，`game.out` 的 B 比 `stdout` 的少？_______（1分）
+除此之外，还有哪一选项会导致上面的运行结果中，`game.out` 的 B 比 `stdout` 的少？{{blank:legacy-gap-7}}（1分）
 
 | 选项 | 描述 |
 | --- | --- |
