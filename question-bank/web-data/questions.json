@@ -67742,7 +67742,7 @@
     {
       "schemaVersion": "5",
       "id": "q-9acce0371658f35f",
-      "revision": 5,
+      "revision": 6,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 19,
       "number": {
@@ -67897,7 +67897,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "2.考虑如下一段Y86-64代码片段：\n```\nLoop:  mrmovq (%rdi), %r10   # line 1\n    rmmovq %r10, (%rsi)   # line 2\n    andq %r10, %r10      # line 3\n    jle Npos          # line 4\n    irmovq $1, %r10      # line 5\n    addq %r10, %rax      # line 6\nNpos:  irmovq $1, %r10      # line 7\n    subq %r10, %rdx      # line 8\n    irmovq $8, %r10      # line 9\n    addq %r10, %rdi      # line 10\n    addq %r10, %rsi      # line 11\n    andq %rdx, %rdx      # line 12\n    jg Loop          # line 13\n    ret           # line 14\n```\n（1）这段代码中存在一些指令间的数据相关，其中行5与行6的数据相关可以采\n用数据前递（Forwarding）技术解决，在下图中体现在Sel+FwdA和FwdB部件\n上。前者输出的信号会存到流水线寄存器E的valA域（即E_valA信号），请选\n出该信号正确的HCL语言描述：______（2分）\n\n![E 级数据前递通路（Sel+FwdA 与 FwdB 部件）](assets/期中/2019期中-带答案/p17-e-stage-datapath.png)\n\n\n```\nlong d_valA = [\n  D_icode in { ICALL, IJXX }: D_valP;\n  ________;\n  ________;\n  ________;\n  ________;\n  ________;\n  1: d_rvalA;\n]\n```\n\n○1 d_srcA == e_dstE : e_valE\n\n○2 d_srcA == M_dstE : M_valE\n\n○3 d_srcA == M_dstM : m_valM\n\n○4 d_srcA == W_dstE : W_valE\n\n○5 d_srcA == W_dstM : W_valM\n"
+            "text": "2.考虑如下一段Y86-64代码片段：\n```\nLoop:  mrmovq (%rdi), %r10   # line 1\n    rmmovq %r10, (%rsi)   # line 2\n    andq %r10, %r10      # line 3\n    jle Npos          # line 4\n    irmovq $1, %r10      # line 5\n    addq %r10, %rax      # line 6\nNpos:  irmovq $1, %r10      # line 7\n    subq %r10, %rdx      # line 8\n    irmovq $8, %r10      # line 9\n    addq %r10, %rdi      # line 10\n    addq %r10, %rsi      # line 11\n    andq %rdx, %rdx      # line 12\n    jg Loop          # line 13\n    ret           # line 14\n```\n（1）这段代码中存在一些指令间的数据相关，其中行5与行6的数据相关可以采\n用数据前递（Forwarding）技术解决，在下图中体现在Sel+FwdA和FwdB部件\n上。前者输出的信号会存到流水线寄存器E的valA域（即E_valA信号），请选\n出该信号正确的HCL语言描述：______（2分）\n\n![E 级数据前递通路（Sel+FwdA 与 FwdB 部件）](assets/期中/2019期中-带答案/p17-e-stage-datapath.png)\n\n\n```\nlong d_valA = [\n  D_icode in { ICALL, IJXX }: D_valP;\n  ________;\n  ________;\n  ________;\n  ________;\n  ________;\n  1: d_rvalA;\n]\n```\n\n○1 d_srcA == e_dstE : e_valE  \n○2 d_srcA == M_dstE : M_valE  \n○3 d_srcA == M_dstM : m_valM  \n○4 d_srcA == W_dstE : W_valE  \n○5 d_srcA == W_dstM : W_valM\n"
           },
           "solution": {
             "state": "available",
