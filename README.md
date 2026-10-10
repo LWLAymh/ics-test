@@ -91,7 +91,7 @@ npm run review-paper -- -Paper "2025期末"
 
 `.github/workflows/pages.yml` 只在 `main` push 时自动验证、构建并发布 Pages。工作分支 push / PR 运行 `validate.yml`，**只校验、不部署**。手动部署工作流也限制在 `main`，避免误发布尚未合并的迁移。
 
-本次迁移在 `schema-v5-migration` 上交付，需维护者确认后再合并。普通改题须一起提交人工 Markdown 和重新编译的 `web-data/`；生成结果漂移会被 CI 拦截。
+本次迁移已在维护者确认后从 `schema-v5-migration` 合并到 `main`，当前主分支使用 v5。普通改题须一起提交人工 Markdown 和重新编译的 `web-data/`；生成结果漂移会被 CI 拦截。
 
 ## 题目来源与致谢
 

@@ -53,4 +53,4 @@ npm run build
 
 `tests/browser-v5.cjs` 在真实浏览器中验证全库 Markdown/资源、整卷组题、各题型交互、同空同步、草稿恢复、计分、错误率排序及跳过。测试会替换 Supabase 客户端，不向线上提交任何统计或报告。启动本地 `_site` 服务后可用 Playwright 运行；Windows 可设置 `PLAYWRIGHT_CHANNEL=msedge`，其他平台使用已安装的 Chromium。
 
-此分支不部署。等待维护者确认后才合并；主分支和线上仍保留原版本。若需要回退，在主分支继续使用基线提交即可，不需迁移数据库。后续 v5 编辑流程见 [完整编写指导](QUESTION_AUTHORING_V5.md)。
+迁移开发阶段仅校验分支、不部署；维护者现已确认合并，主分支使用 v5 并按正常 Pages 流程部署。若需要回退，可恢复迁移前的基线版本，不需迁移数据库。后续 v5 编辑流程见 [完整编写指导](QUESTION_AUTHORING_V5.md)。
