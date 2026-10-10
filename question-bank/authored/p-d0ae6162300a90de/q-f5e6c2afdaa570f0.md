@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f5e6c2afdaa570f0",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-d0ae6162300a90de",
   "paperOrder": 23,
   "number": {
@@ -732,6 +732,7 @@
 一共有8个数据读取操作，每个操作的地址按顺序如下所示（单位是字节），数据替换采用
 LRU（least recently used）策略。
                  数据访问地址： 1 -> 4 -> 17 –> 2 –> 8 -> 16 –> 9->0
+
 1） 如果Cache的结构是directed mapped（`S=4`， `E=1`），如下图所示，请在下图空白处填
 入，访问上述数据序列访问后Cache的状态。（注：TAG使用二进制格式，`V=1`代表数据有
 效，用[A-B]表示地址A到B之间对应的数据）（4分）

@@ -46603,7 +46603,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b8edc298950e949d",
-      "revision": 1,
+      "revision": 3,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 4,
       "number": {
@@ -46630,7 +46630,9 @@
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": []
+        "issues": [
+          "原卷答案为 B（3 条），原卷亦注明「这个条件相当于 !(a==0 || a==1 || a==-1)」。线上有读者反馈「理论最小值是 1」：若先用 setcc 无分支地算出谓词、再跳一次，条件转移可减到 1 条；用条件传送（cmov）甚至可以做到 0 条。题干问的是「至少包含几条」，而标准编译输出与理论下界并不相同，本题问法本身有歧义。按维护约定保留原卷答案 B 并在此记录争议，不擅自改判。"
+        ]
       },
       "sources": [
         {
@@ -68625,7 +68627,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e9162b5ebf244c22",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 20,
       "number": {
@@ -68825,7 +68827,7 @@
                 }
               }
             ],
-            "text": "第五题（15分）\n1）不同的Cache组织结构对访存性能有很大的影响。以直接映射Cache为例，\nL1 Cache的容量为128字节，block size为16个字节。为简化起见，使用\n8位地址访问该Cache，地址如下图所示：\n\n![图](assets/期中/2019期中-带答案/p19-addr-fields.png)\n\n对于如下访问序列，请填写 L1 Cache (Tag Ram) 中的变化，其中 B0 ~ B7 对应 8 个\nCache Block，表项中填写对应的 Tag。（6分）\n\n| 访问地址序列 | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | 是否命中(Y / N) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| A0 |  |  |  |  |  |  |  |  | {{blank:hit-1}} |\n| 20 |  |  |  |  |  |  |  |  | {{blank:hit-2}} |\n| A2 |  |  |  |  |  |  |  |  | {{blank:hit-3}} |\n| 0 |  |  |  |  |  |  |  |  | {{blank:hit-4}} |\n| 80 |  |  |  |  |  |  |  |  | {{blank:hit-5}} |\n| 4 |  |  |  |  |  |  |  |  | {{blank:hit-6}} |"
+            "text": "第五题（15分）\n\n1）不同的Cache组织结构对访存性能有很大的影响。以直接映射Cache为例，\nL1 Cache的容量为128字节，block size为16个字节。为简化起见，使用\n8位地址访问该Cache，地址如下图所示：\n\n![图](assets/期中/2019期中-带答案/p19-addr-fields.png)\n\n对于如下访问序列，请填写 L1 Cache (Tag Ram) 中的变化，其中 B0 ~ B7 对应 8 个\nCache Block，表项中填写对应的 Tag。（6分）\n\n| 访问地址序列 | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | 是否命中(Y / N) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| A0 |  |  |  |  |  |  |  |  | {{blank:hit-1}} |\n| 20 |  |  |  |  |  |  |  |  | {{blank:hit-2}} |\n| A2 |  |  |  |  |  |  |  |  | {{blank:hit-3}} |\n| 0 |  |  |  |  |  |  |  |  | {{blank:hit-4}} |\n| 80 |  |  |  |  |  |  |  |  | {{blank:hit-5}} |\n| 4 |  |  |  |  |  |  |  |  | {{blank:hit-6}} |"
           },
           "solution": {
             "state": "available",
@@ -69657,7 +69659,7 @@
     {
       "schemaVersion": "5",
       "id": "q-214498ca68ff174f",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ac5fea2cf89e5bed",
       "paperOrder": 22,
       "number": {
@@ -69700,7 +69702,7 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "第三题 （12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。（3分）\n\n![图](assets/期末/2013期末-带答案/p11-img1.jpg)"
+        "text": "第三题 （12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。\n\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。（3分）\n\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。（3分）\n\n![图](assets/期末/2013期末-带答案/p11-img1.jpg)"
       },
       "solution": {
         "state": "available",
@@ -73470,7 +73472,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0324b364e9cc3917",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 16,
       "number": {
@@ -73545,7 +73547,7 @@
             "width": "medium"
           }
         ],
-        "text": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\n`C  Fn  0xF  rB`\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\n    jne     Lo\n    ret\n```\n周期数计算从执行`bar`第一条指令开始，直到其返回指令`ret`完全通过流水线为\n止。在调用`bar`之前，处理器已经执行过足够多的`nop`指令。\n当函数`bar`的参数 `x=0` 时，需要执行______个周期；`x=3` 时需要执行______\n个周期。（每空2分，共4分）"
+        "text": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\n`C  Fn  0xF  rB`\n4位  4位  4位  4位\n考虑教材中的SEQ处理器，进行必要的改动使得cdeclXX指令能够根据之前指令\n产生的条件码执行操作，并根据计算结果正常设置条件码。请填写下表中缺失的4\n条操作，每空只包含一条操作（或其一部分）。（每空2分，共8分）\n```\nStage  cdecl rB\nFetch  icode:ifun ← M1[PC]\nrA:rB ← ①_______\n②____________\nDecode  valB ← R[rB]\nExecute  ③____________\nCnd ← Cond(CC, ifun)\nMemory  none\nWrite back  ④____________\nPC Update  PC ← valP\n```\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```\nword f_pc = [\nM_icode ==IJXX && ①         : ②        ;\nW_icode == IRET : ③        ;\n1 : F_predPC\n]\n```\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n```\n\n\n```\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\n    jne     Lo\n    ret\n```\n周期数计算从执行`bar`第一条指令开始，直到其返回指令`ret`完全通过流水线为\n止。在调用`bar`之前，处理器已经执行过足够多的`nop`指令。\n当函数`bar`的参数 `x=0` 时，需要执行______个周期；`x=3` 时需要执行______\n个周期。（每空2分，共4分）"
       },
       "solution": {
         "state": "available",
@@ -77039,7 +77041,7 @@
     {
       "schemaVersion": "5",
       "id": "q-db07f3829cfe0e66",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 17,
       "number": {
@@ -77110,7 +77112,7 @@
             "label": "文件内容"
           }
         ],
-        "text": "第三题（15分）\nPart A: 分析下面这段代码的行为，假设`file.txt`文件存在，且不需要考虑\n`open()`函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main(){\n    int fd[3];\n    fd[0] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\n    fd[1] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\nwrite(fd[0], \"Harry\", 5);\nif (fork() == 0) {\n    dup2(fd[0], fd[1]);\n    write(fd[1], \"Voldemort\", 9);\n    fd[2] = open(\"./file.txt\", O_RDWR, 0);\n    printf(\"%d\\n\", fd[2]);\n    exit(0);\n}\nwait(NULL);\nfd[1] = dup(fd[0]);\nwrite(fd[0], \"Hermione\", 8);\nwrite(fd[1], \"Ron\", 3);\nfd[2] = open(\"./file.txt\", O_RDWR, 0);\nprintf(\"%d\\n\", fd[2]);\n}\n```\n1） 运行这段代码，在终端上可以看到两行输出，第一行的内容为 {{blank:line1}} ，\n第二行的内容为 {{blank:line2}} 。(每空1分)\n2） 运行这段代码后，`file.txt`文件的内容为 {{blank:file-content}} 。\n（3分）"
+        "text": "第三题（15分）\nPart A: 分析下面这段代码的行为，假设`file.txt`文件存在，且不需要考虑\n`open()`函数未能正常打开文件的情况。\n```\n#include <csapp.h>\nint main(){\n    int fd[3];\n    fd[0] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\n    fd[1] = open(\"./file.txt\", O_RDWR | O_TRUNC, 0);\nwrite(fd[0], \"Harry\", 5);\nif (fork() == 0) {\n    dup2(fd[0], fd[1]);\n    write(fd[1], \"Voldemort\", 9);\n    fd[2] = open(\"./file.txt\", O_RDWR, 0);\n    printf(\"%d\\n\", fd[2]);\n    exit(0);\n}\nwait(NULL);\nfd[1] = dup(fd[0]);\nwrite(fd[0], \"Hermione\", 8);\nwrite(fd[1], \"Ron\", 3);\nfd[2] = open(\"./file.txt\", O_RDWR, 0);\nprintf(\"%d\\n\", fd[2]);\n}\n```\n1） 运行这段代码，在终端上可以看到两行输出，第一行的内容为 {{blank:line1}} ，\n第二行的内容为 {{blank:line2}} 。(每空1分)\n\n2） 运行这段代码后，`file.txt`文件的内容为 {{blank:file-content}} 。\n（3分）"
       },
       "solution": {
         "state": "available",
@@ -77263,7 +77265,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f106961e4b86af22",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 19,
       "number": {
@@ -77426,7 +77428,7 @@
             "label": "文件内容结果数"
           }
         ],
-        "text": "Part C: 分析下面这段代码的行为，假设`file.txt`文件存在且初始内容为空，\n并且不需要考虑`open()`函数未能正常打开文件的情况。\n```c\n#include <csapp.h>\nint main() {\n    char *numbers = \"0123456789\";\n    char buffer[100];\n    buffer[0] = '\\0';\n    pid_t father_pid = getpid();\n    for (int i = 0; i < 10; ++i) {\n        if (fork() != 0) {\n            strncat(buffer, numbers + i, 1);\n        }\n    }\n    int fd = open(\"./file.txt\", O_RDWR , 0);\n    write(fd, buffer, strlen(buffer));\n    while (wait(NULL) != -1) {}\n    if (getpid() == father_pid) {\n        close(fd);\n        fd = open(\"./file.txt\", O_RDONLY, 0);\n        char content[100];\n        read(fd, content, 100);\n        printf(\"%c\\n\", content[3]);\n        printf(\"%c\\n\", content[6]);\n    }\n    exit(0);\n}\n```\n\n\n如果你不清楚`string.h`中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\n`dest`，一个源字符串`src`和最大追加的字符数`n`。在`src`的长度至少为`n`时，这个函数将\n`src`的前`n`个字符拼接到`dest`字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为 {{blank:possible-third}} ，\n第二行的内容可能为 {{blank:possible-sixth}} 。（ 你需要列出所有可能出现的输出，每种可能\n性用逗号隔开，每空1分）\n2） 在运行这段代码之后，`file.txt`中的内容有 {{blank:file-result-count}} 种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）"
+        "text": "Part C: 分析下面这段代码的行为，假设`file.txt`文件存在且初始内容为空，\n并且不需要考虑`open()`函数未能正常打开文件的情况。\n```c\n#include <csapp.h>\nint main() {\n    char *numbers = \"0123456789\";\n    char buffer[100];\n    buffer[0] = '\\0';\n    pid_t father_pid = getpid();\n    for (int i = 0; i < 10; ++i) {\n        if (fork() != 0) {\n            strncat(buffer, numbers + i, 1);\n        }\n    }\n    int fd = open(\"./file.txt\", O_RDWR , 0);\n    write(fd, buffer, strlen(buffer));\n    while (wait(NULL) != -1) {}\n    if (getpid() == father_pid) {\n        close(fd);\n        fd = open(\"./file.txt\", O_RDONLY, 0);\n        char content[100];\n        read(fd, content, 100);\n        printf(\"%c\\n\", content[3]);\n        printf(\"%c\\n\", content[6]);\n    }\n    exit(0);\n}\n```\n\n\n如果你不清楚`string.h`中strncat()函数的行为，可以参考下列说明:\nstrncat()函数用于将一个字符串追加到另一个字符串的末尾。它接受一个目标字符串\n`dest`，一个源字符串`src`和最大追加的字符数`n`。在`src`的长度至少为`n`时，这个函数将\n`src`的前`n`个字符拼接到`dest`字符串的后面。例如：\n```\n    char *dest = \"Astarion\";\nchar *src = \"Shadowheart\";\nstrncat(dest, src, 6);\nprintf(\"%s\\n\", dest);\n```\n这段代码将输出 AstarionShadow。\n\n1） 运行上述代码，在终端上会看到两行输出，第一行的内容可能为 {{blank:possible-third}} ，\n第二行的内容可能为 {{blank:possible-sixth}} 。（ 你需要列出所有可能出现的输出，每种可能\n性用逗号隔开，每空1分）\n\n2） 在运行这段代码之后，`file.txt`中的内容有 {{blank:file-result-count}} 种可能的结果。\n（3分）（注意，字符串级别相等的内容属于同一种可能的结果）"
       },
       "solution": {
         "state": "available",
@@ -84294,7 +84296,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f61782a86996eff4",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 6,
       "number": {
@@ -84363,14 +84365,14 @@
           "id": "A",
           "content": {
             "format": "markdown",
-            "text": "`cmpq %rsi, %rdi setl %al`连续执行这两条指令的效果是如果`%rsi`的值\n小于%rdi，则将%al设置为1。"
+            "text": "`cmpq %rsi, %rdi` `setl %al`连续执行这两条指令的效果是如果`%rsi`的值\n小于`%rdi`，则将`%al`设置为1。"
           }
         },
         {
           "id": "B",
           "content": {
             "format": "markdown",
-            "text": "`testq %rax, %rax sete %al`连续执行这两条指令的效果是如果`%rax`中\n的值等于0，则将%al设置为1。"
+            "text": "`testq %rax, %rax` `sete %al`连续执行这两条指令的效果是如果`%rax`中\n的值等于0，则将`%al`设置为1。"
           }
         },
         {
@@ -84384,7 +84386,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "set*（如sete, setne, seta） 指令中的目的操作数只能是一个低位单字\n节寄存器，该指令会根据条件是否成立将一个字节设置为0或1。"
+            "text": "`set*`（如 `sete`, `setne`, `seta`） 指令中的目的操作数只能是一个低位单字\n节寄存器，该指令会根据条件是否成立将一个字节设置为0或1。"
           }
         }
       ]
@@ -92976,7 +92978,7 @@
     {
       "schemaVersion": "5",
       "id": "q-2d3657e2f402ef3b",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-d0ae6162300a90de",
       "paperOrder": 22,
       "number": {
@@ -93055,7 +93057,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "第七题（10分）\n已知如下的汇编程序实现了函数`transform(char* src, char* tgt, char delta)`\n```asm\ntransform:\n    jmp L2\nL1:\n    add %edx, %eax\n    add $1, $rdi\n    mov %al, (%rsi)\n    add $1, $rsi\nL2:\n    movzbl (%rdi), %eax\n    test %al, %al\n    jne L1\n    movb $0, (%rsi)\n    retq\n```\n参考信息：64位指令集中传递前三个参数分别使用寄存器`%rdi, %rsi`和`%rdx`\n1）写出`transform`函数对应的C语言版本（2分）"
+            "text": "第七题（10分）\n已知如下的汇编程序实现了函数`transform(char* src, char* tgt, char delta)`\n```asm\ntransform:\n    jmp L2\nL1:\n    add %edx, %eax\n    add $1, $rdi\n    mov %al, (%rsi)\n    add $1, $rsi\nL2:\n    movzbl (%rdi), %eax\n    test %al, %al\n    jne L1\n    movb $0, (%rsi)\n    retq\n```\n参考信息：64位指令集中传递前三个参数分别使用寄存器`%rdi, %rsi`和`%rdx`\n\n1）写出`transform`函数对应的C语言版本（2分）"
           },
           "solution": {
             "state": "available",
@@ -93144,7 +93146,7 @@
                 "width": "medium"
               }
             ],
-            "text": "2）假设读写访存指令延迟为20个时钟周期，其他指令延迟为2个时钟周期，所有分支预测都成功。同时\nCPU包含足够多的部件来实现指令集并行，那么在最理想情况下CPE最低应该是多少？为什么？（共4分）\nCPE：{{blank:cpe-value}}；原因：{{blank:cpe-reason}}\n3）已知`src`对应字符串中每个字符c都满足`0<c<=80`且`0<=delta<=5`。通过下面的改写，可以把`transform`\n程序CPE的理论下限降低一半，请填空。假设程序运行在小端法机器上。（每空1分）\n`void transform(char* src, char* tgt, char delta) {`\n  `short x = {{blank:packed-delta}}`;\n  `while(*src && {{blank:second-char}}) {`\n    `*(short*)tgt = *(short*)src + x`;\n    src += 2;\n    tgt += 2;\n  }\n  \\*(short*)tgt = {{blank:source-nonzero}} ? \\*(short*)src + delta : \\*(short*)tgt & {{blank:mask}};\n}"
+            "text": "2）假设读写访存指令延迟为20个时钟周期，其他指令延迟为2个时钟周期，所有分支预测都成功。同时\nCPU包含足够多的部件来实现指令集并行，那么在最理想情况下CPE最低应该是多少？为什么？（共4分）\nCPE：{{blank:cpe-value}}；原因：{{blank:cpe-reason}}\n\n3）已知`src`对应字符串中每个字符c都满足`0<c<=80`且`0<=delta<=5`。通过下面的改写，可以把`transform`\n程序CPE的理论下限降低一半，请填空。假设程序运行在小端法机器上。（每空1分）\n`void transform(char* src, char* tgt, char delta) {`\n  `short x = {{blank:packed-delta}}`;\n  `while(*src && {{blank:second-char}}) {`\n    `*(short*)tgt = *(short*)src + x`;\n    src += 2;\n    tgt += 2;\n  }\n  \\*(short*)tgt = {{blank:source-nonzero}} ? \\*(short*)src + delta : \\*(short*)tgt & {{blank:mask}};\n}"
           },
           "solution": {
             "state": "available",
@@ -94434,7 +94436,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d167b837a24ec9b4",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-d0ae6162300a90de",
       "paperOrder": 20,
       "number": {
@@ -94536,7 +94538,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "第五题（9分）\n\n![四级流水线各流水级的工作内容和延迟](assets/期中/2013期中-带答案/p10-pipeline-structure.png)\n\n在“取指-译码-执行-写回”的四级流水线中，各流水级的工作内容和延迟如上图所示，寄存器的延迟\n也已标出。数据和指令分别存放在不同的存储器中。Cycle N写入寄存器文件的数据Cycle N+1才可读出。\n请问：\n1）若不考虑流水线填充和清空时间，请计算该处理器的吞吐率。（1分）"
+            "text": "第五题（9分）\n\n![四级流水线各流水级的工作内容和延迟](assets/期中/2013期中-带答案/p10-pipeline-structure.png)\n\n在“取指-译码-执行-写回”的四级流水线中，各流水级的工作内容和延迟如上图所示，寄存器的延迟\n也已标出。数据和指令分别存放在不同的存储器中。Cycle N写入寄存器文件的数据Cycle N+1才可读出。\n请问：\n\n1）若不考虑流水线填充和清空时间，请计算该处理器的吞吐率。（1分）"
           },
           "solution": {
             "state": "available",
@@ -95211,7 +95213,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f5e6c2afdaa570f0",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-d0ae6162300a90de",
       "paperOrder": 23,
       "number": {
@@ -95419,7 +95421,7 @@
                 }
               }
             ],
-            "text": "第八题（9分）\n假设存在一个能够存储四个数据的Cache，每一个line的长度（B）为2字节。假设内存空\n间的地址一共是32字节，既内存空间地址长度一共是5个比特：从0（00000）到31（11111），\n一共有8个数据读取操作，每个操作的地址按顺序如下所示（单位是字节），数据替换采用\nLRU（least recently used）策略。\n                 数据访问地址： 1 -> 4 -> 17 –> 2 –> 8 -> 16 –> 9->0\n1） 如果Cache的结构是directed mapped（`S=4`， `E=1`），如下图所示，请在下图空白处填\n入，访问上述数据序列访问后Cache的状态。（注：TAG使用二进制格式，`V=1`代表数据有\n效，用[A-B]表示地址A到B之间对应的数据）（4分）\n\n| V | TAG | DATA |\n| --- | --- | --- |\n| {{blank:dm-v1}} | {{blank:dm-tag1}} | {{blank:dm-data1}} |\n| {{blank:dm-v2}} | {{blank:dm-tag2}} | {{blank:dm-data2}} |\n| {{blank:dm-v3}} | {{blank:dm-tag3}} | {{blank:dm-data3}} |\n| {{blank:dm-v4}} |  |  |"
+            "text": "第八题（9分）\n假设存在一个能够存储四个数据的Cache，每一个line的长度（B）为2字节。假设内存空\n间的地址一共是32字节，既内存空间地址长度一共是5个比特：从0（00000）到31（11111），\n一共有8个数据读取操作，每个操作的地址按顺序如下所示（单位是字节），数据替换采用\nLRU（least recently used）策略。\n                 数据访问地址： 1 -> 4 -> 17 –> 2 –> 8 -> 16 –> 9->0\n\n1） 如果Cache的结构是directed mapped（`S=4`， `E=1`），如下图所示，请在下图空白处填\n入，访问上述数据序列访问后Cache的状态。（注：TAG使用二进制格式，`V=1`代表数据有\n效，用[A-B]表示地址A到B之间对应的数据）（4分）\n\n| V | TAG | DATA |\n| --- | --- | --- |\n| {{blank:dm-v1}} | {{blank:dm-tag1}} | {{blank:dm-data1}} |\n| {{blank:dm-v2}} | {{blank:dm-tag2}} | {{blank:dm-data2}} |\n| {{blank:dm-v3}} | {{blank:dm-tag3}} | {{blank:dm-data3}} |\n| {{blank:dm-v4}} |  |  |"
           },
           "solution": {
             "state": "available",
@@ -148375,7 +148377,7 @@
     {
       "schemaVersion": "5",
       "id": "q-5d574996f3b93516",
-      "revision": 1,
+      "revision": 3,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 28,
       "number": {
@@ -148415,14 +148417,105 @@
           "editorNote": "signal/fork/dup/open 的输出与 counter"
         }
       ],
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "第四题（10分）\nC语言中的代码如下：\n```\nint counter = 0;\nvoid handler(int sig) {\n        counter++;\n}\nint main(int argc, char *argv[])\n{\n        int fd1, fd2, fd3;\n        char c1, c2, c3;\n        char *fname = argv[1];\n        int parent;\n        signal(SIGUSR1, handler);\n        fd1 = open(fname, O_RDONLY);\n        read(fd1, &c1, 1);\n        parent = getpid();\n        if (fork()) {\n                wait();\n                fd2 = open(fname, O_RDONLY);\n        } else {\n                kill(parent, SIGUSR1);\n                fd2 = dup(fd1);\n        }\n        read(fd2, &c2, 1);\n        parent = getpid();\n        if (fork()) {\n                wait();\n                fd3 = open(fname, O_RDONLY);\n        } else {\n                kill(parent, SIGUSR1);\n                fd3 = dup(fd2);\n        }\n        read(fd3, &c3, 1);\n        printf(\"%c %c %c %d\\n\", c1, c2, c3, counter);\n        return 0;\n}\n```\n当`fname`文件内容为abcde时，这段代码的打印结果为    行，输出结果如下：（不考虑出\n错的情况）"
+        "blanks": [
+          {
+            "id": "line-count",
+            "marker": "{{blank:line-count}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "out-1",
+            "marker": "{{blank:out-1}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "out-2",
+            "marker": "{{blank:out-2}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "out-3",
+            "marker": "{{blank:out-3}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "out-4",
+            "marker": "{{blank:out-4}}",
+            "occurrence": 0,
+            "width": "medium"
+          }
+        ],
+        "text": "第四题（10分）\nC语言中的代码如下：\n```\nint counter = 0;\nvoid handler(int sig) {\n        counter++;\n}\nint main(int argc, char *argv[])\n{\n        int fd1, fd2, fd3;\n        char c1, c2, c3;\n        char *fname = argv[1];\n        int parent;\n        signal(SIGUSR1, handler);\n        fd1 = open(fname, O_RDONLY);\n        read(fd1, &c1, 1);\n        parent = getpid();\n        if (fork()) {\n                wait();\n                fd2 = open(fname, O_RDONLY);\n        } else {\n                kill(parent, SIGUSR1);\n                fd2 = dup(fd1);\n        }\n        read(fd2, &c2, 1);\n        parent = getpid();\n        if (fork()) {\n                wait();\n                fd3 = open(fname, O_RDONLY);\n        } else {\n                kill(parent, SIGUSR1);\n                fd3 = dup(fd2);\n        }\n        read(fd3, &c3, 1);\n        printf(\"%c %c %c %d\\n\", c1, c2, c3, counter);\n        return 0;\n}\n```\n当`fname`文件内容为abcde时，这段代码的打印结果为 {{blank:line-count}} 行，输出结果如下（不考虑出错的情况）：\n\n第 1 行：{{blank:out-1}}\n\n第 2 行：{{blank:out-2}}\n\n第 3 行：{{blank:out-3}}\n\n第 4 行：{{blank:out-4}}"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "line-count",
+            "method": "exact",
+            "acceptedAnswers": [
+              "4",
+              "4 行",
+              "四"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "out-1",
+            "method": "exact",
+            "acceptedAnswers": [
+              "a b c 0"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "out-2",
+            "method": "exact",
+            "acceptedAnswers": [
+              "a b a 1"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "out-3",
+            "method": "exact",
+            "acceptedAnswers": [
+              "a a b 1"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "out-4",
+            "method": "exact",
+            "acceptedAnswers": [
+              "a a a 2"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
         "reference": {
           "format": "markdown",
           "text": "答案：共打印 4 行，内容依次为\n```\na b c 0\na b a 1\na a b 1\na a a 2\n```\n解析：父进程每次重新 `open` 都回到文件开头，`dup` 则与原来的描述符共享同一文件偏移；四个进程的 `counter` 相互独立，相对的父进程总是用 `wait()` 等子进程，所以输出顺序一定是子子、子父、父子、父父。\n（来源：2019、2020期末-答案解析）"
@@ -149515,7 +149608,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ca36da4b1e755039",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 30,
       "number": {
@@ -149558,7 +149651,7 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "第六题（10分）\n1. 火锅洞洞主终于要请吃火锅啦！由于防疫规定，洞主决定分批邀请，Alice、\nBob、……、Zach这26位同学顺理成章地成为了第一批受到邀请的同学。他们围坐在\n一张圆桌旁，按照首字母顺序排列（即Alice的右边是Bob，Bob的右边是\nCarol，……，Zach的右边是Alice）。吃饭之前，洞主想要验证他们的身份，他提出了\n这样的要求：\n1） 每位同学有一个编号，即字母序号减1，也就是说，Alice是0号，Bob是1\n号，以此类推。\n2） 每位同学需要同时拿着旁边两位同学的手机去找洞主（不必带上自己的手\n机），按照洞主的要求在树洞里发信息以验证身份。\n3） 可以同时有多位同学找洞主验证（也就是说，Alice需要拿着Zach和Bob的\n手机找洞主，并且在同一时间，Bob也可以拿着Alice和Carol的手机找洞\n主。但是，如果Alice还没同时拿到Zach和Bob的手机，就只能坐在座位上\n等待。）\n所幸，在座有多位字母君学过ICS，他们决定采用信号量解决问题。\n\n1.1 Alice给出了这样的代码，其中`thread`函数的参数指明了字母君的编号：\n```c\n1.  #include \"csapp.h\"\n2.  #define N 26\n3.  #define UP(i) ((i + 1) % N)\n4.  #define DOWN(i) ((i - 1 + N) % N)\n5.  sem_t sem[N];\n6.\n7.  void *thread(void *i){\n8.      int num = (int)i;\n9.      P(&sem[UP(num)]);\n10.     P(&sem[DOWN(num)]);\n11.\n12.     /* verify identity */\n13.\n14.     V(&sem[UP(num)]);\n15.     V(&sem[DOWN(num)]);\n16. }\n17. int main(){\n18.     for (int i = 0; i < N; i++)\n19.         Sem_init(&sem[i], 0, 1);\n20.     pthread_t tid[N];\n21.     for (int i = 0; i < N; i++)\n22.         Pthread_create(&tid[i], NULL, thread, (void *)i);\n23.     Pthread_exit(0);\n24. }\n```\nBob一看，皱起了眉头。请问这段代码可能会发生什么问题（用一个专用名词表\n述即可）？\n\n\n1.2 Carol把`thread`函数换成了下面这样：\n```c\n1.  void *thread(void *i){\n2.      int num = (int)i;\n3.      for (int i = 0; i < N; i++)\n4.          P(&sem[i]);\n5.      /* verify identity */\n6.      for (int i = 0; i < N; i++)\n7.          V(&sem[i]);\n8.  }\n```\nDave指出，这段代码固然正确，但是效率太低了，他认为只要把第3、4行的代\n码换成一个P操作，把第6、7行的代码换成一个V操作，就能实现同样的效果。\n请问Dave的方法是：\n\n1.2.1 P操作：`P(&sem[         ])`;\n1.2.2 V操作：`V(&sem[         ])`;\n1.3 Eve看了Dave的方案还是摇头，这样执行效率太低了，没能利用同时可以有多位\n同学找洞主验证的条件。借助“互斥锁加锁顺序规则”，他给出了自己的代码。你能\n把代码补全吗？\n```c\n1.  `void *thread(void *i)`\n2.  {\n3.      int num = (int)i;\n4.      if (UP(num) < DOWN(num)){\n5.          P(&sem[  A  ]);\n6.          P(&sem[  B  ]);\n7.      }\n8.      else{\n9.          P(&sem[  C  ]);\n10.         P(&sem[  D  ]);\n11.     }\n12.     /* verify identity */\n13.     V(&sem[UP(num)]);\n14.     V(&sem[DOWN(num)]);\n15. }\n```\nA:             B:             C:             D:\n以上4空均填序号：\n①  UP(num)\n②  DOWN(num)\n③  `num`\n2. Hungary Alice发现自己没吃上第一场的火锅，一怒之下，给上面的26位字母君出了一\n道难题：用二元信号量实现信号量（也就是值可以是任意非负整数的信号量）。精通ICS的\n你自然认为这是小儿科，迅速补全了以下代码。\n\n\n```c\n1.  #include \"csapp.h\"\n2.  typedef struct{\n3.      int value;\n4.      sem_t mutex;\n5.      sem_t zero;\n6.  } my_sem_t;\n7.  void my_sem_init(my_sem_t *sem, unsigned int value){\n8.      sem->value = value;\n9.      Sem_init(&sem->mutex, 0,   A  );\n10.     Sem_init(&sem->zero, 0,   B  );\n11. }\n12. void my_P(my_sem_t *sem){\n13.     P(&sem->mutex);\n14.     sem->value--;\n15.     if (sem->value   C   0)\n16.     {\n17.           D  ;\n18.           E  ;\n19.     }\n20.     else\n21.         V(&sem->mutex);\n22. }\n23. void my_V(my_sem_t *sem){\n24.     P(&sem->mutex);\n25.     sem->value++;\n26.     if (sem->value   F   0)\n27.     {\n28.         V(&sem->mutex);\n29.         V(&sem->zero);\n30.     }\n31.     else\n32.         V(&sem->mutex);\n33. }\n```\nA:             B:             C:\nD:             E:             F:\nD和E请填序号：\n①  `P(&sem->mutex)`\n②  `P(&sem->zero)`\n③  `V(&sem->mutex)`\n④  `V(&sem->zero)`"
+        "text": "第六题（10分）\n1. 火锅洞洞主终于要请吃火锅啦！由于防疫规定，洞主决定分批邀请，Alice、\nBob、……、Zach这26位同学顺理成章地成为了第一批受到邀请的同学。他们围坐在\n一张圆桌旁，按照首字母顺序排列（即Alice的右边是Bob，Bob的右边是\nCarol，……，Zach的右边是Alice）。吃饭之前，洞主想要验证他们的身份，他提出了\n这样的要求：\n\n1） 每位同学有一个编号，即字母序号减1，也就是说，Alice是0号，Bob是1\n号，以此类推。\n\n2） 每位同学需要同时拿着旁边两位同学的手机去找洞主（不必带上自己的手\n机），按照洞主的要求在树洞里发信息以验证身份。\n\n3） 可以同时有多位同学找洞主验证（也就是说，Alice需要拿着Zach和Bob的\n手机找洞主，并且在同一时间，Bob也可以拿着Alice和Carol的手机找洞\n主。但是，如果Alice还没同时拿到Zach和Bob的手机，就只能坐在座位上\n等待。）\n所幸，在座有多位字母君学过ICS，他们决定采用信号量解决问题。\n\n1.1 Alice给出了这样的代码，其中`thread`函数的参数指明了字母君的编号：\n```c\n1.  #include \"csapp.h\"\n2.  #define N 26\n3.  #define UP(i) ((i + 1) % N)\n4.  #define DOWN(i) ((i - 1 + N) % N)\n5.  sem_t sem[N];\n6.\n7.  void *thread(void *i){\n8.      int num = (int)i;\n9.      P(&sem[UP(num)]);\n10.     P(&sem[DOWN(num)]);\n11.\n12.     /* verify identity */\n13.\n14.     V(&sem[UP(num)]);\n15.     V(&sem[DOWN(num)]);\n16. }\n17. int main(){\n18.     for (int i = 0; i < N; i++)\n19.         Sem_init(&sem[i], 0, 1);\n20.     pthread_t tid[N];\n21.     for (int i = 0; i < N; i++)\n22.         Pthread_create(&tid[i], NULL, thread, (void *)i);\n23.     Pthread_exit(0);\n24. }\n```\nBob一看，皱起了眉头。请问这段代码可能会发生什么问题（用一个专用名词表\n述即可）？\n\n\n1.2 Carol把`thread`函数换成了下面这样：\n```c\n1.  void *thread(void *i){\n2.      int num = (int)i;\n3.      for (int i = 0; i < N; i++)\n4.          P(&sem[i]);\n5.      /* verify identity */\n6.      for (int i = 0; i < N; i++)\n7.          V(&sem[i]);\n8.  }\n```\nDave指出，这段代码固然正确，但是效率太低了，他认为只要把第3、4行的代\n码换成一个P操作，把第6、7行的代码换成一个V操作，就能实现同样的效果。\n请问Dave的方法是：\n\n1.2.1 P操作：`P(&sem[         ])`;\n1.2.2 V操作：`V(&sem[         ])`;\n1.3 Eve看了Dave的方案还是摇头，这样执行效率太低了，没能利用同时可以有多位\n同学找洞主验证的条件。借助“互斥锁加锁顺序规则”，他给出了自己的代码。你能\n把代码补全吗？\n```c\n1.  `void *thread(void *i)`\n2.  {\n3.      int num = (int)i;\n4.      if (UP(num) < DOWN(num)){\n5.          P(&sem[  A  ]);\n6.          P(&sem[  B  ]);\n7.      }\n8.      else{\n9.          P(&sem[  C  ]);\n10.         P(&sem[  D  ]);\n11.     }\n12.     /* verify identity */\n13.     V(&sem[UP(num)]);\n14.     V(&sem[DOWN(num)]);\n15. }\n```\nA:             B:             C:             D:\n以上4空均填序号：\n①  UP(num)\n②  DOWN(num)\n③  `num`\n2. Hungary Alice发现自己没吃上第一场的火锅，一怒之下，给上面的26位字母君出了一\n道难题：用二元信号量实现信号量（也就是值可以是任意非负整数的信号量）。精通ICS的\n你自然认为这是小儿科，迅速补全了以下代码。\n\n\n```c\n1.  #include \"csapp.h\"\n2.  typedef struct{\n3.      int value;\n4.      sem_t mutex;\n5.      sem_t zero;\n6.  } my_sem_t;\n7.  void my_sem_init(my_sem_t *sem, unsigned int value){\n8.      sem->value = value;\n9.      Sem_init(&sem->mutex, 0,   A  );\n10.     Sem_init(&sem->zero, 0,   B  );\n11. }\n12. void my_P(my_sem_t *sem){\n13.     P(&sem->mutex);\n14.     sem->value--;\n15.     if (sem->value   C   0)\n16.     {\n17.           D  ;\n18.           E  ;\n19.     }\n20.     else\n21.         V(&sem->mutex);\n22. }\n23. void my_V(my_sem_t *sem){\n24.     P(&sem->mutex);\n25.     sem->value++;\n26.     if (sem->value   F   0)\n27.     {\n28.         V(&sem->mutex);\n29.         V(&sem->zero);\n30.     }\n31.     else\n32.         V(&sem->mutex);\n33. }\n```\nA:             B:             C:\nD:             E:             F:\nD和E请填序号：\n①  `P(&sem->mutex)`\n②  `P(&sem->zero)`\n③  `V(&sem->mutex)`\n④  `V(&sem->zero)`"
       },
       "solution": {
         "state": "available",
