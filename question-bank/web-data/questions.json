@@ -2766,6 +2766,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-13ac9e7bfac45201",
+      "revision": 1,
+      "paperId": "p-0854288fe48c1276",
+      "paperOrder": 1,
+      "number": {
+        "display": "12.1",
+        "major": {
+          "display": "第 12 章",
+          "value": "12"
+        },
+        "minor": {
+          "display": "12.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "concurrent_programming",
+        "moduleIds": [
+          "concurrent_programming"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-12"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 12.1：父进程 `fork` 出子进程后，父进程关闭自己的已连接描述符副本。为什么子进程仍能通过该描述符通信？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "子进程拥有独立的文件表，因此父进程关闭不会影响它。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "父子进程的描述符引用同一打开文件表项；父进程关闭后引用计数仍为 1。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`close` 只关闭网络套接字，不会改变描述符状态。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "内核会在父子进程之间自动重新创建该描述符。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "`fork` 复制描述符表并增加共享打开文件表项的引用计数。父进程关闭副本只将引用计数从 2 减为 1；内核在计数为 0 前不会关闭连接。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/chapter.md#L150",
+          "provenance": "rewritten",
+          "editorNote": "练习 12.1 的进程派生与文件描述符引用计数。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/练习题答案.md#L3",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-17b51998a11d7f35",
       "revision": 1,
       "paperId": "p-0854288fe48c1276",
@@ -2823,6 +2922,105 @@
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/homework/12.16-12.39-concurrent-programming.md#L126",
           "provenance": "rewritten",
           "editorNote": "CSAPP3e 家庭作业；保留锁对分析与新加锁次序要求；非官方解析。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-2b84cd60f37a1e95",
+      "revision": 1,
+      "paperId": "p-0854288fe48c1276",
+      "paperOrder": 2,
+      "number": {
+        "display": "12.2",
+        "major": {
+          "display": "第 12 章",
+          "value": "12"
+        },
+        "minor": {
+          "display": "12.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "concurrent_programming",
+        "moduleIds": [
+          "concurrent_programming"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-12"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 12.2：若基于进程的服务器省略子进程中关闭已连接描述符的语句，子进程退出时如何避免该描述符一直泄漏？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "父进程的下一次 `fork` 会覆盖该描述符。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "描述符会在客户端断开时自动从进程表删除。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`wait` 会替子进程关闭所有描述符。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "进程终止时，内核会关闭该进程所有打开的描述符。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "进程终止时，内核会关闭它所有仍打开的描述符；因此子进程退出会自动关闭其描述符副本。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/chapter.md#L152",
+          "provenance": "rewritten",
+          "editorNote": "练习 12.2 问进程终止时内核对未关闭描述符的处理。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/练习题答案.md#L7",
+          "provenance": "reflow"
         }
       ]
     },
@@ -2988,6 +3186,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-6decb55123a89740",
+      "revision": 1,
+      "paperId": "p-0854288fe48c1276",
+      "paperOrder": 9,
+      "number": {
+        "display": "12.9",
+        "major": {
+          "display": "第 12 章",
+          "value": "12"
+        },
+        "minor": {
+          "display": "12.9",
+          "value": "9"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "concurrent_programming",
+        "moduleIds": [
+          "concurrent_programming"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-12"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 12.9 的情形 C：有 `p>1` 个生产者、`c>1` 个消费者，缓冲区容量 `n=1`。信号量初值为 `slots=1`（空槽数）、`items=0`（已有项目数）、`mutex=1`。操作顺序如下：\n\n插入操作：\n\n```text\nP(slots)\nP(mutex)\n写入唯一缓冲区槽\nV(mutex)\nV(items)\n```\n\n移除操作：\n\n```text\nP(items)\nP(mutex)\n读取唯一缓冲区槽\nV(mutex)\nV(slots)\n```\n\n现在只考虑去掉 `P(mutex)` 和 `V(mutex)`，保留 `slots`、`items` 及其余操作。缓冲区的互斥锁是否必需？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "两处互斥锁都必需，因为生产者和消费者均有多个。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "只需要插入操作中的互斥锁。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "都不需要。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "只需要移除操作中的互斥锁。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "不需要。容量为 1 时，`slots` 和 `items` 保证缓冲区空时不会有消费者进入，缓冲区满时不会有生产者进入；对每次插入或移除，取得相应计数信号量的线程会在另一类操作可继续前完成对唯一槽位的访问。因此保留这两个计数信号量时，任一时刻至多有一个线程访问缓冲区。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/chapter.md#L1112",
+          "provenance": "rewritten",
+          "editorNote": "取练习 12.9 的 C 情形并说明缓冲区容量为一。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/练习题答案.md#L77",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-7a93e11483c8b03d",
       "revision": 1,
       "paperId": "p-0854288fe48c1276",
@@ -3103,6 +3400,105 @@
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/homework/12.16-12.39-concurrent-programming.md#L38",
           "provenance": "rewritten",
           "editorNote": "CSAPP3e 家庭作业；保留原进度图并补充指令含义；仅判断不要求绘图；非官方解析。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-96bf14b578ce20a3",
+      "revision": 1,
+      "paperId": "p-0854288fe48c1276",
+      "paperOrder": 4,
+      "number": {
+        "display": "12.4",
+        "major": {
+          "display": "第 12 章",
+          "value": "12"
+        },
+        "minor": {
+          "display": "12.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "concurrent_programming",
+        "moduleIds": [
+          "concurrent_programming"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-12"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 12.4：事件驱动服务器为什么必须在每次调用 `select` 前重新初始化 `pool.ready_set`？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`select` 会把输入集合改写为就绪集合。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "每次调用都必须创建一个不同的集合地址。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "重新初始化是为了清空客户端套接字的文件表项。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`select` 只能接收空集合，之后再由内核添加描述符。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "该集合既是 `select` 的输入参数（待监视集合），也是输出参数（已就绪集合）；调用会改写它，所以每次都要重建待监视集合。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/chapter.md#L394",
+          "provenance": "rewritten",
+          "editorNote": "练习 12.4 中 select 对 ready_set 的输入输出语义。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/练习题答案.md#L15",
+          "provenance": "reflow"
         }
       ]
     },
@@ -10684,6 +11080,204 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-0fa4c517b9de8326",
+      "revision": 1,
+      "paperId": "p-0db63d22232f572c",
+      "paperOrder": 3,
+      "number": {
+        "display": "5.3",
+        "major": {
+          "display": "第 5 章",
+          "value": "5"
+        },
+        "minor": {
+          "display": "5.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-5"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 5.3 的片段 A 使用 `for (i = min(x,y); i < max(x,y); incr(&i,1))`，且 `x=10, y=100`。整个循环执行期间，`min` 被调用几次？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "1 次"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "90 次"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "91 次"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "180 次"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "`min` 只出现在初始化表达式中，循环变量初始化时调用一次；判断条件调用的是 `max`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第05章-优化程序性能/chapter.md#L477",
+          "provenance": "rewritten",
+          "editorNote": "练习 5.3 的 A 片段中只考查 min 的调用次数。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第05章-优化程序性能/练习题答案.md#L21",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-583af2412c0661de",
+      "revision": 1,
+      "paperId": "p-0db63d22232f572c",
+      "paperOrder": 2,
+      "number": {
+        "display": "5.2",
+        "major": {
+          "display": "第 5 章",
+          "value": "5"
+        },
+        "minor": {
+          "display": "5.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-5"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 5.2 给出三个近似运行时间：版本 1 为 `60+35n`，版本 2 为 `136+4n`，版本 3 为 `157+1.25n`。当 `n=5` 时，哪个版本最快？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "版本 1"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "版本 2"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "版本 3"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "三个版本相同"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "代入 `n=5`，三者分别为 235、156、163.25 个周期，因此版本 2 最快。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第05章-优化程序性能/chapter.md#L256",
+          "provenance": "rewritten",
+          "editorNote": "用练习 5.2 给出的三个运行时间公式，取 n=5 比较。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第05章-优化程序性能/练习题答案.md#L17",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-8de02946fff9a230",
       "revision": 1,
       "paperId": "p-0db63d22232f572c",
@@ -16886,6 +17480,105 @@
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/homework/8.9-8.15-processes-and-fork.md#L25",
           "provenance": "rewritten",
           "editorNote": "CSAPP3e 家庭作业；明确假定系统调用成功；非官方解析。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-c1ff9a63d4eb2780",
+      "revision": 1,
+      "paperId": "p-146f52a44a7f14ec",
+      "paperOrder": 2,
+      "number": {
+        "display": "8.2",
+        "major": {
+          "display": "第 8 章",
+          "value": "8"
+        },
+        "minor": {
+          "display": "8.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "ecf_and_system_io",
+        "moduleIds": [
+          "ecf_and_system_io"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-8"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 8.2 的程序片段如下。假设 `Fork()` 成功，问子进程中第一条 `printf` 打印什么？\n\n```c\nint x = 1;\nif (Fork() == 0)\n    printf(\"p1: x=%d\\n\", ++x);\nprintf(\"p2: x=%d\\n\", --x);\n```"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`p1: x=1`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`p1: x=2`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`p1: x=0`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "子进程不执行该分支。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "子进程中的 `x` 从 1 自增为 2，所以第一行输出 `p1: x=2`。`fork` 后父子进程有各自的地址空间。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/chapter.md#L537",
+          "provenance": "rewritten",
+          "editorNote": "保留练习 8.2 完整短程序，聚焦子进程输出。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/练习题答案.md#L7",
+          "provenance": "reflow"
         }
       ]
     },
@@ -34219,6 +34912,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-97e1ac350d5f482c",
+      "revision": 1,
+      "paperId": "p-46c262dc3df0f9e1",
+      "paperOrder": 5,
+      "number": {
+        "display": "11.5",
+        "major": {
+          "display": "第 11 章",
+          "value": "11"
+        },
+        "minor": {
+          "display": "11.5",
+          "value": "5"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "network",
+        "moduleIds": [
+          "network"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-11"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 11.5：图 11-27 的 CGI 程序由服务器创建的子进程运行，通过标准输出返回 HTTP 响应，末尾的相关代码如下（`content` 为已生成的响应正文）：\n\n```c\nprintf(\"%s\", content);\nfflush(stdout);\nexit(0);\n```\n\n第 10.11 节提醒过在网络应用中使用 C 标准 I/O 的风险。为什么这种每次请求运行一个 CGI 子进程的用法仍然可行？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "处理完请求后子进程终止，其资源被回收，内核会关闭该进程仍打开的描述符。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "标准 I/O 库会自动把网络套接字转换为无缓冲模式。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "CGI 的标准输入输出并不对应文件描述符。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "标准 I/O 库会在每次写入后自动关闭流。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "来源参考答案强调：CGI 程序在子进程中运行，子进程终止时，内核会关闭其所有描述符。它不必像长期运行的服务器一样，靠反复显式关闭输入输出流来回收每次请求的资源。上面的代码先刷新输出，再正常退出；不能据此推断标准 I/O 在所有网络程序中都安全。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第11章-网络编程/chapter.md#L1189",
+          "provenance": "rewritten",
+          "editorNote": "将练习 11.5 的缘由整理为概念选择题。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第11章-网络编程/练习题答案.md#L114",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-a6a1811b8c984602",
       "revision": 1,
       "paperId": "p-46c262dc3df0f9e1",
@@ -35240,6 +36032,204 @@
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/homework/9.11-9.13-address-translation.md#L81",
           "provenance": "rewritten",
           "editorNote": "CSAPP3e 家庭作业；补齐独立系统上下文；缺页后原题要求留空部分保留说明；非官方解析。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-7a5627c3d1f04e8b",
+      "revision": 1,
+      "paperId": "p-5d1091f10c242495",
+      "paperOrder": 2,
+      "number": {
+        "display": "9.2",
+        "major": {
+          "display": "第 9 章",
+          "value": "9"
+        },
+        "minor": {
+          "display": "9.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "virtual_memory_and_malloc",
+        "moduleIds": [
+          "virtual_memory_and_malloc"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-9"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 9.2 中，虚拟地址大小 `n=32` 位、页大小 `P=4K=2^12` 字节。单级页表需要多少个页表条目？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`2^12`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`2^20`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`2^32`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`2^44`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "虚拟页数为 `2^(32-12)=2^20`，每个虚拟页对应一个 PTE，因此需要 `2^20=1,048,576` 个条目。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/chapter.md#L175",
+          "provenance": "rewritten",
+          "editorNote": "取练习 9.2 中 n=32、P=4K 的页表条目数量。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/练习题答案.md#L15",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-8bc1f79d4a25e630",
+      "revision": 1,
+      "paperId": "p-5d1091f10c242495",
+      "paperOrder": 3,
+      "number": {
+        "display": "9.3",
+        "major": {
+          "display": "第 9 章",
+          "value": "9"
+        },
+        "minor": {
+          "display": "9.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "virtual_memory_and_malloc",
+        "moduleIds": [
+          "virtual_memory_and_malloc"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-9"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 9.3 中，虚拟地址为 32 位、物理地址为 24 位，页面大小为 `4KB=2^12` 字节。`(VPN,VPO,PPN,PPO)` 的位数是哪一组？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`(12,20,12,12)`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`(20,20,4,4)`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`(20,12,20,12)`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`(20,12,12,12)`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "页内偏移位数为 `12`；因此 `VPN=32-12=20`，`PPN=24-12=12`，VPO 与 PPO 都是 12 位。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/chapter.md#L334",
+          "provenance": "rewritten",
+          "editorNote": "抽取练习 9.3 的 4KB 页面大小一行。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/练习题答案.md#L26",
+          "provenance": "reflow"
         }
       ]
     },
@@ -75352,6 +76342,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-041c86f935fc7d20",
+      "revision": 1,
+      "paperId": "p-c039f10f0dbe7e3e",
+      "paperOrder": 2,
+      "number": {
+        "display": "6.2",
+        "major": {
+          "display": "第 6 章",
+          "value": "6"
+        },
+        "minor": {
+          "display": "6.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-6"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 6.2 中，磁盘有 2 个盘片、每盘片 2 个表面、每表面 10,000 条磁道、每磁道 400 个扇区、每扇区 512 字节。按十进制 GB 计算，磁盘容量是多少？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`4.096 GB`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`6.144 GB`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`8.192 GB`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`16.384 GB`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "`2 × 2 × 10,000 × 400 × 512 = 8,192,000,000` 字节，即 `8.192 GB`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/chapter.md#L261",
+          "provenance": "rewritten",
+          "editorNote": "依练习 6.2 给出的盘片、表面、磁道和扇区参数求容量。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L15",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-05b4c656fcf1ad07",
       "revision": 1,
       "paperId": "p-c039f10f0dbe7e3e",
@@ -75553,6 +76642,105 @@
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/homework/6.38-6.46-cache-locality-and-optimization.md#L140",
           "provenance": "rewritten",
           "editorNote": "CSAPP3e家庭作业；补齐6.41条件，按题目把每次int写计为一次缓存访问；非官方解析。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-379f16b80da42c56",
+      "revision": 1,
+      "paperId": "p-c039f10f0dbe7e3e",
+      "paperOrder": 4,
+      "number": {
+        "display": "6.4",
+        "major": {
+          "display": "第 6 章",
+          "value": "6"
+        },
+        "minor": {
+          "display": "6.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-6"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 6.4 中，文件有 2,000 个 512 字节逻辑块。磁盘平均寻道时间为 5 ms，平均旋转时间为 3 ms，最大旋转时间为 6 ms；最好情况下所有块连续放置，每转可读 1,000 个块。读完文件约需多少毫秒？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`8 ms`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`12 ms`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`17 ms`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`20 ms`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "定位首块需平均寻道与旋转 `5+3` ms；连续读取两整圈需 `2×6` ms，总计 `20` ms。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/chapter.md#L349",
+          "provenance": "rewritten",
+          "editorNote": "从练习 6.4 取连续扇区读取的最好情况。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L40",
+          "provenance": "reflow"
         }
       ]
     },
@@ -77861,6 +79049,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-b8ec95278d5601ac",
+      "revision": 1,
+      "paperId": "p-c039f10f0dbe7e3e",
+      "paperOrder": 3,
+      "number": {
+        "display": "6.3",
+        "major": {
+          "display": "第 6 章",
+          "value": "6"
+        },
+        "minor": {
+          "display": "6.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-6"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 6.3 中磁盘转速为 15,000 RPM。假设平均旋转等待为最大旋转时间的一半，平均旋转时间约为多少毫秒？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`2 ms`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`4 ms`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`8 ms`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`10 ms`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "一圈需 `60/15000` 秒，平均等待半圈为 `0.5 × 60/15000 × 1000 = 2` 毫秒。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/chapter.md#L329",
+          "provenance": "rewritten",
+          "editorNote": "只取练习 6.3 平均旋转时间计算。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L26",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-bc908234f1e08260",
       "revision": 1,
       "paperId": "p-c039f10f0dbe7e3e",
@@ -79065,6 +80352,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-9e2c5f714b30a681",
+      "revision": 1,
+      "paperId": "p-c081961b91de6e5c",
+      "paperOrder": 1,
+      "number": {
+        "display": "10.1",
+        "major": {
+          "display": "第 10 章",
+          "value": "10"
+        },
+        "minor": {
+          "display": "10.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "ecf_and_system_io",
+        "moduleIds": [
+          "ecf_and_system_io"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-10"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 10.1 中，程序启动时只有描述符 `0`、`1`、`2` 打开。程序先调用 `Open` 打开第一个文件，调用成功后关闭返回的描述符，再调用 `Open` 打开第二个文件；两次 `Open` 和 `Close` 均成功。第二次 `Open` 返回哪个描述符？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`3`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`4`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`0`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`1`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "`open` 总是返回最低的未打开描述符。第一次打开得到 3，关闭后 3 被释放，所以第二次打开仍返回 3。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/chapter.md#L166",
+          "provenance": "rewritten",
+          "editorNote": "练习 10.1 中关闭后再打开文件，求最低可用描述符。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/练习题答案.md#L3",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-ac707fe3d952e2e1",
       "revision": 1,
       "paperId": "p-c081961b91de6e5c",
@@ -79143,6 +80529,105 @@
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/homework/10.6-10.10-system-level-io.md#L3",
           "provenance": "rewritten",
           "editorNote": "CSAPP3e 家庭作业；明确教材0/1/2已打开的假设；非官方解析。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-c7d3b2019a8465ef",
+      "revision": 1,
+      "paperId": "p-c081961b91de6e5c",
+      "paperOrder": 2,
+      "number": {
+        "display": "10.2",
+        "major": {
+          "display": "第 10 章",
+          "value": "10"
+        },
+        "minor": {
+          "display": "10.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "ecf_and_system_io",
+        "moduleIds": [
+          "ecf_and_system_io"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-10"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 10.2 中，`foobar.txt` 的内容为 `foobar`。程序独立打开该文件两次，分别读一次：\n\n```c\nfd1 = Open(\"foobar.txt\", O_RDONLY, 0);\nfd2 = Open(\"foobar.txt\", O_RDONLY, 0);\nRead(fd1, &c, 1);\nRead(fd2, &c, 1);\nprintf(\"c = %c\\n\", c);\n```\n\n输出是什么？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`c = o`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`c = b`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`c = f`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "输出不确定，因为两个描述符共享同一文件位置。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两个描述符对应不同的打开文件表项，各有独立文件位置。两次读取都读取首字节，最后 `c` 为 `f`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/chapter.md#L655",
+          "provenance": "rewritten",
+          "editorNote": "练习 10.2 的两个独立 open 描述符各自维护文件位置。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/练习题答案.md#L7",
+          "provenance": "reflow"
         }
       ]
     },
@@ -89263,6 +90748,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-0c6723d4f2e918ab",
+      "revision": 1,
+      "paperId": "p-e855951134d0e9f7",
+      "paperOrder": 29,
+      "number": {
+        "display": "4.29",
+        "major": {
+          "display": "第 4 章",
+          "value": "4"
+        },
+        "minor": {
+          "display": "4.29",
+          "value": "29"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-4"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 4.29 假设把组合逻辑分为 `k` 个等延迟阶段，总逻辑延迟为 `300 ps`，每个流水线寄存器延迟为 `20 ps`。系统吞吐量的理论上限是多少？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`1/300` 条/ps"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`15` 条/ns"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`50` 条/ns"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "吞吐量没有有限上限"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "周期时间为 `300/k+20 ps`，吞吐量为其倒数。令 `k` 趋于无穷，逻辑部分趋于 0，故上限为 `1/20 ps = 0.05` 条/ps，即 `50` 条/ns。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第04章-处理器体系结构/chapter.md#L1389",
+          "provenance": "rewritten",
+          "editorNote": "从练习 4.29 取可独立计算的流水线延迟与吞吐量上限。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第04章-处理器体系结构/练习题答案.md#L408",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-805315e5d479d411",
       "revision": 1,
       "paperId": "p-e855951134d0e9f7",
@@ -89605,6 +91189,204 @@
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/homework/7.6-7.13-linking-and-object-files.md#L133",
           "provenance": "rewritten",
           "editorNote": "CSAPP3e 家庭作业；题面给出图7-14所需段大小；非官方解析。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-5f63b1c0ad8e7429",
+      "revision": 1,
+      "paperId": "p-e8af86f345a050ee",
+      "paperOrder": 2,
+      "number": {
+        "display": "7.2",
+        "major": {
+          "display": "第 7 章",
+          "value": "7"
+        },
+        "minor": {
+          "display": "7.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-7"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 7.2 的情形 B 中，模块 1 定义强符号 `main`，模块 2 也定义强符号 `main`。链接器会如何处理？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "选择模块 1 的定义"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "选择模块 2 的定义"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "报链接时错误"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "链接器任意选择一个定义，结果未知"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两个模块都定义同名强全局符号，违反链接器规则 1，产生链接时错误。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/chapter.md#L503",
+          "provenance": "rewritten",
+          "editorNote": "取练习 7.2 B 的多重定义情形。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/练习题答案.md#L15",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-6d128a37f9054bce",
+      "revision": 1,
+      "paperId": "p-e8af86f345a050ee",
+      "paperOrder": 3,
+      "number": {
+        "display": "7.3",
+        "major": {
+          "display": "第 7 章",
+          "value": "7"
+        },
+        "minor": {
+          "display": "7.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-7"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 7.3 A 给出依赖 `p.o → libx.a`。满足符号解析要求的最小静态链接命令是哪一个？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`gcc p.o libx.a`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`gcc libx.a p.o`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`gcc p.o`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`gcc libx.a p.o libx.a`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "目标文件 `p.o` 引用的符号由 `libx.a` 定义；从左到右扫描时应先放 `p.o` 再放库：`gcc p.o libx.a`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/chapter.md#L709",
+          "provenance": "rewritten",
+          "editorNote": "取练习 7.3 A，静态链接参数保持原题给定依赖。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/练习题答案.md#L35",
+          "provenance": "reflow"
         }
       ]
     },
@@ -101199,6 +102981,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-2a8b7f1c90d34e61",
+      "revision": 1,
+      "paperId": "p-f4835e390ee6ce49",
+      "paperOrder": 8,
+      "number": {
+        "display": "2.8",
+        "major": {
+          "display": "第 2 章",
+          "value": "2"
+        },
+        "minor": {
+          "display": "2.8",
+          "value": "8"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-2"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 2.8 给出 `a = [01101001]`、`b = [01010101]`。`a & b` 的结果是哪一个？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`[01000001]`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`[01111101]`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`[00101000]`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`[11111111]`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "按位与只在两位都为 1 时产生 1：`[01000001]`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/chapter.md#L538",
+          "provenance": "rewritten",
+          "editorNote": "从位向量布尔运算表中选取 a & b。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/练习题答案.md#L104",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-3e41fd24ac20c647",
       "revision": 1,
       "paperId": "p-f4835e390ee6ce49",
@@ -102127,6 +104008,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-6c3e0a8f8c9b1472",
+      "revision": 1,
+      "paperId": "p-f4835e390ee6ce49",
+      "paperOrder": 9,
+      "number": {
+        "display": "2.9",
+        "major": {
+          "display": "第 2 章",
+          "value": "2"
+        },
+        "minor": {
+          "display": "2.9",
+          "value": "9"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-2"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "在练习题 2.9 的 RGB 位向量编码中，红、绿、蓝三个分量分别对应从高位到低位的三个位；蓝色编码为 `001`，绿色编码为 `010`。求 `蓝色 | 绿色`。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "红色"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "白色"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "蓝绿色"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "红紫色"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "蓝色为 `001`，绿色为 `010`，逐位 OR 得 `011`，即蓝绿色。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/chapter.md#L560",
+          "provenance": "rewritten",
+          "editorNote": "使用 2.9 的颜色位向量规则，抽取蓝色与绿色的并运算。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/练习题答案.md#L115",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-72f5f49722d45dcc",
       "revision": 1,
       "paperId": "p-f4835e390ee6ce49",
@@ -102713,6 +104693,204 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-a4f9ce18fd730b62",
+      "revision": 1,
+      "paperId": "p-f4835e390ee6ce49",
+      "paperOrder": 14,
+      "number": {
+        "display": "2.14",
+        "major": {
+          "display": "第 2 章",
+          "value": "2"
+        },
+        "minor": {
+          "display": "2.14",
+          "value": "14"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-2"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 2.14 中 `x = 0x66`、`y = 0x39`。按 8 位字节计算 `x & y`，结果是多少？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`0x5F`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`0x20`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`0x7F`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`0x01`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "`0x66 = 0110 0110`，`0x39 = 0011 1001`，按位与为 `0010 0000 = 0x20`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/chapter.md#L687",
+          "provenance": "rewritten",
+          "editorNote": "只取练习 2.14 的按位与一项。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/练习题答案.md#L194",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-ef31a28c64d79b05",
+      "revision": 1,
+      "paperId": "p-f4835e390ee6ce49",
+      "paperOrder": 16,
+      "number": {
+        "display": "2.16",
+        "major": {
+          "display": "第 2 章",
+          "value": "2"
+        },
+        "minor": {
+          "display": "2.16",
+          "value": "16"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-2"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "在练习题 2.16 的 8 位运算中，`x = 0xC3`。将其算术右移 2 位，结果是哪一个字节？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`0x30`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`0xC3`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`0xF3`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`0xF0`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "`0xC3` 的最高位为 1，算术右移时左侧补 1：`1100 0011 >> 2 = 1111 0000 = 0xF0`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/chapter.md#L745",
+          "provenance": "rewritten",
+          "editorNote": "取练习 2.16 中 0xC3 的算术右移一项。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/练习题答案.md#L213",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-f056683b1b65eedc",
       "revision": 1,
       "paperId": "p-f4835e390ee6ce49",
@@ -102832,6 +105010,105 @@
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/homework/3.58-3.63-arithmetic-and-control-flow.md#L26",
           "provenance": "rewritten",
           "editorNote": "CSAPP3e家庭作业；分析已有汇编算法；非官方解析。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-0b294c7e6a1f835d",
+      "revision": 1,
+      "paperId": "p-f7485360f6c6060d",
+      "paperOrder": 2,
+      "number": {
+        "display": "3.2",
+        "major": {
+          "display": "第 3 章",
+          "value": "3"
+        },
+        "minor": {
+          "display": "3.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-3"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 3.2 的第二条指令为 `mov_ (%rax), %dx`。应使用哪个指令后缀？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`b`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`l`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`q`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`w`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "目的寄存器 `%dx` 是 16 位寄存器，因此使用字传送后缀 `w`，指令为 `movw`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/chapter.md#L579",
+          "provenance": "rewritten",
+          "editorNote": "选练习 3.2 第二条指令，按目的寄存器宽度取后缀。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/练习题答案.md#L21",
+          "provenance": "reflow"
         }
       ]
     },
@@ -103744,6 +106021,105 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-85d9f762a3c4b10e",
+      "revision": 1,
+      "paperId": "p-f7485360f6c6060d",
+      "paperOrder": 8,
+      "number": {
+        "display": "3.8",
+        "major": {
+          "display": "第 3 章",
+          "value": "3"
+        },
+        "minor": {
+          "display": "3.8",
+          "value": "8"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-3"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 3.8 中，`%rax=0x100`、`%rdx=3`，且内存地址 `0x108` 的 8 字节值为 `0xAB`。执行 `subq %rdx, 8(%rax)` 后，写入哪个地址、值变成多少？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "地址 `0x100`，值 `0xA8`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "地址 `0x108`，值 `0xAE`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "地址 `0x108`，值 `0xA8`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "地址 `0x118`，值 `0xA8`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "目的地址 `8(%rax)=0x108`。源操作数 `%rdx=3`，因此该内存字的值从 `0xAB` 减为 `0xA8`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/chapter.md#L876",
+          "provenance": "rewritten",
+          "editorNote": "选练习 3.8 的减法内存操作数一行；题干补充所需寄存器和内存值。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/练习题答案.md#L133",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-9ad128c39d15c8ef",
       "revision": 1,
       "paperId": "p-f7485360f6c6060d",
@@ -103837,6 +106213,105 @@
         },
         {
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/练习题答案.md#L5-L19",
+          "provenance": "reflow"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-b316ea901da57643",
+      "revision": 1,
+      "paperId": "p-f7485360f6c6060d",
+      "paperOrder": 6,
+      "number": {
+        "display": "3.6",
+        "major": {
+          "display": "第 3 章",
+          "value": "3"
+        },
+        "minor": {
+          "display": "3.6",
+          "value": "6"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "csapp",
+          "practice",
+          "chapter-3"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "练习题 3.6 的指令 `leaq 7(%rax,%rax,8), %rdx` 中，设 `%rax=x`。指令执行后 `%rdx` 的值是什么？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`8x+7`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`7x+8`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`8x+8`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`9x+7`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "有效地址为位移 `7` 加基址 `x` 再加索引 `x×8`，所以结果为 `9x+7`。"
+        },
+        "provenance": {
+          "origin": "unknown",
+          "crossChecked": null,
+          "note": "答案取自来源仓库的《练习题答案.md》，未另行交叉复核。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/chapter.md#L835",
+          "provenance": "rewritten",
+          "editorNote": "从练习 3.6 选取一个 LEA 地址计算式。"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/练习题答案.md#L98",
           "provenance": "reflow"
         }
       ]

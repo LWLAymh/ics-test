@@ -19,6 +19,9 @@
     answerForm: $('ics-answer-form'), answerLabel: $('ics-answer-label'), answerHint: $('ics-answer-hint'),
     choiceList: $('ics-choice-list'), answer: $('ics-answer'), submit: $('ics-submit'), skip: $('ics-skip'),
     reportIssue: $('ics-report-issue'), reportStatus: $('ics-report-status'),
+    issueForm: $('ics-issue-form'), issueMessage: $('ics-issue-message'),
+    issueSend: $('ics-issue-send'), issueCancel: $('ics-issue-cancel'),
+    mastery: $('ics-mastery'), masteryStatus: $('ics-mastery-status'), masteryNote: $('ics-mastery-note'),
     feedback: $('ics-feedback'), verdict: $('ics-verdict'), reference: $('ics-reference'),
     liveStats: $('ics-live-stats'), statsSummary: $('ics-stats-summary'), statsOptions: $('ics-stats-options'), statsNote: $('ics-stats-note'), liveDot: $('ics-live-dot'),
     selfGrade: $('ics-self-grade'), next: $('ics-next'), result: $('ics-result'),
@@ -31,6 +34,7 @@
     practiceNote: $('ics-practice-note'),
     issueBoard: $('ics-issue-board'), issueCount: $('ics-issue-count'),
     issueBoardStatus: $('ics-issue-board-status'), issueList: $('ics-issue-list'),
+    issueMessageStatus: $('ics-issue-message-status'),
   };
 
   const state = {
@@ -39,8 +43,61 @@
     supabase: null, statsChannel: null, currentStats: null, statsQuestionId: '', statsRevealed: false,
     issueChannel: null, reportedIssues: [], issueQuestionIndex: new Map(), issueIndexLoaded: false,
     reportedThisSession: new Set(), issueReloadTimer: null, pendingCompositeGrade: null,
+    reportingQuestions: new Set(), issueDrafts: new Map(), issueFormQuestionId: '',
+    mastered: new Set(), masteryPersistent: true,
+    issueMessages: [], issueMessageLoad: 0,
   };
   const contract = window.ICSQuestionV5;
+  const MASTERY_KEY = 'ics-question-mastery-v1';
+  function loadMastery() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(MASTERY_KEY) || 'null');
+      state.mastered = new Set(saved && saved.version === 1 && Array.isArray(saved.questionIds)
+        ? saved.questionIds.filter(function (id) { return typeof id === 'string' && /^q-[a-f0-9]{8,64}$/.test(id); }) : []);
+    } catch (_) {
+      state.mastered = new Set();
+      state.masteryPersistent = false;
+    }
+  }
+
+  function renderMastery() {
+    const question = state.questions[state.index];
+    const mastered = question && state.mastered.has(question.id);
+    ui.mastery.textContent = mastered ? '已熟知 · 取消标记' : '标记熟知';
+    ui.mastery.setAttribute('aria-pressed', mastered ? 'true' : 'false');
+    ui.masteryStatus.textContent = !state.masteryPersistent
+      ? '浏览器存储不可用，本次标记可能无法在刷新后保留。'
+      : mastered ? '已保存，后续模块随机不再抽到本题。' : '';
+    ui.masteryNote.textContent = state.masteryPersistent
+      ? '熟知进度仅保存在当前浏览器；模块随机会跳过已熟知的题，整卷、模块全练和高错题练习仍保留。'
+      : '浏览器存储不可用或数据损坏；当前熟知进度仅临时保留，建议检查浏览器存储设置。';
+    if (!state.catalog) return;
+    const sources = selectedSourceCollections();
+    const publishedIds = new Set(state.papers.filter(function (paper) {
+      return sources.includes(contract.paperCollection(paper));
+    }).flatMap(function (paper) { return paper.questionIds; }));
+    ui.modules.querySelectorAll('[data-module-progress]').forEach(function (container) {
+      const module = state.catalog.modules.find(function (item) { return item.id === container.dataset.moduleProgress; });
+      const ids = module.questionIds.filter(function (id) { return publishedIds.has(id); });
+      const count = ids.filter(function (id) { return state.mastered.has(id); }).length;
+      container.querySelector('small').textContent = ids.length + ' 道题 · 已熟知 ' + count + ' / ' + ids.length;
+      const progress = container.querySelector('progress');
+      progress.max = Math.max(1, ids.length); progress.value = count;
+      progress.setAttribute('aria-label', module.title + '：已熟知 ' + count + ' / ' + ids.length + ' 道');
+    });
+  }
+
+  function toggleMastery() {
+    const question = state.questions[state.index];
+    if (!question) return;
+    if (state.mastered.has(question.id)) state.mastered.delete(question.id);
+    else state.mastered.add(question.id);
+    try {
+      localStorage.setItem(MASTERY_KEY, JSON.stringify({ version: 1, questionIds: Array.from(state.mastered).sort() }));
+      state.masteryPersistent = true;
+    } catch (_) { state.masteryPersistent = false; }
+    renderMastery();
+  }
   const PUBLISHED_QUESTION_KINDS = new Set([
     'single-choice', 'multiple-choice', 'fill', 'short-answer', 'composite',
   ]);
@@ -171,11 +228,16 @@
           .filter(Boolean).map(escapeHtml).join(' · ')
         : '题目定位信息尚未加载';
       const latest = formatIssueTime(row.last_reported_at);
+      const messages = state.issueMessages.filter(function (message) { return message.question_id === row.question_id; });
+      const messageHtml = messages.map(function (message) {
+        return '<blockquote class="ics-public-issue-message"><small>问题说明 · ' + escapeHtml(formatIssueTime(message.reported_at)) +
+          '</small><p>' + escapeHtml(message.message) + '</p></blockquote>';
+      }).join('');
       return '<article class="ics-issue-item">' +
         '<div class="ics-issue-item-main"><div class="ics-issue-item-head">' +
         '<code>' + escapeHtml(row.question_id) + '</code>' +
         '<button class="ics-issue-copy" type="button" data-copy-question-id="' + escapeHtml(row.question_id) + '">复制 ID</button>' +
-        '</div><p class="ics-issue-item-meta">' + meta + (latest ? '<br>最近报告：' + escapeHtml(latest) : '') + '</p></div>' +
+        '</div><p class="ics-issue-item-meta">' + meta + (latest ? '<br>最近报告：' + escapeHtml(latest) : '') + '</p>' + messageHtml + '</div>' +
         '<span class="ics-issue-item-stats">' + Number(row.report_count || 0) + ' 人报告</span></article>';
     }).join('');
   }
@@ -220,7 +282,32 @@
     }
     state.reportedIssues = result.data || [];
     renderIssueBoard();
-    if (ui.issueBoard.open) await ensureIssueQuestionIndex();
+    if (ui.issueBoard.open) await Promise.all([ensureIssueQuestionIndex(), loadIssueMessages()]);
+  }
+
+  async function loadIssueMessages() {
+    if (!state.supabase || !ui.issueBoard.open) return;
+    const load = ++state.issueMessageLoad;
+    const messages = [];
+    try {
+      for (let start = 0; ; start += 500) {
+        const result = await state.supabase.from('ics_question_issue_messages')
+          .select('id,question_id,message,reported_at')
+          .order('reported_at', { ascending: false }).order('id', { ascending: true }).range(start, start + 499);
+        if (result.error) throw new Error('无法读取问题说明');
+        messages.push.apply(messages, result.data || []);
+        if (!result.data || result.data.length < 500) break;
+      }
+      if (load !== state.issueMessageLoad) return;
+      state.issueMessages = messages;
+      ui.issueMessageStatus.textContent = '';
+      renderIssueBoard();
+    } catch (_) {
+      if (load !== state.issueMessageLoad) return;
+      state.issueMessages = [];
+      ui.issueMessageStatus.textContent = '问题说明暂时无法读取；报告列表仍可查看。';
+      renderIssueBoard();
+    }
   }
 
   function startIssueSubscription() {
@@ -236,36 +323,71 @@
       .subscribe();
   }
 
-  async function reportCurrentIssue() {
+  function closeIssueForm() {
+    if (state.issueFormQuestionId) state.issueDrafts.set(state.issueFormQuestionId, ui.issueMessage.value);
+    state.issueFormQuestionId = '';
+    ui.issueForm.hidden = true;
+    ui.reportIssue.setAttribute('aria-expanded', 'false');
+  }
+
+  function openIssueForm() {
     const question = state.questions[state.index];
-    if (!question || state.reportedThisSession.has(question.id)) return;
+    if (!question || state.reportedThisSession.has(question.id) || state.reportingQuestions.has(question.id)) return;
+    if (!ui.issueForm.hidden) { closeIssueForm(); return; }
+    state.issueFormQuestionId = question.id;
+    ui.issueMessage.value = state.issueDrafts.get(question.id) || '';
+    ui.issueMessage.disabled = false;
+    ui.issueCancel.disabled = false;
+    ui.issueForm.hidden = false;
+    ui.reportIssue.setAttribute('aria-expanded', 'true');
+    ui.issueMessage.focus();
+  }
+
+  async function reportCurrentIssue(event) {
+    event.preventDefault();
+    const question = state.questions[state.index];
+    if (!question || state.issueFormQuestionId !== question.id || state.reportedThisSession.has(question.id) || state.reportingQuestions.has(question.id)) return;
+    const message = ui.issueMessage.value.trim();
+    if (message.length > 1000) { ui.reportStatus.textContent = '问题说明不能超过 1000 字。'; return; }
+    state.issueDrafts.set(question.id, ui.issueMessage.value);
+    state.reportingQuestions.add(question.id);
     ui.reportIssue.disabled = true;
     ui.reportIssue.textContent = '正在提交…';
+    ui.issueSend.disabled = true;
+    ui.issueMessage.disabled = true;
+    ui.issueCancel.disabled = true;
     ui.reportStatus.textContent = '';
-    if (!state.supabase) {
-      ui.reportIssue.disabled = false;
-      ui.reportIssue.textContent = '您认为此题有误';
-      ui.reportStatus.textContent = '问题上报服务尚未连接。';
-      return;
-    }
-    const result = await state.supabase.rpc('report_ics_question_issue', {
-      p_question_id: question.id,
-      p_visitor_id: visitorId(),
-    });
-    if (result.error) {
+    try {
+      if (!state.supabase) throw new Error('问题上报服务尚未连接。');
+      const args = { p_question_id: question.id, p_visitor_id: visitorId() };
+      let result = await state.supabase.rpc('report_ics_question_issue_with_message', Object.assign({ p_message: message }, args));
+      const missingRpc = result.error && ['PGRST202', '42883'].includes(result.error.code);
+      if (missingRpc && !message) result = await state.supabase.rpc('report_ics_question_issue', args);
+      else if (missingRpc) throw new Error('带说明的上报尚未启用，请等待维护者执行数据库升级；说明已在本次页面内保留。');
+      if (result.error) throw new Error(result.error.message);
+      state.reportedThisSession.add(question.id);
+      state.issueDrafts.delete(question.id);
+      if (state.questions[state.index] && state.questions[state.index].id === question.id) {
+        closeIssueForm();
+        state.issueDrafts.delete(question.id);
+        ui.reportIssue.textContent = '已报告，感谢反馈';
+        ui.reportStatus.textContent = message ? '报告已提交，问题说明将公开展示在待复核列表。' : '题目 ID：' + question.id;
+      }
+      await loadReportedIssues().catch(function () {});
+    } catch (error) {
       if (state.questions[state.index] && state.questions[state.index].id === question.id) {
         ui.reportIssue.disabled = false;
         ui.reportIssue.textContent = '您认为此题有误';
-        ui.reportStatus.textContent = '提交失败：' + result.error.message;
+        ui.reportStatus.textContent = '提交失败：' + error.message;
       }
-      return;
+    } finally {
+      state.reportingQuestions.delete(question.id);
+      ui.issueSend.disabled = false;
+      if (state.issueFormQuestionId === question.id || !state.issueFormQuestionId) {
+        ui.issueMessage.disabled = false;
+        ui.issueCancel.disabled = false;
+      }
     }
-    state.reportedThisSession.add(question.id);
-    if (state.questions[state.index] && state.questions[state.index].id === question.id) {
-      ui.reportIssue.textContent = '已报告，感谢反馈';
-      ui.reportStatus.textContent = '题目 ID：' + question.id;
-    }
-    await loadReportedIssues();
   }
 
   function emptyStats(questionId) {
@@ -533,8 +655,8 @@
       const count = module.questionIds.filter(function (id) { return questionIds.has(id); }).length;
       return '<label class="ics-module-card"><input type="checkbox" value="' + escapeHtml(module.id) + '"' +
         (count && (keepAll || oldModules.has(module.id)) ? ' checked' : '') + (count ? '' : ' disabled') + '>' +
-        '<span><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
-        '<small>' + count + ' 道题</small></span></label>';
+        '<span data-module-progress="' + escapeHtml(module.id) + '"><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
+        '<small>' + count + ' 道题</small><progress max="1" value="0"></progress></span></label>';
     }).join('');
     const examType = ui.examType.value;
     ui.examType.innerHTML = '<option value="">全部类型</option>';
@@ -560,6 +682,7 @@
     ui.bankSummary.textContent = questionIds.size + ' 道练习题 · ' + pkuCount + ' 份真题 · ' + chapterCount + ' 章课本习题';
     updateModeUi();
     updatePaperStatus();
+    renderMastery();
     if (!sources.length) showSetupError('请至少选择一个题目来源。');
   }
 
@@ -609,6 +732,7 @@
   }
 
   async function init() {
+    loadMastery();
     try {
       state.catalog = await fetchJson(app.dataset.catalog);
       contract.assertVersion(state.catalog);
@@ -681,6 +805,10 @@
       }).map(function (question) { return Object.assign({}, question); });
 
       if (!pool.length) throw new Error('当前筛选条件下没有可用题目');
+      if (mode === 'random') {
+        pool = pool.filter(function (question) { return !state.mastered.has(question.id); });
+        if (!pool.length) throw new Error('当前范围内的题目都已标记熟知。可扩大范围，或在模块全练 / 按卷练习中取消标记。');
+      }
       if (mode === 'mistakes') pool = await rankByErrorRate(pool);
 
       const count = mode === 'random' || mode === 'mistakes' ? Math.min(Number(ui.count.value), pool.length) : pool.length;
@@ -792,6 +920,7 @@
   }
 
   function renderQuestion() {
+    closeIssueForm();
     const q = state.questions[state.index];
     state.pendingCompositeGrade = null;
     const number = state.index + 1;
@@ -814,9 +943,14 @@
     ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false; ui.skip.disabled = false;
     ui.submit.hidden = false; ui.skip.hidden = false;
     const alreadyReported = state.reportedThisSession.has(q.id);
-    ui.reportIssue.disabled = alreadyReported;
-    ui.reportIssue.textContent = alreadyReported ? '已报告，感谢反馈' : '您认为此题有误';
+    const reporting = state.reportingQuestions.has(q.id);
+    ui.reportIssue.disabled = alreadyReported || reporting;
+    ui.reportIssue.textContent = alreadyReported ? '已报告，感谢反馈' : reporting ? '正在提交…' : '您认为此题有误';
     ui.reportStatus.textContent = alreadyReported ? '题目 ID：' + q.id : '';
+    ui.issueSend.disabled = false;
+    ui.issueMessage.disabled = false;
+    ui.issueCancel.disabled = false;
+    renderMastery();
     ui.answerForm.dataset.mode = state.currentMode;
     ui.choiceList.innerHTML = '';
     ui.choiceList.hidden = !choiceQuestion;
@@ -1114,9 +1248,15 @@
     boxes.forEach(function (box) { box.checked = !allSelected; }); updateSelectToggle();
   });
   ui.start.addEventListener('click', startQuiz);
-  ui.reportIssue.addEventListener('click', reportCurrentIssue);
+  ui.reportIssue.addEventListener('click', openIssueForm);
+  ui.issueForm.addEventListener('submit', reportCurrentIssue);
+  ui.issueCancel.addEventListener('click', function () { closeIssueForm(); ui.reportIssue.focus(); });
+  ui.mastery.addEventListener('click', toggleMastery);
+  window.addEventListener('storage', function (event) {
+    if (event.key === MASTERY_KEY || event.key === null) { loadMastery(); renderMastery(); }
+  });
   ui.issueBoard.addEventListener('toggle', function () {
-    if (ui.issueBoard.open) ensureIssueQuestionIndex().catch(function (error) {
+    if (ui.issueBoard.open) Promise.all([ensureIssueQuestionIndex(), loadIssueMessages()]).catch(function (error) {
       ui.issueBoardStatus.textContent = '题目定位信息加载失败：' + error.message;
     });
   });

@@ -1683,6 +1683,10 @@
       "sequence": null,
       "questionIds": [
         "q-55312298cd5561c9",
+        "q-2a8b7f1c90d34e61",
+        "q-6c3e0a8f8c9b1472",
+        "q-a4f9ce18fd730b62",
+        "q-ef31a28c64d79b05",
         "q-14bd226433913679",
         "q-40eae851d24907df",
         "q-06d8adc2438d633d",
@@ -1704,11 +1708,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/homework/2.82-2.91-floating-point-basics.md"
       ],
       "stats": {
-        "questionCount": 11,
-        "publishedQuestionCount": 11,
-        "quizQuestionCount": 11,
-        "verifiedAnswerCount": 11,
-        "singleChoiceCount": 1,
+        "questionCount": 15,
+        "publishedQuestionCount": 15,
+        "quizQuestionCount": 15,
+        "verifiedAnswerCount": 15,
+        "singleChoiceCount": 5,
         "multipleChoiceCount": 0,
         "fillCount": 4,
         "shortAnswerCount": 5,
@@ -1729,6 +1733,9 @@
       "sequence": null,
       "questionIds": [
         "q-9ad128c39d15c8ef",
+        "q-0b294c7e6a1f835d",
+        "q-b316ea901da57643",
+        "q-85d9f762a3c4b10e",
         "q-00fd59705ea47ab2",
         "q-612092e69e1b921d",
         "q-386987c9307bd84b",
@@ -1751,11 +1758,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/homework/3.70-3.75-unions-stack-and-floating-point.md"
       ],
       "stats": {
-        "questionCount": 10,
-        "publishedQuestionCount": 10,
-        "quizQuestionCount": 10,
-        "verifiedAnswerCount": 10,
-        "singleChoiceCount": 1,
+        "questionCount": 13,
+        "publishedQuestionCount": 13,
+        "quizQuestionCount": 13,
+        "verifiedAnswerCount": 13,
+        "singleChoiceCount": 4,
         "multipleChoiceCount": 0,
         "fillCount": 4,
         "shortAnswerCount": 3,
@@ -1775,6 +1782,7 @@
       "examKind": "practice",
       "sequence": null,
       "questionIds": [
+        "q-0c6723d4f2e918ab",
         "q-805315e5d479d411",
         "q-88d2db0a30f24496"
       ],
@@ -1788,11 +1796,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第04章-处理器体系结构/homework/4.51-4.57-processor-control.md"
       ],
       "stats": {
-        "questionCount": 2,
-        "publishedQuestionCount": 2,
-        "quizQuestionCount": 2,
-        "verifiedAnswerCount": 2,
-        "singleChoiceCount": 1,
+        "questionCount": 3,
+        "publishedQuestionCount": 3,
+        "quizQuestionCount": 3,
+        "verifiedAnswerCount": 3,
+        "singleChoiceCount": 2,
         "multipleChoiceCount": 0,
         "fillCount": 0,
         "shortAnswerCount": 1,
@@ -1812,7 +1820,9 @@
       "examKind": "practice",
       "sequence": null,
       "questionIds": [
-        "q-8de02946fff9a230"
+        "q-8de02946fff9a230",
+        "q-583af2412c0661de",
+        "q-0fa4c517b9de8326"
       ],
       "coverage": {
         "state": "partial",
@@ -1823,11 +1833,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第05章-优化程序性能/练习题答案.md"
       ],
       "stats": {
-        "questionCount": 1,
-        "publishedQuestionCount": 1,
-        "quizQuestionCount": 1,
-        "verifiedAnswerCount": 1,
-        "singleChoiceCount": 1,
+        "questionCount": 3,
+        "publishedQuestionCount": 3,
+        "quizQuestionCount": 3,
+        "verifiedAnswerCount": 3,
+        "singleChoiceCount": 3,
         "multipleChoiceCount": 0,
         "fillCount": 0,
         "shortAnswerCount": 0,
@@ -1848,6 +1858,9 @@
       "sequence": null,
       "questionIds": [
         "q-b8378621681fb01a",
+        "q-041c86f935fc7d20",
+        "q-b8ec95278d5601ac",
+        "q-379f16b80da42c56",
         "q-9e8e0f44bbf0df0e",
         "q-3918da43fd0f2705",
         "q-a6290729b21f28cc",
@@ -1884,11 +1897,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/homework/6.38-6.46-cache-locality-and-optimization.md"
       ],
       "stats": {
-        "questionCount": 23,
-        "publishedQuestionCount": 23,
-        "quizQuestionCount": 23,
-        "verifiedAnswerCount": 23,
-        "singleChoiceCount": 1,
+        "questionCount": 26,
+        "publishedQuestionCount": 26,
+        "quizQuestionCount": 26,
+        "verifiedAnswerCount": 26,
+        "singleChoiceCount": 4,
         "multipleChoiceCount": 0,
         "fillCount": 21,
         "shortAnswerCount": 0,
@@ -1909,6 +1922,8 @@
       "sequence": null,
       "questionIds": [
         "q-7ca21ebde142bd2e",
+        "q-5f63b1c0ad8e7429",
+        "q-6d128a37f9054bce",
         "q-1acb19897e46192d",
         "q-f993b7d7723ec769",
         "q-0243b02e85eba5ce",
@@ -1926,11 +1941,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第07章-链接/homework/7.6-7.13-linking-and-object-files.md"
       ],
       "stats": {
-        "questionCount": 7,
-        "publishedQuestionCount": 7,
-        "quizQuestionCount": 7,
-        "verifiedAnswerCount": 7,
-        "singleChoiceCount": 1,
+        "questionCount": 9,
+        "publishedQuestionCount": 9,
+        "quizQuestionCount": 9,
+        "verifiedAnswerCount": 9,
+        "singleChoiceCount": 3,
         "multipleChoiceCount": 0,
         "fillCount": 2,
         "shortAnswerCount": 4,
@@ -1951,6 +1966,7 @@
       "sequence": null,
       "questionIds": [
         "q-b48ebb1ac5f7f48a",
+        "q-c1ff9a63d4eb2780",
         "q-ed23c53608b10bd0",
         "q-b6133702293b28c7",
         "q-ea7005680e372c05",
@@ -1977,11 +1993,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第08章-异常控制流/homework/8.22-8.26-signals-and-shell.md"
       ],
       "stats": {
-        "questionCount": 14,
-        "publishedQuestionCount": 14,
-        "quizQuestionCount": 14,
-        "verifiedAnswerCount": 14,
-        "singleChoiceCount": 1,
+        "questionCount": 15,
+        "publishedQuestionCount": 15,
+        "quizQuestionCount": 15,
+        "verifiedAnswerCount": 15,
+        "singleChoiceCount": 2,
         "multipleChoiceCount": 1,
         "fillCount": 8,
         "shortAnswerCount": 4,
@@ -2002,6 +2018,8 @@
       "sequence": null,
       "questionIds": [
         "q-5aaf382af9d9f858",
+        "q-7a5627c3d1f04e8b",
+        "q-8bc1f79d4a25e630",
         "q-43ce2610bb3f6245",
         "q-cd0265acf56a6fab",
         "q-77b2af49394019df",
@@ -2020,11 +2038,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第09章-虚拟内存/homework/9.14-9.20-memory-mapping-and-allocation.md"
       ],
       "stats": {
-        "questionCount": 7,
-        "publishedQuestionCount": 7,
-        "quizQuestionCount": 7,
-        "verifiedAnswerCount": 7,
-        "singleChoiceCount": 1,
+        "questionCount": 9,
+        "publishedQuestionCount": 9,
+        "quizQuestionCount": 9,
+        "verifiedAnswerCount": 9,
+        "singleChoiceCount": 3,
         "multipleChoiceCount": 0,
         "fillCount": 6,
         "shortAnswerCount": 0,
@@ -2044,6 +2062,8 @@
       "examKind": "practice",
       "sequence": null,
       "questionIds": [
+        "q-9e2c5f714b30a681",
+        "q-c7d3b2019a8465ef",
         "q-59d17769e8300691",
         "q-ac707fe3d952e2e1",
         "q-e4025cbdaa78b15e"
@@ -2058,11 +2078,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第10章-系统级IO/homework/10.6-10.10-system-level-io.md"
       ],
       "stats": {
-        "questionCount": 3,
-        "publishedQuestionCount": 3,
-        "quizQuestionCount": 3,
-        "verifiedAnswerCount": 3,
-        "singleChoiceCount": 1,
+        "questionCount": 5,
+        "publishedQuestionCount": 5,
+        "quizQuestionCount": 5,
+        "verifiedAnswerCount": 5,
+        "singleChoiceCount": 3,
         "multipleChoiceCount": 0,
         "fillCount": 1,
         "shortAnswerCount": 1,
@@ -2082,7 +2102,8 @@
       "examKind": "practice",
       "sequence": null,
       "questionIds": [
-        "q-a6a1811b8c984602"
+        "q-a6a1811b8c984602",
+        "q-97e1ac350d5f482c"
       ],
       "coverage": {
         "state": "partial",
@@ -2093,11 +2114,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第11章-网络编程/练习题答案.md"
       ],
       "stats": {
-        "questionCount": 1,
-        "publishedQuestionCount": 1,
-        "quizQuestionCount": 1,
-        "verifiedAnswerCount": 1,
-        "singleChoiceCount": 1,
+        "questionCount": 2,
+        "publishedQuestionCount": 2,
+        "quizQuestionCount": 2,
+        "verifiedAnswerCount": 2,
+        "singleChoiceCount": 2,
         "multipleChoiceCount": 0,
         "fillCount": 0,
         "shortAnswerCount": 0,
@@ -2117,7 +2138,11 @@
       "examKind": "practice",
       "sequence": null,
       "questionIds": [
+        "q-13ac9e7bfac45201",
+        "q-2b84cd60f37a1e95",
         "q-2b8b77844036d027",
+        "q-96bf14b578ce20a3",
+        "q-6decb55123a89740",
         "q-9d79e1fae3025ef4",
         "q-7a93e11483c8b03d",
         "q-b62930709c10ca7c",
@@ -2136,11 +2161,11 @@
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第12章-并发编程/homework/12.16-12.39-concurrent-programming.md"
       ],
       "stats": {
-        "questionCount": 8,
-        "publishedQuestionCount": 8,
-        "quizQuestionCount": 8,
-        "verifiedAnswerCount": 8,
-        "singleChoiceCount": 1,
+        "questionCount": 12,
+        "publishedQuestionCount": 12,
+        "quizQuestionCount": 12,
+        "verifiedAnswerCount": 12,
+        "singleChoiceCount": 5,
         "multipleChoiceCount": 0,
         "fillCount": 1,
         "shortAnswerCount": 6,

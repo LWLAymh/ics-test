@@ -67,6 +67,7 @@ window.MathJax = {
       <legend id="ics-module-legend">知识模块（可多选）</legend>
       <button class="ics-text-button ics-select-toggle" id="ics-select-toggle" type="button">取消全选</button>
       <div class="ics-module-grid" id="ics-modules" aria-live="polite"></div>
+      <p class="ics-local-progress-note" id="ics-mastery-note" role="status">熟知进度仅保存在当前浏览器；模块随机会跳过已熟知的题。</p>
     </fieldset>
     <div class="ics-options">
       <label class="ics-field" id="ics-count-field">题目数量
@@ -148,7 +149,21 @@ window.MathJax = {
       <span id="ics-navigation-status" role="status"></span>
       <button class="ics-secondary" id="ics-next" type="button">下一题 →</button>
     </nav>
-    <div class="ics-question-utilities"><button class="ics-report-button" id="ics-report-issue" type="button">您认为此题有误</button><span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span></div>
+    <div class="ics-question-utilities">
+      <button class="ics-secondary" id="ics-mastery" type="button" aria-pressed="false">标记熟知</button>
+      <span class="ics-report-status" id="ics-mastery-status" role="status"></span>
+      <button class="ics-report-button" id="ics-report-issue" type="button" aria-expanded="false" aria-controls="ics-issue-form">您认为此题有误</button>
+      <span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span>
+    </div>
+    <form class="ics-issue-form" id="ics-issue-form" hidden>
+      <label for="ics-issue-message">问题说明（选填）</label>
+      <textarea id="ics-issue-message" maxlength="1000" rows="3" placeholder="例如：选项 D 混入答案文字，或第二段代码缺少缩进。" aria-describedby="ics-issue-message-note"></textarea>
+      <p id="ics-issue-message-note">最多 1000 字，可留空。说明将在首页待复核列表中公开，方便大家修复和提交 PR；请勿填写联系方式等个人信息。</p>
+      <div class="ics-issue-form-actions">
+        <button class="ics-secondary" id="ics-issue-cancel" type="button">取消</button>
+        <button class="ics-primary" id="ics-issue-send" type="submit">提交报告</button>
+      </div>
+    </form>
     </div>
     <aside class="ics-session-sidebar" aria-label="本次练习概览">
       <details id="ics-question-map" open>
@@ -171,6 +186,7 @@ window.MathJax = {
       <div class="ics-issue-board-body">
         <p class="ics-issue-board-note">这里汇总同学主动报告的题目，仅表示“建议复核”，不等同于题目一定有误。</p>
         <p class="ics-issue-board-status" id="ics-issue-board-status" role="status"></p>
+        <p class="ics-issue-board-status" id="ics-issue-message-status" role="status"></p>
         <div class="ics-issue-list" id="ics-issue-list"></div>
       </div>
     </details>

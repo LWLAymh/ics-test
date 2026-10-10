@@ -115,13 +115,17 @@
         "q-06d8adc2438d633d",
         "q-0957a01aa1c7af9f",
         "q-14bd226433913679",
+        "q-2a8b7f1c90d34e61",
         "q-3e41fd24ac20c647",
         "q-40eae851d24907df",
         "q-55312298cd5561c9",
         "q-663d8a321c079baf",
+        "q-6c3e0a8f8c9b1472",
         "q-72f5f49722d45dcc",
         "q-891259272b9c30b2",
         "q-96a266cdbb9db246",
+        "q-a4f9ce18fd730b62",
+        "q-ef31a28c64d79b05",
         "q-f056683b1b65eedc",
         "q-1896942fba0eb99a",
         "q-802ef0380553a23d",
@@ -142,9 +146,9 @@
         "q-c9a40cdea839080f",
         "q-ce72197e573dfd2e"
       ],
-      "questionCount": 129,
-      "publishedQuestionCount": 128,
-      "quizQuestionCount": 128
+      "questionCount": 133,
+      "publishedQuestionCount": 132,
+      "quizQuestionCount": 132
     },
     {
       "id": "machine_prog",
@@ -263,12 +267,15 @@
         "q-7d94ab8a255c7f2d",
         "q-dc098e5a5efcc480",
         "q-00fd59705ea47ab2",
+        "q-0b294c7e6a1f835d",
         "q-386987c9307bd84b",
         "q-40a597ce05d95c45",
         "q-4115df441ce2be40",
         "q-612092e69e1b921d",
         "q-775da05d618f67c8",
+        "q-85d9f762a3c4b10e",
         "q-9ad128c39d15c8ef",
+        "q-b316ea901da57643",
         "q-c2a9a2f0bcb68b70",
         "q-cc225ba7cc1417ad",
         "q-e99de6be6bcc7042",
@@ -296,9 +303,9 @@
         "q-c498661955b005c7",
         "q-d5d56ae86119aa5f"
       ],
-      "questionCount": 143,
-      "publishedQuestionCount": 138,
-      "quizQuestionCount": 138
+      "questionCount": 146,
+      "publishedQuestionCount": 141,
+      "quizQuestionCount": 141
     },
     {
       "id": "processor_arch",
@@ -389,6 +396,7 @@
         "q-9a11cb77014a0915",
         "q-a9bc62802358fa85",
         "q-c7cbe7724a1752f2",
+        "q-0c6723d4f2e918ab",
         "q-805315e5d479d411",
         "q-88d2db0a30f24496",
         "q-2838a94f4aae42c7",
@@ -407,9 +415,9 @@
         "q-d36537e61267ceb5",
         "q-f2c81089030ddaa5"
       ],
-      "questionCount": 100,
-      "publishedQuestionCount": 100,
-      "quizQuestionCount": 100
+      "questionCount": 101,
+      "publishedQuestionCount": 101,
+      "quizQuestionCount": 101
     },
     {
       "id": "memory_hierarchy",
@@ -483,8 +491,10 @@
         "q-e37b5d279eb569af",
         "q-f9e8e4aa56b79184",
         "q-fc5832aa452d9480",
+        "q-041c86f935fc7d20",
         "q-05b4c656fcf1ad07",
         "q-2acbedcb62e2d75b",
+        "q-379f16b80da42c56",
         "q-3918da43fd0f2705",
         "q-47b69e3b61cd3a23",
         "q-5806de49ca1af9ce",
@@ -499,6 +509,7 @@
         "q-a280af9a9921d9b1",
         "q-a6290729b21f28cc",
         "q-b8378621681fb01a",
+        "q-b8ec95278d5601ac",
         "q-bc908234f1e08260",
         "q-bdbfe53bb26f3f23",
         "q-ca5f55956d03145c",
@@ -534,9 +545,9 @@
         "q-410e91810503c521",
         "q-561fcc94e43aae14"
       ],
-      "questionCount": 116,
-      "publishedQuestionCount": 113,
-      "quizQuestionCount": 113
+      "questionCount": 119,
+      "publishedQuestionCount": 116,
+      "quizQuestionCount": 116
     },
     {
       "id": "compilation_linking",
@@ -555,6 +566,8 @@
         "q-e91c0450a43a6c8f",
         "q-ebcdd45277168c72",
         "q-fb4adbdb7bf4b42e",
+        "q-0fa4c517b9de8326",
+        "q-583af2412c0661de",
         "q-8de02946fff9a230",
         "q-89f018b6386fdfc2",
         "q-efc49aa2e1b0d155",
@@ -608,6 +621,8 @@
         "q-0243b02e85eba5ce",
         "q-1acb19897e46192d",
         "q-485c31012a670956",
+        "q-5f63b1c0ad8e7429",
+        "q-6d128a37f9054bce",
         "q-7ca21ebde142bd2e",
         "q-921d7d42b875fe49",
         "q-d57b27992fe08d7d",
@@ -623,9 +638,9 @@
         "q-785518f2a1305196",
         "q-b0ef359a9e930155"
       ],
-      "questionCount": 78,
-      "publishedQuestionCount": 74,
-      "quizQuestionCount": 74
+      "questionCount": 82,
+      "publishedQuestionCount": 78,
+      "quizQuestionCount": 78
     },
     {
       "id": "ecf_and_system_io",
@@ -658,6 +673,7 @@
         "q-9f8b6e8e45f9b9b6",
         "q-b48ebb1ac5f7f48a",
         "q-b6133702293b28c7",
+        "q-c1ff9a63d4eb2780",
         "q-c6dac96523e72112",
         "q-e70504f6b9e42492",
         "q-ea7005680e372c05",
@@ -716,7 +732,9 @@
         "q-bd20070420641526",
         "q-bd62fc1d79bc1009",
         "q-59d17769e8300691",
+        "q-9e2c5f714b30a681",
         "q-ac707fe3d952e2e1",
+        "q-c7d3b2019a8465ef",
         "q-e4025cbdaa78b15e",
         "q-54e55a2556b716c4",
         "q-af342c9ccb98e2cf",
@@ -734,9 +752,9 @@
         "q-5d574996f3b93516",
         "q-d476fa89c01aa623"
       ],
-      "questionCount": 100,
-      "publishedQuestionCount": 95,
-      "quizQuestionCount": 95
+      "questionCount": 103,
+      "publishedQuestionCount": 98,
+      "quizQuestionCount": 98
     },
     {
       "id": "virtual_memory_and_malloc",
@@ -771,6 +789,8 @@
         "q-580fa185a7e36442",
         "q-5aaf382af9d9f858",
         "q-77b2af49394019df",
+        "q-7a5627c3d1f04e8b",
+        "q-8bc1f79d4a25e630",
         "q-b618e9b2501d9315",
         "q-cd0265acf56a6fab",
         "q-37e4fa1acf9d6c42",
@@ -816,9 +836,9 @@
         "q-ddf9fc695c8ac097",
         "q-f8c72980c915c7fa"
       ],
-      "questionCount": 71,
-      "publishedQuestionCount": 67,
-      "quizQuestionCount": 67
+      "questionCount": 73,
+      "publishedQuestionCount": 69,
+      "quizQuestionCount": 69
     },
     {
       "id": "network",
@@ -845,6 +865,7 @@
         "q-99e5e4f1f599db68",
         "q-9c5d3b54be5480a9",
         "q-ca7f9653fe94b2de",
+        "q-97e1ac350d5f482c",
         "q-a6a1811b8c984602",
         "q-1dfdad28c97b66ac",
         "q-923088b4fef4799c",
@@ -877,9 +898,9 @@
         "q-9d490502269e77f1",
         "q-db2d4bf775b8e912"
       ],
-      "questionCount": 50,
-      "publishedQuestionCount": 48,
-      "quizQuestionCount": 48
+      "questionCount": 51,
+      "publishedQuestionCount": 49,
+      "quizQuestionCount": 49
     },
     {
       "id": "concurrent_programming",
@@ -887,10 +908,14 @@
       "name": "Concurrent Programming and Synchronization",
       "title": "并发编程与同步",
       "questionIds": [
+        "q-13ac9e7bfac45201",
         "q-17b51998a11d7f35",
+        "q-2b84cd60f37a1e95",
         "q-2b8b77844036d027",
         "q-330a03ec6bb48432",
+        "q-6decb55123a89740",
         "q-7a93e11483c8b03d",
+        "q-96bf14b578ce20a3",
         "q-9a6489100605fcb5",
         "q-9d79e1fae3025ef4",
         "q-b62930709c10ca7c",
@@ -941,9 +966,9 @@
         "q-ca36da4b1e755039",
         "q-d79493be4d3d185e"
       ],
-      "questionCount": 53,
-      "publishedQuestionCount": 49,
-      "quizQuestionCount": 49
+      "questionCount": 57,
+      "publishedQuestionCount": 53,
+      "quizQuestionCount": 53
     }
   ],
   "filters": {
@@ -972,9 +997,9 @@
     ]
   },
   "stats": {
-    "questions": 825,
-    "publishedQuestions": 797,
-    "quizQuestions": 797,
+    "questions": 850,
+    "publishedQuestions": 822,
+    "quizQuestions": 822,
     "withheldQuestions": 28,
     "papers": 39,
     "quizGroups": 60

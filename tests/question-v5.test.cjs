@@ -10,6 +10,20 @@ test('source collections are explicit with a legacy v5 default', () => {
   assert.equal(api.paperCollection({}),'pku-exam');
 });
 
+test('CSAPP practice questions retain independent context and complete code fences', () => {
+  const practice=bank.filter(q=>q.classification.tags.includes('csapp')&&q.classification.tags.includes('practice'));
+  assert(practice.length>=36);
+  const bounded=practice.find(q=>q.id==='q-6decb55123a89740');
+  assert.match(bounded.stem.text,/slots=1/);
+  assert.match(bounded.stem.text,/items=0/);
+  assert.equal((bounded.stem.text.match(/```text\n/g)||[]).length,2);
+  assert.deepEqual(bounded.solution.correctOptionIds,['C']);
+  const cgi=practice.find(q=>q.id==='q-97e1ac350d5f482c');
+  assert.match(cgi.stem.text,/```c\n[\s\S]*fflush\(stdout\);\nexit\(0\);\n```/);
+  assert.match(cgi.solution.reference.text,/子进程终止时/);
+  assert.match(cgi.options.find(o=>o.id===cgi.solution.correctOptionIds[0]).content.text,/关闭.*描述符/);
+});
+
 test('hand-authored assembly keeps labels at column zero and instructions indented', () => {
   const q=bank.find(q=>q.id==='q-cb30db95322d3051');
   const loop=q.parts.find(p=>p.id==='q-4284650c2063ef72').stem.text;

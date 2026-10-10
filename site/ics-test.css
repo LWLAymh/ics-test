@@ -69,6 +69,9 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-module-card:has(input:checked) { background: color-mix(in srgb, var(--accent-soft) 45%, var(--surface)); }
 .ics-module-card strong { display: block; font-size: 13px; font-weight: 550; }
 .ics-module-card small { display: block; margin-top: 3px; color: var(--text-muted); font-size: 11px; }
+.ics-module-card > span { flex: 1; min-width: 0; }
+.ics-module-card progress { display: block; width: 100%; height: 5px; margin-top: 8px; accent-color: var(--accent); }
+.ics-local-progress-note { margin: 10px 0 0; color: var(--text-muted); font-size: 12px; }
 .ics-options { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; padding-top: 22px; border-top: 1px solid var(--border); }
 .ics-field { display: grid; gap: 6px; min-width: 145px; color: var(--text-muted); font-size: 12px; }
 .ics-field select { width: 100%; max-width: 100%; height: 39px; padding: 0 32px 0 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); color: var(--text); font-size: 13px; }
@@ -149,6 +152,16 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-report-button { padding: 0; border: 0; background: transparent; color: var(--text-muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .ics-report-button:hover { color: var(--ics-danger); }
 .ics-report-status { color: var(--text-muted); font-size: 11px; overflow-wrap: anywhere; }
+#ics-mastery { padding: 7px 12px; font-size: 12px; }
+#ics-mastery[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.ics-issue-form { margin-top: 14px; padding: 16px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg-soft); }
+.ics-issue-form label { display: block; font-size: 13px; font-weight: 600; }
+.ics-issue-form textarea { display: block; box-sizing: border-box; width: 100%; margin-top: 8px; padding: 10px; resize: vertical; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; font-size: 14px; }
+.ics-issue-form p { margin: 8px 0 12px; color: var(--text-muted); font-size: 12px; }
+.ics-issue-form-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+.ics-public-issue-message { margin: 10px 0 0; padding: 10px 12px; border-left: 2px solid var(--border); background: var(--bg-soft); }
+.ics-public-issue-message p { margin: 5px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; }
+.ics-public-issue-message small { color: var(--text-muted); font-size: 11px; }
 .ics-session-sidebar { min-width: 0; padding: 24px 18px; border-left: 1px solid var(--border); background: color-mix(in srgb, var(--bg-soft) 30%, var(--surface)); }
 .ics-session-sidebar summary { display: flex; justify-content: space-between; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 600; }
 #ics-completion-summary { color: var(--text-muted); font-size: 11px; font-weight: 400; }

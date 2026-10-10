@@ -10,11 +10,13 @@ const all = JSON.parse(fs.readFileSync(path.join(root, 'question-bank/web-data/q
 const source = fs.readFileSync(path.join(root, 'site/ics-test.js'), 'utf8').replace('  init();',
   '  window.__test = {state, ui, renderQuestion, renderSolution, renderContent, rankByErrorRate, loadQuestionBank}; init();');
 const stub = `window.__writes=[];window.__rows={};window.supabase={createClient(){return {
-from(){return {select(){return this},order(){return Promise.resolve({data:[]})},
+from(table){return {select(){return this},order(){return this},
+then(resolve,reject){return Promise.resolve({data:table==='ics_question_issue_reports' ? window.__issues||[] : []}).then(resolve,reject)},
+range(start,end){return Promise.resolve({data:(window.__messages||[]).slice(start,end+1),error:window.__messageError||null})},
 in(k,ids){return Promise.resolve({data:ids.map(id=>window.__rows[id]).filter(Boolean)})},
 eq(k,id){this.id=id;return this},maybeSingle(){return Promise.resolve({data:window.__rows[this.id]||null})}}},
 channel(){return {on(){return this},subscribe(){return this}}},removeChannel(){},
-rpc(name,args){window.__writes.push({name,args});return Promise.resolve({data:null})}}}};`;
+rpc(name,args){window.__writes.push({name,args});return window.__rpcHandler ? window.__rpcHandler(name,args) : Promise.resolve({data:null})}}}};`;
 function content(text, blanks) { return { format: 'markdown', text, ...(blanks ? {blanks} : {}) }; }
 function solution(grading, extra = {}) {
   return { state:'available', grading, reference:content('人工参考答案。'), provenance:{origin:'unknown',crossChecked:null}, ...extra };
@@ -86,6 +88,97 @@ async function run() {
     await page.uncheck('#ics-source-picker input[value="csapp-textbook"]');
     assert.equal(await page.locator('#ics-exam-type').inputValue(),'');
     await page.check('#ics-source-picker input[value="csapp-textbook"]');
+    // Mastery is local, survives refresh and never mutates quiz/statistics.
+    await fixture(page,[single]);
+    await page.click('#ics-mastery');
+    assert.equal(await page.locator('#ics-mastery').getAttribute('aria-pressed'),'true');
+    assert(await page.evaluate(id=>JSON.parse(localStorage.getItem('ics-question-mastery-v1')).questionIds.includes(id),single.id));
+    assert.equal(await page.evaluate(()=>window.__writes.length),0);
+    assert.equal(await page.evaluate(()=>window.__test.state.records.length),0);
+    assert(await page.locator('#ics-modules progress').evaluateAll(items=>items.some(p=>p.value===1)));
+    await page.reload();await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
+    await fixture(page,[single]);
+    assert.equal(await page.locator('#ics-mastery').getAttribute('aria-pressed'),'true');
+    await page.click('#ics-abandon');await page.selectOption('#ics-count','50');await page.click('#ics-start');
+    await page.waitForFunction(()=>!document.querySelector('#ics-quiz').hidden);
+    assert(!(await page.evaluate(()=>window.__test.state.questions.map(q=>q.id))).includes(single.id));
+    // All mastered: random explains the empty pool; whole-module practice keeps it.
+    await page.evaluate(ids=>{localStorage.setItem('ics-question-mastery-v1',JSON.stringify({version:1,questionIds:ids}));
+      dispatchEvent(new StorageEvent('storage',{key:'ics-question-mastery-v1'}));},initialPapers.flatMap(p=>p.questionIds));
+    await page.click('#ics-abandon');await page.click('#ics-start');
+    assert.match(await page.locator('#ics-setup-error').innerText(),/都已标记熟知/);
+    await page.check('input[value="module-all"]');await page.click('#ics-start');
+    await page.waitForFunction(()=>!document.querySelector('#ics-quiz').hidden);
+    assert((await page.evaluate(()=>window.__test.state.questions.length))>0);
+    await page.click('#ics-abandon');await page.check('input[value="exam"]');
+    await page.selectOption('#ics-paper',initialPapers[0].id);await page.click('#ics-start');
+    await page.waitForFunction(()=>!document.querySelector('#ics-quiz').hidden);
+    assert.equal(await page.evaluate(()=>window.__test.state.questions.length),initialPapers[0].questionIds.length);
+    // Cancellation and unavailable storage are explicit, not silent failures.
+    await fixture(page,[single]);await page.click('#ics-mastery');
+    assert.equal(await page.locator('#ics-mastery').getAttribute('aria-pressed'),'false');
+    await page.evaluate(()=>{window.__setItem=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw new Error('blocked')}});
+    await page.click('#ics-mastery');assert.match(await page.locator('#ics-mastery-status').innerText(),/存储不可用/);
+    await page.evaluate(()=>{Storage.prototype.setItem=window.__setItem;localStorage.setItem('ics-question-mastery-v1','invalid json')});
+    await page.reload();await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
+    assert.equal(await page.evaluate(()=>window.__test.state.mastered.size),0);
+    assert.match(await page.locator('#ics-mastery-note').innerText(),/数据损坏/);
+    await fixture(page,[single]);await page.click('#ics-mastery');await page.click('#ics-mastery');
+    assert.equal(await page.locator('#ics-mastery').getAttribute('aria-pressed'),'false');
+    // Reports require explicit confirmation; optional text is preserved on error.
+    await page.click('#ics-report-issue');assert.equal(await page.evaluate(()=>window.__writes.length),0);
+    await page.fill('#ics-issue-message','选项包含噪声 <script>alert(1)</script>');
+    await page.click('#ics-issue-cancel');assert.equal(await page.evaluate(()=>window.__writes.length),0);
+    await page.click('#ics-report-issue');assert.match(await page.locator('#ics-issue-message').inputValue(),/选项包含噪声/);
+    await page.evaluate(()=>window.__rpcHandler=()=>Promise.resolve({error:{code:'PGRST202',message:'missing RPC'}}));
+    await page.click('#ics-issue-send');await page.waitForFunction(()=>document.querySelector('#ics-report-status').textContent.includes('尚未启用'));
+    assert.equal(await page.locator('#ics-issue-form').isVisible(),true);
+    assert.equal(await page.evaluate(()=>window.__test.state.reportedThisSession.size),0);
+    assert.equal(await page.evaluate(()=>window.__writes.length),1); // No dropping text into the old RPC.
+    await page.evaluate(()=>window.__rpcHandler=()=>Promise.reject(new Error('network offline')));
+    await page.click('#ics-issue-send');await page.waitForFunction(()=>document.querySelector('#ics-report-status').textContent.includes('network offline'));
+    assert.match(await page.locator('#ics-issue-message').inputValue(),/script/);
+    await page.evaluate(()=>window.__rpcHandler=null);await page.click('#ics-issue-send');
+    await page.waitForFunction(()=>document.querySelector('#ics-issue-form').hidden);
+    const report=await page.evaluate(()=>window.__writes.at(-1));
+    assert.equal(report.name,'report_ics_question_issue_with_message');
+    assert.equal(report.args.p_question_id,single.id);
+    assert.equal(report.args.p_message,'选项包含噪声 <script>alert(1)</script>');
+    assert.equal(await page.locator('#ics-report-issue').isDisabled(),true);
+    assert.equal(await page.locator('#ics-issue-list script').count(),0);
+    // Public explanations are plain text; >1000 rows are paginated, no receipt IDs.
+    await page.evaluate(id=>{
+      window.__issues=[{question_id:id,report_count:2,last_reported_at:new Date().toISOString()}];
+      window.__messages=Array.from({length:1001},(_,i)=>({id:String(i),question_id:id,
+        message:i===0?'<img src=x onerror=alert(1)>\n第二行说明':'说明 '+i,reported_at:new Date().toISOString()}));
+      window.__test.state.reportedIssues=window.__issues;
+      document.querySelector('#ics-issue-board').open=true;
+    },single.id);
+    await page.waitForFunction(()=>document.querySelectorAll('.ics-public-issue-message').length===1001);
+    assert.match(await page.locator('.ics-public-issue-message').first().innerText(),/<img src=x onerror=alert\(1\)>/);
+    assert.equal(await page.locator('.ics-public-issue-message img').count(),0);
+    await page.evaluate(()=>{document.querySelector('#ics-issue-board').open=false;window.__messageError={code:'42P01'}});
+    await page.waitForTimeout(50);
+    await page.evaluate(()=>document.querySelector('#ics-issue-board').open=true);
+    await page.waitForFunction(()=>document.querySelector('#ics-issue-message-status').textContent.includes('无法读取'));
+    assert.equal(await page.locator('#ics-issue-list article').count(),1);
+    await page.evaluate(()=>{window.__messageError=null;window.__messages=[];window.__issues=[];document.querySelector('#ics-issue-board').open=false});
+    await fixture(page,[multiple]);await page.click('#ics-report-issue');
+    await page.evaluate(()=>window.__rpcHandler=name=>Promise.resolve(name==='report_ics_question_issue_with_message'
+      ? {error:{code:'PGRST202',message:'missing RPC'}} : {data:null}));
+    await page.click('#ics-issue-send');await page.waitForFunction(()=>document.querySelector('#ics-issue-form').hidden);
+    assert.equal(await page.evaluate(()=>window.__writes.at(-1).name),'report_ics_question_issue');
+    // Navigation while a request is in flight must not mark the next question.
+    await fixture(page,[fill,short]);await page.click('#ics-report-issue');
+    await page.fill('#ics-issue-message','本题第二行缺少代码围栏');
+    await page.evaluate(()=>window.__rpcHandler=()=>new Promise(resolve=>{window.__resolveReport=resolve}));
+    await page.click('#ics-issue-send');await page.click('#ics-next');
+    await page.evaluate(()=>window.__resolveReport({data:null}));
+    await page.waitForFunction(()=>!window.__test.state.reportingQuestions.size);
+    assert.equal(await page.locator('#ics-report-issue').isDisabled(),false);
+    assert(await page.evaluate(id=>window.__test.state.reportedThisSession.has(id),fill.id));
+    assert(!(await page.evaluate(id=>window.__test.state.reportedThisSession.has(id),short.id)));
+    await page.evaluate(()=>window.__rpcHandler=null);
     // Reported questions: actual math rendering, intact C blocks, and mirrored
     // assembly operands. These checks exercise source repairs, not heuristics.
     const minimum = all.find(q=>q.id==='q-96276f24280880cd');
