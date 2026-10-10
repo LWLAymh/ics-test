@@ -357,8 +357,8 @@
         "verifiedAnswerCount": 23,
         "singleChoiceCount": 13,
         "multipleChoiceCount": 2,
-        "fillCount": 6,
-        "shortAnswerCount": 1,
+        "fillCount": 7,
+        "shortAnswerCount": 0,
         "compositeCount": 1
       }
     },
@@ -471,8 +471,8 @@
         "verifiedAnswerCount": 24,
         "singleChoiceCount": 20,
         "multipleChoiceCount": 0,
-        "fillCount": 0,
-        "shortAnswerCount": 3,
+        "fillCount": 2,
+        "shortAnswerCount": 1,
         "compositeCount": 1
       }
     },
@@ -677,8 +677,8 @@
         "verifiedAnswerCount": 60,
         "singleChoiceCount": 47,
         "multipleChoiceCount": 0,
-        "fillCount": 5,
-        "shortAnswerCount": 3,
+        "fillCount": 6,
+        "shortAnswerCount": 2,
         "compositeCount": 5
       }
     },
@@ -898,8 +898,8 @@
         "verifiedAnswerCount": 26,
         "singleChoiceCount": 19,
         "multipleChoiceCount": 1,
-        "fillCount": 3,
-        "shortAnswerCount": 2,
+        "fillCount": 4,
+        "shortAnswerCount": 1,
         "compositeCount": 1
       }
     },
@@ -1233,8 +1233,8 @@
         "verifiedAnswerCount": 27,
         "singleChoiceCount": 15,
         "multipleChoiceCount": 0,
-        "fillCount": 4,
-        "shortAnswerCount": 3,
+        "fillCount": 5,
+        "shortAnswerCount": 2,
         "compositeCount": 0
       }
     },

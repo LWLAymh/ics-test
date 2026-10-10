@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-fb0c6fbc0e9f5b44",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-febcfbeee0f364b2",
   "paperOrder": 24,
   "number": {
@@ -53,55 +53,181 @@
         "id": "q24-aslr-source",
         "marker": "{{blank:q24-aslr-source}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       },
       {
         "id": "q24-aslr-recompile",
         "marker": "{{blank:q24-aslr-recompile}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       },
       {
         "id": "q24-aslr-hardware",
         "marker": "{{blank:q24-aslr-hardware}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       },
       {
         "id": "q24-nx-source",
         "marker": "{{blank:q24-nx-source}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       },
       {
         "id": "q24-nx-recompile",
         "marker": "{{blank:q24-nx-recompile}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       },
       {
         "id": "q24-nx-hardware",
         "marker": "{{blank:q24-nx-hardware}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       },
       {
         "id": "q24-canary-source",
         "marker": "{{blank:q24-canary-source}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       },
       {
         "id": "q24-canary-recompile",
         "marker": "{{blank:q24-canary-recompile}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       },
       {
         "id": "q24-canary-hardware",
         "marker": "{{blank:q24-canary-hardware}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "否"
+            }
+          ]
+        }
       }
     ]
   },
@@ -119,102 +245,66 @@
     "blankAnswers": [
       {
         "blankId": "q24-aslr-source",
-        "method": "exact",
-        "acceptedAnswers": [
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "q24-aslr-recompile",
-        "method": "exact",
-        "acceptedAnswers": [
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "q24-aslr-hardware",
-        "method": "exact",
-        "acceptedAnswers": [
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "q24-nx-source",
-        "method": "exact",
-        "acceptedAnswers": [
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "q24-nx-recompile",
-        "method": "exact",
-        "acceptedAnswers": [
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "q24-nx-hardware",
-        "method": "exact",
-        "acceptedAnswers": [
-          "是"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "yes"
+        ]
       },
       {
         "blankId": "q24-canary-source",
-        "method": "exact",
-        "acceptedAnswers": [
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "q24-canary-recompile",
-        "method": "exact",
-        "acceptedAnswers": [
-          "是"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "yes"
+        ]
       },
       {
         "blankId": "q24-canary-hardware",
-        "method": "exact",
-        "acceptedAnswers": [
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       }
     ]
   }

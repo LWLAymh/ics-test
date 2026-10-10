@@ -3,6 +3,52 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
+
+test('all declared select keys grade by values; wrong and missing selections fail', () => {
+  for (const question of bank) for (const unit of question.parts || [question]) {
+    if (unit.type !== 'fill') continue;
+    for (const blank of unit.stem.blanks) {
+      if (blank.input?.kind !== 'select') continue;
+      const rule = unit.solution.blankAnswers.find(r=>r.blankId===blank.id);
+      const solution = {state:'available',grading:'blanks',blankAnswers:[rule]};
+      if (rule.method === 'self') {
+        assert.equal(api.gradeBlanks({},solution),null);
+        continue;
+      }
+      const correct = blank.input.multiple ? rule.correctValues : rule.correctValues[0];
+      assert.equal(api.gradeBlanks({[blank.id]:correct},solution),true,question.id+'/'+blank.id);
+      assert.equal(api.gradeBlanks({},solution),false);
+      const wrong = blank.input.options.find(o=>!rule.correctValues.includes(o.value));
+      const changed = wrong ? [...rule.correctValues,wrong.value] : rule.correctValues.slice(1);
+      assert.equal(api.gradeBlanks({[blank.id]:changed},solution),false);
+    }
+  }
+});
+
+test('bounded comparison uses full candidates, while numeric/code answers stay text', () => {
+  const comparison=bank.find(q=>q.id==='q-be9654f19b9b4b25');
+  assert.deepEqual(comparison.stem.blanks[0].input.options.map(o=>o.label),['大于','小于','等于']);
+  assert.equal(api.gradeBlanks({'q2-relation':'gt'},comparison.solution),true);
+  assert.equal(api.gradeBlanks({'q2-relation':'lt'},comparison.solution),false);
+  const mixed=bank.find(q=>q.id==='q-7b8ae9d0614c29bf');
+  assert.equal(mixed.stem.blanks.find(b=>b.id==='q3').input.multiple,true);
+  assert.equal(mixed.stem.blanks.find(b=>b.id==='q2a').input,undefined);
+  assert.equal(mixed.stem.blanks.find(b=>b.id==='q4b').input,undefined);
+});
+
+test('inline assembly underscores are not blanks; restored judgments include numeric output', () => {
+  const question=bank.find(q=>q.id==='q-48830bbf91e759fa');
+  const first=question.parts.find(p=>p.id==='q-49ad744352e4e33c');
+  assert.match(first.stem.text,/__asm__ __volatile__/);
+  assert.deepEqual(first.stem.blanks.map(b=>b.id),['portable','equivalent','output']);
+  assert.equal(api.gradeBlanks({portable:'no',equivalent:'yes',output:'3.75'},first.solution),true);
+  assert.equal(api.gradeBlanks({portable:'no',equivalent:'yes'},first.solution),false);
+  const third=question.parts.find(p=>p.id==='q-50d8c8bfdff1fa9f');
+  assert.equal(api.gradeBlanks({'legacy-gap-0':'no','legacy-gap-1':'no','union-output':'-1105'},third.solution),true);
+  assert.equal(api.gradeBlanks({'legacy-gap-0':'no','legacy-gap-1':'no'},third.solution),false);
+  const symbols=bank.find(q=>q.id==='q-53b7581785c41178');
+  assert(!symbols.stem.blanks.some(b=>b.marker==='__'));
+});
 test('strict version gate', () => {
   assert.throws(() => api.assertVersion({ schemaVersion: 3 }));
   assert.throws(() => api.assertVersion({ schemaVersion: 5 }));

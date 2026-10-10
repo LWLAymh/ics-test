@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-beb1170e1a0ed2fe",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ffd1f5f688babe1b",
   "paperOrder": 16,
   "number": {
@@ -59,7 +59,21 @@
         "id": "sign",
         "marker": "{{blank:sign}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "positive",
+              "label": "正"
+            },
+            {
+              "value": "negative",
+              "label": "负"
+            }
+          ]
+        }
       },
       {
         "id": "absolute-value",
@@ -87,7 +101,10 @@
       },
       {
         "blankId": "sign",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "negative"
+        ]
       },
       {
         "blankId": "absolute-value",

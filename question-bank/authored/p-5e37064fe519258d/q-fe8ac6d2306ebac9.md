@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-fe8ac6d2306ebac9",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-5e37064fe519258d",
   "paperOrder": 16,
   "number": {
@@ -92,13 +92,49 @@
         "id": "real-count-change",
         "marker": "{{blank:real-count-change}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "up",
+              "label": "增加"
+            },
+            {
+              "value": "down",
+              "label": "降低"
+            },
+            {
+              "value": "same",
+              "label": "不变"
+            }
+          ]
+        }
       },
       {
         "id": "precision-change",
         "marker": "{{blank:precision-change}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "up",
+              "label": "增加"
+            },
+            {
+              "value": "down",
+              "label": "降低"
+            },
+            {
+              "value": "same",
+              "label": "不变"
+            }
+          ]
+        }
       }
     ]
   },
@@ -194,25 +230,17 @@
       },
       {
         "blankId": "real-count-change",
-        "method": "exact",
-        "acceptedAnswers": [
-          "增加"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "up"
+        ]
       },
       {
         "blankId": "precision-change",
-        "method": "exact",
-        "acceptedAnswers": [
-          "降低"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "down"
+        ]
       }
     ]
   }

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-3ec4aed1f80da6f3",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-e8f40973e2cc056e",
   "paperOrder": 28,
   "number": {
@@ -87,7 +87,21 @@
             "id": "swap-result",
             "marker": "{{blank:swap-result}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
           }
         ]
       },
@@ -105,14 +119,10 @@
         "blankAnswers": [
           {
             "blankId": "swap-result",
-            "method": "exact",
-            "acceptedAnswers": [
-              "否"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "no"
+            ]
           }
         ]
       },

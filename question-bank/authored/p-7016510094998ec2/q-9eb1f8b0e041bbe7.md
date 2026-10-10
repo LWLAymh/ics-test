@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-9eb1f8b0e041bbe7",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 20,
   "number": {
@@ -132,7 +132,21 @@
             "id": "legacy-gap-0",
             "marker": "______",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "SOCK_STREAM",
+                  "label": "SOCK_STREAM"
+                },
+                {
+                  "value": "SOCK_DGRAM",
+                  "label": "SOCK_DGRAM"
+                }
+              ]
+            }
           }
         ]
       },
@@ -150,7 +164,10 @@
         "blankAnswers": [
           {
             "blankId": "legacy-gap-0",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "SOCK_STREAM"
+            ]
           }
         ]
       },
@@ -195,7 +212,21 @@
             "id": "legacy-gap-0",
             "marker": "______",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "name-to-ip",
+                  "label": "主机名对应的 IP 地址"
+                },
+                {
+                  "value": "ip-to-name",
+                  "label": "IP 地址对应的主机名"
+                }
+              ]
+            }
           }
         ]
       },
@@ -213,7 +244,10 @@
         "blankAnswers": [
           {
             "blankId": "legacy-gap-0",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "ip-to-name"
+            ]
           }
         ]
       },

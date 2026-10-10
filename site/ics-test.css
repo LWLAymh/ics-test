@@ -102,6 +102,7 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .post-content table { display: block; max-width: 100%; margin: 16px 0; border-collapse: collapse; overflow: auto; font-size: 14px; }
 .post-content th, .post-content td { padding: 8px 12px; border: 1px solid var(--border); vertical-align: top; text-align: left; }
 .post-content th { background: var(--bg-soft); font-weight: 600; }
+.post-content td code { white-space: nowrap; overflow-wrap: normal; }
 .post-content img { display: block; max-width: 100%; height: auto; max-height: 760px; margin: 18px auto; object-fit: contain; background: white; }
 .post-content mjx-container:not([display="true"]) { font-size: 1em !important; }
 .post-content mjx-container[display="true"] { max-width: 100%; margin: 18px 0 !important; padding: 8px 0; overflow-x: auto; overflow-y: hidden; }

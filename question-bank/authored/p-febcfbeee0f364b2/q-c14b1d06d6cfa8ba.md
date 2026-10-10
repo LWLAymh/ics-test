@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c14b1d06d6cfa8ba",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-febcfbeee0f364b2",
   "paperOrder": 17,
   "number": {
@@ -53,25 +53,81 @@
         "id": "q17-v0",
         "marker": "{{blank:q17-v0}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "register",
+              "label": "寄存器"
+            },
+            {
+              "value": "memory",
+              "label": "内存"
+            }
+          ]
+        }
       },
       {
         "id": "q17-v1",
         "marker": "{{blank:q17-v1}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "register",
+              "label": "寄存器"
+            },
+            {
+              "value": "memory",
+              "label": "内存"
+            }
+          ]
+        }
       },
       {
         "id": "q17-v2",
         "marker": "{{blank:q17-v2}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "register",
+              "label": "寄存器"
+            },
+            {
+              "value": "memory",
+              "label": "内存"
+            }
+          ]
+        }
       },
       {
         "id": "q17-v3",
         "marker": "{{blank:q17-v3}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "register",
+              "label": "寄存器"
+            },
+            {
+              "value": "memory",
+              "label": "内存"
+            }
+          ]
+        }
       }
     ]
   },
@@ -89,47 +145,31 @@
     "blankAnswers": [
       {
         "blankId": "q17-v0",
-        "method": "exact",
-        "acceptedAnswers": [
-          "寄存器"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "register"
+        ]
       },
       {
         "blankId": "q17-v1",
-        "method": "exact",
-        "acceptedAnswers": [
-          "内存"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "memory"
+        ]
       },
       {
         "blankId": "q17-v2",
-        "method": "exact",
-        "acceptedAnswers": [
-          "寄存器"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "register"
+        ]
       },
       {
         "blankId": "q17-v3",
-        "method": "exact",
-        "acceptedAnswers": [
-          "寄存器"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "register"
+        ]
       }
     ]
   }

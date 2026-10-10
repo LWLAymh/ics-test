@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c4db69af5ae828fe",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-2c2b56c4452255b1",
   "paperOrder": 21,
   "number": {
@@ -50,25 +50,97 @@
         "id": "q2-fifo-misses",
         "marker": "{{blank:q2-fifo-misses}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "lt",
+              "label": "<"
+            },
+            {
+              "value": "eq",
+              "label": "="
+            },
+            {
+              "value": "gt",
+              "label": ">"
+            }
+          ]
+        }
       },
       {
         "id": "q2-cold-misses",
         "marker": "{{blank:q2-cold-misses}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "cold",
+              "label": "冷／强制性"
+            },
+            {
+              "value": "conflict",
+              "label": "冲突"
+            },
+            {
+              "value": "capacity",
+              "label": "容量"
+            }
+          ]
+        }
       },
       {
         "id": "q2-cache-level",
         "marker": "{{blank:q2-cache-level}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "L1",
+              "label": "L1"
+            },
+            {
+              "value": "L2",
+              "label": "L2"
+            },
+            {
+              "value": "L3",
+              "label": "L3"
+            }
+          ]
+        }
       },
       {
         "id": "q2-stride-order",
         "marker": "{{blank:q2-stride-order}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "lt",
+              "label": "<"
+            },
+            {
+              "value": "eq",
+              "label": "="
+            },
+            {
+              "value": "gt",
+              "label": ">"
+            }
+          ]
+        }
       },
       {
         "id": "q2-capacity",
@@ -98,19 +170,31 @@
     "blankAnswers": [
       {
         "blankId": "q2-fifo-misses",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "lt"
+        ]
       },
       {
         "blankId": "q2-cold-misses",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "cold"
+        ]
       },
       {
         "blankId": "q2-cache-level",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "L3"
+        ]
       },
       {
         "blankId": "q2-stride-order",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "gt"
+        ]
       },
       {
         "blankId": "q2-capacity",

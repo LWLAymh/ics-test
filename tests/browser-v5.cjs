@@ -139,6 +139,45 @@ async function run() {
     await page.keyboard.press('Escape');await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.score),1);
     // Native single-select is also disabled for unavailable root/part answers.
+    // Real finite-domain additions: screenshot example, dense tables, composite
+    // controls and mixed text/select grading, without network writes.
+    const relation=all.find(q=>q.id==='q-be9654f19b9b4b25');
+    await fixture(page,[relation,single]);
+    const finiteOutput=process.env.ICS_SCREENSHOTS;
+    if(finiteOutput){
+      fs.mkdirSync(finiteOutput,{recursive:true});
+      await page.screenshot({path:path.join(finiteOutput,'finite-comparison-desktop.png'),fullPage:true});
+    }
+    assert.equal(await page.locator('select[data-blank-id="q2-relation"]').count(),1);
+    await page.selectOption('select[data-blank-id="q2-relation"]','gt');
+    await page.click('#ics-next');await page.click('#ics-previous');
+    assert.equal(await page.locator('select[data-blank-id="q2-relation"]').inputValue(),'gt');
+    await page.click('#ics-submit');
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    assert(await page.locator('select[data-blank-id="q2-relation"]').isDisabled());
+    const symbolTable=all.find(q=>q.id==='q-c448153415e0dd8d');
+    await fixture(page,[symbolTable]);
+    assert.equal(await page.locator('table select.ics-blank-input').count(),20);
+    assert.equal(await page.locator('table td code').first().evaluate(el=>getComputedStyle(el).whiteSpace),'nowrap');
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    await page.setViewportSize({width:1280,height:900});
+    if(finiteOutput)await page.screenshot({path:path.join(finiteOutput,'finite-table-desktop.png'),fullPage:true});
+    const assembly=all.find(q=>q.id==='q-48830bbf91e759fa');
+    await fixture(page,[assembly]);
+    assert.match(await page.locator('#ics-question-content pre').first().innerText(),/__asm__ __volatile__/);
+    assert.equal(await page.locator('#ics-question-content pre select').count(),0);
+    assert.equal(await page.locator('select[data-blank-id="portable"]').count(),1);
+    const network=all.find(q=>q.id==='q-b72158b8a694d842');
+    await fixture(page,[network]);
+    assert.equal(await page.locator('table select.ics-blank-input').count(),6);
+    for(const answer of network.solution.blankAnswers){
+      const el=page.locator('[data-blank-id="'+answer.blankId+'"]');
+      if(answer.method==='selection')await el.selectOption(answer.correctValues[0]);
+      else await el.fill(answer.acceptedAnswers[0]);
+    }
+    await page.click('#ics-submit');
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
     await fixture(page,[{...mixedDropdown,solution:{...solution('none'),state:'missing',reason:'待复核'}}]);
     assert(await page.locator('select.ics-blank-input').first().isDisabled());
     // Declared missing answer must not be blocked by required fill inputs.
@@ -187,6 +226,10 @@ async function run() {
       const assets=new Set();let sections=0;
       for(let i=0;i<questions.length;i++){
         state.index=i;renderQuestion();ui.reference.innerHTML=renderSolution(questions[i]);
+        const expectedSelects=(questions[i].parts||[questions[i]]).reduce((n,u)=>
+          n+(u.stem.blanks||[]).filter(b=>b.input?.kind==='select').length,0);
+        const actualSelects=ui.questionContent.querySelectorAll('select.ics-blank-input,[data-blank-toggle]').length;
+        if(actualSelects!==expectedSelects)throw new Error('Lost select: '+questions[i].id+' '+actualSelects+'/'+expectedSelects);
         for(const node of questions[i].parts||[questions[i]]){
           const el=document.createElement('div');el.innerHTML=renderContent(node.stem)+(node.options||[]).map(o=>renderContent(o.content)).join('');
           el.querySelectorAll('img').forEach(img=>assets.add(img.src));sections++;
@@ -216,6 +259,10 @@ async function run() {
     await page.setViewportSize({width:1280,height:900});
     await page.locator('[data-blank-toggle]').nth(2).click();
     if(output)await page.screenshot({path:path.join(output,'dropdown-desktop.png')});
+    await fixture(page,[relation]);
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    if(output)await page.screenshot({path:path.join(output,'finite-comparison-mobile.png'),fullPage:true});
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({success:true,...result,assets:result.assets.length}));
   } finally { await browser.close(); }

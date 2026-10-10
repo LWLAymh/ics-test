@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-bcf53a1d45ecdc51",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-2c2b56c4452255b1",
   "paperOrder": 50,
   "number": {
@@ -93,16 +93,358 @@
           "题 题干+Part A"
         ]
       },
-      "type": "short-answer",
+      "type": "fill",
       "moduleIds": [
         "compilation_linking"
       ],
       "stem": {
-        "format": "markdown"
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "iter-present",
+            "marker": "{{blank:iter-present}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "iter-section",
+            "marker": "{{blank:iter-section}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "pnt-present",
+            "marker": "{{blank:pnt-present}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "pnt-section",
+            "marker": "{{blank:pnt-section}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "Point-present",
+            "marker": "{{blank:Point-present}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "Point-section",
+            "marker": "{{blank:Point-section}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "total-present",
+            "marker": "{{blank:total-present}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "total-section",
+            "marker": "{{blank:total-section}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "seed-present",
+            "marker": "{{blank:seed-present}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "seed-section",
+            "marker": "{{blank:seed-section}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          }
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
         "reference": {
           "format": "markdown"
         },
@@ -110,7 +452,64 @@
           "origin": "unknown",
           "crossChecked": null,
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        }
+        },
+        "blankAnswers": [
+          {
+            "blankId": "iter-present",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "iter-section",
+            "method": "self"
+          },
+          {
+            "blankId": "pnt-present",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "pnt-section",
+            "method": "self"
+          },
+          {
+            "blankId": "Point-present",
+            "method": "selection",
+            "correctValues": [
+              "no"
+            ]
+          },
+          {
+            "blankId": "Point-section",
+            "method": "self"
+          },
+          {
+            "blankId": "total-present",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "total-section",
+            "method": "self"
+          },
+          {
+            "blankId": "seed-present",
+            "method": "selection",
+            "correctValues": [
+              "no"
+            ]
+          },
+          {
+            "blankId": "seed-section",
+            "method": "self"
+          }
+        ]
       },
       "sources": [
         {
@@ -195,16 +594,66 @@
           "题 Part C"
         ]
       },
-      "type": "short-answer",
+      "type": "fill",
       "moduleIds": [
         "ecf_and_system_io"
       ],
       "stem": {
-        "format": "markdown"
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "entry",
+            "marker": "{{blank:entry}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · _init"
+                },
+                {
+                  "value": "B",
+                  "label": "B · main"
+                },
+                {
+                  "value": "C",
+                  "label": "C · __libc_start_main"
+                },
+                {
+                  "value": "D",
+                  "label": "D · _start"
+                }
+              ]
+            }
+          },
+          {
+            "id": "mode",
+            "marker": "{{blank:mode}}",
+            "occurrence": 0,
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "user",
+                  "label": "用户"
+                },
+                {
+                  "value": "kernel",
+                  "label": "内核"
+                }
+              ]
+            }
+          }
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
         "reference": {
           "format": "markdown"
         },
@@ -212,7 +661,23 @@
           "origin": "unknown",
           "crossChecked": null,
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        }
+        },
+        "blankAnswers": [
+          {
+            "blankId": "entry",
+            "method": "selection",
+            "correctValues": [
+              "D"
+            ]
+          },
+          {
+            "blankId": "mode",
+            "method": "selection",
+            "correctValues": [
+              "user"
+            ]
+          }
+        ]
       },
       "sources": [
         {
@@ -265,8 +730,8 @@ Part A. **(每个符号1分，共5分)** 请说明以下符号是否在a.out的�
 
 | 符号名                             | `iter` | `pnt` | `Point` | `total` | `seed` |
 |------------------------------------|------|-----|-------|-------|------|
-| 在符号表中？****（填是/否）**** |      |     |       |       |      |
-| 定义所在节                         |      |     |       |       |      |
+| 在符号表中？（填是／否） | {{blank:iter-present}} | {{blank:pnt-present}} | {{blank:Point-present}} | {{blank:total-present}} | {{blank:seed-present}} |
+| 定义所在节（无条目选 /） | {{blank:iter-section}} | {{blank:pnt-section}} | {{blank:Point-section}} | {{blank:total-section}} | {{blank:seed-section}} |
 %%% part-reference: q-a26ced764598c929
 答案：本大题的 Part A、Part B、Part C 答案如下。
 
@@ -342,7 +807,7 @@ Part B.** (每空1分，共3分)** 使用`objdump -dx f1.o f2.o` 看到如下几
 
 **评分标准：第二空允许有若干前导0，其余每空必须完全一致才得分**
 %%% part-stem: q-58e76213788bb4aa
-Part C. **(每空1分，共2分)** 使用`execve`加载a.out并执行时，其中第一个被执行的语句默认是\_\_\_\_\_\_\_(单选) 函数的开头。已知 gcc -e 可以修改该默认行为到一个程序指定的函数，据此你推断该函数执行在\_\_\_\_\_\_\_态下(填 用户/内核)。
+Part C. **(每空1分，共2分)** 使用`execve`加载a.out并执行时，其中第一个被执行的语句默认是{{blank:entry}}(单选) 函数的开头。已知 gcc -e 可以修改该默认行为到一个程序指定的函数，据此你推断该函数执行在{{blank:mode}}态下(填 用户/内核)。
 
 1.  `_init     B.main     C.__libc_start_main    D._start`
 %%% part-reference: q-58e76213788bb4aa

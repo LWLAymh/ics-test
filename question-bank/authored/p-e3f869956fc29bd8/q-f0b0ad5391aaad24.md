@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f0b0ad5391aaad24",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-e3f869956fc29bd8",
   "paperOrder": 17,
   "number": {
@@ -81,11 +81,732 @@
       ],
       "stem": {
         "format": "markdown",
-        "blanks": []
+        "blanks": [
+          {
+            "id": "bufp0-present",
+            "marker": "{{blank:bufp0-present}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "bufp0-type",
+            "marker": "{{blank:bufp0-type}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "local",
+                  "label": "局部"
+                },
+                {
+                  "value": "global",
+                  "label": "全局"
+                },
+                {
+                  "value": "external",
+                  "label": "外部"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                }
+              ]
+            }
+          },
+          {
+            "id": "bufp0-module",
+            "marker": "{{blank:bufp0-module}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "m.o",
+                  "label": "m.o"
+                },
+                {
+                  "value": "foo.o",
+                  "label": "foo.o"
+                },
+                {
+                  "value": "/",
+                  "label": "/"
+                }
+              ]
+            }
+          },
+          {
+            "id": "bufp0-section",
+            "marker": "{{blank:bufp0-section}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "buf-present",
+            "marker": "{{blank:buf-present}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "buf-type",
+            "marker": "{{blank:buf-type}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "local",
+                  "label": "局部"
+                },
+                {
+                  "value": "global",
+                  "label": "全局"
+                },
+                {
+                  "value": "external",
+                  "label": "外部"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                }
+              ]
+            }
+          },
+          {
+            "id": "buf-module",
+            "marker": "{{blank:buf-module}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "m.o",
+                  "label": "m.o"
+                },
+                {
+                  "value": "foo.o",
+                  "label": "foo.o"
+                },
+                {
+                  "value": "/",
+                  "label": "/"
+                }
+              ]
+            }
+          },
+          {
+            "id": "buf-section",
+            "marker": "{{blank:buf-section}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "bufp1-present",
+            "marker": "{{blank:bufp1-present}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "bufp1-type",
+            "marker": "{{blank:bufp1-type}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "local",
+                  "label": "局部"
+                },
+                {
+                  "value": "global",
+                  "label": "全局"
+                },
+                {
+                  "value": "external",
+                  "label": "外部"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                }
+              ]
+            }
+          },
+          {
+            "id": "bufp1-module",
+            "marker": "{{blank:bufp1-module}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "m.o",
+                  "label": "m.o"
+                },
+                {
+                  "value": "foo.o",
+                  "label": "foo.o"
+                },
+                {
+                  "value": "/",
+                  "label": "/"
+                }
+              ]
+            }
+          },
+          {
+            "id": "bufp1-section",
+            "marker": "{{blank:bufp1-section}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "foo-present",
+            "marker": "{{blank:foo-present}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "foo-type",
+            "marker": "{{blank:foo-type}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "local",
+                  "label": "局部"
+                },
+                {
+                  "value": "global",
+                  "label": "全局"
+                },
+                {
+                  "value": "external",
+                  "label": "外部"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                }
+              ]
+            }
+          },
+          {
+            "id": "foo-module",
+            "marker": "{{blank:foo-module}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "m.o",
+                  "label": "m.o"
+                },
+                {
+                  "value": "foo.o",
+                  "label": "foo.o"
+                },
+                {
+                  "value": "/",
+                  "label": "/"
+                }
+              ]
+            }
+          },
+          {
+            "id": "foo-section",
+            "marker": "{{blank:foo-section}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "temp-present",
+            "marker": "{{blank:temp-present}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "temp-type",
+            "marker": "{{blank:temp-type}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "local",
+                  "label": "局部"
+                },
+                {
+                  "value": "global",
+                  "label": "全局"
+                },
+                {
+                  "value": "external",
+                  "label": "外部"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                }
+              ]
+            }
+          },
+          {
+            "id": "temp-module",
+            "marker": "{{blank:temp-module}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "m.o",
+                  "label": "m.o"
+                },
+                {
+                  "value": "foo.o",
+                  "label": "foo.o"
+                },
+                {
+                  "value": "/",
+                  "label": "/"
+                }
+              ]
+            }
+          },
+          {
+            "id": "temp-section",
+            "marker": "{{blank:temp-section}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "count-present",
+            "marker": "{{blank:count-present}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "count-type",
+            "marker": "{{blank:count-type}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "local",
+                  "label": "局部"
+                },
+                {
+                  "value": "global",
+                  "label": "全局"
+                },
+                {
+                  "value": "external",
+                  "label": "外部"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                }
+              ]
+            }
+          },
+          {
+            "id": "count-module",
+            "marker": "{{blank:count-module}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "m.o",
+                  "label": "m.o"
+                },
+                {
+                  "value": "foo.o",
+                  "label": "foo.o"
+                },
+                {
+                  "value": "/",
+                  "label": "/"
+                }
+              ]
+            }
+          },
+          {
+            "id": "count-section",
+            "marker": "{{blank:count-section}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": ".text",
+                  "label": ".text"
+                },
+                {
+                  "value": ".data",
+                  "label": ".data"
+                },
+                {
+                  "value": ".bss",
+                  "label": ".bss"
+                },
+                {
+                  "value": ".rodata",
+                  "label": ".rodata"
+                },
+                {
+                  "value": "COMMON",
+                  "label": "COMMON / COM"
+                },
+                {
+                  "value": "UNDEF",
+                  "label": "UNDEF / UND"
+                },
+                {
+                  "value": "ABS",
+                  "label": "ABS"
+                },
+                {
+                  "value": "/",
+                  "label": "/ · 不存在条目"
+                },
+                {
+                  "value": "X",
+                  "label": "X · 无法确定"
+                }
+              ]
+            }
+          }
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
         "reference": {
           "format": "markdown"
         },
@@ -93,7 +814,177 @@
           "origin": "unknown",
           "crossChecked": null,
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        }
+        },
+        "blankAnswers": [
+          {
+            "blankId": "bufp0-present",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "bufp0-type",
+            "method": "selection",
+            "correctValues": [
+              "global"
+            ]
+          },
+          {
+            "blankId": "bufp0-module",
+            "method": "selection",
+            "correctValues": [
+              "foo.o"
+            ]
+          },
+          {
+            "blankId": "bufp0-section",
+            "method": "selection",
+            "correctValues": [
+              ".data"
+            ]
+          },
+          {
+            "blankId": "buf-present",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "buf-type",
+            "method": "selection",
+            "correctValues": [
+              "external"
+            ]
+          },
+          {
+            "blankId": "buf-module",
+            "method": "selection",
+            "correctValues": [
+              "m.o"
+            ]
+          },
+          {
+            "blankId": "buf-section",
+            "method": "selection",
+            "correctValues": [
+              ".data"
+            ]
+          },
+          {
+            "blankId": "bufp1-present",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "bufp1-type",
+            "method": "selection",
+            "correctValues": [
+              "global"
+            ]
+          },
+          {
+            "blankId": "bufp1-module",
+            "method": "selection",
+            "correctValues": [
+              "foo.o"
+            ]
+          },
+          {
+            "blankId": "bufp1-section",
+            "method": "selection",
+            "correctValues": [
+              "COMMON"
+            ]
+          },
+          {
+            "blankId": "foo-present",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "foo-type",
+            "method": "selection",
+            "correctValues": [
+              "global"
+            ]
+          },
+          {
+            "blankId": "foo-module",
+            "method": "selection",
+            "correctValues": [
+              "foo.o"
+            ]
+          },
+          {
+            "blankId": "foo-section",
+            "method": "selection",
+            "correctValues": [
+              ".text"
+            ]
+          },
+          {
+            "blankId": "temp-present",
+            "method": "selection",
+            "correctValues": [
+              "no"
+            ]
+          },
+          {
+            "blankId": "temp-type",
+            "method": "selection",
+            "correctValues": [
+              "/"
+            ]
+          },
+          {
+            "blankId": "temp-module",
+            "method": "selection",
+            "correctValues": [
+              "/"
+            ]
+          },
+          {
+            "blankId": "temp-section",
+            "method": "selection",
+            "correctValues": [
+              "/"
+            ]
+          },
+          {
+            "blankId": "count-present",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "count-type",
+            "method": "selection",
+            "correctValues": [
+              "local"
+            ]
+          },
+          {
+            "blankId": "count-module",
+            "method": "selection",
+            "correctValues": [
+              "foo.o"
+            ]
+          },
+          {
+            "blankId": "count-section",
+            "method": "selection",
+            "correctValues": [
+              ".bss"
+            ]
+          }
+        ]
       },
       "sources": [
         {
@@ -109,9 +1000,7 @@
           "editorNote": "各符号的 .symtab 条目、类型与所在节"
         }
       ],
-      "issues": [
-        "blank-positions-unresolved"
-      ]
+      "issues": []
     },
     {
       "id": "q-906e831c908a1bd5",
@@ -220,12 +1109,12 @@ void foo() {
 用英文回答的，如果正确也可以给分。
 | 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节 |
 | --- | --- | --- | --- | --- |
-| `bufp0` |  |  |  |  |
-| `buf` |  |  |  |  |
-| `bufp1` |  |  |  |  |
-| `foo` |  |  |  |  |
-| `temp` |  |  |  |  |
-| `count` |  |  |  |  |
+| `bufp0` | {{blank:bufp0-present}} | {{blank:bufp0-type}} | {{blank:bufp0-module}} | {{blank:bufp0-section}} |
+| `buf` | {{blank:buf-present}} | {{blank:buf-type}} | {{blank:buf-module}} | {{blank:buf-section}} |
+| `bufp1` | {{blank:bufp1-present}} | {{blank:bufp1-type}} | {{blank:bufp1-module}} | {{blank:bufp1-section}} |
+| `foo` | {{blank:foo-present}} | {{blank:foo-type}} | {{blank:foo-module}} | {{blank:foo-section}} |
+| `temp` | {{blank:temp-present}} | {{blank:temp-type}} | {{blank:temp-module}} | {{blank:temp-section}} |
+| `count` | {{blank:count-present}} | {{blank:count-type}} | {{blank:count-module}} | {{blank:count-section}} |
 %%% part-reference: q-fcdcf49e11759e0e
 | 符号 | .symtab 条目？ | 符号类型 | 定义符号的模块 | 节 |
 | --- | --- | --- | --- | --- |

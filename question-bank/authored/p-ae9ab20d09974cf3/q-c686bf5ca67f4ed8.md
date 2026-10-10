@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c686bf5ca67f4ed8",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ae9ab20d09974cf3",
   "paperOrder": 23,
   "number": {
@@ -61,43 +61,165 @@
         "id": "legacy-gap-1",
         "marker": "_______",
         "occurrence": 1,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "会"
+            },
+            {
+              "value": "no",
+              "label": "不会"
+            }
+          ]
+        }
       },
       {
         "id": "legacy-gap-2",
         "marker": "_______",
         "occurrence": 2,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "不是"
+            }
+          ]
+        }
       },
       {
         "id": "legacy-gap-3",
         "marker": "_______",
         "occurrence": 3,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "是"
+            },
+            {
+              "value": "no",
+              "label": "不是"
+            }
+          ]
+        }
       },
       {
         "id": "legacy-gap-4",
         "marker": "_______",
         "occurrence": 4,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "yes",
+              "label": "可能"
+            },
+            {
+              "value": "no",
+              "label": "不会"
+            }
+          ]
+        }
       },
       {
         "id": "legacy-gap-5",
         "marker": "_______",
         "occurrence": 5,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "A",
+              "label": "A · 进程调度"
+            },
+            {
+              "value": "B",
+              "label": "B · 线程调度"
+            },
+            {
+              "value": "C",
+              "label": "C · 下发信号"
+            },
+            {
+              "value": "D",
+              "label": "D · 处理系统调用"
+            }
+          ]
+        }
       },
       {
         "id": "legacy-gap-6",
         "marker": "_______",
         "occurrence": 6,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "A",
+              "label": "A · 进程调度"
+            },
+            {
+              "value": "B",
+              "label": "B · 线程调度"
+            },
+            {
+              "value": "C",
+              "label": "C · 下发信号"
+            },
+            {
+              "value": "D",
+              "label": "D · 处理系统调用"
+            }
+          ]
+        }
       },
       {
         "id": "legacy-gap-7",
         "marker": "_______",
         "occurrence": 7,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "A",
+              "label": "A · 进程调度"
+            },
+            {
+              "value": "B",
+              "label": "B · 线程调度"
+            },
+            {
+              "value": "C",
+              "label": "C · 下发信号"
+            },
+            {
+              "value": "D",
+              "label": "D · 处理系统调用"
+            }
+          ]
+        }
       }
     ]
   },
@@ -119,31 +241,52 @@
       },
       {
         "blankId": "legacy-gap-1",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "legacy-gap-2",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "legacy-gap-3",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "yes"
+        ]
       },
       {
         "blankId": "legacy-gap-4",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "no"
+        ]
       },
       {
         "blankId": "legacy-gap-5",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "D"
+        ]
       },
       {
         "blankId": "legacy-gap-6",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "A"
+        ]
       },
       {
         "blankId": "legacy-gap-7",
-        "method": "self"
+        "method": "selection",
+        "correctValues": [
+          "C"
+        ]
       }
     ]
   }

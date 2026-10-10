@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c5a45b9c928fb3ce",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-e8f40973e2cc056e",
   "paperOrder": 27,
   "number": {
@@ -29,9 +29,7 @@
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "blank-positions-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -50,11 +48,56 @@
   "type": "fill",
   "stem": {
     "format": "markdown",
-    "blanks": []
+    "blanks": [
+      {
+        "id": "shared-vars",
+        "marker": "{{blank:shared-vars}}",
+        "occurrence": 0,
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": true,
+          "options": [
+            {
+              "value": "i",
+              "label": "i"
+            },
+            {
+              "value": "niters",
+              "label": "niters"
+            },
+            {
+              "value": "local_thread",
+              "label": "local_thread"
+            },
+            {
+              "value": "static_local",
+              "label": "static_local"
+            },
+            {
+              "value": "cnt",
+              "label": "cnt"
+            },
+            {
+              "value": "index",
+              "label": "index"
+            },
+            {
+              "value": "shared_array",
+              "label": "shared_array"
+            },
+            {
+              "value": "dynamic_ptr",
+              "label": "dynamic_ptr"
+            }
+          ]
+        }
+      }
+    ]
   },
   "solution": {
     "state": "available",
-    "grading": "self",
+    "grading": "blanks",
     "reference": {
       "format": "markdown"
     },
@@ -62,7 +105,19 @@
       "origin": "unknown",
       "crossChecked": null,
       "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-    }
+    },
+    "blankAnswers": [
+      {
+        "blankId": "shared-vars",
+        "method": "selection",
+        "correctValues": [
+          "static_local",
+          "cnt",
+          "shared_array",
+          "dynamic_ptr"
+        ]
+      }
+    ]
   }
 }
 +++
@@ -71,7 +126,8 @@
 1.（4分）以下是一段改编自教材上的多线程代码。对于`thread`函数内出现的以下8个
 变量：i,niters,local_thread,static_local,cnt,index,shared_array,
 `dynamic_ptr`。哪几个是共享变量？
-答：
+答：{{blank:shared-vars}}（可多选）
+
 ```c
 #define N 100
 void *thread(void *vargp);

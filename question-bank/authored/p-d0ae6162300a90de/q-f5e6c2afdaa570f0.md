@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f5e6c2afdaa570f0",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-d0ae6162300a90de",
   "paperOrder": 23,
   "number": {
@@ -96,7 +96,21 @@
             "id": "dm-v1",
             "marker": "{{blank:dm-v1}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
           },
           {
             "id": "dm-tag1",
@@ -114,7 +128,21 @@
             "id": "dm-v2",
             "marker": "{{blank:dm-v2}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
           },
           {
             "id": "dm-tag2",
@@ -132,7 +160,21 @@
             "id": "dm-v3",
             "marker": "{{blank:dm-v3}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
           },
           {
             "id": "dm-tag3",
@@ -150,7 +192,21 @@
             "id": "dm-v4",
             "marker": "{{blank:dm-v4}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
           }
         ]
       },
@@ -168,14 +224,10 @@
         "blankAnswers": [
           {
             "blankId": "dm-v1",
-            "method": "exact",
-            "acceptedAnswers": [
+            "method": "selection",
+            "correctValues": [
               "1"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            ]
           },
           {
             "blankId": "dm-tag1",
@@ -201,14 +253,10 @@
           },
           {
             "blankId": "dm-v2",
-            "method": "exact",
-            "acceptedAnswers": [
+            "method": "selection",
+            "correctValues": [
               "1"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            ]
           },
           {
             "blankId": "dm-tag2",
@@ -234,14 +282,10 @@
           },
           {
             "blankId": "dm-v3",
-            "method": "exact",
-            "acceptedAnswers": [
+            "method": "selection",
+            "correctValues": [
               "1"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            ]
           },
           {
             "blankId": "dm-tag3",
@@ -267,14 +311,10 @@
           },
           {
             "blankId": "dm-v4",
-            "method": "exact",
-            "acceptedAnswers": [
+            "method": "selection",
+            "correctValues": [
               "0"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            ]
           }
         ]
       },
@@ -319,7 +359,21 @@
             "id": "twoway-v11",
             "marker": "{{blank:twoway-v11}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
           },
           {
             "id": "twoway-tag11",
@@ -337,7 +391,21 @@
             "id": "twoway-v12",
             "marker": "{{blank:twoway-v12}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
           },
           {
             "id": "twoway-tag12",
@@ -355,7 +423,21 @@
             "id": "twoway-v21",
             "marker": "{{blank:twoway-v21}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
           },
           {
             "id": "twoway-tag21",
@@ -373,7 +455,21 @@
             "id": "twoway-v22",
             "marker": "{{blank:twoway-v22}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
           },
           {
             "id": "misses",
@@ -397,14 +493,10 @@
         "blankAnswers": [
           {
             "blankId": "twoway-v11",
-            "method": "exact",
-            "acceptedAnswers": [
+            "method": "selection",
+            "correctValues": [
               "1"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            ]
           },
           {
             "blankId": "twoway-tag11",
@@ -430,14 +522,10 @@
           },
           {
             "blankId": "twoway-v12",
-            "method": "exact",
-            "acceptedAnswers": [
+            "method": "selection",
+            "correctValues": [
               "1"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            ]
           },
           {
             "blankId": "twoway-tag12",
@@ -463,14 +551,10 @@
           },
           {
             "blankId": "twoway-v21",
-            "method": "exact",
-            "acceptedAnswers": [
+            "method": "selection",
+            "correctValues": [
               "1"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            ]
           },
           {
             "blankId": "twoway-tag21",
@@ -496,14 +580,10 @@
           },
           {
             "blankId": "twoway-v22",
-            "method": "exact",
-            "acceptedAnswers": [
+            "method": "selection",
+            "correctValues": [
               "0"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            ]
           },
           {
             "blankId": "misses",

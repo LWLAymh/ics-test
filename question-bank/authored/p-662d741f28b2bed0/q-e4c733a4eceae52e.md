@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-e4c733a4eceae52e",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-662d741f28b2bed0",
   "paperOrder": 21,
   "number": {
@@ -53,49 +53,161 @@
         "id": "q1",
         "marker": "{{blank:q1}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "Y",
+              "label": "Y · 是"
+            },
+            {
+              "value": "N",
+              "label": "N · 否"
+            }
+          ]
+        }
       },
       {
         "id": "q2",
         "marker": "{{blank:q2}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "Y",
+              "label": "Y · 是"
+            },
+            {
+              "value": "N",
+              "label": "N · 否"
+            }
+          ]
+        }
       },
       {
         "id": "q3",
         "marker": "{{blank:q3}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "Y",
+              "label": "Y · 是"
+            },
+            {
+              "value": "N",
+              "label": "N · 否"
+            }
+          ]
+        }
       },
       {
         "id": "q4",
         "marker": "{{blank:q4}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "Y",
+              "label": "Y · 是"
+            },
+            {
+              "value": "N",
+              "label": "N · 否"
+            }
+          ]
+        }
       },
       {
         "id": "q5",
         "marker": "{{blank:q5}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "Y",
+              "label": "Y · 是"
+            },
+            {
+              "value": "N",
+              "label": "N · 否"
+            }
+          ]
+        }
       },
       {
         "id": "q6",
         "marker": "{{blank:q6}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "Y",
+              "label": "Y · 是"
+            },
+            {
+              "value": "N",
+              "label": "N · 否"
+            }
+          ]
+        }
       },
       {
         "id": "q7",
         "marker": "{{blank:q7}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "Y",
+              "label": "Y · 是"
+            },
+            {
+              "value": "N",
+              "label": "N · 否"
+            }
+          ]
+        }
       },
       {
         "id": "q8",
         "marker": "{{blank:q8}}",
         "occurrence": 0,
-        "width": "medium"
+        "width": "medium",
+        "input": {
+          "kind": "select",
+          "multiple": false,
+          "options": [
+            {
+              "value": "Y",
+              "label": "Y · 是"
+            },
+            {
+              "value": "N",
+              "label": "N · 否"
+            }
+          ]
+        }
       }
     ]
   },
@@ -113,99 +225,59 @@
     "blankAnswers": [
       {
         "blankId": "q1",
-        "method": "exact",
-        "acceptedAnswers": [
-          "N",
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "N"
+        ]
       },
       {
         "blankId": "q2",
-        "method": "exact",
-        "acceptedAnswers": [
-          "N",
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "N"
+        ]
       },
       {
         "blankId": "q3",
-        "method": "exact",
-        "acceptedAnswers": [
-          "Y",
-          "是"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "Y"
+        ]
       },
       {
         "blankId": "q4",
-        "method": "exact",
-        "acceptedAnswers": [
-          "N",
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "N"
+        ]
       },
       {
         "blankId": "q5",
-        "method": "exact",
-        "acceptedAnswers": [
-          "N",
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "N"
+        ]
       },
       {
         "blankId": "q6",
-        "method": "exact",
-        "acceptedAnswers": [
-          "N",
-          "否"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "N"
+        ]
       },
       {
         "blankId": "q7",
-        "method": "exact",
-        "acceptedAnswers": [
-          "Y",
-          "是"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "Y"
+        ]
       },
       {
         "blankId": "q8",
-        "method": "exact",
-        "acceptedAnswers": [
-          "Y",
-          "是"
-        ],
-        "normalize": {
-          "caseSensitive": false,
-          "trimWhitespace": true
-        }
+        "method": "selection",
+        "correctValues": [
+          "Y"
+        ]
       }
     ]
   }

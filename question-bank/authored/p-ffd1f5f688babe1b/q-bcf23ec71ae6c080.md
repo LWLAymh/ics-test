@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-bcf23ec71ae6c080",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ffd1f5f688babe1b",
   "paperOrder": 21,
   "number": {
@@ -201,7 +201,21 @@
             "id": "q2-bubble",
             "marker": "{{blank:q2-bubble}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "需要"
+                },
+                {
+                  "value": "no",
+                  "label": "不需要"
+                }
+              ]
+            }
           },
           {
             "id": "q2-hcl-condition",
@@ -219,7 +233,29 @@
             "id": "q2-hcl-position",
             "marker": "{{blank:q2-hcl-position}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "①"
+                },
+                {
+                  "value": "2",
+                  "label": "②"
+                },
+                {
+                  "value": "3",
+                  "label": "③"
+                },
+                {
+                  "value": "4",
+                  "label": "④"
+                }
+              ]
+            }
           }
         ]
       },
@@ -237,7 +273,10 @@
         "blankAnswers": [
           {
             "blankId": "q2-bubble",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "no"
+            ]
           },
           {
             "blankId": "q2-hcl-condition",
@@ -249,7 +288,12 @@
           },
           {
             "blankId": "q2-hcl-position",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "1",
+              "2",
+              "3"
+            ]
           }
         ]
       },
@@ -306,31 +350,121 @@
             "id": "q3-f",
             "marker": "{{blank:q3-f}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "normal",
+                  "label": "normal · 正常"
+                },
+                {
+                  "value": "stall",
+                  "label": "stall · 暂停"
+                },
+                {
+                  "value": "bubble",
+                  "label": "bubble · 气泡"
+                }
+              ]
+            }
           },
           {
             "id": "q3-d",
             "marker": "{{blank:q3-d}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "normal",
+                  "label": "normal · 正常"
+                },
+                {
+                  "value": "stall",
+                  "label": "stall · 暂停"
+                },
+                {
+                  "value": "bubble",
+                  "label": "bubble · 气泡"
+                }
+              ]
+            }
           },
           {
             "id": "q3-e",
             "marker": "{{blank:q3-e}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "normal",
+                  "label": "normal · 正常"
+                },
+                {
+                  "value": "stall",
+                  "label": "stall · 暂停"
+                },
+                {
+                  "value": "bubble",
+                  "label": "bubble · 气泡"
+                }
+              ]
+            }
           },
           {
             "id": "q3-m",
             "marker": "{{blank:q3-m}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "normal",
+                  "label": "normal · 正常"
+                },
+                {
+                  "value": "stall",
+                  "label": "stall · 暂停"
+                },
+                {
+                  "value": "bubble",
+                  "label": "bubble · 气泡"
+                }
+              ]
+            }
           },
           {
             "id": "q3-w",
             "marker": "{{blank:q3-w}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "normal",
+                  "label": "normal · 正常"
+                },
+                {
+                  "value": "stall",
+                  "label": "stall · 暂停"
+                },
+                {
+                  "value": "bubble",
+                  "label": "bubble · 气泡"
+                }
+              ]
+            }
           }
         ]
       },
