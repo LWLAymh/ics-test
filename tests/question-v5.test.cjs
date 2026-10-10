@@ -73,6 +73,69 @@ test('reported RGB and structure questions include all reference data', () => {
   assert.deepEqual(retired.solution.correctOptionIds,['D']); // Keep historical key, never publish.
 });
 
+test('2024 final large memory questions retain tables and complete automatic blanks', () => {
+  const virtual=bank.find(q=>q.id==='q-492c07fd54f9b065');
+  assert.equal(virtual.stem.blanks.length,8);
+  assert(!virtual.stem.text.includes('page-21.png'));
+  assert.match(virtual.stem.text,/\| 6 \| 1 \| 4 \| 0 \| 0 \| C \| 1 \|/);
+  assert.match(virtual.stem.text,/\| 06 \| C \| 1 \| 0E \| D \| 1 \|/);
+  const answers={entries:'64','table-pages':'1','physical-address':'0x6a1','memory-accesses':'8',
+    'access-1':'B','access-2':'C','ia32-l1-pte':'0xe77190','ia32-l2-pte':'0xd000980'};
+  assert.equal(api.gradeBlanks(answers,virtual.solution),true);
+  assert.equal(api.gradeBlanks({...answers,'access-1':'A'},virtual.solution),false);
+  assert.equal((0x721>>>7),0x0e);
+  assert.equal(0xd*128+(0x721&127),0x6a1);
+  assert.equal(0xe77000+(0x19260817>>>22)*4,0xe77190);
+  assert.equal(0xd000000+((0x19260817>>>12)&1023)*4,0xd000980);
+  const allocation=bank.find(q=>q.id==='q-69a53f8a7ed107eb');
+  assert.equal(allocation.stem.blanks.length,9);
+  assert(!allocation.stem.text.includes('page-23.png'));
+  assert.match(allocation.stem.text,/calloc\(1, 28\)/);
+  assert.match(allocation.stem.text,/不一定是块末尾/);
+  const mallocAnswers={'pointer-position':'C','header-byte':'0x11','deferred-combine':'C','immediate-combine':'A',
+    utilization:'1/16','footer-space':'A','attack-write-offset':'12','attack-write-value':'16','false-free-offset':'12'};
+  assert.equal(api.gradeBlanks(mallocAnswers,allocation.solution),true);
+  assert.equal(api.gradeBlanks({...mallocAnswers,'false-free-offset':'16'},allocation.solution),true);
+  assert.equal(api.gradeBlanks({...mallocAnswers,'attack-write-offset':'16'},allocation.solution),false);
+  assert.equal(Math.ceil((28+4)/8)*8-4-16,12); // Fake header before p2; payload starts four bytes later.
+});
+
+test('2024 final concurrent questions retain complete code, choices and repeated blanks', () => {
+  const cinema=bank.find(q=>q.id==='q-a01a9f044af56d47');
+  assert.equal(cinema.stem.blanks.length,21);
+  assert.equal(cinema.solution.blankAnswers.length,12);
+  assert.equal((cinema.stem.text.match(/```c\n/g)||[]).length,2);
+  assert.match(cinema.stem.text,/while \(n--\) \{\n\s+\{\{blank:part2-f\}\};/);
+  assert(!/\n2\n/.test(cinema.stem.text));
+  const cinemaKeys={a:'4',b:'5',c:'3',d:'2',e:'3',starvation:'possible',
+    'part2-a':'1','part2-b':'1','part2-c':'7','part2-d':'8','part2-e':'3','part2-f':'9'};
+  assert.equal(api.gradeBlanks(cinemaKeys,cinema.solution),true);
+  assert.equal(api.gradeBlanks({...cinemaKeys,starvation:'impossible'},cinema.solution),false);
+  const signals=bank.find(q=>q.id==='q-c686bf5ca67f4ed8');
+  assert.equal(signals.stem.blanks.length,8);
+  assert.equal((signals.stem.text.match(/```c\n/g)||[]).length,1);
+  assert.match(signals.stem.text,/\| G \| 由于磁盘太慢等原因，产生写不足 \|/);
+  assert.equal(api.gradeBlanks({'legacy-gap-0':'2','legacy-gap-1':'no','legacy-gap-2':'no',
+    'legacy-gap-3':'yes','legacy-gap-4':'no','legacy-gap-5':'D','legacy-gap-6':'A','legacy-gap-7':'C'},signals.solution),true);
+});
+
+test('large linking and producer-consumer questions keep separate files and stable line numbers', () => {
+  for(const id of ['q-96576bae25379ede','q-0db09198d5c9f64c']) {
+    const q=bank.find(q=>q.id===id);
+    assert.equal((q.stem.text.match(/```asm\n/g)||[]).length,2);
+    assert.equal((q.stem.text.match(/```c\n/g)||[]).length,2);
+    assert(!/0000000000.*<main>:[^\n]*0000000000/.test(q.stem.text));
+    assert(!q.stem.text.includes('48 c7 05 00 00 00 00 00 00 00 00 00'));
+  }
+  const final2019=bank.find(q=>q.id==='q-96576bae25379ede');
+  assert(!final2019.stem.text.includes('<func>'));
+  assert.match(final2019.stem.text,/原卷.*`1018`.*重复/);
+  const producer=bank.find(q=>q.id==='q-59acf52820891cfb');
+  assert.match(producer.stem.text,/\n15\. static void sync_var_init\(\) \{\n16\.     Sem_init/);
+  assert.match(producer.stem.text,/\n59\.     for .*\n60\.         Pthread_create/);
+  assert.match(producer.stem.text,/\n86\. \}\n```/);
+});
+
 test('2014 final bit reversal and disassembly blanks have exact automatic keys', () => {
   const question=bank.find(q=>q.id==='q-7d2647844e7abcf9');
   const [values,assembly]=question.parts;

@@ -21723,7 +21723,7 @@
     {
       "schemaVersion": "5",
       "id": "q-59acf52820891cfb",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-2c2b56c4452255b1",
       "paperOrder": 25,
       "number": {
@@ -22080,14 +22080,14 @@
             }
           }
         ],
-        "text": "第六题. 请结合教材第十二章“并发编程”的有关知识回答问题(15分)\n“生产者-消费者”问题是并发编程中的经典问题。本题中，考虑如下场景：\na.  所有生产者和所有消费者共享同一个`buffer`\nb.  生产者、消费者各有`NUM_WORKERS`个（大于一个）\nc.  buffer的容量为`BUF_SIZE`，初始情况下`buffer`为空\nd.  每个生产者向 `buffer` 中添加一个 `item`；若 `buffer` 满，则生产者等待\n`buffer`中有空槽时才能添加元素\ne.  每个消费者从 `buffer` 中取走一个 `item`；若 `buffer` 空，则消费者等待\n`buffer`中有`item`时才能取走元素\n1. 阅读以下代码并回答问题（代码阅读提示：主要关注`producer`和`consumer`\n两个函数）\n```\n1. /* Producer–Consumer Problem (Solution 1) */\n2.\n3. #include \"csapp.h\"\n4.\n5. #define BUF_SIZE 3\n6. #define NUM_WORKERS 50\n7. #define MAX_SLEEP_SEC 10\n8.\n9. volatile static int items = 0; /* How many items are there in the buffer */\n10.\n11.  static sem_t mutex; /* Mutual Exclusion */\n12.  static sem_t empty; /* How many empty slots are there in the buffer */\n13.  static sem_t full;  /* How many items are there in the buffer */\n14.\n15.  static void sync_var_init() {\n    16.      Sem_init(&mutex, 0, 1);\n    17.\n    18.      /* Initially, there is no item in the buffer */\n    19.      Sem_init(&empty, 0, BUF_SIZE);\n    20.      Sem_init(&full, 0, 0);\n    21.  }\n22.\n23.  static void *producer(void *num) {\n    24.      {{blank:p-empty}};\n    25.      {{blank:p-mutex}};\n    26.\n    27.      /* Critical section begins */\n    28.      Sleep(rand() % MAX_SLEEP_SEC);\n    29.      items++;\n    30.      /* Critical section ends */\n    31.\n    32.      V(&mutex);\n    33.      V(&full);\n    34.\n    35.      return NULL;\n    36.  }\n37.\n38.  static void *consumer(void *num) {\n    39.      {{blank:p-full}};\n    40.      {{blank:c-mutex}};\n    41.\n    42.      /* Critical section begins */\n    43.      Sleep(rand() % MAX_SLEEP_SEC);\n    44.      items--;\n    45.      /* Critical section ends */\n    46.\n    47.      V(&mutex);\n    48.      V(&empty);\n    49.\n    50.      return NULL;\n    51.  }\n52.\n53.  int main() {\n    54.      sync_var_init();\n    55.\n    56.      pthread_t pid_producer[NUM_WORKERS];\n    57.      pthread_t pid_consumer[NUM_WORKERS];\n    58.\n    59.      for (int i = 0; i < NUM_WORKERS; i++) {\n        60.          Pthread_create(&pid_producer[i], NULL, producer, (void *)i);\n        61.          Pthread_create(&pid_consumer[i], NULL, consumer, (void *)i);\n        62.      }\n    63.\n    64.      for (int i = 0; i < NUM_WORKERS; i++) {\n        65.          Pthread_join(pid_producer[i], NULL);\n        66.          Pthread_join(pid_consumer[i], NULL);\n        67.      }\n    68.  }\n```\na)  补全代码（请从以下选项中选择，可重复选择，每个1分，共4分）\n①    （24行）\n②    （25行）\n③    （39行）\n④    （40行）\n选项：\nA.  P(&mutex)\nB.  P(&empty)\nC.  P(&full)\nb)  如果交换24行与25行（两个P操作），      （单选，2分） {{blank:exchange-p}}\nA.  有可能死锁\nB.  有可能饥饿\nC.  既不会死锁，也不会饥饿\n\n\nc)  交换32、33行（两个V操作）是否可能造成同步错误？    （2分） {{blank:exchange-v}}\nA.  可能\nB.  不可能\nd)  rand函数是不是线程安全的？   （1分） {{blank:rand-safe}}\nA.  是\nB.  不是\n28行与43行对`rand`函数的使用是否会导致竞争？   （1分） {{blank:rand-race}}\nA.  会\nB.  不会\n已知`rand`函数的实现如下\n来源：\nhttps://github.com/begriffs/libc/blob/master/stdlib.h\nhttps://github.com/begriffs/libc/blob/master/stdlib.c\n```c\n1.  #define RAND_MAX 32767\n2.\n3.  unsigned long _Randomseed = 1;\n4.\n5.  int rand() {\n6.      _Randomseed = _Randomseed * 1103515425 + 12345;\n7.      return (unsigned int)(_Randomseed>>16) & RAND_MAX;\n8.  }\n9.\n10. void srand(unsigned int seed) {\n11.     _Randomseed = seed;\n12. }\n```\n2. 考虑“生产者-消费者”问题的另一种解法（代码阅读提示：12-69 行之外\n均与上一种解法相同）\n```c\n1.  /* Producer–Consumer Problem (Solution 2) */\n2.\n3.  #include \"csapp.h\"\n4.\n5.  #define BUF_SIZE 3\n6.  #define NUM_WORKERS 50\n7.  #define MAX_SLEEP_SEC 10\n8.\n9.  volatile static int items = 0; /* How many items are there in the buffer */\n10.\n11. static sem_t mutex;                /* Mutual Exclusion */\n12. static sem_t sem_waiting_producer; /* Wait for empty slots */\n13. static sem_t sem_waiting_consumer; /* Wait for available items */\n14.\n15. volatile static int num_waiting_producer = 0;\n16. volatile static int num_waiting_consumer = 0;\n17.\n18. static void sync_var_init() {\n    19.     Sem_init(&mutex, 0, 1);\n    20.\n    21.     Sem_init(&sem_waiting_producer, 0, {{blank:initial}});\n    22.     Sem_init(&sem_waiting_consumer, 0, {{blank:initial}});\n    23. }\n24.\n25. static void *producer(void *num) {\n    26.     P(&mutex);\n    27.     while (items == BUF_SIZE) {\n        28.         num_waiting_producer++;\n        29.         {{blank:release-mutex}};\n        30.         {{blank:wait-producer}};\n        31.         P(&mutex);\n        32.     }\n    33.\n    34.     /* Critical section begins */\n    35.     Sleep(rand() % MAX_SLEEP_SEC);\n    36.     items++;\n    37.     /* Critical section ends */\n    38.\n    39.     if (num_waiting_consumer > 0) {\n        40.         num_waiting_consumer--;\n        41.         V(&sem_waiting_consumer);\n        42.     }\n    43.     V(&mutex);\n    44.\n    45.     return NULL;\n    46. }\n47.\n48. static void *consumer(void *num) {\n    49.     P(&mutex);\n    50.     while (items == 0) {\n        51.         num_waiting_consumer++;\n        52.         ④;\n        53.         ⑤;\n        54.         P(&mutex);\n        55.     }\n    56.\n    57.     /* Critical section begins */\n    58.     Sleep(rand() % MAX_SLEEP_SEC);\n    59.     items--;\n    60.     /* Critical section ends */\n    61.\n    62.     if (num_waiting_producer > 0) {\n        63.         num_waiting_producer--;\n        64.         V(&sem_waiting_producer);\n        65.     }\n    66.     V(&mutex);\n    67.\n    68.     return NULL;\n    69. }\n70.\n71. int main() {\n    72.     sync_var_init();\n    73.\n    74.     pthread_t pid_producer[NUM_WORKERS];\n    75.     pthread_t pid_consumer[NUM_WORKERS];\n    76.\n    77.     for (int i = 0; i < NUM_WORKERS; i++) {\n        78.         Pthread_create(&pid_producer[i], NULL, producer, (void *)i);\n        79.         Pthread_create(&pid_consumer[i], NULL, consumer, (void *)i);\n        80.     }\n    81.\n    82.     for (int i = 0; i < NUM_WORKERS; i++) {\n        83.         Pthread_join(pid_producer[i], NULL);\n        84.         Pthread_join(pid_consumer[i], NULL);\n        85.     }\n    86. }\n```\na)  补全代码（请从以下选项中选择，④⑤无需填写，每个 1 分，共 3 分）\n①    （21、22行）\n②    （29行）\n③    （30行）\n选项：\nA.  0\nB.  1\nC.  P(&sem_waiting_producer)\nD.  V(&mutex)\nb)  如果27行和50行的`while`换成`if`，是否可能造成同步错误？ {{blank:while-if}}\n   （2分）\nA.  可能\nB.  不可能"
+        "text": "第六题. 请结合教材第十二章“并发编程”的有关知识回答问题(15分)\n“生产者-消费者”问题是并发编程中的经典问题。本题中，考虑如下场景：\n- a. 所有生产者和所有消费者共享同一个 `buffer`\n- b. 生产者、消费者各有 `NUM_WORKERS` 个（大于一个）\n- c. `buffer` 的容量为 `BUF_SIZE`，初始情况下为空\n- d. 每个生产者向 `buffer` 中添加一个 `item`；若 `buffer` 满，则生产者等待 `buffer` 中有空槽时才能添加元素\n- e. 每个消费者从 `buffer` 中取走一个 `item`；若 `buffer` 空，则消费者等待 `buffer` 中有 `item` 时才能取走元素\n\n### 1.\n\n阅读以下代码并回答问题（代码阅读提示：主要关注 `producer` 和 `consumer` 两个函数）。原行号保留，以便与小问对应。\n\n```c\n 1. /* Producer–Consumer Problem (Solution 1) */\n 2.\n 3. #include \"csapp.h\"\n 4.\n 5. #define BUF_SIZE 3\n 6. #define NUM_WORKERS 50\n 7. #define MAX_SLEEP_SEC 10\n 8.\n 9. volatile static int items = 0; /* How many items are there in the buffer */\n10.\n11. static sem_t mutex; /* Mutual Exclusion */\n12. static sem_t empty; /* How many empty slots are there in the buffer */\n13. static sem_t full;  /* How many items are there in the buffer */\n14.\n15. static void sync_var_init() {\n16.     Sem_init(&mutex, 0, 1);\n17.\n18.     /* Initially, there is no item in the buffer */\n19.     Sem_init(&empty, 0, BUF_SIZE);\n20.     Sem_init(&full, 0, 0);\n21. }\n22.\n23. static void *producer(void *num) {\n24.     {{blank:p-empty}};\n25.     {{blank:p-mutex}};\n26.\n27.     /* Critical section begins */\n28.     Sleep(rand() % MAX_SLEEP_SEC);\n29.     items++;\n30.     /* Critical section ends */\n31.\n32.     V(&mutex);\n33.     V(&full);\n34.\n35.     return NULL;\n36. }\n37.\n38. static void *consumer(void *num) {\n39.     {{blank:p-full}};\n40.     {{blank:c-mutex}};\n41.\n42.     /* Critical section begins */\n43.     Sleep(rand() % MAX_SLEEP_SEC);\n44.     items--;\n45.     /* Critical section ends */\n46.\n47.     V(&mutex);\n48.     V(&empty);\n49.\n50.     return NULL;\n51. }\n52.\n53. int main() {\n54.     sync_var_init();\n55.\n56.     pthread_t pid_producer[NUM_WORKERS];\n57.     pthread_t pid_consumer[NUM_WORKERS];\n58.\n59.     for (int i = 0; i < NUM_WORKERS; i++) {\n60.         Pthread_create(&pid_producer[i], NULL, producer, (void *)i);\n61.         Pthread_create(&pid_consumer[i], NULL, consumer, (void *)i);\n62.     }\n63.\n64.     for (int i = 0; i < NUM_WORKERS; i++) {\n65.         Pthread_join(pid_producer[i], NULL);\n66.         Pthread_join(pid_consumer[i], NULL);\n67.     }\n68. }\n```\n#### a)\n\n补全代码中第 24、25、39、40 行（分别对应①②③④）。请从以下选项中选择，可重复选择，每空 1 分，共 4 分。\n\n| 选项 | 操作 |\n| --- | --- |\n| A | `P(&mutex)` |\n| B | `P(&empty)` |\n| C | `P(&full)` |\n\n#### b)\n\n如果交换第 24、25 行（两个 P 操作），{{blank:exchange-p}}（单选，2 分）。\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 有可能死锁 |\n| B | 有可能饥饿 |\n| C | 既不会死锁，也不会饥饿 |\n\n\n#### c)\n\n交换第 32、33 行（两个 V 操作）是否可能造成同步错误？{{blank:exchange-v}}（2 分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 可能 |\n| B | 不可能 |\n\n#### d)\n\n`rand` 函数是不是线程安全的？{{blank:rand-safe}}（1 分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 是 |\n| B | 不是 |\n\n第 28、43 行对 `rand` 函数的使用是否会导致竞争？{{blank:rand-race}}（1 分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 会 |\n| B | 不会 |\n\n已知 `rand` 函数的实现如下。\n\n来源：[stdlib.h](https://github.com/begriffs/libc/blob/master/stdlib.h)、[stdlib.c](https://github.com/begriffs/libc/blob/master/stdlib.c)。\n\n```c\n1.  #define RAND_MAX 32767\n2.\n3.  unsigned long _Randomseed = 1;\n4.\n5.  int rand() {\n6.      _Randomseed = _Randomseed * 1103515425 + 12345;\n7.      return (unsigned int)(_Randomseed>>16) & RAND_MAX;\n8.  }\n9.\n10. void srand(unsigned int seed) {\n11.     _Randomseed = seed;\n12. }\n```\n### 2.\n\n考虑“生产者-消费者”问题的另一种解法（代码阅读提示：第 12–69 行之外均与上一种解法相同）。\n\n```c\n 1. /* Producer–Consumer Problem (Solution 2) */\n 2.\n 3. #include \"csapp.h\"\n 4.\n 5. #define BUF_SIZE 3\n 6. #define NUM_WORKERS 50\n 7. #define MAX_SLEEP_SEC 10\n 8.\n 9. volatile static int items = 0; /* How many items are there in the buffer */\n10.\n11. static sem_t mutex;                /* Mutual Exclusion */\n12. static sem_t sem_waiting_producer; /* Wait for empty slots */\n13. static sem_t sem_waiting_consumer; /* Wait for available items */\n14.\n15. volatile static int num_waiting_producer = 0;\n16. volatile static int num_waiting_consumer = 0;\n17.\n18. static void sync_var_init() {\n19.     Sem_init(&mutex, 0, 1);\n20.\n21.     Sem_init(&sem_waiting_producer, 0, {{blank:initial}});\n22.     Sem_init(&sem_waiting_consumer, 0, {{blank:initial}});\n23. }\n24.\n25. static void *producer(void *num) {\n26.     P(&mutex);\n27.     while (items == BUF_SIZE) {\n28.         num_waiting_producer++;\n29.         {{blank:release-mutex}};\n30.         {{blank:wait-producer}};\n31.         P(&mutex);\n32.     }\n33.\n34.     /* Critical section begins */\n35.     Sleep(rand() % MAX_SLEEP_SEC);\n36.     items++;\n37.     /* Critical section ends */\n38.\n39.     if (num_waiting_consumer > 0) {\n40.         num_waiting_consumer--;\n41.         V(&sem_waiting_consumer);\n42.     }\n43.     V(&mutex);\n44.\n45.     return NULL;\n46. }\n47.\n48. static void *consumer(void *num) {\n49.     P(&mutex);\n50.     while (items == 0) {\n51.         num_waiting_consumer++;\n52.         ④;\n53.         ⑤;\n54.         P(&mutex);\n55.     }\n56.\n57.     /* Critical section begins */\n58.     Sleep(rand() % MAX_SLEEP_SEC);\n59.     items--;\n60.     /* Critical section ends */\n61.\n62.     if (num_waiting_producer > 0) {\n63.         num_waiting_producer--;\n64.         V(&sem_waiting_producer);\n65.     }\n66.     V(&mutex);\n67.\n68.     return NULL;\n69. }\n70.\n71. int main() {\n72.     sync_var_init();\n73.\n74.     pthread_t pid_producer[NUM_WORKERS];\n75.     pthread_t pid_consumer[NUM_WORKERS];\n76.\n77.     for (int i = 0; i < NUM_WORKERS; i++) {\n78.         Pthread_create(&pid_producer[i], NULL, producer, (void *)i);\n79.         Pthread_create(&pid_consumer[i], NULL, consumer, (void *)i);\n80.     }\n81.\n82.     for (int i = 0; i < NUM_WORKERS; i++) {\n83.         Pthread_join(pid_producer[i], NULL);\n84.         Pthread_join(pid_consumer[i], NULL);\n85.     }\n86. }\n```\n#### a)\n\n补全代码中第 21/22、29、30 行（分别对应①②③；④⑤无需填写）。请从以下选项中选择，每空 1 分，共 3 分。\n\n| 选项 | 值或操作 |\n| --- | --- |\n| A | `0` |\n| B | `1` |\n| C | `P(&sem_waiting_producer)` |\n| D | `V(&mutex)` |\n\n#### b)\n\n如果把第 27、50 行的 `while` 换成 `if`，是否可能造成同步错误？{{blank:while-if}}（2 分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 可能 |\n| B | 不可能 |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n1. 生产者-消费者（Solution 1）\na) ① （24 行）B：P(&empty)；② （25 行）A：P(&mutex)；③ （39 行）C：P(&full)；④ （40 行）A：P(&mutex)\nb) A：有可能死锁\nc) B：不可能\nd) rand 函数不是线程安全的（B）；28 行与 43 行对 `rand` 函数的使用不会导致竞争（B）\n\n2. 生产者-消费者（Solution 2）\na) ① （21、22 行）A：0；② （29 行）D：V(&mutex)；③ （30 行）C：P(&sem_waiting_producer)\nb) A：可能造成同步错误"
+          "text": "### 1.\na) ① （24 行）B：P(&empty)；② （25 行）A：P(&mutex)；③ （39 行）C：P(&full)；④ （40 行）A：P(&mutex)\nb) A：有可能死锁\n\nc) B：不可能\n\nd) rand 函数不是线程安全的（B）；28 行与 43 行对 `rand` 函数的使用不会导致竞争（B）\n\n### 2.\na) ① （21、22 行）A：0；② （29 行）D：V(&mutex)；③ （30 行）C：P(&sem_waiting_producer)\n\nb) A：可能造成同步错误"
         },
         "provenance": {
           "origin": "unknown",
@@ -53799,7 +53799,7 @@
     {
       "schemaVersion": "5",
       "id": "q-96576bae25379ede",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 22,
       "number": {
@@ -54340,14 +54340,14 @@
             }
           }
         ],
-        "text": "第三题（10分）\n本题基于下列`m.c`及`foo.c`文件所编译生成的`m.o`和`foo.o`，编译和运行\n在x86-64/Linux下完成，编译过程未加优化选项。\n```c\n//m.c\nvoid myswap();\nchar buf[2] = {1, 2};\nvoid *bufp0;\nvoid *bufp1;\nchar temp;\nint main(){\n    ......//略去题目无关代码\n    myswap(temp);\n    ......//略去题目无关代码\n    return 0;\n}\n```\n\n```c\n//foo.c\nextern int buf[];\nchar *bufp0;\n......//略去题目无关代码\nchar *bufp1 = &buf[1];\nvoid myswap(char temp){\n    static int count = 0;\n    ......//略去题目无关代码\n    bufp0 = &buf[0];\n    temp = *bufp0;\n    ......//略去题目无关代码\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    ......//略去题目无关代码\n    count++;\n}\n```\n（1）  对于每个`foo.o`中定义和引用的符号，请用“是”或“否”指出它是\n否在模块`foo.o`的.symtab节中有符号表条目。如果存在条目，则请指出在\n模块`foo.o`中的符号类型（局部、全局或外部）、它在`foo.o`模块中所处的\n节（.data、.text、.bss 或 COMMON）以及其强弱信息（强、弱、非强非\n弱）；如果不存在条目，则请将该行后继空白处标记为“/”（请将下表画到答\n题纸上）。\n| 符号 | .symtab 条目? | 符号类型 | 节 | 强弱 |\n| --- | --- | --- | --- | --- |\n| `bufp1` | 是 | 全局 | .data | 强 |\n| `buf` | {{blank:buf-present}} | {{blank:buf-type}} | {{blank:buf-section}} | {{blank:buf-binding}} |\n| `bufp0` | {{blank:bufp0-present}} | {{blank:bufp0-type}} | {{blank:bufp0-section}} | {{blank:bufp0-binding}} |\n| `temp` | {{blank:temp-present}} | {{blank:temp-type}} | {{blank:temp-section}} | {{blank:temp-binding}} |\n| `count` | {{blank:count-present}} | {{blank:count-type}} | {{blank:count-section}} | {{blank:count-binding}} |\n（2）  我们使用 `REF(myswap.m)->DEF(myswap.foo)`表示链接器将把\n模块`m`中对符号`myswap`的任意引用与模块`foo`中对swap的定义关联起来。\n对于下面的示例，用这种方法来说明链接器如何解析每个模块对多重定义符号\n的引用。如果有链接时错误，请标记“错误”。如果链接器从定义中任意选择一\n个，请标记“未知”。\na) REF(bufp0.m)  ->DEF(________________)\nb) REF(bufp1.m)  ->DEF(________________)\n（3）  下图左边给出了`m.o`和`foo.o`的反汇编文件，右边给出了采用某个\n配置链接成可执行程序后再反汇编出来的文件。根据答题需要，其中的信息略\n有删减。\n\n```\n0000000000......<main>:                       0000000000000f28 <main>:\n55                 push   %rbp               f28: 55                  push    %rbp\n48 89 e5           mov    %rsp,%rbp          f29: 48 89 e5            mov     %rsp,%rbp\n48 83 ec 10       sub     $0x10,%rsp         f2c: 48 83 ec 10         sub      $0x10,%rsp\n......                                        ......略去部分和答题无关的信息......\nb8 00 00 00 00     mov    $0x0,%eax          f38: b8 00 00 00 00      mov     $0x0,%eax\ne8 00 00 00 00       callq 1a <main+0x1a>    f3d:   e8         ①                callq 1000\n①                                             <myswap>\n......                                        ......略去部分和答题无关的信息......\nc9                 leaveq                    ffd: c9                   leaveq\nc3                 req                       ffe: c3                   retq\n                                              ......略去部分和答题无关的信息......\n0000000000......<myswap>:                     0000000000001000 <myswap>:\n55                 push   %rbp                1000: 55                  push    %rbp\n48 89 e5            mov    %rsp,%rbp          1001: 48 89 e5            mov     %rsp,%rbp\n......                                        ......略去部分和答题无关的信息......\n48 c7 05 00 00 00 00 00 00 00 00              100d: 48 c7 05 ?? ?? ?? ?? ?? ?? ?? ??\n                                              movq     ② ,0x????(%rip)\n    movq   $0x0,0x0(%rip)        ③②          1018:                         48             8b\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax   05 ?? ?? ?? ?? mov    0x????(%rip),%rax\n④                                             101f: 0f b6 00             movzbl (%rax),%eax\n0f b6 00              movzbl (%rax),%eax      1018: 88 45 fc                   mov     %eax,-\n88 45 fc              mov    %al,-0x4(%rbp)   0x4(%rbp)\n......                                        ......略去部分和答题无关的信息......\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax   1035:      48 8b 05 ?? ?? ?? ?? mov\n⑤                                             0x????(%rip),%rax\n48 8b 15 00 00 00 00 mov     0x0(%rip),%rdx   103c:   48 8b 15 ?? ?? ?? ?? mov             ⑥\n⑥                                             (%rip),%rdx\n0f b6 12              movzbl (%rdx),%edx      1043:   0f b6 12                         movzbl\n88 10                 mov    %dl,(%rax)       (%rdx),%edx\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax   1046: 88 10                 mov     %dl,(%rax)\n⑦                                             1048:      48 8b 05 ?? ?? ?? ?? mov\n0f b6 55 fc          movzbl -0x4(%rbp),%edx   0x????(%rip),%rax\n88 10                 mov    %dl,(%rax)       104f:   0f b6 55 fc                   movzbl -\n......                                        0x4(%rbp),%edx\n8b 05 00 00 00 00     mov    0x0(%rip),%eax   1053: 88 10                 mov     %dl,(%rax)\n⑧                                             ......略去部分和答题无关的信息......\n83 c0 01              add    $0x1,%eax        1057:     8b 05 ?? ?? ?? ??                 mov\n89 05 00 00 00 00     mov    %eax,0x0(%rip)   0x????(%rip),%eax\n⑨                                             105d: 83 c0 01               add     $0x1,%eax\n90                     nop                    1060: 89 05 ?? ?? ?? ??       mov     %eax, ⑨\n5d                     pop    %rbp            (%rip)\nc3                     retq                   1066: 90                    nop\n                                              1067: 5d                    pop     %rbp\n                                              1068: c3                    retq\n                                              ......略去部分和答题无关的信息......\n                                              000000000000a000 <buf>:\n                                              ......略去部分和答题无关的信息......\n                                              000000000000a050 <bufp1>:\n                                              ......略去部分和答题无关的信息......\n                                              000000000000cb24 <count.1837>:\n                                              ......略去部分和答题无关的信息......\n                                              000000000000cb28 <bufp0>:\n```\n\n在上图中对所涉及到的重定位条目进行用数字①至⑨进行了标记，请根据下表中所提供的重定位条目信息，计算相应的重定位引用值并填写下表。（请将下表的第1列和第3列画到答题纸上）\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ① | `r.offset = 0x16`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ② | `r.offset = 0x14`　　`r.symbol = buf` `r.type = R_X86_64_32`　　`r.addend = +0` |  |\n| ⑥ | `r.offset = 0x3f`　　`r.symbol = bufp1` `r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ⑨ | `r.offset = 0x62`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |"
+        "text": "第三题（10分）\n本题基于下列 `m.c` 及 `foo.c` 文件编译生成的 `m.o` 和 `foo.o`。编译和运行在 x86-64/Linux 下完成，编译过程未加优化选项。\n```c\n//m.c\nvoid myswap();\nchar buf[2] = {1, 2};\nvoid *bufp0;\nvoid *bufp1;\nchar temp;\nint main(){\n    ......//略去题目无关代码\n    myswap(temp);\n    ......//略去题目无关代码\n    return 0;\n}\n```\n\n```c\n//foo.c\nextern int buf[];\nchar *bufp0;\n......//略去题目无关代码\nchar *bufp1 = &buf[1];\nvoid myswap(char temp){\n    static int count = 0;\n    ......//略去题目无关代码\n    bufp0 = &buf[0];\n    temp = *bufp0;\n    ......//略去题目无关代码\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    ......//略去题目无关代码\n    count++;\n}\n```\n### （1）\n\n对于每个 `foo.o` 中定义和引用的符号，请用“是”或“否”指出它是否在模块 `foo.o` 的 .symtab 节中有符号表条目。如果存在条目，请指出其符号类型（局部、全局或外部）、在 `foo.o` 中所处的节（.data、.text、.bss 或 COMMON）以及强弱信息（强、弱、非强非弱）；如果不存在条目，请将该行后继空白处标记为“/”（请将下表画到答题纸上）。\n\n| 符号 | .symtab 条目? | 符号类型 | 节 | 强弱 |\n| --- | --- | --- | --- | --- |\n| `bufp1` | 是 | 全局 | .data | 强 |\n| `buf` | {{blank:buf-present}} | {{blank:buf-type}} | {{blank:buf-section}} | {{blank:buf-binding}} |\n| `bufp0` | {{blank:bufp0-present}} | {{blank:bufp0-type}} | {{blank:bufp0-section}} | {{blank:bufp0-binding}} |\n| `temp` | {{blank:temp-present}} | {{blank:temp-type}} | {{blank:temp-section}} | {{blank:temp-binding}} |\n| `count` | {{blank:count-present}} | {{blank:count-type}} | {{blank:count-section}} | {{blank:count-binding}} |\n\n### （2）\n\n我们使用 `REF(myswap.m)->DEF(myswap.foo)` 表示链接器将把模块 `m` 中对符号 `myswap` 的任意引用与模块 `foo` 中对 `myswap` 的定义关联起来。请用这种方法说明链接器如何解析下面各模块对多重定义符号的引用。如果链接时出错，请标记“错误”；如果链接器从定义中任意选择一个，请标记“未知”。\n\n- a) `REF(bufp0.m) -> DEF(________________)`\n- b) `REF(bufp1.m) -> DEF(________________)`\n\n### （3）\n\n下面分别给出 `m.o` 和 `foo.o` 的反汇编，以及采用某个配置链接后的可执行程序反汇编。根据答题需要，部分信息略有删减。\n\n目标文件 `m.o` / `foo.o` 的反汇编：\n\n```asm\n0000000000......<main>:\n55                 push   %rbp\n48 89 e5           mov    %rsp,%rbp\n48 83 ec 10         sub    $0x10,%rsp\n......\nb8 00 00 00 00     mov    $0x0,%eax\ne8 00 00 00 00     callq  1a <main+0x1a>     # ①\n......\nc9                 leaveq\nc3                 retq\n\n0000000000......<myswap>:\n55                 push   %rbp\n48 89 e5            mov    %rsp,%rbp\n......\n48 c7 05 00 00 00 00 00 00 00 00\n    movq   $0x0,0x0(%rip)        ③②\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n④\n0f b6 00              movzbl (%rax),%eax\n88 45 fc              mov    %al,-0x4(%rbp)\n......\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n⑤\n48 8b 15 00 00 00 00 mov     0x0(%rip),%rdx\n⑥\n0f b6 12              movzbl (%rdx),%edx\n88 10                 mov    %dl,(%rax)\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax\n⑦\n0f b6 55 fc          movzbl -0x4(%rbp),%edx\n88 10                 mov    %dl,(%rax)\n......\n8b 05 00 00 00 00     mov    0x0(%rip),%eax\n⑧\n83 c0 01              add    $0x1,%eax\n89 05 00 00 00 00     mov    %eax,0x0(%rip)\n⑨\n90                     nop\n5d                     pop    %rbp\nc3                     retq\n\n```\n\n链接后的可执行文件反汇编：\n\n```asm\n0000000000000f28 <main>:\nf28: 55                  push    %rbp\nf29: 48 89 e5            mov     %rsp,%rbp\nf2c: 48 83 ec 10         sub     $0x10,%rsp\n......略去部分和答题无关的信息......\nf38: b8 00 00 00 00      mov     $0x0,%eax\nf3d: e8 ①                callq   1000 <myswap>\n......略去部分和答题无关的信息......\nffd: c9                  leaveq\nffe: c3                  retq\n......略去部分和答题无关的信息......\n0000000000001000 <myswap>:\n1000: 55                  push    %rbp\n1001: 48 89 e5            mov     %rsp,%rbp\n......略去部分和答题无关的信息......\n100d: 48 c7 05 ?? ?? ?? ?? ?? ?? ?? ??\n      movq     ②,0x????(%rip)\n1018: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n101f: 0f b6 00             movzbl (%rax),%eax\n1018: 88 45 fc             mov      %eax,-0x4(%rbp)\n......略去部分和答题无关的信息......\n1035: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n103c: 48 8b 15 ?? ?? ?? ?? mov      ⑥(%rip),%rdx\n1043: 0f b6 12             movzbl  (%rdx),%edx\n1046: 88 10                mov      %dl,(%rax)\n1048: 48 8b 05 ?? ?? ?? ??\n      mov      0x????(%rip),%rax\n104f: 0f b6 55 fc          movzbl  -0x4(%rbp),%edx\n1053: 88 10                mov      %dl,(%rax)\n......略去部分和答题无关的信息......\n1057: 8b 05 ?? ?? ?? ??    mov      0x????(%rip),%eax\n105d: 83 c0 01             add      $0x1,%eax\n1060: 89 05 ?? ?? ?? ??    mov      %eax,⑨(%rip)\n1066: 90                  nop\n1067: 5d                  pop      %rbp\n1068: c3                  retq\n......略去部分和答题无关的信息......\n000000000000a000 <buf>:\n......略去部分和答题无关的信息......\n000000000000a050 <bufp1>:\n......略去部分和答题无关的信息......\n000000000000cb24 <count.1837>:\n......略去部分和答题无关的信息......\n000000000000cb28 <bufp0>:\n```\n\n注：原卷的链接后反汇编在 `myswap` 中将 `88 45 fc` 一行标为 `1018`，与前一条 `1018` 地址重复。此处依原卷保留。\n\n以上反汇编中用①至⑨标记了相关重定位条目。请根据下表中的重定位信息，计算引用值并填写下表。（请将下表的第1列和第3列画到答题纸上）\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值 |\n| --- | --- | --- |\n| ① | `r.offset = 0x16`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ② | `r.offset = 0x14`　　`r.symbol = buf` `r.type = R_X86_64_32`　　`r.addend = +0` |  |\n| ⑥ | `r.offset = 0x3f`　　`r.symbol = bufp1` `r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ⑨ | `r.offset = 0x62`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：（1）符号表见下表；（2）a) REF(bufp0.m) -> DEF(未知)、b) REF(bufp1.m) -> DEF(bufp1.foo)；\n（3）① `0x000000be`；② `0x0000a000`；⑥ `0x0000900d`；⑨ `0x0000babe`。\n（1）\n| 符号 | .symtab 有条目? | 符号类型 | 节 | 强弱 |\n| --- | --- | --- | --- | --- |\n| `bufp1` | 有 | 全局 | .data | 强 |\n| `buf` | 有 | 外部 | UNDEF | 弱 |\n| `bufp0` | 有 | 全局 | COMMON | 弱 |\n| `temp` | 无 | / | / | / |\n| `count` | 有 | 局部 | .bss | 非强非弱 |\n（2）`a) REF(bufp0.m) -> DEF(`未知)：`bufp0` 在 `m.c` 与 `foo.c` 中都是 COMMON 弱符号，链接器任选其一；\n`b) REF(bufp1.m) -> DEF(bufp1.foo)`：`bufp1` 只在 `foo.c` 中定义（全局强符号）。\n（3）① `0x000000be`；② `0x0000a000`；⑥ `0x0000900d`；⑨ `0x0000babe`。\n解析：①=`f28` 处 `1000-f28-16-4=0x000000be`；②是 `buf` 的绝对地址 `0x0000a000`（`R_X86_64_32`）；\n⑥ 对应 `bufp1`，`a050-1043=0x0000900d`；⑨ 对应 `count`，`cb24-1066=0x0000babe`。\n（来源：2019、2020期末-答案解析）"
+          "text": "### （1）\n\n| 符号 | .symtab 有条目? | 符号类型 | 节 | 强弱 |\n| --- | --- | --- | --- | --- |\n| `bufp1` | 有 | 全局 | .data | 强 |\n| `buf` | 有 | 外部 | UNDEF | 弱 |\n| `bufp0` | 有 | 全局 | COMMON | 弱 |\n| `temp` | 无 | / | / | / |\n| `count` | 有 | 局部 | .bss | 非强非弱 |\n\n### （2）\n\n- a) `REF(bufp0.m) -> DEF(未知)`：`bufp0` 在 `m.c` 与 `foo.c` 中都是 COMMON 弱符号，链接器任选其一。\n- b) `REF(bufp1.m) -> DEF(bufp1.foo)`：`bufp1` 只在 `foo.c` 中定义（全局强符号）。\n\n### （3）\n\n| 编号 | 引用值 | 解析 |\n| --- | --- | --- |\n| ① | `0x000000be` | `0x1000 - 0xf28 - 0x16 - 4` |\n| ② | `0x0000a000` | `buf` 的绝对地址，类型为 `R_X86_64_32` |\n| ⑥ | `0x0000900d` | `bufp1`：`0xa050 - 0x1043` |\n| ⑨ | `0x0000babe` | `count`：`0xcb24 - 0x1066` |\n\n（来源：2019、2020期末-答案解析）"
         },
         "provenance": {
           "origin": "unknown",
@@ -68339,7 +68339,7 @@
     {
       "schemaVersion": "5",
       "id": "q-492c07fd54f9b065",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 20,
       "number": {
@@ -68389,6 +68389,30 @@
         "format": "markdown",
         "blanks": [
           {
+            "id": "entries",
+            "marker": "{{blank:entries}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "table-pages",
+            "marker": "{{blank:table-pages}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "physical-address",
+            "marker": "{{blank:physical-address}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "memory-accesses",
+            "marker": "{{blank:memory-accesses}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
             "id": "access-1",
             "marker": "{{blank:access-1}}",
             "occurrence": 0,
@@ -68435,16 +68459,28 @@
                 }
               ]
             }
+          },
+          {
+            "id": "ia32-l1-pte",
+            "marker": "{{blank:ia32-l1-pte}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "ia32-l2-pte",
+            "marker": "{{blank:ia32-l2-pte}}",
+            "occurrence": 0,
+            "width": "medium"
           }
         ],
-        "text": "第四题（20分）\nPart A: 虚拟内存(11分)\n考虑如下的一种小型系统：内存的最基本单位为Byte，任何数据类型的长度\n都是Byte的整数倍，且按照小端法表示。该系统中，单个页表项占据2B，地址\n编码为16位，页大小为128B，页表为一级页表。目前，该系统支持的虚拟地址\n空间大小为8KB，实际拥有的物理内存为2KB。系统中的TLB为8组2路组相联，\n共有16个条目，替换策略为LRU。TLB被系统单独储存，不占用物理内存。\n在运行了一段时间后，这个系统内的TLB布局如下：\n页表的前16个页表项布局如下（页表项经过翻译，以便于阅读）：\n\n![TLB 布局和页表前 16 个页表项](assets/期末/2024期末-带答案/page-21.png)\n\n1） 该系统的一个完整的页表中共有     个页表项，该系统需要    个物理页来\n存储页表结构。（每空1分）\n2） 该系统的CPU执行指令时，取到一条虚拟地址为`0x0721`。经过翻译，该虚拟\n地址对应的物理地址是            （以十六进制方式书写，如`0x012`）。（2分）\n3） 不考虑2）中操作对TLB和页表的修改。该系统的CPU执行指令时，依次连\n续访问了以下若干虚拟地址：`0x11A5, 0x1419, 0x1C01, 0x0863, 0x1C7F`。\n每次TLB不命中时，都会将翻译结果的PPN替换入TLB。假设这些操作过程中未\n发生缺页异常，则共产生了     次对物理内存的访问（不考虑对指令地址的翻译\n和访问；不考虑高速缓存，即，无论物理内存中高速缓存命中与否，均只看作一次\n访问）。（3分）\n4） 不考虑2）和3）中操作对TLB和页表的修改。该系统的CPU执行指令时，\n取到一条虚拟地址为`0x00D0`，程序运行过程中一定会发生 {{blank:access-1}}（单选，填写选\n项，下同）。该系统的CPU执行指令时，取到一条虚拟地址为`0x2226`，程序运行\n过程中一定会发生 {{blank:access-2}}。（ 每 空1分）\nA. 正常访存     B.缺页异常      C. 段错误\n5） 在真实环境中，为了节省内存等目的，往往采用多级页表的方式。考虑一个\nIA32体系下的系统，单个页表项占据4B，地址编码为32位，页大小为4KB，使\n用了两级页表，每个页表均占据一页。设一级页表基址为`0x00E77000`，则虚拟地\n址`0x19260817`对应的一级页表项地址为            （以十六进制方式书写）。\n假设该页表项的值为`0x0D000721`，则该虚拟地址对应的二级页表项地址为\n             （以十六进制方式书写）。（每空1分）"
+        "text": "第四题（20分）\n\n### Part A：虚拟内存（11分）\n\n考虑如下小型系统：内存最小单位为 Byte，数据类型长度均为 Byte 的整数倍，采用小端法。页表项为 2 B，地址编码为 16 位，页大小为 128 B，使用一级页表。系统支持的虚拟地址空间为 8 KB，物理内存为 2 KB。TLB 为 8 组、每组 2 路（共 16 项），采用 LRU；TLB 单独储存，不占用物理内存。\n\n系统运行一段时间后的 TLB 布局如下。每个 set 的两列分别表示一路，Tag、PPN 均以十六进制显示，Valid 为有效位。\n\n| Set | 路 0 Tag | 路 0 PPN | Valid | 路 1 Tag | 路 1 PPN | Valid |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 2 | 6 | 1 | 5 | E | 0 |\n| 1 | 0 | D | 0 | 3 | 7 | 1 |\n| 2 | 1 | 3 | 1 | 5 | A | 1 |\n| 3 | 6 | B | 0 | 4 | F | 1 |\n| 4 | 0 | 8 | 1 | 7 | B | 1 |\n| 5 | 5 | E | 0 | 2 | 4 | 0 |\n| 6 | 1 | 4 | 0 | 0 | C | 1 |\n| 7 | 3 | 8 | 0 | 6 | 0 | 0 |\n\n页表前 16 项（VPN、PPN 为十六进制；无效项的 PPN 以 `-` 表示）：\n\n| VPN | PPN | Valid | VPN | PPN | Valid |\n| ---: | ---: | ---: | ---: | ---: | ---: |\n| 00 | - | 0 | 08 | - | 0 |\n| 01 | - | 0 | 09 | E | 1 |\n| 02 | - | 0 | 0A | 3 | 1 |\n| 03 | 2 | 1 | 0B | - | 0 |\n| 04 | 8 | 1 | 0C | 1 | 1 |\n| 05 | - | 0 | 0D | - | 0 |\n| 06 | C | 1 | 0E | D | 1 |\n| 07 | - | 0 | 0F | 9 | 1 |\n\n#### 1）\n\n完整页表共有 {{blank:entries}} 个页表项；存储该页表需要 {{blank:table-pages}} 个物理页。（每空 1 分）\n\n#### 2）\n\n虚拟地址 `0x0721` 翻译得到的物理地址为 {{blank:physical-address}}（十六进制，如 `0x012`）。（2 分）\n\n#### 3）\n\n不考虑第 2 问对 TLB 和页表的修改，依次连续访问 `0x11A5, 0x1419, 0x1C01, 0x0863, 0x1C7F`。每次 TLB 未命中时将翻译结果的 PPN 替换入 TLB。假设过程中未发生缺页异常，共访问物理内存 {{blank:memory-accesses}} 次。不计指令地址的翻译和访问；不考虑高速缓存，每次物理内存访问均计 1 次。（3 分）\n\n#### 4）\n\n不考虑第 2、3 问对 TLB 和页表的修改。取虚拟地址 `0x00D0` 时，程序运行过程中一定发生 {{blank:access-1}}；取虚拟地址 `0x2226` 时，一定发生 {{blank:access-2}}。（每空 1 分）\n\n| 选项 | 含义 |\n| --- | --- |\n| A | 正常访存 |\n| B | 缺页异常 |\n| C | 段错误 |\n\n#### 5）\n\n考虑 IA-32 两级页表系统：页表项为 4 B，地址编码为 32 位，页大小为 4 KB，每张页表占一页。一级页表基址为 `0x00E77000`。虚拟地址 `0x19260817` 对应的一级页表项地址为 {{blank:ia32-l1-pte}}。若该页表项值为 `0x0D000721`，则对应的二级页表项地址为 {{blank:ia32-l2-pte}}。（答案均用十六进制，每空 1 分）"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "Part A：\n1）64；1。\n2）`0x6A1`（或 `0x06A1`）。\n3）8 次。\n4）B（缺页异常）；C（段错误）。\n5）`0x00E77190`；`0x0D000980`。"
+          "text": "1）64 项；64 × 2 B = 128 B，恰为 1 个 128 B 物理页。\n\n2）`0x6A1`（也可写 `0x06A1`）。页内偏移为 `0x21`，VPN 为 `0x0E`，其有效页表项给出 PPN `0xD`，所以物理地址为 `0xD × 0x80 + 0x21 = 0x6A1`。\n\n3）8 次。五次访问的 VPN 依次为 `0x23, 0x28, 0x38, 0x10, 0x38`，TLB set 依次为 3、0、0、0、0。第一次命中 set 3 中有效的 tag `4`；第二次在 set 0 的无效路填入 tag `5`；第三次 set 0 未命中，替换原有效 tag `2`；第四次对 tag `2` 未命中，按 LRU 替换第二次填入的 tag `5`；第五次命中第三次填入的 tag `7`。三次未命中各访问页表和数据，共 6 次，两个命中各访问数据一次，共 2 次。\n\n4）B（缺页异常）；C（段错误）。`0x00D0` 的 VPN 为 1，其页表项无效；`0x2226` 超出系统配置的 8 KB 虚拟地址空间。\n\n5）`0x00E77190`；`0x0D000980`。"
         },
         "provenance": {
           "origin": "unknown",
@@ -68453,12 +68489,87 @@
         },
         "blankAnswers": [
           {
+            "blankId": "entries",
+            "method": "exact",
+            "acceptedAnswers": [
+              "64"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "table-pages",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "physical-address",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x6A1",
+              "0x06A1"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "memory-accesses",
+            "method": "exact",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
             "blankId": "access-1",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "B"
+            ]
           },
           {
             "blankId": "access-2",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "C"
+            ]
+          },
+          {
+            "blankId": "ia32-l1-pte",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x00E77190",
+              "0xE77190"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "ia32-l2-pte",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x0D000980",
+              "0xD000980"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
           }
         ]
       }
@@ -68760,7 +68871,7 @@
     {
       "schemaVersion": "5",
       "id": "q-69a53f8a7ed107eb",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 21,
       "number": {
@@ -68789,9 +68900,7 @@
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "blank-positions-unresolved"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -68810,21 +68919,243 @@
       "type": "fill",
       "stem": {
         "format": "markdown",
-        "blanks": [],
-        "text": "Part B: 动态内存分配(9分)\n小明开发了一种简单的动态内存分配器，仅采取无脚部的隐式空闲链表组织方\n式，没有额外的数据结构，内存分配块采取8字节对齐，其内存块如图1所示，块\n大小采用小端法存储。分配算法采用首次适配，堆空间足够大。\n\n![动态内存块布局图1和图2](assets/期末/2024期末-带答案/page-23.png)\n\n1） 在如上动态内存分配器的机器上（初始堆为空），小张执行 `void *p = malloc(5);` 后，p实际指向的位置为图1中的     位置（选填“A”、“B”、“C”或“D”），此时A处的1个字节的内容为     （用十六进制表示，如`0xFF`）。\n（每空1分）\n2） 小明设计的分配器采取的空闲块合并方式为推迟合并，假设某次合并前，堆空\n间共有n个独立的内存块，则该合并过程的时间复杂度至少为     。（ 单选 ，填\n写选项）（1分）\nA. O(1)   B. O(log n)   C. O(n)     D. O(n²)\n3） 为了提高空闲块合并的效率，小明为每个内存块在结尾处都添加了脚部，如图\n2所示，空闲块合并策略更改为立即合并，假设某次释放某已分配内存块后，堆空\n间共有n个独立的内存块，则此时的合并操作的时间复杂度至少为     。（ 单选 ，\n填写选项）\nA. O(1)   B. O(log n)   C. O(n)     D. O(n²)\n此时使用`malloc`申请内存时，单个内存块的内存利用率最低为     。（用 最简\n分数表示，内存利用率=申请块大小/实际分配块大小）（每空1分）\n4） 为了进一步提升内存利用率，小明只对空闲块添加脚部，而不对分配块添加脚\n部。则此时对已分配块执行释放操作时，     有足够空间存放脚部。（1分）\nA. 一定           B. 不一定\n5） 小明改进后的合并方法如下：每当释放一个内存块时，取出该内存块头部之前\n的四个字节的数据，检查最低位是否为0，如果最低位为0，再利用取出的字节的\n\n\n其他部分读出块大小，并根据大小找到对应的头部位置，如果此时找到的头部与取\n出的四个字节内容完全相同，则合并这个块。小张认为小明此时的合并方式存在问\n题，于是构造了如下代码进行攻击，假设初始堆为空：\n```\n#include <stdlib.h>\nint main() {\n    void *p1 =  calloc(28);\n    void *p2 =  calloc(32);\n    *((char*)p1 + 24 ) = 0x10;\n    *((char*)p1 + ① ) =  ② ;\n    free(p2);\n}\n```\n为了使小明的内存分配器合并空闲块出错，上述代码段①、②处应当分别填\n写     、     ，此时在执行完 `free(p2)` ;后，小明的内存分配器会错误地认\n为从地址 `((char*)p1 +      )` 开始的堆内存都是空闲的。（3分，代码两空\n全部正确得1分，最后一空2分）"
+        "blanks": [
+          {
+            "id": "pointer-position",
+            "marker": "{{blank:pointer-position}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A"
+                },
+                {
+                  "value": "B",
+                  "label": "B"
+                },
+                {
+                  "value": "C",
+                  "label": "C"
+                },
+                {
+                  "value": "D",
+                  "label": "D"
+                }
+              ]
+            }
+          },
+          {
+            "id": "header-byte",
+            "marker": "{{blank:header-byte}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "deferred-combine",
+            "marker": "{{blank:deferred-combine}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · O(1)"
+                },
+                {
+                  "value": "B",
+                  "label": "B · O(log n)"
+                },
+                {
+                  "value": "C",
+                  "label": "C · O(n)"
+                },
+                {
+                  "value": "D",
+                  "label": "D · O(n²)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "immediate-combine",
+            "marker": "{{blank:immediate-combine}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · O(1)"
+                },
+                {
+                  "value": "B",
+                  "label": "B · O(log n)"
+                },
+                {
+                  "value": "C",
+                  "label": "C · O(n)"
+                },
+                {
+                  "value": "D",
+                  "label": "D · O(n²)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "utilization",
+            "marker": "{{blank:utilization}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "footer-space",
+            "marker": "{{blank:footer-space}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · 一定"
+                },
+                {
+                  "value": "B",
+                  "label": "B · 不一定"
+                }
+              ]
+            }
+          },
+          {
+            "id": "attack-write-offset",
+            "marker": "{{blank:attack-write-offset}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "attack-write-value",
+            "marker": "{{blank:attack-write-value}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "false-free-offset",
+            "marker": "{{blank:false-free-offset}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### Part B：动态内存分配（9分）\n\n小明实现了一个简单的动态内存分配器：仅使用无脚部的隐式空闲链表，不使用额外数据结构；内存块按 8 字节对齐，块大小采用小端法存储，分配采用首次适配，堆空间足够大。\n\n图1的布局改用偏移表表示。头部占 4 B：A 标记头部起点处的低位字节，B 标记头部位字段中 bit 3 与 bit 2 的分界（不是地址位置）；C 是头部之后的载荷起点，D 是载荷后的边界。\n\n| 相对块起点的偏移 | 内容 | 图中标记 |\n| ---: | --- | --- |\n| 0 | 头部起点；大小/分配字最低地址字节 | A |\n| 0–3 | 4 B 头部（最高地址处为偏移 3） | B 标记 bit 3/bit 2 分界 |\n| 4 | 有效载荷起点 | C |\n| 4 + 申请字节数 | 有效载荷结束、可选填充开始的边界（不一定是块末尾） | D |\n\n头部 bit 31–3 保存块大小，bit 2–1 为 0，bit 0 为分配位 `a`（1 表示已分配，0 表示空闲）。块总长度包含头部、载荷及填充；图2还包含脚部。\n\n图2的布局为：\n\n| 顺序（低地址到高地址） | 内容 |\n| --- | --- |\n| 1 | 4 B 头部：块大小与分配位 |\n| 2 | 有效载荷 |\n| 3 | 可选填充 |\n| 4 | 4 B 脚部：与头部相同的块大小与分配位 |\n\n#### 1）\n\n初始堆为空，执行 `void *p = malloc(5);` 后，`p` 实际指向图1中的 {{blank:pointer-position}}。此时 A 处 1 个字节的内容为 {{blank:header-byte}}（十六进制，如 `0xFF`）。（每空 1 分）\n\n#### 2）\n\n若某次合并前堆中有 n 个独立内存块，该合并过程的时间复杂度至少为 {{blank:deferred-combine}}。（1 分）\n\n| 选项 | 复杂度 |\n| --- | --- |\n| A | O(1) |\n| B | O(log n) |\n| C | O(n) |\n| D | O(n²) |\n\n#### 3）\n\n若每个块末尾均添加脚部，并改用立即合并，释放一个已分配块后堆中有 n 个独立内存块，此时合并操作的时间复杂度至少为 {{blank:immediate-combine}}。此时调用 `malloc` 时，单块内存利用率最低为 {{blank:utilization}}（最简分数；利用率 = 申请块大小 / 实际分配块大小）。（每空 1 分）\n\n| 选项 | 复杂度 |\n| --- | --- |\n| A | O(1) |\n| B | O(log n) |\n| C | O(n) |\n| D | O(n²) |\n\n#### 4）\n\n为提高利用率，小明只给空闲块添加脚部，不给已分配块添加脚部。此时释放已分配块时，{{blank:footer-space}} 有足够空间存放脚部。（1 分）\n\n| 选项 | 判断 |\n| --- | --- |\n| A | 一定 |\n| B | 不一定 |\n\n#### 5）\n\n改进后的合并算法：释放一个内存块时，取出该块头部之前 4 B 的数据；若最低位为 0，则从这些数据的其余位读出块大小，并据此找到候选块头。若找到的头部与取出的 4 B 完全相同，就合并该块。\n\n原题写作 `calloc(28)`，但标准 C 的 `calloc` 需要两个参数；这里改为 `calloc(1, 28)`（32 B 分配同理），保留分配并清零指定字节数的原意。下面代码用于构造错误合并情形。\n\n\n```c\n#include <stdlib.h>\nint main() {\n    void *p1 = calloc(1, 28);\n    void *p2 = calloc(1, 32);\n    *((char *)p1 + 24) = 0x10;\n    *((char *)p1 + {{blank:attack-write-offset}}) = {{blank:attack-write-value}};\n    free(p2);\n}\n```\n\n执行完 `free(p2)` 后，分配器会错误地认为从 `((char *)p1 + {{blank:false-free-offset}})` 开始的堆内存都是空闲的。（3 分：前两空都正确得 1 分，最后一空得 2 分）\n\n以上分值为原卷分值；本站按本题全部逻辑空自动核对后归一化计分，不执行原卷的小问加权。"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "Part B：\n1）C；`0x11`。\n2）C（`O(n)`）。\n3）A（`O(1)`）；`1/16`。\n4）A（一定）。\n5）① `12`；② `0x10`（或 16）；错误合并后空闲块起始位置偏移 `12`。"
+          "text": "1）C；`0x11`。申请 5 B 载荷，加 4 B 头部后按 8 B 对齐，块总长为 16 B，头部大小/分配字为 `0x11`，小端存储后 A 字节为 `0x11`，载荷从偏移 4 开始。\n\n2）C（`O(n)`）。推迟合并需扫描堆中的空闲块以找到可合并块。\n\n3）A（`O(1)`）；`1/16`。脚部使释放块可在常数时间定位相邻块；最小块总长为 16 B，最小非零申请为 1 B。\n\n4）A（一定）。释放前的载荷空间足以写入脚部。\n\n5）① `12`；② `0x10`（或 `16`）。伪造块头位于相对 `p1` 偏移 12 的位置；其大小为 16 B，故错误合并范围从偏移 12 起。若末空按题面所指的错误块头起点填写 `12`；按错误块中载荷起点填写 `16`，与原答案注明的等价填法一致。"
         },
         "provenance": {
           "origin": "unknown",
           "crossChecked": null,
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        }
+        },
+        "blankAnswers": [
+          {
+            "blankId": "pointer-position",
+            "method": "selection",
+            "correctValues": [
+              "C"
+            ]
+          },
+          {
+            "blankId": "header-byte",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x11"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "deferred-combine",
+            "method": "selection",
+            "correctValues": [
+              "C"
+            ]
+          },
+          {
+            "blankId": "immediate-combine",
+            "method": "selection",
+            "correctValues": [
+              "A"
+            ]
+          },
+          {
+            "blankId": "utilization",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1/16"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "footer-space",
+            "method": "selection",
+            "correctValues": [
+              "A"
+            ]
+          },
+          {
+            "blankId": "attack-write-offset",
+            "method": "exact",
+            "acceptedAnswers": [
+              "12"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "attack-write-value",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x10",
+              "16"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "false-free-offset",
+            "method": "exact",
+            "acceptedAnswers": [
+              "12",
+              "16"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ]
       }
     },
     {
@@ -69223,7 +69554,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a01a9f044af56d47",
-      "revision": 2,
+      "revision": 4,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 22,
       "number": {
@@ -69252,9 +69583,7 @@
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "blank-positions-unresolved"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -69273,16 +69602,875 @@
       "type": "fill",
       "stem": {
         "format": "markdown",
-        "blanks": [],
-        "text": "第五题（20分）\nPart A (12分)\n北京大学南门外新开设了一家小型的电影院，由于电影院规模较小，只有两个\n影厅——影厅A与影厅B，并且工作人员只有一名同时充当售票员的经理。这个影\n院有一些奇怪的规定。\nl  每个影厅正在放映的电影是自动续播的，只有当最后一个观众主动离开当前的\n影厅时结束当前影片的放映。\nl  两个影厅同时放映电影，选择观看两个影厅中任意一个正在放映的影片的观众\n买票后可立即进入，且后续不能更换影厅。\nl  两个影厅内的总观众人数不能超过 100 人。购票人数到达上限后，购票通道\n会立即关闭。直到有观众离开影院，后续观众才可以继续购票。\nl  如果有推销商来找经理推销新影片或者高级放映设施，为了能够及时接待推销\n商，经理会立即关闭购票入口，新到来的观众不能购票入场。\nl  每次经理只能与一名推销商会谈，后续到达的推销商需要等待。经理与已经到\n达的所有推销商都会谈过后，电影院才能重新开业接待观众。\n1. 这名可怜的经理希望北京大学的同学能帮他开发出一套系统，实现上面的逻辑，\n从而减轻他的工作量。学过ICS的小A一眼就看出这个问题可以建模为读者-写者\n问题，并且写出了代码。\n1） 补全代码（5分）\n```\n#include “csapp.h”\n#define MaxAudienceCount 100\n```\n`int AudienceCount = 0; //` 影院的观众数\n`int PromoterCount = 0; //` 推销商的数量\n信号量 `MovieA = 1`;\n信号量 `MovieB = 1`;\n信号量 `Promote = 1`;\n信号量 `MaxAudience = MaxAudienceCount`;\n信号量 `AudienceMutex = 1;  //` 变量`AudienceCount`的互斥锁\n信号量 `PromoterMutex = 1;  //` 变量`PromoterCount`的互斥锁\n```\nAudienceA(){\n    while(1){\n        P([  A  ]);\n        P(MovieA);\n        P([  B  ]);\n        AudienceCount++;\n        if (AudienceCount == 1){\n            P([  C  ]);\n        }\n        V([  B  ]);\n        V(MovieA);\n        // Watch the movie\n        P(AudienceMutex);\n        AudienceCount--;\n        if (AudienceCount == 0){\n            V(Promote);\n        }\n        V(AudienceMutex);\n        V(MaxAudience);\n    }\n}\nAudienceB(){\n    while(1){\n        P([  A  ]);\n        P([  D  ]);\n        P([  B  ]);\n        AudienceCount++;\n        if (AudienceCount == 1){\n            P([  C  ]);\n        }\n        V([  B  ]);\n        V([  D  ]);\n        // Watch the movie\n        P(AudienceMutex);\n        AudienceCount--;\n        if (AudienceCount == 0){\n            V(Promote);\n        }\n        V(AudienceMutex);\n        V(MaxAudience);\n    }\n}\nPromoter(){\n    while(1){\n        P(PromoterMutex);\n        PromoterCount++;\n        if (PromoterCount == 1){\n```\n2\n\n\n```\n            P(MovieA);\n            P(MovieB);\n        }\n        V(PromoterMutex);\n        P([  E  ]);\n        // Try to promote\n        V([  E  ]);\n        P(PromoterMutex);\n        PromoterCount--;\n        if (PromoterCount == 0){\n            V(movieA);\n            V([  D  ]);\n        }\n        V(PromoterMutex);\n   }\n}\nA:       B:       C:\nD:       E:\n```\n（选择下述编号填入字母表示的空缺内，注意不同字母也可能填入相同的数字编号）\n```\n①  MovieA\n②  MovieB\n③  Promote\n④  MaxAudience\n⑤  AudienceMutex\n```\n2） 在这个实现的逻辑下，观众有可能饥饿吗？   （1分）\n2. 让我们再次回归到最基本的第二类读者-写者问题的另一种解法，如下述代码\n所示。学习了并发之后的你迅速提取出了有效信息并补全了代码。（6分）\n`ActiveR` 表示正在读的读者的数量，`WaitingR` 表示正在等待的读者的数量；\n`ActiveW` 表示正在写的写者的数量，`WaitingW` 表示正在等待的写者的数量。\n```\nint ActiveR = 0;\nint WaitingR = 0;\nint ActiveW = 0;\nint WaitingW = 0;\n```\n信号量 `mutex = 1`;\n信号量 waitingToRead = [  A  ];\n2\n\n\n信号量 waitingToWrite = [  B  ];\n```\nReader() {\n    P(mutex);\n    while ((ActiveW + WaitingW) > 0) {\n        WaitingR++;\n        [  C  ];\n        [  D  ];\n        P(mutex);\n        WaitingR--;\n    }\n    ActiveR++;\n    V(mutex);\n    // Perform actual read-only access\n    P(mutex);\n    ActiveR--;\n    if (ActiveR == 0 && WaitingW > 0) {\n        V(waitingToWrite);\n    }\n    V(mutex);\n}\nWriter () {\n    P(mutex);\n    while (([  E  ]) > 0) {\n        WaitingW++;\n        [  C  ];\n        P(waitingToWrite);\n        P(mutex);\n        WaitingW--;\n    }\n    ActiveW++;\n    V(mutex);\n    // Perform actual write-only access\n    P(mutex);\n    ActiveW--;\n    if (WaitingW > 0) {\n        V(waitingToWrite);\n    } else if (WaitingR > 0) {\n        int n = WaitingR;\n        while (n--) {\n            ;\n        }\n    }\n    V(mutex);\n}\nA:       B:       C:\nD:       E:       F:\n```\n（选择下述编号填入字母表示的空缺内，注意不同字母也可能填入相同的数字编号）\n①  0\n②  1\n```\n③  ActiveR + ActiveW\n④  ActiveR + WaitingR\n⑤  ActiveW + WaitingW\n⑥  P(mutex)\n⑦  V(mutex)\n⑧  P(waitingToRead)\n⑨  V(waitingToRead)\n```"
+        "blanks": [
+          {
+            "id": "a",
+            "marker": "{{blank:a}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "marker": "{{blank:b}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "c",
+            "marker": "{{blank:c}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "d",
+            "marker": "{{blank:d}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "e",
+            "marker": "{{blank:e}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "starvation",
+            "marker": "{{blank:starvation}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "possible",
+                  "label": "可能"
+                },
+                {
+                  "value": "impossible",
+                  "label": "不可能"
+                }
+              ]
+            }
+          },
+          {
+            "id": "part2-a",
+            "marker": "{{blank:part2-a}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① 0"
+                },
+                {
+                  "value": "2",
+                  "label": "② 1"
+                },
+                {
+                  "value": "3",
+                  "label": "③ ActiveR + ActiveW"
+                },
+                {
+                  "value": "4",
+                  "label": "④ ActiveR + WaitingR"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ ActiveW + WaitingW"
+                },
+                {
+                  "value": "6",
+                  "label": "⑥ P(mutex)"
+                },
+                {
+                  "value": "7",
+                  "label": "⑦ V(mutex)"
+                },
+                {
+                  "value": "8",
+                  "label": "⑧ P(waitingToRead)"
+                },
+                {
+                  "value": "9",
+                  "label": "⑨ V(waitingToRead)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "part2-b",
+            "marker": "{{blank:part2-b}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① 0"
+                },
+                {
+                  "value": "2",
+                  "label": "② 1"
+                },
+                {
+                  "value": "3",
+                  "label": "③ ActiveR + ActiveW"
+                },
+                {
+                  "value": "4",
+                  "label": "④ ActiveR + WaitingR"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ ActiveW + WaitingW"
+                },
+                {
+                  "value": "6",
+                  "label": "⑥ P(mutex)"
+                },
+                {
+                  "value": "7",
+                  "label": "⑦ V(mutex)"
+                },
+                {
+                  "value": "8",
+                  "label": "⑧ P(waitingToRead)"
+                },
+                {
+                  "value": "9",
+                  "label": "⑨ V(waitingToRead)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "part2-c",
+            "marker": "{{blank:part2-c}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① 0"
+                },
+                {
+                  "value": "2",
+                  "label": "② 1"
+                },
+                {
+                  "value": "3",
+                  "label": "③ ActiveR + ActiveW"
+                },
+                {
+                  "value": "4",
+                  "label": "④ ActiveR + WaitingR"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ ActiveW + WaitingW"
+                },
+                {
+                  "value": "6",
+                  "label": "⑥ P(mutex)"
+                },
+                {
+                  "value": "7",
+                  "label": "⑦ V(mutex)"
+                },
+                {
+                  "value": "8",
+                  "label": "⑧ P(waitingToRead)"
+                },
+                {
+                  "value": "9",
+                  "label": "⑨ V(waitingToRead)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "part2-d",
+            "marker": "{{blank:part2-d}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① 0"
+                },
+                {
+                  "value": "2",
+                  "label": "② 1"
+                },
+                {
+                  "value": "3",
+                  "label": "③ ActiveR + ActiveW"
+                },
+                {
+                  "value": "4",
+                  "label": "④ ActiveR + WaitingR"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ ActiveW + WaitingW"
+                },
+                {
+                  "value": "6",
+                  "label": "⑥ P(mutex)"
+                },
+                {
+                  "value": "7",
+                  "label": "⑦ V(mutex)"
+                },
+                {
+                  "value": "8",
+                  "label": "⑧ P(waitingToRead)"
+                },
+                {
+                  "value": "9",
+                  "label": "⑨ V(waitingToRead)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "part2-e",
+            "marker": "{{blank:part2-e}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① 0"
+                },
+                {
+                  "value": "2",
+                  "label": "② 1"
+                },
+                {
+                  "value": "3",
+                  "label": "③ ActiveR + ActiveW"
+                },
+                {
+                  "value": "4",
+                  "label": "④ ActiveR + WaitingR"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ ActiveW + WaitingW"
+                },
+                {
+                  "value": "6",
+                  "label": "⑥ P(mutex)"
+                },
+                {
+                  "value": "7",
+                  "label": "⑦ V(mutex)"
+                },
+                {
+                  "value": "8",
+                  "label": "⑧ P(waitingToRead)"
+                },
+                {
+                  "value": "9",
+                  "label": "⑨ V(waitingToRead)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "part2-f",
+            "marker": "{{blank:part2-f}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① 0"
+                },
+                {
+                  "value": "2",
+                  "label": "② 1"
+                },
+                {
+                  "value": "3",
+                  "label": "③ ActiveR + ActiveW"
+                },
+                {
+                  "value": "4",
+                  "label": "④ ActiveR + WaitingR"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ ActiveW + WaitingW"
+                },
+                {
+                  "value": "6",
+                  "label": "⑥ P(mutex)"
+                },
+                {
+                  "value": "7",
+                  "label": "⑦ V(mutex)"
+                },
+                {
+                  "value": "8",
+                  "label": "⑧ P(waitingToRead)"
+                },
+                {
+                  "value": "9",
+                  "label": "⑨ V(waitingToRead)"
+                }
+              ]
+            }
+          },
+          {
+            "id": "a",
+            "marker": "{{blank:a}}",
+            "occurrence": 1,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "marker": "{{blank:b}}",
+            "occurrence": 1,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "marker": "{{blank:b}}",
+            "occurrence": 2,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "marker": "{{blank:b}}",
+            "occurrence": 3,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "c",
+            "marker": "{{blank:c}}",
+            "occurrence": 1,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "d",
+            "marker": "{{blank:d}}",
+            "occurrence": 1,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "d",
+            "marker": "{{blank:d}}",
+            "occurrence": 2,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "e",
+            "marker": "{{blank:e}}",
+            "occurrence": 1,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① MovieA"
+                },
+                {
+                  "value": "2",
+                  "label": "② MovieB"
+                },
+                {
+                  "value": "3",
+                  "label": "③ Promote"
+                },
+                {
+                  "value": "4",
+                  "label": "④ MaxAudience"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ AudienceMutex"
+                }
+              ]
+            }
+          },
+          {
+            "id": "part2-c",
+            "marker": "{{blank:part2-c}}",
+            "occurrence": 1,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "1",
+                  "label": "① 0"
+                },
+                {
+                  "value": "2",
+                  "label": "② 1"
+                },
+                {
+                  "value": "3",
+                  "label": "③ ActiveR + ActiveW"
+                },
+                {
+                  "value": "4",
+                  "label": "④ ActiveR + WaitingR"
+                },
+                {
+                  "value": "5",
+                  "label": "⑤ ActiveW + WaitingW"
+                },
+                {
+                  "value": "6",
+                  "label": "⑥ P(mutex)"
+                },
+                {
+                  "value": "7",
+                  "label": "⑦ V(mutex)"
+                },
+                {
+                  "value": "8",
+                  "label": "⑧ P(waitingToRead)"
+                },
+                {
+                  "value": "9",
+                  "label": "⑨ V(waitingToRead)"
+                }
+              ]
+            }
+          }
+        ],
+        "text": "第五题（20分）\n\n### Part A（12分）\n\n北京大学南门外新开设了一家小型电影院，只有两个影厅——影厅 A 与影厅 B，并且工作人员只有一名同时充当售票员的经理。这个电影院有一些特别的规定：\n\n- 每个影厅正在放映的电影会自动续播，只有当最后一个观众主动离开当前影厅时，当前影片才结束放映。\n- 两个影厅同时放映电影，观众选择观看任意一个正在放映的影片，买票后可立即进入，且之后不能更换影厅。\n- 两个影厅内的总观众人数不能超过 100 人。购票人数到达上限后，购票通道立即关闭；直到有观众离开影院，后续观众才可以继续购票。\n- 如果有推销商来找经理推销新影片或者高级放映设施，经理会立即关闭购票入口，新到来的观众不能购票入场。\n- 每次经理只能与一名推销商会谈，后续到达的推销商需要等待。经理与已经到达的所有推销商都谈过后，电影院才能重新开业接待观众。\n\n### 1.\n\n这名可怜的经理希望北京大学的同学能帮他开发一套系统，实现上述逻辑，从而减轻他的工作量。学过 ICS 的小 A 一眼看出这个问题可以建模为读者-写者问题，并写出了代码。\n\n#### 1）补全代码（5分）\n\n`Semaphore`、`P` 和 `V` 为原题伪代码；以下按 C 风格排版。\n\n```c\n#include \"csapp.h\"\n#define MaxAudienceCount 100\n\nint AudienceCount = 0; // 影院的观众数\nint PromoterCount = 0; // 推销商的数量\nSemaphore MovieA = 1;\nSemaphore MovieB = 1;\nSemaphore Promote = 1;\nSemaphore MaxAudience = MaxAudienceCount;\nSemaphore AudienceMutex = 1; // AudienceCount 的互斥锁\nSemaphore PromoterMutex = 1; // PromoterCount 的互斥锁\n\nAudienceA() {\n    while (1) {\n        P({{blank:a}});\n        P(MovieA);\n        P({{blank:b}});\n        AudienceCount++;\n        if (AudienceCount == 1) {\n            P({{blank:c}});\n        }\n        V({{blank:b}});\n        V(MovieA);\n        // Watch the movie\n        P(AudienceMutex);\n        AudienceCount--;\n        if (AudienceCount == 0) {\n            V(Promote);\n        }\n        V(AudienceMutex);\n        V(MaxAudience);\n    }\n}\nAudienceB() {\n    while (1) {\n        P({{blank:a}});\n        P({{blank:d}});\n        P({{blank:b}});\n        AudienceCount++;\n        if (AudienceCount == 1) {\n            P({{blank:c}});\n        }\n        V({{blank:b}});\n        V({{blank:d}});\n        // Watch the movie\n        P(AudienceMutex);\n        AudienceCount--;\n        if (AudienceCount == 0) {\n            V(Promote);\n        }\n        V(AudienceMutex);\n        V(MaxAudience);\n    }\n}\nPromoter() {\n    while (1) {\n        P(PromoterMutex);\n        PromoterCount++;\n        if (PromoterCount == 1) {\n            P(MovieA);\n            P(MovieB);\n        }\n        V(PromoterMutex);\n        P({{blank:e}});\n        // Try to promote\n        V({{blank:e}});\n        P(PromoterMutex);\n        PromoterCount--;\n        if (PromoterCount == 0) {\n            V(MovieA);\n            V({{blank:d}});\n        }\n        V(PromoterMutex);\n    }\n}\n```\n\n空缺候选项：① `MovieA`　② `MovieB`　③ `Promote`　④ `MaxAudience`　⑤ `AudienceMutex`\n\n#### 2）\n\n在这个实现的逻辑下，观众有可能饥饿吗？{{blank:starvation}}（1分）\n\n### 2.\n\n让我们再次回归到最基本的第二类读者-写者问题的另一种解法，如下述代码所示。学习了并发之后，你迅速提取出有效信息并补全代码。（6分）\n\n`ActiveR`、`WaitingR` 分别表示正在读和正在等待的读者数量；`ActiveW`、`WaitingW` 分别表示正在写和正在等待的写者数量。\n\n```c\nint ActiveR = 0;\nint WaitingR = 0;\nint ActiveW = 0;\nint WaitingW = 0;\nSemaphore mutex = 1;\nSemaphore waitingToRead = {{blank:part2-a}};\nSemaphore waitingToWrite = {{blank:part2-b}};\n\nReader() {\n    P(mutex);\n    while ((ActiveW + WaitingW) > 0) {\n        WaitingR++;\n        {{blank:part2-c}};\n        {{blank:part2-d}};\n        P(mutex);\n        WaitingR--;\n    }\n    ActiveR++;\n    V(mutex);\n    // Perform actual read-only access\n    P(mutex);\n    ActiveR--;\n    if (ActiveR == 0 && WaitingW > 0) {\n        V(waitingToWrite);\n    }\n    V(mutex);\n}\nWriter() {\n    P(mutex);\n    while (({{blank:part2-e}}) > 0) {\n        WaitingW++;\n        {{blank:part2-c}};\n        P(waitingToWrite);\n        P(mutex);\n        WaitingW--;\n    }\n    ActiveW++;\n    V(mutex);\n    // Perform actual write-only access\n    P(mutex);\n    ActiveW--;\n    if (WaitingW > 0) {\n        V(waitingToWrite);\n    } else if (WaitingR > 0) {\n        int n = WaitingR;\n        while (n--) {\n            {{blank:part2-f}};\n        }\n    }\n    V(mutex);\n}\n```\n\n空缺候选项：① `0`　② `1`　③ `ActiveR + ActiveW`　④ `ActiveR + WaitingR`　⑤ `ActiveW + WaitingW`　⑥ `P(mutex)`　⑦ `V(mutex)`　⑧ `P(waitingToRead)`　⑨ `V(waitingToRead)`\n\n以上分值为原卷分值；本站按全部逻辑空自动核对后归一化计分。同一个字母的重复空位同步填写，只判一次。"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
         "reference": {
           "format": "markdown",
           "text": "1. （1）A=④（`MaxAudience`）；B=⑤（`AudienceMutex`）；C=③（`Promote`）；D=②（`MovieB`）；E=③（`Promote`）。\n   （2）A（可能饥饿）。\n2. A=①（0）；B=①（0）；C=⑦（`V(mutex)`）；D=⑧（`P(waitingToRead)`）；E=③（`ActiveR + ActiveW`）；F=⑨（`V(waitingToRead)`）。"
         },
+        "blankAnswers": [
+          {
+            "blankId": "a",
+            "method": "selection",
+            "correctValues": [
+              "4"
+            ]
+          },
+          {
+            "blankId": "b",
+            "method": "selection",
+            "correctValues": [
+              "5"
+            ]
+          },
+          {
+            "blankId": "c",
+            "method": "selection",
+            "correctValues": [
+              "3"
+            ]
+          },
+          {
+            "blankId": "d",
+            "method": "selection",
+            "correctValues": [
+              "2"
+            ]
+          },
+          {
+            "blankId": "e",
+            "method": "selection",
+            "correctValues": [
+              "3"
+            ]
+          },
+          {
+            "blankId": "starvation",
+            "method": "selection",
+            "correctValues": [
+              "possible"
+            ]
+          },
+          {
+            "blankId": "part2-a",
+            "method": "selection",
+            "correctValues": [
+              "1"
+            ]
+          },
+          {
+            "blankId": "part2-b",
+            "method": "selection",
+            "correctValues": [
+              "1"
+            ]
+          },
+          {
+            "blankId": "part2-c",
+            "method": "selection",
+            "correctValues": [
+              "7"
+            ]
+          },
+          {
+            "blankId": "part2-d",
+            "method": "selection",
+            "correctValues": [
+              "8"
+            ]
+          },
+          {
+            "blankId": "part2-e",
+            "method": "selection",
+            "correctValues": [
+              "3"
+            ]
+          },
+          {
+            "blankId": "part2-f",
+            "method": "selection",
+            "correctValues": [
+              "9"
+            ]
+          }
+        ],
         "provenance": {
           "origin": "unknown",
           "crossChecked": null,
@@ -69587,7 +70775,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c686bf5ca67f4ed8",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 23,
       "number": {
@@ -69807,7 +70995,7 @@
             }
           }
         ],
-        "text": "Part B (8分)\n完全人格，首在体育。小北同学近日遇到了考入某体育强校的李华同学，但二\n者就谁是体育世一大产生了争执，因此决定通过拔河比赛一决胜负。为了确保公平\n性，小北和李华各自找来了自己的学长作为裁判进行比赛计分。作为计算机专业的\n同学，你希望编写一个运行在Linux内核上的C程序模拟这个场景，以分析小北\n是否遥遥领先。\n为了模拟上述场景，我们用进程表示选手团和裁判团，每个进程中又用两个线\n程去模拟两位选手和两位裁判。每个“选手”线程通过信号将自己视角下的比赛情\n况发给对应的“裁判”线程，“裁判”线程将比赛结果记录在文件里以便最后登记\n分数。\n补充说明：\n•  在POSIX语义下，多线程进程接收信号时将随机指定一个线程进行接收\no  但在Linux系统下，通过在主线程中BLOCK某信号、在对等线程中\nUNBLOCK该信号，可以强制指定该对等线程接收该信号\no  本题利用这种方法，使两个线程`judger1`和`judger2`分别处理进\n程收到的`SIGUSR1`和`SIGUSR2`信号\n•  `volatile` 修饰关键词要求编译器对于指定的变量的每次读写都必须使\n用内存中的值\n•  `register`修饰关键词要求编译器必须将指定的变量分配在寄存器上\n•  题目在Ubuntu 24.04.1上使用gcc 13.3.0 (Ubuntu 13.3.0-\n6ubuntu2~24.04)进行编译，编译命令为 `gcc input.c csapp.c -o`\n`input`。题目环境的内核版本5.为15.167.4。解决本题无需课程内容以外知\n识，提供本信息仅为避免你臆想不必要的情况。\n\n\n```\ninput.c\n#include \"csapp.h\"\nvoid signal_handler(int signo) {\n    if (signo == SIGUSR1) printf(\"A\\n\");\n    if (signo == SIGUSR2) printf(\"B\\r\");\n}\nvoid *judger(void *num) {\n    ...\n    //在省略的代码中使用pthread_sigmask分别取消对SIGUSR1和SIGUSR2信号的阻塞\n    //(int)num为1则取消 SIGUSR1的阻塞，(int)num为2则取消SIGUSR2的阻塞\n    for (;;);\n}\nint judger_pid = 0;\nvoid *player(void *arg) {\n    int num = (int)(uint64_t)arg;\n    volatile static int flag = 0;\n    register int val = 0;\n    for (int i = 1; i <= 10; i++) {\n        val = flag; // *2\n        if (num == 1) {\n            if (val <= 0) ++val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val,\n\"_A\"[val > 0]);\n            if (val > 0) kill(judger_pid, SIGUSR1);\n        } else {\n            if (val >= 0) --val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val,\n\"_B\"[val < 0]);\n            if (val < 0) kill(judger_pid, SIGUSR2);\n        }\n    }\n}\nint main() {\n    ...\n    // 在省略的代码中使用pthread_sigmask阻塞SIGUSR1和SIGUSR2信号\n    // 并设置SIGUSR1和SIGUSR2的信号处理函数为signal_handler\n    pid_t player_pid;\n    if (player_pid = fork()) { // *1\n        freopen(\"game.out\", \"wb\", stdout); //题目保证硬盘空间足够\n        setvbuf(stdout, NULL, _IOLBF, 1024);\n        // 裁判团\n        pthread_t judger1, judger2;\n        pthread_create(&judger1, NULL, judger, (void *)1);\n        pthread_create(&judger2, NULL, judger, (void *)2);\n        waitpid(player_pid, NULL, 0);\n        sleep(1); // 题目保证此时所有pending信号均处理完成\n        _exit(0);\n    } else {\n        sleep(1); // 题目保证此时信号处理程序已按要求生效\n        // 玩家团\n        judger_pid = getppid();\n        pthread_t player1, player2;\n        pthread_create(&player1, NULL, player, (void *)1);\n        pthread_create(&player2, NULL, player, (void *)2);\n        pthread_join(player1, NULL);\n        pthread_join(player2, NULL);\n        return 0;\n    }\n}\n```\n1） 在`player`函数中，使用了_______个共享变量? (同一个变量多次出现算1\n个) （1分）\n2） 看到代码后，你很快发现：在信号处理程序里使用了不安全的`printf`函数！\n老师在课堂上讲过著名的“灵魂出窍”死锁案例，而题目的程序同时在`main`函数\n和信号处理程序都使用了`printf`。\n题目中的程序_______（会/不会）出现死锁？原因包括：printf _______（是/不是）异步信号安全的；printf _______（是/不是）线程安全的；在题目的程序中，`signal_handler` 中的 printf _______（可能/不会）被打断。（4分）\n3） 下面是上面代码某次运行时输出的结果：\n```\nstdout:\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 2: 0 _\nPlayer 2: 0 _\nPlayer 2: -1 B\nPlayer 1: 1 A\nPlayer 1: 0 _\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\n\ngame.out:\nA\nA\nA\nA\nB\nA\n```\n① 下列哪一项不是导致本题程序多次运行的结果不同的原因？_______（1分）\nA. 操作系统调度进程具有不确定性\nB. 操作系统调度线程具有不确定性\nC. 操作系统下发信号的时机具有不确定性\nD. 操作系统处理系统调用具有不确定性\n② 下列哪一选项会导致上面的运行结果中，game.out 的 A 比 `stdout` 的少？\n_______ （1分）\n除此之外，还有哪一选项会导致上面的运行结果中，game.out的B比`stdout`的\n少？_______（1分）"
+        "text": "### Part B（8分）\n\n完全人格，首在体育。小北同学近日遇到了考入某体育强校的李华同学，但二者就谁是体育世一大产生了争执，因此决定通过拔河比赛一决胜负。为了确保公平性，小北和李华各自找来了自己的学长作为裁判进行比赛计分。作为计算机专业的同学，你希望编写一个运行在 Linux 内核上的 C 程序模拟这个场景，以分析小北是否遥遥领先。\n\n为了模拟上述场景，我们用进程表示选手团和裁判团，每个进程中又用两个线程去模拟两位选手和两位裁判。每个“选手”线程通过信号将自己视角下的比赛情况发给对应的“裁判”线程，“裁判”线程将比赛结果记录在文件里以便最后登记分数。\n补充说明：\n\n- 在 POSIX 语义下，多线程进程接收信号时会随机指定一个线程接收。\n  - 但在 Linux 系统下，通过在主线程中 BLOCK 某信号、在对等线程中 UNBLOCK 该信号，可以强制指定该对等线程接收该信号。\n  - 本题利用这种方法，使线程 `judger1` 和 `judger2` 分别处理进程收到的 `SIGUSR1` 和 `SIGUSR2` 信号。\n- `volatile` 修饰关键词要求编译器对指定变量的每次读写都必须使用内存中的值。\n- `register` 修饰关键词要求编译器必须将指定变量分配在寄存器上。\n- 题目在 Ubuntu 24.04.1 上使用 gcc 13.3.0（Ubuntu 13.3.0-6ubuntu2~24.04）编译，命令为 `gcc input.c csapp.c -o input`。题目环境的内核版本为 5.15.167.4。解决本题无需课程内容以外的知识；提供这些信息仅为避免臆想不必要的情况。\n\n\n```c\n// input.c\n#include \"csapp.h\"\nvoid signal_handler(int signo) {\n    if (signo == SIGUSR1) printf(\"A\\n\");\n    if (signo == SIGUSR2) printf(\"B\\r\");\n}\nvoid *judger(void *num) {\n    ...\n    //在省略的代码中使用pthread_sigmask分别取消对SIGUSR1和SIGUSR2信号的阻塞\n    //(int)num为1则取消 SIGUSR1的阻塞，(int)num为2则取消SIGUSR2的阻塞\n    for (;;);\n}\nint judger_pid = 0;\nvoid *player(void *arg) {\n    int num = (int)(uint64_t)arg;\n    volatile static int flag = 0;\n    register int val = 0;\n    for (int i = 1; i <= 10; i++) {\n        val = flag; // *2\n        if (num == 1) {\n            if (val <= 0) ++val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val, \"_A\"[val > 0]);\n            if (val > 0) kill(judger_pid, SIGUSR1);\n        } else {\n            if (val >= 0) --val;\n            flag = val;\n            printf(\"Player %d: %d %c\\n\", num, val, \"_B\"[val < 0]);\n            if (val < 0) kill(judger_pid, SIGUSR2);\n        }\n    }\n}\nint main() {\n    ...\n    // 在省略的代码中使用pthread_sigmask阻塞SIGUSR1和SIGUSR2信号\n    // 并设置SIGUSR1和SIGUSR2的信号处理函数为signal_handler\n    pid_t player_pid;\n    if (player_pid = fork()) { // *1\n        freopen(\"game.out\", \"wb\", stdout); //题目保证硬盘空间足够\n        setvbuf(stdout, NULL, _IOLBF, 1024);\n        // 裁判团\n        pthread_t judger1, judger2;\n        pthread_create(&judger1, NULL, judger, (void *)1);\n        pthread_create(&judger2, NULL, judger, (void *)2);\n        waitpid(player_pid, NULL, 0);\n        sleep(1); // 题目保证此时所有pending信号均处理完成\n        _exit(0);\n    } else {\n        sleep(1); // 题目保证此时信号处理程序已按要求生效\n        // 玩家团\n        judger_pid = getppid();\n        pthread_t player1, player2;\n        pthread_create(&player1, NULL, player, (void *)1);\n        pthread_create(&player2, NULL, player, (void *)2);\n        pthread_join(player1, NULL);\n        pthread_join(player2, NULL);\n        return 0;\n    }\n}\n```\n#### 1）\n\n在 `player` 函数中，使用了_______个共享变量？（同一个变量多次出现算 1 个）（1分）\n\n#### 2）\n\n信号处理程序里使用了不安全的 `printf` 函数。老师在课堂上讲过著名的“灵魂出窍”死锁案例，而题目的程序同时在 `main` 函数和信号处理程序中使用 `printf`。\n\n题目中的程序_______（会/不会）出现死锁？原因包括：\n\n- `printf` _______（是/不是）异步信号安全的；\n- `printf` _______（是/不是）线程安全的；\n- 在题目的程序中，`signal_handler` 中的 `printf` _______（可能/不会）被打断。\n\n（本小问共 4 分）\n\n#### 3）\n\n下面是上面代码某次运行时的输出结果。\n\n`stdout`：\n\n```text\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 1: 1 A\nPlayer 2: 0 _\nPlayer 2: 0 _\nPlayer 2: -1 B\nPlayer 1: 1 A\nPlayer 1: 0 _\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\nPlayer 2: -1 B\n```\n\n`game.out`：\n\n```text\nA\nA\nA\nA\nB\nA\n```\n\n① 下列哪一项不是导致本题程序多次运行结果不同的原因？_______（1分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 操作系统调度进程具有不确定性 |\n| B | 操作系统调度线程具有不确定性 |\n| C | 操作系统下发信号的时机具有不确定性 |\n| D | 操作系统处理系统调用具有不确定性 |\n\n② 下列哪一选项会导致上面的运行结果中，`game.out` 的 A 比 `stdout` 的少？_______（1分）\n\n除此之外，还有哪一选项会导致上面的运行结果中，`game.out` 的 B 比 `stdout` 的少？_______（1分）\n\n| 选项 | 描述 |\n| --- | --- |\n| A | 多个到达的信号可能只被处理一次 |\n| B | 后面的字符可能在缓冲区内覆盖前面的字符 |\n| C | 缓冲区内的字符没有刷新到文件，程序就退出了 |\n| D | 多次相同的 `kill` 可能只有一次进入内核 |\n| E | 父进程中的两个线程产生 race condition |\n| F | 子进程中的两个线程产生 race condition |\n| G | 由于磁盘太慢等原因，产生写不足 |"
       },
       "solution": {
         "state": "available",
@@ -69824,7 +71012,14 @@
         "blankAnswers": [
           {
             "blankId": "legacy-gap-0",
-            "method": "self"
+            "method": "exact",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
           },
           {
             "blankId": "legacy-gap-1",
@@ -106623,7 +107818,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0db09198d5c9f64c",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 27,
       "number": {
@@ -107268,14 +108463,14 @@
             }
           }
         ],
-        "text": "第三题（10分）\n\n本题基于下列`m.c`及`swap.c`文件所编译生成的`m.o`和`swap.o`，编译和运行在Linux/X86-64下使用GCC完成，编译过程未加优化选项。\n\n```c\n//m.c\nvoid myswap();\nvoid func();\nchar buf[2] = {1, 2};\nvoid *bufp0;\nvoid *bufp1;\nchar temp;\nint main(){\n    func();\n    ......//略去题目无关代码\n    myswap(temp);\n    ......//略去题目无关代码\n    return 0;\n}\n```\n\n```c\n//swap.c\nextern int buf[];\nchar *bufp0;\n......//略去题目无关代码\nchar *bufp1 = &buf[1];\nvoid myswap(char temp){\n    static int count = 0;\n    ......//略去题目无关代码\n    bufp0 = &buf[0];\n    temp = *bufp0;\n    ......//略去题目无关代码\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    ......//略去题目无关代码\n    count++;\n}\nvoid func(){\n    ......//略去题目无关代码\n}\n```\n\n1） 对于每个 `swap.o` 中定义和引用的符号，请用“是”或“否”指出它是否在模块 `swap.o` 的.symtab节中存在符号表条目。如果存在条目，则请指出定义该符号的模块（`swap.o` 或`m.o`）、符号类型（局部、全局或外部）以及该符号在所属的模块（“即该符号在该模块中被定义”）中所处的节；如果不存在条目，则请将该行后继空白处标记为“/”。\n\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| `buf` | {{blank:buf-r1-c1}} | {{blank:buf-r1-c2}} | {{blank:buf-r1-c3}} | {{blank:buf-r1-c4}} |\n| `bufp0` | {{blank:bufp0-r2-c1}} | {{blank:bufp0-r2-c2}} | {{blank:bufp0-r2-c3}} | {{blank:bufp0-r2-c4}} |\n| `count` | {{blank:count-r3-c1}} | {{blank:count-r3-c2}} | {{blank:count-r3-c3}} | {{blank:count-r3-c4}} |\n| `func` | {{blank:func-r4-c1}} | {{blank:func-r4-c2}} | {{blank:func-r4-c3}} | {{blank:func-r4-c4}} |\n| `temp` | {{blank:temp-r5-c1}} | {{blank:temp-r5-c2}} | {{blank:temp-r5-c3}} | {{blank:temp-r5-c4}} |\n\n2） 下图左边给出了 `m.o` 和`swap.o` 的反汇编文件，右边给出了采用某个配置链接成可执行程序后再反汇编出来的文件。根据答题需要，其中的信息略有删减。\n\n```\n0000000000......<main>:                             0000000000001000 <main>:\n55                      push    %rbp                1000: 55                  push %rbp\n48 89 e5                mov     %rsp,%rbp           1001: 48 89 e5           mov %rsp,%rbp\nb8 00 00 00 00          mov     $0x0,%eax            1004: b8 00 00 00 00      mov    $0x0,%eax\ne8 00 00 00 00          callq e <main+0xe>    ①     1009: e8      ①           callq 302e <func>\n......                                              ......\n0f b6 05 00 00 00 00    movzbl 0x0(%rip),%eax ②     1010: 0f b6 05                  ②             movzbl\n0f be c0               movsbl %al,%eax              0x??????(%rip),%eax\n89 c7                   mov    %eax,%edi            1017: 0f be c0            movsbl %al,%eax\nb8 00 00 00 00          mov    $0x0,%eax            101a: 89 c7               mov     %eax,%edi\ne8 00 00 00 00          callq 26 <main+0x26> ③      101c: b8 00 00 00 00      mov     $0x0,%eax\n......                                              1021: e8      ③           callq 10e4 <myswap>\nb8 00 00 00 00          mov   $0x0,%eax             ......\n5d                     pop    %rbp                  10db: b8 00 00 00 00       mov     $0x0,%eax\nc3                     retq                         10e0: 5d                    pop     %rbp\n                                                    10e1: c3                    retq\n0000000000......<myswap>:\n55                push %rbp                         00000000000010e4<myswap>:\n48 89 e5           mov    %rsp,%rbp                 10e4: 55                    push    %rbp\n89 f8             mov     %edi,%eax                 10e5: 48 89 e5              mov     %rsp,%rbp\n88 45 fc           mov    %al,-0x4(%rbp)            10e8: 89 f8                 mov     %edi,%eax\n......                                              10ea: 88 45 fc               mov     %al,-0x4(%rbp)\n48 c7 05 00 00 00 00 00 00 00 00               ⑤④   ......\n                     movq $0x0,0x0(%rip)            10f4: 48 c7 05      ⑤               ④\n......                                                                  movq     ④     , ⑤     (%rip)\n48 8b 05 00 00 00 00 mov      0x0(%rip),%rax   ⑥    ......\n0f b6 00              movzbl (%rax),%eax            1104: 48 8b 05      ⑥       mov   ⑥ (%rip),%rax\n88 45 fc              mov    %al,-0x4(%rbp)         110b: 0f b6 00              movzbl (%rax),%eax\n......                                              110e: 88 45 fc              mov   %al,-0x4(%rbp)\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax    ⑦    ......\n48 8b 15 00 00 00 00 mov     0x0(%rip),%rdx    ⑧    1229: 48 8b 05      ⑦       mov    ⑦ (%rip),%rax\n0f b6 12             movzbl (%rdx),%edx             1230：48 8b 15      ⑧        mov   ⑧ (%rip),%rdx\n88 10                mov    %dl,(%rax)              1237：0f b6 12               movzbl (%rdx),%edx\n48 8b 05 00 00 00 00 mov     0x0(%rip),%rax    ⑨    123a: 88 10                 mov   %dl,(%rax)\n0f b6 55 fc         movzbl -0x4(%rbp),%edx          123c: 48 8b 05      ⑨       mov     ⑨ (%rip),%rax\n88 10                mov    %dl,(%rax)              1243: 0f b6 55 fc           movzbl -0x4(%rbp),%edx\n......                                              1247: 88 10                 mov   %dl,(%rax)\n8b 05 00 00 00 00     mov    0x0(%rip),%eax    ⑩    ......\n83 c0 01              add    $0x1,%eax              124b: 8b 05      ⑩          mov       ⑩ (%rip),%eax\n89 05 00 00 00 00     mov    %eax,0x0(%rip)    ⑪    1251：83 c0 01               add     $0x1,%eax\n90                    nop                           1254：89 05      ⑪           mov     %eax, ⑪ (%rip)\n5d                    pop    %rbp                   125a: 90                    nop\nc3                    retq                          125b: 5d                    pop     %rbp\n                                                    125c: c3                    retq\n0000000000......<func>:\n......                                              000000000000302e<func>:\n                                                    ......\n                                                      ......略去部分和答题无关的信息......\n                                                    000000000000a000 <buf>:\n                                                      ......略去部分和答题无关的信息......\n                                                    000000000000a250 <bufp1>:\n                                                      ......略去部分和答题无关的信息......\n                                                    0000000000dedd38 <count.1837>:\n                                                      ......略去部分和答题无关的信息......\n                                                    0000000000dedd40 <bufp0>:\n                                                      ......略去部分和答题无关的信息......\n```\n\n在上图中对所涉及到的重定位条目进行用数字①至⑪进行了标记，请根据下表中所提供的重定位条目信息，计算相应的重定位引用值并填写下表。\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值（一律填写 32 位 16 进制数） |\n| --- | --- | --- |\n| ① | `r.offset = 0x0a`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ③ | `r.offset = 0x22`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ④ | `r.offset = 0x17`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_32`　　`r.addend = 0` |  |\n| ⑨ | `r.offset = 0x15b`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ⑪ | `r.offset = 0x172`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |"
+        "text": "第三题（10分）\n\n本题基于下列 `m.c` 及 `swap.c` 文件编译生成的 `m.o` 和 `swap.o`。编译和运行在 Linux/X86-64 下使用 GCC 完成，编译过程未加优化选项。\n\n```c\n//m.c\nvoid myswap();\nvoid func();\nchar buf[2] = {1, 2};\nvoid *bufp0;\nvoid *bufp1;\nchar temp;\nint main(){\n    func();\n    ......//略去题目无关代码\n    myswap(temp);\n    ......//略去题目无关代码\n    return 0;\n}\n```\n\n```c\n//swap.c\nextern int buf[];\nchar *bufp0;\n......//略去题目无关代码\nchar *bufp1 = &buf[1];\nvoid myswap(char temp){\n    static int count = 0;\n    ......//略去题目无关代码\n    bufp0 = &buf[0];\n    temp = *bufp0;\n    ......//略去题目无关代码\n    *bufp0 = *bufp1;\n    *bufp1 = temp;\n    ......//略去题目无关代码\n    count++;\n}\nvoid func(){\n    ......//略去题目无关代码\n}\n```\n\n### 1）\n\n对于每个 `swap.o` 中定义和引用的符号，请用“是”或“否”指出它是否在模块 `swap.o` 的.symtab节中存在符号表条目。如果存在条目，则请指出定义该符号的模块（`swap.o` 或`m.o`）、符号类型（局部、全局或外部）以及该符号在所属的模块（“即该符号在该模块中被定义”）中所处的节；如果不存在条目，则请将该行后继空白处标记为“/”。\n\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| `buf` | {{blank:buf-r1-c1}} | {{blank:buf-r1-c2}} | {{blank:buf-r1-c3}} | {{blank:buf-r1-c4}} |\n| `bufp0` | {{blank:bufp0-r2-c1}} | {{blank:bufp0-r2-c2}} | {{blank:bufp0-r2-c3}} | {{blank:bufp0-r2-c4}} |\n| `count` | {{blank:count-r3-c1}} | {{blank:count-r3-c2}} | {{blank:count-r3-c3}} | {{blank:count-r3-c4}} |\n| `func` | {{blank:func-r4-c1}} | {{blank:func-r4-c2}} | {{blank:func-r4-c3}} | {{blank:func-r4-c4}} |\n| `temp` | {{blank:temp-r5-c1}} | {{blank:temp-r5-c2}} | {{blank:temp-r5-c3}} | {{blank:temp-r5-c4}} |\n\n### 2）\n\n下面分别给出 `m.o` 和 `swap.o` 的反汇编，以及采用某个配置链接后的可执行程序反汇编。根据答题需要，部分信息略有删减。\n\n`m.o` 与 `swap.o` 的反汇编：\n\n```asm\n0000000000......<main>:\n55                      push    %rbp\n48 89 e5                mov     %rsp,%rbp\nb8 00 00 00 00          mov     $0x0,%eax\ne8 00 00 00 00          callq   e <main+0xe>    ①\n......\n0f b6 05 00 00 00 00    movzbl  0x0(%rip),%eax ②\n0f be c0                movsbl  %al,%eax\n89 c7                   mov     %eax,%edi\nb8 00 00 00 00          mov     $0x0,%eax\ne8 00 00 00 00          callq   26 <main+0x26> ③\n......\nb8 00 00 00 00          mov     $0x0,%eax\n5d                      pop     %rbp\nc3                      retq\n\n0000000000......<myswap>:\n55                      push    %rbp\n48 89 e5                mov     %rsp,%rbp\n89 f8                   mov     %edi,%eax\n88 45 fc                mov     %al,-0x4(%rbp)\n......\n48 c7 05 00 00 00 00 00 00 00 00             ⑤④\n    movq    $0x0,0x0(%rip)\n......\n48 8b 05 00 00 00 00    mov     0x0(%rip),%rax ⑥\n0f b6 00                movzbl  (%rax),%eax\n88 45 fc                mov     %al,-0x4(%rbp)\n......\n48 8b 05 00 00 00 00    mov     0x0(%rip),%rax ⑦\n48 8b 15 00 00 00 00    mov     0x0(%rip),%rdx ⑧\n0f b6 12                movzbl  (%rdx),%edx\n88 10                   mov     %dl,(%rax)\n48 8b 05 00 00 00 00    mov     0x0(%rip),%rax ⑨\n0f b6 55 fc             movzbl  -0x4(%rbp),%edx\n88 10                   mov     %dl,(%rax)\n......\n8b 05 00 00 00 00       mov     0x0(%rip),%eax ⑩\n83 c0 01                add     $0x1,%eax\n89 05 00 00 00 00       mov     %eax,0x0(%rip) ⑪\n90                      nop\n5d                      pop     %rbp\nc3                      retq\n\n0000000000......<func>:\n......\n```\n\n链接后的可执行文件反汇编：\n\n```asm\n0000000000001000 <main>:\n1000: 55                  push    %rbp\n1001: 48 89 e5            mov     %rsp,%rbp\n1004: b8 00 00 00 00      mov     $0x0,%eax\n1009: e8                  callq   302e <func>    ①\n......\n1010: 0f b6 05             ② movzbl 0x??????(%rip),%eax\n1017: 0f be c0             movsbl %al,%eax\n101a: 89 c7                mov    %eax,%edi\n101c: b8 00 00 00 00       mov     $0x0,%eax\n1021: e8                  callq   10e4 <myswap>   ③\n......\n10db: b8 00 00 00 00       mov     $0x0,%eax\n10e0: 5d                  pop     %rbp\n10e1: c3                  retq\n\n00000000000010e4 <myswap>:\n10e4: 55                  push    %rbp\n10e5: 48 89 e5             mov     %rsp,%rbp\n10e8: 89 f8                mov     %edi,%eax\n10ea: 88 45 fc             mov     %al,-0x4(%rbp)\n......\n10f4: 48 c7 05      ⑤     ④\n      movq     ④, ⑤(%rip)\n......\n1104: 48 8b 05      ⑥     mov   ⑥(%rip),%rax\n110b: 0f b6 00             movzbl (%rax),%eax\n110e: 88 45 fc             mov   %al,-0x4(%rbp)\n......\n1229: 48 8b 05      ⑦     mov    ⑦(%rip),%rax\n1230: 48 8b 15      ⑧     mov    ⑧(%rip),%rdx\n1237: 0f b6 12             movzbl (%rdx),%edx\n123a: 88 10                mov    %dl,(%rax)\n123c: 48 8b 05      ⑨     mov    ⑨(%rip),%rax\n1243: 0f b6 55 fc          movzbl -0x4(%rbp),%edx\n1247: 88 10                mov    %dl,(%rax)\n......\n124b: 8b 05      ⑩        mov    ⑩(%rip),%eax\n1251: 83 c0 01             add     $0x1,%eax\n1254: 89 05      ⑪        mov     %eax,⑪(%rip)\n125a: 90                  nop\n125b: 5d                  pop     %rbp\n125c: c3                  retq\n000000000000302e <func>:\n......\n略去部分和答题无关的信息......\n000000000000a000 <buf>:\n......略去部分和答题无关的信息......\n000000000000a250 <bufp1>:\n......略去部分和答题无关的信息......\n0000000000dedd38 <count.1837>:\n......略去部分和答题无关的信息......\n0000000000dedd40 <bufp0>:\n......略去部分和答题无关的信息......\n```\n\n以上反汇编中用①至⑪标记了相关重定位条目。请根据下表中的重定位信息，计算引用值并填写下表。\n\n| 编号 | 重定位条目信息 | 应填入的重定位引用值（一律填写 32 位 16 进制数） |\n| --- | --- | --- |\n| ① | `r.offset = 0x0a`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ③ | `r.offset = 0x22`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ④ | `r.offset = 0x17`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_32`　　`r.addend = 0` |  |\n| ⑨ | `r.offset = 0x15b`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |\n| ⑪ | `r.offset = 0x172`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：1）符号表见下表；2）① 0x00002020；③ 0x000000be；④ 0x0000a000；⑨ 0x0000900d；⑪ 0x00decade。\n1）\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| `buf` | 有 | 外部 | `m.o` | .data |\n| `bufp0` | 有 | 全局 | `swap.o` | COMMON |\n| `count` | 有 | 局部 | `swap.o` | .bss |\n| `func` | 有 | 全局 | `swap.o` | .text |\n| `temp` | 无 | / | / | / |\n2）① `0x00002020`；③ `0x000000be`；④ `0x0000a000`；⑨ `0x0000900d`；⑪ `0x00decade`。\n解析：① `302e-1000-a-4 = 0x00002020`；③ `10e4-1000-22-4 = 0x000000be`；④ 是 `buf` 的绝对地址（`R_X86_64_32`）`0x0000a000`；⑨ 是 `bufp1`：`a250-1243 = 0x0000900d`；⑪ 是 `count`：`dedd38-125a = 0x00decade`。（填写时注意小端法与立即数格式。）\n勘误：Arthals 认为 ④ 处应为 `count` 的地址 `0x00dedd38`，与原解析不一致，此处采用原解析。\n（来源：2019、2020期末-答案解析）"
+          "text": "### 1）\n\n| 符号 | .symtab 有条目? | 符号类型 | 定义符号的模块 | 节 |\n| --- | --- | --- | --- | --- |\n| `buf` | 有 | 外部 | `m.o` | .data |\n| `bufp0` | 有 | 全局 | `swap.o` | COMMON |\n| `count` | 有 | 局部 | `swap.o` | .bss |\n| `func` | 有 | 全局 | `swap.o` | .text |\n| `temp` | 无 | / | / | / |\n\n### 2）\n\n| 编号 | 引用值 | 解析 |\n| --- | --- | --- |\n| ① | `0x00002020` | `0x302e - 0x1000 - 0x0a - 4` |\n| ③ | `0x000000be` | `0x10e4 - 0x1000 - 0x22 - 4` |\n| ④ | `0x0000a000` | 原解析取 `buf` 的绝对地址，类型为 `R_X86_64_32` |\n| ⑨ | `0x0000900d` | `bufp1`：`0xa250 - 0x1243` |\n| ⑪ | `0x00decade` | `count`：`0xdedd38 - 0x125a` |\n\n填写时注意小端法与立即数格式。\n\n勘误：Arthals 认为 ④ 处应为 `count` 的地址 `0x00dedd38`，与原解析不一致，此处采用原解析。\n\n（来源：2019、2020期末-答案解析）"
         },
         "provenance": {
           "origin": "unknown",

@@ -597,7 +597,8 @@
   }
 
   function renderCompositeQuestion(question) {
-    return renderContent(question.stem) + question.parts.map(function (part, index) {
+    const context = renderContent(question.stem);
+    return (context.trim() ? '<div class="ics-composite-context">' + context + '</div>' : '') + question.parts.map(function (part, index) {
       let body = part.type === 'fill' ? renderFillQuestion(part.stem, index) : renderContent(part.stem);
       if (part.type === 'single-choice' || part.type === 'multiple-choice') {
         body += '<div class="ics-composite-choices" data-part-index="' + index + '" data-multiple="' +
@@ -606,17 +607,21 @@
         body += '<p class="ics-composite-note">本小问思考完成后，在整题提交时查看参考答案并自评。</p>';
       }
       if (part.solution.state !== 'available') body += '<p class="ics-composite-note">本小问答案待复核，不计分。</p>';
-      return '<section class="ics-composite-part" data-composite-part="' + index + '"><header><strong>' +
-        escapeHtml(part.number.display || ('第 ' + (index + 1) + ' 小问')) + '</strong><span>' +
+      return '<section class="ics-composite-part" data-composite-part="' + index + '"><header><h3>' +
+        escapeHtml(part.number.display || ('第 ' + (index + 1) + ' 小问')) + '</h3><span>' +
         issueTypeLabel(part.type) + '</span></header><div class="ics-composite-body">' + body + '</div></section>';
     }).join('');
   }
 
   function renderSolution(question) {
     const solution = question.solution;
-    if (question.type === 'composite') return question.parts.map(function (part) {
-      return '<section><h4>' + escapeHtml(part.number.display) + '</h4>' + renderSolution(part) + '</section>';
-    }).join('') + renderContent(solution.reference);
+    if (question.type === 'composite') {
+      const reference = renderContent(solution.reference);
+      return question.parts.map(function (part, index) {
+        return '<section class="ics-solution-part"><h4>' +
+          escapeHtml(part.number.display || ('第 ' + (index + 1) + ' 小问')) + '</h4>' + renderSolution(part) + '</section>';
+      }).join('') + (reference.trim() ? '<div class="ics-solution-context">' + reference + '</div>' : '');
+    }
     if (solution.state !== 'available') return '<p>' + escapeHtml(solution.reason || '本题答案待复核，未计分。') + '</p>';
     const key = solution.grading === 'choice'
       ? '<p><strong>正确选项：' + solution.correctOptionIds.map(escapeHtml).join('、') + '</strong></p>' : '';

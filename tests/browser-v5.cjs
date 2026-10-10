@@ -227,7 +227,12 @@ async function run() {
     await page.click('#ics-previous');assert.equal(await page.locator('.ics-blank-input').first().inputValue(),'42');await page.click('#ics-submit');
     assert.match(await page.locator('#ics-verdict').innerText(),/正确/);
     await page.click('#ics-next');await page.click('[data-grade="0.5"]');await page.click('#ics-next');
+    assert.equal(await page.locator('.ics-composite-context').innerText(),'共用题面。');
+    assert.deepEqual(await page.locator('.ics-composite-part > header h3').allTextContents(),['(1)','(2)','(3)']);
+    assert.equal(await page.locator('.ics-composite-part').first().evaluate(el=>getComputedStyle(el).borderTopStyle),'solid');
     await page.click('[data-composite-choice="B"]');await page.locator('.ics-blank-input').first().fill('42');await page.click('#ics-submit');
+    assert.deepEqual(await page.locator('.ics-solution-part > h4').allTextContents(),['(1)','(2)','(3)']);
+    assert.equal(await page.locator('.ics-solution-context').innerText(),'人工参考答案。');
     assert(await page.locator('#ics-self-grade').isVisible());await page.click('[data-grade="1"]');
     assert.equal(await page.evaluate(()=>window.__test.state.score),4.5);
     await page.click('#ics-finish');assert.match(await page.locator('#ics-final-summary').innerText(),/已计分 5/);
@@ -359,6 +364,70 @@ async function run() {
     await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.score),1);
     assert.match(await page.locator('#ics-reference').innerText(),/唯一解/);
+    // Long reported questions use real Markdown tables, no duplicated whole-page images.
+    for (const [id,expectedBlanks] of [['q-492c07fd54f9b065',8],['q-69a53f8a7ed107eb',9]]) {
+      const large=all.find(q=>q.id===id);
+      await fixture(page,[large]);
+      assert.equal(await page.locator('#ics-question-content img').count(),0);
+      assert.equal(await page.locator('#ics-question-content h4').count(),5);
+      assert.equal(await page.locator('#ics-question-content .ics-blank-input').count(),expectedBlanks);
+      if(id==='q-492c07fd54f9b065') {
+        assert.equal(await page.locator('#ics-question-content table').nth(0).locator('tbody tr').count(),8);
+        assert.equal(await page.locator('#ics-question-content table').nth(1).locator('tbody tr').count(),8);
+      } else {
+        assert.equal(await page.locator('#ics-question-content pre').count(),1);
+        assert.equal(await page.locator('#ics-question-content pre .ics-blank-input').count(),2);
+        for(const index of [2,3])assert.equal(await page.locator('#ics-question-content table').nth(index).locator('tbody tr').count(),4);
+      }
+      if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-desktop.png'),fullPage:true});
+      for(const answer of large.solution.blankAnswers) {
+        const input=page.locator('[data-blank-id="'+answer.blankId+'"]');
+        if(answer.method==='selection')await input.selectOption(answer.correctValues[0]);
+        else await input.fill(answer.acceptedAnswers[0]);
+      }
+      await page.click('#ics-submit');
+      assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+      assert.equal(await page.locator('#ics-self-grade').isVisible(),false);
+      await page.setViewportSize({width:390,height:844});
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+      if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-mobile.png'),fullPage:true});
+      await page.setViewportSize({width:1280,height:900});
+    }
+    for(const [id,count] of [['q-a01a9f044af56d47',21],['q-c686bf5ca67f4ed8',8]]) {
+      const large=all.find(q=>q.id===id);
+      await fixture(page,[large]);
+      assert.equal(await page.locator('#ics-question-content .ics-blank-input').count(),count);
+      if(id==='q-a01a9f044af56d47') {
+        assert.equal(await page.locator('#ics-question-content pre').count(),2);
+        await page.locator('[data-blank-id="b"]').first().selectOption('5');
+        assert.deepEqual(await page.locator('[data-blank-id="b"]').evaluateAll(nodes=>nodes.map(n=>n.value)),['5','5','5','5']);
+      } else {
+        assert.equal(await page.locator('#ics-question-content pre').count(),3);
+        assert.equal(await page.locator('#ics-question-content table').nth(1).locator('tbody tr').count(),7);
+      }
+      for(const answer of large.solution.blankAnswers) {
+        const input=page.locator('[data-blank-id="'+answer.blankId+'"]').first();
+        if(answer.method==='selection')await input.selectOption(answer.correctValues[0]);
+        else await input.fill(answer.acceptedAnswers[0]);
+      }
+      await page.click('#ics-submit');
+      assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+      if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-desktop.png'),fullPage:true});
+      await page.setViewportSize({width:390,height:844});
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+      await page.setViewportSize({width:1280,height:900});
+    }
+    for(const id of ['q-96576bae25379ede','q-0db09198d5c9f64c','q-59acf52820891cfb']) {
+      const large=all.find(q=>q.id===id);
+      await fixture(page,[large]);
+      assert.equal(await page.locator('#ics-question-content pre').count(),id==='q-59acf52820891cfb'?3:4);
+      await page.evaluate(()=>{const {state,ui,renderSolution}=window.__test;ui.reference.innerHTML=renderSolution(state.questions[0]);ui.feedback.hidden=false});
+      if(id!=='q-59acf52820891cfb')assert.equal(await page.locator('#ics-reference table').count(),2);
+      if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-desktop.png'),fullPage:true});
+      await page.setViewportSize({width:390,height:844});
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+      await page.setViewportSize({width:1280,height:900});
+    }
     const final2015 = all.find(q=>q.id==='q-8c4d8b2b8d02717d');
     await fixture(page,[final2015]);
     assert.equal(await page.locator('#ics-question-content pre').count(),3);
@@ -371,7 +440,7 @@ async function run() {
     const mid2021 = all.find(q=>q.id==='q-b0ef359a9e930155');
     await fixture(page,[mid2021]);
     assert.equal(await page.locator('[data-composite-part]').count(),7);
-    assert.match(await page.locator('#ics-question-content > pre').innerText(),/struct s_element/);
+    assert.match(await page.locator('#ics-question-content > .ics-composite-context > pre').innerText(),/struct s_element/);
     for(let i=0;i<mid2021.parts.length;i++){
       for(const answer of mid2021.parts[i].solution.blankAnswers||[]){
         await page.locator('[data-composite-part="'+i+'"] .ics-blank-input[data-blank-id="'+answer.blankId+'"]')

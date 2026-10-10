@@ -102,6 +102,7 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .post-content > :last-child { margin-bottom: 0; }
 .post-content p { margin: 14px 0; }
 .post-content h2, .post-content h3 { margin: 20px 0 10px; font-size: 18px; font-weight: 650; }
+.post-content h4 { margin: 20px 0 10px; font-size: 16px; font-weight: 650; }
 .post-content ul, .post-content ol { margin: 12px 0; padding-left: 24px; }
 .post-content li + li { margin-top: 5px; }
 .post-content blockquote { margin: 16px 0; padding: 8px 14px; border-left: 2px solid var(--border); color: var(--text-muted); background: var(--bg-soft); font-size: 14px; }
@@ -191,9 +192,15 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-stats-bar i { display: block; height: 100%; background: var(--accent); }
 .ics-stats-value { min-width: 90px; text-align: right; color: var(--text-muted); }
 .ics-stats-note { margin: 10px 0 0; color: var(--text-muted); font-size: 11px; }
-.ics-composite-part + .ics-composite-part { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
-.ics-composite-part > header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 13px; }
+.ics-composite-context { margin-bottom: 28px; }
+.ics-composite-context + .ics-composite-part, .ics-composite-part + .ics-composite-part { padding-top: 20px; border-top: 1px solid var(--border); }
+.ics-composite-part + .ics-composite-part { margin-top: 28px; }
+.ics-composite-part > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin-bottom: 12px; }
+.ics-composite-part > header h3 { margin: 0; font-size: 16px; }
 .ics-composite-part > header span { color: var(--text-muted); font-size: 11px; }
+.ics-composite-body > :first-child, .ics-composite-context > :first-child, .ics-solution-part > :first-child, .ics-solution-context > :first-child { margin-top: 0; }
+.ics-composite-body > :last-child, .ics-composite-context > :last-child, .ics-solution-part > :last-child, .ics-solution-context > :last-child { margin-bottom: 0; }
+.ics-solution-part + .ics-solution-part, .ics-solution-part + .ics-solution-context { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); }
 .ics-composite-choices { margin-top: 12px; }
 .ics-composite-note { color: var(--text-muted); font-size: 12px; }
 .ics-inline-blank { display: inline-flex; align-items: center; gap: 5px; margin: 3px 4px; vertical-align: middle; }
