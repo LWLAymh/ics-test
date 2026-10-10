@@ -45,11 +45,32 @@ test('CSAPP explicitly accepts zero constants and states float-format assumption
 });
 
 test('reported invalid questions remain backed up with an explicit non-publishable state', () => {
-  for (const id of ['q-f39f4e62d028f8d6','q-3376fb77c2e3a398']) {
+  for (const id of ['q-f39f4e62d028f8d6','q-3376fb77c2e3a398','q-45d24dbc19ab7615']) {
     const question = bank.find(q=>q.id===id);
     assert.equal(question.publication.state,'review');
     assert(question.publication.issues.includes('retired-invalid-question'));
   }
+});
+
+test('reported RGB and structure questions include all reference data', () => {
+  const rgb=bank.find(q=>q.id==='q-6c3e0a8f8c9b1472');
+  assert.match(rgb.stem.text,/!\[.*\]\(assets\/csapp\/ch2\/ex-2-9-color-lights.jpg\)/);
+  for(const code of ['000','001','010','011','100','101','110','111']) assert(rgb.stem.text.includes('`'+code+'`'));
+  const structure=bank.find(q=>q.id==='q-7cd9182305e4534c');
+  assert.match(structure.stem.text,/```c\ntypedef struct \{\n    short x\[A\]\[B\];/);
+  assert.match(structure.stem.text,/32 位 x86/);
+  assert.equal(api.gradeBlanks({'value-a':'3','value-b':'7'},structure.solution),true);
+  assert.equal(api.gradeBlanks({'value-a':'3','value-b':'8'},structure.solution),false);
+  const align4=n=>Math.ceil(n/4)*4;
+  const candidates=[];
+  for(let a=1;a<=22;a++) for(let b=1;b<=22;b++) {
+    if(align4(b)===8&&align4(12+2*b)===28&&align4(2*a*b)===44) candidates.push([a,b]);
+  }
+  assert.deepEqual(candidates,[[3,7]]);
+  const retired=bank.find(q=>q.id==='q-45d24dbc19ab7615');
+  assert.match(retired.stem.text,/char s\[8\] = "01234567";/);
+  assert.match(retired.solution.reference.text,/返回地址在 `8\(%rbp\)`/);
+  assert.deepEqual(retired.solution.correctOptionIds,['D']); // Keep historical key, never publish.
 });
 
 test('2014 final bit reversal and disassembly blanks have exact automatic keys', () => {

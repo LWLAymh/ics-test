@@ -417,10 +417,10 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 26,
-        "publishedQuestionCount": 26,
-        "quizQuestionCount": 26,
+        "publishedQuestionCount": 25,
+        "quizQuestionCount": 25,
         "verifiedAnswerCount": 26,
-        "singleChoiceCount": 20,
+        "singleChoiceCount": 19,
         "multipleChoiceCount": 0,
         "fillCount": 6,
         "shortAnswerCount": 0,

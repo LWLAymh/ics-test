@@ -304,8 +304,8 @@
         "q-d5d56ae86119aa5f"
       ],
       "questionCount": 146,
-      "publishedQuestionCount": 141,
-      "quizQuestionCount": 141
+      "publishedQuestionCount": 140,
+      "quizQuestionCount": 140
     },
     {
       "id": "processor_arch",
@@ -998,9 +998,9 @@
   },
   "stats": {
     "questions": 850,
-    "publishedQuestions": 822,
-    "quizQuestions": 822,
-    "withheldQuestions": 28,
+    "publishedQuestions": 821,
+    "quizQuestions": 821,
+    "withheldQuestions": 29,
     "papers": 39,
     "quizGroups": 60
   }

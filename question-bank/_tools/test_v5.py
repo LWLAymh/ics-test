@@ -192,7 +192,7 @@ class ContractTests(unittest.TestCase):
     def test_reported_ambiguous_questions_are_excluded_from_all_deployed_indexes(self):
         from build_web_data import deployed_payloads
         deployed = deployed_payloads(self.modules, self.papers, self.questions)
-        for question_id in ("q-f39f4e62d028f8d6", "q-3376fb77c2e3a398"):
+        for question_id in ("q-f39f4e62d028f8d6", "q-3376fb77c2e3a398", "q-45d24dbc19ab7615"):
             self.assertNotIn(question_id, [q["id"] for q in deployed["questions.json"]["questions"]])
             for paper in deployed["papers.json"]["papers"]:
                 self.assertNotIn(question_id, paper["questionIds"])

@@ -343,7 +343,22 @@ async function run() {
     // Real reported questions: corrected keys, restored references and explicit retirement.
     const deployedIds = await page.evaluate(async()=> (await (await fetch('./web-data/questions.json')).json()).questions.map(q=>q.id));
     assert(!deployedIds.includes('q-622ae65ab616a110'));
+    assert(!deployedIds.includes('q-45d24dbc19ab7615'));
     assert.equal(deployedIds.length,all.filter(q=>q.publication.state==='published').length);
+    const rgb=all.find(q=>q.id==='q-6c3e0a8f8c9b1472');
+    await fixture(page,[rgb]);
+    const rgbImage=page.locator('#ics-question-content img');
+    await rgbImage.evaluate(img=>img.decode());
+    assert(await rgbImage.evaluate(img=>img.naturalWidth>0));
+    assert.equal(await page.locator('#ics-question-content table tbody tr').count(),4);
+    const structure=all.find(q=>q.id==='q-7cd9182305e4534c');
+    await fixture(page,[structure]);
+    assert.equal(await page.locator('#ics-question-content pre').count(),2);
+    await page.locator('[data-blank-id="value-a"]').fill('3');
+    await page.locator('[data-blank-id="value-b"]').fill('7');
+    await page.click('#ics-submit');
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    assert.match(await page.locator('#ics-reference').innerText(),/唯一解/);
     const final2015 = all.find(q=>q.id==='q-8c4d8b2b8d02717d');
     await fixture(page,[final2015]);
     assert.equal(await page.locator('#ics-question-content pre').count(),3);

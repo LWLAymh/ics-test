@@ -50309,7 +50309,7 @@
     {
       "schemaVersion": "5",
       "id": "q-7cd9182305e4534c",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 24,
       "number": {
@@ -50351,7 +50351,7 @@
             "原文/期末/2015期末-20151109-带答案.md"
           ],
           "provenance": "rewritten",
-          "editorNote": "二维数组寻址与 lea 偏移（求 A、B，含本大题答案）"
+          "editorNote": "结构体成员偏移推导 A、B；补齐32位x86的数据大小与自然对齐约定，保留原汇编和原答案，补充推导。"
         }
       ],
       "type": "fill",
@@ -50371,14 +50371,14 @@
             "width": "medium"
           }
         ],
-        "text": "4.阅读下列代码，回答后面的问题\n```\ntypedef struct {\n  short x[A][B];\n  int y;\n}str1;\ntypedef struct {\n  char array[B];\n  int t;\n  short s[B];\n  int u;\n}str2;\nvoid setVal(str1 *p,str2 *q) {\n  int v1=q->t;\n  int v2=q->u;\n  p->y=v1+v2;\n}\n```\n（`short` 按 2 字节计算）\n\nGCC 为 `setVal` 函数主体生成了以下代码：\n```asm\n    movl 12(%ebp), %eax\n    movl 28(%eax), %edx\n    addl 8(%eax), %edx\n    movl 8(%ebp), %eax\n    movl %edx, 44(%eax)\n```\n请直接写出 A 和 B 的值各是多少？（6分）\nA = {{blank:value-a}}，B = {{blank:value-b}}"
+        "text": "4. 阅读下列代码，回答后面的问题。`A`、`B` 为正整数，采用 32 位 x86 的通常布局：`char` 为 1 字节、`short` 为 2 字节、`int` 和指针为 4 字节，成员自然对齐，未启用结构体压缩打包。\n\n```c\ntypedef struct {\n    short x[A][B];\n    int y;\n} str1;\n\ntypedef struct {\n    char array[B];\n    int t;\n    short s[B];\n    int u;\n} str2;\n\nvoid setVal(str1 *p, str2 *q) {\n    int v1 = q->t;\n    int v2 = q->u;\n    p->y = v1 + v2;\n}\n```\n\nGCC 为 `setVal` 函数主体生成了以下代码：\n\n```asm\n    movl 12(%ebp), %eax\n    movl 28(%eax), %edx\n    addl 8(%eax), %edx\n    movl 8(%ebp), %eax\n    movl %edx, 44(%eax)\n```\n请写出 `A` 和 `B` 的值。（6 分）\n\nA = {{blank:value-a}}，B = {{blank:value-b}}"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：A = 3，B = 7。"
+          "text": "答案：A = 3，B = 7。\n\n汇编先读取 `q` 的地址，取偏移 `28` 和偏移 `8` 处的两个 `int` 相加，再写到 `p` 的偏移 `44` 处。因此 `t`、`u` 的偏移依次为 `8`、`28`，`y` 的偏移为 `44`。\n\n1. `array[B]` 后的 `t` 按 4 字节对齐且偏移为 `8`，所以 `B` 只能是 `5`、`6`、`7`、`8`。\n2. `t` 占 4 字节，`s[B]` 从偏移 `12` 开始，占 `2 * B` 字节。之后的 `u` 向上对齐到偏移 `28`，进一步得到 `B` 只能是 `7` 或 `8`。\n3. `x[A][B]` 占 `2 * A * B` 字节，之后的 `y` 向上对齐到 `44`。因此 `A * B` 只能是 `21` 或 `22`；结合 `B` 为 `7` 或 `8` 及正整数条件，唯一解为 `A = 3`、`B = 7`。"
         },
         "provenance": {
           "origin": "unknown",
@@ -74283,7 +74283,7 @@
     {
       "schemaVersion": "5",
       "id": "q-45d24dbc19ab7615",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 12,
       "number": {
@@ -74306,11 +74306,15 @@
         "tags": []
       },
       "publication": {
-        "state": "published",
+        "state": "review",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": []
+        "issues": [
+          "retired-invalid-question",
+          "missing-string-terminator",
+          "source-answer-disputed"
+        ]
       },
       "sources": [
         {
@@ -74323,7 +74327,7 @@
           "curated": "_curated/期中/2023期中-带答案/220.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "栈帧布局与缓冲区溢出对局部变量的影响"
+          "editorNote": "暂停发布，保留原题及原参考D：s[8]没有NUL终止，strcpy会越界读取；即使假定紧随8字符有NUL，该字节先覆盖保存的rbp，而非rbp+8处的返回地址。不能据此可靠判D错误。"
         }
       ],
       "type": "single-choice",
@@ -74336,7 +74340,7 @@
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：D\n注意字符串结尾有‘\\0’。"
+          "text": "答案：D\n注意字符串结尾有‘\\0’。\n\n维护说明（暂停上线，以上为保留的原参考）：\n\n- `char s[8] = \"01234567\";` 的 8 个位置全被字符占用，数组内没有 `\\0`。将它作为 C 字符串传给 `strcpy` 会越界读取，题面没有给出后续内存，不能保证复制何时结束。\n- 按所列汇编，`c` 从 `-0x8(%rbp)` 开始，局部变量 `a` 在 `-0x4(%rbp)`，保存的调用者 `%rbp` 在 `0(%rbp)`，返回地址在 `8(%rbp)`。即便额外假设第 9 个复制字节是 `\\0`，它覆盖的也是保存的 `%rbp` 的最低字节，不是返回地址；不能用“字符串末尾有 NUL”证明 D 错误。\n- 原题与原答案缺少可靠的唯一判分依据，暂不参与任何线上组卷。保留原始题面、选项及原判分键供后续复核，不擅自更换答案。"
         },
         "provenance": {
           "origin": "unknown",
@@ -104009,7 +104013,7 @@
     {
       "schemaVersion": "5",
       "id": "q-6c3e0a8f8c9b1472",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f4835e390ee6ce49",
       "paperOrder": 9,
       "number": {
@@ -104038,7 +104042,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "在练习题 2.9 的 RGB 位向量编码中，红、绿、蓝三个分量分别对应从高位到低位的三个位；蓝色编码为 `001`，绿色编码为 `010`。求 `蓝色 | 绿色`。"
+        "text": "练习题 2.9 使用红、绿、蓝三种光源混合产生颜色。每种光源可以关闭（`0`）或打开（`1`），示意如下：\n\n![红、绿、蓝三种光源投射到玻璃屏幕上的示意图](assets/csapp/ch2/ex-2-9-color-lights.jpg)\n\nRGB 位向量从高位到低位分别表示红、绿、蓝三个分量，颜色对应关系如下：\n\n| RGB 编码 | 颜色 | RGB 编码 | 颜色 |\n| --- | --- | --- | --- |\n| `000` | 黑色 | `100` | 红色 |\n| `001` | 蓝色 | `101` | 红紫色 |\n| `010` | 绿色 | `110` | 黄色 |\n| `011` | 蓝绿色 | `111` | 白色 |\n\n按上述编码对颜色做按位或运算，`蓝色 | 绿色` 的结果是哪种颜色？"
       },
       "options": [
         {
