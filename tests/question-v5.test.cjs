@@ -39,6 +39,20 @@ test('reported Markdown protects complete expressions and separates the float4 f
   assert(byteSwap.options.every(o=>/^`[^\n]+`\s*$/.test(o.content.text)));
 });
 
+test('2014 float normalization distinguishes decimal and explicitly marked binary significands', () => {
+  const question=bank.find(q=>q.id==='q-bf82915267634dbd');
+  const answers={'value-0375-form':'1.5*2^-2','value-0375-hex':'0x3EC00000',
+    'value-neg125-form':'-1.5625*2^3','value-neg125-hex':'0xC1480000'};
+  assert.equal(api.gradeBlanks(answers,question.solution),true);
+  assert.equal(api.gradeBlanks({...answers,'value-0375-form':'1.1*2^-2'},question.solution),false);
+  assert.equal(api.gradeBlanks({...answers,'value-0375-form':'1.1_2*2^-2'},question.solution),true);
+  assert.equal(api.gradeBlanks({...answers,'value-neg125-form':'(-1)*1.1001_2*2^3'},question.solution),true);
+  assert.match(question.solution.reference.text,/\$\(-1\)\^1\\times 1\.5625\\times 2\^\{3\}\$/);
+  for(const id of ['q-b64bee7e95173543','q-62e446c0bb6e29fe']) {
+    assert.match(bank.find(q=>q.id===id).stem.text,/```c\n/);
+  }
+});
+
 test('all declared select keys grade by values; wrong and missing selections fail', () => {
   for (const question of bank) for (const unit of question.parts || [question]) {
     if (unit.type !== 'fill') continue;

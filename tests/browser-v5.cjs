@@ -57,6 +57,11 @@ async function run() {
     await fixture(page,[minimum]);
     await page.waitForFunction(()=>document.querySelectorAll('#ics-choice-list mjx-container').length===4);
     assert.equal(await page.locator('#ics-choice-list mjx-merror').count(),0);
+    const normalization=all.find(q=>q.id==='q-bf82915267634dbd');
+    await fixture(page,[normalization]);
+    await page.waitForFunction(()=>document.querySelectorAll('#ics-question-content thead mjx-container').length===2);
+    assert.equal(await page.locator('#ics-question-content table input').count(),4);
+    assert.equal(await page.locator('#ics-question-content mjx-merror').count(),0);
     const float4 = all.find(q=>q.id==='q-31fd3c710550b47e');
     await fixture(page,[float4]);
     const code = await page.locator('#ics-question-content pre').first().innerText();

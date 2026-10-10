@@ -31401,7 +31401,7 @@
     {
       "schemaVersion": "5",
       "id": "q-bf82915267634dbd",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 18,
       "number": {
@@ -31473,14 +31473,14 @@
             "width": "medium"
           }
         ],
-        "text": "2）请按 IEEE 浮点标准的单精度浮点数表示下表中的数值，首先写出形如 $(-1)^{S}\\times M\\times 2^{E}$ 的表达式，然后给出十六进制的表示。（每格 1 分，共 4 分）\n\n注：单精度浮点数的字段划分如下：\n\n符号位（s）：1-bit；阶码字段（exp）：8-bit；小数字段（frac）：23-bit；偏置值（bias）：127。\n\n| Value | $(-1)^{S}\\times M\\times 2^{E}$`, 1<=M<2` | Hex representation |\n| --- | --- | --- |\n| 0.375 | {{blank:value-0375-form}} | {{blank:value-0375-hex}} |\n| -12.5 | {{blank:value-neg125-form}} | {{blank:value-neg125-hex}} |"
+        "text": "2）请按 IEEE 浮点标准的单精度浮点数表示下表中的数值，首先写出形如 $(-1)^{S}\\times M\\times 2^{E}$ 的表达式，然后给出十六进制的表示。（每格 1 分，共 4 分）\n\n注：单精度浮点数的字段划分如下：\n\n符号位（s）：1-bit；阶码字段（exp）：8-bit；小数字段（frac）：23-bit；偏置值（bias）：127。\n\n表达式输入约定：用 `*` 表示乘号、`^` 表示指数，不插入空格，`M` 默认使用十进制，例如 `1.25*2^4` 或 `(-1)^1*1.25*2^4`。若用二进制有效数，须在有效数后显式加 `_2`，避免把十进制 `1.1` 与二进制 `1.1` 混淆。十六进制结果可带或不带 `0x`。\n\n| Value | $(-1)^{S}\\times M\\times 2^{E}$，$1\\le M<2$ | Hex representation |\n| --- | --- | --- |\n| 0.375 | {{blank:value-0375-form}} | {{blank:value-0375-hex}} |\n| -12.5 | {{blank:value-neg125-form}} | {{blank:value-neg125-hex}} |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n\n| Value | $(-1)^{S}\\times M\\times 2^{E}$，`1<=M<2` | Hex representation |\n| --- | --- | --- |\n| 0.375 | 1.1 x $2^{-2}$ | `0x3EC00000` |\n| -12.5 | (-1) * 1.1001*$2^{3}$ | `0xC1480000` |"
+          "text": "答案：\n\n| Value | $(-1)^{S}\\times M\\times 2^{E}$，$1\\le M<2$ | Hex representation |\n| --- | --- | --- |\n| 0.375 | $(-1)^0\\times 1.5\\times 2^{-2}$ | `0x3EC00000` |\n| -12.5 | $(-1)^1\\times 1.5625\\times 2^{3}$ | `0xC1480000` |\n\n其中，十进制有效数 1.5、1.5625 分别等于二进制有效数 $(1.1)_2$、$(1.1001)_2$；参考答案中的乘法完整放在数学跨度中，不依赖 Markdown 的星号解析。"
         },
         "provenance": {
           "origin": "unknown",
@@ -31493,7 +31493,9 @@
             "method": "exact",
             "acceptedAnswers": [
               "1.5*2^-2",
-              "1.1*2^-2"
+              "(-1)^0*1.5*2^-2",
+              "1.1_2*2^-2",
+              "(1.1)_2*2^-2"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -31517,7 +31519,10 @@
             "method": "exact",
             "acceptedAnswers": [
               "-1.5625*2^3",
-              "(-1)*1.1001*2^3"
+              "(-1)*1.5625*2^3",
+              "(-1)^1*1.5625*2^3",
+              "(-1)*1.1001_2*2^3",
+              "(-1)*(1.1001)_2*2^3"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -46404,7 +46409,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b64bee7e95173543",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 5,
       "number": {
@@ -46452,14 +46457,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "5.  已知下面的数据结构，假设在Linux/IA32下要求对齐，这个结构的总的大\n小是多少个字节？如果重新排列其中的字段，最少可以达到多少个字节？\n```\nstruct {\nchar a;\ndouble *b;\ndouble c;\nshort d;\nlong long e;\nshort f;\n};\n```"
+        "text": "5. 已知下面的数据结构，假设在 Linux/IA32 下要求对齐。这个结构的总大小是多少字节？如果重新排列其中的字段，最少可以达到多少字节？\n\n```c\nstruct {\n    char a;\n    double *b;\n    double c;\n    short d;\n    long long e;\n    short f;\n};\n```"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：A。\nLinux/IA32 下这些成员按 4 字节边界对齐。原顺序中，`a` 位于偏移 0，随后填充 3 字节；`b` 位于偏移 4，占 4 字节；`c` 位于偏移 8，占 8 字节；`d` 位于偏移 16，占 2 字节，随后填充 2 字节；`e` 位于偏移 20，占 8 字节；`f` 位于偏移 28，占 2 字节，结构末尾再填充 2 字节，总计 32 字节。重新排列成员后，字段本身共占 25 字节，结构按 4 字节边界补齐到 28 字节。"
+          "text": "答案：A（32 字节，28 字节）。\n\n按本题的 Linux/IA32 对齐规则，`char` 按 1 字节对齐，`short` 按 2 字节对齐，指针、`double` 和 `long long` 按 4 字节对齐；并非每个成员都要求 4 字节对齐。原顺序的布局如下：\n\n| 成员 | 偏移 | 大小 | 成员后的填充 |\n| --- | --- | --- | --- |\n| `a` | 0 | 1 | 3 |\n| `b` | 4 | 4 | 0 |\n| `c` | 8 | 8 | 0 |\n| `d` | 16 | 2 | 2 |\n| `e` | 20 | 8 | 0 |\n| `f` | 28 | 2 | 2 |\n\n所以原结构共 32 字节。所有成员自身大小之和为 $1+4+8+2+8+2=25$ 字节。改为 `c, e, b, d, f, a` 的顺序后，成员之间没有填充；末尾补 3 字节，使结构大小为 4 的倍数，得到最小值 28 字节。"
         },
         "provenance": {
           "origin": "unknown",
@@ -73064,7 +73069,7 @@
     {
       "schemaVersion": "5",
       "id": "q-62e446c0bb6e29fe",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-d0ae6162300a90de",
       "paperOrder": 6,
       "number": {
@@ -73110,14 +73115,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "6、32位x86计算机、Windows操作系统下定义的一个structure S包含三个部分： double a,\nint b, char c, 请问S在内存空间中最多和最少分别能占据多少个字节（32位Windows系统\n按1、4、8的原则对齐char、int、double）？答：（      ）"
+        "text": "6. 在 32 位 x86 计算机、Windows 操作系统下，一个结构体 `S` 包含以下三个成员：\n\n```c\ndouble a;\nint b;\nchar c;\n```\n\n调整这三个成员的排列顺序时，`S` 在内存中最多和最少分别占多少字节？本题规定 `char`、`int`、`double` 分别按 1、4、8 字节对齐。"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：D 考虑对齐,windows double按8字节对齐，最长 c, a, b，最短 a,b,c"
+          "text": "答案：D（24 字节，16 字节）。\n\n结构体的对齐要求是最大成员对齐要求，即 8 字节；末尾也要补齐到 8 字节的倍数。\n\n- 最大：按 `c, a, b` 排列，三个成员分别位于偏移 0、8、16，最后一个成员结束于偏移 20，再填充 4 字节，共 24 字节。\n- 最小：按 `a, b, c` 排列，三个成员分别位于偏移 0、8、12，最后一个成员结束于偏移 13，再填充 3 字节，共 16 字节。\n\n13 字节只是成员大小之和，不是满足结构体对齐要求的总大小。"
         },
         "provenance": {
           "origin": "unknown",
