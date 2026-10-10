@@ -17,6 +17,47 @@ test('Markdown rendering preserves every declared blank, including table cells c
   }
 });
 
+test('accepted report repairs keep complete code listings and explicit stack assumptions', () => {
+  const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false});
+  const transform=bank.find(q=>q.id==='q-2d3657e2f402ef3b');
+  const assembly=md.parse(transform.parts[0].stem.text,{}).find(t=>t.type==='fence').content;
+  assert.match(assembly,/add \$1, %rdi/);
+  assert.match(assembly,/add \$1, %rsi/);
+  assert(!/\$r[sd]i/.test(assembly));
+  const code=md.parse(transform.parts[1].stem.text,{}).filter(t=>t.type==='fence');
+  assert.equal(code.length,1);
+  for(const fragment of ['void transform(', 'short x =', 'src += 2;', 'tgt += 2;', '{{blank:mask}};'])
+    assert(code[0].content.includes(fragment),fragment);
+  assert(!code[0].content.includes('`'));
+  const stack=bank.find(q=>q.id==='q-9270f741d613d9a2');
+  const dump=md.parse(stack.parts[1].stem.text,{}).filter(t=>t.type==='fence');
+  assert.equal(dump.length,1);
+  assert(dump[0].content.includes('0x7fffffffe558'));
+  assert(dump[0].content.includes('0x7fffffffe4f8'));
+  assert.equal((dump[0].content.match(/\{\{blank:/g)||[]).length,4);
+  const frame=bank.find(q=>q.id==='q-5667f7a0eca8dc57');
+  assert.equal(frame.publication.state,'published');
+  assert.match(frame.stem.text,/省略的部分不改变栈指针/);
+  assert.match(frame.stem.text,/qux.*恢复调用前/);
+  assert.equal(api.gradeChoice(['A','B','D','E'],frame.solution),true);
+});
+
+test('round-table semaphore question has real answers without accepting inconsistent lock order', () => {
+  const question=bank.find(q=>q.id==='q-ca36da4b1e755039');
+  assert.equal(question.type,'fill');
+  assert.equal(question.stem.blanks.length,13);
+  const answers=Object.fromEntries(question.solution.blankAnswers.map(r=>[r.blankId,r.acceptedAnswers[0]]));
+  assert.equal(api.gradeBlanks(answers,question.solution),true);
+  assert.equal(api.gradeBlanks({...answers,'mutex-index':'25'},question.solution),true);
+  assert.equal(api.gradeBlanks({...answers,'mutex-index':'26'},question.solution),false);
+  assert.equal(api.gradeBlanks({...answers,'order-c':'1'},question.solution),false);
+  assert.equal(api.gradeBlanks({...answers,'binary-c':'<='},question.solution),false);
+  assert.equal(api.gradeBlanks({...answers,'binary-f':'<'},question.solution),false);
+  assert.equal(question.stem.blanks.filter(b=>b.id==='mutex-index').length,2);
+  assert.match(question.stem.text,/先锁较小编号、再锁较大编号/);
+  assert.match(question.solution.reference.text,/先锁较小编号、再锁较大编号/);
+});
+
 test('source inventory finds exercises in section headings and quoted boxes, without counting prose references', () => {
   const {practiceNumbers}=require('../scripts/audit-csapp-practice.cjs');
   assert.deepEqual(practiceNumbers('**练习题 2.45** 表格\n\n> **练习题 9.1**\n\n### 练习题 3.1\n\n**练习题 2.45**\n参见练习题 2.99。'),['2.45','9.1','3.1']);
@@ -152,7 +193,8 @@ test('CSAPP explicitly accepts zero constants and states float-format assumption
 });
 
 test('reported invalid questions remain backed up with an explicit non-publishable state', () => {
-  for (const id of ['q-f39f4e62d028f8d6','q-3376fb77c2e3a398','q-45d24dbc19ab7615']) {
+  for (const id of ['q-f39f4e62d028f8d6','q-3376fb77c2e3a398','q-45d24dbc19ab7615',
+    'q-b8edc298950e949d','q-19c4d964d98fc677']) {
     const question = bank.find(q=>q.id===id);
     assert.equal(question.publication.state,'review');
     assert(question.publication.issues.includes('retired-invalid-question'));

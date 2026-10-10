@@ -831,14 +831,14 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 30,
-        "publishedQuestionCount": 30,
-        "quizQuestionCount": 30,
+        "publishedQuestionCount": 29,
+        "quizQuestionCount": 29,
         "verifiedAnswerCount": 30,
         "singleChoiceCount": 25,
         "multipleChoiceCount": 0,
-        "fillCount": 3,
-        "shortAnswerCount": 1,
-        "compositeCount": 1
+        "fillCount": 4,
+        "shortAnswerCount": 0,
+        "compositeCount": 0
       }
     },
     {

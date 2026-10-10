@@ -481,6 +481,41 @@ async function run() {
       if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-new-mobile.png'),fullPage:true});
       await page.setViewportSize({width:1280,height:900});
     }
+    // Report acceptance: test actual authored controls, not just Markdown placeholder survival.
+    for(const id of ['q-ca36da4b1e755039','q-5d574996f3b93516','q-3f14235fd87550aa','q-96576bae25379ede']) {
+      const question=all.find(q=>q.id===id);
+      await fixture(page,[question]);
+      for(const answer of question.solution.blankAnswers) {
+        const input=page.locator('[data-blank-id="'+answer.blankId+'"]').first();
+        if(answer.method==='selection')await input.selectOption(answer.correctValues[0]);
+        else if(await input.evaluate(el=>el.tagName==='SELECT'))
+          await input.selectOption(await input.locator('option').evaluateAll(options=>options.find(o=>o.value&&!o.disabled).value));
+        else await input.fill(answer.method==='self' ? '按参考核对的草稿' : answer.acceptedAnswers[0]);
+      }
+      if(id==='q-ca36da4b1e755039') {
+        const copies=page.locator('[data-blank-id="mutex-index"]');
+        await copies.first().fill('25');
+        assert.equal(await copies.nth(1).inputValue(),'25');
+        assert.equal(await page.locator('.ics-blank-input').count(),13);
+      }
+      await page.click('#ics-submit');
+      if(question.solution.blankAnswers.some(answer=>answer.method==='self')) {
+        assert(await page.locator('#ics-self-grade').isVisible());
+        await page.click('[data-grade="1"]');
+      }
+      assert.equal(await page.evaluate(()=>window.__test.state.score),1,id);
+      if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-accepted-desktop.png'),fullPage:true});
+      await page.setViewportSize({width:390,height:844});
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),id);
+      await page.setViewportSize({width:1280,height:900});
+    }
+    for(const id of ['q-2d3657e2f402ef3b','q-9270f741d613d9a2']) {
+      await fixture(page,[all.find(q=>q.id===id)]);
+      const lastPre=page.locator('[data-composite-part="1"] pre');
+      assert.equal(await lastPre.count(),1,id);
+      assert.equal(await lastPre.locator('.ics-blank-input').count(),4);
+      if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-accepted-desktop.png'),fullPage:true});
+    }
     // Full bank browser parse, including withheld questions' Markdown, all options/references.
     const result=await page.evaluate(questions=>{
       window.MathJax=undefined;

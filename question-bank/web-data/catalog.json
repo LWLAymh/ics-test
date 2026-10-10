@@ -526,8 +526,8 @@
         "q-f2c81089030ddaa5"
       ],
       "questionCount": 114,
-      "publishedQuestionCount": 114,
-      "quizQuestionCount": 114
+      "publishedQuestionCount": 113,
+      "quizQuestionCount": 113
     },
     {
       "id": "memory_hierarchy",
@@ -672,8 +672,8 @@
         "q-561fcc94e43aae14"
       ],
       "questionCount": 135,
-      "publishedQuestionCount": 132,
-      "quizQuestionCount": 132
+      "publishedQuestionCount": 131,
+      "quizQuestionCount": 131
     },
     {
       "id": "compilation_linking",
@@ -1149,10 +1149,10 @@
   },
   "stats": {
     "questions": 1001,
-    "publishedQuestions": 971,
-    "quizQuestions": 971,
-    "withheldQuestions": 30,
+    "publishedQuestions": 970,
+    "quizQuestions": 970,
+    "withheldQuestions": 31,
     "papers": 40,
-    "quizGroups": 110
+    "quizGroups": 109
   }
 }
