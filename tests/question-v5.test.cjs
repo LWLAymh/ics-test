@@ -4,6 +4,41 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('reported invalid questions remain backed up with an explicit non-publishable state', () => {
+  for (const id of ['q-f39f4e62d028f8d6','q-3376fb77c2e3a398']) {
+    const question = bank.find(q=>q.id===id);
+    assert.equal(question.publication.state,'review');
+    assert(question.publication.issues.includes('retired-invalid-question'));
+  }
+});
+
+test('2014 final bit reversal and disassembly blanks have exact automatic keys', () => {
+  const question=bank.find(q=>q.id==='q-7d2647844e7abcf9');
+  const [values,assembly]=question.parts;
+  assert.equal(api.gradeBlanks({'result-1':'0x800000','result-2':'0'},values.solution),true);
+  assert.equal(api.gradeBlanks({'result-1':'0x80000000','result-2':'0'},values.solution),false);
+  const answers={'operand-1':'%eax','operand-2':'$8','operand-3':'%rbx','operand-4':'$16',
+    'operand-5':'%edx','operand-6':'%eax','operand-7':'$0x8','operand-8':'%eax'};
+  assert.equal(api.gradeBlanks(answers,assembly.solution),true);
+  assert.equal(api.gradeBlanks({...answers,'operand-3':'%ebx'},assembly.solution),false);
+  assert.equal(assembly.stem.blanks.filter(b=>b.id==='operand-3').length,2);
+  assert.match(values.solution.reference.text,/c\(1\) = 0x80000000/);
+});
+
+test('reported Markdown protects complete expressions and separates the float4 functions', () => {
+  const question=bank.find(q=>q.id==='q-31fd3c710550b47e');
+  assert.match(question.stem.text,/int4 f2i\(float4 f\) \{\n  return \(int4\) f;\n\}/);
+  assert(!/\n2\s*$/.test(question.stem.text));
+  assert.match(question.solution.reference.text,/`0110` \| \+∞/);
+  assert.match(question.solution.reference.text,/`0111` \| NaN/);
+  const minimum=bank.find(q=>q.id==='q-96276f24280880cd');
+  assert.deepEqual(minimum.options.map(o=>o.content.text.trim()),['$-2^{32}$','$-2^{32}+1$','$-2^{31}$','$-2^{31}+1$']);
+  const small=bank.find(q=>q.id==='q-0a147b905856ecc3');
+  assert.match(small.options[1].content.text,/\$2\^\{-149\}\$/);
+  const byteSwap=bank.find(q=>q.id==='q-b0a1a7fb9bac4b8c');
+  assert(byteSwap.options.every(o=>/^`[^\n]+`\s*$/.test(o.content.text)));
+});
+
 test('all declared select keys grade by values; wrong and missing selections fail', () => {
   for (const question of bank) for (const unit of question.parts || [question]) {
     if (unit.type !== 'fill') continue;

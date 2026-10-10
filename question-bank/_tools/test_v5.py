@@ -161,6 +161,16 @@ class ContractTests(unittest.TestCase):
         bad["publication"]["state"] = "published"
         self.invalid(bad)
 
+    def test_reported_ambiguous_questions_are_excluded_from_all_deployed_indexes(self):
+        from build_web_data import deployed_payloads
+        deployed = deployed_payloads(self.modules, self.papers, self.questions)
+        for question_id in ("q-f39f4e62d028f8d6", "q-3376fb77c2e3a398"):
+            self.assertNotIn(question_id, [q["id"] for q in deployed["questions.json"]["questions"]])
+            for paper in deployed["papers.json"]["papers"]:
+                self.assertNotIn(question_id, paper["questionIds"])
+            for module in deployed["catalog.json"]["modules"]:
+                self.assertNotIn(question_id, module["questionIds"])
+
     def test_duplicate_paper_order_fails(self):
         papers = copy.deepcopy(self.papers)
         papers[0]["questionIds"].append(papers[0]["questionIds"][0])

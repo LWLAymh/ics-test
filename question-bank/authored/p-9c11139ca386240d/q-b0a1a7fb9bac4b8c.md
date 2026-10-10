@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-b0a1a7fb9bac4b8c",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-9c11139ca386240d",
   "paperOrder": 14,
   "number": {
@@ -94,9 +94,9 @@
 }
 +++
 %%% stem
-14. （2 分）下面给出了 `byteSwap` 函数的代码，该函数交换后两个参数所指定的两个字
-节的数据。下面哪一个选项正确给出了(1)和(2)处应当填写的内容？
-```
+14. （2 分）下面给出了 `byteSwap` 函数的代码，该函数交换后两个参数所指定的两个字节的数据。下面哪一个选项正确给出了 (1) 和 (2) 处应当填写的内容？
+
+```c
 /*
  * byteSwap - swaps the nth byte and the mth byte
  *  Examples: byteSwap(0x12345678, 1, 3) = 0x56341278
@@ -113,7 +113,7 @@ int byteSwap(int x, int n, int m) {
 %%% reference
 答案：A
 
-解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 `(1) = 3`；两个字节的差异用异或取出（`swap_byte = byte_m ^ byte_n`），再在 `n`、`m` 两个位置各异或一次就完成了交换，故 `(2) = ^`。若用 |，两处字节会被"或"成同一个值而不是互换。故选 A。
+解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 `(1) = 3`；两个字节的差异用异或取出（`swap_byte = byte_m ^ byte_n`），再在 `n`、`m` 两个位置各异或一次就完成了交换，故 `(2) = ^`。若用 `|`，则不能完成上述异或交换。故选 A。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 %%% option: A
@@ -121,6 +121,6 @@ int byteSwap(int x, int n, int m) {
 %%% option: B
 `(1) 8 (2) ^`
 %%% option: C
-(1) 3 (2) |
+`(1) 3 (2) |`
 %%% option: D
-(1) 8 (2) |
+`(1) 8 (2) |`

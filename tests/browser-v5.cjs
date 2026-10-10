@@ -51,6 +51,25 @@ async function run() {
     await page.goto(process.env.ICS_TEST_URL || 'http://127.0.0.1:4186/');
     await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
     assert.equal(await page.locator('#ics-paper option').count(),29);
+    // Reported questions: actual math rendering, intact C blocks, and mirrored
+    // assembly operands. These checks exercise source repairs, not heuristics.
+    const minimum = all.find(q=>q.id==='q-96276f24280880cd');
+    await fixture(page,[minimum]);
+    await page.waitForFunction(()=>document.querySelectorAll('#ics-choice-list mjx-container').length===4);
+    assert.equal(await page.locator('#ics-choice-list mjx-merror').count(),0);
+    const float4 = all.find(q=>q.id==='q-31fd3c710550b47e');
+    await fixture(page,[float4]);
+    const code = await page.locator('#ics-question-content pre').first().innerText();
+    assert.match(code,/int4 f2i\(float4 f\) \{\n  return \(int4\) f;\n\}/);
+    await page.click('#ics-submit');
+    const reversal = all.find(q=>q.id==='q-7d2647844e7abcf9');
+    await fixture(page,[reversal]);
+    assert.equal(await page.locator('#ics-question-content pre input').count(),11);
+    const mirrored=page.locator('input[data-blank-id="operand-3"]');
+    assert.equal(await mirrored.count(),2);
+    await mirrored.first().fill('%rbx');
+    assert.equal(await mirrored.last().inputValue(),'%rbx');
+    await page.click('#ics-abandon');
     // Every real published paper: exact membership/order; composite never split.
     await page.check('input[value="exam"]');
     const papers=await page.evaluate(()=>window.__test.state.papers);

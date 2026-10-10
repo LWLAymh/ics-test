@@ -132,8 +132,8 @@
         "q-ce72197e573dfd2e"
       ],
       "questionCount": 118,
-      "publishedQuestionCount": 118,
-      "quizQuestionCount": 118
+      "publishedQuestionCount": 117,
+      "quizQuestionCount": 117
     },
     {
       "id": "machine_prog",
@@ -276,8 +276,8 @@
         "q-d5d56ae86119aa5f"
       ],
       "questionCount": 133,
-      "publishedQuestionCount": 129,
-      "quizQuestionCount": 129
+      "publishedQuestionCount": 128,
+      "quizQuestionCount": 128
     },
     {
       "id": "processor_arch",
@@ -885,9 +885,9 @@
   },
   "stats": {
     "questions": 738,
-    "publishedQuestions": 712,
-    "quizQuestions": 712,
-    "withheldQuestions": 26,
+    "publishedQuestions": 710,
+    "quizQuestions": 710,
+    "withheldQuestions": 28,
     "papers": 28,
     "quizGroups": 56
   }

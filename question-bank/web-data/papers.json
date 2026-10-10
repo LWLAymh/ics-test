@@ -466,10 +466,10 @@
       ],
       "stats": {
         "questionCount": 24,
-        "publishedQuestionCount": 24,
-        "quizQuestionCount": 24,
+        "publishedQuestionCount": 23,
+        "quizQuestionCount": 23,
         "verifiedAnswerCount": 24,
-        "singleChoiceCount": 20,
+        "singleChoiceCount": 19,
         "multipleChoiceCount": 0,
         "fillCount": 2,
         "shortAnswerCount": 1,
@@ -945,11 +945,11 @@
       ],
       "stats": {
         "questionCount": 20,
-        "publishedQuestionCount": 20,
-        "quizQuestionCount": 20,
+        "publishedQuestionCount": 19,
+        "quizQuestionCount": 19,
         "verifiedAnswerCount": 20,
         "singleChoiceCount": 12,
-        "multipleChoiceCount": 3,
+        "multipleChoiceCount": 2,
         "fillCount": 4,
         "shortAnswerCount": 0,
         "compositeCount": 1

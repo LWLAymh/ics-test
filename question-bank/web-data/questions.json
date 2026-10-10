@@ -4109,7 +4109,7 @@
     {
       "schemaVersion": "5",
       "id": "q-7d2647844e7abcf9",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 21,
       "number": {
@@ -4134,9 +4134,7 @@
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "blank-positions-unresolved"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -4190,15 +4188,57 @@
           ],
           "stem": {
             "format": "markdown",
-            "blanks": [],
-            "text": "第二题（10分）汇编\n阅读下面的C代码：\n```\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，下面的结果是：\n```\nc(b(a(1))) =     (1)\na(b(c(1))) =     (2)\n```"
+            "blanks": [
+              {
+                "id": "result-1",
+                "marker": "{{blank:result-1}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "result-2",
+                "marker": "{{blank:result-2}}",
+                "occurrence": 0,
+                "width": "medium"
+              }
+            ],
+            "text": "第二题（10分）汇编\n\n阅读下面的 C 代码：\n\n```c\nunsigned char d[256] = {\n        0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,\n        0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,\n        0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,\n        0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,\n        0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4,\n        0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,\n        0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec,\n        0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,\n        0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2,\n        0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,\n        0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea,\n        0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,\n        0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6,\n        0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,\n        0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee,\n        0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,\n        0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1,\n        0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,\n        0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9,\n        0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,\n        0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5,\n        0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,\n        0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed,\n        0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,\n        0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3,\n        0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,\n        0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb,\n        0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,\n        0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7,\n        0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,\n        0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef,\n        0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,\n};\nstatic inline unsigned char a(unsigned char x)\n{\n        return d[x];\n}\nunsigned short b(unsigned short x)\n{\n        return (a(x & 0xff) << 8) | a(x >> 8);\n}\nunsigned int c(unsigned int x)\n{\n        return (b(x & 0xffff) << 16) | b(x >> 16);\n}\n```\n1、根据程序逻辑，填写下面的结果（可填写十六进制或十进制整数）：\n\n```c\nc(b(a(1))) = {{blank:result-1}}\na(b(c(1))) = {{blank:result-2}}\n```"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "result-1",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0x800000",
+                  "0x00800000",
+                  "8388608"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "result-2",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0",
+                  "0x0",
+                  "0x00",
+                  "0x00000000"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              }
+            ],
             "reference": {
               "format": "markdown",
-              "text": "答案：\n（1）`c(b(a(1))) = 0x800000`\n（2）`a(b(c(1))) = 0`\n\n解析（原卷自带答案，此处补全推导）：\n`d[256]` 就是**8 位比特反转表**：`d[x]` 把 `x` 的 8 个比特整个反过来\n（`d[1] = 0x80`、`d[0x80] = 1`、`d[0x0F] = 0xF0` …）。\n三个函数都是**按字节/半字/字做整数的比特反转**：\n- `a(x) = d[x]`：8 位内反转比特；\n- `b(x) = (a(x & 0xff) << 8) | a(x >> 8)`：把低字节与高字节交换、各自再反转比特\n  ⇒ 16 位整数的比特反转；\n- `c(x) = (b(x & 0xffff) << 16) | b(x >> 16)`：两个半字交换、各自再做 16 位反转\n  ⇒ 32 位整数的比特反转。\n\n（1）逐步算：\n- `a(1) = d[1] = 0x80`\n- `b(0x0080)`：低字节 `0x80`、高字节 `0x00 ⇒ (a(0x80) << 8) | a(0x00)`\n  `= (0x01 << 8) | 0x00 = 0x0100`\n- `c(0x00000100)`：低半字 `0x0100`、高半字 `0x0000 ⇒ (b(0x0100) << 16) | b(0x0000)`\n  `= (0x0080 << 16) | 0x0000 = 0x800000`\n⇒ **`c(b(a(1))) = 0x800000`**，与原卷答案一致。\n\n（2）逐步算：\n- `c(1)`：低半字 `0x0001`、高半字 `0x0000`\n  `⇒ (b(0x0001) << 16) | b(0x0000)`，其中 `b(0x0001) = (a(0x01) << 8) | a(0x00) = 0x0100`\n  `⇒ c(1) = 0x0100 << 16 = 0x01000000`\n- `b(0x01000000)`（unsigned short 形参，取低 16 位 `0x0000` 与高 16 位 `0x0100`）\n  `⇒ (a(0x00) << 8) | a(0x0100)`；`a` 的形参是 unsigned char，`0x0100` 截断为 `0x00`\n  `⇒ 0x00 | d[0x00] = 0`\n- `a(0) = d[0] = 0`\n⇒ **`a(b(c(1))) = 0`**，与原卷答案一致。\n\n> 备注：`b`/`c` 的语义就是「对本宽度的整数做完整比特反转」（字节序交换 + 逐字节\n> 反转比特）。第（1）问把 1 放在 32 位里反转落在 bit24（= `0x800000`），第（2）问\n> 反转后被 `a` 截到低 8 位，结果为 0。\n\n> 说明：原卷把答案（1）`0x800000`、（2）0 直接印在题面之后；本文件把答案移入\n> `%%% answer` 段，字符内容与原卷完全一致。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+              "text": "答案：\n（1）`c(b(a(1))) = 0x800000`\n（2）`a(b(c(1))) = 0`\n\n解析（原卷自带答案，此处补全推导）：\n`d[256]` 就是**8 位比特反转表**：`d[x]` 把 `x` 的 8 个比特整个反过来\n（`d[1] = 0x80`、`d[0x80] = 1`、`d[0x0F] = 0xF0` …）。\n三个函数都是**按字节/半字/字做整数的比特反转**：\n- `a(x) = d[x]`：8 位内反转比特；\n- `b(x) = (a(x & 0xff) << 8) | a(x >> 8)`：把低字节与高字节交换、各自再反转比特\n  ⇒ 16 位整数的比特反转；\n- `c(x) = (b(x & 0xffff) << 16) | b(x >> 16)`：两个半字交换、各自再做 16 位反转\n  ⇒ 32 位整数的比特反转。\n\n（1）逐步算：\n- `a(1) = d[1] = 0x80`\n- `b(0x0080)`：低字节 `0x80`、高字节 `0x00 ⇒ (a(0x80) << 8) | a(0x00)`\n  `= (0x01 << 8) | 0x00 = 0x0100`\n- `c(0x00000100)`：低半字 `0x0100`、高半字 `0x0000 ⇒ (b(0x0100) << 16) | b(0x0000)`\n  `= (0x0080 << 16) | 0x0000 = 0x800000`\n⇒ **`c(b(a(1))) = 0x800000`**，与原卷答案一致。\n\n（2）逐步算：\n- `c(1)`：低半字为 `0x0001`、高半字为 `0x0000`。\n  `b(0x0001) = (a(0x01) << 8) | a(0x00) = 0x8000`，所以 `c(1) = 0x80000000`。\n- 调用 `b(c(1))` 时，`unsigned short` 形参先将 `0x80000000` 截断为低 16 位的 `0x0000`，因此 `b(0) = 0`。\n- `a(0) = d[0] = 0`\n⇒ **`a(b(c(1))) = 0`**，与原卷答案一致。\n\n> 备注：`b`/`c` 的语义就是「对本宽度的整数做完整比特反转」（字节序交换 + 逐字节\n> 反转比特）。第（1）问 `b(a(1)) = 0x0100` 的 bit8 经 32 位反转落到 bit23（`0x800000`）；第（2）问在调用 `b` 时截断，结果为 0。\n\n> 说明：原卷把答案（1）`0x800000`、（2）0 直接印在题面之后；本文件将其放入参考答案，推导中的中间值已在本轮复核时更正。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
             },
             "provenance": {
               "origin": "unknown",
@@ -4220,9 +4260,7 @@
               "editorNote": "字节置换与位运算的信息表示（含共用代码）"
             }
           ],
-          "issues": [
-            "blank-positions-unresolved"
-          ]
+          "issues": []
         },
         {
           "id": "q-5fdb7b45da649a68",
@@ -4244,15 +4282,163 @@
           ],
           "stem": {
             "format": "markdown",
-            "blanks": [],
-            "text": "2、填写下面反汇编中的缺失的内容：（数组`d`的地址为`0x6009a0`）\n（提示：注意反汇编格式与汇编格式有所区别）\n```\n00000000004004d0 <b>:\n  4004d0:       mov    %edi,%eax\n  4004d2:       movzbl %dil,%edx\n  4004d6:       movzbl 0x6009a0(%rdx),%edx\n  4004dd:       movzbl %ah,    (1)\n  4004e0:       movzbl 0x6009a0(%rax),%eax\n  4004e7:       shl        (2)     ,%edx\n  4004ea:       or     %edx,%eax\n  4004ec:       retq\n```\n\n\n```\n00000000004004f0 <c>:\n  4004f0:       mov    %edi,%eax\n  4004f2:       push       (3)\n  4004f3:       mov    %edi,%ebx\n  4004f5:       shr        (4)     ,%eax\n  4004f8:       movzbl %bh,%ebx\n  4004fb:       movzbl %al,    (5)\n  4004fe:       movzbl %ah,    (6)\n  400501:       movzbl 0x6009a0(%rdx),%edx\n  400508:       movzbl 0x6009a0(%rax),%eax\n  40050f:       shl        (7)     ,%edx\n  400512:       or     %edx,%eax\n  400514:       movzbl %dil,%edx\n  400518:       movzbl 0x6009a0(%rdx),%ecx\n  40051f:       movzbl 0x6009a0(%rbx),%edx\n  400526:       movzwl %ax,%eax\n  400529:       pop        (3)\n  40052a:       shl    $0x8,%ecx\n  40052d:       or     %ecx,%edx\n  40052f:       shl    $0x10,%edx\n  400532:       or     %edx,    (8)\n  400534:       retq\n```"
+            "blanks": [
+              {
+                "id": "operand-1",
+                "marker": "{{blank:operand-1}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "operand-2",
+                "marker": "{{blank:operand-2}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "operand-3",
+                "marker": "{{blank:operand-3}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "operand-4",
+                "marker": "{{blank:operand-4}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "operand-5",
+                "marker": "{{blank:operand-5}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "operand-6",
+                "marker": "{{blank:operand-6}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "operand-7",
+                "marker": "{{blank:operand-7}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "operand-3",
+                "marker": "{{blank:operand-3}}",
+                "occurrence": 1,
+                "width": "short"
+              },
+              {
+                "id": "operand-8",
+                "marker": "{{blank:operand-8}}",
+                "occurrence": 0,
+                "width": "short"
+              }
+            ],
+            "text": "2、填写下面反汇编中的缺失的内容：（数组`d`的地址为`0x6009a0`）\n（提示：注意反汇编格式与汇编格式有所区别；寄存器填写 `%eax` 这类形式，立即数须带 `$`。）\n\n```asm\n00000000004004d0 <b>:\n  4004d0:       mov    %edi,%eax\n  4004d2:       movzbl %dil,%edx\n  4004d6:       movzbl 0x6009a0(%rdx),%edx\n  4004dd:       movzbl %ah,{{blank:operand-1}}\n  4004e0:       movzbl 0x6009a0(%rax),%eax\n  4004e7:       shl    {{blank:operand-2}},%edx\n  4004ea:       or     %edx,%eax\n  4004ec:       retq\n```\n\n\n```asm\n00000000004004f0 <c>:\n  4004f0:       mov    %edi,%eax\n  4004f2:       push   {{blank:operand-3}}\n  4004f3:       mov    %edi,%ebx\n  4004f5:       shr    {{blank:operand-4}},%eax\n  4004f8:       movzbl %bh,%ebx\n  4004fb:       movzbl %al,{{blank:operand-5}}\n  4004fe:       movzbl %ah,{{blank:operand-6}}\n  400501:       movzbl 0x6009a0(%rdx),%edx\n  400508:       movzbl 0x6009a0(%rax),%eax\n  40050f:       shl    {{blank:operand-7}},%edx\n  400512:       or     %edx,%eax\n  400514:       movzbl %dil,%edx\n  400518:       movzbl 0x6009a0(%rdx),%ecx\n  40051f:       movzbl 0x6009a0(%rbx),%edx\n  400526:       movzwl %ax,%eax\n  400529:       pop    {{blank:operand-3}}\n  40052a:       shl    $0x8,%ecx\n  40052d:       or     %ecx,%edx\n  40052f:       shl    $0x10,%edx\n  400532:       or     %edx,{{blank:operand-8}}\n  400534:       retq\n```"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "operand-1",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "%eax"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "operand-2",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "$0x8",
+                  "$8"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "operand-3",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "%rbx"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "operand-4",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "$0x10",
+                  "$16"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "operand-5",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "%edx"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "operand-6",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "%eax"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "operand-7",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "$0x8",
+                  "$8"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "operand-8",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "%eax"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              }
+            ],
             "reference": {
               "format": "markdown",
-              "text": "答案（每项1分）：\n（1）`%eax`\n（2）`$0x8`\n（3）`%rbx`\n（4）`$0x10`\n（5）`%edx`\n（6）`%eax`\n（7）`$0x8`\n（8）`%eax`\n\n解析（原卷自带答案，此处补全推导）：\n**反汇编格式与汇编格式的区别**：`objdump` 输出的是 AT&T 语法，寄存器带 `%`、立即数\n带 `$`、指令不带后缀（`movzbl/mov` 这种带宽度后缀的写法本身就来自 `objdump`）。\n本题每空要填的是**操作数**：寄存器操作数写 `%eax` 这种带 `%` 的形式，立即数要写成\n`$0x8`（带 `$`，与原卷答案一致）。\n\n函数 `b(unsigned short x)` 的实现是：\n```\nreturn (a(x & 0xff) << 8) | a(x >> 8);\n```\n即「低字节查表后放到高 8 位，高字节查表后放到低 8 位」。\n\n对 `b`：\n- `mov %edi,%eax`：`eax = x`（低 16 位有效）。\n- `movzbl %dil,%edx`：`edx = x` 的低字节。\n- `movzbl 0x6009a0(%rdx),%edx`：`edx = d[x & 0xff] = a(x & 0xff)`。\n- `movzbl %ah, (1)`：`%ah` 是 `eax` 的次低字节，正是 `x` 的高字节；下一步要用\n  `0x6009a0(%rax)` 以它为下标查表，所以它必须被放进 **%eax**\n  ⇒ **(1) = %eax**（`movzbl %ah,%eax` 会把 `eax` 变成高字节的零扩展值）。\n- `movzbl 0x6009a0(%rax),%eax`：`eax = d[x >> 8] = a(x >> 8)`。\n- `shl (2),%edx`：把先算出的那一项左移 8 位（放进高字节）⇒ **(2) = `$0x8`**。\n- `or %edx,%eax`：合并成 16 位结果。\n\n对 `c`：\n```\nreturn (b(x & 0xffff) << 16) | b(x >> 16);\n```\n- `mov %edi,%eax`：`eax = x`。\n- `push (3)` …… 后面 `pop (3)`：因为要用 `%bh`（只能用 `ebx` 的次低字节）暂存 `x` 的\n  第二个字节，必须先保护调用者保存寄存器 %rbx ⇒ **(3) = %rbx**（注意是 64 位名）。\n- `mov %edi,%ebx`：`ebx = x`。\n- `shr (4),%eax`：`eax = x >> 16`（取高半字，供内层 `b` 用）⇒ **(4) = `$0x10`**。\n- `movzbl %bh,%ebx`：`ebx = (x >> 8) & 0xff` = 第二个字节（内层 `b` 的第二项下标）。\n- `movzbl %al, (5)`：`%al` 是 `x >> 16` 的低字节；接下来\n  `movzbl 0x6009a0(%rdx),%edx` 以它为下标查表 ⇒ 应送进 **%edx** ⇒ **(5) = %edx**。\n- `movzbl %ah, (6)`：`x >> 16` 的高字节；后面 `movzbl 0x6009a0(%rax),%eax`\n  以它为下标 ⇒ 应送进 **%eax** ⇒ **(6) = %eax**。\n- `shl (7),%edx`：把第一项左移 8 位 ⇒ **(7) = `$0x8`**。\n- `or %edx,%eax`：得到内层 `b(x >> 16)`。\n- `movzbl %dil,%edx / movzbl 0x6009a0(%rdx),%ecx`：`ecx = a(x & 0xff)`。\n- `movzbl 0x6009a0(%rbx),%edx`：`edx = a((x >> 8) & 0xff)`。\n- `movzwl %ax,%eax`：把刚算好的内层结果截成 16 位。\n- `shl $0x8,%ecx / or %ecx,%edx`：拼出 `b(x & 0xffff)`。\n- `shl $0x10,%edx / or %edx, (8)`：把 `b(x & 0xffff)` 移到高 16 位后与\n  `b(x >> 16)`（此刻在 `%eax`）合并 ⇒ **(8) = %eax**。\n\n> 说明：原卷把 8 项答案直接印在题面之后；本文件把答案移入 `%%% answer` 段，\n> 字符内容与原卷完全一致。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+              "text": "答案（每项1分）：\n（1）`%eax`\n（2）`$0x8`\n（3）`%rbx`\n（4）`$0x10`\n（5）`%edx`\n（6）`%eax`\n（7）`$0x8`\n（8）`%eax`\n\n解析（原卷自带答案，此处补全推导）：\n**反汇编格式与汇编格式的区别**：`objdump` 输出的是 AT&T 语法，寄存器带 `%`、立即数\n带 `$`、指令不带后缀（`movzbl/mov` 这种带宽度后缀的写法本身就来自 `objdump`）。\n本题每空要填的是**操作数**：寄存器操作数写 `%eax` 这种带 `%` 的形式，立即数要写成\n`$0x8`（带 `$`，与原卷答案一致）。\n\n函数 `b(unsigned short x)` 的实现是：\n```\nreturn (a(x & 0xff) << 8) | a(x >> 8);\n```\n即「低字节查表后放到高 8 位，高字节查表后放到低 8 位」。\n\n对 `b`：\n- `mov %edi,%eax`：`eax = x`（低 16 位有效）。\n- `movzbl %dil,%edx`：`edx = x` 的低字节。\n- `movzbl 0x6009a0(%rdx),%edx`：`edx = d[x & 0xff] = a(x & 0xff)`。\n- `movzbl %ah, (1)`：`%ah` 是 `eax` 的次低字节，正是 `x` 的高字节；下一步要用\n  `0x6009a0(%rax)` 以它为下标查表，所以它必须被放进 **%eax**\n  ⇒ **(1) = %eax**（`movzbl %ah,%eax` 会把 `eax` 变成高字节的零扩展值）。\n- `movzbl 0x6009a0(%rax),%eax`：`eax = d[x >> 8] = a(x >> 8)`。\n- `shl (2),%edx`：把先算出的那一项左移 8 位（放进高字节）⇒ **(2) = `$0x8`**。\n- `or %edx,%eax`：合并成 16 位结果。\n\n对 `c`：\n```\nreturn (b(x & 0xffff) << 16) | b(x >> 16);\n```\n- `mov %edi,%eax`：`eax = x`。\n- `push (3)` …… 后面 `pop (3)`：因为要用 `%bh`（只能用 `ebx` 的次低字节）暂存 `x` 的\n  第二个字节，必须先保护被调用者保存寄存器 `%rbx` ⇒ **(3) = `%rbx`**（注意是 64 位名）。\n- `mov %edi,%ebx`：`ebx = x`。\n- `shr (4),%eax`：`eax = x >> 16`（取高半字，供内层 `b` 用）⇒ **(4) = `$0x10`**。\n- `movzbl %bh,%ebx`：`ebx = (x >> 8) & 0xff` = 第二个字节（内层 `b` 的第二项下标）。\n- `movzbl %al, (5)`：`%al` 是 `x >> 16` 的低字节；接下来\n  `movzbl 0x6009a0(%rdx),%edx` 以它为下标查表 ⇒ 应送进 **%edx** ⇒ **(5) = %edx**。\n- `movzbl %ah, (6)`：`x >> 16` 的高字节；后面 `movzbl 0x6009a0(%rax),%eax`\n  以它为下标 ⇒ 应送进 **%eax** ⇒ **(6) = %eax**。\n- `shl (7),%edx`：把第一项左移 8 位 ⇒ **(7) = `$0x8`**。\n- `or %edx,%eax`：得到内层 `b(x >> 16)`。\n- `movzbl %dil,%edx / movzbl 0x6009a0(%rdx),%ecx`：`ecx = a(x & 0xff)`。\n- `movzbl 0x6009a0(%rbx),%edx`：`edx = a((x >> 8) & 0xff)`。\n- `movzwl %ax,%eax`：把刚算好的内层结果截成 16 位。\n- `shl $0x8,%ecx / or %ecx,%edx`：拼出 `b(x & 0xffff)`。\n- `shl $0x10,%edx / or %edx, (8)`：把 `b(x & 0xffff)` 移到高 16 位后与\n  `b(x >> 16)`（此刻在 `%eax`）合并 ⇒ **(8) = %eax**。\n\n> 说明：原卷的 8 项答案现放入参考答案，并显式配置为自动判分规则。\n\n> 📌 本题答案来自原卷（带答案版的参考答案 / PDF 页面上的红色答案）；解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
             },
             "provenance": {
               "origin": "unknown",
@@ -4274,9 +4460,7 @@
               "editorNote": "反汇编填空（movzbl/shl/push/pop 等）"
             }
           ],
-          "issues": [
-            "blank-positions-unresolved"
-          ]
+          "issues": []
         }
       ],
       "solution": {
@@ -13576,7 +13760,7 @@
     {
       "schemaVersion": "5",
       "id": "q-6467625b6cf0ae5a",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-12950876262955d9",
       "paperOrder": 1,
       "number": {
@@ -13622,14 +13806,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "1.已知 a 是 `int` 类型变量，表达式 `a < 0` 为真，下列选项中一定为真的表达\n式是："
+        "text": "1. 已知 `a` 是 `int` 类型变量，表达式 `a < 0` 为真，下列选项中一定为真的表达式是："
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：D\n本题考察整数的运算律，A选项`a = TMIN`时，`-a = TMIN`不满足；B,C选项中若 a\n= -1，由补码表示和向零舍入，`a/2 = ~a = 0`。"
+          "text": "答案：D。\n\n按本题采用的补码运算及算术右移模型：\n\n- A：当 `a = TMIN` 时，补码取负的结果仍为 `TMIN`，不大于 0。\n- B、C：当 `a = -1` 时，`~a = 0`，且整数除法向零舍入，`a / 2 = 0`。\n- D：负数算术右移后符号位仍为 1，因此 `(a >> 1) < 0`。\n\n注意：这里沿用 ICS 的机器级运算模型；标准 C 中对 `INT_MIN` 取负属于有符号溢出。"
         },
         "provenance": {
           "origin": "unknown",
@@ -13666,7 +13850,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "`(a >> 1)` < 0"
+            "text": "`(a >> 1) < 0`"
           }
         }
       ]
@@ -15138,7 +15322,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f39f4e62d028f8d6",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-12950876262955d9",
       "paperOrder": 5,
       "number": {
@@ -15161,11 +15345,14 @@
         "tags": []
       },
       "publication": {
-        "state": "published",
+        "state": "review",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": []
+        "issues": [
+          "retired-invalid-question",
+          "no-correct-option-string-terminates-at-nul"
+        ]
       },
       "sources": [
         {
@@ -15178,7 +15365,7 @@
           "curated": "_curated/期中/2022期中-带答案/99.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "小端字节序与short/int指针读取（原答案有争议）"
+          "editorNote": "2026-10-10 复核：原题没有正确选项。写入 int 会产生两个 NUL 字节，printf 输出应在第一个 NUL 处结束，不能输出 20150004。保留原题及旧答案备查，暂不发布。"
         }
       ],
       "type": "single-choice",
@@ -15191,7 +15378,7 @@
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C 本题考查大小端。sh1 == 0x3332, sh2 = 0x3430, 因此sh2 - sh1 >\n0, 因此A选项错误。B选项，字符串顺序存储没有大小端一说，所以s的内容就\n是20233204; 如果执行 `*(int *)(s + 2) = 0x3531`会把s的第3, 4, 5,\n6个字节按照小端法覆盖，成为[32 30 31 35 00 00 30 34]16, 因此s的内\n容变成20150004, 所以选C\n（注：该题答案存在问题）"
+          "text": "维护复核（2026-10-10）：原答案 C 不成立，本题暂停发布。\n\n即使按题目默认的 x86-64 内存读取模型，写入 `0x3531` 后，字节序列也应为 `32 30 31 35 00 00 30 34`（十六进制）。`printf(\"%s\", s)` 在第一个 `00` 处终止，只会输出 `2015`，不会把 NUL 打印成字符 `0`。A、B、D 也不成立。此外，原始 `s[8]` 未保证 NUL 终止，直接打印还可能越界。以下保留旧参考内容用于追溯，不作为判分依据。\n\n答案：C 本题考查大小端。sh1 == 0x3332, sh2 = 0x3430, 因此sh2 - sh1 >\n0, 因此A选项错误。B选项，字符串顺序存储没有大小端一说，所以s的内容就\n是20233204; 如果执行 `*(int *)(s + 2) = 0x3531`会把s的第3, 4, 5,\n6个字节按照小端法覆盖，成为[32 30 31 35 00 00 30 34]16, 因此s的内\n容变成20150004, 所以选C\n（注：该题答案存在问题）"
         },
         "provenance": {
           "origin": "unknown",
@@ -52489,7 +52676,7 @@
     {
       "schemaVersion": "5",
       "id": "q-42ee16bd009c98ad",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-9c11139ca386240d",
       "paperOrder": 11,
       "number": {
@@ -52535,7 +52722,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "11. （2分）下面给出了`satMul2`函数的代码，其中变量`overflow`在结果溢出时会被设\n置为 `0xFFFFFFFF`，否则为 0。下面哪一个选项正确给出了 `overflow` 的表达式(提\n示：可根据`x`和2 * x的符号位来判断是否溢出)：\n```\n/*\n * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow\n *   Examples: satMul2(0x30000000) = 0x60000000\n *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)\n *             satMul2(0x90000000) = 0x80000000 (saturate to TMin)\n*/\nint satMul2(int x) {\nint overflow, negative_x, raw_result, tmin, tmax;\n    overflow = ____________________\n    negative_x = x >> 31;\n    raw_result = x << 1;\n    tmin = 1 << 31;\ntmax = tmin + ~0;\n    return (overflow & negative_x & tmin) | (overflow & ~negative_x &\ntmax) | (~overflow & raw_result);\n}\n```"
+        "text": "11. （2 分）下面给出了 `satMul2` 函数的代码，其中变量 `overflow` 在结果溢出时会被设置为 `0xFFFFFFFF`，否则为 0。下面哪一个选项正确给出了 `overflow` 的表达式（提示：可根据 `x` 和 `2 * x` 的符号位来判断是否溢出）：\n\n```c\n/*\n * satMul2 - multiplies by 2, saturating to Tmin or Tmax if overflow\n *   Examples: satMul2(0x30000000) = 0x60000000\n *             satMul2(0x40000000) = 0x7FFFFFFF (saturate to TMax)\n *             satMul2(0x90000000) = 0x80000000 (saturate to TMin)\n*/\nint satMul2(int x) {\n    int overflow, negative_x, raw_result, tmin, tmax;\n    overflow = ____________________\n    negative_x = x >> 31;\n    raw_result = x << 1;\n    tmin = 1 << 31;\n    tmax = tmin + ~0;\n    return (overflow & negative_x & tmin)\n         | (overflow & ~negative_x & tmax)\n         | (~overflow & raw_result);\n}\n```"
       },
       "solution": {
         "state": "available",
@@ -54174,7 +54361,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b0a1a7fb9bac4b8c",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-9c11139ca386240d",
       "paperOrder": 14,
       "number": {
@@ -54220,14 +54407,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "14. （2 分）下面给出了 `byteSwap` 函数的代码，该函数交换后两个参数所指定的两个字\n节的数据。下面哪一个选项正确给出了(1)和(2)处应当填写的内容？\n```\n/*\n * byteSwap - swaps the nth byte and the mth byte\n *  Examples: byteSwap(0x12345678, 1, 3) = 0x56341278\n *              byteSwap(0xDEADBEEF, 0, 2) = 0xDEEFBEAD\n *  You may assume that 0 <= n <= 3, 0 <= m <= 3\n*/\nint byteSwap(int x, int n, int m) {\n    int n8 = n << ___(1)___;\n    int m8 = m << ___(1)___;\n    int swap_byte = ((x >> m8) __(2)__ (x >> n8)) & 0xff;\n    return x ^ (swap_byte << n8) __(2)__ (swap_byte << m8);\n}\n```"
+        "text": "14. （2 分）下面给出了 `byteSwap` 函数的代码，该函数交换后两个参数所指定的两个字节的数据。下面哪一个选项正确给出了 (1) 和 (2) 处应当填写的内容？\n\n```c\n/*\n * byteSwap - swaps the nth byte and the mth byte\n *  Examples: byteSwap(0x12345678, 1, 3) = 0x56341278\n *              byteSwap(0xDEADBEEF, 0, 2) = 0xDEEFBEAD\n *  You may assume that 0 <= n <= 3, 0 <= m <= 3\n*/\nint byteSwap(int x, int n, int m) {\n    int n8 = n << ___(1)___;\n    int m8 = m << ___(1)___;\n    int swap_byte = ((x >> m8) __(2)__ (x >> n8)) & 0xff;\n    return x ^ (swap_byte << n8) __(2)__ (swap_byte << m8);\n}\n```"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：A\n\n解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 `(1) = 3`；两个字节的差异用异或取出（`swap_byte = byte_m ^ byte_n`），再在 `n`、`m` 两个位置各异或一次就完成了交换，故 `(2) = ^`。若用 |，两处字节会被\"或\"成同一个值而不是互换。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+          "text": "答案：A\n\n解析：字节下标要变成比特下标必须乘 8，即 `n << 3`，故 `(1) = 3`；两个字节的差异用异或取出（`swap_byte = byte_m ^ byte_n`），再在 `n`、`m` 两个位置各异或一次就完成了交换，故 `(2) = ^`。若用 `|`，则不能完成上述异或交换。故选 A。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
         },
         "provenance": {
           "origin": "ai-derived",
@@ -54258,14 +54445,14 @@
           "id": "C",
           "content": {
             "format": "markdown",
-            "text": "(1) 3 (2) |"
+            "text": "`(1) 3 (2) |`"
           }
         },
         {
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "(1) 8 (2) |"
+            "text": "`(1) 8 (2) |`"
           }
         }
       ]
@@ -63644,7 +63831,7 @@
     {
       "schemaVersion": "5",
       "id": "q-31fd3c710550b47e",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 1,
       "number": {
@@ -63690,14 +63877,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "1. 假想一类“半字节数”（4-bit）的数据类型，包括有符号整数（`int4`）以及\n浮点数（`float4`）。有符号整数（`int4`）采用补码表示，浮点数（`float4`）基于\nIEEE 浮点格式，有 1 个符号位，2 个阶码位（`k=2`）和 1 个小数位（`n=1`）。\n有两种函数 f2b(f) 和 f2i(f)，代码实现如下所示：\n```\nint4 f2b(float4 f) {  int4 f2i(float4 f) {\n  union {    return (int4) f;\n    int4 d;  }\n    float4 f;\n  } temp;\n  temp.f = f;\n  return temp.d;\n}\n```\n`f2b` 函数返回`f`的二进制表示，如若`f`的二进制表示为0100，则返回的 `int4`\n值为4。 `f2i` 函数返回`f`的值向零舍入的结果。我们执行如下函数，其行为是从\n0000 到 1111 枚举非 NaN 及 ±INF 的所有 `float4` 类型能表示的浮点数\n值，并进行比较。\n```\nvoid fun() {\n  for (float4 f from 4'b0000 to 4'b1111) {\n    if (isnan(f) || isinf(f)) continue;\n    if (f2b(f) == f2i(f)) printf(\"Success!\\n\");\n  }\n}\n```\n请问 `f2b` 和 `f2i` 相等时，`f` 的二进制表示是：\n```\n① 0000  ② 0001 ③ 1000 ④ 1101\n```\n2"
+        "text": "1. 假想一类“半字节数”（4-bit）的数据类型，包括有符号整数（`int4`）以及浮点数（`float4`）。`int4` 采用补码表示；`float4` 基于 IEEE 浮点格式，有 1 个符号位、2 个阶码位（`k = 2`）和 1 个小数位（`n = 1`）。\n\n有两种函数 `f2b(f)` 和 `f2i(f)`，代码实现如下：\n\n```c\nint4 f2b(float4 f) {\n  union {\n    int4 d;\n    float4 f;\n  } temp;\n  temp.f = f;\n  return temp.d;\n}\n\nint4 f2i(float4 f) {\n  return (int4) f;\n}\n```\n\n`f2b` 函数返回 `f` 的二进制表示按 `int4` 解读的值。例如，`f` 的二进制表示为 `0100` 时返回 4。`f2i` 函数返回 `f` 的值向零舍入的结果。\n\n执行下面的伪代码，从 `0000` 到 `1111` 枚举所有 `float4` 位模式，跳过 NaN 及正负无穷，并进行比较：\n\n```c\nvoid fun() {\n  for (float4 f from 4'b0000 to 4'b1111) {\n    if (isnan(f) || isinf(f)) continue;\n    if (f2b(f) == f2i(f)) printf(\"Success!\\n\");\n  }\n}\n```\n请问 `f2b` 和 `f2i` 相等时，`f` 的二进制表示是：\n\n① `0000`　② `0001`　③ `1000`　④ `1101`"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：D。所有 16 种情况如下表。实际做题时无需如此繁琐，只需对四个选项计\n算即可。\n二进 制 f  f2b(f)  f2i(f)  dif\n表示\n```\n0000  0  0  0  0\n0001  1/2  1  0  1\n0010  1  2  1  1\n0011  3/2  3  1  2\n0100  2  4  2  2\n0101  3  5  3  2\n0110  nan  -  -  -\n0111  inf  -  -  -\n1000  -0  -8  0  -8\n1001  -1/2  -7  0  -7\n1010  -1  -6  -1  -5\n1011  -3/2  -5  -1  -4\n1100  -2  -4  -2  -2\n1101  -3  -3  -3  0\n1110  nan  -  -  -\n1111  -inf  -  -  -\n```"
+          "text": "答案：D（①④）。\n\n阶码偏置为 $2^{k-1}-1 = 1$。下表中 `dif = f2b(f) - f2i(f)`；只有 `0000` 和 `1101` 两行的差为 0。\n\n| 二进制表示 | `f` | `f2b(f)` | `f2i(f)` | `dif` |\n| --- | --- | --- | --- | --- |\n| `0000` | 0 | 0 | 0 | 0 |\n| `0001` | 1/2 | 1 | 0 | 1 |\n| `0010` | 1 | 2 | 1 | 1 |\n| `0011` | 3/2 | 3 | 1 | 2 |\n| `0100` | 2 | 4 | 2 | 2 |\n| `0101` | 3 | 5 | 3 | 2 |\n| `0110` | +∞ | — | — | — |\n| `0111` | NaN | — | — | — |\n| `1000` | −0 | −8 | 0 | −8 |\n| `1001` | −1/2 | −7 | 0 | −7 |\n| `1010` | −1 | −6 | −1 | −5 |\n| `1011` | −3/2 | −5 | −1 | −4 |\n| `1100` | −2 | −4 | −2 | −2 |\n| `1101` | −3 | −3 | −3 | 0 |\n| `1110` | −∞ | — | — | — |\n| `1111` | NaN | — | — | — |\n\n维护说明：原参考表将全 1 阶码下的小数字段 0/1 对应的无穷和 NaN 写反，此处按 IEEE 格式更正；不影响答案 D。"
         },
         "provenance": {
           "origin": "unknown",
@@ -68709,7 +68896,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0a147b905856ecc3",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 3,
       "number": {
@@ -68755,14 +68942,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "3.对于`float`类型的变量a，b，下列说法正确的是："
+        "text": "3. 对于 IEEE 754 单精度 `float` 类型的变量 `a`、`b`，下列说法正确的是："
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：B\n考察浮点数的位级表示和运算规则。\nA 错误。比如a为1e20，b为1.0，a + b会舍入到1e20,(a + b) – a的\n结果是0.0。\nB 正确。`float`的位级表示有1个符号位，8位阶码(偏移为127)，23位小数。\n所以最小的可精确表达的正数是 $2^{-23} \\times 2^{1-127} = 2^{-149}$。\nC 错误。可能会发生溢出。\nD 错误。a的值为无穷大时，不存在这样的b（因为正负无穷相加结果为NaN）。"
+          "text": "答案：B。\n\n- A 错误。例如 `a = 1e20f`、`b = 1.0f` 时，`a + b` 舍入到 `a`，所以 `(a + b) - a` 的结果为 `0.0f`。\n- B 正确。单精度浮点数有 1 个符号位、8 个阶码位（偏置为 127）和 23 个小数位。最小正非规格化数为 $2^{-23} \\times 2^{1-127} = 2^{-149}$。\n- C 错误。即使 `a` 是整数，也可能超出 `int` 的表示范围。\n- D 错误。若 `a` 为无穷大，与反号无穷大相加得到 NaN，不能得到 0。"
         },
         "provenance": {
           "origin": "unknown",
@@ -68778,28 +68965,28 @@
           "id": "A",
           "content": {
             "format": "markdown",
-            "text": "假设a，b不是NaN，则`(a + b) - a == b`总为真"
+            "text": "假设 `a`、`b` 不是 NaN，则 `(a + b) - a == b` 总为真"
           }
         },
         {
           "id": "B",
           "content": {
             "format": "markdown",
-            "text": "a的小数字段长度为23位，所以它能精确表示的最小正数是2-149"
+            "text": "`a` 的小数字段长度为 23 位，所以它能精确表示的最小正数是 $2^{-149}$"
           }
         },
         {
           "id": "C",
           "content": {
             "format": "markdown",
-            "text": "假设a表示的是一个整数，那么`(int)a == a`总为真"
+            "text": "假设 `a` 表示的是一个整数，那么 `(int)a == a` 总为真"
           }
         },
         {
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "假设a不是NaN，则存在b的取值使得`a + b == 0`为真"
+            "text": "假设 `a` 不是 NaN，则存在 `b` 的取值使得 `a + b == 0` 为真"
           }
         }
       ]
@@ -74592,7 +74779,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f4ab8ae043083a94",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-d0ae6162300a90de",
       "paperOrder": 16,
       "number": {
@@ -74720,14 +74907,14 @@
             }
           }
         ],
-        "text": "第二题（8分）\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行1分）\n```c\nint x, y;\nunsigned u, v;\n```\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | {{blank:if-x-0-then-x-2-0-r1-c1}} |  |\n| `u<= -1` | {{blank:u-1-r2-c1}} |  |\n| if x> y, then -x < -y | {{blank:if-x-y-then-x-y-r3-c1}} |  |\n| if u> v, then -u > -v | {{blank:if-u-v-then-u-v-r4-c1}} |  |"
+        "text": "第二题（8分）\n\n1）判断下表中每一行表达式对或错。如果错，请举出反例或简要说明原因（每行 1 分）。本页通过下拉框核对判断结果；反例或原因请自行思考，并与参考解析对照。\n\n```c\nint x, y;\nunsigned u, v;\n```\n\n| 表达式 | True or false |\n| --- | --- |\n| 若 `x < 0`，则 `x * 2 < 0` | {{blank:if-x-0-then-x-2-0-r1-c1}} |\n| `u <= -1` | {{blank:u-1-r2-c1}} |\n| 若 `x > y`，则 `-x < -y` | {{blank:if-x-y-then-x-y-r3-c1}} |\n| 若 `u > v`，则 `-u > -v` | {{blank:if-u-v-then-u-v-r4-c1}} |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n\n| | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| if x<0, then x*2 <0 | F | X = $-2^{w-1}$ |\n| `u<= -1` | T | -1 作为无符号来比大于 `u` |\n| if x> y, then -x < -y | F | `X=0, y` = $-2^{w-1}$ |\n| if u> v, then -u > -v | F | `U=2, v=1` |"
+          "text": "答案：\n\n| 表达式 | True or false | 原因或举出反例 |\n| --- | --- | --- |\n| 若 `x < 0`，则 `x * 2 < 0` | F | 在补码回绕模型下，取 $x = -2^{w-1}$，乘 2 后为 0。 |\n| `u <= -1` | T | 比较时 `-1` 转为 `UINT_MAX`，所有 `unsigned` 值都不大于它（可以相等）。 |\n| 若 `x > y`，则 `-x < -y` | F | 取 `x = 0`、$y = -2^{w-1}$，补码取负后的 `-y` 仍为最小负数。 |\n| 若 `u > v`，则 `-u > -v` | F | 取 `u = 2`、`v = 1`，无符号取负按模 $2^w$ 运算，得到 `-u < -v`。 |\n\n这里按原题采用的机器级补码模型解释；标准 C 中上述有符号溢出不是定义良好的运算。"
         },
         "provenance": {
           "origin": "unknown",
@@ -88632,7 +88819,7 @@
     {
       "schemaVersion": "5",
       "id": "q-96276f24280880cd",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ea869cda0eb89689",
       "paperOrder": 8,
       "number": {
@@ -88685,7 +88872,7 @@
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "**答案：C**"
+          "text": "**答案：C**\n\n32 位补码的表示范围是 $-2^{31}$ 到 $2^{31}-1$，因此最小值为 $-2^{31}$。"
         },
         "provenance": {
           "origin": "unknown",
@@ -88701,28 +88888,28 @@
           "id": "A",
           "content": {
             "format": "markdown",
-            "text": "−$2^{32}$"
+            "text": "$-2^{32}$"
           }
         },
         {
           "id": "B",
           "content": {
             "format": "markdown",
-            "text": "−$2^{32}$ + 1"
+            "text": "$-2^{32}+1$"
           }
         },
         {
           "id": "C",
           "content": {
             "format": "markdown",
-            "text": "−$2^{31}$"
+            "text": "$-2^{31}$"
           }
         },
         {
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "−$2^{31}$ + 1"
+            "text": "$-2^{31}+1$"
           }
         }
       ]
@@ -90348,7 +90535,7 @@
     {
       "schemaVersion": "5",
       "id": "q-3376fb77c2e3a398",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-eaef0ab4d19e72c9",
       "paperOrder": 8,
       "number": {
@@ -90371,11 +90558,14 @@
         "tags": []
       },
       "publication": {
-        "state": "published",
+        "state": "review",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": []
+        "issues": [
+          "retired-invalid-question",
+          "original-grading-awards-all-options"
+        ]
       },
       "sources": [
         {
@@ -90388,7 +90578,7 @@
           "curated": "_curated/期中/2018期中-带答案/134.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "条件码的读写与改变"
+          "editorNote": "2026-10-10 复核：原卷已修订为 ABCD 均给分，不能用只接受 C 的精确集合判分。保留原题备查，暂不发布。"
         }
       ],
       "type": "multiple-choice",
@@ -90401,7 +90591,7 @@
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C，leaq是movq指令的变形，它只传送地址，不改变条件码。\n答案修订：ABCD均给分。\n  AB没有指明是x86指令系统；x86指令系统中有SIMD类指令不改变条件码；\n  C 数据传送一般不改变条件码；\n  D 正确，SAHF、STC、CLC、CMC等指令均可以直接写条件码。"
+          "text": "维护复核（2026-10-10）：原卷明确修订为“ABCD 均给分”，不是要求同时选择 ABCD；不能将旧答案 C 作为唯一正确集合。本题暂停发布，以下保留原参考内容。\n\n答案：C，leaq是movq指令的变形，它只传送地址，不改变条件码。\n答案修订：ABCD均给分。\n  AB没有指明是x86指令系统；x86指令系统中有SIMD类指令不改变条件码；\n  C 数据传送一般不改变条件码；\n  D 正确，SAHF、STC、CLC、CMC等指令均可以直接写条件码。"
         },
         "provenance": {
           "origin": "unknown",
