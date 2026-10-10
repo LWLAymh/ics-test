@@ -8,14 +8,16 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root = path.resolve(__dirname, '..');
 const all = JSON.parse(fs.readFileSync(path.join(root, 'question-bank/web-data/questions.json'))).questions;
 const source = fs.readFileSync(path.join(root, 'site/ics-test.js'), 'utf8').replace('  init();',
-  '  window.__test = {state, ui, renderQuestion, renderSolution, renderContent, rankByErrorRate, loadQuestionBank}; init();');
-const stub = `window.__writes=[];window.__rows={};window.supabase={createClient(){return {
+  '  window.__test = {state, ui, renderQuestion, renderSolution, renderContent, rankByErrorRate, loadQuestionBank, loadSiteAttempts}; init();');
+const stub = `window.__writes=[];window.__rows={};window.__subscriptions={};window.supabase={createClient(){return {
 from(table){return {select(){return this},order(){return this},
 then(resolve,reject){return Promise.resolve({data:table==='ics_question_issue_reports' ? window.__issues||[] : []}).then(resolve,reject)},
-range(start,end){return Promise.resolve({data:(window.__messages||[]).slice(start,end+1),error:window.__messageError||null})},
+range(start,end){return table==='ics_question_stats'
+  ? (window.__statsPageHandler ? window.__statsPageHandler(start,end) : Promise.resolve({data:Object.values(window.__rows).sort((a,b)=>a.question_id.localeCompare(b.question_id)).slice(start,end+1),error:window.__statsError||null}))
+  : Promise.resolve({data:(window.__messages||[]).slice(start,end+1),error:window.__messageError||null})},
 in(k,ids){return Promise.resolve({data:ids.map(id=>window.__rows[id]).filter(Boolean)})},
 eq(k,id){this.id=id;return this},maybeSingle(){return Promise.resolve({data:window.__rows[this.id]||null})}}},
-channel(){return {on(){return this},subscribe(){return this}}},removeChannel(){},
+channel(name){return {on(event,filter,callback){window.__subscriptions[name]=callback;return this},subscribe(){return this}}},removeChannel(){},
 rpc(name,args){window.__writes.push({name,args});return window.__rpcHandler ? window.__rpcHandler(name,args) : Promise.resolve({data:null})}}}};`;
 function content(text, blanks) { return { format: 'markdown', text, ...(blanks ? {blanks} : {}) }; }
 function solution(grading, extra = {}) {
@@ -52,6 +54,37 @@ async function run() {
     await page.route('**/rest/v1/**',route=>route.abort());
     await page.goto(process.env.ICS_TEST_URL || 'http://127.0.0.1:4186/');
     await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
+    // Global totals use all pages, not the question pool or PostgREST's first page.
+    await page.evaluate(async()=>{
+      window.__rows=Object.fromEntries(Array.from({length:1103},(_,i)=>{
+        const id='q-'+i.toString(16).padStart(16,'0');return [id,{question_id:id,total_answers:2}];
+      }));
+      await window.__test.loadSiteAttempts();
+    });
+    assert.equal(await page.locator('#ics-site-attempts').innerText(),'2,206');
+    await page.evaluate(()=>window.__subscriptions['ics-site-attempts']({eventType:'UPDATE',new:{question_id:'q-0000000000000000',total_answers:3}}));
+    assert.equal(await page.locator('#ics-site-attempts').innerText(),'2,207');
+    await page.evaluate(()=>window.__subscriptions['ics-site-attempts']({eventType:'INSERT',new:{question_id:'q-ffffffffffffffff',total_answers:1}}));
+    assert.equal(await page.locator('#ics-site-attempts').innerText(),'2,208');
+    await page.evaluate(()=>window.__subscriptions['ics-site-attempts']({eventType:'DELETE',old:{question_id:'q-ffffffffffffffff'}}));
+    assert.equal(await page.locator('#ics-site-attempts').innerText(),'2,207');
+    // A live event during an initial/paginated read must not be lost to an older snapshot.
+    await page.evaluate(async()=>{
+      let resolvePage;
+      window.__statsPageHandler=()=>new Promise(resolve=>{resolvePage=resolve});
+      const loading=window.__test.loadSiteAttempts();
+      await Promise.resolve();
+      window.__subscriptions['ics-site-attempts']({eventType:'UPDATE',new:{question_id:'q-0000000000000000',total_answers:9}});
+      resolvePage({data:[{question_id:'q-0000000000000000',total_answers:2}]});
+      await loading;window.__statsPageHandler=null;
+    });
+    assert.equal(await page.locator('#ics-site-attempts').innerText(),'9');
+    await page.evaluate(async()=>{window.__statsError={message:'offline'};await window.__test.loadSiteAttempts()});
+    assert.equal(await page.locator('#ics-site-attempts').innerText(),'9');
+    assert.match(await page.locator('#ics-site-attempt-note').innerText(),/上次/);
+    await page.evaluate(async()=>{window.__statsError=null;window.__rows={};await window.__test.loadSiteAttempts()});
+    assert.equal(await page.locator('#ics-site-attempts').innerText(),'0');
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),'0');
     const initialPapers=await page.evaluate(()=>window.__test.state.papers);
     assert.equal(await page.locator('#ics-paper option').count(),initialPapers.length+1);
     assert.equal(await page.locator('#ics-source-picker input:checked').count(),2);
@@ -212,6 +245,10 @@ async function run() {
       assert.deepEqual(await page.evaluate(()=>window.__test.state.questions.map(q=>q.id)),paper.questionIds);
       await page.click('#ics-abandon');
     }
+    await fixture(page,[single,multiple]);
+    await page.click('#ics-skip');
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),'0');
+    assert.equal(await page.evaluate(()=>window.__writes.filter(r=>r.name==='record_ics_answer').length),0);
     await fixture(page,[single,multiple,fill,short,composite]);
     await page.click('[data-choice="B"]');await page.click('#ics-next');
     await page.click('[data-choice="A"]');await page.click('[data-choice="B"]');await page.click('#ics-previous');
@@ -219,11 +256,13 @@ async function run() {
     await page.click('#ics-next');assert.equal(await page.locator('#ics-answer').inputValue(),'AB');await page.click('#ics-submit');
     await page.click('#ics-previous');assert(await page.locator('[data-choice="B"]').isDisabled());
     assert.equal(await page.evaluate(()=>window.__test.state.score),2);
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),'2');
     await page.click('[data-question-index="2"]');assert.equal(await page.locator('.ics-blank-input').count(),2);
     await page.locator('.ics-blank-input').first().fill('42');assert.equal(await page.locator('.ics-blank-input').nth(1).inputValue(),'42');
     assert.equal(await page.locator('#ics-question-content pre input').count(),1);
     assert.equal(await page.locator('#ics-question-content table input').count(),1);
     await page.click('#ics-next');await page.click('#ics-submit');assert(await page.locator('#ics-self-grade').isVisible());
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),'2'); // Reveal is not completion.
     await page.click('#ics-previous');assert.equal(await page.locator('.ics-blank-input').first().inputValue(),'42');await page.click('#ics-submit');
     assert.match(await page.locator('#ics-verdict').innerText(),/正确/);
     await page.click('#ics-next');await page.click('[data-grade="0.5"]');await page.click('#ics-next');
@@ -237,6 +276,19 @@ async function run() {
     assert.equal(await page.evaluate(()=>window.__test.state.score),4.5);
     await page.click('#ics-finish');assert.match(await page.locator('#ics-final-summary').innerText(),/已计分 5/);
     assert.equal(await page.evaluate(()=>window.__writes.filter(r=>r.name==='record_ics_answer').length),5);
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),'5');
+    // Repeating a question in a fresh quiz increments local count, not the
+    // unique-browser global aggregate returned by the unchanged database RPC.
+    await page.evaluate(id=>{
+      window.__rows={[id]:{question_id:id,total_answers:1}};
+      window.__rpcHandler=()=>Promise.resolve({data:[{question_id:id,total_answers:1}]});
+    },single.id);
+    await page.evaluate(()=>window.__test.loadSiteAttempts());
+    await fixture(page,[single]);
+    await page.click('[data-choice="B"]');await page.click('#ics-submit');
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),'6');
+    assert.equal(await page.locator('#ics-site-attempts').innerText(),'1');
+    await page.evaluate(()=>window.__rpcHandler=null);
     await fixture(page,[{...composite,parts:composite.parts.slice(0,2)}]);
     await page.click('[data-composite-choice="A"]');await page.locator('.ics-blank-input').first().fill('42');await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.score),0.5);
@@ -564,6 +616,26 @@ async function run() {
     await page.setViewportSize({width:390,height:844});
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     if(output)await page.screenshot({path:path.join(output,'finite-comparison-mobile.png'),fullPage:true});
+    // Cross-tab storage events and refresh preserve the local cumulative count.
+    const beforeStorage=Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',',''));
+    await page.evaluate(()=>{
+      const key='ics-completed-attempt-v1:00000000-0000-4000-8000-ffffffffffff';
+      localStorage.setItem(key,'1');dispatchEvent(new StorageEvent('storage',{key}));
+    });
+    assert.equal(Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',','')),beforeStorage+1);
+    await page.reload();await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
+    assert.equal(Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',','')),beforeStorage+1);
+    // Offline submission still counts locally; unavailable storage is explicit.
+    await fixture(page,[single]);
+    await page.evaluate(()=>{
+      window.__originalSetItem=Storage.prototype.setItem;
+      Storage.prototype.setItem=function(){throw new Error('quota')};
+      window.__rpcHandler=()=>Promise.resolve({error:{message:'offline'}});
+    });
+    await page.click('[data-choice="A"]');await page.click('#ics-submit');
+    assert.equal(Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',','')),beforeStorage+2);
+    assert.match(await page.locator('#ics-local-attempt-note').innerText(),/临时保留/);
+    await page.evaluate(()=>Storage.prototype.setItem=window.__originalSetItem);
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({success:true,...result,assets:result.assets.length}));
   } finally { await browser.close(); }

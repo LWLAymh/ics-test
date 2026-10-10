@@ -22,6 +22,8 @@
     issueForm: $('ics-issue-form'), issueMessage: $('ics-issue-message'),
     issueSend: $('ics-issue-send'), issueCancel: $('ics-issue-cancel'),
     mastery: $('ics-mastery'), masteryStatus: $('ics-mastery-status'), masteryNote: $('ics-mastery-note'),
+    localAttempts: $('ics-local-attempts'), localAttemptNote: $('ics-local-attempt-note'),
+    siteAttempts: $('ics-site-attempts'), siteAttemptNote: $('ics-site-attempt-note'),
     feedback: $('ics-feedback'), verdict: $('ics-verdict'), reference: $('ics-reference'),
     liveStats: $('ics-live-stats'), statsSummary: $('ics-stats-summary'), statsOptions: $('ics-stats-options'), statsNote: $('ics-stats-note'), liveDot: $('ics-live-dot'),
     selfGrade: $('ics-self-grade'), next: $('ics-next'), result: $('ics-result'),
@@ -45,10 +47,86 @@
     reportedThisSession: new Set(), issueReloadTimer: null, pendingCompositeGrade: null,
     reportingQuestions: new Set(), issueDrafts: new Map(), issueFormQuestionId: '',
     mastered: new Set(), masteryPersistent: true,
+    siteStats: new Map(), siteStatsLoaded: false, siteStatsChannel: null,
+    siteStatsLoad: null, siteStatsChanges: [],
     issueMessages: [], issueMessageLoad: 0,
   };
   const contract = window.ICSQuestionV5;
   const MASTERY_KEY = 'ics-question-mastery-v1';
+  const attemptCounts = window.ICSAttemptCounts.create(function () { return localStorage; });
+  function renderLocalAttempts() {
+    const value = attemptCounts.snapshot();
+    ui.localAttempts.textContent = value.count.toLocaleString('zh-CN');
+    ui.localAttemptNote.textContent = value.persistent
+      ? '重复练习计次，跳过不计入；仅保存在本浏览器。'
+      : '浏览器存储不可用，部分次数仅在当前页面临时保留。';
+  }
+
+  function applySiteStatsChange(rows, payload) {
+    if (payload.eventType === 'DELETE') rows.delete(payload.old.question_id);
+    else if (payload.new && payload.new.question_id) rows.set(payload.new.question_id, payload.new);
+  }
+
+  function renderSiteAttempts() {
+    if (!state.siteStatsLoaded) return;
+    const total = Array.from(state.siteStats.values()).reduce(function (sum, row) {
+      return sum + Number(row.total_answers || 0);
+    }, 0);
+    ui.siteAttempts.textContent = total.toLocaleString('zh-CN');
+  }
+
+  function loadSiteAttempts() {
+    if (state.siteStatsLoad) return state.siteStatsLoad;
+    if (!state.supabase) {
+      ui.siteAttemptNote.textContent = '统计服务暂不可用；同一浏览器、同一道题只计一次。';
+      return Promise.resolve();
+    }
+    state.siteStatsChanges = [];
+    state.siteStatsLoad = Promise.resolve().then(async function () {
+      try {
+        const rows = new Map();
+        const pageSize = 500;
+        // PostgREST limits rows per response: sum every page, including questions
+        // since withdrawn from publication, rather than just the current pool.
+        for (let start = 0; ; start += pageSize) {
+          const result = await state.supabase.from('ics_question_stats')
+            .select('question_id,total_answers').order('question_id').range(start, start + pageSize - 1);
+          if (result.error) throw result.error;
+          (result.data || []).forEach(function (row) { rows.set(row.question_id, row); });
+          if (!result.data || result.data.length < pageSize) break;
+        }
+        state.siteStatsChanges.forEach(function (payload) { applySiteStatsChange(rows, payload); });
+        state.siteStats = rows;
+        state.siteStatsLoaded = true;
+        renderSiteAttempts();
+        ui.siteAttemptNote.textContent = '同一浏览器、同一道题只计一次；数据来自 Supabase。';
+      } catch (_) {
+        ui.siteAttemptNote.textContent = state.siteStatsLoaded
+          ? '更新暂时失败，显示上次读到的累计数据。'
+          : '全站统计暂不可用，请联网后重试。';
+      } finally {
+        state.siteStatsLoad = null;
+        state.siteStatsChanges = [];
+      }
+    });
+    return state.siteStatsLoad;
+  }
+
+  function startSiteStatsSubscription() {
+    if (!state.supabase) { loadSiteAttempts(); return; }
+    state.siteStatsChannel = state.supabase.channel('ics-site-attempts')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'ics_question_stats' }, function (payload) {
+        if (state.siteStatsLoad) state.siteStatsChanges.push(payload);
+        applySiteStatsChange(state.siteStats, payload);
+        renderSiteAttempts();
+      }).subscribe(function (status) {
+        if (status === 'SUBSCRIBED') loadSiteAttempts();
+        else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
+          ui.siteAttemptNote.textContent = '实时连接中断；返回页面时会重新读取统计。';
+        }
+      });
+    loadSiteAttempts();
+  }
   function loadMastery() {
     try {
       const saved = JSON.parse(localStorage.getItem(MASTERY_KEY) || 'null');
@@ -471,6 +549,15 @@
       p_selected_options: selected,
       p_is_correct: Boolean(isCorrect),
     });
+    if (!result.error) {
+      const saved = Array.isArray(result.data) ? result.data[0] : result.data;
+      if (saved) {
+        const change = { eventType: 'UPDATE', new: saved };
+        if (state.siteStatsLoad) state.siteStatsChanges.push(change);
+        applySiteStatsChange(state.siteStats, change);
+        renderSiteAttempts();
+      }
+    }
     if (state.statsQuestionId !== question.id) return;
     if (result.error) {
       ui.statsSummary.textContent = '统计服务尚未初始化';
@@ -738,6 +825,10 @@
 
   async function init() {
     loadMastery();
+    attemptCounts.refresh();
+    renderLocalAttempts();
+    initSupabase();
+    startSiteStatsSubscription();
     try {
       state.catalog = await fetchJson(app.dataset.catalog);
       contract.assertVersion(state.catalog);
@@ -747,7 +838,6 @@
         return Number(paper.stats.publishedQuestionCount || 0) > 0;
       });
       renderSourceFilters();
-      initSupabase();
       await loadReportedIssues();
       startIssueSubscription();
       ui.start.disabled = false;
@@ -1017,7 +1107,13 @@
     state.score = Math.round(state.records.reduce(function (total, record) {
       return total + (record && typeof record.points === 'number' ? record.points : 0);
     }, 0) * 100) / 100;
-    if (typeof points === 'number') recordRemoteStats(q, points === 1).catch(function () {});
+    if (typeof points === 'number') {
+      // This hook runs only after grading. Skips, revealing an answer and
+      // revisiting a graded record never create a completed attempt.
+      attemptCounts.add(crypto.randomUUID());
+      renderLocalAttempts();
+      recordRemoteStats(q, points === 1).catch(function () {});
+    }
     ui.selfGrade.hidden = true;
     ui.submit.hidden = true; ui.skip.hidden = true;
     highlightChoiceResults(q);
@@ -1259,6 +1355,15 @@
   ui.mastery.addEventListener('click', toggleMastery);
   window.addEventListener('storage', function (event) {
     if (event.key === MASTERY_KEY || event.key === null) { loadMastery(); renderMastery(); }
+    if (event.key === null || event.key.startsWith(window.ICSAttemptCounts.PREFIX)) {
+      attemptCounts.refresh(); renderLocalAttempts();
+    }
+  });
+  window.addEventListener('online', loadSiteAttempts);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') {
+      attemptCounts.refresh(); renderLocalAttempts(); loadSiteAttempts();
+    }
   });
   ui.issueBoard.addEventListener('toggle', function () {
     if (ui.issueBoard.open) Promise.all([ensureIssueQuestionIndex(), loadIssueMessages()]).catch(function (error) {

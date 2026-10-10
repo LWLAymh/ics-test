@@ -43,6 +43,11 @@ window.MathJax = {
     </button>
   </header>
 
+  <section class="ics-attempt-summary" aria-label="累计作答统计">
+    <div><span>本浏览器累计作答</span><strong id="ics-local-attempts" aria-live="polite">0</strong><small id="ics-local-attempt-note">重复练习计次，跳过不计入。</small></div>
+    <div><span>全站累计作答</span><strong id="ics-site-attempts" aria-live="polite">—</strong><small id="ics-site-attempt-note">正在读取；同一浏览器、同一道题只计一次。</small></div>
+  </section>
+
   <div class="ics-panel" id="ics-setup">
     <div class="ics-panel-head">
       <div><p class="ics-eyebrow">开始练习</p><h2>选择你的练习范围</h2><p id="ics-bank-summary">正在读取题库…</p></div>
@@ -215,6 +220,7 @@ window.MathJax = {
 <script src="./vendor/markdown-it/markdown-it.min.js" defer></script>
 <script src="./vendor/supabase/supabase.js" defer></script>
 <script src="./question-v5.js" defer></script>
+<script src="./attempt-counts.js" defer></script>
 <script src="./ics-test.js" defer></script>
 </body>
 </html>
