@@ -55,7 +55,7 @@ async function run() {
     const initialPapers=await page.evaluate(()=>window.__test.state.papers);
     assert.equal(await page.locator('#ics-paper option').count(),initialPapers.length+1);
     assert.equal(await page.locator('#ics-source-picker input:checked').count(),2);
-    assert.equal(initialPapers.filter(p=>p.sourceCollection==='csapp-textbook').length,11);
+    assert.equal(initialPapers.filter(p=>p.sourceCollection==='csapp-textbook').length,12);
     for(const collection of ['csapp-textbook','pku-exam']){
       const other=collection==='pku-exam'?'csapp-textbook':'pku-exam';
       await page.check('#ics-source-picker input[value="'+collection+'"]');
@@ -355,7 +355,9 @@ async function run() {
     const rgbImage=page.locator('#ics-question-content img');
     await rgbImage.evaluate(img=>img.decode());
     assert(await rgbImage.evaluate(img=>img.naturalWidth>0));
-    assert.equal(await page.locator('#ics-question-content table tbody tr').count(),4);
+    assert.deepEqual(await page.locator('#ics-question-content table').evaluateAll(tables=>tables.map(t=>t.tBodies[0].rows.length)),[4,8,3]);
+    assert.equal(await page.locator('#ics-question-content .ics-blank-input').count(),11);
+    assert.deepEqual(await page.locator('#ics-question-content table').nth(2).locator('tbody tr').evaluateAll(rows=>rows.map(r=>r.cells.length)),[2,2,2]);
     const structure=all.find(q=>q.id==='q-7cd9182305e4534c');
     await fixture(page,[structure]);
     assert.equal(await page.locator('#ics-question-content pre').count(),2);
@@ -454,6 +456,31 @@ async function run() {
     assert.match(await page.locator('#ics-reference').innerText(),/0x4098/);
     await page.click('[data-grade="1"]');
     assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    // Repaired large fills and full textbook tables: controls really render and submit.
+    for (const id of ['q-24321282fb032032','q-496d550407168984','q-54e55a2556b716c4',
+      'q-7a264bcc951d408e','q-651a9efb8c0342d7','q-0e957c1fa43b6d82','q-1928bdf6054a73ce']) {
+      const question=all.find(q=>q.id===id);
+      await fixture(page,[question]);
+      const units=question.parts||[question];
+      for(let index=0;index<units.length;index++)for(const answer of units[index].solution.blankAnswers||[]) {
+        if(answer.method==='self')continue;
+        const scope=question.type==='composite' ? '[data-composite-part="'+index+'"] ' : '';
+        const input=page.locator(scope+'[data-blank-id="'+answer.blankId+'"]').first();
+        if(answer.method==='selection') await input.selectOption(answer.correctValues[0]);
+        else await input.fill(answer.acceptedAnswers[0]);
+      }
+      if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-new-desktop.png'),fullPage:true});
+      await page.click('#ics-submit');
+      if(units.some(unit=>unit.solution.grading==='self'||unit.solution.blankAnswers?.some(answer=>answer.method==='self'))) {
+        assert(await page.locator('#ics-self-grade').isVisible());
+        await page.click('[data-grade="1"]');
+      }
+      assert.equal(await page.evaluate(()=>window.__test.state.score),1,id);
+      await page.setViewportSize({width:390,height:844});
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),id);
+      if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-new-mobile.png'),fullPage:true});
+      await page.setViewportSize({width:1280,height:900});
+    }
     // Full bank browser parse, including withheld questions' Markdown, all options/references.
     const result=await page.evaluate(questions=>{
       window.MathJax=undefined;
@@ -466,6 +493,9 @@ async function run() {
           n+(u.stem.blanks||[]).filter(b=>b.input?.kind==='select').length,0);
         const actualSelects=ui.questionContent.querySelectorAll('select.ics-blank-input,[data-blank-toggle]').length;
         if(actualSelects!==expectedSelects)throw new Error('Lost select: '+questions[i].id+' '+actualSelects+'/'+expectedSelects);
+        const expectedBlanks=(questions[i].parts||[questions[i]]).reduce((n,u)=>n+(u.stem.blanks||[]).length,0);
+        const actualBlanks=ui.questionContent.querySelectorAll('.ics-blank-input').length;
+        if(actualBlanks!==expectedBlanks)throw new Error('Lost blank: '+questions[i].id+' '+actualBlanks+'/'+expectedBlanks);
         for(const node of questions[i].parts||[questions[i]]){
           const el=document.createElement('div');el.innerHTML=renderContent(node.stem)+(node.options||[]).map(o=>renderContent(o.content)).join('');
           el.querySelectorAll('img').forEach(img=>assets.add(img.src));sections++;

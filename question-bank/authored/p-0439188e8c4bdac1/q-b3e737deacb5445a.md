@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-b3e737deacb5445a",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-0439188e8c4bdac1",
   "paperOrder": 3,
   "number": {
@@ -29,9 +29,7 @@
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "blank-positions-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -47,7 +45,7 @@
       "editorNote": "由 HCL 布尔表达式补全组合逻辑电路图"
     }
   ],
-  "type": "fill",
+  "type": "short-answer",
   "stem": {
     "format": "markdown",
     "blanks": []

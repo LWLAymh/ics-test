@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-b04eecbfa5be0f56",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 21,
   "number": {
@@ -26,9 +26,7 @@
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "blank-positions-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -81,11 +79,30 @@
       ],
       "stem": {
         "format": "markdown",
-        "blanks": []
+        "blanks": [
+          {"id":"r1","marker":"{{blank:r1}}","occurrence":0,"width":"medium","label":"读者优先空 1"},
+          {"id":"r2","marker":"{{blank:r2}}","occurrence":0,"width":"medium","label":"读者优先空 2"},
+          {"id":"r3","marker":"{{blank:r3}}","occurrence":0,"width":"medium","label":"读者优先空 3"},
+          {"id":"r4","marker":"{{blank:r4}}","occurrence":0,"width":"medium","label":"读者优先空 4"},
+          {"id":"r5","marker":"{{blank:r5}}","occurrence":0,"width":"medium","label":"读者优先空 5"},
+          {"id":"r6","marker":"{{blank:r6}}","occurrence":0,"width":"medium","label":"读者优先空 6"},
+          {"id":"r7","marker":"{{blank:r7}}","occurrence":0,"width":"medium","label":"读者优先空 7"},
+          {"id":"r8","marker":"{{blank:r8}}","occurrence":0,"width":"medium","label":"读者优先空 8"}
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {"blankId":"r1","method":"exact","acceptedAnswers":["P(&mutex);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"r2","method":"exact","acceptedAnswers":["P(&w);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"r3","method":"exact","acceptedAnswers":["V(&mutex);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"r4","method":"exact","acceptedAnswers":["P(&mutex);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"r5","method":"exact","acceptedAnswers":["V(&w);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"r6","method":"exact","acceptedAnswers":["V(&mutex);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"r7","method":"exact","acceptedAnswers":["P(&w);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"r8","method":"exact","acceptedAnswers":["V(&w);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}}
+        ],
         "reference": {
           "format": "markdown"
         },
@@ -109,9 +126,7 @@
           "editorNote": "第一类读者-写者（读者优先）信号量 P/V 填空"
         }
       ],
-      "issues": [
-        "blank-positions-unresolved"
-      ]
+      "issues": []
     },
     {
       "id": "q-f83ca79637ff66b3",
@@ -133,11 +148,28 @@
       ],
       "stem": {
         "format": "markdown",
-        "blanks": []
+        "blanks": [
+          {"id":"w1","marker":"{{blank:w1}}","occurrence":0,"width":"short","label":"w 信号量初值"},
+          {"id":"w2","marker":"{{blank:w2}}","occurrence":0,"width":"medium","label":"写者优先空 2"},
+          {"id":"w3","marker":"{{blank:w3}}","occurrence":0,"width":"long","label":"写者优先空 3"},
+          {"id":"w4","marker":"{{blank:w4}}","occurrence":0,"width":"medium","label":"写者优先空 4"},
+          {"id":"w5","marker":"{{blank:w5}}","occurrence":0,"width":"long","label":"写者优先空 5"},
+          {"id":"w6","marker":"{{blank:w6}}","occurrence":0,"width":"long","label":"写者优先空 6"},
+          {"id":"w7","marker":"{{blank:w7}}","occurrence":0,"width":"long","label":"写者优先空 7"}
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {"blankId":"w1","method":"exact","acceptedAnswers":["1"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"w2","method":"exact","acceptedAnswers":["P(&r);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"w3","method":"exact","acceptedAnswers":["if (readcnt == 1) P(&w);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"w4","method":"exact","acceptedAnswers":["V(&r);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"w5","method":"exact","acceptedAnswers":["if (readcnt == 0) V(&w);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"w6","method":"exact","acceptedAnswers":["if (writecnt == 1) P(&r);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"w7","method":"exact","acceptedAnswers":["if (writecnt == 0) V(&r);"],"normalize":{"trimWhitespace":true,"caseSensitive":false}}
+        ],
         "reference": {
           "format": "markdown"
         },
@@ -161,9 +193,7 @@
           "editorNote": "第二类读者-写者（写者优先）信号量 P/V 填空"
         }
       ],
-      "issues": [
-        "blank-positions-unresolved"
-      ]
+      "issues": []
     }
   ],
   "solution": {
@@ -193,19 +223,19 @@ sem_t mutex, w; /* Both initially 1 */
 void reader(void)
 {
   while (1) {
-    /* 1 */
+    /* {{blank:r1}} */
     readcnt++;
     if (readcnt == 1) /* First in */
-      /* 2 */
-    /* 3 */
+      /* {{blank:r2}} */
+    /* {{blank:r3}} */
 
     /* Reading happens here */
 
-    /* 4 */
+    /* {{blank:r4}} */
     readcnt--;
     if (readcnt == 0) /* Last out */
-      /* 5 */
-    /* 6 */
+      /* {{blank:r5}} */
+    /* {{blank:r6}} */
   }
 }
 
@@ -216,11 +246,11 @@ void writer(void)
 
 ```c
   while (1) {
-    /* 7 */
+    /* {{blank:r7}} */
 
     /* Writing here */
 
-    /* 8 */
+    /* {{blank:r8}} */
   }
 }
 ```
@@ -240,22 +270,22 @@ void writer(void)
 ```c
 int readcnt, writecnt;      // Initially 0
 sem_t rmutex, wmutex;       // Initially 1
-sem_t r, w;                 // Initially /* 1 */
+sem_t r, w;                 // Initially /* {{blank:w1}} */
 void reader(void)
 {
   while (1) {
-    /* 2 */
+    /* {{blank:w2}} */
     P(&rmutex);
     readcnt++;
-    /* 3 */
+    /* {{blank:w3}} */
     V(&rmutex);
-    /* 4 */
+    /* {{blank:w4}} */
 
     /* Reading happens here */
 
     P(&rmutex);
     readcnt--;
-    /* 5 */
+    /* {{blank:w5}} */
     V(&rmutex);
   }
 }
@@ -265,7 +295,7 @@ void writer(void)
   while (1) {
     P(&wmutex);
     writecnt++;
-    /* 6 */
+    /* {{blank:w6}} */
     V(&wmutex);
 
     P(&w);
@@ -274,7 +304,7 @@ void writer(void)
 
     P(&wmutex);
     writecnt--;
-    /* 7 */
+    /* {{blank:w7}} */
     V(&wmutex);
   }
 }

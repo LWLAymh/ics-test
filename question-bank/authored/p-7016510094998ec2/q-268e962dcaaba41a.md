@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-268e962dcaaba41a",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 3,
   "number": {
@@ -77,11 +77,15 @@
     "blankAnswers": [
       {
         "blankId": "legacy-gap-0",
-        "method": "self"
+        "method": "exact",
+        "acceptedAnswers": ["rdi", "%rdi"],
+        "normalize": {"caseSensitive": false, "trimWhitespace": true}
       },
       {
         "blankId": "legacy-gap-1",
-        "method": "self"
+        "method": "exact",
+        "acceptedAnswers": ["rsi", "%rsi"],
+        "normalize": {"caseSensitive": false, "trimWhitespace": true}
       }
     ]
   }

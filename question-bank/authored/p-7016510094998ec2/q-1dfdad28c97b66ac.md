@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-1dfdad28c97b66ac",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 12,
   "number": {
@@ -71,7 +71,9 @@
     "blankAnswers": [
       {
         "blankId": "legacy-gap-0",
-        "method": "self"
+        "method": "exact",
+        "acceptedAnswers": ["36.152.44.95"],
+        "normalize": {"caseSensitive": false, "trimWhitespace": true}
       }
     ]
   }

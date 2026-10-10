@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-8ecabaa93552c5fd",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-0439188e8c4bdac1",
   "paperOrder": 21,
   "number": {
@@ -29,9 +29,7 @@
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "blank-positions-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -47,7 +45,7 @@
       "editorNote": "目标文件反汇编中 0 填充与重定位、callq 偏移"
     }
   ],
-  "type": "fill",
+  "type": "short-answer",
   "stem": {
     "format": "markdown",
     "blanks": []

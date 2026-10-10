@@ -4,6 +4,113 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('Markdown rendering preserves every declared blank, including table cells containing operators', () => {
+  const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false,linkify:false,typographer:false});
+  for(const question of bank) for(const unit of question.parts||[question]) {
+    const spans=api.blankSpans(unit.stem);
+    let cursor=0,markdown='';
+    spans.forEach((span,index)=>{markdown+=unit.stem.text.slice(cursor,span.start)+'ICSBLANKTOKEN'+index+'END';cursor=span.end;});
+    markdown+=unit.stem.text.slice(cursor);
+    const html=md.render(markdown);
+    spans.forEach((span,index)=>assert.equal(html.split('ICSBLANKTOKEN'+index+'END').length-1,1,
+      question.id+'/'+unit.id+'/'+span.blank.id+' disappeared during Markdown rendering'));
+  }
+});
+
+test('source inventory finds exercises in section headings and quoted boxes, without counting prose references', () => {
+  const {practiceNumbers}=require('../scripts/audit-csapp-practice.cjs');
+  assert.deepEqual(practiceNumbers('**练习题 2.45** 表格\n\n> **练习题 9.1**\n\n### 练习题 3.1\n\n**练习题 2.45**\n参见练习题 2.99。'),['2.45','9.1','3.1']);
+});
+
+test('every declared objective fill has usable explicit keys; no missing/partial submission passes', () => {
+  for (const question of bank) for (const unit of question.parts || [question]) {
+    if (unit.solution.grading !== 'blanks') continue;
+    const rules = unit.solution.blankAnswers;
+    if (rules.some(rule=>rule.method==='self')) continue;
+    const answers = Object.fromEntries(rules.map(rule=>[rule.blankId,
+      rule.method==='selection' ? rule.correctValues : rule.acceptedAnswers[0]]));
+    assert.equal(api.gradeBlanks(answers,unit.solution),true,question.id+'/'+unit.id);
+    assert.equal(api.gradeBlanks({},unit.solution),false,question.id+'/'+unit.id);
+    for (const rule of rules) {
+      const incomplete = {...answers}; delete incomplete[rule.blankId];
+      assert.equal(api.gradeBlanks(incomplete,unit.solution),false,question.id+'/'+rule.blankId);
+    }
+    const unique = new Set((unit.stem.blanks||[]).map(blank=>blank.id));
+    assert.deepEqual(new Set(rules.map(rule=>rule.blankId)),unique);
+  }
+});
+
+test('CSAPP floating-point section retains full tables and explicit judgment choices', () => {
+  const chapter = bank.filter(q=>q.paperId==='p-f4835e390ee6ce49');
+  for (const number of ['2.45','2.46','2.47','2.48','2.49','2.50','2.51','2.52','2.54']) {
+    assert.equal(chapter.filter(q=>q.number.display===number).length,1,number);
+  }
+  const byNumber = number=>chapter.find(q=>q.number.display===number);
+  assert.equal(byNumber('2.45').stem.blanks.length,12);
+  assert.equal(byNumber('2.50').stem.blanks.length,12);
+  assert.equal(byNumber('2.52').stem.blanks.length,12);
+  const conversion = byNumber('2.52');
+  assert.equal(api.gradeBlanks({'a-value':'15/2','a-bits':'1001 111','a-rounded':'15/2',
+    'b-value':'25/32','b-bits':'0110 100','b-rounded':'3/4',
+    'c-value':'31/2','c-bits':'1011 000','c-rounded':'16',
+    'd-value':'1/64','d-bits':'0001 000','d-rounded':'1/64'},conversion.solution),true);
+  const judgments=byNumber('2.54');
+  assert.equal(judgments.stem.blanks.length,8);
+  assert(judgments.stem.blanks.every(blank=>blank.input.options.length===2));
+  assert.equal(api.gradeBlanks({a:'true',b:'false',c:'false',d:'true',e:'true',f:'true',g:'true',h:'false'},judgments.solution),true);
+  assert.match(judgments.solution.reference.text,/16777217/);
+});
+
+test('CSAPP chapter 5 keeps all eligible exercises and grades complete operation tables', () => {
+  const chapter=bank.filter(q=>q.paperId==='p-0db63d22232f572c'&&q.classification.tags.includes('practice'));
+  assert.deepEqual(chapter.map(q=>q.number.display).sort(),['5.1','5.10','5.2','5.3','5.4','5.5','5.6','5.8']);
+  const byNumber=number=>chapter.find(q=>q.number.display===number);
+  assert.equal(byNumber('5.2').stem.blanks.length,4);
+  assert.equal(byNumber('5.3').stem.blanks.length,12);
+  assert.match(byNumber('5.5').stem.text,/double poly\(double a\[\], double x, long degree\)/);
+  assert.match(byNumber('5.6').stem.text,/double polyh\(double a\[\], double x, long degree\)/);
+  assert.equal(api.gradeBlanks({a1:'5',a2:'10/3',a3:'5/3',a4:'5/3',a5:'10/3'},byNumber('5.8').solution),true);
+  assert.equal(api.gradeBlanks({a1:'5',a2:'10/3',a3:'5/3',a4:'5/3',a5:'5/3'},byNumber('5.8').solution),false);
+});
+
+test('CSAPP chapter 2 preserves givens and separates bounded judgments from open constructions', () => {
+  const chapter=bank.filter(q=>q.paperId==='p-f4835e390ee6ce49'&&q.classification.tags.includes('practice'));
+  assert.equal(chapter.length,50);
+  assert(!chapter.some(q=>['2.32','2.35','2.36','2.37'].includes(q.number.display)));
+  const byNumber=number=>chapter.find(q=>q.number.display===number);
+  assert.match(byNumber('2.20').stem.text,/T2U_w\(x\)/);
+  assert.match(byNumber('2.20').stem.text,/-8, -3, -2, -1, 0, 5/);
+  for(const row of byNumber('2.24').parts.slice(0,5)) assert.equal(row.stem.blanks.length,2);
+  assert.match(byNumber('2.29').stem.text,/-32 <= z < -16/);
+  assert.equal(api.gradeBlanks({multipliers:['1','2','3','4','5','8','9']},byNumber('2.38').solution),true);
+  const truth=byNumber('2.44').parts[0];
+  assert.equal(truth.stem.blanks.length,7);
+  assert.equal(api.gradeBlanks({A:'false',B:'true',C:'false',D:'true',E:'false',F:'true',G:'true'},truth.solution),true);
+  assert.equal(api.gradeBlanks({pos:'1.0/0.0',neg:'-POS_INFINITY',zero:'-0.0'},byNumber('2.53').solution),null);
+});
+
+test('reported source artifacts are removed in authored Markdown, not renderer heuristics', () => {
+  const builtin=bank.find(q=>q.id==='q-0e17d6371642c853');
+  assert.match(builtin.stem.text,/__builtin_return_address\(1\)/);
+  assert(!builtin.stem.text.includes('\\_\\_builtin'));
+  for(const id of ['q-7d29433073c3ab5d','q-70e351f742b73d89']) {
+    assert(!/[正错]．[确误]．/.test(bank.find(q=>q.id===id).stem.text));
+  }
+});
+
+test('reported 2018 and 2016 large questions expose original-position grading and readable options', () => {
+  const translation=bank.find(q=>q.id==='q-24321282fb032032');
+  assert.equal(translation.solution.grading,'blanks');
+  assert.equal(translation.stem.blanks.length,12);
+  const mapping=bank.find(q=>q.id==='q-f8e10c8048661052');
+  for(const letter of ['A','B','C','D'])assert.match(mapping.stem.text,new RegExp('^- \\*\\*'+letter+'\\.\\*\\*','m'));
+  const io=bank.find(q=>q.id==='q-54e55a2556b716c4');
+  assert.equal(io.type,'composite');
+  assert.deepEqual(io.parts.map(part=>part.type),['short-answer','fill','fill','short-answer']);
+  assert.equal(io.parts[1].stem.blanks.length,12);
+  assert.equal(io.parts[2].solution.grading,'blanks');
+});
+
 test('source collections are explicit with a legacy v5 default', () => {
   assert.equal(api.paperCollection({sourceCollection:'csapp-textbook'}),'csapp-textbook');
   assert.equal(api.paperCollection({sourceCollection:'pku-exam'}),'pku-exam');

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-e0aacd0c843b23b9",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 26,
   "number": {
@@ -29,9 +29,7 @@
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "blank-positions-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -47,7 +45,7 @@
       "editorNote": "用 signal/alarm/pause 实现 sleep 的缺陷"
     }
   ],
-  "type": "fill",
+  "type": "short-answer",
   "stem": {
     "format": "markdown",
     "blanks": []

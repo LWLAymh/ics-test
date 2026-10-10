@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f0b0ad5391aaad24",
-  "revision": 2,
+  "revision": 4,
   "paperId": "p-e3f869956fc29bd8",
   "paperOrder": 17,
   "number": {
@@ -26,9 +26,7 @@
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "blank-positions-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -1022,11 +1020,17 @@
       ],
       "stem": {
         "format": "markdown",
-        "blanks": []
+        "blanks": [
+          {"id":"reloc-1","marker":"{{blank:reloc-1}}","occurrence":0,"width":"medium"},
+          {"id":"reloc-2","marker":"{{blank:reloc-2}}","occurrence":0,"width":"medium"},
+          {"id":"reloc-3","marker":"{{blank:reloc-3}}","occurrence":0,"width":"medium"},
+          {"id":"reloc-5","marker":"{{blank:reloc-5}}","occurrence":0,"width":"medium"},
+          {"id":"reloc-9","marker":"{{blank:reloc-9}}","occurrence":0,"width":"medium"}
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
         "reference": {
           "format": "markdown"
         },
@@ -1034,7 +1038,14 @@
           "origin": "unknown",
           "crossChecked": null,
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        }
+        },
+        "blankAnswers": [
+          {"blankId":"reloc-1","method":"exact","acceptedAnswers":["0a 00 00 00","0A 00 00 00"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"reloc-2","method":"exact","acceptedAnswers":["0x2334"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"reloc-3","method":"exact","acceptedAnswers":["0x2019"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"reloc-5","method":"exact","acceptedAnswers":["0x1316"],"normalize":{"trimWhitespace":true,"caseSensitive":false}},
+          {"blankId":"reloc-9","method":"exact","acceptedAnswers":["0x1fdc"],"normalize":{"trimWhitespace":true,"caseSensitive":false}}
+        ]
       },
       "sources": [
         {
@@ -1050,9 +1061,7 @@
           "editorNote": "反汇编中的重定位条目与引用值计算"
         }
       ],
-      "issues": [
-        "blank-positions-unresolved"
-      ]
+      "issues": []
     }
   ],
   "solution": {
@@ -1175,11 +1184,11 @@ c3                               retq                  104a:  c3                
 
 | 编号 | 重定位条目信息 | 应填入的重定位引用值 |
 | --- | --- | --- |
-| ① | `r.offset = 0xa`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |
-| ② | `r.offset = 0xb`　　`r.symbol = buf` `r.type = R_X86_64_32`　　`r.addend = +4` |  |
-| ③ | `r.offset = 0x7`　　`r.symbol = bufp1` `r.type = R_X86_64_PC32`　　`r.addend = -8` |  |
-| ⑤ | `r.offset = 0x1e`　　`r.symbol = bufp0` `r.type = R_X86_64_PC32`　　`r.addend = -4` |  |
-| ⑨ | `r.offset = 0x44`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` |  |
+| ① | `r.offset = 0xa`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` | {{blank:reloc-1}} |
+| ② | `r.offset = 0xb`　　`r.symbol = buf` `r.type = R_X86_64_32`　　`r.addend = +4` | `{{blank:reloc-2}}` |
+| ③ | `r.offset = 0x7`　　`r.symbol = bufp1` `r.type = R_X86_64_PC32`　　`r.addend = -8` | `{{blank:reloc-3}}` |
+| ⑤ | `r.offset = 0x1e`　　`r.symbol = bufp0` `r.type = R_X86_64_PC32`　　`r.addend = -4` | `{{blank:reloc-5}}` |
+| ⑨ | `r.offset = 0x44`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` | `{{blank:reloc-9}}` |
 %%% part-reference: q-906e831c908a1bd5
 | 编号 | 重定位条目信息 | 应填入的重定位引用值 |
 | --- | --- | --- |

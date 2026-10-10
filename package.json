@@ -6,6 +6,7 @@
     "build": "node scripts/build-site.js",
     "check": "node --check site/ics-test.js && node --check site/standalone.js && node --check scripts/build-site.js && node --test tests/question-v5.test.cjs && python question-bank/_tools/test_v5.py && python question-bank/_tools/validate_web_data.py",
     "compile-bank": "python question-bank/_tools/build_web_data.py",
+    "audit-csapp": "node scripts/audit-csapp-practice.cjs",
     "verify-migration": "python question-bank/_tools/migrate_v3_to_v5.py verify",
     "review-pdfs": "powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1",
     "review-paper": "powershell -ExecutionPolicy Bypass -File scripts/generate-review-pdfs.ps1",

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ca7c15d1d3855afc",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 25,
   "number": {
@@ -29,9 +29,7 @@
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "blank-positions-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -50,11 +48,24 @@
   "type": "fill",
   "stem": {
     "format": "markdown",
-    "blanks": []
+    "blanks": [
+      {"id":"out1","marker":"{{blank:out1}}","occurrence":0,"width":"short","label":"第 1 行输出字符"},
+      {"id":"out2","marker":"{{blank:out2}}","occurrence":0,"width":"short","label":"第 2 行输出字符"},
+      {"id":"out3","marker":"{{blank:out3}}","occurrence":0,"width":"short","label":"第 3 行输出字符"},
+      {"id":"out4","marker":"{{blank:out4}}","occurrence":0,"width":"short","label":"第 4 行输出字符"},
+      {"id":"file-content","marker":"{{blank:file-content}}","occurrence":0,"width":"long","label":"buffer.txt 最终内容"}
+    ]
   },
   "solution": {
     "state": "available",
-    "grading": "self",
+    "grading": "blanks",
+    "blankAnswers": [
+      {"blankId":"out1","method":"exact","acceptedAnswers":["p"],"normalize":{"trimWhitespace":true,"caseSensitive":true}},
+      {"blankId":"out2","method":"exact","acceptedAnswers":["k"],"normalize":{"trimWhitespace":true,"caseSensitive":true}},
+      {"blankId":"out3","method":"exact","acceptedAnswers":["n"],"normalize":{"trimWhitespace":true,"caseSensitive":true}},
+      {"blankId":"out4","method":"exact","acceptedAnswers":["g"],"normalize":{"trimWhitespace":true,"caseSensitive":true}},
+      {"blankId":"file-content","method":"exact","acceptedAnswers":["ppkknggniv"],"normalize":{"trimWhitespace":true,"caseSensitive":true}}
+    ],
     "reference": {
       "format": "markdown"
     },
@@ -104,6 +115,10 @@ int main() {
     return 0;
 }
 ```
+
+打印输出：`1 = {{blank:out1}}`、`2 = {{blank:out2}}`、`3 = {{blank:out3}}`、`4 = {{blank:out4}}`。
+
+`buffer.txt` 最终内容：{{blank:file-content}}
 %%% reference
 答案：
 ```
