@@ -83,6 +83,64 @@ async function run() {
     await fixture(page,[{...composite,parts:composite.parts.slice(0,2)}]);
     await page.click('[data-composite-choice="A"]');await page.locator('.ics-blank-input').first().fill('42');await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.score),0.5);
+    // Explicit select widgets: repeated anchors, exact sets, exclusivity, drafts,
+    // missing-value focus, keyboard close, table/code placement and submitted locks.
+    const dropdown = all.find(q=>q.id==='q-1737c983c32fea14');
+    assert.equal(dropdown.type,'fill');
+    const mixedDropdown = all.find(q=>q.id==='q-d3c830eb8ed35d68');
+    const tableFill = all.find(q=>q.id==='q-dc4e632066c6ca4a');
+    await fixture(page,[dropdown,single]);
+    assert.equal(await page.locator('[data-blank-toggle]').count(),8);
+    await page.click('#ics-submit');
+    assert.equal(await page.locator('[data-blank-toggle]').first().evaluate(el=>el===document.activeElement),true);
+    const first = page.locator('.ics-inline-blank').first();
+    await first.locator('[data-blank-toggle]').click();
+    await first.locator('[value="A"]').check();
+    await first.locator('[value="E"]').check();
+    assert.equal(await first.locator('[value="A"]').isChecked(),false);
+    await first.locator('[value="D"]').check();
+    assert.equal(await first.locator('[value="E"]').isChecked(),false);
+    await page.keyboard.press('Escape');
+    assert(await first.locator('.ics-blank-menu').isHidden());
+    await page.click('#ics-next');await page.click('#ics-previous');
+    assert.match(await first.locator('[data-blank-toggle]').innerText(),/D · !=/);
+    const expected = [['D'],['D'],['B','D'],['E'],['A','D'],['E'],['C'],['C']];
+    for(let i=0;i<8;i++){
+      const row = page.locator('.ics-inline-blank').nth(i);
+      await row.locator('[data-blank-toggle]').click();
+      for(const value of expected[i]) await row.locator('[value="'+value+'"]').check();
+      await row.locator('[data-blank-close]').click();
+    }
+    await page.click('#ics-submit');assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    assert(await first.locator('[data-blank-toggle]').isDisabled());
+    assert(await first.locator('[data-blank-option]').first().isDisabled());
+    await page.click('#ics-next');await page.click('#ics-previous');
+    assert(await first.locator('[data-blank-toggle]').isDisabled());
+    await fixture(page,[mixedDropdown,single]);
+    assert.equal(await page.locator('table select.ics-blank-input').count(),2);
+    await page.locator('input[data-blank-id="negative-zero"]').fill('-0');
+    await page.locator('input[data-blank-id="nine-half"]').fill('9.5');
+    await page.selectOption('select[data-blank-id="association"]','yes');
+    await page.selectOption('select[data-blank-id="accumulation"]','no');
+    await page.click('#ics-next');await page.click('#ics-previous');
+    assert.equal(await page.locator('select[data-blank-id="association"]').inputValue(),'yes');
+    await page.click('#ics-submit');assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    assert(await page.locator('select[data-blank-id="association"]').isDisabled());
+    await fixture(page,[tableFill]);
+    assert.equal(await page.locator('table .ics-blank-input').count(),10);
+    assert(!await page.locator('#ics-question-content').innerText().then(text=>text.includes('0 000 0001')));
+    const repeatedSelect = {...fill,stem:content('值：{{blank:x}} / {{blank:x}}',[
+      {...blank('x'),input:{kind:'select',multiple:true,options:[{value:'a',label:'甲'},{value:'b',label:'乙'}]}},
+      {...blank('x',1),input:{kind:'select',multiple:true,options:[{value:'a',label:'甲'},{value:'b',label:'乙'}]}},
+    ]),solution:solution('blanks',{blankAnswers:[{blankId:'x',method:'selection',correctValues:['a']}]})};
+    await fixture(page,[{...composite,parts:[{...repeatedSelect,id:'select-part',number:{display:'(1)'}}]}]);
+    await page.locator('[data-blank-toggle]').first().click();await page.locator('[data-blank-option][value="a"]').first().check();
+    assert.match(await page.locator('[data-blank-toggle]').nth(1).innerText(),/甲/);
+    await page.keyboard.press('Escape');await page.click('#ics-submit');
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    // Native single-select is also disabled for unavailable root/part answers.
+    await fixture(page,[{...mixedDropdown,solution:{...solution('none'),state:'missing',reason:'待复核'}}]);
+    assert(await page.locator('select.ics-blank-input').first().isDisabled());
     // Declared missing answer must not be blocked by required fill inputs.
     await fixture(page,[{...fill,solution:{...solution('none'),state:'missing',reason:'待复核'}}]);
     assert(await page.locator('.ics-blank-input').first().isDisabled());await page.click('#ics-submit');
@@ -117,6 +175,17 @@ async function run() {
     await page.setViewportSize({width:390,height:844});
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     if(output)await page.screenshot({path:path.join(output,'v5-mobile.png'),fullPage:true});
+    await fixture(page,[dropdown]);
+    await page.locator('[data-blank-toggle]').nth(2).click();
+    await page.locator('.ics-inline-blank').nth(2).locator('[value="B"]').check();
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    const popup = await page.locator('.ics-blank-menu:visible').boundingBox();
+    assert(popup.x>=0 && popup.x+popup.width<=390 && popup.y>=0 && popup.y+popup.height<=844);
+    if(output)await page.screenshot({path:path.join(output,'dropdown-mobile.png')});
+    await page.keyboard.press('Escape');
+    await page.setViewportSize({width:1280,height:900});
+    await page.locator('[data-blank-toggle]').nth(2).click();
+    if(output)await page.screenshot({path:path.join(output,'dropdown-desktop.png')});
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({success:true,...result,assets:result.assets.length}));
   } finally { await browser.close(); }

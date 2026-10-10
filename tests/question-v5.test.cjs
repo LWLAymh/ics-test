@@ -41,3 +41,21 @@ test('exact matching uses explicit aliases/normalization, never eval or numeric 
   solution.blankAnswers.push({ blankId: 'why', method: 'self' });
   assert.equal(api.gradeBlanks({ x: '255' }, solution), null);
 });
+
+test('select blanks compare explicit option values as exact sets, not Markdown or substrings', () => {
+  const solution = {state:'available', grading:'blanks', blankAnswers:[
+    {blankId:'single', method:'selection', correctValues:['lt']},
+    {blankId:'multi', method:'selection', correctValues:['A','D']},
+  ]};
+  assert.equal(api.gradeBlanks({single:'lt',multi:['D','A']},solution),true);
+  for (const multi of [[], ['A'], ['A','D','E'], ['A','D','D'], 'AD', 'A,D']) {
+    assert.equal(api.gradeBlanks({single:'lt',multi},solution),false);
+  }
+  assert.equal(api.gradeBlanks({single:'<',multi:['A','D']},solution),false);
+  assert.equal(api.gradeBlanks({multi:['A','D']},solution),false);
+  solution.blankAnswers.push({blankId:'text',method:'exact',acceptedAnswers:['42'],
+    normalize:{trimWhitespace:true,caseSensitive:true}});
+  assert.equal(api.gradeBlanks({single:'lt',multi:['A','D'],text:'42'},solution),true);
+  solution.blankAnswers.push({blankId:'why',method:'self'});
+  assert.equal(api.gradeBlanks({},solution),null);
+});

@@ -2633,7 +2633,7 @@
     {
       "schemaVersion": "5",
       "id": "q-005346f534f14bb8",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 18,
       "number": {
@@ -2725,7 +2725,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "数字数据只能通过数字信号传输\n【答案】B\n【说明】Ａ应该是连接协议，Ｃ应该是HTTP，Ｄ应该还包括模拟信号"
+            "text": "数字数据只能通过数字信号传输"
           }
         }
       ]
@@ -3675,7 +3675,7 @@
     {
       "schemaVersion": "5",
       "id": "q-69a1bf250f9b6afa",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 20,
       "number": {
@@ -3767,7 +3767,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "H2，`L2`，H1，L1，U1，U2，S2，T2，S1，T1\n【答案】Ｃ\n【说明】考查两个并发线程指令执行序列是否会导致不安全轨迹线。"
+            "text": "H2，`L2`，H1，L1，U1，U2，S2，T2，S1，T1"
           }
         }
       ]
@@ -3875,7 +3875,7 @@
     {
       "schemaVersion": "5",
       "id": "q-798628eee4c9aa30",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 19,
       "number": {
@@ -3967,7 +3967,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "线程`thread`运行后成为僵尸线程\n【答案】B\n【说明】考查对Posix线程包Pthreads函数功能的理解。"
+            "text": "线程`thread`运行后成为僵尸线程"
           }
         }
       ]
@@ -4223,7 +4223,7 @@
     {
       "schemaVersion": "5",
       "id": "q-8a75ddae2da2bd06",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 14,
       "number": {
@@ -4315,7 +4315,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "`str1`指向的内存是分配在堆空间内的，`str2`指向的内存是分配在栈空间内的\n【答案】Ｃ\n【说明】考察malloc函数是显式地分配和释放堆存储器"
+            "text": "`str1`指向的内存是分配在堆空间内的，`str2`指向的内存是分配在栈空间内的"
           }
         }
       ]
@@ -4521,7 +4521,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a7e7d2984076c296",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 17,
       "number": {
@@ -4613,7 +4613,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "交换机\n【答案】Ｃ\n【说明】"
+            "text": "交换机"
           }
         }
       ]
@@ -6188,7 +6188,7 @@
     {
       "schemaVersion": "5",
       "id": "q-34c644cfbd1d75f5",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 10,
       "number": {
@@ -6234,7 +6234,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "10. 以下四句都是关于Unix I/O的说法。其中正确的是："
+        "text": "10. 以下四句都是关于Unix I/O的说法。其中正确的是：\n\n参考信息：`O_RDWR` 表示文件可读可写；`dup2(oldfd, newfd)` 表示将 `oldfd` 重定向给 `newfd`。"
       },
       "solution": {
         "state": "available",
@@ -6278,7 +6278,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "使用 `dup2(4, 1)`成功进行重定向后执行 `close(4)`，会导致 `1`号文件描\n述符也不可用。\n参考信息：O_RDWR表示文件可读可写；dup2(oldfd, newfd)表示将oldfd\n重定向给newfd。"
+            "text": "使用 `dup2(4, 1)`成功进行重定向后执行 `close(4)`，会导致 `1`号文件描\n述符也不可用。"
           }
         }
       ]
@@ -6755,7 +6755,7 @@
     {
       "schemaVersion": "5",
       "id": "q-52bb69c4e3f41cdd",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 2,
       "number": {
@@ -6801,7 +6801,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "2.  单精度浮点数27.5实际存储在内存中的十六进制数值为："
+        "text": "2.  单精度浮点数27.5实际存储在内存中的十六进制数值为：\n\n参考信息：单精度浮点数阶码 8 位，尾数 23 位。"
       },
       "solution": {
         "state": "available",
@@ -6845,7 +6845,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "`0x025c0000`\n参考信息：单精度浮点数阶码8位，尾数23位"
+            "text": "`0x025c0000`"
           }
         }
       ]
@@ -16834,7 +16834,7 @@
     {
       "schemaVersion": "5",
       "id": "q-5b6c4fa627324353",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-2c2b56c4452255b1",
       "paperOrder": 37,
       "number": {
@@ -16903,7 +16903,7 @@
           "id": "A",
           "content": {
             "format": "markdown",
-            "text": "`movq %rax, \\$1`"
+            "text": "`movq %rax, $1`"
           }
         },
         {
@@ -24638,7 +24638,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1febd3da8c05ab57",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 11,
       "number": {
@@ -24728,7 +24728,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "CISC 机器中的寄存器数目较少，函数参数必须通过栈来进行传递；RISC 机器中的寄存器数目较多，只需要通过寄存器来传递参数。\n答：（　　　）"
+            "text": "CISC 机器中的寄存器数目较少，函数参数必须通过栈来进行传递；RISC 机器中的寄存器数目较多，只需要通过寄存器来传递参数。"
           }
         }
       ]
@@ -24736,7 +24736,7 @@
     {
       "schemaVersion": "5",
       "id": "q-2a14a2743c3a25d2",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 10,
       "number": {
@@ -24826,7 +24826,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "24ns\n答：（　　　）"
+            "text": "24ns"
           }
         }
       ]
@@ -24834,7 +24834,7 @@
     {
       "schemaVersion": "5",
       "id": "q-33ec37d6429745c6",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 3,
       "number": {
@@ -24924,7 +24924,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "`2147483647 + 1 != 2147483648`\n答：（　　　）"
+            "text": "`2147483647 + 1 != 2147483648`"
           }
         }
       ]
@@ -26196,7 +26196,7 @@
     {
       "schemaVersion": "5",
       "id": "q-59d08960ac7868b9",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 5,
       "number": {
@@ -26286,7 +26286,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "`INCL (%ebx, %eax)`\n答：（　　　）"
+            "text": "`INCL (%ebx, %eax)`"
           }
         }
       ]
@@ -26294,7 +26294,7 @@
     {
       "schemaVersion": "5",
       "id": "q-625767f0ca5f1aff",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 2,
       "number": {
@@ -26384,7 +26384,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 如果是单精度浮点表示，则表示的是 $-(1.110111111)_2 \\times 2^{31-127}$\n答：（　　　）"
+            "text": "1000, 1111, 1110, 1111, 1100, 0000, 0000, 0000 如果是单精度浮点表示，则表示的是 $-(1.110111111)_2 \\times 2^{31-127}$"
           }
         }
       ]
@@ -27510,7 +27510,7 @@
     {
       "schemaVersion": "5",
       "id": "q-8121de7d6f030f0f",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 8,
       "number": {
@@ -27600,7 +27600,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "`jmp *.L3(, %eax, 8)`\n答：（　　　）"
+            "text": "`jmp *.L3(, %eax, 8)`"
           }
         }
       ]
@@ -27706,7 +27706,7 @@
     {
       "schemaVersion": "5",
       "id": "q-939a58c4fea16c9d",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 4,
       "number": {
@@ -27796,7 +27796,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "LEAL, CMP\n答：（　　　）"
+            "text": "LEAL, CMP"
           }
         }
       ]
@@ -27804,7 +27804,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b127d0d7bfcddecd",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 16,
       "number": {
@@ -27895,7 +27895,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "如果不采用\"LRU\"，使用\"随机替换策略\"，miss rate 可能会降低\n答：（　　　）"
+            "text": "如果不采用\"LRU\"，使用\"随机替换策略\"，miss rate 可能会降低"
           }
         }
       ]
@@ -28044,7 +28044,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c17edf12c7437968",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 13,
       "number": {
@@ -28134,7 +28134,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "增大循环展开（loop unrolling）的级数，有可能降低程序的性能（即增加执行时间）\n答：（　　　）"
+            "text": "增大循环展开（loop unrolling）的级数，有可能降低程序的性能（即增加执行时间）"
           }
         }
       ]
@@ -28240,7 +28240,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d398be4714dea016",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 15,
       "number": {
@@ -28330,7 +28330,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "以上选项都不正确\n答：（　　　）"
+            "text": "以上选项都不正确"
           }
         }
       ]
@@ -28476,7 +28476,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e457ce2c7a29522b",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 7,
       "number": {
@@ -28566,7 +28566,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "在硬件级别引入不可执行代码段的机制\n答：（　　　）"
+            "text": "在硬件级别引入不可执行代码段的机制"
           }
         }
       ]
@@ -28574,7 +28574,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ef4e309d8566d0c1",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 6,
       "number": {
@@ -28664,7 +28664,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "优化成员变量的顺序，可以做到`\"sizeof(sa) == 16\"`\n答：（　　　）"
+            "text": "优化成员变量的顺序，可以做到 `sizeof(sa) == 16`"
           }
         }
       ]
@@ -28672,7 +28672,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f25a4a546d82dc0d",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 12,
       "number": {
@@ -28762,7 +28762,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "流水级划分应尽量均衡，不均衡的流水线会增加控制冒险。\n答：（　　　）"
+            "text": "流水级划分应尽量均衡，不均衡的流水线会增加控制冒险。"
           }
         }
       ]
@@ -32890,7 +32890,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a33e784d6e5ec1dc",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 13,
       "number": {
@@ -32980,7 +32980,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "以上选项都不正确\n答：（      ）"
+            "text": "以上选项都不正确"
           }
         }
       ]
@@ -38602,7 +38602,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1737c983c32fea14",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 21,
       "number": {
@@ -38644,25 +38644,375 @@
             "原文/期末/2015期末-20151109-带答案.md"
           ],
           "provenance": "rewritten",
-          "editorNote": "整型/无符号/移位表达式恒成立判断"
+          "editorNote": "逐项对照原卷 PDF 第9页补充8个多选空；第8式移除原印刷中不配对的冗余括号，保留逻辑非、移位的运算顺序。"
         }
       ],
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "第二题（20分）\n1. 对于下面的每一个表达式，请选择以下选项中的一个或多个（即“不定项”），使\n得该表达式恒成立，如果没有满足条件的选项则选E。\n题目中出现的变量定义如下（浮点数保证不是NaN或者Inf）:\n```\nint x, y;\nunsigned ux = x;\ndouble d;\n```\n1) 如果`x > 0`, 则 x + 1      0\n2) 如果 `x > y`, 则 ux       y\n3) 如果 `((x << 31) >> 31) < 0`, 则x & 1       0\n4) 如果`((unsigned char)x >> 1) < 64`， 则`(char)x      0`\n5) 如果`d < 0`， 则d * 2      0\n6) 如果`d < 0`, 则 d * d      0\n7) `x ^ y ^ (~x) - y       y ^ x ^ (~y) - x`\n8) `(((!!ux)) << 31) >> 31)       (((!!x) << 31) >> 31)`\n（前6题每题一分，漏选错选不得分; 7、8两题每题2分，漏选得1分;共10\n分）\n选项：A. <　B. >　C. ==　D. !=　E. none"
+        "blanks": [
+          {
+            "id": "r1",
+            "marker": "{{blank:r1}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "第1式的关系符",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "exclusiveValues": [
+                "E"
+              ],
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · <"
+                },
+                {
+                  "value": "B",
+                  "label": "B · >"
+                },
+                {
+                  "value": "C",
+                  "label": "C · =="
+                },
+                {
+                  "value": "D",
+                  "label": "D · !="
+                },
+                {
+                  "value": "E",
+                  "label": "E · none"
+                }
+              ]
+            }
+          },
+          {
+            "id": "r2",
+            "marker": "{{blank:r2}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "第2式的关系符",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "exclusiveValues": [
+                "E"
+              ],
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · <"
+                },
+                {
+                  "value": "B",
+                  "label": "B · >"
+                },
+                {
+                  "value": "C",
+                  "label": "C · =="
+                },
+                {
+                  "value": "D",
+                  "label": "D · !="
+                },
+                {
+                  "value": "E",
+                  "label": "E · none"
+                }
+              ]
+            }
+          },
+          {
+            "id": "r3",
+            "marker": "{{blank:r3}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "第3式的关系符",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "exclusiveValues": [
+                "E"
+              ],
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · <"
+                },
+                {
+                  "value": "B",
+                  "label": "B · >"
+                },
+                {
+                  "value": "C",
+                  "label": "C · =="
+                },
+                {
+                  "value": "D",
+                  "label": "D · !="
+                },
+                {
+                  "value": "E",
+                  "label": "E · none"
+                }
+              ]
+            }
+          },
+          {
+            "id": "r4",
+            "marker": "{{blank:r4}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "第4式的关系符",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "exclusiveValues": [
+                "E"
+              ],
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · <"
+                },
+                {
+                  "value": "B",
+                  "label": "B · >"
+                },
+                {
+                  "value": "C",
+                  "label": "C · =="
+                },
+                {
+                  "value": "D",
+                  "label": "D · !="
+                },
+                {
+                  "value": "E",
+                  "label": "E · none"
+                }
+              ]
+            }
+          },
+          {
+            "id": "r5",
+            "marker": "{{blank:r5}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "第5式的关系符",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "exclusiveValues": [
+                "E"
+              ],
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · <"
+                },
+                {
+                  "value": "B",
+                  "label": "B · >"
+                },
+                {
+                  "value": "C",
+                  "label": "C · =="
+                },
+                {
+                  "value": "D",
+                  "label": "D · !="
+                },
+                {
+                  "value": "E",
+                  "label": "E · none"
+                }
+              ]
+            }
+          },
+          {
+            "id": "r6",
+            "marker": "{{blank:r6}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "第6式的关系符",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "exclusiveValues": [
+                "E"
+              ],
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · <"
+                },
+                {
+                  "value": "B",
+                  "label": "B · >"
+                },
+                {
+                  "value": "C",
+                  "label": "C · =="
+                },
+                {
+                  "value": "D",
+                  "label": "D · !="
+                },
+                {
+                  "value": "E",
+                  "label": "E · none"
+                }
+              ]
+            }
+          },
+          {
+            "id": "r7",
+            "marker": "{{blank:r7}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "第7式的关系符",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "exclusiveValues": [
+                "E"
+              ],
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · <"
+                },
+                {
+                  "value": "B",
+                  "label": "B · >"
+                },
+                {
+                  "value": "C",
+                  "label": "C · =="
+                },
+                {
+                  "value": "D",
+                  "label": "D · !="
+                },
+                {
+                  "value": "E",
+                  "label": "E · none"
+                }
+              ]
+            }
+          },
+          {
+            "id": "r8",
+            "marker": "{{blank:r8}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "第8式的关系符",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "exclusiveValues": [
+                "E"
+              ],
+              "options": [
+                {
+                  "value": "A",
+                  "label": "A · <"
+                },
+                {
+                  "value": "B",
+                  "label": "B · >"
+                },
+                {
+                  "value": "C",
+                  "label": "C · =="
+                },
+                {
+                  "value": "D",
+                  "label": "D · !="
+                },
+                {
+                  "value": "E",
+                  "label": "E · none"
+                }
+              ]
+            }
+          }
+        ],
+        "text": "对于下面每个表达式，在空位处选择一个或多个关系符，使表达式恒成立；如果没有满足条件的关系符，选 **E · none**（不能和其他选项同时选择）。\n\n候选项：A · `<`，B · `>`，C · `==`，D · `!=`，E · none。\n\n变量定义如下（浮点数保证不是 NaN 或 Inf）：\n\n```c\nint x, y;\nunsigned ux = x;\ndouble d;\n```\n\n1. 如果 `x > 0`，则 `x + 1` {{blank:r1}} `0`。\n2. 如果 `x > y`，则 `ux` {{blank:r2}} `y`。\n3. 如果 `((x << 31) >> 31) < 0`，则 `x & 1` {{blank:r3}} `0`。\n4. 如果 `((unsigned char)x >> 1) < 64`，则 `(char)x` {{blank:r4}} `0`。\n5. 如果 `d < 0`，则 `d * 2` {{blank:r5}} `0`。\n6. 如果 `d < 0`，则 `d * d` {{blank:r6}} `0`。\n7. `x ^ y ^ (~x) - y` {{blank:r7}} `y ^ x ^ (~y) - x`。\n8. `((!!ux) << 31) >> 31` {{blank:r8}} `((!!x) << 31) >> 31`。\n\n本练习将这 8 个空作为一题：所有空的选择集合完全正确得 1 分，不按原卷的小问分值或少选规则计分。"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "r1",
+            "method": "selection",
+            "correctValues": [
+              "D"
+            ]
+          },
+          {
+            "blankId": "r2",
+            "method": "selection",
+            "correctValues": [
+              "D"
+            ]
+          },
+          {
+            "blankId": "r3",
+            "method": "selection",
+            "correctValues": [
+              "B",
+              "D"
+            ]
+          },
+          {
+            "blankId": "r4",
+            "method": "selection",
+            "correctValues": [
+              "E"
+            ]
+          },
+          {
+            "blankId": "r5",
+            "method": "selection",
+            "correctValues": [
+              "A",
+              "D"
+            ]
+          },
+          {
+            "blankId": "r6",
+            "method": "selection",
+            "correctValues": [
+              "E"
+            ]
+          },
+          {
+            "blankId": "r7",
+            "method": "selection",
+            "correctValues": [
+              "C"
+            ]
+          },
+          {
+            "blankId": "r8",
+            "method": "selection",
+            "correctValues": [
+              "C"
+            ]
+          }
+        ],
         "reference": {
           "format": "markdown",
-          "text": "答案：1) D　2) D　3) B、D　4) E　5) A、D\n6) E（当两个数绝对值都很小时，相乘以后由于精度不够会变成 0）\n7) C　8) C"
+          "text": "| 空位 | 参考选项 | 关系符 |\n| --- | --- | --- |\n| 1 | D | `!=` |\n| 2 | D | `!=` |\n| 3 | B、D | `>`、`!=` |\n| 4 | E | none |\n| 5 | A、D | `<`、`!=` |\n| 6 | E | none |\n| 7 | C | `==` |\n| 8 | C | `==` |\n\n第 6 空：当 `d` 的绝对值很小时，`d * d` 可能下溢为 `0`，因此不能保证严格大于 `0`。\n\n原卷计分：前 6 空每空 1 分，漏选、错选不得分；第 7、8 空每空 2 分，漏选得 1 分，共 10 分。本练习站使用上述整题归一化计分，不复刻原卷分值。"
         },
         "provenance": {
           "origin": "unknown",
           "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
+          "note": "答案沿用原卷第9页给出的参考键；原卷计分与本练习站整题计分不同，见参考说明。"
         }
       }
     },
@@ -48242,7 +48592,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a799ede033274a27",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-9c11139ca386240d",
       "paperOrder": 43,
       "number": {
@@ -48333,7 +48683,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "`realloc(ptr, 0) (`其中ptr不为NULL) 的行为是将该块的大小标记为`0`，但\n保留该块的已分配状态，并返回原指针"
+            "text": "`realloc(ptr, 0)`（其中 `ptr` 不为 `NULL`）的行为是将该块的大小标记为 `0`，但\n保留该块的已分配状态，并返回原指针"
           }
         }
       ]
@@ -52048,7 +52398,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d3c830eb8ed35d68",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 17,
       "number": {
@@ -52088,20 +52438,120 @@
           "curated": "_curated/期中/2019期中-带答案/263.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "IEEE 754 值的换算与浮点结合性"
+          "editorNote": "依原卷第8-9页恢复四空；两道正误判断显式使用是/否下拉，采用原解析的单精度浮点假设与答案。"
         }
       ],
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "2. （4 point）假设IEEE 754 浮点数标准，请回答以下问题（每空1分）\n| 浮点数 | Decimal values |\n| --- | --- |\n| `0x80000000` |  |\n| `0x41180000` |  |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} != 2 + (2^{50} - 2^{50})$ |  |\n| $2^{25} + 1 + 1 + 1 + 1 == 2^{25} + 4$ |  |"
+        "blanks": [
+          {
+            "id": "negative-zero",
+            "marker": "{{blank:negative-zero}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "0x80000000的十进制值"
+          },
+          {
+            "id": "nine-half",
+            "marker": "{{blank:nine-half}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "0x41180000的十进制值"
+          },
+          {
+            "id": "association",
+            "marker": "{{blank:association}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "第一个表达式是否正确",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          },
+          {
+            "id": "accumulation",
+            "marker": "{{blank:accumulation}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "第二个表达式是否正确",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          }
+        ],
+        "text": "假设采用 IEEE 754 单精度浮点格式（1 位符号、8 位阶码、23 位小数），请填写数值并判断表达式是否正确。表达式中的各步运算均按单精度舍入，连续加法从左到右计算。\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| `0x80000000` | {{blank:negative-zero}} |\n| `0x41180000` | {{blank:nine-half}} |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} \\ne 2 + (2^{50} - 2^{50})$ | {{blank:association}} |\n| $2^{25} + 1 + 1 + 1 + 1 = 2^{25} + 4$ | {{blank:accumulation}} |\n\n请保留零的符号。原卷每空 1 分；本站四空全对计整题 1 分。"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "negative-zero",
+            "method": "exact",
+            "acceptedAnswers": [
+              "-0",
+              "-0.0"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "nine-half",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9.5",
+              "+9.5",
+              "19/2",
+              "+19/2"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "association",
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
+          },
+          {
+            "blankId": "accumulation",
+            "method": "selection",
+            "correctValues": [
+              "no"
+            ]
+          }
+        ],
         "reference": {
           "format": "markdown",
-          "text": "答案：2.\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| `0x80000000` | -0 |\n| `0x41180000` | +9.5 |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} != 2 + (2^{50} - 2^{50})$ | 是 |\n| $2^{25} + 1 + 1 + 1 + 1 == 2^{25} + 4$ | 否 |\n\nAssociative: Only 23 bits of mantissa (M), so $2 + 2^{50} = 2^{50}$ (2 gets rounded off). So LHS = 0, RHS = 2.\n\nCumulative: 1 is 25 powers of 2 away from $2^{25}$, so $2^{25} + 1 = 2^{25}$, but 4 is 23 powers of 2 away from $2^{25}$, so it doesn't get rounded off."
+          "text": "答案：2.\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| `0x80000000` | -0 |\n| `0x41180000` | +9.5 |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} \\ne 2 + (2^{50} - 2^{50})$ | 是 |\n| $2^{25} + 1 + 1 + 1 + 1 = 2^{25} + 4$ | 否 |\n\nAssociative: Only 23 bits of mantissa (M), so $2 + 2^{50} = 2^{50}$ (2 gets rounded off). So LHS = 0, RHS = 2.\n\nCumulative: 1 is 25 powers of 2 away from $2^{25}$, so $2^{25} + 1 = 2^{25}$, but 4 is 23 powers of 2 away from $2^{25}$, so it doesn't get rounded off."
         },
         "provenance": {
           "origin": "unknown",
@@ -55819,7 +56269,7 @@
     {
       "schemaVersion": "5",
       "id": "q-dc4e632066c6ca4a",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ac5fea2cf89e5bed",
       "paperOrder": 21,
       "number": {
@@ -55856,17 +56306,210 @@
           "curated": "_curated/期末/2013期末-带答案/339.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "自定义短浮点格式填表（含舍入）"
+          "editorNote": "对照原卷 PDF 第10页红色答案区恢复10个真实空位；描述列的破折号不是空，最小规格正数的1/4为已知条件。"
         }
       ],
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "第二题（8 分）\n\n考虑一种遵从 IEEE 规范的新浮点格式，它包含 1 位符号位、3 位指数位和 4 位小数位。请填写下表中的空项：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | 3 | — |\n| 最小的正数 | $1/64$ | `0 000 0001` |\n| 最小的有限数 | $-15.5$ | `1 110 1111` |\n| 最小规格正数 | $1/4$ | `0 001 0000` |\n| （填写描述） | $-11/32$ | `1 001 0110` |\n| （填写描述） | $7/2$ | `0 100 1100` |\n| （填写描述） | $63/128$ | `0 010 0000` |\n| （填写描述） | $13.25$ | `0 110 1010` |\n\n每行 1 分。"
+        "blanks": [
+          {
+            "id": "bias",
+            "marker": "{{blank:bias}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "Bias"
+          },
+          {
+            "id": "min-positive",
+            "marker": "{{blank:min-positive}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "最小正数的值"
+          },
+          {
+            "id": "min-positive-bits",
+            "marker": "{{blank:min-positive-bits}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "最小正数的编码"
+          },
+          {
+            "id": "min-finite",
+            "marker": "{{blank:min-finite}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "最小有限数的值"
+          },
+          {
+            "id": "min-finite-bits",
+            "marker": "{{blank:min-finite-bits}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "最小有限数的编码"
+          },
+          {
+            "id": "min-normal-bits",
+            "marker": "{{blank:min-normal-bits}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "最小规格正数的编码"
+          },
+          {
+            "id": "negative-bits",
+            "marker": "{{blank:negative-bits}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "-11/32的编码"
+          },
+          {
+            "id": "seven-halves-bits",
+            "marker": "{{blank:seven-halves-bits}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "7/2的编码"
+          },
+          {
+            "id": "round-one-bits",
+            "marker": "{{blank:round-one-bits}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "63/128舍入后的编码"
+          },
+          {
+            "id": "round-two-bits",
+            "marker": "{{blank:round-two-bits}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "13.25舍入后的编码"
+          }
+        ],
+        "text": "第二题（8 分）\n\n考虑一种遵从 IEEE 规范的新浮点格式，它包含 1 位符号位、3 位指数位和 4 位小数位。请填写下表中的空项（舍入采用最接近、相等时取偶数）：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | {{blank:bias}} | — |\n| 最小的正数 | {{blank:min-positive}} | {{blank:min-positive-bits}} |\n| 最小的有限数 | {{blank:min-finite}} | {{blank:min-finite-bits}} |\n| 最小规格正数 | $1/4$ | {{blank:min-normal-bits}} |\n| — | $-11/32$ | {{blank:negative-bits}} |\n| — | $7/2$ | {{blank:seven-halves-bits}} |\n| — | $63/128$ | {{blank:round-one-bits}} |\n| — | $13.25$ | {{blank:round-two-bits}} |\n\n数值可填十进制或分数；编码可按 `s eee ffff` 分组，也可连续写 8 位。描述列的“—”不是待填项。原卷每行 1 分；本站所有空正确计整题 1 分。"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "bias",
+            "method": "exact",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "min-positive",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1/64",
+              "0.015625"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "min-positive-bits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0 000 0001",
+              "00000001"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "min-finite",
+            "method": "exact",
+            "acceptedAnswers": [
+              "-15.5",
+              "-31/2"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "min-finite-bits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1 110 1111",
+              "11101111"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "min-normal-bits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0 001 0000",
+              "00010000"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "negative-bits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1 001 0110",
+              "10010110"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "seven-halves-bits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0 100 1100",
+              "01001100"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "round-one-bits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0 010 0000",
+              "00100000"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "round-two-bits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0 110 1010",
+              "01101010"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
         "reference": {
           "format": "markdown",
           "text": "参考表格：\n\n| 描述 | 十进制数（或分数） | 二进制表示 |\n| --- | ---: | --- |\n| Bias | 3 | — |\n| 最小的正数 | $1/64$ | `0 000 0001` |\n| 最小的有限数 | $-15.5$ | `1 110 1111` |\n| 最小规格正数 | $1/4$ | `0 001 0000` |\n| — | $-11/32$ | `1 001 0110` |\n| — | $7/2$ | `0 100 1100` |\n| — | $63/128$ | `0 010 0000` |\n| — | $13.25$ | `0 110 1010` |\n\n考查对浮点数编码与舍入的掌握。"
@@ -57887,7 +58530,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c2fccf6325a5538b",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 5,
       "number": {
@@ -57933,7 +58576,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "5. 针对下列代码，假定编译器不做任何编译优化，同时编译系统在预处理 `a.c` 和 `b.c` 时可以顺利找到 `common.h`。运行 `gcc a.c b.c` 命令，发现报错。已知报错信息中含有如下内容：\n```\ncollect2: error: ld returned 1 exit status\n```"
+        "text": "5. 针对下列代码，假定编译器不做任何编译优化，同时编译系统在预处理 `a.c` 和 `b.c` 时可以顺利找到 `common.h`。运行 `gcc a.c b.c` 命令，发现报错。已知报错信息中含有如下内容：\n```\ncollect2: error: ld returned 1 exit status\n```\n\n原卷给出的源文件：\n\n`a.c`\n```c\n#include <stdio.h>\n#include \"common.h\"\nint main() {\n    scanf(\"%d\\n\", &x);\n    funcB();\n    printf(\"%d\\n\", x);\n}\n```\n\n`b.c`\n```c\n#include \"common.h\"\nint funcB(void) {\n    x++;\n}\n```\n\n`common.h`\n```c\nint x = 1;\nint funcB(void);\n```"
       },
       "solution": {
         "state": "available",
@@ -57977,7 +58620,7 @@
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "在编译系统及二进制工具链对本题所涉源代码进行处理过程中，所产生的中间目标文件的 `.text` 节中，对于变量 `x` 的引用都需要在链接时重定位。\n原卷给出的源文件：\n```c\n// a.c\n#include <stdio.h>\n#include \"common.h\"\nint main() {\n    scanf(\"%d\\n\", &x);\n    funcB();\n    printf(\"%d\\n\", x);\n}\n// b.c\n#include \"common.h\"\nint funcB(void) {\n    x++;\n}\n// common.h\nint x = 1;\nint funcB(void);\n```"
+            "text": "在编译系统及二进制工具链对本题所涉源代码进行处理过程中，所产生的中间目标文件的 `.text` 节中，对于变量 `x` 的引用都需要在链接时重定位。"
           }
         }
       ]
@@ -89593,7 +90236,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1dfc955e6bd2043a",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ffd1f5f688babe1b",
       "paperOrder": 12,
       "number": {
@@ -89662,7 +90305,7 @@
           "id": "A",
           "content": {
             "format": "markdown",
-            "text": "旋转磁盘对扇区的访问时间有三个主要的部分：寻道时间、旋转时间和传送时"
+            "text": "旋转磁盘对扇区的访问时间有三个主要的部分：寻道时间、旋转时间和传送时间"
           }
         },
         {

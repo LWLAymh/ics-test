@@ -840,8 +840,8 @@
         "verifiedAnswerCount": 21,
         "singleChoiceCount": 15,
         "multipleChoiceCount": 0,
-        "fillCount": 3,
-        "shortAnswerCount": 1,
+        "fillCount": 4,
+        "shortAnswerCount": 0,
         "compositeCount": 2
       }
     },
@@ -1291,8 +1291,8 @@
         "verifiedAnswerCount": 26,
         "singleChoiceCount": 20,
         "multipleChoiceCount": 0,
-        "fillCount": 2,
-        "shortAnswerCount": 1,
+        "fillCount": 3,
+        "shortAnswerCount": 0,
         "compositeCount": 3
       }
     },
@@ -1581,8 +1581,8 @@
         "verifiedAnswerCount": 27,
         "singleChoiceCount": 11,
         "multipleChoiceCount": 0,
-        "fillCount": 4,
-        "shortAnswerCount": 3,
+        "fillCount": 5,
+        "shortAnswerCount": 2,
         "compositeCount": 2
       }
     },

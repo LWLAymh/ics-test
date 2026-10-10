@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-52bb69c4e3f41cdd",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-08e665c0f6e47348",
   "paperOrder": 2,
   "number": {
@@ -94,6 +94,8 @@
 +++
 %%% stem
 2.  单精度浮点数27.5实际存储在内存中的十六进制数值为：
+
+参考信息：单精度浮点数阶码 8 位，尾数 23 位。
 %%% reference
 答案：C，考察浮点数的理解。
 %%% option: A
@@ -104,4 +106,3 @@
 `0x41dc0000`
 %%% option: D
 `0x025c0000`
-参考信息：单精度浮点数阶码8位，尾数23位

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-8a75ddae2da2bd06",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 14,
   "number": {
@@ -117,5 +117,3 @@ int foo( ) {
 `str1`指向的内存是分配在栈空间内的，`str2`指向的内存是分配在堆空间内的
 %%% option: D
 `str1`指向的内存是分配在堆空间内的，`str2`指向的内存是分配在栈空间内的
-【答案】Ｃ
-【说明】考察malloc函数是显式地分配和释放堆存储器

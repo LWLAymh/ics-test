@@ -206,6 +206,32 @@ def validate_response(node):
         answers = [rule["blankId"] for rule in solution["blankAnswers"]]
         if len(answers) != len(set(answers)) or set(answers) != bindings:
             raise ValueError("blank answer IDs must match all declared blanks exactly")
+    inputs = {}
+    for blank in stem.get("blanks", []):
+        widget = blank.get("input")
+        if blank["id"] in inputs and inputs[blank["id"]] != widget:
+            raise ValueError("repeated blank must use identical input configuration")
+        inputs[blank["id"]] = widget
+        if widget:
+            values = [option["value"] for option in widget["options"]]
+            if len(values) != len(set(values)):
+                raise ValueError("duplicate blank option values")
+            if not set(widget.get("exclusiveValues", [])) <= set(values):
+                raise ValueError("exclusive blank value references missing option")
+    for rule in solution.get("blankAnswers", []):
+        widget = inputs.get(rule["blankId"])
+        if rule["method"] == "selection":
+            if not widget:
+                raise ValueError("selection rule requires explicit select input")
+            correct = rule["correctValues"]
+            if not set(correct) <= {option["value"] for option in widget["options"]}:
+                raise ValueError("correct blank value references missing option")
+            if not widget["multiple"] and len(correct) != 1:
+                raise ValueError("single select requires one correct value")
+            if len(correct) > 1 and set(correct) & set(widget.get("exclusiveValues", [])):
+                raise ValueError("exclusive value cannot be combined with other answers")
+        elif widget and rule["method"] != "self":
+            raise ValueError("select input requires selection or self grading")
     if kind == "fill" and not stem.get("blanks"):
         if "blank-positions-unresolved" not in node.get("issues", node.get("publication", {}).get("issues", [])):
             raise ValueError("fill without anchors must explicitly declare unresolved blank positions")

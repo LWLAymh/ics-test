@@ -38,9 +38,17 @@
 
   function gradeBlanks(values, solution) {
     if (solution.state !== 'available' || solution.grading !== 'blanks' ||
-        solution.blankAnswers.some(function (rule) { return rule.method !== 'exact'; })) return null;
+        solution.blankAnswers.some(function (rule) { return rule.method !== 'exact' && rule.method !== 'selection'; })) return null;
     return solution.blankAnswers.every(function (rule) {
       if (!Object.prototype.hasOwnProperty.call(values, rule.blankId)) return false;
+      if (rule.method === 'selection') {
+        const value = values[rule.blankId];
+        const actual = (Array.isArray(value) ? value : [value]).slice().sort();
+        const expected = rule.correctValues.slice().sort();
+        return actual.length === expected.length && actual.every(function (item, index) {
+          return typeof item === 'string' && item === expected[index];
+        });
+      }
       function normalize(value) {
         let result = String(value);
         if (rule.normalize.trimWhitespace) result = result.trim();

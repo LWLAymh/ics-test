@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-69a1bf250f9b6afa",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 20,
   "number": {
@@ -127,5 +127,3 @@ H1，L1，U1，H2，`L2`，S1，T1，U2，S2，T2
 H2，`L2`，U2，H1，S2，L1，T2，U1，S1，T1
 %%% option: D
 H2，`L2`，H1，L1，U1，U2，S2，T2，S1，T1
-【答案】Ｃ
-【说明】考查两个并发线程指令执行序列是否会导致不安全轨迹线。

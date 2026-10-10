@@ -378,19 +378,90 @@
     spans.forEach(function (span, index) {
       const blank = span.blank;
       const label = blank.label || ('第 ' + (index + 1) + ' 空');
-      const input = '<span class="ics-inline-blank"><span class="ics-blank-number">' + (index + 1) + '</span>' +
-        '<input class="ics-blank-input" name="blank-' + (partIndex == null ? 'root' : partIndex) + '-' + index + '" ' +
+      const attributes = 'class="ics-blank-input" name="blank-' + (partIndex == null ? 'root' : partIndex) + '-' + index + '" ' +
         'data-blank-id="' + escapeHtml(blank.id) + '" data-blank-scope="' + (partIndex == null ? 'root' : partIndex) + '" ' +
         'data-width="' + blank.width + '" form="ics-answer-form" aria-label="' + escapeHtml(label) +
-        '" autocomplete="off" required></span>';
-      html = html.replace(prefix + index + 'END', input);
+        '" autocomplete="off"';
+      let control;
+      if (!blank.input) {
+        control = '<input ' + attributes + ' required>';
+      } else if (!blank.input.multiple) {
+        control = '<select ' + attributes + ' required><option value="">请选择…</option>' +
+          blank.input.options.map(function (option) {
+            return '<option value="' + escapeHtml(option.value) + '">' + escapeHtml(option.label) + '</option>';
+          }).join('') + '</select>';
+      } else {
+        const menuId = 'blank-menu-' + (partIndex == null ? 'root' : partIndex) + '-' + index;
+        control = '<input type="hidden" ' + attributes + ' data-multiple="true">' +
+          '<button type="button" class="ics-blank-toggle" data-blank-toggle aria-haspopup="dialog" aria-expanded="false" ' +
+          'aria-controls="' + menuId + '" aria-label="' + escapeHtml(label) + '，可多选">请选择… ▾</button>' +
+          '<span class="ics-blank-menu" id="' + menuId + '" role="dialog" aria-label="' + escapeHtml(label) + '，可多选" hidden>' +
+          '<span class="ics-blank-menu-hint">可多选</span>' + blank.input.options.map(function (option) {
+            return '<label><input type="checkbox" data-blank-option value="' + escapeHtml(option.value) + '"' +
+              ((blank.input.exclusiveValues || []).includes(option.value) ? ' data-exclusive="true"' : '') + '> ' +
+              '<span>' + escapeHtml(option.label) + '</span></label>';
+          }).join('') + '<button type="button" data-blank-close>完成</button></span>';
+      }
+      const input = '<span class="ics-inline-blank tex2jax_ignore"><span class="ics-blank-number">' + (index + 1) + '</span>' + control + '</span>';
+      html = html.replace(prefix + index + 'END', function () { return input; });
     });
     return html;
   }
 
+  function readBlankValue(input) {
+    if (input.dataset.multiple === 'true') {
+      try {
+        const value = JSON.parse(input.value || '[]');
+        return Array.isArray(value) ? value : [];
+      } catch (_) { return []; }
+    }
+    return input.value;
+  }
+
+  function syncBlank(input) {
+    if (input.dataset.multiple !== 'true') return;
+    const root = input.closest('.ics-inline-blank');
+    const selected = readBlankValue(input);
+    const labels = [];
+    root.querySelectorAll('[data-blank-option]').forEach(function (option) {
+      option.checked = selected.includes(option.value);
+      option.disabled = input.disabled;
+      if (option.checked) labels.push(option.nextElementSibling.textContent);
+    });
+    const toggle = root.querySelector('[data-blank-toggle]');
+    toggle.textContent = (labels.length ? labels.join('、') : '请选择…') + ' ▾';
+    toggle.setAttribute('aria-label', input.getAttribute('aria-label') + '，可多选，' + (labels.join('、') || '未选择'));
+    toggle.disabled = input.disabled;
+    toggle.classList.toggle('missing', input.classList.contains('missing'));
+  }
+
+  function blankAnswerText(input) {
+    if (input.tagName === 'SELECT') return input.selectedOptions[0].textContent;
+    if (input.dataset.multiple !== 'true') return input.value.trim();
+    return Array.from(input.closest('.ics-inline-blank').querySelectorAll('[data-blank-option]:checked'))
+      .map(function (option) { return option.nextElementSibling.textContent; }).join('、');
+  }
+
+  function focusBlank(input) {
+    syncBlank(input);
+    (input.dataset.multiple === 'true' ? input.closest('.ics-inline-blank').querySelector('[data-blank-toggle]') : input).focus();
+  }
+
+  function closeBlankMenus() {
+    ui.questionContent.querySelectorAll('[data-blank-toggle][aria-expanded="true"]').forEach(function (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      document.getElementById(toggle.getAttribute('aria-controls')).hidden = true;
+    });
+  }
+
+  function disableQuestionControls(root) {
+    closeBlankMenus();
+    root.querySelectorAll('button, input, select').forEach(function (control) { control.disabled = true; });
+  }
+
   function gradeFillInputs(inputs, solution) {
     const values = {};
-    inputs.forEach(function (input) { values[input.dataset.blankId] = input.value; });
+    inputs.forEach(function (input) { values[input.dataset.blankId] = readBlankValue(input); });
     return contract.gradeBlanks(values, solution);
   }
 
@@ -666,6 +737,7 @@
     ui.questionContent.querySelectorAll('.ics-blank-input').forEach(function (input) {
       const saved = draft.blanks.find(function (blank) { return blank.name === input.name; });
       if (saved) input.value = saved.value;
+      syncBlank(input);
     });
     ui.questionContent.querySelectorAll('[data-composite-choice]').forEach(function (button) {
       const part = button.closest('[data-part-index]').dataset.partIndex;
@@ -681,7 +753,7 @@
     ui.reference.innerHTML = renderSolution(question);
 
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
-    ui.questionContent.querySelectorAll('button, input').forEach(function (control) { control.disabled = true; });
+    disableQuestionControls(ui.questionContent);
     if (!draft.needsSelfGrade) highlightChoiceResults(question);
     typeset(ui.reference);
   }
@@ -726,7 +798,7 @@
       ? '题目仍按原卷顺序展示，本题不会计入成绩'
       : state.currentMode === 'choice'
       ? (q.type === 'multiple-choice' ? '可选择多个选项' : '点击一个选项')
-      : state.currentMode === 'fill' ? '每个空格单独填写'
+      : state.currentMode === 'fill' ? '逐空填写或展开选择；标注“可多选”的空位可勾选多项'
         : state.currentMode === 'composite' ? '选择与填空自动核对；简答显示答案后自评'
           : '本题查看答案后自评';
     ui.submit.textContent = state.currentMode === 'unavailable' ? '跳过并继续'
@@ -738,13 +810,12 @@
       ui.choiceList.innerHTML = renderOptions(q.options, 'data-choice');
     }
     if (q.solution.state !== 'available') {
-      ui.questionContent.querySelectorAll('input, button').forEach(function (control) { control.disabled = true; });
+      disableQuestionControls(ui.questionContent);
       ui.choiceList.querySelectorAll('button').forEach(function (control) { control.disabled = true; });
     } else if (compositeQuestion) {
       q.parts.forEach(function (part, index) {
         if (part.solution.state === 'available') return;
-        ui.questionContent.querySelector('[data-composite-part="' + index + '"]')
-          .querySelectorAll('input, button').forEach(function (control) { control.disabled = true; });
+        disableQuestionControls(ui.questionContent.querySelector('[data-composite-part="' + index + '"]'));
       });
     }
 
@@ -817,7 +888,7 @@
           return;
         }
         answers.push(part.number.display + '：' + inputs.map(function (input) {
-          return input.dataset.blankId + '=' + input.value.trim();
+          return input.dataset.blankId + '=' + blankAnswerText(input);
         }).join('；'));
         const fillResult = gradeFillInputs(inputs, part.solution);
         if (fillResult === null) subjectiveCount += 1;
@@ -831,12 +902,11 @@
       }
     });
     if (firstMissing) {
-      if (firstMissing.focus) firstMissing.focus();
+      if (firstMissing.matches('.ics-blank-input')) focusBlank(firstMissing);
+      else if (firstMissing.focus) firstMissing.focus();
       return null;
     }
-    ui.questionContent.querySelectorAll('button, input').forEach(function (control) {
-      control.disabled = true;
-    });
+    disableQuestionControls(ui.questionContent);
     return {
       answers: answers,
       objectiveCorrect: objectiveCorrect,
@@ -866,10 +936,10 @@
     if (state.currentMode === 'fill') {
       const inputs = Array.from(ui.questionContent.querySelectorAll('.ics-blank-input'));
       const missing = inputs.find(function (input) { return !input.value.trim(); });
-      if (missing) { missing.classList.add('missing'); missing.focus(); return; }
+      if (missing) { missing.classList.add('missing'); focusBlank(missing); return; }
       ui.answer.value = inputs.map(function (input, index) {
         input.disabled = true;
-        return '第 ' + (index + 1) + ' 空：' + input.value.trim();
+        return '第 ' + (index + 1) + ' 空：' + blankAnswerText(input);
       }).join('；');
     } else if (state.currentMode === 'composite') {
       const q = state.questions[state.index];
@@ -892,6 +962,7 @@
     ui.answer.disabled = true; ui.submit.disabled = true; ui.feedback.hidden = false;
     ui.submit.hidden = true; ui.skip.hidden = true;
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
+    disableQuestionControls(ui.questionContent);
     ui.reference.innerHTML = renderSolution(q);
 
     typeset(ui.reference);
@@ -1071,9 +1142,54 @@
     ui.questionContent.querySelectorAll('.ics-blank-input').forEach(function (other) {
       if (other.dataset.blankId === input.dataset.blankId && other.dataset.blankScope === input.dataset.blankScope) {
         other.value = input.value; other.classList.remove('missing');
+        syncBlank(other);
       }
     });
   });
+  ui.questionContent.addEventListener('change', function (event) {
+    const option = event.target.closest('[data-blank-option]');
+    if (!option) return;
+    const root = option.closest('.ics-inline-blank');
+    if (option.checked) root.querySelectorAll('[data-blank-option]').forEach(function (other) {
+      if (other !== option && (option.dataset.exclusive === 'true' || other.dataset.exclusive === 'true')) other.checked = false;
+    });
+    const input = root.querySelector('.ics-blank-input');
+    const selected = Array.from(root.querySelectorAll('[data-blank-option]:checked')).map(function (item) { return item.value; });
+    input.value = selected.length ? JSON.stringify(selected) : '';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  ui.questionContent.addEventListener('click', function (event) {
+    const close = event.target.closest('[data-blank-close]');
+    if (close) {
+      const toggle = close.closest('.ics-inline-blank').querySelector('[data-blank-toggle]');
+      closeBlankMenus(); toggle.focus(); return;
+    }
+    const toggle = event.target.closest('[data-blank-toggle]');
+    if (!toggle || toggle.disabled) return;
+    const wasOpen = toggle.getAttribute('aria-expanded') === 'true';
+    closeBlankMenus();
+    if (wasOpen) return;
+    const menu = document.getElementById(toggle.getAttribute('aria-controls'));
+    toggle.setAttribute('aria-expanded', 'true'); menu.hidden = false;
+    const rect = toggle.getBoundingClientRect();
+    const width = Math.min(260, window.innerWidth - 24);
+    menu.style.width = width + 'px';
+    menu.style.left = Math.max(12, Math.min(rect.left, window.innerWidth - width - 12)) + 'px';
+    menu.style.top = (rect.bottom + menu.offsetHeight + 8 <= window.innerHeight
+      ? rect.bottom + 4 : Math.max(8, rect.top - menu.offsetHeight - 4)) + 'px';
+  });
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('.ics-inline-blank')) closeBlankMenus();
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape') return;
+    const toggle = ui.questionContent.querySelector('[data-blank-toggle][aria-expanded="true"]');
+    closeBlankMenus(); if (toggle) toggle.focus();
+  });
+  window.addEventListener('resize', closeBlankMenus);
+  window.addEventListener('scroll', function (event) {
+    if (!event.target.closest || !event.target.closest('.ics-blank-menu')) closeBlankMenus();
+  }, true);
   ui.selfGrade.addEventListener('click', function (event) {
     const button = event.target.closest('[data-grade]');
     if (!button) return;

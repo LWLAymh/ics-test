@@ -89,6 +89,51 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             blank_spans(content)
 
+    def test_select_blank_contract(self):
+        q = self.example("fill")
+        widget = {"kind": "select", "multiple": True, "exclusiveValues": ["E"],
+                  "options": [{"value": "A", "label": "<"}, {"value": "B", "label": ">"},
+                              {"value": "E", "label": "none"}]}
+        q["stem"] = {"format": "markdown", "text": "{{blank:x}} / {{blank:x}}", "blanks": [
+            {"id": "x", "marker": "{{blank:x}}", "occurrence": i, "width": "short", "input": copy.deepcopy(widget)}
+            for i in range(2)]}
+        q["solution"].update(grading="blanks", blankAnswers=[
+            {"blankId": "x", "method": "selection", "correctValues": ["A", "B"]}])
+        validate_question(q)
+        for mutate in (
+            lambda bad: bad["solution"]["blankAnswers"][0].update(correctValues=["Z"]),
+            lambda bad: bad["solution"]["blankAnswers"][0].update(correctValues=["A", "A"]),
+            lambda bad: bad["solution"]["blankAnswers"][0].update(correctValues=["A", "E"]),
+            lambda bad: bad["stem"]["blanks"][0].pop("input"),
+            lambda bad: bad["stem"]["blanks"][0]["input"].update(multiple=False),
+        ):
+            bad = copy.deepcopy(q)
+            mutate(bad)
+            self.invalid(bad)
+        for blank in q["stem"]["blanks"]:
+            blank["input"]["multiple"] = False
+        self.invalid(q)  # Two keys cannot grade a single-select input.
+        q["solution"]["blankAnswers"][0]["correctValues"] = ["A"]
+        validate_question(q)
+        for blank in q["stem"]["blanks"]:
+            blank["input"]["options"][1]["value"] = "A"
+        self.invalid(q)
+
+    def test_select_blank_rejects_text_rule_and_unknown_exclusion(self):
+        q = self.example("fill")
+        q["stem"] = {"format": "markdown", "text": "{{blank:x}}", "blanks": [
+            {"id": "x", "marker": "{{blank:x}}", "occurrence": 0, "width": "short",
+             "input": {"kind": "select", "multiple": False, "options": [
+                 {"value": "yes", "label": "是"}, {"value": "no", "label": "否"}]}}]}
+        q["solution"].update(grading="blanks", blankAnswers=[
+            {"blankId": "x", "method": "exact", "acceptedAnswers": ["yes"],
+             "normalize": {"trimWhitespace": True, "caseSensitive": True}}])
+        self.invalid(q)
+        q["solution"]["blankAnswers"] = [{"blankId": "x", "method": "self"}]
+        validate_question(q)
+        q["stem"]["blanks"][0]["input"]["exclusiveValues"] = ["missing"]
+        self.invalid(q)
+
     def test_human_review_must_not_be_fabricated(self):
         q = self.example("short-answer")
         q["publication"].update(state="published", basis="human-review", reviewer=None, reviewedAt=None)

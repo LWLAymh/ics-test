@@ -7,6 +7,8 @@
 - **当前题目接口为 v5**，人工编辑入口是 `question-bank/authored/`，不再是 `_curated/`。
 - 完整指导：[v5 题目编写与接口](docs/QUESTION_AUTHORING_V5.md)
 - 设计审查、迁移证据与限制：[v5 迁移说明](docs/MIGRATION_V5.md)
+- 有限候选填空支持原位单选/多选下拉，按空位显式配置；[编写方式](docs/QUESTION_AUTHORING_V5.md#候选项有限单选下拉--多选下拉)。
+- [选项噪声逐卷审阅记录](docs/OPTION_NOISE_AUDIT.md)（2026-10-10；28 份卷子、2,150 个选项）。
 
 ## 本地维护与验证
 

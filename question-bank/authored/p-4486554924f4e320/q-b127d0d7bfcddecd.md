@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-b127d0d7bfcddecd",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-4486554924f4e320",
   "paperOrder": 16,
   "number": {
@@ -110,4 +110,3 @@
 保持总容量和 E 不变，提高 B，miss rate 一定不会增加
 %%% option: D
 如果不采用"LRU"，使用"随机替换策略"，miss rate 可能会降低
-答：（　　　）

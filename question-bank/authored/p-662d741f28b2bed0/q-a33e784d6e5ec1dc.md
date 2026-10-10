@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-a33e784d6e5ec1dc",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-662d741f28b2bed0",
   "paperOrder": 13,
   "number": {
@@ -104,4 +104,3 @@
 增加额外一级存储，数据存取的延时一定不会增加
 %%% option: D
 以上选项都不正确
-答：（      ）

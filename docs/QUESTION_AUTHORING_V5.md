@@ -185,7 +185,56 @@ marker 是精确字面文本，不是正则；occurrence 是该 marker 在本内
 
 exact 只做指定的首尾空白、大小写处理，再对白名单精确比较。`0x00ff`、`3*85` 不自动等于 `255`；需要接受则人工加入。不会 eval，也暂不支持数值容差、符号化简或模糊匹配。
 
-某空需人工判断时使用 `{blankId:"x",method:"self"}`。若本填空小问任一规则是 self，则此小问整体显示参考答案后自评；若全部 exact，所有逻辑空都对才算小问正确。根题与综合题小问规则相同。
+某空需人工判断时使用 `{blankId:"x",method:"self"}`。若本填空小问任一规则是 self，则此小问整体显示参考答案后自评；若全部 exact 或 selection，所有逻辑空都对才算小问正确。根题与综合题小问规则相同。
+
+### 候选项有限：单选下拉 / 多选下拉
+
+这是 v5 的可选扩展；没有 `input` 的空仍是普通文本框，不需要批量迁移或自动猜测。作者须逐空明确填写完整候选集，**不能只把正确答案列为候选项**。选择标签是普通文本，不做 Markdown/LaTeX 猜测；候选值是稳定 ID，不是展示文字。
+
+单选下拉空位示例：
+
+```json
+{
+  "id":"relation", "marker":"{{blank:relation}}", "occurrence":0,
+  "width":"short", "label":"关系符",
+  "input":{
+    "kind":"select", "multiple":false,
+    "options":[
+      {"value":"lt","label":"<"},
+      {"value":"eq","label":"=="},
+      {"value":"gt","label":">"}
+    ]
+  }
+}
+```
+
+判分规则为 `{"blankId":"relation","method":"selection","correctValues":["lt"]}`。必须引用该空实际候选 ID；单选恰好一个正确值。不要给 selection 填 acceptedAnswers/normalize，也不要对下拉空使用 exact。
+
+需要在同一个空中选择多项时使用 `multiple:true`。页面会展开带勾选框的菜单，而不是原生列表的 Ctrl 多选。比如“不定项关系符”：
+
+```json
+{
+  "id":"r", "marker":"{{blank:r}}", "occurrence":0,
+  "width":"medium", "label":"关系符（可多选）",
+  "input":{
+    "kind":"select", "multiple":true,
+    "options":[
+      {"value":"A","label":"A · <"},
+      {"value":"B","label":"B · >"},
+      {"value":"C","label":"C · =="},
+      {"value":"D","label":"D · !="},
+      {"value":"E","label":"E · none"}
+    ],
+    "exclusiveValues":["E"]
+  }
+}
+```
+
+对应规则例：`{"blankId":"r","method":"selection","correctValues":["B","D"]}`。集合必须完全一致（顺序无关），少选/多选不得分。exclusiveValues 可省略；其中每个值都与其他所有值互斥，适用于 none / 以上都不是。正确集合不能同时包含互斥项和其他项。
+
+候选值必须唯一，至少两个候选。重复展示同一逻辑空时，各处 input 配置必须完全相同；选中值自动同步。普通输入、单选下拉、多选下拉可混在同一填空题或综合小问中，分别配置 exact / selection / self 规则。选择也保留草稿，提交后锁定，上一题/下一题返回时不丢失。
+
+维护实例：2015 期中第二题第 1 小问（`q-1737c983c32fea14`），8 个原位多选空，E 与关系符互斥。原卷小问计分与网站整题归一化计分不同，题面与参考中明确说明，不暗示支持少选部分分。
 
 仅历史迁移允许暂未标注空位的 fill，需登记 `blank-positions-unresolved` 且 grading:self/none，页面明确提示待补空位，不降格成简答、不瞎造输入框。新题应补标注后发布。
 

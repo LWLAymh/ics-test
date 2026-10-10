@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-1febd3da8c05ab57",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-4486554924f4e320",
   "paperOrder": 11,
   "number": {
@@ -106,4 +106,3 @@ CISC 指令系统中的指令数目较多，因此程序代码通常会比较长
 CISC 指令系统支持的寻址方式较多，RISC 指令系统支持的寻址方式较少，因此用 CISC 在程序中实现访存的功能更容易。
 %%% option: D
 CISC 机器中的寄存器数目较少，函数参数必须通过栈来进行传递；RISC 机器中的寄存器数目较多，只需要通过寄存器来传递参数。
-答：（　　　）
