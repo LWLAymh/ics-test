@@ -21271,7 +21271,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c1ff9a63d4eb2780",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-146f52a44a7f14ec",
       "paperOrder": 2,
       "number": {
@@ -21324,7 +21324,13 @@
             "blankId": "child",
             "method": "exact",
             "acceptedAnswers": [
-              "p1: x=2; p2: x=1"
+              "p1: x=2; p2: x=1",
+              "p1: x=2;p2: x=1",
+              "p1: x=2；p2: x=1",
+              "p1: x=2； p2: x=1",
+              "p1:x=2; p2:x=1",
+              "p1:x=2;p2:x=1",
+              "p1: x=2, p2: x=1"
             ],
             "normalize": {
               "trimWhitespace": true,
@@ -21335,7 +21341,8 @@
             "blankId": "parent",
             "method": "exact",
             "acceptedAnswers": [
-              "p2: x=0"
+              "p2: x=0",
+              "p2:x=0"
             ],
             "normalize": {
               "trimWhitespace": true,
@@ -85831,7 +85838,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000015",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 15,
       "number": {
@@ -86005,7 +86012,7 @@
           "provenance": "rewritten"
         },
         {
-          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L189-L206",
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L164-L183",
           "provenance": "reflow"
         }
       ]
@@ -86013,7 +86020,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000016",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 16,
       "number": {
@@ -86152,13 +86159,17 @@
         {
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/chapter.md#L1120-L1220",
           "provenance": "rewritten"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L185-L187",
+          "provenance": "reflow"
         }
       ]
     },
     {
       "schemaVersion": "5",
       "id": "q-0600000000000017",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 17,
       "number": {
@@ -86194,7 +86205,7 @@
         "grading": "parts",
         "reference": {
           "format": "markdown",
-          "text": "A（16字节cache）：\n\n| 数组 | 行0列0 | 行0列1 | 行1列0 | 行1列1 |\n| --- | --- | --- | --- | --- |\n| dst | m | m | m | h |\n| src | m | m | m | m |\n\nB（32字节cache）：\n\n| 数组 | 行0列0 | 行0列1 | 行1列0 | 行1列1 |\n| --- | --- | --- | --- | --- |\n| dst | m | h | m | h |\n| src | m | h | m | h |"
+          "text": "A（16字节cache）：\n\n| 数组 | 行0列0 | 行0列1 | 行1列0 | 行1列1 |\n| --- | --- | --- | --- | --- |\n| dst | m | m | m | m |\n| src | m | m | m | h |\n\nB（32字节cache）：\n\n| 数组 | 行0列0 | 行0列1 | 行1列0 | 行1列1 |\n| --- | --- | --- | --- | --- |\n| dst | m | h | m | h |\n| src | m | h | m | h |"
         },
         "provenance": {
           "origin": "unknown",
@@ -86299,7 +86310,7 @@
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "src四次访问均不命中；dst依次为`dst[0][0]`不命中、`dst[1][0]`不命中、`dst[0][1]`不命中、`dst[1][1]`命中。按行列矩阵填写结果见总参考答案。"
+              "text": "dst 四次写访问均不命中；src 依次为 `src[0][0]` 不命中、`src[0][1]` 不命中、`src[1][0]` 不命中、`src[1][1]` 命中（第 5 步把 `src[1]` 所在块装入唯一的另一行，第 7 步读 `src[1][1]` 时仍在缓存中）。按行列矩阵填写结果见总参考答案。"
             },
             "provenance": {
               "origin": "unknown",
@@ -86344,7 +86355,7 @@
                 "blankId": "q-0600000000000017-a-dst-11",
                 "method": "exact",
                 "acceptedAnswers": [
-                  "h"
+                  "m"
                 ],
                 "normalize": {
                   "caseSensitive": false,
@@ -86388,7 +86399,7 @@
                 "blankId": "q-0600000000000017-a-src-11",
                 "method": "exact",
                 "acceptedAnswers": [
-                  "m"
+                  "h"
                 ],
                 "normalize": {
                   "caseSensitive": false,
@@ -86595,7 +86606,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000018",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 18,
       "number": {
@@ -86650,6 +86661,10 @@
         {
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/chapter.md#L1417-L1458",
           "provenance": "rewritten"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L207-L216",
+          "provenance": "reflow"
         }
       ],
       "parts": [
@@ -86862,7 +86877,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000019",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 19,
       "number": {
@@ -86917,6 +86932,10 @@
         {
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/chapter.md#L1417-L1477",
           "provenance": "rewritten"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L217-L228",
+          "provenance": "reflow"
         }
       ],
       "parts": [
@@ -87197,7 +87216,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000020",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 20,
       "number": {
@@ -87252,6 +87271,10 @@
         {
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/chapter.md#L1417-L1496",
           "provenance": "rewritten"
+        },
+        {
+          "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第06章-存储器层次结构/练习题答案.md#L229-L240",
+          "provenance": "reflow"
         }
       ],
       "parts": [
