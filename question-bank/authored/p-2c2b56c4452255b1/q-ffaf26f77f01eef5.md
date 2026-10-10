@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ffaf26f77f01eef5",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-2c2b56c4452255b1",
   "paperOrder": 56,
   "number": {
@@ -414,23 +414,17 @@ IA32体系采用**小端法**、32位虚拟地址和两级页表。两级页表�
 %%% part-stem: q-7e98b751f0325385
 3.  考虑下面计算矩阵和向量乘法代码：
 
-`1 int *mat_vec_mul(int **A, int *x, int n)`
-
+```c
+1 int *mat_vec_mul(int **A, int *x, int n)
 2 {
-
 3 int i, j;
-
-`4 int *y = (int *)malloc(n * sizeof(int))`;
-
-5 \*for\* (i = 0; i \< n; i++)
-
-6 \*for\* (j = 0; j \< n; j++)
-
-`7 y[i] += A[i][j] * x[j]`;
-
-8 \*return\* y;
-
+4 int *y = (int *)malloc(n * sizeof(int));
+5 for (i = 0; i < n; i++)
+6 for (j = 0; j < n; j++)
+7 y[i] += A[i][j] * x[j];
+8 return y;
 9 }
+```
 
 ⑴ 在64位 Linux 机器中运行该代码，输入**同一组合法的参数**后，每次运行返回的向量的值都**不一样**，修复这一错误有一种简单的方法，将第\_\_\_\_行改为\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_。（第二空填写C代码，每空1分，共2分）
 
