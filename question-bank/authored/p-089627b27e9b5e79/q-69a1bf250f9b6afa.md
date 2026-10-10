@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-69a1bf250f9b6afa",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 20,
   "number": {
@@ -115,7 +115,7 @@
     jne   .L3
 .L2:
 ```
-请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？(      )
+请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？
 %%% reference
 答案：C
 考查两个并发线程指令执行序列是否会导致不安全轨迹线。

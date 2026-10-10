@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-49e2ba2fc68bee01",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 2,
   "number": {
@@ -98,7 +98,7 @@
 int x = a >> 2;
 int y = (x + a) / 4;
 ```
-那么有多少个位于闭区间[-8,8]的整数`a`能使得`x`和`y`相等？（    ）
+那么有多少个位于闭区间[-8,8]的整数`a`能使得`x`和`y`相等？
 %%% reference
 答案：B
 %%% option: A

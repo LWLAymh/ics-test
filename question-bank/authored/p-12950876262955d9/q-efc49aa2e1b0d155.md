@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-efc49aa2e1b0d155",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-12950876262955d9",
   "paperOrder": 15,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-15. 下面说法正确的是（    ）。
+15. 下面说法正确的是
 %%% reference
 答案：C
 A循环展开次数增加会导致代码膨胀、增大寄存器压力，影响性能（课本5.11.1）。

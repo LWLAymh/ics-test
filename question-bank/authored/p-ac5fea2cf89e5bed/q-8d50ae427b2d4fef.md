@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-8d50ae427b2d4fef",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ac5fea2cf89e5bed",
   "paperOrder": 14,
   "number": {
@@ -94,9 +94,9 @@
 +++
 %%% stem
 14、用带有header和footer的隐式空闲链表实现分配器时，如果一个应用请
-求一个3字节的块，下列说法哪一项是错误的？答：（     ）
+求一个3字节的块，下列说法哪一项是错误的？
 %%% reference
-答案 ：D，malloc在64位机器上返回的地址应该按16字节对齐。
+答案：D，malloc在64位机器上返回的地址应该按16字节对齐。
 %%% option: A
 搜索空闲链表时，存储利用率为：`best fit > next fit > first fit`
 %%% option: B

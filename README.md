@@ -10,6 +10,7 @@
 - 有限候选填空支持原位单选/多选下拉，按空位显式配置；[编写方式](docs/QUESTION_AUTHORING_V5.md#候选项有限单选下拉--多选下拉)。
 - [有限候选填空核对记录](docs/FINITE_BLANK_AUDIT_2026-10-10.md)：69 道题共 434 处下拉选择（含多选），开放式答案仍保留文本输入或自评。
 - [选项噪声逐卷审阅记录](docs/OPTION_NOISE_AUDIT.md)（2026-10-10；28 份卷子、2,150 个选项）。
+- [题面噪声清理记录](docs/STEM_NOISE_AUDIT_2026-10-10.md)：96 题清除纸卷答题占位与异常空白；保留有用途的全角空格、强制换行与 `____` 占位。
 - [线上报错修复记录](docs/ISSUE_REPAIRS_2026-10-10.md)：逐题修复、停用说明与本轮 7 道大题排版复核记录。
 - [代码排版复查记录](docs/CODE_LAYOUT_AUDIT_2026-10-10.md)：手工修订汇编缩进、C 循环与函数排版、并排文件及断开的围栏。
 - CSAPP 精选题清单：[第 2–6 章家庭作业](docs/CSAPP_CH2_6_SELECTION.md)、[第 7–12 章家庭作业](docs/CSAPP_CH7_12_SELECTION.md)、[章节练习题](docs/CSAPP_PRACTICE_SELECTION.md)。

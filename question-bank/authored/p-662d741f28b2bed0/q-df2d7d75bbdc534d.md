@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-df2d7d75bbdc534d",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-662d741f28b2bed0",
   "paperOrder": 7,
   "number": {
@@ -94,7 +94,7 @@
 +++
 %%% stem
 7.  已知短整型数组S的起始地址和下标i分别存放在寄存器`%rdx`和`%rcx`，将
-`&S[i]`存放在寄存器`%rax`中所对应的汇编代码是（ ）
+`&S[i]`存放在寄存器`%rax`中所对应的汇编代码是
 %%% reference
 答案：C
 %%% option: A

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f1a1465d2a3ec2ae",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-d0ae6162300a90de",
   "paperOrder": 8,
   "number": {
@@ -95,7 +95,7 @@
 }
 +++
 %%% stem
-8、 x86体系结构中，下面哪些选项是错误的？答：（      ）
+8、 x86体系结构中，下面哪些选项是错误的？
 %%% reference
 答案：ACD
 %%% option: A

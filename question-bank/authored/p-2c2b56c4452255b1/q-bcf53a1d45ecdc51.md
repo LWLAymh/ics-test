@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-bcf53a1d45ecdc51",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-2c2b56c4452255b1",
   "paperOrder": 50,
   "number": {
@@ -716,7 +716,7 @@
 %%% part-stem: q-a26ced764598c929
 4.  **(本大题共三问，共10分)** 有以下三个 c 文件 `hd.h f1.c f2.c`。使用
 
-`gcc -c f1.c f2.c; gcc f1.o f2.o` 
+`gcc -c f1.c f2.c; gcc f1.o f2.o`
 
 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及的符号所对应的变量已在代码中加粗。****本大题无需理解代码的含义。****
 
@@ -807,7 +807,7 @@ Part B.** (每空1分，共3分)** 使用`objdump -dx f1.o f2.o` 看到如下几
 
 **评分标准：第二空允许有若干前导0，其余每空必须完全一致才得分**
 %%% part-stem: q-58e76213788bb4aa
-Part C. **(每空1分，共2分)** 使用`execve`加载a.out并执行时，其中第一个被执行的语句默认是{{blank:entry}}(单选) 函数的开头。已知 gcc -e 可以修改该默认行为到一个程序指定的函数，据此你推断该函数执行在{{blank:mode}}态下(填 用户/内核)。
+Part C. **(每空1分，共2分)** 使用`execve`加载a.out并执行时，其中第一个被执行的语句默认是{{blank:entry}}(单选) 函数的开头。已知 gcc -e 可以修改该默认行为到一个程序指定的函数，据此你推断该函数执行在{{blank:mode}}态下(填用户/内核)。
 
 1.  `_init     B.main     C.__libc_start_main    D._start`
 %%% part-reference: q-58e76213788bb4aa

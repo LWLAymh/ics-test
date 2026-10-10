@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-b6e3f1dcce4873ad",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-d0ae6162300a90de",
   "paperOrder": 1,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-1、变量x的值为`0x01234567`，地址&x为`0x100`；则该变量的值在x86和Sun机器内存中的存储排列顺序正确的是（        ）
+1、变量x的值为`0x01234567`，地址&x为`0x100`；则该变量的值在x86和Sun机器内存中的存储排列顺序正确的是
 %%% reference
 答案：A
 考察大端、小端；同时Sun是大端、x86是小端

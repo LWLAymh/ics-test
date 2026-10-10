@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-703874ba6aeb4fff",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-d0ae6162300a90de",
   "paperOrder": 10,
   "number": {
@@ -94,7 +94,7 @@
 }
 +++
 %%% stem
-10、下面对流水线技术的描述，正确的是：（      ）
+10、下面对流水线技术的描述，正确的是：
 %%% reference
 答案：CD
 %%% option: A

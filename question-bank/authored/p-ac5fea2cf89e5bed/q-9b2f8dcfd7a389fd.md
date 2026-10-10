@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-9b2f8dcfd7a389fd",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ac5fea2cf89e5bed",
   "paperOrder": 16,
   "number": {
@@ -126,7 +126,7 @@ int fd2 = dup(fd1);
 char *str1 = "I love ";
 char *str2 = "I love ICS!";
 ```
-下面哪一个组合是正确的：（       ）
+下面哪一个组合是正确的：
 %%% reference
 答案：B
 说明：考察两种不同文件描述符指向同一文件v的不同，一种是指向了同一的`open`

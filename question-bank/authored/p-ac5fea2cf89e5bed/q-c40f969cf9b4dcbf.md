@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c40f969cf9b4dcbf",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ac5fea2cf89e5bed",
   "paperOrder": 8,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-8、在链接时，对于什么样的符号一定不需要进行重定位？答：（      ）
+8、在链接时，对于什么样的符号一定不需要进行重定位？
 %%% reference
 答案：C
 说明：考察需要进行重定位的条件。A 在链接前不在同一目标文件中，BD 都位

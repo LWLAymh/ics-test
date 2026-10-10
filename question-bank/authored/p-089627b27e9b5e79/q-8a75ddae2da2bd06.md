@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-8a75ddae2da2bd06",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 14,
   "number": {
@@ -105,7 +105,7 @@ int foo( ) {
   free(str2);
 }
 ```
-下列说法中正确的是(      )
+下列说法中正确的是
 %%% reference
 答案：C
 考察`malloc`函数是显式地分配和释放堆存储器。
