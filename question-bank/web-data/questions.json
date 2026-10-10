@@ -154311,7 +154311,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c43f907076bd5a56",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-febcfbeee0f364b2",
       "paperOrder": 3,
       "number": {
@@ -154365,7 +154365,7 @@
             "width": "medium"
           }
         ],
-        "text": "3. 分析下面的 C 语言代码：\n\n```c\nshort int y = -12;\nint iy = (int) y;\n```\n\n`iy` 首字节的值为（用十六进制表示）：{{blank:q3-first-byte}}"
+        "text": "3. 分析下面的 C 语言代码：\n\n```c\nshort int y = -12;\nint iy = (int) y;\n```\n\n`iy` 首字节的值为（用十六进制表示）：{{blank:q3-first-byte}}\n\n提示：本题的“首字节”指最高有效字节（最高字节），不是内存最低地址处的字节。"
       },
       "solution": {
         "state": "available",
