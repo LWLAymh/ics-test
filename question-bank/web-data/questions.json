@@ -67556,7 +67556,7 @@
             "width": "medium"
           }
         ],
-        "text": "第三题 机器级编程（15分，每空1分）\n下面的C程序包含main(), caller(), callee()三个函数。本题给出了该程序的部\n分C代码和X86-64汇编与机器代码。请分析给出的代码，补全空白处的内容，并回答问题。\n注：汇编与机器码中的数字用16进制数填写\nX86-64汇编与机器代码：\n\n```\n00000000004006cd <caller>:\n  4006cd:  55                    push     %rbp\n  4006ce:  48 89 e5              mov      %rsp,   %rbp\n  4006d1:  48 83 ec 50           sub      $0x50,   %rsp\n  4006d5:  48 89 7d b8           mov      %rdi,   -0x48(%rbp)\n  4006d9:  64 48 8b 04 25 28 00  mov      %fs:0x28,  %rax\n  4006e0:  00 00\n  4006e2:  48 89 45 f8           mov      %rax,   -0x8(%rbp)\n  4006e6:  31 c0                 xor      %eax,   %eax\n  4006e8:  c6 45 d0 00           movb     $0x0,   -0x30(%rbp)\n  4006ec:  c6 45 e0 00           movb     $0x0,    {{blank:slot-1}}\n  4006f0:  48 8b 45 b8           mov      {{blank:slot-2}},   %rax\n  4006f4:  48 89 c7              mov      %rax,   %rdi\n  4006f7:                        callq    400510 <strlen@plt>\n  4006fc:  89 45 cc              mov      {{blank:slot-3}},   -0x34(%rbp)\n  4006ff:  83 7d cc 0e           cmpl     $0xe,   -0x34(%rbp)\n  400703:  7f                    {{blank:slot-4}}                 jg       400752 <caller+0x85>\n  400705:  83 7d cc 09           cmpl     $0x9,   -0x34(%rbp)\n  400709:                        jg       400720 <caller+0x53>\n  40070b:  48 8b 55 b8           mov      -0x48(%rbp), %rdx\n  40070f:  48 8d 45 d0           lea      {{blank:slot-5}},   %rax\n  400713:  48 89 d6              mov      %rdx,   %rsi\n  400716:  48 89 c7              mov      %rax,   %rdi\n  400719:                        callq    400500 <strcpy@plt>\n  40071e:                        jmp      40073b <caller+0x6e>\n  400720:  48 8b 45 b8           mov      -0x48(%rbp), %rax\n  400724:  48 8d 50 0a           lea      0xa(%rax),  %rdx\n  400728:  48 8d 45 d0           lea      -0x30(%rbp), %rax\n  40072c:  48 83 c0 10           add       {{blank:slot-6}},   %rax\n\n  400730:  48 89 d6              mov      %rdx,   %rsi\n  400733:  48 89 c7              mov      %rax,   %rdi\n  400736:                        callq    400500 <strcpy@plt>\n  40073b:  ff 75 e8              pushq    -0x18(%rbp)\n  40073e:  ff 75 e0              pushq    -0x20(%rbp)\n  400741:  ff 75 d8              pushq    -0x28(%rbp)\n  400744:  ff 75 d0              pushq    -0x30(%rbp)\n  400747:  e8                    {{blank:slot-7}}           callq    400666 <callee>\n  40074c:  48 83 c4 20           add      $0x20,   %rsp\n  400750:                        jmp      400753 <caller+0x86>\n  400752:  90                    nop\n  400753:  48 8b 45 f8           mov       {{blank:slot-8}},   %rax\n  400757:  64 48 33 04 25 28 00  xor      %fs:0x28,  %rax\n  40075e:  00 00\n  400760:                        je       400767 <caller+0x9a>\n  400762:                        callq    400520 <__stack_chk_fail@plt>\n  400767:  c9                    leaveq\n  400768:  c3                    retq\n```\nC代码：\n```\n#include <stdio.h>\n#include \"string.h\"\n#define N   {{blank:slot-9}}\n#define M   {{blank:slot-10}}\ntypedef union {char str_u[N]; long l;} union_e;\ntypedef struct {char str_s[M]; union_e u; long c;} struct_e;\nvoid callee(struct_e s){\n char buf[M+N];\n strcpy(buf, s.str_s);\n strcat(buf, s.u.str_u);\n printf(\"%s \\n\",buf);\n}\n\nvoid caller(char *str){\n```\n struct_e s;\n```\n s.str_s[0]=‘\\0’;\n s.u.str_u[0]=’\\0’;\n int len = strlen(str);\n if(len>=  M+N)\n```\n  {{blank:slot-11}};\n```\n else if(len<N){\n  strcpy(s.str_s, {{blank:slot-12}});\n }\n else{\n  strcpy(s.u.str_u, {{blank:slot-13}});\n }\n callee(s);\n}\nint main(int argc, char *argv[]){\n caller(\"0123456789abcd\");\n return 0;\n}\n```\n`caller`函数中，变量`s` 所占的内存空间为：{{blank:slot-14}}\n该程序运行后，`printf`函数是否有输出？输出结果为：{{blank:slot-15}}"
+        "text": "第三题 机器级编程（15分，每空1分）\n下面的C程序包含main(), caller(), callee()三个函数。本题给出了该程序的部\n分C代码和X86-64汇编与机器代码。请分析给出的代码，补全空白处的内容，并回答问题。\n注：汇编与机器码中的数字用16进制数填写\nX86-64汇编与机器代码：\n\n```\n00000000004006cd <caller>:\n  4006cd:  55                    push     %rbp\n  4006ce:  48 89 e5              mov      %rsp,   %rbp\n  4006d1:  48 83 ec 50           sub      $0x50,   %rsp\n  4006d5:  48 89 7d b8           mov      %rdi,   -0x48(%rbp)\n  4006d9:  64 48 8b 04 25 28 00  mov      %fs:0x28,  %rax\n  4006e0:  00 00\n  4006e2:  48 89 45 f8           mov      %rax,   -0x8(%rbp)\n  4006e6:  31 c0                 xor      %eax,   %eax\n  4006e8:  c6 45 d0 00           movb     $0x0,   -0x30(%rbp)\n  4006ec:  c6 45 e0 00           movb     $0x0,    {{blank:slot-1}}\n  4006f0:  48 8b 45 b8           mov      {{blank:slot-2}},   %rax\n  4006f4:  48 89 c7              mov      %rax,   %rdi\n  4006f7:                        callq    400510 <strlen@plt>\n  4006fc:  89 45 cc              mov      {{blank:slot-3}},   -0x34(%rbp)\n  4006ff:  83 7d cc 0e           cmpl     $0xe,   -0x34(%rbp)\n  400703:  7f {{blank:slot-4}}                 jg       400752 <caller+0x85>\n  400705:  83 7d cc 09           cmpl     $0x9,   -0x34(%rbp)\n  400709:                        jg       400720 <caller+0x53>\n  40070b:  48 8b 55 b8           mov      -0x48(%rbp), %rdx\n  40070f:  48 8d 45 d0           lea      {{blank:slot-5}},   %rax\n  400713:  48 89 d6              mov      %rdx,   %rsi\n  400716:  48 89 c7              mov      %rax,   %rdi\n  400719:                        callq    400500 <strcpy@plt>\n  40071e:                        jmp      40073b <caller+0x6e>\n  400720:  48 8b 45 b8           mov      -0x48(%rbp), %rax\n  400724:  48 8d 50 0a           lea      0xa(%rax),  %rdx\n  400728:  48 8d 45 d0           lea      -0x30(%rbp), %rax\n  40072c:  48 83 c0 10           add       {{blank:slot-6}},   %rax\n\n  400730:  48 89 d6              mov      %rdx,   %rsi\n  400733:  48 89 c7              mov      %rax,   %rdi\n  400736:                        callq    400500 <strcpy@plt>\n  40073b:  ff 75 e8              pushq    -0x18(%rbp)\n  40073e:  ff 75 e0              pushq    -0x20(%rbp)\n  400741:  ff 75 d8              pushq    -0x28(%rbp)\n  400744:  ff 75 d0              pushq    -0x30(%rbp)\n  400747:  e8 {{blank:slot-7}}           callq    400666 <callee>\n  40074c:  48 83 c4 20           add      $0x20,   %rsp\n  400750:                        jmp      400753 <caller+0x86>\n  400752:  90                    nop\n  400753:  48 8b 45 f8           mov       {{blank:slot-8}},   %rax\n  400757:  64 48 33 04 25 28 00  xor      %fs:0x28,  %rax\n  40075e:  00 00\n  400760:                        je       400767 <caller+0x9a>\n  400762:                        callq    400520 <__stack_chk_fail@plt>\n  400767:  c9                    leaveq\n  400768:  c3                    retq\n```\nC代码：\n```\n#include <stdio.h>\n#include \"string.h\"\n#define N   {{blank:slot-9}}\n#define M   {{blank:slot-10}}\ntypedef union {char str_u[N]; long l;} union_e;\ntypedef struct {char str_s[M]; union_e u; long c;} struct_e;\nvoid callee(struct_e s){\n char buf[M+N];\n strcpy(buf, s.str_s);\n strcat(buf, s.u.str_u);\n printf(\"%s \\n\",buf);\n}\n\nvoid caller(char *str){\n```\n struct_e s;\n```\n s.str_s[0]=‘\\0’;\n s.u.str_u[0]=’\\0’;\n int len = strlen(str);\n if(len>=  M+N)\n```\n  {{blank:slot-11}};\n```\n else if(len<N){\n  strcpy(s.str_s, {{blank:slot-12}});\n }\n else{\n  strcpy(s.u.str_u, {{blank:slot-13}});\n }\n callee(s);\n}\nint main(int argc, char *argv[]){\n caller(\"0123456789abcd\");\n return 0;\n}\n```\n`caller`函数中，变量`s` 所占的内存空间为：{{blank:slot-14}}\n该程序运行后，`printf`函数是否有输出？输出结果为：{{blank:slot-15}}"
       },
       "solution": {
         "state": "available",
@@ -114580,7 +114580,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ddc156550a8238c1",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-ea869cda0eb89689",
       "paperOrder": 21,
       "number": {
@@ -114655,17 +114655,496 @@
             },
             "parts": []
           },
-          "type": "short-answer",
+          "type": "fill",
           "moduleIds": [
             "machine_prog"
           ],
           "stem": {
             "format": "markdown",
-            "text": "**Problem D Stack (10 pts)**\n\nStack discipline. Consider the following C code and assembly code for a recursive function . **10pts**\n\n\n```c\nint gcd(int a, int b)\n{\n    if (!b)\n    {\n        return a;\n    }\n\n    return gcd(b, a % b);\n}\n```\n\n```asm\n0x08048394 <+0>:     push   %ebp\n0x08048395 <+1>:     mov    %esp,%ebp\n0x08048397 <+3>:     sub    $0x10,%esp\n0x0804839a <+6>:     mov    0x8(%ebp),%eax\n0x0804839d <+9>:     mov    0xc(%ebp),%ecx\n0x080483a0 <+12>:    test   %ecx,%ecx\n0x080483a2 <+14>:    je     0x80483b7 <gcd+35>\n0x080483a4 <+16>:    mov    %eax,%edx\n0x080483a6 <+18>:    sar    $0x1f,%edx\n0x080483a9 <+21>:    idiv   %ecx\n0x080483ab <+23>:    mov    %eax,0x4(%esp)\n0x080483af <+27>:    mov    %ecx,(%esp)\n0x080483b2 <+30>:    call   0x8048394 <gcd>\n0x080483b7 <+35>:    leave\n0x080483b8 <+36>:    ret\n```\n\nImagine that a program makes the procedure call gcd(213, 18). Also imagine that prior to the\ninvocation, the value of `%esp` is 0xffff1000—that is, 0xffff1000 is the value of `%esp` immediately\nbefore the execution of the call instruction.\n\n**A.** Note that the call gcd(213, 18) will result in the following function invocations: gcd(213, 18),\ngcd(18, 15), gcd(15, 3), and gcd(3, 0). Using the provided code and your knowledge of IA32 stack\ndiscipline, fill in the stack diagram with the values that would be present immediately before the\nexecution of the leave instruction for gcd(15, 3). Supply numerical values wherever possible, and\ncross out each blank for which there is insufficient information to complete with a numerical\nvalue.\n\n**Hints:** The following set of C style statements describes an approximation of the operation of\nthe instruction idiv `%ecx`, where ’/’ is the division operator and ’%’ is the modulo operator:\n\n```\n%eax = %eax / %ecx\n\n%edx = %eax % %ecx\n```\n\nAlso, recall that leave is equivalent to movl `%ebp`, `%esp`; popl `%ebp`\n\n***Part A:***\n\n| 地址 | 填答 |\n| --- | --- |\n| `0xffff1008` | ________ |\n| `0xffff1004` | ________ |\n| `0xffff1000` | ________ |\n| `0xffff0ffc` | ________ |\n| `0xffff0ff8` | ________ |\n| `0xffff0ff4` | ________ |\n| `0xffff0ff0` | ________ |\n| `0xffff0fec` | ________ |\n| `0xffff0fe8` | ________ |\n| `0xffff0fe4` | ________ |\n| `0xffff0fe0` | ________ |\n| `0xffff0fdc` | ________ |\n| `0xffff0fd8` | ________ |\n| `0xffff0fd4` | ________ |\n| `0xffff0fd0` | ________ |\n| `0xffff0fcc` | ________ |\n| `0xffff0fc8` | ________ |\n| `0xffff0fc4` | ________ |\n| `0xffff0fc0` | ________ |\n| `0xffff0fbc` | ________ |\n| `0xffff0fb8` | ________ |\n| `0xffff0fb4` | ________ |\n| `0xffff0fb0` | ________ |"
+            "blanks": [
+              {
+                "id": "stk-ffff1008",
+                "marker": "{{blank:stk-ffff1008}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff1004",
+                "marker": "{{blank:stk-ffff1004}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff1000",
+                "marker": "{{blank:stk-ffff1000}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0ffc",
+                "marker": "{{blank:stk-ffff0ffc}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0ff8",
+                "marker": "{{blank:stk-ffff0ff8}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0ff4",
+                "marker": "{{blank:stk-ffff0ff4}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0ff0",
+                "marker": "{{blank:stk-ffff0ff0}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fec",
+                "marker": "{{blank:stk-ffff0fec}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fe8",
+                "marker": "{{blank:stk-ffff0fe8}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fe4",
+                "marker": "{{blank:stk-ffff0fe4}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fe0",
+                "marker": "{{blank:stk-ffff0fe0}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fdc",
+                "marker": "{{blank:stk-ffff0fdc}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fd8",
+                "marker": "{{blank:stk-ffff0fd8}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fd4",
+                "marker": "{{blank:stk-ffff0fd4}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fd0",
+                "marker": "{{blank:stk-ffff0fd0}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fcc",
+                "marker": "{{blank:stk-ffff0fcc}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fc8",
+                "marker": "{{blank:stk-ffff0fc8}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fc4",
+                "marker": "{{blank:stk-ffff0fc4}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fc0",
+                "marker": "{{blank:stk-ffff0fc0}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fbc",
+                "marker": "{{blank:stk-ffff0fbc}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fb8",
+                "marker": "{{blank:stk-ffff0fb8}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fb4",
+                "marker": "{{blank:stk-ffff0fb4}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "stk-ffff0fb0",
+                "marker": "{{blank:stk-ffff0fb0}}",
+                "occurrence": 0,
+                "width": "short"
+              }
+            ],
+            "text": "**Problem D Stack (10 pts)**\n\nStack discipline. Consider the following C code and assembly code for a recursive function . **10pts**\n\n\n```c\nint gcd(int a, int b)\n{\n    if (!b)\n    {\n        return a;\n    }\n\n    return gcd(b, a % b);\n}\n```\n\n```asm\n0x08048394 <+0>:     push   %ebp\n0x08048395 <+1>:     mov    %esp,%ebp\n0x08048397 <+3>:     sub    $0x10,%esp\n0x0804839a <+6>:     mov    0x8(%ebp),%eax\n0x0804839d <+9>:     mov    0xc(%ebp),%ecx\n0x080483a0 <+12>:    test   %ecx,%ecx\n0x080483a2 <+14>:    je     0x80483b7 <gcd+35>\n0x080483a4 <+16>:    mov    %eax,%edx\n0x080483a6 <+18>:    sar    $0x1f,%edx\n0x080483a9 <+21>:    idiv   %ecx\n0x080483ab <+23>:    mov    %eax,0x4(%esp)\n0x080483af <+27>:    mov    %ecx,(%esp)\n0x080483b2 <+30>:    call   0x8048394 <gcd>\n0x080483b7 <+35>:    leave\n0x080483b8 <+36>:    ret\n```\n\nImagine that a program makes the procedure call gcd(213, 18). Also imagine that prior to the\ninvocation, the value of `%esp` is 0xffff1000—that is, 0xffff1000 is the value of `%esp` immediately\nbefore the execution of the call instruction.\n\n**A.** Note that the call gcd(213, 18) will result in the following function invocations: gcd(213, 18),\ngcd(18, 15), gcd(15, 3), and gcd(3, 0). Using the provided code and your knowledge of IA32 stack\ndiscipline, fill in the stack diagram with the values that would be present immediately before the\nexecution of the leave instruction for gcd(15, 3). Supply numerical values wherever possible, and\ncross out each blank for which there is insufficient information to complete with a numerical\nvalue.\n\n**Hints:** The following set of C style statements describes an approximation of the operation of\nthe instruction idiv `%ecx`, where ’/’ is the division operator and ’%’ is the modulo operator:\n\n```\n%eax = %eax / %ecx\n\n%edx = %eax % %ecx\n```\n\nAlso, recall that leave is equivalent to movl `%ebp`, `%esp`; popl `%ebp`\n\n***Part A:***\n\n| 地址 | 填答 |\n| --- | --- |\n| `0xffff1008` | {{blank:stk-ffff1008}} |\n| `0xffff1004` | {{blank:stk-ffff1004}} |\n| `0xffff1000` | {{blank:stk-ffff1000}} |\n| `0xffff0ffc` | {{blank:stk-ffff0ffc}} |\n| `0xffff0ff8` | {{blank:stk-ffff0ff8}} |\n| `0xffff0ff4` | {{blank:stk-ffff0ff4}} |\n| `0xffff0ff0` | {{blank:stk-ffff0ff0}} |\n| `0xffff0fec` | {{blank:stk-ffff0fec}} |\n| `0xffff0fe8` | {{blank:stk-ffff0fe8}} |\n| `0xffff0fe4` | {{blank:stk-ffff0fe4}} |\n| `0xffff0fe0` | {{blank:stk-ffff0fe0}} |\n| `0xffff0fdc` | {{blank:stk-ffff0fdc}} |\n| `0xffff0fd8` | {{blank:stk-ffff0fd8}} |\n| `0xffff0fd4` | {{blank:stk-ffff0fd4}} |\n| `0xffff0fd0` | {{blank:stk-ffff0fd0}} |\n| `0xffff0fcc` | {{blank:stk-ffff0fcc}} |\n| `0xffff0fc8` | {{blank:stk-ffff0fc8}} |\n| `0xffff0fc4` | {{blank:stk-ffff0fc4}} |\n| `0xffff0fc0` | {{blank:stk-ffff0fc0}} |\n| `0xffff0fbc` | {{blank:stk-ffff0fbc}} |\n| `0xffff0fb8` | {{blank:stk-ffff0fb8}} |\n| `0xffff0fb4` | {{blank:stk-ffff0fb4}} |\n| `0xffff0fb0` | {{blank:stk-ffff0fb0}} |\n"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "stk-ffff1008",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff1004",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "18",
+                  "0x12"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff1000",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "213",
+                  "0xd5"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0ffc",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0ff8",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0ff4",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0ff0",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fec",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "15",
+                  "0xf"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fe8",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "18",
+                  "0x12"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fe4",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0x080483b7",
+                  "0x80483b7",
+                  "080483b7",
+                  "80483b7",
+                  "0x080483b7"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fe0",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0xffff0ff8",
+                  "ffff0ff8"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fdc",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fd8",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fd4",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "3",
+                  "0x3"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fd0",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "15",
+                  "0xf"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fcc",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0x080483b7",
+                  "0x80483b7",
+                  "080483b7",
+                  "80483b7",
+                  "0x080483b7"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fc8",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0xffff0fe0",
+                  "ffff0fe0"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fc4",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fc0",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fbc",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0",
+                  "0x0"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fb8",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "3",
+                  "0x3"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fb4",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "stk-ffff0fb0",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "unknown",
+                  "Unknown",
+                  "UNKNOWN",
+                  "未知",
+                  "不确定",
+                  "?",
+                  "无"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              }
+            ],
             "reference": {
               "format": "markdown",
               "text": "答案：Part A 的栈内容图（立即在 gcd(15, 3) 的 leave 指令之前执行时，地址由高到低，原卷红色为参考答案）：\n\n| 地址 | 值 |\n| --- | --- |\n| `0xffff1008` | unknown |\n| `0xffff1004` | 18 |\n| `0xffff1000` | 213 |\n| `0xffff0ffc` | unknown |\n| `0xffff0ff8` | unknown |\n| `0xffff0ff4` | unknown |\n| `0xffff0ff0` | unknown |\n| `0xffff0fec` | 15 |\n| `0xffff0fe8` | 18 |\n| `0xffff0fe4` | `0x080483b7` |\n| `0xffff0fe0` | `0xffff0ff8` |\n| `0xffff0fdc` | unknown |\n| `0xffff0fd8` | unknown |\n| `0xffff0fd4` | 3 |\n| `0xffff0fd0` | 15 |\n| `0xffff0fcc` | `0x080483b7` |\n| `0xffff0fc8` | `0xffff0fe0` |\n| `0xffff0fc4` | unknown |\n| `0xffff0fc0` | unknown |\n| `0xffff0fbc` | 0 |\n| `0xffff0fb8` | 3 |\n| `0xffff0fb4` | unknown |\n| `0xffff0fb0` | unknown |"
@@ -114706,17 +115185,57 @@
             },
             "parts": []
           },
-          "type": "short-answer",
+          "type": "fill",
           "moduleIds": [
             "machine_prog"
           ],
           "stem": {
             "format": "markdown",
-            "text": "**B.** What are the values of `%esp` and `%ebp` immediately before the execution of the `ret` instruction for `gcd(15, 3)`?"
+            "blanks": [
+              {
+                "id": "esp-ret",
+                "marker": "{{blank:esp-ret}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "ebp-ret",
+                "marker": "{{blank:ebp-ret}}",
+                "occurrence": 0,
+                "width": "medium"
+              }
+            ],
+            "text": "**B.** What are the values of `%esp` and `%ebp` immediately before the execution of the `ret` instruction for `gcd(15, 3)`?\n\n`%esp` = {{blank:esp-ret}}\n\n`%ebp` = {{blank:ebp-ret}}\n"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "esp-ret",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0xffff0fcc",
+                  "ffff0fcc"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              },
+              {
+                "blankId": "ebp-ret",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "0xffff0fe0",
+                  "ffff0fe0"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": false
+                }
+              }
+            ],
             "reference": {
               "format": "markdown",
               "text": "答案：`%esp = 0xffff0fcc`；`%ebp = 0xffff0fe0`（原卷红色标注）"
