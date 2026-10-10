@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ffc3db50cfb5b1e6",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-ac5fea2cf89e5bed",
   "paperOrder": 5,
   "number": {
@@ -97,6 +97,7 @@
 %%% stem
 （5~6） 如果直接映射高速缓存（Cache）的大小是4KB，并且块大小（block）
 大小为32字节。
+
 5、请问它每路（way）有多少行（line）？
 %%% reference
 答案：选 A，容量=路容量\*路数=cache 行大小*Set 数\*路数->set 数

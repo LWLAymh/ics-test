@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-e4c733a4eceae52e",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-662d741f28b2bed0",
   "paperOrder": 21,
   "number": {
@@ -286,6 +286,7 @@
 %%% stem
 第二题（20分）
 （边凯归，周明辉）
+
 1.在64位机器上，判断下列等式是否恒成立
 ```c
 /* random_int()函数返回一个随机的int类型值 */

@@ -5204,7 +5204,7 @@
     {
       "schemaVersion": "5",
       "id": "q-00a8b5c318a16492",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 28,
       "number": {
@@ -5255,7 +5255,7 @@
             "width": "medium"
           }
         ],
-        "text": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听 {{blank:max-connections}} 个来自一个客户端独\n立的 `socket` 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。`HTTP`服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（`Server`）\n通过 `socket`进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其`Open_clientfd`命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给`Server`端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 `Server` 端相\n应代码行画一条单向箭头。\n\n![Echo Client 与 Echo Server 代码（原卷题面，不含答案）](assets/期末/2014期末-带答案/page-24-question.svg)\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```"
+        "text": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听 {{blank:max-connections}} 个来自一个客户端独\n立的 `socket` 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。`HTTP`服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（`Server`）\n通过 `socket`进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其`Open_clientfd`命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给`Server`端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 `Server` 端相\n应代码行画一条单向箭头。\n\n![Echo Client 与 Echo Server 代码（原卷题面，不含答案）](assets/期末/2014期末-带答案/page-24-question.svg)\n\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```"
       },
       "solution": {
         "state": "available",
@@ -7970,7 +7970,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ca7c15d1d3855afc",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 25,
       "number": {
@@ -8053,7 +8053,7 @@
             "label": "buffer.txt 最终内容"
           }
         ],
-        "text": "第六题（10分）ECF\n1.（5 分）以下程序运行时系统调用全部正确执行，`buffer.txt` 文件的内容为\npekinguniv。请给出代码运行后打印输出的结果，并给出程序运行结束后\n`buffer.txt`文件的内容。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <fcntl.h>\n#include <unistd.h>\nint main() {\n    char c;\n    int file1 = open(\"buffer.txt\", O_RDWR);\n    int file2;\n    read(file1, &c, 1);\n    file2 = dup(file1);\n    write(file2, &c, 1);\n    printf(\"1 = %c\\n\", c);\n    int pid = fork() ;\n    if (pid == 0) {\n        read(file1, &c, 1);\n        write(file2, &c, 1);\n        printf(\"2 = %c\\n\", c);\n        read(file1, &c, 1);\n        printf(\"3 = %c\\n\", c);\n        close(file1);\n        exit(0);\n    } else {\n        waitpid(pid, NULL, 0);\n        close(file2);\n        dup2(file1, file2);\n        read(file2, &c, 1);\n        write(file2, &c, 1);\n        printf(\"4 = %c\\n\", c);\n    }\n    return 0;\n}\n```\n\n打印输出：`1 = {{blank:out1}}`、`2 = {{blank:out2}}`、`3 = {{blank:out3}}`、`4 = {{blank:out4}}`。\n\n`buffer.txt` 最终内容：{{blank:file-content}}"
+        "text": "第六题（10分）ECF\n\n1.（5 分）以下程序运行时系统调用全部正确执行，`buffer.txt` 文件的内容为\npekinguniv。请给出代码运行后打印输出的结果，并给出程序运行结束后\n`buffer.txt`文件的内容。\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <fcntl.h>\n#include <unistd.h>\nint main() {\n    char c;\n    int file1 = open(\"buffer.txt\", O_RDWR);\n    int file2;\n    read(file1, &c, 1);\n    file2 = dup(file1);\n    write(file2, &c, 1);\n    printf(\"1 = %c\\n\", c);\n    int pid = fork() ;\n    if (pid == 0) {\n        read(file1, &c, 1);\n        write(file2, &c, 1);\n        printf(\"2 = %c\\n\", c);\n        read(file1, &c, 1);\n        printf(\"3 = %c\\n\", c);\n        close(file1);\n        exit(0);\n    } else {\n        waitpid(pid, NULL, 0);\n        close(file2);\n        dup2(file1, file2);\n        read(file2, &c, 1);\n        write(file2, &c, 1);\n        printf(\"4 = %c\\n\", c);\n    }\n    return 0;\n}\n```\n\n打印输出：`1 = {{blank:out1}}`、`2 = {{blank:out2}}`、`3 = {{blank:out3}}`、`4 = {{blank:out4}}`。\n\n`buffer.txt` 最终内容：{{blank:file-content}}"
       },
       "solution": {
         "state": "available",
@@ -8327,7 +8327,7 @@
     {
       "schemaVersion": "5",
       "id": "q-dce1153891e59f40",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 23,
       "number": {
@@ -8684,7 +8684,7 @@
             }
           }
         ],
-        "text": "第四题（10分） 链接\n考虑如下3个文件：`main.c, fib.c`和`bignat.c`：\n```\n/* main.c */\nvoid fib (int n);\nint main (int argc, char** argv) {\n    int n = 0;\n    sscanf(argv[1], \"%d\", &n);\n    fib(n);\n}\n/* fib.c */\n#define N 16\nstatic unsigned int ring[3][N];\nstatic void print_bignat(unsigned int* a) {\n    int i;\n    for (i = N-1; i >= 0; i--)\n        printf(\"%u \", a[i]); /* print a[i] as unsigned int\n    */\n    printf(\"\\n\");\n}\nvoid fib (int n) {\n    int i, carry;\n    from_int(N, 0, ring[0]); /* fib(0) = 0 */\n    from_int(N, 1, ring[1]); /* fib(1) = 1 */\n    for (i = 0; i <= n-2; i++) {\n        carry  =  plus(N,  ring[i%3],  ring[(i+1)%3],\n            ring[(i+2)%3]);\n        if (carry) {\n            printf(\"Overflow  at  fib(%d)\\n\",  i+2);\n            exit(0);\n        }\n    }\n    print_bignat(ring[n%3]);\n}\n```\n另外，假设在文件`bignat.c`中定义了如下两个函数`plus`和`from_int`（具体\n定义略）：\n\n\n```\nint plus (int n, unsigned int* a, unsigned int* b, unsigned\nint* c);\nvoid from_int (int n, unsigned int k, unsigned int* a);\n```\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n| 文件 | 符号 | 局部或全局？ | 强或弱？ |\n| --- | --- | --- | --- |\n| `main.c` | `fib` | {{blank:scope-1}} | {{blank:binding-1}} |\n| `main.c` | `main` | {{blank:scope-2}} | {{blank:binding-2}} |\n| `fib.c` | `ring` | {{blank:scope-3}} | {{blank:binding-3}} |\n| `fib.c` | `fib` | {{blank:scope-4}} | {{blank:binding-4}} |\n| `fib.c` | `plus` | {{blank:scope-5}} | {{blank:binding-5}} |\n\n2. （3分） 假设文件`bignat.c`被编译为一个静态库`bignat.a`，对于如下的\n`gcc`调用，会得到什么样的结果（请选择）？\n（A） 编译和链接都正确\n（B） 链接失败（原因是包含未定义的引用）\n（C） 链接失败（原因是包含重复定义）\n| 命令 | 结果（A、B 或 C） |\n| --- | --- |\n| `gcc -o fib main.c fib.c bignat.a` | {{blank:link-1}} |\n| `gcc -o fib bignat.a main.c fib.c` | {{blank:link-2}} |\n| `gcc -o fib fib.c main.c bignat.a` | {{blank:link-3}} |\n3. （2分）如果在文件`fib.c`中，程序员在声明变量`ring`时，不小心把它写成\n了：\n`static int ring[3][N]`;\n会不会影响这些文件的编译、链接和运行结果？为什么？"
+        "text": "第四题（10分） 链接\n考虑如下3个文件：`main.c, fib.c`和`bignat.c`：\n```\n/* main.c */\nvoid fib (int n);\nint main (int argc, char** argv) {\n    int n = 0;\n    sscanf(argv[1], \"%d\", &n);\n    fib(n);\n}\n/* fib.c */\n#define N 16\nstatic unsigned int ring[3][N];\nstatic void print_bignat(unsigned int* a) {\n    int i;\n    for (i = N-1; i >= 0; i--)\n        printf(\"%u \", a[i]); /* print a[i] as unsigned int\n    */\n    printf(\"\\n\");\n}\nvoid fib (int n) {\n    int i, carry;\n    from_int(N, 0, ring[0]); /* fib(0) = 0 */\n    from_int(N, 1, ring[1]); /* fib(1) = 1 */\n    for (i = 0; i <= n-2; i++) {\n        carry  =  plus(N,  ring[i%3],  ring[(i+1)%3],\n            ring[(i+2)%3]);\n        if (carry) {\n            printf(\"Overflow  at  fib(%d)\\n\",  i+2);\n            exit(0);\n        }\n    }\n    print_bignat(ring[n%3]);\n}\n```\n另外，假设在文件`bignat.c`中定义了如下两个函数`plus`和`from_int`（具体\n定义略）：\n\n\n```\nint plus (int n, unsigned int* a, unsigned int* b, unsigned\nint* c);\nvoid from_int (int n, unsigned int k, unsigned int* a);\n```\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n| 文件 | 符号 | 局部或全局？ | 强或弱？ |\n| --- | --- | --- | --- |\n| `main.c` | `fib` | {{blank:scope-1}} | {{blank:binding-1}} |\n| `main.c` | `main` | {{blank:scope-2}} | {{blank:binding-2}} |\n| `fib.c` | `ring` | {{blank:scope-3}} | {{blank:binding-3}} |\n| `fib.c` | `fib` | {{blank:scope-4}} | {{blank:binding-4}} |\n| `fib.c` | `plus` | {{blank:scope-5}} | {{blank:binding-5}} |\n\n2. （3分） 假设文件`bignat.c`被编译为一个静态库`bignat.a`，对于如下的\n`gcc`调用，会得到什么样的结果（请选择）？\n\n（A） 编译和链接都正确\n\n（B） 链接失败（原因是包含未定义的引用）\n\n（C） 链接失败（原因是包含重复定义）\n| 命令 | 结果（A、B 或 C） |\n| --- | --- |\n| `gcc -o fib main.c fib.c bignat.a` | {{blank:link-1}} |\n| `gcc -o fib bignat.a main.c fib.c` | {{blank:link-2}} |\n| `gcc -o fib fib.c main.c bignat.a` | {{blank:link-3}} |\n3. （2分）如果在文件`fib.c`中，程序员在声明变量`ring`时，不小心把它写成\n了：\n`static int ring[3][N]`;\n会不会影响这些文件的编译、链接和运行结果？为什么？"
       },
       "solution": {
         "state": "available",
@@ -8823,7 +8823,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e7e0b2274550651e",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 24,
       "number": {
@@ -8936,7 +8936,7 @@
             }
           }
         ],
-        "text": "第五题（10分）虚拟存储\nIntel的IA32 体系结构采用小端法和二级页表。其中两级页表的大小相同，\n页大小为4KB。一级页表和二级页表的表项结构相同，其中页表项后六位的含义如\n下。\n\n| 位 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 标志 | — | D | A | CD | WT | U | W | P |\n\nD：Dirty（在页目录项中为0）；A：Accessed；CD：Cache Disabled；WT：1为\nWrite-through，0为Write-back；U：User；W：Writable；P：Present。\n\n已知一级页表的地址为`0x0c23b000`，物理内存中的部分内容如下图所示。\n地址  内容  地址  内容  地址  内容  地址  内容\n```\n00023000  E0  00023001  BE   00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n00023FF8  29  00023FF9  FF  00023FFA  DE  00023FFB  BC\n00055004  03  00055005  D0  00055006  74  00055007  89\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055460  97  00055461  D2  00055462  7B  00055463  45\n00055464  97  00055465  E2  00055466  7B  00055467  45\n0C23B020  55  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  55  0C23B041  AB  0C23B042  2A  0C23B043  01\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n0C23B09D  05  0C23B09E  D3  0C23B09F  F2  0C23B0A0  0F\n0C23B274  05  0C23B275  3D  0C23B276  02  0C23B277  00\n0C23B9FC  25  0C23B9FD  D2  0C23B9FE  14  0C23B9FF  23\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n2314D4A0  BD  2314D4A1  BC  2314D4A2  88  2314D4A3  D3\n2314D890  00  2314D891  2D  2314D892  B3  2314D893  00\n24AEE001  07  24AEE002  A0  24AEE003  37  24AEE004  C2\n24AEE520  D1  24AEE521  DA  24AEE522  8C  24AEE523  B5\n29DE2504  02  29DE2505  AD  29DE2506  FF  29DE2507  56\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n29DE9402  00  29DE9403  20  29DE9404  73  29DE9405  D4\n29DEE500  B0  29DEE501  CD  29DEE502  23  29DEE503  1A\n```\nTLB采用直接映射，TLB的内容如下所示。\n索引  TLB标记  内容  有效位\n```\n0  0x08001  2314d220  1\n1  0x01000  24aee520  0\n2  0x005AE  00055004  0\n3  0x016BA  0c23b09d  1\n4  0x0AA00  0005545c  1\n5  0x0000A  29dee500  0\n6  0x5AE82  00023320  1\n7  0x28DFC  00023000  1\n```\n1. （2分）某用户态进程试图写入虚拟地址：`0x080016ba`。该访问的最后结果\n是______。\n(a) 该进程成功写入，未触发异常\n(b) 该进程触发了一个缺页异常\n(c) 该进程触发了一个非法访问异常\n2.下面描述了具体的访问过程，请填空。如果某个空在访问过程中已不可用，请\n填入“--”\n2.1 TLB的索引为______，访问为 {{blank:tlb-hit}}（(a) 命中；(b) 不命中）（2分）\n2.2一级页表表项地址为_______________。（2分）\n2.3二级页表表项地址为______________。（2分）\n2.4最后物理地址为______________。（2分）"
+        "text": "第五题（10分）虚拟存储\nIntel的IA32 体系结构采用小端法和二级页表。其中两级页表的大小相同，\n页大小为4KB。一级页表和二级页表的表项结构相同，其中页表项后六位的含义如\n下。\n\n| 位 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 标志 | — | D | A | CD | WT | U | W | P |\n\nD：Dirty（在页目录项中为0）；A：Accessed；CD：Cache Disabled；WT：1为\nWrite-through，0为Write-back；U：User；W：Writable；P：Present。\n\n已知一级页表的地址为`0x0c23b000`，物理内存中的部分内容如下图所示。\n地址  内容  地址  内容  地址  内容  地址  内容\n```\n00023000  E0  00023001  BE   00023002  EF  00023003  BE\n00023120  83  00023121  C8  00023122  FD  00023123  12\n00023200  23  00023201  FD  00023202  BC  00023203  DE\n00023320  33  00023321  29  00023322  E5  00023323  D2\n00023FF8  29  00023FF9  FF  00023FFA  DE  00023FFB  BC\n00055004  03  00055005  D0  00055006  74  00055007  89\n0005545C  97  0005545D  C2  0005545E  7B  0005545F  45\n00055460  97  00055461  D2  00055462  7B  00055463  45\n00055464  97  00055465  E2  00055466  7B  00055467  45\n0C23B020  55  0C23B021  EB  0C23B022  AE  0C23B023  24\n0C23B040  55  0C23B041  AB  0C23B042  2A  0C23B043  01\n0C23B080  05  0C23B081  5D  0C23B082  05  0C23B083  00\n0C23B09D  05  0C23B09E  D3  0C23B09F  F2  0C23B0A0  0F\n0C23B274  05  0C23B275  3D  0C23B276  02  0C23B277  00\n0C23B9FC  25  0C23B9FD  D2  0C23B9FE  14  0C23B9FF  23\n2314D200  23  2314D201  12  2314D202  DC  2314D203  0F\n2314D220  A9  2314D221  45  2314D222  13  2314D223  D2\n2314D4A0  BD  2314D4A1  BC  2314D4A2  88  2314D4A3  D3\n2314D890  00  2314D891  2D  2314D892  B3  2314D893  00\n24AEE001  07  24AEE002  A0  24AEE003  37  24AEE004  C2\n24AEE520  D1  24AEE521  DA  24AEE522  8C  24AEE523  B5\n29DE2504  02  29DE2505  AD  29DE2506  FF  29DE2507  56\n29DE4400  D0  29DE4401  5C  29DE4402  B4  29DE4403  2A\n29DE9402  00  29DE9403  20  29DE9404  73  29DE9405  D4\n29DEE500  B0  29DEE501  CD  29DEE502  23  29DEE503  1A\n```\nTLB采用直接映射，TLB的内容如下所示。\n索引  TLB标记  内容  有效位\n```\n0  0x08001  2314d220  1\n1  0x01000  24aee520  0\n2  0x005AE  00055004  0\n3  0x016BA  0c23b09d  1\n4  0x0AA00  0005545c  1\n5  0x0000A  29dee500  0\n6  0x5AE82  00023320  1\n7  0x28DFC  00023000  1\n```\n1. （2分）某用户态进程试图写入虚拟地址：`0x080016ba`。该访问的最后结果\n是______。\n\n(a) 该进程成功写入，未触发异常\n\n(b) 该进程触发了一个缺页异常\n\n(c) 该进程触发了一个非法访问异常\n\n2.下面描述了具体的访问过程，请填空。如果某个空在访问过程中已不可用，请\n填入“--”\n\n2.1 TLB的索引为______，访问为 {{blank:tlb-hit}}（(a) 命中；(b) 不命中）（2分）\n\n2.2一级页表表项地址为_______________。（2分）\n\n2.3二级页表表项地址为______________。（2分）\n\n2.4最后物理地址为______________。（2分）"
       },
       "solution": {
         "state": "available",
@@ -11424,7 +11424,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a3e6929db333a3d1",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 25,
       "number": {
@@ -11611,7 +11611,7 @@
             }
           }
         ],
-        "text": "第六题（15分）虚拟内存地址转换\n为了提升虚拟内存地址的转换效率，降低遍历两级页表结构所带来的地址转换\n开销，英特尔处理器中引入了大页TLB，即一个TLB项可以涵盖整个4MB对齐的\n地址空间（针对32位模式）。只要设置页目录页中页目录项（PDE）的大页标志位，\n即可让MMU识别这是一个大页PDE，并加载到大页TLB项中。大页PDE中记录的\n物理内存页面号必须是4MB对齐的，并且整个连续的4MB内存均可统一通过该大\n页PDE进行地址转换。\n在32位的Linux系统中，为了方便访问物理内存，内核将地址0~768MB间\n的物理内存映射到虚拟内存地址3GB~3GB+768MB上，并通过大页PDE进行进行\n该区间的地址转换。任何 0~768MB 的物理内存地址可以直接通过加 3G\n（`0xC0000000`）的方式得到其虚拟内存地址。在内核中，除了该区间的内存外，\n其他地址的内存通常都通过普通的两级页表结构来进行地址转换。\n假设在我们使用的处理器中有2个大页TLB项，其当前状态如下：\n索引号  TLB标记  页面号  有效位\n```\n0  0xC48  0x04800  1\n1  0xC9C  0x09C00  1\n```\n有4个普通TLB项，当前的状态如下：\n索引号  TLB标记  页面号  有效位\n```\n0  0xF8034  0x04812  1\n1  0xF8033  0x09812  1\n2  0xF4427  0x12137  1\n3  0xF44AE  0x17343  1\n```\n当前页活跃的目录页（PD）中的部分PDE的内容如下：\nPDE索引  页面号  其他标志  大页位  存在位\n```\n786  0x04800  …  1  1\n807  0x09C00  …  1  1\n977  0x09C33  …  0  1\n992  0x09078  …  0  1\n```\n注：普通页面大小为4KB，并且4KB对齐。每个页面的页面号为其页面起始物理地址除以\n4096得到。大页由连续1024个4KB小页组成，且4MB对齐。\n\n\n1. 分析下面的指令序列，\n```\n    movl $0xC48012024, %ebx\n    movl $128, (%ebx)\n    movl $0xF8034000, %ecx\n    movl 36(%ecx), %eax\n```\n请问，执行完上述指令后，`eax` 寄存器中的内容是（{{blank:q6-1-eax}}）；在执行上述指令过程\n中，共发生了（{{blank:q6-1-tlb}}）次TLB miss？同时会发生（{{blank:q6-1-pf}}）次page fault？\n注：不能确定时填写“--”。\n2. 请判断下列页面号对应的页面中，哪些一定是页表页？哪些不是？哪些不确\n定？\n页面号  是否为页表页（是/不是/不确定）\n```\n0x04800  {{blank:q6-2-4}}\n0x09C33  {{blank:q6-2-5}}\n0x09812  {{blank:q6-2-6}}\n```\n3. 下列虚拟地址中哪一个对应着能够将虚拟内存地址 `0xF4427048` 映射到物理内\n存地址`0x14321048`的页表项（{{blank:q6-3-pte}}）？\n（A）`0x09C33027`      （B）`0xC9C3309C`\n（C）`0xC9C33027`      （D）`0x09C3309C`\n通过上述虚拟地址，利用`movl`指令修改对应的页表项，完成上述映射，在此\n过程中，是否会产生TLB miss？（{{blank:q6-3-miss}}）（回答：会/不会/不确定）\n修改页表项后，是否可以立即直接使用下面的指令序列将物理内存地址\n`0x14321048`开始的一个32位整数清零？为什么？\n```\n    movl $0xF4427048, %ebx\n    movl $0, (%ebx)\n```\n答：请先思考，再对照下方解析。"
+        "text": "第六题（15分）虚拟内存地址转换\n为了提升虚拟内存地址的转换效率，降低遍历两级页表结构所带来的地址转换\n开销，英特尔处理器中引入了大页TLB，即一个TLB项可以涵盖整个4MB对齐的\n地址空间（针对32位模式）。只要设置页目录页中页目录项（PDE）的大页标志位，\n即可让MMU识别这是一个大页PDE，并加载到大页TLB项中。大页PDE中记录的\n物理内存页面号必须是4MB对齐的，并且整个连续的4MB内存均可统一通过该大\n页PDE进行地址转换。\n在32位的Linux系统中，为了方便访问物理内存，内核将地址0~768MB间\n的物理内存映射到虚拟内存地址3GB~3GB+768MB上，并通过大页PDE进行进行\n该区间的地址转换。任何 0~768MB 的物理内存地址可以直接通过加 3G\n（`0xC0000000`）的方式得到其虚拟内存地址。在内核中，除了该区间的内存外，\n其他地址的内存通常都通过普通的两级页表结构来进行地址转换。\n假设在我们使用的处理器中有2个大页TLB项，其当前状态如下：\n索引号  TLB标记  页面号  有效位\n```\n0  0xC48  0x04800  1\n1  0xC9C  0x09C00  1\n```\n有4个普通TLB项，当前的状态如下：\n索引号  TLB标记  页面号  有效位\n```\n0  0xF8034  0x04812  1\n1  0xF8033  0x09812  1\n2  0xF4427  0x12137  1\n3  0xF44AE  0x17343  1\n```\n当前页活跃的目录页（PD）中的部分PDE的内容如下：\nPDE索引  页面号  其他标志  大页位  存在位\n```\n786  0x04800  …  1  1\n807  0x09C00  …  1  1\n977  0x09C33  …  0  1\n992  0x09078  …  0  1\n```\n注：普通页面大小为4KB，并且4KB对齐。每个页面的页面号为其页面起始物理地址除以\n4096得到。大页由连续1024个4KB小页组成，且4MB对齐。\n\n\n1. 分析下面的指令序列，\n```\n    movl $0xC48012024, %ebx\n    movl $128, (%ebx)\n    movl $0xF8034000, %ecx\n    movl 36(%ecx), %eax\n```\n请问，执行完上述指令后，`eax` 寄存器中的内容是（{{blank:q6-1-eax}}）；在执行上述指令过程\n中，共发生了（{{blank:q6-1-tlb}}）次TLB miss？同时会发生（{{blank:q6-1-pf}}）次page fault？\n注：不能确定时填写“--”。\n2. 请判断下列页面号对应的页面中，哪些一定是页表页？哪些不是？哪些不确\n定？\n页面号  是否为页表页（是/不是/不确定）\n```\n0x04800  {{blank:q6-2-4}}\n0x09C33  {{blank:q6-2-5}}\n0x09812  {{blank:q6-2-6}}\n```\n3. 下列虚拟地址中哪一个对应着能够将虚拟内存地址 `0xF4427048` 映射到物理内\n存地址`0x14321048`的页表项（{{blank:q6-3-pte}}）？\n\n（A）`0x09C33027`      （B）`0xC9C3309C`\n\n（C）`0xC9C33027`      （D）`0x09C3309C`\n通过上述虚拟地址，利用`movl`指令修改对应的页表项，完成上述映射，在此\n过程中，是否会产生TLB miss？（{{blank:q6-3-miss}}）（回答：会/不会/不确定）\n修改页表项后，是否可以立即直接使用下面的指令序列将物理内存地址\n`0x14321048`开始的一个32位整数清零？为什么？\n```\n    movl $0xF4427048, %ebx\n    movl $0, (%ebx)\n```\n答：请先思考，再对照下方解析。"
       },
       "solution": {
         "state": "available",
@@ -11700,7 +11700,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c42dbf66f5c328f4",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 26,
       "number": {
@@ -12045,7 +12045,7 @@
             }
           }
         ],
-        "text": "第七题（10分）网络\n1. 请根据 `web` 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP,\nKernel code, User code\n```\n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | {{blank:q7-http-data}} | {{blank:q7-http-code}} |\n| `TCP` | {{blank:q7-tcp-data}} | {{blank:q7-tcp-code}} |\n| IP | {{blank:q7-ip-data}} | {{blank:q7-ip-code}} |\n\n\n2. 以下关于互联网的说法中哪些是正确的？\nA. 在client-server模型中，server通常使用监听套接字`listenfd`和多\n个client同时通信\nB. 在client-server模型中，套接字是一种文件标识符\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\nD. Web是一种互联网协议\nE. 域名和IP地址是一一对应的\nF. Internet是一种internet\n正确选项：{{blank:q7-correct-options}}。请简要说明原因；说明部分提交后对照解析。"
+        "text": "第七题（10分）网络\n1. 请根据 `web` 应用在计算机网络中的定义以及其在协议栈自上而下在软件中的\n实现，把以下关键字填入表格\n注：同一个关键词可能被填入多次；不是每一个关键词都必须被填入\n```\nStreams (end to end), Datagrams, web content, IP, TCP, UDP,\nKernel code, User code\n```\n| 协议 | 数据包类型 | 软件实现 |\n| --- | --- | --- |\n| HTTP | {{blank:q7-http-data}} | {{blank:q7-http-code}} |\n| `TCP` | {{blank:q7-tcp-data}} | {{blank:q7-tcp-code}} |\n| IP | {{blank:q7-ip-data}} | {{blank:q7-ip-code}} |\n\n\n2. 以下关于互联网的说法中哪些是正确的？\n\nA. 在client-server模型中，server通常使用监听套接字`listenfd`和多\n个client同时通信\n\nB. 在client-server模型中，套接字是一种文件标识符\n\nC. 准确地说，IP地址是用于标识主机的adapter (network interface ca\nrd)，并非主机\n\nD. Web是一种互联网协议\n\nE. 域名和IP地址是一一对应的\n\nF. Internet是一种internet\n正确选项：{{blank:q7-correct-options}}。请简要说明原因；说明部分提交后对照解析。"
       },
       "solution": {
         "state": "available",
@@ -14254,7 +14254,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1d4f3586e8bd5b5c",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 17,
       "number": {
@@ -14390,7 +14390,7 @@
             "label": "（13）最大栈帧数"
           }
         ],
-        "text": "第三题（15分）\n下列C代码实现了一个名为`foo`的函数，请阅读并分析该C代码及其对应的x86\n汇编代码，补全代码中缺失的部分，并回答相应问题。（注：第（14）题不要求作\n答。）\n```c\nvoid foo(char *p)\n{\n  int len = strlen(p);\n  char tmp =   {{blank:b1}}  ;\n  *p =   (14)  ;\n  (14)   = '\\0';\n  if (strlen(p + 1)  {{blank:b2}}  1)\n  {\n    {{blank:b3}}   ;\n  }\n  (14)   = tmp;\n}\n0000000000001189 <foo>:\n    1189:  f3 0f 1e fa     endbr64\n    118d:  55              push   %rbp\n    118e:  48 89 e5        mov    %rsp,  {{blank:b4}}\n    1191:  48 83 ec 20     sub    $0x20,%rsp\n    1195:  48 89 7d e8     mov    %rdi,-0x18(%rbp)\n    1199:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    119d:  48 89 c7        mov    %rax,%rdi\n    11a0:  e8 db fe ff ff  call   <strlen@plt>\n    11a5:  89 45 fc        mov    %eax,-0x4(%rbp)\n    11a8:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11ac:  0f b6 00        movzbl (%rax),%eax\n    11af:  88 45 fb        mov    %al,-0x5(%rbp)\n    11b2:  8b 45 fc        mov    -0x4(%rbp),%eax\n    11b5:  48 98           cltq\n    11b7:  48 8d 50 ff     lea    -0x1(%rax),%rdx\n\n    11bb:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11bf:  48 01 d0        add    %rdx,%rax\n    11c2:  0f b6 10        movzbl (%rax),%edx\n    11c5:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11c9:  88 10           mov    %dl,(%rax)\n    11cb:  8b 45 fc        mov    -0x4(%rbp),%eax\n    11ce:  48 98           {{blank:b5}}\n    11d0:  48 8d 50 ff     lea    -0x1(%rax),%rdx\n    11d4:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11d8:  48 01 d0        add    %rdx,%rax\n    11db:  c6 00 00        movb   $0x0,(%rax)\n    11de:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11e2:  48 83 c0 01     add    $0x1,%rax\n    11e6:  48 89 c7        mov      {{blank:b6}}  ,%rdi\n    11e9:  e8 92 fe ff ff  call   <strlen@plt>\n    11ee:  48 83 f8 01     cmp    $0x1,%rax\n    11f2:  76              {{blank:b7}}               jbe    1204 <foo+0x7b>\n    11f4:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11f8:  48 83 c0 01     add    $0x1,%rax\n    11fc:  48 89 c7        mov    %rax,  {{blank:b8}}\n    11ff:  e8 85 ff ff ff  call   1189 <foo>\n    1204:  8b 45 fc        mov    -0x4(%rbp),%eax\n    1207:  48 98           cltq\n    1209:  48 8d 50 ff     lea    {{blank:b9}}(%rax),%rdx\n    120d:  48 8b 45 e8     mov      {{blank:b10}}  ,%rax\n    1211:  48 01 c2        add    %rax,%rdx\n    1214:  0f b6 45 fb     movzbl -0x5(%rbp),%eax\n    1218:  88 02           mov    %al,(%rdx)\n    121a:  90              nop\n    121b:  c9              leave\n    121c:  c3              {{blank:b11}}\n```\n若在程序中， main 函数调用了 `foo` 函数，且传递的参数指向字符\n串”ILOVEICS\\0”，则调用该函数后的字符串内容变为  {{blank:b12}}  。\n若main函数向`foo`函数传递的参数指向字符串”ICS2024\\0”，则main函数在\n调用`foo`函数时，栈中最多会同时存在 {{blank:b13}} 个`foo`函数的帧。（注意：程序\n中其他地方不会调用`foo`函数）\n（1）\n\n（2）\n（3）\n（4）\n（5）\n（6）\n（7）\n（8）\n（9）\n（10）\n（11）\n（12）\n（13）"
+        "text": "第三题（15分）\n下列C代码实现了一个名为`foo`的函数，请阅读并分析该C代码及其对应的x86\n汇编代码，补全代码中缺失的部分，并回答相应问题。（注：第（14）题不要求作\n答。）\n```c\nvoid foo(char *p)\n{\n  int len = strlen(p);\n  char tmp =   {{blank:b1}}  ;\n  *p =   (14)  ;\n  (14)   = '\\0';\n  if (strlen(p + 1)  {{blank:b2}}  1)\n  {\n    {{blank:b3}}   ;\n  }\n  (14)   = tmp;\n}\n0000000000001189 <foo>:\n    1189:  f3 0f 1e fa     endbr64\n    118d:  55              push   %rbp\n    118e:  48 89 e5        mov    %rsp,  {{blank:b4}}\n    1191:  48 83 ec 20     sub    $0x20,%rsp\n    1195:  48 89 7d e8     mov    %rdi,-0x18(%rbp)\n    1199:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    119d:  48 89 c7        mov    %rax,%rdi\n    11a0:  e8 db fe ff ff  call   <strlen@plt>\n    11a5:  89 45 fc        mov    %eax,-0x4(%rbp)\n    11a8:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11ac:  0f b6 00        movzbl (%rax),%eax\n    11af:  88 45 fb        mov    %al,-0x5(%rbp)\n    11b2:  8b 45 fc        mov    -0x4(%rbp),%eax\n    11b5:  48 98           cltq\n    11b7:  48 8d 50 ff     lea    -0x1(%rax),%rdx\n\n    11bb:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11bf:  48 01 d0        add    %rdx,%rax\n    11c2:  0f b6 10        movzbl (%rax),%edx\n    11c5:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11c9:  88 10           mov    %dl,(%rax)\n    11cb:  8b 45 fc        mov    -0x4(%rbp),%eax\n    11ce:  48 98           {{blank:b5}}\n    11d0:  48 8d 50 ff     lea    -0x1(%rax),%rdx\n    11d4:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11d8:  48 01 d0        add    %rdx,%rax\n    11db:  c6 00 00        movb   $0x0,(%rax)\n    11de:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11e2:  48 83 c0 01     add    $0x1,%rax\n    11e6:  48 89 c7        mov      {{blank:b6}}  ,%rdi\n    11e9:  e8 92 fe ff ff  call   <strlen@plt>\n    11ee:  48 83 f8 01     cmp    $0x1,%rax\n    11f2:  76              {{blank:b7}}               jbe    1204 <foo+0x7b>\n    11f4:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11f8:  48 83 c0 01     add    $0x1,%rax\n    11fc:  48 89 c7        mov    %rax,  {{blank:b8}}\n    11ff:  e8 85 ff ff ff  call   1189 <foo>\n    1204:  8b 45 fc        mov    -0x4(%rbp),%eax\n    1207:  48 98           cltq\n    1209:  48 8d 50 ff     lea    {{blank:b9}}(%rax),%rdx\n    120d:  48 8b 45 e8     mov      {{blank:b10}}  ,%rax\n    1211:  48 01 c2        add    %rax,%rdx\n    1214:  0f b6 45 fb     movzbl -0x5(%rbp),%eax\n    1218:  88 02           mov    %al,(%rdx)\n    121a:  90              nop\n    121b:  c9              leave\n    121c:  c3              {{blank:b11}}\n```\n若在程序中， main 函数调用了 `foo` 函数，且传递的参数指向字符\n串”ILOVEICS\\0”，则调用该函数后的字符串内容变为  {{blank:b12}}  。\n若main函数向`foo`函数传递的参数指向字符串”ICS2024\\0”，则main函数在\n调用`foo`函数时，栈中最多会同时存在 {{blank:b13}} 个`foo`函数的帧。（注意：程序\n中其他地方不会调用`foo`函数）\n\n（1）\n\n（2）\n\n（3）\n\n（4）\n\n（5）\n\n（6）\n\n（7）\n\n（8）\n\n（9）\n\n（10）\n\n（11）\n\n（12）\n\n（13）"
       },
       "solution": {
         "state": "available",
@@ -15581,7 +15581,7 @@
     {
       "schemaVersion": "5",
       "id": "q-48830bbf91e759fa",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 16,
       "number": {
@@ -15721,7 +15721,7 @@
                 "width": "medium"
               }
             ],
-            "text": "第二题（15分）\nGCC的内联汇编（inline assembly）特性允许在C程序中直接嵌入汇编代码，\n使开发者能够访问常规 C 代码无法直接访问的底层机器特性，例如寄存器的值或\n特定的处理器指令。通过这种方式，开发者可以对硬件进行精细控制，提升程序性\n能或实现特定的底层操作。请结合教材第二、三章的相关知识，回答下列问题。\n1. 下列运行在x86-64机器上的C 代码展示了一个使用内联汇编的例子：\n```\nfloat *p = 0x7ffc3608bf40;\nfloat value;\n/* inline assembly starts */\n__asm__ __volatile__(\n    \"vmovss (%1), %0\"\n    : \"=x\"(value)\n    : \"r\"(p)\n);\n/* inline assembly ends */\nprintf(\"%.2f\\n\", value);\n```\n这段代码通过在 C 代码中插入浮点指令 `vmovss`（Vector  Move  Scalar\nSingle-Precision Floating-Point）将内存地址`0x7ffc3608bf40`处的\n浮点数数据读取到`float`类型的变量value中。\n（1）  （2分）请判断以下说法是否正确（填“是”或“否”）：\n\na. 这段代码也可以在任何不是 x86-64 的机器上编译、运行。（{{blank:portable}}）\n\nb. 插入的内联汇编代码的效果等同于语句 `value = *p;`。（{{blank:equivalent}}）\n\n（2）（2分）若内存中从地址 `0x7ffc3608bf40` 开始的 4 个字节依次为 `00 00 70 40`，且浮点编码遵循 IEEE 754，则输出为 {{blank:output}}。"
+            "text": "第二题（15分）\nGCC的内联汇编（inline assembly）特性允许在C程序中直接嵌入汇编代码，\n使开发者能够访问常规 C 代码无法直接访问的底层机器特性，例如寄存器的值或\n特定的处理器指令。通过这种方式，开发者可以对硬件进行精细控制，提升程序性\n能或实现特定的底层操作。请结合教材第二、三章的相关知识，回答下列问题。\n1. 下列运行在x86-64机器上的C 代码展示了一个使用内联汇编的例子：\n```\nfloat *p = 0x7ffc3608bf40;\nfloat value;\n/* inline assembly starts */\n__asm__ __volatile__(\n    \"vmovss (%1), %0\"\n    : \"=x\"(value)\n    : \"r\"(p)\n);\n/* inline assembly ends */\nprintf(\"%.2f\\n\", value);\n```\n这段代码通过在 C 代码中插入浮点指令 `vmovss`（Vector  Move  Scalar\nSingle-Precision Floating-Point）将内存地址`0x7ffc3608bf40`处的\n浮点数数据读取到`float`类型的变量value中。\n\n（1）  （2分）请判断以下说法是否正确（填“是”或“否”）：\n\na. 这段代码也可以在任何不是 x86-64 的机器上编译、运行。（{{blank:portable}}）\n\nb. 插入的内联汇编代码的效果等同于语句 `value = *p;`。（{{blank:equivalent}}）\n\n（2）（2分）若内存中从地址 `0x7ffc3608bf40` 开始的 4 个字节依次为 `00 00 70 40`，且浮点编码遵循 IEEE 754，则输出为 {{blank:output}}。"
           },
           "solution": {
             "state": "available",
@@ -15822,7 +15822,7 @@
                 "label": "NaN 编码数"
               }
             ],
-            "text": "2. 从上一题中可以看出，当需要表示的浮点数的有效位数较少时，使用 IEEE-\n754标准编码浮点数会造成一些内存浪费。下面基于IEEE-754标准定义一种\n8位的浮点数，符号位、阶码位和尾数位长度分别为1,5,2。\n（1）  （4分）该浮点数格式可表示的最大的负非规格化数（不考虑-0）的二进\n制表示为 {{blank:subnormal}} ，可表示的最小的正规格化数为 {{blank:minnormal}} （填十进制\n数，无需计算出结果中2的幂的值）。\n（2）  （2分）只考虑符号位为0的情况，表示NaN的浮点数有 {{blank:nan-count}} 个。"
+            "text": "2. 从上一题中可以看出，当需要表示的浮点数的有效位数较少时，使用 IEEE-\n754标准编码浮点数会造成一些内存浪费。下面基于IEEE-754标准定义一种\n8位的浮点数，符号位、阶码位和尾数位长度分别为1,5,2。\n\n（1）  （4分）该浮点数格式可表示的最大的负非规格化数（不考虑-0）的二进\n制表示为 {{blank:subnormal}} ，可表示的最小的正规格化数为 {{blank:minnormal}} （填十进制\n数，无需计算出结果中2的幂的值）。\n\n（2）  （2分）只考虑符号位为0的情况，表示NaN的浮点数有 {{blank:nan-count}} 个。"
           },
           "solution": {
             "state": "available",
@@ -15957,7 +15957,7 @@
                 "width": "medium"
               }
             ],
-            "text": "3. 接第1题，现在我们已经将内存中`0x7ffc3608bf40`处的浮点数数据读取到\n了变量value中，下面的C代码使用联合（`union`）对value进行类型转换。\n（1）  （2分）请判断以下说法是否正确（填“是”或“否”）：\n```\nunion{\n    float f;\n    int i;\n} converter;\nconverter.f = value;\nprintf(“%d\\n”, converter.i);\n```\na. 这段代码的输出在任何情况下都和语句 `printf(\"%d\\n\", (int)value);` 的输出相同。                （    ）\nb. float转换为`int`有可能发生舍入和溢出，但`int`转换为`float`不\n会发生舍入，也不会出现溢出。             （    ）\n（2）  （3 分）若第 1 题中读取到 value 中的值为 -1104.5，则\n`printf(\"%d\\n\",(int)converter.f+(converter.i >> 31))`；的\n输出为 {{blank:union-output}}。"
+            "text": "3. 接第1题，现在我们已经将内存中`0x7ffc3608bf40`处的浮点数数据读取到\n了变量value中，下面的C代码使用联合（`union`）对value进行类型转换。\n\n（1）  （2分）请判断以下说法是否正确（填“是”或“否”）：\n```\nunion{\n    float f;\n    int i;\n} converter;\nconverter.f = value;\nprintf(“%d\\n”, converter.i);\n```\na. 这段代码的输出在任何情况下都和语句 `printf(\"%d\\n\", (int)value);` 的输出相同。                （    ）\n\nb. float转换为`int`有可能发生舍入和溢出，但`int`转换为`float`不\n会发生舍入，也不会出现溢出。             （    ）\n\n（2）  （3 分）若第 1 题中读取到 value 中的值为 -1104.5，则\n`printf(\"%d\\n\",(int)converter.f+(converter.i >> 31))`；的\n输出为 {{blank:union-output}}。"
           },
           "solution": {
             "state": "available",
@@ -16228,7 +16228,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a2b60d2e0a94d42b",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 18,
       "number": {
@@ -16543,7 +16543,7 @@
             }
           }
         ],
-        "text": "第四题（20分）\n(a)\n\n![Y86-64 简单流水线处理器（PIPE）实现图（图(a)）](assets/期中/2024期中-带答案/p18-pipe-impl-a.png)\n\n图(a)是在教材中 Y86-64 的简单流水线处理器（PIPE）实现图。其中部分展示\n了通过数据前递（forwarding）解决数据冒险(hazard)的流程。\n1.  （7分）若当前指令从内存中加载了数据至一个寄存器中，且该寄存器是下一\n条指令的源寄存器，那么通过数据前递的方式可以减少流水线的暂停（stall）。\n请根据前递的工作原理，补全下列HCL描述语句，以实现正确的`d_valA`的\n选择。\n```\nword d_valA = [\n      D_icode in {ICALL,IJXX } : ___(1)___;\n      d_srcA == e_dstE : ___(2)___;\n      d_srcA == M_dstM : ___(3)___;\n      d_srcA == M_dstE : ___(4)___;\n      d_srcA == W_dstM : ___(5)___;\n      d_srcA == W_dstE : ___(6)___;\n      1 : ___(7)___;\n]\n```\n2.  （3分）考虑如下两条Y86-64指令系统的指令顺序完成执行：\n```\n1    mrmovq 0(%rcx),%rdx\n2    pushq %rdx\n```\n这两条指令的执行会导致流水线中出现Load/Use数据冒险。当指令1执行到(8) {{blank:stage-8}} 阶段时，会获得对应内存地址中的数据，该数据将会以信号(9) {{blank:signal-9}} 进\n行数据前递。此时按照图(a)的方式，仍然需要停顿来正确执行指令2，流水线需\n要停顿(10) {{blank:cycles-10}} 个周期来保证程序执行正确。\n3.  （3分）针对第2小题中的问题，可以通过设计一条额外的数据通路(path)\n进行前递的方式来解决这种冲突，从而使得指令1、2之间无需插入气泡。这\n条数据通路应当从(11) {{blank:stage-11}} 阶段将数据前递至(12) {{blank:stage-12}} 阶段，用于选择流水线寄存器(13) {{blank:signal-13}} 的值。\n4.  （3分）补充通路后的流水线处理器局部如图(b)所示\n\n![补充数据通路后的流水线处理器局部（图(b)）](assets/期中/2024期中-带答案/p20-pipe-local-b.png)\n\n请根据图示和设计逻辑，补全下列HCL描述语句，以实现正确的`e_valA`的选择。\n```\nword e_valA = [\n      E_icode in { IPUSHQ, IRMMOVQ } && E_srcA ==\n___(14)__        _  :    {{blank:signal-15}};\n1 :   {{blank:signal-16}};\n]\n```\n5.  （4分）在补充了第4小题中的功能后，流水线依然存在需要暂停才可以处理\n的数据冒险情况。例如，下两条指令顺序执行：\n```\n3    popq %rdx\n4    rmmovq %rax,0(%rdx)\n```\n这两条指令会导致流水线中出现 Load/Use 数据冒险，请用 stall、bubble、\n`normal` 填写下面的控制信号条件表，说明当前流水线对于这种冒险的处理方式。\n| Fetch | Decode | Execute | Memory | Write back |\n| --- | --- | --- | --- | --- |\n| (17) {{blank:control-17}} | (18) {{blank:control-18}} | (19) {{blank:control-19}} | (20) {{blank:control-20}} | normal |"
+        "text": "第四题（20分）\n\n(a)\n\n![Y86-64 简单流水线处理器（PIPE）实现图（图(a)）](assets/期中/2024期中-带答案/p18-pipe-impl-a.png)\n\n图(a)是在教材中 Y86-64 的简单流水线处理器（PIPE）实现图。其中部分展示\n了通过数据前递（forwarding）解决数据冒险(hazard)的流程。\n1.  （7分）若当前指令从内存中加载了数据至一个寄存器中，且该寄存器是下一\n条指令的源寄存器，那么通过数据前递的方式可以减少流水线的暂停（stall）。\n请根据前递的工作原理，补全下列HCL描述语句，以实现正确的`d_valA`的\n选择。\n```\nword d_valA = [\n      D_icode in {ICALL,IJXX } : ___(1)___;\n      d_srcA == e_dstE : ___(2)___;\n      d_srcA == M_dstM : ___(3)___;\n      d_srcA == M_dstE : ___(4)___;\n      d_srcA == W_dstM : ___(5)___;\n      d_srcA == W_dstE : ___(6)___;\n      1 : ___(7)___;\n]\n```\n2.  （3分）考虑如下两条Y86-64指令系统的指令顺序完成执行：\n```\n1    mrmovq 0(%rcx),%rdx\n2    pushq %rdx\n```\n这两条指令的执行会导致流水线中出现Load/Use数据冒险。当指令1执行到(8) {{blank:stage-8}} 阶段时，会获得对应内存地址中的数据，该数据将会以信号(9) {{blank:signal-9}} 进\n行数据前递。此时按照图(a)的方式，仍然需要停顿来正确执行指令2，流水线需\n要停顿(10) {{blank:cycles-10}} 个周期来保证程序执行正确。\n3.  （3分）针对第2小题中的问题，可以通过设计一条额外的数据通路(path)\n进行前递的方式来解决这种冲突，从而使得指令1、2之间无需插入气泡。这\n条数据通路应当从(11) {{blank:stage-11}} 阶段将数据前递至(12) {{blank:stage-12}} 阶段，用于选择流水线寄存器(13) {{blank:signal-13}} 的值。\n4.  （3分）补充通路后的流水线处理器局部如图(b)所示\n\n![补充数据通路后的流水线处理器局部（图(b)）](assets/期中/2024期中-带答案/p20-pipe-local-b.png)\n\n请根据图示和设计逻辑，补全下列HCL描述语句，以实现正确的`e_valA`的选择。\n```\nword e_valA = [\n      E_icode in { IPUSHQ, IRMMOVQ } && E_srcA ==\n___(14)__        _  :    {{blank:signal-15}};\n1 :   {{blank:signal-16}};\n]\n```\n5.  （4分）在补充了第4小题中的功能后，流水线依然存在需要暂停才可以处理\n的数据冒险情况。例如，下两条指令顺序执行：\n```\n3    popq %rdx\n4    rmmovq %rax,0(%rdx)\n```\n这两条指令会导致流水线中出现 Load/Use 数据冒险，请用 stall、bubble、\n`normal` 填写下面的控制信号条件表，说明当前流水线对于这种冒险的处理方式。\n| Fetch | Decode | Execute | Memory | Write back |\n| --- | --- | --- | --- | --- |\n| (17) {{blank:control-17}} | (18) {{blank:control-18}} | (19) {{blank:control-19}} | (20) {{blank:control-20}} | normal |"
       },
       "solution": {
         "state": "available",
@@ -18226,7 +18226,7 @@
     {
       "schemaVersion": "5",
       "id": "q-398fe9f606ec567b",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-12950876262955d9",
       "paperOrder": 24,
       "number": {
@@ -18450,7 +18450,7 @@
                 "width": "medium"
               }
             ],
-            "text": "2.下面我们将考虑实际程序中发生的访存行为。考虑一个 32-bit 地址空间的机\n器，并有如下的高速缓存：总大小为16 Bytes，每个cache block的大小为4\nBytes，组织结构为全相联（`S=1`），替换策略为LRU。\n在此机器上运行如下C语言代码。假设初始时cache为空，只考虑读写数据引起\n的cache访问，不考虑编译优化，临时变量a, b, c, i均储存在寄存器中，`int`\n数据类型的大小为4 Bytes，`f`数组的起始地址为`0x10000000`。回答下列问题：\n```\n1: # define N 20\n2: int f[N + 2];\n3: f[0] = 1;\n4: f[1] = 1;\n5: for(int i = 0; i < N; i++) {\n6:    int a = f[i];\n7:    int b = f[i + 1];\n8:    int c = a + b;\n9:    f[i + 2] = c;\n10: }\n```\n（1）假设cache在写命中时采用直写(write-through) 策略，在写不命中时\n采用非写分配(not-write-allocate) 策略，则当程序第一次运行到第6行时，\n所发生的访存是否命中cache？__________（填“是”或“否”）。（2分）整个\n程序的执行过程共命中cache __________次。（1分）\n（2）假设cache在写命中时采用写回(write-back) 策略，在写不命中时采用\n写分配(write-allocate) 策略，整个程序的执行过程共命中 cache\n___________次。（1分）"
+            "text": "2.下面我们将考虑实际程序中发生的访存行为。考虑一个 32-bit 地址空间的机\n器，并有如下的高速缓存：总大小为16 Bytes，每个cache block的大小为4\nBytes，组织结构为全相联（`S=1`），替换策略为LRU。\n在此机器上运行如下C语言代码。假设初始时cache为空，只考虑读写数据引起\n的cache访问，不考虑编译优化，临时变量a, b, c, i均储存在寄存器中，`int`\n数据类型的大小为4 Bytes，`f`数组的起始地址为`0x10000000`。回答下列问题：\n```\n1: # define N 20\n2: int f[N + 2];\n3: f[0] = 1;\n4: f[1] = 1;\n5: for(int i = 0; i < N; i++) {\n6:    int a = f[i];\n7:    int b = f[i + 1];\n8:    int c = a + b;\n9:    f[i + 2] = c;\n10: }\n```\n（1）假设cache在写命中时采用直写(write-through) 策略，在写不命中时\n采用非写分配(not-write-allocate) 策略，则当程序第一次运行到第6行时，\n所发生的访存是否命中cache？__________（填“是”或“否”）。（2分）整个\n程序的执行过程共命中cache __________次。（1分）\n\n（2）假设cache在写命中时采用写回(write-back) 策略，在写不命中时采用\n写分配(write-allocate) 策略，整个程序的执行过程共命中 cache\n___________次。（1分）"
           },
           "solution": {
             "state": "available",
@@ -18613,7 +18613,7 @@
     {
       "schemaVersion": "5",
       "id": "q-67ee13bfb461a052",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-12950876262955d9",
       "paperOrder": 23,
       "number": {
@@ -18730,7 +18730,7 @@
             }
           }
         ],
-        "text": "第四题 请分析 Y86-64 ISA 中新加入的一组条件 `POP` 指令 `cpopqXX`。`cpopqXX` 和 `popq` 指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组`cpopqXX`指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器`rA`中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对`rA`、栈指针都无影响。\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\nStage  cpopqXX rA\nicode:ifun\nM1[PC]\nFetch  rA:rB\nM1[PC+1]\nvalP\nPC+2\nDecode\nExecute\nMemory\nWrite back\nPC update  PC\nvalP\n```\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\n`rA`和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```\nword e_dstE = [\n  (E_icode in {IRRMOVQ, ①\n) : RNONE;\n  1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == ①\n) : RNONE;\n    1 :  E_dstM;\n]\n```\n3.和`popq`与`mrmovq`相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了`cpopqXX` 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件：E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {     ,      }\n控制逻辑：（选填stall, bubble和`normal`）\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:control-f}} | {{blank:control-d}} | {{blank:control-e}} | normal | normal |\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xor  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n```\n\n\n```\n    jne  L1  # Line 9\n    ret    # Line 10\n```\n假设条件分支总是预测跳转, 计算在输入的`n`值取1和3时，函数`foo`执行的周期\n止。另外在调用`foo`之前，处理器已经执行过足够多的`nop`指令。）\n`n`为1时候需要执行          个周期；`n`为3时候需要执行          个周期。"
+        "text": "第四题 请分析 Y86-64 ISA 中新加入的一组条件 `POP` 指令 `cpopqXX`。`cpopqXX` 和 `popq` 指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组`cpopqXX`指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器`rA`中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对`rA`、栈指针都无影响。\n\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n```\nStage  cpopqXX rA\nicode:ifun\nM1[PC]\nFetch  rA:rB\nM1[PC+1]\nvalP\nPC+2\nDecode\nExecute\nMemory\nWrite back\nPC update  PC\nvalP\n```\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\n`rA`和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```\nword e_dstE = [\n  (E_icode in {IRRMOVQ, ①\n) : RNONE;\n  1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == ①\n) : RNONE;\n    1 :  E_dstM;\n]\n```\n3.和`popq`与`mrmovq`相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了`cpopqXX` 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件：E_icode in {IMRMOVQ, IPOPQ} && e_dstM in {     ,      }\n控制逻辑：（选填stall, bubble和`normal`）\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:control-f}} | {{blank:control-d}} | {{blank:control-e}} | normal | normal |\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xor  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n```\n\n\n```\n    jne  L1  # Line 9\n    ret    # Line 10\n```\n假设条件分支总是预测跳转, 计算在输入的`n`值取1和3时，函数`foo`执行的周期\n止。另外在调用`foo`之前，处理器已经执行过足够多的`nop`指令。）\n`n`为1时候需要执行          个周期；`n`为3时候需要执行          个周期。"
       },
       "solution": {
         "state": "available",
@@ -20276,7 +20276,7 @@
     {
       "schemaVersion": "5",
       "id": "q-fb5cc335ffaa2b78",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-12950876262955d9",
       "paperOrder": 11,
       "number": {
@@ -20322,7 +20322,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "11.下列 4 组对于 ISA 的描述, 它们分别符合(a)\\_\\_\\_\\_\\_, (b)\\_\\_\\_\\_\\_\\_,\n(c)______, (d)______, 的特点.\n(a) 某ISA中, 所有指令均不采用条件码\n(b) 某ISA中, 只有基址和偏移量寻址\n(c) 某ISA中, 执行一些指令需要经过复杂的译码电路\n(d) 某ISA中, 指令长度最短1字节, 最长15字节以上"
+        "text": "11.下列 4 组对于 ISA 的描述, 它们分别符合(a)\\_\\_\\_\\_\\_, (b)\\_\\_\\_\\_\\_\\_,\n(c)______, (d)______, 的特点.\n\n(a) 某ISA中, 所有指令均不采用条件码\n\n(b) 某ISA中, 只有基址和偏移量寻址\n\n(c) 某ISA中, 执行一些指令需要经过复杂的译码电路\n\n(d) 某ISA中, 指令长度最短1字节, 最长15字节以上"
       },
       "solution": {
         "state": "available",
@@ -24868,7 +24868,7 @@
     {
       "schemaVersion": "5",
       "id": "q-53b7581785c41178",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-2c2b56c4452255b1",
       "paperOrder": 22,
       "number": {
@@ -25319,7 +25319,7 @@
             }
           }
         ],
-        "text": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有以下三个 `c` 文件 `hd.h f1.c f2.c`。使用`gcc -c f1.c f2.c; gcc`\n`f1.o f2.o` 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及\n的符号所对应的变量已在代码中加粗。本大题无需理解代码的含义。\n```\nf1.c  #include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\n    for (iter = 0; iter < total; ++iter) {\n        rand_point(&pnt);\n        count += if_inside(&pnt);\n    }\n    printf(\"Integral on [0,1] is %lf.\\n\",\n        1.0 * count / total);\n}\nhd.h  typedef struct {\n    double x;\n    double y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\nf2.c  #include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\n    static int seed = 0;\n    if (!seed) {\n        srand((unsigned)time(NULL));\n        seed = 1;\n    }\n    ptr->x = 1.0 * rand() / RAND_MAX;\n    ptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\n    return 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n| 项目 | `iter` | `pnt` | `Point` | `total` | `seed` |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？（填是/否） | {{blank:q3-A-iter-present}} | {{blank:q3-A-pnt-present}} | {{blank:q3-A-Point-present}} | {{blank:q3-A-total-present}} | {{blank:q3-A-seed-present}} |\n| 定义所在节 | {{blank:q3-A-iter-section}} | {{blank:q3-A-pnt-section}} | {{blank:q3-A-Point-section}} | {{blank:q3-A-total-section}} | {{blank:q3-A-seed-section}} |\nPart B. (每空1分，共3分) 使用`objdump -dx f1.o f2.o` 看到如下\n几条代码。这里可以将重定位类型 `R_X86_64_PLT32`和 `R_X86_64_PC32` 同\n等看待。\n# `objdump` 重定位条目格式：\n```\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n# 所有数值均以十六进制表示\n```\n# f1.o\n0000000000000000 <main>:\n```\n... # 省略无关代码\n```\n17:  e8 00 00 00 00.       callq  1c <main+0x1c>\n18:                        R_X86_64_PLT32      rand_point-0x4\n1c:  48 8d 3d 00 00 00 00  lea 0x0(%rip),%rdi\n1f:                        R_X86_64_PC32       .bss+0xc\n23:  e8 00 00 00 00        callq  28 <main+0x28>\n24:                        R_X86_64_PLT32      if_inside-0x4\n28:  89 c2                 mov %eax,%edx\n```\n... # 省略无关代码\n```\n# f2.o\n0000000000000000 <rand_point>:\n```\n... # 省略无关代码\n`0000000000000074 <if_inside>`:\n... # 省略无关代码\n据此可以确定  <`main+0x1f>`  处的重定位条目是针对符号\n{{blank:q3-B-relocation-symbol}}（填写符号名，不要填写 .bss 这个节名）的重定位。同时该\n符号定义的位置在 `f1.o` 中相对于 .bss 节的偏移量是\n0x{{blank:q3-B-bss-offset}}。\n现已知 a.out 文件中 <`main+0x17>` 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <`main+0x23>` 行将变成\n```\n11ad: e8 {{blank:q3-B-call-displacement}}          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 使用 `execve` 加载 a.out 并执行时，其中第\n一个被执行的语句默认是 {{blank:q3-C-entry-function}}（单选）函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在 {{blank:q3-C-mode}} 态下\n(填用户/内核)。\nA. _init     B.main     C.__libc_start_main    D._start"
+        "text": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有以下三个 `c` 文件 `hd.h f1.c f2.c`。使用`gcc -c f1.c f2.c; gcc`\n`f1.o f2.o` 编译后得到可执行文件a.out。回答以下问题。Part A 中涉及\n的符号所对应的变量已在代码中加粗。本大题无需理解代码的含义。\n```\nf1.c  #include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\n    for (iter = 0; iter < total; ++iter) {\n        rand_point(&pnt);\n        count += if_inside(&pnt);\n    }\n    printf(\"Integral on [0,1] is %lf.\\n\",\n        1.0 * count / total);\n}\nhd.h  typedef struct {\n    double x;\n    double y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\nf2.c  #include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\n    static int seed = 0;\n    if (!seed) {\n        srand((unsigned)time(NULL));\n        seed = 1;\n    }\n    ptr->x = 1.0 * rand() / RAND_MAX;\n    ptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\n    return 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n| 项目 | `iter` | `pnt` | `Point` | `total` | `seed` |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？（填是/否） | {{blank:q3-A-iter-present}} | {{blank:q3-A-pnt-present}} | {{blank:q3-A-Point-present}} | {{blank:q3-A-total-present}} | {{blank:q3-A-seed-present}} |\n| 定义所在节 | {{blank:q3-A-iter-section}} | {{blank:q3-A-pnt-section}} | {{blank:q3-A-Point-section}} | {{blank:q3-A-total-section}} | {{blank:q3-A-seed-section}} |\nPart B. (每空1分，共3分) 使用`objdump -dx f1.o f2.o` 看到如下\n几条代码。这里可以将重定位类型 `R_X86_64_PLT32`和 `R_X86_64_PC32` 同\n等看待。\n# `objdump` 重定位条目格式：\n```\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n# 所有数值均以十六进制表示\n```\n# f1.o\n0000000000000000 <main>:\n```\n... # 省略无关代码\n```\n17:  e8 00 00 00 00.       callq  1c <main+0x1c>\n18:                        R_X86_64_PLT32      rand_point-0x4\n1c:  48 8d 3d 00 00 00 00  lea 0x0(%rip),%rdi\n1f:                        R_X86_64_PC32       .bss+0xc\n23:  e8 00 00 00 00        callq  28 <main+0x28>\n24:                        R_X86_64_PLT32      if_inside-0x4\n28:  89 c2                 mov %eax,%edx\n```\n... # 省略无关代码\n```\n# f2.o\n0000000000000000 <rand_point>:\n```\n... # 省略无关代码\n`0000000000000074 <if_inside>`:\n... # 省略无关代码\n据此可以确定  <`main+0x1f>`  处的重定位条目是针对符号\n{{blank:q3-B-relocation-symbol}}（填写符号名，不要填写 .bss 这个节名）的重定位。同时该\n符号定义的位置在 `f1.o` 中相对于 .bss 节的偏移量是\n0x{{blank:q3-B-bss-offset}}。\n现已知 a.out 文件中 <`main+0x17>` 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <`main+0x23>` 行将变成\n```\n11ad: e8 {{blank:q3-B-call-displacement}}          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 使用 `execve` 加载 a.out 并执行时，其中第\n一个被执行的语句默认是 {{blank:q3-C-entry-function}}（单选）函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在 {{blank:q3-C-mode}} 态下\n(填用户/内核)。\n\nA. _init     B.main     C.__libc_start_main    D._start"
       },
       "solution": {
         "state": "available",
@@ -27231,7 +27231,7 @@
     {
       "schemaVersion": "5",
       "id": "q-aef3c997509d203e",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-2c2b56c4452255b1",
       "paperOrder": 23,
       "number": {
@@ -27324,7 +27324,7 @@
             "width": "medium"
           }
         ],
-        "text": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 `fork` 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 `pid` 是\n相邻的。\n```c\nint N;\nint nxt; // 表示该子进程下一个需要输出的数\nint pid_1 = 0; // 第一次 fork 出的子进程 pid\nint pid_2 = 0; // 第二次 fork 出的子进程 pid\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n    {{blank:q4-A}} // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n}\nint main(int argc, char* argv[]) {\n  {{blank:q4-B}} //将 `handler1` 绑定到 `SIGUSR1` 上\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n    {{blank:q4-C}};  // 设置 `nxt` 的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  // 跳转并等待子进程结束\n    }\n  }\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n  wait_til_end:\n  int status;\n  while ({{blank:q4-D}})  // 用 waitpid 等待子进程结束，注意 status\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n\n\nPART B. 阅读如下 C 代码，回答问题\n```c\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n{{blank:q4-B-1}}（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到`n`个相同信号，那么\n进程实际会处理几个信号？{{blank:q4-B-2}}（1分）\nA.1\nB.1到`n`之间的随机数值\n`C.n`\n3.如果 `N=2`，所有可能的输出为：{{blank:q4-B-3}}\n（全部选对得2分，部分选对得1分，选错不得分）\n`A.CC`\n`B.CC1`\n`C.CC12`\nD. C1C2\n4.如果 `N=2`，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n{{blank:q4-B-4}}\n（全部选对得2分，部分选对得1分，选错不得分）\n A. CC\n`B.CC1`\n`C.CC1R2`\n`D.C1RC2`\n`E.C1CR2`"
+        "text": "第四题. 请结合教材第八章“异常控制流”的有关知识回答问题(10分)\nPART A.  Alice 想用两个进程来顺序输出奇数和偶数，请你帮她补全代码。她\n的做法是：父进程首先 `fork` 出两个子进程，之后子进程之间互相通信，顺序输\n出 1,2,…,N。请严格按照注释描述的功能填写代码，假设兄弟进程的 `pid` 是\n相邻的。\n```c\nint N;\nint nxt; // 表示该子进程下一个需要输出的数\nint pid_1 = 0; // 第一次 fork 出的子进程 pid\nint pid_2 = 0; // 第二次 fork 出的子进程 pid\n// All child process should do their work in handler 1\nvoid handler1(int sig) {\n  printf(\"%d\\n\", nxt);\n  nxt += 2;\n  if (nxt & 1) kill(getpid()+1, SIGUSR1);\n  else {\n    assert(pid_1 != 0);\n    {{blank:q4-A}} // 通知兄弟进程\n  }\n  if (nxt > N) exit(0);  // 子进程完成输出后退出\n}\nint main(int argc, char* argv[]) {\n  {{blank:q4-B}} //将 `handler1` 绑定到 `SIGUSR1` 上\n  N = atoi(argv[1]);\n  nxt = 1;\n  if ((pid_1 = fork()) != 0) {\n    {{blank:q4-C}};  // 设置 `nxt` 的初值\n    if ((pid_2 = fork()) != 0) {  // 该进程是父进程\n      kill(pid_1, SIGUSR1);\n      goto wait_til_end;  // 跳转并等待子进程结束\n    }\n  }\n  while (1) { sleep(1); }  // 子进程会在此循环直到输出完成\n  wait_til_end:\n  int status;\n  while ({{blank:q4-D}})  // 用 waitpid 等待子进程结束，注意 status\n    assert(WIFEXITED(status));\n  return 0;\n}\n```\n （4分, 每空1分）\n```\nA.\nB.\nC.\nD.\n```\n\n\nPART B. 阅读如下 C 代码，回答问题\n```c\nint counter = 0;\nint pid = 0;\nint N = 2;\nvoid handler1(int sig) {\n    counter++;\n    printf(\"%d\", counter); fflush(stdout);\n    // Kill(pid, SIGUSR2);\n}\nvoid handler2(int sig) {\n    printf(\"R\"); fflush(stdout);\n}\nint main() {\n    Signal(SIGUSR1, handler1);\n    Signal(SIGUSR2, handler2);\n    if ((pid = Fork()) == 0) { // child\n        for (int i = 0; i < N; ++i) {\n            printf(\"C\"); fflush(stdout);\n            Kill(Getppid(), SIGUSR1);\n        }\n    } else { // parent\n        Wait(NULL);\n    }\n    return 0;\n}\n```\n1.进程在何时检查待处理信号，并调用相应的signal handler处理信号？\n{{blank:q4-B-1}}（1分）\nA.随时\nB.用户态切换到内核态\nC.内核态切换到用户态\n\n2.在两次检查并处理信号量的时间间隙中，如果进程接收到`n`个相同信号，那么\n进程实际会处理几个信号？{{blank:q4-B-2}}（1分）\nA.1\nB.1到`n`之间的随机数值\n`C.n`\n\n3.如果 `N=2`，所有可能的输出为：{{blank:q4-B-3}}\n（全部选对得2分，部分选对得1分，选错不得分）\n`A.CC`\n`B.CC1`\n`C.CC12`\n\nD. C1C2\n\n4.如果 `N=2`，并且取消hanlder1中的注释（第7行），所有不可能的输出为：\n{{blank:q4-B-4}}\n（全部选对得2分，部分选对得1分，选错不得分）\n\n A. CC\n`B.CC1`\n`C.CC1R2`\n`D.C1RC2`\n`E.C1CR2`"
       },
       "solution": {
         "state": "available",
@@ -28553,7 +28553,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c4db69af5ae828fe",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-2c2b56c4452255b1",
       "paperOrder": 21,
       "number": {
@@ -28706,7 +28706,7 @@
             "width": "medium"
           }
         ],
-        "text": "第二题. 请结合教材第六章“存储器层次结构”的有关知识回答问题(10分)\n1. (2 分)高速缓存(cache)的先进先出替换策略(FIFO)指的是在发生缓存不\n命中时,最先进入高速缓存的行(cache line)将最先被替换出.考虑两种\n遵循先进先出替换策略且块大小(block size)相同的全相联高速缓存 C1\n和C2.其中C1是3路全相联的,C2是4路全相联的.假设初始情况下C1,C2\n所有行的有效位都为0。让它们分别连续访问标记(tag)为0, 1, 2, 3, 0, 1, 4, 0, 1, 2, 3, 4 的行之后，C1 发生的缓存不命中次数 {{blank:q2-fifo-misses}} C2 发生的缓存不命中次数（填“>”“=”或“<”）。\n2. 已知某单核处理器有 L1,L2,L3 三级高速缓存且遵循先进先出替换策略,你\n希望通过触发行驱逐(cache line eviction)的方法测量该处理器的L1\n数据缓存(L1 d-cache)的相联度,实验前已知 L1 d-cache 的容量在\n16KiB到64KiB之间(含16KiB和64KiB)且字节数为2的幂,且已知高速\n缓存块的字节数小于1KiB.你的实验步骤如下：\nStep #1: 开辟一块足够大(如8MiB)的内存空间.\nStep #2: 逐步调整访问的步长S(S依次取1KiB, 2KiB, 4KiB, …,\n32KiB,64KiB)和访问的元素数量N(N依次取1, 2, 3, …, 127, 128).\n对于给定的S和N,连续两次从所开辟内存的起始位置开始,以S为步长顺序\n访问N个内存地址.记录第二次访问时平均一个内存地址的访问时间T.\nStep #3: 多次实验取平均值以减小误差.作图并分析实验结果.\n这里是给定S和N后访问内存的一个例子：当`S=64KiB,N=6`时,先按顺序\n访问一遍所开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB,\n320KiB 处的一个字节的值.清空寄存器,接着计时并第二遍按顺序访问所\n开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB, 320KiB\n处的一个字节的值.访问完成后立即停止计时,并记录`T = (`结束计时的时\n刻 - 开始计时的时刻) ÷ 6.0.\n(a)  (2分)Step #2中,给定S和N后第一遍访问N个内存地址的过程\n被称为暖身(warm up),这是为了避免 {{blank:q2-cold-misses}} 不命中带来的影响\n(填“冷/强制性”“冲突”或“容量”).\n(b)  (4 分)假设访问内存的过程都在高速缓\n存中顺次进行,且不考虑预取(prefetch)机制\n的影响.你选取了步长为S1, S2时的部分实验结\n果如图所示(此图为示意图).你注意到访存速度\n越快,则访问单个元素的时间越短.因此从图中\n可以看出 T3 最接近 {{blank:q2-cache-level}}（填“L1”“L2”或“L3”）级缓存的访存时间，S1 {{blank:q2-stride-order}} S2（填“>”“=”或“<”）。\n![步长为 S1、S2 时的平均访问时间示意曲线](assets/期末/2021期末-无答案/p9-cache-latency.png)\n\n(c) (2分)在(b)的条件下, 进一步推理可知该处理器的L1 d-cache的\n容量(capacity)为 {{blank:q2-capacity}}（用代数式表示，S1、S2、N0为已知量，下同。注意计算容量时不考虑有效位和标记位），相联度为 {{blank:q2-associativity}}。"
+        "text": "第二题. 请结合教材第六章“存储器层次结构”的有关知识回答问题(10分)\n1. (2 分)高速缓存(cache)的先进先出替换策略(FIFO)指的是在发生缓存不\n命中时,最先进入高速缓存的行(cache line)将最先被替换出.考虑两种\n遵循先进先出替换策略且块大小(block size)相同的全相联高速缓存 C1\n和C2.其中C1是3路全相联的,C2是4路全相联的.假设初始情况下C1,C2\n所有行的有效位都为0。让它们分别连续访问标记(tag)为0, 1, 2, 3, 0, 1, 4, 0, 1, 2, 3, 4 的行之后，C1 发生的缓存不命中次数 {{blank:q2-fifo-misses}} C2 发生的缓存不命中次数（填“>”“=”或“<”）。\n2. 已知某单核处理器有 L1,L2,L3 三级高速缓存且遵循先进先出替换策略,你\n希望通过触发行驱逐(cache line eviction)的方法测量该处理器的L1\n数据缓存(L1 d-cache)的相联度,实验前已知 L1 d-cache 的容量在\n16KiB到64KiB之间(含16KiB和64KiB)且字节数为2的幂,且已知高速\n缓存块的字节数小于1KiB.你的实验步骤如下：\nStep #1: 开辟一块足够大(如8MiB)的内存空间.\nStep #2: 逐步调整访问的步长S(S依次取1KiB, 2KiB, 4KiB, …,\n32KiB,64KiB)和访问的元素数量N(N依次取1, 2, 3, …, 127, 128).\n对于给定的S和N,连续两次从所开辟内存的起始位置开始,以S为步长顺序\n访问N个内存地址.记录第二次访问时平均一个内存地址的访问时间T.\nStep #3: 多次实验取平均值以减小误差.作图并分析实验结果.\n这里是给定S和N后访问内存的一个例子：当`S=64KiB,N=6`时,先按顺序\n访问一遍所开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB,\n320KiB 处的一个字节的值.清空寄存器,接着计时并第二遍按顺序访问所\n开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB, 320KiB\n处的一个字节的值.访问完成后立即停止计时,并记录`T = (`结束计时的时\n刻 - 开始计时的时刻) ÷ 6.0.\n\n(a)  (2分)Step #2中,给定S和N后第一遍访问N个内存地址的过程\n被称为暖身(warm up),这是为了避免 {{blank:q2-cold-misses}} 不命中带来的影响\n(填“冷/强制性”“冲突”或“容量”).\n\n(b)  (4 分)假设访问内存的过程都在高速缓\n存中顺次进行,且不考虑预取(prefetch)机制\n的影响.你选取了步长为S1, S2时的部分实验结\n果如图所示(此图为示意图).你注意到访存速度\n越快,则访问单个元素的时间越短.因此从图中\n可以看出 T3 最接近 {{blank:q2-cache-level}}（填“L1”“L2”或“L3”）级缓存的访存时间，S1 {{blank:q2-stride-order}} S2（填“>”“=”或“<”）。\n![步长为 S1、S2 时的平均访问时间示意曲线](assets/期末/2021期末-无答案/p9-cache-latency.png)\n\n(c) (2分)在(b)的条件下, 进一步推理可知该处理器的L1 d-cache的\n容量(capacity)为 {{blank:q2-capacity}}（用代数式表示，S1、S2、N0为已知量，下同。注意计算容量时不考虑有效位和标记位），相联度为 {{blank:q2-associativity}}。"
       },
       "solution": {
         "state": "available",
@@ -45079,7 +45079,7 @@
     {
       "schemaVersion": "5",
       "id": "q-25dbe016122b4a0d",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 23,
       "number": {
@@ -45163,7 +45163,7 @@
             "width": "medium"
           }
         ],
-        "text": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从`rsp`中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```"
+        "text": "第三题（20分）\n（出题人：熊英飞，审核人：陈钟、焦文品）\n\n(1) 观察下面C语言函数和它相应的X86-64汇编代码\n```c\nint foo(int x, int i)\n{\n    switch (i) {\n    case 1:\n        x -= 10;\n    case 2:\n        x *= 8;\n        break;\n    case 3:\n        x += 5;\n    case 5:\n        x /= 2;\n        break;\n    case 0:\n        x &= 1;\n    default:\n        x += i;\n    }\n    return x;\n}\n```\n```asm\n00000000004004a8 <foo>:\n4004a8:   mov %edi,%edx\n4004aa:   cmp $0x5,%esi\n4004ad:   ja 4004d4 <foo+0x2c>\n4004af:   mov %esi,%eax\n4004b1:   jmpq *0x400690(,%rax,8)\n4004b8:   sub $0xa,%edx\n4004bb:   shl $0x3,%edx\n4004be:   jmp 4004d6 <foo+0x2e>\n4004c0:   add $0x5,%edx\n4004c3:   mov %edx,%eax\n4004c5:   shr $0x1f,%eax\n4004c8:   lea (%rdx,%rax,1),%eax\n4004cb:   mov %eax,%edx\n4004cd:   sar %edx\n4004cf:   jmp 4004d6 <foo+0x2e>\n4004d1:   and $0x1,%edx\n4004d4:   add %esi,%edx\n4004d6:   mov %edx,%eax\n4004d8:   retq\n```\n调用`gdb`命令x/kg `$rsp` 将会检查从`rsp`中的地址开始的k个8字节字，请填写下\n面`gdb`命令的输出（每空一分）。\n```text\n(gdb) x/6g 0x400690\n0x400690: 0x__________________ 0x__________________\n0x4006a0: 0x__________________ 0x__________________\n0x4006b0: 0x__________________ 0x__________________\n```"
       },
       "solution": {
         "state": "available",
@@ -47527,7 +47527,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e4c733a4eceae52e",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 21,
       "number": {
@@ -47735,7 +47735,7 @@
             }
           }
         ],
-        "text": "第二题（20分）\n（边凯归，周明辉）\n1.在64位机器上，判断下列等式是否恒成立\n```c\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\n```\n\n| 表达式 | 是否恒成立 |\n| --- | --- |\n| `(x >= 0) \\|\\| (3*x < 0)` | {{blank:q1}} |\n| `(x >= 0) \\|\\| (x < ux)` | {{blank:q2}} |\n| `((x >> 1) << 1) <= x` | {{blank:q3}} |\n| `((x-y)<<3) + (x>>1) - y == 8*x - 9*y + x/2` | {{blank:q4}} |\n| `(x - y > 0) == ((y+~x+1)>>31 == 1)` | {{blank:q5}} |\n| `dx + dy == (double) (y+x)` | {{blank:q6}} |\n| `dx + dy + dz == dz + dy + dx` | {{blank:q7}} |\n| `(int)((lx+ly)>>1) == ((x&y) + ((x^y)>>1))` | {{blank:q8}} |\n（前6题每题1分; 7、8两题每题2分; 共10分）"
+        "text": "第二题（20分）\n（边凯归，周明辉）\n\n1.在64位机器上，判断下列等式是否恒成立\n```c\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\n```\n\n| 表达式 | 是否恒成立 |\n| --- | --- |\n| `(x >= 0) \\|\\| (3*x < 0)` | {{blank:q1}} |\n| `(x >= 0) \\|\\| (x < ux)` | {{blank:q2}} |\n| `((x >> 1) << 1) <= x` | {{blank:q3}} |\n| `((x-y)<<3) + (x>>1) - y == 8*x - 9*y + x/2` | {{blank:q4}} |\n| `(x - y > 0) == ((y+~x+1)>>31 == 1)` | {{blank:q5}} |\n| `dx + dy == (double) (y+x)` | {{blank:q6}} |\n| `dx + dy + dz == dz + dy + dx` | {{blank:q7}} |\n| `(int)((lx+ly)>>1) == ((x&y) + ((x^y)>>1))` | {{blank:q8}} |\n（前6题每题1分; 7、8两题每题2分; 共10分）"
       },
       "solution": {
         "state": "available",
@@ -55573,7 +55573,7 @@
     {
       "schemaVersion": "5",
       "id": "q-6422fce8a943ccfa",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 26,
       "number": {
@@ -55655,7 +55655,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "第五题（20分）\n (每个填空和选择1分，表格每相邻两格1分)\n1.仔细阅读下面的程序，根据条件回答下列各题（10分）\n•  地址宽度为7，数组的起始地址为`0x1000000`\n•  `Block Size = 4 Byte`，`Set = 4`，两路组相连.\n•  替换算法为 LRU（最近最少使用）\n```\n#define LENGTH 8\nvoid clear4x4 ( char array[LENGTH][LENGTH] )  {\n  int row, col ;\n  for ( col = 0 ; col < 4; col++ ) {\n    for ( row = 0; row < 4 ; row++ ) {\n      array[ row] [ col] = 0;\n    }\n  }\n}\n```\n1)  以上程序执行会引起多少次失效？\n______\n2)  如果`LENGTH`改为16，会引起多少次失效？\n______\n3)  如果`LENGTH`变为17，与2)相比，下面描述正确的是：______，会引起 ______ 次\n失效。\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n4)  请画出3）运行后cache中set0和set1的最终状态。\n（3）运行后 cache 中 set0 和 set1 的最终状态见答案）"
+            "text": "第五题（20分）\n (每个填空和选择1分，表格每相邻两格1分)\n\n1.仔细阅读下面的程序，根据条件回答下列各题（10分）\n•  地址宽度为7，数组的起始地址为`0x1000000`\n•  `Block Size = 4 Byte`，`Set = 4`，两路组相连.\n•  替换算法为 LRU（最近最少使用）\n```\n#define LENGTH 8\nvoid clear4x4 ( char array[LENGTH][LENGTH] )  {\n  int row, col ;\n  for ( col = 0 ; col < 4; col++ ) {\n    for ( row = 0; row < 4 ; row++ ) {\n      array[ row] [ col] = 0;\n    }\n  }\n}\n```\n1)  以上程序执行会引起多少次失效？\n______\n2)  如果`LENGTH`改为16，会引起多少次失效？\n______\n3)  如果`LENGTH`变为17，与2)相比，下面描述正确的是：______，会引起 ______ 次\n失效。\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n4)  请画出3）运行后cache中set0和set1的最终状态。\n\n（3）运行后 cache 中 set0 和 set1 的最终状态见答案）"
           },
           "solution": {
             "state": "available",
@@ -55708,7 +55708,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "2.改变假设条件，回答下列各题（10分）\n•  地址宽度为8，数组的起始地址为`0x10000000`\n•  Cache容量为16 Byte，`Block Size = 4 Byte`，全相联Cache\n•  替换算法为 LRU（最近最少使用）\n1)  Tag的位数为 ______\n2)  如果执行上述程序，当`LENGTH=8`时，会引起多少次失效？\n______\n3)  如果`LENGTH`改为16，会引起多少次失效？\n______\n4)  如果`LENGTH`变为17，与3)相比，下面描述正确的是：______\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n5)  请画出4）执行后cache的最终状态\n（4）执行后 cache 的最终状态见答案）"
+            "text": "2.改变假设条件，回答下列各题（10分）\n•  地址宽度为8，数组的起始地址为`0x10000000`\n•  Cache容量为16 Byte，`Block Size = 4 Byte`，全相联Cache\n•  替换算法为 LRU（最近最少使用）\n1)  Tag的位数为 ______\n2)  如果执行上述程序，当`LENGTH=8`时，会引起多少次失效？\n______\n3)  如果`LENGTH`改为16，会引起多少次失效？\n______\n4)  如果`LENGTH`变为17，与3)相比，下面描述正确的是：______\nA） 16×16 比17×17产生更多的失效次数\nB） 16×16 和17×17产生的失效次数相同\nC） 16×16 比17×17产生更少的失效次数\n5)  请画出4）执行后cache的最终状态\n\n（4）执行后 cache 的最终状态见答案）"
           },
           "solution": {
             "state": "available",
@@ -56663,7 +56663,7 @@
     {
       "schemaVersion": "5",
       "id": "q-cb30db95322d3051",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 23,
       "number": {
@@ -56768,7 +56768,7 @@
                 "width": "medium"
               }
             ],
-            "text": "第三题（20分）\n1.考虑下面的`union`的声明，回答后面的问题。\n```\nunion ELE {\n  struct {\n    int x;\n    int *p;\n  }e1;\n  struct {\n    union ELE * next;\n    int y;\n  }e2;\n};\n```\n(注：32位机器)\n这个 `union` 总共大小为多少{{blank:union-size}}字节？（2分）"
+            "text": "第三题（20分）\n\n1.考虑下面的`union`的声明，回答后面的问题。\n```\nunion ELE {\n  struct {\n    int x;\n    int *p;\n  }e1;\n  struct {\n    union ELE * next;\n    int y;\n  }e2;\n};\n```\n(注：32位机器)\n这个 `union` 总共大小为多少{{blank:union-size}}字节？（2分）"
           },
           "solution": {
             "state": "available",
@@ -57586,7 +57586,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1a709db2fc08e155",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 6,
       "number": {
@@ -57632,7 +57632,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "6.  在链接时，对于下列哪些符号需要进行重定位？\n(1) 不同C语言源文件中定义的函数\n(2) 同一C语言源文件中定义的全局变量\n(3) 同一函数中定义时不带`static`的变量\n(4) 同一函数中定义时带有`static`的变量"
+        "text": "6.  在链接时，对于下列哪些符号需要进行重定位？\n\n(1) 不同C语言源文件中定义的函数\n\n(2) 同一C语言源文件中定义的全局变量\n\n(3) 同一函数中定义时不带`static`的变量\n\n(4) 同一函数中定义时带有`static`的变量"
       },
       "solution": {
         "state": "available",
@@ -57880,7 +57880,7 @@
     {
       "schemaVersion": "5",
       "id": "q-2b4c6c474fcda60d",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 25,
       "number": {
@@ -57985,7 +57985,7 @@
             "width": "medium"
           }
         ],
-        "text": "第六题（10分）\n下图是一个基于`echo`服务器的client-server框架\n（1）  请给图中的编号填写相应的函数名。\n\n![图](../../assets/期末/2019期末-无答案/p14-img1.jpg)\n\n图中编号①—⑦依次为：{{blank:diagram-1}}、{{blank:diagram-2}}、{{blank:diagram-3}}、{{blank:diagram-4}}、{{blank:diagram-5}}、{{blank:diagram-6}}、{{blank:diagram-7}}。\n\n（2）  请补全下面`server`端`open_listenfd`函数中缺失的操作（Line 21, Line\n26和Line 34）\n\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if ({{blank:bind-call}}(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo({{blank:freeaddrinfo-arg}});\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return {{blank:listenfd-return}};\nLine 35:  }\n```"
+        "text": "第六题（10分）\n下图是一个基于`echo`服务器的client-server框架\n\n（1）  请给图中的编号填写相应的函数名。\n\n![图](../../assets/期末/2019期末-无答案/p14-img1.jpg)\n\n图中编号①—⑦依次为：{{blank:diagram-1}}、{{blank:diagram-2}}、{{blank:diagram-3}}、{{blank:diagram-4}}、{{blank:diagram-5}}、{{blank:diagram-6}}、{{blank:diagram-7}}。\n\n（2）  请补全下面`server`端`open_listenfd`函数中缺失的操作（Line 21, Line\n26和Line 34）\n\n```\nLine 1:  int open_listenfd(char *port)\nLine 2:  {\nLine 3:     struct addrinfo hints, *listp, *p;\nLine 4:     int listenfd, optval=1;\nLine 5:     /* Get a list of potential server addresses */\nLine 6:     memset(&hints, 0, sizeof(struct addrinfo));\nLine 7:     hints.ai_socktype = SOCK_STREAM;\nLine 8:     hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;\nLine 9:     hints.ai_flags |= AI_NUMERICSERV;\nLine 10:    Getaddrinfo(NULL, port, &hints, &listp);\nLine 11:\nLine 12:     for (p = listp; p; p = p->ai_next) {\nLine 13:         /* Create a socket descriptor */\nLine 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,\nLine 15:                                    p->ai_protocol)) < 0)\nLine 16:           continue;  /* Socket failed, try the next */\nLine 17:         /* Eliminates \"Address already in use\" error from\nbind */\nLine 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,\nLine 19:                    (const void *)&optval , sizeof(int));\nLine 20:\nLine 21:         if ({{blank:bind-call}}(listenfd, p->ai_addr, p->ai_addrlen) == 0)\nLine 22:           break;  /* Success */\nLine 23:         Close(listenfd);\nLine 24:     }\nLine 25:     /* Clean up */\nLine 26:     Freeaddrinfo({{blank:freeaddrinfo-arg}});\nLine 27:     if (!p) /* No address worked */\nLine 28:         return -1;\nLine 29:\nLine 30:     if (listen(listenfd, LISTENQ) < 0) {\nLine 31:         Close(listenfd);\nLine 32:         return -1;\nLine 33:     }\nLine 34:     return {{blank:listenfd-return}};\nLine 35:  }\n```"
       },
       "solution": {
         "state": "available",
@@ -58312,7 +58312,7 @@
     {
       "schemaVersion": "5",
       "id": "q-3f14235fd87550aa",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 23,
       "number": {
@@ -58399,7 +58399,7 @@
             "width": "medium"
           }
         ],
-        "text": "第四题（10分）\n分析以下C程序，其中`f1.txt`和`f2.txt`为已有用户有读写的文件，初始文\n件内容为空。\n```c\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n9.\n10. int main()\n11. {\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n22.\n23.   close(fd2);\n24.\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n36.   }\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n\n\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n44.   }\n45.\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n51. }\n```\n当程序正确运行后，填写输出结果：\n（1）  程序第18行：fd1={{blank:fd1}}，fd2={{blank:fd2}}；\n（2）  程序第28行：fd3={{blank:fd3}}，fd4={{blank:fd4}}；\n（3）  程序第35、43、50行输出`c`的值依次分别为：{{blank:c-values}}；\n（4）  文件`f1.txt`中的内容为：{{blank:f1-content}}；\n（5）  文件`f2.txt`中的内容为：{{blank:f2-content}}。"
+        "text": "第四题（10分）\n分析以下C程序，其中`f1.txt`和`f2.txt`为已有用户有读写的文件，初始文\n件内容为空。\n```c\n1.  #include <stdio.h>\n2.  #include <stdlib.h>\n3.  #include <sys/types.h>\n4.  #include <sys/stat.h>\n5.  #include <fcntl.h>\n6.  #include <unistd.h>\n7.  #include <sys/types.h>\n8.  #include <sys/wait.h>\n9.\n10. int main()\n11. {\n12.   int fd1,fd2,fd3,fd4;\n13.   int pid;\n14.   int c=1;\n15.   fd1=open(\"./f1.txt\",O_WRONLY,0);\n16.   fd2=open(\"./f1.txt\",O_WRONLY,0);\n17.\n18.   printf(\"fd1=%d,fd2=%d;\\n\",fd1,fd2);\n19.\n20.   write(fd1,\"EECSPKU\",7);\n21.   write(fd2,\"2019\",4);\n22.\n23.   close(fd2);\n24.\n25.   fd3=open(\"./f2.txt\",O_WRONLY,0);\n26.   fd4=dup(fd3);\n27.\n28.   printf(\"fd3=%d,fd4=%d;\\n\",fd3,fd4);\n29.\n30.   pid=fork();\n31.   if((pid==0)) {\n32.     c--;\n33.     write(fd3,\"PKU\",3);\n34.     write(fd4,\"ICS\",3);\n35.     printf(\"c= %d\\n\",c);\n36.   }\n37.   else {\n38.     waitpid(-1,NULL,0);\n39.     c++;\n40.     write(fd3,\"2019\",4);\n\n\n41.     close(fd3);\n42.     close(fd4);\n43.     printf(\"c= %d\\n\",c);\n44.   }\n45.\n46.   if(c)\n47.    write(fd1,\"CS\",2);\n48.   c++;\n49.   close(fd1);\n50.   printf(\"c=%d\\n\",c);\n51. }\n```\n当程序正确运行后，填写输出结果：\n\n（1）  程序第18行：fd1={{blank:fd1}}，fd2={{blank:fd2}}；\n\n（2）  程序第28行：fd3={{blank:fd3}}，fd4={{blank:fd4}}；\n\n（3）  程序第35、43、50行输出`c`的值依次分别为：{{blank:c-values}}；\n\n（4）  文件`f1.txt`中的内容为：{{blank:f1-content}}；\n\n（5）  文件`f2.txt`中的内容为：{{blank:f2-content}}。"
       },
       "solution": {
         "state": "available",
@@ -58498,7 +58498,7 @@
     {
       "schemaVersion": "5",
       "id": "q-5f2d2b416c72e83f",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 21,
       "number": {
@@ -58622,7 +58622,7 @@
                 "width": "medium"
               }
             ],
-            "text": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax\n    addq    $8, %rdi\n    addq    $1, %rcx\n    cmpq    $8, %rcx\n    jl     .L2\n```\n初始寄存器值：`%rdi = 0x8008`，`%rax = 0`，`%rbx = 0`，`%rcx = 0`。\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```"
+            "text": "第二题（10分）\n现有如下汇编代码段，相关寄存器的初始值也在右侧表格中给出:\n```\n.L2:\n    movq    (%rdi), %rbx\n    addq    %rbx, %rax\n    addq    $8, %rdi\n    addq    $1, %rcx\n    cmpq    $8, %rcx\n    jl     .L2\n```\n初始寄存器值：`%rdi = 0x8008`，`%rax = 0`，`%rbx = 0`，`%rcx = 0`。\n\n（1）  请在下面C代码中，补充缺失的部分。\n```\n  for(i=0; i<_____ ; i++)\n  {\n    sum=sum+a[i];\n  }\n```"
           },
           "solution": {
             "state": "available",
@@ -60662,7 +60662,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f5038dc497e7b201",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 24,
       "number": {
@@ -60749,7 +60749,7 @@
             "width": "medium"
           }
         ],
-        "text": "第五题（10分）\n某32位机器有24位地址空间，采用二级页表，一级页表中有64个`PTE`，二\n级页表中有1024个`PTE`，一级页表4KB对齐，`PTE`最高一位是有效位，没有\nTLB和Cache。惠楚思程序员在该机器上执行了如下代码。\n```\n1. int* a=calloc(10000, sizeof(int));\n2. int* b = a+5000;\n3. fork();\n4. *b=0x80C3F110;\n```\n（1）  假设编译后 `b` 的值保存在寄存器中，请问该机器页面大小为{{blank:page-size}}字\n节，`VPN1`长度为{{blank:vpn1-length}}，`VPN2`长度为{{blank:vpn2-length}}。\n（2）  由于该执行结果不符合预期，惠楚思需要对程序执行过程进行还原。\n程序执行过程中硬件记录了部分内存访问记录，但访问记录并不完整。目前已\n知在父进程执行第四行的时候，进行了若干次物理内存的读写操作，其中第一\n次读内存操作从地址 `0x67F0E8` 读出 `0x80AA32C4`，另外有两次将\n`0x80C3F110`写入内存的操作，写入的地址分别是`0xC3F50D`和`0xAA3AD0`，\n但写入顺序并不清楚。程序结束后变量`b`中保存的值是{{blank:b-value}}。在\n解析“*b”的过程中，一级页表的起始地址为{{blank:l1-address}}；二级页表\n的起始地址为{{blank:l2-address}}；物理页面的起始地址为{{blank:page-address}}。\n（地址均用16进制表示）"
+        "text": "第五题（10分）\n某32位机器有24位地址空间，采用二级页表，一级页表中有64个`PTE`，二\n级页表中有1024个`PTE`，一级页表4KB对齐，`PTE`最高一位是有效位，没有\nTLB和Cache。惠楚思程序员在该机器上执行了如下代码。\n```\n1. int* a=calloc(10000, sizeof(int));\n2. int* b = a+5000;\n3. fork();\n4. *b=0x80C3F110;\n```\n（1）  假设编译后 `b` 的值保存在寄存器中，请问该机器页面大小为{{blank:page-size}}字\n节，`VPN1`长度为{{blank:vpn1-length}}，`VPN2`长度为{{blank:vpn2-length}}。\n\n（2）  由于该执行结果不符合预期，惠楚思需要对程序执行过程进行还原。\n程序执行过程中硬件记录了部分内存访问记录，但访问记录并不完整。目前已\n知在父进程执行第四行的时候，进行了若干次物理内存的读写操作，其中第一\n次读内存操作从地址 `0x67F0E8` 读出 `0x80AA32C4`，另外有两次将\n`0x80C3F110`写入内存的操作，写入的地址分别是`0xC3F50D`和`0xAA3AD0`，\n但写入顺序并不清楚。程序结束后变量`b`中保存的值是{{blank:b-value}}。在\n解析“*b”的过程中，一级页表的起始地址为{{blank:l1-address}}；二级页表\n的起始地址为{{blank:l2-address}}；物理页面的起始地址为{{blank:page-address}}。\n（地址均用16进制表示）"
       },
       "solution": {
         "state": "available",
@@ -62238,7 +62238,7 @@
     {
       "schemaVersion": "5",
       "id": "q-23de3bd6db6e2bd9",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-9c11139ca386240d",
       "paperOrder": 13,
       "number": {
@@ -62284,7 +62284,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "13. （2分）下面给出了`float_half`函数的代码，该函数给出单精度浮点数`f`的一半（即\n0.5 * f）的位模式。下面哪一个选项正确给出了(1)和(2)处应当填写的值？\n```\n/*\n * float_half - Return bit-level equivalent of expression 0.5*f for\n *   floating point argument f.\n *   Both the argument and result are passed as unsigned int's, but\n *   they are to be interpreted as the bit-level representation of\n *   single-precision floating point values.\n *   When argument is NaN, return argument\n*/\nunsigned float_half(unsigned uf) {\n  unsigned sign = uf >> 31;\n  unsigned exp = (uf >> 23) & 0xFF;\n  unsigned frac = uf & 0x7FFFFF;\n  /* Only roundup case will be when rounding to even */\n  unsigned roundup = (frac & 0x3) == 3;\n  if (exp == 0) {\n    /* Denormalized. Must halve fraction */\n    frac = (frac >> 1) + roundup;\n  } else if (exp < 0xFF) {\n    /* Normalized. Decrease exponent */\n    exp--;\n    if (exp == 0) {\n      /* Denormalize adding back leading one */\n      frac = (frac >> 1) + roundup + _____(1)_____;\n    }\n  }\n  /* NaN Infinity do not require any changes */\n  return (sign << 31) | (exp << _____(2)_____) | frac;\n}\n```"
+        "text": "13. （2分）下面给出了`float_half`函数的代码，该函数给出单精度浮点数`f`的一半（即\n\n0.5 * f）的位模式。下面哪一个选项正确给出了(1)和(2)处应当填写的值？\n```\n/*\n * float_half - Return bit-level equivalent of expression 0.5*f for\n *   floating point argument f.\n *   Both the argument and result are passed as unsigned int's, but\n *   they are to be interpreted as the bit-level representation of\n *   single-precision floating point values.\n *   When argument is NaN, return argument\n*/\nunsigned float_half(unsigned uf) {\n  unsigned sign = uf >> 31;\n  unsigned exp = (uf >> 23) & 0xFF;\n  unsigned frac = uf & 0x7FFFFF;\n  /* Only roundup case will be when rounding to even */\n  unsigned roundup = (frac & 0x3) == 3;\n  if (exp == 0) {\n    /* Denormalized. Must halve fraction */\n    frac = (frac >> 1) + roundup;\n  } else if (exp < 0xFF) {\n    /* Normalized. Decrease exponent */\n    exp--;\n    if (exp == 0) {\n      /* Denormalize adding back leading one */\n      frac = (frac >> 1) + roundup + _____(1)_____;\n    }\n  }\n  /* NaN Infinity do not require any changes */\n  return (sign << 31) | (exp << _____(2)_____) | frac;\n}\n```"
       },
       "solution": {
         "state": "available",
@@ -66199,7 +66199,7 @@
     {
       "schemaVersion": "5",
       "id": "q-09e5c0e61848d20a",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 21,
       "number": {
@@ -66298,7 +66298,7 @@
             "width": "medium"
           }
         ],
-        "text": "第六题（15分）\n下面这段代码可以用于评测计算机系统的存储系统性能。在某款现代的个人计算机\n上，采用该评测程序的不同的配置参数（数据集大小和访问步长），得到了如下图\n所示的性能表现。\n\n![图](assets/期中/2019期中-带答案/p21-memory-mountain.png)\n\n```\nlong data[MAXELEMS];  /* Global array to traverse */\n/* test - Iterate over first \"elems\" elements of\n *        array “data” with stride of \"stride\", using\n *        using 4x4 loop unrolling.\n */\nint test(int elems, int stride) {\n    long i, sx2=stride*2, sx3=stride*3, sx4=stride*4;\n    long acc0 = 0, acc1 = 0, acc2 = 0, acc3 = 0;\n    long length = elems, limit = length - sx4;\n    /* Combine 4 elements at a time */\n    for (i = 0; i < limit; i += sx4) {\n        acc0 = acc0 + data[i];\n        acc1 = acc1 + data[i+stride];\n        acc2 = acc2 + data[i+sx2];\n        acc3 = acc3 + data[i+sx3];\n    }\n    /* Finish any remaining elements */\n    for (; i < length; i++) {\n        acc0 = acc0 + data[i];\n    }\n    return ((acc0 + acc1) + (acc2 + acc3));\n}\n```\n（1）图中 A1-D1 这几个点有一些较为平缓的“平台”，这主要体现了访存行为的什么特性？ ______（2分）\n（2）如果图中D1体现了内存的性能，那A1、B1、C1分别体现存储层次结构中\n的什么部件的性能：A1：______、B1: ______、C1: ______。\n(每空1分)\n其中，B1所体现的部件，容量可能是多大？ ______（2分）\n  a. 32KB  b. 256KB    c.1MB    d.8MB\nC1所体现的部件，容量可能是多大？ ______（2分）\n  a. 32KB  b. 256KB    c.1MB    d.8MB\n（3）图中B2和B1、C2和C1之间的“斜坡”，这主要是由于访存行为的什么特\n性导致的？ ______（2分）\n（4）图中B2和C2的性能指标差别不大，不像B1和C1之间的差距那么大，主\n要是什么原因导致的？ ______（2分）\n（5）实际评测时，需要把 `test()`函数先运行一遍，然后再运行一次获取评测数\n据，这是为了避免什么现象的影响？ ______(2分)"
+        "text": "第六题（15分）\n下面这段代码可以用于评测计算机系统的存储系统性能。在某款现代的个人计算机\n上，采用该评测程序的不同的配置参数（数据集大小和访问步长），得到了如下图\n所示的性能表现。\n\n![图](assets/期中/2019期中-带答案/p21-memory-mountain.png)\n\n```\nlong data[MAXELEMS];  /* Global array to traverse */\n/* test - Iterate over first \"elems\" elements of\n *        array “data” with stride of \"stride\", using\n *        using 4x4 loop unrolling.\n */\nint test(int elems, int stride) {\n    long i, sx2=stride*2, sx3=stride*3, sx4=stride*4;\n    long acc0 = 0, acc1 = 0, acc2 = 0, acc3 = 0;\n    long length = elems, limit = length - sx4;\n    /* Combine 4 elements at a time */\n    for (i = 0; i < limit; i += sx4) {\n        acc0 = acc0 + data[i];\n        acc1 = acc1 + data[i+stride];\n        acc2 = acc2 + data[i+sx2];\n        acc3 = acc3 + data[i+sx3];\n    }\n    /* Finish any remaining elements */\n    for (; i < length; i++) {\n        acc0 = acc0 + data[i];\n    }\n    return ((acc0 + acc1) + (acc2 + acc3));\n}\n```\n（1）图中 A1-D1 这几个点有一些较为平缓的“平台”，这主要体现了访存行为的什么特性？ ______（2分）\n\n（2）如果图中D1体现了内存的性能，那A1、B1、C1分别体现存储层次结构中\n的什么部件的性能：A1：______、B1: ______、C1: ______。\n(每空1分)\n其中，B1所体现的部件，容量可能是多大？ ______（2分）\n\n  a. 32KB  b. 256KB    c.1MB    d.8MB\nC1所体现的部件，容量可能是多大？ ______（2分）\n\n  a. 32KB  b. 256KB    c.1MB    d.8MB\n\n（3）图中B2和B1、C2和C1之间的“斜坡”，这主要是由于访存行为的什么特\n性导致的？ ______（2分）\n\n（4）图中B2和C2的性能指标差别不大，不像B1和C1之间的差距那么大，主\n要是什么原因导致的？ ______（2分）\n\n（5）实际评测时，需要把 `test()`函数先运行一遍，然后再运行一次获取评测数\n据，这是为了避免什么现象的影响？ ______(2分)"
       },
       "solution": {
         "state": "available",
@@ -67383,7 +67383,7 @@
     {
       "schemaVersion": "5",
       "id": "q-9acce0371658f35f",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 19,
       "number": {
@@ -67488,7 +67488,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "第四题（15分）\n请分析Y86-64 ISA中新加入的一族算术指令： irOpq V, rA, rB，其格式如\n下：\nC  Fn  rA  rB  V（8字节）\n  与Opq类似，这族指令由四个指令组成，分别是iraddq, irsubq, irandq\n和irxorq。其功能为：计算`R[rA] OP V`并将结果存入`R[rB]`中，这里OP根\n据Fn的取值分别取+, -, &和`^`，且此过程会设置条件码寄存器。\n1.若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC,\nvalE, valP, Cnd; the register file R[], data memory M[],\nProgram counter PC, condition codes CC。其中对存储器的引用必须标\n明字节数。如果在某一阶段没有任何操作，请填写`none`指明。（6分）"
+            "text": "第四题（15分）\n请分析Y86-64 ISA中新加入的一族算术指令： irOpq V, rA, rB，其格式如\n下：\nC  Fn  rA  rB  V（8字节）\n  与Opq类似，这族指令由四个指令组成，分别是iraddq, irsubq, irandq\n和irxorq。其功能为：计算`R[rA] OP V`并将结果存入`R[rB]`中，这里OP根\n据Fn的取值分别取+, -, &和`^`，且此过程会设置条件码寄存器。\n\n1.若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC,\nvalE, valP, Cnd; the register file R[], data memory M[],\nProgram counter PC, condition codes CC。其中对存储器的引用必须标\n明字节数。如果在某一阶段没有任何操作，请填写`none`指明。（6分）"
           },
           "solution": {
             "state": "available",
@@ -73176,7 +73176,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ffc3db50cfb5b1e6",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-ac5fea2cf89e5bed",
       "paperOrder": 5,
       "number": {
@@ -73224,7 +73224,7 @@
       "type": "unclassified-choice",
       "stem": {
         "format": "markdown",
-        "text": "（5~6） 如果直接映射高速缓存（Cache）的大小是4KB，并且块大小（block）\n大小为32字节。\n5、请问它每路（way）有多少行（line）？"
+        "text": "（5~6） 如果直接映射高速缓存（Cache）的大小是4KB，并且块大小（block）\n大小为32字节。\n\n5、请问它每路（way）有多少行（line）？"
       },
       "solution": {
         "state": "available",
@@ -79551,7 +79551,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d00b4881c35e6fec",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-bc69f9ea3beff7ee",
       "paperOrder": 27,
       "number": {
@@ -79658,7 +79658,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧"
+            "text": "2.某辆公交车的司机和售票员为保证乘客的安全，需要密切配合、协调工作。司\n机和售票员的工作流程如下所示。请编写程序，用P、V操作来实现司机与售票员\n之间的同步。\n| 司机进程 | 售票员进程 |\n| --- | --- |\n| `while (1) {` | `while (1) {` |\n| ① | ⑤ |\n| 启动车辆； | 关门； |\n| ② | ⑥ |\n| 正常行驶； | 报站名或维持秩序； |\n| ③ | ⑦ |\n| 到站停车； | 到站开门； |\n| ④ | ⑧ |\n| `}` | `}` |\n\n（1）请设计若干信号量，给出每一个信号量的作用和初值。\n\n（2）请将信号量对应的PV操作填写在代码中适当位置。\n注：每一标号处可以不填入语句（请标记成 X），或填入一条或多条语句。\n标号  对应的操作\n①\n②\n③\n④\n⑤\n⑥\n⑦\n⑧"
           },
           "solution": {
             "state": "available",
@@ -80517,7 +80517,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f8e10c8048661052",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-bc69f9ea3beff7ee",
       "paperOrder": 25,
       "number": {
@@ -80810,7 +80810,7 @@
             "width": "medium"
           }
         ],
-        "text": "第六题（12分）\n程序`i16.c`如下：\n```\n#include <stdio.h>\n#include <fcntl.h>\n#include <unistd.h>\n#include <ctype.h>\n#include <sys/types.h>\n#include <sys/stat.h>\n#include <sys/mman.h>\n#include <sys/wait.h>\n#include \"csapp.h\"\nint main(int argc, char **argv)\n{\n  int fd1, fd2;\n  char *cs;\n  struct stat stat;\n  int sz, i;\n  fd1 = Open(argv[1], O_RDWR, S_IRUSR | S_IWUSR);\n  Fstat(fd1, &stat);\n  sz = stat.st_size;\n  fd2 = Open(argv[2], O_RDWR | O_TRUNC | O_CREAT, \\\n             S_IRUSR | S_IWUSR);\n  cs = (char *)Mmap(NULL, sz, PROT_READ | PROT_WRITE, \\\n                    X, fd1, 0);\n  if (Fork()) {\n    Wait(&i);\n    Write(fd2, cs, sz);\n  } else {\n    for (i = 0; i < sz; i++) {\n      if (islower(cs[i]))\n        cs[i] = (char) toupper(cs[i]);\n      else if (isupper(cs[i]))\n        cs[i] = (char) tolower(cs[i]);\n    }\n       Y         ;\n  }\n  Munmap(cs, sz);\n  Close(fd1);\n  Close(fd2);\n}\n```\n1、假定`t1`内容为`ICSexam`，根据X/Y处的内容，判断执行`./i16 t1 t2`之后\n的结果：（均为单选题）\n1.1、X为`MAP_PRIVATE`，Y为空时，结果为{{blank:choice-1-1}}\n- **A.** t1为`ICSexam`，`t2`为`ICSexam`\n- **B.** t1为`ICSexam`，`t2`为`icsEXAM`\n- **C.** t1为`icsEXAM`，`t2`为`icsEXAM`\n- **D.** t1为`icsEXAM`，`t2`为`ICSexam`\n1.2、X为`MAP_SHARED`时，Y为空时，结果为{{blank:choice-1-2}}\n- **A.** t1为`ICSexam`，`t2`为`ICSexam`\n- **B.** t1为`ICSexam`，`t2`为`icsEXAM`\n- **C.** t1为`icsEXAM`，`t2`为`icsEXAM`\n- **D.** t1为`icsEXAM`，`t2`为`ICSexam`\n1.3、X处的内容为`MAP_PRIVATE`，Y为Write(fd2, cs, sz)时，`t2`的\n结果为{{blank:choice-1-3}}\n- **A.** t2为`ICSexam`\n- **B.** t2为`icsEXAM`\n- **C.** t2为`icsEXAMICSexam`\n- **D.** t2为`icsEXAMicsEXAM`\n1.4、X处的内容为`MAP_SHARED`，Y为Write(fd2, cs, sz)时，`t2`的结\n果为{{blank:choice-1-4}}\n- **A.** t2为`ICSexam`\n- **B.** t2为`icsEXAM`\n- **C.** t2为`icsEXAMICSexam`\n- **D.** t2为`icsEXAMicsEXAM`\n\n\n2、X为`MAP_SHARED`，当子进程运行到Y处时，内存映射的内容如下：（只保留了\n/proc/pid/maps中的三部分内容：分别为address/perms/pathname）\n```\n00400000-00405000 r-xp           /home/tao/i16/i16\n00604000-00605000 r--p           /home/tao/i16/i16\n00605000-00606000   A             /home/tao/i16/i16\n7f5df1e61000-7f5df2020000 r-xp   /lib/x86_64-linux-gnu/libc-2.23.so\n7f5df2020000-7f5df2220000 ---p   /lib/x86_64-linux-gnu/libc-2.23.so\n7f5df2220000-7f5df2224000 r--p   /lib/x86_64-linux-gnu/libc-2.23.so\n7f5df2224000-7f5df2226000 rw-p   /lib/x86_64-linux-gnu/libc-2.23.so\n7f5df2226000-7f5df222a000 rw-p\n7f5df222a000-7f5df2250000 r-xp   /lib/x86_64-linux-gnu/      B\n7f5df243f000-7f5df2442000 rw-p\n7f5df244c000-7f5df244d000 rw-s            C\n7f5df244d000-7f5df244f000 rw-p\n7f5df244f000-7f5df2450000 r--p   /lib/x86_64-linux-gnu/      B\n7f5df2450000-7f5df2451000 rw-p   /lib/x86_64-linux-gnu/      B\n7f5df2451000-7f5df2452000 rw-p\n7ffd4e35f000-7ffd4e380000 rw-p   [      D        ]\n7ffd4e3b0000-7ffd4e3b2000 r--p   [vvar]\n7ffd4e3b2000-7ffd4e3b4000 r-xp   [vdso]\nffffffffff600000-ffffffffff601000 r-xp  [vsyscall]\n```\n根据程序执行情况，填充空白处：\nA：{{blank:map-A}}\n\nB：{{blank:map-B}}\n\nC：{{blank:map-C}}\n\nD：{{blank:map-D}}\n\n3、X为`MAP_SHARED`，当子进程运行到Y处时：（均为单选题）\n3.1、关于页表的描述，正确的是：{{blank:choice-3-1}}\n\n- **A.** 由于`i16`本身的代码和数据只占用了低32位空间，所以这部分空间只需使用\n  2级页表\n- **B.** 所有虚拟地址空间都是48位地址空间，都需要使用完整的4级页表\n- **C.** 当页表项无效时（P位为0），MMU不会使用到其它位的内容\n- **D.** 除读写权限外，需要在页表项中为COW机制提供专门的支持\n3.2、如果子进程在Y处访问7f5df2224这一页，可能发生以下异常：{{blank:choice-3-2}}\n- **A.** Page Fault或General Protection Fault\n- **B.** General Protection Fault或Segmentation Fault\n- **C.** Page Fault或Segmentation Fault\n- **D.** Page Fault或General Protection Fault或Segmentation Fault\n3.3、假设TLB有64个表项，4路组相联，当访问7f5df2224这一页时，所对\n应的TLBT应为：{{blank:choice-3-3}}\n- **A.** 0111 1111 0101 1101 1111 0010 0010 0010\n- **B.** 0111 1111 0101 1101 1111 0010 0010 0010 01\n- **C.** 1111 0101 1101 1111 0010 0010 0010 0100\n- **D.** 11 1111 0101 1101 1111 0010 0010 0010 0100\n3.4、当发生TLB命中时，则意味着：{{blank:choice-3-4}}\n- **A.** 相应的页表项，在L1 Cache里\n- **B.** 要访问的数据内容，在L1 Cache里\n- **C.** 如果要访问的数据内容已在L1 Cache中，则该Cache Line的权限位中应\n  具有相应的读写执行权限\n- **D.** 以上都不对"
+        "text": "第六题（12分）\n程序`i16.c`如下：\n```\n#include <stdio.h>\n#include <fcntl.h>\n#include <unistd.h>\n#include <ctype.h>\n#include <sys/types.h>\n#include <sys/stat.h>\n#include <sys/mman.h>\n#include <sys/wait.h>\n#include \"csapp.h\"\nint main(int argc, char **argv)\n{\n  int fd1, fd2;\n  char *cs;\n  struct stat stat;\n  int sz, i;\n  fd1 = Open(argv[1], O_RDWR, S_IRUSR | S_IWUSR);\n  Fstat(fd1, &stat);\n  sz = stat.st_size;\n  fd2 = Open(argv[2], O_RDWR | O_TRUNC | O_CREAT, \\\n             S_IRUSR | S_IWUSR);\n  cs = (char *)Mmap(NULL, sz, PROT_READ | PROT_WRITE, \\\n                    X, fd1, 0);\n  if (Fork()) {\n    Wait(&i);\n    Write(fd2, cs, sz);\n  } else {\n    for (i = 0; i < sz; i++) {\n      if (islower(cs[i]))\n        cs[i] = (char) toupper(cs[i]);\n      else if (isupper(cs[i]))\n        cs[i] = (char) tolower(cs[i]);\n    }\n       Y         ;\n  }\n  Munmap(cs, sz);\n  Close(fd1);\n  Close(fd2);\n}\n```\n1、假定`t1`内容为`ICSexam`，根据X/Y处的内容，判断执行`./i16 t1 t2`之后\n的结果：（均为单选题）\n\n1.1、X为`MAP_PRIVATE`，Y为空时，结果为{{blank:choice-1-1}}\n- **A.** t1为`ICSexam`，`t2`为`ICSexam`\n- **B.** t1为`ICSexam`，`t2`为`icsEXAM`\n- **C.** t1为`icsEXAM`，`t2`为`icsEXAM`\n- **D.** t1为`icsEXAM`，`t2`为`ICSexam`\n\n1.2、X为`MAP_SHARED`时，Y为空时，结果为{{blank:choice-1-2}}\n- **A.** t1为`ICSexam`，`t2`为`ICSexam`\n- **B.** t1为`ICSexam`，`t2`为`icsEXAM`\n- **C.** t1为`icsEXAM`，`t2`为`icsEXAM`\n- **D.** t1为`icsEXAM`，`t2`为`ICSexam`\n\n1.3、X处的内容为`MAP_PRIVATE`，Y为Write(fd2, cs, sz)时，`t2`的\n结果为{{blank:choice-1-3}}\n- **A.** t2为`ICSexam`\n- **B.** t2为`icsEXAM`\n- **C.** t2为`icsEXAMICSexam`\n- **D.** t2为`icsEXAMicsEXAM`\n\n1.4、X处的内容为`MAP_SHARED`，Y为Write(fd2, cs, sz)时，`t2`的结\n果为{{blank:choice-1-4}}\n- **A.** t2为`ICSexam`\n- **B.** t2为`icsEXAM`\n- **C.** t2为`icsEXAMICSexam`\n- **D.** t2为`icsEXAMicsEXAM`\n\n\n2、X为`MAP_SHARED`，当子进程运行到Y处时，内存映射的内容如下：（只保留了\n/proc/pid/maps中的三部分内容：分别为address/perms/pathname）\n```\n00400000-00405000 r-xp           /home/tao/i16/i16\n00604000-00605000 r--p           /home/tao/i16/i16\n00605000-00606000   A             /home/tao/i16/i16\n7f5df1e61000-7f5df2020000 r-xp   /lib/x86_64-linux-gnu/libc-2.23.so\n7f5df2020000-7f5df2220000 ---p   /lib/x86_64-linux-gnu/libc-2.23.so\n7f5df2220000-7f5df2224000 r--p   /lib/x86_64-linux-gnu/libc-2.23.so\n7f5df2224000-7f5df2226000 rw-p   /lib/x86_64-linux-gnu/libc-2.23.so\n7f5df2226000-7f5df222a000 rw-p\n7f5df222a000-7f5df2250000 r-xp   /lib/x86_64-linux-gnu/      B\n7f5df243f000-7f5df2442000 rw-p\n7f5df244c000-7f5df244d000 rw-s            C\n7f5df244d000-7f5df244f000 rw-p\n7f5df244f000-7f5df2450000 r--p   /lib/x86_64-linux-gnu/      B\n7f5df2450000-7f5df2451000 rw-p   /lib/x86_64-linux-gnu/      B\n7f5df2451000-7f5df2452000 rw-p\n7ffd4e35f000-7ffd4e380000 rw-p   [      D        ]\n7ffd4e3b0000-7ffd4e3b2000 r--p   [vvar]\n7ffd4e3b2000-7ffd4e3b4000 r-xp   [vdso]\nffffffffff600000-ffffffffff601000 r-xp  [vsyscall]\n```\n根据程序执行情况，填充空白处：\nA：{{blank:map-A}}\n\nB：{{blank:map-B}}\n\nC：{{blank:map-C}}\n\nD：{{blank:map-D}}\n\n3、X为`MAP_SHARED`，当子进程运行到Y处时：（均为单选题）\n\n3.1、关于页表的描述，正确的是：{{blank:choice-3-1}}\n\n- **A.** 由于`i16`本身的代码和数据只占用了低32位空间，所以这部分空间只需使用\n  2级页表\n- **B.** 所有虚拟地址空间都是48位地址空间，都需要使用完整的4级页表\n- **C.** 当页表项无效时（P位为0），MMU不会使用到其它位的内容\n- **D.** 除读写权限外，需要在页表项中为COW机制提供专门的支持\n\n3.2、如果子进程在Y处访问7f5df2224这一页，可能发生以下异常：{{blank:choice-3-2}}\n- **A.** Page Fault或General Protection Fault\n- **B.** General Protection Fault或Segmentation Fault\n- **C.** Page Fault或Segmentation Fault\n- **D.** Page Fault或General Protection Fault或Segmentation Fault\n\n3.3、假设TLB有64个表项，4路组相联，当访问7f5df2224这一页时，所对\n应的TLBT应为：{{blank:choice-3-3}}\n- **A.** 0111 1111 0101 1101 1111 0010 0010 0010\n- **B.** 0111 1111 0101 1101 1111 0010 0010 0010 01\n- **C.** 1111 0101 1101 1111 0010 0010 0010 0100\n- **D.** 11 1111 0101 1101 1111 0010 0010 0010 0100\n\n3.4、当发生TLB命中时，则意味着：{{blank:choice-3-4}}\n- **A.** 相应的页表项，在L1 Cache里\n- **B.** 要访问的数据内容，在L1 Cache里\n- **C.** 如果要访问的数据内容已在L1 Cache中，则该Cache Line的权限位中应\n  具有相应的读写执行权限\n- **D.** 以上都不对"
       },
       "solution": {
         "state": "available",
@@ -81513,7 +81513,7 @@
     {
       "schemaVersion": "5",
       "id": "q-15b1a73349ac7405",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 21,
       "number": {
@@ -81668,7 +81668,7 @@
             }
           }
         ],
-        "text": "第二题（15分） 请结合教材第二章的相关知识,回答下列问题\n量化（Quantization）是将输入值从大集合映射到较小集合中的输出值的过程，\n在神经网络中是压缩模型的经典方法，通过降低权重、偏差和激活精度消耗更少的\n内存。 量化利用了神经网络对噪声的弹性； 通过使用较低精度的值，量化会引入\n一些噪声，但深度神经网络仍然可以学习拾取关键模式并忽略噪声。在 Nvidia\nH100 GPU 中引入了对新数据类型 FP8（8 位浮点）的支持，从而实现了更高的\n矩阵乘法和卷积吞吐量。FP8包含`E4M3`和E5M2两种不同的数据类型，`E4M3`包\n含1位符号，4位阶码，3位尾数；E5M2包含1位符号，5位阶码，2位尾数。\n（M是mantissa的缩写表示尾数部分，与书本上fraction等价）\n\n![E4M3 和 E5M2 位模式示例](assets/期中/2023期中-带答案/p13-fp8-examples.png)\n\n   1. 其中E5M2遵守IEEE-754标准，根据所学的`float`和`double`的知识，\n该数据类型能表示最大的规格化数（二进制）是 {{blank:e5m2-max-normal}}；最大的非规格化数（二\n进制）是 {{blank:e5m2-max-subnormal}}。\n   2. 但是在Nvidia的设计中`E4M3`放弃了IEEE-754标准，通过回收用于特\n殊值的大多数位模式来扩展动态范围，它只保留了阶码(E)和尾数(M)全为1时为\n特殊值 NaN，则该数据类型将能表示的最大规格化数扩展到（二进制）\n(3) {{blank:e4m3-max-bits}}，值（十进制）是 (4) {{blank:e4m3-max-value}}，是 IEEE-754 标准设计出的最\n大规格化数的 (5) {{blank:e4m3-range-ratio}} 倍（舍入到整数）。因为在这种情况下，实现的更大范\n围比支持特殊值的多种编码有用得多。\n   3. 另一种 8bit 格式 int8（8bit 整型）在模型量化中占有重要地位。与\n`float`相比，int8在少量精度损失下将模型大小和内存带宽需求降低4倍，使得\n模型表示更加紧凑，并且在PyTorch, TensorFlow框架中都有很好的支持。那\n么在H100 GPU上用Nvidia E4M3表示int8，是否会发生溢出 (6) {{blank:int8-overflow}}\n\n\n（请填是/否），是否会发生舍入 (7) {{blank:int8-rounding}}（请填是/否）。\n   4. 深度学习模型计算会涉及大量浮点数的加法和乘法，而计算顺序对于结果\n有很大的影响。要将E5M2表示的-1.25, 1.5, 1/16, 1/32四个浮点数相加，\n写出可能得到的最小计算结果（分数）(8) {{blank:min-sum}}，最大计算结果（分数）\n(9) {{blank:max-sum}}。\n   5. 在深度学习中，我们期望使用在容忍一定误差的前提下使用内存占用最小\n的数据类型，则对于以下一维卷积应当采用 (10) {{blank:preferred-fp8}} 的浮点型（请填\nfloat/double/E4M3/E5M2）\n![一维卷积示意图](assets/期中/2023期中-带答案/p14-convolution.png)\n   在训练神经网络期间， 通常前向激活和权重需要更高的精度，因此最好在前向\n传递期间使用 `E4M3` 数据类型。 然而在后向传递中，流经网络的梯度通常不太容\n易受到精度损失的影响，但需要更高的动态范围。 因此，最好使用 E5M2 数据格\n式存储它们。"
+        "text": "第二题（15分） 请结合教材第二章的相关知识,回答下列问题\n量化（Quantization）是将输入值从大集合映射到较小集合中的输出值的过程，\n在神经网络中是压缩模型的经典方法，通过降低权重、偏差和激活精度消耗更少的\n内存。 量化利用了神经网络对噪声的弹性； 通过使用较低精度的值，量化会引入\n一些噪声，但深度神经网络仍然可以学习拾取关键模式并忽略噪声。在 Nvidia\nH100 GPU 中引入了对新数据类型 FP8（8 位浮点）的支持，从而实现了更高的\n矩阵乘法和卷积吞吐量。FP8包含`E4M3`和E5M2两种不同的数据类型，`E4M3`包\n含1位符号，4位阶码，3位尾数；E5M2包含1位符号，5位阶码，2位尾数。\n（M是mantissa的缩写表示尾数部分，与书本上fraction等价）\n\n![E4M3 和 E5M2 位模式示例](assets/期中/2023期中-带答案/p13-fp8-examples.png)\n\n   1. 其中E5M2遵守IEEE-754标准，根据所学的`float`和`double`的知识，\n该数据类型能表示最大的规格化数（二进制）是 {{blank:e5m2-max-normal}}；最大的非规格化数（二\n进制）是 {{blank:e5m2-max-subnormal}}。\n   2. 但是在Nvidia的设计中`E4M3`放弃了IEEE-754标准，通过回收用于特\n殊值的大多数位模式来扩展动态范围，它只保留了阶码(E)和尾数(M)全为1时为\n特殊值 NaN，则该数据类型将能表示的最大规格化数扩展到（二进制）\n\n(3) {{blank:e4m3-max-bits}}，值（十进制）是 (4) {{blank:e4m3-max-value}}，是 IEEE-754 标准设计出的最\n大规格化数的 (5) {{blank:e4m3-range-ratio}} 倍（舍入到整数）。因为在这种情况下，实现的更大范\n围比支持特殊值的多种编码有用得多。\n   3. 另一种 8bit 格式 int8（8bit 整型）在模型量化中占有重要地位。与\n`float`相比，int8在少量精度损失下将模型大小和内存带宽需求降低4倍，使得\n模型表示更加紧凑，并且在PyTorch, TensorFlow框架中都有很好的支持。那\n么在H100 GPU上用Nvidia E4M3表示int8，是否会发生溢出 (6) {{blank:int8-overflow}}\n\n\n（请填是/否），是否会发生舍入 (7) {{blank:int8-rounding}}（请填是/否）。\n   4. 深度学习模型计算会涉及大量浮点数的加法和乘法，而计算顺序对于结果\n有很大的影响。要将E5M2表示的-1.25, 1.5, 1/16, 1/32四个浮点数相加，\n写出可能得到的最小计算结果（分数）(8) {{blank:min-sum}}，最大计算结果（分数）\n\n(9) {{blank:max-sum}}。\n   5. 在深度学习中，我们期望使用在容忍一定误差的前提下使用内存占用最小\n的数据类型，则对于以下一维卷积应当采用 (10) {{blank:preferred-fp8}} 的浮点型（请填\nfloat/double/E4M3/E5M2）\n![一维卷积示意图](assets/期中/2023期中-带答案/p14-convolution.png)\n   在训练神经网络期间， 通常前向激活和权重需要更高的精度，因此最好在前向\n传递期间使用 `E4M3` 数据类型。 然而在后向传递中，流经网络的梯度通常不太容\n易受到精度损失的影响，但需要更高的动态范围。 因此，最好使用 E5M2 数据格\n式存储它们。"
       },
       "solution": {
         "state": "available",
@@ -82380,7 +82380,7 @@
     {
       "schemaVersion": "5",
       "id": "q-67f217d16c378540",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 23,
       "number": {
@@ -82575,7 +82575,7 @@
             }
           }
         ],
-        "text": "第四题（15分）\n\n![图](assets/期中/2023期中-带答案/p19-figs-ab.png)\n\n1） 为实现PC相对地址的条件控制转移指令，增加Bxx指令（其中xx为条件码），\n跳转目标地址等于当前指令执行时的PC加上偏移offset，编码如下。\n```\n0xC  fn  Offset\n```\n请为该指令补全下面的HCL描述语句，以正确选择可能的PC来源（2分）。\n```\nword new_pc = [\n    icode == ICALL :      略            ;\n    icode == IJxx && Cnd :      略     ;\n    icode == IBxx && Cnd : (1) __________     ;\n    icode == IRET :      略            ;\n    1  :       略            ;\n];\n```\n2） 为实现更长距离的灵活的间接跳转，增加JxxR指令（其中xx为条件码），\n从寄存器中直接获得跳转目标地址，编码如下。\n```\n0xD  fn  rA  0xF\n```\n请为该指令补全下面的HCL描述语句，以正确选择可能的PC来源（2分）。\n```\nword new_pc = [\n    icode == ICALL :      略            ;\n    icode == IJxx && Cnd :      略     ;\n    icode == IJxxR && Cnd: (2)  __________  ;\n    icode == IRET :      略            ;\n    1  :       略            ;\n];\n```\n3）在Y86-64的PIPE实现中，采用前递（forwarding）技术解决程序执行过\n程中存在的数据冒险（hazard），请为该流水线控制信号设计补全下面的HCL描\n述语句，填写在括号中：(7分，每空1分)\n```\nword d_valA = [\n D_icode in { ICALL, IJXX } : (3)  __________\nd_srcA == e_dstE : (4) _______________________\nd_srcA == M_dstM : (5) _______________________\nd_srcA == M_dstE : (6) _______________________\nd_srcA == W_dstM : (7) _______________________\nd_srcA == W_dstE : (8) _______________________\n1  : (9) _______________\n]；\n```\n4）如下图所示的流水线时空图中，假设第5个周期时，指令4发生了指令译码错\n误遇到非法指令（INS），此时流水线寄存器 D 的控制信号应该是\n(10)__________________。流水线寄存器 E 的控制信号应该是\n(11)_________________。（请在暂停/Stall、气泡/Bubble、正常/Normal\n中选择）。（2分）\n\n![图](assets/期中/2023期中-带答案/p21-timing.png)\n\n5）参考4）中的流水线时空图，这次其它指令正常执行，但在第5个周期时，指\n令2在访存阶段遇到了一级高速缓存未命中（后续二级高速缓存访问命中），此时\n流水线寄存器D的控制信号应该是(12)__________________，流水线寄存器\nM 的控制信号应该是(13)____________________（请在暂停/Stall、气泡\n/Bubble、正常/Normal中选择）。（2分）"
+        "text": "第四题（15分）\n\n![图](assets/期中/2023期中-带答案/p19-figs-ab.png)\n\n1） 为实现PC相对地址的条件控制转移指令，增加Bxx指令（其中xx为条件码），\n跳转目标地址等于当前指令执行时的PC加上偏移offset，编码如下。\n```\n0xC  fn  Offset\n```\n请为该指令补全下面的HCL描述语句，以正确选择可能的PC来源（2分）。\n```\nword new_pc = [\n    icode == ICALL :      略            ;\n    icode == IJxx && Cnd :      略     ;\n    icode == IBxx && Cnd : (1) __________     ;\n    icode == IRET :      略            ;\n    1  :       略            ;\n];\n```\n2） 为实现更长距离的灵活的间接跳转，增加JxxR指令（其中xx为条件码），\n从寄存器中直接获得跳转目标地址，编码如下。\n```\n0xD  fn  rA  0xF\n```\n请为该指令补全下面的HCL描述语句，以正确选择可能的PC来源（2分）。\n```\nword new_pc = [\n    icode == ICALL :      略            ;\n    icode == IJxx && Cnd :      略     ;\n    icode == IJxxR && Cnd: (2)  __________  ;\n    icode == IRET :      略            ;\n    1  :       略            ;\n];\n```\n3）在Y86-64的PIPE实现中，采用前递（forwarding）技术解决程序执行过\n程中存在的数据冒险（hazard），请为该流水线控制信号设计补全下面的HCL描\n述语句，填写在括号中：(7分，每空1分)\n```\nword d_valA = [\n D_icode in { ICALL, IJXX } : (3)  __________\nd_srcA == e_dstE : (4) _______________________\nd_srcA == M_dstM : (5) _______________________\nd_srcA == M_dstE : (6) _______________________\nd_srcA == W_dstM : (7) _______________________\nd_srcA == W_dstE : (8) _______________________\n1  : (9) _______________\n]；\n```\n4）如下图所示的流水线时空图中，假设第5个周期时，指令4发生了指令译码错\n误遇到非法指令（INS），此时流水线寄存器 D 的控制信号应该是\n\n(10)__________________。流水线寄存器 E 的控制信号应该是\n\n(11)_________________。（请在暂停/Stall、气泡/Bubble、正常/Normal\n中选择）。（2分）\n\n![图](assets/期中/2023期中-带答案/p21-timing.png)\n\n5）参考4）中的流水线时空图，这次其它指令正常执行，但在第5个周期时，指\n令2在访存阶段遇到了一级高速缓存未命中（后续二级高速缓存访问命中），此时\n流水线寄存器D的控制信号应该是(12)__________________，流水线寄存器\nM 的控制信号应该是(13)____________________（请在暂停/Stall、气泡\n/Bubble、正常/Normal中选择）。（2分）"
       },
       "solution": {
         "state": "available",
@@ -83213,7 +83213,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d1c9c9315f98a1c4",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 24,
       "number": {
@@ -83273,7 +83273,7 @@
             "width": "medium"
           }
         ],
-        "text": "第五题（15分）\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n（1） ____ 局部性：\n（2）_____ 局部性："
+        "text": "第五题（15分）\n\n1、高速缓存（cache）在现代计算机系统中发挥了重要作用，其背后的原理被称\n为局部性原理，该原理包含如下两种情况，请补全名称，并予以解释说明。（名词\n各1分，解释各1分）\n\n（1） ____ 局部性：\n\n（2）_____ 局部性："
       },
       "solution": {
         "state": "available",
@@ -96042,7 +96042,7 @@
     {
       "schemaVersion": "5",
       "id": "q-13c961451563b43b",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-d72f88c4198cf267",
       "paperOrder": 15,
       "number": {
@@ -96123,7 +96123,7 @@
           "stem": {
             "format": "markdown",
             "blanks": [],
-            "text": "第四题（20分）\n基于教材所描述的Y86-64 ISA和SEQ、PIPE处理器结构，完成下列问题。\n（1）拟新加入指令`leave`。其语义相当于\n```\n    rrmovq  %rbp, %rsp\n    popq   %rbp\n```\n请按下表补全SEQ处理器每个阶段的操作。需说明的信号可能会包括：`icode`,\nifun, rA, rB, valA, valB, valC, valE, valP, Cnd；寄存器堆R[],\n存储器M[], 程序计数器PC, 条件码CC。其中对存储器的引用必须标明字节数。\n（合计16分，详见下表内）\n\n| 阶段 | 操作 |\n| --- | --- |\n| 取指 | `icode:ifun ← M1[PC]`；`valP ← PC + 1` |\n| 译码 |  |\n| 执行 |  |\n| 访存 |  |\n| 写回 |  |\n| 更新PC | `PC ← valP` |\n\n每个空内的语句顺序无所谓"
+            "text": "第四题（20分）\n基于教材所描述的Y86-64 ISA和SEQ、PIPE处理器结构，完成下列问题。\n\n（1）拟新加入指令`leave`。其语义相当于\n```\n    rrmovq  %rbp, %rsp\n    popq   %rbp\n```\n请按下表补全SEQ处理器每个阶段的操作。需说明的信号可能会包括：`icode`,\nifun, rA, rB, valA, valB, valC, valE, valP, Cnd；寄存器堆R[],\n存储器M[], 程序计数器PC, 条件码CC。其中对存储器的引用必须标明字节数。\n（合计16分，详见下表内）\n\n| 阶段 | 操作 |\n| --- | --- |\n| 取指 | `icode:ifun ← M1[PC]`；`valP ← PC + 1` |\n| 译码 |  |\n| 执行 |  |\n| 访存 |  |\n| 写回 |  |\n| 更新PC | `PC ← valP` |\n\n每个空内的语句顺序无所谓"
           },
           "solution": {
             "state": "available",
@@ -96471,7 +96471,7 @@
     {
       "schemaVersion": "5",
       "id": "q-521d76fb06b284d2",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-d72f88c4198cf267",
       "paperOrder": 16,
       "number": {
@@ -96569,7 +96569,7 @@
                 "width": "medium"
               }
             ],
-            "text": "第五题（16分）\n现有一个直接映射（Direct-mapped）的高速缓存（cache），其总容量为16字\n节，每个高速缓存块（cache block）为 4 字节（`B=4Byte/block`）。Cache\n的初始状态为空。\n（1）经过如下地址访问序列后，请填写cache第2组（即Set 2，注：从0开\n始编号）的状态。数据块用10进制表示，举例：`M[4-7]`表示地址4-7的数据。\n地址序列全部为读访存, 每次读取2个字节，地址单位为字节。\n（提示：一次访存可能访问多个高速缓存块。）\n（6分，v/Tag/Block，每空2分）\n\n| 访问 | 地址 |\n| --- | --- |\n| R | 0 [000000_{2}] |\n| R | 1 [000001_{2}] |\n| R | 7 [000111_{2}] |\n| R | 4 [000100_{2}] |\n| R | 0 [000000_{2}] |\n\n| Set 2 | v | Tag | Block |\n| --- | --- | --- | --- |\n|  |  |  |  |\n\n本次访存序列，共发生 ______ 次高速缓存缺失(miss)? （2分）\n（提示：一次访存可能引发多次高速缓存缺失。）"
+            "text": "第五题（16分）\n现有一个直接映射（Direct-mapped）的高速缓存（cache），其总容量为16字\n节，每个高速缓存块（cache block）为 4 字节（`B=4Byte/block`）。Cache\n的初始状态为空。\n\n（1）经过如下地址访问序列后，请填写cache第2组（即Set 2，注：从0开\n始编号）的状态。数据块用10进制表示，举例：`M[4-7]`表示地址4-7的数据。\n地址序列全部为读访存, 每次读取2个字节，地址单位为字节。\n（提示：一次访存可能访问多个高速缓存块。）\n（6分，v/Tag/Block，每空2分）\n\n| 访问 | 地址 |\n| --- | --- |\n| R | 0 [000000_{2}] |\n| R | 1 [000001_{2}] |\n| R | 7 [000111_{2}] |\n| R | 4 [000100_{2}] |\n| R | 0 [000000_{2}] |\n\n| Set 2 | v | Tag | Block |\n| --- | --- | --- | --- |\n|  |  |  |  |\n\n本次访存序列，共发生 ______ 次高速缓存缺失(miss)? （2分）\n（提示：一次访存可能引发多次高速缓存缺失。）"
           },
           "solution": {
             "state": "available",
@@ -98361,7 +98361,7 @@
     {
       "schemaVersion": "5",
       "id": "q-116083ef80b5731e",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-e3f869956fc29bd8",
       "paperOrder": 22,
       "number": {
@@ -98590,7 +98590,7 @@
             }
           }
         ],
-        "text": "第八题（10分，每空1分）\n题目假设：软硬件系统为 64位 Linux操作系统，页大小为 4KB；栈的分配空\n间最大为8MB；题目中的echoserveri/echoserverp/echoservert分别为原书中的\n迭代`echo`服务器、基于进程的并发`echo`服务器、基于线程的并发`echo`服务器；\n当客户端连入服务器时，假设客户端只进行了连接，没有进行后续的读写操作。\n启动`echoserveri`，查看内存占用情况如下：（输出结果中删除了部分没有用到\n的列）\n```\nlinux$ pmap -X `pidof echoserveri`\n18859:   ./echoserveri 15213\nAddress Perm   Offset Device Size  Rss Pss Anonymous Mapping\n00400000 r-xp 00000000  fc:02   20   20  20         0 echoserveri\n00604000 r--p 00004000  fc:02    4    4   4         4 echoserveri\n00605000 rw-p 00005000  fc:02    4    4   4         4 echoserveri\n00a9a000 rw-p 00000000  00:00  132    8   8         8     (1)\n7f56da7af000 r-xp 00000000  fc:00 1792 1220  11         0 libc-2.23.so\n7f56da96f000 ---p 001c0000  fc:00 2048    0   0         0 libc-2.23.so\n7f56dab6f000 r--p 001c0000  fc:00   16   16  16        16 libc-2.23.so\n7f56dab73000 rw-p 001c4000  fc:00    8    8   8         8 libc-2.23.so\n7f56dab75000 rw-p 00000000  00:00   16   16  16        16\n7f56dab79000 r-xp 00000000  fc:00   96   92   1         0 libpthread-2.23.so\n7f56dab91000 ---p 00018000  fc:00 2044    0   0         0 libpthread-2.23.so\n7f56dad90000 r--p 00017000  fc:00    4    4   4         4 libpthread-2.23.so\n7f56dad91000 rw-p 00018000  fc:00    4    4   4         4 libpthread-2.23.so\n7f56dad92000 rw-p 00000000  00:00   16    4   4         4\n7f56dad96000 r-xp 00000000  fc:00  152  152   1         0     (2)\n7f56dafac000 rw-p 00000000  00:00   16   16  16        16\n7f56dafbb000 r--p 00025000  fc:00    4    4   4         4     (2)\n7f56dafbc000 rw-p 00026000  fc:00    4    4   4         4     (2)\n7f56dafbd000 rw-p 00000000  00:00    4    4   4         4\n7ffd382f8000  (3)  00000000   (4)   132   24  24        24 [stack]\n7ffd38364000 r--p 00000000  00:00   12    0   0         0 [vvar]\n7ffd38367000 r-xp 00000000  00:00    8    4   0         0 [vdso]\nffffffffff600000 r-xp 00000000  00:00    4    0   0         0 [vsyscall]\n\n==== ==== === =========\n6540 1608 153       120 KB\n```\n填空：\n\n1、{{blank:mapping-1}}\n\n2、{{blank:mapping-2}}\n\n3、{{blank:permissions}}\n\n4、{{blank:device}}\n在上面的表格中，`Size`一列指的是VSS (Virtual Set Size)，表示一个进程\n可访问的总的地址空间的大小（the total accessible address space of a\nprocess）；RSS (Resident Set Size) 表示一个进程实际驻留在RAM中的空间大小\n（the total memory actually held in RAM for a process），其中包括了该进程\n所用到的所有共享空间（如共享库或私有COW空间）；PSS (Proportional Set Size)\n与`RSS`的区别在于共享空间的尺寸，当某个共享空间为30页时，如果有三个进程\n共享该空间，则每个进程的该共享空间的`PSS`只为10页，而每个进程的该共享空\n间的`RSS`仍为30页。根据上述定义，可以做出如下判断：`VSS >= RSS >= PSS`。\n可以根据`echoserveri`的相关数值，对echoserverp和echoservert的运行情\n况进行估计：（单选题）\n5、使用echoserverp作为服务器端，当十个客户端连入`echo`服务器时，总的\n`VSS`值可能为： {{blank:server-5}}\nA.  约80MB\nB.  约16MB\nC.  约6MB\nD.  约2MB\n6、使用echoserverp作为服务器端，当十个客户端连入`echo`服务器时，总的\n`RSS`值可能为： {{blank:server-6}}\nA.  约80MB\nB.  约16MB\nC.  约6MB\nD.  约2MB\n7、使用echoserverp作为服务器端，当十个客户端连入`echo`服务器时，总的\n`PSS`值可能为： {{blank:server-7}}\nA.  约16MB\nB.  约6MB\nC.  约2MB\nD.  约500KB\n8、使用echoservert作为服务器端，当十个客户端连入`echo`服务器时，总的\n`VSS`值可能为： {{blank:server-8}}\nA.  约80MB\nB.  约16MB\nC.  约6MB\nD.  约2MB\n9、使用echoservert作为服务器端，当十个客户端连入`echo`服务器时，总的`RSS`\n值可能为： {{blank:server-9}}\nA.  约80MB\nB.  约16MB\nC.  约6MB\nD.  约2MB\n10、使用echoservert作为服务器端，当十个客户端连入`echo`服务器时，总\n的`PSS`值可能为： {{blank:server-10}}\nA.  比echoserverp作为服务器时的总`PSS`值大\nB.  比echoserverp作为服务器时的总`PSS`值小"
+        "text": "第八题（10分，每空1分）\n题目假设：软硬件系统为 64位 Linux操作系统，页大小为 4KB；栈的分配空\n间最大为8MB；题目中的echoserveri/echoserverp/echoservert分别为原书中的\n迭代`echo`服务器、基于进程的并发`echo`服务器、基于线程的并发`echo`服务器；\n当客户端连入服务器时，假设客户端只进行了连接，没有进行后续的读写操作。\n启动`echoserveri`，查看内存占用情况如下：（输出结果中删除了部分没有用到\n的列）\n```\nlinux$ pmap -X `pidof echoserveri`\n18859:   ./echoserveri 15213\nAddress Perm   Offset Device Size  Rss Pss Anonymous Mapping\n00400000 r-xp 00000000  fc:02   20   20  20         0 echoserveri\n00604000 r--p 00004000  fc:02    4    4   4         4 echoserveri\n00605000 rw-p 00005000  fc:02    4    4   4         4 echoserveri\n00a9a000 rw-p 00000000  00:00  132    8   8         8     (1)\n7f56da7af000 r-xp 00000000  fc:00 1792 1220  11         0 libc-2.23.so\n7f56da96f000 ---p 001c0000  fc:00 2048    0   0         0 libc-2.23.so\n7f56dab6f000 r--p 001c0000  fc:00   16   16  16        16 libc-2.23.so\n7f56dab73000 rw-p 001c4000  fc:00    8    8   8         8 libc-2.23.so\n7f56dab75000 rw-p 00000000  00:00   16   16  16        16\n7f56dab79000 r-xp 00000000  fc:00   96   92   1         0 libpthread-2.23.so\n7f56dab91000 ---p 00018000  fc:00 2044    0   0         0 libpthread-2.23.so\n7f56dad90000 r--p 00017000  fc:00    4    4   4         4 libpthread-2.23.so\n7f56dad91000 rw-p 00018000  fc:00    4    4   4         4 libpthread-2.23.so\n7f56dad92000 rw-p 00000000  00:00   16    4   4         4\n7f56dad96000 r-xp 00000000  fc:00  152  152   1         0     (2)\n7f56dafac000 rw-p 00000000  00:00   16   16  16        16\n7f56dafbb000 r--p 00025000  fc:00    4    4   4         4     (2)\n7f56dafbc000 rw-p 00026000  fc:00    4    4   4         4     (2)\n7f56dafbd000 rw-p 00000000  00:00    4    4   4         4\n7ffd382f8000  (3)  00000000   (4)   132   24  24        24 [stack]\n7ffd38364000 r--p 00000000  00:00   12    0   0         0 [vvar]\n7ffd38367000 r-xp 00000000  00:00    8    4   0         0 [vdso]\nffffffffff600000 r-xp 00000000  00:00    4    0   0         0 [vsyscall]\n\n==== ==== === =========\n6540 1608 153       120 KB\n```\n填空：\n\n1、{{blank:mapping-1}}\n\n2、{{blank:mapping-2}}\n\n3、{{blank:permissions}}\n\n4、{{blank:device}}\n在上面的表格中，`Size`一列指的是VSS (Virtual Set Size)，表示一个进程\n可访问的总的地址空间的大小（the total accessible address space of a\nprocess）；RSS (Resident Set Size) 表示一个进程实际驻留在RAM中的空间大小\n（the total memory actually held in RAM for a process），其中包括了该进程\n所用到的所有共享空间（如共享库或私有COW空间）；PSS (Proportional Set Size)\n与`RSS`的区别在于共享空间的尺寸，当某个共享空间为30页时，如果有三个进程\n共享该空间，则每个进程的该共享空间的`PSS`只为10页，而每个进程的该共享空\n间的`RSS`仍为30页。根据上述定义，可以做出如下判断：`VSS >= RSS >= PSS`。\n可以根据`echoserveri`的相关数值，对echoserverp和echoservert的运行情\n况进行估计：（单选题）\n\n5、使用echoserverp作为服务器端，当十个客户端连入`echo`服务器时，总的\n`VSS`值可能为： {{blank:server-5}}\n\nA.  约80MB\n\nB.  约16MB\n\nC.  约6MB\n\nD.  约2MB\n\n6、使用echoserverp作为服务器端，当十个客户端连入`echo`服务器时，总的\n`RSS`值可能为： {{blank:server-6}}\n\nA.  约80MB\n\nB.  约16MB\n\nC.  约6MB\n\nD.  约2MB\n\n7、使用echoserverp作为服务器端，当十个客户端连入`echo`服务器时，总的\n`PSS`值可能为： {{blank:server-7}}\n\nA.  约16MB\n\nB.  约6MB\n\nC.  约2MB\n\nD.  约500KB\n\n8、使用echoservert作为服务器端，当十个客户端连入`echo`服务器时，总的\n`VSS`值可能为： {{blank:server-8}}\n\nA.  约80MB\n\nB.  约16MB\n\nC.  约6MB\n\nD.  约2MB\n\n9、使用echoservert作为服务器端，当十个客户端连入`echo`服务器时，总的`RSS`\n值可能为： {{blank:server-9}}\n\nA.  约80MB\n\nB.  约16MB\n\nC.  约6MB\n\nD.  约2MB\n\n10、使用echoservert作为服务器端，当十个客户端连入`echo`服务器时，总\n的`PSS`值可能为： {{blank:server-10}}\n\nA.  比echoserverp作为服务器时的总`PSS`值大\n\nB.  比echoserverp作为服务器时的总`PSS`值小"
       },
       "solution": {
         "state": "available",
@@ -99490,7 +99490,7 @@
     {
       "schemaVersion": "5",
       "id": "q-54e55a2556b716c4",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-e3f869956fc29bd8",
       "paperOrder": 18,
       "number": {
@@ -99910,7 +99910,7 @@
                 }
               }
             ],
-            "text": "Part B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\n`file.txt`中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在`file.txt`中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前`fd1`的值。\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n**分析 1 的描述符和打开文件表**（第一次在终端输出 `+` 的瞬间）\n\n| 时刻 / 进程 | `fd1` 的值（0–3） | 打开文件表 refcnt |\n| --- | --- | --- |\n| 分析1：父进程 | {{blank:a-parent-fd}} | {{blank:a-parent-ref}} |\n| 分析1：子进程 | {{blank:a-child-fd}} | {{blank:a-child-ref}} |\n\n分析2. 当程序第一次在`file.txt`中输出+的瞬间，填写下表：\n\n| 时刻 / 进程 | `fd1` 的值（0–3） | 打开文件表 refcnt |\n| --- | --- | --- |\n| 分析2：父进程 | {{blank:b-parent-fd}} | {{blank:b-parent-ref}} |\n| 分析2：子进程 | {{blank:b-child-fd}} | {{blank:b-child-ref}} |\n\n分析3. 如果要产生Bob预期的输出，填写下表：\n\n| 时刻 / 进程 | `fd1` 的值（0–3） | 打开文件表 refcnt |\n| --- | --- | --- |\n| 分析3：父进程 | {{blank:c-parent-fd}} | {{blank:c-parent-ref}} |\n| 分析3：子进程 | {{blank:c-child-fd}} | {{blank:c-child-ref}} |\n\n原卷说明箭头不计分；本题只要求填写描述符值和 refcnt。"
+            "text": "Part B. (6分) Bob根据Alice的反馈，在某两行之间加了若干代码，修复了\nPart A的问题。当X处代码和Y处代码都是count++;、Z处为空时，Bob期望\n`file.txt`中的输出是：\n+-++--+++---++++----+++++-----++++++------\n可Alice测评Bob的程序的时候，却发现有时Bob的程序在`file.txt`中的输\n出是：\n+-+--+---+----+------\n而与此同时，终端上出现了如下的输出：\n+\nBob找不到自己的代码的BUG，只好向Alice求助。Alice帮他做了如下分析：\n分析1. 当程序第一次在终端上输出+的瞬间，请完成下表。要求：\n\n(1)  在“描述符表”一栏中，用“√”勾选该进程当前`fd1`的值。\n\n(2)  在“打开文件表”一栏中，填写该项的refcnt（即，被引用多少次）。如\n果某一项不存在，请在括号中写“0”（并忽略其指向v-node表的箭头）。\n\n(3)  画出“描述符表”到“打开文件表”的表项指向关系。不需要画关于标准输\n入/标准输出/标准错误的箭头。评分时不对箭头评分，请务必保证前两步\n的解答与箭头的连接情况匹配。\n**分析 1 的描述符和打开文件表**（第一次在终端输出 `+` 的瞬间）\n\n| 时刻 / 进程 | `fd1` 的值（0–3） | 打开文件表 refcnt |\n| --- | --- | --- |\n| 分析1：父进程 | {{blank:a-parent-fd}} | {{blank:a-parent-ref}} |\n| 分析1：子进程 | {{blank:a-child-fd}} | {{blank:a-child-ref}} |\n\n分析2. 当程序第一次在`file.txt`中输出+的瞬间，填写下表：\n\n| 时刻 / 进程 | `fd1` 的值（0–3） | 打开文件表 refcnt |\n| --- | --- | --- |\n| 分析2：父进程 | {{blank:b-parent-fd}} | {{blank:b-parent-ref}} |\n| 分析2：子进程 | {{blank:b-child-fd}} | {{blank:b-child-ref}} |\n\n分析3. 如果要产生Bob预期的输出，填写下表：\n\n| 时刻 / 进程 | `fd1` 的值（0–3） | 打开文件表 refcnt |\n| --- | --- | --- |\n| 分析3：父进程 | {{blank:c-parent-fd}} | {{blank:c-parent-ref}} |\n| 分析3：子进程 | {{blank:c-child-fd}} | {{blank:c-child-ref}} |\n\n原卷说明箭头不计分；本题只要求填写描述符值和 refcnt。"
           },
           "solution": {
             "state": "available",
@@ -104394,7 +104394,7 @@
     {
       "schemaVersion": "5",
       "id": "q-80bd157fa962c43e",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-e855951134d0e9f7",
       "paperOrder": 44,
       "number": {
@@ -104461,7 +104461,7 @@
             "width": "short"
           }
         ],
-        "text": "练习题 4.44：比较条件分支版和条件传送版 `absSum` 的内循环。假设数组足够长，约一半元素为正，循环回边跳转始终预测为选择分支且准确；条件跳转的误预测代价为 2 个气泡。为了使本题独立可答，两个循环体如下（不含函数序言/结尾）：\n\n分支版：\n```asm\nmrmovq (%rdi),%r10\nxorq %r11,%r11\nsubq %r10,%r11\njle pos\nrrmovq %r11,%r10\npos:\naddq %r10,%rax\naddq %r8,%rdi\nsubq %r9,%rsi\njne loop\n```\n\n条件传送版：\n```asm\nmrmovq (%rdi),%r10\nxorq %r11,%r11\nsubq %r10,%r11\ncmovg %r11,%r10\naddq %r10,%rax\naddq %r8,%rdi\nsubq %r9,%rsi\njne loop\n```\n\nA. 每个元素平均执行的指令数：分支版 {{blank:branch-instr}}；条件传送版 {{blank:cmov-instr}}。  \nB. 每个元素平均插入的气泡数：分支版 {{blank:branch-bubbles}}；条件传送版 {{blank:cmov-bubbles}}。  \nC. 每个元素平均需要的周期：分支版 {{blank:branch-cycles}}；条件传送版 {{blank:cmov-cycles}}。"
+        "text": "练习题 4.44：比较条件分支版和条件传送版 `absSum` 的内循环。假设数组足够长，约一半元素为正，循环回边跳转始终预测为选择分支且准确；条件跳转的误预测代价为 2 个气泡。为了使本题独立可答，两个循环体如下（不含函数序言/结尾）：\n\n分支版：\n```asm\nmrmovq (%rdi),%r10\nxorq %r11,%r11\nsubq %r10,%r11\njle pos\nrrmovq %r11,%r10\npos:\naddq %r10,%rax\naddq %r8,%rdi\nsubq %r9,%rsi\njne loop\n```\n\n条件传送版：\n```asm\nmrmovq (%rdi),%r10\nxorq %r11,%r11\nsubq %r10,%r11\ncmovg %r11,%r10\naddq %r10,%rax\naddq %r8,%rdi\nsubq %r9,%rsi\njne loop\n```\n\nA. 每个元素平均执行的指令数：分支版 {{blank:branch-instr}}；条件传送版 {{blank:cmov-instr}}。  \n\nB. 每个元素平均插入的气泡数：分支版 {{blank:branch-bubbles}}；条件传送版 {{blank:cmov-bubbles}}。  \n\nC. 每个元素平均需要的周期：分支版 {{blank:branch-cycles}}；条件传送版 {{blank:cmov-cycles}}。"
       },
       "solution": {
         "state": "available",
@@ -105603,7 +105603,7 @@
     {
       "schemaVersion": "5",
       "id": "q-6d128a37f9054bce",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-e8af86f345a050ee",
       "paperOrder": 3,
       "number": {
@@ -105652,7 +105652,7 @@
             "width": "long"
           }
         ],
-        "text": "练习题 7.3：`a → b` 表示 `a` 依赖于 `b`。对每种场景填写能解析所有符号引用、且含最少目标文件/库参数的命令行（省略 `linux>` 提示符）：\n\nA. `p.o → libx.a`：{{blank:cmd-a}}  \nB. `p.o → libx.a → liby.a`：{{blank:cmd-b}}  \nC. `p.o → libx.a → liby.a` 且 `liby.a → libx.a → p.o`：{{blank:cmd-c}}"
+        "text": "练习题 7.3：`a → b` 表示 `a` 依赖于 `b`。对每种场景填写能解析所有符号引用、且含最少目标文件/库参数的命令行（省略 `linux>` 提示符）：\n\nA. `p.o → libx.a`：{{blank:cmd-a}}  \n\nB. `p.o → libx.a → liby.a`：{{blank:cmd-b}}  \n\nC. `p.o → libx.a → liby.a` 且 `liby.a → libx.a → p.o`：{{blank:cmd-c}}"
       },
       "solution": {
         "state": "available",
@@ -107316,7 +107316,7 @@
     {
       "schemaVersion": "5",
       "id": "q-3ec4aed1f80da6f3",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 28,
       "number": {
@@ -107419,7 +107419,7 @@
                 }
               }
             ],
-            "text": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注`reader`和writer两个函数），回答问题：\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）"
+            "text": "2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注`reader`和writer两个函数），回答问题：\n\n（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）"
           },
           "solution": {
             "state": "available",
@@ -108629,7 +108629,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c5a45b9c928fb3ce",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 27,
       "number": {
@@ -108721,7 +108721,7 @@
             }
           }
         ],
-        "text": "四 并发相关主题（15分）\n1.（4分）以下是一段改编自教材上的多线程代码。对于`thread`函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\n`dynamic_ptr`。哪几个是共享变量？\n答：{{blank:shared-vars}}（可多选）\n\n```c\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\n    long niters;\n    pthread_t tid1, tid2;\n    int local_main = 0;\n    if(argc!=2) {\n        printf(\"usage: %s <niters>\\n\", argv[0]);\n        exit(0);\n    }\n    niters = atoi(argv[1]);\n    dynamic_ptr = (int*)malloc(N * sizeof(int));\n    if(dynamic_ptr == NULL) {\n        printf(\"Memory allocation failed\\n\");\n        exit(1);\n    }\n    for(int i = 0; i < N; i++) {\n        shared_array[i] = i;\n    }\n    int thread_arg = niters;\n    pthread_create(&tid1, NULL, thread, &thread_arg);\n    pthread_create(&tid2, NULL, thread, &thread_arg);\n    pthread_join(tid1, NULL);\n    pthread_join(tid2, NULL);\n    if (cnt != 2 * niters) {\n        printf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n    } else {\n        printf(\"OK cnt = %ld\\n\", cnt);\n    }\n    free(dynamic_ptr);\n    exit(0);\n}\nvoid* thread(void *arg) {\n    long i;\n    int niters = *(int *)arg;\n    int local_thread = 0;\n    static int static_local = 0;\n    for(i = 0; i < niters; i++) {\n        cnt++;\n        int index = i % N;\n        shared_array[index]++;\n        dynamic_ptr[index]++;\n        static_local++;\n        local_thread++;\n    }\n    printf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\n           local_thread, static_local);\n    return NULL;\n}\n```"
+        "text": "四 并发相关主题（15分）\n\n1.（4分）以下是一段改编自教材上的多线程代码。对于`thread`函数内出现的以下8个\n变量：i,niters,local_thread,static_local,cnt,index,shared_array,\n`dynamic_ptr`。哪几个是共享变量？\n答：{{blank:shared-vars}}（可多选）\n\n```c\n#define N 100\nvoid *thread(void *vargp);\nvolatile long cnt = 0;\nint shared_array[N];\nint *dynamic_ptr;\nint main(int argc, char** argv) {\n    long niters;\n    pthread_t tid1, tid2;\n    int local_main = 0;\n    if(argc!=2) {\n        printf(\"usage: %s <niters>\\n\", argv[0]);\n        exit(0);\n    }\n    niters = atoi(argv[1]);\n    dynamic_ptr = (int*)malloc(N * sizeof(int));\n    if(dynamic_ptr == NULL) {\n        printf(\"Memory allocation failed\\n\");\n        exit(1);\n    }\n    for(int i = 0; i < N; i++) {\n        shared_array[i] = i;\n    }\n    int thread_arg = niters;\n    pthread_create(&tid1, NULL, thread, &thread_arg);\n    pthread_create(&tid2, NULL, thread, &thread_arg);\n    pthread_join(tid1, NULL);\n    pthread_join(tid2, NULL);\n    if (cnt != 2 * niters) {\n        printf(\"BOOM! cnt = %ld (expected %ld)\\n\", cnt, 2 * niters);\n    } else {\n        printf(\"OK cnt = %ld\\n\", cnt);\n    }\n    free(dynamic_ptr);\n    exit(0);\n}\nvoid* thread(void *arg) {\n    long i;\n    int niters = *(int *)arg;\n    int local_thread = 0;\n    static int static_local = 0;\n    for(i = 0; i < niters; i++) {\n        cnt++;\n        int index = i % N;\n        shared_array[index]++;\n        dynamic_ptr[index]++;\n        static_local++;\n        local_thread++;\n    }\n    printf(\"Thread finished: local_thread=%d, static_local=%d\\n\",\n           local_thread, static_local);\n    return NULL;\n}\n```"
       },
       "solution": {
         "state": "available",
@@ -108859,7 +108859,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c799f2158ed1e841",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 26,
       "number": {
@@ -109847,7 +109847,7 @@
                 }
               }
             ],
-            "text": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 `main.o` 和 `sum.o`，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```c\n// main.c\n#include <stdio.h>\nextern int sum_array(int *arr, int n);\nint arr[5] = {1, 2, 3, 4, 5}, result;\nstatic int fix = 2010;\nint main() {\n    result = sum_array(arr, 5)+fix;\n    printf(\"sum = %d\\n\", result);\n    return 0;\n}\n```\n\n```c\n// sum.c\nint sum_array(int *arr, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += arr[i];\n    }\n    return sum;\n}\n```\n校对说明：原卷该处印作 `res1`，但前文声明并赋值的是 `result`；按上下文校为 `result`，原卷疑似笔误。\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 `main.o` 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（`main.o`、`sum.o`、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n| 符号 | .symtab 有条目？ | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| `arr` | {{blank:arr-present}} | {{blank:arr-type}} | {{blank:arr-module}} | {{blank:arr-section}} |\n| `result` | {{blank:result-present}} | {{blank:result-type}} | {{blank:result-module}} | {{blank:result-section}} |\n| `fix` | {{blank:fix-present}} | {{blank:fix-type}} | {{blank:fix-module}} | {{blank:fix-section}} |\n| `sum_array` | {{blank:sum_array-present}} | {{blank:sum_array-type}} | {{blank:sum_array-module}} | {{blank:sum_array-section}} |\n| `i` | {{blank:i-present}} | {{blank:i-type}} | {{blank:i-module}} | {{blank:i-section}} |\n| `sum` | {{blank:sum-present}} | {{blank:sum-type}} | {{blank:sum-module}} | {{blank:sum-section}} |\n| `printf` | {{blank:printf-present}} | {{blank:printf-type}} | {{blank:printf-module}} | {{blank:printf-section}} |"
+            "text": "三 链接相关主题（10分）\n本题基于下列两个 C 语言文件编译生成的 `main.o` 和 `sum.o`，编译和运行\n在 x86-64/Linux 环境下完成，未开启优化选项。\n```c\n// main.c\n#include <stdio.h>\nextern int sum_array(int *arr, int n);\nint arr[5] = {1, 2, 3, 4, 5}, result;\nstatic int fix = 2010;\nint main() {\n    result = sum_array(arr, 5)+fix;\n    printf(\"sum = %d\\n\", result);\n    return 0;\n}\n```\n\n```c\n// sum.c\nint sum_array(int *arr, int n) {\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n        sum += arr[i];\n    }\n    return sum;\n}\n```\n校对说明：原卷该处印作 `res1`，但前文声明并赋值的是 `result`；按上下文校为 `result`，原卷疑似笔误。\n\n1.符号表分析（7分）\n对于下表中给出的每个符号，用“是”或“否”指出它是否在模块 `main.o` 的 .symtab 节\n中有符号表条目。如果存在条目，请指出符号类型（局部、全局、外部）以及定义该符号的\n模块（`main.o`、`sum.o`、libc.so或“无”）和所在节名（或伪节名）。如果不存在条目，\n则填写“/”。\n（注：在答题纸上画出下面完整表格）\n| 符号 | .symtab 有条目？ | 符号类型 | 定义符号的模块 | 节或伪节名 |\n| --- | --- | --- | --- | --- |\n| `arr` | {{blank:arr-present}} | {{blank:arr-type}} | {{blank:arr-module}} | {{blank:arr-section}} |\n| `result` | {{blank:result-present}} | {{blank:result-type}} | {{blank:result-module}} | {{blank:result-section}} |\n| `fix` | {{blank:fix-present}} | {{blank:fix-type}} | {{blank:fix-module}} | {{blank:fix-section}} |\n| `sum_array` | {{blank:sum_array-present}} | {{blank:sum_array-type}} | {{blank:sum_array-module}} | {{blank:sum_array-section}} |\n| `i` | {{blank:i-present}} | {{blank:i-type}} | {{blank:i-module}} | {{blank:i-section}} |\n| `sum` | {{blank:sum-present}} | {{blank:sum-type}} | {{blank:sum-module}} | {{blank:sum-section}} |\n| `printf` | {{blank:printf-present}} | {{blank:printf-type}} | {{blank:printf-module}} | {{blank:printf-section}} |"
           },
           "solution": {
             "state": "available",
@@ -149321,7 +149321,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ca36da4b1e755039",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 30,
       "number": {
@@ -149364,7 +149364,7 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "第六题（10分）\n1. 火锅洞洞主终于要请吃火锅啦！由于防疫规定，洞主决定分批邀请，Alice、\nBob、……、Zach这26位同学顺理成章地成为了第一批受到邀请的同学。他们围坐在\n一张圆桌旁，按照首字母顺序排列（即Alice的右边是Bob，Bob的右边是\nCarol，……，Zach的右边是Alice）。吃饭之前，洞主想要验证他们的身份，他提出了\n这样的要求：\n1） 每位同学有一个编号，即字母序号减1，也就是说，Alice是0号，Bob是1\n号，以此类推。\n2） 每位同学需要同时拿着旁边两位同学的手机去找洞主（不必带上自己的手\n机），按照洞主的要求在树洞里发信息以验证身份。\n3） 可以同时有多位同学找洞主验证（也就是说，Alice需要拿着Zach和Bob的\n手机找洞主，并且在同一时间，Bob也可以拿着Alice和Carol的手机找洞\n主。但是，如果Alice还没同时拿到Zach和Bob的手机，就只能坐在座位上\n等待。）\n所幸，在座有多位字母君学过ICS，他们决定采用信号量解决问题。\n1.1 Alice给出了这样的代码，其中`thread`函数的参数指明了字母君的编号：\n```c\n1.  #include \"csapp.h\"\n2.  #define N 26\n3.  #define UP(i) ((i + 1) % N)\n4.  #define DOWN(i) ((i - 1 + N) % N)\n5.  sem_t sem[N];\n6.\n7.  void *thread(void *i){\n8.      int num = (int)i;\n9.      P(&sem[UP(num)]);\n10.     P(&sem[DOWN(num)]);\n11.\n12.     /* verify identity */\n13.\n14.     V(&sem[UP(num)]);\n15.     V(&sem[DOWN(num)]);\n16. }\n17. int main(){\n18.     for (int i = 0; i < N; i++)\n19.         Sem_init(&sem[i], 0, 1);\n20.     pthread_t tid[N];\n21.     for (int i = 0; i < N; i++)\n22.         Pthread_create(&tid[i], NULL, thread, (void *)i);\n23.     Pthread_exit(0);\n24. }\n```\nBob一看，皱起了眉头。请问这段代码可能会发生什么问题（用一个专用名词表\n述即可）？\n\n\n1.2 Carol把`thread`函数换成了下面这样：\n```c\n1.  void *thread(void *i){\n2.      int num = (int)i;\n3.      for (int i = 0; i < N; i++)\n4.          P(&sem[i]);\n5.      /* verify identity */\n6.      for (int i = 0; i < N; i++)\n7.          V(&sem[i]);\n8.  }\n```\nDave指出，这段代码固然正确，但是效率太低了，他认为只要把第3、4行的代\n码换成一个P操作，把第6、7行的代码换成一个V操作，就能实现同样的效果。\n请问Dave的方法是：\n1.2.1 P操作：`P(&sem[         ])`;\n1.2.2 V操作：`V(&sem[         ])`;\n1.3 Eve看了Dave的方案还是摇头，这样执行效率太低了，没能利用同时可以有多位\n同学找洞主验证的条件。借助“互斥锁加锁顺序规则”，他给出了自己的代码。你能\n把代码补全吗？\n```c\n1.  `void *thread(void *i)`\n2.  {\n3.      int num = (int)i;\n4.      if (UP(num) < DOWN(num)){\n5.          P(&sem[  A  ]);\n6.          P(&sem[  B  ]);\n7.      }\n8.      else{\n9.          P(&sem[  C  ]);\n10.         P(&sem[  D  ]);\n11.     }\n12.     /* verify identity */\n13.     V(&sem[UP(num)]);\n14.     V(&sem[DOWN(num)]);\n15. }\n```\nA:             B:             C:             D:\n以上4空均填序号：\n①  UP(num)\n②  DOWN(num)\n③  `num`\n2. Hungary Alice发现自己没吃上第一场的火锅，一怒之下，给上面的26位字母君出了一\n道难题：用二元信号量实现信号量（也就是值可以是任意非负整数的信号量）。精通ICS的\n你自然认为这是小儿科，迅速补全了以下代码。\n\n\n```c\n1.  #include \"csapp.h\"\n2.  typedef struct{\n3.      int value;\n4.      sem_t mutex;\n5.      sem_t zero;\n6.  } my_sem_t;\n7.  void my_sem_init(my_sem_t *sem, unsigned int value){\n8.      sem->value = value;\n9.      Sem_init(&sem->mutex, 0,   A  );\n10.     Sem_init(&sem->zero, 0,   B  );\n11. }\n12. void my_P(my_sem_t *sem){\n13.     P(&sem->mutex);\n14.     sem->value--;\n15.     if (sem->value   C   0)\n16.     {\n17.           D  ;\n18.           E  ;\n19.     }\n20.     else\n21.         V(&sem->mutex);\n22. }\n23. void my_V(my_sem_t *sem){\n24.     P(&sem->mutex);\n25.     sem->value++;\n26.     if (sem->value   F   0)\n27.     {\n28.         V(&sem->mutex);\n29.         V(&sem->zero);\n30.     }\n31.     else\n32.         V(&sem->mutex);\n33. }\n```\nA:             B:             C:\nD:             E:             F:\nD和E请填序号：\n①  `P(&sem->mutex)`\n②  `P(&sem->zero)`\n③  `V(&sem->mutex)`\n④  `V(&sem->zero)`"
+        "text": "第六题（10分）\n1. 火锅洞洞主终于要请吃火锅啦！由于防疫规定，洞主决定分批邀请，Alice、\nBob、……、Zach这26位同学顺理成章地成为了第一批受到邀请的同学。他们围坐在\n一张圆桌旁，按照首字母顺序排列（即Alice的右边是Bob，Bob的右边是\nCarol，……，Zach的右边是Alice）。吃饭之前，洞主想要验证他们的身份，他提出了\n这样的要求：\n1） 每位同学有一个编号，即字母序号减1，也就是说，Alice是0号，Bob是1\n号，以此类推。\n2） 每位同学需要同时拿着旁边两位同学的手机去找洞主（不必带上自己的手\n机），按照洞主的要求在树洞里发信息以验证身份。\n3） 可以同时有多位同学找洞主验证（也就是说，Alice需要拿着Zach和Bob的\n手机找洞主，并且在同一时间，Bob也可以拿着Alice和Carol的手机找洞\n主。但是，如果Alice还没同时拿到Zach和Bob的手机，就只能坐在座位上\n等待。）\n所幸，在座有多位字母君学过ICS，他们决定采用信号量解决问题。\n\n1.1 Alice给出了这样的代码，其中`thread`函数的参数指明了字母君的编号：\n```c\n1.  #include \"csapp.h\"\n2.  #define N 26\n3.  #define UP(i) ((i + 1) % N)\n4.  #define DOWN(i) ((i - 1 + N) % N)\n5.  sem_t sem[N];\n6.\n7.  void *thread(void *i){\n8.      int num = (int)i;\n9.      P(&sem[UP(num)]);\n10.     P(&sem[DOWN(num)]);\n11.\n12.     /* verify identity */\n13.\n14.     V(&sem[UP(num)]);\n15.     V(&sem[DOWN(num)]);\n16. }\n17. int main(){\n18.     for (int i = 0; i < N; i++)\n19.         Sem_init(&sem[i], 0, 1);\n20.     pthread_t tid[N];\n21.     for (int i = 0; i < N; i++)\n22.         Pthread_create(&tid[i], NULL, thread, (void *)i);\n23.     Pthread_exit(0);\n24. }\n```\nBob一看，皱起了眉头。请问这段代码可能会发生什么问题（用一个专用名词表\n述即可）？\n\n\n1.2 Carol把`thread`函数换成了下面这样：\n```c\n1.  void *thread(void *i){\n2.      int num = (int)i;\n3.      for (int i = 0; i < N; i++)\n4.          P(&sem[i]);\n5.      /* verify identity */\n6.      for (int i = 0; i < N; i++)\n7.          V(&sem[i]);\n8.  }\n```\nDave指出，这段代码固然正确，但是效率太低了，他认为只要把第3、4行的代\n码换成一个P操作，把第6、7行的代码换成一个V操作，就能实现同样的效果。\n请问Dave的方法是：\n\n1.2.1 P操作：`P(&sem[         ])`;\n1.2.2 V操作：`V(&sem[         ])`;\n1.3 Eve看了Dave的方案还是摇头，这样执行效率太低了，没能利用同时可以有多位\n同学找洞主验证的条件。借助“互斥锁加锁顺序规则”，他给出了自己的代码。你能\n把代码补全吗？\n```c\n1.  `void *thread(void *i)`\n2.  {\n3.      int num = (int)i;\n4.      if (UP(num) < DOWN(num)){\n5.          P(&sem[  A  ]);\n6.          P(&sem[  B  ]);\n7.      }\n8.      else{\n9.          P(&sem[  C  ]);\n10.         P(&sem[  D  ]);\n11.     }\n12.     /* verify identity */\n13.     V(&sem[UP(num)]);\n14.     V(&sem[DOWN(num)]);\n15. }\n```\nA:             B:             C:             D:\n以上4空均填序号：\n①  UP(num)\n②  DOWN(num)\n③  `num`\n2. Hungary Alice发现自己没吃上第一场的火锅，一怒之下，给上面的26位字母君出了一\n道难题：用二元信号量实现信号量（也就是值可以是任意非负整数的信号量）。精通ICS的\n你自然认为这是小儿科，迅速补全了以下代码。\n\n\n```c\n1.  #include \"csapp.h\"\n2.  typedef struct{\n3.      int value;\n4.      sem_t mutex;\n5.      sem_t zero;\n6.  } my_sem_t;\n7.  void my_sem_init(my_sem_t *sem, unsigned int value){\n8.      sem->value = value;\n9.      Sem_init(&sem->mutex, 0,   A  );\n10.     Sem_init(&sem->zero, 0,   B  );\n11. }\n12. void my_P(my_sem_t *sem){\n13.     P(&sem->mutex);\n14.     sem->value--;\n15.     if (sem->value   C   0)\n16.     {\n17.           D  ;\n18.           E  ;\n19.     }\n20.     else\n21.         V(&sem->mutex);\n22. }\n23. void my_V(my_sem_t *sem){\n24.     P(&sem->mutex);\n25.     sem->value++;\n26.     if (sem->value   F   0)\n27.     {\n28.         V(&sem->mutex);\n29.         V(&sem->zero);\n30.     }\n31.     else\n32.         V(&sem->mutex);\n33. }\n```\nA:             B:             C:\nD:             E:             F:\nD和E请填序号：\n①  `P(&sem->mutex)`\n②  `P(&sem->zero)`\n③  `V(&sem->mutex)`\n④  `V(&sem->zero)`"
       },
       "solution": {
         "state": "available",
@@ -154210,7 +154210,7 @@
     {
       "schemaVersion": "5",
       "id": "q-342720662ae6f949",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ffd1f5f688babe1b",
       "paperOrder": 22,
       "number": {
@@ -154405,7 +154405,7 @@
                 "width": "medium"
               }
             ],
-            "text": "2． 在一个16-bit地址空间的机器上，有一个总大小为16 Bytes的cache，\n替换策略为LRU，回答如下问题（本题不考虑编译优化）：\n（1）若每个block的大小为4 Bytes，采用直接映射的方式组织，则 tag 段长度为 {{blank:q2-tag-bits}} bits。"
+            "text": "2． 在一个16-bit地址空间的机器上，有一个总大小为16 Bytes的cache，\n替换策略为LRU，回答如下问题（本题不考虑编译优化）：\n\n（1）若每个block的大小为4 Bytes，采用直接映射的方式组织，则 tag 段长度为 {{blank:q2-tag-bits}} bits。"
           },
           "solution": {
             "state": "available",
@@ -154541,7 +154541,7 @@
                 "width": "medium"
               }
             ],
-            "text": "（3）在如下代码中，假设初始时 cache 为空，只考虑读写数据引起的 cache 访问，并假定：\n\na. Cache 命中的延迟为 10 周期，不命中处罚（miss penalty）为 190 周期；\nb. 延迟与数据的长度无关；\nc. 若数据对应到不同的缓存块，则需进行多次访问，且访问之间不能重叠（即访存不能并行）。\n\n（共4分）\n```\n# define N 4\ntypedef struct {\n    char x;\n    short y;\n} node;\nnode p[N];\nint main() {\n    for (int i = 0; i < N; i++) {\n        p[i].x = i;\n        p[i].y = 1 - i;\n    }\n    return 0;\n}\n```\n① 若数组 `p` 的起始地址为 `0x0000`，cache block 大小为 8 Bytes，采用直接映射，则 cache 访问的总延迟为 {{blank:q2-3-aligned-delay}} 周期。\n\n② 若结构体不采用数据对齐（即 `(void *)&p[i] - (void *)&p[0] == 3 * i`），则在①的条件下，cache 访问的总延迟为 {{blank:q2-3-unaligned-delay}} 周期。"
+            "text": "（3）在如下代码中，假设初始时 cache 为空，只考虑读写数据引起的 cache 访问，并假定：\n\na. Cache 命中的延迟为 10 周期，不命中处罚（miss penalty）为 190 周期；\n\nb. 延迟与数据的长度无关；\n\nc. 若数据对应到不同的缓存块，则需进行多次访问，且访问之间不能重叠（即访存不能并行）。\n\n（共4分）\n```\n# define N 4\ntypedef struct {\n    char x;\n    short y;\n} node;\nnode p[N];\nint main() {\n    for (int i = 0; i < N; i++) {\n        p[i].x = i;\n        p[i].y = 1 - i;\n    }\n    return 0;\n}\n```\n① 若数组 `p` 的起始地址为 `0x0000`，cache block 大小为 8 Bytes，采用直接映射，则 cache 访问的总延迟为 {{blank:q2-3-aligned-delay}} 周期。\n\n② 若结构体不采用数据对齐（即 `(void *)&p[i] - (void *)&p[0] == 3 * i`），则在①的条件下，cache 访问的总延迟为 {{blank:q2-3-unaligned-delay}} 周期。"
           },
           "solution": {
             "state": "available",

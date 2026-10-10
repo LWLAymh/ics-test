@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-2b4c6c474fcda60d",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-98acf19964247e22",
   "paperOrder": 25,
   "number": {
@@ -237,6 +237,7 @@
 %%% stem
 第六题（10分）
 下图是一个基于`echo`服务器的client-server框架
+
 （1）  请给图中的编号填写相应的函数名。
 
 ![图](../../assets/期末/2019期末-无答案/p14-img1.jpg)

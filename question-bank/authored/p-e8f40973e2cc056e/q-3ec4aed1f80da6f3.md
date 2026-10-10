@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-3ec4aed1f80da6f3",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-e8f40973e2cc056e",
   "paperOrder": 28,
   "number": {
@@ -240,6 +240,7 @@
 
 %%% part-stem: q-51332fd0f4b3baa8
 2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注`reader`和writer两个函数），回答问题：
+
 （1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）
 %%% part-reference: q-51332fd0f4b3baa8
 答案：（1）否（1分）

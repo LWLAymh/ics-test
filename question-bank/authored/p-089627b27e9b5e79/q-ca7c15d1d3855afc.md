@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ca7c15d1d3855afc",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 25,
   "number": {
@@ -79,6 +79,7 @@
 +++
 %%% stem
 第六题（10分）ECF
+
 1.（5 分）以下程序运行时系统调用全部正确执行，`buffer.txt` 文件的内容为
 pekinguniv。请给出代码运行后打印输出的结果，并给出程序运行结束后
 `buffer.txt`文件的内容。

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c5a45b9c928fb3ce",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-e8f40973e2cc056e",
   "paperOrder": 27,
   "number": {
@@ -123,6 +123,7 @@
 +++
 %%% stem
 四 并发相关主题（15分）
+
 1.（4分）以下是一段改编自教材上的多线程代码。对于`thread`函数内出现的以下8个
 变量：i,niters,local_thread,static_local,cnt,index,shared_array,
 `dynamic_ptr`。哪几个是共享变量？

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-23de3bd6db6e2bd9",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-9c11139ca386240d",
   "paperOrder": 13,
   "number": {
@@ -95,6 +95,7 @@
 +++
 %%% stem
 13. （2分）下面给出了`float_half`函数的代码，该函数给出单精度浮点数`f`的一半（即
+
 0.5 * f）的位模式。下面哪一个选项正确给出了(1)和(2)处应当填写的值？
 ```
 /*
