@@ -4,6 +4,37 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('binary bit patterns accept explicit grouped and continuous forms, not missing or changed bits', () => {
+  const cases = [
+    ['q-b9417a58e44059bb', 'unsigned-r1-c1', '0000 0000', '00000000'],
+    ['q-b9417a58e44059bb', 'two-s-complement-r2-c1', '1000 0000', '10000000'],
+    ['q-fe8ac6d2306ebac9', 'denormalized-bits', '0 0000 1111', '000001111'],
+    ['q-fe8ac6d2306ebac9', 'min-normal-bits', '0 0001 0000', '000010000'],
+    ['q-fe8ac6d2306ebac9', 'max-normal-bits', '0 1110 1111', '011101111'],
+    ['q-d96a81c92222abf6', 'a', '1 100011 00000', '110001100000'],
+    ['q-d96a81c92222abf6', 'b', '0 111011 00010', '011101100010'],
+    ['q-d96a81c92222abf6', 'c', '1 111111 00000', '111111100000'],
+    ['q-ac2f0dc843d3564e', 'b3-r2-c1', '100 10', '10010'],
+    ['q-ac2f0dc843d3564e', 'b9-r3-c1', '110 00', '11000'],
+    ['q-ac2f0dc843d3564e', 'b3-16-r4-c1', '000 11', '00011'],
+    ['q-ac2f0dc843d3564e', 'b15-2-r5-c1', '110 00', '11000'],
+  ];
+  for (const [id, blankId, grouped, continuous] of cases) {
+    const rule = bank.find(q=>q.id===id).solution.blankAnswers.find(r=>r.blankId===blankId);
+    assert.equal(api.gradeBlank(grouped,rule),true,id+'/'+blankId);
+    assert.equal(api.gradeBlank(continuous,rule),true,id+'/'+blankId);
+    assert.equal(api.gradeBlank(' '+continuous+' ',rule),true);
+    assert.equal(api.gradeBlank(continuous.slice(1),rule),false);
+    assert.equal(api.gradeBlank(continuous+'0',rule),false);
+    assert.equal(api.gradeBlank((continuous[0]==='0'?'1':'0')+continuous.slice(1),rule),false);
+  }
+  // A list of possible outputs is not a binary bit pattern: do not merge its values.
+  const output = bank.find(q=>q.id==='q-a52d536a178598a6').parts.find(p=>p.id==='q-9b7cd569a8bd4748');
+  const rule = output.solution.blankAnswers.find(r=>r.blankId==='line-4');
+  assert.equal(api.gradeBlank('0 1',rule),true);
+  assert.equal(api.gradeBlank('01',rule),false);
+});
+
 test('per-blank grading uses the same explicit exact/selection rules without judging subjective blanks', () => {
   const exact={method:'exact',acceptedAnswers:['n != 1'],normalize:{trimWhitespace:true,caseSensitive:true}};
   assert.equal(api.gradeBlank(' n != 1 ',exact),true);

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-fe8ac6d2306ebac9",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-5e37064fe519258d",
   "paperOrder": 16,
   "number": {
@@ -166,7 +166,8 @@
         "blankId": "denormalized-bits",
         "method": "exact",
         "acceptedAnswers": [
-          "0 0000 1111"
+          "0 0000 1111",
+          "000001111"
         ],
         "normalize": {
           "caseSensitive": false,
@@ -188,7 +189,8 @@
         "blankId": "min-normal-bits",
         "method": "exact",
         "acceptedAnswers": [
-          "0 0001 0000"
+          "0 0001 0000",
+          "000010000"
         ],
         "normalize": {
           "caseSensitive": false,
@@ -210,7 +212,8 @@
         "blankId": "max-normal-bits",
         "method": "exact",
         "acceptedAnswers": [
-          "0 1110 1111"
+          "0 1110 1111",
+          "011101111"
         ],
         "normalize": {
           "caseSensitive": false,
@@ -253,7 +256,7 @@
 以下问题：（注：阶码偏移量为 $2^{k−1}-1$）
 1.  求k和n的值。（1分）{{blank:format-fields}}
 2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如
-17/64）。（注:每格2分）
+17/64）。（注:每格2分）二进制位表示需保留完整的 9 位，可连续填写，也可按符号位、阶码、小数三个字段用一个空格分隔。
 | 描述 | 二进制位表示 | 值 |
 | --- | --- | --- |
 | 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |

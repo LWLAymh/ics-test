@@ -44559,7 +44559,7 @@
     {
       "schemaVersion": "5",
       "id": "q-fe8ac6d2306ebac9",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-5e37064fe519258d",
       "paperOrder": 16,
       "number": {
@@ -44694,7 +44694,7 @@
             }
           }
         ],
-        "text": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）{{blank:format-fields}}\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）\n| 描述 | 二进制位表示 | 值 |\n| --- | --- | --- |\n| 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |\n| 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |\n| 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）实数数量：{{blank:real-count-change}}；数值精度：{{blank:precision-change}}。"
+        "text": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）{{blank:format-fields}}\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）二进制位表示需保留完整的 9 位，可连续填写，也可按符号位、阶码、小数三个字段用一个空格分隔。\n| 描述 | 二进制位表示 | 值 |\n| --- | --- | --- |\n| 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |\n| 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |\n| 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）实数数量：{{blank:real-count-change}}；数值精度：{{blank:precision-change}}。"
       },
       "solution": {
         "state": "available",
@@ -44725,7 +44725,8 @@
             "blankId": "denormalized-bits",
             "method": "exact",
             "acceptedAnswers": [
-              "0 0000 1111"
+              "0 0000 1111",
+              "000001111"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -44747,7 +44748,8 @@
             "blankId": "min-normal-bits",
             "method": "exact",
             "acceptedAnswers": [
-              "0 0001 0000"
+              "0 0001 0000",
+              "000010000"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -44769,7 +44771,8 @@
             "blankId": "max-normal-bits",
             "method": "exact",
             "acceptedAnswers": [
-              "0 1110 1111"
+              "0 1110 1111",
+              "011101111"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -47419,7 +47422,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d96a81c92222abf6",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 22,
       "number": {
@@ -47497,7 +47500,7 @@
             "width": "medium"
           }
         ],
-        "text": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，其字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为 {{blank:min-diff}}\n相邻两数之间差值的最大值为 {{blank:max-diff}}\n2) 现定义了如下变量：\n```c\nT a = -15.875;\nT b = (1<<28) + (1<<24) + (1<<22);\nT c = a*b;\n```\n请写出各变量的二进制表示（每个字段之间以空格分隔）：\n\n| 变量 | 二进制表示 |\n| --- | --- |\n| `a` | {{blank:a}} |\n| `b` | {{blank:b}} |\n| `c` | {{blank:c}} |\n（每空2分; 共10分）"
+        "text": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，其字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为 {{blank:min-diff}}\n相邻两数之间差值的最大值为 {{blank:max-diff}}\n2) 现定义了如下变量：\n```c\nT a = -15.875;\nT b = (1<<28) + (1<<24) + (1<<22);\nT c = a*b;\n```\n请写出各变量完整的 12 位二进制表示（可连续填写，也可在符号位、阶码、小数三个字段之间用一个空格分隔；前导零需保留）：\n\n| 变量 | 二进制表示 |\n| --- | --- |\n| `a` | {{blank:a}} |\n| `b` | {{blank:b}} |\n| `c` | {{blank:c}} |\n（每空2分; 共10分）"
       },
       "solution": {
         "state": "available",
@@ -47541,6 +47544,7 @@
             "method": "exact",
             "acceptedAnswers": [
               "1 100011 00000",
+              "110001100000",
               "1 100011 00000 (发生进位)"
             ],
             "normalize": {
@@ -47553,6 +47557,7 @@
             "method": "exact",
             "acceptedAnswers": [
               "0 111011 00010",
+              "011101100010",
               "0 111011 00010 (发生舍入)"
             ],
             "normalize": {
@@ -47565,6 +47570,7 @@
             "method": "exact",
             "acceptedAnswers": [
               "1 111111 00000",
+              "111111100000",
               "1 111111 00000 (溢出，+∞)"
             ],
             "normalize": {
@@ -68385,7 +68391,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b9417a58e44059bb",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 16,
       "number": {
@@ -68497,14 +68503,14 @@
             }
           }
         ],
-        "text": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：{{blank:unsigned-r1-c1}} | 十进制：{{blank:unsigned-r1-c2}} | {{blank:unsigned-r1-c3}} |\n| Two’s Complement | 二进制：{{blank:two-s-complement-r2-c1}} | 十进制：{{blank:two-s-complement-r2-c2}} | {{blank:two-s-complement-r2-c3}} |"
+        "text": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n二进制空位填写完整的 8 位，可连续填写，也可每 4 位用一个空格分组；前导零需保留。\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：{{blank:unsigned-r1-c1}} | 十进制：{{blank:unsigned-r1-c2}} | {{blank:unsigned-r1-c3}} |\n| Two’s Complement | 二进制：{{blank:two-s-complement-r2-c1}} | 十进制：{{blank:two-s-complement-r2-c2}} | {{blank:two-s-complement-r2-c3}} |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：0000 0000 | 十进制：168 | 是 |\n| Two's Complement | 二进制：1000 0000 | 十进制：-88 | 否 |"
+          "text": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：`00000000`（或 `0000 0000`） | 十进制：168 | 是 |\n| Two's Complement | 二进制：`10000000`（或 `1000 0000`） | 十进制：-88 | 否 |"
         },
         "provenance": {
           "origin": "unknown",
@@ -68516,7 +68522,8 @@
             "blankId": "unsigned-r1-c1",
             "method": "exact",
             "acceptedAnswers": [
-              "0000 0000"
+              "0000 0000",
+              "00000000"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -68545,7 +68552,8 @@
             "blankId": "two-s-complement-r2-c1",
             "method": "exact",
             "acceptedAnswers": [
-              "1000 0000"
+              "1000 0000",
+              "10000000"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -114545,7 +114553,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ac2f0dc843d3564e",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ea869cda0eb89689",
       "paperOrder": 17,
       "number": {
@@ -114641,7 +114649,7 @@
             "width": "medium"
           }
         ],
-        "text": "2. Floating point encoding. Consider the following 5-bit floating point representation based on\n   the IEEE floating point format. This format does not have a sign bit – it can only represent\n   nonnegative numbers.\n   • There are k = 3 exponent bits. The exponent bias is 3.\n   • There are n = 2 fraction bits.\n   Recall that numeric values are encoded as a value of the form V = M × $2^E$, where E is the\n   exponent after biasing, and M is the significant value. The fraction bits encode the significant\n   value M using either a denormalized (exponent field 0) or a normalized representation (exponent\n   field nonzero). The exponent E is given by E = 1 – Bias for denormalized values and E = e – Bias\n   for normalized values, where e is the value of the exponent field exp interpreted as an unsigned\n   number.\n   Below, you are given some decimal values, and your task it to encode them in floating point\n   format. In addition, you should give the rounded value of the encoded floating point number. To\n   get credit, you must give these as whole numbers (e.g., 17) or as fractions in reduced form (e.g.,\n   3/4). Any rounding of the significand is based on round-to-even, which rounds an\n   unrepresentable value that lies halfway between two representable values to the nearest even\n   representable value.\n   **(8pts)**\n\n\n\n| Value | Floating Point Bits | Rounded value |\n| --- | --- | --- |\n| 9/32 | 001 00 | 1/4 |\n| 3 | {{blank:b3-r2-c1}} | {{blank:b3-r2-c2}} |\n| 9 | {{blank:b9-r3-c1}} | {{blank:b9-r3-c2}} |\n| 3/16 | {{blank:b3-16-r4-c1}} | {{blank:b3-16-r4-c2}} |\n| 15/2 | {{blank:b15-2-r5-c1}} | {{blank:b15-2-r5-c2}} |"
+        "text": "2. Floating point encoding. Consider the following 5-bit floating point representation based on\n   the IEEE floating point format. This format does not have a sign bit – it can only represent\n   nonnegative numbers.\n   • There are k = 3 exponent bits. The exponent bias is 3.\n   • There are n = 2 fraction bits.\n   Recall that numeric values are encoded as a value of the form V = M × $2^E$, where E is the\n   exponent after biasing, and M is the significant value. The fraction bits encode the significant\n   value M using either a denormalized (exponent field 0) or a normalized representation (exponent\n   field nonzero). The exponent E is given by E = 1 – Bias for denormalized values and E = e – Bias\n   for normalized values, where e is the value of the exponent field exp interpreted as an unsigned\n   number.\n   Below, you are given some decimal values, and your task it to encode them in floating point\n   format. In addition, you should give the rounded value of the encoded floating point number. To\n   get credit, you must give these as whole numbers (e.g., 17) or as fractions in reduced form (e.g.,\n   3/4). Any rounding of the significand is based on round-to-even, which rounds an\n   unrepresentable value that lies halfway between two representable values to the nearest even\n   representable value.\n   **(8pts)**\n\nFor each bit pattern, enter all 5 bits, including leading zeros. Either continuous bits or the two fields separated by one space are accepted.\n\n\n\n| Value | Floating Point Bits | Rounded value |\n| --- | --- | --- |\n| 9/32 | 001 00 | 1/4 |\n| 3 | {{blank:b3-r2-c1}} | {{blank:b3-r2-c2}} |\n| 9 | {{blank:b9-r3-c1}} | {{blank:b9-r3-c2}} |\n| 3/16 | {{blank:b3-16-r4-c1}} | {{blank:b3-16-r4-c2}} |\n| 15/2 | {{blank:b15-2-r5-c1}} | {{blank:b15-2-r5-c2}} |"
       },
       "solution": {
         "state": "available",
@@ -114660,7 +114668,8 @@
             "blankId": "b3-r2-c1",
             "method": "exact",
             "acceptedAnswers": [
-              "100 10"
+              "100 10",
+              "10010"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -114682,7 +114691,8 @@
             "blankId": "b9-r3-c1",
             "method": "exact",
             "acceptedAnswers": [
-              "110 00"
+              "110 00",
+              "11000"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -114704,7 +114714,8 @@
             "blankId": "b3-16-r4-c1",
             "method": "exact",
             "acceptedAnswers": [
-              "000 11"
+              "000 11",
+              "00011"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -114726,7 +114737,8 @@
             "blankId": "b15-2-r5-c1",
             "method": "exact",
             "acceptedAnswers": [
-              "110 00"
+              "110 00",
+              "11000"
             ],
             "normalize": {
               "caseSensitive": false,
