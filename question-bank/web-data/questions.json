@@ -3186,7 +3186,7 @@
     {
       "schemaVersion": "5",
       "id": "q-2b8b77844036d027",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0854288fe48c1276",
       "paperOrder": 3,
       "number": {
@@ -3215,7 +3215,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "在 Linux 中，在标准输入上键入 Ctrl+D 表示 EOF。图 12-6 的程序阻塞在 `select` 调用上时，键入 Ctrl+D 会发生什么？"
+        "text": "在 Linux 终端的空行上键入 Ctrl+D，使当前标准输入读取遇到 EOF。图 12-6 的程序同时监视标准输入和监听套接字，其相关片段如下；`Select` 是 `select` 的错误检查包装函数：\n\n```c\nFD_ZERO(&read_set);\nFD_SET(STDIN_FILENO, &read_set);\nFD_SET(listenfd, &read_set);\nwhile (1) {\n    ready_set = read_set;\n    Select(listenfd + 1, &ready_set, NULL, NULL, NULL);\n    if (FD_ISSET(STDIN_FILENO, &ready_set))\n        command();\n    /* 其他分支处理监听套接字，此处省略。 */\n}\n```\n\n当程序阻塞在 `Select` 调用上时，在空行键入 Ctrl+D，该次调用及返回的准备好集合会怎样？"
       },
       "options": [
         {
@@ -3695,7 +3695,7 @@
     {
       "schemaVersion": "5",
       "id": "q-94cf3a41c9e79f2a",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0854288fe48c1276",
       "paperOrder": 12,
       "number": {
@@ -3724,7 +3724,7 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "练习题 12.12：图 12-38 中的 `ctime_ts` 函数是线程安全的，但不是可重入的。请解释原因。"
+        "text": "练习题 12.12：图 12-38 中的 `ctime_ts` 函数是线程安全的，但不是可重入的。请解释原因。\n\n相关代码如下。`mutex` 是预先初始化的全局互斥信号量，`P` / `V` 分别执行等待 / 释放操作；每个调用者提供自己的 `privatep` 缓冲区。`ctime` 返回指向其内部共享静态缓冲区的指针。\n\n```c\nchar *ctime_ts(const time_t *timep, char *privatep) {\n    char *sharedp;\n\n    P(&mutex);\n    sharedp = ctime(timep);\n    strcpy(privatep, sharedp);\n    V(&mutex);\n    return privatep;\n}\n```"
       },
       "solution": {
         "state": "available",
@@ -4762,7 +4762,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c62b001d3da02a1b",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0854288fe48c1276",
       "paperOrder": 14,
       "number": {
@@ -4791,7 +4791,7 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "练习题 12.14：图 12-43 为每个线程 ID 分配单独的内存块来避免竞争。\n\nA. 给出一种不调用 `malloc` / `free` 的替代方法。\n\nB. 说明这种方法的优点和缺点。"
+        "text": "练习题 12.14：图 12-43 为每个线程 ID 分配单独的内存块来避免竞争。\n\n相关代码如下。主线程创建所有线程后逐一 `Pthread_join`，因此不会在它们完成前退出；`Malloc` / `Free` / `Pthread_create` 是对应系统函数的错误检查包装。\n\n```c\n/* 主线程：tid 数组及 i、ptr 已声明。 */\nfor (i = 0; i < N; i++) {\n    ptr = Malloc(sizeof(int));\n    *ptr = i;\n    Pthread_create(&tid[i], NULL, thread, ptr);\n}\n\n/* 对等线程 */\nvoid *thread(void *vargp) {\n    int myid = *((int *)vargp);\n    Free(vargp);\n    printf(\"Hello from thread %d\\n\", myid);\n    return NULL;\n}\n```\n\nA. 给出一种不调用 `malloc` / `free` 的替代方法。\n\nB. 说明这种方法的优点和缺点。"
       },
       "solution": {
         "state": "available",
@@ -5039,7 +5039,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ef0018499602cc08",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0854288fe48c1276",
       "paperOrder": 13,
       "number": {
@@ -5068,7 +5068,7 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "练习题 12.13：在图 12-43 中，为什么不能在主线程中的第 14 行后立即释放已分配的内存块，而应由对等线程释放？"
+        "text": "练习题 12.13：图 12-43 为每个线程的整数 ID 分配独立内存。相关代码如下，`Malloc` / `Free` / `Pthread_create` 是对应系统函数的错误检查包装：\n\n```c\n/* 主线程：tid 数组及 i、ptr 已声明。 */\nfor (i = 0; i < N; i++) {\n    ptr = Malloc(sizeof(int));\n    *ptr = i;\n    Pthread_create(&tid[i], NULL, thread, ptr);  /* 原图第 14 行 */\n}\nfor (i = 0; i < N; i++)\n    Pthread_join(tid[i], NULL);\n\n/* 对等线程 */\nvoid *thread(void *vargp) {\n    int myid = *((int *)vargp);  /* 原图第 24 行 */\n    Free(vargp);\n    printf(\"Hello from thread %d\\n\", myid);\n    return NULL;\n}\n```\n\n为什么不能将 `Free` 移到主线程的 `Pthread_create` 后立即执行，而应由对等线程读取 ID 后释放？"
       },
       "solution": {
         "state": "available",
@@ -8327,7 +8327,7 @@
     {
       "schemaVersion": "5",
       "id": "q-dce1153891e59f40",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 23,
       "number": {
@@ -8684,7 +8684,7 @@
             }
           }
         ],
-        "text": "第四题（10分） 链接\n考虑如下3个文件：`main.c, fib.c`和`bignat.c`：\n```\n/* main.c */\nvoid fib (int n);\nint main (int argc, char** argv) {\n    int n = 0;\n    sscanf(argv[1], \"%d\", &n);\n    fib(n);\n}\n/* fib.c */\n#define N 16\nstatic unsigned int ring[3][N];\nstatic void print_bignat(unsigned int* a) {\n    int i;\n    for (i = N-1; i >= 0; i--)\n        printf(\"%u \", a[i]); /* print a[i] as unsigned int\n    */\n    printf(\"\\n\");\n}\nvoid fib (int n) {\n    int i, carry;\n    from_int(N, 0, ring[0]); /* fib(0) = 0 */\n    from_int(N, 1, ring[1]); /* fib(1) = 1 */\n    for (i = 0; i <= n-2; i++) {\n        carry  =  plus(N,  ring[i%3],  ring[(i+1)%3],\n            ring[(i+2)%3]);\n        if (carry) {\n            printf(\"Overflow  at  fib(%d)\\n\",  i+2);\n            exit(0);\n        }\n    }\n    print_bignat(ring[n%3]);\n}\n```\n另外，假设在文件`bignat.c`中定义了如下两个函数`plus`和`from_int`（具体\n定义略）：\n\n\n```\nint plus (int n, unsigned int* a, unsigned int* b, unsigned\nint* c);\nvoid from_int (int n, unsigned int k, unsigned int* a);\n```\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n| 文件 | 符号 | 局部或全局？ | 强或弱？ |\n| --- | --- | --- | --- |\n| `main.c` | `fib` | {{blank:scope-1}} | {{blank:binding-1}} |\n| `main.c` | `main` | {{blank:scope-2}} | {{blank:binding-2}} |\n| `fib.c` | `ring` | {{blank:scope-3}} | {{blank:binding-3}} |\n| `fib.c` | `fib` | {{blank:scope-4}} | {{blank:binding-4}} |\n| `fib.c` | `plus` | {{blank:scope-5}} | {{blank:binding-5}} |\n\n2. （3分） 假设文件`bignat.c`被编译为一个静态库`bignat.a`，对于如下的\n`gcc`调用，会得到什么样的结果（请选择）？\n\n（A） 编译和链接都正确\n\n（B） 链接失败（原因是包含未定义的引用）\n\n（C） 链接失败（原因是包含重复定义）\n| 命令 | 结果（A、B 或 C） |\n| --- | --- |\n| `gcc -o fib main.c fib.c bignat.a` | {{blank:link-1}} |\n| `gcc -o fib bignat.a main.c fib.c` | {{blank:link-2}} |\n| `gcc -o fib fib.c main.c bignat.a` | {{blank:link-3}} |\n3. （2分）如果在文件`fib.c`中，程序员在声明变量`ring`时，不小心把它写成\n了：\n`static int ring[3][N]`;\n会不会影响这些文件的编译、链接和运行结果？为什么？"
+        "text": "第四题（10分） 链接\n考虑如下3个文件：`main.c, fib.c`和`bignat.c`：\n```\n/* main.c */\nvoid fib (int n);\nint main (int argc, char** argv) {\n    int n = 0;\n    sscanf(argv[1], \"%d\", &n);\n    fib(n);\n}\n/* fib.c */\n#define N 16\nstatic unsigned int ring[3][N];\nstatic void print_bignat(unsigned int* a) {\n    int i;\n    for (i = N-1; i >= 0; i--)\n        printf(\"%u \", a[i]); /* print a[i] as unsigned int\n    */\n    printf(\"\\n\");\n}\nvoid fib (int n) {\n    int i, carry;\n    from_int(N, 0, ring[0]); /* fib(0) = 0 */\n    from_int(N, 1, ring[1]); /* fib(1) = 1 */\n    for (i = 0; i <= n-2; i++) {\n        carry  =  plus(N,  ring[i%3],  ring[(i+1)%3],\n            ring[(i+2)%3]);\n        if (carry) {\n            printf(\"Overflow  at  fib(%d)\\n\",  i+2);\n            exit(0);\n        }\n    }\n    print_bignat(ring[n%3]);\n}\n```\n另外，假设在文件`bignat.c`中定义了如下两个函数`plus`和`from_int`（具体\n定义略）：\n\n\n```\nint plus (int n, unsigned int* a, unsigned int* b, unsigned\nint* c);\nvoid from_int (int n, unsigned int k, unsigned int* a);\n```\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n\n| 文件 | 符号 | 局部或全局？ | 强或弱？ |\n| --- | --- | --- | --- |\n| `main.c` | `fib` | {{blank:scope-1}} | {{blank:binding-1}} |\n| `main.c` | `main` | {{blank:scope-2}} | {{blank:binding-2}} |\n| `fib.c` | `ring` | {{blank:scope-3}} | {{blank:binding-3}} |\n| `fib.c` | `fib` | {{blank:scope-4}} | {{blank:binding-4}} |\n| `fib.c` | `plus` | {{blank:scope-5}} | {{blank:binding-5}} |\n\n2. （3分） 假设文件`bignat.c`被编译为一个静态库`bignat.a`，对于如下的\n`gcc`调用，会得到什么样的结果（请选择）？\n\n（A） 编译和链接都正确\n\n（B） 链接失败（原因是包含未定义的引用）\n\n（C） 链接失败（原因是包含重复定义）\n\n| 命令 | 结果（A、B 或 C） |\n| --- | --- |\n| `gcc -o fib main.c fib.c bignat.a` | {{blank:link-1}} |\n| `gcc -o fib bignat.a main.c fib.c` | {{blank:link-2}} |\n| `gcc -o fib fib.c main.c bignat.a` | {{blank:link-3}} |\n\n3. （2分）如果在文件`fib.c`中，程序员在声明变量`ring`时，不小心把它写成\n了：\n`static int ring[3][N]`;\n会不会影响这些文件的编译、链接和运行结果？为什么？"
       },
       "solution": {
         "state": "available",
@@ -14506,7 +14506,7 @@
     {
       "schemaVersion": "5",
       "id": "q-3000615f0e2c7873",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 19,
       "number": {
@@ -14692,7 +14692,7 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "2.  （4分）在前题基础上，将Cache容量扩大为16 Bytes。假设对于访\n问内存地址序列 $0_{10}$,$2_{10}$,$4_{10}$,$8_{10}$,$12_{10}$,$14_{10}$，其命中率为33.3%，\n那么请问该Cache的block大小是\n？"
+            "text": "2.  （4分）在前题基础上，将Cache容量扩大为16 Bytes。假设对于访\n问内存地址序列 $0_{10}$,$2_{10}$,$4_{10}$,$8_{10}$,$12_{10}$,$14_{10}$，其命中率为33.3%，\n那么请问该 Cache 的 block 大小是多少？"
           },
           "solution": {
             "state": "available",
@@ -14912,7 +14912,7 @@
                 "width": "medium"
               }
             ],
-            "text": "3.  在前题基础上，假设每个Cache Block的大小为4 Bytes（即 B =\n4），Cache的结构如下图所示（`S=2`，`E=2`），且替换策略为LRU。\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n210  2310  1310  910  2010   1510   1310   1010\n请在下图空白处填入访问上述数据后Cache的状态。（4分）\n（`TAG`使用二进制格式；Data Block使用十进制格式，例：`M[4-7]`表示\n地址410-710对应的数据）（注：同`Set`内不同Line的顺序可颠倒）\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 | {{blank:valid-1}} | {{blank:tag-3a}} | {{blank:block-3a}} |\n| set0 | {{blank:valid-2}} | {{blank:tag-3b}} | {{blank:block-3b}} |\n| set1 | {{blank:valid-3}} | {{blank:tag-3c}} | {{blank:block-3c}} |\n| set1 | {{blank:valid-4}} | {{blank:tag-3d}} | {{blank:block-3d}} |\n上述数据访问一共产生了多少次Hit（2分）：{{blank:hits-3}}"
+            "text": "3. 在前题基础上，假设每个 Cache Block 为 4 Bytes（`B=4`），Cache 有 2 组、每组 2 路（`S=2`、`E=2`），初始状态为空，替换策略为 LRU。\n\n程序依次访问以下字节地址（均为十进制）：\n\n```text\n2, 23, 13, 9, 20, 15, 13, 10\n```\n\n请在下表填写访问后的 Cache 状态。（4分）`TAG` 使用二进制，Data Block 使用十进制，例如 `M[4-7]` 表示地址 4 至 7 对应的数据。同一组内两路的顺序可颠倒。\n\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 | {{blank:valid-1}} | {{blank:tag-3a}} | {{blank:block-3a}} |\n| set0 | {{blank:valid-2}} | {{blank:tag-3b}} | {{blank:block-3b}} |\n| set1 | {{blank:valid-3}} | {{blank:tag-3c}} | {{blank:block-3c}} |\n| set1 | {{blank:valid-4}} | {{blank:tag-3d}} | {{blank:block-3d}} |\n\n上述数据访问一共产生了多少次Hit（2分）：{{blank:hits-3}}"
           },
           "solution": {
             "state": "available",
@@ -15204,7 +15204,7 @@
                 "width": "medium"
               }
             ],
-            "text": "4. 在前题基础上，增加一条新规则：地址区间包含10倍数的block将不\n会被缓存。假设仍旧使用LRU替换策略，请在下图空白处填入访问上述数据\n后Cache的状态（4分）。（注：同`Set`内不同Line的顺序可颠倒）\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 | {{blank:valid-1}} | {{blank:tag-4a}} | {{blank:block-4a}} |\n| set0 | {{blank:valid-2}} |  |  |\n| set1 | {{blank:valid-3}} | {{blank:tag-4c}} | {{blank:block-4c}} |\n| set1 | {{blank:valid-4}} |  |  |\n上述数据访问一共产生了多少次Hit（2分）：{{blank:hits-4}}"
+            "text": "4. 对同一个地址序列从空 Cache 重新模拟，增加一条规则：地址区间包含 10 的倍数的 block 不会被缓存。仍使用 LRU 替换策略，填写访问后的 Cache 状态（4分）。同一组内两路的顺序可颠倒。\n\n| Set | V | TAG | Data Block |\n| --- | --- | --- | --- |\n| set0 | {{blank:valid-1}} | {{blank:tag-4a}} | {{blank:block-4a}} |\n| set0 | {{blank:valid-2}} |  |  |\n| set1 | {{blank:valid-3}} | {{blank:tag-4c}} | {{blank:block-4c}} |\n| set1 | {{blank:valid-4}} |  |  |\n\n上述数据访问一共产生了多少次Hit（2分）：{{blank:hits-4}}"
           },
           "solution": {
             "state": "available",
@@ -19853,7 +19853,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d077d3270d2bb69f",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-12950876262955d9",
       "paperOrder": 21,
       "number": {
@@ -19890,7 +19890,7 @@
           "curated": "_curated/期中/2022期中-带答案/331.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "8位IEEE浮点格式：编码、比较、溢出与舍入（1-7小题）"
+          "editorNote": "按原卷补齐七小题的全部空位；浮点位模式、格式参数和数值使用显式答案核对。"
         }
       ],
       "type": "fill",
@@ -19898,10 +19898,24 @@
         "format": "markdown",
         "blanks": [
           {
+            "id": "bd-decimal",
+            "marker": "{{blank:bd-decimal}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "0xBD 的十进制值"
+          },
+          {
+            "id": "fraction-hex",
+            "marker": "{{blank:fraction-hex}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "9/64 的十六进制编码"
+          },
+          {
             "id": "fp-relation",
             "marker": "{{blank:fp-relation}}",
             "occurrence": 0,
-            "width": "medium",
+            "width": "short",
             "input": {
               "kind": "select",
               "multiple": false,
@@ -19926,10 +19940,24 @@
             }
           },
           {
+            "id": "unsigned-bits",
+            "marker": "{{blank:unsigned-bits}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "0x6E 转换后的 8 位编码"
+          },
+          {
+            "id": "max-integer",
+            "marker": "{{blank:max-integer}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "可精确表示的最大整数的二进制值"
+          },
+          {
             "id": "overflow",
             "marker": "{{blank:overflow}}",
             "occurrence": 0,
-            "width": "medium",
+            "width": "short",
             "input": {
               "kind": "select",
               "multiple": false,
@@ -19949,7 +19977,7 @@
             "id": "rounding",
             "marker": "{{blank:rounding}}",
             "occurrence": 0,
-            "width": "medium",
+            "width": "short",
             "input": {
               "kind": "select",
               "multiple": false,
@@ -19969,7 +19997,7 @@
             "id": "count",
             "marker": "{{blank:count}}",
             "occurrence": 0,
-            "width": "medium",
+            "width": "short",
             "input": {
               "kind": "select",
               "multiple": false,
@@ -19988,38 +20016,161 @@
                 }
               ]
             }
+          },
+          {
+            "id": "exponent-width",
+            "marker": "{{blank:exponent-width}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "16 位格式的阶码位数 m"
+          },
+          {
+            "id": "fraction-width",
+            "marker": "{{blank:fraction-width}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "16 位格式的小数位数 n"
+          },
+          {
+            "id": "min-negative-subnormal",
+            "marker": "{{blank:min-negative-subnormal}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "数值最小的负非规格化数"
           }
         ],
-        "text": "第二题 类似 IEEE 浮点数标准定义 8 位浮点数，符号位、阶码位和尾数位长度分别为 1、3、4，依此回答下列问题：\n1.  若浮点十六进制表示为`0xBD`，那么该数的十进制大小为      ；若十进制大\n小为9/64，那么浮点十六进制表示为\n2.  已知浮点数A和B，A浮点表示为010000xx，B的浮点表示为00111x11，\nx表示对应的位未知，则 A {{blank:fp-relation}} B（请填小于、大于、等于或无法判断）\n3.  若某个unsigned char类型数的十六进制表示为`0x6E`，那么该数的浮点表\n示为\n4.  该标准浮点数能够精确表示的最大整数的二进制表示是\n5.  用上述浮点格式表达 unsigned char 类型整数，是否会发生溢出 {{blank:overflow}}（请填是或否），是否会发生舍入 {{blank:rounding}}（请填是或否）\n6.  如果有另一种符合IEEE标准的浮点数，符号位、阶码位和尾数位长度分别为\n1, 4, 3, 则其能精确表示的实数的数量 {{blank:count}}（请填更多、更少或相同）\n7.  再考虑另一个符合IEEE标准的16位浮点系统，包含1位符号, m位阶码, n\n位尾数. 已知实数 1 在该浮点格式系统中的位级表示为 `0x3c00`, 则 m\n=      , n =       . 该浮点类型所表示的最小负非规格化数（十进制）\n为       ."
+        "text": "第二题。参照 IEEE 浮点编码规则定义一种 8 位浮点格式：符号位、阶码位、小数位长度分别为 `1、3、4`，阶码偏置为 `3`，全 0／全 1 阶码分别用于非规格化数（及零）／无穷大和 NaN。依次回答：\n\n1. 若浮点位级编码为 `0xBD`，该数的十进制值为 {{blank:bd-decimal}}；若数值为 `9/64`，其浮点十六进制编码为 {{blank:fraction-hex}}。\n\n2. 已知 A 的位级编码为 `010000xx`，B 的位级编码为 `00111x11`，其中各个 `x` 是独立未知的位，则 A {{blank:fp-relation}} B。\n\n3. 将 `unsigned char` 类型整数 `0x6E` 转换为这种浮点格式，得到的位级编码为 {{blank:unsigned-bits}}（填完整 8 位二进制，可按 `s E frac` 分组；也接受十六进制编码）。\n\n4. 这种格式能够精确表示的最大整数，其二进制值为 {{blank:max-integer}}（填整数的二进制值，不是浮点编码）。\n\n5. 用这种格式表示 `unsigned char` 类型整数，是否可能发生溢出？{{blank:overflow}}。对没有溢出的整数，是否需要因有效位不足而舍入？{{blank:rounding}}。\n\n6. 另一种 8 位格式的符号位、阶码位、小数位长度为 `1、4、3`，其余遵循相同的 IEEE 编码规则。与前一种格式相比，可精确表示的有限实数的数量 {{blank:count}}。\n\n7. 再考虑一种 16 位格式，符号位、阶码位、小数位分别占 `1、m、n` 位。实数 1 的位级编码为 `0x3c00`，则 `m = {{blank:exponent-width}}`，`n = {{blank:fraction-width}}`。\n\n   该 16 位格式的数值最小（即最负、不是绝对值最小）的负非规格化数为 {{blank:min-negative-subnormal}}。可填精确十进制值，或用 `-a/(2^b)` 格式填写你计算出的分式（将 `a`、`b` 换成实际整数）。\n\n第 1–6 问每问 2 分，第 7 问 3 分，沿用原卷分值说明。"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n1) -1.8125；`0x09`。二进制浮点数到十进制浮点数的转化运算。\n2) 大于。浮点数的大小比较，先看符号位，再看阶码位。\n3) 01110000。整数到浮点数的转化运算，此处为上溢出的情况。\n4) 1111₂。\n5) 是；否。阶码位最大为 `110₂=6`，`6-3=3`，能精确表达的值为 1111₂，故会发生溢出，但不会发生舍入。\n6) 更多。浮点数格式的考察。\n7) `m=5`，`n=10`，最小负非规格化数为 `-1023/(2^24)`。在符合 IEEE 标准的浮点系统下，实数 1 的表示为阶码 01111，其余位为 0，所以 `m=5`、`n=10`。此浮点系统能表示的最小负非规格化数的位级表示为 1000 0011 1111 1111，即 `-1023/(2^24)`。\n\n第 1–6 题每题 2 分（两空的每空 1 分，一空的 2 分），第 7 题 3 分（每空 1 分）。"
+          "text": "1. `-1.8125`；`0x09`。`0xBD = 1 011 1101`，数值为 $-(1+13/16)2^0=-29/16$；`9/64` 是非规格化数，值为 $(9/16)2^{-2}$，编码为 `0 000 1001`。\n\n2. 大于。A 的阶码为 `100`，B 的阶码为 `011`；无论未知位如何取值，A 均大于 B。\n\n3. `01110000`（`0x70`），表示正无穷大。整数 `0x6E = 110` 超出该格式的有限范围。\n\n4. `1111`，即整数 15。最大有限值为 $(1+15/16)2^3=15.5$，所以最大可精确表示整数是 15。\n\n5. 是；否。16–255 会溢出；有限范围内的整数 0–15 都能精确表示。本问按原卷将溢出与“未溢出时的有效位舍入”分开讨论，并非声称溢出不涉及 IEEE 的舍入模式。\n\n6. 更多。原格式有 223 个不同有限实数，新格式有 239 个（正负零按同一个实数计）；全 1 阶码下占用的 NaN 编码数量减少。\n\n7. `m = 5`，`n = 10`。1 的阶码为 `01111`，对应偏置 15，因此最小非规格化步长为 $2^{1-15-10}=2^{-24}$。最负的非规格化数为 $-1023 \\times 2^{-24}$，即 `-1023/(2^24)` 或 `-0.000060975551605224609375`。`-1/(2^24)` 是最接近 0 的负非规格化数，不能与题目所问混淆。"
         },
         "provenance": {
           "origin": "unknown",
           "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
+          "note": "原卷答案保留，补写逐项计算依据；第 5 问明确将舍入限定为有限范围内的精度损失，第 7 问明确最小指数值最负。未声明官方或人工审核。"
         },
         "blankAnswers": [
           {
+            "blankId": "bd-decimal",
+            "method": "exact",
+            "acceptedAnswers": [
+              "-1.8125",
+              "-29/16"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "fraction-hex",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x09",
+              "0x9",
+              "09",
+              "9"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
+          },
+          {
             "blankId": "fp-relation",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "gt"
+            ]
+          },
+          {
+            "blankId": "unsigned-bits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "01110000",
+              "0 111 0000",
+              "0x70",
+              "70"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "max-integer",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1111",
+              "0b1111",
+              "1111₂"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
           },
           {
             "blankId": "overflow",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "yes"
+            ]
           },
           {
             "blankId": "rounding",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "no"
+            ]
           },
           {
             "blankId": "count",
-            "method": "self"
+            "method": "selection",
+            "correctValues": [
+              "更多"
+            ]
+          },
+          {
+            "blankId": "exponent-width",
+            "method": "exact",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "fraction-width",
+            "method": "exact",
+            "acceptedAnswers": [
+              "10"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "min-negative-subnormal",
+            "method": "exact",
+            "acceptedAnswers": [
+              "-1023/(2^24)",
+              "-1023/2^24",
+              "-1023/16777216",
+              "-1023*2^-24",
+              "-0.000060975551605224609375"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true
+            }
           }
         ]
       }
@@ -41145,7 +41296,7 @@
     {
       "schemaVersion": "5",
       "id": "q-85a85b345e99accf",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-5d1091f10c242495",
       "paperOrder": 6,
       "number": {
@@ -41224,7 +41375,7 @@
             "width": "short"
           }
         ],
-        "text": "练习题 9.6。假设分配器保持双字（8 字节）对齐，采用图 9-35 的隐式空闲链表块格式；块大小按 8 字节向上取整。填写每次 `malloc` 请求产生的块大小（十进制字节）和头部值（十六进制）：\n\n| 请求 | 块大小 | 头部值 |\n| --- | --- | --- |\n| `malloc(1)` | {{blank:size1}} | {{blank:header1}} |\n| `malloc(5)` | {{blank:size5}} | {{blank:header5}} |\n| `malloc(12)` | {{blank:size12}} | {{blank:header12}} |\n| `malloc(13)` | {{blank:size13}} | {{blank:header13}} |"
+        "text": "练习题 9.6。分配器保持双字（8 字节）对齐，采用图 9-35 的隐式空闲链表块格式。无需查阅原图，块格式及编码规则如下：\n\n- 每块由 4 字节头部、请求的有效载荷以及对齐填充组成；没有脚部。\n- 块大小包括头部、有效载荷和填充，按 8 字节向上取整，最小为 8 字节。\n- 头部的高位保存块大小，最低位为已分配标记（已分配为 1），另两个低位为 0。`malloc` 成功时，头部值为 `块大小 | 1`。\n\n填写每次 `malloc` 请求产生的块大小（十进制字节）和头部值（带 `0x` 前缀的十六进制）：\n\n| 请求 | 块大小 | 头部值 |\n| --- | --- | --- |\n| `malloc(1)` | {{blank:size1}} | {{blank:header1}} |\n| `malloc(5)` | {{blank:size5}} | {{blank:header5}} |\n| `malloc(12)` | {{blank:size12}} | {{blank:header12}} |\n| `malloc(13)` | {{blank:size13}} | {{blank:header13}} |"
       },
       "solution": {
         "state": "available",
@@ -42749,7 +42900,7 @@
     {
       "schemaVersion": "5",
       "id": "q-48a073bf38414881",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-5e37064fe519258d",
       "paperOrder": 19,
       "number": {
@@ -42946,7 +43097,7 @@
             "width": "medium"
           }
         ],
-        "text": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即`B = 2`）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n$0_{10}$  $3_{10}$  $4_{10}$  $7_{10}$  $16_{10}$   $19_{10}$   $21_{10}$  $22_{10}$  $8_{10}$  $10_{10}$  $13_{10}$  $14_{10}$  $24_{10}$  $26_{10}$   $29_{10}$  $30_{10}$\n1. Cache的结构如下图所示（`S=2`， `E=2`），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：`M[6-7]`表示地址\n$6_{10}$-$7_{10}$对应的数据）\n| 组 | 路 | V | TAG | Data Block |\n| --- | --- | --- | --- | --- |\n| set0 | way0 | {{blank:set0-way0-v}} | {{blank:set0-way0-tag}} | {{blank:set0-way0-data}} |\n| set0 | way1 | {{blank:set0-way1-v}} | {{blank:set0-way1-tag}} | {{blank:set0-way1-data}} |\n| set1 | way0 | {{blank:set1-way0-v}} | {{blank:set1-way0-tag}} | {{blank:set1-way0-data}} |\n| set1 | way1 | {{blank:set1-way1-v}} | {{blank:set1-way1-tag}} | {{blank:set1-way1-data}} |\n上述数据访问一共产生了多少次Hit: {{blank:hits-basic}} (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 `M[0-1]`\n访问发生miss，则把`M[0-1]`和`M[2-3]`都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit：{{blank:hits-prefetch}} (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\n`B = 4`，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit：\n{{blank:hits-block4}} (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit：{{blank:hits-block4-prefetch}} (2分)"
+        "text": "第五题（20分）\n现有一个能够存储4个Block的Cache，每一个Cache Block的大小为2 Byte\n（即`B = 2`）。内存空间的大小是32 Byte，即内存空间地址范围如下：\n$0_{10}$  ($00000_2$) -- $31_{10}$ ($11111_2$)\n现有一程序，访问内存地址序列如下所示，单位是Byte。\n$0_{10}$  $3_{10}$  $4_{10}$  $7_{10}$  $16_{10}$   $19_{10}$   $21_{10}$  $22_{10}$  $8_{10}$  $10_{10}$  $13_{10}$  $14_{10}$  $24_{10}$  $26_{10}$   $29_{10}$  $30_{10}$\n1. Cache的结构如下图所示（`S=2`， `E=2`），初始状态为空，替换策略LRU。请\n在下图空白处填入上述数据访问后Cache的状态。(12分)\n（TAG 使用二进制格式；Data Block 使用十进制格式，例：`M[6-7]`表示地址\n$6_{10}$-$7_{10}$对应的数据）\n\n| 组 | 路 | V | TAG | Data Block |\n| --- | --- | --- | --- | --- |\n| set0 | way0 | {{blank:set0-way0-v}} | {{blank:set0-way0-tag}} | {{blank:set0-way0-data}} |\n| set0 | way1 | {{blank:set0-way1-v}} | {{blank:set0-way1-tag}} | {{blank:set0-way1-data}} |\n| set1 | way0 | {{blank:set1-way0-v}} | {{blank:set1-way0-tag}} | {{blank:set1-way0-data}} |\n| set1 | way1 | {{blank:set1-way1-v}} | {{blank:set1-way1-tag}} | {{blank:set1-way1-data}} |\n\n上述数据访问一共产生了多少次Hit: {{blank:hits-basic}} (2分)\n2. 在第1小题的基础上，现增加一条数据预取规则：每当cache访问出现miss\n时，被访问地址及其后续的一个 cache block 都会被放入缓存，即当 `M[0-1]`\n访问发生miss，则把`M[0-1]`和`M[2-3]`都放入缓存中。那么，这16次数据访问\n一共产生了多少次Hit：{{blank:hits-prefetch}} (2分)\n3. 在第1小题的基础上，如果每一个Cache Block的大小扩大为4 Byte（即\n`B = 4`，cache大小变为原来的2倍），这16次数据访问一共产生了多少次Hit：\n{{blank:hits-block4}} (2分)\n4. 在第3小题的基础上，考虑增加2中的数据预取规则，这16次数据访问一共\n产生了多少次Hit：{{blank:hits-block4-prefetch}} (2分)"
       },
       "solution": {
         "state": "available",
@@ -44561,7 +44712,7 @@
     {
       "schemaVersion": "5",
       "id": "q-fe8ac6d2306ebac9",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-5e37064fe519258d",
       "paperOrder": 16,
       "number": {
@@ -44696,7 +44847,7 @@
             }
           }
         ],
-        "text": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）{{blank:format-fields}}\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）二进制位表示需保留完整的 9 位，可连续填写，也可按符号位、阶码、小数三个字段用一个空格分隔。\n| 描述 | 二进制位表示 | 值 |\n| --- | --- | --- |\n| 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |\n| 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |\n| 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）实数数量：{{blank:real-count-change}}；数值精度：{{blank:precision-change}}。"
+        "text": "第二题（15分）\n考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k\n个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答\n以下问题：（注：阶码偏移量为 $2^{k−1}-1$）\n1.  求k和n的值。（1分）{{blank:format-fields}}\n2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如\n17/64）。（注:每格2分）二进制位表示需保留完整的 9 位，可连续填写，也可按符号位、阶码、小数三个字段用一个空格分隔。\n\n| 描述 | 二进制位表示 | 值 |\n| --- | --- | --- |\n| 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |\n| 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |\n| 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |\n\n3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的\n实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即\n可）（2分）实数数量：{{blank:real-count-change}}；数值精度：{{blank:precision-change}}。"
       },
       "solution": {
         "state": "available",
@@ -69518,7 +69669,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f81cf90920e892cb",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 7,
       "number": {
@@ -69571,7 +69722,7 @@
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：B 本题考察指针和数组的存储方式，答案为B。f是一个数组，每个元素都\n是一个函数指针，指向返回值为int *的函数。对于f而言，`sizeof(f)`返回整\n个指针数组的大小，为`3 * 8 = 24`；对于*f而言，它是`f[0]`元素，是一个指\n针变量，大小为8。"
+          "text": "答案：B。本题考察指针和数组的存储方式。`f` 是一个数组，每个元素都是函数指针，指向返回值为 `int *` 的函数。\n\n`sizeof(f)` 返回整个指针数组的大小，即 `3 * 8 = 24` 字节；`*f` 是 `f[0]` 元素，是一个指针变量，`sizeof(*f)` 为 8 字节。"
         },
         "provenance": {
           "origin": "unknown",
@@ -78597,7 +78748,7 @@
     {
       "schemaVersion": "5",
       "id": "q-28abf0da673e7840",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-bc69f9ea3beff7ee",
       "paperOrder": 2,
       "number": {
@@ -78643,14 +78794,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "2. 现有一个二进制浮点数的表示规则：\n\n- `E` 为指数部分，占 3 比特，bias 为 3；\n- `M` 为小数部分，占 5 比特，采用二进制补码表示，且 $\\frac{1}{2} \\le |M| < 1$；\n- `s` 是浮点数的符号位；该形式包含一个值为 1 的隐藏位。\n\n| 符号位 | 指数部分 | 小数部分 |\n| --- | --- | --- |\n| `s` | `E` | `M` |\n\n如果用该形式表示十进制数 $+5_{10}$，`s`、`E` 和 `M` 分别是："
+        "text": "2. 现有一个二进制浮点数的表示规则：\n\n- `E` 为指数部分，占 3 比特，bias 为 3；\n- `M` 为小数部分，占 5 比特，采用二进制补码表示，且 $\\frac{1}{2} \\le |M| < 1$；\n- `s` 是浮点数的符号位；该形式包含一个值为 1 的隐藏位。\n\n为明确原卷采用的自定义编码语义，本题的数值定义补充为：\n\n$$V = (-1)^s (1 + M) 2^{e-3}.$$\n\n其中 `e` 是 3 位 `E` 字段按无符号整数解释的值；若 `M` 的五位依次是 `b4 b3 b2 b1 b0`，则其补码小数值为 $M=-b_4+b_3/2+b_2/4+b_1/8+b_0/16$。隐藏位是公式中的常数 `1`。这是题目自定义格式，**不采用 IEEE 的全 1 阶码保留规则**，故 `E = 111` 可用于普通数值。仍需满足上面的 $1/2 \\le |M| < 1$ 约束。\n\n| 符号位 | 指数部分 | 小数部分 |\n| --- | --- | --- |\n| `s` | `E` | `M` |\n\n如果用该形式表示十进制数 $+5_{10}$，`s`、`E` 和 `M` 分别是："
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：D\n\n实际上，5 可以分别写成 $4+1$、$8-3$、$16-11$，对应 B、C、D\n三种编码思路；但前两种都不满足 $\\frac{1}{2} \\le |M| < 1$，因此只能选 D。\nA 是迷惑选项。"
+          "text": "答案：D\n\n按题面补充的数值定义逐项计算：\n\n| 选项 | 指数 `e - 3` | 补码小数 `M` | 数值 | 是否满足归一化约束 |\n| --- | --- | --- | --- | --- |\n| A | 1 | `12/16` | `3.5` | 是，但数值不是 5 |\n| B | 2 | `4/16` | `5` | 否 |\n| C | 3 | `-6/16` | `5` | 否 |\n| D | 4 | `-11/16` | `5` | 是 |\n\nB、C、D 分别对应 $4+1$、$8-3$、$16-11$，只有 D 同时表示 5 并满足 $1/2 \\le |M| < 1$。这里的格式与 IEEE 不同，不能把 D 的 `111` 阶码解释成无穷大／NaN。"
         },
         "provenance": {
           "origin": "unknown",
@@ -79235,7 +79386,7 @@
     {
       "schemaVersion": "5",
       "id": "q-5d9ff50c3d2ec4b1",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-bc69f9ea3beff7ee",
       "paperOrder": 21,
       "number": {
@@ -79285,7 +79436,7 @@
         "grading": "self",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n1. for (i = 0; i <  2 ; i++) { //（1分）\n//下面第一二个等式左边都对得1分，第三个等式左边写对得1分\n    `c[2*i] = b[0] * a[2*i] + b[2] * a[2*i+1]; //`（等式右边\n乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    `c[2*i+1] = b[1] * a[2*i] + b[3] * a[2*i+1]; //`（等式右\n边乘加乘序列得1分，等式右边写对2\\*i和2\\*i+1得1分）\n    `d = d + c[2*i] + c[2*i+1];  //`（等式右边两个加号得1分，等\n式右边写对2\\*i和2\\*i+1得1分）\n  return    d   ;  //（1分）\n2. 139  （2分）"
+          "text": "1. 完整函数如下：\n\n```c\nint myfunction(int a[], int b[], int c[], int d) {\n    int i;\n    for (i = 0; i < 2; i++) {\n        c[2*i] = b[0] * a[2*i] + b[2] * a[2*i+1];\n        c[2*i+1] = b[1] * a[2*i] + b[3] * a[2*i+1];\n        d = d + c[2*i] + c[2*i+1];\n    }\n    return d;\n}\n```\n\n原卷评分：循环上界 1 分；前两个赋值左侧共同 1 分，第三个赋值左侧 1 分；前两个右侧的乘、加、乘序列各 1 分，三个右侧的 `2*i` 与 `2*i+1` 各 1 分；第三个右侧的两个加号 1 分；返回值 1 分。\n\n2. 输出 `139`（2分）。两次循环分别得到 `c[0]=19`、`c[1]=20`、`c[2]=47`、`c[3]=48`；`d=5+19+20+47+48=139`。"
         },
         "provenance": {
           "origin": "unknown",
@@ -85900,7 +86051,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000012",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 12,
       "number": {
@@ -85949,7 +86100,7 @@
             "width": "short"
           }
         ],
-        "text": "练习题 6.12。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n根据13位地址格式，分别填写标记（CT）、组索引（CI）、块偏移（CO）所占位号范围（从高位到低位）。\n\n| 字段 | 位号范围 |\n| --- | --- |\n| CT | {{blank:ct-range}} |\n| CI | {{blank:ci-range}} |\n| CO | {{blank:co-range}} |"
+        "text": "练习题 6.12。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n根据13位地址格式，分别填写标记（CT）、组索引（CI）、块偏移（CO）所占位号范围（从高位到低位）。\n\n| 字段 | 位号范围 |\n| --- | --- |\n| CT | {{blank:ct-range}} |\n| CI | {{blank:ci-range}} |\n| CO | {{blank:co-range}} |"
       },
       "solution": {
         "state": "available",
@@ -86031,7 +86182,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000013",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 13,
       "number": {
@@ -86098,7 +86249,7 @@
             "width": "short"
           }
         ],
-        "text": "练习题 6.13。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n引用地址`0x0E34`处的一个字节。填写13位二进制地址格式：{{blank:bin}}；CO：{{blank:co}}；CI：{{blank:ci}}；CT：{{blank:ct}}；是否命中：{{blank:hit}}；返回的缓存字节：{{blank:byte}}。"
+        "text": "练习题 6.13。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n引用地址`0x0E34`处的一个字节。填写13位二进制地址格式：{{blank:bin}}；CO：{{blank:co}}；CI：{{blank:ci}}；CT：{{blank:ct}}；是否命中：{{blank:hit}}；返回的缓存字节：{{blank:byte}}。"
       },
       "solution": {
         "state": "available",
@@ -86205,7 +86356,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000014",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 14,
       "number": {
@@ -86272,7 +86423,7 @@
             "width": "short"
           }
         ],
-        "text": "练习题 6.14。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n对内存地址`0x0DD5`重复6.13的分析：13位地址：{{blank:bin}}；CO：{{blank:co}}；CI：{{blank:ci}}；CT：{{blank:ct}}；是否命中：{{blank:hit}}；返回字节：{{blank:byte}}。"
+        "text": "练习题 6.14。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n对内存地址`0x0DD5`重复6.13的分析：13位地址：{{blank:bin}}；CO：{{blank:co}}；CI：{{blank:ci}}；CT：{{blank:ct}}；是否命中：{{blank:hit}}；返回字节：{{blank:byte}}。"
       },
       "solution": {
         "state": "available",
@@ -86381,7 +86532,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000015",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 15,
       "number": {
@@ -86448,7 +86599,7 @@
             "width": "short"
           }
         ],
-        "text": "练习题 6.15。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n对内存地址`0x1FE4`重复6.13的分析：13位地址：{{blank:bin}}；CO：{{blank:co}}；CI：{{blank:ci}}；CT：{{blank:ct}}；是否命中：{{blank:hit}}；返回字节：{{blank:byte}}。"
+        "text": "练习题 6.15。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n对内存地址`0x1FE4`重复6.13的分析：13位地址：{{blank:bin}}；CO：{{blank:co}}；CI：{{blank:ci}}；CT：{{blank:ct}}；是否命中：{{blank:hit}}；返回字节：{{blank:byte}}。"
       },
       "solution": {
         "state": "available",
@@ -86563,7 +86714,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0600000000000016",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-c039f10f0dbe7e3e",
       "paperOrder": 16,
       "number": {
@@ -86618,7 +86769,7 @@
             "width": "short"
           }
         ],
-        "text": "练习题 6.16。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n对6.12中的缓存，按升序填写所有会在组3中命中的十六进制内存地址：{{blank:addr0}}、{{blank:addr1}}、{{blank:addr2}}、{{blank:addr3}}。"
+        "text": "练习题 6.16。机器内存按字节寻址，地址宽度为13位；缓存为2路组相联（`E=2`），块大小`B=4`字节，组数`S=8`。表中标记与数据均为十六进制，缓存状态是初始状态。\n\n| 组 | 行0标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 | 行1标记 | 有效 | 字节0 | 字节1 | 字节2 | 字节3 |\n| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n| 0 | 09 | 1 | 86 | 30 | 3F | 10 | 00 | 0 | — | — | — | — |\n| 1 | 45 | 1 | 60 | 4F | E0 | 23 | 38 | 1 | 00 | BC | 0B | 37 |\n| 2 | EB | 0 | — | — | — | — | 0B | 0 | — | — | — | — |\n| 3 | 06 | 0 | — | — | — | — | 32 | 1 | 12 | 08 | 7B | AD |\n| 4 | C7 | 1 | 06 | 78 | 07 | C5 | 05 | 1 | 40 | 67 | C2 | 3B |\n| 5 | 71 | 1 | 0B | DE | 18 | 4B | 6E | 0 | — | — | — | — |\n| 6 | 91 | 1 | A0 | B7 | 26 | 2D | F0 | 0 | — | — | — | — |\n| 7 | 46 | 0 | — | — | — | — | DE | 1 | 12 | C0 | 88 | 37 |\n\n对6.12中的缓存，按升序填写所有会在组3中命中的十六进制内存地址：{{blank:addr0}}、{{blank:addr1}}、{{blank:addr2}}、{{blank:addr3}}。"
       },
       "solution": {
         "state": "available",
@@ -93551,7 +93702,7 @@
     {
       "schemaVersion": "5",
       "id": "q-4e2859f161b0083a",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-d0ae6162300a90de",
       "paperOrder": 2,
       "number": {
@@ -93597,25 +93748,24 @@
       "type": "multiple-choice",
       "stem": {
         "format": "markdown",
-        "text": "2、假设下列`int`和`unsigned`数均为32位，\n```c\nint x = 0x80000000;\nunsigned y = 0x00000001;\nint z = 0x80000001;\n```\n以下表达式正确的是"
+        "text": "2. 假设 `int` 和 `unsigned` 均为 32 位，`int` 使用补码表示：\n\n```c\nint x = 0x80000000;\nunsigned y = 0x00000001;\nint z = 0x80000001;\n```\n本题沿用原卷的**32 位机器数模型**：取负、加减乘法及合法位数的左移均保留低 32 位，再按结果类型解释；有符号与无符号数混合比较按 C 的类型转换规则。运算符优先级仍遵循 C，不能自行补括号；移位计数必须在 0–31 内，不能对计数取模。\n\n注意：这是题目明确指定的机器数模型，不是 ISO C 对有符号溢出或负数左移的语言保证。\n\n以下哪些表达式成立？（多选）"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案:ABCD；考虑到运算符的优先顺序，选ABC也算对\nA. int中`0x80000000`的相反数还是自己\n`B. signed (-1)` 和 unsinged y 比较，都按照 `unsigned`，所以强制类型转换后 （-1）很大\nC: unsigned, signed左移三位 = *8\nD：应该是相等关系；`signed` 左移之后，和 unsigned y*24 相比都看成 `unsigned`"
+          "text": "答案：A、B、C。原解析同时写“ABCD”和“选 ABC 也算对”，此处按原选项的实际优先级修正，不能将缺失的括号默默补上。\n\n- A：按本题指定的截断模型，`-x` 的位模式仍为 `0x80000000`，按 `int` 解释为负数。\n- B：`-1` 与 `unsigned y` 比较时转换为无符号数 `0xFFFFFFFF`，大于 1。\n- C：两边截断后的位模式都为 `0x00000008`。\n- D：按 C 优先级，表达式是 `(y * 24) == ((z << (5 - z)) << 3)`，不是 `(y * 24) == ((z << 5) - (z << 3))`。`5 - z` 按指定的 32 位模型得到负数 `-2147483644`，不属于合法移位计数，不能判为成立。\n\n只有人为补上 `(z << 5) - (z << 3)` 的括号，右侧才会在本题机器数模型下得到 24；这不是原选项的写法。C 的移位语法与非法计数规则可参见 [WG14 草案第 6.5.7 节](https://open-std.org/jtc1/sc22/wg14/www/docs/n843.htm)。"
         },
         "provenance": {
           "origin": "unknown",
           "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
+          "note": "原卷参考同时写 ABCD 与 ABC；按原表达式的 C 优先级修正为 ABC，补充原卷实际采用的 32 位机器数截断模型，避免将其误认为 ISO C 有符号溢出保证。"
         },
         "correctOptionIds": [
           "A",
           "B",
-          "C",
-          "D"
+          "C"
         ]
       },
       "options": [
@@ -100665,7 +100815,7 @@
     {
       "schemaVersion": "5",
       "id": "q-6e0eea29f44ce37d",
-      "revision": 5,
+      "revision": 6,
       "paperId": "p-e3f869956fc29bd8",
       "paperOrder": 21,
       "number": {
@@ -100678,9 +100828,8 @@
         "parts": []
       },
       "classification": {
-        "primaryModuleId": "machine_prog",
+        "primaryModuleId": "concurrent_programming",
         "moduleIds": [
-          "machine_prog",
           "concurrent_programming"
         ],
         "tags": []
@@ -100740,19 +100889,19 @@
           },
           "type": "short-answer",
           "moduleIds": [
-            "machine_prog"
+            "concurrent_programming"
           ],
           "stem": {
             "format": "markdown",
             "blanks": [],
-            "text": "第七题（10分）\n给定如下程序：\n```\n#include <stdio.h>\n#include <pthread.h>\nint i = 0;\nint j = 0;\nvoid *do_stuff1(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{i++; j++;}\nreturn NULL;\n}\nvoid *do_stuff2(void * arg __attribute__((unused))) {\nint a;\nfor (a = 0; a < 1000; a++)\n{j++; i++;}\nreturn NULL;\n}\nint main() {\npthread_t tid1, tid2;\npthread_create(&tid1, NULL, do_stuff1, NULL);\npthread_create(&tid2, NULL, do_stuff2, NULL);\npthread_join(tid1, NULL);\npthread_join(tid2, NULL);\nprintf(\"%d, %d\\n\", i, j);\nreturn 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1, %eax`"
+            "text": "第七题（10分）\n给定如下程序：\n```c\n#include <stdio.h>\n#include <pthread.h>\n\nint i = 0;\nint j = 0;\n\nvoid *do_stuff1(void *arg __attribute__((unused))) {\n    int a;\n    for (a = 0; a < 1000; a++) {\n        i++;\n        j++;\n    }\n    return NULL;\n}\n\nvoid *do_stuff2(void *arg __attribute__((unused))) {\n    int a;\n    for (a = 0; a < 1000; a++) {\n        j++;\n        i++;\n    }\n    return NULL;\n}\n\nint main() {\n    pthread_t tid1, tid2;\n    pthread_create(&tid1, NULL, do_stuff1, NULL);\n    pthread_create(&tid2, NULL, do_stuff2, NULL);\n    pthread_join(tid1, NULL);\n    pthread_join(tid2, NULL);\n    printf(\"%d, %d\\n\", i, j);\n    return 0;\n}\n```\n1.  （2分）用以下元素的编号写出i++编译后的汇编代码。\n`(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`\n比如，回答(a) (e) (d)表示`mov $0x1, %eax`"
           },
           "solution": {
             "state": "available",
             "grading": "self",
             "reference": {
               "format": "markdown",
-              "text": "1.  (a)(c)(d)\n(b)(e)(d)\n(a)(d)(c)\n（写错任意一个不得分）"
+              "text": "```text\n(a) (c) (d)\n(b) (e) (d)\n(a) (d) (c)\n```\n\n（写错任意一个不得分）"
             },
             "provenance": {
               "origin": "unknown",
@@ -100816,14 +100965,14 @@
                 "width": "medium"
               }
             ],
-            "text": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n\n    - (a) 2000, 2000\n    - (b) 1500, 1500\n    - (c) 1000, 1000\n    - (d) 2, 2\n\n3.  （2分）卜廷江同学在学习了信号量之后，决定要让程序能稳定输出2000, 2000，\n于是对程序进行了如下改写。\n```c\n1.  #include <stdio.h>\n2.  #include <pthread.h>\n3.  int i = 0;\n4.  int j = 0;\n5.  sem_t si;\n6.  sem_t sj;\n7.  void *do_stuff1(void * arg __attribute__((unused))) {\n    8.  int a;\n    9.    for (a = 0; a < 1000; a++) {\n        10. P(&si);\n        11. P(&sj);\n        12. i++;\n        13. j++;\n        14. V(&si);\n        15. V(&sj);\n        16. }\n    17. return NULL;\n    18. }\n19. void *do_stuff2(void * arg __attribute__((unused))) {\n    20. int a;\n    21. for (a = 0; a < 1000; a++) {\n        22. P(&sj);\n        23. P(&si);\n        24. j++;\n        25. i++;\n        26. V(&si);\n        27. V(&sj);\n        28. }\n29. return NULL;\n30. }\n31. int main() {\n32. pthread_t tid1, tid2;\n33. Sem_init(&si, 0, 1);\n34. Sem_init(&sj, 0, 1);\n35. pthread_create(&tid1, NULL, do_stuff1, NULL);\n36. pthread_create(&tid2, NULL, do_stuff2, NULL);\n37. pthread_join(tid1, NULL);\n38. pthread_join(tid2, NULL);\n39. printf(\"%d\\n\", i);\n40. return 0;\n41. }\n```\n请问卜廷江同学的程序有什么潜在问题？为什么？\n4.  （2 分）如果对卜廷江同学的程序改动一处数字来消除上述问题，同时仍然保\n证输出结果稳定为2000, 2000，应该如何改动？\n回答：将{{blank:legacy-gap-4}}（填行号）行的{{blank:legacy-gap-5}}（填数字）改为{{blank:legacy-gap-6}}（填数字）。"
+            "text": "2.  （4分）请回答该程序是否有可能输出如下结果，并简述原因。\n\n    - (a) 2000, 2000\n    - (b) 1500, 1500\n    - (c) 1000, 1000\n    - (d) 2, 2\n\n3. （2分）卜廷江同学在学习了信号量之后，决定要让两个计数器最终稳定为 `2000, 2000`，于是对程序进行了如下改写。注释中的数字保留原卷行号；`P` / `V` 是信号量等待 / 释放操作，`Sem_init` 是初始化包装函数。\n\n```c\n/* 01 */ #include <stdio.h>\n/* 02 */ #include <pthread.h>\n/* 03 */ int i = 0;\n/* 04 */ int j = 0;\n/* 05 */ sem_t si;\n/* 06 */ sem_t sj;\n/* 07 */ void *do_stuff1(void *arg __attribute__((unused))) {\n/* 08 */     int a;\n/* 09 */     for (a = 0; a < 1000; a++) {\n/* 10 */         P(&si);\n/* 11 */         P(&sj);\n/* 12 */         i++;\n/* 13 */         j++;\n/* 14 */         V(&si);\n/* 15 */         V(&sj);\n/* 16 */     }\n/* 17 */     return NULL;\n/* 18 */ }\n/* 19 */ void *do_stuff2(void *arg __attribute__((unused))) {\n/* 20 */     int a;\n/* 21 */     for (a = 0; a < 1000; a++) {\n/* 22 */         P(&sj);\n/* 23 */         P(&si);\n/* 24 */         j++;\n/* 25 */         i++;\n/* 26 */         V(&si);\n/* 27 */         V(&sj);\n/* 28 */     }\n/* 29 */     return NULL;\n/* 30 */ }\n/* 31 */ int main() {\n/* 32 */     pthread_t tid1, tid2;\n/* 33 */     Sem_init(&si, 0, 1);\n/* 34 */     Sem_init(&sj, 0, 1);\n/* 35 */     pthread_create(&tid1, NULL, do_stuff1, NULL);\n/* 36 */     pthread_create(&tid2, NULL, do_stuff2, NULL);\n/* 37 */     pthread_join(tid1, NULL);\n/* 38 */     pthread_join(tid2, NULL);\n/* 39 */     printf(\"%d\\n\", i);\n/* 40 */     return 0;\n/* 41 */ }\n```\n请问卜廷江同学的程序有什么潜在问题？为什么？\n\n4. （2分）如果对程序改动一处数字来消除上述问题，同时仍然保证两个计数器最终稳定为 `2000, 2000`，应该如何改动？（原代码第 39 行只打印 `i`，此处讨论 `i`、`j` 的最终值。）\n\n回答：将{{blank:legacy-gap-4}}（填行号）行的{{blank:legacy-gap-5}}（填数字）改为{{blank:legacy-gap-6}}（填数字）。"
           },
           "solution": {
             "state": "available",
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "2.  (a) 可能，do_stuff俩函数全串行执行即可\n(b) 可能，`do_stuff1`先执行了读取`i`的操作，然后`do_stuff2`执行500次循\n环，接下来`do_stuff1`写回`i`完成该次循环，`i`变成1，`j`变成501。之后\n`do_stuff2` 执行了读取 `j` 的操作，然后 `do_stuff1` 执行 500 次循环，接下来\n`do_stuff2`完成该次循环，`i`变成501，`j`变成501。然后两个线程串行执行\n剩下的499次循环即可。\n(c) 不可能。可以证明程序结束时一定有`i+j>=2002`。只能当某线程先执行了\n读i (j)操作，之后另一个线程执行了若干次i++ (j++)，然后`h`该线程执行\n了写i (j)操作可以将另一个线程的i++ (j++)效果抵消掉。这个过程中，抵\n消掉的加法次数一定不会多于执行的加法次数。同时，由于两个线程交错执行\ni++和j++的顺序相反，所以头尾一定存在一次i++或j++无法被抵消，因此增\n加的总次数大于等于2002。\n(d) 不可能。理由同上。\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n3.  死锁。两个线程分别执行到11行和23行时会发生。\n4.  将33行或34行中的1改为任意大于2的数。（错任意一空不得分）"
+              "text": "以下沿用原题将自增拆成读、加、写指令的交错执行模型；不是对存在数据竞争的 C 程序作语言层面的保证。\n\n2. (a) 可能，两个函数完全串行执行即可。\n\n   (b) 可能。`do_stuff1` 先读取 `i`，然后 `do_stuff2` 执行 500 次循环；接下来 `do_stuff1` 写回 `i` 并完成该次循环，此时 `i = 1`、`j = 501`。之后 `do_stuff2` 读取 `j`，`do_stuff1` 执行 500 次循环；接下来 `do_stuff2` 完成该次循环，此时 `i = 501`、`j = 501`。然后两个线程串行执行各自剩下的 499 次循环即可。\n\n   (c) 不可能。在原题指令交错模型下，程序结束时 `i + j >= 2002`：一个线程的旧值写回可以覆盖另一线程的若干次自增，但两个线程的 `i++`、`j++` 顺序相反，首尾存在不能同时被覆盖的更新。\n\n   (d) 不可能，理由同上。\n\n（前一半对，后一半解释大致差不多得分，否则不得分。）\n\n3. 死锁。两个线程分别持有一个信号量，在第 11 行和第 23 行等待对方释放另一个信号量。\n\n4. 将第 33 行或第 34 行的 `1` 改为任意大于等于 `2` 的整数，另一处仍为 `1`。初值为 `2` 的信号量可同时供两个线程获取，避免循环等待；另一个初值为 `1` 的信号量仍保证计数器操作互斥。原解析写作“大于 2”，但 `2` 也足够。本小问允许多种相互关联的改法，保留自评。"
             },
             "provenance": {
               "origin": "unknown",
@@ -117806,7 +117955,7 @@
     {
       "schemaVersion": "5",
       "id": "q-91d52adb5f08e3b9",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-eaef0ab4d19e72c9",
       "paperOrder": 19,
       "number": {
@@ -117965,7 +118114,7 @@
             "width": "medium"
           }
         ],
-        "text": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（`S=2, E=2`），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：`M[6-7]`表示地址6和7对\n应的数据)\n| Set | Way 0 Tag | Way 0 Data | Way 1 Tag | Way 1 Data |\n| --- | --- | --- | --- | --- |\n| SET 0 | {{blank:s0t0}} | {{blank:s0d0}} | {{blank:s0t1}} | {{blank:s0d1}} |\n| SET 1 | {{blank:s1t0}} | {{blank:s1d0}} | {{blank:s1t1}} | {{blank:s1d1}} |\n共命中{{blank:hits}}次（1分），分别访问地址{{blank:hitaddrs}}（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及`miss`\n`rate`）。方案选择：{{blank:better}}。C1 miss rate：{{blank:c1miss}}，总时间：{{blank:c1time}}；C2 miss rate：{{blank:c2miss}}，总时间：{{blank:c2time}}。\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用{{blank:total}} Bytes. (datasize + (valid bit size + tag\nsize) * blocks)"
+        "text": "第五题（15分）\nCache为处理器提供了一个高性能的存储器层次框架。下面是一个8位存储器地址\n引用的列表（地址单位为字节，地址为10进制表示）：\n3，180，43，2，191，88，190，14，181，44\n1.  (7分)考虑如下cache（`S=2, E=2`），每个cache block大小为2个字节。假设\ncache初始状态为空，替换策略为LRU。请填补下表：\n(Tag使用二进制格式；Data使用十进制格式，例：`M[6-7]`表示地址6和7对\n应的数据)\n\n| Set | Way 0 Tag | Way 0 Data | Way 1 Tag | Way 1 Data |\n| --- | --- | --- | --- | --- |\n| SET 0 | {{blank:s0t0}} | {{blank:s0d0}} | {{blank:s0t1}} | {{blank:s0d1}} |\n| SET 1 | {{blank:s1t0}} | {{blank:s1d0}} | {{blank:s1t1}} | {{blank:s1d1}} |\n\n共命中{{blank:hits}}次（1分），分别访问地址{{blank:hitaddrs}}（地址用10进制表示，\n2分）\n\n2.  (4分)现在有另外两种直接映射的cache设计方案C1和C2，每种方案的cache\n总大小都为8个字节，C1块大小为2个字节，C2块大小为4个字节。假设从\n内存加载一次数据到cache的时间为25个周期，访问一次C1的时间为3个周\n期，访问一次C2的时间为5个周期。针对第一问的地址访问序列，哪一种cache\n的设计更好？（请分别给出两种cache访问第一问地址序列的总时间以及`miss`\n`rate`）。方案选择：{{blank:better}}。C1 miss rate：{{blank:c1miss}}，总时间：{{blank:c1time}}；C2 miss rate：{{blank:c2miss}}，总时间：{{blank:c2time}}。\n\n3.  (2分)现在考虑另外一个计算机系统。在该系统中，存储器地址为32位，并采\n用如下的cache：\nCache datasize  Cache block size  Cache mode\n32 KiB  8 Bytes  直接映射\n此cache至少要占用{{blank:total}} Bytes. (datasize + (valid bit size + tag\nsize) * blocks)"
       },
       "solution": {
         "state": "available",
@@ -120461,7 +120610,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1d549f83cb6e20a7",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f4835e390ee6ce49",
       "paperOrder": 11,
       "number": {
@@ -120490,7 +120639,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": "练习题 2.11 在练习题 2.10 的 `inplace_swap` 函数基础上，下面的 `reverse_array` 试图将数组首尾元素依次对调：\n\n```c\nvoid reverse_array(int a[], int cnt) {\n    int first, last;\n    for (first = 0, last = cnt-1;\n         first <= last;\n         first++, last--)\n        inplace_swap(&a[first], &a[last]);\n}\n```\n\n该函数对偶数长度数组工作正常，但对 `{1, 2, 3, 4, 5}` 得到 `{5, 4, 0, 2, 1}`。"
+        "text": "练习题 2.11 下面的 `inplace_swap` 来自练习题 2.10，使用异或运算交换两个指针所指位置的值。本题所需代码完整给出，无需先打开 2.10：\n\n```c\nvoid inplace_swap(int *x, int *y) {\n    *y = *x ^ *y;  /* Step 1 */\n    *x = *x ^ *y;  /* Step 2 */\n    *y = *x ^ *y;  /* Step 3 */\n}\n```\n\n下面的 `reverse_array` 试图将数组首尾元素依次对调：\n\n```c\nvoid reverse_array(int a[], int cnt) {\n    int first, last;\n    for (first = 0, last = cnt-1;\n         first <= last;\n         first++, last--)\n        inplace_swap(&a[first], &a[last]);\n}\n```\n\n该函数对偶数长度数组工作正常，但对 `{1, 2, 3, 4, 5}` 得到 `{5, 4, 0, 2, 1}`。"
       },
       "parts": [
         {
@@ -121294,7 +121443,7 @@
     {
       "schemaVersion": "5",
       "id": "q-28f1c9a4076bde35",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f4835e390ee6ce49",
       "paperOrder": 28,
       "number": {
@@ -121430,7 +121579,7 @@
             "label": "x=F 的逆元十六进制值"
           }
         ],
-        "text": "练习题 2.28 w = 4，位模式用一个十六进制数字表示。对每个给定的 x，按无符号解释和等式（2.12）填写加法逆元（十六进制）。\n\n| x（十六进制） | x（十进制） | `−ᵘ₄x`（十进制） | `−ᵘ₄x`（十六进制） |\n|---|---:|---:|---|\n| 0 | {{blank:r1d}} | {{blank:r1u}} | {{blank:r1h}} |\n| 5 | {{blank:r2d}} | {{blank:r2u}} | {{blank:r2h}} |\n| 8 | {{blank:r3d}} | {{blank:r3u}} | {{blank:r3h}} |\n| D | {{blank:r4d}} | {{blank:r4u}} | {{blank:r4h}} |\n| F | {{blank:r5d}} | {{blank:r5u}} | {{blank:r5h}} |"
+        "text": "练习题 2.28 位宽 `w = 4`，位模式用一个十六进制数字表示。对每个给定的 `x`，填写它的无符号十进制值，以及无符号加法逆元的十进制、十六进制值。\n\n这里的加法逆元是使 `(x + y) mod 16 = 0` 的 `y`：`x = 0` 时 `y = 0`；`x > 0` 时 `y = 16 - x`（教材等式 2.12）。十六进制栏只填一位数字，不加 `0x` 前缀。\n\n| x（十六进制） | x（十进制） | 加法逆元（十进制） | 加法逆元（十六进制） |\n|---|---:|---:|---|\n| 0 | {{blank:r1d}} | {{blank:r1u}} | {{blank:r1h}} |\n| 5 | {{blank:r2d}} | {{blank:r2u}} | {{blank:r2h}} |\n| 8 | {{blank:r3d}} | {{blank:r3u}} | {{blank:r3h}} |\n| D | {{blank:r4d}} | {{blank:r4u}} | {{blank:r4h}} |\n| F | {{blank:r5d}} | {{blank:r5u}} | {{blank:r5h}} |"
       },
       "solution": {
         "state": "available",
@@ -121604,7 +121753,7 @@
         ],
         "reference": {
           "format": "markdown",
-          "text": "| x（十六进制） | x（十进制） | `−ᵘ₄x`（十进制） | `−ᵘ₄x`（十六进制） |\n|---|---:|---:|---|\n| 0 | 0 | 0 | 0 |\n| 5 | 5 | 11 | B |\n| 8 | 8 | 8 | 8 |\n| D | 13 | 3 | 3 |\n| F | 15 | 1 | 1 |"
+          "text": "| x（十六进制） | x（十进制） | 加法逆元（十进制） | 加法逆元（十六进制） |\n|---|---:|---:|---|\n| 0 | 0 | 0 | 0 |\n| 5 | 5 | 11 | B |\n| 8 | 8 | 8 | 8 |\n| D | 13 | 3 | 3 |\n| F | 15 | 1 | 1 |"
         },
         "provenance": {
           "origin": "unknown",
@@ -121633,7 +121782,7 @@
     {
       "schemaVersion": "5",
       "id": "q-29d43f7b6a1ce085",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f4835e390ee6ce49",
       "paperOrder": 29,
       "number": {
@@ -121839,7 +121988,7 @@
             "label": "第5行情况编号"
           }
         ],
-        "text": "练习题 2.29 按照图 2-25 的形式填写下表。x、y 为 5 位补码；分别列出整数值、整数和、5 位补码和及其位模式，以及属于等式（2.13）推导中的哪种情况。\n\n无需查阅原图：“情况”按未截断的整数和 `z = x + y` 划分为以下四类。数值与位模式同填的单元格使用 `十进制值 [位模式]` 的格式，例如 `3 [00011]`。\n\n| 情况编号 | 整数和范围 | 5 位补码结果 |\n| --- | --- | --- |\n| 1 | `-32 <= z < -16` | `z + 32`（负溢出） |\n| 2 | `-16 <= z < 0` | `z`（正常、负数） |\n| 3 | `0 <= z < 16` | `z`（正常、非负数） |\n| 4 | `16 <= z < 32` | `z - 32`（正溢出） |\n\n| x（给定位模式） | y（给定位模式） | x（十进制） | y（十进制） | x+y（整数和 [6 位模式]） | `x +ᵗ₅ y`（5 位补码值 [位模式]） | 情况 |\n|---|---|---|---|---|---|---:|\n| [10100] | [10001] | {{blank:a1}} | {{blank:a2}} | {{blank:a3}} | {{blank:a4}} | {{blank:a5}} |\n| [11000] | [11000] | {{blank:b1}} | {{blank:b2}} | {{blank:b3}} | {{blank:b4}} | {{blank:b5}} |\n| [10111] | [01000] | {{blank:c1}} | {{blank:c2}} | {{blank:c3}} | {{blank:c4}} | {{blank:c5}} |\n| [00010] | [00101] | {{blank:d1}} | {{blank:d2}} | {{blank:d3}} | {{blank:d4}} | {{blank:d5}} |\n| [01100] | [00100] | {{blank:e1}} | {{blank:e2}} | {{blank:e3}} | {{blank:e4}} | {{blank:e5}} |"
+        "text": "练习题 2.29 按照图 2-25 的形式填写下表。x、y 为 5 位补码；分别列出整数值、整数和、5 位补码和及其位模式，以及属于等式（2.13）推导中的哪种情况。\n\n无需查阅原图：“情况”按未截断的整数和 `z = x + y` 划分为以下四类。数值与位模式同填的单元格使用 `十进制值 [位模式]` 的格式，例如 `3 [00011]`。\n\n| 情况编号 | 整数和范围 | 5 位补码结果 |\n| --- | --- | --- |\n| 1 | `-32 <= z < -16` | `z + 32`（负溢出） |\n| 2 | `-16 <= z < 0` | `z`（正常、负数） |\n| 3 | `0 <= z < 16` | `z`（正常、非负数） |\n| 4 | `16 <= z < 32` | `z - 32`（正溢出） |\n\n| x（给定位模式） | y（给定位模式） | x（十进制） | y（十进制） | x+y（整数和 [6 位模式]） | 截断后的和（5 位补码值 [位模式]） | 情况 |\n|---|---|---|---|---|---|---:|\n| [10100] | [10001] | {{blank:a1}} | {{blank:a2}} | {{blank:a3}} | {{blank:a4}} | {{blank:a5}} |\n| [11000] | [11000] | {{blank:b1}} | {{blank:b2}} | {{blank:b3}} | {{blank:b4}} | {{blank:b5}} |\n| [10111] | [01000] | {{blank:c1}} | {{blank:c2}} | {{blank:c3}} | {{blank:c4}} | {{blank:c5}} |\n| [00010] | [00101] | {{blank:d1}} | {{blank:d2}} | {{blank:d3}} | {{blank:d4}} | {{blank:d5}} |\n| [01100] | [00100] | {{blank:e1}} | {{blank:e2}} | {{blank:e3}} | {{blank:e4}} | {{blank:e5}} |"
       },
       "solution": {
         "state": "available",
@@ -122123,7 +122272,7 @@
         ],
         "reference": {
           "format": "markdown",
-          "text": "| x（给定位模式） | y（给定位模式） | x（十进制） | y（十进制） | x+y（整数和 [6 位模式]） | `x +ᵗ₅ y`（5 位补码值 [位模式]） | 情况 |\n|---|---|---:|---:|---|---|---:|\n| [10100] | [10001] | -12 | -15 | -27 [100101] | 5 [00101] | 1 |\n| [11000] | [11000] | -8 | -8 | -16 [110000] | -16 [10000] | 2 |\n| [10111] | [01000] | -9 | 8 | -1 [111111] | -1 [11111] | 2 |\n| [00010] | [00101] | 2 | 5 | 7 [000111] | 7 [00111] | 3 |\n| [01100] | [00100] | 12 | 4 | 16 [010000] | -16 [10000] | 4 |"
+          "text": "| x（给定位模式） | y（给定位模式） | x（十进制） | y（十进制） | x+y（整数和 [6 位模式]） | 截断后的和（5 位补码值 [位模式]） | 情况 |\n|---|---|---:|---:|---|---|---:|\n| [10100] | [10001] | -12 | -15 | -27 [100101] | 5 [00101] | 1 |\n| [11000] | [11000] | -8 | -8 | -16 [110000] | -16 [10000] | 2 |\n| [10111] | [01000] | -9 | 8 | -1 [111111] | -1 [11111] | 2 |\n| [00010] | [00101] | 2 | 5 | 7 [000111] | 7 [00111] | 3 |\n| [01100] | [00100] | 12 | 4 | 16 [010000] | -16 [10000] | 4 |"
         },
         "provenance": {
           "origin": "unknown",
@@ -122507,7 +122656,7 @@
     {
       "schemaVersion": "5",
       "id": "q-33c2e7a0d1489f56",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f4835e390ee6ce49",
       "paperOrder": 33,
       "number": {
@@ -122650,7 +122799,7 @@
             "label": "与无符号求反相比的位模式关系"
           }
         ],
-        "text": "练习题 2.33 w = 4，位模式用一个十六进制数字表示。根据补码解释，填写各 x 的十进制值及其补码加法逆元。最后比较其逆元位模式与练习题 2.28 的无符号加法逆元位模式。\n\n| x（十六进制） | x（补码十进制） | `−ᵗ₄x`（十进制） | `−ᵗ₄x`（十六进制） |\n|---|---:|---:|---|\n| 0 | {{blank:r1d}} | {{blank:r1n}} | {{blank:r1h}} |\n| 5 | {{blank:r2d}} | {{blank:r2n}} | {{blank:r2h}} |\n| 8 | {{blank:r3d}} | {{blank:r3n}} | {{blank:r3h}} |\n| D | {{blank:r4d}} | {{blank:r4n}} | {{blank:r4h}} |\n| F | {{blank:r5d}} | {{blank:r5n}} | {{blank:r5h}} |\n\n与对应无符号求反的位模式{{blank:same}}。"
+        "text": "练习题 2.33 w = 4，位模式用一个十六进制数字表示。根据补码解释，填写各 x 的十进制值及其补码加法逆元。最后比较其逆元位模式与练习题 2.28 的无符号加法逆元位模式。\n\n补码加法逆元指在 4 位补码加法下与 `x` 相加得到 0 的值。比较时，将同一个十六进制位模式改按无符号数解释，求其模 16 加法逆元，再比较结果的 4 位位模式；无需打开练习题 2.28。十六进制空填写单个数字，不加 `0x` 前缀。\n\n| x（十六进制） | x（补码十进制） | 加法逆元（补码十进制） | 加法逆元（十六进制） |\n|---|---:|---:|---|\n| 0 | {{blank:r1d}} | {{blank:r1n}} | {{blank:r1h}} |\n| 5 | {{blank:r2d}} | {{blank:r2n}} | {{blank:r2h}} |\n| 8 | {{blank:r3d}} | {{blank:r3n}} | {{blank:r3h}} |\n| D | {{blank:r4d}} | {{blank:r4n}} | {{blank:r4h}} |\n| F | {{blank:r5d}} | {{blank:r5n}} | {{blank:r5h}} |\n\n与对应无符号求反的位模式{{blank:same}}。"
       },
       "solution": {
         "state": "available",
@@ -122837,7 +122986,7 @@
         ],
         "reference": {
           "format": "markdown",
-          "text": "| x（十六进制） | x（补码十进制） | `−ᵗ₄x`（十进制） | `−ᵗ₄x`（十六进制） |\n|---|---:|---:|---|\n| 0 | 0 | 0 | 0 |\n| 5 | 5 | -5 | B |\n| 8 | -8 | -8 | 8 |\n| D | -3 | 3 | 3 |\n| F | -1 | 1 | 1 |\n\n与无符号加法逆元的位模式相同。"
+          "text": "| x（十六进制） | x（补码十进制） | 加法逆元（补码十进制） | 加法逆元（十六进制） |\n|---|---:|---:|---|\n| 0 | 0 | 0 | 0 |\n| 5 | 5 | -5 | B |\n| 8 | -8 | -8 | 8 |\n| D | -3 | 3 | 3 |\n| F | -1 | 1 | 1 |\n\n与无符号加法逆元的位模式相同。"
         },
         "provenance": {
           "origin": "unknown",
@@ -148629,7 +148778,7 @@
     {
       "schemaVersion": "5",
       "id": "q-36cdda52cd922bd2",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 29,
       "number": {
@@ -148842,7 +148991,7 @@
             "width": "medium"
           }
         ],
-        "text": "第五题（10分）\n考虑一对 n*n 矩阵相乘问题：`C=AB`。矩阵乘法函数通常用 3 个嵌套循环实现，分别用索引 `i`、`j` 和 `k` 标识。改变循环次序可以得到以下 6 个功能等价的版本：\n\n1）ijk 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (j = 0; j < n; j++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n2）jik 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (i = 0; i < n; i++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n3）jki 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (k = 0; k < n; k++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n4）kji 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (j = 0; j < n; j++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n5）kij 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (i = 0; i < n; i++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n\n6）ikj 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (k = 0; k < n; k++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n本题目具有以下假设：\n  每个数组都是一个`double`类型的n*n的数组，`sizeof(double)==8`\n  虚拟存储分页管理，页大小为4K字节，且A的起始地址为页对齐，ABC连续存放\n  TLB为全相联结构\n  初始时TLB为空，数据全部在硬盘中\n  一级dTLB有64表项，采用LRU（Least-Recently-Used）置换策略\n  分析过程只考虑矩阵操作本身的数据空间，且i/j/k/n/r/sum等变量都存放在寄存器中\n  分析过程不考虑进程切换和异常处理程序的影响\n  不考虑对页表本身的访问\n`n` 的取值：8、16、64、512；请填写缺页次数和一级 dTLB 失效次数：\n\n| `n` | 缺页次数 | 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | {{blank:b8-r1-c1}} | {{blank:b8-r1-c2}} | {{blank:b8-r1-c3}} | {{blank:b8-r1-c4}} | {{blank:b8-r1-c5}} | {{blank:b8-r1-c6}} | {{blank:b8-r1-c7}} |\n| 16 | {{blank:b16-r2-c1}} | {{blank:b16-r2-c2}} | {{blank:b16-r2-c3}} | {{blank:b16-r2-c4}} | {{blank:b16-r2-c5}} | {{blank:b16-r2-c6}} | {{blank:b16-r2-c7}} |\n| 64 | {{blank:b64-r3-c1}} | {{blank:b64-r3-c2}} | {{blank:b64-r3-c3}} | {{blank:b64-r3-c4}} | {{blank:b64-r3-c5}} | {{blank:b64-r3-c6}} | {{blank:b64-r3-c7}} |\n| 512 | {{blank:b512-r4-c1}} | {{blank:b512-r4-c2}} | {{blank:b512-r4-c3}} | {{blank:b512-r4-c4}} | {{blank:b512-r4-c5}} | {{blank:b512-r4-c6}} | {{blank:b512-r4-c7}} |"
+        "text": "第五题（10分）\n考虑一对 `n * n` 矩阵相乘问题：`C=AB`。矩阵乘法函数通常用 3 个嵌套循环实现，分别用索引 `i`、`j` 和 `k` 标识。改变循环次序可以得到以下 6 个功能等价的版本：\n\n1）ijk 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (j = 0; j < n; j++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n2）jik 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (i = 0; i < n; i++) {\n        sum = 0.0;\n        for (k = 0; k < n; k++)\n            sum += A[i][k] * B[k][j];\n        C[i][j] += sum;\n    }\n}\n```\n\n3）jki 版本\n\n```\nfor (j = 0; j < n; j++) {\n    for (k = 0; k < n; k++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n4）kji 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (j = 0; j < n; j++) {\n        r = B[k][j];\n        for (i = 0; i < n; i++)\n            C[i][j] += A[i][k] * r;\n    }\n}\n```\n\n5）kij 版本\n\n```\nfor (k = 0; k < n; k++) {\n    for (i = 0; i < n; i++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n\n6）ikj 版本\n\n```\nfor (i = 0; i < n; i++) {\n    for (k = 0; k < n; k++) {\n        r = A[i][k];\n        for (j = 0; j < n; j++)\n            C[i][j] += r * B[k][j];\n    }\n}\n```\n本题目具有以下假设：\n\n- 每个数组都是 `double` 类型的 `n * n` 数组，`sizeof(double) == 8`。\n- 虚拟存储分页管理，页大小为 4 KB，且 `A` 的起始地址为页对齐，`A`、`B`、`C` 连续存放。\n- TLB 为全相联结构。\n- 初始时 TLB 为空，数据全部在硬盘中。\n- 一级 dTLB 有 64 个表项，采用 LRU（Least-Recently-Used）置换策略。\n- 分析过程只考虑矩阵操作本身的数据空间，且 `i`、`j`、`k`、`n`、`r`、`sum` 等变量都存放在寄存器中。\n- 分析过程不考虑进程切换和异常处理程序的影响。\n- 不考虑对页表本身的访问。\n\n`n` 的取值：8、16、64、512；请填写缺页次数和一级 dTLB 失效次数：\n\n| `n` | 缺页次数 | 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | {{blank:b8-r1-c1}} | {{blank:b8-r1-c2}} | {{blank:b8-r1-c3}} | {{blank:b8-r1-c4}} | {{blank:b8-r1-c5}} | {{blank:b8-r1-c6}} | {{blank:b8-r1-c7}} |\n| 16 | {{blank:b16-r2-c1}} | {{blank:b16-r2-c2}} | {{blank:b16-r2-c3}} | {{blank:b16-r2-c4}} | {{blank:b16-r2-c5}} | {{blank:b16-r2-c6}} | {{blank:b16-r2-c7}} |\n| 64 | {{blank:b64-r3-c1}} | {{blank:b64-r3-c2}} | {{blank:b64-r3-c3}} | {{blank:b64-r3-c4}} | {{blank:b64-r3-c5}} | {{blank:b64-r3-c6}} | {{blank:b64-r3-c7}} |\n| 512 | {{blank:b512-r4-c1}} | {{blank:b512-r4-c2}} | {{blank:b512-r4-c3}} | {{blank:b512-r4-c4}} | {{blank:b512-r4-c5}} | {{blank:b512-r4-c6}} | {{blank:b512-r4-c7}} |"
       },
       "solution": {
         "state": "available",
@@ -152229,7 +152378,7 @@
     {
       "schemaVersion": "5",
       "id": "q-339849bc860968a1",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-febcfbeee0f364b2",
       "paperOrder": 20,
       "number": {
@@ -152283,14 +152432,14 @@
             "width": "medium"
           }
         ],
-        "text": "20. 考虑下面的代码，输出结果是：{{blank:q20-result}}\n\n```c\n#define ZLEN 5\n#define PCOUNT 4\n\ntypedef int zip_dig[ZLEN];\n\nint main(void) {\n    zip_dig pgh[PCOUNT] = {\n        {1, 5, 2, 0, 6},\n        {1, 5, 2, 1, 3},\n        {1, 5, 2, 1, 7},\n        {1, 5, 2, 2, 1}\n    };\n\n    int *linear_zip = (int *)pgh;\n    int *zip1 = (int *)pgh[1];\n    int result =\n        pgh[2][3] +\n        linear_zip[14] +\n        *(linear_zip + 16) +\n        zip1[4];\n\n    printf(\"result: %d\\n\", result);\n}\n```"
+        "text": "20. 考虑下面的代码，填写 `printf` 打印的完整一行（包含文字前缀，不含末尾换行）：{{blank:q20-result}}\n\n```c\n#define ZLEN 5\n#define PCOUNT 4\n\ntypedef int zip_dig[ZLEN];\n\nint main(void) {\n    zip_dig pgh[PCOUNT] = {\n        {1, 5, 2, 0, 6},\n        {1, 5, 2, 1, 3},\n        {1, 5, 2, 1, 7},\n        {1, 5, 2, 2, 1}\n    };\n\n    int *linear_zip = (int *)pgh;\n    int *zip1 = (int *)pgh[1];\n    int result =\n        pgh[2][3] +\n        linear_zip[14] +\n        *(linear_zip + 16) +\n        zip1[4];\n\n    printf(\"result: %d\\n\", result);\n}\n```"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：`16`"
+          "text": "答案：`result: 16`。\n\n四项分别为 `1`、`7`、`5`、`3`，相加得到 `16`；格式字符串还会打印 `result: ` 前缀，因此不能只填写数值。"
         },
         "provenance": {
           "origin": "unknown",
@@ -152302,7 +152451,8 @@
             "blankId": "q20-result",
             "method": "exact",
             "acceptedAnswers": [
-              "16"
+              "result: 16",
+              "result:16"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -158227,7 +158377,7 @@
     {
       "schemaVersion": "5",
       "id": "q-bcf23ec71ae6c080",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-ffd1f5f688babe1b",
       "paperOrder": 21,
       "number": {
@@ -158697,7 +158847,7 @@
                 }
               }
             ],
-            "text": "3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。\n触发条件：（如果有多种可能请任写一种）\n{{blank:q3-condition-a}} == IJREGXX && {{blank:q3-condition-b}}\n控制逻辑：（如果有多种可能请任写一种）\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:q3-f}} | {{blank:q3-d}} | {{blank:q3-e}} | {{blank:q3-m}} | {{blank:q3-w}} |"
+            "text": "3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。\n触发条件：（如果有多种可能请任写一种）\n{{blank:q3-condition-a}} == IJREGXX && {{blank:q3-condition-b}}\n控制逻辑：（如果有多种可能请任写一种）\n\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:q3-f}} | {{blank:q3-d}} | {{blank:q3-e}} | {{blank:q3-m}} | {{blank:q3-w}} |"
           },
           "solution": {
             "state": "available",

@@ -203,11 +203,17 @@
     const labels = { disconnected: '未连接', connecting: '正在创建…', connected: '已启用同步',
       syncing: '同步中…', error: '连接异常', expired: '已过期', disconnecting: '正在断开…', 'revocation-pending': '断开待确认' };
     controls.summary.textContent = labels[state.status] || '未连接';
-    let text = state.error || (state.status === 'disconnected' ? '默认未连接。点击连接后才会按下方共享设置同步当前题目；不上传历史或熟知进度。'
+    controls.summary.dataset.state = state.status;
+    controls.status.dataset.state = state.status;
+    // The summary already shows in-flight progress. Preserve the last status
+    // during routine updates so this panel above the quiz does not change height
+    // and trigger scroll-dismissal of an open answer menu.
+    if (state.status === 'syncing' && state.remote) return;
+    let text = state.error || (state.status === 'disconnected' ? '尚未开启同步。'
       : state.status === 'connecting' ? '正在创建临时练习连接…'
       : state.status === 'disconnecting' ? '已停止同步，正在撤销服务器上的连接…'
       : state.status === 'syncing' ? '正在同步当前题目…'
-      : state.remote && state.remote.questionId ? '已同步：' + state.remote.questionId + (state.remote.partId ? ' · 小问 ' + state.remote.partId : '')
+      : state.remote && state.remote.questionId ? '当前题目已同步。'
       : '已启用同步，当前未打开练习题。');
     if (active) {
       text += state.remote && state.remote.shareDraft ? ' · 已共享当前填写内容（只读）' : ' · 未共享填写内容';
@@ -233,6 +239,19 @@
     } catch (_) {
       controls.copyStatus.textContent = '浏览器未允许自动复制，请手动复制下面的连接信息。';
       controls.prompt.focus(); controls.prompt.select();
+    }
+  });
+  $('ics-agent-copy-url').addEventListener('click', async function () {
+    const field = $('ics-agent-service-url'), status = $('ics-agent-url-status');
+    try {
+      await root.navigator.clipboard.writeText(field.textContent.trim());
+      status.textContent = '服务地址已复制。';
+    } catch (_) {
+      const range = root.document.createRange();
+      range.selectNodeContents(field);
+      const selection = root.getSelection();
+      selection.removeAllRanges(); selection.addRange(range);
+      status.textContent = '请手动复制已选中的服务地址。';
     }
   });
   let draftTimer = null, lastInputSync = 0, latestContext = null;

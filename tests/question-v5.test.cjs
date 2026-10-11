@@ -4,6 +4,74 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('October 11 follow-up reports supply prerequisites, restore 11 float blanks, and grade whole output', () => {
+  const swap=bank.find(q=>q.id==='q-1d549f83cb6e20a7');
+  assert.match(swap.stem.text,/void inplace_swap\(int \*x, int \*y\)/);
+  assert.match(swap.stem.text,/void reverse_array/);
+  const fp=bank.find(q=>q.id==='q-d077d3270d2bb69f');
+  assert.equal(fp.type,'fill'); assert.equal(fp.stem.blanks.length,11);
+  assert.equal(fp.solution.blankAnswers.length,11);
+  assert(fp.solution.blankAnswers.every(r=>r.method!=='self'));
+  const answers=Object.fromEntries(fp.solution.blankAnswers.map(r=>[r.blankId,
+    r.method==='selection'?r.correctValues:r.acceptedAnswers[0]]));
+  assert.equal(api.gradeBlanks(answers,fp.solution),true);
+  for(const blank of fp.stem.blanks) {
+    assert.equal(api.gradeBlanks({...answers,[blank.id]:undefined},fp.solution),false,blank.id);
+    assert.equal(api.gradeBlanks({...answers,[blank.id]:'wrong'},fp.solution),false,blank.id);
+  }
+  const output=bank.find(q=>q.id==='q-339849bc860968a1');
+  const rule=output.solution.blankAnswers[0];
+  assert.equal(api.gradeBlank('result: 16',rule),true);
+  assert.equal(api.gradeBlank('16',rule),false,'whole-line blank needs the prefix');
+  // A prefix already supplied by the stem must not be required again.
+  const fragment=bank.find(q=>q.id==='q-e70504f6b9e42492');
+  const fragmentRule=fragment.solution.blankAnswers[0];
+  assert.equal(api.gradeBlank('2',fragmentRule),true);
+  assert.equal(api.gradeBlank('counter = 2',fragmentRule),false);
+  const concurrent=bank.find(q=>q.id==='q-6e0eea29f44ce37d');
+  assert.equal(concurrent.classification.primaryModuleId,'concurrent_programming');
+  assert(concurrent.parts.every(p=>p.moduleIds.includes('concurrent_programming')));
+  assert.match(concurrent.parts[1].stem.text,/\/\* 09 \*\/     for/);
+  assert.match(concurrent.parts[1].solution.reference.text,/大于等于/);
+  const custom=bank.find(q=>q.id==='q-28abf0da673e7840');
+  assert.deepEqual(custom.solution.correctOptionIds,['D']);
+  assert.match(custom.stem.text,/IEEE/);
+  const precedence=bank.find(q=>q.id==='q-4e2859f161b0083a');
+  assert.deepEqual(precedence.solution.correctOptionIds,['A','B','C']);
+  assert.match(precedence.stem.text,/32 位机器数模型/);
+  assert.match(precedence.options[3].content.text,/z<<5 - z<<3/);
+  assert.match(precedence.solution.reference.text,/不能将缺失的括号默默补上/);
+});
+
+test('common-problem audit keeps real Markdown tables and rejects private-use extraction noise across the bank', () => {
+  const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false});
+  for(const q of bank) for(const u of[q,...(q.parts||[])]) {
+    const sections=[['stem',u.stem.text],['reference',u.solution.reference.text],
+      ...(u.options||[]).map(o=>['option:'+o.id,o.content.text])];
+    for(const [kind,text]of sections) {
+      const inline=md.parse(text,{}).filter(t=>t.type==='inline').flatMap(t=>t.children||[]);
+      for(const token of inline.filter(t=>t.type==='text')) {
+        assert.doesNotMatch(token.content,/\|\s*:?-{3,}:?\s*\|/,q.id+'/'+u.id+'/'+kind+' has an unparsed table delimiter');
+        assert.doesNotMatch(token.content,/[\uE000-\uF8FF]/,q.id+'/'+kind+' has private-use extraction noise');
+      }
+    }
+  }
+  for(const id of['q-29d43f7b6a1ce085','q-33c2e7a0d1489f56','q-28f1c9a4076bde35']) {
+    const q=bank.find(q=>q.id===id);
+    assert.doesNotMatch(q.stem.text+q.solution.reference.text,/[ᵗᵘ]/);
+  }
+  for(const id of['q-2b8b77844036d027','q-94cf3a41c9e79f2a','q-ef0018499602cc08','q-c62b001d3da02a1b']) {
+    const q=bank.find(q=>q.id===id);
+    assert(md.parse(q.stem.text,{}).some(t=>t.type==='fence'&&t.info==='c'),id+' needs its referenced code');
+  }
+  const allocator=bank.find(q=>q.id==='q-85a85b345e99accf');
+  assert.match(allocator.stem.text,/4 字节头部/); assert.match(allocator.stem.text,/没有脚部/);
+  const explanation=bank.find(q=>q.id==='q-5d9ff50c3d2ec4b1');
+  assert.equal(md.parse(explanation.solution.reference.text,{}).filter(t=>t.type==='fence'&&t.info==='c').length,1);
+  const sizeofQuestion=bank.find(q=>q.id==='q-f81cf90920e892cb');
+  assert(!md.parse(sizeofQuestion.solution.reference.text,{}).some(t=>(t.children||[]).some(c=>c.type==='em_open')));
+});
+
 test('x86-64 near-return blanks explicitly accept ret and retq without changing Y86 answers', () => {
   const cases = [
     ['q-1d4f3586e8bd5b5c', null, 'b11'],

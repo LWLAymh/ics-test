@@ -190,13 +190,42 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-question-navigation { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
 #ics-navigation-status { text-align: center; color: var(--text-muted); font-size: 12px; }
 .ics-question-utilities { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
-.ics-mcp-help { padding-top: 16px; line-height: 1.8; }
-.ics-agent-connection-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
-.ics-agent-connection-actions button { min-height: 42px; }
-.ics-agent-share { display: flex; align-items: center; gap: 8px; padding: 8px 0; cursor: pointer; }
-.ics-agent-share input { width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--accent); }
-#ics-agent-connection-status { overflow-wrap: anywhere; }
-.ics-mcp-url { display: block; overflow-wrap: anywhere; padding: 10px; background: var(--surface); }
+.ics-mcp-help { padding-top: 20px; font-size: 13px; line-height: 1.65; }
+.ics-agent-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.ics-agent-step { min-width: 0; }
+.ics-agent-step + .ics-agent-step { border-left: 1px solid var(--border); padding-left: 24px; }
+.ics-agent-step h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+.ics-agent-step h3 > span { display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid var(--border); border-radius: 50%; color: var(--text-muted); font-size: 11px; }
+.ics-agent-step > p { margin: 0 0 14px; color: var(--text-muted); }
+.ics-agent-endpoint { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg-soft); }
+.ics-mcp-url { display: block; flex: 1; min-width: 0; overflow-wrap: anywhere; font: 12px/1.65 var(--font-mono); }
+.ics-agent-endpoint button { flex-shrink: 0; padding: 6px 10px; font-size: 12px; background: var(--surface); }
+.ics-agent-service-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 10px; color: var(--text-muted); font-size: 11px; }
+.ics-agent-step > .ics-agent-url-status { margin: 6px 0 0; font-size: 11px; }
+.ics-agent-connection-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 8px; }
+.ics-agent-connection-actions button { min-height: 36px; padding: 7px 12px; font-size: 12px; }
+.ics-agent-share { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 5px; cursor: pointer; }
+.ics-agent-share input { width: 15px; height: 15px; margin: 3px 0 0; flex-shrink: 0; accent-color: var(--accent); }
+.ics-agent-share strong { display: block; font-size: 12px; font-weight: 550; }
+.ics-agent-share small { display: block; margin-top: 2px; color: var(--text-muted); font-size: 11px; }
+.ics-agent-step > #ics-agent-connection-status { margin: 0; overflow-wrap: anywhere; font-size: 11px; }
+#ics-agent-connection-status[data-state="error"], #ics-agent-connection-status[data-state="revocation-pending"] { color: var(--ics-danger); }
+#ics-agent-summary.ics-agent-state { padding: 2px 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 11px; line-height: 1.5; }
+#ics-agent-summary[data-state="connected"] { color: var(--ics-success); border-color: color-mix(in srgb, var(--ics-success) 35%, var(--border)); }
+#ics-agent-summary[data-state="error"], #ics-agent-summary[data-state="revocation-pending"] { color: var(--ics-danger); }
+.ics-agent-footer { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 11px; }
+.ics-agent-footer p { margin: 0; color: var(--text-muted); }
+.ics-agent-footer a { white-space: nowrap; }
+.ics-agent-help { margin-top: 10px; color: var(--text-muted); font-size: 11px; }
+.ics-agent-help > summary { cursor: pointer; width: fit-content; }
+.ics-agent-help ul { max-width: 80ch; padding-left: 20px; margin: 10px 0 0; }
+.ics-agent-help li + li { margin-top: 6px; }
+@media (max-width: 760px) {
+  .ics-agent-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .ics-agent-step + .ics-agent-step { border-left: 0; border-top: 1px solid var(--border); padding: 20px 0 0; }
+  .ics-agent-footer { display: block; }
+  .ics-agent-footer a { display: inline-block; margin-top: 8px; }
+}
 .ics-mcp-copy-panel { margin-top: 16px; font-size: 14px; line-height: 1.7; }
 .ics-mcp-copy-panel textarea { display: block; box-sizing: border-box; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; resize: vertical; }
 .ics-report-button { padding: 0; border: 0; background: transparent; color: var(--text-muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }

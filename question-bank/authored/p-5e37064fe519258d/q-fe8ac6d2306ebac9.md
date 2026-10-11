@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-fe8ac6d2306ebac9",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-5e37064fe519258d",
   "paperOrder": 16,
   "number": {
@@ -257,11 +257,13 @@
 1.  求k和n的值。（1分）{{blank:format-fields}}
 2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如
 17/64）。（注:每格2分）二进制位表示需保留完整的 9 位，可连续填写，也可按符号位、阶码、小数三个字段用一个空格分隔。
+
 | 描述 | 二进制位表示 | 值 |
 | --- | --- | --- |
 | 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |
 | 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |
 | 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |
+
 3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的
 实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即
 可）（2分）实数数量：{{blank:real-count-change}}；数值精度：{{blank:precision-change}}。

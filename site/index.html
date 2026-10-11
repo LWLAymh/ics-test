@@ -62,26 +62,53 @@ window.MathJax = {
 
   <section class="ics-panel ics-history-panel" aria-label="Agent 接入">
     <details id="ics-agent-connection">
-      <summary><strong>Agent / MCP 接入</strong><span id="ics-agent-summary">未连接</span></summary>
+      <summary><strong>Agent / MCP 接入</strong><span id="ics-agent-summary" class="ics-agent-state">未连接</span></summary>
       <div class="ics-history-body ics-mcp-help">
-        <p>在支持远程 MCP 的 Agent 中添加以下地址，传输方式选择 Streamable HTTP，无需登录或密钥。</p>
-        <code class="ics-mcp-url">https://ics-test-mcp.ics-test-mcp.workers.dev/mcp</code>
-        <p>点击“连接当前练习”，再复制连接信息给 Agent 一次。之后切题会自动同步题号和点选的小问；勾选下方设置时还会共享当前题已选选项和填空内容。Agent 只能读取，不能代填、修改或提交；不会上传其他题的回答、熟知进度或历史。Agent 仍需按需调用工具，不会因切题自动开始讲解。</p>
-        <label class="ics-agent-share"><input id="ics-agent-share-draft" type="checkbox" checked>共享当前填写内容（只读，可随时取消）</label>
-        <div class="ics-agent-connection-actions">
-          <button class="ics-primary" id="ics-agent-connect" type="button">连接当前练习</button>
-          <button class="ics-secondary" id="ics-agent-copy-connection" type="button" hidden>复制连接信息</button>
-          <button class="ics-secondary" id="ics-agent-sync" type="button" hidden>重新同步</button>
-          <button class="ics-secondary" id="ics-agent-disconnect" type="button" hidden>断开连接</button>
+        <div class="ics-agent-grid">
+          <section class="ics-agent-step" aria-labelledby="ics-agent-service-title">
+            <h3 id="ics-agent-service-title"><span aria-hidden="true">1</span>添加 MCP 服务</h3>
+            <p>在支持远程 MCP 的 Agent 中添加服务。只需配置一次。</p>
+            <div class="ics-agent-endpoint">
+              <code class="ics-mcp-url" id="ics-agent-service-url">https://ics-test-mcp.ics-test-mcp.workers.dev/mcp</code>
+              <button class="ics-secondary" id="ics-agent-copy-url" type="button" aria-label="复制 MCP 服务地址">复制地址</button>
+            </div>
+            <div class="ics-agent-service-meta"><span>Streamable HTTP</span><span>无需登录</span></div>
+            <p class="ics-agent-url-status" id="ics-agent-url-status" role="status" aria-live="polite"></p>
+          </section>
+          <section class="ics-agent-step" aria-labelledby="ics-agent-practice-title">
+            <h3 id="ics-agent-practice-title"><span aria-hidden="true">2</span>连接当前练习</h3>
+            <p>连接后复制一次连接信息给 Agent，之后切题自动同步。</p>
+            <label class="ics-agent-share">
+              <input id="ics-agent-share-draft" type="checkbox" checked>
+              <span><strong>共享当前填写内容</strong><small>仅当前题的选项与填空；可随时取消。</small></span>
+            </label>
+            <div class="ics-agent-connection-actions">
+              <button class="ics-primary" id="ics-agent-connect" type="button">连接当前练习</button>
+              <button class="ics-primary" id="ics-agent-copy-connection" type="button" hidden>复制连接信息</button>
+              <button class="ics-secondary" id="ics-agent-sync" type="button" hidden>重新同步</button>
+              <button class="ics-secondary" id="ics-agent-disconnect" type="button" hidden>断开连接</button>
+            </div>
+            <p id="ics-agent-connection-status" role="status" aria-live="polite">尚未开启同步。</p>
+          </section>
         </div>
-        <p id="ics-agent-connection-status" role="status" aria-live="polite">默认关闭，临时连接两小时后过期，可随时断开。</p>
+        <div class="ics-agent-footer">
+          <p>Agent 只能读取，不能代填、修改或提交。不共享其他题的回答、作答历史或熟知进度。</p>
+          <a href="https://github.com/LWLAymh/ics-test/blob/main/docs/MCP.md" target="_blank" rel="noopener noreferrer">使用文档 ↗</a>
+        </div>
         <div id="ics-agent-connection-copy-panel" class="ics-mcp-copy-panel" hidden>
           <p id="ics-agent-connection-copy-status" role="status" aria-live="polite"></p>
           <label for="ics-agent-connection-prompt">临时只读连接信息（请勿公开）</label>
           <textarea id="ics-agent-connection-prompt" rows="8" readonly spellcheck="false"></textarea>
         </div>
-        <p>连接仅保留在当前页面内存，刷新后需重新连接。网页超过三分钟未同步时，Agent 会收到提示。也可不连接，继续使用每题“复制给 Agent”分享固定题号。报错说明会公开，提交前仍需确认。</p>
-        <a href="https://github.com/LWLAymh/ics-test/blob/main/docs/MCP.md" target="_blank" rel="noopener noreferrer">接入与使用说明 ↗</a>
+        <details class="ics-agent-help">
+          <summary>连接规则与隐私</summary>
+          <ul>
+            <li>连接两小时后过期，可随时断开；刷新页面后需重新连接。</li>
+            <li>超过三分钟未同步时拒绝读取旧内容。取消共享会清空服务器上的填写快照；已被 Agent 读取的内容无法从其对话中撤回。</li>
+            <li>Agent 需主动调用工具读取，不会因切题自动开始讲解。也可不连接，用每题“复制给 Agent”仅分享固定题号。</li>
+            <li>连接凭证请勿公开。报错说明会公开，提交前仍需确认。</li>
+          </ul>
+        </details>
       </div>
     </details>
   </section>

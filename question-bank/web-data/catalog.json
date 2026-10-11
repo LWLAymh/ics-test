@@ -293,7 +293,6 @@
         "q-6c9a0d5afae03b35",
         "q-e79fe5b33df52e8d",
         "q-ff1af654488bd8b8",
-        "q-6e0eea29f44ce37d",
         "q-d2849e98f1c73576",
         "q-278ab17999fada62",
         "q-5667f7a0eca8dc57",
@@ -400,9 +399,9 @@
         "q-c498661955b005c7",
         "q-d5d56ae86119aa5f"
       ],
-      "questionCount": 198,
-      "publishedQuestionCount": 191,
-      "quizQuestionCount": 191
+      "questionCount": 197,
+      "publishedQuestionCount": 190,
+      "quizQuestionCount": 190
     },
     {
       "id": "processor_arch",

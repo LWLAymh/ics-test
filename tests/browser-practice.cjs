@@ -85,7 +85,33 @@ async function run() {
     await page.locator('[data-choice="A"]').click();
     await page.waitForTimeout(1800);
     assert.equal(calls.length, 0, 'opt-in: displaying and filling questions must not create sessions');
-    await page.locator('#ics-agent-connection summary').click();
+    await page.locator('#ics-agent-connection > summary').click();
+    assert.equal(await page.locator('.ics-agent-help').getAttribute('open'), null, 'verbose connection help starts folded');
+    assert.match(await page.locator('.ics-agent-footer').innerText(), /不能代填、修改或提交/);
+    await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true,
+      value: { writeText: async text => { window.__copied = text; } } }));
+    await page.locator('#ics-agent-copy-url').click();
+    assert.equal(await page.evaluate(() => window.__copied), 'https://ics-test-mcp.ics-test-mcp.workers.dev/mcp');
+    assert.equal(calls.length, 0, 'copying a public endpoint must not enable sharing');
+    await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true,
+      value: { writeText: async () => { throw new Error('denied'); } } }));
+    await page.locator('#ics-agent-copy-url').click();
+    assert.equal(await page.evaluate(() => getSelection().toString()), 'https://ics-test-mcp.ics-test-mcp.workers.dev/mcp');
+    assert.match(await page.locator('#ics-agent-url-status').innerText(), /手动复制/);
+    await page.evaluate(() => getSelection().removeAllRanges());
+    if (process.env.ICS_SCREENSHOTS) {
+      fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true });
+      await page.locator('#ics-agent-connection').screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'agent-panel-desktop.png') });
+      await page.emulateMedia({ colorScheme: 'dark' });
+      await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+      await page.locator('#ics-agent-connection').screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'agent-panel-dark.png') });
+      await page.emulateMedia({ colorScheme: 'light' });
+      await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
+      await page.setViewportSize({ width: 390, height: 844 });
+      assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      await page.locator('#ics-agent-connection').screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'agent-panel-mobile.png') });
+      await page.setViewportSize({ width: 1280, height: 900 });
+    }
     await page.locator('#ics-agent-connect').click();
     await page.waitForFunction(() => !document.querySelector('#ics-agent-copy-connection').disabled);
     assert.deepEqual(remote.draft.choices, ['A']);
@@ -119,7 +145,12 @@ async function run() {
     await page.locator('[data-composite-choice="B"]').click();
     await page.waitForTimeout(1800);
     assert.equal(remote.partId, 'part-a'); assert.deepEqual(remote.draft.parts[0].choices, ['B']);
+    await page.locator('[data-blank-toggle]').evaluate(el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
+    await page.waitForTimeout(200); // Let explicit navigation scrolling finish before opening the menu.
     await page.locator('[data-blank-toggle]').click();
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('[data-blank-toggle]').getAttribute('aria-expanded'), 'true',
+      'routine MCP part synchronization must not shift the page and dismiss an answer menu');
     await page.locator('[data-blank-option][value="<"]').check();
     await page.locator('[data-blank-option][value="="]').check();
     await page.waitForTimeout(1800);

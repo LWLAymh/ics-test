@@ -6,6 +6,7 @@
 - [仓库 / 提交 PR](https://github.com/LWLAymh/ics-test)
 - **当前题目接口为 v5**，人工编辑入口是 `question-bank/authored/`，不再是 `_curated/`。
 - 完整指导：[v5 题目编写与接口](docs/QUESTION_AUTHORING_V5.md)
+- [10 月 11 日第二轮修复与全库通用问题排查](docs/ISSUE_REPAIRS_2026-10-11_ROUND2.md)：28 道题逐题修订，覆盖表格、缺上下文、异常符号与判分口径；同步整理 Agent 接入面板。
 - 设计审查、迁移证据与限制：[v5 迁移说明](docs/MIGRATION_V5.md)
 - 有限候选填空支持原位单选/多选下拉，按空位显式配置；[编写方式](docs/QUESTION_AUTHORING_V5.md#候选项有限单选下拉--多选下拉)。
 - [有限候选填空核对记录](docs/FINITE_BLANK_AUDIT_2026-10-10.md)：69 道题共 434 处下拉选择（含多选），开放式答案仍保留文本输入或自评。
