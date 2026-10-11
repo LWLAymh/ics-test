@@ -14107,7 +14107,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1d4f3586e8bd5b5c",
-      "revision": 6,
+      "revision": 7,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 17,
       "number": {
@@ -14363,7 +14363,8 @@
             "blankId": "b11",
             "method": "exact",
             "acceptedAnswers": [
-              "ret"
+              "ret",
+              "retq"
             ],
             "normalize": {
               "trimWhitespace": true,
@@ -14395,7 +14396,7 @@
         ],
         "reference": {
           "format": "markdown",
-          "text": "（1）`*p`\n（2）`>`\n（3）`foo(p + 1)`\n（4）`%rbp`\n（5）`cltq`\n（6）`%rax`\n（7）`10`\n（8）`%rdi`\n（9）`-1`\n（10）`-0x18(%rbp)`\n（11）`ret`\n（12）`SCIEVOLI`\n（13）`3`\n（14）原卷注明不要求作答。"
+          "text": "（1）`*p`\n（2）`>`\n（3）`foo(p + 1)`\n（4）`%rbp`\n（5）`cltq`\n（6）`%rax`\n（7）`10`\n（8）`%rdi`\n（9）`-1`\n（10）`-0x18(%rbp)`\n（11）`ret`（本题为 x86-64，无操作数的近返回也接受 `retq`）\n（12）`SCIEVOLI`\n（13）`3`\n（14）原卷注明不要求作答。"
         },
         "provenance": {
           "origin": "unknown",
@@ -42426,7 +42427,7 @@
     {
       "schemaVersion": "5",
       "id": "q-44f11b5f6c3a79d5",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-5e37064fe519258d",
       "paperOrder": 17,
       "number": {
@@ -42568,7 +42569,7 @@
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n○1 strcpy\n○2 Where am I?\n○3 %s \\n\n`○4 %rsp`\n`○5 %rax`\n`○6 -40(%rbp)`\n`○7 %rsi`\n`○8 movq  %rax, %rdi`\n○9 leaq\n`○10 movq  -8(%rbp), %rax`\n`○11 xorq  %fs:40, %rax`\n○12 .L2\n○13 ret\n○14 204\n○15 call  myprint\n\n注：○10/○11 下面这种回答也对：`○10 movq  %fs:40, %rax`、`○11 xorq  -8(%rbp), %rax`（`xorq` 可交换，两种写法等价）。\n第14空的 204 是十进制字节值；写入汇编字符串时对应八进制转义 `\\314`。"
+          "text": "答案：\n○1 strcpy\n○2 Where am I?\n○3 %s \\n\n`○4 %rsp`\n`○5 %rax`\n`○6 -40(%rbp)`\n`○7 %rsi`\n`○8 movq  %rax, %rdi`\n○9 leaq\n`○10 movq  -8(%rbp), %rax`\n`○11 xorq  %fs:40, %rax`\n○12 .L2\n○13 `ret`（本题为 x86-64，无操作数的近返回也接受 `retq`）\n○14 204\n○15 call  myprint\n\n注：○10/○11 下面这种回答也对：`○10 movq  %fs:40, %rax`、`○11 xorq  -8(%rbp), %rax`（`xorq` 可交换，两种写法等价）。\n第14空的 204 是十进制字节值；写入汇编字符串时对应八进制转义 `\\314`。"
         },
         "provenance": {
           "origin": "unknown",
@@ -42712,7 +42713,8 @@
             "blankId": "q13",
             "method": "exact",
             "acceptedAnswers": [
-              "ret"
+              "ret",
+              "retq"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -81715,7 +81717,7 @@
     {
       "schemaVersion": "5",
       "id": "q-101768ad11b3e033",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-bed4802d7c36448b",
       "paperOrder": 22,
       "number": {
@@ -81857,7 +81859,7 @@
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "(1) `0`；(2) `1`；(3) `n`；(4) `1`。\n`(5) %rbp`；`(6) %rbx`；`(7) -0x1`（或 `-1`）。\n`(8) %esi`；`(9) %edi`；`(10) %eax`；`(11) %edx`；`(12) %ebx`；(13) `retq`。\n(14) `10`；(15) `120`。"
+          "text": "(1) `0`；(2) `1`；(3) `n`；(4) `1`。\n`(5) %rbp`；`(6) %rbx`；`(7) -0x1`（或 `-1`）。\n`(8) %esi`；`(9) %edi`；`(10) %eax`；`(11) %edx`；`(12) %ebx`；(13) `retq`（本题为 x86-64，无操作数的近返回也接受 `ret`）。\n(14) `10`；(15) `120`。"
         },
         "provenance": {
           "origin": "unknown",
@@ -82002,7 +82004,8 @@
             "blankId": "asm-13",
             "method": "exact",
             "acceptedAnswers": [
-              "retq"
+              "retq",
+              "ret"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -152312,7 +152315,7 @@
     {
       "schemaVersion": "5",
       "id": "q-39f3f84bc46decbc",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-febcfbeee0f364b2",
       "paperOrder": 12,
       "number": {
@@ -152420,7 +152423,7 @@
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "答案：\n\n```asm\n    jg .L4\n    ret\n    cmpq %rsi, %rdi\n```"
+              "text": "答案：\n\n```asm\n    jg .L4\n    ret\n    cmpq %rsi, %rdi\n```\n\n其中返回指令空位也接受 `retq`：在本题的 x86-64 语境中，它与无操作数的 `ret` 表示同一种近返回。"
             },
             "provenance": {
               "origin": "unknown",
@@ -152443,7 +152446,8 @@
                 "blankId": "q12-ret-before-else",
                 "method": "exact",
                 "acceptedAnswers": [
-                  "ret"
+                  "ret",
+                  "retq"
                 ],
                 "normalize": {
                   "caseSensitive": false,

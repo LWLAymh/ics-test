@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-39f3f84bc46decbc",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-febcfbeee0f364b2",
   "paperOrder": 12,
   "number": {
@@ -130,7 +130,8 @@
             "blankId": "q12-ret-before-else",
             "method": "exact",
             "acceptedAnswers": [
-              "ret"
+              "ret",
+              "retq"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -281,6 +282,8 @@ absdiff:
     ret
     cmpq %rsi, %rdi
 ```
+
+其中返回指令空位也接受 `retq`：在本题的 x86-64 语境中，它与无操作数的 `ret` 表示同一种近返回。
 %%% part-stem: q-60f6356d0e6b5538
 （4）有些情况不适合使用条件传送指令。原因是什么？
 %%% part-reference: q-60f6356d0e6b5538

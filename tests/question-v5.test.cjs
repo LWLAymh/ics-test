@@ -4,6 +4,29 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('x86-64 near-return blanks explicitly accept ret and retq without changing Y86 answers', () => {
+  const cases = [
+    ['q-1d4f3586e8bd5b5c', null, 'b11'],
+    ['q-44f11b5f6c3a79d5', null, 'q13'],
+    ['q-101768ad11b3e033', null, 'asm-13'],
+    ['q-39f3f84bc46decbc', 'q-c62728deb08346bb', 'q12-ret-before-else'],
+  ];
+  for (const [id, partId, blankId] of cases) {
+    const question = bank.find(q=>q.id===id);
+    const unit = partId ? question.parts.find(p=>p.id===partId) : question;
+    const rule = unit.solution.blankAnswers.find(r=>r.blankId===blankId);
+    assert.deepEqual([...rule.acceptedAnswers].sort(), ['ret', 'retq']);
+    for (const answer of ['ret', 'retq', ' RETQ ']) assert.equal(api.gradeBlank(answer,rule),true,id);
+    for (const answer of ['retw', 'retl', 'lretq', 'iretq', 'ret $8', 'retq $8', 'return']) {
+      assert.equal(api.gradeBlank(answer,rule),false,id+'/'+answer);
+    }
+    assert.match(unit.solution.reference.text, /retq/);
+  }
+  const y86 = bank.find(q=>q.id==='q-a340b29e1c78d56f').solution.blankAnswers.find(r=>r.blankId==='b');
+  assert.equal(api.gradeBlank(y86.acceptedAnswers[0],y86),true);
+  assert.equal(api.gradeBlank(y86.acceptedAnswers[0].replace(/\bret$/, 'retq'),y86),false);
+});
+
 test('binary bit patterns accept explicit grouped and continuous forms, not missing or changed bits', () => {
   const cases = [
     ['q-b9417a58e44059bb', 'unsigned-r1-c1', '0000 0000', '00000000'],
