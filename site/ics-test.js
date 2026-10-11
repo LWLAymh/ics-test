@@ -23,6 +23,9 @@
     issueSend: $('ics-issue-send'), issueCancel: $('ics-issue-cancel'),
     mastery: $('ics-mastery'), masteryStatus: $('ics-mastery-status'), masteryNote: $('ics-mastery-note'),
     localAttempts: $('ics-local-attempts'), localAttemptNote: $('ics-local-attempt-note'),
+    practiceHistory: $('ics-practice-history'), historyCount: $('ics-history-count'),
+    historyWrongOnly: $('ics-history-wrong-only'), historyStatus: $('ics-history-status'),
+    historyList: $('ics-history-list'), historyMore: $('ics-history-more'),
     siteAttempts: $('ics-site-attempts'), siteAttemptNote: $('ics-site-attempt-note'),
     feedback: $('ics-feedback'), verdict: $('ics-verdict'), reference: $('ics-reference'),
     liveStats: $('ics-live-stats'), statsSummary: $('ics-stats-summary'), statsOptions: $('ics-stats-options'), statsNote: $('ics-stats-note'), liveDot: $('ics-live-dot'),
@@ -50,6 +53,7 @@
     siteStats: new Map(), siteStatsLoaded: false, siteStatsChannel: null,
     siteStatsLoad: null, siteStatsChanges: [],
     issueMessages: [], issueMessageLoad: 0,
+    historyQuestions: null, historyLimit: 50,
   };
   const contract = window.ICSQuestionV5;
   const MASTERY_KEY = 'ics-question-mastery-v1';
@@ -60,6 +64,64 @@
     ui.localAttemptNote.textContent = value.persistent
       ? '重复练习计次，跳过不计入；仅保存在本浏览器。'
       : '浏览器存储不可用，部分次数仅在当前页面临时保留。';
+    renderPracticeHistory();
+  }
+
+  function renderPracticeHistory() {
+    const records = attemptCounts.history();
+    ui.historyCount.textContent = records.length.toLocaleString('zh-CN') + ' 次';
+    if (!ui.practiceHistory.open) return;
+    const filtered = ui.historyWrongOnly.checked ? records.filter(function (record) { return record.points < 1; }) : records;
+    const legacyCount = Math.max(0, attemptCounts.snapshot().count - records.length);
+    ui.historyStatus.textContent = (filtered.length ? '显示 ' + Math.min(filtered.length, state.historyLimit) + ' / ' + filtered.length + ' 次作答。'
+      : ui.historyWrongOnly.checked ? '暂无错题记录。' : '暂无作答记录，完成判分后会自动保存。') +
+      ' 部分正确及自评“需要复习”也计为错题，跳过不计入。' +
+      (legacyCount ? ' 此前 ' + legacyCount + ' 次作答只有累计次数，无法补回历史详情。' : '') +
+      (!attemptCounts.snapshot().persistent ? ' 存储不可用，部分记录仅在当前页面临时保留。' : '') +
+      (records.length && !state.historyQuestions ? ' 正在加载题目定位信息…' : '');
+    ui.historyMore.hidden = filtered.length <= state.historyLimit;
+    ui.historyList.innerHTML = filtered.slice(0, state.historyLimit).map(function (record) {
+      const question = state.historyQuestions && state.historyQuestions.get(record.questionId);
+      const paper = question && paperFor(question);
+      const name = question ? [paper && paper.displayName, question.number.display, moduleTitle(question)].filter(Boolean).join(' · ') : record.questionId;
+      const result = record.points === 1 ? '正确' : record.points === 0 ? '错误' : '部分正确';
+      const revised = question && record.revision !== question.revision;
+      return '<article class="ics-history-item"><div class="ics-history-item-head"><strong>' + escapeHtml(name) + '</strong>' +
+        '<span class="ics-history-result ' + (record.points === 1 ? 'correct' : 'incorrect') + '">' + result + ' · ' + record.points + ' 分</span></div>' +
+        '<p class="ics-history-note"><time datetime="' + escapeHtml(record.answeredAt) + '">' + escapeHtml(formatIssueTime(record.answeredAt)) +
+        '</time> · ' + (record.mode === 'auto' ? '自动核对' : record.mode === 'mixed' ? '自动核对＋自评' : '自评') +
+        (revised ? ' · 题目已更新，重练使用最新版本' : '') + '</p>' +
+        '<details class="ics-history-answer"><summary>当时的回答</summary><p>' + escapeHtml(record.answer || '查看参考答案后自评') + '</p></details>' +
+        '<button class="ics-secondary" type="button" data-history-question="' + escapeHtml(record.questionId) + '"' +
+        (question ? '' : ' disabled') + '>' + (question ? '再练一次' : state.historyQuestions ? '题目已下架或不在当前题库' : '正在加载题目…') + '</button></article>';
+    }).join('');
+  }
+
+  async function loadPracticeHistory() {
+    attemptCounts.refresh(); renderLocalAttempts();
+    if (!state.catalog) { ui.historyStatus.textContent = '题库尚在加载，请稍后重新展开。'; return; }
+    try {
+      const questions = await loadQuestionBank();
+      state.historyQuestions = new Map(questions.map(function (question) { return [question.id, question]; }));
+      renderPracticeHistory();
+    } catch (_) { ui.historyStatus.textContent = '题目定位加载失败；本地记录仍保留，收起后重新展开可重试。'; }
+  }
+
+  function retryHistoryQuestion(questionId) {
+    const question = state.historyQuestions && state.historyQuestions.get(questionId);
+    if (!question) return;
+    // Keep an ongoing quiz and its drafts intact. A retry is a fresh, appended
+    // instance, not a mutation of the previous graded record.
+    if (!ui.quiz.hidden || !ui.result.hidden) {
+      saveQuestionDraft();
+      state.questions.push(question);
+      state.index = state.questions.length - 1;
+    } else {
+      state.questions = [question]; state.index = 0; state.score = 0; state.records = []; state.drafts = [];
+    }
+    ui.setup.hidden = true; ui.result.hidden = true; ui.quiz.hidden = false;
+    renderQuestion();
+    window.scrollTo({ top: ui.quiz.offsetTop - 20, behavior: 'smooth' });
   }
 
   function applySiteStatsChange(rows, payload) {
@@ -838,6 +900,7 @@
         return Number(paper.stats.publishedQuestionCount || 0) > 0;
       });
       renderSourceFilters();
+      if (ui.practiceHistory.open) loadPracticeHistory();
       await loadReportedIssues();
       startIssueSubscription();
       ui.start.disabled = false;
@@ -981,6 +1044,34 @@
     });
   }
 
+  function highlightBlankResults(question) {
+    if (question.solution.state !== 'available') return;
+    ui.questionContent.querySelectorAll('.ics-blank-input').forEach(function (input) {
+      const scope = input.dataset.blankScope;
+      const unit = scope === 'root' ? question : question.parts[Number(scope)];
+      const solution = unit.solution;
+      const rule = (solution.blankAnswers || []).find(function (item) { return item.blankId === input.dataset.blankId; });
+      const result = solution.state === 'available' && solution.grading === 'blanks'
+        ? contract.gradeBlank(readBlankValue(input), rule) : null;
+      const status = result === true ? 'correct' : result === false ? 'incorrect' : 'pending';
+      const root = input.closest('.ics-inline-blank');
+      root.dataset.result = status;
+      let feedback = root.querySelector('.ics-blank-result');
+      if (!feedback) {
+        feedback = document.createElement('span');
+        feedback.className = 'ics-blank-result';
+        feedback.id = input.name + '-result';
+        root.appendChild(feedback);
+      }
+      feedback.textContent = result === true ? '✓ 正确' : result === false ? '✕ 错误'
+        : solution.state === 'available' ? '待自评' : '待校对';
+      [input, root.querySelector('[data-blank-toggle]')].filter(Boolean).forEach(function (control) {
+        control.setAttribute('aria-describedby', feedback.id);
+        control.setAttribute('aria-invalid', String(result === false));
+      });
+    });
+  }
+
   function restoreQuestionDraft(question) {
     const draft = state.drafts[state.index];
     if (!draft) return;
@@ -1010,6 +1101,7 @@
 
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
     disableQuestionControls(ui.questionContent);
+    highlightBlankResults(question);
     if (!draft.needsSelfGrade) highlightChoiceResults(question);
     typeset(ui.reference);
   }
@@ -1110,13 +1202,15 @@
     if (typeof points === 'number') {
       // This hook runs only after grading. Skips, revealing an answer and
       // revisiting a graded record never create a completed attempt.
-      attemptCounts.add(crypto.randomUUID());
+      attemptCounts.add(crypto.randomUUID(), { version: 1, questionId: q.id, revision: q.revision,
+        answeredAt: new Date().toISOString(), points: points, mode: mode, answer: ui.answer.value.trim().slice(0, 20000) });
       renderLocalAttempts();
       recordRemoteStats(q, points === 1).catch(function () {});
     }
     ui.selfGrade.hidden = true;
     ui.submit.hidden = true; ui.skip.hidden = true;
     highlightChoiceResults(q);
+    highlightBlankResults(q);
     saveQuestionDraft();
     updateNavigation();
   }
@@ -1232,6 +1326,7 @@
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
     disableQuestionControls(ui.questionContent);
     ui.reference.innerHTML = renderSolution(q);
+    highlightBlankResults(q);
 
     typeset(ui.reference);
 
@@ -1353,6 +1448,13 @@
   ui.issueForm.addEventListener('submit', reportCurrentIssue);
   ui.issueCancel.addEventListener('click', function () { closeIssueForm(); ui.reportIssue.focus(); });
   ui.mastery.addEventListener('click', toggleMastery);
+  ui.practiceHistory.addEventListener('toggle', function () { if (ui.practiceHistory.open) loadPracticeHistory(); });
+  ui.historyWrongOnly.addEventListener('change', function () { state.historyLimit = 50; renderPracticeHistory(); });
+  ui.historyMore.addEventListener('click', function () { state.historyLimit += 50; renderPracticeHistory(); });
+  ui.historyList.addEventListener('click', function (event) {
+    const button = event.target.closest('[data-history-question]');
+    if (button && !button.disabled) retryHistoryQuestion(button.dataset.historyQuestion);
+  });
   window.addEventListener('storage', function (event) {
     if (event.key === MASTERY_KEY || event.key === null) { loadMastery(); renderMastery(); }
     if (event.key === null || event.key.startsWith(window.ICSAttemptCounts.PREFIX)) {

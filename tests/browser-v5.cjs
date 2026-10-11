@@ -265,11 +265,14 @@ async function run() {
     assert.equal(await page.locator('#ics-local-attempts').innerText(),'2'); // Reveal is not completion.
     await page.click('#ics-previous');assert.equal(await page.locator('.ics-blank-input').first().inputValue(),'42');await page.click('#ics-submit');
     assert.match(await page.locator('#ics-verdict').innerText(),/正确/);
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),2);
+    assert.deepEqual(await page.locator('.ics-blank-result').allTextContents(),['✓ 正确','✓ 正确']);
     await page.click('#ics-next');await page.click('[data-grade="0.5"]');await page.click('#ics-next');
     assert.equal(await page.locator('.ics-composite-context').innerText(),'共用题面。');
     assert.deepEqual(await page.locator('.ics-composite-part > header h3').allTextContents(),['(1)','(2)','(3)']);
     assert.equal(await page.locator('.ics-composite-part').first().evaluate(el=>getComputedStyle(el).borderTopStyle),'solid');
     await page.click('[data-composite-choice="B"]');await page.locator('.ics-blank-input').first().fill('42');await page.click('#ics-submit');
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),2);
     assert.deepEqual(await page.locator('.ics-solution-part > h4').allTextContents(),['(1)','(2)','(3)']);
     assert.equal(await page.locator('.ics-solution-context').innerText(),'人工参考答案。');
     assert(await page.locator('#ics-self-grade').isVisible());await page.click('[data-grade="1"]');
@@ -292,6 +295,60 @@ async function run() {
     await fixture(page,[{...composite,parts:composite.parts.slice(0,2)}]);
     await page.click('[data-composite-choice="A"]');await page.locator('.ics-blank-input').first().fill('42');await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.score),0.5);
+    // Per-blank feedback remains independent of the whole-question verdict.
+    // Subjective blanks stay neutral, while exact keys get red/green feedback.
+    const feedbackFill={...fill,stem:content('表达式：{{blank:x}}；数值：{{blank:y}}；说明：{{blank:reason}}',
+      [blank('x'),blank('y'),blank('reason')]),solution:solution('blanks',{blankAnswers:[rule('x','n != 1'),rule('y','42'),{blankId:'reason',method:'self'}]})};
+    await fixture(page,[feedbackFill,single]);
+    assert.equal(await page.locator('.ics-blank-result').count(),0);
+    await page.locator('[data-blank-id="x"]').fill('n != 1');
+    await page.locator('[data-blank-id="y"]').fill('41');
+    await page.locator('[data-blank-id="reason"]').fill('<script>local answer</script>');
+    await page.click('#ics-next');await page.click('#ics-previous');
+    assert.equal(await page.locator('.ics-blank-result').count(),0);
+    await page.click('#ics-submit');
+    assert.deepEqual(await page.locator('.ics-blank-result').allTextContents(),['✓ 正确','✕ 错误','待自评']);
+    assert.equal(await page.locator('[data-blank-id="x"]').getAttribute('aria-invalid'),'false');
+    assert.equal(await page.locator('[data-blank-id="y"]').getAttribute('aria-invalid'),'true');
+    assert.equal(await page.locator('[data-blank-id="x"]').inputValue(),'n != 1');
+    assert.equal(await page.locator('[data-blank-id="x"]').evaluate(el=>getComputedStyle(el).fontVariantLigatures),'none');
+    assert(await page.locator('[data-blank-id="x"]').evaluate(el=>getComputedStyle(el).fontFeatureSettings.includes('"calt" 0')));
+    const correctBorder=await page.locator('[data-blank-id="x"]').evaluate(el=>getComputedStyle(el).borderColor);
+    assert.notEqual(await page.locator('[data-blank-id="y"]').evaluate(el=>getComputedStyle(el).borderColor),correctBorder);
+    await page.click('#ics-next');await page.click('#ics-previous');
+    assert.deepEqual(await page.locator('.ics-blank-result').allTextContents(),['✓ 正确','✕ 错误','待自评']);
+    await page.click('[data-grade="0.5"]');
+    assert.equal(await page.locator('.ics-blank-result').count(),3);
+    await page.evaluate(()=>document.documentElement.dataset.theme='dark');
+    if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,'blank-feedback-dark.png'),fullPage:true});
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,'blank-feedback-mobile.png'),fullPage:true});
+    await page.setViewportSize({width:1280,height:900});
+    await page.evaluate(()=>document.documentElement.dataset.theme='light');
+    const textbookSwitch=all.find(q=>q.id==='q-f7d13a9c61e54b28');
+    await fixture(page,[textbookSwitch,single]);
+    for(const answer of textbookSwitch.solution.blankAnswers)
+      await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(answer.blankId==='vcd'?'(b+c)>>2':answer.acceptedAnswers[0]);
+    await page.click('#ics-submit');
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),9);
+    assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"]').count(),1);
+    assert.match(await page.locator('#ics-reference').innerText(),/各空实际应填写/);
+    if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,'switcher-blank-feedback.png'),fullPage:true});
+    await page.click('#ics-next');await page.click('#ics-previous');
+    assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"]').count(),1);
+    const switch2022=all.find(q=>q.id==='q-a70c753abad8eb3c');
+    await fixture(page,[switch2022]);
+    assert.equal(await page.locator('#ics-question-content pre input').count(),15);
+    for(const answer of switch2022.solution.blankAnswers)
+      await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(answer.acceptedAnswers[0]);
+    await page.click('#ics-submit');
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),15);
+    assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    const semaphore=all.find(q=>q.id==='q-06903e5136e1ac18');
+    await fixture(page,[semaphore]);assert.equal(await page.locator('.ics-blank-input').count(),0);
+    await page.click('#ics-submit');assert(await page.locator('#ics-self-grade').isVisible());
+    assert.match(await page.locator('#ics-reference').innerText(),/释放.*空位/);
     // Current live reports: real MathJax case rows, compilable parameter names,
     // intact assembly, and complete automatic/self grading of the loop question.
     const cases = all.find(q=>q.id==='q-207c8ae536b149fd');
@@ -351,6 +408,7 @@ async function run() {
       await row.locator('[data-blank-close]').click();
     }
     await page.click('#ics-submit');assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),8);
     assert(await first.locator('[data-blank-toggle]').isDisabled());
     assert(await first.locator('[data-blank-option]').first().isDisabled());
     await page.click('#ics-next');await page.click('#ics-previous');
@@ -365,6 +423,7 @@ async function run() {
     assert.equal(await page.locator('select[data-blank-id="association"]').inputValue(),'yes');
     await page.click('#ics-submit');assert.equal(await page.evaluate(()=>window.__test.state.score),1);
     assert(await page.locator('select[data-blank-id="association"]').isDisabled());
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),4);
     await fixture(page,[tableFill]);
     assert.equal(await page.locator('table .ics-blank-input').count(),10);
     assert(!await page.locator('#ics-question-content').innerText().then(text=>text.includes('0 000 0001')));
@@ -377,6 +436,14 @@ async function run() {
     assert.match(await page.locator('[data-blank-toggle]').nth(1).innerText(),/甲/);
     await page.keyboard.press('Escape');await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.score),1);
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),2);
+    // A wrong multiple-select set gets a red visible toggle, not just a hidden input.
+    await fixture(page,[repeatedSelect]);
+    await page.locator('[data-blank-toggle]').first().click();
+    await page.locator('[data-blank-option][value="b"]').first().check();
+    await page.keyboard.press('Escape');await page.click('#ics-submit');
+    assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"] [data-blank-toggle]').count(),2);
+    assert.equal(await page.locator('[data-blank-toggle]').first().getAttribute('aria-invalid'),'true');
     // Native single-select is also disabled for unavailable root/part answers.
     // Real finite-domain additions: screenshot example, dense tables, composite
     // controls and mixed text/select grading, without network writes.
@@ -423,6 +490,7 @@ async function run() {
     await fixture(page,[{...fill,solution:{...solution('none'),state:'missing',reason:'待复核'}}]);
     assert(await page.locator('.ics-blank-input').first().isDisabled());await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.records[0].mode),'unavailable');
+    assert.equal(await page.locator('.ics-blank-result').count(),0);
     await fixture(page,[single,multiple]);await page.click('#ics-skip');await page.click('#ics-previous');
     assert(await page.locator('#ics-submit').isVisible());
     await page.evaluate(()=>{window.__rows={a:{question_id:'a',total_answers:10,correct_answers:1},b:{question_id:'b',total_answers:20,correct_answers:2}}});
@@ -646,6 +714,43 @@ async function run() {
     await page.setViewportSize({width:390,height:844});
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     if(output)await page.screenshot({path:path.join(output,'finite-comparison-mobile.png'),fullPage:true});
+    // Persistent history: pagination, repeated attempts, wrong-only filtering,
+    // literal answer display, retired entries and safe retry during a quiz.
+    await page.evaluate(({questionId,revision})=>{
+      for(let i=0;i<55;i++){
+        const suffix=(0x100+i).toString(16).padStart(12,'0');
+        localStorage.setItem('ics-completed-attempt-v1:00000000-0000-4000-8000-'+suffix,JSON.stringify({
+          version:1,questionId,revision,answeredAt:new Date(Date.UTC(2026,9,12,0,i)).toISOString(),
+          points:i===54?0:1,mode:'auto',answer:'<img src=x onerror=alert(1)> n != 1'}));
+      }
+      localStorage.setItem('ics-completed-attempt-v1:00000000-0000-4000-8000-eeeeeeeeeeee',JSON.stringify({
+        version:1,questionId:'q-622ae65ab616a110',revision:1,answeredAt:'2026-10-12T01:00:00.000Z',points:0,mode:'auto',answer:'B'}));
+      dispatchEvent(new StorageEvent('storage',{key:null}));
+    },{questionId:single.id,revision:single.revision});
+    await page.click('#ics-practice-history > summary');
+    await page.waitForFunction(()=>document.querySelector('#ics-history-list button').textContent==='题目已下架或不在当前题库');
+    assert.equal(await page.locator('.ics-history-item').count(),50);
+    assert(await page.locator('.ics-history-item').first().locator('button').isDisabled());
+    assert.equal(await page.locator('#ics-history-list img, #ics-history-list script').count(),0);
+    assert.match(await page.locator('.ics-history-answer').nth(1).textContent(),/<img src=x onerror=alert\(1\)> n != 1/);
+    await page.click('#ics-history-more');assert(await page.locator('.ics-history-item').count()>55);
+    await page.check('#ics-history-wrong-only');
+    assert.equal(await page.locator('.ics-history-result.correct').count(),0);
+    assert(await page.locator('.ics-history-result.incorrect').count()>0);
+    await page.uncheck('#ics-history-wrong-only');
+    await fixture(page,[single,multiple]);
+    await page.click('[data-choice="B"]');
+    const countBeforeRetry=await page.locator('#ics-local-attempts').innerText();
+    await page.locator('#ics-history-list [data-history-question="'+single.id+'"]').first().click();
+    assert.equal(await page.evaluate(()=>window.__test.state.questions.length),3);
+    assert.equal(await page.locator('#ics-answer').inputValue(),'');
+    await page.click('[data-question-index="0"]');
+    assert.equal(await page.locator('#ics-answer').inputValue(),'B');
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),countBeforeRetry);
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    if(output)await page.screenshot({path:path.join(output,'browser-history-mobile.png'),fullPage:true});
+    await page.check('#ics-history-wrong-only');
     // Cross-tab storage events and refresh preserve the local cumulative count.
     const beforeStorage=Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',',''));
     await page.evaluate(()=>{
@@ -655,6 +760,10 @@ async function run() {
     assert.equal(Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',','')),beforeStorage+1);
     await page.reload();await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
     assert.equal(Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',','')),beforeStorage+1);
+    await page.click('#ics-practice-history > summary');
+    await page.waitForFunction(()=>document.querySelector('#ics-history-list [data-history-question]:not(:disabled)'));
+    assert.match(await page.locator('#ics-history-status').innerText(),/此前 1 次作答只有累计次数/);
+    await page.check('#ics-history-wrong-only');assert.equal(await page.locator('.ics-history-result.correct').count(),0);
     // Offline submission still counts locally; unavailable storage is explicit.
     await fixture(page,[single]);
     await page.evaluate(()=>{
@@ -665,6 +774,7 @@ async function run() {
     await page.click('[data-choice="A"]');await page.click('#ics-submit');
     assert.equal(Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',','')),beforeStorage+2);
     assert.match(await page.locator('#ics-local-attempt-note').innerText(),/临时保留/);
+    assert.match(await page.locator('#ics-history-status').innerText(),/临时保留/);
     await page.evaluate(()=>Storage.prototype.setItem=window.__originalSetItem);
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({success:true,...result,assets:result.assets.length}));

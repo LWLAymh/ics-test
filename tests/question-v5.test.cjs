@@ -4,6 +4,50 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('per-blank grading uses the same explicit exact/selection rules without judging subjective blanks', () => {
+  const exact={method:'exact',acceptedAnswers:['n != 1'],normalize:{trimWhitespace:true,caseSensitive:true}};
+  assert.equal(api.gradeBlank(' n != 1 ',exact),true);
+  assert.equal(api.gradeBlank('n == 1',exact),false);
+  assert.equal(api.gradeBlank(['n != 1'],exact),false);
+  assert.equal(api.gradeBlank(undefined,exact),false);
+  assert.equal(api.gradeBlank('anything',{method:'self'}),null);
+  assert.equal(api.gradeBlank('anything',undefined),null);
+  const selection={method:'selection',correctValues:['a','b']};
+  assert.equal(api.gradeBlank(['b','a'],selection),true);
+  assert.equal(api.gradeBlank(['a'],selection),false);
+  assert.equal(api.gradeBlank(['a','b','b'],selection),false);
+  assert.equal(api.gradeBlank([],selection),false);
+});
+
+test('October 11 reports restore real blanks, distinguish fragments, and keep open semaphore designs subjective', () => {
+  const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false});
+  const textbook=bank.find(q=>q.id==='q-f7d13a9c61e54b28');
+  const answers=Object.fromEntries(textbook.solution.blankAnswers.map(r=>[r.blankId,r.acceptedAnswers[0]]));
+  assert.equal(api.gradeBlanks({...answers,vcd:'(b+c)<<2'},textbook.solution),true);
+  assert.equal(api.gradeBlanks({...answers,vcd:'(b+c)>>2'},textbook.solution),false);
+  assert.equal(api.gradeBlanks({...answers,a:'case 5'},textbook.solution),false);
+  assert.equal(api.gradeBlanks({...answers,ca:'c=b^15'},textbook.solution),false);
+  assert.equal(api.gradeBlanks({...answers,c:'7',d:'7'},textbook.solution),false);
+  assert.match(textbook.solution.reference.text,/各空实际应填写/);
+  const restored=bank.find(q=>q.id==='q-a70c753abad8eb3c');
+  assert.equal(restored.type,'fill');assert.equal(restored.stem.blanks.length,15);
+  const assembly=md.parse(restored.stem.text,{}).filter(t=>t.type==='fence'&&t.info==='asm');
+  assert.equal(assembly.length,1);assert.match(assembly[0].content,/\.L10:/);
+  const restoredKeys=Object.fromEntries(restored.solution.blankAnswers.map(r=>[r.blankId,r.acceptedAnswers[0]]));
+  assert.equal(api.gradeBlanks({...restoredKeys,'expr-11':'3*b+3*c'},restored.solution),true);
+  assert.equal(api.gradeBlanks({...restoredKeys,'expr-8':'c=b^31'},restored.solution),false);
+  const semaphore=bank.find(q=>q.id==='q-06903e5136e1ac18');
+  assert.equal(semaphore.type,'short-answer');assert.equal(semaphore.solution.grading,'self');
+  assert.equal(semaphore.stem.blanks,undefined);assert.equal(semaphore.solution.blankAnswers,undefined);
+  assert.match(semaphore.solution.reference.text,/V\(&mutex1\); V\(&empty1\); P\(&empty2\);/);
+  const asm=bank.find(q=>q.id==='q-3469f6f994d8a49f').parts[1];
+  assert.equal(api.gradeBlanks({'save-rbx':'%rbx,-0x10(%rsp)','save-rbp':'%rbp,-0x8(%rsp)'},asm.solution),true);
+  assert.equal(api.gradeBlanks({'save-rbx':'mov %rbx,-0x10(%rsp)','save-rbp':'%rbp,-0x8(%rsp)'},asm.solution),false);
+  const calls=bank.find(q=>q.id==='q-20fcc7293246e535');
+  assert(calls.solution.blankAnswers.every(r=>r.acceptedAnswers.every(a=>!a.endsWith(';'))));
+  assert.match(bank.find(q=>q.id==='q-7d29433073c3ab5d').solution.reference.text,/movq %rdi, %rax/);
+});
+
 test('October issue repairs retain two-row math and correct parameter names and shift directions', () => {
   const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false});
   const conversions=bank.find(q=>q.id==='q-207c8ae536b149fd');

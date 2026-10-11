@@ -47,6 +47,28 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-attempt-summary span { font-size: 13px; font-weight: 550; }
 .ics-attempt-summary strong { font-size: 24px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.3; }
 .ics-attempt-summary small { grid-column: 1 / -1; color: var(--text-muted); font-size: 11px; }
+.ics-panel.ics-history-panel { padding: 0; }
+.ics-history-panel > details > summary { display: flex; justify-content: space-between; gap: 12px; padding: 16px 24px; cursor: pointer; font-size: 13px; }
+.ics-history-panel > details > summary::before { content: '+'; color: var(--text-muted); }
+.ics-history-panel > details[open] > summary::before { content: '−'; }
+.ics-history-panel > details > summary strong { flex: 1; }
+.ics-history-panel > details > summary span { color: var(--text-muted); font-size: 12px; }
+.ics-history-body { padding: 0 24px 20px; border-top: 1px solid var(--border); }
+.ics-history-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin: 16px 0 10px; font-size: 12px; }
+.ics-history-toolbar label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.ics-history-toolbar > span, .ics-history-note { color: var(--text-muted); font-size: 12px; }
+.ics-history-list { display: grid; gap: 10px; margin: 12px 0; }
+.ics-history-item { min-width: 0; padding: 14px; border: 1px solid var(--border); border-radius: 5px; }
+.ics-history-item-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 13px; }
+.ics-history-item-head strong { overflow-wrap: anywhere; }
+.ics-history-result { white-space: nowrap; }
+.ics-history-result.correct { color: var(--ics-success); }
+.ics-history-result.incorrect { color: var(--ics-danger); }
+.ics-history-item .ics-history-note { margin: 6px 0 10px; }
+.ics-history-answer { margin-bottom: 12px; font-size: 12px; }
+.ics-history-answer summary { cursor: pointer; color: var(--text-muted); }
+.ics-history-answer p { margin: 8px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.ics-history-item button { min-height: 30px; padding: 4px 10px; font-size: 12px; }
 .ics-hero { display: flex; align-items: center; justify-content: space-between; min-height: 112px; gap: 20px; }
 .ics-brand { display: flex; align-items: center; gap: 14px; }
 .ics-brand-mark { display: grid; place-items: center; width: 46px; height: 46px; background: var(--text); color: var(--surface); border-radius: 6px; font-size: 16px; font-weight: 750; letter-spacing: -.6px; }
@@ -231,6 +253,17 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-blank-toggle { min-height: 34px; min-width: 110px; max-width: min(300px, 65vw); padding: 5px 9px; border: 1px solid var(--border); border-bottom-color: var(--text-muted); border-radius: 3px; background: var(--surface); color: var(--text); font: 14px/1.5 var(--font-mono); white-space: normal; text-align: left; cursor: pointer; }
 .ics-blank-toggle.missing { border-color: var(--ics-danger); }
 .ics-blank-toggle:disabled { color: var(--text-muted); background: var(--bg-soft); cursor: default; }
+.ics-inline-blank[data-result="correct"] { --blank-result-color: var(--ics-success); }
+.ics-inline-blank[data-result="incorrect"] { --blank-result-color: var(--ics-danger); }
+.ics-inline-blank[data-result="pending"] { --blank-result-color: var(--text-muted); }
+.ics-inline-blank[data-result] > .ics-blank-input,
+.ics-inline-blank[data-result] > .ics-blank-toggle {
+  opacity: 1;
+  color: var(--text);
+  border-color: var(--blank-result-color);
+  background: color-mix(in srgb, var(--blank-result-color) 9%, var(--surface));
+}
+.ics-blank-result { color: var(--blank-result-color); font: 11px/1.4 var(--font-ui); white-space: nowrap; }
 .ics-blank-toggle:focus-visible, select.ics-blank-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .ics-blank-menu { position: fixed; z-index: 100; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px; max-height: min(360px, 75vh); overflow: auto; padding: 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); box-shadow: 0 6px 20px #0002; font: 14px/1.5 var(--font-ui); white-space: normal; text-align: left; }
 .ics-blank-menu[hidden] { display: none; }
@@ -336,3 +369,9 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
   .ics-question-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+/* Keep this after font shorthands, which reset font-variant-ligatures.
+   Code is literal: !=, <= and >= must remain separate ASCII characters. */
+.post-content code, .post-content pre, .ics-blank-input, .ics-blank-toggle, .ics-blank-menu, .ics-issue-item code {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "calt" 0;
+}

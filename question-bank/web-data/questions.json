@@ -9185,7 +9185,7 @@
     {
       "schemaVersion": "5",
       "id": "q-06903e5136e1ac18",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 27,
       "number": {
@@ -9222,174 +9222,27 @@
           "curated": "_curated/期末/2015期末-20160104-带答案/814.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "双缓冲区生产者-消费者信号量设计与 PV 填空"
+          "editorNote": "双缓冲区生产者-消费者信号量设计；自由命名与不同正确方案采用自评，修订参考解中的互斥锁初值及 Buff1 资源释放遗漏。"
         }
       ],
-      "type": "fill",
+      "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "blanks": [
-          {
-            "id": "q8-1",
-            "marker": "{{blank:q8-1}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q8-2",
-            "marker": "{{blank:q8-2}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q8-3",
-            "marker": "{{blank:q8-3}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q8-4",
-            "marker": "{{blank:q8-4}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q8-5",
-            "marker": "{{blank:q8-5}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q8-6",
-            "marker": "{{blank:q8-6}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q8-7",
-            "marker": "{{blank:q8-7}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q8-8",
-            "marker": "{{blank:q8-8}}",
-            "occurrence": 0,
-            "width": "medium"
-          }
-        ],
-        "text": "第八题（10分）并发\n有三个线程 PA、PB、PC 协作工作以解决文件打印问题：PA 将记录从磁盘读\n入内存缓冲区 `Buff1`，每执行一次读一个记录；PB 将缓冲区 `Buff1` 的内容复制\n到缓冲区`Buff2`，每执行一次复制一个记录； PC将缓冲区`Buff2`的内容打印出\n来，每执行一次打印一个记录。缓冲区 `Buff1` 可以放 4 个记录；缓冲区 `Buff2`\n可以放8个记录。请用信号量及P、V操作实现上述三个线程以保证文件的正确打\n印。\n```\nPA() {\n  while (1) {\n    /* ① */\n    从磁盘读入一个记录\n    /* ② */\n    将记录放入 Buff1\n    /* ③ */\n  }\n}\nPB() {\n  while (1) {\n    /* ④ */\n    从 Buff1 中取出一个记录\n    /* ⑤ */\n    将记录放入 Buff2\n    /* ⑥ */\n  }\n}\nPC() {\n  while (1) {\n    /* ⑦ */\n    从 Buff2 中取出一个记录\n    /* ⑧ */\n    打印\n  }\n}\n```\n1．请设计若干信号量，给出每一个信号量的作用和初值。\n\n\n2．请将信号量上对应的 PV操作填写在代码中适当位置。注意：每一标号处可\n以不填入语句（请标记成 X），或填入一条或多条语句。\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | {{blank:q8-1}} |\n| ② | {{blank:q8-2}} |\n| ③ | {{blank:q8-3}} |\n| ④ | {{blank:q8-4}} |\n| ⑤ | {{blank:q8-5}} |\n| ⑥ | {{blank:q8-6}} |\n| ⑦ | {{blank:q8-7}} |\n| ⑧ | {{blank:q8-8}} |"
+        "text": "第八题（10 分）并发\n\n三个线程 PA、PB、PC 协作完成文件打印：\n\n- PA 每次从磁盘读入一条记录，放入内存缓冲区 `Buff1`。\n- PB 每次从 `Buff1` 取出一条记录，复制到 `Buff2`。\n- PC 每次从 `Buff2` 取出一条记录并打印。\n- `Buff1` 可容纳 4 条记录，`Buff2` 可容纳 8 条记录，初始均为空。\n\n请用信号量及 P、V 操作实现同步，保证文件正确打印。\n\n```text\nPA() {\n    while (1) {\n        /* ① */\n        从磁盘读入一条记录\n        /* ② */\n        将记录放入 Buff1\n        /* ③ */\n    }\n}\n\nPB() {\n    while (1) {\n        /* ④ */\n        从 Buff1 中取出一条记录\n        /* ⑤ */\n        将记录放入 Buff2\n        /* ⑥ */\n    }\n}\n\nPC() {\n    while (1) {\n        /* ⑦ */\n        从 Buff2 中取出一条记录\n        /* ⑧ */\n        打印\n    }\n}\n```\n\n1. 设计所需信号量，说明各自的作用和初值。\n2. 给出 ①～⑧ 处的 P、V 操作。每处可填写一条或多条语句；不需要操作时记为 `X`。\n\n信号量可以自由命名，同步方案也不唯一。本题对照参考解自评，不按固定变量名自动判错。取出的记录可保存在对应线程的局部变量中。"
       },
       "solution": {
         "state": "available",
-        "grading": "blanks",
+        "grading": "self",
         "reference": {
           "format": "markdown",
-          "text": "答案：（本大题总得分按四舍五入取整数）\n1．3分，答对1个0.5分\n`empty1`，初值4；\n`full1`，初值0；\n`empty2`，初值8；\n`full2`，初值0；\n`mutex1`，初值1；\n`mutex2`，初值2\n2．7分\n| 标号 | 对应的操作 |\n| --- | --- |\n| ① | X |\n| ② | `P(&empty1);` `P(&mutex1);` |\n| ③ | `V(&full1);` `V(&mutex1);` |\n| ④ | `P(&full1);` `P(&mutex1);` |\n| ⑤ | `P(&empty2);` `P(&mutex2);` |\n| ⑥ | `V(&mutex2);` `V(&full2);` |\n| ⑦ | `P(&full2);` `P(&mutex2);` |\n| ⑧ | `V(&mutex2);` `V(&empty2);` |\n\n注意：P 操作的顺序不能错。各操作按原卷评分标准计分。"
+          "text": "下面是一种正确方案，不要求使用相同的信号量名称。\n\n| 信号量 | 作用 | 初值 |\n| --- | --- | --- |\n| `empty1` | `Buff1` 空闲位置数 | `4` |\n| `full1` | `Buff1` 可取出的记录数 | `0` |\n| `empty2` | `Buff2` 空闲位置数 | `8` |\n| `full2` | `Buff2` 可取出的记录数 | `0` |\n| `mutex1` | 互斥访问 `Buff1` | `1` |\n| `mutex2` | 互斥访问 `Buff2` | `1` |\n\n| 标号 | 对应操作 |\n| --- | --- |\n| ① | `X` |\n| ② | `P(&empty1); P(&mutex1);` |\n| ③ | `V(&mutex1); V(&full1);` |\n| ④ | `P(&full1); P(&mutex1);` |\n| ⑤ | `V(&mutex1); V(&empty1); P(&empty2); P(&mutex2);` |\n| ⑥ | `V(&mutex2); V(&full2);` |\n| ⑦ | `P(&full2); P(&mutex2);` |\n| ⑧ | `V(&mutex2); V(&empty2);` |\n\nPB 取出记录并存入自己的局部变量后，先释放 `Buff1` 的锁和空位，再等待 `Buff2` 的空位；PC 同理，取出后即可释放 `Buff2`，打印不需要占着缓冲区锁。等待空位或记录应在获取相应互斥锁之前，避免占锁等待对方推进。\n\n自评时检查：初始容量正确、空时不取、满时不放、每次 P/V 配对，且没有丢失记录、重复打印或死锁。等价方案应认可。\n\n校订说明：题源原参考将 `mutex2` 初值写为 `2`，且 PB 取出 `Buff1` 记录后漏写释放 `mutex1` 和归还 `empty1` 的操作。本参考解修正这两处，不沿用原来的字面答案。"
         },
         "provenance": {
-          "origin": "unknown",
-          "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        },
-        "blankAnswers": [
-          {
-            "blankId": "q8-1",
-            "method": "exact",
-            "acceptedAnswers": [
-              "X",
-              "x"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          },
-          {
-            "blankId": "q8-2",
-            "method": "exact",
-            "acceptedAnswers": [
-              "P(&empty1); P(&mutex1);",
-              "P(&empty1);P(&mutex1);"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          },
-          {
-            "blankId": "q8-3",
-            "method": "exact",
-            "acceptedAnswers": [
-              "V(&full1); V(&mutex1);",
-              "V(&full1);V(&mutex1);"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          },
-          {
-            "blankId": "q8-4",
-            "method": "exact",
-            "acceptedAnswers": [
-              "P(&full1); P(&mutex1);",
-              "P(&full1);P(&mutex1);"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          },
-          {
-            "blankId": "q8-5",
-            "method": "exact",
-            "acceptedAnswers": [
-              "P(&empty2); P(&mutex2);",
-              "P(&empty2);P(&mutex2);"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          },
-          {
-            "blankId": "q8-6",
-            "method": "exact",
-            "acceptedAnswers": [
-              "V(&mutex2); V(&full2);",
-              "V(&mutex2);V(&full2);"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          },
-          {
-            "blankId": "q8-7",
-            "method": "exact",
-            "acceptedAnswers": [
-              "P(&full2); P(&mutex2);",
-              "P(&full2);P(&mutex2);"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          },
-          {
-            "blankId": "q8-8",
-            "method": "exact",
-            "acceptedAnswers": [
-              "V(&mutex2); V(&empty2);",
-              "V(&mutex2);V(&empty2);"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          }
-        ]
+          "origin": "ai-derived",
+          "crossChecked": false,
+          "attribution": "AI 推导修订，非官方答案",
+          "note": "根据缓冲区容量与生产者-消费者同步关系修订示例解，非官方答案；题源原参考中 mutex2 初值及 PB 释放 Buff1 的操作存在遗漏。"
+        }
       }
     },
     {
@@ -9689,7 +9542,7 @@
     {
       "schemaVersion": "5",
       "id": "q-4c2ab0e8b67755ee",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 23,
       "number": {
@@ -9993,7 +9846,7 @@
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n（每格0.5分）\n`main.c`\n  局部或全局？  强或弱？\n`a`  全局  强\n`foo`  全局  弱\n`foo.c`\n  局部或全局？  强或弱？\n`a`  全局  弱\n`foo`  全局  强\n`out_buf`  局部  X\n2. （3分）根据程序运行结果，补全程序\n`long long a = 0xdeadbeefcafebffe`; （1分）\n`*(int *)((unsigned long long)a + 2)` （2分）\n3. 请问编译链接能通过吗？请说明理由。\n不能。无论如何声明`a`的类型都会造成在至少一个文件内引起声明和定义冲突。\n结论1分，理由2分。（结论错不得分）"
+          "text": "答案：\n1. （5分）对于每个程序中的相应符号，给出它的属性（局部或全局，强符号或\n弱符号）（提示：如果某表项中的内容无法确定，请画X。）\n（每格0.5分）\n`main.c`\n  局部或全局？  强或弱？\n`a`  全局  强\n`foo`  全局  弱\n`foo.c`\n  局部或全局？  强或弱？\n`a`  全局  弱\n`foo`  全局  强\n`out_buf`  局部  X\n2. （3分）根据程序运行结果，补全程序\n第一处代码空实际填 `a = 0xdeadbeefcafebffe`（1 分）；题面已有 `long long` 和分号，不要重复。完整声明仅供对照：`long long a = 0xdeadbeefcafebffe;`。\n`*(int *)((unsigned long long)a + 2)` （2分）\n3. 请问编译链接能通过吗？请说明理由。\n不能。无论如何声明`a`的类型都会造成在至少一个文件内引起声明和定义冲突。\n结论1分，理由2分。（结论错不得分）"
         },
         "provenance": {
           "origin": "unknown",
@@ -19251,7 +19104,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a70c753abad8eb3c",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-12950876262955d9",
       "paperOrder": 22,
       "number": {
@@ -19291,17 +19144,311 @@
           "editorNote": "switch跳转表汇编还原C代码与结构体"
         }
       ],
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "第三题 下列的C代码描述了一个`switcher`：\n```\nstruct prob{\n  long *p;\n  struct { long x; long y; long z;}s;\n  struct prob *next;\n};\nvoid switcher(long a, long b, long c, struct prob *sp){\n  long val;\n  switch(a){\n    case ①            : c = ⑧                ;\n    case ②            : val = ⑨              ; break;\n    case ③            : c = ⑩               ;\n    case ④            : val = ⑪              ; break;\n    case ⑤            : val = ⑫               ; break;\n    case ⑥            : ⑬                  ;break;\n    case ⑦            : val = ⑭                ;break;\n    default: ⑮                ; break;\n  }\n  sp->s.y = val;\n}\n```\n采用GCC编译器产生的汇编代码如下所示，请根据此进行分析，补全上述代码。\n```\nswitcher:\n        cmpq    $7, %rdi\n        ja      .L2\n        jmp     *.L4(,%rdi,8)\n.L4:\n        .quad   .L3\n        .quad   .L5\n        .quad   .L6\n        .quad   .L7\n        .quad   .L2\n        .quad   .L8\n        .quad   .L9\n        .quad   .L10\n```\n\n\n```\n.L8:\n        movq    %rsi, %rdx\n        xorq    $31, %rdx\n.L6:\n        leaq    2022(%rdx), %rax\n        movq    %rax, 16(%rcx)\n        ret\n.L3:\n        subq    $54, %rdx\n.L5:\n        addq    %rdx, %rsi\n        leaq    (%rsi,%rsi,2), %rax\n        movq    %rax, 16(%rcx)\n        ret\n.L7:\n        movq    8(%rcx), %rax\n        movq    %rax, 16(%rcx)\n        ret\n.L10:\n        movq    $1898, 24(%rcx)\n        movq    %rax, 16(%rcx)\n        ret\n.L9:\n        movq    (%rcx), %rax\n        movq    (%rax), %rax\n        movq    %rax, 16(%rcx)\n        ret\n.L2:\n        movq    %rcx, 32(%rcx)\n        movq    %rax, 16(%rcx)\n        ret\n```"
+        "blanks": [
+          {
+            "id": "case-1",
+            "marker": "{{blank:case-1}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "① case 常量"
+          },
+          {
+            "id": "case-2",
+            "marker": "{{blank:case-2}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "② case 常量"
+          },
+          {
+            "id": "case-3",
+            "marker": "{{blank:case-3}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "③ case 常量"
+          },
+          {
+            "id": "case-4",
+            "marker": "{{blank:case-4}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "④ case 常量"
+          },
+          {
+            "id": "case-5",
+            "marker": "{{blank:case-5}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "⑤ case 常量"
+          },
+          {
+            "id": "case-6",
+            "marker": "{{blank:case-6}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "⑥ case 常量"
+          },
+          {
+            "id": "case-7",
+            "marker": "{{blank:case-7}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "⑦ case 常量"
+          },
+          {
+            "id": "expr-8",
+            "marker": "{{blank:expr-8}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "⑧ c 的右侧表达式"
+          },
+          {
+            "id": "expr-9",
+            "marker": "{{blank:expr-9}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "⑨ val 的右侧表达式"
+          },
+          {
+            "id": "expr-10",
+            "marker": "{{blank:expr-10}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "⑩ c 的右侧表达式"
+          },
+          {
+            "id": "expr-11",
+            "marker": "{{blank:expr-11}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "⑪ val 的右侧表达式"
+          },
+          {
+            "id": "expr-12",
+            "marker": "{{blank:expr-12}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "⑫ val 的右侧表达式"
+          },
+          {
+            "id": "stmt-13",
+            "marker": "{{blank:stmt-13}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "⑬ 赋值语句，不含分号"
+          },
+          {
+            "id": "expr-14",
+            "marker": "{{blank:expr-14}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "⑭ val 的右侧表达式"
+          },
+          {
+            "id": "stmt-15",
+            "marker": "{{blank:stmt-15}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "⑮ 赋值语句，不含分号"
+          }
+        ],
+        "text": "第三题 根据 GCC 生成的汇编代码，补全下面的 `switcher`。\n\n为便于逐空核对，请保持模板中各分支的顺序。标号处只填常量，赋值右侧只填表达式；⑬、⑮ 填赋值语句，均不含题面已有的分号。\n\n```c\nstruct prob {\n    long *p;\n    struct {\n        long x;\n        long y;\n        long z;\n    } s;\n    struct prob *next;\n};\n\nvoid switcher(long a, long b, long c, struct prob *sp) {\n    long val;\n    switch (a) {\n    case {{blank:case-1}}:\n        c = {{blank:expr-8}};\n        /* fall through */\n    case {{blank:case-2}}:\n        val = {{blank:expr-9}};\n        break;\n    case {{blank:case-3}}:\n        c = {{blank:expr-10}};\n        /* fall through */\n    case {{blank:case-4}}:\n        val = {{blank:expr-11}};\n        break;\n    case {{blank:case-5}}:\n        val = {{blank:expr-12}};\n        break;\n    case {{blank:case-6}}:\n        {{blank:stmt-13}};\n        break;\n    case {{blank:case-7}}:\n        val = {{blank:expr-14}};\n        break;\n    default:\n        {{blank:stmt-15}};\n        break;\n    }\n    sp->s.y = val;\n}\n```\n\n原卷的部分分支没有给 `val` 赋值。本题只要求还原所示语句，不据此讨论那些分支中 `sp->s.y` 的确定值，也不自行补入原卷没有的初始化。\n\n```asm\nswitcher:\n        cmpq    $7, %rdi\n        ja      .L2\n        jmp     *.L4(,%rdi,8)\n.L4:\n        .quad   .L3\n        .quad   .L5\n        .quad   .L6\n        .quad   .L7\n        .quad   .L2\n        .quad   .L8\n        .quad   .L9\n        .quad   .L10\n.L8:\n        movq    %rsi, %rdx\n        xorq    $31, %rdx\n.L6:\n        leaq    2022(%rdx), %rax\n        movq    %rax, 16(%rcx)\n        ret\n.L3:\n        subq    $54, %rdx\n.L5:\n        addq    %rdx, %rsi\n        leaq    (%rsi,%rsi,2), %rax\n        movq    %rax, 16(%rcx)\n        ret\n.L7:\n        movq    8(%rcx), %rax\n        movq    %rax, 16(%rcx)\n        ret\n.L10:\n        movq    $1898, 24(%rcx)\n        movq    %rax, 16(%rcx)\n        ret\n.L9:\n        movq    (%rcx), %rax\n        movq    (%rax), %rax\n        movq    %rax, 16(%rcx)\n        ret\n.L2:\n        movq    %rcx, 32(%rcx)\n        movq    %rax, 16(%rcx)\n        ret\n```"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "case-1",
+            "method": "exact",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "case-2",
+            "method": "exact",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "case-3",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "case-4",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "case-5",
+            "method": "exact",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "case-6",
+            "method": "exact",
+            "acceptedAnswers": [
+              "7"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "case-7",
+            "method": "exact",
+            "acceptedAnswers": [
+              "6"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "expr-8",
+            "method": "exact",
+            "acceptedAnswers": [
+              "b ^ 31",
+              "b^31"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "expr-9",
+            "method": "exact",
+            "acceptedAnswers": [
+              "c + 2022",
+              "c+2022",
+              "2022 + c",
+              "2022+c"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "expr-10",
+            "method": "exact",
+            "acceptedAnswers": [
+              "c - 54",
+              "c-54"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "expr-11",
+            "method": "exact",
+            "acceptedAnswers": [
+              "(c + b) * 3",
+              "(c+b)*3",
+              "(b + c) * 3",
+              "(b+c)*3",
+              "3 * (b + c)",
+              "3*(b+c)",
+              "3 * (c + b)",
+              "3*(c+b)",
+              "3 * b + 3 * c",
+              "3*b+3*c",
+              "3 * c + 3 * b",
+              "3*c+3*b"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "expr-12",
+            "method": "exact",
+            "acceptedAnswers": [
+              "sp->s.x"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "stmt-13",
+            "method": "exact",
+            "acceptedAnswers": [
+              "sp->s.z = 1898",
+              "sp->s.z=1898"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "expr-14",
+            "method": "exact",
+            "acceptedAnswers": [
+              "*(sp->p)",
+              "*sp->p",
+              "sp->p[0]"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "stmt-15",
+            "method": "exact",
+            "acceptedAnswers": [
+              "sp->next = sp",
+              "sp->next=sp"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
         "reference": {
           "format": "markdown",
-          "text": "```c\nvoid switcher(long a, long b, long c, struct prob *sp){\n  long val;\n  switch(a){\n    case 5: c = b ^ 31;\n    case 2: val = c + 2022; break;\n    case 0: c = c - 54;\n    case 1: val = (c + b) * 3; break;\n    case 3: val = sp->s.x; break;\n    case 7: sp->s.z = 1898; break;\n    case 6: val = *(sp->p); break;\n    default: sp->next = sp; break;\n  }\n  sp->s.y = val;\n}\n```\n\n原卷说明：各单元格原则上可以互换，但应保持程序基本语义不变。`(c+b)*3` 可写为 `(b+c)*3`、`3*(b+c)` 或 `3*(c+b)`；`3*b+3*c` 也可接受。必须符合 C 语言语法。"
+          "text": "各空实际填入内容如下；不要重复已有的 `case`、`c =` 或 `val =`。\n\n| 原卷标号 | 填入内容 |\n| --- | --- |\n| ① | `5` |\n| ② | `2` |\n| ③ | `0` |\n| ④ | `1` |\n| ⑤ | `3` |\n| ⑥ | `7` |\n| ⑦ | `6` |\n| ⑧ | `b ^ 31` |\n| ⑨ | `c + 2022` |\n| ⑩ | `c - 54` |\n| ⑪ | `(c + b) * 3` |\n| ⑫ | `sp->s.x` |\n| ⑬ | `sp->s.z = 1898` |\n| ⑭ | `*(sp->p)` |\n| ⑮ | `sp->next = sp` |\n\n完整代码（用于对照，不是要求每个空填写完整语句）：\n\n```c\nvoid switcher(long a, long b, long c, struct prob *sp){\n  long val;\n  switch(a){\n    case 5: c = b ^ 31;\n    case 2: val = c + 2022; break;\n    case 0: c = c - 54;\n    case 1: val = (c + b) * 3; break;\n    case 3: val = sp->s.x; break;\n    case 7: sp->s.z = 1898; break;\n    case 6: val = *(sp->p); break;\n    default: sp->next = sp; break;\n  }\n  sp->s.y = val;\n}\n```\n\n原卷允许语义等价的分支重排；本在线模板固定分支顺序以便逐空核对。⑪ 接受 `(b+c)*3`、`3*(b+c)`、`3*(c+b)` 和 `3*b+3*c` 等显式列出的写法。⑬、⑮ 已经在题面末尾提供分号，输入时不要重复。"
         },
         "provenance": {
           "origin": "unknown",
@@ -34864,7 +35011,7 @@
     {
       "schemaVersion": "5",
       "id": "q-3469f6f994d8a49f",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 20,
       "number": {
@@ -35095,14 +35242,14 @@
                 "width": "medium"
               }
             ],
-            "text": "如下是通过\"gcc -g -O2\"命令编译后，在`gdb`中通过\"disas f\"命令得到的反汇编代码，其中有两个汇编指令不全，请补全这两条汇编指令（2分）。\n\n```\n0x00000000004004e0 <f+0>:            mov    {{blank:save-rbx}}\n0x00000000004004e5 <f+5>:            mov    {{blank:save-rbp}}\n0x00000000004004ea <f+10>:           xor    %eax,%eax\n0x00000000004004ec <f+12>:           sub    $0x10,%rsp\n0x00000000004004f0 <f+16>:           test   %esi,%esi\n0x00000000004004f2 <f+18>:           mov    %edi,%ebp\n0x00000000004004f4 <f+20>:           mov    %esi,%ebx\n0x00000000004004f6 <f+22>:           jle    0x400513 <f+51>\n0x00000000004004f8 <f+24>:           cmp    $0x1,%edi\n0x00000000004004fb <f+27>:           jle    0x400521 <f+65>\n0x00000000004004fd <f+29>:           lea    -0x1(%rbp),%edi\n0x0000000000400500 <f+32>:           callq  0x4004e0 <f>\n0x0000000000400505 <f+37>:           lea    -0x1(%rax,%rbx,1),%edx\n0x0000000000400509 <f+41>:           mov    %edx,%eax\n0x000000000040050b <f+43>:           sar    $0x1f,%edx\n0x000000000040050e <f+46>:           idiv   %ebp\n0x0000000000400510 <f+48>:           lea    0x1(%rdx),%eax\n0x0000000000400513 <f+51>:           mov    (%rsp),%rbx\n0x0000000000400517 <f+55>:           mov    0x8(%rsp),%rbp\n0x000000000040051c <f+60>:           add    $0x10,%rsp\n0x0000000000400520 <f+64>:           retq\n0x0000000000400521 <f+65>:           sete   %al\n0x0000000000400524 <f+68>:           movzbl %al,%eax\n0x0000000000400527 <f+71>:           jmp    0x400513 <f+51>\n```\n\n{考察点：函数中使用到了`%rbp`和`%rbx`寄存器，两者都是callee保存的寄存器，使用前需要压栈，函数返回时需要弹栈恢复寄存器的值。通过前后汇编代码的对比，应该可以猜出两个空分别填写什么；但要注意，压栈和弹栈时，`%rsp`寄存器的值不同，因而对应的地址表示也不同。}"
+            "text": "如下是通过 `gcc -g -O2` 编译后，在 `gdb` 中通过 `disas f` 得到的反汇编代码，其中两条指令的操作数缺失。请只填写操作数（2 分），不要重复题面已经给出的 `mov`。\n\n```\n0x00000000004004e0 <f+0>:            mov    {{blank:save-rbx}}\n0x00000000004004e5 <f+5>:            mov    {{blank:save-rbp}}\n0x00000000004004ea <f+10>:           xor    %eax,%eax\n0x00000000004004ec <f+12>:           sub    $0x10,%rsp\n0x00000000004004f0 <f+16>:           test   %esi,%esi\n0x00000000004004f2 <f+18>:           mov    %edi,%ebp\n0x00000000004004f4 <f+20>:           mov    %esi,%ebx\n0x00000000004004f6 <f+22>:           jle    0x400513 <f+51>\n0x00000000004004f8 <f+24>:           cmp    $0x1,%edi\n0x00000000004004fb <f+27>:           jle    0x400521 <f+65>\n0x00000000004004fd <f+29>:           lea    -0x1(%rbp),%edi\n0x0000000000400500 <f+32>:           callq  0x4004e0 <f>\n0x0000000000400505 <f+37>:           lea    -0x1(%rax,%rbx,1),%edx\n0x0000000000400509 <f+41>:           mov    %edx,%eax\n0x000000000040050b <f+43>:           sar    $0x1f,%edx\n0x000000000040050e <f+46>:           idiv   %ebp\n0x0000000000400510 <f+48>:           lea    0x1(%rdx),%eax\n0x0000000000400513 <f+51>:           mov    (%rsp),%rbx\n0x0000000000400517 <f+55>:           mov    0x8(%rsp),%rbp\n0x000000000040051c <f+60>:           add    $0x10,%rsp\n0x0000000000400520 <f+64>:           retq\n0x0000000000400521 <f+65>:           sete   %al\n0x0000000000400524 <f+68>:           movzbl %al,%eax\n0x0000000000400527 <f+71>:           jmp    0x400513 <f+51>\n```\n\n{考察点：函数中使用到了`%rbp`和`%rbx`寄存器，两者都是callee保存的寄存器，使用前需要压栈，函数返回时需要弹栈恢复寄存器的值。通过前后汇编代码的对比，应该可以猜出两个空分别填写什么；但要注意，压栈和弹栈时，`%rsp`寄存器的值不同，因而对应的地址表示也不同。}"
           },
           "solution": {
             "state": "available",
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "答案：两处缺失的汇编指令（原卷红色下划线为操作数）分别为：\n```\n0x00000000004004e0 <f+0>:  mov  %rbx,-0x10(%rsp)\n0x00000000004004e5 <f+5>:  mov  %rbp,-0x8(%rsp)\n```\n即先用 `%rsp` 相对寻址保存 callee-saved 寄存器；对应的弹栈指令为 `mov (%rsp),%rbx` 与 `mov 0x8(%rsp),%rbp`。"
+              "text": "两空实际填入的操作数分别为 `%rbx,-0x10(%rsp)` 和 `%rbp,-0x8(%rsp)`，不包含 `mov`。完整指令仅供对照：\n```\n0x00000000004004e0 <f+0>:  mov  %rbx,-0x10(%rsp)\n0x00000000004004e5 <f+5>:  mov  %rbp,-0x8(%rsp)\n```\n即先用 `%rsp` 相对寻址保存 callee-saved 寄存器；对应的弹栈指令为 `mov (%rsp),%rbx` 与 `mov 0x8(%rsp),%rbp`。"
             },
             "provenance": {
               "origin": "unknown",
@@ -35115,7 +35262,7 @@
                 "method": "exact",
                 "acceptedAnswers": [
                   "%rbx,-0x10(%rsp)",
-                  "mov %rbx,-0x10(%rsp)"
+                  "%rbx, -0x10(%rsp)"
                 ],
                 "normalize": {
                   "caseSensitive": false,
@@ -35127,7 +35274,7 @@
                 "method": "exact",
                 "acceptedAnswers": [
                   "%rbp,-0x8(%rsp)",
-                  "mov %rbp,-0x8(%rsp)"
+                  "%rbp, -0x8(%rsp)"
                 ],
                 "normalize": {
                   "caseSensitive": false,
@@ -107109,7 +107256,7 @@
     {
       "schemaVersion": "5",
       "id": "q-20fcc7293246e535",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-e8f40973e2cc056e",
       "paperOrder": 29,
       "number": {
@@ -107205,7 +107352,7 @@
             "width": "medium"
           }
         ],
-        "text": "3.（8 分）在现代餐饮行业中，服务员线程接收顾客订单，厨师线程处理订单。所有线程通过一个共享订单缓冲区协作：\n\n- 有 `NUM_WAITERS` 名服务员和 `NUM_COOKS` 名厨师，二者都大于 1；\n- 每个服务员每次向共享缓冲区放入一个订单；缓冲区满时必须等待；\n- 每个厨师每次从共享缓冲区取出一个订单；缓冲区空时必须等待；\n- 缓冲区容量为 `BUF_SIZE`，初始为空。\n\n下面的 `waiter` 是服务员线程，`cook` 是厨师线程，`init_buffer` 会在系统启动时调用一次。请填写代码中的八个空：\n\n```c\n#define NUM_WAITERS 4\n#define NUM_COOKS 2\n#define BUF_SIZE 5\n\ntypedef struct {\n    char *orders[BUF_SIZE];\n    int in;\n    int out;\n    sem_t mutex;\n    sem_t empty;\n    sem_t full;\n} Buffer;\n\nBuffer buffer;\n\nvoid init_buffer(void) {\n    buffer.in = 0;\n    buffer.out = 0;\n    sem_init(&buffer.mutex, 0, {{blank:init-mutex}});\n    sem_init(&buffer.empty, 0, {{blank:init-empty}});\n    sem_init(&buffer.full, 0, 0);\n}\n\nvoid *waiter(void *arg) {\n    while (1) {\n        /* 接单逻辑 */\n        char *order = xxxx;\n\n        /* 将订单放入缓冲区 */\n        {{blank:waiter-empty}};\n        {{blank:waiter-mutex}};\n        buffer.orders[buffer.in] = order;\n        buffer.in = (buffer.in + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:waiter-full}};\n\n        /* 其他逻辑略去 */\n    }\n}\n\nvoid *cook(void *arg) {\n    while (1) {\n        /* 从缓冲区取出订单 */\n        {{blank:cook-full}};\n        {{blank:cook-mutex}};\n        char *order = buffer.orders[buffer.out];\n        buffer.out = (buffer.out + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:cook-empty}};\n\n        /* 其他逻辑略去 */\n    }\n}\n```"
+        "text": "3.（8 分）在现代餐饮行业中，服务员线程接收顾客订单，厨师线程处理订单。所有线程通过一个共享订单缓冲区协作：\n\n- 有 `NUM_WAITERS` 名服务员和 `NUM_COOKS` 名厨师，二者都大于 1；\n- 每个服务员每次向共享缓冲区放入一个订单；缓冲区满时必须等待；\n- 每个厨师每次从共享缓冲区取出一个订单；缓冲区空时必须等待；\n- 缓冲区容量为 `BUF_SIZE`，初始为空。\n\n下面的 `waiter` 是服务员线程，`cook` 是厨师线程，`init_buffer` 会在系统启动时调用一次。请填写代码中的八个空：\n\n前两空只填初值，其余空填 P/V 调用表达式；题面已提供分号，不要重复填写。\n\n```c\n#define NUM_WAITERS 4\n#define NUM_COOKS 2\n#define BUF_SIZE 5\n\ntypedef struct {\n    char *orders[BUF_SIZE];\n    int in;\n    int out;\n    sem_t mutex;\n    sem_t empty;\n    sem_t full;\n} Buffer;\n\nBuffer buffer;\n\nvoid init_buffer(void) {\n    buffer.in = 0;\n    buffer.out = 0;\n    sem_init(&buffer.mutex, 0, {{blank:init-mutex}});\n    sem_init(&buffer.empty, 0, {{blank:init-empty}});\n    sem_init(&buffer.full, 0, 0);\n}\n\nvoid *waiter(void *arg) {\n    while (1) {\n        /* 接单逻辑 */\n        char *order = xxxx;\n\n        /* 将订单放入缓冲区 */\n        {{blank:waiter-empty}};\n        {{blank:waiter-mutex}};\n        buffer.orders[buffer.in] = order;\n        buffer.in = (buffer.in + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:waiter-full}};\n\n        /* 其他逻辑略去 */\n    }\n}\n\nvoid *cook(void *arg) {\n    while (1) {\n        /* 从缓冲区取出订单 */\n        {{blank:cook-full}};\n        {{blank:cook-mutex}};\n        char *order = buffer.orders[buffer.out];\n        buffer.out = (buffer.out + 1) % BUF_SIZE;\n        V(&buffer.mutex);\n        {{blank:cook-empty}};\n\n        /* 其他逻辑略去 */\n    }\n}\n```"
       },
       "solution": {
         "state": "available",
@@ -107246,8 +107393,7 @@
             "blankId": "waiter-empty",
             "method": "exact",
             "acceptedAnswers": [
-              "P(&buffer.empty)",
-              "P(&buffer.empty);"
+              "P(&buffer.empty)"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -107258,8 +107404,7 @@
             "blankId": "waiter-mutex",
             "method": "exact",
             "acceptedAnswers": [
-              "P(&buffer.mutex)",
-              "P(&buffer.mutex);"
+              "P(&buffer.mutex)"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -107270,8 +107415,7 @@
             "blankId": "waiter-full",
             "method": "exact",
             "acceptedAnswers": [
-              "V(&buffer.full)",
-              "V(&buffer.full);"
+              "V(&buffer.full)"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -107282,8 +107426,7 @@
             "blankId": "cook-full",
             "method": "exact",
             "acceptedAnswers": [
-              "P(&buffer.full)",
-              "P(&buffer.full);"
+              "P(&buffer.full)"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -107294,8 +107437,7 @@
             "blankId": "cook-mutex",
             "method": "exact",
             "acceptedAnswers": [
-              "P(&buffer.mutex)",
-              "P(&buffer.mutex);"
+              "P(&buffer.mutex)"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -107306,8 +107448,7 @@
             "blankId": "cook-empty",
             "method": "exact",
             "acceptedAnswers": [
-              "V(&buffer.empty)",
-              "V(&buffer.empty);"
+              "V(&buffer.empty)"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -146712,7 +146853,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f7d13a9c61e54b28",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f7485360f6c6060d",
       "paperOrder": 31,
       "number": {
@@ -146747,73 +146888,73 @@
             "marker": "{{blank:a}}",
             "occurrence": 0,
             "width": "short",
-            "label": "情况 A 标号"
+            "label": "A 的 case 常量"
           },
           {
             "id": "ca",
             "marker": "{{blank:ca}}",
             "occurrence": 0,
             "width": "long",
-            "label": "情况 A 的 c 赋值"
+            "label": "A 中 c 的右侧表达式"
           },
           {
             "id": "b",
             "marker": "{{blank:b}}",
             "occurrence": 0,
             "width": "short",
-            "label": "情况 B 标号"
+            "label": "B 的 case 常量"
           },
           {
             "id": "vb",
             "marker": "{{blank:vb}}",
             "occurrence": 0,
             "width": "long",
-            "label": "情况 B 的 val 赋值"
+            "label": "B 中 val 的右侧表达式"
           },
           {
             "id": "c",
             "marker": "{{blank:c}}",
             "occurrence": 0,
             "width": "short",
-            "label": "情况 C 标号"
+            "label": "C 的 case 常量"
           },
           {
             "id": "d",
             "marker": "{{blank:d}}",
             "occurrence": 0,
             "width": "short",
-            "label": "情况 D 标号"
+            "label": "D 的 case 常量"
           },
           {
             "id": "vcd",
             "marker": "{{blank:vcd}}",
             "occurrence": 0,
             "width": "long",
-            "label": "情况 C/D 的 val 赋值"
+            "label": "C/D 中 val 的右侧表达式"
           },
           {
             "id": "e",
             "marker": "{{blank:e}}",
             "occurrence": 0,
             "width": "short",
-            "label": "情况 E 标号"
+            "label": "E 的 case 常量"
           },
           {
             "id": "ve",
             "marker": "{{blank:ve}}",
             "occurrence": 0,
             "width": "long",
-            "label": "情况 E 的 val 赋值"
+            "label": "E 中 val 的右侧表达式"
           },
           {
             "id": "vd",
             "marker": "{{blank:vd}}",
             "occurrence": 0,
             "width": "long",
-            "label": "默认 val 赋值"
+            "label": "default 中 val 的右侧表达式"
           }
         ],
-        "text": "练习题 3.31 根据下面的汇编代码与跳转表，填写 `switcher` 的 C 代码模板。参数分别位于 `%rdi`、`%rsi`、`%rdx`、`%rcx`；标号 A 有意落入标号 B。\n\n```c\nvoid switcher(long a, long b, long c, long *dest) {\n    long val;\n    switch(a) {\n    case {{blank:a}}: /* A */\n        c = {{blank:ca}};\n        /* fall through */\n    case {{blank:b}}: /* B */\n        val = {{blank:vb}};\n        break;\n    case {{blank:c}}: /* C */\n    case {{blank:d}}: /* D */\n        val = {{blank:vcd}};\n        break;\n    case {{blank:e}}: /* E */\n        val = {{blank:ve}};\n        break;\n    default:\n        val = {{blank:vd}};\n    }\n    *dest = val;\n}\n```\n\n```text\nswitcher:\n    cmpq  $7, %rdi\n    ja    .L2\n    jmp   *.L4(,%rdi,8)\n.L7: xorq $15, %rsi\n     movq %rsi, %rdx\n.L3: leaq 112(%rdx), %rdi\n     jmp .L6\n.L5: leaq (%rdx,%rsi), %rdi\n     salq $2, %rdi\n     jmp .L6\n.L2: movq %rsi, %rdi\n.L6: movq %rdi, (%rcx)\n     ret\n.L4: .quad .L3, .L2, .L5, .L2, .L6, .L7, .L2, .L5\n```"
+        "text": "练习题 3.31 根据下面的汇编代码与跳转表，填写 `switcher` 的 C 代码模板。参数分别位于 `%rdi`、`%rsi`、`%rdx`、`%rcx`；标号 A 有意落入标号 B。\n\n每空只填缺失的常量或表达式，不要重复输入题面已有的 `case`、`c =`、`val =`、冒号或分号。共用分支 C、D 的两个常量请按从小到大顺序填写，以便逐空自动核对。\n\n```c\nvoid switcher(long a, long b, long c, long *dest) {\n    long val;\n    switch (a) {\n    case {{blank:a}}: /* A */\n        c = {{blank:ca}};\n        /* fall through */\n    case {{blank:b}}: /* B */\n        val = {{blank:vb}};\n        break;\n    case {{blank:c}}: /* C */\n    case {{blank:d}}: /* D */\n        val = {{blank:vcd}};\n        break;\n    case {{blank:e}}: /* E */\n        val = {{blank:ve}};\n        break;\n    default:\n        val = {{blank:vd}};\n    }\n    *dest = val;\n}\n```\n\n```asm\nswitcher:\n    cmpq  $7, %rdi\n    ja    .L2\n    jmp   *.L4(,%rdi,8)\n.L7:\n    xorq  $15, %rsi\n    movq  %rsi, %rdx\n.L3:\n    leaq  112(%rdx), %rdi\n    jmp   .L6\n.L5:\n    leaq  (%rdx,%rsi), %rdi\n    salq  $2, %rdi\n    jmp   .L6\n.L2:\n    movq  %rsi, %rdi\n.L6:\n    movq  %rdi, (%rcx)\n    ret\n.L4:\n    .quad .L3, .L2, .L5, .L2, .L6, .L7, .L2, .L5\n```"
       },
       "solution": {
         "state": "available",
@@ -146858,7 +146999,9 @@
             "method": "exact",
             "acceptedAnswers": [
               "c + 112",
-              "c+112"
+              "c+112",
+              "112 + c",
+              "112+c"
             ],
             "normalize": {
               "trimWhitespace": true,
@@ -146892,7 +147035,9 @@
             "method": "exact",
             "acceptedAnswers": [
               "(c + b) << 2",
-              "(c+b)<<2"
+              "(c+b)<<2",
+              "(b + c) << 2",
+              "(b+c)<<2"
             ],
             "normalize": {
               "trimWhitespace": true,
@@ -146935,12 +147080,12 @@
         ],
         "reference": {
           "format": "markdown",
-          "text": "完整填入后为：A=`case 5`，`c=b^15`；B=`case 0`，`val=c+112`；C、D 分别为 `case 2`、`case 7`（顺序可互换），`val=(c+b)<<2`；E=`case 4`，`val=a`；default 为 `val=b`。该代码保留 A 到 B 的 fall-through。"
+          "text": "各空实际应填写的内容如下，不包含题面已经写出的语句前缀或标点：\n\n| 空位 | 填入内容 |\n| --- | --- |\n| A 的常量 | `5` |\n| A 中 `c` 的右侧表达式 | `b ^ 15` |\n| B 的常量 | `0` |\n| B 中 `val` 的右侧表达式 | `c + 112` |\n| C 的常量 | `2` |\n| D 的常量 | `7` |\n| C/D 中 `val` 的右侧表达式 | `(c + b) << 2`，也接受 `(b + c) << 2` |\n| E 的常量 | `4` |\n| E 中 `val` 的右侧表达式 | `a` |\n| default 中 `val` 的右侧表达式 | `b` |\n\n`salq $2` 是左移两位，所以这里是 `<< 2`，不是 `>> 2`。C、D 在完整程序中可以交换，但本练习按题面指定的递增顺序逐空核对；不能把两个空都填为同一个常量。A 到 B 的 fall-through 必须保留。"
         },
         "provenance": {
           "origin": "unknown",
           "crossChecked": null,
-          "note": "依据固定版本来源仓库参考答案文本录入；代码与跳转目标逐项对应。"
+          "note": "依据固定版本来源仓库参考答案录入；明确缺失片段与完整语句的区别，增加加法交换写法。"
         }
       },
       "publication": {
@@ -149850,7 +149995,7 @@
     {
       "schemaVersion": "5",
       "id": "q-7d29433073c3ab5d",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 1,
       "number": {
@@ -149896,14 +150041,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "1. 下列关于 x86-64 汇编，说法**错误**的是："
+        "text": "1. 下列关于 x86-64 汇编，说法**错误**的是：\n\n注：课程及实验描述沿用 2020 年原卷语境；B 项的 AT&T 写法与原卷一致，不是将 Intel 误写为 AT&T。"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C（来源：2019、2020期末-答案解析）\n解析：栈帧长度可以在运行时变化，编译时无法确定，因此仍需要用 `%rbp` 作帧指针；A 是 attacklab/bomblab 的混淆项。"
+          "text": "答案：C（来源：2019、2020期末-答案解析）\n解析：C 错在“栈帧长度在编译时被确定”和“不会再作为帧指针使用”这两个绝对化表述。栈帧可以有运行时才确定的部分，编译器仍可用 `%rbp` 作帧指针；并不是所有函数都必须使用它。参考解析认为 A 正确，提醒不要将 Attacklab 和 Bomblab 混淆。\n\nB 中 AT&T 双操作数指令是源在前、目标在后，例如 `movq %rdi, %rax` 把 `%rdi` 复制到 `%rax`；Intel 写法为 `mov rax, rdi`。这里描述的是原卷课程使用的语法，不意味着当前所有课程或工具都只能使用这一种格式。"
         },
         "provenance": {
           "origin": "unknown",

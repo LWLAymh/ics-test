@@ -515,8 +515,8 @@
         "verifiedAnswerCount": 24,
         "singleChoiceCount": 19,
         "multipleChoiceCount": 0,
-        "fillCount": 2,
-        "shortAnswerCount": 1,
+        "fillCount": 3,
+        "shortAnswerCount": 0,
         "compositeCount": 1
       }
     },
@@ -1409,8 +1409,8 @@
         "verifiedAnswerCount": 27,
         "singleChoiceCount": 19,
         "multipleChoiceCount": 1,
-        "fillCount": 5,
-        "shortAnswerCount": 2,
+        "fillCount": 4,
+        "shortAnswerCount": 3,
         "compositeCount": 0
       }
     },

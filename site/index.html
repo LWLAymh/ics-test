@@ -48,6 +48,18 @@ window.MathJax = {
     <div><span>全站累计作答</span><strong id="ics-site-attempts" aria-live="polite">—</strong><small id="ics-site-attempt-note">正在读取；同一浏览器、同一道题只计一次。</small></div>
   </section>
 
+  <section class="ics-panel ics-history-panel" aria-label="本浏览器作答记录">
+    <details id="ics-practice-history">
+      <summary><strong>我的作答记录</strong><span id="ics-history-count">0 次</span></summary>
+      <div class="ics-history-body">
+        <div class="ics-history-toolbar"><label><input id="ics-history-wrong-only" type="checkbox"> 只看错题</label><span>按作答时间倒序 · 仅本浏览器</span></div>
+        <p class="ics-history-note" id="ics-history-status" role="status"></p>
+        <div id="ics-history-list" class="ics-history-list"></div>
+        <button id="ics-history-more" class="ics-secondary" type="button" hidden>加载更多记录</button>
+      </div>
+    </details>
+  </section>
+
   <div class="ics-panel" id="ics-setup">
     <div class="ics-panel-head">
       <div><p class="ics-eyebrow">开始练习</p><h2>选择你的练习范围</h2><p id="ics-bank-summary">正在读取题库…</p></div>

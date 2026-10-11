@@ -40,29 +40,33 @@
     return actual.length === expected.length && actual.every(function (id, index) { return id === expected[index]; });
   }
 
+  function gradeBlank(value, rule) {
+    if (!rule || (rule.method !== 'exact' && rule.method !== 'selection')) return null;
+    if (rule.method === 'selection') {
+      const actual = (Array.isArray(value) ? value : [value]).slice().sort();
+      const expected = rule.correctValues.slice().sort();
+      return actual.length === expected.length && actual.every(function (item, index) {
+        return typeof item === 'string' && item === expected[index];
+      });
+    }
+    function normalize(value) {
+      let result = String(value);
+      if (rule.normalize.trimWhitespace) result = result.trim();
+      if (!rule.normalize.caseSensitive) result = result.toLowerCase();
+      return result;
+    }
+    if (value == null || Array.isArray(value)) return false;
+    return rule.acceptedAnswers.some(function (accepted) { return normalize(accepted) === normalize(value); });
+  }
+
   function gradeBlanks(values, solution) {
     if (solution.state !== 'available' || solution.grading !== 'blanks' ||
         solution.blankAnswers.some(function (rule) { return rule.method !== 'exact' && rule.method !== 'selection'; })) return null;
     return solution.blankAnswers.every(function (rule) {
-      if (!Object.prototype.hasOwnProperty.call(values, rule.blankId)) return false;
-      if (rule.method === 'selection') {
-        const value = values[rule.blankId];
-        const actual = (Array.isArray(value) ? value : [value]).slice().sort();
-        const expected = rule.correctValues.slice().sort();
-        return actual.length === expected.length && actual.every(function (item, index) {
-          return typeof item === 'string' && item === expected[index];
-        });
-      }
-      function normalize(value) {
-        let result = String(value);
-        if (rule.normalize.trimWhitespace) result = result.trim();
-        if (!rule.normalize.caseSensitive) result = result.toLowerCase();
-        return result;
-      }
-      return rule.acceptedAnswers.some(function (accepted) { return normalize(accepted) === normalize(values[rule.blankId]); });
+      return Object.prototype.hasOwnProperty.call(values, rule.blankId) && gradeBlank(values[rule.blankId], rule);
     });
   }
 
   return { VERSION: VERSION, EXAM_LABELS: EXAM_LABELS, assertVersion: assertVersion, paperCollection: paperCollection,
-    blankSpans: blankSpans, gradeChoice: gradeChoice, gradeBlanks: gradeBlanks };
+    blankSpans: blankSpans, gradeChoice: gradeChoice, gradeBlank: gradeBlank, gradeBlanks: gradeBlanks };
 }));
