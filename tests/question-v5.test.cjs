@@ -4,6 +4,41 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('new October 11 reports qualify float types, share judgment givens and fix union alignment', () => {
+  const float = bank.find(q=>q.id==='q-f96f55c9c2cfd494');
+  assert.match(float.stem.text,/同一种浮点格式/);
+  assert.deepEqual(float.solution.correctOptionIds,['D']);
+  // The mixed-format counterexample is real, not an answer-key change.
+  const a=2**24, b=Math.fround(a), x=Math.fround(1);
+  assert.equal(a>b,false);
+  assert.equal(a+x>Math.fround(b+x),true);
+  const exact=-(2**-54);
+  const low=Math.fround(Math.fround(1+2**-53)-Math.fround(1+3*2**-54));
+  const high=(1+2**-53)-(1+3*2**-54);
+  assert.equal(low,0);
+  assert.equal(high,-(2**-52));
+  assert(Math.abs(high-exact)>Math.abs(low-exact));
+  const judgment=bank.find(q=>q.id==='q-155f1dde880cc7e5');
+  assert.match(judgment.stem.text,/double dx =/);
+  assert.deepEqual(judgment.parts.map(p=>p.solution.correctOptionIds[0]),['A','A','B','B']);
+  assert.match(judgment.parts[1].solution.reference.text,/True/);
+  assert.match(judgment.parts[1].solution.reference.text,/53 位/);
+  const union=bank.find(q=>q.id==='q-a52d536a178598a6');
+  const output=union.parts.find(p=>p.id==='q-9b7cd569a8bd4748');
+  const rule=output.solution.blankAnswers.find(r=>r.blankId==='line-3');
+  assert.equal(api.gradeBlank('24',rule),true);
+  assert.equal(api.gradeBlank('20',rule),false);
+  assert.match(output.solution.reference.text,/8 字节对齐/);
+  const abi=bank.find(q=>q.id==='q-f30a858658c5a553');
+  assert.deepEqual(abi.solution.correctOptionIds,['C']);
+  assert.match(abi.solution.reference.text,/D 是正确说法/);
+  const zero=bank.find(q=>q.id==='q-d3c830eb8ed35d68');
+  const zeroRule=zero.solution.blankAnswers.find(r=>r.blankId==='negative-zero');
+  for(const value of ['0','0.0','+0','+0.0','-0','-0.0']) assert.equal(api.gradeBlank(value,zeroRule),true,value);
+  for(const value of ['1','-1','0x80000000']) assert.equal(api.gradeBlank(value,zeroRule),false,value);
+  assert.doesNotMatch(zero.stem.text,/请保留零的符号/);
+});
+
 test('October 11 follow-up reports supply prerequisites, restore 11 float blanks, and grade whole output', () => {
   const swap=bank.find(q=>q.id==='q-1d549f83cb6e20a7');
   assert.match(swap.stem.text,/void inplace_swap\(int \*x, int \*y\)/);

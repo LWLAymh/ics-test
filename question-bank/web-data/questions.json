@@ -17294,7 +17294,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f30a858658c5a553",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 7,
       "number": {
@@ -17333,21 +17333,21 @@
           },
           "curated": "_curated/期中/2024期中-带答案/155.md",
           "aliases": [],
-          "provenance": "verbatim",
+          "provenance": "rewritten",
           "editorNote": "结构体参数与返回值经栈/寄存器传递"
         }
       ],
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "7.在作业题中，我们考察过GCC为一个参数和返回值都是结构体的函数产生的汇\n编代码，此时参数和返回值都是通过栈传递的，以下有关说法错误的是："
+        "text": "7. 在作业题中，我们考察过 GCC 为一个参数和返回值都是结构体的函数产生的汇编代码。在该例中，结构体参数通过栈传递，返回结构体写入调用者提供的内存空间。采用 x86-64 System V ABI 时，以下有关说法错误的是："
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C。\nC. 返回的结构体实际上存放在调用者的栈帧当中，而非被调用者"
+          "text": "答案：C。\n\n该例中，调用者在自己的栈帧内为返回结构体预留空间，并把这个空间的地址作为隐藏的第一个参数放入 `%rdi`。被调用者将返回内容写入该空间，返回时还把同一地址放入 `%rax`，因此 A、B 正确，C 错误。\n\nD 是正确说法：并非所有结构体都必须通过栈传递。满足 ABI 分类条件的小结构体可以使用寄存器传参、返回；题干描述的是作业中的那个具体例子。"
         },
         "provenance": {
           "origin": "unknown",
@@ -33283,7 +33283,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a52d536a178598a6",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 21,
       "number": {
@@ -33388,7 +33388,7 @@
                 "width": "medium"
               }
             ],
-            "text": "第二题（12 分）\n\n假设程序运行在 x86-64 小端机器上，编译器按照标准规则对齐，并且有 NaN 参与的算术比较均返回 0。请根据 C 程序与右侧汇编所反映的操作，填写四处缺失的 C 表达式。\n\n```c\nstruct a {\n    char c[2][3];\n    int i;\n};\n\nstruct b {\n    float f;\n    struct a a;\n    char c;\n};\n\nunion c {\n    struct a a;\n    struct b b;\n    struct b *pb;\n};\n\nvoid proc1(union c *u) {\n    double a = u->b.f {{blank:proc1-a}};\n    double b = u->b.f {{blank:proc1-b}};\n    printf(\"%d\\n\", a == b);\n}\n\nvoid proc2(union c *u) {\n    char *a = u->a.c[1] + 1;\n    char *b = (u->a.c + 1)[1];\n    printf(\"%d\\n\", (int)(b - a));\n}\n\nvoid proc3(union c *u) {\n    char x = u->a.c[1][0];\n    char y = {{blank:proc3-y}};\n    if (x == 0x7F && (y & 0x80) == 0x80) {\n        printf(\"%d\\n\", u->b.f < u->a.i);\n    } else {\n        printf(\"0\\n\");\n    }\n}\n\nvoid proc4(union c *u) {\n    int x = u->a.i;\n    int y = {{blank:proc4-y}};\n    printf(\"%d\\n\", (x > y) != (-x < -y));\n}\n\nint main(void) {\n    printf(\"%zu\\n\", sizeof(struct a));\n    printf(\"%zu\\n\", sizeof(struct b));\n    printf(\"%zu\\n\", sizeof(union c));\n\n    union c u;\n    /* 随机初始化 u */\n    proc1(&u);\n    proc2(&u);\n    proc3(&u);\n    proc4(&u);\n}\n```\n\n与四个空相关的汇编片段如下：\n\n```asm\n# proc1：第一条路径先做单精度加法，第二条路径先扩展为双精度\n    movss      (%rcx), %xmm1\n    movss      .LC0(%rip), %xmm0\n    addss      %xmm1, %xmm0\n    cvtss2sd   %xmm0, %xmm2\n\n    movss      (%rcx), %xmm0\n    cvtss2sd   %xmm0, %xmm0\n    movsd      .LC1(%rip), %xmm1\n    addsd      %xmm1, %xmm0\n\n# proc3 / proc4：从 union 起始地址偏移 16 字节处读取有符号 char\n    movzbl     16(%rcx), %eax\n    movsbl     %al, %eax\n\n.LC0:\n    .long 1048576000          # 0x3E800000，单精度 0.25\n.LC1:\n    .long 0\n    .long 1070596096          # 0x3FD00000，双精度 0.25 的高 32 位\n```"
+            "text": "第二题（12 分）\n\n假设程序运行在 x86-64 小端机器上，采用 System V AMD64 ABI 的默认对齐：`int`、`float` 的大小与对齐均为 4 字节，指针的大小与对齐均为 8 字节；`char` 为有符号类型。涉及 NaN 的 `<`、`>`、`==` 比较均返回 0（`!=` 返回 1）。请根据 C 程序与下方汇编所反映的操作，填写四处缺失的 C 表达式。\n\n```c\nstruct a {\n    char c[2][3];\n    int i;\n};\n\nstruct b {\n    float f;\n    struct a a;\n    char c;\n};\n\nunion c {\n    struct a a;\n    struct b b;\n    struct b *pb;\n};\n\nvoid proc1(union c *u) {\n    double a = u->b.f {{blank:proc1-a}};\n    double b = u->b.f {{blank:proc1-b}};\n    printf(\"%d\\n\", a == b);\n}\n\nvoid proc2(union c *u) {\n    char *a = u->a.c[1] + 1;\n    char *b = (u->a.c + 1)[1];\n    printf(\"%d\\n\", (int)(b - a));\n}\n\nvoid proc3(union c *u) {\n    char x = u->a.c[1][0];\n    char y = {{blank:proc3-y}};\n    if (x == 0x7F && (y & 0x80) == 0x80) {\n        printf(\"%d\\n\", u->b.f < u->a.i);\n    } else {\n        printf(\"0\\n\");\n    }\n}\n\nvoid proc4(union c *u) {\n    int x = u->a.i;\n    int y = {{blank:proc4-y}};\n    printf(\"%d\\n\", (x > y) != (-x < -y));\n}\n\nint main(void) {\n    printf(\"%zu\\n\", sizeof(struct a));\n    printf(\"%zu\\n\", sizeof(struct b));\n    printf(\"%zu\\n\", sizeof(union c));\n\n    union c u;\n    /* 随机初始化 u */\n    proc1(&u);\n    proc2(&u);\n    proc3(&u);\n    proc4(&u);\n}\n```\n\n与四个空相关的汇编片段如下：\n\n```asm\n# proc1：第一条路径先做单精度加法，第二条路径先扩展为双精度\n    movss      (%rcx), %xmm1\n    movss      .LC0(%rip), %xmm0\n    addss      %xmm1, %xmm0\n    cvtss2sd   %xmm0, %xmm2\n\n    movss      (%rcx), %xmm0\n    cvtss2sd   %xmm0, %xmm0\n    movsd      .LC1(%rip), %xmm1\n    addsd      %xmm1, %xmm0\n\n# proc3 / proc4：从 union 起始地址偏移 16 字节处读取有符号 char\n    movzbl     16(%rcx), %eax\n    movsbl     %al, %eax\n\n.LC0:\n    .long 1048576000          # 0x3E800000，单精度 0.25\n.LC1:\n    .long 0\n    .long 1070596096          # 0x3FD00000，双精度 0.25 的高 32 位\n```"
           },
           "solution": {
             "state": "available",
@@ -33539,7 +33539,7 @@
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "| 输出行 | 所有可能的值 |\n| --- | --- |\n| 第一行 | `12` |\n| 第二行 | `20` |\n| 第三行 | `20` |\n| 第四行 | `0, 1` |\n| 第五行 | `2` |\n| 第六行 | `0, 1` |\n| 第七行 | `0, 1` |\n\n前三行分别是 `sizeof(struct a)`、`sizeof(struct b)` 和 `sizeof(union c)`。第五行中，两个指针相差 2 个 `char`。第四、六、七行会随随机初始化的数据和第一问填写的表达式而变化。\n\n> 原卷无官方答案；这里保留现有人工推导结论，仍建议后续由助教复核。"
+              "text": "| 输出行 | 所有可能的值 |\n| --- | --- |\n| 第一行 | `12` |\n| 第二行 | `20` |\n| 第三行 | `24` |\n| 第四行 | `0, 1` |\n| 第五行 | `2` |\n| 第六行 | `0, 1` |\n| 第七行 | `0, 1` |\n\n前三行分别是 `sizeof(struct a)`、`sizeof(struct b)` 和 `sizeof(union c)`：\n\n- `struct a`：字符数组占 6 字节，填充 2 字节后存放 4 字节的 `int`，总计 12 字节，对齐为 4 字节。\n- `struct b`：`f`、`a`、`c` 分别从偏移 0、4、16 开始，末尾补齐到 4 的倍数，总计 20 字节。\n- `union c`：最大成员 `struct b` 占 20 字节，但指针成员 `pb` 要求 **8 字节对齐**，因此联合体整体大小向上补齐到 24 字节，而不是 20 字节。\n\n第五行中，两个指针相差 2 个 `char`。第四、六、七行会随随机初始化的数据和第一问填写的表达式而变化。\n\n> 原卷无官方答案；这里保留现有人工推导结论，仍建议后续由助教复核。"
             },
             "provenance": {
               "origin": "ai-derived",
@@ -33574,7 +33574,7 @@
                 "blankId": "line-3",
                 "method": "exact",
                 "acceptedAnswers": [
-                  "20"
+                  "24"
                 ],
                 "normalize": {
                   "caseSensitive": false,
@@ -57663,7 +57663,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f96f55c9c2cfd494",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 4,
       "number": {
@@ -57711,14 +57711,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "4.  关于浮点数，以下说法正确的是"
+        "text": "4. 关于浮点数，以下说法正确的是：\n\n本题采用 IEEE 754 浮点运算，按“舍入到最近值，恰好居中时取偶数”舍入，不使用扩展精度。A、D 中的 `a`、`b`、`x` 必须使用**同一种浮点格式**，两边的加法也在该格式下完成，不允许混合 `float` 与 `double` 类型。B、C 比较的是同一计算过程分别采用高、低精度时的结果。"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：D。A 不成立，例如取 a = +Inf、b = 1、x = −Inf，则 a > b 为真，但 a + x 和 b + x 分别为 NaN 和 −Inf，比较结果不满足 A。IEEE 浮点加法保持单调性；当 a > b 不成立时，给两边加上同一个 x 不会使比较反转为 a + x > b + x。涉及 NaN 时，比较结果为假。关于 B、C，高精度运算也不保证对特定精确结果的舍入误差总小于低精度运算。"
+          "text": "答案：D。\n\nA 不成立，即使都是有限值，也可能因为舍入使严格不等式变为相等。例如采用 binary32 时，`a = 1.0f`、`b = 0.0f`、`x = 16777216.0f`，有 `a > b`，但两个加法结果都为 `16777216.0f`。\n\nD 在题面规定的同格式、同舍入方式下成立：浮点加法保持非严格单调性，因此 `a <= b` 时不会得到 `a + x > b + x`；若 `a` 或 `b` 为 NaN，对应的和仍为 NaN，`>` 比较也为假。无穷大引起 NaN 时同样不会令 `>` 为真。\n\n这里的“同一种浮点格式”不可省略。例如 `double a = 16777216.0; float b = 16777216.0f, x = 1.0f;`，`a > b` 为假，但左侧加法在双精度下得到 `16777217.0`，右侧加法在单精度下舍入为 `16777216.0f`，D 在混合类型下便不成立。\n\nB、C 不成立：更高精度不能保证任意多步计算最终一定更接近精确值。例如计算 `(1 + 2^-53) - (1 + 3 * 2^-54)`，精确值为 `-2^-54`。binary32 中两个括号都舍入为 `1`，结果为 `0`，误差为 `2^-54`；binary64 中两个括号分别舍入为 `1` 和 `1 + 2^-52`，结果为 `-2^-52`，误差为 `3 * 2^-54`，反而更大。这个例子没有 NaN、Inf 或溢出。"
         },
         "provenance": {
           "origin": "unknown",
@@ -57734,28 +57734,28 @@
           "id": "A",
           "content": {
             "format": "markdown",
-            "text": "给定任意浮点数a，b和x，如果`a>b`成立（求值为`1`），则一定`a+x>b+x`\n成立"
+            "text": "给定任意浮点数 `a`、`b` 和 `x`，如果 `a > b` 成立（求值为 `1`），则一定 `a + x > b + x` 成立。"
           }
         },
         {
           "id": "B",
           "content": {
             "format": "markdown",
-            "text": "不考虑结果为NaN、Inf或运算过程发生溢出的情况，高精度浮点数一定\n得到比低精度浮点数更精确或相同的结果"
+            "text": "不考虑结果为 NaN、Inf 或运算过程发生溢出的情况，高精度浮点数一定得到比低精度浮点数更精确或相同的结果。"
           }
         },
         {
           "id": "C",
           "content": {
             "format": "markdown",
-            "text": "不考虑输入为NaN、Inf的情况，高精度浮点数一定得到比低精度浮点数\n更精确或相同的结果"
+            "text": "不考虑输入为 NaN、Inf 的情况，高精度浮点数一定得到比低精度浮点数更精确或相同的结果。"
           }
         },
         {
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "给定任意浮点数a, b和x，如果`a>b`不成立（求值为`0`），则一定`a+x>b+x`\n不成立。"
+            "text": "给定任意浮点数 `a`、`b` 和 `x`，如果 `a > b` 不成立（求值为 `0`），则一定 `a + x > b + x` 不成立。"
           }
         }
       ]
@@ -68835,7 +68835,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d3c830eb8ed35d68",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 17,
       "number": {
@@ -68939,7 +68939,7 @@
             }
           }
         ],
-        "text": "假设采用 IEEE 754 单精度浮点格式（1 位符号、8 位阶码、23 位小数），请填写数值并判断表达式是否正确。表达式中的各步运算均按单精度舍入，连续加法从左到右计算。\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| `0x80000000` | {{blank:negative-zero}} |\n| `0x41180000` | {{blank:nine-half}} |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} \\ne 2 + (2^{50} - 2^{50})$ | {{blank:association}} |\n| $2^{25} + 1 + 1 + 1 + 1 = 2^{25} + 4$ | {{blank:accumulation}} |\n\n请保留零的符号。原卷每空 1 分；本站四空全对计整题 1 分。"
+        "text": "假设采用 IEEE 754 单精度浮点格式（1 位符号、8 位阶码、23 位小数），请填写数值并判断表达式是否正确。表达式中的各步运算均按单精度舍入，连续加法从左到右计算。\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| `0x80000000` | {{blank:negative-zero}} |\n| `0x41180000` | {{blank:nine-half}} |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} \\ne 2 + (2^{50} - 2^{50})$ | {{blank:association}} |\n| $2^{25} + 1 + 1 + 1 + 1 = 2^{25} + 4$ | {{blank:accumulation}} |\n\n本题填写十进制数值，零可以写作 `0`；若要体现原位模式的符号，也可写作 `-0`。原卷每空 1 分；本站四空全对计整题 1 分。"
       },
       "solution": {
         "state": "available",
@@ -68950,7 +68950,11 @@
             "method": "exact",
             "acceptedAnswers": [
               "-0",
-              "-0.0"
+              "-0.0",
+              "0",
+              "0.0",
+              "+0",
+              "+0.0"
             ],
             "normalize": {
               "trimWhitespace": true,
@@ -68988,7 +68992,7 @@
         ],
         "reference": {
           "format": "markdown",
-          "text": "答案：2.\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| `0x80000000` | -0 |\n| `0x41180000` | +9.5 |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} \\ne 2 + (2^{50} - 2^{50})$ | 是 |\n| $2^{25} + 1 + 1 + 1 + 1 = 2^{25} + 4$ | 否 |\n\nAssociative: Only 23 bits of mantissa (M), so $2 + 2^{50} = 2^{50}$ (2 gets rounded off). So LHS = 0, RHS = 2.\n\nCumulative: 1 is 25 powers of 2 away from $2^{25}$, so $2^{25} + 1 = 2^{25}$, but 4 is 23 powers of 2 away from $2^{25}$, so it doesn't get rounded off."
+          "text": "参考答案如下。\n\n| 浮点数 | Decimal values |\n| --- | --- |\n| `0x80000000` | -0 |\n| `0x41180000` | +9.5 |\n\n| 表达式 | 是否正确 |\n| --- | --- |\n| $(2 + 2^{50}) - 2^{50} \\ne 2 + (2^{50} - 2^{50})$ | 是 |\n| $2^{25} + 1 + 1 + 1 + 1 = 2^{25} + 4$ | 否 |\n\n`0x80000000` 表示 IEEE 754 的负零 `-0`，数值与正零相等。因此第一空填写 `0`、`0.0`、`+0`、`+0.0`、`-0` 或 `-0.0` 都接受；这并不表示正负零的位模式相同。\n\nAssociative: Only 23 bits of mantissa (M), so $2 + 2^{50} = 2^{50}$ (2 gets rounded off). So LHS = 0, RHS = 2.\n\nCumulative: 1 is 25 powers of 2 away from $2^{25}$, so $2^{25} + 1 = 2^{25}$, but 4 is 23 powers of 2 away from $2^{25}$, so it doesn't get rounded off."
         },
         "provenance": {
           "origin": "unknown",
@@ -151840,7 +151844,7 @@
     {
       "schemaVersion": "5",
       "id": "q-155f1dde880cc7e5",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-febcfbeee0f364b2",
       "paperOrder": 6,
       "number": {
@@ -151922,7 +151926,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": ""
+        "text": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，可在查看答案后阅读说明。"
       },
       "parts": [
         {
@@ -151945,14 +151949,14 @@
           ],
           "stem": {
             "format": "markdown",
-            "text": "6. 在一个 `int` 类型为 32 位补码表示的机器上运行程序。`float` 类型使用 32 位 IEEE 格式，`double` 类型使用 64 位 IEEE 格式，且机器上没有 80 位扩展精度。以下 C 代码产生随机整数 `x`、`y`、`z`，并把它们转换成 `double` 类型：\n\n```c\nint x = random();\nint y = random();\nint z = random();\ndouble dx = (double) x;\ndouble dy = (double) y;\ndouble dz = (double) z;\n```\n\n对于下列每个 C 表达式，指出它是否总是为 True。若为“否”，可在查看答案后阅读说明。\n\n**A.** `(float) x == (float) dx`"
+            "text": "**A.** `(float) x == (float) dx`"
           },
           "solution": {
             "state": "available",
             "grading": "choice",
             "reference": {
               "format": "markdown",
-              "text": "答案：A"
+              "text": "答案：A（是 / True）。\n\n32 位整数可由 binary64 精确表示，因此直接从 `int` 转成 `float`，与先精确转成 `double` 再转成 `float`，结果相同。"
             },
             "provenance": {
               "origin": "unknown",
@@ -152022,7 +152026,7 @@
             "grading": "choice",
             "reference": {
               "format": "markdown",
-              "text": "答案：A"
+              "text": "答案：A（是 / True）。\n\n此处三个 `double` 都是由 32 位整数精确转换而来。任意两个数相加，绝对值至多为 `2^32`；三个数之和的绝对值至多为 `3 * 2^31`。这些整数均在 binary64 的 53 位有效精度范围内，所以两种结合次序都没有舍入误差，结果相等。\n\n这不意味着任意 `double` 加法都满足结合律；关键是本题限定了操作数来自 32 位整数。"
             },
             "provenance": {
               "origin": "unknown",
@@ -152211,7 +152215,7 @@
         "grading": "parts",
         "reference": {
           "format": "markdown",
-          "text": ""
+          "text": "四个小问的答案依次为：True、True、False、False。这里的 `dx`、`dy`、`dz` 来自 32 位整数转换，并非任意 `double` 值。"
         },
         "provenance": {
           "origin": "unknown",
