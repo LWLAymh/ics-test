@@ -4,6 +4,30 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('2019 midterm caller blanks require an immediate prefix and the correct string offset', () => {
+  const q=bank.find(q=>q.id==='q-873f08e7b04463d8');
+  const rules=Object.fromEntries(q.solution.blankAnswers.map(r=>[r.blankId,r]));
+  for(const value of ['$0x8','$0x08','$8']) assert.equal(api.gradeBlank(value,rules['slot-6']),true,value);
+  for(const value of ['0x8','8','$0x10']) assert.equal(api.gradeBlank(value,rules['slot-6']),false,value);
+  for(const value of ['str + 10','str+N','str + N','&str[N]','&str[10]'])
+    assert.equal(api.gradeBlank(value,rules['slot-13']),true,value);
+  for(const value of ['str+M','str + M','(str+M)','s.u.str_u','str[10]'])
+    assert.equal(api.gradeBlank(value,rules['slot-13']),false,value);
+  assert.equal(api.gradeBlank('s.str_s',rules['slot-12']),false);
+  const answers=Object.fromEntries(q.solution.blankAnswers.map(r=>[r.blankId,r.acceptedAnswers[0]]));
+  assert.equal(api.gradeBlanks(answers,q.solution),true);
+  assert.match(q.stem.text,/4006ec:  c6 45 d8 00/);
+  assert.match(q.stem.text,/40072c:  48 83 c0 08/);
+  assert.doesNotMatch(q.stem.text,/[‘’]/);
+  assert.match(q.stem.text,/LP64/);
+  assert.match(q.solution.reference.text,/str \+ M.*不正确/);
+  const s=-0x30, u=s+8;
+  assert.equal(u,-0x28);
+  assert.equal(Buffer.from([0xd8]).readInt8(0),u);
+  assert.equal('0123456789abcd'.slice(10),'abcd');
+  assert.notEqual('0123456789abcd'.slice(5),'abcd');
+});
+
 test('October 12 reports fix unsigned overflow and accept full-width LEA alternatives', () => {
   const integer = bank.find(q=>q.id==='q-b9417a58e44059bb');
   const rules = Object.fromEntries(integer.solution.blankAnswers.map(r=>[r.blankId,r]));

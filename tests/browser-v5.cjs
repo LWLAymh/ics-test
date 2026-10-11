@@ -766,6 +766,19 @@ async function run() {
         assert.match(await page.locator('#ics-reference table tbody tr').first().innerText(),/168\s+否/);
       }
     }
+    // The caller repair renders literal AT&T immediates and grades pointer aliases.
+    const callerRepair=all.find(q=>q.id==='q-873f08e7b04463d8');
+    await fixture(page,[callerRepair]);
+    for(const answer of callerRepair.solution.blankAnswers) {
+      await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(
+        answer.blankId==='slot-13'?'&str[N]':answer.acceptedAnswers[0]);
+    }
+    assert.equal(await page.locator('[data-blank-id="slot-6"]').inputValue(),'$0x8');
+    assert.equal(await page.locator('#ics-question-content pre').count(),2);
+    await page.click('#ics-submit');
+    assert.equal(await page.evaluate(()=>window.__test.state.records[0].points),1);
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),15);
+    assert.match(await page.locator('#ics-reference').innerText(),/\$0x8/);
     // Full bank browser parse, including withheld questions' Markdown, all options/references.
     const result=await page.evaluate(questions=>{
       window.MathJax=undefined;
