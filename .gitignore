@@ -6,4 +6,6 @@ output/pdf/question-review/
 output/pdf/paper-review/
 __pycache__/
 *.pyc
+.wrangler/
+.dev.vars
 

@@ -1,0 +1,15 @@
+{
+  "name": "ics-test-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "dry-run": "wrangler deploy --dry-run"
+  },
+  "dependencies": { "@modelcontextprotocol/sdk": "1.32.1" },
+  "devDependencies": { "wrangler": "4.149.0" }
+}

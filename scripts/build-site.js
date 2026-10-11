@@ -15,4 +15,12 @@ run('question-bank/_tools/build_web_data.py', '--deploy', path.join(output, 'web
 fs.cpSync(path.join(root, 'question-bank/assets'), path.join(output, 'web-data/assets'), { recursive: true });
 fs.writeFileSync(path.join(output, '.nojekyll'), '');
 run('question-bank/_tools/validate_v5.py', '--web', path.join(output, 'web-data'));
+const { packet } = require('./mcp-data.cjs');
+const questions = JSON.parse(fs.readFileSync(path.join(output, 'web-data/questions.json'), 'utf8')).questions;
+const papers = new Map(JSON.parse(fs.readFileSync(path.join(output, 'web-data/papers.json'), 'utf8')).papers.map(p => [p.id, p]));
+fs.mkdirSync(path.join(output, 'mcp-data'), { recursive: true });
+for (const question of questions) {
+  if (!/^q-[a-f0-9]{8,64}$/.test(question.id)) throw new Error('Unsafe MCP question ID');
+  fs.writeFileSync(path.join(output, 'mcp-data', question.id + '.json'), JSON.stringify(packet(question, papers.get(question.paperId))));
+}
 console.log('Built native v5 site; unpublished questions and legacy payloads excluded.');

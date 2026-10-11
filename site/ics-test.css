@@ -190,6 +190,10 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-question-navigation { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
 #ics-navigation-status { text-align: center; color: var(--text-muted); font-size: 12px; }
 .ics-question-utilities { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+.ics-mcp-help { padding-top: 16px; line-height: 1.8; }
+.ics-mcp-url { display: block; overflow-wrap: anywhere; padding: 10px; background: var(--surface); }
+.ics-mcp-copy-panel { margin-top: 16px; font-size: 14px; line-height: 1.7; }
+.ics-mcp-copy-panel textarea { display: block; box-sizing: border-box; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; resize: vertical; }
 .ics-report-button { padding: 0; border: 0; background: transparent; color: var(--text-muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .ics-report-button:hover { color: var(--ics-danger); }
 .ics-report-status { color: var(--text-muted); font-size: 11px; overflow-wrap: anywhere; }

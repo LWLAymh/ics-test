@@ -54,6 +54,22 @@ async function run() {
     await page.route('**/rest/v1/**',route=>route.abort());
     await page.goto(process.env.ICS_TEST_URL || 'http://127.0.0.1:4186/');
     await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
+    // Copying a question shares only its stable ID, not private practice data.
+    await fixture(page, [single, multiple]);
+    await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true,
+      value: { writeText: async text => { window.__agentCopied = text; } } }));
+    await page.locator('#ics-copy-agent').click();
+    assert.ok((await page.evaluate(() => window.__agentCopied)).includes(single.id));
+    assert.ok((await page.locator('#ics-agent-copy-status').innerText()).includes('已复制'));
+    assert.ok(!(await page.locator('#ics-agent-prompt').inputValue()).includes('correctOptionIds'));
+    await page.locator('#ics-next').click();
+    assert.equal(await page.locator('#ics-agent-copy-panel').isVisible(), false);
+    await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true,
+      value: { writeText: async () => { throw Error('permission denied'); } } }));
+    await page.locator('#ics-copy-agent').click();
+    assert.ok((await page.locator('#ics-agent-copy-status').innerText()).includes('手动复制'));
+    assert.ok((await page.locator('#ics-agent-prompt').inputValue()).includes(multiple.id));
+    await page.locator('#ics-abandon').click();
     // Global totals use all pages, not the question pool or PostgREST's first page.
     await page.evaluate(async()=>{
       window.__rows=Object.fromEntries(Array.from({length:1103},(_,i)=>{

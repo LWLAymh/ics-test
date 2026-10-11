@@ -1110,6 +1110,9 @@
     closeIssueForm();
     const q = state.questions[state.index];
     state.pendingCompositeGrade = null;
+    ui.questionMeta.dataset.questionId = q.id;
+    const agentPanel = $('ics-agent-copy-panel');
+    if (agentPanel) { agentPanel.hidden = true; $('ics-agent-prompt').value = ''; }
     const number = state.index + 1;
     const choiceQuestion = q.type === 'single-choice' || q.type === 'multiple-choice';
     const compositeQuestion = q.type === 'composite';
@@ -1445,6 +1448,25 @@
   });
   ui.start.addEventListener('click', startQuiz);
   ui.reportIssue.addEventListener('click', openIssueForm);
+  $('ics-copy-agent').addEventListener('click', async function () {
+    const q = state.questions[state.index];
+    if (!q) return;
+    const prompt = '请使用 ICS Test MCP 帮我理解这道题。\n' +
+      'MCP 地址：https://ics-test-mcp.ics-test-mcp.workers.dev/mcp（Streamable HTTP）\n' +
+      '题目 ID：' + q.id + '\n' +
+      '请先调用 read_question；除非我要求查看参考答案，否则不要调用 read_answer。\n' +
+      '如需报错，请先向我展示将公开的题号和说明，得到确认后再调用 report_issue。';
+    const field = $('ics-agent-prompt');
+    field.value = prompt;
+    $('ics-agent-copy-panel').hidden = false;
+    try {
+      await navigator.clipboard.writeText(prompt);
+      $('ics-agent-copy-status').textContent = '已复制。请粘贴到已配置此 MCP 的 Agent 对话中。';
+    } catch (_) {
+      $('ics-agent-copy-status').textContent = '浏览器未允许自动复制，请手动复制下面的文字。';
+      field.focus(); field.select();
+    }
+  });
   ui.issueForm.addEventListener('submit', reportCurrentIssue);
   ui.issueCancel.addEventListener('click', function () { closeIssueForm(); ui.reportIssue.focus(); });
   ui.mastery.addEventListener('click', toggleMastery);

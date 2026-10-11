@@ -118,6 +118,10 @@ v3、v4 和 v4.1 的文档、模板与解析工具仅留作历史参考；**不�
 
 代码填写遵循“只填缺失片段”：题面已有 `case`、`return`、`mov`、赋值左侧或分号时，逐空答案不得重复这些部分。参考区若展示完整代码，必须另行说明各空实际填入内容。比较运算符在代码／输入框中写成 ASCII `!=`、`<=`、`>=`，不替换成 LaTeX 或 Unicode 数学符号；前端关闭代码字体连字，保持原始字符可辨认。
 
+## Agent / MCP 接入
+
+远程 MCP 地址：<https://ics-test-mcp.ics-test-mcp.workers.dev/mcp>，使用 Streamable HTTP，仅提供读题、读答案和经确认公开报错三个工具，不允许提交作答或改变进度。网站每题的“复制给 Agent”按钮可复制当前稳定题目 ID；不会自动监视浏览器页面。使用方法、接口、安全边界及部署步骤见 [MCP 完整说明](docs/MCP.md)。
+
 ## Supabase：统计与实时问题报告
 
 首次启用在 SQL Editor 执行 `supabase/ics_stats.sql` 和 `supabase/ics_issue_reports.sql`，再执行下述说明功能升级脚本。前端连接配置位于 `site/index.html` 的 `data-supabase-url` / `data-supabase-key`；只能使用公开 publishable key，**不能放 secret/service-role key**。v5 题库迁移本身不需要新增 SQL：题目 ID、整题统计 ID 保持不变，旧片段 ID 仍可定位到综合题的小问；公开报错说明需单独升级。

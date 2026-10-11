@@ -60,6 +60,18 @@ window.MathJax = {
     </details>
   </section>
 
+  <section class="ics-panel ics-history-panel" aria-label="Agent 接入">
+    <details>
+      <summary><strong>Agent / MCP 接入</strong><span>读题 · 读答案 · 公开报错</span></summary>
+      <div class="ics-history-body ics-mcp-help">
+        <p>在支持远程 MCP 的 Agent 中添加以下地址，传输方式选择 Streamable HTTP，无需登录或密钥。</p>
+        <code class="ics-mcp-url">https://ics-test-mcp.ics-test-mcp.workers.dev/mcp</code>
+        <p>练习时点击“复制给 Agent”，把当前题号交给它。不会自动同步你的页面、答案、进度或作答记录；报错说明会公开，提交前需由你确认。</p>
+        <a href="https://github.com/LWLAymh/ics-test/blob/main/docs/MCP.md" target="_blank" rel="noopener noreferrer">接入与使用说明 ↗</a>
+      </div>
+    </details>
+  </section>
+
   <div class="ics-panel" id="ics-setup">
     <div class="ics-panel-head">
       <div><p class="ics-eyebrow">开始练习</p><h2>选择你的练习范围</h2><p id="ics-bank-summary">正在读取题库…</p></div>
@@ -167,10 +179,16 @@ window.MathJax = {
       <button class="ics-secondary" id="ics-next" type="button">下一题 →</button>
     </nav>
     <div class="ics-question-utilities">
+      <button class="ics-secondary" id="ics-copy-agent" type="button" aria-controls="ics-agent-copy-panel">复制给 Agent</button>
       <button class="ics-secondary" id="ics-mastery" type="button" aria-pressed="false">标记熟知</button>
       <span class="ics-report-status" id="ics-mastery-status" role="status"></span>
       <button class="ics-report-button" id="ics-report-issue" type="button" aria-expanded="false" aria-controls="ics-issue-form">您认为此题有误</button>
       <span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span>
+    </div>
+    <div class="ics-mcp-copy-panel" id="ics-agent-copy-panel" hidden>
+      <p id="ics-agent-copy-status" role="status" aria-live="polite"></p>
+      <label for="ics-agent-prompt">交给 Agent 的题目编号（不含你的答案或作答记录）</label>
+      <textarea id="ics-agent-prompt" rows="5" readonly spellcheck="false"></textarea>
     </div>
     <form class="ics-issue-form" id="ics-issue-form" hidden>
       <label for="ics-issue-message">问题说明（选填）</label>
