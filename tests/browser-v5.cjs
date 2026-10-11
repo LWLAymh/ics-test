@@ -265,12 +265,58 @@ async function run() {
     await page.click('#ics-skip');
     assert.equal(await page.locator('#ics-local-attempts').innerText(),'0');
     assert.equal(await page.evaluate(()=>window.__writes.filter(r=>r.name==='record_ics_answer').length),0);
+    // Direct reference viewing bypasses required/missing inputs and never
+    // counts an attempt, even across navigation or a pending self-assessment.
+    await fixture(page,[single,multiple,fill,short,composite]);
+    for(let i=0;i<5;i++) {
+      await page.click('#ics-show-answer');
+      assert.equal(await page.evaluate(()=>window.__test.state.index),i,'stay on the reference');
+      assert(await page.locator('#ics-feedback').isVisible());
+      assert(await page.locator('#ics-reference').isVisible());
+      assert.equal(await page.locator('#ics-self-grade').isVisible(),false);
+      assert.equal(await page.locator('#ics-submit').isVisible(),false);
+      assert.equal(await page.locator('#ics-show-answer').isVisible(),false);
+      assert.equal(await page.locator('.ics-blank-result').count(),0);
+      assert.match(await page.locator('#ics-navigation-status').innerText(),/已看答案/);
+      await page.evaluate(()=>{
+        document.querySelector('#ics-answer-form').dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));
+        document.querySelector('[data-grade="1"]').click();
+      });
+      if(i>0) { await page.click('#ics-previous');await page.click('#ics-next'); }
+      assert(await page.locator('#ics-feedback').isVisible(),'reference survives revisiting');
+      assert.equal(await page.locator('.ics-blank-result').count(),0);
+      assert.equal(await page.evaluate(()=>window.__test.state.score),0);
+      assert.equal(await page.locator('#ics-local-attempts').innerText(),'0');
+      await page.click('#ics-next');
+    }
+    assert.match(await page.locator('#ics-final-summary').innerText(),/已计分 0 题 · 跳过 5 题/);
+    await page.click('#ics-review-toggle');
+    assert.equal(await page.locator('.ics-review-score').filter({hasText:'已看答案（跳过）'}).count(),5);
+    await page.click('[data-review-index="2"]');
+    assert(await page.locator('#ics-feedback').isVisible());
+    assert.equal(await page.locator('.ics-blank-result').count(),0);
+    // The ordinary short-answer reveal still permits grading, while the
+    // explicit skip-view button can abandon a pending self-assessment.
+    for(const question of [short,composite]) {
+      await fixture(page,[question]);
+      if(question.type==='composite') {
+        await page.click('[data-composite-choice="B"]');await page.locator('.ics-blank-input').first().fill('42');
+      }
+      await page.click('#ics-submit');assert(await page.locator('#ics-self-grade').isVisible());
+      await page.click('#ics-show-answer');assert.equal(await page.locator('#ics-self-grade').isVisible(),false);
+      assert.equal(await page.locator('.ics-blank-result').count(),0);
+      assert.equal(await page.evaluate(()=>window.__test.state.pendingCompositeGrade),null);
+      await page.evaluate(()=>document.querySelector('[data-grade="1"]').click());
+    }
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),'0');
+    assert.equal(await page.evaluate(()=>window.__writes.filter(r=>r.name==='record_ics_answer').length),0);
     await fixture(page,[single,multiple,fill,short,composite]);
     await page.click('[data-choice="B"]');await page.click('#ics-next');
     await page.click('[data-choice="A"]');await page.click('[data-choice="B"]');await page.click('#ics-previous');
     assert.equal(await page.locator('#ics-answer').inputValue(),'B');await page.click('#ics-submit');
     await page.click('#ics-next');assert.equal(await page.locator('#ics-answer').inputValue(),'AB');await page.click('#ics-submit');
     await page.click('#ics-previous');assert(await page.locator('[data-choice="B"]').isDisabled());
+    assert.equal(await page.locator('#ics-show-answer').isVisible(),false,'graded answers cannot be converted to unrecorded skips');
     assert.equal(await page.evaluate(()=>window.__test.state.score),2);
     assert.equal(await page.locator('#ics-local-attempts').innerText(),'2');
     await page.click('[data-question-index="2"]');assert.equal(await page.locator('.ics-blank-input').count(),2);
@@ -504,6 +550,7 @@ async function run() {
     assert(await page.locator('select.ics-blank-input').first().isDisabled());
     // Declared missing answer must not be blocked by required fill inputs.
     await fixture(page,[{...fill,solution:{...solution('none'),state:'missing',reason:'待复核'}}]);
+    assert.equal(await page.locator('#ics-show-answer').isVisible(),false);
     assert(await page.locator('.ics-blank-input').first().isDisabled());await page.click('#ics-submit');
     assert.equal(await page.evaluate(()=>window.__test.state.records[0].mode),'unavailable');
     assert.equal(await page.locator('.ics-blank-result').count(),0);

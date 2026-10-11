@@ -176,7 +176,7 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-choice-content pre { margin: 0; padding: 10px 12px; }
 .ics-choice-content table { margin: 0; }
 .needs-choice { outline: 2px solid var(--ics-danger); outline-offset: 3px; border-radius: 5px; }
-.ics-answer-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+.ics-answer-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 18px; }
 .ics-feedback { margin-top: 22px; }
 .ics-verdict { margin-bottom: 16px; padding: 11px 13px; border-left: 3px solid var(--accent); background: var(--bg-soft); font-size: 13px; }
 .ics-verdict.correct { border-color: var(--ics-success); color: var(--ics-success); }

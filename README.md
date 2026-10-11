@@ -2,6 +2,8 @@
 
 独立的 PKU 计算机系统导论真题与 CSAPP 课本习题练习站，不依赖博客。
 
+练习时可点击“直接显示答案”：显示参考答案并将该题按跳过处理，停留本题供阅读，再用“下一题”继续。不计入成绩、本浏览器做题记录或 Supabase 作答统计；本次练习切回该题仍显示解析且不能再提交计分。简答题原有“显示参考答案 → 自评”入口仍正常计分，两者用途不同。
+
 - [在线练习](https://lwlaymh.github.io/ics-test/)
 - [仓库 / 提交 PR](https://github.com/LWLAymh/ics-test)
 - **当前题目接口为 v5**，人工编辑入口是 `question-bank/authored/`，不再是 `_curated/`。

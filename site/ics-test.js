@@ -18,6 +18,7 @@
     questionContent: $('ics-question-content'),
     answerForm: $('ics-answer-form'), answerLabel: $('ics-answer-label'), answerHint: $('ics-answer-hint'),
     choiceList: $('ics-choice-list'), answer: $('ics-answer'), submit: $('ics-submit'), skip: $('ics-skip'),
+    showAnswer: $('ics-show-answer'),
     reportIssue: $('ics-report-issue'), reportStatus: $('ics-report-status'),
     issueForm: $('ics-issue-form'), issueMessage: $('ics-issue-message'),
     issueSend: $('ics-issue-send'), issueCancel: $('ics-issue-cancel'),
@@ -62,7 +63,7 @@
     const value = attemptCounts.snapshot();
     ui.localAttempts.textContent = value.count.toLocaleString('zh-CN');
     ui.localAttemptNote.textContent = value.persistent
-      ? '重复练习计次，跳过不计入；仅保存在本浏览器。'
+      ? '重复练习计次，跳过或直接看答案不计入；仅保存在本浏览器。'
       : '浏览器存储不可用，部分次数仅在当前页面临时保留。';
     renderPracticeHistory();
   }
@@ -1020,7 +1021,8 @@
     ui.next.textContent = state.index === state.questions.length - 1 ? '查看结果 →' : '下一题 →';
     ui.navigationStatus.textContent = record && typeof record.points === 'number' ? '已作答 · ' + record.points + ' 分'
       : draft && draft.needsSelfGrade ? '请完成自评'
-        : record && record.mode === 'skipped' ? '已跳过，可继续作答'
+        : record && record.revealed ? '已看答案 · 按跳过处理'
+          : record && record.mode === 'skipped' ? '已跳过，可继续作答'
           : record && record.mode === 'unavailable' ? '答案待校对，未计分'
             : draftHasContent(draft) ? '草稿已保存' : '尚未作答';
     ui.questionGrid.innerHTML = state.questions.map(function (question, index) {
@@ -1029,7 +1031,8 @@
       const status = item && typeof item.points === 'number' ? 'answered'
         : saved && saved.needsSelfGrade ? 'draft'
           : item && item.mode === 'skipped' ? 'skipped' : draftHasContent(saved) ? 'draft' : '';
-      const label = status === 'answered' ? '已作答' : status === 'skipped' ? '已跳过' : status === 'draft' ? '有草稿' : '未作答';
+      const label = status === 'answered' ? '已作答' : item && item.revealed ? '已看答案，按跳过处理'
+        : status === 'skipped' ? '已跳过' : status === 'draft' ? '有草稿' : '未作答';
       return '<button type="button" data-question-index="' + index + '" class="' + status + '"' +
         (index === state.index ? ' aria-current="step"' : '') +
         ' aria-label="第 ' + (index + 1) + ' 题，' + label + '">' + (index + 1) + '</button>';
@@ -1101,6 +1104,9 @@
 
     ui.choiceList.querySelectorAll('button').forEach(function (button) { button.disabled = true; });
     disableQuestionControls(ui.questionContent);
+    const revealed = state.records[state.index] && state.records[state.index].revealed;
+    ui.showAnswer.hidden = revealed || !draft.needsSelfGrade;
+    if (revealed) { typeset(ui.reference); return; }
     highlightBlankResults(question);
     if (!draft.needsSelfGrade) highlightChoiceResults(question);
     typeset(ui.reference);
@@ -1133,6 +1139,7 @@
 
     ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false; ui.skip.disabled = false;
     ui.submit.hidden = false; ui.skip.hidden = false;
+    ui.showAnswer.hidden = q.solution.state !== 'available'; ui.showAnswer.disabled = false;
     const alreadyReported = state.reportedThisSession.has(q.id);
     const reporting = state.reportingQuestions.has(q.id);
     ui.reportIssue.disabled = alreadyReported || reporting;
@@ -1199,7 +1206,7 @@
   function recordGrade(points, mode) {
     const q = state.questions[state.index];
     const previous = state.records[state.index];
-    if (previous && typeof previous.points === 'number') return;
+    if (previous && (typeof previous.points === 'number' || previous.revealed)) return;
     state.records[state.index] = { question: q, answer: ui.answer.value.trim(), points: points, mode: mode };
     state.score = Math.round(state.records.reduce(function (total, record) {
       return total + (record && typeof record.points === 'number' ? record.points : 0);
@@ -1214,6 +1221,7 @@
     }
     ui.selfGrade.hidden = true;
     ui.submit.hidden = true; ui.skip.hidden = true;
+    ui.showAnswer.hidden = true;
     highlightChoiceResults(q);
     highlightBlankResults(q);
     saveQuestionDraft();
@@ -1284,7 +1292,7 @@
 
   function submitAnswer(event) {
     event.preventDefault();
-    if (ui.submit.disabled) return;
+    if (ui.submit.disabled || (state.records[state.index] && state.records[state.index].revealed)) return;
     if (state.currentMode === 'unavailable') {
       ui.answer.value = '答案待校对，本题未计分';
       ui.submit.disabled = true; ui.skip.disabled = true;
@@ -1383,6 +1391,40 @@
     advanceQuestion();
   }
 
+  function revealCurrentAnswer() {
+    const q = state.questions[state.index];
+    const record = state.records[state.index];
+    if (!q || q.solution.state !== 'available' || (record && (typeof record.points === 'number' || record.revealed))) return;
+    // This is a skip, not a submission: never call recordGrade or either attempt ledger.
+    state.records[state.index] = { question: q, answer: '直接查看答案，未作答', points: null, mode: 'skipped', revealed: true };
+    state.pendingCompositeGrade = null;
+    ui.answer.disabled = true; ui.submit.disabled = true; ui.skip.disabled = true;
+    ui.submit.hidden = true; ui.skip.hidden = true; ui.showAnswer.hidden = true; ui.selfGrade.hidden = true;
+    ui.choiceList.querySelectorAll('button').forEach(function (button) {
+      button.disabled = true; button.classList.remove('is-correct', 'is-incorrect');
+    });
+    disableQuestionControls(ui.questionContent);
+    // A pending self-assessment may already have per-blank feedback. Viewing
+    // without submitting must not present those drafts as graded answers.
+    ui.questionContent.querySelectorAll('.ics-inline-blank').forEach(function (root) {
+      root.removeAttribute('data-result');
+      const feedback = root.querySelector('.ics-blank-result');
+      root.querySelectorAll('.ics-blank-input, [data-blank-toggle]').forEach(function (control) {
+        control.classList.remove('missing'); control.removeAttribute('aria-invalid');
+        if (feedback && control.getAttribute('aria-describedby') === feedback.id) control.removeAttribute('aria-describedby');
+      });
+      if (feedback) feedback.remove();
+    });
+    ui.feedback.hidden = false;
+    ui.feedback.querySelector('details').open = true;
+    ui.verdict.className = 'ics-verdict';
+    ui.verdict.textContent = '已直接显示答案，本题按跳过处理，不计入成绩、做题记录或作答统计。';
+    ui.reference.innerHTML = renderSolution(q);
+    state.statsRevealed = true; renderLiveStats();
+    typeset(ui.reference);
+    saveQuestionDraft(); updateNavigation();
+  }
+
   function finishQuiz() {
     saveQuestionDraft();
     stopStatsSubscription();
@@ -1403,12 +1445,13 @@
     ui.reviewList.innerHTML = state.questions.map(function (question, index) {
       const record = state.records[index];
       const draft = state.drafts[index];
-      const score = record && record.mode === 'skipped' ? '已跳过'
+      const score = record && record.revealed ? '已看答案（跳过）' : record && record.mode === 'skipped' ? '已跳过'
         : record && typeof record.points === 'number' ? record.points + ' 分' : draft && draft.needsSelfGrade ? '待自评' : '未计分';
       const originalNumber = question.number.display ? ' · ' + escapeHtml(question.number.display) : '';
       return '<button type="button" class="ics-review-item" data-review-index="' + index + '"><span class="ics-review-score">' + score + '</span>' +
         '<strong>第 ' + (index + 1) + ' 题' + originalNumber + '</strong>' +
-        '<p>' + (record && record.mode !== 'skipped' ? '你的回答：' + escapeHtml(record.answer)
+        '<p>' + (record && record.revealed ? '仅查看参考答案，未计入作答记录'
+          : record && record.mode !== 'skipped' ? '你的回答：' + escapeHtml(record.answer)
           : draftHasContent(draft) ? '已保留草稿，点击返回题目' : '尚未作答，点击返回题目') + '</p></button>';
     }).join('');
     window.scrollTo({ top: ui.result.offsetTop - 90, behavior: 'smooth' });
@@ -1637,7 +1680,7 @@
   }, true);
   ui.selfGrade.addEventListener('click', function (event) {
     const button = event.target.closest('[data-grade]');
-    if (!button) return;
+    if (!button || ui.selfGrade.hidden || (state.records[state.index] && state.records[state.index].revealed)) return;
     const points = Number(button.dataset.grade);
     let finalPoints = points;
     if (state.currentMode === 'composite' && state.pendingCompositeGrade) {
@@ -1673,6 +1716,7 @@
     if (event.target.closest('[data-composite-choice]') && !ui.submit.disabled) saveEditedDraft();
   });
   ui.skip.addEventListener('click', skipCurrentQuestion);
+  ui.showAnswer.addEventListener('click', revealCurrentAnswer);
   ui.abandon.addEventListener('click', resetToSetup);
   ui.retry.addEventListener('click', resetToSetup);
   ui.reviewToggle.addEventListener('click', function () {
