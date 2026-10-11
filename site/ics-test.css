@@ -176,7 +176,11 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-choice-content pre { margin: 0; padding: 10px 12px; }
 .ics-choice-content table { margin: 0; }
 .needs-choice { outline: 2px solid var(--ics-danger); outline-offset: 3px; border-radius: 5px; }
-.ics-answer-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+.ics-answer-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 18px; }
+.ics-answer-actions .ics-secondary, .ics-answer-actions .ics-primary { min-height: 38px; padding: 8px 12px; font: 550 13px/1.5 var(--font-ui); }
+.ics-submit-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; margin-left: auto; }
+.ics-action-status > span:not(:empty) { display: block; margin-top: 8px; }
+.ics-action-status > span:empty { display: none; }
 .ics-feedback { margin-top: 22px; }
 .ics-verdict { margin-bottom: 16px; padding: 11px 13px; border-left: 3px solid var(--accent); background: var(--bg-soft); font-size: 13px; }
 .ics-verdict.correct { border-color: var(--ics-success); color: var(--ics-success); }
@@ -189,7 +193,8 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-grade-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 .ics-question-navigation { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
 #ics-navigation-status { text-align: center; color: var(--text-muted); font-size: 12px; }
-.ics-question-utilities { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+.ics-question-utilities { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ics-question-utilities .ics-report-button { margin-left: 6px; }
 .ics-mcp-help { padding-top: 20px; font-size: 13px; line-height: 1.65; }
 .ics-agent-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
 .ics-agent-step { min-width: 0; }
@@ -231,7 +236,6 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-report-button { padding: 0; border: 0; background: transparent; color: var(--text-muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .ics-report-button:hover { color: var(--ics-danger); }
 .ics-report-status { color: var(--text-muted); font-size: 11px; overflow-wrap: anywhere; }
-#ics-mastery { padding: 7px 12px; font-size: 12px; }
 #ics-mastery[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 .ics-issue-form { margin-top: 14px; padding: 16px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg-soft); }
 .ics-issue-form label { display: block; font-size: 13px; font-weight: 600; }
