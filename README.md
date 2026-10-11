@@ -120,7 +120,7 @@ v3、v4 和 v4.1 的文档、模板与解析工具仅留作历史参考；**不�
 
 ## Agent / MCP 接入
 
-远程 MCP 地址：<https://ics-test-mcp.ics-test-mcp.workers.dev/mcp>，使用 Streamable HTTP，仅提供读题、读答案和经确认公开报错三个工具，不允许提交作答或改变进度。网站每题的“复制给 Agent”按钮可复制当前稳定题目 ID；不会自动监视浏览器页面。使用方法、接口、安全边界及部署步骤见 [MCP 完整说明](docs/MCP.md)。
+远程 MCP 地址：<https://ics-test-mcp.ics-test-mcp.workers.dev/mcp>，使用 Streamable HTTP，仅提供读题、读答案和经确认公开报错三个工具，不允许提交作答或改变进度。展开“Agent / MCP 接入”，主动连接当前练习并复制一次连接信息后，切题自动同步；可选择只读共享当前已选选项和填空内容，不上传其他题的回答或历史。连接两小时后过期，可随时取消共享／断开。也可用每题“复制给 Agent”仅分享固定题号。使用方法、接口、安全边界及部署步骤见 [MCP 完整说明](docs/MCP.md)。
 
 ## Supabase：统计与实时问题报告
 

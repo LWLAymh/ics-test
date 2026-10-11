@@ -756,7 +756,7 @@
         body += '<p class="ics-composite-note">本小问思考完成后，在整题提交时查看参考答案并自评。</p>';
       }
       if (part.solution.state !== 'available') body += '<p class="ics-composite-note">本小问答案待复核，不计分。</p>';
-      return '<section class="ics-composite-part" data-composite-part="' + index + '"><header><h3>' +
+      return '<section class="ics-composite-part" data-composite-part="' + index + '" data-mcp-part-id="' + escapeHtml(part.id) + '"><header><h3>' +
         escapeHtml(part.number.display || ('第 ' + (index + 1) + ' 小问')) + '</h3><span>' +
         issueTypeLabel(part.type) + '</span></header><div class="ics-composite-body">' + body + '</div></section>';
     }).join('');
@@ -1111,6 +1111,7 @@
     const q = state.questions[state.index];
     state.pendingCompositeGrade = null;
     ui.questionMeta.dataset.questionId = q.id;
+    activePracticePart = null;
     const agentPanel = $('ics-agent-copy-panel');
     if (agentPanel) { agentPanel.hidden = true; $('ics-agent-prompt').value = ''; }
     const number = state.index + 1;
@@ -1181,6 +1182,7 @@
     ui.feedback.querySelector('details').open = true;
     ui.verdict.className = 'ics-verdict'; ui.reference.innerHTML = '';
     restoreQuestionDraft(q);
+    publishPracticeContext();
     updateNavigation();
     typeset(ui.questionContent);
     typeset(ui.choiceList);
@@ -1385,6 +1387,7 @@
     saveQuestionDraft();
     stopStatsSubscription();
     ui.quiz.hidden = true; ui.result.hidden = false;
+    document.dispatchEvent(new CustomEvent('ics:practice-context', { detail: { questionId: null, partId: null } }));
     const total = state.questions.length;
     const graded = state.records.filter(function (record) { return typeof record.points === 'number'; }).length;
     const skipped = state.records.filter(function (record) { return record.mode === 'skipped'; }).length;
@@ -1428,6 +1431,7 @@
   function resetToSetup() {
     stopStatsSubscription();
     ui.quiz.hidden = true; ui.result.hidden = true; ui.setup.hidden = false;
+    document.dispatchEvent(new CustomEvent('ics:practice-context', { detail: { questionId: null, partId: null } }));
     showSetupError('');
     window.scrollTo({ top: ui.setup.offsetTop - 90, behavior: 'smooth' });
   }
@@ -1448,6 +1452,39 @@
   });
   ui.start.addEventListener('click', startQuiz);
   ui.reportIssue.addEventListener('click', openIssueForm);
+  let activePracticePart = null;
+  function publishPracticeContext() {
+    const q = state.questions[state.index];
+    if (!q || ui.quiz.hidden) return;
+    function blanks(scope) {
+      const values = new Map();
+      ui.questionContent.querySelectorAll('.ics-blank-input').forEach(function (input) {
+        if (input.dataset.blankScope === scope) values.set(input.dataset.blankId, readBlankValue(input));
+      });
+      return Array.from(values, function (entry) { return { id: entry[0], value: entry[1] }; });
+    }
+    const draft = {
+      choices: Array.from(ui.choiceList.querySelectorAll('[data-choice].selected'), button => button.dataset.choice),
+      blanks: blanks('root'),
+      parts: (q.parts || []).map(function (part, index) {
+        const section = ui.questionContent.querySelector('[data-composite-part="' + index + '"]');
+        return { id: part.id, choices: section ? Array.from(section.querySelectorAll('[data-composite-choice].selected'),
+          button => button.dataset.compositeChoice) : [], blanks: blanks(String(index)) };
+      }),
+    };
+    document.dispatchEvent(new CustomEvent('ics:practice-context', {
+      detail: { questionId: q.id, partId: activePracticePart, draft },
+    }));
+  }
+  ['click', 'focusin', 'input', 'change'].forEach(function (name) {
+    ui.questionContent.addEventListener(name, function (event) {
+      const part = event.target.closest('[data-mcp-part-id]');
+      activePracticePart = part ? part.dataset.mcpPartId : null;
+      // Read after choice selection and repeated-blank mirroring have completed.
+      setTimeout(publishPracticeContext, 0);
+    });
+  });
+  ui.choiceList.addEventListener('click', () => setTimeout(publishPracticeContext, 0));
   $('ics-copy-agent').addEventListener('click', async function () {
     const q = state.questions[state.index];
     if (!q) return;

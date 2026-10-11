@@ -191,6 +191,11 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 #ics-navigation-status { text-align: center; color: var(--text-muted); font-size: 12px; }
 .ics-question-utilities { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
 .ics-mcp-help { padding-top: 16px; line-height: 1.8; }
+.ics-agent-connection-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.ics-agent-connection-actions button { min-height: 42px; }
+.ics-agent-share { display: flex; align-items: center; gap: 8px; padding: 8px 0; cursor: pointer; }
+.ics-agent-share input { width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--accent); }
+#ics-agent-connection-status { overflow-wrap: anywhere; }
 .ics-mcp-url { display: block; overflow-wrap: anywhere; padding: 10px; background: var(--surface); }
 .ics-mcp-copy-panel { margin-top: 16px; font-size: 14px; line-height: 1.7; }
 .ics-mcp-copy-panel textarea { display: block; box-sizing: border-box; width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; resize: vertical; }
