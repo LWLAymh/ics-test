@@ -36,7 +36,7 @@ export async function reporterId(ip, secret) {
 async function loadPacket(id, env, upstream) {
   // Fixed deployment origin + validated ID: the caller cannot supply a URL.
   const url = new URL('mcp-data/' + id + '.json', env.SITE_URL);
-  const response = await upstream(url.href, { redirect: 'error', signal: AbortSignal.timeout(10000), cache: 'no-store' });
+  const response = await upstream(url.href, { redirect: 'manual', signal: AbortSignal.timeout(10000), cache: 'no-store' });
   if (response.status === 404) throw new Error('找不到该题，或题目尚未发布／已暂停发布。');
   if (!response.ok) throw new Error('题库暂时不可用，请稍后重试。');
   const raw = await response.text();
@@ -46,7 +46,7 @@ async function loadPacket(id, env, upstream) {
   if (packet.packetVersion !== 1 || packet.questionId !== id || packet.question?.id !== id || packet.answer?.id !== id) throw new Error('题库数据不兼容。');
   return packet;
 }
-export async function callTool(name, args, env, ip, upstream = fetch) {
+export async function callTool(name, args, env, ip, upstream = (...args) => fetch(...args)) {
   if (!TOOLS.some(tool => tool.name === name)) return problem('未知工具；本服务只允许读题、读答案、报错。');
   if (!validArgs(name, args)) return problem('参数无效。请使用完整题目 ID；报错还需要明确确认 confirmed=true，说明最多1000字符。');
   try {
@@ -59,7 +59,7 @@ export async function callTool(name, args, env, ip, upstream = fetch) {
     if (name === 'read_answer') return result(packet.answer);
     const visitorId = await reporterId(ip, env.REPORT_IDENTITY_SECRET);
     const response = await upstream(new URL('/rest/v1/rpc/report_ics_question_issue_with_message', env.SUPABASE_URL).href, {
-      method: 'POST', redirect: 'error', signal: AbortSignal.timeout(10000),
+      method: 'POST', redirect: 'manual', signal: AbortSignal.timeout(10000),
       headers: { 'Content-Type': 'application/json', apikey: env.SUPABASE_PUBLISHABLE_KEY },
       body: JSON.stringify({ p_question_id: args.questionId, p_visitor_id: visitorId, p_message: (args.message || '').trim() }),
     });
@@ -72,7 +72,7 @@ export async function callTool(name, args, env, ip, upstream = fetch) {
     return problem(safe.includes(error.message) ? error.message : '服务暂时不可用，请稍后重试。');
   }
 }
-export async function handleRequest(request, env, upstream = fetch) {
+export async function handleRequest(request, env, upstream = (...args) => fetch(...args)) {
   const url = new URL(request.url);
   const origin = request.headers.get('Origin');
   const allowedOrigin = !origin || origin === new URL(env.SITE_URL).origin || origin === url.origin;

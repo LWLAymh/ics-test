@@ -11,5 +11,5 @@
     "dry-run": "wrangler deploy --dry-run"
   },
   "dependencies": { "@modelcontextprotocol/sdk": "1.32.1" },
-  "devDependencies": { "wrangler": "4.149.0" }
+  "devDependencies": { "wrangler": "4.149.0", "esbuild": "0.28.2", "miniflare": "5.20261006.1-alpha" }
 }

@@ -81,7 +81,7 @@ npx.cmd wrangler secret put REPORT_IDENTITY_SECRET
 
 在交互提示中粘贴新生成的高强度随机值；不要复用 Supabase 管理密钥，不要提交 secret 到 Git。.dev.vars 已忽略，可放本地测试值；生产密钥由 Cloudflare 保存。轮换会改变匿名回执身份，旧报告仍保留。部署配置中的 account ID、站点地址、Supabase 项目和公开 key 若用于自己的 fork，需要改为自己的值。
 
-mcp/test/worker.test.mjs 用真实官方 SDK 客户端测试握手、列工具和调用；报错 RPC 全部模拟，不向线上造报告。根目录 tests/mcp-data.test.cjs 全量检查发布题的 Markdown 保真、答案隔离和图片文件。持续验证只打包 Worker，不把 Cloudflare 登录凭证放 GitHub。
+mcp/test/worker.test.mjs 用真实官方 SDK 客户端测试握手、列工具和调用；runtime.test.mjs 在 Cloudflare 的真实 workerd 运行时检查读题、读答案、报错和重定向拒绝。报错 RPC 全部模拟，不向线上造报告。根目录 tests/mcp-data.test.cjs 全量检查发布题的 Markdown 保真、答案隔离和图片文件。持续验证只打包 Worker，不把 Cloudflare 登录凭证放 GitHub。
 
 线上检查可用任意兼容客户端，验证只列出三个工具，再对网站实际题号调用两个只读工具。**不要为了测试公开报错而制造虚假问题**。
 
