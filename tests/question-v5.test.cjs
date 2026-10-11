@@ -4,6 +4,33 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('October 12 reports fix unsigned overflow and accept full-width LEA alternatives', () => {
+  const integer = bank.find(q=>q.id==='q-b9417a58e44059bb');
+  const rules = Object.fromEntries(integer.solution.blankAnswers.map(r=>[r.blankId,r]));
+  assert.equal(39+((-127+256)%256),168);
+  assert(168<256);
+  assert.equal(api.gradeBlank(['no'],rules['unsigned-r1-c3']),true);
+  assert.equal(api.gradeBlank(['yes'],rules['unsigned-r1-c3']),false);
+  const answers = Object.fromEntries(integer.solution.blankAnswers.map(r=>[r.blankId,
+    r.method==='selection'?r.correctValues:r.acceptedAnswers[0]]));
+  assert.equal(api.gradeBlanks(answers,integer.solution),true);
+  assert.match(integer.stem.text,/整数提升/);
+  assert.match(integer.solution.reference.text,/39 \+ 129 = 168/);
+  const array = bank.find(q=>q.id==='q-a44ec5ff33556a53');
+  const add = array.solution.blankAnswers.find(r=>r.blankId==='add-column');
+  for(const code of [
+    'addq %rcx, %rax', 'leaq (%rax,%rcx), %rax',
+    'leaq (%rax, %rcx), %rax', 'leaq (%rcx,%rax),%rax',
+    'leaq (%rcx, %rax, 1), %rax'
+  ]) assert.equal(api.gradeBlank(code,add),true,code);
+  for(const code of [
+    'leaq %rcx, %rax', 'leaq (%rax,%rcx,4), %rax',
+    'leaq (%rax,%rcx), %rcx', 'leal (%eax,%ecx), %eax',
+    'movq (%rax,%rcx), %rax', 'addl %ecx, %eax'
+  ]) assert.equal(api.gradeBlank(code,add),false,code);
+  assert.match(array.solution.reference.text,/不使用这些条件码/);
+});
+
 test('new October 11 reports qualify float types, share judgment givens and fix union alignment', () => {
   const float = bank.find(q=>q.id==='q-f96f55c9c2cfd494');
   assert.match(float.stem.text,/同一种浮点格式/);

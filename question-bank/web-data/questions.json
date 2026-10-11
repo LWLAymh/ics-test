@@ -68544,7 +68544,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b9417a58e44059bb",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 16,
       "number": {
@@ -68656,14 +68656,14 @@
             }
           }
         ],
-        "text": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n二进制空位填写完整的 8 位，可连续填写，也可每 4 位用一个空格分组；前导零需保留。\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：{{blank:unsigned-r1-c1}} | 十进制：{{blank:unsigned-r1-c2}} | {{blank:unsigned-r1-c3}} |\n| Two’s Complement | 二进制：{{blank:two-s-complement-r2-c1}} | 十进制：{{blank:two-s-complement-r2-c2}} | {{blank:two-s-complement-r2-c3}} |"
+        "text": "第二题 整数、浮点数（10分）\n1. （6 points）假设8-bit整数，请填写以下表格（每空1分）\n\n按 8 位机器整数运算理解本题，不考虑 C 语言的整数提升。Unsigned 行中先将 `-127` 转换为 8 位无符号整数，再与 `39` 相加；最后一列只判断 `39+(-127)` 这一列的加法是否溢出。\n\n二进制空位填写完整的 8 位，可连续填写，也可每 4 位用一个空格分组；前导零需保留。\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：{{blank:unsigned-r1-c1}} | 十进制：{{blank:unsigned-r1-c2}} | {{blank:unsigned-r1-c3}} |\n| Two’s Complement | 二进制：{{blank:two-s-complement-r2-c1}} | 十进制：{{blank:two-s-complement-r2-c2}} | {{blank:two-s-complement-r2-c3}} |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：1.\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：`00000000`（或 `0000 0000`） | 十进制：168 | 是 |\n| Two's Complement | 二进制：`10000000`（或 `1000 0000`） | 十进制：-88 | 否 |"
+          "text": "参考答案如下。\n\n| 类型 | 最大的整数+1 | 39+(-127) | 39+(-127) 是否溢出? |\n| --- | --- | --- | --- |\n| Unsigned | 二进制：`00000000`（或 `0000 0000`） | 十进制：168 | 否 |\n| Two's Complement | 二进制：`10000000`（或 `1000 0000`） | 十进制：-88 | 否 |\n\n无符号行中，`-127` 的 8 位表示对应无符号值 `129`，所以 `39 + 129 = 168`，没有超出 `0..255`，不溢出。补码行中，`39 + (-127) = -88`，也在 `-128..127` 范围内，不溢出。\n\n“最大的整数+1”是另一项运算：无符号数 `255 + 1` 回绕为 `0`；补码数 `127 + 1` 的低 8 位为 `10000000`（即 `-128`）。这两项均溢出，但不影响最后一列对另一项加法的判断。"
         },
         "provenance": {
           "origin": "unknown",
@@ -68698,7 +68698,7 @@
             "blankId": "unsigned-r1-c3",
             "method": "selection",
             "correctValues": [
-              "yes"
+              "no"
             ]
           },
           {
@@ -154141,7 +154141,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a44ec5ff33556a53",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-febcfbeee0f364b2",
       "paperOrder": 19,
       "number": {
@@ -154201,14 +154201,14 @@
             "width": "medium"
           }
         ],
-        "text": "19. C 语言中传参 $n\\times n$ 二维数组时，如果 `n` 是变量，应该如何传递？补全下面的汇编代码。\n\n```asm\n# int var_ele(size_t n, int a[n][n], size_t i, size_t j)\n# { return a[i][j]; }\n# 参数寄存器：%rdi, %rsi, %rdx, %rcx\n\nvar_ele:\n    movq %rdx, %rax\n    {{blank:multiply-index}}\n    {{blank:add-column}}\n    movl (%rsi,%rax,4), %eax\n    ret\n```"
+        "text": "19. C 语言中传参 $n\\times n$ 二维数组时，如果 `n` 是变量，应该如何传递？补全下面的汇编代码。\n\n每空填写一条完整的 AT&T 格式指令；能正确实现该函数的等价指令也可。\n\n```asm\n# int var_ele(size_t n, int a[n][n], size_t i, size_t j)\n# { return a[i][j]; }\n# 参数寄存器：%rdi, %rsi, %rdx, %rcx\n\nvar_ele:\n    movq %rdx, %rax\n    {{blank:multiply-index}}\n    {{blank:add-column}}\n    movl (%rsi,%rax,4), %eax\n    ret\n```"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n\n1. `imulq %rdi, %rax`\n2. `addq %rcx, %rax`\n\n数组按行优先存放，`a[i][j]` 的元素下标为 `i * n + j`。因此先计算 `%rax = i * n`，再加上 `j`；最后用比例因子 4 读取 `int` 元素。"
+          "text": "答案：\n\n1. `imulq %rdi, %rax`\n2. `addq %rcx, %rax`\n\n数组按行优先存放，`a[i][j]` 的元素下标为 `i * n + j`。因此先计算 `%rax = i * n`，再加上 `j`；最后用比例因子 4 读取 `int` 元素。\n\n第二空也可填写 `leaq (%rax,%rcx), %rax`：它计算两个寄存器之和，并不读取内存。基址与变址寄存器可以互换，也可显式写出比例因子 `1`，例如 `leaq (%rcx,%rax,1), %rax`。\n\n`addq` 会修改条件码，`leaq` 不会；后续的 `movl` 和 `ret` 不使用这些条件码，因此这里两种写法都正确。"
         },
         "provenance": {
           "origin": "unknown",
@@ -154233,7 +154233,19 @@
             "method": "exact",
             "acceptedAnswers": [
               "addq %rcx, %rax",
-              "addq %rcx,%rax"
+              "addq %rcx,%rax",
+              "leaq (%rax,%rcx), %rax",
+              "leaq (%rax,%rcx),%rax",
+              "leaq (%rax, %rcx), %rax",
+              "leaq (%rcx,%rax), %rax",
+              "leaq (%rcx,%rax),%rax",
+              "leaq (%rcx, %rax), %rax",
+              "leaq (%rax,%rcx,1), %rax",
+              "leaq (%rax,%rcx,1),%rax",
+              "leaq (%rax, %rcx, 1), %rax",
+              "leaq (%rcx,%rax,1), %rax",
+              "leaq (%rcx,%rax,1),%rax",
+              "leaq (%rcx, %rax, 1), %rax"
             ],
             "normalize": {
               "caseSensitive": false,

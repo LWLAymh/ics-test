@@ -748,6 +748,24 @@ async function run() {
       assert.equal(await lastPre.locator('.ics-blank-input').count(),4);
       if(process.env.ICS_SCREENSHOTS)await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,id+'-accepted-desktop.png'),fullPage:true});
     }
+    // October 12 public reports: real controls, full-question grading and table layout.
+    for(const id of ['q-b9417a58e44059bb','q-a44ec5ff33556a53']) {
+      const question=all.find(q=>q.id===id);
+      await fixture(page,[question]);
+      for(const answer of question.solution.blankAnswers) {
+        const input=page.locator('[data-blank-id="'+answer.blankId+'"]').first();
+        if(answer.method==='selection') await input.selectOption(answer.correctValues[0]);
+        else await input.fill(answer.blankId==='add-column'?'leaq (%rax,%rcx), %rax':answer.acceptedAnswers[0]);
+      }
+      await page.click('#ics-submit');
+      assert.equal(await page.evaluate(()=>window.__test.state.records[0].points),1,id);
+      assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"]').count(),0,id);
+      assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),question.stem.blanks.length,id);
+      if(id==='q-b9417a58e44059bb') {
+        assert.equal(await page.locator('#ics-reference table').count(),1);
+        assert.match(await page.locator('#ics-reference table tbody tr').first().innerText(),/168\s+否/);
+      }
+    }
     // Full bank browser parse, including withheld questions' Markdown, all options/references.
     const result=await page.evaluate(questions=>{
       window.MathJax=undefined;
