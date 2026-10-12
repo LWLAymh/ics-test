@@ -4,6 +4,32 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('new reports accept equivalent float expressions and LEA displacements without changing call timing', () => {
+  const expression=bank.find(q=>q.id==='q-0300000000000057').parts[0];
+  const ret2=expression.solution.blankAnswers.find(r=>r.blankId==='ret2');
+  for(const value of ['c + d * 2','d * 2 + c','c+d*2','d*2+c','c + 2 * d','2*d+c'])
+    assert.equal(api.gradeBlank(value,ret2),true,value);
+  for(const value of ['(c+d)*2','c+d','c+4*d'])
+    assert.equal(api.gradeBlank(value,ret2),false,value);
+  assert.match(expression.stem.text,/不是 NaN/);
+  const foo=bank.find(q=>q.id==='q-1d4f3586e8bd5b5c');
+  const b9=foo.solution.blankAnswers.find(r=>r.blankId==='b9');
+  for(const value of ['-1','-0x1','-0X01']) assert.equal(api.gradeBlank(value,b9),true,value);
+  for(const value of ['1','0xff','$-0x1']) assert.equal(api.gradeBlank(value,b9),false,value);
+  assert.equal(Buffer.from([0xff]).readInt8(0),-1);
+  assert.doesNotMatch(foo.stem.text,/^（[1-9][0-3]?）$/m);
+  const stack=bank.find(q=>q.id==='q-3d1423df07ea83f3');
+  assert.deepEqual(stack.solution.correctOptionIds,['C']);
+  assert.equal(api.gradeChoice(['C'],stack.solution),true);
+  assert.equal(api.gradeChoice(['A'],stack.solution),false);
+  assert.match(stack.stem.text,/Gets.*尚未执行、也尚未返回/);
+  assert.match(stack.solution.reference.text,/属于调用者.*getbuf/);
+  assert.match(stack.solution.reference.text,/0x401cc2/);
+  const incoming=0x1000, allocated=incoming-0x38, afterCall=allocated-8, afterReturn=afterCall+8;
+  assert.equal(incoming-afterCall,0x40);
+  assert.equal(incoming-afterReturn,0x38);
+});
+
 test('2019 midterm caller blanks require an immediate prefix and the correct string offset', () => {
   const q=bank.find(q=>q.id==='q-873f08e7b04463d8');
   const rules=Object.fromEntries(q.solution.blankAnswers.map(r=>[r.blankId,r]));

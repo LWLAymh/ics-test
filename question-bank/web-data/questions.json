@@ -14107,7 +14107,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1d4f3586e8bd5b5c",
-      "revision": 7,
+      "revision": 8,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 17,
       "number": {
@@ -14243,7 +14243,7 @@
             "label": "（13）最大栈帧数"
           }
         ],
-        "text": "第三题（15分）\n下列C代码实现了一个名为`foo`的函数，请阅读并分析该C代码及其对应的x86\n汇编代码，补全代码中缺失的部分，并回答相应问题。（注：第（14）题不要求作\n答。）\n```c\nvoid foo(char *p)\n{\n  int len = strlen(p);\n  char tmp =   {{blank:b1}}  ;\n  *p =   (14)  ;\n  (14)   = '\\0';\n  if (strlen(p + 1)  {{blank:b2}}  1)\n  {\n    {{blank:b3}}   ;\n  }\n  (14)   = tmp;\n}\n0000000000001189 <foo>:\n    1189:  f3 0f 1e fa     endbr64\n    118d:  55              push   %rbp\n    118e:  48 89 e5        mov    %rsp,  {{blank:b4}}\n    1191:  48 83 ec 20     sub    $0x20,%rsp\n    1195:  48 89 7d e8     mov    %rdi,-0x18(%rbp)\n    1199:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    119d:  48 89 c7        mov    %rax,%rdi\n    11a0:  e8 db fe ff ff  call   <strlen@plt>\n    11a5:  89 45 fc        mov    %eax,-0x4(%rbp)\n    11a8:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11ac:  0f b6 00        movzbl (%rax),%eax\n    11af:  88 45 fb        mov    %al,-0x5(%rbp)\n    11b2:  8b 45 fc        mov    -0x4(%rbp),%eax\n    11b5:  48 98           cltq\n    11b7:  48 8d 50 ff     lea    -0x1(%rax),%rdx\n\n    11bb:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11bf:  48 01 d0        add    %rdx,%rax\n    11c2:  0f b6 10        movzbl (%rax),%edx\n    11c5:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11c9:  88 10           mov    %dl,(%rax)\n    11cb:  8b 45 fc        mov    -0x4(%rbp),%eax\n    11ce:  48 98           {{blank:b5}}\n    11d0:  48 8d 50 ff     lea    -0x1(%rax),%rdx\n    11d4:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11d8:  48 01 d0        add    %rdx,%rax\n    11db:  c6 00 00        movb   $0x0,(%rax)\n    11de:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11e2:  48 83 c0 01     add    $0x1,%rax\n    11e6:  48 89 c7        mov      {{blank:b6}}  ,%rdi\n    11e9:  e8 92 fe ff ff  call   <strlen@plt>\n    11ee:  48 83 f8 01     cmp    $0x1,%rax\n    11f2:  76 {{blank:b7}}               jbe    1204 <foo+0x7b>\n    11f4:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11f8:  48 83 c0 01     add    $0x1,%rax\n    11fc:  48 89 c7        mov    %rax,  {{blank:b8}}\n    11ff:  e8 85 ff ff ff  call   1189 <foo>\n    1204:  8b 45 fc        mov    -0x4(%rbp),%eax\n    1207:  48 98           cltq\n    1209:  48 8d 50 ff     lea    {{blank:b9}}(%rax),%rdx\n    120d:  48 8b 45 e8     mov      {{blank:b10}}  ,%rax\n    1211:  48 01 c2        add    %rax,%rdx\n    1214:  0f b6 45 fb     movzbl -0x5(%rbp),%eax\n    1218:  88 02           mov    %al,(%rdx)\n    121a:  90              nop\n    121b:  c9              leave\n    121c:  c3              {{blank:b11}}\n```\n若在程序中， main 函数调用了 `foo` 函数，且传递的参数指向字符\n串”ILOVEICS\\0”，则调用该函数后的字符串内容变为  {{blank:b12}}  。\n若main函数向`foo`函数传递的参数指向字符串”ICS2024\\0”，则main函数在\n调用`foo`函数时，栈中最多会同时存在 {{blank:b13}} 个`foo`函数的帧。（注意：程序\n中其他地方不会调用`foo`函数）\n\n（1）\n\n（2）\n\n（3）\n\n（4）\n\n（5）\n\n（6）\n\n（7）\n\n（8）\n\n（9）\n\n（10）\n\n（11）\n\n（12）\n\n（13）"
+        "text": "第三题（15分）\n\n下列 C 代码实现了一个名为 `foo` 的函数，请阅读并分析该 C 代码及其对应的 x86-64 汇编代码，补全缺失部分并回答问题。注：标为（14）的内容是原卷有意省略的代码，不要求作答。\n\n```c\nvoid foo(char *p)\n{\n  int len = strlen(p);\n  char tmp =   {{blank:b1}}  ;\n  *p =   (14)  ;\n  (14)   = '\\0';\n  if (strlen(p + 1)  {{blank:b2}}  1)\n  {\n    {{blank:b3}}   ;\n  }\n  (14)   = tmp;\n}\n```\n\n```asm\n0000000000001189 <foo>:\n    1189:  f3 0f 1e fa     endbr64\n    118d:  55              push   %rbp\n    118e:  48 89 e5        mov    %rsp,  {{blank:b4}}\n    1191:  48 83 ec 20     sub    $0x20,%rsp\n    1195:  48 89 7d e8     mov    %rdi,-0x18(%rbp)\n    1199:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    119d:  48 89 c7        mov    %rax,%rdi\n    11a0:  e8 db fe ff ff  call   <strlen@plt>\n    11a5:  89 45 fc        mov    %eax,-0x4(%rbp)\n    11a8:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11ac:  0f b6 00        movzbl (%rax),%eax\n    11af:  88 45 fb        mov    %al,-0x5(%rbp)\n    11b2:  8b 45 fc        mov    -0x4(%rbp),%eax\n    11b5:  48 98           cltq\n    11b7:  48 8d 50 ff     lea    -0x1(%rax),%rdx\n\n    11bb:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11bf:  48 01 d0        add    %rdx,%rax\n    11c2:  0f b6 10        movzbl (%rax),%edx\n    11c5:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11c9:  88 10           mov    %dl,(%rax)\n    11cb:  8b 45 fc        mov    -0x4(%rbp),%eax\n    11ce:  48 98           {{blank:b5}}\n    11d0:  48 8d 50 ff     lea    -0x1(%rax),%rdx\n    11d4:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11d8:  48 01 d0        add    %rdx,%rax\n    11db:  c6 00 00        movb   $0x0,(%rax)\n    11de:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11e2:  48 83 c0 01     add    $0x1,%rax\n    11e6:  48 89 c7        mov      {{blank:b6}}  ,%rdi\n    11e9:  e8 92 fe ff ff  call   <strlen@plt>\n    11ee:  48 83 f8 01     cmp    $0x1,%rax\n    11f2:  76 {{blank:b7}}               jbe    1204 <foo+0x7b>\n    11f4:  48 8b 45 e8     mov    -0x18(%rbp),%rax\n    11f8:  48 83 c0 01     add    $0x1,%rax\n    11fc:  48 89 c7        mov    %rax,  {{blank:b8}}\n    11ff:  e8 85 ff ff ff  call   1189 <foo>\n    1204:  8b 45 fc        mov    -0x4(%rbp),%eax\n    1207:  48 98           cltq\n    1209:  48 8d 50 ff     lea    {{blank:b9}}(%rax),%rdx\n    120d:  48 8b 45 e8     mov      {{blank:b10}}  ,%rax\n    1211:  48 01 c2        add    %rax,%rdx\n    1214:  0f b6 45 fb     movzbl -0x5(%rbp),%eax\n    1218:  88 02           mov    %al,(%rdx)\n    121a:  90              nop\n    121b:  c9              leave\n    121c:  c3              {{blank:b11}}\n```\n若 `main` 调用 `foo`，传递的参数指向字符串 `\"ILOVEICS\\0\"`，则调用后的字符串内容变为 {{blank:b12}}。\n\n若 `main` 传递的参数指向字符串 `\"ICS2024\\0\"`，则栈中最多同时存在 {{blank:b13}} 个 `foo` 函数的帧。（程序中其他地方不会调用 `foo`。）"
       },
       "solution": {
         "state": "available",
@@ -14275,7 +14275,9 @@
             "blankId": "b3",
             "method": "exact",
             "acceptedAnswers": [
-              "foo(p + 1)"
+              "foo(p + 1)",
+              "foo(p+1)",
+              "foo(&p[1])"
             ],
             "normalize": {
               "trimWhitespace": true,
@@ -14341,6 +14343,8 @@
             "blankId": "b9",
             "method": "exact",
             "acceptedAnswers": [
+              "-0x1",
+              "-0x01",
               "-1"
             ],
             "normalize": {
@@ -14396,7 +14400,7 @@
         ],
         "reference": {
           "format": "markdown",
-          "text": "（1）`*p`\n（2）`>`\n（3）`foo(p + 1)`\n（4）`%rbp`\n（5）`cltq`\n（6）`%rax`\n（7）`10`\n（8）`%rdi`\n（9）`-1`\n（10）`-0x18(%rbp)`\n（11）`ret`（本题为 x86-64，无操作数的近返回也接受 `retq`）\n（12）`SCIEVOLI`\n（13）`3`\n（14）原卷注明不要求作答。"
+          "text": "（1）`*p`\n（2）`>`\n（3）`foo(p + 1)`\n（4）`%rbp`\n（5）`cltq`\n（6）`%rax`\n（7）`10`\n（8）`%rdi`\n（9）`-0x1`（十六进制）或 `-1`（十进制），两者均为位移 -1，不需要立即数前缀 `$`。\n（10）`-0x18(%rbp)`\n（11）`ret`（本题为 x86-64，无操作数的近返回也接受 `retq`）\n（12）`SCIEVOLI`\n（13）`3`\n（14）原卷注明不要求作答。"
         },
         "provenance": {
           "origin": "unknown",
@@ -63204,7 +63208,7 @@
     {
       "schemaVersion": "5",
       "id": "q-3d1423df07ea83f3",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-9c11139ca386240d",
       "paperOrder": 24,
       "number": {
@@ -63250,20 +63254,20 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "24. （2分）下面给出了AttackLab中`ctarget`目标程序的`getbuf`函数的汇编代码；\n在`call`指令执行完成后，`getbuf`的栈帧大小为；\n```\n0000000000401cb2 <getbuf>:\n  401cb2:  f3 0f 1e fa     endbr64\n  401cb6:  48 83 ec 38     sub    $0x38,%rsp\n  401cba:  48 89 e7        mov    %rsp,%rdi\n  401cbd:  e8 57 03 00 00  call   402019 <Gets>\n  401cc2:  b8 01 00 00 00  mov    $0x1,%eax\n  401cc7:  48 83 c4 38     add    $0x38,%rsp\n  401ccb:  c3              ret\n```"
+        "text": "24. （2 分）下面给出了 AttackLab 中 `ctarget` 目标程序的 `getbuf` 函数汇编代码。执行地址 `0x401cbd` 的 `call` 指令后，`getbuf` 的栈帧大小为多少？\n\n观察时刻是 `call` 指令本身刚执行完：返回地址已压栈，控制流已进入 `Gets`，但 `Gets` 尚未执行、也尚未返回。按 CSAPP 的约定，过程调用压入的返回地址归调用者的栈帧。\n\n```asm\n0000000000401cb2 <getbuf>:\n  401cb2:  f3 0f 1e fa     endbr64\n  401cb6:  48 83 ec 38     sub    $0x38,%rsp\n  401cba:  48 89 e7        mov    %rsp,%rdi\n  401cbd:  e8 57 03 00 00  call   402019 <Gets>\n  401cc2:  b8 01 00 00 00  mov    $0x1,%eax\n  401cc7:  48 83 c4 38     add    $0x38,%rsp\n  401ccb:  c3              ret\n```"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C\n\n解析：`call` 指令把 8 字节返回地址压栈，进入 `getbuf` 后 `sub $0x38,%rsp` 又分配 `0x38` 字节，所以此刻 `getbuf` 的栈帧是 `0x38`（局部空间）+ 8（返回地址）= `0x40` 字节。`0x38` 只算了局部空间；`0x3C`、`0x44` 则是按 4 字节返回地址或重复计数得出的干扰项。故选 C。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+          "text": "答案：C\n\n解析：`sub $0x38,%rsp` 为 `getbuf` 分配 `0x38` 字节。随后执行 `call Gets`，把指向 `0x401cc2` 的 8 字节返回地址压栈；这个地址用于从 `Gets` 返回到 `getbuf`，按教材约定属于调用者 `getbuf` 的栈帧。因此在题目指定时刻，其大小为 `0x38 + 8 = 0x40` 字节，选 C。\n\n调用者进入 `getbuf` 时留下的返回地址，属于 `getbuf` 的调用者，不计入这里。初版解析误把这一返回地址算给了 `getbuf`，虽然选项碰巧相同，理由是不正确的。\n\n如果观察的是 `Gets` 已经执行 `ret`、控制流回到 `0x401cc2` 之后，则该 8 字节返回地址已弹出，`getbuf` 保留的空间才是 `0x38` 字节；这不是本题的观察时刻。不能把“执行完 call 指令”和“被调用函数已经返回”混为一谈。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
         },
         "provenance": {
           "origin": "ai-derived",
           "crossChecked": false,
           "attribution": "deepseek v4.1 flash · 大肥鱼小姐",
-          "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text."
+          "note": "初版记录于 docs/AI_DERIVED_ANSWERS.md。2026-10-12 据公开报告与 CSAPP 3.7.1 的返回地址归属约定复核：保留 C，修正初版错误归属的解析，并明确为 call 刚执行完、Gets 尚未返回的时刻；未核对官方答案。"
         },
         "correctOptionIds": [
           "C"
@@ -143765,7 +143769,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0300000000000057",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f7485360f6c6060d",
       "paperOrder": 57,
       "number": {
@@ -143850,7 +143854,7 @@
                 "label": ".L8 分支的返回值"
               }
             ],
-            "text": "A. 按行分析汇编并填写下表（表达式中用参数名 ap、b、c、dp 以及函数内的 a、d 表示）：\n\n| 位置 | 指令 | 说明 |\n|---|---|---|\n| 第 2 行 | `vmovss (%rdx), %xmm1` | `d` = {{blank:dv}} |\n| 第 3 行 | `vcvtsi2sd (%rdi), %xmm2, %xmm2` | `a` = {{blank:av}}（并转换为 double） |\n| 第 4～5 行 | `vucomisd %xmm2, %xmm0`、`jbe .L8` | 跳转到 `.L8` 的条件：{{blank:cond}} |\n| 第 6～10 行 | `jbe` 未跳转时执行的分支，返回 | {{blank:ret1}} |\n| 第 12～17 行 | `.L8` 标号处的分支，返回 | {{blank:ret2}} |"
+            "text": "A. 按行分析汇编并填写下表（表达式中用参数名 ap、b、c、dp 以及函数内的 a、d 表示）：\n\n本问按 `b` 不是 NaN 的情况分析比较条件；算术表达式按给定 C 参数类型进行转换和计算。\n\n| 位置 | 指令 | 说明 |\n|---|---|---|\n| 第 2 行 | `vmovss (%rdx), %xmm1` | `d` = {{blank:dv}} |\n| 第 3 行 | `vcvtsi2sd (%rdi), %xmm2, %xmm2` | `a` = {{blank:av}}（并转换为 double） |\n| 第 4～5 行 | `vucomisd %xmm2, %xmm0`、`jbe .L8` | 跳转到 `.L8` 的条件：{{blank:cond}} |\n| 第 6～10 行 | `jbe` 未跳转时执行的分支，返回 | {{blank:ret1}} |\n| 第 12～17 行 | `.L8` 标号处的分支，返回 | {{blank:ret2}} |"
           },
           "solution": {
             "state": "available",
@@ -143912,8 +143916,17 @@
                 "acceptedAnswers": [
                   "c+2*d",
                   "c + 2*d",
+                  "c + 2 * d",
+                  "c+2 * d",
                   "2*d+c",
-                  "2 * d + c"
+                  "2*d + c",
+                  "2 * d + c",
+                  "c+d*2",
+                  "c + d*2",
+                  "c + d * 2",
+                  "d*2+c",
+                  "d*2 + c",
+                  "d * 2 + c"
                 ],
                 "normalize": {
                   "trimWhitespace": true,
@@ -143923,7 +143936,7 @@
             ],
             "reference": {
               "format": "markdown",
-              "text": "同样地，为代码加注释，包括处理条件分支：\n\n```text\ndouble funct3(int *ap, double b, long c, float *dp)\nap in %rdi, b in %xmm0, c in %rsi, dp in %rdx\n 1 funct3:\n 2     vmovss     (%rdx), %xmm1            Get d = *dp\n 3     vcvtsi2sd  (%rdi), %xmm2, %xmm2     Get a = *ap and convert to double\n 4     vucomisd   %xmm2, %xmm0            Compare b:a\n 5     jbe        .L8                      If <=, goto lesseq\n 6     vcvtsi2ssq %rsi, %xmm0, %xmm0      Convert c to float\n 7     vmulss     %xmm1, %xmm0, %xmm1     Multiply by d\n 8     vunpcklps  %xmm1, %xmm1, %xmm1\n 9     vcvtps2pd  %xmm1, %xmm0           Convert to double\n10     ret                                 Return\n11 .L8:                                lesseq:\n12     vaddss     %xmm1, %xmm1, %xmm1     Compute d+d = 2.0 * d\n13     vcvtsi2ssq %rsi, %xmm0, %xmm0      Convert c to float\n14     vaddss     %xmm1, %xmm0, %xmm0     Compute c + 2*d\n15     vunpcklps  %xmm0, %xmm0, %xmm0\n16     vcvtps2pd  %xmm0, %xmm0           Convert to double\n17     ret                                 Return\n```\n\n由此得到：第 2 行取出 `d = *dp`；第 3 行取出 `a = *ap` 并转换为 double；`vucomisd %xmm2, %xmm0` 按 `b:a` 比较，`jbe` 在 `b <= a`（等价地 `a >= b`）时跳到 `.L8`。`jbe` 未跳转时 `b > a`（即 `a < b`），第 6～9 行把 c 转换为 float 后与 d 相乘，返回 `c*d`；`.L8` 分支第 12 行先算出 `d+d` 即 2d，第 13～14 行再加上 c，返回 `c + 2*d`。\n\n乘法与加法满足交换律，`c*d` 与 `d*c`、`c+2*d` 与 `2*d+c` 是同一个值；这里按答案文本的写法给出。"
+              "text": "同样地，为代码加注释，包括处理条件分支：\n\n```text\ndouble funct3(int *ap, double b, long c, float *dp)\nap in %rdi, b in %xmm0, c in %rsi, dp in %rdx\n 1 funct3:\n 2     vmovss     (%rdx), %xmm1            Get d = *dp\n 3     vcvtsi2sd  (%rdi), %xmm2, %xmm2     Get a = *ap and convert to double\n 4     vucomisd   %xmm2, %xmm0            Compare b:a\n 5     jbe        .L8                      If <=, goto lesseq\n 6     vcvtsi2ssq %rsi, %xmm0, %xmm0      Convert c to float\n 7     vmulss     %xmm1, %xmm0, %xmm1     Multiply by d\n 8     vunpcklps  %xmm1, %xmm1, %xmm1\n 9     vcvtps2pd  %xmm1, %xmm0           Convert to double\n10     ret                                 Return\n11 .L8:                                lesseq:\n12     vaddss     %xmm1, %xmm1, %xmm1     Compute d+d = 2.0 * d\n13     vcvtsi2ssq %rsi, %xmm0, %xmm0      Convert c to float\n14     vaddss     %xmm1, %xmm0, %xmm0     Compute c + 2*d\n15     vunpcklps  %xmm0, %xmm0, %xmm0\n16     vcvtps2pd  %xmm0, %xmm0           Convert to double\n17     ret                                 Return\n```\n\n由此得到：第 2 行取出 `d = *dp`；第 3 行取出 `a = *ap` 并转换为 double；`vucomisd %xmm2, %xmm0` 按 `b:a` 比较，`jbe` 在 `b <= a`（等价地 `a >= b`）时跳到 `.L8`。`jbe` 未跳转时 `b > a`（即 `a < b`），第 6～9 行把 c 转换为 float 后与 d 相乘，返回 `c*d`；`.L8` 分支第 12 行先算出 `d+d` 即 2d，第 13～14 行再加上 c，返回 `c + 2*d`。\n\n本题还接受 `d*c`，以及 `c + d * 2`、`d * 2 + c`、`2 * d + c` 等同值写法。它们只交换这里的乘法因子或加法的两个操作数，不改变运算分组；不能由此认为任意浮点表达式都可以重新结合。"
             },
             "provenance": {
               "origin": "unknown",

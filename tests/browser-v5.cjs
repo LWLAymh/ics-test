@@ -779,6 +779,38 @@ async function run() {
     assert.equal(await page.evaluate(()=>window.__test.state.records[0].points),1);
     assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),15);
     assert.match(await page.locator('#ics-reference').innerText(),/\$0x8/);
+    // New reports: equivalent expressions and displacement notation are accepted.
+    const floatRepair=all.find(q=>q.id==='q-0300000000000057');
+    for(const equivalent of ['c + d * 2','d * 2 + c']) {
+      await fixture(page,[floatRepair]);
+      for(const answer of floatRepair.parts[0].solution.blankAnswers)
+        await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(
+          answer.blankId==='ret2'?equivalent:answer.acceptedAnswers[0]);
+      await page.click('#ics-submit');
+      assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),5);
+      assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"]').count(),0);
+      assert(await page.locator('#ics-self-grade').isVisible());
+      await page.click('[data-grade="1"]');
+      assert.equal(await page.evaluate(()=>window.__test.state.records[0].points),1);
+    }
+    const fooRepair=all.find(q=>q.id==='q-1d4f3586e8bd5b5c');
+    await fixture(page,[fooRepair]);
+    for(const answer of fooRepair.solution.blankAnswers)
+      await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(answer.acceptedAnswers[0]);
+    assert.equal(await page.locator('#ics-question-content pre').count(),2);
+    assert.equal(await page.locator('[data-blank-id="b9"]').inputValue(),'-0x1');
+    await page.click('#ics-submit');
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),13);
+    assert.equal(await page.evaluate(()=>window.__test.state.records[0].points),1);
+    // The call timing report does not justify changing the correct option.
+    const stackRepair=all.find(q=>q.id==='q-3d1423df07ea83f3');
+    for(const [choice,points] of [['C',1],['A',0]]) {
+      await fixture(page,[stackRepair]);
+      await page.click('[data-choice="'+choice+'"]');
+      await page.click('#ics-submit');
+      assert.equal(await page.evaluate(()=>window.__test.state.records[0].points),points);
+      assert.match(await page.locator('#ics-reference').innerText(),/调用者.*getbuf/);
+    }
     // Full bank browser parse, including withheld questions' Markdown, all options/references.
     const result=await page.evaluate(questions=>{
       window.MathJax=undefined;
@@ -830,14 +862,17 @@ async function run() {
     // Persistent history: pagination, repeated attempts, wrong-only filtering,
     // literal answer display, retired entries and safe retry during a quiz.
     await page.evaluate(({questionId,revision})=>{
+      // Keep injected records newer than the attempts created earlier in this run.
+      // Fixed calendar dates eventually fall behind the real test clock.
+      const historyBase=Date.now()+60000;
       for(let i=0;i<55;i++){
         const suffix=(0x100+i).toString(16).padStart(12,'0');
         localStorage.setItem('ics-completed-attempt-v1:00000000-0000-4000-8000-'+suffix,JSON.stringify({
-          version:1,questionId,revision,answeredAt:new Date(Date.UTC(2026,9,12,0,i)).toISOString(),
+          version:1,questionId,revision,answeredAt:new Date(historyBase+i*1000).toISOString(),
           points:i===54?0:1,mode:'auto',answer:'<img src=x onerror=alert(1)> n != 1'}));
       }
       localStorage.setItem('ics-completed-attempt-v1:00000000-0000-4000-8000-eeeeeeeeeeee',JSON.stringify({
-        version:1,questionId:'q-622ae65ab616a110',revision:1,answeredAt:'2026-10-12T01:00:00.000Z',points:0,mode:'auto',answer:'B'}));
+        version:1,questionId:'q-622ae65ab616a110',revision:1,answeredAt:new Date(historyBase+60000).toISOString(),points:0,mode:'auto',answer:'B'}));
       dispatchEvent(new StorageEvent('storage',{key:null}));
     },{questionId:single.id,revision:single.revision});
     await page.click('#ics-practice-history > summary');
