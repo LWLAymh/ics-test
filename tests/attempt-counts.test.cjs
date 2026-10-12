@@ -15,6 +15,7 @@ function storage() {
     key(index) { return Array.from(values.keys())[index] || null; },
     getItem(key) { return values.get(key) ?? null; },
     setItem(key, value) { values.set(key, value); },
+    removeItem(key) { values.delete(key); },
     clear() { values.clear(); },
   };
 }
@@ -93,4 +94,57 @@ test('temporary history survives failed refresh and a later retry can persist it
   const reloaded=create(()=>db);
   assert.deepEqual(reloaded.refresh(),{count:1,persistent:true});
   assert.deepEqual(reloaded.history(),[{...record(),attemptId:first}]);
+});
+
+test('delete selected events only, including repeated questions, with counts and reload in sync', () => {
+  const db=storage(), a=create(()=>db), b=create(()=>db);
+  const third='00000000-0000-4000-8000-000000000003';
+  const legacy='00000000-0000-4000-8000-000000000004';
+  a.add(first,record()); a.add(second,record()); a.add(third,record()); a.add(legacy);
+  db.setItem('ics-question-mastery-v1','keep'); db.setItem('unrelated','keep');
+  b.refresh();
+  assert.deepEqual(a.remove([first,third,first]),{removedIds:[first,third],failedIds:[]});
+  assert.equal(a.snapshot().count,2);
+  assert.deepEqual(a.history().map(r=>r.attemptId),[second]);
+  assert.equal(db.getItem('ics-question-mastery-v1'),'keep');
+  assert.equal(db.getItem('unrelated'),'keep');
+  assert.equal(db.getItem(PREFIX+legacy),'1');
+  assert.equal(create(()=>db).refresh().count,2);
+  assert.equal(b.refresh().count,2);
+  assert.deepEqual(b.history().map(r=>r.attemptId),[second]);
+  assert.deepEqual(a.remove([first]),{removedIds:[],failedIds:[]});
+  assert.throws(()=>a.remove([second,'invalid']),/Invalid attempt IDs/);
+  assert.throws(()=>a.remove(first),/Invalid attempt IDs/);
+  assert.throws(()=>a.remove([null]),/Invalid attempt IDs/);
+  assert.notEqual(db.getItem(PREFIX+second),null);
+});
+
+test('partial deletion failure retains failed records for retry without hiding persistence errors', () => {
+  const db=storage(), counter=create(()=>db);
+  counter.add(first,record());counter.add(second,record());
+  const remove=db.removeItem;
+  db.removeItem=key=>{if(key===PREFIX+second)throw Error('blocked');remove(key);};
+  assert.deepEqual(counter.remove([first,second]),{removedIds:[first],failedIds:[second]});
+  assert.equal(counter.snapshot().count,1);
+  assert.deepEqual(counter.history().map(r=>r.attemptId),[second]);
+  assert.deepEqual(create(()=>db).refresh(),{count:1,persistent:true});
+  db.removeItem=remove;
+  assert.deepEqual(counter.remove([second]),{removedIds:[second],failedIds:[]});
+  assert.equal(counter.snapshot().count,0);
+  assert.deepEqual(counter.history(),[]);
+});
+
+test('temporary selected history can be deleted even when browser storage is unavailable', () => {
+  const blocked=create(()=>{throw Error('blocked')});
+  blocked.add(first,record());blocked.add(second,record());
+  assert.deepEqual(blocked.remove([first]),{removedIds:[first],failedIds:[]});
+  assert.deepEqual(blocked.snapshot(),{count:1,persistent:false});
+  assert.deepEqual(blocked.history().map(r=>r.attemptId),[second]);
+  const db=storage(),set=db.setItem,counter=create(()=>db);
+  counter.add(first,record()); db.setItem=()=>{throw Error('quota')};
+  counter.add(second,record());
+  counter.remove([second]); db.setItem=set;
+  counter.add('00000000-0000-4000-8000-000000000003',record());
+  assert.equal(counter.history().some(r=>r.attemptId===second),false);
+  assert.equal(create(()=>db).refresh().count,2);
 });

@@ -27,6 +27,9 @@
     practiceHistory: $('ics-practice-history'), historyCount: $('ics-history-count'),
     historyWrongOnly: $('ics-history-wrong-only'), historyStatus: $('ics-history-status'),
     historyList: $('ics-history-list'), historyMore: $('ics-history-more'),
+    historySelectAll: $('ics-history-select-all'), historySelectedCount: $('ics-history-selected-count'),
+    historyClearSelection: $('ics-history-clear-selection'), historyDelete: $('ics-history-delete'),
+    historyDeleteStatus: $('ics-history-delete-status'),
     siteAttempts: $('ics-site-attempts'), siteAttemptNote: $('ics-site-attempt-note'),
     feedback: $('ics-feedback'), verdict: $('ics-verdict'), reference: $('ics-reference'),
     liveStats: $('ics-live-stats'), statsSummary: $('ics-stats-summary'), statsOptions: $('ics-stats-options'), statsNote: $('ics-stats-note'), liveDot: $('ics-live-dot'),
@@ -54,7 +57,7 @@
     siteStats: new Map(), siteStatsLoaded: false, siteStatsChannel: null,
     siteStatsLoad: null, siteStatsChanges: [],
     issueMessages: [], issueMessageLoad: 0,
-    historyQuestions: null, historyLimit: 50,
+    historyQuestions: null, historyLimit: 50, historySelected: new Set(),
   };
   const contract = window.ICSQuestionV5;
   const MASTERY_KEY = 'ics-question-mastery-v1';
@@ -71,6 +74,8 @@
   function renderPracticeHistory() {
     const records = attemptCounts.history();
     ui.historyCount.textContent = records.length.toLocaleString('zh-CN') + ' 次';
+    const existingIds = new Set(records.map(function (record) { return record.attemptId; }));
+    state.historySelected.forEach(function (id) { if (!existingIds.has(id)) state.historySelected.delete(id); });
     if (!ui.practiceHistory.open) return;
     const filtered = ui.historyWrongOnly.checked ? records.filter(function (record) { return record.points < 1; }) : records;
     const legacyCount = Math.max(0, attemptCounts.snapshot().count - records.length);
@@ -87,7 +92,9 @@
       const name = question ? [paper && paper.displayName, question.number.display, moduleTitle(question)].filter(Boolean).join(' · ') : record.questionId;
       const result = record.points === 1 ? '正确' : record.points === 0 ? '错误' : '部分正确';
       const revised = question && record.revision !== question.revision;
-      return '<article class="ics-history-item"><div class="ics-history-item-head"><strong>' + escapeHtml(name) + '</strong>' +
+      return '<article class="ics-history-item"><div class="ics-history-item-head"><label class="ics-history-select">' +
+        '<input type="checkbox" data-history-select="' + escapeHtml(record.attemptId) + '" aria-label="' +
+        escapeHtml('选择记录：' + name + '，' + formatIssueTime(record.answeredAt)) + '"><strong>' + escapeHtml(name) + '</strong></label>' +
         '<span class="ics-history-result ' + (record.points === 1 ? 'correct' : 'incorrect') + '">' + result + ' · ' + record.points + ' 分</span></div>' +
         '<p class="ics-history-note"><time datetime="' + escapeHtml(record.answeredAt) + '">' + escapeHtml(formatIssueTime(record.answeredAt)) +
         '</time> · ' + (record.mode === 'auto' ? '自动核对' : record.mode === 'mixed' ? '自动核对＋自评' : '自评') +
@@ -96,6 +103,37 @@
         '<button class="ics-secondary" type="button" data-history-question="' + escapeHtml(record.questionId) + '"' +
         (question ? '' : ' disabled') + '>' + (question ? '再练一次' : state.historyQuestions ? '题目已下架或不在当前题库' : '正在加载题目…') + '</button></article>';
     }).join('');
+    updateHistorySelection();
+  }
+
+  function updateHistorySelection() {
+    const controls = Array.from(ui.historyList.querySelectorAll('[data-history-select]'));
+    const visibleIds = new Set(controls.map(function (control) { return control.dataset.historySelect; }));
+    // Never delete records hidden by a filter or displaced beyond the page limit.
+    state.historySelected.forEach(function (id) { if (!visibleIds.has(id)) state.historySelected.delete(id); });
+    controls.forEach(function (control) {
+      control.checked = state.historySelected.has(control.dataset.historySelect);
+      control.closest('.ics-history-item').classList.toggle('is-selected', control.checked);
+    });
+    const count = state.historySelected.size;
+    ui.historySelectedCount.textContent = '已选 ' + count + ' 条';
+    ui.historySelectAll.disabled = controls.length === 0;
+    ui.historySelectAll.checked = count > 0 && count === controls.length;
+    ui.historySelectAll.indeterminate = count > 0 && count < controls.length;
+    ui.historyClearSelection.disabled = count === 0;
+    ui.historyDelete.disabled = count === 0;
+  }
+
+  function deleteSelectedHistory() {
+    const ids = Array.from(state.historySelected);
+    if (!ids.length || !window.confirm('删除选中的 ' + ids.length + ' 条本地作答记录？删除后无法恢复，本浏览器累计作答次数也会相应减少。\n不会影响全站统计、熟知标记或本次练习成绩。')) return;
+    const result = attemptCounts.remove(ids);
+    result.removedIds.forEach(function (id) { state.historySelected.delete(id); });
+    renderLocalAttempts();
+    ui.historyDeleteStatus.textContent = (result.removedIds.length ? '已删除 ' + result.removedIds.length + ' 条本地记录。' : '没有记录被删除。') +
+      (result.failedIds.length ? ' 有 ' + result.failedIds.length + ' 条删除失败，记录仍保留，请检查浏览器存储权限后重试。' : '');
+    const focusTarget = !ui.historyDelete.disabled ? ui.historyDelete : !ui.historySelectAll.disabled ? ui.historySelectAll : ui.practiceHistory.querySelector('summary');
+    focusTarget.focus({ preventScroll: true });
   }
 
   async function loadPracticeHistory() {
@@ -1551,8 +1589,24 @@
   ui.issueCancel.addEventListener('click', function () { closeIssueForm(); ui.reportIssue.focus(); });
   ui.mastery.addEventListener('click', toggleMastery);
   ui.practiceHistory.addEventListener('toggle', function () { if (ui.practiceHistory.open) loadPracticeHistory(); });
-  ui.historyWrongOnly.addEventListener('change', function () { state.historyLimit = 50; renderPracticeHistory(); });
+  ui.historyWrongOnly.addEventListener('change', function () { state.historyLimit = 50; state.historySelected.clear(); renderPracticeHistory(); });
   ui.historyMore.addEventListener('click', function () { state.historyLimit += 50; renderPracticeHistory(); });
+  ui.historySelectAll.addEventListener('change', function () {
+    state.historySelected.clear();
+    if (ui.historySelectAll.checked) ui.historyList.querySelectorAll('[data-history-select]').forEach(function (control) {
+      state.historySelected.add(control.dataset.historySelect);
+    });
+    updateHistorySelection();
+  });
+  ui.historyClearSelection.addEventListener('click', function () { state.historySelected.clear(); updateHistorySelection(); });
+  ui.historyDelete.addEventListener('click', deleteSelectedHistory);
+  ui.historyList.addEventListener('change', function (event) {
+    const control = event.target.closest('[data-history-select]');
+    if (!control) return;
+    if (control.checked) state.historySelected.add(control.dataset.historySelect);
+    else state.historySelected.delete(control.dataset.historySelect);
+    updateHistorySelection();
+  });
   ui.historyList.addEventListener('click', function (event) {
     const button = event.target.closest('[data-history-question]');
     if (button && !button.disabled) retryHistoryQuestion(button.dataset.historyQuestion);

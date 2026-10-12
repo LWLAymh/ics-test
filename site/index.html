@@ -53,6 +53,15 @@ window.MathJax = {
       <summary><strong>我的作答记录</strong><span id="ics-history-count">0 次</span></summary>
       <div class="ics-history-body">
         <div class="ics-history-toolbar"><label><input id="ics-history-wrong-only" type="checkbox"> 只看错题</label><span>按作答时间倒序 · 仅本浏览器</span></div>
+        <div class="ics-history-selection">
+          <label><input id="ics-history-select-all" type="checkbox" disabled> 选择当前显示</label>
+          <span id="ics-history-selected-count">已选 0 条</span>
+          <div class="ics-history-selection-actions">
+            <button id="ics-history-clear-selection" class="ics-secondary" type="button" disabled>取消选择</button>
+            <button id="ics-history-delete" class="ics-secondary ics-history-delete" type="button" disabled>删除所选</button>
+          </div>
+        </div>
+        <p class="ics-history-note" id="ics-history-delete-status" role="status"></p>
         <p class="ics-history-note" id="ics-history-status" role="status"></p>
         <div id="ics-history-list" class="ics-history-list"></div>
         <button id="ics-history-more" class="ics-secondary" type="button" hidden>加载更多记录</button>

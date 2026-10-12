@@ -57,8 +57,18 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-history-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin: 16px 0 10px; font-size: 12px; }
 .ics-history-toolbar label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
 .ics-history-toolbar > span, .ics-history-note { color: var(--text-muted); font-size: 12px; }
+.ics-history-selection { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+.ics-history-selection label, .ics-history-select { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; min-width: 0; }
+.ics-history-selection label { align-items: center; }
+.ics-history-selection input, .ics-history-select input { flex-shrink: 0; width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--accent); }
+.ics-history-selection-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; }
+.ics-history-selection-actions button { min-height: 32px; padding: 4px 10px; font-size: 12px; }
+.ics-secondary.ics-history-delete { color: var(--ics-danger); }
+#ics-history-delete-status:empty { display: none; }
+#ics-history-delete-status { margin: 10px 0; }
 .ics-history-list { display: grid; gap: 10px; margin: 12px 0; }
 .ics-history-item { min-width: 0; padding: 14px; border: 1px solid var(--border); border-radius: 5px; }
+.ics-history-item.is-selected { border-color: var(--accent); background: var(--accent-soft); }
 .ics-history-item-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 13px; }
 .ics-history-item-head strong { overflow-wrap: anywhere; }
 .ics-history-result { white-space: nowrap; }

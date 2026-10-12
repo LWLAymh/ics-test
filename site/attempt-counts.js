@@ -70,12 +70,33 @@
       }
       return snapshot();
     }
+    function remove(attemptIds) {
+      if (!Array.isArray(attemptIds) || attemptIds.some(function (id) {
+        return typeof id !== 'string' || !ID.test(id);
+      })) throw new Error('Invalid attempt IDs');
+      refresh();
+      const removedIds = [], failedIds = [];
+      new Set(attemptIds).forEach(function (id) {
+        if (!saved.has(id) && !temporary.has(id)) return;
+        // Delete only the selected event keys, never the whole browser store.
+        // If a persistent removal fails, keep its history and count intact.
+        if (saved.has(id)) {
+          try { getStorage().removeItem(PREFIX + id); }
+          catch (_) { failedIds.push(id); return; }
+        }
+        saved.delete(id); details.delete(id);
+        temporary.delete(id); temporaryDetails.delete(id);
+        removedIds.push(id);
+      });
+      refresh();
+      return { removedIds: removedIds, failedIds: failedIds };
+    }
     function history() {
       return Array.from(new Map([...details, ...temporaryDetails]), function (entry) {
         return { ...entry[1], attemptId: entry[0] };
       }).sort(function (a, b) { return Date.parse(b.answeredAt) - Date.parse(a.answeredAt) || b.attemptId.localeCompare(a.attemptId); });
     }
-    return { refresh: refresh, add: add, snapshot: snapshot, history: history };
+    return { refresh: refresh, add: add, remove: remove, snapshot: snapshot, history: history };
   }
   return { PREFIX: PREFIX, create: create };
 });

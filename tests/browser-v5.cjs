@@ -933,6 +933,70 @@ async function run() {
     assert.match(await page.locator('#ics-local-attempt-note').innerText(),/临时保留/);
     assert.match(await page.locator('#ics-history-status').innerText(),/临时保留/);
     await page.evaluate(()=>Storage.prototype.setItem=window.__originalSetItem);
+    // Selective local deletion: cancellation, filtering, failure, reload and
+    // repeated attempts on the same question must never touch remote stats.
+    const deletionIds=['10000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000002','10000000-0000-4000-8000-000000000003'];
+    const beforeDeletion=await page.evaluate(()=>({
+      count:Number(document.querySelector('#ics-local-attempts').textContent.replaceAll(',','')),
+      writes:window.__writes.length, mastery:localStorage.getItem('ics-question-mastery-v1'),
+      score:window.__test.state.score, records:window.__test.state.records.length,
+      siteCount:document.querySelector('#ics-site-attempts').textContent
+    }));
+    await page.evaluate(({ids,questionId,revision})=>{
+      ids.forEach((id,i)=>localStorage.setItem('ics-completed-attempt-v1:'+id,JSON.stringify({
+        version:1,questionId,revision,answeredAt:new Date(Date.now()+86400000+i*1000).toISOString(),
+        points:i===1?1:0,mode:'auto',answer:'test '+i})));
+      dispatchEvent(new StorageEvent('storage',{key:null}));
+    },{ids:deletionIds,questionId:single.id,revision:single.revision});
+    assert(await page.locator('#ics-history-delete').isDisabled());
+    await page.check('#ics-history-select-all');
+    assert(await page.locator('[data-history-select]').evaluateAll(inputs=>inputs.every(el=>el.checked)));
+    await page.click('#ics-history-clear-selection');
+    for(const id of [deletionIds[0],deletionIds[2]])await page.check('[data-history-select="'+id+'"]');
+    assert.equal(await page.locator('#ics-history-selected-count').innerText(),'已选 2 条');
+    assert(await page.locator('#ics-history-select-all').evaluate(el=>el.indeterminate));
+    page.once('dialog',dialog=>{assert.match(dialog.message(),/2 条/);dialog.dismiss();});
+    await page.click('#ics-history-delete');
+    assert.equal(await page.locator('[data-history-select="'+deletionIds[0]+'"]').count(),1);
+    page.once('dialog',dialog=>dialog.accept());
+    await page.click('#ics-history-delete');
+    assert.match(await page.locator('#ics-history-delete-status').innerText(),/已删除 2 条/);
+    assert.equal(await page.locator('[data-history-select="'+deletionIds[0]+'"]').count(),0);
+    assert.equal(await page.locator('[data-history-select="'+deletionIds[2]+'"]').count(),0);
+    assert.equal(Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',','')),beforeDeletion.count+1);
+    await page.uncheck('#ics-history-wrong-only');
+    await page.check('[data-history-select="'+deletionIds[1]+'"]');
+    await page.check('#ics-history-wrong-only');
+    assert.equal(await page.locator('#ics-history-selected-count').innerText(),'已选 0 条');
+    await page.uncheck('#ics-history-wrong-only');
+    await page.check('[data-history-select="'+deletionIds[1]+'"]');
+    await page.evaluate(id=>{
+      window.__originalRemoveItem=Storage.prototype.removeItem;
+      Storage.prototype.removeItem=function(key){
+        if(key==='ics-completed-attempt-v1:'+id)throw Error('blocked');
+        return window.__originalRemoveItem.call(this,key);
+      };
+    },deletionIds[1]);
+    page.once('dialog',dialog=>dialog.accept());await page.click('#ics-history-delete');
+    assert.match(await page.locator('#ics-history-delete-status').innerText(),/1 条删除失败/);
+    assert(await page.locator('[data-history-select="'+deletionIds[1]+'"]').isChecked());
+    await page.evaluate(()=>Storage.prototype.removeItem=window.__originalRemoveItem);
+    page.once('dialog',dialog=>dialog.accept());await page.click('#ics-history-delete');
+    assert.equal(Number((await page.locator('#ics-local-attempts').innerText()).replaceAll(',','')),beforeDeletion.count);
+    assert.deepEqual(await page.evaluate(()=>({
+      writes:window.__writes.length,mastery:localStorage.getItem('ics-question-mastery-v1'),
+      score:window.__test.state.score,records:window.__test.state.records.length,
+      siteCount:document.querySelector('#ics-site-attempts').textContent
+    })),{writes:beforeDeletion.writes,mastery:beforeDeletion.mastery,score:beforeDeletion.score,records:beforeDeletion.records,siteCount:beforeDeletion.siteCount});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    if(output){
+      await page.locator('.ics-history-panel').first().evaluate(el=>el.scrollIntoView({block:'start'}));
+      await page.screenshot({path:path.join(output,'history-delete-mobile.png')});
+      await page.setViewportSize({width:1280,height:900});
+      await page.screenshot({path:path.join(output,'history-delete-desktop.png')});
+    }
+    await page.reload();await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
+    assert(await page.evaluate(ids=>ids.every(id=>localStorage.getItem('ics-completed-attempt-v1:'+id)===null),deletionIds));
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({success:true,...result,assets:result.assets.length}));
   } finally { await browser.close(); }
