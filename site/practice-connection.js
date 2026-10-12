@@ -10,8 +10,10 @@
     const identifier = id => typeof id === 'string' && id.length > 0 && id.length <= 128;
     function unit(item, part) {
       if (!item || (part && !identifier(item.id)) || !Array.isArray(item.choices) || item.choices.length > 64 ||
-          !item.choices.every(identifier) || !Array.isArray(item.blanks) || item.blanks.length > 256) throw Error();
+          !item.choices.every(identifier) || !Array.isArray(item.blanks) || item.blanks.length > 256 ||
+          (item.text !== undefined && (typeof item.text !== 'string' || item.text.length > 10000))) throw Error();
       return { ...(part ? { id: item.id } : {}), choices: [...new Set(item.choices)],
+        ...(item.text !== undefined ? { text: item.text } : {}),
         blanks: item.blanks.map(blank => {
           if (!blank || !identifier(blank.id) ||
               !(typeof blank.value === 'string' ? blank.value.length <= 2048 : Array.isArray(blank.value) &&
@@ -149,7 +151,7 @@
         '临时只读连接凭证 connectionToken：' + this.session.connectionToken + '\n' +
         '每次我问“当前这题”时，请重新调用 read_question({connectionToken:"' + this.session.connectionToken + '"})，不要沿用旧题号。\n' +
         'practice.draft 是我允许共享的当前填写内容，不是参考答案；可只读分析，不能修改、代填或提交。shareDraft=false 时不读取我的填写内容。\n' +
-        '仅在我要求查看答案时，用刚读取到的明确题目 ID 调用 read_answer。\n' +
+        '仅在我要求查看答案或批阅回答时，用刚读取到的明确题目 ID 调用 read_answer。简答文本在 draft.text 或 draft.parts 中对应小问的 text；批阅只给建议，不代我在网页确认自评或计分。\n' +
         '报错前先向我展示明确题号和将公开的说明，得到确认后调用 report_issue。\n' +
         '凭证只用于当前临时会话，不要公开、写进报错或提交到仓库；断开或过期后失效。';
     }
@@ -217,7 +219,7 @@
       : '已启用同步，当前未打开练习题。');
     if (active) {
       text += state.remote && state.remote.shareDraft ? ' · 已共享当前填写内容（只读）' : ' · 未共享填写内容';
-      if (state.shareDraft && state.context.draftTooLarge) text += ' · 填写内容过长，暂只同步题号；每空限 2048 字符、合计 48KB';
+      if (state.shareDraft && state.context.draftTooLarge) text += ' · 填写内容无效或过长，暂只同步题号；每空限 2048 字符、每个简答限 10,000 字符、合计 48KB';
       text += ' · 到期 ' + new Date(state.expiresAt).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
       text += state.remote && state.remote.lastReadAt ? ' · Agent 曾读取此会话' : ' · 复制连接信息交给 Agent 后即可读取';
     }

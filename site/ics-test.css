@@ -171,6 +171,12 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-answer-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
 .ics-answer-label { font-size: 13px; font-weight: 600; }
 .ics-answer-hint { color: var(--text-muted); font-size: 12px; }
+.ics-short-answer { margin: 20px 0; }
+.ics-short-answer label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+.ics-short-answer textarea { display: block; width: 100%; max-width: 100%; min-height: 140px; padding: 12px; border: 1px solid var(--border); border-radius: 5px; resize: vertical; background: var(--surface); color: var(--text); font: 14px/1.7 var(--font-ui); }
+.ics-short-answer textarea::placeholder { color: var(--text-muted); }
+.ics-short-answer textarea:disabled { opacity: 1; background: var(--bg-soft); cursor: default; -webkit-text-fill-color: var(--text); }
+.ics-short-answer .ics-composite-note { margin: 8px 0 0; font-size: 12px; }
 .ics-choice-list, .ics-composite-choices { display: grid; gap: 8px; }
 .ics-choice { display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: baseline; gap: 13px; width: 100%; min-height: 49px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); color: var(--text); text-align: left; }
 .ics-choice:hover:not(:disabled) { background: var(--bg-soft); border-color: var(--text-muted); }

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { PracticeSession, SESSION_TTL, CONTEXT_TTL, keyHash, validContext } from '../src/practice-session.mjs';
+import { PracticeSession, SESSION_TTL, CONTEXT_TTL, keyHash, validContext, validDraft } from '../src/practice-session.mjs';
 import { callTool, handleRequest } from '../src/worker.mjs';
 const q1 = 'q-0123456789abcdef', q2 = 'q-fedcba9876543210';
 const writeKey = '1'.repeat(64), readKey = '2'.repeat(64), id = 'a'.repeat(32);
@@ -118,6 +118,34 @@ test('context API refuses private data, arbitrary questions, invalid parts, over
   assert.ok(!JSON.stringify(stored).includes(created.writeToken));
   assert.ok(!JSON.stringify(stored).includes(created.connectionToken.split('.')[1]));
 });
+test('short-answer text is bounded, read-only, and restricted to the correct question type', async () => {
+  const draft={choices:[],blanks:[],parts:[],text:'回答\n<用户文本>'};
+  assert.equal(validDraft(draft),true);
+  assert.equal(validDraft({...draft,text:'x'.repeat(10000)}),true);
+  for(const text of [null,[],{},'x'.repeat(10001)])assert.equal(validDraft({...draft,text}),false);
+  assert.equal(validDraft({...draft,parts:[{id:'part-c',choices:[],blanks:[],text:'简答'}]}),true);
+  assert.equal(validDraft({...draft,parts:[{id:'part-c',choices:[],blanks:[],text:5}]}),false);
+  const h=harness();await initialized(h,{questionId:q1,shareDraft:true,draft});
+  const env={SITE_URL:'https://bank.example/',PRACTICE_SESSIONS:{
+    idFromName:value=>value,get:()=>({fetch:request=>h.object.fetch(request)})}};
+  const upstream=async()=>Response.json({packetVersion:1,questionId:q1,
+    question:{id:q1,type:'short-answer'},answer:{id:q1,solution:{reference:{text:'ANSWER_ONLY'}}}});
+  const result=await callTool('read_question',{connectionToken:id+'.'+readKey},env,'test',upstream);
+  assert.equal(result.structuredContent.practice.draft.text,draft.text);
+  assert.ok(!JSON.stringify(result).includes('ANSWER_ONLY'));
+  assert.equal((await h.invoke('update',readKey,{questionId:q1,shareDraft:true,draft:{...draft,text:'修改'},sequence:1})).status,403);
+  await h.invoke('update',writeKey,{questionId:q1,shareDraft:false,sequence:1});
+  assert.equal((await (await h.invoke('read',readKey)).json()).draft,null);
+  assert.ok(!JSON.stringify(h.store.get('session')).includes('用户文本'));
+  const allow={limit:async()=>({success:true})};
+  const apiEnv={...env,MCP_RATE_LIMITER:allow,SESSION_CREATE_RATE_LIMITER:allow};
+  const request=body=>new Request('https://worker.example/practice-sessions',{
+    method:'POST',headers:{'Content-Type':'application/json','CF-Connecting-IP':'203.0.113.1'},body:JSON.stringify(body)});
+  const choiceUpstream=async()=>Response.json({packetVersion:1,questionId:q1,
+    question:{id:q1,type:'single-choice',options:[]},answer:{id:q1}});
+  assert.equal((await handleRequest(request({questionId:q1,shareDraft:true,draft}),apiEnv,choiceUpstream)).status,400);
+});
+
 test('draft sharing is explicit, current-only and revocable; read capabilities cannot alter it', async () => {
   const h = harness();
   const draft = { choices: ['A'], blanks: [{ id: 'x', value: 'USER_ONLY' }],

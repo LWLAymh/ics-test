@@ -47,7 +47,9 @@ test('real Workers runtime reads and reports through a mocked outbound service w
 });
 test('real SQLite Durable Objects isolate sessions, share only current drafts and enforce read-only capabilities', async () => {
   const q1 = 'q-0123456789abcdef', q2 = 'q-fedcba9876543210';
-  const draft = { choices: ['A'], blanks: [], parts: [{ id: 'part-a', choices: [], blanks: [{ id: 'x', value: 'USER_ONLY' }] }] };
+  const draft = { choices: ['A'], blanks: [], parts: [
+    { id: 'part-a', choices: [], blanks: [{ id: 'x', value: 'USER_ONLY' }] },
+    { id: 'part-c', choices: [], blanks: [], text: '简答\n只读 USER_ONLY' }] };
   const bundle = await build({ entryPoints: [fileURLToPath(new URL('../src/worker.mjs', import.meta.url))],
     bundle: true, format: 'esm', platform: 'browser', write: false });
   const runtime = new Miniflare(convertV4MiniflareOptions({
@@ -62,7 +64,8 @@ test('real SQLite Durable Objects isolate sessions, share only current drafts an
       assert.equal(request.method, 'GET');
       const id = request.url.includes(q2) ? q2 : q1;
       return Response.json({ packetVersion: 1, questionId: id,
-        question: { id, options: [{ id: 'A' }], parts: [{ id: 'part-a', stem: { blanks: [{ id: 'x' }] } }] },
+        question: { id, options: [{ id: 'A' }], parts: [
+          { id: 'part-a', stem: { blanks: [{ id: 'x' }] } }, { id: 'part-c', type: 'short-answer' }] },
         answer: { id, solution: { reference: { text: 'ANSWER_ONLY' } } } });
     },
   }));

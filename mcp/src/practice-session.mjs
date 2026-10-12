@@ -8,7 +8,8 @@ export const MAX_DRAFT_BYTES = 48000;
 const identifier = value => typeof value === 'string' && value.length > 0 && value.length <= 128;
 const only = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).every(key => keys.includes(key));
 function validUnit(unit, part = false) {
-  return only(unit, part ? ['id', 'choices', 'blanks'] : ['choices', 'blanks', 'parts']) &&
+  return only(unit, part ? ['id', 'choices', 'blanks', 'text'] : ['choices', 'blanks', 'parts', 'text']) &&
+    (unit.text === undefined || typeof unit.text === 'string' && unit.text.length <= 10000) &&
     (!part || identifier(unit.id)) && Array.isArray(unit.choices) && unit.choices.length <= 64 &&
     unit.choices.every(identifier) && new Set(unit.choices).size === unit.choices.length &&
     Array.isArray(unit.blanks) && unit.blanks.length <= 256 &&

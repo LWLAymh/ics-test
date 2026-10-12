@@ -342,7 +342,15 @@ async function run() {
     await page.locator('.ics-blank-input').first().fill('42');assert.equal(await page.locator('.ics-blank-input').nth(1).inputValue(),'42');
     assert.equal(await page.locator('#ics-question-content pre input').count(),1);
     assert.equal(await page.locator('#ics-question-content table input').count(),1);
-    await page.click('#ics-next');await page.click('#ics-submit');assert(await page.locator('#ics-self-grade').isVisible());
+    await page.click('#ics-next');
+    const shortText='我的推理\n<script>不作为 HTML 执行</script>\nx + y';
+    await page.locator('[data-short-answer="root"]').fill(shortText);
+    assert.match(await page.locator('#ics-navigation-status').innerText(),/草稿/);
+    await page.click('#ics-previous');await page.click('#ics-next');
+    assert.equal(await page.locator('[data-short-answer="root"]').inputValue(),shortText);
+    assert.equal(await page.locator('#ics-question-content script').count(),0);
+    await page.click('#ics-submit');assert(await page.locator('#ics-self-grade').isVisible());
+    assert(await page.locator('[data-short-answer="root"]').isDisabled());
     assert.equal(await page.locator('#ics-local-attempts').innerText(),'2'); // Reveal is not completion.
     await page.click('#ics-previous');assert.equal(await page.locator('.ics-blank-input').first().inputValue(),'42');await page.click('#ics-submit');
     assert.match(await page.locator('#ics-verdict').innerText(),/正确/);
@@ -352,7 +360,12 @@ async function run() {
     assert.equal(await page.locator('.ics-composite-context').innerText(),'共用题面。');
     assert.deepEqual(await page.locator('.ics-composite-part > header h3').allTextContents(),['(1)','(2)','(3)']);
     assert.equal(await page.locator('.ics-composite-part').first().evaluate(el=>getComputedStyle(el).borderTopStyle),'solid');
-    await page.click('[data-composite-choice="B"]');await page.locator('.ics-blank-input').first().fill('42');await page.click('#ics-submit');
+    await page.click('[data-composite-choice="B"]');await page.locator('.ics-blank-input').first().fill('42');
+    await page.locator('[data-short-answer="2"]').fill('第三小问的分析\n补充理由。');
+    await page.click('#ics-previous');await page.click('#ics-next');
+    assert.equal(await page.locator('[data-short-answer="2"]').inputValue(),'第三小问的分析\n补充理由。');
+    await page.click('#ics-submit');
+    assert(await page.locator('[data-short-answer="2"]').isDisabled());
     assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),2);
     assert.deepEqual(await page.locator('.ics-solution-part > h4').allTextContents(),['(1)','(2)','(3)']);
     assert.equal(await page.locator('.ics-solution-context').innerText(),'人工参考答案。');
@@ -361,6 +374,10 @@ async function run() {
     await page.click('#ics-finish');assert.match(await page.locator('#ics-final-summary').innerText(),/已计分 5/);
     assert.equal(await page.evaluate(()=>window.__writes.filter(r=>r.name==='record_ics_answer').length),5);
     assert.equal(await page.locator('#ics-local-attempts').innerText(),'5');
+    const storedShorts=await page.evaluate(()=>Object.entries(localStorage).filter(([key])=>key.startsWith('ics-completed-attempt-v1:'))
+      .map(([,value])=>JSON.parse(value)).filter(record=>record.mode==='self'||record.mode==='mixed'));
+    assert.equal(storedShorts.find(record=>record.mode==='self').answer,shortText);
+    assert.ok(storedShorts.find(record=>record.mode==='mixed').answer.includes('第三小问的分析\n补充理由。'));
     // Repeating a question in a fresh quiz increments local count, not the
     // unique-browser global aggregate returned by the unchanged database RPC.
     await page.evaluate(id=>{

@@ -25,10 +25,14 @@ const multiFill = { ...fill, stem: { ...markdown('请选择 {{blank:x}}。'), bl
       { value: '<', label: '小于' }, { value: '=', label: '等于' }, { value: '>', label: '大于' },
     ] } },
 ] } };
+const short = { ...base, id:'q-0000000000000004',type:'short-answer',options:undefined,
+  stem:markdown('请解释你的推理。'),solution:{state:'available',grading:'self',
+    reference:markdown('REFERENCE_PRIVATE'),provenance:{origin:'unknown',crossChecked:null}} };
 const composite = { ...base, id: 'q-0000000000000005', type: 'composite', options: undefined,
   stem: markdown('综合题'), solution: { ...base.solution, grading: 'parts' }, parts: [
     { ...single, id: 'part-a', number: { display: '(1)' } },
     { ...multiFill, id: 'part-b', number: { display: '(2)' } },
+    { ...short, id: 'part-c', number: { display: '(3)' } },
   ] };
 function installSupabaseMock() {
   window.__writes = [];
@@ -81,7 +85,7 @@ async function run() {
     });
     await page.goto(process.env.ICS_TEST_URL || 'http://127.0.0.1:4187/');
     await page.waitForFunction(() => !document.querySelector('#ics-start').disabled);
-    await fixture(page, [single, fill]);
+    await fixture(page, [single, fill, short]);
     await page.locator('[data-choice="A"]').click();
     await page.waitForTimeout(1800);
     assert.equal(calls.length, 0, 'opt-in: displaying and filling questions must not create sessions');
@@ -141,6 +145,25 @@ async function run() {
     await page.waitForTimeout(1800); assert.equal(calls.length, count);
     await page.check('#ics-agent-share-draft');
     await page.waitForTimeout(100); assert.deepEqual(remote.draft.choices, ['A']);
+    await page.locator('#ics-next').click();await page.locator('#ics-next').click();
+    const text='我的分析\n`x+y` 与 x + y\n<script>只是文字</script>';
+    await page.locator('[data-short-answer="root"]').fill(text);
+    await page.waitForTimeout(1800);
+    assert.equal(remote.draft.text,text);
+    assert.equal(remote.questionId,short.id);
+    assert.ok(!JSON.stringify(calls).includes('REFERENCE_PRIVATE'));
+    await page.uncheck('#ics-agent-share-draft');await page.waitForTimeout(100);
+    assert.equal(remote.draft,null);
+    const shortCalls=calls.length;
+    await page.locator('[data-short-answer="root"]').fill(text+'\n补充');
+    await page.waitForTimeout(1800);assert.equal(calls.length,shortCalls);
+    await page.check('#ics-agent-share-draft');await page.waitForTimeout(100);
+    assert.equal(remote.draft.text,text+'\n补充');
+    await page.locator('#ics-previous').click();await page.waitForTimeout(100);
+    assert.equal(remote.draft.text,undefined,'other questions do not inherit short answers');
+    await page.locator('#ics-next').click();await page.waitForTimeout(100);
+    assert.equal(await page.locator('[data-short-answer="root"]').inputValue(),text+'\n补充');
+    assert.equal(remote.draft.text,text+'\n补充');
     await fixture(page, [composite]);
     await page.locator('[data-composite-choice="B"]').click();
     await page.waitForTimeout(1800);
@@ -156,6 +179,20 @@ async function run() {
     await page.waitForTimeout(1800);
     assert.equal(remote.partId, 'part-b');
     assert.deepEqual(remote.draft.parts[1].blanks, [{ id: 'x', value: ['<', '='] }]);
+    await page.locator('[data-short-answer="2"]').fill('综合题第三小问：\n独立的简答。');
+    await page.waitForTimeout(1800);
+    assert.equal(remote.partId,'part-c');
+    assert.equal(remote.draft.parts[2].text,'综合题第三小问：\n独立的简答。');
+    assert.equal(remote.draft.text,undefined);
+    assert.deepEqual(remote.draft.parts[1].blanks,[{id:'x',value:['<','=']}]);
+    assert.equal(await page.locator('#ics-local-attempts').innerText(),'0','typing and sharing are not graded attempts');
+    await page.setViewportSize({width:390,height:844});
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    if(process.env.ICS_SCREENSHOTS){
+      await page.locator('.ics-short-answer').scrollIntoViewIfNeeded();
+      await page.screenshot({path:path.join(process.env.ICS_SCREENSHOTS,'short-answer-mobile.png')});
+    }
+    await page.setViewportSize({width:1280,height:900});
     assert.equal(calls.filter(call => call.method === 'POST').length, 1, 'navigation reuses a single pairing');
     await page.locator('#ics-abandon').click();
     await page.waitForTimeout(100);
@@ -174,7 +211,7 @@ async function run() {
       fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true });
       await page.screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'practice-connection-mobile.png'), fullPage: true });
     }
-    console.log('Browser pairing passed: consent, current choices/fills/composite, read-key-only copy, sharing toggle, clear, revoke, no grading writes.');
+    console.log('Browser pairing passed: consent, current choices/fills/short-answer/composite, restored short drafts, read-key-only copy, sharing toggle, clear, revoke, no grading writes.');
   } finally { await browser.close(); }
 }
 run().catch(error => { console.error(error); process.exitCode = 1; });

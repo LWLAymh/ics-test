@@ -91,6 +91,39 @@ test('current draft is whitelisted; disabling sharing erases it and re-enabling 
   assert.equal(JSON.parse(h.calls.at(-1).body).draft, null);
   assert.equal(c.snapshot().context.draftTooLarge, true);
 });
+test('short-answer sharing preserves literal text, stays current-only and rejects oversize drafts', async () => {
+  const h=harness(),c=h.controller;
+  const text='我的回答\n\n`x + y` <script>不是指令</script>';
+  const draft={choices:[],blanks:[],parts:[],text,history:'PRIVATE'};
+  await c.setContext({questionId:q1,draft});
+  assert.equal(h.calls.length,0);
+  await c.connect();
+  assert.deepEqual(JSON.parse(h.calls.at(-1).body).draft,{choices:[],blanks:[],parts:[],text});
+  assert.match(c.prompt(),/批阅/);
+  await c.setSharing(false);
+  assert.equal(JSON.parse(h.calls.at(-1).body).draft,null);
+  draft.text='新回答';
+  const count=h.calls.length;
+  await c.setContext({questionId:q1,draft});assert.equal(h.calls.length,count);
+  await c.setSharing(true);
+  assert.equal(JSON.parse(h.calls.at(-1).body).draft.text,'新回答');
+  await c.setContext({questionId:q2,draft:{choices:[],blanks:[],parts:[{id:'part-c',choices:[],blanks:[],text}]}});
+  const body=JSON.parse(h.calls.at(-1).body);
+  assert.equal(body.draft.text,undefined);assert.equal(body.draft.parts[0].text,text);
+  assert.ok(!h.calls.at(-1).body.includes('新回答'));
+  for(const invalid of [10001, null, ['x']]) {
+    await c.setContext({questionId:q1,draft:{...draft,text:typeof invalid==='number'?'x'.repeat(invalid):invalid}});
+    assert.equal(c.snapshot().context.draftTooLarge,true);
+    assert.equal(JSON.parse(h.calls.at(-1).body).draft,null);
+  }
+  await c.setContext({questionId:q1,draft:{...draft,text:'x'.repeat(10000)}});
+  assert.equal(JSON.parse(h.calls.at(-1).body).draft.text.length,10000);
+  await c.setContext({questionId:q1,draft:{choices:[],blanks:[],text:'中'.repeat(10000),
+    parts:[{id:'p',choices:[],blanks:[],text:'中'.repeat(10000)}]}});
+  assert.equal(c.snapshot().context.draftTooLarge,true);
+  assert.equal(JSON.parse(h.calls.at(-1).body).draft,null);
+});
+
 test('sync failure is explicit and retry sends the latest context; disconnect failure does not claim revocation', async () => {
   const h = harness(), c = h.controller;
   await c.setContext({ questionId: q1 }); await c.connect();

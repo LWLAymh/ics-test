@@ -767,7 +767,7 @@
 
   function disableQuestionControls(root) {
     closeBlankMenus();
-    root.querySelectorAll('button, input, select').forEach(function (control) { control.disabled = true; });
+    root.querySelectorAll('button, input, select, textarea').forEach(function (control) { control.disabled = true; });
   }
 
   function gradeFillInputs(inputs, solution) {
@@ -784,6 +784,14 @@
     }).join('');
   }
 
+  function renderShortAnswer(scope) {
+    const id = 'ics-short-answer-' + scope;
+    return '<div class="ics-short-answer"><label for="' + id + '">我的回答（选填）</label>' +
+      '<textarea id="' + id + '" data-short-answer="' + scope + '" rows="6" maxlength="10000" ' +
+      'aria-describedby="' + id + '-note" placeholder="在这里写下你的分析、计算过程或结论。"></textarea>' +
+      '<p id="' + id + '-note" class="ics-composite-note">切题保留本次页面内的草稿，刷新会清除未完成的草稿。开启 MCP 共享后，可自行向本地 Agent 请求批阅；仍由你确认自评，不会自动计分。最多 10,000 字符。</p></div>';
+  }
+
   function renderCompositeQuestion(question) {
     const context = renderContent(question.stem);
     return (context.trim() ? '<div class="ics-composite-context">' + context + '</div>' : '') + question.parts.map(function (part, index) {
@@ -792,7 +800,7 @@
         body += '<div class="ics-composite-choices" data-part-index="' + index + '" data-multiple="' +
           (part.type === 'multiple-choice') + '">' + renderOptions(part.options, 'data-composite-choice') + '</div>';
       } else if (part.type === 'short-answer') {
-        body += '<p class="ics-composite-note">本小问思考完成后，在整题提交时查看参考答案并自评。</p>';
+        body += renderShortAnswer(index);
       }
       if (part.solution.state !== 'available') body += '<p class="ics-composite-note">本小问答案待复核，不计分。</p>';
       return '<section class="ics-composite-part" data-composite-part="' + index + '" data-mcp-part-id="' + escapeHtml(part.id) + '"><header><h3>' +
@@ -1028,6 +1036,9 @@
     if (!state.questions[state.index] || ui.quiz.hidden) return;
     state.drafts[state.index] = {
       answer: ui.answer.value,
+      shortAnswers: Array.from(ui.questionContent.querySelectorAll('[data-short-answer]')).map(function (input) {
+        return { scope: input.dataset.shortAnswer, value: input.value };
+      }),
       blanks: Array.from(ui.questionContent.querySelectorAll('.ics-blank-input')).map(function (input) {
         return { name: input.name, value: input.value };
       }),
@@ -1043,7 +1054,8 @@
   }
 
   function draftHasContent(draft) {
-    return draft && (draft.answer || draft.submitted || draft.blanks.some(function (blank) { return blank.value; }) || draft.compositeChoices.length);
+    return draft && (draft.answer || draft.submitted || draft.blanks.some(function (blank) { return blank.value; }) ||
+      (draft.shortAnswers || []).some(function (item) { return item.value.trim(); }) || draft.compositeChoices.length);
   }
 
   function updateNavigation() {
@@ -1117,6 +1129,10 @@
     const draft = state.drafts[state.index];
     if (!draft) return;
     ui.answer.value = draft.answer;
+    ui.questionContent.querySelectorAll('[data-short-answer]').forEach(function (input) {
+      const saved = (draft.shortAnswers || []).find(function (item) { return item.scope === input.dataset.shortAnswer; });
+      if (saved) input.value = saved.value;
+    });
     ui.choiceList.querySelectorAll('[data-choice]').forEach(function (button) {
       const selected = draft.answer.includes(button.dataset.choice);
       button.classList.toggle('selected', selected);
@@ -1173,7 +1189,7 @@
     ui.questionHistory.textContent = q.practiceStats
       ? '历史错误率 ' + Math.round(q.practiceStats.errorRate * 100) + '% · ' + q.practiceStats.total + ' 人作答 · 按错误率降序练习' : '';
     ui.questionContent.innerHTML = q.type === 'fill' ? renderFillQuestion(q.stem)
-      : compositeQuestion ? renderCompositeQuestion(q) : renderContent(q.stem);
+      : compositeQuestion ? renderCompositeQuestion(q) : renderContent(q.stem) + (q.type === 'short-answer' ? renderShortAnswer('root') : '');
 
     ui.answer.value = ''; ui.answer.disabled = false; ui.submit.disabled = false; ui.skip.disabled = false;
     ui.submit.hidden = false; ui.skip.hidden = false;
@@ -1311,7 +1327,8 @@
         }
       } else {
         subjectiveCount += 1;
-        answers.push(part.number.display + '：查看答案后自评');
+        const response = root.querySelector('[data-short-answer]');
+        answers.push(part.number.display + '：' + (response && response.value.trim() || '查看答案后自评'));
       }
     });
     if (firstMissing) {
@@ -1360,7 +1377,8 @@
       if (!compositeResult) return;
       ui.answer.value = compositeResult.answers.join('；');
     } else if (state.currentMode === 'short') {
-      ui.answer.value = '查看参考答案后自评';
+      const response = ui.questionContent.querySelector('[data-short-answer="root"]');
+      ui.answer.value = response && response.value.trim() || '查看参考答案后自评';
     }
     ui.skip.disabled = true;
     const q = state.questions[state.index];
@@ -1547,10 +1565,12 @@
     const draft = {
       choices: Array.from(ui.choiceList.querySelectorAll('[data-choice].selected'), button => button.dataset.choice),
       blanks: blanks('root'),
+      ...(q.type === 'short-answer' ? { text: ui.questionContent.querySelector('[data-short-answer="root"]').value } : {}),
       parts: (q.parts || []).map(function (part, index) {
         const section = ui.questionContent.querySelector('[data-composite-part="' + index + '"]');
         return { id: part.id, choices: section ? Array.from(section.querySelectorAll('[data-composite-choice].selected'),
-          button => button.dataset.compositeChoice) : [], blanks: blanks(String(index)) };
+          button => button.dataset.compositeChoice) : [], blanks: blanks(String(index)),
+          ...(part.type === 'short-answer' ? { text: section.querySelector('[data-short-answer]').value } : {}) };
       }),
     };
     document.dispatchEvent(new CustomEvent('ics:practice-context', {
