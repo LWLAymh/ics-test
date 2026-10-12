@@ -4,6 +4,58 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('opt-in C token comparison ignores spacing but preserves token and literal boundaries', () => {
+  const rule=answer=>({method:'exact',acceptedAnswers:[answer],
+    normalize:{trimWhitespace:true,caseSensitive:true,syntax:'c-tokens'}});
+  for(const input of ['x+y','x + y','x\t+\ty'])
+    assert.equal(api.gradeBlank(input,rule('x + y')),true,input);
+  for(const input of ['foo(p+1)',' foo ( p + 1 ) ','foo\t(\np+1\n)'])
+    assert.equal(api.gradeBlank(input,rule('foo(p + 1)')),true,input);
+  for(const input of ['fo o(p+1)','FOO(p+1)','foo(p+2)','foo(p+1);','foo(p+1)// hide code','foo(p+1)/*x*/'])
+    assert.equal(api.gradeBlank(input,rule('foo(p + 1)')),false,input);
+  assert.equal(api.gradeBlank('unsigned\tint',rule('unsigned int')),true);
+  assert.equal(api.gradeBlank('unsignedint',rule('unsigned int')),false);
+  assert.equal(api.gradeBlank('x + + y',rule('x + +y')),true);
+  assert.equal(api.gradeBlank('x++ + y',rule('x + +y')),false);
+  assert.equal(api.gradeBlank('n ! = 1',rule('n != 1')),false);
+  assert.equal(api.gradeBlank('"a b"',rule('"a b"')),true);
+  assert.equal(api.gradeBlank('"ab"',rule('"a b"')),false);
+  assert.equal(api.gradeBlank('"A b"',rule('"a b"')),false);
+  assert.equal(api.gradeBlank('"a b',rule('"a b"')),false);
+  assert.equal(api.gradeBlank('u8 "a b"',rule('u8"a b"')),false);
+  assert.equal(api.gradeBlank('255',rule('0xff')),false);
+  assert.equal(api.gradeBlank('3*85',rule('255')),false);
+  assert.equal(api.gradeBlank(' '.repeat(4097)+'foo(p+1)',rule('foo(p+1)')),false);
+  assert.equal(api.gradeBlank('foo(p+1)',{...rule('foo(p+1)'),normalize:{trimWhitespace:true,caseSensitive:true}}),true);
+  assert.equal(api.gradeBlank('foo(p+1)',{...rule('foo(p + 1)'),normalize:{trimWhitespace:true,caseSensitive:true}}),false);
+  const plain={method:'exact',acceptedAnswers:['hello world'],normalize:{trimWhitespace:true,caseSensitive:true}};
+  assert.equal(api.gradeBlank('helloworld',plain),false);
+  assert.equal(api.gradeBlank('hello  world',plain),false);
+});
+
+test('opt-in AT&T spacing preserves instruction, register and statement boundaries', () => {
+  const instruction={method:'exact',acceptedAnswers:['leaq (%rax,%rcx,1), %rax'],
+    normalize:{trimWhitespace:true,caseSensitive:true,syntax:'att-instruction'}};
+  for(const input of ['leaq\t( %rax , %rcx , 1 ) ,%rax','leaq (%rax,%rcx,1),%rax'])
+    assert.equal(api.gradeBlank(input,instruction),true,input);
+  for(const input of ['leaq(%rax,%rcx,1),%rax','leaq (% rax,%rcx,1),%rax',
+    'leaq (%rax,%rcx,1) %rax','leaq (%rax,%rcx,4),%rax',
+    'leaq (%rax,%rcx,1),%rax; ret','leaq (%rax,%rcx,1),\n%rax',
+    'leaq (%rax,%rcx,1),%rax # comment'])
+    assert.equal(api.gradeBlank(input,instruction),false,input);
+  const operand={method:'exact',acceptedAnswers:['-0x18(%rbp)'],
+    normalize:{trimWhitespace:true,caseSensitive:false,syntax:'att-operand'}};
+  assert.equal(api.gradeBlank('-0x18 ( %rbp )',operand),true);
+  assert.equal(api.gradeBlank('-0x18(% rbp)',operand),false);
+  assert.equal(api.gradeBlank('-0x18(%rbp)\nret',operand),false);
+  const literal={...operand,acceptedAnswers:['"a b"']};
+  assert.equal(api.gradeBlank('"a  b"',literal),false);
+  assert.equal(api.gradeBlank('"A b"',literal),false);
+  assert.equal(api.gradeBlank('ret',{...instruction,acceptedAnswers:['ret']}),true);
+  assert.equal(api.gradeBlank('retq',{...instruction,acceptedAnswers:['ret']}),false);
+  assert.equal(api.gradeBlank('foo',{...operand,acceptedAnswers:['foo'],normalize:{...operand.normalize,syntax:'unknown'}}),false);
+});
+
 test('new reports accept equivalent float expressions and LEA displacements without changing call timing', () => {
   const expression=bank.find(q=>q.id==='q-0300000000000057').parts[0];
   const ret2=expression.solution.blankAnswers.find(r=>r.blankId==='ret2');

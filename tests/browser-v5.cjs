@@ -785,7 +785,7 @@ async function run() {
       await fixture(page,[floatRepair]);
       for(const answer of floatRepair.parts[0].solution.blankAnswers)
         await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(
-          answer.blankId==='ret2'?equivalent:answer.acceptedAnswers[0]);
+          answer.blankId==='ret2'?equivalent.replaceAll(' ','\t'):answer.acceptedAnswers[0]);
       await page.click('#ics-submit');
       assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),5);
       assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"]').count(),0);
@@ -796,12 +796,21 @@ async function run() {
     const fooRepair=all.find(q=>q.id==='q-1d4f3586e8bd5b5c');
     await fixture(page,[fooRepair]);
     for(const answer of fooRepair.solution.blankAnswers)
-      await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(answer.acceptedAnswers[0]);
+      await page.locator('[data-blank-id="'+answer.blankId+'"]').fill(
+        answer.blankId==='b3'?'foo( p+1 )':answer.acceptedAnswers[0]);
     assert.equal(await page.locator('#ics-question-content pre').count(),2);
     assert.equal(await page.locator('[data-blank-id="b9"]').inputValue(),'-0x1');
     await page.click('#ics-submit');
     assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),13);
     assert.equal(await page.evaluate(()=>window.__test.state.records[0].points),1);
+    // Real assembly fields use the same explicit normalizer as their green feedback.
+    const assemblySpacing=all.find(q=>q.id==='q-a44ec5ff33556a53');
+    await fixture(page,[assemblySpacing]);
+    await page.locator('[data-blank-id="multiply-index"]').fill('imulq\t%rdi ,%rax');
+    await page.locator('[data-blank-id="add-column"]').fill('leaq\t( %rax , %rcx ) ,%rax');
+    await page.click('#ics-submit');
+    assert.equal(await page.evaluate(()=>window.__test.state.records[0].points),1);
+    assert.equal(await page.locator('.ics-inline-blank[data-result="correct"]').count(),2);
     // The call timing report does not justify changing the correct option.
     const stackRepair=all.find(q=>q.id==='q-3d1423df07ea83f3');
     for(const [choice,points] of [['C',1],['A',0]]) {

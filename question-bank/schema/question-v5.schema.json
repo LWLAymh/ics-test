@@ -546,8 +546,22 @@
             },
             "caseSensitive": {
               "type": "boolean"
+            },
+            "syntax": {
+              "enum": ["c-tokens", "att-operand", "att-instruction"],
+              "description": "Opt-in lexical whitespace comparison for reviewed code fragments; absent means literal exact matching."
             }
-          }
+          },
+          "allOf": [
+            {
+              "if": { "required": ["syntax"] },
+              "then": { "properties": { "trimWhitespace": { "const": true } } }
+            },
+            {
+              "if": { "properties": { "syntax": { "const": "c-tokens" } }, "required": ["syntax"] },
+              "then": { "properties": { "caseSensitive": { "const": true } } }
+            }
+          ]
         }
       },
       "allOf": [

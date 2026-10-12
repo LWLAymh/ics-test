@@ -14107,7 +14107,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1d4f3586e8bd5b5c",
-      "revision": 8,
+      "revision": 9,
       "paperId": "p-0fe6817c7f881573",
       "paperOrder": 17,
       "number": {
@@ -14276,12 +14276,12 @@
             "method": "exact",
             "acceptedAnswers": [
               "foo(p + 1)",
-              "foo(p+1)",
               "foo(&p[1])"
             ],
             "normalize": {
               "trimWhitespace": true,
-              "caseSensitive": false
+              "caseSensitive": true,
+              "syntax": "c-tokens"
             }
           },
           {
@@ -14349,7 +14349,8 @@
             ],
             "normalize": {
               "trimWhitespace": true,
-              "caseSensitive": false
+              "caseSensitive": false,
+              "syntax": "att-operand"
             }
           },
           {
@@ -143769,7 +143770,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0300000000000057",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f7485360f6c6060d",
       "paperOrder": 57,
       "number": {
@@ -143868,7 +143869,8 @@
                 ],
                 "normalize": {
                   "trimWhitespace": true,
-                  "caseSensitive": true
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
                 }
               },
               {
@@ -143879,58 +143881,49 @@
                 ],
                 "normalize": {
                   "trimWhitespace": true,
-                  "caseSensitive": true
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
                 }
               },
               {
                 "blankId": "cond",
                 "method": "exact",
                 "acceptedAnswers": [
-                  "b<=a",
                   "b <= a",
-                  "a>=b",
                   "a >= b"
                 ],
                 "normalize": {
                   "trimWhitespace": true,
-                  "caseSensitive": true
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
                 }
               },
               {
                 "blankId": "ret1",
                 "method": "exact",
                 "acceptedAnswers": [
-                  "c*d",
                   "c * d",
-                  "d*c",
                   "d * c"
                 ],
                 "normalize": {
                   "trimWhitespace": true,
-                  "caseSensitive": true
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
                 }
               },
               {
                 "blankId": "ret2",
                 "method": "exact",
                 "acceptedAnswers": [
-                  "c+2*d",
-                  "c + 2*d",
                   "c + 2 * d",
-                  "c+2 * d",
-                  "2*d+c",
-                  "2*d + c",
-                  "2 * d + c",
-                  "c+d*2",
-                  "c + d*2",
                   "c + d * 2",
-                  "d*2+c",
-                  "d*2 + c",
+                  "2 * d + c",
                   "d * 2 + c"
                 ],
                 "normalize": {
                   "trimWhitespace": true,
-                  "caseSensitive": true
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
                 }
               }
             ],
@@ -154161,7 +154154,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a44ec5ff33556a53",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-febcfbeee0f364b2",
       "paperOrder": 19,
       "number": {
@@ -154244,7 +154237,8 @@
               "imulq %rdi,%rax"
             ],
             "normalize": {
-              "caseSensitive": false,
+              "caseSensitive": true,
+              "syntax": "att-instruction",
               "trimWhitespace": true
             }
           },
@@ -154268,7 +154262,8 @@
               "leaq (%rcx, %rax, 1), %rax"
             ],
             "normalize": {
-              "caseSensitive": false,
+              "caseSensitive": true,
+              "syntax": "att-instruction",
               "trimWhitespace": true
             }
           }

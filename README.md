@@ -8,6 +8,7 @@
 - [仓库 / 提交 PR](https://github.com/LWLAymh/ics-test)
 - **当前题目接口为 v5**，人工编辑入口是 `question-bank/authored/`，不再是 `_curated/`。
 - 完整指导：[v5 题目编写与接口](docs/QUESTION_AUTHORING_V5.md)
+- 代码填空可显式启用[词法空白比较](docs/CODE_ANSWER_WHITESPACE_2026-10-12.md)：不再枚举空格组合；保留字符串与运算符边界，不做表达式求值。
 - [10 月 11 日第二轮修复与全库通用问题排查](docs/ISSUE_REPAIRS_2026-10-11_ROUND2.md)：28 道题逐题修订，覆盖表格、缺上下文、异常符号与判分口径；同步整理 Agent 接入面板。
 - [10 月 11 日第三轮报告复核](docs/ISSUE_REPAIRS_2026-10-11_ROUND3.md)：浮点类型前提、判断题公共条件、联合体对齐、结构体传参和负零判分。
 - [10 月 12 日报告修复](docs/ISSUE_REPAIRS_2026-10-12.md)：无符号加法溢出判分与等价 LEA 填空答案。

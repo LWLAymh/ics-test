@@ -80,6 +80,26 @@ class ContractTests(unittest.TestCase):
         q["stem"]["blanks"] = []
         self.invalid(q)
 
+    def test_code_whitespace_normalization_is_explicit_and_bounded(self):
+        q = self.example("fill")
+        q["stem"] = {"format": "markdown", "text": "{{blank:code}}", "blanks": [
+            {"id": "code", "marker": "{{blank:code}}", "occurrence": 0, "width": "medium"}]}
+        rule = {"blankId": "code", "method": "exact", "acceptedAnswers": ["foo(p + 1)"],
+                "normalize": {"trimWhitespace": True, "caseSensitive": True}}
+        q["solution"].update(grading="blanks", blankAnswers=[rule])
+        for syntax in ("c-tokens", "att-operand", "att-instruction"):
+            rule["normalize"]["syntax"] = syntax
+            validate_question(q)
+            self.assertEqual(parse_authored(dump_authored(q)), q)
+        rule["normalize"]["syntax"] = "strip-all-spaces"
+        self.invalid(q)
+        rule["normalize"]["syntax"] = "c-tokens"
+        rule["normalize"]["caseSensitive"] = False
+        self.invalid(q)
+        rule["normalize"]["caseSensitive"] = True
+        rule["normalize"]["trimWhitespace"] = False
+        self.invalid(q)
+
     def test_repeated_logical_blank_and_overlap(self):
         content = {"text": "____ and ____", "blanks": [
             {"id": "x", "marker": "____", "occurrence": 0},
