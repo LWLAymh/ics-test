@@ -1,0 +1,69 @@
+# 用户精选卷
+
+在“按卷 / 章节”中切换到“用户精选卷”。无需账号，可从不同来源、模块、题型或原卷选题；也可在当前筛选范围内随机添加。随机结果在选题时固定，发布后不会重新抽题。综合题保持完整。每卷 1–200 道题，可预览、排序、移除；标题最多 60 字、署名 40 字、描述 500 字。署名是自填昵称，不是身份认证。
+
+草稿保存在本浏览器。点击“直接发布”并确认后立即公开，不经过待审核。已发布题单不可编辑，修订可另发一卷。仅保存题目 ID，题面、选项、图片和答案继续使用仓库的人工 Markdown；不复制到 Supabase。题目后续修订会使用最新内容；已停用题目不会悄悄替换，含不可用题目的卷子会阻止开始并提示报告。
+
+## 点赞、参与和报告
+
+- 每个浏览器每卷最多一个赞，可以取消；数据库唯一键去重，不依赖按钮禁用。
+- 同一浏览器每卷只计一次参与，至少实际提交一道答案或完成自评后计入。仅打开、跳过、直接显示答案不计入。不是完卷人数或真实用户人数。
+- 列表按最新发布 / 最多点赞排序，每页 12 份；用刷新读取最新数据。
+- 每卷可报告问题，说明可为空、最多 1000 字，按纯文本公开展示。同一浏览器对同一卷重报会更新说明，不重复增加一条。
+- 清除浏览器数据或换设备会成为新的匿名浏览器；这些统计不是防刷或实名认证系统。
+
+## MCP 辅助选题：只能写未发布草稿
+
+在创建卷子的编辑器中展开“让 Agent 帮我组卷”，点击授权并复制信息给 Agent。只共享这份组卷草稿，不共享作答历史或熟知进度。
+
+1. Agent 用 `search_questions` 按来源、模块、题型、原卷或关键词查询；每页最多 20 题，返回摘要，不含答案。全文用 `read_question`。
+2. `read_paper_draft` 读取草稿与版本；`update_paper_draft` 使用明确的整题 ID 写入新草稿，并校验当前已发布题库与预期版本，防止旧请求覆盖新草稿。
+3. 用户回网页点击“检查 Agent 草稿”，再确认“载入此草稿”。没有自动覆盖本地编辑。
+4. 用户检查后亲自点击“直接发布”，再次确认。载入草稿不等于发布。
+
+组卷 `curationToken` 与练习只读 `connectionToken` 是不同权限与存储对象，不能混用；浏览器另持有不会分享给 Agent 的读取/撤销密钥。连接两小时后删除，刷新需重连；断开删除远程草稿，不删除已载入的本地草稿。
+
+## 初次启用（不需要数据库题目清单）
+
+1. 在 Supabase SQL Editor 执行 **`supabase/ics_community_papers.sql`**。脚本仅新增精选卷相关结构，可重跑，不清除已有数据。执行结果返回 `community_publish_token`；这个口令只允许创建精选卷，不是 Supabase secret/service-role key。
+2. 部署独立发布 Worker `ics-test-community`（仓库根目录 `npm run deploy-community`）。在该 Worker 的 Variables and Secrets 中添加 **Secret `COMMUNITY_PUBLISH_TOKEN`**，值为上一步输出。不要贴到聊天、浏览器配置或 Git。
+3. 更新原 MCP Worker：在 `mcp` 中执行 `npm ci`、`npm test`、`npm run deploy`，新增独立 `CurationSession` SQLite Durable Object 及迁移。
+4. 正常构建并部署网页：`npm run check`、`npm run build`。构建自动生成 `_site/mcp-data/question-index.json`；只包含当前发布题目的摘要，不含答案。以后加题只需原有网站构建/发布流程，**不需要同步数据库题目清单或重复执行 SQL**。
+
+`output/sql/community-setup.sql` 只是上述 SQL 的构建副本，也不包含固定题目 ID 清单。不需要配置 `SUPABASE_SECRET_KEY` 给任一 Worker；若曾按未完成方案把管理员密钥加到 MCP Worker，请删除该 Secret。
+
+### 权限边界
+
+| 位置 | 可用权限 |
+| --- | --- |
+| 浏览器 | 公开卷子与报告、匿名点赞/参与/报告、用户点击确认后请求发布服务 |
+| MCP Worker | 读题/读答案/确认后报题目问题、查询题库、持临时授权写未发布草稿；无发布口令 |
+| 独立发布 Worker | 读取最新站点题目索引，用专用口令调用创建卷子函数；无管理员密钥，无下架/清理权限 |
+| 维护者 | SQL Editor 或本机管理员脚本下架/恢复卷子、清理已处理报告 |
+
+公开客户端不能直接插入、修改或删除卷子及计数；发布数据库函数必须校验独立口令。口令存放在 `private` 表并启用 RLS，无匿名读取权限。发布服务不接受调用方指定网址、不跟随跳转、不返回上游响应或凭证。公开说明、署名与题目都按不可信资料处理。
+
+发布每 IP 每分钟最多 3 次，数据库每浏览器滚动 24 小时最多 5 份；其他写操作每浏览器每分钟最多 60 次。发布重试沿用草稿 UUID，不重复创建。网页要求真实点击与确认，MCP 没有发布工具或发布路由。
+
+**限制：**没有账号、验证码或硬件身份，浏览器点击与 Origin 检查不能证明请求来自真人；有通用网络/浏览器操作权限的自动化仍可能模拟公开网站。这一版保证 MCP 组卷能力本身不能发布，并做基础限流，不宣称能彻底防住恶意机器人。如出现滥用，可在独立发布服务增加 Turnstile，而不扩大 MCP 权限。
+
+## 下架、恢复和处理报告
+
+Supabase SQL Editor 可按明确 UUID 操作：
+
+```sql
+-- 下架，保留所有卷子内容与计数作为备份
+update public.ics_community_papers set status = 'hidden' where id = '替换为卷子 UUID';
+-- 恢复
+update public.ics_community_papers set status = 'published' where id = '替换为卷子 UUID';
+-- 处理完报告后清理；不删卷子或计数
+delete from private.ics_community_reports where paper_id = '替换为卷子 UUID';
+```
+
+也可在本机安全配置管理员环境变量后运行 `npm run moderate-paper -- -PaperId <UUID> -Action Hide`，Action 可选 `Hide` / `Restore` / `ResolveReports`。下架卷子不会出现在公开列表和报告列表，已有卡片也会在开始练习前重新检查状态；管理员仍能查看备份。不得将管理员环境变量配置进网站或两个 Worker。
+
+专用发布口令如需轮换，在 SQL Editor 更新 `private.ics_community_publish_key.token`，并同步更新独立发布 Worker 的 Secret；无需修改任何题目或 MCP 服务。
+
+## 验证
+
+根目录 `npm run check` / `npm run build`；`mcp` 下 `npm test` 包含真实 PostgreSQL（PGlite）的权限、去重、额度、安装重跑和下架测试，以及 MCP 能力隔离测试。`tests/browser-community.cjs` 用真实浏览器覆盖筛选、顺序、随机去重、本地草稿恢复、人工载入、发布确认、重试、点赞、报告、计数、手机布局与数据库未初始化回退；线上请求全部替身，不制造公开测试卷子。

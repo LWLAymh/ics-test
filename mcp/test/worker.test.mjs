@@ -10,7 +10,7 @@ const allow = { limit: async () => ({ success: true }) };
 function env(extra = {}) { return { SITE_URL: 'https://lwlaymh.github.io/ics-test/', SUPABASE_URL: 'https://example.supabase.co',
   SUPABASE_PUBLISHABLE_KEY: 'public-test-key', REPORT_IDENTITY_SECRET: 'test-only-secret',
   MCP_RATE_LIMITER: allow, ISSUE_RATE_LIMITER: allow, ...extra }; }
-test('official SDK client initializes, lists exactly three tools, reads without leaking answers', async () => {
+test('official SDK lists read/report and draft-only curation tools, reads without leaking answers', async () => {
   const calls = [];
   const upstream = async (url, init) => { calls.push([url, init]); return Response.json(packet); };
   const client = new Client({ name: 'test', version: '1' });
@@ -21,7 +21,7 @@ test('official SDK client initializes, lists exactly three tools, reads without 
     },
   });
   await client.connect(transport);
-  assert.deepEqual((await client.listTools()).tools.map(t => t.name), ['read_question', 'read_answer', 'report_issue']);
+  assert.deepEqual((await client.listTools()).tools.map(t => t.name), ['read_question', 'read_answer', 'report_issue', 'search_questions', 'read_paper_draft', 'update_paper_draft']);
   const question = await client.callTool({ name: 'read_question', arguments: { questionId: id } });
   assert.equal(question.structuredContent.stem.text, '题面');
   assert.ok(!JSON.stringify(question).includes('ANSWER_ONLY'));
@@ -82,9 +82,9 @@ test('HTTP origin, rate limit, route and body limits', async () => {
   assert.equal((await handleRequest(request(), env({ MCP_RATE_LIMITER: { limit: async () => ({ success: false }) } }))).status, 429);
   assert.equal((await handleRequest(request(), env({ MCP_RATE_LIMITER: null }))).status, 503);
   const big = request(); const headers = new Headers(big.headers);
-  const response = await handleRequest(new Request(big.url, { method: 'POST', headers, body: 'x'.repeat(17000) }), env());
+  const response = await handleRequest(new Request(big.url, { method: 'POST', headers, body: 'x'.repeat(34000) }), env());
   assert.equal(response.status, 413);
   assert.equal((await handleRequest(new Request('https://worker.example/other'), env())).status, 404);
   assert.equal((await handleRequest(new Request('https://worker.example/'), env())).status, 200);
-  assert.equal(TOOLS.length, 3);
+  assert.equal(TOOLS.length, 6);
 });

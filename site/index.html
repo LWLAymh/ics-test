@@ -148,6 +148,10 @@ window.MathJax = {
       <div class="ics-module-grid" id="ics-modules" aria-live="polite"></div>
       <p class="ics-local-progress-note" id="ics-mastery-note" role="status">熟知进度仅保存在当前浏览器；模块随机会跳过已熟知的题。</p>
     </fieldset>
+    <div id="ics-paper-kind" class="ics-community-tabs" role="group" aria-label="卷子来源" hidden>
+      <button type="button" class="ics-secondary" data-paper-kind="original" aria-pressed="true">原卷 / 课本章节</button>
+      <button type="button" class="ics-secondary" data-paper-kind="community" aria-pressed="false">用户精选卷</button>
+    </div>
     <div class="ics-options">
       <label class="ics-field" id="ics-count-field">题目数量
         <select id="ics-count">
@@ -173,9 +177,11 @@ window.MathJax = {
     </div>
     <p class="ics-setup-note" id="ics-practice-note">选择题与已配置答案的填空题自动核对，简答题查看参考答案后自评。</p>
     <p class="ics-error" id="ics-setup-error" role="alert" hidden></p>
+    <section id="ics-community" class="ics-community" hidden aria-label="用户精选卷"></section>
   </div>
 
   <section class="ics-panel ics-quiz" id="ics-quiz" hidden aria-label="当前练习">
+    <p id="ics-community-current" class="ics-community-note" hidden></p>
     <div class="ics-progress-row">
       <div><button class="ics-text-button" id="ics-abandon" type="button">重新组卷</button><span class="ics-toolbar-divider" aria-hidden="true"></span><span id="ics-progress-text" aria-live="polite"></span></div>
       <span id="ics-score-text"></span>
@@ -306,6 +312,8 @@ window.MathJax = {
 <script src="./vendor/supabase/supabase.js" defer></script>
 <script src="./question-v5.js" defer></script>
 <script src="./attempt-counts.js" defer></script>
+<script src="./community-papers.js" defer></script>
+<script src="./community-agent.js" defer></script>
 <script src="./ics-test.js" defer></script>
 <script src="./practice-connection.js" defer></script>
 </body>

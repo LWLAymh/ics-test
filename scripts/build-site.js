@@ -24,3 +24,5 @@ for (const question of questions) {
   fs.writeFileSync(path.join(output, 'mcp-data', question.id + '.json'), JSON.stringify(packet(question, papers.get(question.paperId))));
 }
 console.log('Built native v5 site; unpublished questions and legacy payloads excluded.');
+require('./community-data.cjs').artifacts(root, output, questions, Array.from(papers.values()),
+  JSON.parse(fs.readFileSync(path.join(output, 'web-data/catalog.json'), 'utf8')));

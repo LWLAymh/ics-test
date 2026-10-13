@@ -1,0 +1,15 @@
+{
+  "$schema": "../mcp/node_modules/wrangler/config-schema.json",
+  "name": "ics-test-community",
+  "account_id": "d36b1aa688170ab636ac79a352af1caf",
+  "main": "src/worker.mjs",
+  "compatibility_date": "2026-10-11",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "vars": {
+    "SITE_URL": "https://lwlaymh.github.io/ics-test/",
+    "SUPABASE_URL": "https://mecmgiejovjmyzptuela.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_y6w0NcfEp_WCJl1hDctSZw_DNplokC-"
+  },
+  "ratelimits": [{ "name": "PAPER_PUBLISH_RATE_LIMITER", "namespace_id": "861004", "simple": { "limit": 3, "period": 60 } }]
+}

@@ -7,9 +7,9 @@
   "workers_dev": true,
   "observability": { "enabled": false },
   "durable_objects": {
-    "bindings": [{ "name": "PRACTICE_SESSIONS", "class_name": "PracticeSession" }]
+    "bindings": [{ "name": "PRACTICE_SESSIONS", "class_name": "PracticeSession" }, { "name": "CURATION_SESSIONS", "class_name": "CurationSession" }]
   },
-  "migrations": [{ "tag": "practice-session-v1", "new_sqlite_classes": ["PracticeSession"] }],
+  "migrations": [{ "tag": "practice-session-v1", "new_sqlite_classes": ["PracticeSession"] }, { "tag": "curation-session-v1", "new_sqlite_classes": ["CurationSession"] }],
   "vars": {
     "SITE_URL": "https://lwlaymh.github.io/ics-test/",
     "SUPABASE_URL": "https://mecmgiejovjmyzptuela.supabase.co",

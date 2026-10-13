@@ -45,6 +45,86 @@ test('real Workers runtime reads and reports through a mocked outbound service w
     assert.ok(calls.every(call => !call.url.includes('must-not-follow')));
   } finally { await runtime.dispose(); }
 });
+
+test('real SQLite curation sessions enforce separate capabilities and optimistic revisions', async () => {
+  const q = 'q-0123456789abcdef';
+  const draft = { title: 'Selected questions', author: 'Reader', description: '', ids: [q] };
+  const bundle = await build({ entryPoints: [fileURLToPath(new URL('../src/worker.mjs', import.meta.url))],
+    bundle: true, format: 'esm', platform: 'browser', write: false });
+  const runtime = new Miniflare(convertV4MiniflareOptions({
+    modules: true, script: bundle.outputFiles[0].text, compatibilityDate: '2026-10-11', stripCfConnectingIp: false,
+    bindings: { SITE_URL: 'https://curation-bank.example/' },
+    durableObjects: { CURATION_SESSIONS: { className: 'CurationSession', useSQLite: true } },
+    ratelimits: {
+      MCP_RATE_LIMITER: { namespace_id: '21', simple: { limit: 60, period: 60 } },
+      SESSION_CREATE_RATE_LIMITER: { namespace_id: '22', simple: { limit: 5, period: 60 } },
+    },
+    outboundService: async request => {
+      assert.equal(request.method, 'GET');
+      assert.equal(request.url, 'https://curation-bank.example/mcp-data/question-index.json');
+      return Response.json({ version: 1, modules: [], questions: [{ id: q }] });
+    },
+  }));
+  const api = (path, method, body, key) => runtime.dispatchFetch('https://worker.example' + path, {
+    method, headers: { 'Content-Type': 'application/json', 'CF-Connecting-IP': '203.0.113.3',
+      ...(key ? { Authorization: 'Bearer ' + key } : {}) }, ...(body ? { body: JSON.stringify(body) } : {}),
+  });
+  async function tool(name, args) {
+    const response = await runtime.dispatchFetch('https://worker.example/mcp', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream', 'CF-Connecting-IP': '203.0.113.3' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name, arguments: args } }),
+    });
+    assert.equal(response.status, 200); return (await response.json()).result;
+  }
+  try {
+    const response = await api('/curation-sessions', 'POST', { draft: null });
+    assert.equal(response.status, 201);
+    const session = await response.json(), path = '/curation-sessions/' + session.sessionId;
+    const token = { curationToken: session.curationToken };
+    assert.equal((await tool('read_paper_draft', token)).structuredContent.revision, 0);
+    assert.equal((await api(path, 'GET', null, session.curationToken.split('.')[1])).status, 403);
+    assert.equal((await api(path, 'DELETE', null, session.curationToken.split('.')[1])).status, 403);
+    assert.equal((await tool('update_paper_draft', { ...token, expectedRevision: 0, draft })).structuredContent.revision, 1);
+    assert.equal((await tool('update_paper_draft', { ...token, expectedRevision: 0, draft })).isError, true);
+    assert.deepEqual((await (await api(path, 'GET', null, session.browserToken)).json()).draft, draft);
+    assert.equal((await tool('read_paper_draft', { curationToken: session.sessionId + '.' + session.browserToken })).isError, true);
+    assert.equal((await api('/papers', 'POST', {})).status, 404, 'MCP Worker has no publication endpoint');
+    assert.equal((await api(path, 'DELETE', null, session.browserToken)).status, 200);
+    assert.equal((await tool('read_paper_draft', token)).isError, true);
+  } finally { await runtime.dispose(); }
+});
+
+test('real separate publisher runtime forwards only its narrow publication capability', async () => {
+  const id = 'q-0123456789abcdef', capability = 'a'.repeat(64), calls = [];
+  const bundle = await build({ entryPoints: [fileURLToPath(new URL('../../community/src/worker.mjs', import.meta.url))],
+    bundle: true, format: 'esm', platform: 'browser', write: false });
+  const runtime = new Miniflare(convertV4MiniflareOptions({
+    modules: true, script: bundle.outputFiles[0].text, compatibilityDate: '2026-10-11', stripCfConnectingIp: false,
+    bindings: { SITE_URL: 'https://publisher-bank.example/', SUPABASE_URL: 'https://database.example',
+      SUPABASE_PUBLISHABLE_KEY: 'public-key', COMMUNITY_PUBLISH_TOKEN: capability },
+    ratelimits: { PAPER_PUBLISH_RATE_LIMITER: { namespace_id: '31', simple: { limit: 3, period: 60 } } },
+    outboundService: async request => {
+      calls.push(request.url);
+      if (request.method === 'GET') return Response.json({ version: 1, modules: [], questions: [{ id }] });
+      assert.equal(request.url, 'https://database.example/rest/v1/rpc/publish_ics_community_paper');
+      assert.equal(request.headers.get('apikey'), 'public-key');
+      assert.equal(request.headers.get('Authorization'), null);
+      assert.equal((await request.json()).p_publish_token, capability);
+      return Response.json('00000000-0000-4000-8000-000000000001');
+    },
+  }));
+  try {
+    const response = await runtime.dispatchFetch('https://publisher.example/papers', {
+      method: 'POST', headers: { Origin: 'https://publisher-bank.example', 'Content-Type': 'application/json', 'CF-Connecting-IP': '203.0.113.4' },
+      body: JSON.stringify({ paperId: '00000000-0000-4000-8000-000000000001', visitorId: '00000000-0000-4000-8000-000000000002',
+        draft: { title: 'Runtime test', author: 'Reader', description: '', ids: [id] } }),
+    });
+    assert.equal(response.status, 201);
+    assert.ok(!(await response.text()).includes(capability));
+    assert.equal(calls.length, 2);
+    assert.equal((await runtime.dispatchFetch('https://publisher.example/mcp', { headers: { Origin: 'https://publisher-bank.example' } })).status, 404);
+  } finally { await runtime.dispose(); }
+});
 test('real SQLite Durable Objects isolate sessions, share only current drafts and enforce read-only capabilities', async () => {
   const q1 = 'q-0123456789abcdef', q2 = 'q-fedcba9876543210';
   const draft = { choices: ['A'], blanks: [], parts: [

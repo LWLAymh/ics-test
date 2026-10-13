@@ -34,13 +34,18 @@ Agent 能读取填写内容并据此解释，但不能通过 MCP 代填、修改
 }
 ~~~
 
-## 仅有三个工具
+## 练习工具与独立组卷工具
 
 | 工具 | 参数 | 返回 / 副作用 |
 | --- | --- | --- |
 | read_question | questionId 或 connectionToken（二选一） | 人工 Markdown 题面、选项、空位配置、综合题小问、考试与题号、图片绝对链接；配对读取还返回 practice 中当前小问及用户允许共享的填写快照，不含参考答案 |
 | read_answer | questionId | 已有参考答案、解析、来源说明与显式答案配置；没有答案时如实返回缺失状态 |
 | report_issue | questionId, message（选填）, confirmed: true | 将题目和选填的公开说明提交到网站原有待复核列表 |
+| search_questions | 来源 / 题型 / 模块 / 原卷 / 关键词 / 分页 | 查询已发布题目摘要与编号，不含答案 |
+| read_paper_draft | curationToken | 读取用户授权的未发布组卷草稿与版本；不能读取作答 |
+| update_paper_draft | curationToken, expectedRevision, draft | 用固定整题编号更新临时草稿；不能发布 |
+
+组卷流程、浏览器人工检查/载入/发布，以及与练习只读连接相互隔离的权限，见[用户精选卷说明](COMMUNITY_PAPERS.md)。发布服务是另一个 Worker；MCP 没有发布口令，也不持有 Supabase 管理员密钥。
 
 questionId 是“复制给 Agent”提供的 q- 开头唯一编号，不是“第一题 6”等显示题号。综合题使用整题 ID，返回其全部小问；不能用小问旧 ID 单独调用。不存在、未发布、暂停发布的题目不提供服务。
 
@@ -121,6 +126,6 @@ npx.cmd wrangler secret put REPORT_IDENTITY_SECRET
 
 mcp/test/worker.test.mjs 用真实官方 SDK 客户端测试握手、列工具和调用；runtime.test.mjs 在 Cloudflare 的真实 workerd 和 SQLite Durable Objects 中检查读题、读答案、报错、配对、会话隔离、只读权限和撤销。practice-session.test.mjs 与根目录 tests/practice-connection.test.cjs 检查时效、乱序、隐私白名单、关闭共享及失败恢复。tests/browser-practice.cjs 检查真实网页填写／切题快照。报错 RPC 全部模拟，不向线上造报告。根目录 tests/mcp-data.test.cjs 全量检查发布题的 Markdown 保真、答案隔离和图片文件。持续验证只打包 Worker，不把 Cloudflare 登录凭证放 GitHub。
 
-线上检查可用任意兼容客户端，验证只列出三个工具，再对网站实际题号调用两个只读工具。**不要为了测试公开报错而制造虚假问题**。
+线上检查可用任意兼容客户端，验证列出三个练习工具和三个独立组卷工具，不存在发布、提交作答、计分或更改熟知进度的工具，再对网站实际题号调用两个只读工具。**不要为了测试公开报错而制造虚假问题或公开测试卷子**。
 
 协议实现参考：[官方 MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk)、[Cloudflare 远程 MCP 指南](https://developers.cloudflare.com/agents/model-context-protocol/guides/remote-mcp-server/)、[Workers 限流绑定](https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/)。

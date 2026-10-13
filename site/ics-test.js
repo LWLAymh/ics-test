@@ -62,6 +62,35 @@
   const contract = window.ICSQuestionV5;
   const MASTERY_KEY = 'ics-question-mastery-v1';
   const attemptCounts = window.ICSAttemptCounts.create(function () { return localStorage; });
+  state.communityPaper = null;
+  let paperKind = 'original';
+  const community = window.ICSCommunityPapers.create({
+    host: $('ics-community'), loadBank: loadQuestionBank, isPublished: isPublishedQuestion,
+    collection: contract.paperCollection, visitorId: visitorId, typeset: typeset,
+    renderPreview: function (q) {
+      function unit(item) {
+        return renderContent(item.stem) + (item.options ? '<ol>' + item.options.map(function (option) {
+          return '<li>' + renderContent(option.content) + '</li>';
+        }).join('') + '</ol>' : '');
+      }
+      return unit(q) + (q.parts || []).map(function (part) { return '<section><h4>' + escapeHtml(part.number.display) + '</h4>' + unit(part) + '</section>'; }).join('');
+    },
+    start: function (paper, questions) {
+      state.communityPaper = paper;
+      state.questions = questions; state.index = 0; state.score = 0; state.records = []; state.drafts = [];
+      $('ics-question-map').open = !window.matchMedia('(max-width: 720px)').matches;
+      ui.setup.hidden = true; ui.result.hidden = true; ui.quiz.hidden = false;
+      renderQuestion();
+    },
+  });
+  window.ICSCommunityAgent.mount(community);
+  $('ics-paper-kind').addEventListener('click', function (event) {
+    const button = event.target.closest('[data-paper-kind]');
+    if (!button) return;
+    paperKind = button.dataset.paperKind;
+    $('ics-paper-kind').querySelectorAll('button').forEach(function (item) { item.setAttribute('aria-pressed', String(item === button)); });
+    updateModeUi();
+  });
   function renderLocalAttempts() {
     const value = attemptCounts.snapshot();
     ui.localAttempts.textContent = value.count.toLocaleString('zh-CN');
@@ -156,6 +185,7 @@
       state.questions.push(question);
       state.index = state.questions.length - 1;
     } else {
+      state.communityPaper = null;
       state.questions = [question]; state.index = 0; state.score = 0; state.records = []; state.drafts = [];
     }
     ui.setup.hidden = true; ui.result.hidden = true; ui.quiz.hidden = false;
@@ -901,6 +931,14 @@
     ui.countField.hidden = mode !== 'random' && mode !== 'mistakes';
     ui.examTypeField.hidden = isAll || isExam;
     ui.paperField.hidden = !isExam;
+    const isCommunity = isExam && paperKind === 'community';
+    $('ics-paper-kind').hidden = !isExam;
+    ui.sourcePicker.closest('fieldset').hidden = isCommunity;
+    ui.paperField.hidden = !isExam || isCommunity;
+    ui.start.hidden = isCommunity;
+    ui.start.closest('.ics-options').hidden = isCommunity;
+    ui.practiceNote.hidden = isCommunity;
+    community.show(isCommunity);
     ui.minAttemptsField.hidden = mode !== 'mistakes';
     ui.practiceNote.textContent = mode === 'mistakes'
       ? '按历史错误率降序排列；错误率相同时优先展示作答人数更多的题。没有达到最低人数的题不会入选，统计包含自评。'
@@ -946,6 +984,7 @@
       state.papers = (paperPayload.papers || []).filter(function (paper) {
         return Number(paper.stats.publishedQuestionCount || 0) > 0;
       });
+      community.init({ client: state.supabase, catalog: state.catalog, papers: state.papers });
       renderSourceFilters();
       if (ui.practiceHistory.open) loadPracticeHistory();
       await loadReportedIssues();
@@ -1020,6 +1059,7 @@
       state.questions = mode === 'exam'
         ? pool.sort(function (a, b) { return Number(a.paperOrder || 0) - Number(b.paperOrder || 0); })
         : mode === 'mistakes' ? pool.slice(0, count) : secureShuffle(pool).slice(0, count);
+      state.communityPaper = null;
       state.index = 0; state.score = 0; state.records = []; state.drafts = [];
       $('ics-question-map').open = !window.matchMedia('(max-width: 720px)').matches;
 
@@ -1167,6 +1207,8 @@
   }
 
   function renderQuestion() {
+    $('ics-community-current').hidden = !state.communityPaper;
+    $('ics-community-current').textContent = state.communityPaper ? '用户精选卷 · ' + state.communityPaper.title + ' · ' + state.communityPaper.author_name : '';
     closeIssueForm();
     const q = state.questions[state.index];
     state.pendingCompositeGrade = null;
@@ -1272,6 +1314,7 @@
         answeredAt: new Date().toISOString(), points: points, mode: mode, answer: ui.answer.value.trim().slice(0, 20000) });
       renderLocalAttempts();
       recordRemoteStats(q, points === 1).catch(function () {});
+      if (state.communityPaper && state.communityPaper.question_ids.includes(q.id)) community.recordParticipation(state.communityPaper.id);
     }
     ui.selfGrade.hidden = true;
     ui.submit.hidden = true; ui.skip.hidden = true;
