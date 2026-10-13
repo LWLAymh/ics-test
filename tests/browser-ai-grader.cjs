@@ -44,12 +44,22 @@ async function run() {
     await page.route('https://ics-test-*.ics-test-mcp.workers.dev/**', route => route.abort());
     await page.route(/https:\/\/api\.(openai|deepseek)\.com\/.*/, async route => {
       const req = route.request(), data = req.postDataJSON(); calls.push({ url: req.url(), data, headers: req.headers() });
+      const currentResult = { ...result, reason: result.reason + '\nMOCK_FEEDBACK_' + calls.length };
       if (delay) await new Promise(resolve => { release = resolve; if (delayedReady) delayedReady(); });
       await route.fulfill({ status: fail ? 401 : 200, contentType: 'application/json', body: JSON.stringify(fail
         ? { error: { message: 'TEST_KEY_OPENAI_MUST_NOT_LEAK PRIVATE_ANSWER' } }
-        : req.url().includes('deepseek') ? { choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(result) } }] } : openai(result)) }).catch(() => {});
+        : req.url().includes('deepseek') ? { choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(currentResult) } }] } : openai(currentResult)) }).catch(() => {});
     });
     const field = key => page.locator('[data-api="' + key + '"]'), grade = () => page.locator('[data-ai-grade]').first();
+    // A previous result/status may remain during confirmation. Wait for the
+    // unique receipt of this request, not generic "已完成" or an already-visible panel.
+    const feedbackReady = (ordinal, provider = 'OpenAI') => page.waitForFunction(({ marker, provider }) => {
+      const root = document.querySelector('[data-ai-grade]').closest('.ics-short-answer');
+      const panel = root.querySelector('[data-ai-result]');
+      return !panel.hidden && panel.textContent.includes(marker) &&
+        panel.querySelector('.ics-api-result-note')?.textContent.startsWith(provider + ' / ') &&
+        root.querySelector('[data-ai-status]').textContent.includes('已完成') && !root.querySelector('[data-ai-grade]').disabled;
+    }, { marker: 'MOCK_FEEDBACK_' + ordinal, provider });
     const settings = async () => { await page.locator('#ics-agent-connection').evaluate(el => { el.open = true; }); await page.locator('#ics-api-settings').evaluate(el => { el.open = true; }); };
     const save = async (key, persist = false) => {
       await settings(); await field('key').fill(key); await field('remember').setChecked(persist); await field('consent').check();
@@ -63,25 +73,25 @@ async function run() {
     await page.locator('[data-short-answer="root"]').fill('存在时间与空间局部性。');
     await grade().click(); await page.locator('#ics-api-confirm').waitFor(); await page.locator('[data-confirm="cancel"]').click(); assert.equal(calls.length, 0);
     await grade().click(); await page.locator('[data-confirm="skip"]').check(); await page.locator('[data-confirm="send"]').click();
-    await page.locator('[data-ai-result]').waitFor(); assert.equal(calls.length, 1);
+    await feedbackReady(1); assert.equal(calls.length, 1);
     assert.equal(await page.locator('[data-ai-result] script').count(), 0); assert.ok(!(await page.evaluate(() => window.pwned)));
     assert.match(await page.locator('[data-ai-result]').innerText(), /7 \/ 10/);
     assert.equal(await page.locator('#ics-local-attempts').innerText(), '0'); assert.equal((await page.evaluate(() => window.__writes)).length, 0);
     assert.ok(!JSON.stringify(calls[0].data).includes('TEST_KEY_OPENAI_MUST_NOT_LEAK'));
     assert.equal(calls[0].headers.authorization, 'Bearer TEST_KEY_OPENAI_MUST_NOT_LEAK');
     assert.equal(calls[0].data.store, false);
-    await grade().click(); await page.waitForFunction(() => document.querySelector('[data-ai-status]').textContent.includes('已完成'));
+    await grade().click(); await feedbackReady(2);
     assert.equal(calls.length, 2); assert.equal(await page.locator('#ics-api-confirm').isVisible(), false);
     await page.locator('[data-short-answer="root"]').fill('修改后的回答'); assert.equal(await page.locator('[data-ai-result]').isVisible(), false);
     await settings(); await field('ask').check(); await grade().click(); await page.locator('#ics-api-confirm').waitFor(); await page.locator('[data-confirm="cancel"]').click();
     assert.equal(calls.length, 2);
     await field('ask').uncheck();
-    delay = true; await grade().click(); await page.waitForFunction(() => !document.querySelector('[data-ai-cancel]').hidden);
+    delay = true; let waiting = new Promise(resolve => { delayedReady = resolve; }); await grade().click(); await waiting;
     await page.locator('#ics-next').click();
     if (release) release(); delay = false;
     assert.equal(await page.locator('[data-ai-result]').isVisible(), false, 'old response cannot attach to the next question');
     await page.locator('[data-short-answer="root"]').fill('另一题待评测回答'); delay = true;
-    let waiting = new Promise(resolve => { delayedReady = resolve; }); await grade().click(); await waiting;
+    waiting = new Promise(resolve => { delayedReady = resolve; }); await grade().click(); await waiting;
     await page.locator('[data-ai-cancel]').click(); release(); delay = false;
     assert.equal(await grade().isEnabled(), true); assert.equal(await page.locator('[data-ai-result]').isVisible(), false);
     delay = true; waiting = new Promise(resolve => { delayedReady = resolve; }); await grade().click(); await waiting;
@@ -90,15 +100,19 @@ async function run() {
     await fixture(page, [composite]);
     assert.equal(await page.locator('[data-ai-grade]').count(), 2, 'only short-answer parts');
     await page.locator('[data-short-answer="1"]').fill('仅评当前简答'); await page.locator('[data-short-answer="2"]').fill('SIBLING_ANSWER_DO_NOT_SEND');
-    await grade().click(); await page.locator('[data-ai-result]').first().waitFor();
+    const compositeCall = calls.length + 1; await grade().click(); await feedbackReady(compositeCall);
     const payload = JSON.parse(calls.at(-1).data.input[0].content);
     assert.equal(payload.partId, 'part-b'); assert.equal(payload.commonQuestion, '公共题面 ONLY_COMMON');
     assert.ok(!JSON.stringify(payload).includes('DO_NOT_SEND'));
     await settings(); await field('provider').selectOption('deepseek'); assert.equal(await field('key').inputValue(), '');
     assert.equal(await grade().isDisabled(), true); await save('TEST_KEY_DEEPSEEK', true);
-    await grade().click(); await page.locator('#ics-api-confirm').waitFor(); await page.locator('[data-confirm="send"]').click();
-    await page.waitForFunction(() => document.querySelector('[data-ai-status]').textContent.includes('已完成'));
+    const deepseekCall = calls.length + 1;
+    delay = true; waiting = new Promise(resolve => { delayedReady = resolve; });
+    await grade().click(); await page.locator('#ics-api-confirm').waitFor(); await page.locator('[data-confirm="send"]').click(); await waiting;
     assert.match(calls.at(-1).url, /api.deepseek.com\/chat\/completions/); assert.equal(calls.at(-1).headers.authorization, 'Bearer TEST_KEY_DEEPSEEK');
+    assert.equal(calls.length, deepseekCall); assert.equal(await page.locator('[data-ai-result]').first().isVisible(), false);
+    assert.equal(await grade().isDisabled(), true, 'pending DeepSeek request cannot reuse the completed OpenAI result');
+    release(); delay = false; await feedbackReady(deepseekCall, 'DeepSeek');
     const beforeReload = calls.length; await page.reload(); await page.waitForFunction(() => !document.querySelector('#ics-start').disabled);
     assert.equal(calls.length, beforeReload); assert.match(await page.locator('#ics-api-summary').innerText(), /DeepSeek/);
     await fixture(page, [short]); await page.locator('[data-short-answer="root"]').fill('重载后的回答');
@@ -106,7 +120,8 @@ async function run() {
     await page.waitForFunction(() => document.querySelector('[data-ai-status]').textContent.includes('无效或没有权限'));
     assert.ok(!(await page.locator('body').innerText()).includes('PRIVATE_ANSWER')); assert.equal(calls.length, beforeReload + 1); fail = false;
     if (process.env.ICS_SCREENSHOTS) {
-      fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true }); await grade().click(); await page.locator('[data-ai-result]').waitFor();
+      fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true }); const screenshotCall = calls.length + 1;
+      await grade().click(); await feedbackReady(screenshotCall, 'DeepSeek');
       await page.screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'ai-desktop.png'), fullPage: true });
       await page.setViewportSize({ width: 390, height: 844 }); assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'ai-mobile.png'), fullPage: true });
