@@ -173,6 +173,7 @@ window.MathJax = {
       <label class="ics-field" id="ics-min-attempts-field" hidden>最低作答人数
         <select id="ics-min-attempts"><option value="1">至少 1 人</option><option value="5">至少 5 人</option><option value="10">至少 10 人</option><option value="20">至少 20 人</option></select>
       </label>
+      <button class="ics-secondary" id="ics-export-paper" type="button" hidden>导出 PDF</button>
       <button class="ics-primary" id="ics-start" type="button" disabled>开始练习 <span aria-hidden="true">→</span></button>
     </div>
     <p class="ics-setup-note" id="ics-practice-note">选择题与已配置答案的填空题自动核对，简答题查看参考答案后自评。</p>
@@ -312,6 +313,7 @@ window.MathJax = {
 <script src="./vendor/supabase/supabase.js" defer></script>
 <script src="./question-v5.js" defer></script>
 <script src="./attempt-counts.js" defer></script>
+<script src="./paper-export.js" defer></script>
 <script src="./community-papers.js" defer></script>
 <script src="./community-agent.js" defer></script>
 <script src="./ics-test.js" defer></script>

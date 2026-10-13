@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>ICS 卷子 · PDF 预览</title>
+<link rel="stylesheet" href="./paper-print.css">
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }, startup: { typeset: false } };
+</script>
+<script defer src="./vendor/mathjax/tex-chtml-full.js"></script><script defer src="./paper-print.js"></script>
+</head><body>
+<aside class="print-toolbar" aria-label="PDF 导出设置">
+  <div><strong>PDF 导出预览</strong><p>点击“打印 / 保存 PDF”，在打印窗口中选择“另存为 PDF”。建议使用 A4；可关闭浏览器附加的页眉页脚。</p></div>
+  <label><input id="print-answers" type="checkbox" disabled> 附带参考答案与解析（卷末）</label>
+  <div class="print-actions"><button id="print-save" type="button" disabled>打印 / 保存 PDF</button><button id="print-retry" type="button" hidden>重新检查资源</button></div>
+  <p id="print-status" role="status" aria-live="polite">正在读取卷子…</p>
+</aside>
+<main id="paper" hidden><header class="paper-header"><h1 id="paper-title"></h1><p id="paper-author"></p><p id="paper-description"></p><p id="paper-count"></p></header>
+<div id="paper-questions" class="post-content"></div><section id="paper-answers" class="post-content paper-answers" hidden></section></main>
+</body></html>

@@ -64,9 +64,24 @@
   const attemptCounts = window.ICSAttemptCounts.create(function () { return localStorage; });
   state.communityPaper = null;
   let paperKind = 'original';
+  function exportPaper(load) {
+    window.ICSPaperExport.open(load, { renderContent: renderContent, renderSolution: renderSolution, contract: contract,
+      source: function (q) { return [paperFor(q).displayName, q.number.display, issueTypeLabel(q.type)].join(' · '); } });
+  }
+  $('ics-export-paper').addEventListener('click', function () {
+    try {
+      const paper = state.papers.find(function (item) { return item.id === ui.paper.value; });
+      if (!paper) throw new Error('请先选择试卷或章节。');
+      exportPaper(async function () {
+        const bank = await loadQuestionBank();
+        return { paper: paper, questions: window.ICSCommunityPapers.resolveQuestions(paper.questionIds, bank) };
+      });
+    } catch (error) { showSetupError(error.message); }
+  });
   const community = window.ICSCommunityPapers.create({
     host: $('ics-community'), loadBank: loadQuestionBank, isPublished: isPublishedQuestion,
     collection: contract.paperCollection, visitorId: visitorId, typeset: typeset,
+    history: function () { attemptCounts.refresh(); return attemptCounts.history(); }, exportPaper: exportPaper,
     renderPreview: function (q) {
       function unit(item) {
         return renderContent(item.stem) + (item.options ? '<ol>' + item.options.map(function (option) {
@@ -936,6 +951,7 @@
     ui.sourcePicker.closest('fieldset').hidden = isCommunity;
     ui.paperField.hidden = !isExam || isCommunity;
     ui.start.hidden = isCommunity;
+    $('ics-export-paper').hidden = !isExam || isCommunity;
     ui.start.closest('.ics-options').hidden = isCommunity;
     ui.practiceNote.hidden = isCommunity;
     community.show(isCommunity);
@@ -962,6 +978,7 @@
 
   function updatePaperStatus() {
     const paper = state.papers.find(function (item) { return item.id === ui.paper.value; });
+    $('ics-export-paper').disabled = !paper;
     if (!paper) { ui.paperStatus.textContent = ''; return; }
     const stats = paper.stats;
     ui.paperStatus.textContent = stats.quizQuestionCount + ' 道独立题目 · 单选 ' + stats.singleChoiceCount +

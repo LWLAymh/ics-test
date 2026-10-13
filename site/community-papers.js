@@ -30,6 +30,10 @@
     }
     return remaining.slice(0, count).map(q => q.id);
   }
+  function historyQuestionIds(records, wrongOnly) {
+    return new Set(records.filter(record => typeof record.questionId === 'string' && ID.test(record.questionId) &&
+      Number.isFinite(record.points) && (!wrongOnly || record.points < 1)).map(record => record.questionId));
+  }
   function create(options) {
     const host = options.host;
     let client, bank = [], papers = new Map(), ids = [], entries = [], offset = 0, request = 0;
@@ -49,12 +53,14 @@
       '<label class="ics-community-description">简短描述<textarea data-community="description" maxlength="500" rows="2" placeholder="适合谁练习、选题思路等（选填）"></textarea></label>' +
       '<div data-community="agent"></div>' +
       '<fieldset class="ics-community-sources"><legend>题目来源</legend><label><input type="checkbox" data-cp-source="pku-exam" checked> PKU 真题</label><label><input type="checkbox" data-cp-source="csapp-textbook" checked> CSAPP 习题</label></fieldset>' +
+      '<div class="ics-community-toolbar"><label>选题范围 <select data-community="history-range"><option value="all">全部题库</option><option value="attempted">我的作答记录</option><option value="wrong">我的错题（曾经答错）</option></select></label>' + button('history-refresh', '刷新本地记录') + button('add-filtered', '添加筛选结果', '', ' hidden') + '</div>' +
+      '<p class="ics-community-note">记录仅在本浏览器读取，重复作答按题目去重；错题包含任意一次得分不足满分的题。个人回答和成绩不会随卷子或 MCP 草稿上传。</p>' +
       '<div class="ics-community-fields"><label>知识模块<select data-community="module"><option value="">全部模块</option></select></label><label>题型<select data-community="type"><option value="">全部题型</option>' + Object.entries(TYPES).map(([key, name]) => '<option value="' + key + '">' + name + '</option>').join('') + '</select></label>' +
       '<label>原卷 / 章节<select data-community="paper"><option value="">全部卷 / 章节</option></select></label><label>搜索题面 / 编号<input data-community="search" type="search" placeholder="关键词或 q-…"></label></div>' +
       '<div class="ics-community-toolbar"><label>随机添加 <input data-community="random-count" type="number" min="1" max="200" value="5"> 题</label>' + button('random', '从当前范围抽题') + '<span data-community="pool-count"></span></div>' +
       '<div class="ics-community-builder"><section><h4>可选题目</h4><div data-community="pool" class="ics-community-candidates"></div>' + button('pool-more', '显示更多候选题') + '</section>' +
       '<section><h4 data-community="selected-heading">已选 0 / 200 题</h4><div data-community="selected" class="ics-community-selected"></div>' + button('selected-more', '显示更多已选题') + '</section></div>' +
-      '<p data-community="editor-status" class="ics-community-note" role="status" aria-live="polite"></p><div class="ics-community-toolbar"><button type="button" class="ics-primary" data-cp-action="publish">直接发布</button>' + button('clear', '清空草稿') + '</div></section>' +
+      '<p data-community="editor-status" class="ics-community-note" role="status" aria-live="polite"></p><div class="ics-community-toolbar"><button type="button" class="ics-primary" data-cp-action="publish">直接发布</button>' + button('export-draft', '导出草稿 PDF') + button('clear', '清空草稿') + '</div></section>' +
       '<section data-community="preview" class="ics-community-preview" hidden aria-label="题目预览"><div class="ics-community-head"><h4 data-community="preview-title"></h4>' + button('close-preview', '关闭预览') + '</div><div data-community="preview-content" class="post-content ics-question-content"></div></section>' +
       '<form data-community="report" class="ics-community-report" hidden><h4>报告精选卷问题</h4><p data-community="report-title"></p><p class="ics-community-note">说明会公开，请勿填写个人联系方式等隐私信息。</p><label>问题说明（选填）<textarea data-community="report-message" rows="3" maxlength="1000"></textarea></label><p data-community="report-status" role="status"></p><div class="ics-community-toolbar"><button type="submit" class="ics-primary">提交报告</button>' + button('close-report', '取消') + '</div></form>';
     function notice(text, editor = false) { $(editor ? 'editor-status' : 'status').textContent = text; }
@@ -74,11 +80,14 @@
     function excerpt(q) { return q.stem.text.replace(/\{\{blank:[^}]+\}\}/g, '____').replace(/[`#*]/g, '').replace(/\s+/g, ' ').slice(0, 140); }
     function filters() {
       const sources = Array.from(host.querySelectorAll('[data-cp-source]:checked')).map(el => el.dataset.cpSource), search = $('search').value.trim().toLowerCase();
+      const range = $('history-range').value, historyIds = range === 'all' ? null : historyQuestionIds(options.history(), range === 'wrong');
       pool = bank.filter(q => sources.includes(options.collection(papers.get(q.paperId))) &&
+        (!historyIds || historyIds.has(q.id)) &&
         (!$('module').value || q.classification.moduleIds.includes($('module').value)) &&
         (!$('type').value || q.type === $('type').value) && (!$('paper').value || q.paperId === $('paper').value) &&
         (!search || (q.id + ' ' + q.stem.text + ' ' + name(q)).toLowerCase().includes(search)));
       $('pool-count').textContent = pool.length + ' 题符合条件 · ' + pool.filter(q => !ids.includes(q.id)).length + ' 题尚未选入';
+      host.querySelector('[data-cp-action="add-filtered"]').hidden = range === 'all';
       $('pool').innerHTML = pool.slice(0, filterLimit).map(q => '<article><small>' + esc(name(q)) + '</small><p>' + esc(excerpt(q)) + '</p><div>' + button('preview', '预览', q.id) + button('add', ids.includes(q.id) ? '已添加' : '添加', q.id, ids.includes(q.id) || publishing ? ' disabled' : '') + '</div></article>').join('') || '<p>没有匹配的题目。</p>';
       host.querySelector('[data-cp-action="pool-more"]').hidden = pool.length <= filterLimit;
     }
@@ -115,7 +124,7 @@
     }
     function renderList() {
       $('list').innerHTML = entries.map(paper => '<article class="ics-community-card"><h4>' + esc(paper.title) + '</h4><small>' + esc(paper.author_name) + ' · ' + new Date(paper.created_at).toLocaleDateString('zh-CN') + ' · ' + paper.question_ids.length + ' 题</small>' +
-        '<p>' + esc(paper.description || '发布者未填写描述。') + '</p><div class="ics-community-card-footer"><span>' + Number(paper.participant_count) + ' 次参与 · ' + Number(paper.like_count) + ' 赞</span><div>' + button('start', '开始练习', paper.id) + button('like', paper.liked ? '取消赞' : '点赞', paper.id, ' aria-pressed="' + Boolean(paper.liked) + '"') + button('report', '报告问题', paper.id) + '</div></div></article>').join('');
+        '<p>' + esc(paper.description || '发布者未填写描述。') + '</p><div class="ics-community-card-footer"><span>' + Number(paper.participant_count) + ' 次参与 · ' + Number(paper.like_count) + ' 赞</span><div>' + button('start', '开始练习', paper.id) + button('export', '导出 PDF', paper.id) + button('like', paper.liked ? '取消赞' : '点赞', paper.id, ' aria-pressed="' + Boolean(paper.liked) + '"') + button('report', '报告问题', paper.id) + '</div></div></article>').join('');
       $('page').textContent = '第 ' + (Math.floor(offset / PAGE_SIZE) + 1) + ' 页';
       host.querySelector('[data-cp-action="previous"]').disabled = offset === 0; host.querySelector('[data-cp-action="next"]').disabled = entries.length < PAGE_SIZE;
     }
@@ -175,7 +184,7 @@
     });
     host.addEventListener('change', event => {
       if (event.target === $('sort')) refresh(true);
-      if (event.target.matches('[data-cp-source]') || ['module', 'type', 'paper'].includes(event.target.dataset.community)) { filterLimit = 30; filters(); }
+      if (event.target.matches('[data-cp-source]') || ['module', 'type', 'paper', 'history-range'].includes(event.target.dataset.community)) { filterLimit = 30; filters(); }
     });
     let reportRows = [], reportLoading = false;
     async function loadReports(reset) {
@@ -211,6 +220,16 @@
         if (action === 'selected-more') { selectedLimit += 30; renderSelected(); }
         if (action === 'preview') await preview(id);
         if (action === 'start') await start(id);
+        if (action === 'export') options.exportPaper(async () => {
+          const result = await api().from('ics_community_papers').select('*').eq('id', id).eq('status', 'published').maybeSingle();
+          if (result.error) throw result.error; if (!result.data) throw new Error('这份卷子已下架或不存在。');
+          await loadBank(); return { paper: result.data, questions: resolveQuestions(result.data.question_ids, bank) };
+        });
+        if (action === 'export-draft') {
+          const current = draft();
+          options.exportPaper(async () => { await loadBank(); return { paper: { ...current, title: current.title.trim() || '未发布精选卷草稿' }, questions: resolveQuestions(current.ids, bank) }; });
+        }
+        if (action === 'history-refresh') { filters(); notice('已重新读取本浏览器记录；已停用的题不会出现在候选题中。', true); }
         // Never exposed to MCP: only a trusted browser click can invoke this UI action.
         if (action === 'publish' && event.isTrusted) await publish();
         if (action === 'like') {
@@ -225,7 +244,12 @@
         if (action === 'up' && position > 0) { [ids[position - 1], ids[position]] = [ids[position], ids[position - 1]]; changed(); }
         if (action === 'down' && position >= 0 && position < ids.length - 1) { [ids[position + 1], ids[position]] = [ids[position], ids[position + 1]]; changed(); }
         if (action === 'random') { ids.push(...sample(pool, ids, Number($('random-count').value))); changed(); }
-      } catch (error) { notice(errorText(error), ['add', 'random', 'preview', 'publish'].includes(action)); }
+        if (action === 'add-filtered') {
+          const additional = pool.filter(q => !ids.includes(q.id)).map(q => q.id);
+          if (ids.length + additional.length > MAX_QUESTIONS) throw new Error('添加后超过 200 题，请缩小筛选范围或逐题添加。');
+          ids.push(...additional); changed(); notice('已添加 ' + additional.length + ' 道题；个人回答和成绩不会上传。', true);
+        }
+      } catch (error) { notice(errorText(error), ['add', 'add-filtered', 'random', 'preview', 'publish', 'export-draft'].includes(action)); }
       finally { if (action === 'like') control.disabled = false; }
     });
     restoreDraft();
@@ -252,5 +276,5 @@
       },
     };
   }
-  return { MAX_QUESTIONS, validateDraft, resolveQuestions, sample, create };
+  return { MAX_QUESTIONS, validateDraft, resolveQuestions, sample, historyQuestionIds, create };
 }));

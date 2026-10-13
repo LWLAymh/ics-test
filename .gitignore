@@ -9,4 +9,5 @@ __pycache__/
 .wrangler/
 .dev.vars
 output/sql/
+output/pdf/web-export-qa/
 

@@ -48,6 +48,12 @@ async function main() {
     const page = await browser.newPage({ viewport: { width: 1280, height: 950 } });
     const errors = [], sessions = [], remote = { title: 'Agent 精选', author: '测试署名', description: '固定题单', ids: [q1.id, q2.id, q3.id] };
     page.on('pageerror', e => errors.push(e.message));
+    await page.addInitScript(({ ids }) => {
+      const attempts = [[ids[0], 0], [ids[0], 1], [ids[1], 1], [ids[2], 0.5], ['q-deadbeefcafebabe', 0]];
+      attempts.forEach(([questionId, points], i) => localStorage.setItem('ics-completed-attempt-v1:00000000-0000-4000-8000-' + String(i + 1).padStart(12, '0'), JSON.stringify({
+        version: 1, questionId, revision: 1, answeredAt: '2026-10-13T00:00:00Z', points, mode: 'auto', answer: 'LOCAL_ANSWER_PRIVATE',
+      })));
+    }, { ids: [q1.id, q2.id, q3.id] });
     let accept = true;
     page.on('dialog', dialog => accept ? dialog.accept() : dialog.dismiss());
     await page.route('**/vendor/supabase/supabase.js', route => route.fulfill({ contentType: 'application/javascript', body: '(' + stub.toString() + ')();' }));
@@ -76,6 +82,11 @@ async function main() {
     await page.waitForFunction(() => document.querySelector('[data-community="status"]').textContent.includes('还没有'));
     assert.equal(await page.locator('#ics-start').isVisible(), false);
     await action('create').click(); await cp('pool').locator('article').first().waitFor();
+    await cp('history-range').selectOption('attempted'); assert.equal(await cp('pool').locator('article').count(), 3);
+    await cp('history-range').selectOption('wrong'); assert.equal(await cp('pool').locator('article').count(), 2);
+    await action('add-filtered').click();
+    assert.deepEqual(new Set(await page.evaluate(() => JSON.parse(localStorage.getItem('ics-community-draft-v1')).ids)), new Set([q1.id, q3.id]));
+    await action('clear').click(); await cp('history-range').selectOption('all');
     await cp('title').fill('手工精选'); await cp('author').fill('作者');
     await cp('search').fill(q1.id); await cp('pool').locator('[data-cp-action="preview"]').click();
     assert.equal(await cp('preview').isVisible(), true);
@@ -119,6 +130,14 @@ async function main() {
     await page.evaluate(() => { window.__publishFail = false; }); await action('publish').click(); await cp('list').locator('article').waitFor();
     assert.equal((await page.evaluate(() => window.__papers))[0].id, attemptedId, 'same publish ID on retry');
     assert.deepEqual((await page.evaluate(() => window.__papers))[0].question_ids, remote.ids);
+    const popupPromise = page.waitForEvent('popup'); await action('export').click(); const printed = await popupPromise;
+    await printed.waitForFunction(() => document.querySelector('#print-save') && !document.querySelector('#print-save').disabled);
+    assert.equal(await printed.locator('#paper-questions > article').count(), 3);
+    assert.deepEqual(await printed.locator('#paper-questions > article').evaluateAll(items => items.map(item => item.dataset.questionId)), remote.ids);
+    assert.equal(await printed.locator('#paper-answers').isVisible(), false);
+    assert.ok(!(await printed.locator('body').innerText()).includes('LOCAL_ANSWER_PRIVATE'));
+    assert.equal((await page.evaluate(() => window.__calls.filter(c => c.name === 'participate_ics_community_paper'))).length, 0, 'export does not count');
+    await printed.close();
     await action('like').click(); await page.waitForFunction(() => document.querySelector('[data-cp-action="like"]').textContent === '取消赞');
     await cp('sort').selectOption('popular'); await cp('list').locator('article').waitFor();
     assert.match(await cp('list').innerText(), /1 赞/);

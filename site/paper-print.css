@@ -1,0 +1,48 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: #edf0f3; color: #16202b; font: 15px/1.65 Arial, "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+.print-toolbar { max-width: 900px; margin: 20px auto; padding: 20px 24px; border: 1px solid #cdd5df; background: white; }
+.print-toolbar p { margin: 6px 0; color: #526174; }
+.print-actions { display: inline-flex; gap: 10px; margin: 12px 0 0 20px; }
+button { padding: 8px 14px; border: 1px solid #a7b6c6; border-radius: 4px; background: white; color: #173b66; font: inherit; cursor: pointer; }
+button:disabled { opacity: .5; cursor: wait; }
+#paper { width: min(100%, 210mm); margin: 20px auto; padding: 16mm; background: white; }
+.paper-header { border-bottom: 2px solid #273a50; padding-bottom: 12px; margin-bottom: 22px; }
+#paper-description { white-space: pre-wrap; overflow-wrap: anywhere; }
+h1 { font-size: 23px; margin: 0 0 12px; line-height: 1.4; overflow-wrap: anywhere; }
+h2 { font-size: 15px; line-height: 1.5; margin: 22px 0 0; break-after: avoid; }
+h3 { font-size: 15px; margin: 18px 0 8px; break-after: avoid; }
+p { margin: 8px 0; }
+.paper-id { font: 10px/1.5 ui-monospace, Consolas, monospace; color: #637181; margin: 2px 0 10px; break-after: avoid; }
+.paper-question { border-bottom: 1px solid #d5dce4; padding-bottom: 18px; break-inside: avoid; }
+.paper-option { display: flex; gap: 10px; margin: 8px 0; break-inside: avoid; }
+.paper-option > div { min-width: 0; flex: 1; }
+.paper-option p { margin: 0; }
+pre { font: 11px/1.55 ui-monospace, Consolas, "Microsoft YaHei", monospace; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 4; background: #f3f4f6; padding: 12px; border: 1px solid #d4dce5; break-inside: avoid; }
+code { font: .9em/1.6 ui-monospace, Consolas, "Microsoft YaHei", monospace; font-variant-ligatures: none; }
+:not(pre) > code { background: #f0f2f4; padding: 1px 3px; }
+pre code { font-size: inherit; background: none; padding: 0; }
+img { max-width: 100%; height: auto; max-height: 225mm; object-fit: contain; break-inside: avoid; }
+table { border-collapse: collapse; width: 100%; font-size: 12px; table-layout: auto; margin: 12px 0; }
+th, td { border: 1px solid #b7c2ce; padding: 5px 7px; overflow-wrap: anywhere; }
+tr { break-inside: avoid; } thead { display: table-header-group; }
+.paper-table-wide { table-layout: fixed; font-size: 10px; }
+.paper-table-wide th, .paper-table-wide td { padding: 4px 3px; }
+blockquote { border-left: 3px solid #8495aa; margin-left: 0; padding-left: 12px; }
+.paper-blank { display: inline-flex; align-items: baseline; white-space: nowrap; width: 6em; max-width: 100%; min-width: 0; vertical-align: baseline; }
+.paper-blank small { color: #637181; font: 9px Arial, sans-serif; padding-right: 4px; flex-shrink: 0; }
+.paper-blank-line { border-bottom: 1px solid currentColor; flex: 1; min-width: 0; }
+.paper-blank-choices { font-size: 12px; }
+.paper-answers { break-before: page; margin-top: 36px; }
+mjx-container { max-width: 100%; } mjx-container[display="true"] { overflow-wrap: normal; }
+[hidden] { display: none !important; }
+@page { size: A4; margin: 15mm; }
+@media print {
+  body { background: white; font-size: 11pt; color: black; }
+  .print-toolbar { display: none; }
+  #paper { width: auto; margin: 0; padding: 0; }
+  pre { background: #f6f6f6; print-color-adjust: exact; }
+  a { color: inherit; text-decoration: none; }
+  .print-not-ready #paper { display: none; }
+  .print-not-ready::before { content: "资源尚未加载完成，请关闭打印窗口，待预览显示已就绪后重试。"; }
+}
+@media (max-width: 640px) { #paper { padding: 20px; } .print-toolbar { margin: 10px; padding: 16px; } .print-actions { display: flex; margin-left: 0; } }
