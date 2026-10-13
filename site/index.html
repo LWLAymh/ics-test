@@ -71,8 +71,9 @@ window.MathJax = {
 
   <section class="ics-panel ics-history-panel" aria-label="Agent 接入">
     <details id="ics-agent-connection">
-      <summary><strong>Agent / MCP 接入</strong><span id="ics-agent-summary" class="ics-agent-state">未连接</span></summary>
+      <summary><strong>Agent 接入 · MCP / API</strong><span class="ics-agent-modes"><span>MCP：<span id="ics-agent-summary" class="ics-agent-state">未连接</span></span><span>API：<span id="ics-api-summary">未启用</span></span></span></summary>
       <div class="ics-history-body ics-mcp-help">
+        <section id="ics-api-config" class="ics-api-config" aria-label="API 简答评测设置"></section>
         <div class="ics-agent-grid">
           <section class="ics-agent-step" aria-labelledby="ics-agent-service-title">
             <h3 id="ics-agent-service-title"><span aria-hidden="true">1</span>添加 MCP 服务</h3>
@@ -316,6 +317,8 @@ window.MathJax = {
 <script src="./paper-export.js" defer></script>
 <script src="./community-papers.js" defer></script>
 <script src="./community-agent.js" defer></script>
+<script src="./ai-grader.js" defer></script>
+<script src="./ai-grader-ui.js" defer></script>
 <script src="./ics-test.js" defer></script>
 <script src="./practice-connection.js" defer></script>
 </body>

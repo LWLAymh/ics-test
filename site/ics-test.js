@@ -64,6 +64,9 @@
   const attemptCounts = window.ICSAttemptCounts.create(function () { return localStorage; });
   state.communityPaper = null;
   let paperKind = 'original';
+  const aiGrader = window.ICSAIGraderUI.create({ host: $('ics-api-config'), summary: $('ics-api-summary'),
+    agentPanel: $('ics-agent-connection'), questionHost: ui.questionContent,
+    question: function () { return ui.quiz.hidden ? null : state.questions[state.index]; } });
   function exportPaper(load) {
     window.ICSPaperExport.open(load, { renderContent: renderContent, renderSolution: renderSolution, contract: contract,
       source: function (q) { return [paperFor(q).displayName, q.number.display, issueTypeLabel(q.type)].join(' · '); } });
@@ -812,7 +815,9 @@
 
   function disableQuestionControls(root) {
     closeBlankMenus();
-    root.querySelectorAll('button, input, select, textarea').forEach(function (control) { control.disabled = true; });
+    root.querySelectorAll('button, input, select, textarea').forEach(function (control) {
+      if (!control.closest('.ics-ai-controls')) control.disabled = true;
+    });
   }
 
   function gradeFillInputs(inputs, solution) {
@@ -834,7 +839,7 @@
     return '<div class="ics-short-answer"><label for="' + id + '">我的回答（选填）</label>' +
       '<textarea id="' + id + '" data-short-answer="' + scope + '" rows="6" maxlength="10000" ' +
       'aria-describedby="' + id + '-note" placeholder="在这里写下你的分析、计算过程或结论。"></textarea>' +
-      '<p id="' + id + '-note" class="ics-composite-note">切题保留本次页面内的草稿，刷新会清除未完成的草稿。开启 MCP 共享后，可自行向本地 Agent 请求批阅；仍由你确认自评，不会自动计分。最多 10,000 字符。</p></div>';
+      '<p id="' + id + '-note" class="ics-composite-note">切题保留本次页面内的草稿，刷新会清除未完成的草稿。可配置 API 评测，或自行向本地 MCP Agent 请求批阅；仍由你确认自评，不会自动计分。最多 10,000 字符。</p></div>';
   }
 
   function renderCompositeQuestion(question) {
@@ -1224,6 +1229,7 @@
   }
 
   function renderQuestion() {
+    aiGrader.stop();
     $('ics-community-current').hidden = !state.communityPaper;
     $('ics-community-current').textContent = state.communityPaper ? '用户精选卷 · ' + state.communityPaper.title + ' · ' + state.communityPaper.author_name : '';
     closeIssueForm();
@@ -1302,6 +1308,7 @@
     ui.feedback.querySelector('details').open = true;
     ui.verdict.className = 'ics-verdict'; ui.reference.innerHTML = '';
     restoreQuestionDraft(q);
+    aiGrader.render();
     publishPracticeContext();
     updateNavigation();
     typeset(ui.questionContent);
@@ -1542,6 +1549,7 @@
   }
 
   function finishQuiz() {
+    aiGrader.stop();
     saveQuestionDraft();
     stopStatsSubscription();
     ui.quiz.hidden = true; ui.result.hidden = false;
@@ -1588,6 +1596,7 @@
   }
 
   function resetToSetup() {
+    aiGrader.stop();
     stopStatsSubscription();
     ui.quiz.hidden = true; ui.result.hidden = true; ui.setup.hidden = false;
     document.dispatchEvent(new CustomEvent('ics:practice-context', { detail: { questionId: null, partId: null } }));
