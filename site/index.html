@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://mecmgiejovjmyzptuela.supabase.co wss://mecmgiejovjmyzptuela.supabase.co https://ics-test-mcp.ics-test-mcp.workers.dev https://ics-test-community.ics-test-mcp.workers.dev https://api.openai.com https://api.deepseek.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>
-(function(){try{var t=localStorage.getItem('lwl-theme');if(!t){t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
-</script>
+<script src="./boot.js"></script>
 <title>ICS 练习</title>
 <meta name="description" content="从 PKU ICS 真题与 CSAPP 课本习题中按知识模块组卷练习。">
 <meta name="author" content="LWLAymh">
@@ -17,17 +17,6 @@
 <meta property="og:description" content="从 PKU ICS 真题与 CSAPP 课本习题中按知识模块组卷练习。">
 <link rel="icon" href="./images/favicon.jpg">
 <link rel="apple-touch-icon" href="./images/favicon.jpg">
-<script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\\[','\\]']],
-    processEscapes: true
-  },
-  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
-  startup: { typeset: false, ready: () => MathJax.startup.defaultReady() }
-};
-</script>
 <script id="MathJax-script" defer src="./vendor/mathjax/tex-chtml-full.js"></script>
 <meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="./ics-test.css">
@@ -311,6 +300,8 @@ window.MathJax = {
 </main>
 <script src="./standalone.js" defer></script>
 <script src="./vendor/markdown-it/markdown-it.min.js" defer></script>
+<script src="./vendor/dompurify/purify.min.js" defer></script>
+<script src="./security.js" defer></script>
 <script src="./vendor/supabase/supabase.js" defer></script>
 <script src="./question-v5.js" defer></script>
 <script src="./attempt-counts.js" defer></script>

@@ -165,6 +165,18 @@ npm run resolve-issue -- -QuestionId q-0123456789abcdef
 
 “Agent 接入 · MCP / API”还支持浏览器自带 OpenAI / DeepSeek API Key 的[简答评测](docs/MCP.md#浏览器-api-简答评测无需-mcp)：仅主动点击后直连官方接口，输出建议评分和理由，不替用户自评或计入作答记录。密钥默认只在内存，明确勾选才保存在本浏览器，可清除；发送确认可选“以后不再显示”并随时恢复。浏览器存储有同源脚本/扩展读取风险，请使用受限密钥；本站不收集、代用或用于其它用途。无需新增 SQL、Worker Secret 或 MCP 权限。
 
+## XSS 防护与安全维护
+
+题面、选项、解析及打印预览的 HTML 统一经过本地 DOMPurify 白名单过滤；Markdown 禁用原始 HTML。拒绝脚本、事件属性、嵌入页面、表单、危险 URL、任意样式及 `id` / `name` 注入；仅允许本站图片或栅格 data 图片。精选卷标题、署名、描述、公开报错、作答记录和 AI 评分均按纯文字转义／`textContent` 展示，不把用户或模型输出直接当 HTML。
+
+MathJax 启用官方 `ui/safe` 扩展，关闭公式中的 URL、class、ID 与样式注入，并禁用 TeX `require` / `autoload`。首页和打印页都配置 CSP：脚本只能来自本站，不允许内联脚本或 `eval`，禁止 object、frame、base 和表单外发；网络请求限于本站及现有 Supabase、两个 Worker、OpenAI、DeepSeek。为 MathJax 排版及组件定位保留内联 **CSS**，不允许内联 **JavaScript**。打印页的网络权限更少，只允许本站。此处 CSP 是附加防线，不替代内容过滤。
+
+新增安全组件的上游版本与 SHA-256 记录在 `site/vendor/security-manifest.json`，许可证随文件保留；更新时须核对官方发行物、同步校验值并重新测试。`npm run check` 检查 CSP、入口加载顺序和依赖校验值；构建并启动本地站点后可运行 `node tests/browser-security.cjs` 验证实际浏览器中的 Markdown、公式、DOM clobbering、打印消息与 CSP 拦截。PR 和正式部署会自动执行该浏览器测试及 API 评测安全测试，失败会阻止部署。测试只使用假密钥和模拟服务；维护时同样应回归 `browser-v5`、`browser-community`、`browser-practice` 和 `browser-paper-export`。
+
+这些措施不能保证浏览器密钥绝对安全：同源其它应用、受信脚本被篡改或恶意扩展仍可能读到它，默认仅内存保存，建议使用低额度受限密钥。GitHub Pages 目前使用 HTML meta CSP，不能以此设置 `frame-ancestors`；不要把它当成完整防嵌套／防点击劫持方案。若以后需要更强隔离，应使用独立站点来源并在托管层设置响应头。
+
+防护依据：[OWASP XSS 防护指南](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)、[DOMPurify 官方仓库](https://github.com/cure53/DOMPurify)、[MathJax 3 安全选项](https://docs.mathjax.org/en/v3.2/options/safe.html)。
+
 ## 网页导出 PDF
 
 在“按卷 / 章节”选择原卷或课本章节后点击“导出 PDF”；用户精选卷卡片也有同名按钮，未发布的编辑草稿可点“导出草稿 PDF”。新窗口显示整卷预览，等待公式、图片和字体就绪，再点击“打印 / 保存 PDF”，在浏览器打印窗口中选择“另存为 PDF”。建议 A4，可关闭浏览器附加页眉页脚。

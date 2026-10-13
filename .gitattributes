@@ -1,0 +1,4 @@
+# Preserve the exact upstream bytes checked by security-manifest.json on every OS.
+site/vendor/dompurify/purify.min.js -text
+site/vendor/mathjax/tex-chtml-full.js -text
+site/vendor/mathjax/ui/safe.js -text

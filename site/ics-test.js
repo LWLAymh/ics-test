@@ -363,7 +363,7 @@
 
   // Only authored Markdown is rendered. No content rewriting, type guessing or answer extraction.
   function renderContent(content) {
-    return md ? md.render(content.text) : '<pre>' + escapeHtml(content.text) + '</pre>';
+    return window.ICSSecurity.sanitizeHtml(md ? md.render(content.text) : '<pre>' + escapeHtml(content.text) + '</pre>');
   }
 
   function paperFor(question) { return state.papers.find(function (paper) { return paper.id === question.paperId; }); }
@@ -739,7 +739,7 @@
       const label = blank.label || ('第 ' + (index + 1) + ' 空');
       const attributes = 'class="ics-blank-input" name="blank-' + (partIndex == null ? 'root' : partIndex) + '-' + index + '" ' +
         'data-blank-id="' + escapeHtml(blank.id) + '" data-blank-scope="' + (partIndex == null ? 'root' : partIndex) + '" ' +
-        'data-width="' + blank.width + '" form="ics-answer-form" aria-label="' + escapeHtml(label) +
+        'data-width="' + escapeHtml(blank.width) + '" form="ics-answer-form" aria-label="' + escapeHtml(label) +
         '" autocomplete="off"';
       let control;
       if (!blank.input) {
@@ -906,7 +906,7 @@
       const count = module.questionIds.filter(function (id) { return questionIds.has(id); }).length;
       return '<label class="ics-module-card"><input type="checkbox" value="' + escapeHtml(module.id) + '"' +
         (count && (keepAll || oldModules.has(module.id)) ? ' checked' : '') + (count ? '' : ' disabled') + '>' +
-        '<span data-module-progress="' + escapeHtml(module.id) + '"><strong>' + module.number + '. ' + escapeHtml(module.title) + '</strong>' +
+        '<span data-module-progress="' + escapeHtml(module.id) + '"><strong>' + escapeHtml(module.number) + '. ' + escapeHtml(module.title) + '</strong>' +
         '<small>' + count + ' 道题</small><progress max="1" value="0"></progress></span></label>';
     }).join('');
     const examType = ui.examType.value;

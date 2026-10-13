@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "path": "dompurify/purify.min.js",
+      "package": "dompurify",
+      "version": "3.4.17",
+      "source": "https://registry.npmjs.org/dompurify/-/dompurify-3.4.17.tgz",
+      "sha256": "cd37898f9782adf54820c413191b5691803f0f137c799d6edcfd38523b4c2c31"
+    },
+    {
+      "path": "mathjax/ui/safe.js",
+      "package": "mathjax",
+      "version": "3.2.2",
+      "source": "https://registry.npmjs.org/mathjax/-/mathjax-3.2.2.tgz",
+      "sha256": "9fef48d868277a8bc1852f7ba796b33ead812d38916a7131b0a29ea48961a6a4"
+    },
+    {
+      "path": "mathjax/tex-chtml-full.js",
+      "package": "mathjax",
+      "version": "3.2.2",
+      "source": "https://registry.npmjs.org/mathjax/-/mathjax-3.2.2.tgz",
+      "sha256": "91b005503c5d1f0958bf4d73ada1a3be33596b2c4ab5da22277f1b0d3149b5a4"
+    }
+  ]
+}

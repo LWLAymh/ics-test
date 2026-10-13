@@ -21,5 +21,16 @@ jobs:
       - run: npm run compile-bank
       - run: npm run check
       - run: npm run build
+      - name: Browser XSS and API safety regression
+        env:
+          ICS_TEST_URL: http://127.0.0.1:4189/
+        run: |
+          npm install --no-save --package-lock=false --ignore-scripts playwright@1.64.0
+          npx playwright install --with-deps chromium
+          python -m http.server 4189 --bind 127.0.0.1 --directory _site >/dev/null 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          node tests/browser-security.cjs
+          node tests/browser-ai-grader.cjs
       - name: Generated source must be committed
         run: git diff --exit-code -- question-bank/web-data

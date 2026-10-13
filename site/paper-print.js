@@ -6,7 +6,7 @@
     const article = document.createElement('article'); article.className = 'paper-question'; article.dataset.questionId = q.id;
     const heading = document.createElement('h2'); heading.textContent = (index + 1) + '. ' + q.source;
     const id = document.createElement('p'); id.className = 'paper-id'; id.textContent = q.id;
-    const content = document.createElement('div'); content.innerHTML = answer ? q.answer : q.html;
+    const content = document.createElement('div'); content.innerHTML = window.ICSSecurity.sanitizeHtml(answer ? q.answer : q.html);
     article.append(heading, id, content); return article;
   }
   const timed = (promise, ms, message) => new Promise((resolve, reject) => {

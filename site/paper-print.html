@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="zh-CN"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow"><title>ICS 卷子 · PDF 预览</title>
 <link rel="stylesheet" href="./paper-print.css">
-<script>
-window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']], processEscapes: true },
-  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }, startup: { typeset: false } };
-</script>
-<script defer src="./vendor/mathjax/tex-chtml-full.js"></script><script defer src="./paper-print.js"></script>
+<script src="./boot.js"></script>
+<script defer src="./vendor/mathjax/tex-chtml-full.js"></script><script defer src="./vendor/dompurify/purify.min.js"></script>
+<script defer src="./security.js"></script><script defer src="./paper-print.js"></script>
 </head><body>
 <aside class="print-toolbar" aria-label="PDF 导出设置">
   <div><strong>PDF 导出预览</strong><p>点击“打印 / 保存 PDF”，在打印窗口中选择“另存为 PDF”。建议使用 A4；可关闭浏览器附加的页眉页脚。</p></div>
