@@ -4,6 +4,54 @@ const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 
+test('2026 stage test 1 preserves all 25 source questions and 49 objective blanks', () => {
+  const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
+  for (const [name, expected] of [
+    ['exam-v2.pdf', '8707fc5bec09e6a84b5992551473b93e9a332f6226ee8828f5556020a7ef77b5'],
+    ['answers-v2.pdf', '2705ed9c35a44c95b7ac533d1891f02a87a5ff28257c539b34f9fb17f0a7fbd1'],
+  ]) assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(__dirname, '../question-bank/原文/阶段测验/2026-stage1', name))).digest('hex'), expected);
+  const paper = require('../question-bank/authored/papers.json').papers.find(p => p.id === 'p-3eac9aa5d6f749a1');
+  const qs = paper.questionIds.map(id => bank.find(q => q.id === id));
+  assert.equal(paper.displayName, '2026阶段测验（第1次）');
+  assert.equal(paper.sourceCollection, 'pku-exam'); assert.equal(paper.examKind, 'stage-test'); assert.equal(paper.sequence, 1);
+  assert.equal(qs.length, 25); assert.ok(qs.every(Boolean));
+  assert.deepEqual(qs.map(q => q.paperOrder), Array.from({ length: 25 }, (_, i) => i + 1));
+  assert.deepEqual(qs.reduce((counts, q) => { counts[q.type] = (counts[q.type] || 0) + 1; return counts; }, {}),
+    { fill: 22, composite: 1, 'multiple-choice': 2 });
+  assert.equal(qs.reduce((n, q) => n + (q.stem.blanks?.length || 0), 0), 49);
+  assert.ok(qs.every(q => q.publication.state === 'published' && q.publication.basis === 'source-import' && q.publication.reviewer === null));
+  const duplicated = qs.filter(q => q.number.minor.display === '4.2');
+  assert.equal(duplicated.length, 2); assert.notEqual(duplicated[0].number.display, duplicated[1].number.display);
+  assert.deepEqual(duplicated[1].parts.map(p => p.solution.correctOptionIds), [['C'], ['B']]);
+  assert.match(paper.coverage.note, /缺一题2分/);
+  const floats = qs.find(q => q.id === 'q-e41402b74638e0ba');
+  assert.equal(floats.stem.text.match(/```c/g).length, 1, 'cross-page float listing stays continuous');
+  const loop = qs.find(q => q.id === 'q-9d421c3e0a8da37e');
+  assert.deepEqual(loop.stem.blanks.map(b => b.id), ['b', 'value']);
+  assert.ok(api.gradeBlank('x&3', loop.solution.blankAnswers[0]));
+  assert.ok(!api.gradeBlank('result += x & 3;', loop.solution.blankAnswers[0]), 'only the missing expression belongs in the blank');
+  const run = qs.find(q => q.id === 'q-8a1b23001222404d');
+  assert.ok(api.gradeBlank('leaq\t8( %rsp ),%rdi', run.solution.blankAnswers[0]));
+  assert.ok(api.gradeBlank('lea 8(rsp), rdi', run.solution.blankAnswers[0]), 'source marking instructions accept omitted percent/q');
+  assert.ok(!api.gradeBlank('movq 8(%rsp), %rdi', run.solution.blankAnswers[0]));
+  const overflow = qs.find(q => q.id === 'q-87169ced45da2981');
+  assert.deepEqual(overflow.solution.blankAnswers.map(r => r.acceptedAnswers?.[0] || r.correctValues[0]), ['0x11E8', '31', '0x401200', 'no']);
+  assert.match(overflow.stem.text, /阻止越界写入本身/);
+  for (const q of qs.filter(q => q.type === 'fill')) {
+    const correct = Object.fromEntries(q.solution.blankAnswers.map(r => [r.blankId, r.acceptedAnswers?.[0] || r.correctValues[0]]));
+    assert.equal(api.gradeBlanks(correct, q.solution), true, q.number.display);
+    for (const rule of q.solution.blankAnswers) {
+      assert.equal(api.gradeBlank('', rule), false, q.number.display + ' missing blank');
+      assert.equal(api.gradeBlank('WRONG_VALUE', rule), false, q.number.display + ' wrong blank');
+      if (rule.method === 'selection') {
+        const choices = q.stem.blanks.find(b => b.id === rule.blankId).input.options;
+        assert.ok(choices.length > rule.correctValues.length, 'dropdown must include wrong candidates');
+        for (const option of choices) assert.equal(api.gradeBlank(option.value, rule), rule.correctValues.includes(option.value));
+      } else for (const alias of rule.acceptedAnswers) assert.ok(api.gradeBlank(alias, rule), q.number.display + ' alias: ' + alias);
+    }
+  }
+});
+
 test('opt-in C token comparison ignores spacing but preserves token and literal boundaries', () => {
   const rule=answer=>({method:'exact',acceptedAnswers:[answer],
     normalize:{trimWhitespace:true,caseSensitive:true,syntax:'c-tokens'}});

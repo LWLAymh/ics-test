@@ -21,7 +21,7 @@ jobs:
       - run: npm run compile-bank
       - run: npm run check
       - run: npm run build
-      - name: Browser XSS and API safety regression
+      - name: Browser safety and question regression
         env:
           ICS_TEST_URL: http://127.0.0.1:4189/
         run: |
@@ -32,5 +32,6 @@ jobs:
           trap 'kill "$preview_pid"' EXIT
           node tests/browser-security.cjs
           node tests/browser-ai-grader.cjs
+          node tests/browser-2026-stage1.cjs
       - name: Generated source must be committed
         run: git diff --exit-code -- question-bank/web-data

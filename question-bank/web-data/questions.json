@@ -34873,6 +34873,3018 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-07314046856eeefb",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 19,
+      "number": {
+        "display": "第6讲 6.2",
+        "major": {
+          "display": "第6讲",
+          "value": "6"
+        },
+        "minor": {
+          "display": "6.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "procedure-call",
+          "callee-saved"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "argument",
+            "marker": "{{blank:argument}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "传递 twice 参数的完整指令"
+          },
+          {
+            "id": "result",
+            "marker": "{{blank:result}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "计算 combine 返回值的完整指令"
+          }
+        ],
+        "text": "### 6.2 过程调用（4 分）\n\n考虑以下 C 语言函数：\n\n```c\nlong twice(long a) {\n    return 2 * a;\n}\n\nlong combine(long x, long y) {\n    long t = x;\n    long v = twice(y);\n    return t + v;\n}\n```\n\n假设运算不发生有符号溢出。在 x86-64 Linux 参数传递规则下，前 6 个整数或指针参数依次通过 `%rdi`、`%rsi`、`%rdx`、`%rcx`、`%r8`、`%r9` 传递，第 7 个及之后的参数通过栈传递。\n\n下面是一种对应的 AT&T 汇编实现，补全两条完整指令，每空 2 分：\n\n```asm\ncombine:\n    pushq %rbx\n    movq %rdi, %rbx\n    {{blank:argument}}\n    call twice\n    {{blank:result}}\n    popq %rbx\n    ret\n```\n\n按原卷批卷说明，含义明确时可省略寄存器前的 `%` 和指令的 `q` 后缀；空格差异不影响核对。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "argument",
+            "method": "exact",
+            "acceptedAnswers": [
+              "movq %rsi, %rdi",
+              "mov %rsi, %rdi",
+              "movq rsi, %rdi",
+              "mov rsi, %rdi",
+              "movq %rsi, rdi",
+              "mov %rsi, rdi",
+              "movq rsi, rdi",
+              "mov rsi, rdi"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "att-instruction"
+            }
+          },
+          {
+            "blankId": "result",
+            "method": "exact",
+            "acceptedAnswers": [
+              "addq %rbx, %rax",
+              "add %rbx, %rax",
+              "addq rbx, %rax",
+              "add rbx, %rax",
+              "addq %rbx, rax",
+              "add %rbx, rax",
+              "addq rbx, rax",
+              "add rbx, rax",
+              "leaq (%rbx,%rax), %rax",
+              "leaq (%rax,%rbx), %rax"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "att-instruction"
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空实际填入的完整指令为：\n\n```asm\n    movq %rsi, %rdi\n    addq %rbx, %rax\n```\n\n调用 `twice(y)` 前，将 `y` 从 `%rsi` 移到第一个参数寄存器 `%rdi`。原参数 `x` 已保存在被调用者保存寄存器 `%rbx` 中，跨过 `twice` 调用仍可使用。`twice` 的返回值在 `%rax`，加上 `%rbx` 即得最终结果。\n\n`combine` 自身使用了 `%rbx`，因此用 `pushq`、`popq` 为自己的调用者保存并恢复它。第二空也接受直接用 `leaq` 计算这两个寄存器之和；这里后续不依赖加法的条件码。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第4页",
+          "note": "原答案使用movq/addq；显式接受批卷说明中的省略%/q，以及无后续条件码依赖时的等价LEA求和。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第8–9页，6.2；跨页函数合为一个汇编代码块，空位填完整指令。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，6.2；第1页批卷说明。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-1eaa764ebd7d7271",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 2,
+      "number": {
+        "display": "第2讲 2.2",
+        "major": {
+          "display": "第2讲",
+          "value": "2"
+        },
+        "minor": {
+          "display": "2.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "shift"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "logical",
+            "marker": "{{blank:logical}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "逻辑右移的8位二进制结果"
+          },
+          {
+            "id": "arithmetic",
+            "marker": "{{blank:arithmetic}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "算术右移的8位二进制结果"
+          }
+        ],
+        "text": "### 2.2 移位（2 分）\n\n一个 8 位二进制数为 `10110100`。分别对其执行右移 2 位的操作，移出的位直接丢弃。\n\n1. 采用逻辑右移，结果为：{{blank:logical}}（1 分）\n2. 采用算术右移，结果为：{{blank:arithmetic}}（1 分）\n\n均用 8 位二进制表示。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "logical",
+            "method": "exact",
+            "acceptedAnswers": [
+              "00101101"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "arithmetic",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11101101"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "1. 逻辑右移：`00101101`，高位补 `0`。\n2. 算术右移：`11101101`，高位复制原最高位 `1`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第1页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，2.2。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，2.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-21e8720cfb433665",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 14,
+      "number": {
+        "display": "第5讲 5.1",
+        "major": {
+          "display": "第5讲",
+          "value": "5"
+        },
+        "minor": {
+          "display": "5.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "condition-codes"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "zf",
+            "marker": "{{blank:zf}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "ZF 的值",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "zero",
+                  "label": "0"
+                },
+                {
+                  "value": "one",
+                  "label": "1"
+                }
+              ]
+            }
+          },
+          {
+            "id": "rax",
+            "marker": "{{blank:rax}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "rax 的十六进制值"
+          }
+        ],
+        "text": "### 5.1 条件码（2 分）\n\n考虑以下 x86-64、AT&T 汇编代码：\n\n```asm\n    movq $0x2A, %rax\n    testq $0x08, %rax\n```\n\n执行后：\n\n1. 条件码 `ZF` 的值为：{{blank:zf}}（1 分）\n2. `%rax` 中的值为（十六进制，可省略 `0x`）：{{blank:rax}}（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "zf",
+            "method": "selection",
+            "correctValues": [
+              "zero"
+            ]
+          },
+          {
+            "blankId": "rax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x2A",
+              "2A"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `0`、`0x2A`。\n\n`0x2A & 0x08 = 0x08`，结果非零，故 `ZF = 0`。`testq` 只设置条件码，不修改 `%rax`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第3页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，5.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，5.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-25908478f8bc91e4",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 21,
+      "number": {
+        "display": "第7讲 7.1",
+        "major": {
+          "display": "第7讲",
+          "value": "7"
+        },
+        "minor": {
+          "display": "7.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "array",
+          "pointer"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "address",
+            "marker": "{{blank:address}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "m[2][1] 的地址（十六进制）"
+          },
+          {
+            "id": "value",
+            "marker": "{{blank:value}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "row[0][1] + row[2][2] 的值"
+          }
+        ],
+        "text": "### 7.1 数组（4 分）\n\n考虑下面的 C 语言代码，采用原卷默认的 x86-64 Linux 环境，`int` 占 4 字节：\n\n```c\nint m[3][4] = {\n    {1, 2, 3, 4},\n    {5, 6, 7, 8},\n    {9, 10, 11, 12}\n};\nint *row[3] = {m[2], m[0], m[1]};\n```\n\n假设二维数组 `m` 的起始地址为 `0x3000`。\n\n1. `&m[2][1]` 的地址为（十六进制，可省略 `0x`）：{{blank:address}}（2 分）\n2. 表达式 `row[0][1] + row[2][2]` 的值为（十进制）：{{blank:value}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "address",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x3024",
+              "3024"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "value",
+            "method": "exact",
+            "acceptedAnswers": [
+              "17"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `0x3024`、`17`。\n\n二维数组按行优先存储，每行 4 个 `int`，因此地址为 `0x3000 + (2*4 + 1)*4 = 0x3024`。\n\n`row` 是指针数组，其三个元素依次指向 `m` 的第 `2`、`0`、`1` 行（下标从 `0` 开始）。`row[0][1] = m[2][1] = 10`，`row[2][2] = m[1][2] = 7`，和为 `17`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第4–5页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第10页，7.1；显式保留全卷默认的x86-64 Linux前提。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4–5页，7.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-2bf5dfc21d5979d3",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 10,
+      "number": {
+        "display": "第4讲 4.2（寻址方式）",
+        "major": {
+          "display": "第4讲",
+          "value": "4"
+        },
+        "minor": {
+          "display": "4.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "addressing"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "address",
+            "marker": "{{blank:address}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "访问的内存地址（十六进制）"
+          }
+        ],
+        "text": "### 4.2 寻址方式（2 分）\n\n在 x86-64 计算机上，假设寄存器的内容为：\n\n| 寄存器 | 内容 |\n| --- | --- |\n| `%rax` | `0x600` |\n| `%rbx` | `0x1000` |\n| `%rcx` | `3` |\n\n现执行 AT&T 指令：\n\n```asm\n    movq 0x18(%rbx,%rcx,8), %rax\n```\n\n该指令访问数据的内存地址为（十六进制，可省略 `0x`）：{{blank:address}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "address",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x1030",
+              "1030"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "填入 `0x1030`。\n\n有效地址为 `0x1000 + 3 * 8 + 0x18 = 0x1030`。`movq` 将该地址开始的 8 字节数据读入 `%rax`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第2页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，第一道4.2。原卷编号重复，显示名称区分，不重编号。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，4.2 寻址方式。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-317ba6faaa5757a0",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 18,
+      "number": {
+        "display": "第6讲 6.1",
+        "major": {
+          "display": "第6讲",
+          "value": "6"
+        },
+        "minor": {
+          "display": "6.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "stack"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "rsp",
+            "marker": "{{blank:rsp}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "pushq 后 rsp 的值"
+          },
+          {
+            "id": "rcx",
+            "marker": "{{blank:rcx}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "最后 rcx 的值"
+          }
+        ],
+        "text": "### 6.1 栈操作（4 分）\n\n假设 x86-64 计算机的栈指针 `%rsp` 初始值为 `0x3000`，执行以下 AT&T 汇编代码：\n\n```asm\n    movq $0x35, %rax\n    pushq %rax\n    movq $0, %rax\n    popq %rcx\n```\n\n1. 执行 `pushq` 指令后，`%rsp` 的值为：{{blank:rsp}}（2 分）\n2. 全部指令执行结束后，`%rcx` 的值为：{{blank:rcx}}（2 分）\n\n均用十六进制表示，可省略 `0x` 前缀。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "rsp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x2FF8",
+              "2FF8"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "rcx",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x35",
+              "35"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `0x2FF8`、`0x35`。\n\n`pushq` 将 `%rsp` 减 `8`，并把 `0x35` 存入新栈顶；后续清零 `%rax` 不改变已入栈的数据。`popq` 读取栈顶到 `%rcx`，并把 `%rsp` 加 `8`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第3页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第8页，6.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，6.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-36d78baae81e88e4",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 12,
+      "number": {
+        "display": "第4讲 4.3",
+        "major": {
+          "display": "第4讲",
+          "value": "4"
+        },
+        "minor": {
+          "display": "4.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "memory-operands"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "rax",
+            "marker": "{{blank:rax}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "rax 的有符号十进制值"
+          },
+          {
+            "id": "memory",
+            "marker": "{{blank:memory}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "0x3000 处内存值"
+          }
+        ],
+        "text": "### 4.3 汇编程序（4 分）\n\n假设 x86-64 计算机的 `%rdi` 为 `0x3000`，从该地址开始的 8 字节内存数据初始值为 `12`。执行以下 AT&T 汇编代码：\n\n```asm\n    movq (%rdi), %rax\n    addq $5, (%rdi)\n    subq (%rdi), %rax\n```\n\n1. 执行结束后，`%rax` 中的值为（十进制）：{{blank:rax}}（2 分）\n2. 地址 `0x3000` 处的 8 字节内存数据，其值为（十进制）：{{blank:memory}}（2 分）\n\n补充说明：与原参考答案一致，寄存器结果按 64 位补码有符号整数解释。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "rax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "-5"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "memory",
+            "method": "exact",
+            "acceptedAnswers": [
+              "17"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `-5`、`17`。\n\n第一条指令将 `12` 读入 `%rax`；第二条把内存值改为 `12 + 5 = 17`，不修改 `%rax`；第三条执行 `%rax = 12 - 17 = -5`。内存仍为 `17`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第2页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "rewritten",
+          "editorNote": "第5页，4.3；按原答案-5明确64位补码有符号解释，消除寄存器十进制值的歧义。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，4.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-41d07aedb2ec62ce",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 13,
+      "number": {
+        "display": "第4讲 4.4",
+        "major": {
+          "display": "第4讲",
+          "value": "4"
+        },
+        "minor": {
+          "display": "4.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "lea",
+          "memory-operands"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "rax",
+            "marker": "{{blank:rax}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "第二条指令后 rax 的值"
+          },
+          {
+            "id": "memory",
+            "marker": "{{blank:memory}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "最终 0x1008 处内存值"
+          }
+        ],
+        "text": "### 4.4 汇编程序（4 分）\n\n某 x86-64 计算机的寄存器初始状态为 `%rdi = 0x1000`、`%rsi = 2`。内存中有两个 64 位整数，分别占据地址 `0x1000` 和 `0x1008` 开始的 8 个字节，初始值分别为 `7` 和 `11`。\n\n执行以下 AT&T 汇编代码：\n\n```asm\n    leaq 8(%rdi), %rcx\n    movq (%rcx), %rax\n    leaq (%rax,%rsi,4), %rdx\n    subq (%rdi), %rdx\n    movq %rdx, (%rcx)\n```\n\n1. 第二条指令执行后，`%rax` 中的值为（十进制）：{{blank:rax}}（2 分）\n2. 全部指令执行结束后，内存地址 `0x1008` 处的 64 位整数值为（十进制）：{{blank:memory}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "rax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "memory",
+            "method": "exact",
+            "acceptedAnswers": [
+              "12"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `11`、`12`。\n\n`%rcx` 指向 `0x1008`，第二条指令读取该处的 `11`。随后计算 `%rdx = 11 + 2*4 = 19`，减去 `0x1000` 处的 `7` 得到 `12`，最终将 `12` 写回 `0x1008`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第3页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，4.4。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，4.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-545e969fd78020ac",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 1,
+      "number": {
+        "display": "第2讲 2.1",
+        "major": {
+          "display": "第2讲",
+          "value": "2"
+        },
+        "minor": {
+          "display": "2.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "bitwise-operations"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "a",
+            "marker": "{{blank:a}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "a 的十六进制值"
+          },
+          {
+            "id": "b",
+            "marker": "{{blank:b}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "b 的十六进制值"
+          }
+        ],
+        "text": "### 2.1 位运算（2 分）\n\n考虑以下 C 语言代码：\n\n```c\nunsigned char x = 0xA6;\nunsigned char a = x & 0x0F;\nunsigned char b = x ^ 0x80;\n```\n\n求变量 `a` 和 `b` 的值，均用十六进制表示（按原卷批卷说明，可省略 `0x` 前缀）。\n\n1. `a =` {{blank:a}}（1 分）\n2. `b =` {{blank:b}}（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "a",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x06",
+              "0x6",
+              "06",
+              "6"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "b",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x26",
+              "26"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `0x06`、`0x26`。\n\n`x & 0x0F` 保留低 4 位；`x ^ 0x80` 翻转最高位，其余位不变。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第1页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，2.1；代码围栏及原位空位为人工排版。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，2.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-597ae48bbeb3fdc8",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 22,
+      "number": {
+        "display": "第7讲 7.2",
+        "major": {
+          "display": "第7讲",
+          "value": "7"
+        },
+        "minor": {
+          "display": "7.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "struct-alignment",
+          "array",
+          "pointer"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "offset",
+            "marker": "{{blank:offset}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "成员 v 的偏移量"
+          },
+          {
+            "id": "size",
+            "marker": "{{blank:size}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "sizeof(Rec)"
+          },
+          {
+            "id": "address",
+            "marker": "{{blank:address}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "a[2].v[1] 的地址"
+          },
+          {
+            "id": "result",
+            "marker": "{{blank:result}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "result 的值"
+          }
+        ],
+        "text": "### 7.2 结构体（8 分）\n\n考虑以下 C 语言代码，采用原卷默认的 x86-64 Linux 环境（`char`、`int`、`long` 分别占 1、4、8 字节）：\n\n```c\ntypedef struct {\n    char tag;\n    int v[3];\n    long sum;\n} Rec;\n\nRec a[3] = {\n    {'A', {1, 2, 3}, 10},\n    {'B', {4, 5, 6}, 20},\n    {'C', {7, 8, 9}, 30}\n};\n\nRec *p = &a[1];\nint *q = p->v;\nlong result = p[1].sum + q[2];\n```\n\n假设结构体采用课件讲授的默认对齐规则，没有使用任何特殊的内存打包设置。数组 `a` 的起始地址为 `0x1000`。\n\n1. `Rec` 中成员 `v` 相对于结构体起始地址的偏移量为：{{blank:offset}} 字节。（2 分）\n2. `sizeof(Rec)` 的值为：{{blank:size}} 字节。（2 分）\n3. `&a[2].v[1]` 的地址为（十六进制，可省略 `0x`）：{{blank:address}}（2 分）\n4. 变量 `result` 最终的值为（十进制）：{{blank:result}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "offset",
+            "method": "exact",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "size",
+            "method": "exact",
+            "acceptedAnswers": [
+              "24"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "address",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x1038",
+              "1038"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "result",
+            "method": "exact",
+            "acceptedAnswers": [
+              "36"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `4`、`24`、`0x1038`、`36`。\n\n结构体布局为：\n\n| 内容 | 字节偏移 | 大小 |\n| --- | --- | --- |\n| `tag` | `0` | `1` |\n| 填充 | `1–3` | `3` |\n| `v[0]` | `4` | `4` |\n| `v[1]` | `8` | `4` |\n| `v[2]` | `12` | `4` |\n| `sum` | `16` | `8` |\n\n总大小为 `24` 字节，满足 8 字节对齐。`&a[2].v[1] = 0x1000 + 2*24 + 4 + 1*4 = 0x1038`。\n\n`p` 指向 `a[1]`，故 `p[1].sum = a[2].sum = 30`；`q` 指向 `a[1].v`，故 `q[2] = 6`，最终 `result = 36`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第5页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第10页，7.2；默认平台前提补在单题中，供随机练习独立阅读。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，7.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-59b10751544638bb",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 4,
+      "number": {
+        "display": "第3讲 3.1",
+        "major": {
+          "display": "第3讲",
+          "value": "3"
+        },
+        "minor": {
+          "display": "3.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "ieee754"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "exponent",
+            "marker": "{{blank:exponent}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "实际指数 E"
+          },
+          {
+            "id": "value",
+            "marker": "{{blank:value}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "浮点数的十进制值"
+          }
+        ],
+        "text": "### 3.1 IEEE 754 标准（4 分）\n\nIEEE 754 单精度浮点数（`float`）采用 32 位编码，包含 1 位符号位、8 位阶码和 23 位小数域。现有一个 `float` 类型的数，其 32 位编码用十六进制表示为 `0xC0E00000`。\n\n1. 按照 $v=(-1)^s\\times M\\times 2^E$，其阶码对应的实际指数 $E$ 为：{{blank:exponent}}（2 分）\n2. 该浮点数的十进制值为：{{blank:value}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "exponent",
+            "method": "exact",
+            "acceptedAnswers": [
+              "2",
+              "+2"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "value",
+            "method": "exact",
+            "acceptedAnswers": [
+              "-7",
+              "-7.0",
+              "-7.00"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `2`、`-7.0`（`-7` 也可）。\n\n符号位为 `1`，阶码为 `129`，故 $E=129-127=2$；有效数 $M=1.11_2=1.75$，数值为 $-1.75\\times 2^2=-7$。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第1页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，3.1；上下标按原页人工恢复。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，3.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-6869d8ba04c0973d",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 7,
+      "number": {
+        "display": "第3讲 3.4",
+        "major": {
+          "display": "第3讲",
+          "value": "3"
+        },
+        "minor": {
+          "display": "3.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "float-format",
+          "round-to-even"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "encoding",
+            "marker": "{{blank:encoding}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "乘积的8位浮点编码（十六进制）"
+          }
+        ],
+        "text": "### 3.4 浮点数格式（2 分）\n\n某计算机采用与 IEEE 754 类似的 8 位浮点数格式：\n\n- 最高 1 位为符号位 $s$；\n- 随后 4 位为阶码 `exp`，偏置值 `Bias = 7`；\n- 最后 3 位为小数域 `frac`；\n- 舍入采用“向偶数舍入”规则。\n\n现有两个浮点数：\n\n$$\na=1.100_2\\times 2^1,\\qquad b=1.110_2\\times 2^1.\n$$\n\n执行浮点乘法 $a\\times b$，乘积最终的 8 位浮点编码（用十六进制表示，可省略 `0x`）为：{{blank:encoding}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "encoding",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x52",
+              "52"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "填入 `0x52`。\n\n精确乘积为：\n\n$$\n1.0101_2\\times 2^3=10.5.\n$$\n\n小数域只保留 3 位，`10.5` 恰好位于可表示值 `10` 和 `11` 之间，向偶数舍入得到：\n\n$$\n1.010_2\\times 2^3=10.\n$$\n\n阶码为 `3 + 7 = 10`，编码为 `0 1010 010`，即 `0x52`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第2页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，3.4；二进制下标及指数人工对照原页恢复。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，3.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-6aff8e001b381e61",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 17,
+      "number": {
+        "display": "第5讲 5.4",
+        "major": {
+          "display": "第5讲",
+          "value": "5"
+        },
+        "minor": {
+          "display": "5.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "jump-table",
+          "unsigned-comparison"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "first",
+            "marker": "{{blank:first}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "select(1,4) 的返回值"
+          },
+          {
+            "id": "second",
+            "marker": "{{blank:second}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "select(5,4) 的返回值"
+          },
+          {
+            "id": "third",
+            "marker": "{{blank:third}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "select(-1,4) 的返回值"
+          }
+        ],
+        "text": "### 5.4 跳转表（6 分）\n\n下面的 x86-64、AT&T 汇编代码实现一个 C 语言函数 `select(long x, long y)`。参数 `x`、`y` 分别存放在 `%rdi` 和 `%rsi` 中，返回值存放在 `%rax` 中。\n\n```asm\nselect:\n    cmpq $5, %rdi\n    ja .Ldefault\n    jmp *.Ltab(,%rdi,8)\n\n.L0:\n    leaq 2(%rsi), %rax\n    ret\n\n.L1:\n    leaq (%rsi,%rsi), %rax\n    jmp .Lplus\n\n.L2:\n    movl $1, %eax\n.Lplus:\n    addq $3, %rax\n    ret\n\n.L45:\n    leaq -1(%rsi), %rax\n    ret\n\n.Ldefault:\n    movl $0, %eax\n    ret\n```\n\n对应的跳转表为：\n\n```asm\n    .section .rodata\n    .align 8\n.Ltab:\n    .quad .L0\n    .quad .L1\n    .quad .L2\n    .quad .Ldefault\n    .quad .L45\n    .quad .L45\n```\n\n根据代码，计算以下函数调用的返回值，均用十进制表示：\n\n1. `select(1, 4) =` {{blank:first}}（2 分）\n2. `select(5, 4) =` {{blank:second}}（2 分）\n3. `select(-1, 4) =` {{blank:third}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "first",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "second",
+            "method": "exact",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "third",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `11`、`3`、`0`。\n\n- `x = 1`：进入 `.L1`，先算 `2*y = 8`，跳到 `.Lplus` 再加 `3`，得到 `11`。\n- `x = 5`：进入 `.L45`，算 `y - 1 = 3`。\n- `x = -1`：`ja` 按无符号比较，`-1` 的 64 位编码视为无符号数大于 `5`，直接进入 `.Ldefault`，返回 `0`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第3页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7–8页，5.4；跨页跳转表合并，标签顶格、指令缩进。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，5.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-85848e9b20b9f521",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 23,
+      "number": {
+        "display": "第8讲 8.1",
+        "major": {
+          "display": "第8讲",
+          "value": "8"
+        },
+        "minor": {
+          "display": "8.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "struct-alignment",
+          "union"
+        ]
+      },
+      "type": "multiple-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 8.1 结构与联合（3 分）\n\n采用原卷默认的 x86-64 Linux 环境及默认对齐规则。考虑以下类型定义：\n\n```c\nstruct S {\n    char c;\n    long x;\n};\n\nunion U {\n    char c;\n    long x;\n};\n```\n\n以下说法哪些正确？（不定项选择）\n\n原卷计分：全对得 3 分，少选得 1 分，错选或不选得 0 分。网站练习按现有多选规则核对：选项集合完全一致才算正确，不模拟原卷的少选部分分。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`sizeof(struct S)` 的值为 `16`。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`sizeof(union U)` 的值为 `8`。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`struct S` 的成员 `c` 和 `x` 占用相同的存储空间。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`union U` 的成员 `c` 和 `x` 具有相同的起始地址。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A",
+          "B",
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A、B、D。\n\n`struct S` 中，`c` 在偏移 `0`，`x` 在偏移 `8`，整体为 `16` 字节，二者不共享存储空间。`union U` 的成员从同一地址开始，整体大小为最大成员的大小 `8` 字节。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第5页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第11页，8.1；保留不定项选择及纸卷分值，另明确网站整题核对规则。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，8.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-87169ced45da2981",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 25,
+      "number": {
+        "display": "第8讲 8.3",
+        "major": {
+          "display": "第8讲",
+          "value": "8"
+        },
+        "minor": {
+          "display": "8.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "buffer-overflow",
+          "stack-frame",
+          "stack-canary"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "buffer",
+            "marker": "{{blank:buffer}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "buf[0] 的地址"
+          },
+          {
+            "id": "maximum",
+            "marker": "{{blank:maximum}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "不修改返回地址的最多A字符数"
+          },
+          {
+            "id": "target",
+            "marker": "{{blank:target}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "多输入一个A后ret跳转地址"
+          },
+          {
+            "id": "canary",
+            "marker": "{{blank:canary}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "金丝雀能否阻止返回地址被写改",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "yes",
+                  "label": "是"
+                },
+                {
+                  "value": "no",
+                  "label": "否"
+                }
+              ]
+            }
+          }
+        ],
+        "text": "### 8.3 缓冲区攻击（8 分）\n\n考虑以下 C 语言程序：\n\n```c\nvoid read_input(void) {\n    char buf[16];\n    gets(buf);  // gets() 是本课程所讲授的有安全隐患的函数\n}\n\nvoid process(void) {\n    read_input();\n    /* 后续操作 */\n}\n```\n\n在一台 x86-64 Linux 计算机上，`read_input` 对应的 AT&T 汇编代码如下：\n\n```asm\nread_input:\n    subq $40, %rsp\n    leaq 8(%rsp), %rdi\n    call gets\n    addq $40, %rsp\n    ret\n```\n\n已知以下条件：\n\n- 调用 `read_input` 时，`call` 指令的下一条指令地址为 `0x4012A5`。\n- 刚进入 `read_input` 时，`%rsp = 0x1208`。\n- 程序未启用“栈金丝雀”。\n- `gets` 读取输入的所有字符，并在末尾添加 `\\0` 字符。\n- 假设下面讨论的越界写入不会引起系统的其他异常情况处理操作，按给定汇编布局分析。\n\n回答以下问题：\n\n1. `gets` 执行时，数组 `buf[0]` 的内存地址为（十六进制，可省略 `0x`）：{{blank:buffer}}（2 分）\n2. 假设用户只输入连续的字符 `A`（ASCII 码为 `0x41`），随后按回车。若要求输入不会修改返回地址，最多可以输入多少个字符 `A`？{{blank:maximum}}（2 分）\n3. 按照第（2）问的情况，如果再多输入 1 个字符 `A`，那么 `read_input` 执行 `ret` 时将跳转到哪个地址？用十六进制表示：{{blank:target}}（2 分）\n4. 如果程序启用“栈金丝雀”，是否可以阻止返回地址被修改？{{blank:canary}}（2 分）\n\n第四问的“阻止被修改”指阻止越界写入本身，而不是检测到修改后在返回前终止程序。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "buffer",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x11E8",
+              "11E8"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "maximum",
+            "method": "exact",
+            "acceptedAnswers": [
+              "31"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "target",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x401200",
+              "401200"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "canary",
+            "method": "selection",
+            "correctValues": [
+              "no"
+            ]
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `0x11E8`、`31`、`0x401200`、否。\n\n以下栈布局推导为录入时的补充解释；判分答案与随卷参考一致：\n\n| 位置 | 地址或偏移 |\n| --- | --- |\n| 刚进入 `read_input` 时的 `%rsp`（保存返回地址处） | `0x1208` |\n| 减去 40 字节后的 `%rsp` | `0x11E0` |\n| `buf[0]`（`8(%rsp)`） | `0x11E8` |\n| 保存返回地址的起始地址 | `0x1208` |\n| 从 `buf[0]` 到返回地址的距离 | `32` 字节 |\n\n输入 `31` 个 `A` 时，末尾的 `\\0` 写到 `0x1207`，不触碰返回地址。输入 `32` 个 `A` 时，`\\0` 写到 `0x1208`。x86-64 采用小端序，因此返回地址 `0x4012A5` 的最低字节从 `0xA5` 变为 `0x00`，`ret` 跳转到 `0x401200`。\n\n栈金丝雀用于检测部分越界写入，通常在返回前发现标记异常并终止程序；它不阻止越界写入实际发生，也不保证返回地址本身不会被写改。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第5页",
+          "note": "四个答案来自随卷参考；分步栈布局解释为本次录入时的AI推导补充。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "rewritten",
+          "editorNote": "第11–12页，8.3。跨页C代码合并，第四问明确区分防止写改本身与检测后阻止返回。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，8.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-8a1b23001222404d",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 20,
+      "number": {
+        "display": "第6讲 6.3",
+        "major": {
+          "display": "第6讲",
+          "value": "6"
+        },
+        "minor": {
+          "display": "6.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "stack-frame",
+          "procedure-call",
+          "pointer"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "address",
+            "marker": "{{blank:address}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "传递 local 地址的完整指令"
+          },
+          {
+            "id": "local",
+            "marker": "{{blank:local}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "加上更新后的 local 的完整指令"
+          },
+          {
+            "id": "x",
+            "marker": "{{blank:x}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "加上原参数 x 的完整指令"
+          },
+          {
+            "id": "value",
+            "marker": "{{blank:value}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "run(4,3) 的返回值"
+          }
+        ],
+        "text": "### 6.3 过程调用和栈帧（8 分）\n\n考虑以下两个 C 语言函数：\n\n```c\nlong increase(long *p, long delta) {\n    long old = *p;\n    *p = old + delta;\n    return old;\n}\n\nlong run(long x, long y) {\n    long local = 2 * x;\n    long old = increase(&local, y);\n    return old + local + x;\n}\n```\n\n假设运算不发生有符号整数溢出。下面是一种实现函数 `run` 的 x86-64、AT&T 汇编代码。参数 `x`、`y` 分别存放在 `%rdi`、`%rsi`，返回值存放在 `%rax`。\n\n```asm\nrun:\n    pushq %rbx\n    subq $16, %rsp\n    movq %rdi, %rbx\n    leaq (%rdi,%rdi), %rax\n    movq %rax, 8(%rsp)\n    {{blank:address}}   # (1) 传递 &local\n    call increase\n    {{blank:local}}     # (2) 将更新后的 local 加入返回值\n    {{blank:x}}         # (3) 将原参数 x 加入返回值\n    addq $16, %rsp\n    popq %rbx\n    ret\n```\n\n1. 根据已有代码和注释，在（1）至（3）处各填入一条完整指令，每空 2 分。含义明确时可省略 `%` 和 `q` 后缀，空格差异不影响核对。\n2. 调用 `run(4, 3)` 时，函数返回值为（十进制）：{{blank:value}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "address",
+            "method": "exact",
+            "acceptedAnswers": [
+              "leaq 8(%rsp), %rdi",
+              "lea 8(%rsp), %rdi",
+              "leaq 8(rsp), %rdi",
+              "lea 8(rsp), %rdi",
+              "leaq 8(%rsp), rdi",
+              "lea 8(%rsp), rdi",
+              "leaq 8(rsp), rdi",
+              "lea 8(rsp), rdi"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "att-instruction"
+            }
+          },
+          {
+            "blankId": "local",
+            "method": "exact",
+            "acceptedAnswers": [
+              "addq 8(%rsp), %rax",
+              "add 8(%rsp), %rax",
+              "addq 8(rsp), %rax",
+              "add 8(rsp), %rax",
+              "addq 8(%rsp), rax",
+              "add 8(%rsp), rax",
+              "addq 8(rsp), rax",
+              "add 8(rsp), rax"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "att-instruction"
+            }
+          },
+          {
+            "blankId": "x",
+            "method": "exact",
+            "acceptedAnswers": [
+              "addq %rbx, %rax",
+              "add %rbx, %rax",
+              "addq rbx, %rax",
+              "add rbx, %rax",
+              "addq %rbx, rax",
+              "add %rbx, rax",
+              "addq rbx, rax",
+              "add rbx, rax",
+              "leaq (%rbx,%rax), %rax",
+              "leaq (%rax,%rbx), %rax"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "att-instruction"
+            }
+          },
+          {
+            "blankId": "value",
+            "method": "exact",
+            "acceptedAnswers": [
+              "23"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空实际填入内容：\n\n| 空位 | 内容 |\n| --- | --- |\n| （1） | `leaq 8(%rsp), %rdi` |\n| （2） | `addq 8(%rsp), %rax` |\n| （3） | `addq %rbx, %rax` |\n| 返回值 | `23` |\n\n`run` 将 `x` 保存在 `%rbx` 中；`local = 2*x` 位于 `8(%rsp)` 指向的 8 字节空间。第一空传递 `&local`，第二个参数 `y` 仍在 `%rsi`。\n\n`increase` 修改 `local`，但返回修改前的值。调用 `run(4, 3)` 时：\n\n| 数据 | 值 |\n| --- | --- |\n| `local` 初始值 | `8` |\n| `increase` 返回的 `old` | `8` |\n| 更新后的 `local` | `11` |\n| 原参数 `x` | `4` |\n| 最终结果 | `8 + 11 + 4 = 23` |\n\n第三空也可用 `leaq` 对 `%rax`、`%rbx` 直接求和，这里后续不依赖条件码。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第4页",
+          "note": "原答案为三条指令及23；批卷说明的省略写法和第三空等价LEA均以显式白名单登记。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第9页，6.3；三个指令空位直接保留在原位置。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，6.3；第1页批卷说明。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-8f0ed4dbad2e3cc2",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 9,
+      "number": {
+        "display": "第4讲 4.1",
+        "major": {
+          "display": "第4讲",
+          "value": "4"
+        },
+        "minor": {
+          "display": "4.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "instruction-encoding"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "length",
+            "marker": "{{blank:length}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "0x400503 处指令的字节数"
+          },
+          {
+            "id": "total",
+            "marker": "{{blank:total}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "三条指令的总字节数"
+          }
+        ],
+        "text": "### 4.1 机器指令（2 分）\n\n默认采用 x86-64、Linux、AT&T 汇编。某程序经过编译、汇编和链接后，使用 `objdump` 反汇编得到以下代码：\n\n```asm\n400500: 48 89 d8       mov %rbx, %rax\n400503: 48 83 c0 05    add $5, %rax\n400507: c3             ret\n```\n\n1. 地址 `0x400503` 处的指令，其机器代码占用 {{blank:length}} 字节。（1 分）\n2. 以上三条指令的机器代码共占用 {{blank:total}} 字节。（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "length",
+            "method": "exact",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "total",
+            "method": "exact",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `4`、`8`。\n\n三条指令的机器码分别占 `3`、`4`、`1` 字节，总计 `3 + 4 + 1 = 8` 字节。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第2页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，4.1；机器码与反汇编保持同一代码块。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，4.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-9174361046a04977",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 6,
+      "number": {
+        "display": "第3讲 3.3",
+        "major": {
+          "display": "第3讲",
+          "value": "3"
+        },
+        "minor": {
+          "display": "3.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "round-to-even"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "first",
+            "marker": "{{blank:first}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "10.10100 的二进制舍入结果"
+          },
+          {
+            "id": "second",
+            "marker": "{{blank:second}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "11.01011 的二进制舍入结果"
+          }
+        ],
+        "text": "### 3.3 舍入规则（2 分）\n\n按照 IEEE 754 默认的“向偶数舍入”规则，将以下两个二进制数保留小数点后两位。答案仍用二进制表示。\n\n1. `10.10100` → {{blank:first}}（1 分）\n2. `11.01011` → {{blank:second}}（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "first",
+            "method": "exact",
+            "acceptedAnswers": [
+              "10.10"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "second",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11.01"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `10.10`、`11.01`。\n\n第一项恰好位于 `10.10` 与 `10.11` 的中点，选择最低保留位为 `0` 的 `10.10`。第二项距离 `11.01` 更近，舍去后面的位。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第2页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，3.3。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，3.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-9d421c3e0a8da37e",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 16,
+      "number": {
+        "display": "第5讲 5.3",
+        "major": {
+          "display": "第5讲",
+          "value": "5"
+        },
+        "minor": {
+          "display": "5.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "loop",
+          "bitwise-operations"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "b",
+            "marker": "{{blank:b}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "b处缺失的右侧表达式"
+          },
+          {
+            "id": "value",
+            "marker": "{{blank:value}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "sum_pairs(0x1B) 的返回值"
+          }
+        ],
+        "text": "### 5.3 循环结构（4 分）\n\n考虑以下 x86-64、AT&T 汇编代码。函数参数 `x` 存放在 `%rdi`，返回值存放在 `%rax`。\n\n```asm\nsum_pairs:\n    movl $0, %eax\n    jmp .Ltest\n.Lbody:\n    movq %rdi, %rdx\n    andq $3, %rdx\n    addq %rdx, %rax\n    shrq $2, %rdi\n.Ltest:\n    testq %rdi, %rdi\n    jne .Lbody\n    ret\n```\n\n该代码与下面的 C 语言函数对应。原卷只要求填写 **（b）** 并计算指定参数下的返回值；（a）、（c）不是本题的作答项。\n\n```c\nlong sum_pairs(unsigned long x) {\n    long result = 0;\n    while (______________) {        // (a)，本题不要求填写\n        result += {{blank:b}};      // (b)\n        x = _______________;        // (c)，本题不要求填写\n    }\n    return result;\n}\n```\n\n1. 在（b）处只填缺失的右侧表达式，不重复 `result +=` 或分号。（2 分）\n2. 当参数 `x = 0x1B` 时，函数返回值为（十进制）：{{blank:value}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "b",
+            "method": "exact",
+            "acceptedAnswers": [
+              "x & 3",
+              "3 & x",
+              "(x & 3)",
+              "(3 & x)",
+              "x & 0x3",
+              "x & 3UL",
+              "x % 4"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "value",
+            "method": "exact",
+            "acceptedAnswers": [
+              "6"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空依次为 `x & 3`、`6`。\n\n每轮提取 `x` 的最低两位（`0` 到 `3`），累加后将 `x` 逻辑右移两位，直到为 `0`。`0x1B` 从低到高每两位的数值依次是 `3`、`2`、`1`，总和为 `6`。\n\n下面是补齐后的完整 C 代码，仅供对照；输入框只要求（b）的表达式。\n\n```c\nlong sum_pairs(unsigned long x) {\n    long result = 0;\n    while (x != 0) {\n        result += x & 3;\n        x = x >> 2;\n    }\n    return result;\n}\n```"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第3页",
+          "note": "原参考为x & 3；显式接受无符号x的等价取低两位表达式。完整C代码仅在参考区用于对照。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "rewritten",
+          "editorNote": "第6–7页，5.3。跨页代码合并；原卷只设分要求(b)及返回值，(a)(c)保留为未要求填写的占位，不增加计分项。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，5.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-b4b322fffd67b4fe",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 5,
+      "number": {
+        "display": "第3讲 3.2",
+        "major": {
+          "display": "第3讲",
+          "value": "3"
+        },
+        "minor": {
+          "display": "3.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "ieee754-special-values"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "first",
+            "marker": "{{blank:first}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "0xFF800000 表示的值",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "pos-inf",
+                  "label": "正无穷（+∞）"
+                },
+                {
+                  "value": "neg-inf",
+                  "label": "负无穷（−∞）"
+                },
+                {
+                  "value": "nan",
+                  "label": "NaN（非数）"
+                },
+                {
+                  "value": "pos-zero",
+                  "label": "正零（+0）"
+                },
+                {
+                  "value": "neg-zero",
+                  "label": "负零（−0）"
+                },
+                {
+                  "value": "finite",
+                  "label": "有限非零数"
+                }
+              ]
+            }
+          },
+          {
+            "id": "second",
+            "marker": "{{blank:second}}",
+            "occurrence": 0,
+            "width": "medium",
+            "label": "0x7FC00000 表示的值",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "pos-inf",
+                  "label": "正无穷（+∞）"
+                },
+                {
+                  "value": "neg-inf",
+                  "label": "负无穷（−∞）"
+                },
+                {
+                  "value": "nan",
+                  "label": "NaN（非数）"
+                },
+                {
+                  "value": "pos-zero",
+                  "label": "正零（+0）"
+                },
+                {
+                  "value": "neg-zero",
+                  "label": "负零（−0）"
+                },
+                {
+                  "value": "finite",
+                  "label": "有限非零数"
+                }
+              ]
+            }
+          }
+        ],
+        "text": "### 3.2 IEEE 754 标准（4 分）\n\n以下两个 32 位编码按照 IEEE 754 单精度浮点数格式解释，分别表示什么？\n\n1. `0xFF800000` → {{blank:first}}（2 分）\n2. `0x7FC00000` → {{blank:second}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "first",
+            "method": "selection",
+            "correctValues": [
+              "neg-inf"
+            ]
+          },
+          {
+            "blankId": "second",
+            "method": "selection",
+            "correctValues": [
+              "nan"
+            ]
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "1. 负无穷（$-\\infty$）。符号位为 `1`，阶码全为 `1`，小数域全为 `0`。\n2. `NaN`（非数）。阶码全为 `1`，小数域不全为 `0`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第1页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，3.2；特殊值配置覆盖全部数值类别的下拉候选。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，3.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-c6e96a18c6cfe64a",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 15,
+      "number": {
+        "display": "第5讲 5.2",
+        "major": {
+          "display": "第5讲",
+          "value": "5"
+        },
+        "minor": {
+          "display": "5.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "conditional-jump"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "compare",
+            "marker": "{{blank:compare}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "第1条缺失的完整指令"
+          },
+          {
+            "id": "jump",
+            "marker": "{{blank:jump}}",
+            "occurrence": 0,
+            "width": "long",
+            "label": "第2条缺失的完整指令"
+          }
+        ],
+        "text": "### 5.2 条件跳转（4 分）\n\n考虑下面的 C 语言代码：\n\n```c\nlong adjust(long x, long y) {\n    long t = x + 5;\n    if (x > y)\n        t = y - 2;\n    return t;\n}\n```\n\n假设 `x`、`y` 分别存放在 `%rdi`、`%rsi`，返回值存放在 `%rax`，计算不发生有符号整数溢出。下面是一种对应的 x86-64、AT&T 汇编实现，请补全两条完整指令（每空 2 分）。\n\n第（1）条指令的第一个操作数已知为 `%rsi`。每个框填写整条指令，不要只填操作数。\n\n```asm\nadjust:\n    leaq 5(%rdi), %rax\n    {{blank:compare}}\n    {{blank:jump}}\n    leaq -2(%rsi), %rax\n.Ldone:\n    ret\n```\n\n按原卷批卷说明，含义明确时可省略寄存器前的 `%` 和指令的 `q` 后缀；指令中的空格或制表符差异不影响核对。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "compare",
+            "method": "exact",
+            "acceptedAnswers": [
+              "cmpq %rsi, %rdi",
+              "cmp %rsi, %rdi",
+              "cmpq rsi, %rdi",
+              "cmp rsi, %rdi",
+              "cmpq %rsi, rdi",
+              "cmp %rsi, rdi",
+              "cmpq rsi, rdi",
+              "cmp rsi, rdi"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "att-instruction"
+            }
+          },
+          {
+            "blankId": "jump",
+            "method": "exact",
+            "acceptedAnswers": [
+              "jle .Ldone",
+              "jng .Ldone"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "att-instruction"
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空实际填入的完整指令为：\n\n```asm\n    cmpq %rsi, %rdi\n    jle .Ldone\n```\n\n先默认计算 `x + 5`。`cmpq %rsi, %rdi` 按 `x - y` 设置条件码；当 `x <= y` 时跳过重新赋值，否则执行 `y - 2`。`jng .Ldone` 与这里的 `jle .Ldone` 等价。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第3页",
+          "note": "明确接受原卷允许的省略%/q，以及jle的同义助记符jng；不靠判分器剥除前缀。"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "rewritten",
+          "editorNote": "第6页，5.2。把原卷部分挖空改为整条指令空位，并保留第一操作数为%rsi的已知条件；删除没有给出参数或作答项的泛称计算返回值。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，5.2；第1页批卷说明。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-d573b16f5390f647",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 11,
+      "number": {
+        "display": "第4讲 4.2（汇编程序）",
+        "major": {
+          "display": "第4讲",
+          "value": "4"
+        },
+        "minor": {
+          "display": "4.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "lea",
+          "assembly-arithmetic"
+        ]
+      },
+      "type": "composite",
+      "stem": {
+        "format": "markdown",
+        "text": "### 4.2 汇编程序（4 分）\n\n以下是一段 x86-64、AT&T 汇编代码。假设函数参数 `x` 存放在 `%rdi` 中，函数返回值存放在 `%rax` 中。\n\n按原卷意图比较指令的算术效果，假设对应 C 表达式的计算不发生有符号溢出。\n\n```asm\ncalc:\n    leaq (%rdi,%rdi,2), %rax\n    salq $2, %rax\n    subq %rdi, %rax\n    ret\n```"
+      },
+      "parts": [
+        {
+          "id": "q-d573b16f5390f647-lea",
+          "number": {
+            "display": "（1）",
+            "major": null,
+            "minor": null,
+            "parts": [
+              "1"
+            ]
+          },
+          "type": "single-choice",
+          "moduleIds": [
+            "machine_prog"
+          ],
+          "stem": {
+            "format": "markdown",
+            "text": "执行第一条指令 `leaq` 后，`%rax` 中的值相当于什么？（2 分）"
+          },
+          "options": [
+            {
+              "id": "A",
+              "content": {
+                "format": "markdown",
+                "text": "`x`"
+              }
+            },
+            {
+              "id": "B",
+              "content": {
+                "format": "markdown",
+                "text": "`2*x`"
+              }
+            },
+            {
+              "id": "C",
+              "content": {
+                "format": "markdown",
+                "text": "`3*x`"
+              }
+            },
+            {
+              "id": "D",
+              "content": {
+                "format": "markdown",
+                "text": "`4*x`"
+              }
+            }
+          ],
+          "solution": {
+            "state": "available",
+            "grading": "choice",
+            "correctOptionIds": [
+              "C"
+            ],
+            "reference": {
+              "format": "markdown",
+              "text": "选 C。`leaq (%rdi,%rdi,2), %rax` 计算 `x + 2*x = 3*x`，并不读取该地址的内存。"
+            },
+            "provenance": {
+              "origin": "official",
+              "crossChecked": null,
+              "attribution": "随卷答案第2页，4.2 汇编程序（1）"
+            }
+          },
+          "sources": [
+            {
+              "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+              "provenance": "reflow",
+              "editorNote": "第4页，4.2 汇编程序（1）。"
+            }
+          ],
+          "issues": []
+        },
+        {
+          "id": "q-d573b16f5390f647-return",
+          "number": {
+            "display": "（2）",
+            "major": null,
+            "minor": null,
+            "parts": [
+              "2"
+            ]
+          },
+          "type": "single-choice",
+          "moduleIds": [
+            "machine_prog"
+          ],
+          "stem": {
+            "format": "markdown",
+            "text": "该函数的返回值相当于以下哪个 C 语言表达式？（2 分）"
+          },
+          "options": [
+            {
+              "id": "A",
+              "content": {
+                "format": "markdown",
+                "text": "`7*x`"
+              }
+            },
+            {
+              "id": "B",
+              "content": {
+                "format": "markdown",
+                "text": "`11*x`"
+              }
+            },
+            {
+              "id": "C",
+              "content": {
+                "format": "markdown",
+                "text": "`12*x`"
+              }
+            },
+            {
+              "id": "D",
+              "content": {
+                "format": "markdown",
+                "text": "`13*x`"
+              }
+            }
+          ],
+          "solution": {
+            "state": "available",
+            "grading": "choice",
+            "correctOptionIds": [
+              "B"
+            ],
+            "reference": {
+              "format": "markdown",
+              "text": "选 B。先得到 `3*x`，左移 2 位得到 `12*x`，再减去 `x`，最终为 `11*x`。这里按题目意图比较指令的算术效果。"
+            },
+            "provenance": {
+              "origin": "official",
+              "crossChecked": null,
+              "attribution": "随卷答案第2页，4.2 汇编程序（2）"
+            }
+          },
+          "sources": [
+            {
+              "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+              "provenance": "reflow",
+              "editorNote": "第4页，4.2 汇编程序（2）。"
+            }
+          ],
+          "issues": []
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "parts",
+        "reference": {
+          "format": "markdown",
+          "text": "两个小问依次选择 C、B。网站保留整题，两个小问分别核对，整题按现有综合题规则归一化计分。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第2页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，第二道4.2；依赖同一汇编的两个选择小问保持为一道综合题。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，4.2 汇编程序。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-d71b79d96b862558",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 24,
+      "number": {
+        "display": "第8讲 8.2",
+        "major": {
+          "display": "第8讲",
+          "value": "8"
+        },
+        "minor": {
+          "display": "8.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "machine_prog",
+        "moduleIds": [
+          "machine_prog"
+        ],
+        "tags": [
+          "buffer-overflow",
+          "stack-canary",
+          "rop"
+        ]
+      },
+      "type": "multiple-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 8.2 防御技术（3 分）\n\n对于 x86-64 Linux 的程序，以下关于缓冲区溢出攻击及防御措施的说法，哪些正确？（不定项选择）\n\n原卷计分：全对得 3 分，少选得 1 分，错选或不选得 0 分。网站练习按现有多选规则核对：选项集合完全一致才算正确，不模拟原卷的少选部分分。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "“栈金丝雀”可以通过检查标记值是否改变，检测到部分缓冲区溢出。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "ROP 攻击可以利用程序中已有的可执行代码，因此不可执行栈无法单独阻止此类攻击。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "栈地址随机化能够从根本上消除程序中的缓冲区越界写入。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "即使设置了不可执行栈，缓冲区溢出仍有可能修改保存在栈中的返回地址。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A",
+          "B",
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A、B、D。\n\n不可执行栈（NX）限制指定内存区域中指令的执行，并不阻止对栈内数据的越界写入。ROP 利用程序中已有的可执行代码，而非直接执行注入栈中的指令。栈地址随机化增加地址预测难度，但不会消除越界写入本身。栈金丝雀只能检测部分溢出情况，也不是通用的内存安全保证。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第5页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第11页，8.2；保留全部四个选项及原卷计分说明。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，8.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-e1e5e6eb91e7c377",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 3,
+      "number": {
+        "display": "第2讲 2.3",
+        "major": {
+          "display": "第2讲",
+          "value": "2"
+        },
+        "minor": {
+          "display": "2.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "unsigned-conversion"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "a",
+            "marker": "{{blank:a}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "a 的值",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "zero",
+                  "label": "0"
+                },
+                {
+                  "value": "one",
+                  "label": "1"
+                }
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "marker": "{{blank:b}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "b 的值",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "zero",
+                  "label": "0"
+                },
+                {
+                  "value": "one",
+                  "label": "1"
+                }
+              ]
+            }
+          }
+        ],
+        "text": "### 2.3 整数（4 分）\n\n考虑以下 C 语言代码，假设 `int` 和 `unsigned int` 均为 32 位：\n\n```c\nunsigned int count = 3U;\nint change = -5;\n\nint a = (change < count);\nunsigned int next = count + change;\nint b = (next > count);\n```\n\n1. `a` 的值为（十进制）：{{blank:a}}（2 分）\n2. `b` 的值为（十进制）：{{blank:b}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "a",
+            "method": "selection",
+            "correctValues": [
+              "zero"
+            ]
+          },
+          {
+            "blankId": "b",
+            "method": "selection",
+            "correctValues": [
+              "one"
+            ]
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `0`、`1`。\n\n比较时，`change` 转换为 32 位无符号整数，值为 $2^{32}-5$，大于 `3`，因此 `a = 0`。\n\n无符号加法按模 $2^{32}$ 计算，`count + change` 的结果为 $2^{32}-2$，大于 `count`，因此 `b = 1`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第1页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，2.3；比较结果只有0或1，显式配置下拉。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，2.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-e41402b74638e0ba",
+      "revision": 1,
+      "paperId": "p-3eac9aa5d6f749a1",
+      "paperOrder": 8,
+      "number": {
+        "display": "第3讲 3.5",
+        "major": {
+          "display": "第3讲",
+          "value": "3"
+        },
+        "minor": {
+          "display": "3.5",
+          "value": "5"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "data_representation",
+        "moduleIds": [
+          "data_representation"
+        ],
+        "tags": [
+          "float-rounding",
+          "non-associativity"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "b",
+            "marker": "{{blank:b}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "b 的值"
+          },
+          {
+            "id": "c",
+            "marker": "{{blank:c}}",
+            "occurrence": 0,
+            "width": "short",
+            "label": "c 的值"
+          }
+        ],
+        "text": "### 3.5 浮点运算（4 分）\n\n考虑以下 C 语言代码。假设 `float` 使用 IEEE 754 单精度格式，采用默认的向偶数舍入规则，每次浮点运算都按单精度舍入，不采用额外精度，也不改变表达式中的运算顺序。\n\n```c\nfloat x = 16777216.0f;  // 2^24\nfloat y = 1.0f;\nfloat a = x + y;\nfloat b = (x + y) - x;\nfloat c = (x - x) + y;\n```\n\n1. `b` 的值为：{{blank:b}}（2 分）\n2. `c` 的值为：{{blank:c}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "b",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0",
+              "0.0",
+              "0.00",
+              "0.0f",
+              "0.f"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "c",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1",
+              "1.0",
+              "1.00",
+              "1.0f",
+              "1.f"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "各空依次为 `0.0`、`1.0`。\n\n在 $2^{24}$ 附近，单精度可表示数的间隔为 `2`；`x + 1.0f` 恰在中点，向偶数舍入回 `x`，因此 `b = 0.0f`。`x - x` 先得到 `0.0f`，再加 `y` 得到 `c = 1.0f`。这体现浮点加法不满足结合律。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null,
+          "attribution": "随卷提供的 v2.0 纯答案 PDF，第2页"
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage1/exam-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3–4页，3.5；跨页代码合并成一个代码块。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage1/answers-v2.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，3.5。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-1febd3da8c05ab57",
       "revision": 2,
       "paperId": "p-4486554924f4e320",

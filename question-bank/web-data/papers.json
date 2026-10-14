@@ -3,6 +3,65 @@
   "papers": [
     {
       "schemaVersion": "5",
+      "id": "p-3eac9aa5d6f749a1",
+      "revision": 1,
+      "displayName": "2026阶段测验（第1次）",
+      "sourceCollection": "pku-exam",
+      "title": "ICS2026 第一次阶段测试",
+      "year": 2026,
+      "academicYear": "2026-2027",
+      "term": "fall",
+      "examKind": "stage-test",
+      "sequence": 1,
+      "questionIds": [
+        "q-545e969fd78020ac",
+        "q-1eaa764ebd7d7271",
+        "q-e1e5e6eb91e7c377",
+        "q-59b10751544638bb",
+        "q-b4b322fffd67b4fe",
+        "q-9174361046a04977",
+        "q-6869d8ba04c0973d",
+        "q-e41402b74638e0ba",
+        "q-8f0ed4dbad2e3cc2",
+        "q-2bf5dfc21d5979d3",
+        "q-d573b16f5390f647",
+        "q-36d78baae81e88e4",
+        "q-41d07aedb2ec62ce",
+        "q-21e8720cfb433665",
+        "q-c6e96a18c6cfe64a",
+        "q-9d421c3e0a8da37e",
+        "q-6aff8e001b381e61",
+        "q-317ba6faaa5757a0",
+        "q-07314046856eeefb",
+        "q-8a1b23001222404d",
+        "q-25908478f8bc91e4",
+        "q-597ae48bbeb3fdc8",
+        "q-85848e9b20b9f521",
+        "q-d71b79d96b862558",
+        "q-87169ced45da2981"
+      ],
+      "coverage": {
+        "state": "complete",
+        "note": "逐题收录打印版 v2.0 实际出现的 25 道题（第2–8讲）。原卷两道4.2保留原编号并加题目名称区分。答案注明第7讲缺一题2分、默认得分；网站不虚构缺题，不模拟纸卷赠分或少选部分分，采用现有归一化练习计分。"
+      },
+      "sourceDocuments": [
+        "原文/阶段测验/2026-stage1/exam-v2.pdf",
+        "原文/阶段测验/2026-stage1/answers-v2.pdf"
+      ],
+      "stats": {
+        "questionCount": 25,
+        "publishedQuestionCount": 25,
+        "quizQuestionCount": 25,
+        "verifiedAnswerCount": 25,
+        "singleChoiceCount": 0,
+        "multipleChoiceCount": 2,
+        "fillCount": 22,
+        "shortAnswerCount": 0,
+        "compositeCount": 1
+      }
+    },
+    {
+      "schemaVersion": "5",
       "id": "p-ef702d9b146ac853",
       "revision": 1,
       "displayName": "CSAPP Sec1 · 计算机系统漫游",
