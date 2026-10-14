@@ -41,12 +41,13 @@
     <details id="ics-practice-history">
       <summary><strong>我的作答记录</strong><span id="ics-history-count">0 次</span></summary>
       <div class="ics-history-body">
-        <div class="ics-history-toolbar"><label><input id="ics-history-wrong-only" type="checkbox"> 只看错题</label><span>按作答时间倒序 · 仅本浏览器</span></div>
+        <div class="ics-history-toolbar"><label><input id="ics-history-wrong-only" type="checkbox"> 只看错题</label><label><input id="ics-history-favorites-only" type="checkbox"> 只看收藏</label><span>按作答时间倒序 · 仅本浏览器</span></div>
         <div class="ics-history-selection">
           <label><input id="ics-history-select-all" type="checkbox" disabled> 选择当前显示</label>
           <span id="ics-history-selected-count">已选 0 条</span>
           <div class="ics-history-selection-actions">
             <button id="ics-history-clear-selection" class="ics-secondary" type="button" disabled>取消选择</button>
+            <button id="ics-history-favorite" class="ics-secondary" type="button" disabled>收藏所选题目</button>
             <button id="ics-history-delete" class="ics-secondary ics-history-delete" type="button" disabled>删除所选</button>
           </div>
         </div>
@@ -56,6 +57,10 @@
         <button id="ics-history-more" class="ics-secondary" type="button" hidden>加载更多记录</button>
       </div>
     </details>
+  </section>
+
+  <section class="ics-panel ics-history-panel" aria-label="本浏览器收藏题目">
+    <details id="ics-favorites"></details>
   </section>
 
   <section class="ics-panel ics-history-panel" aria-label="Agent 接入">
@@ -123,6 +128,7 @@
         <label><input type="checkbox" value="csapp-textbook" checked><span>CSAPP 习题</span></label>
       </div>
     </fieldset>
+    <label class="ics-favorites-scope"><input id="ics-favorites-only" type="checkbox"> 只从我的收藏中选题 <small>适用于模块练习和原卷／章节；用户精选卷保留原题单。</small></label>
     <fieldset class="ics-mode-fieldset">
       <legend>练习方式</legend>
       <div class="ics-mode-grid" id="ics-mode-picker">
@@ -199,6 +205,7 @@
         <div class="ics-question-utilities" role="group" aria-label="题目工具">
           <button class="ics-secondary" id="ics-copy-agent" type="button" aria-controls="ics-agent-copy-panel">复制给 Agent</button>
           <button class="ics-secondary" id="ics-mastery" type="button" aria-pressed="false">标记熟知</button>
+          <button class="ics-secondary" id="ics-favorite" type="button" aria-pressed="false">收藏题目</button>
           <button class="ics-report-button" id="ics-report-issue" type="button" aria-expanded="false" aria-controls="ics-issue-form">您认为此题有误</button>
         </div>
         <div class="ics-submit-actions" role="group" aria-label="作答操作">
@@ -210,6 +217,7 @@
     </form>
     <div class="ics-action-status">
       <span class="ics-report-status" id="ics-mastery-status" role="status"></span>
+      <span class="ics-report-status" id="ics-favorite-status" role="status" aria-live="polite"></span>
       <span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span>
     </div>
     <section class="ics-feedback" id="ics-feedback" hidden>
@@ -308,6 +316,7 @@
 <script src="./vendor/supabase/supabase.js" defer></script>
 <script src="./question-v5.js" defer></script>
 <script src="./attempt-counts.js" defer></script>
+<script src="./favorites.js" defer></script>
 <script src="./paper-export.js" defer></script>
 <script src="./community-papers.js" defer></script>
 <script src="./community-agent.js" defer></script>

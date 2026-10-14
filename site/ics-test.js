@@ -26,6 +26,8 @@
     localAttempts: $('ics-local-attempts'), localAttemptNote: $('ics-local-attempt-note'),
     practiceHistory: $('ics-practice-history'), historyCount: $('ics-history-count'),
     historyWrongOnly: $('ics-history-wrong-only'), historyStatus: $('ics-history-status'),
+    historyFavoritesOnly: $('ics-history-favorites-only'), historyFavorite: $('ics-history-favorite'),
+    favorite: $('ics-favorite'), favoriteStatus: $('ics-favorite-status'), favoritesOnly: $('ics-favorites-only'),
     historyList: $('ics-history-list'), historyMore: $('ics-history-more'),
     historySelectAll: $('ics-history-select-all'), historySelectedCount: $('ics-history-selected-count'),
     historyClearSelection: $('ics-history-clear-selection'), historyDelete: $('ics-history-delete'),
@@ -62,6 +64,8 @@
   const contract = window.ICSQuestionV5;
   const MASTERY_KEY = 'ics-question-mastery-v1';
   const attemptCounts = window.ICSAttemptCounts.create(function () { return localStorage; });
+  const favorites = window.ICSFavorites.create(function () { return localStorage; });
+  favorites.refresh();
   state.communityPaper = null;
   let paperKind = 'original';
   function clearCommunityLink() {
@@ -77,6 +81,29 @@
     window.ICSPaperExport.open(load, { renderContent: renderContent, renderSolution: renderSolution, contract: contract,
       source: function (q) { return [paperFor(q).displayName, q.number.display, issueTypeLabel(q.type)].join(' · '); } });
   }
+  const favoritesPanel = window.ICSFavorites.mount({ host: $('ics-favorites'), store: favorites,
+    loadBank: loadQuestionBank, isPublished: isPublishedQuestion, collection: contract.paperCollection,
+    exportPaper: exportPaper, practice: practiceLocalQuestion, changed: refreshFavorites });
+  function renderFavoriteButton() {
+    const question = state.questions[state.index], saved = question && favorites.has(question.id);
+    ui.favorite.textContent = saved ? '已收藏 · 取消收藏' : '收藏题目';
+    ui.favorite.setAttribute('aria-pressed', String(Boolean(saved)));
+    ui.favoriteStatus.textContent = !favorites.snapshot().persistent
+      ? '存储不可用，部分收藏仅在当前页面临时保留。' : '';
+  }
+  function refreshFavorites() {
+    favoritesPanel.refresh(); renderFavoriteButton(); renderPracticeHistory();
+  }
+  function toggleFavorite(id) {
+    if (!id) return;
+    if (favorites.has(id)) {
+      const result = favorites.remove([id]); refreshFavorites();
+      if (result.failedIds.length) {
+        ui.favoriteStatus.textContent = '取消收藏失败，仍保留，请检查浏览器存储设置后重试。';
+        ui.historyDeleteStatus.textContent = ui.favoriteStatus.textContent;
+      }
+    } else { favorites.add([id]); refreshFavorites(); }
+  }
   $('ics-export-paper').addEventListener('click', function () {
     try {
       const paper = state.papers.find(function (item) { return item.id === ui.paper.value; });
@@ -91,6 +118,7 @@
     host: $('ics-community'), loadBank: loadQuestionBank, isPublished: isPublishedQuestion,
     collection: contract.paperCollection, visitorId: visitorId, typeset: typeset,
     history: function () { attemptCounts.refresh(); return attemptCounts.history(); }, exportPaper: exportPaper,
+    favorites: function () { favorites.refresh(); return new Set(favorites.list().map(function (item) { return item.id; })); },
     renderPreview: function (q) {
       function unit(item) {
         return renderContent(item.stem) + (item.options ? '<ol>' + item.options.map(function (option) {
@@ -134,10 +162,12 @@
     const existingIds = new Set(records.map(function (record) { return record.attemptId; }));
     state.historySelected.forEach(function (id) { if (!existingIds.has(id)) state.historySelected.delete(id); });
     if (!ui.practiceHistory.open) return;
-    const filtered = ui.historyWrongOnly.checked ? records.filter(function (record) { return record.points < 1; }) : records;
+    const filtered = records.filter(function (record) {
+      return (!ui.historyWrongOnly.checked || record.points < 1) && (!ui.historyFavoritesOnly.checked || favorites.has(record.questionId));
+    });
     const legacyCount = Math.max(0, attemptCounts.snapshot().count - records.length);
     ui.historyStatus.textContent = (filtered.length ? '显示 ' + Math.min(filtered.length, state.historyLimit) + ' / ' + filtered.length + ' 次作答。'
-      : ui.historyWrongOnly.checked ? '暂无错题记录。' : '暂无作答记录，完成判分后会自动保存。') +
+      : ui.historyFavoritesOnly.checked ? '暂无符合筛选的收藏题目记录。' : ui.historyWrongOnly.checked ? '暂无错题记录。' : '暂无作答记录，完成判分后会自动保存。') +
       ' 部分正确及自评“需要复习”也计为错题，跳过不计入。' +
       (legacyCount ? ' 此前 ' + legacyCount + ' 次作答只有累计次数，无法补回历史详情。' : '') +
       (!attemptCounts.snapshot().persistent ? ' 存储不可用，部分记录仅在当前页面临时保留。' : '') +
@@ -158,7 +188,9 @@
         (revised ? ' · 题目已更新，重练使用最新版本' : '') + '</p>' +
         '<details class="ics-history-answer"><summary>当时的回答</summary><p>' + escapeHtml(record.answer || '查看参考答案后自评') + '</p></details>' +
         '<button class="ics-secondary" type="button" data-history-question="' + escapeHtml(record.questionId) + '"' +
-        (question ? '' : ' disabled') + '>' + (question ? '再练一次' : state.historyQuestions ? '题目已下架或不在当前题库' : '正在加载题目…') + '</button></article>';
+        (question ? '' : ' disabled') + '>' + (question ? '再练一次' : state.historyQuestions ? '题目已下架或不在当前题库' : '正在加载题目…') + '</button> ' +
+        '<button class="ics-secondary" type="button" data-history-favorite="' + escapeHtml(record.questionId) + '" aria-pressed="' + favorites.has(record.questionId) + '"' +
+        (question ? '' : ' disabled') + '>' + (favorites.has(record.questionId) ? '已收藏 · 取消收藏' : '收藏题目') + '</button></article>';
     }).join('');
     updateHistorySelection();
   }
@@ -179,6 +211,9 @@
     ui.historySelectAll.indeterminate = count > 0 && count < controls.length;
     ui.historyClearSelection.disabled = count === 0;
     ui.historyDelete.disabled = count === 0;
+    ui.historyFavorite.disabled = !attemptCounts.history().some(function (record) {
+      return state.historySelected.has(record.attemptId) && state.historyQuestions && state.historyQuestions.has(record.questionId);
+    });
   }
 
   function deleteSelectedHistory() {
@@ -206,6 +241,10 @@
   function retryHistoryQuestion(questionId) {
     const question = state.historyQuestions && state.historyQuestions.get(questionId);
     if (!question) return;
+    practiceLocalQuestion(question);
+  }
+
+  function practiceLocalQuestion(question) {
     // Keep an ongoing quiz and its drafts intact. A retry is a fresh, appended
     // instance, not a mutation of the previous graded record.
     if (!ui.quiz.hidden || !ui.result.hidden) {
@@ -963,6 +1002,7 @@
     ui.examTypeField.hidden = isAll || isExam;
     ui.paperField.hidden = !isExam;
     const isCommunity = isExam && paperKind === 'community';
+    ui.favoritesOnly.closest('label').hidden = isCommunity;
     $('ics-paper-kind').hidden = !isExam;
     ui.sourcePicker.closest('fieldset').hidden = isCommunity;
     ui.paperField.hidden = !isExam || isCommunity;
@@ -1018,6 +1058,7 @@
         return Number(paper.stats.publishedQuestionCount || 0) > 0;
       });
       community.init({ client: state.supabase, catalog: state.catalog, papers: state.papers });
+      favoritesPanel.init({ catalog: state.catalog, papers: state.papers });
       renderSourceFilters();
       if (ui.practiceHistory.open) loadPracticeHistory();
       await loadReportedIssues();
@@ -1081,16 +1122,17 @@
     ui.start.disabled = true; ui.start.textContent = mode === 'mistakes' ? '正在读取错误率…' : '正在准备…';
     try {
       const bank = await loadQuestionBank();
+      favorites.refresh();
       const examType = mode === 'module-all' || mode === 'exam' ? '' : ui.examType.value;
       let pool = bank.filter(function (question) {
         const paper = paperFor(question);
         return isPublishedQuestion(question) && paper && sources.includes(contract.paperCollection(paper)) &&
           question.classification.moduleIds.some(function (id) { return ids.includes(id); }) &&
           (!examType || (paper && contract.EXAM_LABELS[paper.examKind] === examType)) &&
-          (mode !== 'exam' || question.paperId === ui.paper.value);
+          (mode !== 'exam' || question.paperId === ui.paper.value) && (!ui.favoritesOnly.checked || favorites.has(question.id));
       }).map(function (question) { return Object.assign({}, question); });
 
-      if (!pool.length) throw new Error('当前筛选条件下没有可用题目');
+      if (!pool.length) throw new Error(ui.favoritesOnly.checked ? '当前筛选范围内没有已收藏的可用题目。可扩大范围或取消“只从我的收藏中选题”。' : '当前筛选条件下没有可用题目');
       if (mode === 'random') {
         pool = pool.filter(function (question) { return !state.mastered.has(question.id); });
         if (!pool.length) throw new Error('当前范围内的题目都已标记熟知。可扩大范围，或在模块全练 / 按卷练习中取消标记。');
@@ -1289,6 +1331,7 @@
 
   function renderQuestion() {
     aiGrader.stop();
+    renderFavoriteButton();
     $('ics-community-current').hidden = !state.communityPaper;
     $('ics-community-title').textContent = state.communityPaper ? state.communityPaper.title : '';
     $('ics-community-author').textContent = state.communityPaper ? '署名：' + state.communityPaper.author_name : '';
@@ -1729,8 +1772,18 @@
   ui.issueForm.addEventListener('submit', reportCurrentIssue);
   ui.issueCancel.addEventListener('click', function () { closeIssueForm(); ui.reportIssue.focus(); });
   ui.mastery.addEventListener('click', toggleMastery);
+  ui.favorite.addEventListener('click', function () { toggleFavorite(state.questions[state.index]?.id); });
+  ui.historyFavorite.addEventListener('click', function () {
+    const selected = attemptCounts.history().filter(function (record) { return state.historySelected.has(record.attemptId); });
+    const ids = Array.from(new Set(selected.filter(function (record) { return state.historyQuestions && state.historyQuestions.has(record.questionId); }).map(function (record) { return record.questionId; })));
+    const result = favorites.add(ids); refreshFavorites();
+    ui.historyDeleteStatus.textContent = '已收藏所选记录中的 ' + ids.length + ' 道可用题目（新增 ' + result.addedIds.length + ' 题，重复题不重复收藏）。' +
+      (selected.some(function (record) { return !ids.includes(record.questionId); }) ? ' 已跳过下架或不可用题目。' : '') +
+      (!result.persistent ? ' 部分收藏仅临时保留，刷新可能丢失。' : '');
+  });
   ui.practiceHistory.addEventListener('toggle', function () { if (ui.practiceHistory.open) loadPracticeHistory(); });
   ui.historyWrongOnly.addEventListener('change', function () { state.historyLimit = 50; state.historySelected.clear(); renderPracticeHistory(); });
+  ui.historyFavoritesOnly.addEventListener('change', function () { state.historyLimit = 50; state.historySelected.clear(); renderPracticeHistory(); });
   ui.historyMore.addEventListener('click', function () { state.historyLimit += 50; renderPracticeHistory(); });
   ui.historySelectAll.addEventListener('change', function () {
     state.historySelected.clear();
@@ -1749,10 +1802,13 @@
     updateHistorySelection();
   });
   ui.historyList.addEventListener('click', function (event) {
+    const favorite = event.target.closest('[data-history-favorite]');
+    if (favorite && !favorite.disabled) { toggleFavorite(favorite.dataset.historyFavorite); return; }
     const button = event.target.closest('[data-history-question]');
     if (button && !button.disabled) retryHistoryQuestion(button.dataset.historyQuestion);
   });
   window.addEventListener('storage', function (event) {
+    if (event.key === null || event.key.startsWith(window.ICSFavorites.PREFIX)) { favorites.refresh(); refreshFavorites(); }
     if (event.key === MASTERY_KEY || event.key === null) { loadMastery(); renderMastery(); }
     if (event.key === null || event.key.startsWith(window.ICSAttemptCounts.PREFIX)) {
       attemptCounts.refresh(); renderLocalAttempts();
@@ -1761,6 +1817,7 @@
   window.addEventListener('online', loadSiteAttempts);
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'visible') {
+      favorites.refresh(); refreshFavorites();
       attemptCounts.refresh(); renderLocalAttempts(); loadSiteAttempts();
     }
   });

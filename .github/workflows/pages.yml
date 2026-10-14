@@ -57,6 +57,7 @@ jobs:
           node tests/browser-prompt-images.cjs
           node tests/browser-community.cjs
           node tests/browser-reveal.cjs
+          node tests/browser-favorites.cjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v6

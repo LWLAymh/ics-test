@@ -14,6 +14,10 @@ h3 { font-size: 15px; margin: 18px 0 8px; break-after: avoid; }
 p { margin: 8px 0; }
 .paper-id { font: 10px/1.5 ui-monospace, Consolas, monospace; color: #637181; margin: 2px 0 10px; break-after: avoid; }
 .paper-question { border-bottom: 1px solid #d5dce4; padding-bottom: 18px; break-inside: avoid; }
+/* A long first question may continue onto the next page instead of pushing
+   itself wholesale and leaving a nearly empty title page. Code/images still
+   keep their own break-inside protection. */
+#paper-questions > .paper-question:first-child { break-inside: auto; }
 .paper-option { display: flex; gap: 10px; margin: 8px 0; break-inside: avoid; }
 .paper-option > div { min-width: 0; flex: 1; }
 .paper-option p { margin: 0; }

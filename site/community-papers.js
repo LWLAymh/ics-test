@@ -73,7 +73,7 @@
       '<label class="ics-community-description">简短描述<textarea data-community="description" maxlength="500" rows="2" placeholder="适合谁练习、选题思路等（选填）"></textarea></label>' +
       '<div data-community="agent"></div>' +
       '<fieldset class="ics-community-sources"><legend>题目来源</legend><label><input type="checkbox" data-cp-source="pku-exam" checked> PKU 真题</label><label><input type="checkbox" data-cp-source="csapp-textbook" checked> CSAPP 习题</label></fieldset>' +
-      '<div class="ics-community-toolbar"><label>选题范围 <select data-community="history-range"><option value="all">全部题库</option><option value="attempted">我的作答记录</option><option value="wrong">我的错题（曾经答错）</option></select></label>' + button('history-refresh', '刷新本地记录') + button('add-filtered', '添加筛选结果', '', ' hidden') + '</div>' +
+      '<div class="ics-community-toolbar"><label>选题范围 <select data-community="history-range"><option value="all">全部题库</option><option value="attempted">我的作答记录</option><option value="wrong">我的错题（曾经答错）</option><option value="favorites">我的收藏</option></select></label>' + button('history-refresh', '刷新本地记录') + button('add-filtered', '添加筛选结果', '', ' hidden') + '</div>' +
       '<p class="ics-community-note">记录仅在本浏览器读取，重复作答按题目去重；错题包含任意一次得分不足满分的题。个人回答和成绩不会随卷子或 MCP 草稿上传。</p>' +
       '<div class="ics-community-fields"><label>知识模块<select data-community="module"><option value="">全部模块</option></select></label><label>题型<select data-community="type"><option value="">全部题型</option>' + Object.entries(TYPES).map(([key, name]) => '<option value="' + key + '">' + name + '</option>').join('') + '</select></label>' +
       '<label>原卷 / 章节<select data-community="paper"><option value="">全部卷 / 章节</option></select></label><label>搜索题面 / 编号<input data-community="search" type="search" placeholder="关键词或 q-…"></label></div>' +
@@ -100,7 +100,7 @@
     function excerpt(q) { return q.stem.text.replace(/\{\{blank:[^}]+\}\}/g, '____').replace(/[`#*]/g, '').replace(/\s+/g, ' ').slice(0, 140); }
     function filters() {
       const sources = Array.from(host.querySelectorAll('[data-cp-source]:checked')).map(el => el.dataset.cpSource), search = $('search').value.trim().toLowerCase();
-      const range = $('history-range').value, historyIds = range === 'all' ? null : historyQuestionIds(options.history(), range === 'wrong');
+      const range = $('history-range').value, historyIds = range === 'all' ? null : range === 'favorites' ? options.favorites() : historyQuestionIds(options.history(), range === 'wrong');
       pool = bank.filter(q => sources.includes(options.collection(papers.get(q.paperId))) &&
         (!historyIds || historyIds.has(q.id)) &&
         (!$('module').value || q.classification.moduleIds.includes($('module').value)) &&

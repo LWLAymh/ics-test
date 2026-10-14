@@ -928,7 +928,7 @@ async function run() {
     await page.click('#ics-practice-history > summary');
     await page.waitForFunction(()=>document.querySelector('#ics-history-list button')?.textContent==='题目已下架或不在当前题库');
     assert.equal(await page.locator('.ics-history-item').count(),50);
-    assert(await page.locator('.ics-history-item').first().locator('button').isDisabled());
+    assert(await page.locator('.ics-history-item').first().locator('[data-history-question]').isDisabled());
     assert.equal(await page.locator('#ics-history-list img, #ics-history-list script').count(),0);
     assert.match(await page.locator('.ics-history-answer').nth(1).textContent(),/<img src=x onerror=alert\(1\)> n != 1/);
     await page.click('#ics-history-more');assert(await page.locator('.ics-history-item').count()>55);

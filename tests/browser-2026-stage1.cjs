@@ -50,7 +50,7 @@ async function run() {
     await page.goto(url); await page.waitForFunction(() => !document.querySelector('#ics-start').disabled);
     await page.locator('[name="quiz-mode"][value="exam"]').check(); await page.locator('#ics-paper').selectOption(paperId);
     const opened = page.waitForEvent('popup'); await page.locator('#ics-export-paper').click(); const preview = await opened;
-    await preview.waitForFunction(() => !document.querySelector('#print-save').disabled, null, { timeout: 90000 });
+    await preview.waitForFunction(() => document.querySelector('#print-save') && !document.querySelector('#print-save').disabled, null, { timeout: 90000 });
     assert.deepEqual(await preview.locator('#paper-questions > article').evaluateAll(items => items.map(q => q.dataset.questionId)), paper.questionIds);
     assert.equal(await preview.locator('.paper-blank').count(), 49); assert.equal(await preview.locator('mjx-merror').count(), 0);
     await preview.locator('#print-answers').check(); await preview.waitForFunction(() => !document.querySelector('#print-save').disabled);

@@ -528,6 +528,15 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
   #ics-navigation-status { font-size: 10px; }
   .ics-question-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
 }
+.ics-favorites-filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+.ics-favorites-filters label { display: grid; gap: 6px; min-width: 0; font-size: 12px; color: var(--text-muted); }
+.ics-favorites-filters select, .ics-favorites-filters input { width: 100%; min-width: 0; padding: 9px; border: 1px solid var(--border); border-radius: 4px; color: var(--text); background: var(--bg); font: inherit; }
+.ics-favorite-excerpt { margin: 12px 0 8px; font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+.ics-favorite-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.ics-favorites-scope { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 16px 0; font-size: 13px; }
+.ics-favorites-scope small { color: var(--text-muted); font-size: 11px; }
+#ics-favorite[aria-pressed="true"], [data-history-favorite][aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 720px) { .ics-favorites-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
 /* Keep this after font shorthands, which reset font-variant-ligatures.
    Code is literal: !=, <= and >= must remain separate ASCII characters. */

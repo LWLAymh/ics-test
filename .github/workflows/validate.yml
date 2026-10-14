@@ -36,5 +36,6 @@ jobs:
           node tests/browser-prompt-images.cjs
           node tests/browser-community.cjs
           node tests/browser-reveal.cjs
+          node tests/browser-favorites.cjs
       - name: Generated source must be committed
         run: git diff --exit-code -- question-bank/web-data
