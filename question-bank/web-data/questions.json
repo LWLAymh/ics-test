@@ -2073,7 +2073,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b12725a5ab3fa17b",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 4,
       "number": {
@@ -2097,7 +2097,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -2113,13 +2113,13 @@
           "curated": "_curated/阶段测验/2025第2次阶段测验-带答案/78.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "根据电路图补全时序图中 Out 信号值"
+          "editorNote": "根据电路图补全时序图中 Out 信号值；按原 PDF 第 3 页提取完整电路和时序区域，恢复 In/Load 输入，排除上方被截断的正文及下方答案。"
         }
       ],
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）\n\n![题目电路图和待补全的时序图](assets/阶段测验/2025第2次阶段测验-带答案/p3-q4-logic-timing.png)"
+        "text": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）\n\n![左侧组合逻辑电路及右侧 Clock、Load、In、Out 时序图](assets/阶段测验/2025第2次阶段测验-带答案/p3-q4-timing-prompt.png)"
       },
       "solution": {
         "state": "available",
@@ -5204,7 +5204,7 @@
     {
       "schemaVersion": "5",
       "id": "q-00a8b5c318a16492",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 28,
       "number": {
@@ -5225,7 +5225,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -5241,7 +5241,7 @@
           "curated": "_curated/期末/2014期末-带答案/829.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "socket 数量、Connection socket pair、Echo/Tiny Server"
+          "editorNote": "socket 数量、Connection socket pair、Echo/Tiny Server；从原 PDF 第 24 页提取代码区域，替换依赖外部整页 PNG 的 SVG，不含红色答案。"
         }
       ],
       "type": "fill",
@@ -5255,7 +5255,7 @@
             "width": "medium"
           }
         ],
-        "text": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听 {{blank:max-connections}} 个来自一个客户端独\n立的 `socket` 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。`HTTP`服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（`Server`）\n通过 `socket`进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其`Open_clientfd`命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给`Server`端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 `Server` 端相\n应代码行画一条单向箭头。\n\n![Echo Client 与 Echo Server 代码（原卷题面，不含答案）](assets/期末/2014期末-带答案/page-24-question.svg)\n\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```"
+        "text": "第八题（10分）网络\n1．（1分）以下问题默认为IPv4协议。一个服务器拥有四个独立的固定IP地址，\n那么它在 web 应用端口 80，理论上可以最多再监听 {{blank:max-connections}} 个来自一个客户端独\n立的 `socket` 连接（客户端只有一个固定IP地址）。\n2．（2 分）在 client-server 模型中，一个连接（connection）可以由 IP\n地址，端口号的组合来表示。假设客户端 IP 地址为 162.105.192.178，内网\nIP为192.168.100.121。`HTTP`服务器端IP地址为208.216.181.15。\n服务器使用的是默认监听端口号。\n指出下面这个网页浏览器应用的 Connection socket pair 有什么错误，\n并简要说明原因？\n客户端IP：端口号  服务器端IP：端口号\n192.168.100.121:15321  208.216.181.15:25\n\n3.(4分)在Echo Server程序中，客户端（Client）与服务器端（`Server`）\n通过 `socket`进行一系列的命令和数据交互。\n\n\n注意：客户端Connect命令包含在其`Open_clientfd`命令中。\n请在下图中用单向箭头标出这些交互步骤。例如，当 Client给`Server`端\n发送某个命令或者数据时，则需要在 Client 端相应代码行，朝向 `Server` 端相\n应代码行画一条单向箭头。\n\n![Echo Client 与 Echo Server 代码（原卷题面，不含答案）](assets/期末/2014期末-带答案/p24-echo-code-prompt.png)\n\n4.关于Tiny Server 程序，请回答下列问题。\na.（1分）下面这段服务器代码用来生成内容的文件是哪个参数？\nb.（1分）所生成的内容是静态还是动态？请简述原因。\nc.（1分）如果支持多个客户端请求，下面程序需要添加一个什么功能？\n```\n/* Return first part of HTTP response */\n    sprintf(buf, \"HTTP/1.0 200 OK\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n    sprintf(buf, \"Server: Tiny Web Server\\r\\n\");\n    Rio_writen(fd, buf, strlen(buf));\n  /* Real server would set all CGI vars here */\n  setenv(\"QUERY_STRING\", cgiargs, 1);\n  Dup2(fd, STDOUT_FILENO); /*Redirect stdout to socket and\nclient */\n  Execve(filename, emptylist, environ);/* Run CGI prog  */\n```"
       },
       "solution": {
         "state": "available",
@@ -7062,7 +7062,7 @@
     {
       "schemaVersion": "5",
       "id": "q-7d39077bb218b8b1",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 22,
       "number": {
@@ -7083,7 +7083,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -7099,13 +7099,13 @@
           "curated": "_curated/期末/2014期末-带答案/466.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "组合逻辑流水化级数与吞吐率计算"
+          "editorNote": "组合逻辑流水化级数与吞吐率计算；按原 PDF 第 13 页重新提取完整配图，不含下方被截断的提问。"
         }
       ],
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "第三题（10分） 处理器\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。注意，由于电路互联特点A与B之间如果插入寄存器，\nB本身的延迟将增加到50ps。\n\n![图](assets/期末/2014期末-带答案/p13-block-diagram.png)\n\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结果可以是分数\n形式也可以是小数形式。\n\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式\n也可以是小数形式。\n\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式\n也可以是小数形式。\n\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形式。"
+        "text": "第三题（10分） 处理器\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。注意，由于电路互联特点A与B之间如果插入寄存器，\nB本身的延迟将增加到50ps。\n\n![组合逻辑单元 A 至 F 的延迟与输出寄存器](assets/期末/2014期末-带答案/p13-block-prompt.png)\n\n1）如果改造为一个二级流水线（只插入一个寄存器），为获得最大的吞吐率，该寄\n存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结果可以是分数\n形式也可以是小数形式。\n\n2）如果改造为一个三级流水线（插入两个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式\n也可以是小数形式。\n\n3）如果改造为一个四级流水线（插入三个寄存器），为获得最大的吞吐率，寄存器\n应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式\n也可以是小数形式。\n\n4）不改变单元划分，为获得最大性能，该设计至少需要划分成几级？请计算对应\n的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形式。"
       },
       "solution": {
         "state": "available",
@@ -12264,7 +12264,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f0393d86cf9b56a3",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 22,
       "number": {
@@ -12285,7 +12285,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -12301,13 +12301,13 @@
           "curated": "_curated/期末/2015期末-20160104-带答案/489.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "含 F 模块的组合逻辑流水化与吞吐率"
+          "editorNote": "含 F 模块的组合逻辑流水化与吞吐率；从原 PDF 第 15 页重新提取配图，去掉上下边缘重复和被截断的题面。"
         }
       ],
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "第三题（13分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。设计人员考虑在额外增加一个模块F支持新的指令功能，\n形成图形状的流水线。提示：每个模块必须在一个时钟周期内。\n\n![图](assets/期末/2015期末-20160104-带答案/p15-block-diagram.png)\n\n1）如果没有F模块，请计算该流水线改造前的吞吐率，并说明计算过程。结果保\n留小数点后两位。\n\n2）如果有F模块，请计算该流水线改造前的吞吐率，并说明计算过程。结果保留\n小数点后两位。\n\n3）如果有 F 模块，改造为一个二级流水线（可以插入多个寄存器），为获得最大\n的吞吐率，寄存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结\n果保留小数点后两位。\n\n4）如果有 F 模块，改造为一个三级流水线（插入多个寄存器），为获得最大的吞\n吐率，寄存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结果保\n留小数点后两位。"
+        "text": "第三题（13分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟已在图中标出。\n通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每\n个寄存器的延迟为20ps。设计人员考虑在额外增加一个模块F支持新的指令功能，\n形成图形状的流水线。提示：每个模块必须在一个时钟周期内。\n\n![包含旁路模块 F 的组合逻辑通路与各模块延迟](assets/期末/2015期末-20160104-带答案/p15-block-prompt.png)\n\n1）如果没有F模块，请计算该流水线改造前的吞吐率，并说明计算过程。结果保\n留小数点后两位。\n\n2）如果有F模块，请计算该流水线改造前的吞吐率，并说明计算过程。结果保留\n小数点后两位。\n\n3）如果有 F 模块，改造为一个二级流水线（可以插入多个寄存器），为获得最大\n的吞吐率，寄存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结\n果保留小数点后两位。\n\n4）如果有 F 模块，改造为一个三级流水线（插入多个寄存器），为获得最大的吞\n吐率，寄存器应在哪里插入？请计算该流水线的吞吐率，并说明计算过程。结果保\n留小数点后两位。"
       },
       "solution": {
         "state": "available",
@@ -32344,7 +32344,7 @@
     {
       "schemaVersion": "5",
       "id": "q-78daa36a28b35c57",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 22,
       "number": {
@@ -32365,7 +32365,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -32381,7 +32381,7 @@
           "curated": "_curated/期末/2017期末-无答案/352.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "两级/三级流水线插入寄存器与最大吞吐率"
+          "editorNote": "两级/三级流水线插入寄存器与最大吞吐率；从原 PDF 第 10 页提取完整依赖关系图，不再夹带顶部正文。"
         }
       ],
       "type": "fill",
@@ -32437,7 +32437,7 @@
             "width": "medium"
           }
         ],
-        "text": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\n![图](assets/期末/2017期末-无答案/p10-block-diagram.png)\n1. 如果改造为一个二级流水线，为获得最大的吞吐率：\na) 需要在{{blank:two-stage-cut-1}}模块之间和{{blank:two-stage-cut-2}}模块之间插入寄存器；\nb) 插入寄存器改造后二级流水线的最长延时路径为{{blank:two-stage-path}}，最长延时为{{blank:two-stage-delay}}\nc) 流水线最大吞吐率为：{{blank:two-stage-rate}}\n（用分数表示，约分到最简形式，并写明单位）\n2. 如果改造为一个三级流水线，为获得最大的吞吐率：\na) 需要在{{blank:three-stage-cuts}}\n模块之间插入寄存器；\nb) 插入寄存器改造后三级流水线的最长路径延时为：{{blank:three-stage-delay}}；\nc) 流水线最大吞吐率为：{{blank:three-stage-rate}}\n（用分数表示，约分到最简形式，并写明单位）"
+        "text": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\n![组合逻辑单元 A 至 H 的延迟与依赖关系](assets/期末/2017期末-无答案/p10-block-prompt.png)\n1. 如果改造为一个二级流水线，为获得最大的吞吐率：\na) 需要在{{blank:two-stage-cut-1}}模块之间和{{blank:two-stage-cut-2}}模块之间插入寄存器；\nb) 插入寄存器改造后二级流水线的最长延时路径为{{blank:two-stage-path}}，最长延时为{{blank:two-stage-delay}}\nc) 流水线最大吞吐率为：{{blank:two-stage-rate}}\n（用分数表示，约分到最简形式，并写明单位）\n2. 如果改造为一个三级流水线，为获得最大的吞吐率：\na) 需要在{{blank:three-stage-cuts}}\n模块之间插入寄存器；\nb) 插入寄存器改造后三级流水线的最长路径延时为：{{blank:three-stage-delay}}；\nc) 流水线最大吞吐率为：{{blank:three-stage-rate}}\n（用分数表示，约分到最简形式，并写明单位）"
       },
       "solution": {
         "state": "available",
@@ -33065,7 +33065,7 @@
     {
       "schemaVersion": "5",
       "id": "q-9c5d3b54be5480a9",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 26,
       "number": {
@@ -33089,7 +33089,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -33105,7 +33105,7 @@
           "curated": "_curated/期末/2017期末-无答案/596.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "Echo 客户端/服务器流程填空"
+          "editorNote": "Echo 客户端/服务器流程填空；从原 PDF 第 18 页提取完整流程图，不再截断顶部图框或夹带下方填写横线。"
         }
       ],
       "type": "fill",
@@ -33167,7 +33167,7 @@
             "width": "medium"
           }
         ],
-        "text": "第七题（12分）第1问：请根据 Echo server/client 应用的标准程序填空。\n\n![Echo server/client 连接与通信流程图](assets/期末/2017期末-无答案/p18-img1.png)\n\n1. {{blank:blank-1}}　2. {{blank:blank-2}}　3. {{blank:blank-3}}\n4. {{blank:blank-4}}　5. {{blank:blank-5}}　6. {{blank:blank-6}}\n7. {{blank:blank-7}}　8. {{blank:blank-8}}　9. {{blank:blank-9}}"
+        "text": "第七题（12分）第1问：请根据 Echo server/client 应用的标准程序填空。\n\n![Echo 客户端和服务器的套接字调用流程，编号 1 至 9 待填写](assets/期末/2017期末-无答案/p18-sockets-prompt.png)\n\n1. {{blank:blank-1}}　2. {{blank:blank-2}}　3. {{blank:blank-3}}\n4. {{blank:blank-4}}　5. {{blank:blank-5}}　6. {{blank:blank-6}}\n7. {{blank:blank-7}}　8. {{blank:blank-8}}　9. {{blank:blank-9}}"
       },
       "solution": {
         "state": "available",
@@ -41395,7 +41395,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c32ea3cc636c77f7",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-4486554924f4e320",
       "paperOrder": 9,
       "number": {
@@ -41419,7 +41419,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -41435,20 +41435,20 @@
           "curated": "_curated/期中/2014期中-带答案/173.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "组合电路逻辑门转 HCL 表达式"
+          "editorNote": "组合电路逻辑门转 HCL 表达式；配图仅取原 PDF 第 5 页的完整电路区域（含叠加的 E 标签），不含选项、答案或邻题。"
         }
       ],
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "9、对应下述组合电路的正确 HCL 表达式为\n\n![图](assets/期中/2014期中-带答案/page-05.png)\n\n（图：组合电路图，输入 A、B 经一个与门输出 D，输入 A、C 经另一个与门输出 E，D 与 E 再经一个或门输出 X）\n\n"
+        "text": "9、对应下述组合电路的正确 HCL 表达式为\n\n![组合电路：A、B 接上方与门，A、C 接下方与门，两个输出接或门](assets/期中/2014期中-带答案/q9-circuit-prompt.png)\n\n（图：组合电路图，输入 A、B 经一个与门输出 D，输入 A、C 经另一个与门输出 E，D 与 E 再经一个或门输出 X）\n\n"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C"
+          "text": "答案：C。\n\n上方与门输出 `D = A && B`，下方与门输出 `E = A && C`。因此 `X = D || E = (A && B) || (A && C) = A && (B || C)`。"
         },
         "provenance": {
           "origin": "unknown",
@@ -48526,7 +48526,7 @@
     {
       "schemaVersion": "5",
       "id": "q-4a6077bec6fc2f43",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 25,
       "number": {
@@ -48547,7 +48547,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -48563,7 +48563,7 @@
           "curated": "_curated/期中/2016期中-带答案/402.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "Y86 新增条件返回指令 cretXX 的 SEQ/PIPE 设计"
+          "editorNote": "Y86 新增条件返回指令 cretXX 的 SEQ/PIPE 设计；按原 PDF 第 13 页恢复完整取指通路图，原嵌入图片仅是图的右下角。"
         }
       ],
       "type": "fill",
@@ -48913,7 +48913,7 @@
             }
           }
         ],
-        "text": "（出题人：汪小林，易江芳）\n请分析32位的Y86 ISA中新加入的一组条件返回指令：`cretXX`，其格式如下。\n```\ncretXX  9  fun\n```\n类似cmovXX，该组指令只有当条件码(Cnd)满足时，才执行函数返回；如果\n条件不满足，则顺序执行。\n\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n\n| Stage | cretXX Offset |\n| --- | --- |\n| Fetch | {{blank:fetch-code}}；{{blank:fetch-valp}} |\n| Decode | {{blank:decode-valb}}；{{blank:decode-vala}} |\n| Execute | {{blank:execute-vale}}；{{blank:execute-cnd}} |\n| Memory | {{blank:memory-valm}} |\n| Write back | {{blank:writeback-esp}} |\n| PC update | {{blank:pc-update}} |\n\n（每个空1分，共9分）\n\n2.为了执行`cretXX`指令，我们需要改进教材所描述的PIPE处理器，在W（Write\nBack）阶段引入流水线寄存器 {{blank:w-register}}，并将其连接到 PC 选择器（Select PC）\n以便有条件地更新 PC。假设改进后的处理器总是预测函数返回条件不满足，则如果\n返回条件满足时，一共会错误取指 {{blank:wrong-fetch-count}} 条指令。（每空1分，共2分）\n\n3.在2中改进的PIPE处理器上执行`cretXX`指令时，发生预测错误时的判断条件和\n各级流水线寄存器的控制信号应如何设置？\n\n| Condition | Trigger |\n| --- | --- |\n| Mispredicted cret | `({{blank:trigger-e}}) \\|\\| ({{blank:trigger-m}})` |\n\n（算两个空，每空1分，共2分）\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Mispredicted cret | {{blank:mispredict-f}} | {{blank:mispredict-d}} | {{blank:mispredict-e}} | {{blank:mispredict-m}} | {{blank:mispredict-w}} |\n\n（每空1分，共3分）\n\n![图](assets/期中/2016期中-带答案/p13-img1.jpg)\n\n4. PIPE处理器上处理器上执行如下代码片段，\n```\n0x000:    xorl %eax, %eax\n0x002:    popl %esp\n0x004:    cretne\n```\n是否会发生 load-use 和 misprediction cret 组合的 hazard 情况？{{blank:combo-result}}（1分）\n\n如果此时“`popl %esp`”在流水线的Execute阶段，请问此时，各级流水线寄存\n器的控制信号应如何设置？\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Combination | {{blank:combo-f}} | {{blank:combo-d}} | {{blank:combo-e}} | {{blank:combo-m}} | {{blank:combo-w}} |\n\n（每空1分，共3分）"
+        "text": "（出题人：汪小林，易江芳）\n请分析32位的Y86 ISA中新加入的一组条件返回指令：`cretXX`，其格式如下。\n```\ncretXX  9  fun\n```\n类似cmovXX，该组指令只有当条件码(Cnd)满足时，才执行函数返回；如果\n条件不满足，则顺序执行。\n\n1. 若在教材所描述的SEQ处理器上执行这条指令，请按下表补全每个阶段的操作。\n需说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n\n| Stage | cretXX Offset |\n| --- | --- |\n| Fetch | {{blank:fetch-code}}；{{blank:fetch-valp}} |\n| Decode | {{blank:decode-valb}}；{{blank:decode-vala}} |\n| Execute | {{blank:execute-vale}}；{{blank:execute-cnd}} |\n| Memory | {{blank:memory-valm}} |\n| Write back | {{blank:writeback-esp}} |\n| PC update | {{blank:pc-update}} |\n\n（每个空1分，共9分）\n\n2.为了执行`cretXX`指令，我们需要改进教材所描述的PIPE处理器，在W（Write\nBack）阶段引入流水线寄存器 {{blank:w-register}}，并将其连接到 PC 选择器（Select PC）\n以便有条件地更新 PC。假设改进后的处理器总是预测函数返回条件不满足，则如果\n返回条件满足时，一共会错误取指 {{blank:wrong-fetch-count}} 条指令。（每空1分，共2分）\n\n![PIPE 取指通路、PC 选择器及各阶段输入信号](assets/期中/2016期中-带答案/p13-fetch-complete.png)\n\n3.在2中改进的PIPE处理器上执行`cretXX`指令时，发生预测错误时的判断条件和\n各级流水线寄存器的控制信号应如何设置？\n\n| Condition | Trigger |\n| --- | --- |\n| Mispredicted cret | `({{blank:trigger-e}}) \\|\\| ({{blank:trigger-m}})` |\n\n（算两个空，每空1分，共2分）\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Mispredicted cret | {{blank:mispredict-f}} | {{blank:mispredict-d}} | {{blank:mispredict-e}} | {{blank:mispredict-m}} | {{blank:mispredict-w}} |\n\n（每空1分，共3分）\n\n4. PIPE处理器上处理器上执行如下代码片段，\n```\n0x000:    xorl %eax, %eax\n0x002:    popl %esp\n0x004:    cretne\n```\n是否会发生 load-use 和 misprediction cret 组合的 hazard 情况？{{blank:combo-result}}（1分）\n\n如果此时“`popl %esp`”在流水线的Execute阶段，请问此时，各级流水线寄存\n器的控制信号应如何设置？\n\n| Condition | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Combination | {{blank:combo-f}} | {{blank:combo-d}} | {{blank:combo-e}} | {{blank:combo-m}} | {{blank:combo-w}} |\n\n（每空1分，共3分）"
       },
       "solution": {
         "state": "available",
@@ -49737,7 +49737,7 @@
     {
       "schemaVersion": "5",
       "id": "q-aef611c07980834c",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 12,
       "number": {
@@ -49761,7 +49761,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -49777,13 +49777,13 @@
           "curated": "_curated/期中/2016期中-带答案/131.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "三级流水线执行时间计算"
+          "editorNote": "三级流水线执行时间计算；对照原 PDF 第 4 页，本小题没有配图，移除误挂的第 10、11 小题电路图。"
         }
       ],
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "12. 若处理器实现了三级流水线，每一级流水线实际需要的运行时间分别为 1ns、\n2ns 和 3ns，则此处理器不停顿地执行完毕 10 条指令需要的时间为：\n\n![图](assets/期中/2016期中-带答案/p4-img1.jpg)\n![图](assets/期中/2016期中-带答案/p4-img2.jpg)"
+        "text": "12. 若处理器实现了三级流水线，每一级流水线实际需要的运行时间分别为 1ns、\n2ns 和 3ns，则此处理器不停顿地执行完毕 10 条指令需要的时间为：\n"
       },
       "solution": {
         "state": "available",
@@ -50023,7 +50023,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c466a6a0b7bb808f",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 10,
       "number": {
@@ -50047,7 +50047,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -50062,14 +50062,14 @@
           },
           "curated": "_curated/期中/2016期中-带答案/117.md",
           "aliases": [],
-          "provenance": "verbatim",
-          "editorNote": "组合电路 HCL 表达式"
+          "provenance": "rewritten",
+          "editorNote": "组合电路 HCL 表达式；按原 PDF 第 4 页补回本题电路图，原图曾误挂在第 12 小题。"
         }
       ],
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "10. 对应下述组合电路的正确HCL表达式为："
+        "text": "10. 对应下述组合电路的正确HCL表达式为：\n\n![输入 a、b 经与门、非门及或门连接到输出 eq 的组合电路](assets/期中/2016期中-带答案/p4-img1.jpg)"
       },
       "solution": {
         "state": "available",
@@ -50494,7 +50494,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d92e4610b562ec0f",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 11,
       "number": {
@@ -50518,7 +50518,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -50533,14 +50533,14 @@
           },
           "curated": "_curated/期中/2016期中-带答案/123.md",
           "aliases": [],
-          "provenance": "verbatim",
-          "editorNote": "转移预测错误的判断与恢复信号"
+          "provenance": "rewritten",
+          "editorNote": "转移预测错误的判断与恢复信号；按原 PDF 第 4 页补回本题取指通路图，原图曾误挂在第 12 小题。"
         }
       ],
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "11. 流水线数据通路中的转移预测策略为总是预测跳转。如果转移预测错误，需要\n恢复流水线，并从正确的目标地址开始取值。其中，用来判断转移预测是否正\n确的信号是_①_和_②__，用来获得正确的目标地址的信号是_③_。"
+        "text": "11. 流水线数据通路中的转移预测策略为总是预测跳转。如果转移预测错误，需要\n恢复流水线，并从正确的目标地址开始取值。其中，用来判断转移预测是否正\n确的信号是_①_和_②__，用来获得正确的目标地址的信号是_③_。\n![PIPE 取指通路及 PC 选择器的 M_icode、M_Bch、M_valA、W_icode、W_valM 输入](assets/期中/2016期中-带答案/p4-img2.jpg)\n"
       },
       "solution": {
         "state": "available",
@@ -52387,7 +52387,7 @@
     {
       "schemaVersion": "5",
       "id": "q-71e2271cf5cdd47d",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 7,
       "number": {
@@ -52411,7 +52411,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -52427,7 +52427,7 @@
           "curated": "_curated/期末/2022期末-无答案/60.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "进程上下文切换与信号递送流程填空（含图）"
+          "editorNote": "进程上下文切换与信号递送流程填空；配图仅取原 PDF 第 2 页的流程区域，不再插入第一大题整页。"
         }
       ],
       "type": "fill",
@@ -52447,7 +52447,7 @@
             "width": "medium"
           }
         ],
-        "text": "7. 请根据下图所示流程完成填空。\n\n   ① 处发生了什么？{{blank:legacy-gap-0}}。\n\n   ② 执行的代码是什么？{{blank:legacy-gap-1}}。\n\n   ![图](assets/期末/2022期末-无答案/page-02.png)\n\n   图为进程切换流程示意：左右两栏分别为\"进程 A\"与\"进程 B\"的代码执行时序，由\"用户代码\"\"内核代码\"色块交替组成，右侧两处括注\"上下文切换\"；左上角文字\"有信号发送给进程 A\"，①、② 分别指向内核代码中的两个位置。"
+        "text": "7. 请根据下图所示流程完成填空。\n\n   ① 处发生了什么？{{blank:legacy-gap-0}}。\n\n   ② 执行的代码是什么？{{blank:legacy-gap-1}}。\n\n   ![进程 A 与进程 B 的上下文切换和信号递送流程](assets/期末/2022期末-无答案/p2-context-switch-prompt.png)\n\n   图为进程切换流程示意：左右两栏分别为\"进程 A\"与\"进程 B\"的代码执行时序，由\"用户代码\"\"内核代码\"色块交替组成，右侧两处括注\"上下文切换\"；左上角文字\"有信号发送给进程 A\"，①、② 分别指向内核代码中的两个位置。"
       },
       "solution": {
         "state": "available",
@@ -52599,7 +52599,7 @@
     {
       "schemaVersion": "5",
       "id": "q-80560a1ecf2223dd",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 16,
       "number": {
@@ -52620,7 +52620,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -52636,7 +52636,7 @@
           "curated": "_curated/期末/2022期末-无答案/133.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "Y86 流水线 load-use 冒险的 HCL 检测表达式"
+          "editorNote": "Y86 流水线 load-use 冒险的 HCL 检测表达式；恢复原卷公共题面，信号图仅保留配图区域并置于公共题面，不在小问中重复插整页。"
         },
         {
           "legacyId": "q-f1ee76a3d0c7a75f",
@@ -52702,7 +52702,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": ""
+        "text": "第二题 处理器（15 分）\n\n基于本课程教材中讲述的 Y86 流水线处理器结构，如果一条 `mrmovq` 指令的目标寄存器在紧随的指令里作为源操作数使用，就会导致 `load-use` 冒险，无法通过前递（Forwarding）技术解决。\n\n以下是本题各小问共用的处理器信号连接图。图中信号可能不完整，但足够推测出所需的信号。\n\n![Y86 流水线处理器的执行、译码阶段及前递信号连接](assets/期末/2022期末-无答案/p4-pipe-signals-prompt.png)\n"
       },
       "parts": [
         {
@@ -52745,7 +52745,7 @@
                 "width": "medium"
               }
             ],
-            "text": "(1) 要解决\"load-use\"冒险，首先要能检测出来。根据下面的处理器信号连接图，补全检测\"load-use\"冒险的 HCL 表达式。（每空 1 分）\n\n![图](assets/期末/2022期末-无答案/page-04.png)\n\n　　{{blank:legacy-gap-0}} in { IMRMOVQ, IPOPQ } && E_dstM in { {{blank:legacy-gap-1}}, {{blank:legacy-gap-2}} }"
+            "text": "(1) 要解决 `load-use` 冒险，首先要能检测出来。根据公共题面中的处理器信号连接图，补全检测 `load-use` 冒险的 HCL 表达式。（每空 1 分）\n\n　　{{blank:legacy-gap-0}} in { IMRMOVQ, IPOPQ } && E_dstM in { {{blank:legacy-gap-1}}, {{blank:legacy-gap-2}} }"
           },
           "solution": {
             "state": "available",
@@ -52978,7 +52978,7 @@
                 "width": "medium"
               }
             ],
-            "text": "![图](assets/期末/2022期末-无答案/page-04.png)\n\n图为 Y86 流水线处理器的信号连接图（教材 HCL 图）：左侧标注 Execute、Decode 等阶段，包含 ALU A/ALU B、CC、Set_cc、e_dstE、dstE/dstM/srcA/srcB、Register file（Write back / Read ports）、d_srcA/d_srcB/d_rvalA/d_rvalB、Instr valid/need_regids/need_valC 等信号块，右侧一列为各阶段的状态码。\n\n(3) ret 指令因为在流水线很晚阶段才能获得转移目标地址，所以也要特殊处理。参考上面的处理器信号连接图（注意：图中信号可能不完整，但足够推测出所需的信号），补全检测 `ret` 指令处理时机的 HCL 表达式。（每空 1 分）\n\n　　IRET in { {{blank:legacy-gap-0}}, {{blank:legacy-gap-1}}, {{blank:legacy-gap-2}} }"
+            "text": "(3) ret 指令因为在流水线很晚阶段才能获得转移目标地址，所以也要特殊处理。参考上面的处理器信号连接图（注意：图中信号可能不完整，但足够推测出所需的信号），补全检测 `ret` 指令处理时机的 HCL 表达式。（每空 1 分）\n\n　　IRET in { {{blank:legacy-gap-0}}, {{blank:legacy-gap-1}}, {{blank:legacy-gap-2}} }"
           },
           "solution": {
             "state": "available",
@@ -72126,7 +72126,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e9162b5ebf244c22",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-a12b4c73bf0c30d2",
       "paperOrder": 20,
       "number": {
@@ -72147,7 +72147,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -72326,7 +72326,7 @@
                 }
               }
             ],
-            "text": "第五题（15分）\n\n1）不同的Cache组织结构对访存性能有很大的影响。以直接映射Cache为例，\nL1 Cache的容量为128字节，block size为16个字节。为简化起见，使用\n8位地址访问该Cache，地址如下图所示：\n\n![图](assets/期中/2019期中-带答案/p19-addr-fields.png)\n\n对于如下访问序列，请填写 L1 Cache (Tag Ram) 中的变化，其中 B0 ~ B7 对应 8 个\nCache Block，表项中填写对应的 Tag。（6分）\n\n| 访问地址序列 | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | 是否命中(Y / N) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| A0 |  |  |  |  |  |  |  |  | {{blank:hit-1}} |\n| 20 |  |  |  |  |  |  |  |  | {{blank:hit-2}} |\n| A2 |  |  |  |  |  |  |  |  | {{blank:hit-3}} |\n| 0 |  |  |  |  |  |  |  |  | {{blank:hit-4}} |\n| 80 |  |  |  |  |  |  |  |  | {{blank:hit-5}} |\n| 4 |  |  |  |  |  |  |  |  | {{blank:hit-6}} |"
+            "text": "第五题（15分）\n\n1）不同的Cache组织结构对访存性能有很大的影响。以直接映射Cache为例，\nL1 Cache的容量为128字节，block size为16个字节。为简化起见，使用\n8位地址访问该Cache，地址如下图所示：\n\n![8 位地址划分：第 7 位为 tag，第 6 至 3 位为 index，第 2 至 0 位为块内偏移](assets/期中/2019期中-带答案/p19-address-fields-prompt.png)\n\n对于如下访问序列，请填写 L1 Cache (Tag Ram) 中的变化，其中 B0 ~ B7 对应 8 个\nCache Block，表项中填写对应的 Tag。（6分）\n\n| 访问地址序列 | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | 是否命中(Y / N) |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| A0 |  |  |  |  |  |  |  |  | {{blank:hit-1}} |\n| 20 |  |  |  |  |  |  |  |  | {{blank:hit-2}} |\n| A2 |  |  |  |  |  |  |  |  | {{blank:hit-3}} |\n| 0 |  |  |  |  |  |  |  |  | {{blank:hit-4}} |\n| 80 |  |  |  |  |  |  |  |  | {{blank:hit-5}} |\n| 4 |  |  |  |  |  |  |  |  | {{blank:hit-6}} |"
           },
           "solution": {
             "state": "available",
@@ -76064,7 +76064,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d4217f1e765bf0d4",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ac5fea2cf89e5bed",
       "paperOrder": 25,
       "number": {
@@ -76085,7 +76085,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -76101,7 +76101,7 @@
           "curated": "_curated/期末/2013期末-带答案/555.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "IA32 二级页表自映射实现 get_pde/get_pte"
+          "editorNote": "IA32 二级页表自映射实现 get_pde/get_pte；从原 PDF 第 16 页分别提取地址转换图和页表项字段图，去掉整页与重复正文。"
         }
       ],
       "type": "fill",
@@ -76139,7 +76139,7 @@
             "width": "medium"
           }
         ],
-        "text": "第六题（10分）\nIntel的IA32体系结构采用二级页表，称第一级页表为页目录（Page Directory），第二级页表为页表（Page Table）。其虚拟地址到物理地址的翻译方式如下图。先根据CR3找到页目录地址，然后依据偏移Dir找到一个页目录项，页目录项的高20位（PPN）为二级页表地址；在二级页表中根据偏移Table找到页表项，页表项中的高20位（PPN）即为物理地址的高20位，将这20位与虚拟地址的低12位拼在一起形成完整的物理地址。\n\n![IA32二级页表地址转换及页表项字段](assets/期末/2013期末-带答案/page-16.png)\n\n页目录和页表均有1024项，每一项为4字节。页目录和页表由操作系统维护，通常情况下只能在内核态下访问。为了给用户提供一个访问页表项和页目录项内容的接口，假设操作系统中已经执行过如下代码段：\n\n```c\n#define UVPT 0xef400000\n#define PDX(la) ((((unsigned int)(la)) >> 22) & 0x3FF)\n/* ... */\nkern_pgdir[PDX(UVPT)] = PADDR(kern_pgdir) | PTE_U | PTE_P;\n```\n\n其中`kern_pgdir`是操作系统维护的页目录数组，共1024项，每一项的类型为`unsigned int`。`PADDR(kern_pgdir)`用于获得`kern_pgdir`的物理地址；页目录在物理内存中正好占一页，所以其物理地址是4KB对齐的。`PTE_U`和`PTE_P`代表该页目录项的权限，即用户态可访问（只读）。可以看到，这条语句将页目录的第`PDX(UVPT)`项指向了页目录自身。\n\n利用这一点，对于给定的虚拟地址`va`，可以获得`va`对应的页目录项和页表项内容。请完成以下两个函数（每空2分）：\n\n```c\n#define UVPT 0xef400000\n\n// get_pde(va)：获取虚拟地址va对应的页目录项内容\nunsigned int get_pde(unsigned int va) {\n    unsigned int pdx = (va >> {{blank:pde_shift}}) & {{blank:pde_mask}};\n    unsigned int addr = UVPT + ({{blank:pde_uvpt_offset}}) + pdx * 4;\n    return *((unsigned int *)(addr));\n}\n\n// get_pte(va)：获取虚拟地址va对应的页表项内容\nunsigned int get_pte(unsigned int va) {\n    unsigned int PGNUM = va >> {{blank:pte_shift}};\n    unsigned int addr = {{blank:pte_base}} + PGNUM;\n    return *((unsigned int *)(addr));\n}\n```"
+        "text": "第六题（10分）\nIntel的IA32体系结构采用二级页表，称第一级页表为页目录（Page Directory），第二级页表为页表（Page Table）。其虚拟地址到物理地址的翻译方式如下图。先根据CR3找到页目录地址，然后依据偏移Dir找到一个页目录项，页目录项的高20位（PPN）为二级页表地址；在二级页表中根据偏移Table找到页表项，页表项中的高20位（PPN）即为物理地址的高20位，将这20位与虚拟地址的低12位拼在一起形成完整的物理地址。\n\n![IA32 二级页表地址转换](assets/期末/2013期末-带答案/p16-address-translation.png)\n\n页目录项和页表项的字段如下：\n\n![页目录项和页表项的物理页号及权限标志](assets/期末/2013期末-带答案/p16-page-entry-fields.png)\n\n页目录和页表均有1024项，每一项为4字节。页目录和页表由操作系统维护，通常情况下只能在内核态下访问。为了给用户提供一个访问页表项和页目录项内容的接口，假设操作系统中已经执行过如下代码段：\n\n```c\n#define UVPT 0xef400000\n#define PDX(la) ((((unsigned int)(la)) >> 22) & 0x3FF)\n/* ... */\nkern_pgdir[PDX(UVPT)] = PADDR(kern_pgdir) | PTE_U | PTE_P;\n```\n\n其中`kern_pgdir`是操作系统维护的页目录数组，共1024项，每一项的类型为`unsigned int`。`PADDR(kern_pgdir)`用于获得`kern_pgdir`的物理地址；页目录在物理内存中正好占一页，所以其物理地址是4KB对齐的。`PTE_U`和`PTE_P`代表该页目录项的权限，即用户态可访问（只读）。可以看到，这条语句将页目录的第`PDX(UVPT)`项指向了页目录自身。\n\n利用这一点，对于给定的虚拟地址`va`，可以获得`va`对应的页目录项和页表项内容。请完成以下两个函数（每空2分）：\n\n```c\n#define UVPT 0xef400000\n\n// get_pde(va)：获取虚拟地址va对应的页目录项内容\nunsigned int get_pde(unsigned int va) {\n    unsigned int pdx = (va >> {{blank:pde_shift}}) & {{blank:pde_mask}};\n    unsigned int addr = UVPT + ({{blank:pde_uvpt_offset}}) + pdx * 4;\n    return *((unsigned int *)(addr));\n}\n\n// get_pte(va)：获取虚拟地址va对应的页表项内容\nunsigned int get_pte(unsigned int va) {\n    unsigned int PGNUM = va >> {{blank:pte_shift}};\n    unsigned int addr = {{blank:pte_base}} + PGNUM;\n    return *((unsigned int *)(addr));\n}\n```"
       },
       "solution": {
         "state": "available",
@@ -84638,7 +84638,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ff95e8e3bfa043a2",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-bc69f9ea3beff7ee",
       "paperOrder": 22,
       "number": {
@@ -84659,7 +84659,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -84675,13 +84675,13 @@
           "curated": "_curated/期末/2016期末-带答案/415.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "组合逻辑单元插入寄存器与吞吐率"
+          "editorNote": "组合逻辑单元插入寄存器与吞吐率；从原 PDF 第 11 页重新提取配图，去掉边缘正文，保持原图模块标签不变。"
         }
       ],
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\n\n![图](assets/期末/2016期末-带答案/p11-block-diagram.png)\n\n1）如果改造为一个二级流水线，为获得最大的吞吐率，该寄存器应在哪里插入？\n请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形\n式。\n\n2）如果改造为一个三级流水线，为获得最大的吞吐率，寄存器应在哪里插入？请\n计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形式。"
+        "text": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\n\n![组合逻辑单元的延迟、数据依赖关系与输出寄存器](assets/期末/2016期末-带答案/p11-block-prompt.png)\n\n1）如果改造为一个二级流水线，为获得最大的吞吐率，该寄存器应在哪里插入？\n请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形\n式。\n\n2）如果改造为一个三级流水线，为获得最大的吞吐率，寄存器应在哪里插入？请\n计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形式。"
       },
       "solution": {
         "state": "available",
@@ -104759,7 +104759,7 @@
     {
       "schemaVersion": "5",
       "id": "q-c7cbe7724a1752f2",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-e3f869956fc29bd8",
       "paperOrder": 16,
       "number": {
@@ -104780,7 +104780,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -104796,13 +104796,13 @@
           "curated": "_curated/期末/2018期末-带答案/259.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "组合逻辑流水化插寄存器与吞吐率计算"
+          "editorNote": "组合逻辑流水化插寄存器与吞吐率计算；从原 PDF 第 8 页提取依赖关系图，去掉顶部重复题面。"
         }
       ],
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "第二题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\n\n![图](assets/期末/2018期末-带答案/p8-block-diagram.png)\n\n1）如果改造为一个二级流水线，为获得最大的吞吐率，该寄存器应在哪里插入？\n请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形\n式。（6分）\n\n2）如果改造为一个三级流水线，为获得最大的吞吐率，寄存器应在哪里插入？请\n计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形式。\n（请给出至少两种实现最大吞吐率的设计方案）（6分）"
+        "text": "第二题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\n\n![组合逻辑单元 A 至 H 的延迟与数据依赖关系](assets/期末/2018期末-带答案/p8-block-prompt.png)\n\n1）如果改造为一个二级流水线，为获得最大的吞吐率，该寄存器应在哪里插入？\n请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形\n式。（6分）\n\n2）如果改造为一个三级流水线，为获得最大的吞吐率，寄存器应在哪里插入？请\n计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形式。\n（请给出至少两种实现最大吞吐率的设计方案）（6分）"
       },
       "solution": {
         "state": "available",
@@ -162493,7 +162493,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d36537e61267ceb5",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-ffd1f5f688babe1b",
       "paperOrder": 8,
       "number": {
@@ -162517,7 +162517,7 @@
       },
       "publication": {
         "state": "published",
-        "basis": "legacy-migration",
+        "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
         "issues": []
@@ -162533,13 +162533,13 @@
           "curated": "_curated/期中/2021期中-带答案/160.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "组合逻辑延迟、流水线级数与吞吐率"
+          "editorNote": "组合逻辑延迟、流水线级数与吞吐率；提取原 PDF 第 5 页的独立图像，恢复右侧被截断的 REG 寄存器。"
         }
       ],
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "8. A-G 为7个基本逻辑单元，下图中标出了每个单元的延迟，以及用箭头标出\n了单元之间所有的依赖关系。寄存器的延迟均为20ps，在图中以REG符号表示。\n假设流水线寄存器只能添加在有直接依赖关系的基本逻辑单元之间，而不能在C或\nG与REG之间。以下说法正确的是：\n\n![A–G 七个基本逻辑单元的延迟与依赖关系图](assets/期中/2021期中-带答案/p5-logic-dependency.png)"
+        "text": "8. A-G 为7个基本逻辑单元，下图中标出了每个单元的延迟，以及用箭头标出\n了单元之间所有的依赖关系。寄存器的延迟均为20ps，在图中以REG符号表示。\n假设流水线寄存器只能添加在有直接依赖关系的基本逻辑单元之间，而不能在C或\nG与REG之间。以下说法正确的是：\n\n![组合逻辑单元 A 至 G 的依赖关系与右侧 REG 寄存器](assets/期中/2021期中-带答案/p5-logic-complete.png)"
       },
       "solution": {
         "state": "available",

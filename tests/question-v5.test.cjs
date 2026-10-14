@@ -3,6 +3,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
+require('./prompt-images.test.cjs');
 
 test('2026 stage test 1 preserves all 25 source questions and 49 objective blanks', () => {
   const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');

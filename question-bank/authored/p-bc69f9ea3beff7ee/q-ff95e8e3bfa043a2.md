@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ff95e8e3bfa043a2",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-bc69f9ea3beff7ee",
   "paperOrder": 22,
   "number": {
@@ -23,7 +23,7 @@
   },
   "publication": {
     "state": "published",
-    "basis": "legacy-migration",
+    "basis": "source-import",
     "reviewer": null,
     "reviewedAt": null,
     "issues": []
@@ -39,7 +39,7 @@
       "curated": "_curated/期末/2016期末-带答案/415.md",
       "aliases": [],
       "provenance": "rewritten",
-      "editorNote": "组合逻辑单元插入寄存器与吞吐率"
+      "editorNote": "组合逻辑单元插入寄存器与吞吐率；从原 PDF 第 11 页重新提取配图，去掉边缘正文，保持原图模块标签不变。"
     }
   ],
   "type": "short-answer",
@@ -66,7 +66,7 @@
 关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行
 流水化改造。假设每个寄存器的延迟为10ps。
 
-![图](assets/期末/2016期末-带答案/p11-block-diagram.png)
+![组合逻辑单元的延迟、数据依赖关系与输出寄存器](assets/期末/2016期末-带答案/p11-block-prompt.png)
 
 1）如果改造为一个二级流水线，为获得最大的吞吐率，该寄存器应在哪里插入？
 请计算该流水线的吞吐率，并说明计算过程。结果可以是分数形式也可以是小数形

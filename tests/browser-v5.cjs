@@ -852,7 +852,7 @@ async function run() {
         const expectedBlanks=(questions[i].parts||[questions[i]]).reduce((n,u)=>n+(u.stem.blanks||[]).length,0);
         const actualBlanks=ui.questionContent.querySelectorAll('.ics-blank-input').length;
         if(actualBlanks!==expectedBlanks)throw new Error('Lost blank: '+questions[i].id+' '+actualBlanks+'/'+expectedBlanks);
-        for(const node of questions[i].parts||[questions[i]]){
+        for(const node of [questions[i],...(questions[i].parts||[])]){
           const el=document.createElement('div');el.innerHTML=renderContent(node.stem)+(node.options||[]).map(o=>renderContent(o.content)).join('');
           el.querySelectorAll('img').forEach(img=>assets.add(img.src));sections++;
         }

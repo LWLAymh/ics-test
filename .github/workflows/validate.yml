@@ -33,5 +33,6 @@ jobs:
           node tests/browser-security.cjs
           node tests/browser-ai-grader.cjs
           node tests/browser-2026-stage1.cjs
+          node tests/browser-prompt-images.cjs
       - name: Generated source must be committed
         run: git diff --exit-code -- question-bank/web-data
