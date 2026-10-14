@@ -58,24 +58,25 @@ async function run() {
     });
     // Copying a question shares only its stable ID, not private practice data.
     await fixture(page, [single, multiple]);
-    // Question tools share the answer toolbar, with identical typography and
-    // height. Narrow screens wrap groups rather than overflowing horizontally.
+    // Auxiliary tools stay above the question, separate from answer actions,
+    // with consistent typography. Narrow screens wrap without overflowing.
     const toolbar=await page.evaluate(()=>{
-      const ids=['ics-copy-agent','ics-mastery','ics-submit'];
+      const ids=['ics-copy-agent','ics-mastery','ics-favorite'];
       return ids.map(id=>{const el=document.getElementById(id),s=getComputedStyle(el),r=el.getBoundingClientRect();
         return {font:s.fontSize,family:s.fontFamily,weight:s.fontWeight,height:r.height,top:r.top,
-          inToolbar:!!el.closest('.ics-answer-actions')};});
+          inToolbar:!!el.closest('.ics-question-tools')};});
     });
     assert(toolbar.every(b=>b.inToolbar&&b.font===toolbar[0].font&&b.family===toolbar[0].family&&b.weight===toolbar[0].weight&&b.height===toolbar[0].height));
-    assert(toolbar.every(b=>Math.abs(b.top-toolbar[0].top)<1),'desktop actions share one row');
+    assert(toolbar.every(b=>Math.abs(b.top-toolbar[0].top)<1),'desktop tools share one row');
+    assert(await page.evaluate(()=>document.querySelector('.ics-question-tools').getBoundingClientRect().bottom < document.querySelector('#ics-question-content').getBoundingClientRect().top));
     if(process.env.ICS_SCREENSHOTS) {
       fs.mkdirSync(process.env.ICS_SCREENSHOTS,{recursive:true});
-      await page.locator('.ics-answer-actions').screenshot({path:path.join(process.env.ICS_SCREENSHOTS,'question-toolbar-desktop.png')});
+      await page.locator('.ics-question-tools').screenshot({path:path.join(process.env.ICS_SCREENSHOTS,'question-toolbar-desktop.png')});
     }
     await page.setViewportSize({width:390,height:844});
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
     assert.deepEqual(await page.locator('#ics-copy-agent, #ics-mastery').evaluateAll(buttons=>buttons.map(b=>getComputedStyle(b).fontSize)),[toolbar[0].font,toolbar[0].font]);
-    if(process.env.ICS_SCREENSHOTS) await page.locator('.ics-answer-actions').screenshot({path:path.join(process.env.ICS_SCREENSHOTS,'question-toolbar-mobile.png')});
+    if(process.env.ICS_SCREENSHOTS) await page.locator('.ics-question-tools').screenshot({path:path.join(process.env.ICS_SCREENSHOTS,'question-toolbar-mobile.png')});
     await page.setViewportSize({width:1280,height:900});
     await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true,
       value: { writeText: async text => { window.__agentCopied = text; } } }));

@@ -37,9 +37,10 @@
     <div><span>全站累计作答</span><strong id="ics-site-attempts" aria-live="polite">—</strong><small id="ics-site-attempt-note">正在读取；同一浏览器、同一道题只计一次。</small></div>
   </section>
 
+  <div class="ics-resource-grid" aria-label="学习工具">
   <section class="ics-panel ics-history-panel" aria-label="本浏览器作答记录">
     <details id="ics-practice-history">
-      <summary><strong>我的作答记录</strong><span id="ics-history-count">0 次</span></summary>
+      <summary><strong>作答记录</strong><span id="ics-history-count">0 次</span></summary>
       <div class="ics-history-body">
         <div class="ics-history-toolbar"><label><input id="ics-history-wrong-only" type="checkbox"> 只看错题</label><label><input id="ics-history-favorites-only" type="checkbox"> 只看收藏</label><span>按作答时间倒序 · 仅本浏览器</span></div>
         <div class="ics-history-selection">
@@ -65,7 +66,7 @@
 
   <section class="ics-panel ics-history-panel" aria-label="Agent 接入">
     <details id="ics-agent-connection">
-      <summary><strong>Agent 接入 · MCP / API</strong><span class="ics-agent-modes"><span>MCP：<span id="ics-agent-summary" class="ics-agent-state">未连接</span></span><span>API：<span id="ics-api-summary">未启用</span></span></span></summary>
+      <summary><strong>Agent 助手</strong><span class="ics-agent-modes"><span>MCP：<span id="ics-agent-summary" class="ics-agent-state">未连接</span></span><span>API：<span id="ics-api-summary">未启用</span></span></span></summary>
       <div class="ics-history-body ics-mcp-help">
         <section id="ics-api-config" class="ics-api-config" aria-label="API 简答评测设置"></section>
         <div class="ics-agent-grid">
@@ -116,19 +117,12 @@
       </div>
     </details>
   </section>
+  </div>
 
   <div class="ics-panel" id="ics-setup">
     <div class="ics-panel-head">
       <div><p class="ics-eyebrow">开始练习</p><h2>选择你的练习范围</h2><p id="ics-bank-summary">正在读取题库…</p></div>
     </div>
-    <fieldset class="ics-source-fieldset">
-      <legend>题目来源</legend>
-      <div class="ics-source-picker" id="ics-source-picker">
-        <label><input type="checkbox" value="pku-exam" checked><span>PKU 真题</span></label>
-        <label><input type="checkbox" value="csapp-textbook" checked><span>CSAPP 习题</span></label>
-      </div>
-    </fieldset>
-    <label class="ics-favorites-scope"><input id="ics-favorites-only" type="checkbox"> 只从我的收藏中选题 <small>适用于模块练习和原卷／章节；用户精选卷保留原题单。</small></label>
     <fieldset class="ics-mode-fieldset">
       <legend>练习方式</legend>
       <div class="ics-mode-grid" id="ics-mode-picker">
@@ -138,6 +132,16 @@
         <label class="ics-mode-card"><input type="radio" name="quiz-mode" value="mistakes"><span><strong>高错题优先</strong><small>按大家的错误率从高到低练习</small></span></label>
       </div>
     </fieldset>
+    <div class="ics-scope-row">
+      <fieldset class="ics-source-fieldset">
+        <legend>题目来源</legend>
+        <div class="ics-source-picker" id="ics-source-picker">
+          <label><input type="checkbox" value="pku-exam" checked><span>PKU 真题</span></label>
+          <label><input type="checkbox" value="csapp-textbook" checked><span>CSAPP 习题</span></label>
+        </div>
+      </fieldset>
+      <label class="ics-favorites-scope"><input id="ics-favorites-only" type="checkbox"> 只从收藏中选题 <small>用户精选卷仍保留原题单</small></label>
+    </div>
     <fieldset class="ics-module-fieldset" id="ics-module-fieldset">
       <legend id="ics-module-legend">知识模块（可多选）</legend>
       <button class="ics-text-button ics-select-toggle" id="ics-select-toggle" type="button">取消全选</button>
@@ -189,6 +193,34 @@
     <div class="ics-progress-track" aria-hidden="true"><span id="ics-progress-bar"></span></div>
     <div class="ics-workspace">
     <div class="ics-workspace-main">
+    <div class="ics-question-tools" aria-label="题目工具">
+      <span class="ics-tools-label">题目工具</span>
+      <div class="ics-question-utilities" role="group" aria-label="题目工具">
+        <button class="ics-secondary" id="ics-favorite" type="button" aria-pressed="false">收藏题目</button>
+        <button class="ics-secondary" id="ics-mastery" type="button" aria-pressed="false">标记熟知</button>
+        <button class="ics-secondary" id="ics-copy-agent" type="button" aria-controls="ics-agent-copy-panel">复制给 Agent</button>
+        <button class="ics-report-button" id="ics-report-issue" type="button" title="您认为此题有误？可反馈问题说明" aria-expanded="false" aria-controls="ics-issue-form">反馈问题</button>
+      </div>
+    </div>
+    <div class="ics-action-status">
+      <span class="ics-report-status" id="ics-mastery-status" role="status"></span>
+      <span class="ics-report-status" id="ics-favorite-status" role="status" aria-live="polite"></span>
+      <span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span>
+    </div>
+    <div class="ics-mcp-copy-panel" id="ics-agent-copy-panel" hidden>
+      <p id="ics-agent-copy-status" role="status" aria-live="polite"></p>
+      <label for="ics-agent-prompt">交给 Agent 的题目编号（不含你的答案或作答记录）</label>
+      <textarea id="ics-agent-prompt" rows="5" readonly spellcheck="false"></textarea>
+    </div>
+    <form class="ics-issue-form" id="ics-issue-form" hidden>
+      <label for="ics-issue-message">问题说明（选填）</label>
+      <textarea id="ics-issue-message" maxlength="1000" rows="3" placeholder="例如：选项 D 混入答案文字，或第二段代码缺少缩进。" aria-describedby="ics-issue-message-note"></textarea>
+      <p id="ics-issue-message-note">最多 1000 字，可留空。说明将在首页待复核列表中公开，方便大家修复和提交 PR；请勿填写联系方式等个人信息。</p>
+      <div class="ics-issue-form-actions">
+        <button class="ics-secondary" id="ics-issue-cancel" type="button">取消</button>
+        <button class="ics-primary" id="ics-issue-send" type="submit">提交报告</button>
+      </div>
+    </form>
     <article class="ics-question">
       <div class="ics-question-meta" id="ics-question-meta"></div>
       <p class="ics-question-history" id="ics-question-history" hidden></p>
@@ -202,12 +234,6 @@
       <div class="ics-choice-list" id="ics-choice-list" role="group" aria-labelledby="ics-answer-label" hidden></div>
       <input id="ics-answer" type="hidden" value="">
       <div class="ics-answer-actions">
-        <div class="ics-question-utilities" role="group" aria-label="题目工具">
-          <button class="ics-secondary" id="ics-copy-agent" type="button" aria-controls="ics-agent-copy-panel">复制给 Agent</button>
-          <button class="ics-secondary" id="ics-mastery" type="button" aria-pressed="false">标记熟知</button>
-          <button class="ics-secondary" id="ics-favorite" type="button" aria-pressed="false">收藏题目</button>
-          <button class="ics-report-button" id="ics-report-issue" type="button" aria-expanded="false" aria-controls="ics-issue-form">您认为此题有误</button>
-        </div>
         <div class="ics-submit-actions" role="group" aria-label="作答操作">
           <button class="ics-secondary" id="ics-show-answer" type="button" title="在原题中显示已配置的参考答案并按跳过处理，不计入作答记录或统计">直接显示答案</button>
           <button class="ics-secondary ics-skip-button" id="ics-skip" type="button">跳过本题</button>
@@ -215,11 +241,6 @@
         </div>
       </div>
     </form>
-    <div class="ics-action-status">
-      <span class="ics-report-status" id="ics-mastery-status" role="status"></span>
-      <span class="ics-report-status" id="ics-favorite-status" role="status" aria-live="polite"></span>
-      <span class="ics-report-status" id="ics-report-status" role="status" aria-live="polite"></span>
-    </div>
     <section class="ics-feedback" id="ics-feedback" hidden>
       <div id="ics-verdict"></div>
       <section class="ics-live-stats" id="ics-live-stats" hidden>
@@ -248,20 +269,6 @@
       <span id="ics-navigation-status" role="status"></span>
       <button class="ics-secondary" id="ics-next" type="button">下一题 →</button>
     </nav>
-    <div class="ics-mcp-copy-panel" id="ics-agent-copy-panel" hidden>
-      <p id="ics-agent-copy-status" role="status" aria-live="polite"></p>
-      <label for="ics-agent-prompt">交给 Agent 的题目编号（不含你的答案或作答记录）</label>
-      <textarea id="ics-agent-prompt" rows="5" readonly spellcheck="false"></textarea>
-    </div>
-    <form class="ics-issue-form" id="ics-issue-form" hidden>
-      <label for="ics-issue-message">问题说明（选填）</label>
-      <textarea id="ics-issue-message" maxlength="1000" rows="3" placeholder="例如：选项 D 混入答案文字，或第二段代码缺少缩进。" aria-describedby="ics-issue-message-note"></textarea>
-      <p id="ics-issue-message-note">最多 1000 字，可留空。说明将在首页待复核列表中公开，方便大家修复和提交 PR；请勿填写联系方式等个人信息。</p>
-      <div class="ics-issue-form-actions">
-        <button class="ics-secondary" id="ics-issue-cancel" type="button">取消</button>
-        <button class="ics-primary" id="ics-issue-send" type="submit">提交报告</button>
-      </div>
-    </form>
     </div>
     <aside class="ics-session-sidebar" aria-label="本次练习概览">
       <details id="ics-question-map" open>

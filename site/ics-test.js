@@ -654,7 +654,7 @@
     } catch (error) {
       if (state.questions[state.index] && state.questions[state.index].id === question.id) {
         ui.reportIssue.disabled = false;
-        ui.reportIssue.textContent = '您认为此题有误';
+        ui.reportIssue.textContent = '反馈问题';
         ui.reportStatus.textContent = '提交失败：' + error.message;
       }
     } finally {
@@ -1003,6 +1003,7 @@
     ui.paperField.hidden = !isExam;
     const isCommunity = isExam && paperKind === 'community';
     ui.favoritesOnly.closest('label').hidden = isCommunity;
+    ui.sourcePicker.closest('.ics-scope-row').hidden = isCommunity;
     $('ics-paper-kind').hidden = !isExam;
     ui.sourcePicker.closest('fieldset').hidden = isCommunity;
     ui.paperField.hidden = !isExam || isCommunity;
@@ -1367,7 +1368,7 @@
     const alreadyReported = state.reportedThisSession.has(q.id);
     const reporting = state.reportingQuestions.has(q.id);
     ui.reportIssue.disabled = alreadyReported || reporting;
-    ui.reportIssue.textContent = alreadyReported ? '已报告，感谢反馈' : reporting ? '正在提交…' : '您认为此题有误';
+    ui.reportIssue.textContent = alreadyReported ? '已报告，感谢反馈' : reporting ? '正在提交…' : '反馈问题';
     ui.reportStatus.textContent = alreadyReported ? '题目 ID：' + q.id : '';
     ui.issueSend.disabled = false;
     ui.issueMessage.disabled = false;
