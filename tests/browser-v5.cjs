@@ -53,7 +53,9 @@ async function run() {
     await page.route('**/ics-test.js',route=>route.fulfill({contentType:'application/javascript',body:source}));
     await page.route('**/rest/v1/**',route=>route.abort());
     await page.goto(process.env.ICS_TEST_URL || 'http://127.0.0.1:4186/');
-    await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled);
+    await page.waitForFunction(()=>!document.querySelector('#ics-start').disabled).catch(async error=>{
+      throw new Error(error.message+'; setup: '+await page.locator('#ics-setup-error').textContent()+'; errors: '+errors.join('; '));
+    });
     // Copying a question shares only its stable ID, not private practice data.
     await fixture(page, [single, multiple]);
     // Question tools share the answer toolbar, with identical typography and
@@ -296,6 +298,9 @@ async function run() {
       assert.equal(await page.locator('#ics-submit').isVisible(),false);
       assert.equal(await page.locator('#ics-show-answer').isVisible(),false);
       assert.equal(await page.locator('.ics-blank-result').count(),0);
+      if (i === 0 || i === 1) assert.equal(await page.locator('#ics-choice-list .is-correct').count(), i === 0 ? 1 : 2);
+      if (i === 2 || i === 4) assert.deepEqual(await page.locator('.ics-blank-reference').allTextContents(), ['42', '42']);
+      if (i === 4) assert.equal(await page.locator('[data-composite-choice].is-correct').count(), 1);
       assert.match(await page.locator('#ics-navigation-status').innerText(),/已看答案/);
       await page.evaluate(()=>{
         document.querySelector('#ics-answer-form').dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));
@@ -314,6 +319,25 @@ async function run() {
     await page.click('[data-review-index="2"]');
     assert(await page.locator('#ics-feedback').isVisible());
     assert.equal(await page.locator('.ics-blank-result').count(),0);
+    // Revealed keys are visual reference boxes, not fabricated user answers.
+    await fixture(page,[fill,single]);
+    await page.locator('.ics-blank-input').first().fill('99'); await page.click('#ics-show-answer');
+    assert.deepEqual(await page.locator('.ics-blank-reference').allTextContents(),['42','42']);
+    assert.equal(await page.locator('.ics-blank-input').first().inputValue(),'99');
+    assert.equal(await page.locator('.ics-blank-input').first().isVisible(),false);
+    await page.click('#ics-next');await page.click('#ics-previous');
+    assert.deepEqual(await page.locator('.ics-blank-reference').allTextContents(),['42','42']);
+    assert.equal(await page.locator('.ics-blank-input').first().inputValue(),'99');
+    const revealDropdown=all.find(q=>q.id==='q-1737c983c32fea14');
+    await fixture(page,[revealDropdown]);await page.click('#ics-show-answer');
+    assert.equal(await page.locator('.ics-blank-reference').count(),8);
+    assert.match(await page.locator('.ics-blank-reference').first().innerText(),/D.*!=/);
+    const literalReference={...fill,solution:solution('blanks',{blankAnswers:[rule('x','<img src=x onerror=alert(1)>')]})};
+    await fixture(page,[literalReference]);await page.click('#ics-show-answer');
+    assert.equal(await page.locator('.ics-blank-reference img').count(),0);
+    assert.equal(await page.locator('.ics-blank-reference').first().innerText(),'<img src=x onerror=alert(1)>');
+    await fixture(page,[{...fill,solution:solution('blanks',{blankAnswers:[{blankId:'x',method:'self'}]})}]);await page.click('#ics-show-answer');
+    assert.deepEqual(await page.locator('.ics-blank-reference').allTextContents(),['见下方解析','见下方解析']);
     // The ordinary short-answer reveal still permits grading, while the
     // explicit skip-view button can abandon a pending self-assessment.
     for(const question of [short,composite]) {

@@ -8,6 +8,25 @@
   const MAX_QUESTIONS = 200, PAGE_SIZE = 12, KEY = 'ics-community-draft-v1';
   const TYPES = { 'single-choice': '单选', 'multiple-choice': '多选', fill: '填空', 'short-answer': '简答', composite: '混合 / 综合' };
   const ID = /^q-[a-f0-9]{8,64}$/;
+  const PAPER_ID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
+  function shareUrl(id, base) {
+    if (typeof id !== 'string' || !PAPER_ID.test(id)) throw new Error('卷子编号无效。');
+    const url = new URL(base);
+    if (!/^https?:$/.test(url.protocol)) throw new Error('请通过网站地址分享卷子。');
+    url.search = ''; url.hash = ''; url.username = ''; url.password = ''; url.searchParams.set('paper', id.toLowerCase());
+    return url.href;
+  }
+  function sharedPaperId(base) {
+    try {
+      const url = new URL(base), values = url.searchParams.getAll('paper');
+      return /^https?:$/.test(url.protocol) && values.length === 1 && PAPER_ID.test(values[0]) ? values[0].toLowerCase() : null;
+    } catch (_) { return null; }
+  }
+  function moveQuestion(ids, id, destination) {
+    const moved = ids.slice(), from = moved.indexOf(id);
+    if (from < 0 || !Number.isInteger(destination) || destination < 0 || destination >= moved.length) return moved;
+    moved.splice(destination, 0, moved.splice(from, 1)[0]); return moved;
+  }
   function validateDraft(draft) {
     if (!draft || typeof draft.title !== 'string' || !draft.title.trim() || draft.title.trim().length > 60) throw new Error('标题须为 1–60 字。');
     if (typeof draft.author !== 'string' || !draft.author.trim() || draft.author.trim().length > 40) throw new Error('署名须为 1–40 字。');
@@ -37,8 +56,9 @@
   function create(options) {
     const host = options.host;
     let client, bank = [], papers = new Map(), ids = [], entries = [], offset = 0, request = 0;
-    let pool = [], filterLimit = 30, selectedLimit = 30, ready = false, busy = false, publishing = false;
+    let pool = [], filterLimit = 30, selectedLimit = MAX_QUESTIONS, ready = false, busy = false, publishing = false;
     let draftId = crypto.randomUUID(), dirty = false;
+    let dragging = null, dragFrame = 0;
     const esc = value => String(value == null ? '' : value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const $ = name => host.querySelector('[data-community="' + name + '"]');
     const button = (action, text, id, extra = '') => '<button type="button" class="ics-secondary" data-cp-action="' + action + '"' + (id ? ' data-id="' + esc(id) + '"' : '') + extra + '>' + text + '</button>';
@@ -59,7 +79,7 @@
       '<label>原卷 / 章节<select data-community="paper"><option value="">全部卷 / 章节</option></select></label><label>搜索题面 / 编号<input data-community="search" type="search" placeholder="关键词或 q-…"></label></div>' +
       '<div class="ics-community-toolbar"><label>随机添加 <input data-community="random-count" type="number" min="1" max="200" value="5"> 题</label>' + button('random', '从当前范围抽题') + '<span data-community="pool-count"></span></div>' +
       '<div class="ics-community-builder"><section><h4>可选题目</h4><div data-community="pool" class="ics-community-candidates"></div>' + button('pool-more', '显示更多候选题') + '</section>' +
-      '<section><h4 data-community="selected-heading">已选 0 / 200 题</h4><div data-community="selected" class="ics-community-selected"></div>' + button('selected-more', '显示更多已选题') + '</section></div>' +
+      '<section><h4 data-community="selected-heading">已选 0 / 200 题</h4><p class="ics-community-note">拖动左侧手柄排序；也可聚焦手柄后用 ↑ / ↓、Home / End 键，或使用上移 / 下移。</p><div data-community="selected" class="ics-community-selected" aria-label="已选题目排序"></div>' + button('selected-more', '显示更多已选题') + '</section></div>' +
       '<p data-community="editor-status" class="ics-community-note" role="status" aria-live="polite"></p><div class="ics-community-toolbar"><button type="button" class="ics-primary" data-cp-action="publish">直接发布</button>' + button('export-draft', '导出草稿 PDF') + button('clear', '清空草稿') + '</div></section>' +
       '<section data-community="preview" class="ics-community-preview" hidden aria-label="题目预览"><div class="ics-community-head"><h4 data-community="preview-title"></h4>' + button('close-preview', '关闭预览') + '</div><div data-community="preview-content" class="post-content ics-question-content"></div></section>' +
       '<form data-community="report" class="ics-community-report" hidden><h4>报告精选卷问题</h4><p data-community="report-title"></p><p class="ics-community-note">说明会公开，请勿填写个人联系方式等隐私信息。</p><label>问题说明（选填）<textarea data-community="report-message" rows="3" maxlength="1000"></textarea></label><p data-community="report-status" role="status"></p><div class="ics-community-toolbar"><button type="submit" class="ics-primary">提交报告</button>' + button('close-report', '取消') + '</div></form>';
@@ -92,10 +112,11 @@
       host.querySelector('[data-cp-action="pool-more"]').hidden = pool.length <= filterLimit;
     }
     function renderSelected() {
+      cancelDrag();
       const index = new Map(bank.map(q => [q.id, q])); $('selected-heading').textContent = '已选 ' + ids.length + ' / 200 题';
       $('selected').innerHTML = ids.slice(0, selectedLimit).map((id, position) => {
         const q = index.get(id);
-        return '<article><small>' + (position + 1) + '. ' + esc(q ? name(q) : id) + '</small><p>' + esc(q ? excerpt(q) : '题目已不可用，请移除。') + '</p><div>' + button('preview', '预览', id) + button('up', '上移', id, !position || publishing ? ' disabled' : '') + button('down', '下移', id, position === ids.length - 1 || publishing ? ' disabled' : '') + button('remove', '移除', id, publishing ? ' disabled' : '') + '</div></article>';
+        return '<article data-selected-id="' + esc(id) + '"><button type="button" class="ics-sort-handle" data-sort-handle="' + esc(id) + '" aria-label="第 ' + (position + 1) + ' 题，拖动排序或使用方向键" title="拖动排序；↑↓ 移动，Home/End 移到首尾"' + (publishing ? ' disabled' : '') + '>⠿</button><small>' + (position + 1) + '. ' + esc(q ? name(q) : id) + '</small><p>' + esc(q ? excerpt(q) : '题目已不可用，请移除。') + '</p><div>' + button('preview', '预览', id) + button('up', '上移', id, !position || publishing ? ' disabled' : '') + button('down', '下移', id, position === ids.length - 1 || publishing ? ' disabled' : '') + button('remove', '移除', id, publishing ? ' disabled' : '') + '</div></article>';
       }).join('') || '<p>从左侧添加题目，或者按模块随机抽取。</p>';
       host.querySelector('[data-cp-action="selected-more"]').hidden = ids.length <= selectedLimit;
     }
@@ -107,7 +128,7 @@
     function restoreDraft() {
       try {
         const saved = JSON.parse(localStorage.getItem(KEY)); if (!saved) return;
-        if (/^[a-f0-9-]{36}$/.test(saved.id)) draftId = saved.id;
+        if (typeof saved.id === 'string' && PAPER_ID.test(saved.id)) draftId = saved.id;
         ['title', 'author', 'description'].forEach(key => { if (typeof saved[key] === 'string') $(key).value = saved[key].slice(0, key === 'title' ? 60 : key === 'author' ? 40 : 500); });
         if (Array.isArray(saved.ids)) ids = Array.from(new Set(saved.ids.filter(id => typeof id === 'string' && ID.test(id)))).slice(0, MAX_QUESTIONS);
       } catch (_) { /* Corrupt browser drafts must not prevent using the site. */ }
@@ -117,6 +138,95 @@
       if (!dirty) { draftId = crypto.randomUUID(); dirty = true; }
       saveDraft(); filters(); renderSelected();
     }
+    function moveSelected(id, destination) {
+      const from = ids.indexOf(id);
+      if (publishing || from < 0 || destination < 0 || destination >= ids.length || destination === from) return;
+      ids = moveQuestion(ids, id, destination); changed();
+      $('selected').querySelector('[data-sort-handle="' + id + '"]')?.focus({ preventScroll: true });
+      notice('已将第 ' + (from + 1) + ' 题移到第 ' + (destination + 1) + ' 位，草稿已保存。', true);
+    }
+    function cancelDrag() {
+      if (dragFrame) cancelAnimationFrame(dragFrame); dragFrame = 0;
+      if (!dragging) return;
+      const current = dragging; dragging = null;
+      current.ghost?.remove();
+      $('selected').querySelectorAll('.is-dragging, .is-drop-before, .is-drop-after').forEach(el => el.classList.remove('is-dragging', 'is-drop-before', 'is-drop-after'));
+      if (current.handle.hasPointerCapture(current.pointerId)) current.handle.releasePointerCapture(current.pointerId);
+    }
+    function updateDragTarget() {
+      if (!dragging?.active) return;
+      const list = $('selected'), box = list.getBoundingClientRect(), d = dragging;
+      list.querySelectorAll('.is-drop-before, .is-drop-after').forEach(el => el.classList.remove('is-drop-before', 'is-drop-after'));
+      d.destination = null;
+      if (d.x < box.left || d.x > box.right || d.y < box.top - 48 || d.y > box.bottom + 48) return;
+      const y = Math.max(box.top + 2, Math.min(box.bottom - 2, d.y));
+      const target = document.elementFromPoint(d.x, y)?.closest('[data-selected-id]');
+      if (!target || !list.contains(target) || target === d.row) return;
+      const after = y >= (target.getBoundingClientRect().top + target.getBoundingClientRect().bottom) / 2;
+      let destination = ids.indexOf(target.dataset.selectedId) + (after ? 1 : 0);
+      if (destination > ids.indexOf(d.id)) destination--;
+      d.destination = destination; target.classList.add(after ? 'is-drop-after' : 'is-drop-before');
+    }
+    function scrollDrag() {
+      if (!dragging?.active) return;
+      const list = $('selected'), box = list.getBoundingClientRect(), d = dragging;
+      if (d.x >= box.left && d.x <= box.right && d.y >= box.top - 48 && d.y <= box.bottom + 48) {
+        if (d.y < box.top + 40) list.scrollTop -= Math.min(16, (box.top + 40 - d.y) / 3);
+        else if (d.y > box.bottom - 40) list.scrollTop += Math.min(16, (d.y - box.bottom + 40) / 3);
+        updateDragTarget();
+      }
+      dragFrame = requestAnimationFrame(scrollDrag);
+    }
+    $('selected').addEventListener('pointerdown', event => {
+      const handle = event.target.closest('[data-sort-handle]');
+      if (!handle || handle.disabled || publishing || !event.isPrimary || event.button !== 0) return;
+      cancelDrag(); event.preventDefault(); handle.focus({ preventScroll: true });
+      dragging = { id: handle.dataset.sortHandle, pointerId: event.pointerId, handle, row: handle.closest('article'), x: event.clientX, y: event.clientY, startX: event.clientX, startY: event.clientY, active: false, destination: null };
+      handle.setPointerCapture(event.pointerId);
+    });
+    $('selected').addEventListener('pointermove', event => {
+      if (!dragging || event.pointerId !== dragging.pointerId) return;
+      const d = dragging; d.x = event.clientX; d.y = event.clientY;
+      if (!d.active && Math.hypot(d.x - d.startX, d.y - d.startY) < 6) return;
+      event.preventDefault();
+      if (!d.active) {
+        d.active = true; d.row.classList.add('is-dragging');
+        d.ghost = document.createElement('div'); d.ghost.className = 'ics-sort-ghost'; d.ghost.setAttribute('aria-hidden', 'true');
+        d.ghost.textContent = d.row.querySelector('small').textContent; document.body.appendChild(d.ghost);
+        dragFrame = requestAnimationFrame(scrollDrag);
+      }
+      d.ghost.style.left = Math.min(d.x + 12, Math.max(0, innerWidth - d.ghost.offsetWidth - 8)) + 'px';
+      d.ghost.style.top = Math.min(d.y + 12, Math.max(0, innerHeight - d.ghost.offsetHeight - 8)) + 'px'; updateDragTarget();
+    });
+    $('selected').addEventListener('pointerup', event => {
+      if (!dragging || event.pointerId !== dragging.pointerId) return;
+      const { id, destination, active } = dragging; cancelDrag();
+      if (active && destination !== null) moveSelected(id, destination);
+    });
+    ['pointercancel', 'lostpointercapture'].forEach(type => $('selected').addEventListener(type, cancelDrag));
+    window.addEventListener('blur', cancelDrag);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) cancelDrag(); });
+    host.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && dragging) { event.preventDefault(); cancelDrag(); return; }
+      const handle = event.target.closest('[data-sort-handle]'); if (!handle || handle.disabled || publishing) return;
+      const position = ids.indexOf(handle.dataset.sortHandle), destinations = { ArrowUp: position - 1, ArrowDown: position + 1, Home: 0, End: ids.length - 1 };
+      if (event.key in destinations) { event.preventDefault(); moveSelected(handle.dataset.sortHandle, destinations[event.key]); }
+    });
+    async function copyLink(id, control) {
+      const url = shareUrl(id, location.href);
+      let feedback = control.parentElement.querySelector(':scope > .ics-paper-share-feedback');
+      if (!feedback) { feedback = document.createElement('div'); feedback.className = 'ics-paper-share-feedback'; control.insertAdjacentElement('afterend', feedback); }
+      feedback.dataset.paperId = id;
+      feedback.replaceChildren();
+      const status = document.createElement('p'); status.setAttribute('role', 'status'); feedback.appendChild(status);
+      try { await navigator.clipboard.writeText(url); status.textContent = '链接已复制，其他人打开即可练习此卷。'; }
+      catch (_) {
+        status.textContent = '未能自动复制，请复制下方网址。';
+        const label = document.createElement('label'); label.textContent = '公开分享链接';
+        const input = document.createElement('input'); input.type = 'url'; input.readOnly = true; input.value = url; label.appendChild(input); feedback.appendChild(label);
+        input.focus(); input.select();
+      }
+    }
     async function openEditor() {
       if (!ready) { notice('题库仍在加载，请稍后再试。'); return; } notice('正在读取选题列表…');
       try { await loadBank(); $('editor').hidden = false; filters(); renderSelected(); notice(''); $('title').focus(); }
@@ -124,7 +234,7 @@
     }
     function renderList() {
       $('list').innerHTML = entries.map(paper => '<article class="ics-community-card"><h4>' + esc(paper.title) + '</h4><small>' + esc(paper.author_name) + ' · ' + new Date(paper.created_at).toLocaleDateString('zh-CN') + ' · ' + paper.question_ids.length + ' 题</small>' +
-        '<p>' + esc(paper.description || '发布者未填写描述。') + '</p><div class="ics-community-card-footer"><span>' + Number(paper.participant_count) + ' 次参与 · ' + Number(paper.like_count) + ' 赞</span><div>' + button('start', '开始练习', paper.id) + button('export', '导出 PDF', paper.id) + button('like', paper.liked ? '取消赞' : '点赞', paper.id, ' aria-pressed="' + Boolean(paper.liked) + '"') + button('report', '报告问题', paper.id) + '</div></div></article>').join('');
+        '<p>' + esc(paper.description || '发布者未填写描述。') + '</p><div class="ics-community-card-footer"><span>' + Number(paper.participant_count) + ' 次参与 · ' + Number(paper.like_count) + ' 赞</span><div>' + button('start', '开始练习', paper.id) + button('share', '复制链接', paper.id) + button('export', '导出 PDF', paper.id) + button('like', paper.liked ? '取消赞' : '点赞', paper.id, ' aria-pressed="' + Boolean(paper.liked) + '"') + button('report', '报告问题', paper.id) + '</div></div></article>').join('');
       $('page').textContent = '第 ' + (Math.floor(offset / PAGE_SIZE) + 1) + ' 页';
       host.querySelector('[data-cp-action="previous"]').disabled = offset === 0; host.querySelector('[data-cp-action="next"]').disabled = entries.length < PAGE_SIZE;
     }
@@ -143,7 +253,8 @@
       options.typeset($('preview-content')); $('preview').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     async function start(id) {
-      if (busy) return; busy = true; notice('正在准备精选卷…');
+      if (busy) return; busy = true; ++request; notice('正在准备精选卷…');
+      // A slower list refresh must not replace a shared-link error or current-paper status.
       try {
         // Re-read: an already visible card may have been taken down.
         const result = await api().from('ics_community_papers').select('*').eq('id', id).eq('status', 'published').maybeSingle();
@@ -220,6 +331,7 @@
         if (action === 'selected-more') { selectedLimit += 30; renderSelected(); }
         if (action === 'preview') await preview(id);
         if (action === 'start') await start(id);
+        if (action === 'share') await copyLink(id, control);
         if (action === 'export') options.exportPaper(async () => {
           const result = await api().from('ics_community_papers').select('*').eq('id', id).eq('status', 'published').maybeSingle();
           if (result.error) throw result.error; if (!result.data) throw new Error('这份卷子已下架或不存在。');
@@ -241,8 +353,8 @@
         if (action === 'clear' && confirm('清空当前草稿？此操作不能撤销。')) { ids = []; ['title', 'author', 'description'].forEach(key => { $(key).value = ''; }); changed(); }
         if (action === 'add' && !ids.includes(id)) { if (ids.length >= MAX_QUESTIONS) throw new Error('每卷最多 200 题。'); ids.push(id); changed(); }
         if (action === 'remove' && position >= 0) { ids.splice(position, 1); changed(); }
-        if (action === 'up' && position > 0) { [ids[position - 1], ids[position]] = [ids[position], ids[position - 1]]; changed(); }
-        if (action === 'down' && position >= 0 && position < ids.length - 1) { [ids[position + 1], ids[position]] = [ids[position], ids[position + 1]]; changed(); }
+        if (action === 'up') moveSelected(id, position - 1);
+        if (action === 'down') moveSelected(id, position + 1);
         if (action === 'random') { ids.push(...sample(pool, ids, Number($('random-count').value))); changed(); }
         if (action === 'add-filtered') {
           const additional = pool.filter(q => !ids.includes(q.id)).map(q => q.id);
@@ -256,6 +368,7 @@
     const participation = new Set(), pendingParticipation = new Set();
     return {
       agentHost: $('agent'), getDraft: draft,
+      share: copyLink, openShared: start,
       async importAgentDraft(value) {
         if (publishing) throw new Error('发布中，不能替换草稿。');
         const checked = validateDraft(value); await loadBank(); resolveQuestions(checked.ids, bank);
@@ -267,7 +380,7 @@
         config.catalog.modules.forEach(m => { const option = document.createElement('option'); option.value = m.id; option.textContent = m.title; $('module').appendChild(option); });
         papers.forEach(p => { const option = document.createElement('option'); option.value = p.id; option.textContent = p.displayName; $('paper').appendChild(option); });
       },
-      show(show) { host.hidden = !show; if (show) refresh(); },
+      show(show) { host.hidden = !show; if (show) refresh(); else cancelDrag(); },
       async recordParticipation(id) {
         if (!id || participation.has(id) || pendingParticipation.has(id)) return; pendingParticipation.add(id);
         try { await rpc('participate_ics_community_paper', { p_id: id, p_visitor_id: options.visitorId() }); participation.add(id); }
@@ -276,5 +389,5 @@
       },
     };
   }
-  return { MAX_QUESTIONS, validateDraft, resolveQuestions, sample, historyQuestionIds, create };
+  return { MAX_QUESTIONS, validateDraft, resolveQuestions, sample, historyQuestionIds, moveQuestion, shareUrl, sharedPaperId, create };
 }));

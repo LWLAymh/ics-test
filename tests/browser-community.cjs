@@ -10,7 +10,7 @@ const singles = bank.filter(q => q.type === 'single-choice');
 const q1 = singles[0], q2 = singles[1], q3 = singles[2];
 const source = fs.readFileSync(path.join(root, 'site/ics-test.js'), 'utf8').replace('  init();', '  window.__test = {state, ui}; init();');
 function stub() {
-  window.__calls = []; window.__papers = []; window.__reports = []; window.__participants = [];
+  window.__calls = []; window.__papers = window.__seedPaper ? [window.__seedPaper] : []; window.__reports = []; window.__participants = [];
   window.supabase = { createClient() { return {
     channel() { return { on() { return this; }, subscribe() { return this; } }; }, removeChannel() {},
     from(table) { return {
@@ -48,6 +48,12 @@ async function main() {
     const page = await browser.newPage({ viewport: { width: 1280, height: 950 } });
     const errors = [], sessions = [], remote = { title: 'Agent 精选', author: '测试署名', description: '固定题单', ids: [q1.id, q2.id, q3.id] };
     page.on('pageerror', e => errors.push(e.message));
+    await page.addInitScript(() => {
+      window.__seedPaper = JSON.parse(localStorage.getItem('ics-test-fixture-paper') || 'null');
+      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { async writeText(text) {
+        if (window.__clipboardFail) throw new Error('Clipboard unavailable'); window.__copiedLink = text;
+      } } });
+    });
     await page.addInitScript(({ ids }) => {
       const attempts = [[ids[0], 0], [ids[0], 1], [ids[1], 1], [ids[2], 0.5], ['q-deadbeefcafebabe', 0]];
       attempts.forEach(([questionId, points], i) => localStorage.setItem('ics-completed-attempt-v1:00000000-0000-4000-8000-' + String(i + 1).padStart(12, '0'), JSON.stringify({
@@ -96,6 +102,18 @@ async function main() {
     await cp('search').fill(q2.id); await cp('pool').locator('[data-cp-action="add"]').click();
     await cp('selected').locator('[data-cp-action="up"]').last().click();
     assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ics-community-draft-v1')).ids), [q2.id, q1.id]);
+    const firstHandle = cp('selected').locator('[data-sort-handle]').first();
+    const startBox = await firstHandle.boundingBox(), targetBox = await cp('selected').locator('article').nth(1).boundingBox();
+    await page.mouse.move(startBox.x + startBox.width / 2, startBox.y + startBox.height / 2); await page.mouse.down();
+    await page.mouse.move(startBox.x + startBox.width / 2, targetBox.y + targetBox.height - 8, { steps: 8 }); await page.mouse.up();
+    assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ics-community-draft-v1')).ids), [q1.id, q2.id], 'mouse drag persists the new order');
+    assert.equal(await page.locator('.ics-sort-ghost').count(), 0);
+    await cp('selected').locator('[data-sort-handle]').first().press('End');
+    assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ics-community-draft-v1')).ids), [q2.id, q1.id], 'keyboard can move directly to the end');
+    const cancelHandle = await cp('selected').locator('[data-sort-handle]').first().boundingBox();
+    await page.mouse.move(cancelHandle.x + 10, cancelHandle.y + 10); await page.mouse.down();
+    await page.mouse.move(cancelHandle.x + 12, cancelHandle.y + 50, { steps: 3 }); await page.keyboard.press('Escape'); await page.mouse.up();
+    assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ics-community-draft-v1')).ids), [q2.id, q1.id], 'Escape cancels without saving a reorder');
     await cp('search').fill(''); await cp('type').selectOption('fill'); await cp('random-count').fill('2'); await action('random').click();
     assert.equal((await page.evaluate(() => JSON.parse(localStorage.getItem('ics-community-draft-v1')).ids)).length, 4);
     await page.reload(); await page.waitForFunction(() => !document.querySelector('#ics-start').disabled);
@@ -112,6 +130,22 @@ async function main() {
     await page.locator('[data-ca="import"]').click();
     assert.equal(await cp('title').inputValue(), remote.title);
     assert.equal((await page.evaluate(() => window.__papers)).length, 0, 'import is still unpublished');
+    // Real touch pointer events, including a stationary drag near the scroll edge.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await cp('selected').scrollIntoViewIfNeeded(); await cp('selected').evaluate(el => { el.scrollTop = 0; });
+    const touch = await page.context().newCDPSession(page);
+    await touch.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
+    const touchHandle = await cp('selected').locator('[data-sort-handle]').first().boundingBox(), listBox = await cp('selected').boundingBox();
+    const touchX = touchHandle.x + touchHandle.width / 2, touchY = touchHandle.y + touchHandle.height / 2;
+    await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: touchX, y: touchY, id: 1 }] });
+    await touch.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: touchX, y: listBox.y + listBox.height - 5, id: 1 }] });
+    await page.waitForFunction(() => { const list = document.querySelector('[data-community="selected"]'); return list.scrollTop > 10 && list.scrollTop + list.clientHeight >= list.scrollHeight - 2; });
+    await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ics-community-draft-v1')).ids), [q2.id, q3.id, q1.id], 'touch drag auto-scrolls and persists');
+    await cp('selected').locator('[data-sort-handle="' + q1.id + '"]').press('Home');
+    assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ics-community-draft-v1')).ids), remote.ids);
+    await touch.send('Emulation.setTouchEmulationEnabled', { enabled: false }); await touch.detach();
+    await page.setViewportSize({ width: 1280, height: 950 });
     if (process.env.ICS_SCREENSHOTS) {
       fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true });
       await page.locator('#ics-setup').screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'community-editor.png') });
@@ -130,6 +164,14 @@ async function main() {
     await page.evaluate(() => { window.__publishFail = false; }); await action('publish').click(); await cp('list').locator('article').waitFor();
     assert.equal((await page.evaluate(() => window.__papers))[0].id, attemptedId, 'same publish ID on retry');
     assert.deepEqual((await page.evaluate(() => window.__papers))[0].question_ids, remote.ids);
+    const published = (await page.evaluate(() => window.__papers))[0];
+    await action('share').click();
+    const sharedUrl = await page.evaluate(() => window.__copiedLink);
+    assert.equal(new URL(sharedUrl).search, '?paper=' + published.id);
+    assert.equal(new URL(sharedUrl).hash, '');
+    await page.evaluate(() => { window.__clipboardFail = true; }); await action('share').click();
+    assert.equal(await page.locator('.ics-paper-share-feedback input').inputValue(), sharedUrl);
+    await page.evaluate(() => { window.__clipboardFail = false; });
     const popupPromise = page.waitForEvent('popup'); await action('export').click(); const printed = await popupPromise;
     await printed.waitForFunction(() => document.querySelector('#print-save') && !document.querySelector('#print-save').disabled);
     assert.equal(await printed.locator('#paper-questions > article').count(), 3);
@@ -157,6 +199,17 @@ async function main() {
     }
     await action('start').click(); await page.locator('#ics-quiz').waitFor();
     assert.match(await page.locator('#ics-community-current').innerText(), /Agent 精选/);
+    assert.equal(new URL(page.url()).searchParams.get('paper'), published.id);
+    await page.locator('#ics-community-share').click();
+    assert.equal(await page.evaluate(() => window.__copiedLink), sharedUrl);
+    for (const width of [1280, 390]) {
+      await page.setViewportSize({ width, height: 950 });
+      const quizBox = await page.locator('#ics-quiz').boundingBox(), titleBox = await page.locator('#ics-community-title').boundingBox();
+      assert.ok(titleBox.x >= quizBox.x + 16, 'paper title has the same intentional inset as the toolbar');
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      if (process.env.ICS_SCREENSHOTS) await page.locator('#ics-quiz').screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'community-quiz-' + width + '.png') });
+    }
+    await page.setViewportSize({ width: 1280, height: 950 });
     assert.equal((await page.evaluate(() => window.__calls.filter(c => c.name === 'participate_ics_community_paper'))).length, 0, 'opening does not count');
     await page.locator('#ics-skip').click();
     assert.equal((await page.evaluate(() => window.__calls.filter(c => c.name === 'participate_ics_community_paper'))).length, 0, 'skip does not count');
@@ -171,6 +224,17 @@ async function main() {
     await page.evaluate(() => { window.__listFail = true; }); await action('refresh').click();
     await page.waitForFunction(() => document.querySelector('[data-community="status"]').textContent.includes('数据库尚未初始化'));
     await page.locator('[data-paper-kind="original"]').click(); assert.equal(await page.locator('#ics-start').isVisible(), true);
+    // Reopening a public link reads the current published row; it neither submits nor counts participation.
+    await page.evaluate(paper => localStorage.setItem('ics-test-fixture-paper', JSON.stringify(paper)), published);
+    await page.goto(sharedUrl); await page.locator('#ics-quiz').waitFor();
+    assert.deepEqual(await page.evaluate(() => window.__test.state.questions.map(q => q.id)), remote.ids);
+    assert.equal((await page.evaluate(() => window.__calls.filter(c => c.name === 'participate_ics_community_paper'))).length, 0);
+    await page.evaluate(paper => localStorage.setItem('ics-test-fixture-paper', JSON.stringify({ ...paper, status: 'hidden' })), published);
+    await page.goto(sharedUrl);
+    await page.waitForFunction(() => document.querySelector('[data-community="status"]').textContent.includes('已下架'));
+    assert.equal(await page.locator('#ics-quiz').isVisible(), false);
+    await page.goto(sharedUrl + '&paper=' + published.id);
+    await page.waitForFunction(() => document.querySelector('#ics-setup-error').textContent.includes('编号无效'));
     assert.deepEqual(errors, []);
     console.log('Community browser flow passed: drafts, filters, fixed order, MCP manual import, trusted confirmation, retry, likes, reports, counts, mobile, hide and DB-unavailable fallback.');
   } finally { await browser.close(); }

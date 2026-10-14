@@ -149,6 +149,20 @@
     });
   }
 
+  function blankReferenceText(rule, blank) {
+    if (!rule) return null;
+    if (rule.method === 'exact') return rule.acceptedAnswers[0] ?? null;
+    if (rule.method === 'selection' && blank && blank.input) {
+      return rule.correctValues.map(function (value) {
+        const option = blank.input.options.find(function (item) { return item.value === value; });
+        return option ? option.label : value;
+      }).join('、');
+    }
+    // Subjective blanks have no structured key. Never parse prose or guess an answer.
+    return null;
+  }
+
   return { VERSION: VERSION, EXAM_LABELS: EXAM_LABELS, assertVersion: assertVersion, paperCollection: paperCollection,
-    blankSpans: blankSpans, gradeChoice: gradeChoice, gradeBlank: gradeBlank, gradeBlanks: gradeBlanks };
+    blankSpans: blankSpans, gradeChoice: gradeChoice, gradeBlank: gradeBlank, gradeBlanks: gradeBlanks,
+    blankReferenceText: blankReferenceText };
 }));

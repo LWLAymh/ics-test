@@ -172,7 +172,10 @@
   </div>
 
   <section class="ics-panel ics-quiz" id="ics-quiz" hidden aria-label="当前练习">
-    <p id="ics-community-current" class="ics-community-note" hidden></p>
+    <div id="ics-community-current" class="ics-quiz-context" hidden>
+      <div class="ics-quiz-context-title"><span class="ics-quiz-context-label">用户精选卷</span><strong id="ics-community-title"></strong><span id="ics-community-author"></span></div>
+      <button class="ics-secondary" id="ics-community-share" type="button">复制分享链接</button>
+    </div>
     <div class="ics-progress-row">
       <div><button class="ics-text-button" id="ics-abandon" type="button">重新组卷</button><span class="ics-toolbar-divider" aria-hidden="true"></span><span id="ics-progress-text" aria-live="polite"></span></div>
       <span id="ics-score-text"></span>
@@ -199,7 +202,7 @@
           <button class="ics-report-button" id="ics-report-issue" type="button" aria-expanded="false" aria-controls="ics-issue-form">您认为此题有误</button>
         </div>
         <div class="ics-submit-actions" role="group" aria-label="作答操作">
-          <button class="ics-secondary" id="ics-show-answer" type="button" title="查看参考答案并按跳过处理，不计入作答记录或统计">直接显示答案</button>
+          <button class="ics-secondary" id="ics-show-answer" type="button" title="在原题中显示已配置的参考答案并按跳过处理，不计入作答记录或统计">直接显示答案</button>
           <button class="ics-secondary ics-skip-button" id="ics-skip" type="button">跳过本题</button>
           <button class="ics-primary" id="ics-submit" type="submit">提交答案</button>
         </div>

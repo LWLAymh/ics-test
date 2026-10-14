@@ -55,6 +55,8 @@ jobs:
           node tests/browser-ai-grader.cjs
           node tests/browser-2026-stage1.cjs
           node tests/browser-prompt-images.cjs
+          node tests/browser-community.cjs
+          node tests/browser-reveal.cjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v6

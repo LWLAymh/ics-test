@@ -64,6 +64,12 @@
   const attemptCounts = window.ICSAttemptCounts.create(function () { return localStorage; });
   state.communityPaper = null;
   let paperKind = 'original';
+  function clearCommunityLink() {
+    try {
+      const url = new URL(location.href);
+      if (url.searchParams.has('paper')) { url.searchParams.delete('paper'); history.replaceState(null, '', url.href); }
+    } catch (_) { /* Practice must remain usable when address-bar updates are unavailable. */ }
+  }
   const aiGrader = window.ICSAIGraderUI.create({ host: $('ics-api-config'), summary: $('ics-api-summary'),
     agentPanel: $('ics-agent-connection'), questionHost: ui.questionContent,
     question: function () { return ui.quiz.hidden ? null : state.questions[state.index]; } });
@@ -95,6 +101,7 @@
     },
     start: function (paper, questions) {
       state.communityPaper = paper;
+      try { history.replaceState(null, '', window.ICSCommunityPapers.shareUrl(paper.id, location.href)); } catch (_) { /* Sharing still works without address-bar updates. */ }
       state.questions = questions; state.index = 0; state.score = 0; state.records = []; state.drafts = [];
       $('ics-question-map').open = !window.matchMedia('(max-width: 720px)').matches;
       ui.setup.hidden = true; ui.result.hidden = true; ui.quiz.hidden = false;
@@ -102,6 +109,9 @@
     },
   });
   window.ICSCommunityAgent.mount(community);
+  $('ics-community-share').addEventListener('click', function (event) {
+    if (state.communityPaper) community.share(state.communityPaper.id, event.currentTarget);
+  });
   $('ics-paper-kind').addEventListener('click', function (event) {
     const button = event.target.closest('[data-paper-kind]');
     if (!button) return;
@@ -204,6 +214,7 @@
       state.index = state.questions.length - 1;
     } else {
       state.communityPaper = null;
+      clearCommunityLink();
       state.questions = [question]; state.index = 0; state.score = 0; state.records = []; state.drafts = [];
     }
     ui.setup.hidden = true; ui.result.hidden = true; ui.quiz.hidden = false;
@@ -1013,6 +1024,15 @@
       startIssueSubscription();
       ui.start.disabled = false;
       updateModeUi();
+      const sharedId = window.ICSCommunityPapers.sharedPaperId(location.href);
+      if (sharedId) {
+        app.querySelector('[name="quiz-mode"][value="exam"]').checked = true;
+        paperKind = 'community';
+        $('ics-paper-kind').querySelectorAll('button').forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.paperKind === paperKind)); });
+        updateModeUi(); await community.openShared(sharedId);
+      } else if (new URL(location.href).searchParams.has('paper')) {
+        showSetupError('分享链接的卷子编号无效，请检查完整网址。');
+      }
     } catch (error) {
       ui.bankSummary.textContent = '题库暂时无法读取';
       showSetupError(error.message + '。请确认站点已通过本地服务器访问，并且 web-data/catalog.json 存在。');
@@ -1082,6 +1102,7 @@
         ? pool.sort(function (a, b) { return Number(a.paperOrder || 0) - Number(b.paperOrder || 0); })
         : mode === 'mistakes' ? pool.slice(0, count) : secureShuffle(pool).slice(0, count);
       state.communityPaper = null;
+      clearCommunityLink();
       state.index = 0; state.score = 0; state.records = []; state.drafts = [];
       $('ics-question-map').open = !window.matchMedia('(max-width: 720px)').matches;
 
@@ -1187,6 +1208,44 @@
     });
   }
 
+  function showReferenceInQuestion(question) {
+    ui.questionContent.querySelectorAll('.ics-blank-input').forEach(function (input) {
+      const scope = input.dataset.blankScope, unit = scope === 'root' ? question : question.parts[Number(scope)];
+      const blank = unit.stem.blanks.find(function (item) { return item.id === input.dataset.blankId; });
+      const rule = unit.solution.state === 'available' && (unit.solution.blankAnswers || []).find(function (item) { return item.blankId === blank.id; });
+      const text = contract.blankReferenceText(rule, blank), root = input.closest('.ics-inline-blank');
+      root.removeAttribute('data-result'); root.dataset.revealed = 'true';
+      const previous = root.querySelector('.ics-blank-result');
+      root.querySelectorAll('.ics-blank-input, [data-blank-toggle]').forEach(function (control) {
+        control.classList.remove('missing'); control.removeAttribute('aria-invalid');
+        if (previous && control.getAttribute('aria-describedby') === previous.id) control.removeAttribute('aria-describedby');
+        control.hidden = true;
+      });
+      previous?.remove(); root.querySelector('.ics-blank-reference')?.remove();
+      const reference = document.createElement('span'); reference.className = 'ics-blank-reference';
+      reference.dataset.width = blank.width; reference.dataset.available = String(text !== null);
+      reference.setAttribute('aria-label', (blank.label || input.getAttribute('aria-label')) + '，参考答案');
+      reference.textContent = text !== null ? text : unit.solution.state === 'available' ? '见下方解析' : '答案待校对';
+      root.appendChild(reference);
+      // The original value stays untouched: revealed keys must not become the user's draft or shared response.
+    });
+    function markChoices(unit, root, attribute) {
+      const correct = unit.solution.state === 'available' && unit.solution.grading === 'choice' ? unit.solution.correctOptionIds : [];
+      root.querySelectorAll('[' + attribute + ']').forEach(function (button) {
+        button.dataset.revealed = 'true'; button.classList.remove('is-incorrect');
+        const isCorrect = correct.includes(button.getAttribute(attribute)); button.classList.toggle('is-correct', isCorrect);
+        button.querySelector('.ics-choice-reference')?.remove();
+        if (isCorrect) {
+          const label = document.createElement('span'); label.className = 'ics-choice-reference'; label.textContent = '正确答案'; button.appendChild(label);
+        }
+      });
+    }
+    markChoices(question, ui.choiceList, 'data-choice');
+    (question.parts || []).forEach(function (part, index) {
+      markChoices(part, ui.questionContent.querySelector('[data-composite-part="' + index + '"]'), 'data-composite-choice');
+    });
+  }
+
   function restoreQuestionDraft(question) {
     const draft = state.drafts[state.index];
     if (!draft) return;
@@ -1222,7 +1281,7 @@
     disableQuestionControls(ui.questionContent);
     const revealed = state.records[state.index] && state.records[state.index].revealed;
     ui.showAnswer.hidden = revealed || !draft.needsSelfGrade;
-    if (revealed) { typeset(ui.reference); return; }
+    if (revealed) { showReferenceInQuestion(question); typeset(ui.reference); return; }
     highlightBlankResults(question);
     if (!draft.needsSelfGrade) highlightChoiceResults(question);
     typeset(ui.reference);
@@ -1231,7 +1290,10 @@
   function renderQuestion() {
     aiGrader.stop();
     $('ics-community-current').hidden = !state.communityPaper;
-    $('ics-community-current').textContent = state.communityPaper ? '用户精选卷 · ' + state.communityPaper.title + ' · ' + state.communityPaper.author_name : '';
+    $('ics-community-title').textContent = state.communityPaper ? state.communityPaper.title : '';
+    $('ics-community-author').textContent = state.communityPaper ? '署名：' + state.communityPaper.author_name : '';
+    const shareFeedback = $('ics-community-current').querySelector('.ics-paper-share-feedback');
+    if (shareFeedback && shareFeedback.dataset.paperId !== state.communityPaper?.id) shareFeedback.remove();
     closeIssueForm();
     const q = state.questions[state.index];
     state.pendingCompositeGrade = null;
@@ -1527,17 +1589,7 @@
       button.disabled = true; button.classList.remove('is-correct', 'is-incorrect');
     });
     disableQuestionControls(ui.questionContent);
-    // A pending self-assessment may already have per-blank feedback. Viewing
-    // without submitting must not present those drafts as graded answers.
-    ui.questionContent.querySelectorAll('.ics-inline-blank').forEach(function (root) {
-      root.removeAttribute('data-result');
-      const feedback = root.querySelector('.ics-blank-result');
-      root.querySelectorAll('.ics-blank-input, [data-blank-toggle]').forEach(function (control) {
-        control.classList.remove('missing'); control.removeAttribute('aria-invalid');
-        if (feedback && control.getAttribute('aria-describedby') === feedback.id) control.removeAttribute('aria-describedby');
-      });
-      if (feedback) feedback.remove();
-    });
+    showReferenceInQuestion(q);
     ui.feedback.hidden = false;
     ui.feedback.querySelector('details').open = true;
     ui.verdict.className = 'ics-verdict';

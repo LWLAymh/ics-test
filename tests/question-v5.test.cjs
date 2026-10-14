@@ -5,6 +5,17 @@ const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 require('./prompt-images.test.cjs');
 
+test('inline reference display uses explicit exact/select keys, never a prose parser or grading mutation', () => {
+  const exact = { method: 'exact', acceptedAnswers: ['x != 1', '1 != x'] };
+  assert.equal(api.blankReferenceText(exact), 'x != 1');
+  assert.equal(api.blankReferenceText({ method: 'exact', acceptedAnswers: ['0'] }), '0');
+  assert.equal(api.blankReferenceText({ method: 'self' }), null);
+  assert.equal(api.blankReferenceText(null), null);
+  const blank = { input: { options: [{ value: 'A', label: '<img onerror=alert(1)>' }, { value: 'B', label: 'B · >=' }] } };
+  assert.equal(api.blankReferenceText({ method: 'selection', correctValues: ['A', 'B'] }, blank), '<img onerror=alert(1)>、B · >=');
+  assert.deepEqual(exact.acceptedAnswers, ['x != 1', '1 != x']);
+});
+
 test('2026 stage test 1 preserves all 25 source questions and 49 objective blanks', () => {
   const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
   for (const [name, expected] of [

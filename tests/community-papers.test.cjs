@@ -6,6 +6,27 @@ const path = require('node:path');
 const api = require('../site/community-papers.js');
 const ids = Array.from({ length: 201 }, (_, i) => 'q-' + i.toString(16).padStart(16, '0'));
 const draft = { title: ' 精选 ', author: ' 署名 ', description: ' 描述 ', ids: ids.slice(0, 5) };
+
+test('drag and keyboard reorder stable question IDs without mutating or duplicating the draft', () => {
+  const source = ids.slice(0, 5);
+  assert.deepEqual(api.moveQuestion(source, ids[0], 4), [ids[1], ids[2], ids[3], ids[4], ids[0]]);
+  assert.deepEqual(api.moveQuestion(source, ids[4], 0), [ids[4], ids[0], ids[1], ids[2], ids[3]]);
+  assert.deepEqual(api.moveQuestion(source, ids[1], 3), [ids[0], ids[2], ids[3], ids[1], ids[4]]);
+  for (const [id, destination] of [[ids[8], 0], [ids[0], -1], [ids[0], 5], [ids[0], 1.5]]) assert.deepEqual(api.moveQuestion(source, id, destination), source);
+  assert.deepEqual(source, ids.slice(0, 5));
+});
+
+test('public paper links contain only a UUID and safely reject invalid or duplicate routing', () => {
+  const id = '00000000-0000-4000-8000-000000000001';
+  const link = api.shareUrl(id, 'https://example.test/ics-test/?layout-fix=1&apiKey=PRIVATE#private');
+  assert.equal(link, 'https://example.test/ics-test/?paper=' + id);
+  assert.equal(api.sharedPaperId(link), id);
+  assert.equal(api.shareUrl(id, 'https://name:private@example.test/ics-test/'), 'https://example.test/ics-test/?paper=' + id);
+  assert.equal(api.sharedPaperId('https://example.test/?paper=' + id.toUpperCase()), id);
+  for (const base of ['not a URL', 'javascript:alert(1)', 'https://example.test/?paper=<script>', 'https://example.test/?paper=' + id + '&paper=' + id]) assert.equal(api.sharedPaperId(base), null);
+  assert.throws(() => api.shareUrl('../secret', 'https://example.test/'));
+  assert.throws(() => api.shareUrl(id, 'javascript:alert(1)'));
+});
 test('draft bounds, uniqueness and explicit metadata', () => {
   assert.equal(api.validateDraft(draft).title, '精选');
   for (const value of [null, { ...draft, title: '' }, { ...draft, author: ' ' }, { ...draft, title: 'x'.repeat(61) },
