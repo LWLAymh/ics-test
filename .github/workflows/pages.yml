@@ -59,6 +59,7 @@ jobs:
           node tests/browser-reveal.cjs
           node tests/browser-favorites.cjs
           node tests/browser-layout.cjs
+          node tests/browser-math-authoring.cjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v6

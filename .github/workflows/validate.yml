@@ -38,5 +38,6 @@ jobs:
           node tests/browser-reveal.cjs
           node tests/browser-favorites.cjs
           node tests/browser-layout.cjs
+          node tests/browser-math-authoring.cjs
       - name: Generated source must be committed
         run: git diff --exit-code -- question-bank/web-data
