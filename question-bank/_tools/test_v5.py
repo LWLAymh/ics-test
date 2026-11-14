@@ -188,7 +188,11 @@ class ContractTests(unittest.TestCase):
             self.assertTrue(all("7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66" in s["document"] for s in q["sources"]))
 
     def test_unclassified_choices_not_publishable(self):
-        q = self.example("unclassified-choice")
+        # Use a synthetic review fixture: every real choice may be classified.
+        q = self.example("single-choice")
+        q["type"] = "unclassified-choice"
+        q["publication"]["state"] = "review"
+        validate_question(q)
         q["publication"]["state"] = "published"
         self.invalid(q)
 
@@ -213,12 +217,25 @@ class ContractTests(unittest.TestCase):
         from build_web_data import deployed_payloads
         deployed = deployed_payloads(self.modules, self.papers, self.questions)
         for question_id in ("q-f39f4e62d028f8d6", "q-3376fb77c2e3a398", "q-45d24dbc19ab7615",
-                            "q-b8edc298950e949d", "q-19c4d964d98fc677"):
+                            "q-b8edc298950e949d", "q-ec77a14af219f706", "q-f5038dc497e7b201"):
             self.assertNotIn(question_id, [q["id"] for q in deployed["questions.json"]["questions"]])
             for paper in deployed["papers.json"]["papers"]:
                 self.assertNotIn(question_id, paper["questionIds"])
             for module in deployed["catalog.json"]["modules"]:
                 self.assertNotIn(question_id, module["questionIds"])
+
+    def test_revised_compare_question_deploys_while_original_xor_stays_backed_up(self):
+        from build_web_data import deployed_payloads
+        deployed = deployed_payloads(self.modules, self.papers, self.questions)
+        revised = next(q for q in deployed["questions.json"]["questions"]
+                       if q["id"] == "q-19c4d964d98fc677")
+        self.assertEqual(revised["publication"]["state"], "published")
+        self.assertIn("0x008      cmpq", revised["stem"]["text"])
+        self.assertIn("未找到2020年官方勘误", revised["stem"]["text"])
+        original = parse_authored((BANK / "backups/2020-final-pipeline-original.md").read_text(encoding="utf-8"))
+        self.assertEqual(original["publication"]["state"], "review")
+        self.assertIn("0x008      xorq", original["stem"]["text"])
+        self.assertNotEqual(revised["revision"], original["revision"])
 
     def test_duplicate_paper_order_fails(self):
         papers = copy.deepcopy(self.papers)

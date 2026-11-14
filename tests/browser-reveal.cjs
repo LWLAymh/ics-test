@@ -36,10 +36,11 @@ async function run() {
     const single = bank.find(q => q.type === 'single-choice'), multiple = bank.find(q => q.type === 'multiple-choice');
     const fill = bank.find(q => q.id === 'q-f7d13a9c61e54b28'), select = bank.find(q => q.id === 'q-1737c983c32fea14');
     const short = bank.find(q => q.type === 'short-answer');
+    const fork = bank.find(q => q.id === 'q-46374f8a549b7cd5'); assert.ok(fork);
     const composite = { ...single, type: 'composite', options: undefined, stem: { format: 'markdown', text: '公共题面。' },
       solution: { state: 'available', grading: 'parts', reference: { format: 'markdown', text: '' } },
       parts: [single, fill, select, short].map((q, i) => ({ ...q, id: 'reveal-part-' + i, number: { display: '(' + (i + 1) + ')' } })) };
-    for (const question of [single, multiple, fill, select, composite]) {
+    for (const question of [single, multiple, fill, select, fork, composite]) {
       await fixture(page, [question, single]);
       for (const input of await page.locator('input.ics-blank-input:not([type="hidden"])').all()) await input.fill('USER_DRAFT');
       const before = await page.locator('.ics-blank-input').evaluateAll(nodes => nodes.map(n => n.value));

@@ -550,8 +550,8 @@
         "q-f2c81089030ddaa5"
       ],
       "questionCount": 114,
-      "publishedQuestionCount": 107,
-      "quizQuestionCount": 107
+      "publishedQuestionCount": 109,
+      "quizQuestionCount": 109
     },
     {
       "id": "memory_hierarchy",
@@ -696,8 +696,8 @@
         "q-561fcc94e43aae14"
       ],
       "questionCount": 135,
-      "publishedQuestionCount": 130,
-      "quizQuestionCount": 130
+      "publishedQuestionCount": 131,
+      "quizQuestionCount": 131
     },
     {
       "id": "compilation_linking",
@@ -915,8 +915,8 @@
         "q-d476fa89c01aa623"
       ],
       "questionCount": 108,
-      "publishedQuestionCount": 101,
-      "quizQuestionCount": 101
+      "publishedQuestionCount": 102,
+      "quizQuestionCount": 102
     },
     {
       "id": "virtual_memory_and_malloc",
@@ -1065,8 +1065,8 @@
         "q-db2d4bf775b8e912"
       ],
       "questionCount": 51,
-      "publishedQuestionCount": 46,
-      "quizQuestionCount": 46
+      "publishedQuestionCount": 48,
+      "quizQuestionCount": 48
     },
     {
       "id": "concurrent_programming",
@@ -1142,8 +1142,8 @@
         "q-d79493be4d3d185e"
       ],
       "questionCount": 66,
-      "publishedQuestionCount": 62,
-      "quizQuestionCount": 62
+      "publishedQuestionCount": 63,
+      "quizQuestionCount": 63
     }
   ],
   "filters": {
@@ -1174,10 +1174,10 @@
   },
   "stats": {
     "questions": 1026,
-    "publishedQuestions": 984,
-    "quizQuestions": 984,
-    "withheldQuestions": 42,
+    "publishedQuestions": 990,
+    "quizQuestions": 990,
+    "withheldQuestions": 36,
     "papers": 41,
-    "quizGroups": 116
+    "quizGroups": 117
   }
 }

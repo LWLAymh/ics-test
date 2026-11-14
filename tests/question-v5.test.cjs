@@ -7,6 +7,7 @@ require('./prompt-images.test.cjs');
 require('./math-authoring.test.cjs');
 require('./stage2-2025.test.cjs');
 require('./audit-2026-11.test.cjs');
+require('./followup-audit.test.cjs');
 
 test('inline reference display uses explicit exact/select keys, never a prose parser or grading mutation', () => {
   const exact = { method: 'exact', acceptedAnswers: ['x != 1', '1 != x'] };
@@ -632,7 +633,7 @@ test('2025 stage test first-byte question defines the most significant byte in i
 
 test('reported invalid questions remain backed up with an explicit non-publishable state', () => {
   for (const id of ['q-f39f4e62d028f8d6','q-3376fb77c2e3a398','q-45d24dbc19ab7615',
-    'q-b8edc298950e949d','q-19c4d964d98fc677']) {
+    'q-b8edc298950e949d']) {
     const question = bank.find(q=>q.id===id);
     assert.equal(question.publication.state,'review');
     assert(question.publication.issues.includes('retired-invalid-question'));

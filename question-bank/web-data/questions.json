@@ -7761,7 +7761,7 @@
     {
       "schemaVersion": "5",
       "id": "q-a7e7d2984076c296",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-089627b27e9b5e79",
       "paperOrder": 17,
       "number": {
@@ -7784,13 +7784,11 @@
         "tags": []
       },
       "publication": {
-        "state": "review",
+        "state": "published",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "source-question-missing-protocol-conversion-gateway"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -7803,28 +7801,29 @@
           "curated": "_curated/期末/2014期末-带答案/267.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "不同协议局域网互连设备"
+          "editorNote": "题库勘误：保留原 A-D 选项，新增 E‘协议转换网关’，并明确题意要求异构协议栈间的应用互通；原卷和原答案保留备查"
         }
       ],
-      "type": "unclassified-choice",
+      "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "17. 如果两个局域网高层分别采用TCP/IP协议和SPX/IPX协议，那么可以选择\n的互连设备应是"
+        "text": "17. 两个局域网分别采用 TCP/IP 和 SPX/IPX 协议栈。若要求一侧主机上的应用能够与另一侧主机上的应用直接互通，哪种互连设备可以完成不同协议栈间的协议转换？\n\n**题库勘误：**原卷仅列 A-D，没有协议转换网关，且原答案 C“路由器”不足以保证题干所要求的异构协议栈应用互通。题库保留原有 A-D，新增 E“协议转换网关”；原卷及原答案仍保存在来源文件中。"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "原卷答案为 C，但题目不足以支持该结论：如果要求 TCP/IP 与 SPX/IPX 高层应用直接互通，需要协议转换网关，而选项中没有网关。支持两类网络层协议的多协议路由器可以分别转发对应协议的数据包，却不自动实现端到端的高层协议转换。原题未区分这些目的，暂保留备份并维持待复核状态，不参与已发布题库。"
+          "text": "答案：E（协议转换网关）。\n\n路由器在其支持的网络层协议中转发数据报，不会仅因支持多种路由协议就自动转换端到端协议栈。若要让 TCP/IP 一侧与 SPX/IPX 一侧的应用互通，需要能在对应协议之间转换流量的协议转换网关。题干已明确要求跨协议栈的应用互通，从而排除只进行网络层转发的普通路由器。\n\n依据：[RFC 1683 §4.2](https://www.rfc-editor.org/rfc/rfc1683.html#section-4.2) 将转换网关描述为在不同协议间直接转换网络流量；[RFC 1983](https://www.rfc-editor.org/rfc/rfc1983.html) 说明“gateway”在通用术语和路由语境中含义不同，故本题明确写作“协议转换网关”。"
         },
         "provenance": {
-          "origin": "unknown",
-          "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
+          "origin": "ai-derived",
+          "crossChecked": false,
+          "attribution": "Codex（基于原题与RFC的题库修订，不代表官方勘误）",
+          "note": "题库新增选项 E 作为勘误；来源原卷保留 A-D 及原答案 C。"
         },
         "correctOptionIds": [
-          "C"
+          "E"
         ]
       },
       "options": [
@@ -7854,6 +7853,13 @@
           "content": {
             "format": "markdown",
             "text": "交换机"
+          }
+        },
+        {
+          "id": "E",
+          "content": {
+            "format": "markdown",
+            "text": "协议转换网关\n"
           }
         }
       ]
@@ -32430,7 +32436,7 @@
     {
       "schemaVersion": "5",
       "id": "q-24598d7deeb69df7",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 29,
       "number": {
@@ -32453,14 +32459,11 @@
         "tags": []
       },
       "publication": {
-        "state": "review",
+        "state": "published",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "audit-2017-final-semaphore-multiple-valid-designs-rejected-by-per-slot-key",
-          "needs-explicit-protocol-constraints-or-whole-design-grading"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -32473,312 +32476,27 @@
           "curated": "_curated/期末/2017期末-无答案/702.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "信号量控制线程执行顺序"
+          "editorNote": "保留原题六处PV设计；多种完整方案合法，改为整套设计回答与整体评阅，不能逐空套用唯一键。"
         }
       ],
-      "type": "fill",
+      "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "blanks": [
-          {
-            "id": "slot-1",
-            "marker": "{{blank:slot-1}}",
-            "occurrence": 0,
-            "width": "medium",
-            "input": {
-              "kind": "select",
-              "multiple": false,
-              "options": [
-                {
-                  "value": "p1",
-                  "label": "P(&s1)"
-                },
-                {
-                  "value": "v1",
-                  "label": "V(&s1)"
-                },
-                {
-                  "value": "p2",
-                  "label": "P(&s2)"
-                },
-                {
-                  "value": "v2",
-                  "label": "V(&s2)"
-                },
-                {
-                  "value": "p3",
-                  "label": "P(&s3)"
-                },
-                {
-                  "value": "v3",
-                  "label": "V(&s3)"
-                },
-                {
-                  "value": "none",
-                  "label": "空 · 无操作"
-                }
-              ]
-            }
-          },
-          {
-            "id": "slot-2",
-            "marker": "{{blank:slot-2}}",
-            "occurrence": 0,
-            "width": "medium",
-            "input": {
-              "kind": "select",
-              "multiple": false,
-              "options": [
-                {
-                  "value": "p1",
-                  "label": "P(&s1)"
-                },
-                {
-                  "value": "v1",
-                  "label": "V(&s1)"
-                },
-                {
-                  "value": "p2",
-                  "label": "P(&s2)"
-                },
-                {
-                  "value": "v2",
-                  "label": "V(&s2)"
-                },
-                {
-                  "value": "p3",
-                  "label": "P(&s3)"
-                },
-                {
-                  "value": "v3",
-                  "label": "V(&s3)"
-                },
-                {
-                  "value": "none",
-                  "label": "空 · 无操作"
-                }
-              ]
-            }
-          },
-          {
-            "id": "slot-3",
-            "marker": "{{blank:slot-3}}",
-            "occurrence": 0,
-            "width": "medium",
-            "input": {
-              "kind": "select",
-              "multiple": false,
-              "options": [
-                {
-                  "value": "p1",
-                  "label": "P(&s1)"
-                },
-                {
-                  "value": "v1",
-                  "label": "V(&s1)"
-                },
-                {
-                  "value": "p2",
-                  "label": "P(&s2)"
-                },
-                {
-                  "value": "v2",
-                  "label": "V(&s2)"
-                },
-                {
-                  "value": "p3",
-                  "label": "P(&s3)"
-                },
-                {
-                  "value": "v3",
-                  "label": "V(&s3)"
-                },
-                {
-                  "value": "none",
-                  "label": "空 · 无操作"
-                }
-              ]
-            }
-          },
-          {
-            "id": "slot-4",
-            "marker": "{{blank:slot-4}}",
-            "occurrence": 0,
-            "width": "medium",
-            "input": {
-              "kind": "select",
-              "multiple": false,
-              "options": [
-                {
-                  "value": "p1",
-                  "label": "P(&s1)"
-                },
-                {
-                  "value": "v1",
-                  "label": "V(&s1)"
-                },
-                {
-                  "value": "p2",
-                  "label": "P(&s2)"
-                },
-                {
-                  "value": "v2",
-                  "label": "V(&s2)"
-                },
-                {
-                  "value": "p3",
-                  "label": "P(&s3)"
-                },
-                {
-                  "value": "v3",
-                  "label": "V(&s3)"
-                },
-                {
-                  "value": "none",
-                  "label": "空 · 无操作"
-                }
-              ]
-            }
-          },
-          {
-            "id": "slot-5",
-            "marker": "{{blank:slot-5}}",
-            "occurrence": 0,
-            "width": "medium",
-            "input": {
-              "kind": "select",
-              "multiple": false,
-              "options": [
-                {
-                  "value": "p1",
-                  "label": "P(&s1)"
-                },
-                {
-                  "value": "v1",
-                  "label": "V(&s1)"
-                },
-                {
-                  "value": "p2",
-                  "label": "P(&s2)"
-                },
-                {
-                  "value": "v2",
-                  "label": "V(&s2)"
-                },
-                {
-                  "value": "p3",
-                  "label": "P(&s3)"
-                },
-                {
-                  "value": "v3",
-                  "label": "V(&s3)"
-                },
-                {
-                  "value": "none",
-                  "label": "空 · 无操作"
-                }
-              ]
-            }
-          },
-          {
-            "id": "slot-6",
-            "marker": "{{blank:slot-6}}",
-            "occurrence": 0,
-            "width": "medium",
-            "input": {
-              "kind": "select",
-              "multiple": false,
-              "options": [
-                {
-                  "value": "p1",
-                  "label": "P(&s1)"
-                },
-                {
-                  "value": "v1",
-                  "label": "V(&s1)"
-                },
-                {
-                  "value": "p2",
-                  "label": "P(&s2)"
-                },
-                {
-                  "value": "v2",
-                  "label": "V(&s2)"
-                },
-                {
-                  "value": "p3",
-                  "label": "P(&s3)"
-                },
-                {
-                  "value": "v3",
-                  "label": "V(&s3)"
-                },
-                {
-                  "value": "none",
-                  "label": "空 · 无操作"
-                }
-              ]
-            }
-          }
-        ],
-        "text": "第八题（12分）第2问：已声明三个信号量 s1、s2、s3，初值分别为 1、0、0。请将对应的 P() 和 V() 操作填入标号处（每空至多填写 1 个操作），要求三个线程并发执行的结果只能是 `x = 10`。\n```c\nx = 1;\nvoid thread1(void) {\n    {{blank:slot-1}}\n    x = x * 5;\n    {{blank:slot-2}}\n}\nvoid thread2(void) {\n    {{blank:slot-3}}\n    x = x + 3;\n    {{blank:slot-4}}\n}\nvoid thread3(void) {\n    {{blank:slot-5}}\n    x = x / 2;\n    {{blank:slot-6}}\n}\n```"
+        "text": "第八题（12分）第2问：假设有三个线程，已声明三个信号量 `s1`、`s2`、`s3`，初值分别为 `1`、`0`、`0`。将对应的 `P()` 和 `V()` 操作填入下面六个标号处，每处至多填写一个操作，也可留空，要求三个线程并发执行并全部结束后，结果只能是 `x = 10`。\n\n按教材信号量交错模型作答：`x` 为共享整数，初值为 `1`；三个线程各执行一次，整数除法向零截断；`P(&s)` 等待正值后原子减一，`V(&s)` 原子加一并具有通常的同步语义。赋值的读、计算、写可以被抢占，不预设整条赋值原子化。假设信号量操作成功、可运行线程最终得到调度，方案必须使全部线程完成，不能靠死锁使错误结果不出现。\n\n```c\nx = 1;\nvoid thread1(void) {\n    /* ① */\n    x = x * 5;\n    /* ② */\n}\nvoid thread2(void) {\n    /* ③ */\n    x = x + 3;\n    /* ④ */\n}\nvoid thread3(void) {\n    /* ⑤ */\n    x = x / 2;\n    /* ⑥ */\n}\n```\n\n请在同一答题框中按 `①…；②…；③…；④…；⑤…；⑥…` 给出完整方案，留空处写“空”，并简要说明为何任意允许的线程交错都得到 `10`，且不存在死锁。不得改动初值、三条赋值或增加标号外的操作。本题按整套方案评阅，合法方案不唯一。"
       },
       "solution": {
         "state": "available",
-        "grading": "blanks",
+        "grading": "self",
         "reference": {
           "format": "markdown",
-          "text": "答案：① P(&s2)，② V(&s3)，③ P(&s1)，④ V(&s2)，⑤ P(&s3)，⑥ 空。\n\n执行顺序必须为线程 2 → 线程 1 → 线程 3：`1 + 3 = 4`，`4 × 5 = 20`，`20 ÷ 2 = 10`。线程 2 的 P(&s1) 由初值 1 放行，随后 V(&s2) 放行线程 1，最后 V(&s3) 放行线程 3。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+          "text": "以下给出两套合法方案，均满足每处至多一个操作；参考表不是逐空唯一答案。\n\n| 位置 | 方案A | 方案B |\n| --- | --- | --- |\n| ① | `P(&s2)` | `P(&s3)` |\n| ② | `V(&s3)` | 空 |\n| ③ | `P(&s1)` | `P(&s1)` |\n| ④ | `V(&s2)` | `V(&s2)` |\n| ⑤ | `P(&s3)` | `P(&s2)` |\n| ⑥ | 空 | `V(&s3)` |\n\n方案A中，`s2=s3=0` 使线程1、3在各自赋值前等待。线程2由 `s1=1` 放行，完成 `x=1+3=4` 后才 `V(&s2)`；线程1取得该许可后完成 `x=4*5=20`，再 `V(&s3)`；线程3随后完成 `x=20/2=10`。因此三条赋值不重叠，顺序为线程2 → 线程1 → 线程3，即使赋值内部可被抢占也不会产生不同结果。\n\n方案B中，线程1、3分别等待初值为零的 `s3`、`s2`。线程2先计算 `x=4`，再释放 `s2`；线程3计算 `x=4/2=2` 后释放 `s3`；线程1最后计算 `x=2*5=10`。顺序为线程2 → 线程3 → 线程1，同样正确。旧参考“执行顺序必须为2 → 1 → 3”的断言错误。\n\n两套方案都由初始可运行的线程2启动，后继只等待前驱最终执行的 `V`，没有环形等待；在题定调度前提下全部线程都能结束。各相邻赋值之间还由对应 `V/P` 建立同步，不能只在假定赋值原子化的模型下验证方案。\n\n在方案A或B中把③改为“空”也合法：线程2本来就是起点，后续两条赋值仍由 `s2/s3` 串接；不要求三个信号量都必须使用。其他合法方案也应接受，不能因为某个位置不同于上表而判错，也不能从两列分别任选操作拼成方案后直接认定正确。\n\n整体评阅关键点：\n\n1. 六处均明确给出操作或“空”，每处最多一个 `P(&s1)`、`V(&s1)`、`P(&s2)`、`V(&s2)`、`P(&s3)`、`V(&s3)`，不修改题定程序与初值。\n2. 按整套协议分析初始可运行线程、每次许可的产生与消费，保证在所有允许交错下最终只能为 `10`。只举一条成功执行路径不够。\n3. 同时确认完成性：不存在全部未结束线程都永久等待的状态，且共享 `x` 的访问获得足够同步。不能把“没有得到错误终值，因为根本未结束”视为正确。\n4. 不把上述任一参考方案、`P(&s1)` 的使用或某一个固定线程顺序当作必要条件。仅就三条赋值串行执行而言，六种顺序 `123/132/213/231/312/321` 的终值分别为 `4/5/10/10/3/15`；两种顺序均可得到 `10`。若提交的协议允许更复杂的交错，应直接检验其全部交错，而不是仅靠这张串行结果表判分。\n\n> 原卷及配套材料无官方答案。旧参考由 AI 推导；本轮另行核对原题、重算两种正确串行顺序，并以读写分离的状态枚举独立验证上述方案及③留空变体。此处仍采用整套设计自评/评阅，不宣称有逐空唯一客观键。"
         },
         "provenance": {
-          "origin": "unknown",
-          "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        },
-        "blankAnswers": [
-          {
-            "blankId": "slot-1",
-            "method": "selection",
-            "correctValues": [
-              "p2"
-            ]
-          },
-          {
-            "blankId": "slot-2",
-            "method": "selection",
-            "correctValues": [
-              "v3"
-            ]
-          },
-          {
-            "blankId": "slot-3",
-            "method": "selection",
-            "correctValues": [
-              "p1"
-            ]
-          },
-          {
-            "blankId": "slot-4",
-            "method": "selection",
-            "correctValues": [
-              "v2"
-            ]
-          },
-          {
-            "blankId": "slot-5",
-            "method": "selection",
-            "correctValues": [
-              "p3"
-            ]
-          },
-          {
-            "blankId": "slot-6",
-            "method": "selection",
-            "correctValues": [
-              "none"
-            ]
-          }
-        ]
+          "origin": "ai-derived",
+          "crossChecked": false,
+          "attribution": "deepseek v4.1 flash · 大肥鱼小姐（旧参考）；Codex（本轮独立复核与修订）",
+          "note": "无官方答案。本轮对照原卷，独立枚举六种串行顺序，并以赋值拆分读写的有限状态交错模型验证两套不同顺序的参考协议及一个留空变体；这不构成人工或官方认证。"
+        }
       }
     },
     {
@@ -33152,7 +32870,7 @@
     {
       "schemaVersion": "5",
       "id": "q-46374f8a549b7cd5",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 24,
       "number": {
@@ -33172,14 +32890,11 @@
         "tags": []
       },
       "publication": {
-        "state": "review",
+        "state": "published",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "audit-2017-final-finite-fork-loop-misgraded-as-infinite",
-          "last-output-needs-scheduling-and-signal-delivery-model"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -33192,7 +32907,7 @@
           "curated": "_curated/期末/2017期末-无答案/439.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "fork/信号/sleep 与文件读取的输出行数及内容"
+          "editorNote": "核对原卷第13–14页；补明本轮信号读前处理和完整行即时输出的教学模型。保留有限for/fork结构，末行改为选择全部可能内容，不以sleep时长强制父子先后。"
         }
       ],
       "type": "fill",
@@ -33209,25 +32924,129 @@
             "id": "n2-aa",
             "marker": "{{blank:n2-aa}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "v1",
+                  "label": "123 a"
+                },
+                {
+                  "value": "v2",
+                  "label": "456 a"
+                },
+                {
+                  "value": "v3",
+                  "label": "789 a"
+                },
+                {
+                  "value": "v4",
+                  "label": "456 ab"
+                }
+              ]
+            }
           },
           {
             "id": "n2-ab",
             "marker": "{{blank:n2-ab}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "v1",
+                  "label": "9 abc"
+                },
+                {
+                  "value": "v2",
+                  "label": "1 abc"
+                },
+                {
+                  "value": "v3",
+                  "label": "90 ab"
+                },
+                {
+                  "value": "v4",
+                  "label": "01 ab"
+                },
+                {
+                  "value": "v5",
+                  "label": "90 abc"
+                },
+                {
+                  "value": "v6",
+                  "label": "9 ab"
+                }
+              ]
+            }
           },
           {
             "id": "n2-ba",
             "marker": "{{blank:n2-ba}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "v1",
+                  "label": "789 a"
+                },
+                {
+                  "value": "v2",
+                  "label": "901 a"
+                },
+                {
+                  "value": "v3",
+                  "label": "78 ab"
+                },
+                {
+                  "value": "v4",
+                  "label": "01 ab"
+                },
+                {
+                  "value": "v5",
+                  "label": "789 ab"
+                },
+                {
+                  "value": "v6",
+                  "label": "78 abc"
+                }
+              ]
+            }
           },
           {
             "id": "n2-bb",
             "marker": "{{blank:n2-bb}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "v1",
+                  "label": "5 abc"
+                },
+                {
+                  "value": "v2",
+                  "label": "6 abc"
+                },
+                {
+                  "value": "v3",
+                  "label": "6 abcd"
+                },
+                {
+                  "value": "v4",
+                  "label": "7 abc"
+                }
+              ]
+            }
           },
           {
             "id": "n3-lines",
@@ -33239,50 +33058,152 @@
             "id": "n3-aa",
             "marker": "{{blank:n3-aa}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "v1",
+                  "label": "1234 a"
+                },
+                {
+                  "value": "v2",
+                  "label": "5678 a"
+                },
+                {
+                  "value": "v3",
+                  "label": "9012 a"
+                },
+                {
+                  "value": "v4",
+                  "label": "5678 ab"
+                }
+              ]
+            }
           },
           {
             "id": "n3-ab",
             "marker": "{{blank:n3-ab}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "v1",
+                  "label": "7 abcd"
+                },
+                {
+                  "value": "v2",
+                  "label": "9 abcd"
+                },
+                {
+                  "value": "v3",
+                  "label": "78 abc"
+                },
+                {
+                  "value": "v4",
+                  "label": "89 abc"
+                },
+                {
+                  "value": "v5",
+                  "label": "78 abcd"
+                },
+                {
+                  "value": "v6",
+                  "label": "7 abc"
+                }
+              ]
+            }
           },
           {
             "id": "n3-ba",
             "marker": "{{blank:n3-ba}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "v1",
+                  "label": "9012 a"
+                },
+                {
+                  "value": "v2",
+                  "label": "2345 a"
+                },
+                {
+                  "value": "v3",
+                  "label": "901 ab"
+                },
+                {
+                  "value": "v4",
+                  "label": "345 ab"
+                },
+                {
+                  "value": "v5",
+                  "label": "9012 ab"
+                },
+                {
+                  "value": "v6",
+                  "label": "345 a"
+                }
+              ]
+            }
           },
           {
             "id": "n3-bb",
             "marker": "{{blank:n3-bb}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "medium",
+            "input": {
+              "kind": "select",
+              "multiple": true,
+              "options": [
+                {
+                  "value": "v1",
+                  "label": "5 abcd"
+                },
+                {
+                  "value": "v2",
+                  "label": "6 abcd"
+                },
+                {
+                  "value": "v3",
+                  "label": "6 abc"
+                },
+                {
+                  "value": "v4",
+                  "label": "7 abcd"
+                }
+              ]
+            }
           }
         ],
-        "text": "第五题（10分）\n代码如下：（仅为示例代码，答题时不考虑任何出错的情况）\n```\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n    if (sig == SIGUSR1) counter1++;\n    if (sig == SIGUSR2) counter2++;\n}\nint main(int argc, char **argv) {\n    int i;\n    pid_t ppid, cpid;\n    int fd1, fd2;\n    unsigned char buf1[64], buf2[64];\n    signal(SIGUSR1, handler);\n    signal(SIGUSR2, handler);\n    fd1 = open(\"number.txt\", O_RDWR);\n    for (i = 0; i < N; i++) {\n        ppid = getpid();\n        cpid = fork();\n        if (cpid) {\n            kill(cpid, A);\n            while (sleep(4)) ;\n        } else {\n            kill(ppid, B);\n            while (sleep(2)) ;\n        }\n        fd2 = open(\"letter.txt\", O_RDWR);\n        read(fd1, buf1, counter1);\n        read(fd2, buf2, counter2);\n        buf1[counter1] = '\\0';\n        buf2[counter2] = '\\0';\n        printf(\"%s %s\\n\", buf1, buf2);\n        if (cpid) {\n            waitpid(cpid, 0, 0);\n        } else {\n            E;\n        }\n    }\n}\n```\n其中，`number.txt`文件内容为：\n123456789012345678901234567890\n其中，`letter.txt`文件内容为：\nabcdefghijklmnopqrstuvwxyz\n1. 当 `N=2`，A/B 为 `SIGUSR1` 或 `SIGUSR2`，E 为空时，共有 {{blank:n2-lines}} 行输出。\na) A 为 `SIGUSR1`、B 为 `SIGUSR1` 时，最后一行输出为 {{blank:n2-aa}}\nb) A 为 `SIGUSR1`、B 为 `SIGUSR2` 时，最后一行输出为 {{blank:n2-ab}}\nc) A 为 `SIGUSR2`、B 为 `SIGUSR1` 时，最后一行输出为 {{blank:n2-ba}}\nd) A 为 `SIGUSR2`、B 为 `SIGUSR2` 时，最后一行输出为 {{blank:n2-bb}}\n2. 当 `N=3` 时，A/B 为 `SIGUSR1` 或 `SIGUSR2`，E 为 exit(0) 时，共有 {{blank:n3-lines}} 行输出。\na) A 为 `SIGUSR1`、B 为 `SIGUSR1` 时，最后一行输出为 {{blank:n3-aa}}\nb) A 为 `SIGUSR1`、B 为 `SIGUSR2` 时，最后一行输出为 {{blank:n3-ab}}\nc) A 为 `SIGUSR2`、B 为 `SIGUSR1` 时，最后一行输出为 {{blank:n3-ba}}\nd) A 为 `SIGUSR2`、B 为 `SIGUSR2` 时，最后一行输出为 {{blank:n3-bb}}"
+        "text": "第五题（10分）\n\n代码如下（示例代码，不考虑任何调用出错的情况）。本题补充以下教学模型：\n\n- 每个可运行进程最终都能继续运行；所有调用成功，`read` 读满请求的字节数，`waitpid` 确实等待指定子进程结束。\n- 每轮父子互发的用户信号恰好各处理一次，且各自在本轮第一次 `read` 前处理完。处理函数对本进程计数器的递增视为有效的抽象操作，不讨论严格C中异步访问普通 `int` 的问题。\n- 每次 `printf` 完整输出并立即刷新一行，之后的 `fork` 不复制尚未刷新的输出。共享文件偏移的每次 `read` 视为不可分割的操作。\n- 除程序顺序、信号发送/处理及 `waitpid` 的因果约束外，允许在语句间任意调度，尤其允许在 `read` 与 `printf` 之间暂停。`sleep(2)` 不保证子进程先于 `sleep(4)` 的父进程读取或打印；若 `sleep` 被信号打断，仍按代码重新调用相同的时长。\n\n原卷没有这些完整约定，不能将某次运行的末行当作唯一答案。以下末行小问均为多选，要求选出该模型下所有可能的完整行。\n\n```c\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\n#include <fcntl.h>\n#include <sys/types.h>\n#include <sys/wait.h>\n#include <signal.h>\nint counter1 = 1;\nint counter2 = 1;\nvoid handler(int sig) {\n    if (sig == SIGUSR1) counter1++;\n    if (sig == SIGUSR2) counter2++;\n}\nint main(int argc, char **argv) {\n    int i;\n    pid_t ppid, cpid;\n    int fd1, fd2;\n    unsigned char buf1[64], buf2[64];\n    signal(SIGUSR1, handler);\n    signal(SIGUSR2, handler);\n    fd1 = open(\"number.txt\", O_RDWR);\n    for (i = 0; i < N; i++) {\n        ppid = getpid();\n        cpid = fork();\n        if (cpid) {\n            kill(cpid, A);\n            while (sleep(4)) ;\n        } else {\n            kill(ppid, B);\n            while (sleep(2)) ;\n        }\n        fd2 = open(\"letter.txt\", O_RDWR);\n        read(fd1, buf1, counter1);\n        read(fd2, buf2, counter2);\n        buf1[counter1] = '\\0';\n        buf2[counter2] = '\\0';\n        printf(\"%s %s\\n\", buf1, buf2);\n        if (cpid) {\n            waitpid(cpid, 0, 0);\n        } else {\n            E;\n        }\n    }\n}\n```\n\n`number.txt` 的内容为：\n\n```text\n123456789012345678901234567890\n```\n\n`letter.txt` 的内容为：\n\n```text\nabcdefghijklmnopqrstuvwxyz\n```\n\n1. 当 `N=2`，A/B为 `SIGUSR1` 或 `SIGUSR2`，E为空时，共有 {{blank:n2-lines}} 行输出。\n\na) A为 `SIGUSR1`、B为 `SIGUSR1` 时，选出所有可能的最后一行：{{blank:n2-aa}}\n\nb) A为 `SIGUSR1`、B为 `SIGUSR2` 时，选出所有可能的最后一行：{{blank:n2-ab}}\n\nc) A为 `SIGUSR2`、B为 `SIGUSR1` 时，选出所有可能的最后一行：{{blank:n2-ba}}\n\nd) A为 `SIGUSR2`、B为 `SIGUSR2` 时，选出所有可能的最后一行：{{blank:n2-bb}}\n\n2. 当 `N=3`，A/B为 `SIGUSR1` 或 `SIGUSR2`，E为 `exit(0)` 时，共有 {{blank:n3-lines}} 行输出。\n\na) A为 `SIGUSR1`、B为 `SIGUSR1` 时，选出所有可能的最后一行：{{blank:n3-aa}}\n\nb) A为 `SIGUSR1`、B为 `SIGUSR2` 时，选出所有可能的最后一行：{{blank:n3-ab}}\n\nc) A为 `SIGUSR2`、B为 `SIGUSR1` 时，选出所有可能的最后一行：{{blank:n3-ba}}\n\nd) A为 `SIGUSR2`、B为 `SIGUSR2` 时，选出所有可能的最后一行：{{blank:n3-bb}}"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n1. 程序不终止，输出行数无穷多，因此不存在“最后一行”。A/B 的信号类型不改变这一点。\n2. 共 6 行（父进程每轮输出一行，子进程每轮输出一行后由 `exit(0)` 结束）。最后一行不能由题面唯一确定：父进程在 `waitpid` 之前先打印；父子进程也共享 `fd1` 的打开文件描述及文件偏移，读取先后受调度影响。\n\n解析：`handler` 只递增本进程的 `counter1` 或 `counter2`，没有再次调用 `kill`。`A` 是父进程发给子进程的信号，`B` 是子进程发给父进程的信号。第一问中 `E` 为空，子进程不会退出；它继续执行循环，并在每次循环再次 `fork`，因此进程树不断扩展，题目要求的有限行数和最后一行都不存在。第二问中子进程执行 `exit(0)` 后每轮只留下父、子各一行，但 `waitpid` 位于父进程打印之后，且 `fd1` 的偏移由共享描述符上的读操作共同推进，无法保证一个唯一的末行内容。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+          "text": "两问均有 **6行**输出。各末行集合如下；每个反引号中的内容是一整行，数字与字母间有一个空格。\n\n| 小问 | N=2，E为空 | N=3，E为exit(0) |\n| --- | --- | --- |\n| a，A=USR1、B=USR1 | `123 a`、`456 a` | `1234 a`、`5678 a` |\n| b，A=USR1、B=USR2 | `9 abc`、`1 abc`、`90 ab`、`01 ab` | `7 abcd`、`9 abcd`、`78 abc`、`89 abc` |\n| c，A=USR2、B=USR1 | `789 a`、`901 a`、`78 ab`、`01 ab` | `9012 a`、`2345 a`、`901 ab`、`345 ab` |\n| d，A=USR2、B=USR2 | `5 abc`、`6 abc` | `5 abcd`、`6 abcd` |\n\n**有限进程树。** 第一问从原进程P开始：i=0时P创建C，P和C各打印一次；C执行空的E后把自己的i加到1，再创建D，C/D各打印一次，随后都因i达到2退出。P等待C结束后才进入i=1，创建F，P/F各打印一次，然后退出。总计2+2+2=6行、4个进程、3次fork。`fork` 复制i，不把它重置为0，因此不是无限循环。第二问每个新子进程打印后立即exit，P连续执行3轮，每轮2行，也是6行、4个进程、3次fork。\n\n**计数器与文件偏移。** 令向量u=(1,1)，a表示信号A递增的单位向量，b表示信号B递增的单位向量。A发给子进程，B发给父进程；子进程继承fork时已有的计数器。第一问六次输出的计数器向量分别为：P第0轮u+b，C第0轮u+a，C第1轮u+a+b，D为u+2a，P第1轮u+2b，F为u+a+b。所有进程共享在循环前打开的fd1及其文件偏移；每次重新open得到的fd2则从字母a开始，故字母串只由本次counter2决定。\n\n**缩减到最后一对父子。** 第一问中P开始第1轮前，C及D均已退出，P的第0轮也已经打印。故末行只能来自P第1轮或F；它们的计数器分别为u+2b、u+a+b。设a1、b1是a、b的第一分量，在最后一对读之前fd1偏移为4+4a1+2b1。第二问中每轮末P等待本轮子进程退出，末行只能来自第2轮P或新子进程；两者计数器分别为u+3b、u+2b+a，之前fd1偏移为4+2a1+4b1。这些偏移与前面各次读取的顺序无关，因为累计读取长度固定，且没有读至文件末尾。\n\n**穷尽末行。** 对最后一对父子，先读的取得从上述偏移开始的一段数字，后读的取得紧随其后的一段。数字读取和打印是不同语句，所以即使某进程先读，也可以延后到另一进程打印后才打印。分别考虑“父先读/子先读”及“父最后打印/子最后打印”，恰得表中的全部集合；相同长度/字母串时重复内容合并。所有组合均可通过在两次read/printf之间暂停对应进程实现，休眠时间不形成额外先后关系。\n\n例如第一问b：最后一对读取前偏移为8，P的计数器是(1,3)，F是(2,2)。P先读时得到 `9 abc`，F得到 `01 ab`；F先读时得到 `90 ab`，P得到 `1 abc`。在两种读取顺序下均可选择哪个进程最后打印，所以四行全可达。第一问c的P计数器为(3,1)，F为(2,2)，不能误把P的字母串写成ab，或把F写成abc。\n\n不能只把“最后读到的字符串”当作最后一行，也不能用2秒/4秒休眠推导固定父子顺序。上述集合只适用于题面明确的教学模型；若允许本轮信号延迟到读取之后、输出全缓冲后再fork等，需重新分析。`sleep` 自身不是信号处理完成或父子执行顺序的同步屏障。\n\n> 原卷及配套材料没有官方答案。旧参考为AI推导；本轮对照源卷第13–14页，独立重算并由事件状态枚举和DAG交错枚举复核，仍不构成人工或官方认证。源代码补入声明信号接口所需的 `<signal.h>`。"
         },
         "provenance": {
           "origin": "ai-derived",
           "crossChecked": false,
-          "attribution": "deepseek v4.1 flash · 大肥鱼小姐",
-          "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text."
+          "attribution": "deepseek v4.1 flash · 大肥鱼小姐（旧参考）；Codex（本轮独立复核与修订）",
+          "note": "无官方答案。本轮对照源卷，独立重算有限进程树、计数器继承及末行可达集合，并由独立事件枚举与DAG交错枚举复核；不构成人工或官方认证。"
         },
         "blankAnswers": [
           {
             "blankId": "n2-lines",
             "method": "exact",
             "acceptedAnswers": [
-              "无限，不终止",
-              "无限",
-              "不终止"
+              "6"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -33291,51 +33212,39 @@
           },
           {
             "blankId": "n2-aa",
-            "method": "exact",
-            "acceptedAnswers": [
-              "不存在",
-              "无最后一行"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "v1",
+              "v2"
+            ]
           },
           {
             "blankId": "n2-ab",
-            "method": "exact",
-            "acceptedAnswers": [
-              "不存在",
-              "无最后一行"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "v1",
+              "v2",
+              "v3",
+              "v4"
+            ]
           },
           {
             "blankId": "n2-ba",
-            "method": "exact",
-            "acceptedAnswers": [
-              "不存在",
-              "无最后一行"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "v1",
+              "v2",
+              "v3",
+              "v4"
+            ]
           },
           {
             "blankId": "n2-bb",
-            "method": "exact",
-            "acceptedAnswers": [
-              "不存在",
-              "无最后一行"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "v1",
+              "v2"
+            ]
           },
           {
             "blankId": "n3-lines",
@@ -33350,51 +33259,39 @@
           },
           {
             "blankId": "n3-aa",
-            "method": "exact",
-            "acceptedAnswers": [
-              "无法唯一确定",
-              "调度相关"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "v1",
+              "v2"
+            ]
           },
           {
             "blankId": "n3-ab",
-            "method": "exact",
-            "acceptedAnswers": [
-              "无法唯一确定",
-              "调度相关"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "v1",
+              "v2",
+              "v3",
+              "v4"
+            ]
           },
           {
             "blankId": "n3-ba",
-            "method": "exact",
-            "acceptedAnswers": [
-              "无法唯一确定",
-              "调度相关"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "v1",
+              "v2",
+              "v3",
+              "v4"
+            ]
           },
           {
             "blankId": "n3-bb",
-            "method": "exact",
-            "acceptedAnswers": [
-              "无法唯一确定",
-              "调度相关"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "selection",
+            "correctValues": [
+              "v1",
+              "v2"
+            ]
           }
         ]
       }
@@ -33800,7 +33697,7 @@
     {
       "schemaVersion": "5",
       "id": "q-78daa36a28b35c57",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 22,
       "number": {
@@ -33820,14 +33717,11 @@
         "tags": []
       },
       "publication": {
-        "state": "review",
+        "state": "published",
         "basis": "source-import",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "audit-2017-final-pipeline-cross-dependency-not-accounted-for",
-          "needs-recompute-partition-and-grading-before-publication"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -33840,7 +33734,7 @@
           "curated": "_curated/期末/2017期末-无答案/352.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "2026-11-14审校暂缓发布，原文及旧推导保留：旧二级分割把A→F留同级，却漏计60+60ps跨链路径，100ps键不成立；须完整重算分级、同步寄存器及吞吐量后再发布。本轮按用户先验收要求停止精算。"
+          "editorNote": "2026-11-14后续源核：保留原卷第10页原图及题号，补同步流水线和寄存器延迟计时约定。二级最优周期130ps；原卷两个插入位置下AB/FG或BC/FG均最优。三级最优周期80ps，须计入跨链AF同步寄存器，方案开放自评并列完整判据。独立枚举及负例见docs/AUDIT_FOLLOWUP_2017_PIPELINE.md。"
         }
       ],
       "type": "fill",
@@ -33896,28 +33790,32 @@
             "width": "medium"
           }
         ],
-        "text": "第三题（12分）\n如图所示，每个模块表示一个单独的组合逻辑单元，每个单元的延迟以及数据依赖\n关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行\n流水化改造。假设每个寄存器的延迟为10ps。\n![组合逻辑单元 A 至 H 的延迟与依赖关系](assets/期末/2017期末-无答案/p10-block-prompt.png)\n1. 如果改造为一个二级流水线，为获得最大的吞吐率：\na) 需要在{{blank:two-stage-cut-1}}模块之间和{{blank:two-stage-cut-2}}模块之间插入寄存器；\nb) 插入寄存器改造后二级流水线的最长延时路径为{{blank:two-stage-path}}，最长延时为{{blank:two-stage-delay}}\nc) 流水线最大吞吐率为：{{blank:two-stage-rate}}\n（用分数表示，约分到最简形式，并写明单位）\n2. 如果改造为一个三级流水线，为获得最大的吞吐率：\na) 需要在{{blank:three-stage-cuts}}\n模块之间插入寄存器；\nb) 插入寄存器改造后三级流水线的最长路径延时为：{{blank:three-stage-delay}}；\nc) 流水线最大吞吐率为：{{blank:three-stage-rate}}\n（用分数表示，约分到最简形式，并写明单位）"
+        "text": "第三题（12分）\n如图所示，每个模块表示一个不可再拆分的组合逻辑单元，每个单元的延迟以及数据依赖关系已在图中标出。通过在两个单元间添加寄存器的方式，可以对该数据通路进行流水化改造。假设每个寄存器的延迟为10ps。\n\n![组合逻辑单元 A 至 H 的延迟与依赖关系](assets/期末/2017期末-无答案/p10-block-prompt.png)\n\n按同步流水线模型作答：A、E接收同一组输入，均在第一级；D、H的结果由最终一级的图示输出寄存器同时保存。一个模块只属于一级，依赖边不能从后级指向前级。边跨过几个级间边界，就应串联几个寄存器，以保证汇合处的操作数来自同一组输入；图中斜向的A→F和C→H也必须计入。时钟周期为“各级最长组合路径延迟的最大值 + 10ps”，其中10ps是每级末端寄存器的统一开销，不在同一周期重复相加；忽略其他开销和停顿，流水线充满后每周期完成一组输出。以上为本题计时与同步约定的补充。\n\n1. 改造为二级流水线并获得最大吞吐率。\n\na) 按原卷的两个位置作答：给出一种恰好在两条依赖边上各插入一个寄存器的最优方案。上排的边为{{blank:two-stage-cut-1}}，下排的边为{{blank:two-stage-cut-2}}。每空填边名，如`AB`（也可写`A-B`或`A 与 B`）。\n\nb) 写出该方案的一条最长级内组合路径：{{blank:two-stage-path}}（用`A→B`这样的格式；可附末端`→REG`）。包含寄存器开销的最长延时，即最小时钟周期为{{blank:two-stage-delay}} ps（可只填数值）。\n\nc) 最大吞吐率为{{blank:two-stage-rate}} 组/ps（只填约分后的分数，如`1/50`；单位已给出）。\n\n2. 改造为三级流水线并获得最大吞吐率。\n\na) 写出一种完整最优方案，列出全部需添加寄存器的依赖边；也可写每一级的模块集合并注明跨级边均加同步寄存器：{{blank:three-stage-cuts}}。本空按完整方案自评，不要求与参考答案采用相同顺序或措辞。\n\nb) 包含寄存器开销的最长延时，即最小时钟周期为{{blank:three-stage-delay}} ps（可只填数值）。\n\nc) 最大吞吐率为{{blank:three-stage-rate}} 组/ps（只填约分后的分数；单位已给出）。"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：二级流水线在 B 与 C 之间、F 与 G 之间插入寄存器（最长延时 100ps，最大吞吐率 1/100ps）；三级流水线在 A|B、B|C、E|F、F|G 之间插入寄存器（最长延时 80ps，最大吞吐率 1/80ps）。\n模块延迟：A 60、B 30、C 30、D 40、E 20、F 60、G 40、H 30 ps，寄存器 10ps；跨链依赖为 A→F、C→H，故最长路径是 `A→F→G→H→REG = 200ps`。\n1. 二级流水线：\na) 在 **B 与 C 之间**、**F 与 G 之间**插入寄存器；\nb) 第一级为 A→B（90ps，E→F 只有 80ps），第二级为 C→D→REG 与 G→H→REG（各 70ps）；\n   最长延时路径为 A→B（90ps），含流水线寄存器的最长延时为 100ps；\nc) 最大吞吐率 = `1/100ps = 1/(10⁻¹⁰ s) = 10¹⁰` 条/秒。\n2. 三级流水线：\na) 在 A 与 B 之间、B 与 C 之间，以及 E 与 F 之间、F 与 G 之间插入寄存器；\nb) 最长路径延时为 80ps（第三级 G→H→REG 或 C→D→REG 均为 `40+30+10 = 80ps`）；\nc) 最大吞吐率 = `1/80ps = 1/(8×10⁻¹¹ s) = 1.25×10¹⁰` 条/秒。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+          "text": "二级最优周期为 **130ps**，最大吞吐率为 **1/130 组/ps**；三级最优周期为 **80ps**，最大吞吐率为 **1/80 组/ps**。每个周期只计一次级末寄存器的10ps开销；一个操作经过二级或三级的延迟分别是260ps、240ps，不应以其倒数作为稳态吞吐率。\n\n原图完整依赖边为`AB、BC、CD、EF、FG、GH、AF、CH`，其中`AF`和`CH`是斜向边。未流水化的最长组合路径为`A→F→G→H`，延迟190ps，含输出寄存器为200ps。\n\n1. 二级流水线。\n\n按1a的两条边格式，有两种最优方案：\n\n| 插入寄存器的边 | 第一级 | 第二级 | 第一级最大组合延迟 | 第二级最大组合延迟 |\n| --- | --- | --- | --- | --- |\n| BC、FG | A、B、E、F | C、D、G、H | A→F：120ps | C→D或G→H：70ps |\n| AB、FG | A、E、F | B、C、D、G、H | A→F：120ps | B→C→D：100ps |\n\n两种方案的最长级内组合路径都是`A→F`，故周期均为`120+10=130ps`，吞吐率为`1/130 组/ps = 10^11/13 组/s`。旧解析只计算A→B的90ps，漏掉同级A→F的120ps，因此100ps错误。\n\n最优性：看完整依赖路径`A→F→G→H`的模块延迟`60、60、40、30ps`。二级同步分级必须把该路径分为至多两段；三个内部切点分别得到最大段延迟`max(60,130)=130`、`max(120,70)=120`、`max(160,30)=160ps`。不切更慢，故组合延迟下界为120ps，上表达到了下界。\n\n另有同样达到130ps的三条边方案：在CD、CH、FG各加一个寄存器，第一级A、B、C、E、F，第二级D、G、H，最长组合路径A→B→C与A→F均为120ps。它说明一般最优分级不唯一，但不符合1a明确要求的“恰好两条边”作答格式；不能只写CD、FG而漏掉CH。\n\n2. 三级流水线。\n\n下面两种方案均正确；所列每条边各加一个寄存器，D、H后仍使用原图的输出寄存器。\n\n| 第一级 | 第二级 | 第三级 | 需要添加寄存器的全部边 | 各级最大组合延迟 |\n| --- | --- | --- | --- | --- |\n| A、E | B、F | C、D、G、H | AB、AF、BC、EF、FG | 60、60、70ps |\n| A、E | B、C、F | D、G、H | AB、AF、CD、CH、EF、FG | 60、60、70ps |\n\n第一种方案的第三级最长路径是C→D或G→H，各70ps；第二种方案的第三级最长路径是G→H，70ps。周期均为`70+10=80ps`，吞吐率为`1/80 组/ps = 1.25×10^10 组/s`。第一种方案AF处的寄存器使F在第二级使用与E路径相同批次的数据；漏加AF会混用相邻组输入，不能作为正确同步流水线方案。\n\n最优性：路径`A→F→G→H`有四个不可再拆分模块，分入三级时至少两个相邻模块在同一级；相邻对的延迟和为120、100、70ps，故最大级内组合延迟至少70ps。上表同时满足全部依赖并达到下界。\n\n判分说明：1a接受AB/FG或BC/FG，两个位置分别对应上、下排。1b接受A→F及带末端REG的同义写法；130ps与80ps均包含寄存器开销。两个吞吐率空固定为组/ps，填最简分数1/130、1/80。2a为方案自评空：检查所有模块恰属一级、A/E在第一级、D/H在第三级，依赖不逆向，全部跨级边按级差补足寄存器且各级组合延迟不超过70ps；接受任一表列完整方案及等价描述，不按边列举顺序判错。只写旧AB、BC、EF、FG而漏AF，或第二种方案漏CH，都不满足同步要求；仅写“80ps”也不能代替完整方案。其余七空自动判分不代表2a方案已经通过。\n\n> 原卷及配套材料均无官方答案。旧解来源为AI（deepseek v4.1 flash · 大肥鱼小姐）；本次依据原PDF第10页和原图完整依赖独立重算，并穷举分级交叉验证，仍不代表官方答案或人工认证。"
         },
         "provenance": {
           "origin": "ai-derived",
-          "crossChecked": false,
+          "crossChecked": true,
           "attribution": "deepseek v4.1 flash · 大肥鱼小姐",
-          "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text."
+          "note": "AI来源保留；2026-11-14另按原PDF第10页完整依赖图独立推导并穷举分级交叉验证，不代表官方答案或人工认证。"
         },
         "blankAnswers": [
           {
             "blankId": "two-stage-cut-1",
             "method": "exact",
             "acceptedAnswers": [
+              "A 与 B",
+              "A-B",
+              "AB",
               "B 与 C",
-              "B-C"
+              "B-C",
+              "BC"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -33929,7 +33827,8 @@
             "method": "exact",
             "acceptedAnswers": [
               "F 与 G",
-              "F-G"
+              "F-G",
+              "FG"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -33940,8 +33839,11 @@
             "blankId": "two-stage-path",
             "method": "exact",
             "acceptedAnswers": [
-              "A→B",
-              "A -> B"
+              "A→F",
+              "A -> F",
+              "AF",
+              "A→F→REG",
+              "A -> F -> REG"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -33952,8 +33854,9 @@
             "blankId": "two-stage-delay",
             "method": "exact",
             "acceptedAnswers": [
-              "100ps",
-              "100 ps"
+              "130",
+              "130ps",
+              "130 ps"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -33964,9 +33867,8 @@
             "blankId": "two-stage-rate",
             "method": "exact",
             "acceptedAnswers": [
-              "1/100ps",
-              "10^10 条/秒",
-              "10¹⁰ 条/秒"
+              "1/130",
+              "1 / 130"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -33975,20 +33877,13 @@
           },
           {
             "blankId": "three-stage-cuts",
-            "method": "exact",
-            "acceptedAnswers": [
-              "A 与 B、B 与 C、E 与 F、F 与 G",
-              "A-B、B-C、E-F、F-G"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "self"
           },
           {
             "blankId": "three-stage-delay",
             "method": "exact",
             "acceptedAnswers": [
+              "80",
               "80ps",
               "80 ps"
             ],
@@ -34001,9 +33896,8 @@
             "blankId": "three-stage-rate",
             "method": "exact",
             "acceptedAnswers": [
-              "1/80ps",
-              "1.25×10^10 条/秒",
-              "1.25×10¹⁰ 条/秒"
+              "1/80",
+              "1 / 80"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -34414,7 +34308,7 @@
     {
       "schemaVersion": "5",
       "id": "q-99e5e4f1f599db68",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 27,
       "number": {
@@ -34437,14 +34331,11 @@
         "tags": []
       },
       "publication": {
-        "state": "review",
+        "state": "published",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "audit-2017-final-network-options-have-unresolved-scope",
-          "private-prefix-subsets-and-http10-keepalive-need-source-review"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -34457,28 +34348,30 @@
           "curated": "_curated/期末/2017期末-无答案/623.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "TCP/IP、HTTP 与私有地址判断"
+          "editorNote": "TCP/IP、HTTP 与私有地址判断；按 RFC 范围修正多选键，明确 HTTP/1.0 Keep-Alive 扩展口径"
         }
       ],
       "type": "multiple-choice",
       "stem": {
         "format": "markdown",
-        "text": "第七题（12分）第2问：不定项选择题（全对得分，有错得0分）"
+        "text": "第七题（12分）第2问：不定项选择题（全对得分，有错得0分）。按教材中的常规内核TCP/IP实现与IPv4单播转发判断；D 包含 HTTP/1.0 的 Keep-Alive 扩展。"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C。\n\n只有 C 正确。A 错（TCP 在内核实现，不是用户态）；B 错（IP 地址可由 DHCP 动态分配）；D 错（HTTP/1.0 是非持续连接，HTTP/1.1 才支持一个连接多个事务）；E 错（Web 代理缓存对用户是隐式的）；F 错（私有地址段应为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+          "text": "答案：D、F。\n\n- A 错。TCP 是提供可靠字节流服务的传输层协议；TCP 规范不要求必须在用户态实现，因此“实现在用户态”不是该协议的必然属性。\n- B 错。IP 地址可以动态分配，不要求每台主机始终使用固定地址。\n- C 错。这里问的是 IP 包在网际互联中的路由。IPv4 路由器根据 IP 目的地址及路由信息决定下一跳；LAN 帧头参与本地链路逐跳交付和封装，不与 IP 包头共同决定 IP 路由。\n- D 对。HTTP/1.0 的基本行为不是默认持久连接，但 Keep-Alive 扩展可协商在同一连接上承载多个事务。原选项的“支持”按可通过该扩展实现理解，不表示默认开启。\n- E 错。Web 代理缓存可以显式配置，也可以透明部署，不能一概说对用户显式存在。\n- F 对。RFC 1918 保留的私有地址范围为 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16。选项给出的 10.0.0.0/12、172.16.0.0/16、192.168.0.0/20 均完全落在相应私有块内，因此这些子网里的地址仍属私有地址。\n\n依据：[RFC 1918 §3](https://www.rfc-editor.org/rfc/rfc1918.html#section-3) 定义私有地址块；[RFC 2068 §19.7.1](https://www.rfc-editor.org/rfc/rfc2068.html#section-19.7.1) 记录 HTTP/1.0 的 Keep-Alive 扩展，并说明持久连接不是默认行为；[RFC 1812 §§5.2.1、5.2.4](https://www.rfc-editor.org/rfc/rfc1812.html#section-5.2.1) 规定 IPv4 路由器检查目的 IP 地址，选择下一跳后再确定链路层下一跳地址并封装帧。"
         },
         "provenance": {
-          "origin": "unknown",
-          "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
+          "origin": "ai-derived",
+          "crossChecked": false,
+          "attribution": "deepseek v4.1 flash · 大肥鱼小姐（旧参考）；Codex（本轮基于RFC修订）",
+          "note": "原卷及配套材料无官方答案；本题答案依据 RFC 一手资料重新核定。"
         },
         "correctOptionIds": [
-          "C"
+          "D",
+          "F"
         ]
       },
       "options": [
@@ -34500,14 +34393,14 @@
           "id": "C",
           "content": {
             "format": "markdown",
-            "text": "IP包在网际互联时通过其帧头（LAN frame header）和包头（Internet\npacket header）信息共同决定路由"
+            "text": "IP包在网际互联时通过其帧头（LAN frame header）和包头（Internet packet header）信息共同决定路由"
           }
         },
         {
           "id": "D",
           "content": {
             "format": "markdown",
-            "text": "HTTP1.0支持在同一个连接里进行多个transaction"
+            "text": "HTTP/1.0 可通过 Keep-Alive 扩展在同一个连接里进行多个 transaction"
           }
         },
         {
@@ -34521,7 +34414,7 @@
           "id": "F",
           "content": {
             "format": "markdown",
-            "text": "10.0.0.0/12和172.16.0.0/16和192.168.0.0/20属于私有地址字段"
+            "text": "10.0.0.0/12、172.16.0.0/16 和 192.168.0.0/20 的地址均属于私有地址范围"
           }
         }
       ]
@@ -35904,7 +35797,7 @@
     {
       "schemaVersion": "5",
       "id": "q-ec77a14af219f706",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-382bf3b10bc8d35a",
       "paperOrder": 25,
       "number": {
@@ -35929,8 +35822,8 @@
         "reviewer": null,
         "reviewedAt": null,
         "issues": [
-          "audit-2017-final-pte-content-confused-with-frame-number",
-          "tlb-refill-and-immediate-operand-semantics-need-recomputation"
+          "source-addq-memory-operand-mapping-and-value-unspecified",
+          "source-pte-unshown-bits-and-tlb-replacement-unspecified"
         ]
       },
       "sources": [
@@ -35944,7 +35837,7 @@
           "curated": "_curated/期末/2017期末-无答案/513.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "2026-11-14审校暂缓发布，保留原文待下一轮：旧答案把读出的完整PTE与访问目标的物理页号混淆、把addq的内存操作数擅改立即数、假定TLB miss后不填充而重复miss，后续关系及变化表均需从原卷重算。"
+          "editorNote": "2026-11-14后续源核：视觉核对原PDF第15–17页；第3行确无$，读取虚拟地址0x11000，其映射、TLB状态和内存值均未给，原题欠定；第4行原卷漏写寄存器前缀%，本题明确勘误。重写符号逐指令解析，仅1a保留可证明的客观键，其他空自评并继续review。详见docs/AUDIT_FOLLOWUP_2017_VM.md。"
         }
       ],
       "type": "fill",
@@ -36036,28 +35929,28 @@
             "width": "medium"
           }
         ],
-        "text": "第六题（12分）\n通常处理器中的MMU通过页表实现虚拟内存地址到物理内存地址的转换，而\nTLB被用于提升地址转换的效率。然而TLB必须和页表之间保持一致，才能保证\nMMU正确按页表转换虚拟地址。当修改页表内容时，需要通过`invlpg`指令将对应\n的TLB表项置为失效，以确保TLB与页表一致。\n指令`invlpg m`把包含虚拟地址m的页面在TLB中的表项置为失效。\n假设当前状态下，TLB与页表是一致的。部分TLB表项如下（假设TLB是全\n相联的）：\n有效位  TLB标记  页面号\n`1  0x8040201  0x4801`\n`1  0x8040233  0x4812`\n`0  0x8040382  0x9C33`\n`1  0x8046740  0x4801`\n`0  0x8046621  0x8845`\n`1  0x80467CD  0x6734`\n与上述TLB表项相关的两个页表页的地址及其中的部分页表项如下：\n页面号  存在位    页面号  存在位\n索引号  索引号\nBits: 51 - 12  Bit: 0    Bits: 51 - 12  Bit: 0\n`0x1  0x4801  1    0x10  0x2312  1`\n`0x33  0x4812  1    0x21  0x8845  1`\n`0x54  0x8745  1    0x73  0x4521  1`\n`0x180  0x3212  1    0x140  0x4801  1`\n`0x182  0x9C33  1    0x182  0x8ACD  1`\n`0x1A1  0x9078  1    0x1CD  0x6734  1`\n基地址为`0x4801000`的页表页    基地址为`0x4812000`的页表页\n设处理器采用的是64位虚拟地址和64位物理地址，页面大小为4KB，页表为\n4级。\n1. 分析下面的指令序列：\n\n\n```\n1. movq $0x8040233000, %rbx\n2. movq 0xA00(%rbx), %rcx\n3. addq 0x11000, %rcx\n4. movq %rcx, 0x108(rbx)\n5. movq 0x8046621108, %rax\n```\na) 执行完第2行指令后，载入到`%rcx`中的物理页面号为：{{blank:p1-a}}；\nb) 执行完第3行指令后，`%rcx` 中的物理页面号为：{{blank:p1-b}}；\nc) 执行完第5行指令后，`%rcx` 和 `%rax` 中的内容之间有何关系？{{blank:p1-c}}\nd) 在执行上述5行指令过程中，会发生{{blank:p1-d}}次 TLB miss；\ne) 在执行上述5行指令过程中，会发生{{blank:p1-e}}次 page fault；\n2. 接着上述 5 条指令执行下面的指令：\n```\n6. movq 0x8040382C10, %r10\n7. movq %rax, 0x8046740C10\n8. movq 0x8040382C10, %r11\n9. invlpg 0x8040382C10\n10. movq 0x8040382C10, %r12\n```\na) 全部10条指令执行后，`%r10` 和 `%r11` 中的内容之间有何关系？{{blank:p2-a}}\nb) 全部10条指令执行后，`%r11` 和 `%r12` 中的内容之间有何关系？{{blank:p2-b}}\nc) 在执行上述10行指令过程中，共发生了{{blank:p2-c}}次 TLB miss。\n3. 请写出执行完上述10行指令后，TLB和页表页中有变化的表项中的内容。\n有效位  TLB标记  页面号\n  `0x8040201`\n  `0x8040233`\n  `0x8040382`\n  `0x8046740`\n  `0x8046621`\n  `0x80467CD`\n\n\n页面号  存在位    页面号  存在位\n索引号  索引号\nBits: 51 - 12  Bit: 0    Bits: 51 - 12  Bit: 0\n`0x1        0x10`\n`0x33        0x21`\n`0x54        0x73`\n`0x180        0x140`\n`0x182        0x182`\n`0x1A1        0x1CD`\n基地址为`0x4801000`的页表页    基地址为`0x4812000`的页表页"
+        "text": "第六题（12分）\n\n> 源卷审校说明：原PDF第16页第3行确为 `addq 0x11000, %rcx`，没有立即数前缀 `$`。它读取虚拟地址 `0x11000` 处的8字节；原卷没有给出该页的映射、TLB状态或内容，因此后续部分问题不能唯一作答。本题保留原指令及问题供审校，仅1a自动判分，其余空对照解析自评，暂不发布。第4行原卷的 `0x108(rbx)` 仅补正寄存器前缀为 `0x108(%rbx)`。\n\n通常处理器中的MMU通过页表实现虚拟内存地址到物理内存地址的转换，而TLB被用于提升地址转换的效率。然而TLB必须和页表之间保持一致，才能保证MMU正确按页表转换虚拟地址。当修改页表内容时，需要通过 `invlpg` 指令将对应的TLB表项置为失效，以确保TLB与页表一致。\n\n指令 `invlpg m` 把包含虚拟地址m的页面在TLB中的表项置为失效。\n\n假设当前状态下，TLB与页表是一致的。部分TLB表项如下（假设TLB是全相联的）：\n\n| 有效位 | TLB标记 | 页面号 |\n| --- | --- | --- |\n| 1 | `0x8040201` | `0x4801` |\n| 1 | `0x8040233` | `0x4812` |\n| 0 | `0x8040382` | `0x9C33` |\n| 1 | `0x8046740` | `0x4801` |\n| 0 | `0x8046621` | `0x8845` |\n| 1 | `0x80467CD` | `0x6734` |\n\n与上述TLB表项相关的两个页表页的地址及其中的部分页表项如下。页面号为PTE的bits 51–12，存在位为bit 0；其他位未列出。\n\n| `0x4801000`页表页：索引号 | 页面号 | 存在位 | `0x4812000`页表页：索引号 | 页面号 | 存在位 |\n| --- | --- | --- | --- | --- | --- |\n| `0x1` | `0x4801` | 1 | `0x10` | `0x2312` | 1 |\n| `0x33` | `0x4812` | 1 | `0x21` | `0x8845` | 1 |\n| `0x54` | `0x8745` | 1 | `0x73` | `0x4521` | 1 |\n| `0x180` | `0x3212` | 1 | `0x140` | `0x4801` | 1 |\n| `0x182` | `0x9C33` | 1 | `0x182` | `0x8ACD` | 1 |\n| `0x1A1` | `0x9078` | 1 | `0x1CD` | `0x6734` | 1 |\n\n设处理器采用64位虚拟地址和64位物理地址，页面大小为4KB，页表为4级。\n\n1. 分析下面的指令序列：\n\n```asm\n1. movq $0x8040233000, %rbx\n2. movq 0xA00(%rbx), %rcx\n3. addq 0x11000, %rcx\n4. movq %rcx, 0x108(%rbx)\n5. movq 0x8046621108, %rax\n```\n\na) 执行完第2行指令后，载入到 `%rcx` 中的物理页面号为：{{blank:p1-a}}；\n\nb) 执行完第3行指令后，`%rcx` 中的物理页面号为：{{blank:p1-b}}；\n\nc) 执行完第5行指令后，`%rcx` 和 `%rax` 中的内容之间有何关系？{{blank:p1-c}}\n\nd) 在执行上述5行指令过程中，会发生 {{blank:p1-d}} 次TLB miss；\n\ne) 在执行上述5行指令过程中，会发生 {{blank:p1-e}} 次page fault。\n\n2. 接着上述5条指令执行：\n\n```asm\n6. movq 0x8040382C10, %r10\n7. movq %rax, 0x8046740C10\n8. movq 0x8040382C10, %r11\n9. invlpg 0x8040382C10\n10. movq 0x8040382C10, %r12\n```\n\na) 全部10条指令执行后，`%r10` 和 `%r11` 中的内容之间有何关系？{{blank:p2-a}}\n\nb) 全部10条指令执行后，`%r11` 和 `%r12` 中的内容之间有何关系？{{blank:p2-b}}\n\nc) 在执行上述10行指令过程中，共发生了 {{blank:p2-c}} 次TLB miss。\n\n3. 请写出执行完上述10行指令后，TLB和页表页中有变化的表项中的内容。按题给初始表的各行填写；不能确定的部分说明缺少什么条件。"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：\n1.\n`a) 0x4812`（第 2 条指令读的是虚拟地址 `0x8040233A00`，命中 TLB 表项\n   `0x8040233 → 0x4812`）\n`b) 0x15812`（`0x4812 + 0x11000`）\n`c) %rcx` 是**取数地址**（页表项的物理地址），`%rax` 是该地址处读出的内容\n   （即 `%rax = *(%rcx)`）。数值上 `%rcx = 0x15812`、`%rax = 0x4801`，两者不等；\n   `%rcx` 指向页表页 `0x15812` 中的第 `0x21` 项，`%rax` 就是这一项的值。\n   一句话：`%rcx` 是指向页表项的指针，`%rax` 是该页表项的内容。\nd) 1 次 TLB miss\ne) 0 次 page fault\n2.\n`a) %r10` 与 %r11 **不相等**：第 6 条访存 `0x8040382` 页时该 TLB 表项有效位=0\n   ⇒ TLB miss、查页表得 PTE[0x182] = **0x9C33** ⇒ 读物理 `0x9C33C10`；\n   第 8 条再读时该 TLB 表项**仍然无效**，再查页表 —— 而**页表项已被第 7 条\n   改成 0x4801** ⇒ 读物理 `0x4801C10`。两条读到的是**不同**物理单元的内容。\n`b) %r11` 与 %r12 **相等**：第 9 条 `invlpg` 置无效之后，第 10 条重新查页表，\n   得到的仍是第 7 条改写后的 `PTE[0x182] = 0x4801 ⇒` 与第 8 条读到同一物理单元\n   （`0x4801C10`，即第 7 条刚写入 `%rax` 的位置）。\nc) 4 次 TLB miss\n3. 发生变化的表项：\n\nTLB：\n\n| 有效位 | TLB 标记 | 页面号 |\n| --- | --- | --- |\n| 0 | `0x8040382` | （无效，无需填） |\n\n页表页（基地址 `0x4801000`）：\n\n| 索引号 | 页面号 | 存在位 |\n| --- | --- | --- |\n| `0x182` | `0x4801` | 1 |\n\n解析：\n**地址分解**（4KB 页 ⇒ 页内偏移 12 位；4 级页表 ⇒ 每级 9 位；页表项 8 字节）：\n虚拟地址 = [VPN3:47-39][VPN2:38-30][VPN1:29-21][VPN0:20-12][offset:11-0]。\n题给两个页表页分别是「`VPN2 = 0x1`」和「`VPN2 = 0x2`」两级中的**最末级**页表页：\n- `0x4801000` 一页负责 `VPN = 0x80402xx`（`VPN2=0x1`）；它的 `PTE 0x1 → 0x4801` 等。\n- `0x4812000` 一页负责 `VPN = 0x80466xx`（`VPN2=0x2`）；`PTE 0x21 → 0x8845`、\n  `0x140 → 0x4801`、`0x1CD → 0x6734` 等。\n每个 TLB 表项的「页面号」就是它指向的物理页号：`0x8040201→0x4801`、\n`0x8040233→0x4812`、`0x8040382→0x9C33`（无效）、`0x8046740→0x4801`、\n`0x8046621→0x8845`（无效）、`0x80467CD→0x6734`。TLB 与页表一致。\n\n**第 1 组**\n- 第 1 条 `movq $0x8040233000, %rbx`：`rbx = 0x8040233000`，页号 `0x8040233`、\n  页内偏移 `0x000`。\n- 第 2 条 `movq 0xA00(%rbx), %rcx`：取地址 `0x8040233A00`（页号 `0x8040233`、\n  偏移 `0xA00`）。TLB 命中该页 ⇒ 该虚拟页映射到物理页 `0x4812`；偏移 `0xA00`\n  ⇒ 读物理地址 `0x4812A00` 的 8 字节。\n  （注意 `0xA00 = 0x140 × 8`：题给 `0x4801000` 那张页表页的第 `0x140` 项是\n  「`0x140 → 0x4801`」——这一项正好是虚拟页 `0x8046740` 的映射，说明题目给的两张\n  「页表页」就是 4 级页表的**最末级（`PTE` 级）**页，而 `0x8040233` 自己那一项\n  （索引 `0x33 → 0x4812`）在 `0x4801000` 表里也列了出来。）\n  按题给数据该项读出的值即 **0x4812 = 虚拟页 `0x8040233` 的物理页号**。\n- 第 3 条 `addq 0x11000, %rcx`（原卷缺 `$`，是立即数加法）：\n  0x4812 + 0x11000 = **0x15812**。\n- 第 4 条 `movq %rcx, 0x108(rbx)`：把 `0x15812` 写到虚拟地址 `0x8040233108`\n  （页号 `0x8040233`、偏移 `0x108`；即某张页表页的第 `0x21` 项）。\n- 第 5 条 `movq 0x8046621108, %rax`：读虚拟地址 `0x8046621108`。页号 `0x8046621`\n  （TLB 标记 `0x8046621` 的表项有效位是 0，故这里要查页表），偏移 `0x108`。\n  题给第二张页表页在 `0x4812000`，其第 `0x21` 项正是 `0x21 → 0x8845`，\n  说明物理页 `0x8845` 就是该虚拟页所在页（该页表页第 `0x21` 项即该页的映射入口）。\n  于是这条读到的 8 字节就是第 4 条刚写进去的值 —— 只不过它落在\n  「`%rcx` 所指向的物理位置」和「`0x8046621108` 翻译出的物理位置」的同一处。\n  因此 **%rcx 是地址、`%rax` 是该地址处的内容（页表项）**，二者是\n  「指针 / 指针所指的值」的关系，数值上 `%rax = 0x4801`（= 页表项里指向\n  物理页 `0x4801` 的值），`%rcx = 0x15812 ≠ %rax`。\n- d) 5 条指令里的访存只有第 2 条（页 `0x8040233`，TLB 命中）和第 5 条\n  （页 `0x8046621`，**未命中 ⇒ 1 次 TLB miss**）。第 1、3、4 条是对寄存器的操作，\n  第 4 条虽然是 store，目标页也是 TLB 命中的 `0x8040233`。\n  （若把取指也算进去，取指页固定且命中，不影响计数。）⇒ **1 次**。\n- e) 上述每一次查页表都在题给的存在位=1 的表项中命中 ⇒ **0 次 page fault**。\n\n**第 2 组**（这里的关键是：TLB 里 `0x8040382` 的表项**本来就是无效的**，所以每次\n访问都要查页表；而第 7 条改写了它的页表项，于是「第 8 条」和「第 10 条」看到的\n映射不同。）\n- 第 6 条 `movq 0x8040382C10, %r10`：页号 `0x8040382`（TLB 表项有效位=0）⇒ TLB\n  miss，查页表：`PTE[0x182] = 0x9C33 ⇒` 物理页 `0x9C33`、偏移 `0xC10`\n  ⇒ 读物理 `0x9C33C10`，`%r10` = 该处内容。\n- 第 7 条 `movq %rax, 0x8046740C10`：页号 `0x8046740`（TLB 有效 ⇒ 物理页 `0x4801`），\n  偏移 `0xC10 ⇒` 写物理地址 **0x4801C10**。注意 `0x4801000` 正是题给的**页表页基址**，\n  `0xC10 / 8 = 0x182 ⇒` 这条指令改写的恰好是**页表项 PTE[0x182]**\n  （原值 `0x9C33`，即虚拟页 `0x8040382` 的映射），新值 = `%rax = 0x4801`。\n- 第 8 条再读 `0x8040382C10`：TLB 表项 `0x8040382` 仍是无效的（第 9 条才 `invlpg`），\n  于是重新查页表 —— 但此时 `PTE[0x182]` 已被第 7 条改成 `0x4801 ⇒` 物理页\n  **0x4801**、偏移 `0xC10 ⇒` 读物理地址 `0x4801C10`（与第 7 条写的是同一处）。\n  所以 `%r11 = %rax` 的值（`0x4801`），**%r11 ≠ %r10**。\n- 第 9 条 `invlpg 0x8040382C10`：把 `0x8040382` 的 TLB 表项置无效（它本来就无效）。\n- 第 10 条再读 `0x8040382C10`：同样按被改过的 `PTE` 翻译 ⇒ 仍读 `0x4801C10`\n  `⇒ %r12 = %r11`。\n`⇒ a) %r10 ≠ %r11`（第 6 条走的是物理页 `0x9C33`，第 8 条走的是改后页表项给出的 `0x4801`）；\n   `b) %r11 = %r12`（两条都按改后的 `PTE` 翻译，读同一物理单元）；\n   c) 10 条里的数据访存页号依次为：第 2 条 `0x8040233`（命中）、第 5 条 `0x8046621`\n   （miss①）、第 6 条 `0x8040382`（miss②）、第 7 条 `0x8046740`（命中）、\n   第 8 条 `0x8040382`（表项仍无效 ⇒ miss③）、第 10 条 `0x8040382`（第 9 条刚\n   invalidate ⇒ miss④）⇒ **4 次 TLB miss**。\n\n> 勘误说明：第 8 条**不会**用「旧的 TLB 值」，因为 TLB 里这一项本来就是无效的\n> （有效位 0），它必须查页表 —— 而此刻页表项已被第 7 条改过，所以第 8 条就已经\n> 看到新映射 `0x4801` 了。因此「`%r11 = %r12`」而「`%r10 ≠ %r11`」。\n> 第 9 条的 `invlpg` 依然是必要的：若 `0x8040382` 的表项本来有效（例如本题若把它的\n> 有效位改成 1），不 `invlpg` 就会一直命中 TLB 取到过期的 `0x9C33`。\n\n**第 3 问**（变化的表项）\n- 第 7 条经虚拟地址 `0x8046740C10` 改写了物理页 `0x4801` 上的 `PTE[0x182]`：\n  原 `0x9C33 →` 新 **0x4801**（存在位 1）。这就是页表页中唯一变化的项。\n- TLB：第 9 条 `invlpg` 把 **0x8040382** 的表项置为无效（有效位 0）。其余五项\n  在本程序执行过程中未变（第 7 条只改了内存中的页表项，硬件不会替你失效\n  TLB，这正是本题第一段话所说的「必须用 `invlpg` 保持一致」）。\n\n> ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。"
+          "text": "源卷欠定，不能把旧答案当作有效判分依据。唯一保留的客观键为 **1a：`0x4801`**。以下先按原指令推导，再给出两种补全作为反例；补全不是新增题设。\n\n记 `M[p]` 为物理地址p处的8字节内容，`frame(x) = (x >> 12) & 0xFFFFFFFFFF` 为PTE的页面号字段。4KB页的页内偏移为12位，每个8字节PTE在页内的地址是 `8 × 索引`。\n\n**原指令的逐步结果**\n\n| 行 | 虚拟地址及转换 | 结果/变化 |\n| --- | --- | --- |\n| 1 | 无数据访存 | `%rbx = 0x8040233000`。 |\n| 2 | `0x8040233A00`：VPN=`0x8040233`、offset=`0xA00`；初始TLB命中PPN=`0x4812`，故PA=`0x4812A00`。 | `0xA00 / 8 = 0x140`，读的是基址`0x4812000`页表的第`0x140`项。记完整读数为Q，则 `frame(Q)=0x4801`、`Q & 1 = 1`；所以1a为`0x4801`。注意`0x4812`是此次访存的目标物理页号，并不是Q中的页面号。 |\n| 3 | `0x11000`：VPN=`0x11`、offset=`0`；无`$`，是内存源操作数。 | 若读成功，记读数为U，则 `%rcx = R = (Q + U) mod 2^64`。VPN=`0x11`的TLB状态、映射、存在/权限及U全部未给，不能得出`frame(R)`、本行miss数或缺页数。 |\n| 4 | `0x8040233108`：VPN=`0x8040233`、offset=`0x108`；若仍命中原映射，PA=`0x4812108`。 | `0x108 / 8 = 0x21`，把R作为**完整PTE**写入基址`0x4812000`页表的第`0x21`项，而不是把R当作页面号写入字段。新映射的页面号是`frame(R)`，存在位是`R & 1`。 |\n| 5 | `0x8046621108`：VPN=`0x8046621`、offset=`0x108`；原表项无效，需要查修改后的PTE`[0x21]`。 | 若R为可用PTE，则令F=`frame(R)`，填充TLB `0x8046621 → F`，并令 `%rax = X = M[(F << 12) + 0x108]`。F=`0x4812`时才有本题所需的自别名读回地址；若还有访问位等硬件更新，也须计入完整读数。一般不能断言`%rax=%rcx`或“指针/所指值关系”。 |\n| 6 | `0x8040382C10`：VPN=`0x8040382`、offset=`0xC10`；初始无效，查左表`[0x182]`得PPN=`0x9C33`。 | 正常完成时填充TLB `0x8040382 → 0x9C33`，并读 `Y = M[0x9C33C10]` 到`%r10`。TLB miss后会填充，不能继续把它当作无效。 |\n| 7 | `0x8046740C10`：若仍命中原映射PPN=`0x4801`，则PA=`0x4801C10`。 | `0xC10 / 8 = 0x182`，将X写入基址`0x4801000`页表的第`0x182`项。新页面号为`frame(X)`，存在位为`X & 1`。该store不会自动失效第6行填入的TLB项。 |\n| 8 | 再读`0x8040382C10`。 | 若第6行的TLB项未被替换，则命中过期映射，仍读`0x9C33C10`，故`%r11=%r10=Y`。不能声称“因为初始无效，所以第8行仍miss”。 |\n| 9 | `invlpg 0x8040382C10`。 | 使VPN=`0x8040382`的缓存转换失效；这不是一次读取该地址数据的操作。 |\n| 10 | 再读`0x8040382C10`，须重新查第7行修改后的PTE`[0x182]`。 | 若X为可用PTE，则令G=`frame(X)`，填充TLB `0x8040382 → G`，并令 `%r12 = M[(G << 12) + 0xC10]`。X的存在位或其他条件不满足时，可缺页/无法按此继续。 |\n\n上表第4行以后明确写出的“若”是必要条件：源卷只给了部分TLB项且没有给容量/替换策略，新增VPN=`0x11`的访问也可能引入替换；不能把这张条件推演表冒充原题唯一执行轨迹。原卷也没有提供异常处理方式，因此不能默认所有10行均能完成。\n\n**两个数值补全证明1b和1c不唯一**\n\n为展示欠定，取两种都符合图示页面号/P位的完整内存状态。两种状态均让VPN=`0x11`具有可读映射、其TLB项初始有效，TLB容量充足而不发生替换；所需页表项均具有足够权限，访问位/脏位预先置1，不因本序列增加这些位。设第2行实际读到的完整Q为`0x4801063`（低位`0x63`含P、R/W、A、D）。这里给未展示的位选定值只是构造反例，不代表原卷规定它们的值。\n\n| 项目 | 补全A | 补全B |\n| --- | --- | --- |\n| `U =` 虚拟地址`0x11000`的8字节读数 | `0` | `0x11000` |\n| 第3行R | `0x4801063 + 0 = 0x4801063` | `0x4801063 + 0x11000 = 0x4812063` |\n| 1b：`frame(R)` | `0x4801` | `0x4812` |\n| 第5行物理地址 | `0x4801108` | `0x4812108` |\n| 第5行读数X | 可令未展示的左表`[0x21]`为`0x8745063`，故X=`0x8745063` | 读回第4行写入的R，故X=R=`0x4812063` |\n| 1c | `%rax ≠ %rcx` | `%rax = %rcx` |\n| 第7行后左表`[0x182]`的页面号/P位 | `0x8745 / 1` | `0x4812 / 1` |\n| 第10行物理地址 | `0x8745C10` | `0x4812C10` |\n\n两个补全均可顺利完成10行，且都满足题给初始图表，却产生不同的1b、1c和最终页表/TLB内容。若只改变VPN=`0x11`的初始TLB有效状态，前5行miss数就可在1与2之间变化；若使该虚拟页不驻留，第3行还可能发生缺页。由此不能保留旧键“1d=1、1e=0、2c=4”。\n\n**TLB填充、关系题和变化表**\n\n在上述两种无替换、无缺页的补全中，第5、6、10行各miss一次，第8行命中，总计3次；前5行1次。若VPN=`0x11`初始未命中但页存在，再各加1次。这些是明确补全下的数值，不是原题的唯一答案。\n\n第6行填充后到第8行未被替换时，`%r10=%r11`。第8与第10行即使访问不同物理地址，内容也可能相同，不能仅凭“地址不同”判定寄存器值不等。例如补全B第10行读到右表`[0x182]`，页面号为`0x8ACD`，其完整值可以取`0x8ACD063`；原题没有限定Y，令Y=`0x8ACD063`或Y=`0`分别得到`%r11=%r12`或`%r11≠%r12`。因此旧键2b“相等”无依据。\n\n若相关访问均成功且不发生TLB替换，最终确定的条件形式为：\n\n| 位置 | 最终内容 |\n| --- | --- |\n| TLB：VPN=`0x8046621` | 有效位1，页面号F=`frame(R)`；由第5行miss填充。 |\n| TLB：VPN=`0x8040382` | 有效位1，页面号G=`frame(X)`；第6行填旧值，第9行失效，第10行重新填新值。 |\n| 基址`0x4812000`页表的`[0x21]` | 完整值R；页面号F、存在位`R & 1`，由第4行改写。 |\n| 基址`0x4801000`页表的`[0x182]` | 完整值X；页面号G、存在位`X & 1`，由第7行改写。 |\n\n其余题给页号/P位在这套条件轨迹中未被指令写改。访问位/脏位等未展示位的硬件变化不在原表要求的字段内。原卷没有给出U及其转换条件，不能把F/G代成唯一常数，不能把TLB最终有效位仍写成0，也不能漏掉第4行对右表`[0x21]`的修改。\n\n> 原卷及配套材料无官方答案。旧解析由AI推导（deepseek v4.1 flash · 大肥鱼小姐）；本轮由Codex源核重算，保留AI来源，不代表人工认证。继续review的原因是原题信息不足，而不是沿用旧答案待发布。"
         },
         "provenance": {
           "origin": "ai-derived",
           "crossChecked": false,
           "attribution": "deepseek v4.1 flash · 大肥鱼小姐",
-          "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text."
+          "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text. 2026-11-14由Codex对照源PDF重算并替换错误推导，保留原AI来源；没有官方答案或人工认证，原题信息不足，详见docs/AUDIT_FOLLOWUP_2017_VM.md。"
         },
         "blankAnswers": [
           {
             "blankId": "p1-a",
             "method": "exact",
             "acceptedAnswers": [
-              "0x4812",
-              "4812"
+              "0x4801",
+              "4801"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -36066,77 +35959,31 @@
           },
           {
             "blankId": "p1-b",
-            "method": "exact",
-            "acceptedAnswers": [
-              "0x15812",
-              "15812"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "self"
           },
           {
             "blankId": "p1-c",
-            "method": "exact",
-            "acceptedAnswers": [
-              "%rcx 是地址，%rax 是其指向位置的内容",
-              "指针与指针所指的值"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "self"
           },
           {
             "blankId": "p1-d",
-            "method": "exact",
-            "acceptedAnswers": [
-              "1",
-              "一"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "self"
           },
           {
             "blankId": "p1-e",
-            "method": "exact",
-            "acceptedAnswers": [
-              "0",
-              "零"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "self"
           },
           {
             "blankId": "p2-a",
-            "method": "selection",
-            "correctValues": [
-              "ne"
-            ]
+            "method": "self"
           },
           {
             "blankId": "p2-b",
-            "method": "selection",
-            "correctValues": [
-              "eq"
-            ]
+            "method": "self"
           },
           {
             "blankId": "p2-c",
-            "method": "exact",
-            "acceptedAnswers": [
-              "4",
-              "四"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
+            "method": "self"
           }
         ]
       }
@@ -158745,7 +158592,7 @@
     {
       "schemaVersion": "5",
       "id": "q-19c4d964d98fc677",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 26,
       "number": {
@@ -158766,15 +158613,11 @@
         "tags": []
       },
       "publication": {
-        "state": "review",
+        "state": "published",
         "basis": "legacy-migration",
         "reviewer": null,
         "reviewedAt": null,
-        "issues": [
-          "retired-invalid-question",
-          "source-answer-disputed",
-          "已核对原始 2020期末-无答案.pdf 第8页，原卷确实印作 xorq $8,%rcx，而参考按不改变 %rcx 的比较/测试计算8次循环。按异或写回语义，%rcx 前8轮为9、2、11、4、13、6、15、24，并未变为0，不能据此采用60/96周期及47/5命中的原答案。整题备份保留，待课程方确认指令语义或勘误后恢复发布。"
-        ]
+        "issues": []
       },
       "sources": [
         {
@@ -158799,7 +158642,7 @@
           "curated": "_curated/期末/2020期末-无答案/274.md",
           "aliases": [],
           "provenance": "rewritten",
-          "editorNote": "Y86-64 代码在前递与分支预测下的周期数"
+          "editorNote": "题库显式修订：原卷xorq改为不写回的cmpq教学扩展；非官方勘误，原稿与依据见backups/2020-final-pipeline-original.md及docs/AUDIT_FOLLOWUP_2020_PIPELINE.md"
         },
         {
           "legacyId": "q-6e8b718edb015123",
@@ -158817,7 +158660,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": "\n共用五级标量流水线F/D/E/M/W；后两问执行下列教学扩展指令序列：\n\n```asm\n0x000  t:  mrmovq (%rdi), %rbx\n0x002      addq   %rbx, %rax\n0x004      addq   $8, %rdi\n0x006      addq   $1, %rcx\n0x008      xorq   $8, %rcx\n0x00a      jne    t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| `%rdi` | `0x8008` |\n| `%rax` | 0 |\n| `%rbx` | 0 |\n| `%rcx` | 0 |\n\n> 原卷采用每条2字节、含立即数ALU操作的教学表示，并非标准Y86-64二进制编码。本题显式将其视为ISA扩展：每条占2字节，mrmovq读8字节，立即数ALU指令的阶段时序同addq/xorq。分支在E阶段确定，预测始终跳转，有教材前递与1周期load-use暂停。从第一条指令开始F到最后一次jne完成W计总周期，忽略循环后的程序。最后分支预测失败会清除其后的错路指令，但不会反过来延迟该jne本身的W阶段，不另外等待后继有效指令。\n"
+        "text": "\n共用五级标量流水线F/D/E/M/W；后两问执行下列教学扩展指令序列。\n\n**题库修订说明：**2020年原卷此处印为`xorq $8, %rcx`，会写回`%rcx`，不能作为8轮循环。本练习明确将该条修订为`cmpq $8, %rcx`，只更新条件码、不写回寄存器。2019年同初值、同累加结构的前身题使用`cmpq $8, %rcx`；这只是题库修订依据，未找到2020年官方勘误。以下均按本修订版作答。\n\n```asm\n0x000  t:  mrmovq (%rdi), %rbx\n0x002      addq   %rbx, %rax\n0x004      addq   $8, %rdi\n0x006      addq   $1, %rcx\n0x008      cmpq   $8, %rcx\n0x00a      jne    t\n```\n\n| 寄存器 | 初值 |\n| --- | --- |\n| `%rdi` | `0x8008` |\n| `%rax` | 0 |\n| `%rbx` | 0 |\n| `%rcx` | 0 |\n\n> 本题采用每条2字节的抽象教学ISA，并非标准Y86-64二进制编码。`mrmovq`读8字节，立即数`addq`在E计算并在W写回；新增的`cmpq $8, %rcx`在D读`%rcx`（可取前递值），在E按64位减法`%rcx-8`更新ZF/SF/OF，目的寄存器为RNONE，W不写任何寄存器，无额外暂停。分支`jne`在E读取条件码，ZF=0时跳转，预测始终跳转；支持教材前递与1周期load-use暂停。假设程序中的数据访问均有效。从第一条指令开始F到最后一次`jne`完成W计总周期，忽略循环后的程序。最后分支预测失败清除其后的错路指令，不延迟该`jne`自身的W，不另外等待后继有效指令。\n"
       },
       "parts": [
         {
@@ -158927,7 +158770,7 @@
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "答案仍为 **60** 周期。8轮共48条动态指令、8次load-use各暂停1周期，最后指令从F到W再需4周期：`48+8+4=60`。\n\n末轮mrmovq在F50、D51、E52、M53、W54；addq因load-use延至D53、E54；末jne在F56、D57、E58、M59、W60。E58发现不跳转，清除后面的错路指令；这些气泡在jne身后，不延迟其自身W60。若要等循环后的某条指令完成，才需另外考虑恢复及该指令的周期。原参考数值保留，重写“分支惩罚包含在trailing”这种容易重复相加的解释。"
+              "text": "答案：**60** 周期，仅适用于公共题面明确修订的`cmpq`版本。\n\n每轮`addq $1, %rcx`使计数器加1；`cmpq`不写回，因此各轮比较前的`%rcx`依次为1、2、3、4、5、6、7、8。前7轮ZF=0，`jne`跳转且预测正确；第8轮ZF=1，`jne`不跳转。8轮共48条动态指令，8次`mrmovq`紧邻使用`%rbx`的`addq`各暂停1周期，其余依赖由前递解决。从第一条F计到末条W另有4周期：`48+8+4=60`。\n\n末轮`mrmovq`在F50、D51、E52、M53、W54；`addq %rbx,%rax`因load-use停留于D52/D53，在E54执行；`cmpq`在F55、D56、E57；末`jne`在F56、D57、E58、M59、W60。E58发现不跳转，清除后面的错路指令；气泡在`jne`身后，不延迟其W60。因此不能再加2得到62。若统计到循环后某条有效指令完成，须另定终点并计算恢复时间。"
             },
             "provenance": {
               "origin": "unknown",
@@ -158959,7 +158802,7 @@
               "curated": "_curated/期末/2020期末-无答案/274.md",
               "aliases": [],
               "provenance": "rewritten",
-              "editorNote": "Y86-64 代码在前递与分支预测下的周期数"
+              "editorNote": "题库显式修订：原卷xorq改为不写回的cmpq教学扩展；非官方勘误，原稿与依据见backups/2020-final-pipeline-original.md及docs/AUDIT_FOLLOWUP_2020_PIPELINE.md"
             }
           ],
           "issues": []
@@ -159011,7 +158854,7 @@
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "答案：I-cache命中 **47** 次，D-cache命中 **5** 次，共 **96** 周期。\n\n全部指令地址0x000至0x00b位于同一个32字节块，48次有效取指1次冷缺失、47次命中。8次加载地址为8008、8010、8018、8020、8028、8030、8038、8040（十六进制），各8字节不跨32字节块，覆盖8000/8020/8040三个数据块，3次缺失、5次命中。按明确的阻塞不重叠模型，4次冷缺失各额外9周期，`60+4*9=96`。末分支清除错路与其M/W排空重叠，不重复增加恢复气泡。原数值键全部保留，补齐计数边界与缓存模型。"
+              "text": "答案：I-cache命中 **47** 次，D-cache命中 **5** 次，共 **96** 周期。\n\n全部指令地址0x000至0x00b位于同一个32字节块，修订版8轮的48次有效取指有1次冷缺失、47次命中。8次加载地址为8008、8010、8018、8020、8028、8030、8038、8040（十六进制），各8字节不跨32字节块，块序列为8000、8000、8000、8020、8020、8020、8020、8040；对应缺失、命中、命中、缺失、命中、命中、命中、缺失，共3次缺失、5次命中。按题面阻塞且不重叠的模型，I/D共4次冷缺失，各额外9周期，`60+4*9=96`。不能按每次缺失另加10周期得到100；末分支也不另加恢复周期得到98。原数值键经重新推导适用于本修订版，不能据此反推原`xorq`也应执行8轮。"
             },
             "provenance": {
               "origin": "unknown",
@@ -159076,11 +158919,12 @@
         "grading": "parts",
         "reference": {
           "format": "markdown",
-          "text": ""
+          "text": "\n本题采用明确修订后的`cmpq`版本。原始卷面及停用时的全部元数据/旧参考已保存为`question-bank/backups/2020-final-pipeline-original.md`；修订证据、原`xorq`的独立推演和反例见`docs/AUDIT_FOLLOWUP_2020_PIPELINE.md`。原卷的`xorq`不是比较指令，旧参考的8轮、60/96周期不适用于原版。第1问与该指令勘误无关。\n"
         },
         "provenance": {
           "origin": "unknown",
-          "crossChecked": null
+          "crossChecked": null,
+          "note": "2026-11-14题库修订版：将原卷xorq明确改为cmpq并定义教学扩展语义，独立核算后保留10/60/47/5/96；未找到官方指令勘误，不能将这些键用于原xorq版本。"
         }
       }
     },

@@ -840,7 +840,7 @@
     {
       "schemaVersion": "5",
       "id": "p-f99ca20e1a729e32",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2020期末",
       "title": null,
       "year": 2020,
@@ -890,14 +890,14 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 30,
-        "publishedQuestionCount": 29,
-        "quizQuestionCount": 29,
+        "publishedQuestionCount": 30,
+        "quizQuestionCount": 30,
         "verifiedAnswerCount": 30,
         "singleChoiceCount": 24,
         "multipleChoiceCount": 1,
         "fillCount": 4,
         "shortAnswerCount": 0,
-        "compositeCount": 0
+        "compositeCount": 1
       }
     },
     {
@@ -1176,7 +1176,7 @@
     {
       "schemaVersion": "5",
       "id": "p-382bf3b10bc8d35a",
-      "revision": 3,
+      "revision": 4,
       "displayName": "2017期末",
       "title": null,
       "year": 2017,
@@ -1225,13 +1225,13 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 29,
-        "publishedQuestionCount": 24,
-        "quizQuestionCount": 24,
+        "publishedQuestionCount": 28,
+        "quizQuestionCount": 28,
         "verifiedAnswerCount": 29,
         "singleChoiceCount": 15,
-        "multipleChoiceCount": 5,
-        "fillCount": 1,
-        "shortAnswerCount": 2,
+        "multipleChoiceCount": 6,
+        "fillCount": 3,
+        "shortAnswerCount": 3,
         "compositeCount": 1
       }
     },
@@ -1533,7 +1533,7 @@
     {
       "schemaVersion": "5",
       "id": "p-089627b27e9b5e79",
-      "revision": 3,
+      "revision": 4,
       "displayName": "2014期末",
       "title": null,
       "year": 2014,
@@ -1582,10 +1582,10 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 29,
-        "publishedQuestionCount": 28,
-        "quizQuestionCount": 28,
+        "publishedQuestionCount": 29,
+        "quizQuestionCount": 29,
         "verifiedAnswerCount": 29,
-        "singleChoiceCount": 18,
+        "singleChoiceCount": 19,
         "multipleChoiceCount": 1,
         "fillCount": 2,
         "shortAnswerCount": 2,
