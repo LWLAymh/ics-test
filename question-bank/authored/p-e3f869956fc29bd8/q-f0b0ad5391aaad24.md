@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f0b0ad5391aaad24",
-  "revision": 4,
+  "revision": 5,
   "paperId": "p-e3f869956fc29bd8",
   "paperOrder": 17,
   "number": {
@@ -1078,13 +1078,9 @@
 }
 +++
 %%% stem
-
-%%% reference
-
-%%% part-stem: q-fcdcf49e11759e0e
 第三题（10分）
 本题基于下列`m.c`及`foo.c`文件所编译生成的`m.o`和`foo.o`，编译过程未加优化选
-项。
+项。按课程 ELF 逻辑节分类，启用传统 `-fcommon`，不使用 PIC/PIE 或 LTO；暂定定义归 COMMON，已初始化指针归 `.data`，不按现代工具链的细分重定位数据节另行分类。
 `m.c`：
 ```c
 void foo();
@@ -1110,6 +1106,7 @@ void foo() {
     count++;
 }
 ```
+%%% part-stem: q-fcdcf49e11759e0e
 对于每个`foo.o`中定义和引用的符号，请用“是”或“否”指出它是否在模块`foo.o`
 的.symtab节中有符号表条目。如果存在条目，则请指出定义该符号的模块（`foo.o`
 或`m.o`）、符号类型（局部、全局或外部）以及它在模块中所处的节；如果不存在条
@@ -1134,50 +1131,79 @@ void foo() {
 | `temp` | 否 | / | / | / |
 | `count` | 是 | 局部 | `foo.o` | .bss |
 %%% part-stem: q-906e831c908a1bd5
-下图左边给出了`m.o`和`foo.o`的反汇编文件，右边给出了采用某个配置链接成可执行程序后再反汇编出来的文件。根据答题需要，其中的信息略有删减。
+原卷左右两栏分别为可重定位文件和链接后的文件。为避免跨栏转写混杂，下面按两份独立清单排列；符号最终地址及重定位字段位置完整保留。偏移 `r.offset` 相对于其所在目标模块的函数起点，`main` 与 `foo` 分开计算。
 
+**可重定位文件（每个函数起点记为0，未重定位字段暂为0）：**
+
+```asm
+<main>:
+    push %rbp
+    mov  %rsp, %rbp
+    mov  $0, %eax
+    call foo                    # ① PC32字段偏移0xa
+    mov  $0, %eax
+    pop  %rbp
+    ret
+
+<foo>:
+    push %rbp
+    mov  %rsp, %rbp
+    movq $0, 0(%rip)             # ③ disp偏移0x7；② imm偏移0xb
+    mov  0(%rip), %rax           # ④
+    mov  (%rax), %eax
+    mov  %eax, -4(%rbp)
+    mov  0(%rip), %rax           # ⑤ disp偏移0x1e
+    mov  0(%rip), %rdx           # ⑥
+    mov  (%rdx), %edx
+    mov  %edx, (%rax)
+    mov  0(%rip), %rax           # ⑦
+    mov  -4(%rbp), %edx
+    mov  %edx, (%rax)
+    mov  0(%rip), %eax           # ⑧
+    add  $1, %eax
+    mov  %eax, 0(%rip)           # ⑨ disp偏移0x44
+    nop
+    pop  %rbp
+    ret
 ```
-0000000000......<main>:                                          0000000000000fe8 <main>:
-55                    push    %rbp                    fe8:  55                    push   %rbp
-48 89 e5                mov      %rsp,%rbp           fe9:  48 89 e5             mov    %rsp,%rbp
-b8 00 00 00 00      mov      $0x0,%eax                fec:  b8 00 00 00 00      mov    $0x0,%eax
-e8 00 00 00 00      callq   e <main+0xe>        ①     ff1:  e8       ①            callq   1000 <foo>
-b8 00 00 00 00      mov      $0x0,%eax                ff6:  b8 00 00 00 00      mov    $0x0,%eax
-5d                          pop      %rbp              ffb:  5d                     pop    %rbp
-c3                          req                     ffc:  c3                     retq
-  ......略去部分和答题无关的信息......                     ......略去部分和答题无关的信息......
-0000000000......<foo>:                                        0000000000001000 <foo>:
-55                            push    %rbp              1000:  55                    push   %rbp
-48 89 e5                   mov      %rsp,%rbp           1001:  48 89 e5             mov    %rsp,%rbp
-48 c7 05 00 00 00 00 00 00 00 00                       1004:  48 c7 05 ?? ?? ?? ?? ?? ?? ?? ??
-                        movq      $0x0,0x0(%rip)               movq      ②  ,  ③  (%rip)
-③②
-48 8b 05 00 00 00 00 mov      0x0(%rip),%rax       ④   100f:  48 8b
-8b 00                     mov      (%rax),%eax           05 ?? ?? ?? ??  mov      0x????(%rip),%rax
-89 45 fc                    mov      %eax,-0x4(%rbp)      1016:  8b 00                  mov    (%rax),%eax
-48 8b 05 00 00 00 00 mov      0x0(%rip),%rax       ⑤   1018:  89 45 fc              mov    %eax,-0x4(%rbp)
-48 8b 15 00 00 00 00 mov      0x0(%rip),%rdx       ⑥   101b:  48 8b 05 ?? ?? ?? ??  mov      ⑤  (%rip),%rax
-8b 12                         mov      (%rdx),%edx      1022:  48 8b 15 ?? ?? ?? ??  mov    0x????(%rip),%rdx
-89 10                         mov      %edx,(%rax)         1029:  8b 12                  mov    (%rdx),%edx
-48 8b 05 00 00 00 00 mov      0x0(%rip),%rax       ⑦   102b:  89 10                  mov    %edx,(%rax)
-8b 55 fc                     mov      -0x4(%rbp),%edx  102d:  48 8b 05 ?? ?? ?? ??  mov    0x????(%rip),%rax
-89 10                         mov      %edx,(%rax)      1034:  8b 55 fc               mov    -0x4(%rbp),%edx
-8b  05  00  00  00  00        mov        0x0(%rip),%eax   1037:  89 10                  mov    %edx,(%rax)
-⑧                                                      1039:  8b 05 ?? ?? ?? ??    mov    0x????(%rip),%eax
-83 c0 01                     add      $0x1,%eax
-89  05  00  00  00  00        mov        %eax,0x0(%rip)   103f:  83 c0 01               add    $0x1,%eax
-⑨                                                      1042:  89 05 ?? ?? ?? ??    mov    %eax,  ⑨  (%rip)
-90                               nop                   1048:  90                      nop
-5d                               pop      %rbp           1049:  5d                      pop    %rbp
-c3                               retq                  104a:  c3                      retq
-  ......略去部分和答题无关的信息......                     ......略去部分和答题无关的信息......
-                                                       0000000000002330 <buf>:
-                                                          ......略去部分和答题无关的信息......
-                                                       0000000000002338 <bufp0>:
-                                                          ......略去部分和答题无关的信息......
-                                                       0000000000003024 <count.1837>:
-                                                          ......略去部分和答题无关的信息......
-                                                       0000000000003028 <bufp1>:
+
+**链接后的地址及反汇编（①填机器字节，其余填立即数/位移数值）：**
+
+```asm
+0fe8 <main>:
+  0fe8: 55                         push %rbp
+  0fe9: 48 89 e5                   mov  %rsp, %rbp
+  0fec: b8 00 00 00 00             mov  $0, %eax
+  0ff1: e8 [① 四字节]              call 1000 <foo>
+  0ff6: b8 00 00 00 00             mov  $0, %eax
+  0ffb: 5d                         pop  %rbp
+  0ffc: c3                         ret
+
+1000 <foo>:
+  1000: push %rbp
+  1001: mov  %rsp, %rbp
+  1004: movq $②, ③(%rip)          # 总长11字节，下一条地址100f
+  100f: mov  0x????(%rip), %rax
+  1016: mov  (%rax), %eax
+  1018: mov  %eax, -4(%rbp)
+  101b: mov  ⑤(%rip), %rax         # 总长7字节
+  1022: mov  0x????(%rip), %rdx
+  1029: mov  (%rdx), %edx
+  102b: mov  %edx, (%rax)
+  102d: mov  0x????(%rip), %rax
+  1034: mov  -4(%rbp), %edx
+  1037: mov  %edx, (%rax)
+  1039: mov  0x????(%rip), %eax
+  103f: add  $1, %eax
+  1042: mov  %eax, ⑨(%rip)         # 总长6字节
+  1048: nop
+  1049: pop  %rbp
+  104a: ret
+
+2330 <buf>:
+2338 <bufp0>:
+3024 <count.1837>:
+3028 <bufp1>:
 ```
 
 在上图中对所涉及到的重定位条目进行用数字①至⑨进行了标记，请根据下表中所提供的重定位条目信息，计算相应的重定位引用值并填写下表。
@@ -1197,3 +1223,5 @@ c3                               retq                  104a:  c3                
 | ③ | `r.offset = 0x7`　　`r.symbol = bufp1` `r.type = R_X86_64_PC32`　　`r.addend = -8` | `0x2019` |
 | ⑤ | `r.offset = 0x1e`　　`r.symbol = bufp0` `r.type = R_X86_64_PC32`　　`r.addend = -4` | `0x1316` |
 | ⑨ | `r.offset = 0x44`　　`r.symbol` = 本题不提供；`r.type = R_X86_64_PC32`　　`r.addend = -4` | `0x1fdc` |
+%%% reference
+

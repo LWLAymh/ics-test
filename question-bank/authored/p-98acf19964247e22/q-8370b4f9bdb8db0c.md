@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-8370b4f9bdb8db0c",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-98acf19964247e22",
   "paperOrder": 9,
   "number": {
@@ -97,7 +97,7 @@
 次的？
 %%% reference
 答案：C（来源：2019、2020期末-答案解析）
-解析：`fork` 返回两次，setjmp 可返回多次；longjmp 和 `execve` 都不返回。
+解析：成功 fork 分别在父、子进程返回；setjmp 初次返回0，还可因后续 longjmp 再次返回。longjmp 不返回到自己的调用处；成功 execve 不返回，失败可返回 -1，但不属于多次返回。
 %%% option: A
 longjmp和fork
 %%% option: B

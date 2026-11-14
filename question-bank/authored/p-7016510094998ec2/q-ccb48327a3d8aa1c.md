@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ccb48327a3d8aa1c",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 10,
   "number": {
@@ -71,7 +71,7 @@
     "blankAnswers": [
       {
         "blankId": "legacy-gap-0",
-        "method": "self"
+        "method": "exact", "acceptedAnswers":["0x295","295"], "normalize":{"caseSensitive":false,"trimWhitespace":true}
       }
     ]
   }
@@ -113,8 +113,12 @@
     | 0E | 17 | 1 |
     | 0F | 0D | 1 |
 
-    如果 CPU 执行取到一条虚拟地址为 `0x0395`，经地址翻译后，该虚拟地址对应的物理地址是{{blank:legacy-gap-0}}。
-%%% reference
-答案页给出的答案为 `0x5d5`。
+    表中地址、Tag、VPN、PPN均以十六进制表示。若CPU访问虚拟地址 `0x0395`，按以上TLB与页表翻译后，物理地址是{{blank:legacy-gap-0}}（填十六进制）。
 
-原卷题面数据推导结果为 `0x295`：VPN=`0x03` 落在组 3，匹配的 TLB 项 `Valid=0`，故 TLB 未命中；查页表得 VPN `03` → PPN `02`，物理地址为 `0x02×2⁸+0x95=0x295`。答案页与题面数据矛盾，无法确定哪一处有误。
+> 原卷勘误：本题按给出的表格数据判分，原答案页 `0x5d5` 与这些条件矛盾，不能据它反推另一个未给出的页表项。
+%%% reference
+答案：`0x295`，按当前明确的表格数据判分。
+
+页面大小为256字节，故VPO占8位。`VA=0x0395` 拆为 `VPN=0x03`、`VPO=0x95`。TLB有16项、4路，因此4组、组索引2位；`VPN=0x03` 对应组3、Tag=`0x00`。组3没有有效的Tag=`00`项，因此TLB未命中（Tag=`03`的无效项也不能匹配这个VPN）。查页表VPN=`03`，有效位为1、PPN=`02`；拼接原偏移得 `PA=0x02 * 256 + 0x95 = 0x295`。
+
+原答案页写为 `0x5d5`，其偏移 `0xd5` 甚至不等于本题的页内偏移 `0x95`，不可能来自这个VA的正常分页翻译。题面已说明保留表格并勘误答案，不虚构其他初值。

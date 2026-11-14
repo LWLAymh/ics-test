@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-bc9df96c65fdf526",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-ffd1f5f688babe1b",
   "paperOrder": 1,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-1. 考虑如下代码在x86-64处理器上的运行情况：
+1. 按 x86-64 Linux/GCC 的联合体机器表示模型分析如下代码：采用小端、8字节指针，只查看重解释出的指针位模式，不解引用它，也不将这个位模式解释为一定有效的对象地址。
 ```c
 union U {
     char x[12];
@@ -101,7 +101,7 @@ union U {
 } u;
 int main() {
     strcpy(u.x, "I love ICS!");
-    printf("%p\n", u.p);
+    printf("%p\n", (void *)u.p);
     return 0;
 }
 ```
@@ -111,8 +111,7 @@ int main() {
 2) %p用于输出一个指针的值
 程序运行的输出是:
 %%% reference
-答案：D
-D
+答案：D。指针成员占联合体起始的8字节，取字节 `49 20 6c 6f 76 65 20 49`，按小端组成 `0x492065766f6c2049`；其余字符不属于这个指针成员的位模式。
 %%% option: A
 `0x49206c6f76652049435321`
 %%% option: B

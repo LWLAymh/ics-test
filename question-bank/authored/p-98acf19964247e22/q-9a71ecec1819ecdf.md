@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-9a71ecec1819ecdf",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-98acf19964247e22",
   "paperOrder": 20,
   "number": {
@@ -96,7 +96,7 @@
 20. 下列关于信号量及P、V操作的叙述中，哪一个是不正确的？
 %%% reference
 答案：D（来源：2019、2020期末-答案解析）
-解析：sem_wait/sem_post 会阻塞整个进程，而 pthread_mutex_lock/unlock 只阻塞相应线程，后者效率更高，所以 D 说反了。
+POSIX `sem_wait` 阻塞的是调用线程，并非整个进程；`pthread_mutex_lock` 也可阻塞调用线程。不能只凭接口名称断言信号量一定比互斥锁性能好，实际取决于实现、竞争与使用方式，因此 D 的绝对说法错误。前面选项采用教材抽象的非负信号量/PV模型，不是在枚举POSIX API的所有管理操作。
 %%% option: A
 信号量是一个非负整数，对信号量只能执行P操作和V操作
 %%% option: B

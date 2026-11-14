@@ -6,6 +6,7 @@ const bank = require('../question-bank/web-data/questions.json').questions;
 require('./prompt-images.test.cjs');
 require('./math-authoring.test.cjs');
 require('./stage2-2025.test.cjs');
+require('./audit-2026-11.test.cjs');
 
 test('inline reference display uses explicit exact/select keys, never a prose parser or grading mutation', () => {
   const exact = { method: 'exact', acceptedAnswers: ['x != 1', '1 != x'] };
@@ -293,7 +294,10 @@ test('common-problem audit keeps real Markdown tables and rejects private-use ex
   const allocator=bank.find(q=>q.id==='q-85a85b345e99accf');
   assert.match(allocator.stem.text,/4 字节头部/); assert.match(allocator.stem.text,/没有脚部/);
   const explanation=bank.find(q=>q.id==='q-5d9ff50c3d2ec4b1');
-  assert.equal(md.parse(explanation.solution.reference.text,{}).filter(t=>t.type==='fence'&&t.info==='c').length,1);
+  const restoredFunction=md.parse(explanation.parts[0].solution.reference.text,{}).filter(t=>t.type==='fence'&&t.info==='c');
+  assert.equal(restoredFunction.length,1);
+  assert.match(restoredFunction[0].content,/int myfunction\(int a\[\], int b\[\], int c\[\], int d\)/);
+  assert.match(restoredFunction[0].content,/return d;/);
   const sizeofQuestion=bank.find(q=>q.id==='q-f81cf90920e892cb');
   assert(!md.parse(sizeofQuestion.solution.reference.text,{}).some(t=>(t.children||[]).some(c=>c.type==='em_open')));
 });
@@ -436,10 +440,14 @@ test('Markdown rendering preserves every declared blank, including table cells c
 test('accepted report repairs keep complete code listings and explicit stack assumptions', () => {
   const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false});
   const transform=bank.find(q=>q.id==='q-2d3657e2f402ef3b');
-  const assembly=md.parse(transform.parts[0].stem.text,{}).find(t=>t.type==='fence').content;
+  const sharedAssembly=md.parse(transform.stem.text,{}).filter(t=>t.type==='fence'&&t.info==='asm');
+  assert.equal(sharedAssembly.length,1,'all parts receive the complete shared assembly listing');
+  const assembly=sharedAssembly[0].content;
   assert.match(assembly,/add \$1, %rdi/);
   assert.match(assembly,/add \$1, %rsi/);
   assert(!/\$r[sd]i/.test(assembly));
+  assert.match(assembly,/^transform:\n/m);
+  assert.match(assembly,/^L2:\n    movzbl/m);
   const code=md.parse(transform.parts[1].stem.text,{}).filter(t=>t.type==='fence');
   assert.equal(code.length,1);
   for(const fragment of ['void transform(', 'short x =', 'src += 2;', 'tgt += 2;', '{{blank:mask}};'])
@@ -708,7 +716,12 @@ test('large linking and producer-consumer questions keep separate files and stab
   }
   const final2019=bank.find(q=>q.id==='q-96576bae25379ede');
   assert(!final2019.stem.text.includes('<func>'));
-  assert.match(final2019.stem.text,/原卷.*`1018`.*重复/);
+  const md=require('../site/vendor/markdown-it/markdown-it.min.js')({html:false,breaks:false});
+  const linked=md.parse(final2019.stem.text,{}).filter(t=>t.type==='fence'&&t.info==='asm')[1].content;
+  assert.match(linked,/1018:\s+48 8b 05/,'the preceding 7-byte load retains its source address');
+  assert.match(linked,/101f:\s+0f b6 00\s+movzbl/);
+  assert.match(linked,/1022:\s+88 45 fc\s+mov\s+%al,-0x4\(%rbp\)/,'the byte store follows 101f+3 and uses al');
+  assert.doesNotMatch(linked,/1018:\s+88 45 fc/,'do not duplicate the earlier instruction address');
   const producer=bank.find(q=>q.id==='q-59acf52820891cfb');
   assert.match(producer.stem.text,/\n15\. static void sync_var_init\(\) \{\n16\.     Sem_init/);
   assert.match(producer.stem.text,/\n59\.     for .*\n60\.         Pthread_create/);

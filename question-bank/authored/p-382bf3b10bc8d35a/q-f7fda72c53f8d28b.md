@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f7fda72c53f8d28b",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-382bf3b10bc8d35a",
   "paperOrder": 3,
   "number": {
@@ -98,13 +98,13 @@
 %%% reference
 答案：B
 解析：`test %rax,%rax` 只把 `rax` 与自身相与，其 `ZF/SF/PF` 与 `cmp $0,%rax` 完全一致，`CF` 与 `OF` 也同为 0，二者在条件转移上等价；A 错（指令长度可变），C 错（`switch` 只有分支密集时才生成跳转表）。
-注：若按「标志位完全相同」的严格口径（`TEST` 的 `AF` 未定义），本题也可选 D「以上都不对」，此处取课程教材中「`TEST` 与 `CMP $0` 等价」的表述。
+题面B已明确比较的是常见条件跳转使用的标志，而非所有架构状态。TEST的AF未定义，CMP减0的AF不相同，因此不再使用原来的无范围“恒等”表述。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 %%% option: A
 不同指令的机器码长度是相同的
 %%% option: B
-`test %rax, %rax`恒等于`cmp $0, %rax`
+对于常见条件跳转使用的ZF、SF、PF、CF、OF，`test %rax, %rax` 与 `cmp $0, %rax` 的结果相同。
 %%% option: C
 `switch`编译后总是会产生跳转表
 %%% option: D

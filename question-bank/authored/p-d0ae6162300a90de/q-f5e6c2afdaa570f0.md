@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f5e6c2afdaa570f0",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-d0ae6162300a90de",
   "paperOrder": 23,
   "number": {
@@ -675,19 +675,19 @@
         "blankAnswers": [
           {
             "blankId": "final-block1",
-            "method": "self"
+            "method": "exact", "acceptedAnswers":["M[0-1]"], "normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           },
           {
             "blankId": "final-block2",
-            "method": "self"
+            "method": "exact", "acceptedAnswers":["M[2-3]"], "normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           },
           {
             "blankId": "final-block3",
-            "method": "self"
+            "method": "exact", "acceptedAnswers":["M[8-9]"], "normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           },
           {
             "blankId": "final-block4",
-            "method": "self"
+            "method": "exact", "acceptedAnswers":["M[16-17]"], "normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           }
         ]
       },
@@ -722,10 +722,6 @@
 }
 +++
 %%% stem
-
-%%% reference
-
-%%% part-stem: q-986268962ac158bc
 第八题（9分）
 假设存在一个能够存储四个数据的Cache，每一个line的长度（B）为2字节。假设内存空
 间的地址一共是32字节，既内存空间地址长度一共是5个比特：从0（00000）到31（11111），
@@ -733,16 +729,19 @@
 LRU（least recently used）策略。
                  数据访问地址： 1 -> 4 -> 17 –> 2 –> 8 -> 16 –> 9->0
 
-1） 如果Cache的结构是directed mapped（`S=4`， `E=1`），如下图所示，请在下图空白处填
-入，访问上述数据序列访问后Cache的状态。（注：TAG使用二进制格式，`V=1`代表数据有
-效，用[A-B]表示地址A到B之间对应的数据）（4分）
+三个小问独立从空缓存开始，缓存总共存放4块，每块2字节（数据容量8字节）。每次读取1字节，缺失时装入整块；Tag按表中要求填足二进制位，数据块统一写为 `M[a-b]`。在组相联表中，每组的有效数据块按起始字节地址升序填写，无效路放最后；这仅规定答题行序，不改变LRU策略。
 
-| V | TAG | DATA |
-| --- | --- | --- |
-| {{blank:dm-v1}} | {{blank:dm-tag1}} | {{blank:dm-data1}} |
-| {{blank:dm-v2}} | {{blank:dm-tag2}} | {{blank:dm-data2}} |
-| {{blank:dm-v3}} | {{blank:dm-tag3}} | {{blank:dm-data3}} |
-| {{blank:dm-v4}} |  |  |
+%%% reference
+
+%%% part-stem: q-986268962ac158bc
+1）如果Cache采用直接映射（`S=4, E=1`），请填写访问后的状态。Tag填2位二进制，`V=1`表示有效。（4分）
+
+| 组 | V | TAG | DATA |
+| --- | --- | --- | --- |
+| `set0` | {{blank:dm-v1}} | {{blank:dm-tag1}} | {{blank:dm-data1}} |
+| `set1` | {{blank:dm-v2}} | {{blank:dm-tag2}} | {{blank:dm-data2}} |
+| `set2` | {{blank:dm-v3}} | {{blank:dm-tag3}} | {{blank:dm-data3}} |
+| `set3` | {{blank:dm-v4}} | — | — |
 %%% part-reference: q-986268962ac158bc
 答案：访问上述数据序列后 Cache 的状态（directed mapped，S=4，E=1）：
 
@@ -753,11 +752,15 @@ LRU（least recently used）策略。
 | 1 | 00 | `M[4-5]` |
 | 0 | | |
 %%% part-stem: q-bb29c57bb80c754f
-2） 如果cache的结构如下图所示既`(S = 2, E = 2)`， 请填入访问后的状态 （2分）
-| V | TAG | DATA | V | TAG | DATA |
-| --- | --- | --- | --- | --- | --- |
-| {{blank:twoway-v11}} | {{blank:twoway-tag11}} | {{blank:twoway-data11}} | {{blank:twoway-v12}} | {{blank:twoway-tag12}} | {{blank:twoway-data12}} |
-| {{blank:twoway-v21}} | {{blank:twoway-tag21}} | {{blank:twoway-data21}} | {{blank:twoway-v22}} |  |  |
+2）若 `S=2, E=2`，按公共条件规定的答题行序填写访问后的状态，Tag填3位二进制。（2分）
+
+| 组／答题行 | V | TAG | DATA |
+| --- | --- | --- | --- |
+| `set0 / 0` | {{blank:twoway-v11}} | {{blank:twoway-tag11}} | {{blank:twoway-data11}} |
+| `set0 / 1` | {{blank:twoway-v12}} | {{blank:twoway-tag12}} | {{blank:twoway-data12}} |
+| `set1 / 0` | {{blank:twoway-v21}} | {{blank:twoway-tag21}} | {{blank:twoway-data21}} |
+| `set1 / 1` | {{blank:twoway-v22}} | — | — |
+
    在这种情况下，数据访问一共产生了多少次Miss {{blank:misses}}（1分）
 %%% part-reference: q-bb29c57bb80c754f
 答案：Cache 最终状态（S=2, E=2）：
@@ -771,10 +774,9 @@ LRU（least recently used）策略。
 
 （原卷标注顺序：M → M → M → M → M → H → H → M）
 %%% part-stem: q-ccf1130c97dc3c8e
- 3）如果cache的结构变成 （`S=1`， `E=4`），最终存储在Cache里面的数据有那些（注：只
-需要填写数据部分，顺序不限）？
+3）若 `S=1, E=4`，最终驻留的数据块有哪些？按块起始字节地址从小到大填写，以便逐空自动核对；原卷“顺序不限”的数学集合含义不变，此处明确输入顺序。
 {{blank:final-block1}}，{{blank:final-block2}}，{{blank:final-block3}}，{{blank:final-block4}}（2分）
 %%% part-reference: q-ccf1130c97dc3c8e
-答案：M[0-1]、M[8-9]、M[16-17]、M[2-3]（顺序不限，2分）
+答案按题面升序填写：`M[0-1]`、`M[2-3]`、`M[8-9]`、`M[16-17]`。四个驻留块与原卷集合相同。
 
 说明：访问序列 1 -> 4 -> 17 -> 2 -> 8 -> 16 -> 9 -> 0 的后四个不重复数据。

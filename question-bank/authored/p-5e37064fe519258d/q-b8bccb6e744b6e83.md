@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-b8bccb6e744b6e83",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-5e37064fe519258d",
   "paperOrder": 8,
   "number": {
@@ -96,10 +96,13 @@
 8.  在x86-64架构下，有如下变量：
 
 ```c
-union {char c[8], int i;} x;
+union {
+    char c[8];
+    int i;
+} x;
 ```
 
-在`x.i=0x41424344`时，`x.c[2]`的值为多少（提示：‘A’=`0x41`）：
+采用x86-64的小端法、32位int，赋值 `x.i=0x41424344` 后，按字节查看对象表示，`x.c[2]`的值为多少（ASCII中 `'A'=0x41`）？源卷union声明的逗号已修为分号。
 %%% reference
 答案：B
 %%% option: A

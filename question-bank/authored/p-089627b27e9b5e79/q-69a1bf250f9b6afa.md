@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-69a1bf250f9b6afa",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 20,
   "number": {
@@ -25,13 +25,11 @@
     "tags": []
   },
   "publication": {
-    "state": "review",
+    "state": "published",
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "selection-multiplicity-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -47,7 +45,7 @@
       "editorNote": "并发轨迹线安全/不安全判定"
     }
   ],
-  "type": "unclassified-choice",
+  "type": "single-choice",
   "stem": {
     "format": "markdown"
   },
@@ -95,27 +93,27 @@
 }
 +++
 %%% stem
-20. 两个线程中共享如下一段C代码：
-```
-         for (j = 0;  j < N;  j++)
-                count += 2;
+20. 两个线程各执行以下循环，共享 `count`，但 `j` 为线程私有。设 `N = 1`、`count` 初值为 0，按下面给出的汇编逐条交错执行，不讨论 C 数据竞争的未定义行为：
+```c
+for (j = 0; j < N; j++)
+    count += 2;
 ```
 假设其对应的汇编代码如下：
-```
+```asm
     movq  (%rdi), %rcx
     testq %rcx,%rcx
-    jle   .L2                       Hi
+    jle   .L2                   # Hi
     movl  $0, %eax
 .L3:
-    movq  count(%rip),%rdx       Li
-    addq  $2, %rdx                 Ui
-    movq  %rdx, count(%rip)      Si
+    movq  count(%rip),%rdx       # Li
+    addq  $2, %rdx              # Ui
+    movq  %rdx, count(%rip)      # Si
     addq  $1, %rax
-    cmpq  %rcx, %rax              Ti
+    cmpq  %rcx, %rax             # Ti
     jne   .L3
 .L2:
 ```
-请问在下列指令顺序对应的轨迹线中，哪一个是安全轨迹线？
+其中 `Hi`、`Li`、`Ui`、`Si`、`Ti` 分别表示线程 i 的对应步骤；选项中的 `L2` 指线程 2 的读取操作，不是汇编标签 `.L2`。哪条轨迹保留两次加法的效果，使 `count` 最终为 4？
 %%% reference
 答案：C
 考查两个并发线程指令执行序列是否会导致不安全轨迹线。

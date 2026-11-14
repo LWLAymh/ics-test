@@ -23,7 +23,7 @@ async function run() {
     await page.route('**/ics-test.js', route => route.fulfill({ contentType: 'application/javascript', body: source }));
     await page.route(u => /^https?:$/.test(u.protocol) && u.origin !== new URL(url).origin, route => { remote.push(route.request().url()); return route.abort(); });
     await page.goto(url); await page.waitForFunction(() => !document.querySelector('#ics-start').disabled);
-    for (const id of ['q-521d76fb06b284d2', 'q-5be6279e59ba1151']) {
+    for (const id of ['q-521d76fb06b284d2', 'q-c4db69af5ae828fe']) {
       const q = bank.find(q => q.id === id); assert.ok(q);
       await page.evaluate(async question => {
         const { state, ui, renderQuestion } = window.__test; state.questions = [question]; state.index = 0; state.records = []; state.drafts = []; state.score = 0;
@@ -32,7 +32,7 @@ async function run() {
       }, q);
       if (id === 'q-521d76fb06b284d2') {
         assert.equal(await page.locator('#ics-question-content table mjx-msub').count(), 15, 'all binary address bases are actual subscripts');
-        assert.equal(await page.locator('#ics-question-content .ics-blank-input').count(), 3);
+        assert.equal(await page.locator('#ics-question-content .ics-blank-input').count(), 7);
         assert.ok(!(await page.locator('#ics-question-content').innerText()).includes('_{2}'));
       } else {
         await page.locator('#ics-show-answer').click();
@@ -40,7 +40,9 @@ async function run() {
         assert.ok(await page.locator('#ics-reference mjx-msub').count() >= 12);
         assert.doesNotMatch(await page.locator('#ics-reference').innerText(), /_\{[012]\}|`|\$/);
         assert.equal(await page.locator('#ics-reference code').count(), 0, 'formulas are not swallowed by code spans');
-        assert.equal(await page.locator('#ics-reference ol[start="2"] > li').count(), 5, 'each explanation remains a separate numbered item');
+        assert.equal(await page.locator('#ics-reference ol > li').count(), 3, 'each of the three cache explanations remains a separate numbered item');
+        assert.match(await page.locator('#ics-reference').innerText(), /FIFO/);
+        assert.match(await page.locator('#ics-reference').innerText(), /强制|冷/);
       }
       assert.equal(await page.locator('mjx-merror').count(), 0);
       for (const width of [1280, 390]) {

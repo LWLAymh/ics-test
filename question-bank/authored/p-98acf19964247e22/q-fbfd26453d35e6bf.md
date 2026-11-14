@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-fbfd26453d35e6bf",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-98acf19964247e22",
   "paperOrder": 4,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-4.  下述关于RISC和CISC的讨论，哪个是错误的
+4. 按原卷2019年教材对典型手机ARM与PC x86的生态概述，下述讨论哪个错误？这里的PC概述不是对未来所有个人计算机架构的断言。
 %%% reference
 答案：C（来源：2019、2020期末-答案解析）
 解析：CISC 是变长指令集，部分指令可以比 RISC 的指令还短；手机常用 RISC（ARM），对能耗或结构要求高的设备一般用 RISC。

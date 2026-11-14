@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-3ec4aed1f80da6f3",
-  "revision": 4,
+  "revision": 5,
   "paperId": "p-e8f40973e2cc056e",
   "paperOrder": 28,
   "number": {
@@ -235,20 +235,11 @@
 }
 +++
 %%% stem
-
-%%% reference
-
-%%% part-stem: q-51332fd0f4b3baa8
 2.（3分）小明在学习了读者-写者问题后，编写了以下代码用来解决读者-写者问题。其中，Lightswitch结构体封装了进入临界区的读者计数counter的操作逻辑，保证当有读者在临界区时，其他读者仍然可以进入，但写者无法进入。请阅读下面代码（代码阅读提示：主要关注`reader`和writer两个函数），回答问题：
 
-（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”）
-%%% part-reference: q-51332fd0f4b3baa8
-答案：（1）否（1分）
-%%% part-stem: q-6b0d64ca8f0741b2
-（2）在本题的reader和writer实现基础上，考虑一共有3个读者（R1，R2，R3）和2个写者（W1，W2）依次到来，且循环仅执行一次（NUM_OPERATIONS=1）的情况，读者执行读操作时间为7，写者执行写操作时间为8，其到达时间如下：R1:0, R2:1, W1:2, W2:4, R3:5。在时刻6时，R1、R2、W1、W2、R3依次处于的位置可能是：
-（注意，为简单起见，只考虑读写时间，忽略所有其他时间，包括代码中其他语句的执行时间、线程切换、调度等等，亦假设没有更多的读者或写者或其他线程。）
+两个小问共用以下程序。括号编号用注释标出，作为第2问的位置标签，不是C语句的一部分。
 ```c
-#include “csapp.h”
+#include "csapp.h"
 #define NUM_READERS 5
 #define NUM_WRITERS 10
 #define NUM_OPERATIONS 100
@@ -283,22 +274,22 @@ sem_t wmutex;
 sem_t empty;
 Lightswitch reader_switch;
 void* writer(void* arg) {
-    (1) for (int i = 0; i < NUM_OPERATIONS; i++) {
-        (2) P(&empty);
-        (3) P(&wmutex);
-        (4) // writing here, need 8 time unit
-        (5) V(&wmutex);
-        (6) V(&empty);
+    /* (1) */ for (int i = 0; i < NUM_OPERATIONS; i++) {
+        /* (2) */ P(&empty);
+        /* (3) */ P(&wmutex);
+        /* (4) */ // writing here, need 8 time unit
+        /* (5) */ V(&wmutex);
+        /* (6) */ V(&empty);
     }
     return NULL;
 }
 void* reader(void* arg) {
-    (7) for (int i = 0; i < NUM_OPERATIONS; i++) {
-        (8) P(&empty);
-        (9) lock(&reader_switch, &wmutex);
-        (10) V(&empty);
-        (11) // reading here, need 7 time unit
-        (12) unlock(&reader_switch, &wmutex);
+    /* (7) */ for (int i = 0; i < NUM_OPERATIONS; i++) {
+        /* (8) */ P(&empty);
+        /* (9) */ lock(&reader_switch, &wmutex);
+        /* (10) */ V(&empty);
+        /* (11) */ // reading here, need 7 time unit
+        /* (12) */ unlock(&reader_switch, &wmutex);
     }
     return NULL;
 }
@@ -322,8 +313,18 @@ int main() {
     return 0;
 }
 ```
+%%% reference
+
+%%% part-stem: q-51332fd0f4b3baa8
+（1）交换 `reader` 函数里的 `lock(&reader_switch, &wmutex);` 和 `V(&empty);` 两行，是否会导致竞争或死锁问题？答：{{blank:swap-result}}（填“是”或“否”；不把公平性变化算作竞争或死锁）
+%%% part-reference: q-51332fd0f4b3baa8
+答案：否。即使先释放 `empty`，读者仍通过Lightswitch和 `wmutex` 保持与写者互斥；第一个读者等待 `wmutex` 时不会阻止写者完成并释放它。交换可能影响进入顺序和公平性，但不会因此产生所问的读写互斥破坏或循环等待。
+%%% part-stem: q-6b0d64ca8f0741b2
+（2）独立考虑3个读者R1、R2、R3和2个写者W1、W2，所有循环只执行一次（本问覆盖公共示例的数量与 `NUM_OPERATIONS` 定义）。按给定到达时间模拟 `reader`/`writer` 函数，不由示例 `main` 的线程创建顺序推断到达时间。读操作耗时7，写操作耗时8；到达时间为 `R1:0, R2:1, W1:2, W2:4, R3:5`。在时刻6，五者依次可能位于哪些位置？
+
+只计读写耗时，其他语句与线程切换时间忽略，没有其他线程；此问使用公共代码原始行序，不沿用第1问中的交换。
 %%% part-reference: q-6b0d64ca8f0741b2
-答案：C（2分）
+答案：C。时刻6，R1/R2仍在位置(11)读；W1在(3)等待仍被读者占用的 `wmutex`，并持有 `empty`；W2在(2)等待 `empty`；R3也在(8)等待 `empty`。故位置依次为 `(11),(11),(3),(2),(8)`。
 %%% part-option: q-6b0d64ca8f0741b2 A
 (9),(8),(4),(2),(11)
 %%% part-option: q-6b0d64ca8f0741b2 B

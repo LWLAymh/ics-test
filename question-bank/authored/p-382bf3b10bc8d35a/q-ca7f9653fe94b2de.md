@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ca7f9653fe94b2de",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-382bf3b10bc8d35a",
   "paperOrder": 18,
   "number": {
@@ -45,7 +45,7 @@
       "editorNote": "localhost、套接字地址与 IPv4/IPv6"
     }
   ],
-  "type": "single-choice",
+  "type": "multiple-choice",
   "stem": {
     "format": "markdown"
   },
@@ -62,7 +62,8 @@
       "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text."
     },
     "correctOptionIds": [
-      "B"
+      "A",
+      "C"
     ]
   },
   "options": [
@@ -94,10 +95,11 @@
 }
 +++
 %%% stem
-18. 下列关于计算机网络的说法中，错误的是：
+18. 在Linux套接字API的一般范围内，以下哪些说法不正确？（多选；C讨论传统HTTP/1.1，不涉及HTTP/3。）
 %%% reference
-答案：B
-解析：套接字编程中只能用 IP 地址（不能用网卡 MAC 地址）作为地址，B 错；A、C、D 都正确。
+答案：A、C。localhost不必只映射127.0.0.1，常见IPv6配置还会使用::1，具体取决于本地配置。Linux套接字API不止AF_INET，AF_PACKET等可按链路层地址操作，因此不能把B在一般套接字范围内判错。HTTP/1.1通常在TCP连接上传输，应用层无状态不等于无连接，C错误；D的地址位宽正确。
+
+旧解析把通用Linux套接字限定成IP套接字、又把HTTP无状态当无连接，已按明确范围改正。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 %%% option: A

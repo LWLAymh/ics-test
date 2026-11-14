@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c115d0ee9fcb53f6",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-89e8b793519e36c6",
   "paperOrder": 3,
   "number": {
@@ -96,12 +96,13 @@
 +++
 %%% stem
 3.  在32位平台上，按C90标准以下语句中，结果为假的是
+
+使用ILP32：`int`、`long` 和对应无符号类型均32位；超范围无符号整数转为 `int` 时采用本题平台的低32位补码解释规则。无后缀十进制常量按严格C90的候选类型处理，不使用编译器的扩展 `long long` 规则。
 %%% reference
-答案：b。因为2147483648超出了有符号数的表示范围，C90的C语言会将其
-识别为`unsigned`。注意在32位机器上`long`和`int`都是32位。
+答案：B。无后缀十进制常量2147483648不能由32位int或long表示，按C90选为unsigned long；前面的负号是一元运算，并不属于常量自身。取负后仍为无符号2147483648，与2147483647比较为假。C把这个位模式转换为本题平台的int后得到INT_MIN，比较为真。
 
 参考信息（原卷红字）：
-C90的转换顺序：int -> long -> unsigned -> unsigned long
+C90无后缀十进制整数常量的候选顺序：int → long int → unsigned long int；不能把十六进制常量的候选序列混入此处。现代C99及以后候选可包括long long，不能直接用现代默认编译结果判本题。
 $2^{31}=2147483648$
 %%% option: A
 `return INT_MIN < INT_MAX;`

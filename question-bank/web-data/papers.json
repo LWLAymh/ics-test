@@ -348,8 +348,8 @@
         "publishedQuestionCount": 50,
         "quizQuestionCount": 50,
         "verifiedAnswerCount": 50,
-        "singleChoiceCount": 48,
-        "multipleChoiceCount": 2,
+        "singleChoiceCount": 47,
+        "multipleChoiceCount": 3,
         "fillCount": 0,
         "shortAnswerCount": 0,
         "compositeCount": 0
@@ -466,7 +466,7 @@
     {
       "schemaVersion": "5",
       "id": "p-bed4802d7c36448b",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2023期中",
       "title": null,
       "year": 2023,
@@ -512,10 +512,10 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 26,
-        "publishedQuestionCount": 25,
-        "quizQuestionCount": 25,
+        "publishedQuestionCount": 24,
+        "quizQuestionCount": 24,
         "verifiedAnswerCount": 26,
-        "singleChoiceCount": 19,
+        "singleChoiceCount": 18,
         "multipleChoiceCount": 0,
         "fillCount": 6,
         "shortAnswerCount": 0,
@@ -636,7 +636,7 @@
     {
       "schemaVersion": "5",
       "id": "p-ffd1f5f688babe1b",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2021期中",
       "title": null,
       "year": 2021,
@@ -679,10 +679,10 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 23,
-        "publishedQuestionCount": 23,
-        "quizQuestionCount": 23,
+        "publishedQuestionCount": 22,
+        "quizQuestionCount": 22,
         "verifiedAnswerCount": 23,
-        "singleChoiceCount": 15,
+        "singleChoiceCount": 14,
         "multipleChoiceCount": 0,
         "fillCount": 4,
         "shortAnswerCount": 0,
@@ -692,7 +692,7 @@
     {
       "schemaVersion": "5",
       "id": "p-2c2b56c4452255b1",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2021期末",
       "title": null,
       "year": 2021,
@@ -778,14 +778,14 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 60,
-        "publishedQuestionCount": 60,
-        "quizQuestionCount": 60,
+        "publishedQuestionCount": 34,
+        "quizQuestionCount": 34,
         "verifiedAnswerCount": 60,
-        "singleChoiceCount": 47,
+        "singleChoiceCount": 29,
         "multipleChoiceCount": 0,
-        "fillCount": 6,
-        "shortAnswerCount": 2,
-        "compositeCount": 5
+        "fillCount": 4,
+        "shortAnswerCount": 0,
+        "compositeCount": 1
       }
     },
     {
@@ -830,8 +830,8 @@
         "publishedQuestionCount": 16,
         "quizQuestionCount": 16,
         "verifiedAnswerCount": 16,
-        "singleChoiceCount": 12,
-        "multipleChoiceCount": 0,
+        "singleChoiceCount": 11,
+        "multipleChoiceCount": 1,
         "fillCount": 0,
         "shortAnswerCount": 0,
         "compositeCount": 4
@@ -893,8 +893,8 @@
         "publishedQuestionCount": 29,
         "quizQuestionCount": 29,
         "verifiedAnswerCount": 30,
-        "singleChoiceCount": 25,
-        "multipleChoiceCount": 0,
+        "singleChoiceCount": 24,
+        "multipleChoiceCount": 1,
         "fillCount": 4,
         "shortAnswerCount": 0,
         "compositeCount": 0
@@ -957,7 +957,7 @@
     {
       "schemaVersion": "5",
       "id": "p-98acf19964247e22",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2019期末",
       "title": null,
       "year": 2019,
@@ -1003,14 +1003,14 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 26,
-        "publishedQuestionCount": 26,
-        "quizQuestionCount": 26,
+        "publishedQuestionCount": 25,
+        "quizQuestionCount": 25,
         "verifiedAnswerCount": 26,
         "singleChoiceCount": 19,
         "multipleChoiceCount": 1,
-        "fillCount": 4,
-        "shortAnswerCount": 1,
-        "compositeCount": 1
+        "fillCount": 3,
+        "shortAnswerCount": 0,
+        "compositeCount": 2
       }
     },
     {
@@ -1168,15 +1168,15 @@
         "verifiedAnswerCount": 19,
         "singleChoiceCount": 13,
         "multipleChoiceCount": 1,
-        "fillCount": 4,
+        "fillCount": 3,
         "shortAnswerCount": 0,
-        "compositeCount": 0
+        "compositeCount": 1
       }
     },
     {
       "schemaVersion": "5",
       "id": "p-382bf3b10bc8d35a",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2017期末",
       "title": null,
       "year": 2017,
@@ -1225,12 +1225,12 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 29,
-        "publishedQuestionCount": 29,
-        "quizQuestionCount": 29,
+        "publishedQuestionCount": 24,
+        "quizQuestionCount": 24,
         "verifiedAnswerCount": 29,
-        "singleChoiceCount": 20,
-        "multipleChoiceCount": 1,
-        "fillCount": 5,
+        "singleChoiceCount": 15,
+        "multipleChoiceCount": 5,
+        "fillCount": 1,
         "shortAnswerCount": 2,
         "compositeCount": 1
       }
@@ -1287,8 +1287,8 @@
         "publishedQuestionCount": 25,
         "quizQuestionCount": 25,
         "verifiedAnswerCount": 26,
-        "singleChoiceCount": 13,
-        "multipleChoiceCount": 0,
+        "singleChoiceCount": 12,
+        "multipleChoiceCount": 1,
         "fillCount": 12,
         "shortAnswerCount": 0,
         "compositeCount": 0
@@ -1297,7 +1297,7 @@
     {
       "schemaVersion": "5",
       "id": "p-bc69f9ea3beff7ee",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2016期末",
       "title": null,
       "year": 2016,
@@ -1344,14 +1344,14 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 27,
-        "publishedQuestionCount": 22,
-        "quizQuestionCount": 22,
+        "publishedQuestionCount": 27,
+        "quizQuestionCount": 27,
         "verifiedAnswerCount": 27,
-        "singleChoiceCount": 15,
-        "multipleChoiceCount": 0,
-        "fillCount": 4,
-        "shortAnswerCount": 2,
-        "compositeCount": 1
+        "singleChoiceCount": 19,
+        "multipleChoiceCount": 1,
+        "fillCount": 3,
+        "shortAnswerCount": 1,
+        "compositeCount": 3
       }
     },
     {
@@ -1406,8 +1406,8 @@
         "publishedQuestionCount": 26,
         "quizQuestionCount": 26,
         "verifiedAnswerCount": 26,
-        "singleChoiceCount": 20,
-        "multipleChoiceCount": 0,
+        "singleChoiceCount": 19,
+        "multipleChoiceCount": 1,
         "fillCount": 3,
         "shortAnswerCount": 0,
         "compositeCount": 3
@@ -1468,9 +1468,9 @@
         "verifiedAnswerCount": 27,
         "singleChoiceCount": 19,
         "multipleChoiceCount": 1,
-        "fillCount": 4,
+        "fillCount": 2,
         "shortAnswerCount": 3,
-        "compositeCount": 0
+        "compositeCount": 2
       }
     },
     {
@@ -1523,17 +1523,17 @@
         "publishedQuestionCount": 24,
         "quizQuestionCount": 24,
         "verifiedAnswerCount": 24,
-        "singleChoiceCount": 15,
-        "multipleChoiceCount": 1,
+        "singleChoiceCount": 14,
+        "multipleChoiceCount": 2,
         "fillCount": 4,
-        "shortAnswerCount": 1,
-        "compositeCount": 3
+        "shortAnswerCount": 0,
+        "compositeCount": 4
       }
     },
     {
       "schemaVersion": "5",
       "id": "p-089627b27e9b5e79",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2014期末",
       "title": null,
       "year": 2014,
@@ -1582,14 +1582,14 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 29,
-        "publishedQuestionCount": 16,
-        "quizQuestionCount": 16,
+        "publishedQuestionCount": 28,
+        "quizQuestionCount": 28,
         "verifiedAnswerCount": 29,
-        "singleChoiceCount": 7,
-        "multipleChoiceCount": 0,
-        "fillCount": 4,
+        "singleChoiceCount": 18,
+        "multipleChoiceCount": 1,
+        "fillCount": 2,
         "shortAnswerCount": 2,
-        "compositeCount": 3
+        "compositeCount": 5
       }
     },
     {
@@ -1643,15 +1643,15 @@
         "verifiedAnswerCount": 23,
         "singleChoiceCount": 7,
         "multipleChoiceCount": 7,
-        "fillCount": 4,
-        "shortAnswerCount": 1,
+        "fillCount": 5,
+        "shortAnswerCount": 0,
         "compositeCount": 4
       }
     },
     {
       "schemaVersion": "5",
       "id": "p-ac5fea2cf89e5bed",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2013期末",
       "title": null,
       "year": 2013,
@@ -1698,13 +1698,13 @@
       "sourceCollection": "pku-exam",
       "stats": {
         "questionCount": 27,
-        "publishedQuestionCount": 20,
-        "quizQuestionCount": 20,
+        "publishedQuestionCount": 26,
+        "quizQuestionCount": 26,
         "verifiedAnswerCount": 27,
-        "singleChoiceCount": 11,
-        "multipleChoiceCount": 0,
+        "singleChoiceCount": 17,
+        "multipleChoiceCount": 1,
         "fillCount": 5,
-        "shortAnswerCount": 2,
+        "shortAnswerCount": 1,
         "compositeCount": 2
       }
     },
@@ -1854,8 +1854,8 @@
         "verifiedAnswerCount": 60,
         "singleChoiceCount": 0,
         "multipleChoiceCount": 0,
-        "fillCount": 35,
-        "shortAnswerCount": 13,
+        "fillCount": 36,
+        "shortAnswerCount": 12,
         "compositeCount": 12
       }
     },
@@ -2173,8 +2173,8 @@
         "verifiedAnswerCount": 11,
         "singleChoiceCount": 0,
         "multipleChoiceCount": 0,
-        "fillCount": 7,
-        "shortAnswerCount": 4,
+        "fillCount": 8,
+        "shortAnswerCount": 3,
         "compositeCount": 0
       }
     },
@@ -2228,9 +2228,9 @@
         "verifiedAnswerCount": 18,
         "singleChoiceCount": 0,
         "multipleChoiceCount": 1,
-        "fillCount": 12,
-        "shortAnswerCount": 5,
-        "compositeCount": 0
+        "fillCount": 13,
+        "shortAnswerCount": 3,
+        "compositeCount": 1
       }
     },
     {

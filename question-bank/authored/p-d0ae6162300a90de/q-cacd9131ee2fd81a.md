@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-cacd9131ee2fd81a",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-d0ae6162300a90de",
   "paperOrder": 3,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-3、 对 `x = 1⅛` 和 `y = 1⅜` 进行小数点后两位取整（rounding to nearest even），结果正确的是
+3、对 `x = 1⅛` 和 `y = 1⅜` 舍入到**二进制小数点后两位**（round to nearest, ties to even），结果正确的是
 %%% reference
 答案：D
 `x = 1.00100₂  half way and down --> 1.00`

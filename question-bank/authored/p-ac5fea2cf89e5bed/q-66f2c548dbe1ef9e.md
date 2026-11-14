@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-66f2c548dbe1ef9e",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ac5fea2cf89e5bed",
   "paperOrder": 4,
   "number": {
@@ -389,13 +389,14 @@
 }
 +++
 %%% stem
+4. 在Y86的SEQ实现中，PC更新逻辑根据 `icode` 和 `Cnd` 选择下一条指令地址。以下四小问共用此图，请分别识别数据源①–④。
+
+![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)
 
 %%% reference
 
 %%% part-stem: q-62255a22a4ea1e74
-4. 在 Y86 的 SEQ 实现中，PC 更新逻辑根据 `icode` 与 `Cnd`，从 `valC`、`valM`、`valP` 中选择下一条指令地址。图中的数据源 ① 应为：
-
-![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)
+数据源①应为：
 %%% part-reference: q-62255a22a4ea1e74
 答案：A（`valC`）。
 %%% part-option: q-62255a22a4ea1e74 A
@@ -405,9 +406,7 @@
 %%% part-option: q-62255a22a4ea1e74 C
 `valP`
 %%% part-stem: q-75c36f88f1c3c806
-在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ② 应为：
-
-![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)
+数据源②应为：
 %%% part-reference: q-75c36f88f1c3c806
 答案：A（`valC`）。
 %%% part-option: q-75c36f88f1c3c806 A
@@ -417,9 +416,7 @@
 %%% part-option: q-75c36f88f1c3c806 C
 `valP`
 %%% part-stem: q-7a22222d757afa82
-在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ③ 应为：
-
-![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)
+数据源③应为：
 %%% part-reference: q-7a22222d757afa82
 答案：B（`valM`）。
 %%% part-option: q-7a22222d757afa82 A
@@ -429,9 +426,7 @@
 %%% part-option: q-7a22222d757afa82 C
 `valP`
 %%% part-stem: q-e4d86201d3caab9a
-在 Y86 SEQ 的 PC 更新逻辑中，图中的数据源 ④ 应为：
-
-![Y86 SEQ 的 PC 更新逻辑](assets/期末/2013期末-带答案/p3-pc-update-logic.png)
+数据源④应为：
 %%% part-reference: q-e4d86201d3caab9a
 答案：C（`valP`）。
 %%% part-option: q-e4d86201d3caab9a A

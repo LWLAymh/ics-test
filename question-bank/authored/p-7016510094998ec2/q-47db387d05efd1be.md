@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-47db387d05efd1be",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 5,
   "number": {
@@ -77,17 +77,17 @@
     "blankAnswers": [
       {
         "blankId": "legacy-gap-0",
-        "method": "self"
+        "method": "exact", "acceptedAnswers":["GOT","全局偏移量表","全局偏移表","global offset table"], "normalize":{"caseSensitive":false,"trimWhitespace":true}
       },
       {
         "blankId": "legacy-gap-1",
-        "method": "self"
+        "method": "exact", "acceptedAnswers":["PLT","过程链接表","procedure linkage table"], "normalize":{"caseSensitive":false,"trimWhitespace":true}
       }
     ]
   }
 }
 +++
 %%% stem
-5. 在当前的 Linux 系统中，延迟绑定是通过两个数据结构之间的交互来实现的，这两个重要的数据结构分别是{{blank:legacy-gap-0}}和{{blank:legacy-gap-1}}。
+5. 在教材介绍的 Linux ELF 延迟绑定机制中，需要两个数据结构交互：保存目标地址的表{{blank:legacy-gap-0}}，以及包含跳转指令的代码表{{blank:legacy-gap-1}}。（可填英文缩写或中文名称。）
 %%% reference
 答案：GOT；PLT

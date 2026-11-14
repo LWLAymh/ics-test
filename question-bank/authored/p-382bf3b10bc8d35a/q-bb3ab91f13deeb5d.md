@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-bb3ab91f13deeb5d",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-382bf3b10bc8d35a",
   "paperOrder": 15,
   "number": {
@@ -62,7 +62,7 @@
       "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text."
     },
     "correctOptionIds": [
-      "A"
+      "B"
     ]
   },
   "options": [
@@ -94,7 +94,7 @@
 }
 +++
 %%% stem
-15. 以下程序执行完成后，`ICS.txt`文件中的内容是：
+15. 假设 `ICS.txt` 初始为空，所有系统调用成功且完整读写指定字节数，以下程序执行后文件内容是什么？
 ```
 int main(int argc, char** argv) {
     int fd1 = open("ICS.txt", O_CREAT | O_RDWR,
@@ -113,7 +113,7 @@ int main(int argc, char** argv) {
 }
 ```
 %%% reference
-答案：A
+答案：B。旧键A与下述实际覆盖推导不一致，已纠正。
 解析：`fd1` 写入 "ics " 后偏移为 4；`fd2=fd1`、`fd3=dup(fd2)` 共享同一打开文件表项，`fd4` 以 `O_APPEND` 打开（每次写前定位到文件末尾）。`fd2` 写 "segmentation fault " 追加到 4；`fd4` 写 "tao" 追加到末尾；`dup2(fd3, fd5)` 让 `fd4` 也指向 fd1/fd3 的打开文件表项，此后 `write(fd4,"lab")` 写在偏移 23 处，覆盖掉 "tao"，最终文件为 "ics segmentation fault lab"。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。

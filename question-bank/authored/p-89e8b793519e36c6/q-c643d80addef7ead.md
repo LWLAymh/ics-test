@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c643d80addef7ead",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-89e8b793519e36c6",
   "paperOrder": 2,
   "number": {
@@ -96,6 +96,8 @@
 +++
 %%% stem
 2.  以下说法错误的是
+
+按32位机器补码加法解释：溢出时保留低32位，再按有符号数解释。这不是ISO C对有符号溢出的保证。逻辑操作指逐位布尔运算，不比较短路求值的副作用。
 %%% reference
 答案：d。无法用&和|表示逻辑非
 %%% option: A

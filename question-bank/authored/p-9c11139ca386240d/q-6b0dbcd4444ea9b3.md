@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-6b0dbcd4444ea9b3",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-9c11139ca386240d",
   "paperOrder": 38,
   "number": {
@@ -45,7 +45,7 @@
       "editorNote": "ShellLab 内建命令 jobs/bg/kill/nohup"
     }
   ],
-  "type": "single-choice",
+  "type": "multiple-choice",
   "stem": {
     "format": "markdown"
   },
@@ -62,6 +62,7 @@
       "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text."
     },
     "correctOptionIds": [
+      "A",
       "D"
     ]
   },
@@ -94,12 +95,13 @@
 }
 +++
 %%% stem
-38. （2 分）在 ShellLab 中，我们需要实现一系列内建命令。下列关于内建命令的说法
-正确的是？
-%%% reference
-答案：D
+38.（2分，多选）在 ShellLab 中，我们需要实现一系列内建命令。下列说法正确的是？
 
-解析：writeup 规定 `nohup [command]` 要让后续命令阻塞/忽略 `SIGHUP`（参考实现先阻塞 `SIGHUP` 再执行命令，子进程继承该信号屏蔽），故 D 对。jobs 直接调用 listjobs 输出即可，不需要先屏蔽信号（A 错）；bg 是给已停止的后台任务发 `SIGCONT` 让它继续在后台运行，而不是把前台运行的任务转后台（B 错）；kill 内建命令按 writeup 发送的是 `SIGTERM` 而不是 `SIGKILL`（C 错）。
+> 原卷按单选排版，网页复核后改为多选，并明确了D的设置信号时机。勘误原因见答题后的解析。
+%%% reference
+答案：A、D。`jobs` 遍历共享的任务表时，也可能被修改或删除表项的信号处理函数打断，应在该临界区屏蔽相关信号，A正确。`nohup` 使外部命令忽略或屏蔽 `SIGHUP`；可以在fork前设置后由子进程继承，也可以在子进程exec前设置，D正确。`bg` 是让停止的作业在后台继续，不是直接把正在前台运行的作业转到后台；本实验 `kill` 按规定发送 `SIGTERM`，B、C错误。
+
+原卷未提供官方答案。旧AI解析仅选D，并错误地声称 `jobs` 只读任务表就不需要保护；网页复核后将本题改为多选AD。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 %%% option: A
@@ -109,4 +111,4 @@ bg命令中我们需要将当前运行在前台的任务变为后台运行，且
 %%% option: C
 kill命令中我们需要向指定的进程或进程组发送SIGKILL信号以将其终止
 %%% option: D
-nohup命令中我们需要在创建子进程后阻塞SIGHUP信号或设置忽略该信号
+nohup命令应在执行外部程序前使其屏蔽或忽略 `SIGHUP`：可在fork前设置并由子进程继承，也可在子进程中、exec之前设置

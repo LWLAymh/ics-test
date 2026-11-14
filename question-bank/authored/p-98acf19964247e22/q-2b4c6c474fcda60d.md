@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-2b4c6c474fcda60d",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-98acf19964247e22",
   "paperOrder": 25,
   "number": {
@@ -215,7 +215,7 @@
           "listp"
         ],
         "normalize": {
-          "caseSensitive": false,
+          "caseSensitive": true,
           "trimWhitespace": true
         }
       },
@@ -226,7 +226,7 @@
           "listenfd"
         ],
         "normalize": {
-          "caseSensitive": false,
+          "caseSensitive": true,
           "trimWhitespace": true
         }
       }
@@ -264,8 +264,7 @@ Line 13:         /* Create a socket descriptor */
 Line 14:        if ((listenfd = socket(p->ai_family, p->ai_socktype,
 Line 15:                                    p->ai_protocol)) < 0)
 Line 16:           continue;  /* Socket failed, try the next */
-Line 17:         /* Eliminates "Address already in use" error from
-bind */
+Line 17:         /* Eliminates "Address already in use" error from bind */
 Line 18:         Setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,
 Line 19:                    (const void *)&optval , sizeof(int));
 Line 20:

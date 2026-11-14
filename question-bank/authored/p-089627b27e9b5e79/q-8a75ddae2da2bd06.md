@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-8a75ddae2da2bd06",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 14,
   "number": {
@@ -25,13 +25,11 @@
     "tags": []
   },
   "publication": {
-    "state": "review",
+    "state": "published",
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "selection-multiplicity-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -47,7 +45,7 @@
       "editorNote": "malloc 堆分配与栈数组的区别"
     }
   ],
-  "type": "unclassified-choice",
+  "type": "single-choice",
   "stem": {
     "format": "markdown"
   },
@@ -95,7 +93,7 @@
 }
 +++
 %%% stem
-14. 有程序段如下：
+14. 有程序段如下。假设 `malloc` 成功，按对象存活时所在的存储区域判断（在 `free` 执行前）：
 
 
 ```

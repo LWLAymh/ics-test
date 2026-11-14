@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ecb20c296defe5fd",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-bc69f9ea3beff7ee",
   "paperOrder": 13,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-13. 在Core i7中，关于虚拟地址和物理地址的说法，不正确的是：
+13. 采用教材Core i7地址划分模型：4KB页、64B缓存行、L1有64组，48位虚拟地址的VPN由四个各9位页表索引组成。下列关系中各符号均表示**字段位数**，`+`表示拼接后的位宽之和，并非各字段当前存放的数值之和。哪项不正确？
 %%% reference
 答案：B (VPN = TLBT + TLBI)
 %%% option: A

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-dc098e5a5efcc480",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-eaef0ab4d19e72c9",
   "paperOrder": 17,
   "number": {
@@ -344,8 +344,8 @@
               "t1+24(%rax)"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true, "syntax":"att-operand"
             }
           },
           {
@@ -366,8 +366,8 @@
               "t1[x].ii[y]"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true, "syntax":"c-tokens"
             }
           },
           {
@@ -377,7 +377,7 @@
               "y"
             ],
             "normalize": {
-              "caseSensitive": false,
+              "caseSensitive": true,
               "trimWhitespace": true
             }
           },
@@ -385,11 +385,11 @@
             "blankId": "c3",
             "method": "exact",
             "acceptedAnswers": [
-              "*(t1[x].ip)"
+              "*(t1[x].ip)", "*t1[x].ip", "t1[x].ip[0]"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true, "syntax":"c-tokens"
             }
           },
           {
@@ -399,7 +399,7 @@
               "y"
             ],
             "normalize": {
-              "caseSensitive": false,
+              "caseSensitive": true,
               "trimWhitespace": true
             }
           }
@@ -436,10 +436,6 @@
 }
 +++
 %%% stem
-
-%%% reference
-
-%%% part-stem: q-9fdd13d9aa346014
 第三题（15分，每空1分）
 数据结构定义如下：（测试用机：64位Linux机器）
 ```c
@@ -450,6 +446,9 @@ typedef struct s1 {
 } S1;
 S1 t1[N];
 ```
+采用 x86-64 System V 的通常布局：`int` 大小/对齐为4字节、指针大小/对齐为8字节。以下各问中数组下标与指针访问均有效；初始化函数取 `0 <= n <= N`。
+
+%%% part-stem: q-9fdd13d9aa346014
 1、计算该数据结构的空间：
 当`N=3`时，`sizeof(S1) = {{blank:n3_s1}}`，`sizeof(t1) = {{blank:n3_t1}}`
 当`N=4`时，`sizeof(S1) = {{blank:n4_s1}}`，`sizeof(t1) = {{blank:n4_t1}}`
@@ -482,7 +481,7 @@ init:
         leaq    0(,%rsi,4), %rdx
         addq    $t1+4, %rdx
         salq      {{blank:asm2}} , %rax
-        movq      {{blank:asm3}} , (  {{blank:asm4}} )
+        movq      {{blank:asm3}} , {{blank:asm4}}
         addl    $1, %ecx
 .L2:
         cmpl      {{blank:asm5}} , %ecx
@@ -517,5 +516,7 @@ void fun(int x, int y)
 ```
 %%% part-reference: q-6f1e2a8202d6c801
 答案：
-2) 汇编填空答案依次为`%rax`、`$5`、`%rdx`、`t1+24(%rax)`、`%edi`。第(4)空原卷多出一对括号，按答案修订接受该地址表达式。
+2) 汇编填空答案依次为`%rax`、`$5`、`%rdx`、`t1+24(%rax)`、`%edi`。第(4)空原卷多出一对括号，已从题面移除，填入完整的地址操作数即可。
 3) C代码填空答案依次为`t1[x].ii[y]`、`y`、`*(t1[x].ip)`、`y`。
+%%% reference
+

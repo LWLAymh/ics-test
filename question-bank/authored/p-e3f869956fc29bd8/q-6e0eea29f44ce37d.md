@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-6e0eea29f44ce37d",
-  "revision": 6,
+  "revision": 7,
   "paperId": "p-e3f869956fc29bd8",
   "paperOrder": 21,
   "number": {
@@ -125,36 +125,16 @@
         },
         "parts": []
       },
-      "type": "fill",
+      "type": "short-answer",
       "moduleIds": [
         "concurrent_programming"
       ],
       "stem": {
-        "format": "markdown",
-        "blanks": [
-                                                  {
-            "id": "legacy-gap-4",
-            "marker": "{{blank:legacy-gap-4}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "legacy-gap-5",
-            "marker": "{{blank:legacy-gap-5}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "legacy-gap-6",
-            "marker": "{{blank:legacy-gap-6}}",
-            "occurrence": 0,
-            "width": "medium"
-          }
-        ]
+        "format": "markdown"
       },
       "solution": {
         "state": "available",
-        "grading": "blanks",
+        "grading": "self",
         "reference": {
           "format": "markdown"
         },
@@ -162,21 +142,7 @@
           "origin": "unknown",
           "crossChecked": null,
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        },
-        "blankAnswers": [
-                                                  {
-            "blankId": "legacy-gap-4",
-            "method": "self"
-          },
-          {
-            "blankId": "legacy-gap-5",
-            "method": "self"
-          },
-          {
-            "blankId": "legacy-gap-6",
-            "method": "self"
-          }
-        ]
+        }
       },
       "sources": [
         {
@@ -209,12 +175,9 @@
 }
 +++
 %%% stem
-
-%%% reference
-
-%%% part-stem: q-11519e4dc5364b32
 第七题（10分）
 给定如下程序：
+分析采用题目给定的读、加、写指令交错模型，不把有数据竞争的 C 源程序当作具有语言级保证的可执行规范；两个线程均创建成功。
 ```c
 #include <stdio.h>
 #include <pthread.h>
@@ -250,6 +213,7 @@ int main() {
     return 0;
 }
 ```
+%%% part-stem: q-11519e4dc5364b32
 1.  （2分）用以下元素的编号写出i++编译后的汇编代码。
 `(a) mov   (b) add   (c) 0x601040   (d) %eax (e) $0x1`
 比如，回答(a) (e) (d)表示`mov $0x1, %eax`
@@ -318,7 +282,7 @@ int main() {
 
 4. （2分）如果对程序改动一处数字来消除上述问题，同时仍然保证两个计数器最终稳定为 `2000, 2000`，应该如何改动？（原代码第 39 行只打印 `i`，此处讨论 `i`、`j` 的最终值。）
 
-回答：将{{blank:legacy-gap-4}}（填行号）行的{{blank:legacy-gap-5}}（填数字）改为{{blank:legacy-gap-6}}（填数字）。
+请在答题框逐项填写第2问的判断与原因、第3问的问题与原因，以及第4问的行号/原数字/新数字。第4问的改法相互关联且不唯一，本组对照解析自评。
 %%% part-reference: q-c36c9b861c58b521
 以下沿用原题将自增拆成读、加、写指令的交错执行模型；不是对存在数据竞争的 C 程序作语言层面的保证。
 
@@ -335,3 +299,5 @@ int main() {
 3. 死锁。两个线程分别持有一个信号量，在第 11 行和第 23 行等待对方释放另一个信号量。
 
 4. 将第 33 行或第 34 行的 `1` 改为任意大于等于 `2` 的整数，另一处仍为 `1`。初值为 `2` 的信号量可同时供两个线程获取，避免循环等待；另一个初值为 `1` 的信号量仍保证计数器操作互斥。原解析写作“大于 2”，但 `2` 也足够。本小问允许多种相互关联的改法，保留自评。
+%%% reference
+

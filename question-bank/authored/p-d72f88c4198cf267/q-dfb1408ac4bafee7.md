@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-dfb1408ac4bafee7",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-d72f88c4198cf267",
   "paperOrder": 13,
   "number": {
@@ -325,6 +325,8 @@
 }
 +++
 %%% stem
+
+第二题共用约定：x86-64小端，`int` 为32位、`float`/`double` 分别采用IEEE 754 binary32/binary64，采用就近舍入、偶数优先。联合体按机器位表示解释；不考虑优化器利用未定义行为改变代码。
 
 %%% reference
 

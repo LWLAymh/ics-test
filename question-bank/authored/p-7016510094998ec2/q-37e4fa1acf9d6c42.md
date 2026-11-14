@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-37e4fa1acf9d6c42",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 9,
   "number": {
@@ -77,11 +77,11 @@
     "blankAnswers": [
       {
         "blankId": "legacy-gap-0",
-        "method": "self"
+        "method": "exact", "acceptedAnswers":["MMU","内存管理单元","存储器管理单元","memory management unit"], "normalize":{"caseSensitive":false,"trimWhitespace":true}
       },
       {
         "blankId": "legacy-gap-1",
-        "method": "self"
+        "method": "exact", "acceptedAnswers":["TLB","翻译后备缓冲器","快表","translation lookaside buffer"], "normalize":{"caseSensitive":false,"trimWhitespace":true}
       }
     ]
   }

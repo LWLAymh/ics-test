@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ffc3db50cfb5b1e6",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-ac5fea2cf89e5bed",
   "paperOrder": 5,
   "number": {
@@ -25,13 +25,11 @@
     "tags": []
   },
   "publication": {
-    "state": "review",
+    "state": "published",
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": [
-      "selection-multiplicity-unresolved"
-    ]
+    "issues": []
   },
   "sources": [
     {
@@ -47,7 +45,7 @@
       "editorNote": "直接映射 cache 的每路行数"
     }
   ],
-  "type": "unclassified-choice",
+  "type": "single-choice",
   "stem": {
     "format": "markdown"
   },
@@ -100,8 +98,7 @@
 
 5、请问它每路（way）有多少行（line）？
 %%% reference
-答案：选 A，容量=路容量\*路数=cache 行大小*Set 数\*路数->set 数
-=`4KB/32B=2^7=128`
+答案：A。直接映射只有1路，`4096 / 32 = 128` 个组，每组1行，因此唯一的一路共有128行。不要将“每路行数”和“每组行数”混淆。
 %%% option: A
 128
 %%% option: B

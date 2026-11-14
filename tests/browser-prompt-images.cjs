@@ -5,6 +5,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const fixtures = require('./prompt-image-fixtures.cjs');
 const root = path.resolve(__dirname, '..');
 const bank = JSON.parse(fs.readFileSync(path.join(root, '_site/web-data/questions.json'))).questions;
+const retained = JSON.parse(fs.readFileSync(path.join(root, 'question-bank/web-data/questions.json'))).questions;
 const source = fs.readFileSync(path.join(root, 'site/ics-test.js'), 'utf8').replace('  init();',
   '  window.__test = {state, ui, renderQuestion}; init();');
 function stub() {
@@ -36,7 +37,10 @@ async function run() {
     await page.route(u => /^https?:$/.test(u.protocol) && u.origin !== new URL(url).origin, route => { remote.push(route.request().url()); return route.abort(); });
     await page.goto(url); await page.waitForFunction(() => !document.querySelector('#ics-start').disabled);
     for (const [id, expected] of fixtures) {
-      const q = bank.find(q => q.id === id); assert.ok(q, id);
+      // Keep image regressions for retained source questions without publishing
+      // unresolved answer keys merely to satisfy a display fixture.
+      const q = bank.find(q => q.id === id) || retained.find(q => q.id === id); assert.ok(q, id);
+      if (q.publication.state !== 'published') assert.ok(!bank.some(item => item.id === id), 'review question stays out of deployment');
       for (const width of [1280, 390]) {
         await page.setViewportSize({ width, height: 950 }); await fixture(page, q);
         const images = page.locator('#ics-question-content img');

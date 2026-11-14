@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-5bda1cdcfd5e9cdd",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-d72f88c4198cf267",
   "paperOrder": 2,
   "number": {
@@ -104,4 +104,4 @@ set指令可以根据条件码的组合将一个字节设置为0或1
 %%% option: C
 leaq指令可以设置条件码`CF`和`OF`
 %%% option: D
-除无条件跳转指令`jmp`外，其他跳转指令都是根据条件码的某种组合跳转到标号指示的位置
+教材所列的条件跳转 `jcc` 根据条件码的某种组合决定是否跳转到标号指示的位置（本项不包含 `jrcxz`、`loop` 等其他指令）。

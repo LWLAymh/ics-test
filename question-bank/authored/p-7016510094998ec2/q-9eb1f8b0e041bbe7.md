@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-9eb1f8b0e041bbe7",
-  "revision": 4,
+  "revision": 5,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 20,
   "number": {
@@ -316,11 +316,11 @@
         "blankAnswers": [
           {
             "blankId": "legacy-gap-0",
-            "method": "self"
+            "method": "exact", "acceptedAnswers":["localhost","127.0.0.1","::1"], "normalize":{"caseSensitive":false,"trimWhitespace":true}
           },
           {
             "blankId": "legacy-gap-1",
-            "method": "self"
+            "method": "exact", "acceptedAnswers":["50000"], "normalize":{"caseSensitive":true,"trimWhitespace":true}
           }
         ]
       },
@@ -438,11 +438,11 @@
         "blankAnswers": [
           {
             "blankId": "legacy-gap-0",
-            "method": "self"
+            "method": "exact", "acceptedAnswers":["22","21"], "normalize":{"caseSensitive":true,"trimWhitespace":true}
           },
           {
             "blankId": "legacy-gap-1",
-            "method": "self"
+            "method": "exact", "acceptedAnswers":["Close(clientfd);","close(clientfd);"], "normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           }
         ]
       },
@@ -549,11 +549,13 @@
 }
 +++
 %%% stem
+第六题 网络编程
 
-%%% reference
-
-%%% part-stem: q-35b31dd6c25ebe73
 学完《网络编程》一章，小明迫不及待地想搭建自己的游戏服务器。他根据课本上代码写出的《网络乒乓》服务器代码如下。他在 Class Machine 上运行代码，TCP 等协议都采用默认设置。请你根据代码回答问题。
+
+以下服务端和客户端是各小问共用的程序。行号为原题引用标记，不属于代码语法；第4问单独分析文件描述符耗尽，其余按连接与库函数成功分析。
+
+服务端：
 
 ```c
  1  #include "csapp.h"
@@ -603,15 +605,7 @@
 ```
 
 
-1. 函数 `Open_listenfd` 要建立的是可靠的TCP连接。因此，里面有一行代码设置了 hints.ai_socktype = {{blank:legacy-gap-0}}；（SOCK_STREAM / SOCK_DGRAM）。（1分）
-%%% part-reference: q-35b31dd6c25ebe73
-答案：SOCK_STREAM
-%%% part-stem: q-9839dd0d198535d7
-2. 函数 Getnameinfo 的用途是查询输入的{{blank:legacy-gap-0}}（主机名对应的IP地址 / IP地址对应的主机名）。（1分）
-%%% part-reference: q-9839dd0d198535d7
-答案：IP地址对应的主机名
-%%% part-stem: q-8ef75472241f3c98
-3. 小明的朋友们对他的游戏都不感兴趣，小明只好自己写了一个客户端来玩自己的游戏。他的客户端代码如下：
+客户端：
 
 ```c
  1  #include "csapp.h"
@@ -641,6 +635,19 @@
 25  }
 ```
 
+%%% reference
+
+%%% part-stem: q-35b31dd6c25ebe73
+1. 函数 `Open_listenfd` 为 TCP 监听套接字解析地址时，会设置 `hints.ai_socktype =` {{blank:legacy-gap-0}}（SOCK_STREAM / SOCK_DGRAM）。（1分）监听本身尚未建立到客户端的连接。
+%%% part-reference: q-35b31dd6c25ebe73
+答案：SOCK_STREAM
+%%% part-stem: q-9839dd0d198535d7
+2. 函数 Getnameinfo 的用途是查询输入的{{blank:legacy-gap-0}}（主机名对应的IP地址 / IP地址对应的主机名）。（1分）
+%%% part-reference: q-9839dd0d198535d7
+答案：IP地址对应的主机名
+%%% part-stem: q-8ef75472241f3c98
+3. 小明使用公共题面中的客户端来玩自己的游戏。
+
 他在同一台主机上运行服务器和客户端。他的操作流程是：
 
 ```text
@@ -659,9 +666,11 @@ nohup ./server 50000 > log.out &
 %%% part-stem: q-9173da3272ca94be
 5. 请在客户端中添加一行代码，使得 #define GOAL 100000 时也能正常运行。你添加的位置是现在的第{{blank:legacy-gap-0}}行之后，添加的代码内容是{{blank:legacy-gap-1}}。（2分）
 %%% part-reference: q-9173da3272ca94be
-答案：第 22 行之后；Close(clientfd);
+答案：第22行后添加 `Close(clientfd);`。在第21行完成读取之后立即关闭也正确；后面的 `Fputs` 只访问已读入的缓冲区。这里接受 `Close` 封装或成功时等效的 `close`，完整语句需要分号。
 %%% part-stem: q-2caa71db00b101fa
-6. 小红和小方听说了小明的高难度游戏，非常感兴趣。在小明合理配置服务器使得服务器能被访问到后，小红和小方同时在各自的电脑上运行客户端程序，与小明的服务器互动。假设小红、小方的电脑配置相同，网络延迟大小相同，并且整个过程中没有发生过重传。请推测，一段时间后，小红和小方：（2分）
+6. 小红和小方同时运行第5问修复后的客户端，与 `GOAL=100000` 的同一服务器互动。采用原卷预期的简化进度假设：两人均已开始游戏，库函数成功，无长期调度暂停；当首位玩家收到胜利消息时，另一位玩家的本地 `ball_cnt` 已大于0，且没有重启客户端。随后他们继续原有的循环。则：（2分）
+
+> 条件说明：仅有“配置相同、网络延迟相同”不能保证两人进度同步。这里明确所需的进度前提；若允许第二人一直未开始首轮，直到第一人获胜后才开始，可能先后都胜出，不能声称原选项A在任意系统调度下必然成立。
 %%% part-reference: q-2caa71db00b101fa
 答案：A
 （小明的服务器在迭代处理两个客户端时，ball_cnt 只会在某一次与其中一个客户端连接时等于 GOAL，之后便会设为 0，而另一个客户端已经超过 0，因此只会发送一次"You win!"。）

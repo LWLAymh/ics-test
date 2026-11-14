@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-e79fe5b33df52e8d",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-d72f88c4198cf267",
   "paperOrder": 14,
   "number": {
@@ -176,12 +176,12 @@
             "blankId": "q3-1",
             "method": "exact",
             "acceptedAnswers": [
-              "return",
               "return;"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
             }
           },
           {
@@ -191,8 +191,9 @@
               "params->n"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
             }
           },
           {
@@ -289,6 +290,8 @@
             "method": "exact",
             "acceptedAnswers": [
               "0x00005555555551af",
+              "0x00005555555551af <foo>",
+              "0x5555555551af",
               "5555555551af",
               "foo",
               "<foo>"
@@ -488,12 +491,31 @@
 +++
 %%% stem
 
+第三题共用程序（①②在第1小问作答，不在公共程序重复输入）：
+
+```c
+typedef struct { int n; int product; } parameters;
+
+int bar(parameters *params, int x) {
+    params->product *= x;
+}
+
+void foo(parameters *params) {
+    if (params->n <= 1) { /* ① */ }
+    bar(params, /* ② */);
+    params->n--;
+    foo(params);
+}
+```
+
+采用System V AMD64，`int` 为32位；调用中 `product` 不溢出。`bar` 的返回值不使用。汇编地址中 `bar=0x0000555555555189`、`foo=0x00005555555551af`；`bar` 在518d执行 `push %rbp`，518e执行 `mov %rsp,%rbp`；`foo`在51d9调用bar（返回51de），51f4递归调用foo（返回51f9），其序言保存rbp并分配16字节局部空间。
+
 %%% reference
 
 %%% part-stem: q-0e7411e79eb6dc92
 第三题（20 分）
 
-请分析下面的 C 程序和对应的 x86-64 汇编代码，填写标号对应的缺失内容。汇编与机器码中的数字用十六进制填写。
+请分析下面的 C 程序和对应的 x86-64 汇编代码，填写标号对应的缺失内容。汇编与机器码中的数字用十六进制填写。①为完整 `return;` 语句，②仅填参数表达式，模板已有的前后缀不要重复填写。
 
 ```c
 typedef struct _parameters {
@@ -600,6 +622,6 @@ void foo(parameters *params) {
 13. `0x555551de`
 14. `0xffffe2f0`
 %%% part-stem: q-83f219186da3fa88
-3. 当 `params = {n, 1}` 时，`foo(&params)` 的功能是什么？
+3. 当 `parameters params = {n, 1}` 且 `n>=0` 时，`foo(&params)` 的功能是什么？（排除递归资源耗尽和整数溢出。）
 %%% part-reference: q-83f219186da3fa88
 计算 `n` 的阶乘。函数从 `n` 开始递归，将 `product` 依次乘以当前的 `n`，直到 `n <= 1` 时返回；若初始 `product = 1`，最终 `product = n!`。

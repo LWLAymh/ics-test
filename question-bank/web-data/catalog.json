@@ -200,8 +200,8 @@
         "q-ce72197e573dfd2e"
       ],
       "questionCount": 186,
-      "publishedQuestionCount": 185,
-      "quizQuestionCount": 185
+      "publishedQuestionCount": 184,
+      "quizQuestionCount": 184
     },
     {
       "id": "machine_prog",
@@ -425,8 +425,8 @@
         "q-d5d56ae86119aa5f"
       ],
       "questionCount": 214,
-      "publishedQuestionCount": 207,
-      "quizQuestionCount": 207
+      "publishedQuestionCount": 209,
+      "quizQuestionCount": 209
     },
     {
       "id": "processor_arch",
@@ -550,8 +550,8 @@
         "q-f2c81089030ddaa5"
       ],
       "questionCount": 114,
-      "publishedQuestionCount": 113,
-      "quizQuestionCount": 113
+      "publishedQuestionCount": 107,
+      "quizQuestionCount": 107
     },
     {
       "id": "memory_hierarchy",
@@ -696,8 +696,8 @@
         "q-561fcc94e43aae14"
       ],
       "questionCount": 135,
-      "publishedQuestionCount": 131,
-      "quizQuestionCount": 131
+      "publishedQuestionCount": 130,
+      "quizQuestionCount": 130
     },
     {
       "id": "compilation_linking",
@@ -796,8 +796,8 @@
         "q-b0ef359a9e930155"
       ],
       "questionCount": 89,
-      "publishedQuestionCount": 85,
-      "quizQuestionCount": 85
+      "publishedQuestionCount": 84,
+      "quizQuestionCount": 84
     },
     {
       "id": "ecf_and_system_io",
@@ -915,8 +915,8 @@
         "q-d476fa89c01aa623"
       ],
       "questionCount": 108,
-      "publishedQuestionCount": 103,
-      "quizQuestionCount": 103
+      "publishedQuestionCount": 101,
+      "quizQuestionCount": 101
     },
     {
       "id": "virtual_memory_and_malloc",
@@ -1003,8 +1003,8 @@
         "q-f8c72980c915c7fa"
       ],
       "questionCount": 77,
-      "publishedQuestionCount": 73,
-      "quizQuestionCount": 73
+      "publishedQuestionCount": 72,
+      "quizQuestionCount": 72
     },
     {
       "id": "network",
@@ -1065,8 +1065,8 @@
         "q-db2d4bf775b8e912"
       ],
       "questionCount": 51,
-      "publishedQuestionCount": 49,
-      "quizQuestionCount": 49
+      "publishedQuestionCount": 46,
+      "quizQuestionCount": 46
     },
     {
       "id": "concurrent_programming",
@@ -1174,10 +1174,10 @@
   },
   "stats": {
     "questions": 1026,
-    "publishedQuestions": 995,
-    "quizQuestions": 995,
-    "withheldQuestions": 31,
+    "publishedQuestions": 984,
+    "quizQuestions": 984,
+    "withheldQuestions": 42,
     "papers": 41,
-    "quizGroups": 110
+    "quizGroups": 116
   }
 }

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f2bd165c7fbed479",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-662d741f28b2bed0",
   "paperOrder": 15,
   "number": {
@@ -88,9 +88,13 @@
 }
 +++
 %%% stem
-15. 假定编译器规定`int`和`short`型长度分别为32位和16位，执行下列语句：
-`unsigned short x = 65530`;
-`unsigned int y = x`;
+15. 假定编译器规定 `int` 和 `short` 型长度分别为32位和16位，执行下列语句：
+
+```c
+unsigned short x = 65530;
+unsigned int y = x;
+```
+
 得到y的机器数为 {{blank:y}}。（用16进制表示，勿省略前导的0）
 %%% reference
 答案：0000FFFA

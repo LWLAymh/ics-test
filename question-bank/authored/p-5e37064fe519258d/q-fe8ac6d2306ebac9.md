@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-fe8ac6d2306ebac9",
-  "revision": 4,
+  "revision": 5,
   "paperId": "p-5e37064fe519258d",
   "paperOrder": 16,
   "number": {
@@ -52,6 +52,7 @@
         "occurrence": 0,
         "width": "medium"
       },
+      {"id":"fraction-width","marker":"{{blank:fraction-width}}","occurrence":0,"width":"short","label":"n的值"},
       {
         "id": "denormalized-bits",
         "marker": "{{blank:denormalized-bits}}",
@@ -154,14 +155,14 @@
         "blankId": "format-fields",
         "method": "exact",
         "acceptedAnswers": [
-          "k = 4，n = 4",
-          "k=4, n=4"
+          "4"
         ],
         "normalize": {
           "caseSensitive": false,
           "trimWhitespace": true
         }
       },
+      {"blankId":"fraction-width","method":"exact","acceptedAnswers":["4"],"normalize":{"caseSensitive":true,"trimWhitespace":true}},
       {
         "blankId": "denormalized-bits",
         "method": "exact",
@@ -254,15 +255,15 @@
 考虑有一种基于IEEE浮点格式的9位浮点表示格式A。格式A有1个符号位，k
 个阶码位，n 个小数位。现在已知 $−9/16$ 的位模式可以表示为“101100010”，请回答
 以下问题：（注：阶码偏移量为 $2^{k−1}-1$）
-1.  求k和n的值。（1分）{{blank:format-fields}}
+1. 求k和n（均填十进制整数）：k={{blank:format-fields}}，n={{blank:fraction-width}}。（1分）
 2.  基于格式A，请填写下表。值的表示可以写成整数（如16），或者写成分数（如
 17/64）。（注:每格2分）二进制位表示需保留完整的 9 位，可连续填写，也可按符号位、阶码、小数三个字段用一个空格分隔。
 
 | 描述 | 二进制位表示 | 值 |
 | --- | --- | --- |
-| 最大的非规格化数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |
-| 最小的正规格化数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |
-| 最大的规格化数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |
+| 最大的非规格化正数 | {{blank:denormalized-bits}} | {{blank:denormalized-value}} |
+| 最小的规格化正数 | {{blank:min-normal-bits}} | {{blank:min-normal-value}} |
+| 最大的规格化正数 | {{blank:max-normal-bits}} | {{blank:max-normal-value}} |
 
 3.  假设格式A变为1个符号位，k+1个阶码位，n-1个小数位，那么能表示的
 实数数量会怎样变化，数值的精度会怎样变化？（回答增加、降低或不变即
@@ -270,4 +271,4 @@
 %%% reference
 答案：1. k = 4，n = 4
 2. 最大的非规格化数：`0 0000 1111`，值 15/1024；最小的正规格化数：`0 0001 0000`，值 1/64；最大的规格化数：`0 1110 1111`，值 248
-3. 小数位变少后，NaN 的数量减少了，所以实数数量增加（1 分），数值精度降低（1 分）。
+3. 总位数不变，NaN位模式由30种减少到14种，两个无穷和正负零的重复计数不变；可表示的不同有限实数从479个增至495个。有效数位由5位减为4位，相对精度降低；不是说扩大指数范围能改善所有数值的精度。

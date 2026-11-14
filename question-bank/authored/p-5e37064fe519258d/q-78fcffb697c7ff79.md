@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-78fcffb697c7ff79",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-5e37064fe519258d",
   "paperOrder": 1,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-1. 假定一个特殊设计的计算机将 `int` 型数据的长度从 4 Byte 扩展为 4N Byte，并采用大端法（Big Endian）。现将该 `int` 型所能表示的最小负数写入内存，如下图所示。每个小矩形代表一个 Byte，请问 X 位置这个 Byte 中的值是多少？
+1. 假定一个特殊设计的计算机将 `int` 型数据的长度从4字节扩展为4N字节（N为正整数），采用补码表示、每字节8位，并采用大端法（Big Endian）。现将该类型的最小负数写入内存，如图所示。每个小矩形代表一字节，X位置的字节值是多少？
 
 ![4N Byte 整数在大端内存中的排列示意图，X 位于靠近低地址一侧的指定字节](assets/期中/2017期中-带答案/q1-memory-layout.svg)
 %%% reference

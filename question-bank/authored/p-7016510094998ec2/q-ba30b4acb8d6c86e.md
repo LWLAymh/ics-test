@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ba30b4acb8d6c86e",
-  "revision": 1,
+  "revision": 4,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 19,
   "number": {
@@ -85,16 +85,28 @@
         },
         "parts": []
       },
-      "type": "short-answer",
+      "type": "fill",
       "moduleIds": [
         "virtual_memory_and_malloc"
       ],
       "stem": {
-        "format": "markdown"
+        "format": "markdown",
+        "blanks": [
+          {"id":"vm-code","marker":"{{blank:vm-code}}","occurrence":0,"width":"medium"},
+          {"id":"vm-heap","marker":"{{blank:vm-heap}}","occurrence":0,"width":"medium"},
+          {"id":"vm-map","marker":"{{blank:vm-map}}","occurrence":0,"width":"long"},
+          {"id":"vm-stack","marker":"{{blank:vm-stack}}","occurrence":0,"width":"medium"}
+        ]
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {"blankId":"vm-code","method":"exact","acceptedAnswers":["代码","程序代码","代码段","text",".text"],"normalize":{"caseSensitive":false,"trimWhitespace":true}},
+          {"blankId":"vm-heap","method":"exact","acceptedAnswers":["运行时堆","堆","heap","run-time heap"],"normalize":{"caseSensitive":false,"trimWhitespace":true}},
+          {"blankId":"vm-map","method":"exact","acceptedAnswers":["共享库的内存映射区域","共享库内存映射区域","共享库映射区","共享库","memory-mapped region for shared libraries"],"normalize":{"caseSensitive":false,"trimWhitespace":true}},
+          {"blankId":"vm-stack","method":"exact","acceptedAnswers":["用户栈","运行时栈","栈","stack","user stack"],"normalize":{"caseSensitive":false,"trimWhitespace":true}}
+        ],
         "reference": {
           "format": "markdown"
         },
@@ -192,16 +204,18 @@
         "blanks": [
           {
             "id": "legacy-gap-0",
-            "marker": "________________________________________________________________________________\n\n(2) ________________________________________________________________________________",
+            "marker": "{{blank:legacy-gap-0}}",
             "occurrence": 0,
             "width": "medium"
           },
           {
             "id": "legacy-gap-1",
-            "marker": "________________________________________________________________________________\n\n(4) ________________________________________________________________________________",
+            "marker": "{{blank:legacy-gap-1}}",
             "occurrence": 0,
-            "width": "medium"
-          }
+            "width": "long"
+          },
+          {"id":"bug-3","marker":"{{blank:bug-3}}","occurrence":0,"width":"long"},
+          {"id":"bug-4","marker":"{{blank:bug-4}}","occurrence":0,"width":"long"}
         ]
       },
       "solution": {
@@ -223,7 +237,9 @@
           {
             "blankId": "legacy-gap-1",
             "method": "self"
-          }
+          },
+          {"blankId":"bug-3","method":"self"},
+          {"blankId":"bug-4","method":"self"}
         ]
       },
       "sources": [
@@ -257,16 +273,18 @@
 }
 +++
 %%% stem
+第五题 虚拟内存管理
+
+第(1)、(2)问共用下列教材中的典型 Linux 虚拟内存布局图。第(2)问假设未安装自定义信号处理程序，图中代码区只读，堆与共享库映射区之间的空隙尚未映射。
+
+![Linux 进程虚拟内存地址空间布局图](assets/期末/2022期末-无答案/page-09-q.png)
 
 %%% reference
 
 %%% part-stem: q-d92185485a797988
-1、典型的 Linux 进程的虚拟内存布局如下图所示，请分别给出①②③④对应存放的内容。（每小题 1 分，共 4 分）
+1. 根据公共题面的 Linux 进程虚拟内存布局图，填写①②③④存放的内容。（每空1分，共4分）
 
-
-![Linux 进程虚拟内存地址空间布局图](assets/期末/2022期末-无答案/page-09-q.png)
-
-图为 Linux 进程虚拟内存地址空间布局示意（低地址在下、高地址在上）：最顶部方块为"内核虚拟内存空间"，其下自上而下依次为标号 ④ 的方块、空白方块、标号 ③ 的方块、空白方块、标号 ② 的方块、绿色方块"已初始化和未初始化的数据"、标号 ① 的方块、空白方块；图左侧在 ① 方块与"未用"方块之间标注地址 `0x400000`，最下方方块标注"未用"。
+① {{blank:vm-code}}；② {{blank:vm-heap}}；③ {{blank:vm-map}}；④ {{blank:vm-stack}}。
 %%% part-reference: q-d92185485a797988
 答案：
 ① 代码
@@ -274,9 +292,9 @@
 ③ 共享库的内存映射区域
 ④ 用户栈
 %%% part-stem: q-443a702b2f36d4d9
-2、如上题给出的 Linux 进程的虚拟内存布局图，如果执行`*(int*)main=0`，会出现何种结果？如果在②和③之间的地址空间位置执行 `mov $0x0a, count`，会出现何种结果？（忽略 `count` 的实际意义，假设能正常通过编译）（每小题 1 分，共 2 分）
+2. 根据公共图和已给的映射/权限条件，如果执行 `*(int *)main = 0` 写代码区，会出现何种结果？如果执行 `mov $0x0a, count`，其中 `count` 所标识的目标地址位于②和③之间尚未映射的空隙，又会出现何种结果？忽略指令编译与链接的细节，只分析CPU写目标地址时的行为。（每问1分，共2分）
 %%% part-reference: q-443a702b2f36d4d9
-答案：① 触发保护异常，终止进程；② 触发段错误，终止进程
+答案：① 写只读代码页触发保护性页故障；② 写未映射地址触发页故障。操作系统无法满足这两种访问，通常向进程递送 `SIGSEGV`；在题面假设的默认处理下终止进程。
 %%% part-stem: q-7e4dbca71b0f137c
 3、内存安全（共 4 分，找出一个错误给 1 分）
 
@@ -313,59 +331,55 @@
 22)     assert(new_data != NULL);
 23)     return new_data;
 24) }
-```
-
-
-```c
 25)
 26) Stack *stack_new() {
-    27)     Stack stack;
-    28)     stack.data      = get_heap_memory(1);
-    29)     stack.length    = 0;
-    30)     stack.capacity  = 1;
-    31)     return &stack;
-    32) }
+27)     Stack stack;
+28)     stack.data      = get_heap_memory(1);
+29)     stack.length    = 0;
+30)     stack.capacity  = 1;
+31)     return &stack;
+32) }
 33)
 34) void stack_push(Stack *stack, int n) {
-    35)     if (stack->length == stack->capacity) {
-        36)         int new_capacity = stack->capacity * 2;
-        37)
-        38)         int *new_data = get_heap_memory(new_capacity);
-        39)
-        40)         for (int i = 0; i < stack->length; ++i) {
-            41)             new_data[i] = stack->data[i];
-            42)         }
-        43)
-        44)         free(stack->data);
-        45)         stack->data       = new_data;
-        46)         stack->capacity   = new_capacity;
-        47)     }
-    48)
-    49)     stack->data[stack->length] = n;
-    50)     stack->length += 1;
-    51) }
+35)     if (stack->length == stack->capacity) {
+36)         int new_capacity = stack->capacity * 2;
+37)
+38)         int *new_data = get_heap_memory(new_capacity);
+39)
+40)         for (int i = 0; i < stack->length; ++i) {
+41)             new_data[i] = stack->data[i];
+42)         }
+43)
+44)         free(stack->data);
+45)         stack->data       = new_data;
+46)         stack->capacity   = new_capacity;
+47)     }
+48)
+49)     stack->data[stack->length] = n;
+50)     stack->length += 1;
+51) }
 52)
 53) int main() {
-    54)     Stack *stack = stack_new();
-    55)     stack_push(stack, 107);
-    56)
-    57)     int *n = &stack->data[0];
-    58)     stack_push(stack, 110);
-    59)     printf("%d\n", *n);
-    60)
-    61)     free(stack);
-    62) }
+54)     Stack *stack = stack_new();
+55)     stack_push(stack, 107);
+56)
+57)     int *n = &stack->data[0];
+58)     stack_push(stack, 110);
+59)     printf("%d\n", *n);
+60)
+61)     free(stack);
+62) }
 ```
 
 错误：
 
-(1) ________________________________________________________________________________
+(1) {{blank:legacy-gap-0}}
 
-(2) ________________________________________________________________________________
+(2) {{blank:legacy-gap-1}}
 
-(3) ________________________________________________________________________________
+(3) {{blank:bug-3}}
 
-(4) ________________________________________________________________________________
+(4) {{blank:bug-4}}
 %%% part-reference: q-7e4dbca71b0f137c
 答案：
 ① 第 21 行 所申请的内存大小不足，应该为 `malloc(size*sizeof(int))`;

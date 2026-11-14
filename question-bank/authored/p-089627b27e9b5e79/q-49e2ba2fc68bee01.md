@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-49e2ba2fc68bee01",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 2,
   "number": {
@@ -93,14 +93,15 @@
 }
 +++
 %%% stem
-2.  假设有下面`x`和`y`的程序定义
-```
+2. 假设 `int` 为 32 位，带符号右移采用算术右移，整数除法向零截断。有下面 `x` 和 `y` 的定义：
+```c
 int x = a >> 2;
 int y = (x + a) / 4;
 ```
 那么有多少个位于闭区间[-8,8]的整数`a`能使得`x`和`y`相等？
 %%% reference
 答案：B
+不满足条件的只有 `a = -5, -2, -1, 7`，其余 13 个整数均满足。
 %%% option: A
 12
 %%% option: B

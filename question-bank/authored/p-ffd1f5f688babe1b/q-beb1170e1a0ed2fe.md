@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-beb1170e1a0ed2fe",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-ffd1f5f688babe1b",
   "paperOrder": 16,
   "number": {
@@ -97,7 +97,7 @@
     "blankAnswers": [
       {
         "blankId": "hex-value",
-        "method": "self"
+        "method": "exact", "acceptedAnswers":["fbac"], "normalize":{"caseSensitive":false,"trimWhitespace":true}
       },
       {
         "blankId": "sign",
@@ -108,7 +108,7 @@
       },
       {
         "blankId": "absolute-value",
-        "method": "self"
+        "method": "exact", "acceptedAnswers":["1108"], "normalize":{"caseSensitive":true,"trimWhitespace":true}
       }
     ]
   }

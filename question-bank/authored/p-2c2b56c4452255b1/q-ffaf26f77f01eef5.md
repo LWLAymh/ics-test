@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ffaf26f77f01eef5",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-2c2b56c4452255b1",
   "paperOrder": 56,
   "number": {
@@ -23,11 +23,11 @@
     "tags": []
   },
   "publication": {
-    "state": "published",
+    "state": "review",
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": []
+    "issues": ["duplicate-source-question", "duplicate-of:q-3843863f7e2c5084"]
   },
   "sources": [
     {

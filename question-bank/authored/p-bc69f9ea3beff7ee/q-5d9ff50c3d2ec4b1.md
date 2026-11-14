@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-5d9ff50c3d2ec4b1",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-bc69f9ea3beff7ee",
   "paperOrder": 21,
   "number": {
@@ -42,13 +42,17 @@
       "editorNote": "32 位汇编反推 C 函数并计算返回值"
     }
   ],
-  "type": "short-answer",
+  "type": "composite",
   "stem": {
     "format": "markdown"
   },
+  "parts":[
+    {"id":"q-5d9ff50c3d2ec4b1-A","number":{"display":"1","major":null,"minor":null,"parts":["1"]},"type":"short-answer","moduleIds":["machine_prog"],"stem":{"format":"markdown"},"solution":{"state":"available","grading":"self","reference":{"format":"markdown"},"provenance":{"origin":"unknown","crossChecked":null,"note":"源卷第9–10页，完整代码有多种等价表达，保留自评。"}},"sources":[{"document":"原文/期末/2016期末-带答案.md","lines":{"start":323,"end":409},"provenance":"reflow"}],"issues":[]},
+    {"id":"q-5d9ff50c3d2ec4b1-B","number":{"display":"2","major":null,"minor":null,"parts":["2"]},"type":"fill","moduleIds":["machine_prog"],"stem":{"format":"markdown","blanks":[{"id":"output","marker":"{{blank:output}}","occurrence":0,"width":"short"}]},"solution":{"state":"available","grading":"blanks","blankAnswers":[{"blankId":"output","method":"exact","acceptedAnswers":["139"],"normalize":{"trimWhitespace":true,"caseSensitive":true}}],"reference":{"format":"markdown"},"provenance":{"origin":"unknown","crossChecked":null,"note":"源卷答案139，独立计算四个c元素核对。"}},"sources":[{"document":"原文/期末/2016期末-带答案.md","lines":{"start":323,"end":409},"provenance":"reflow"}],"issues":[]}
+  ],
   "solution": {
     "state": "available",
-    "grading": "self",
+    "grading": "parts",
     "reference": {
       "format": "markdown"
     },
@@ -107,6 +111,9 @@ myfunction:
   ret
 ```
 提示：32位汇编使用栈来传递所有参数，参数压栈顺序为从右至左。
+%%% reference
+
+%%% part-stem: q-5d9ff50c3d2ec4b1-A
 1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。注意，每行一
 条语句；不能定义新的变量。
 ```c
@@ -120,7 +127,8 @@ int myfunction(int a[], int b[], int c[], int d) {
   return       ;
 }
 ```
-2. 请给出以下程序的输出结果。
+%%% part-stem: q-5d9ff50c3d2ec4b1-B
+2. 根据公共题面的汇编语义，以下程序输出的整数为 {{blank:output}}，不填写引号或换行。
 ```c
 int main( )
 {
@@ -133,7 +141,7 @@ int main( )
     return 0;
 }
 ```
-%%% reference
+%%% part-reference: q-5d9ff50c3d2ec4b1-A
 1. 完整函数如下：
 
 ```c
@@ -150,4 +158,5 @@ int myfunction(int a[], int b[], int c[], int d) {
 
 原卷评分：循环上界 1 分；前两个赋值左侧共同 1 分，第三个赋值左侧 1 分；前两个右侧的乘、加、乘序列各 1 分，三个右侧的 `2*i` 与 `2*i+1` 各 1 分；第三个右侧的两个加号 1 分；返回值 1 分。
 
-2. 输出 `139`（2分）。两次循环分别得到 `c[0]=19`、`c[1]=20`、`c[2]=47`、`c[3]=48`；`d=5+19+20+47+48=139`。
+%%% part-reference: q-5d9ff50c3d2ec4b1-B
+输出 `139`（2分）。两次循环分别得到 `c[0]=19`、`c[1]=20`、`c[2]=47`、`c[3]=48`；`d=5+19+20+47+48=139`。

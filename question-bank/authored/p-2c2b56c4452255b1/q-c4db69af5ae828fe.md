@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c4db69af5ae828fe",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-2c2b56c4452255b1",
   "paperOrder": 21,
   "number": {
@@ -198,11 +198,11 @@
       },
       {
         "blankId": "q2-capacity",
-        "method": "self"
+        "method":"exact","acceptedAnswers":["2*N0*S2","2*S2*N0","N0*2*S2","N0*S2*2","S2*2*N0","S2*N0*2","2*N_0*S_2","2*S_2*N_0","N_0*2*S_2","N_0*S_2*2","S_2*2*N_0","S_2*N_0*2","2N0S2","2N_0S_2"],"normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "q2-associativity",
-        "method": "self"
+        "method":"exact","acceptedAnswers":["N0","N_0"],"normalize":{"caseSensitive":true,"trimWhitespace":true}
       }
     ]
   }
@@ -230,8 +230,7 @@ Step #3: 多次实验取平均值以减小误差.作图并分析实验结果.
 访问一遍所开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB,
 320KiB 处的一个字节的值.清空寄存器,接着计时并第二遍按顺序访问所
 开辟内存空间的第0B, 64KiB, 128KiB, 192KiB, 256KiB, 320KiB
-处的一个字节的值.访问完成后立即停止计时,并记录`T = (`结束计时的时
-刻 - 开始计时的时刻) ÷ 6.0.
+处的一个字节的值。访问完成后立即停止计时，记录 `T = (结束计时的时刻 - 开始计时的时刻) / 6.0`。
 
 (a)  (2分)Step #2中,给定S和N后第一遍访问N个内存地址的过程
 被称为暖身(warm up),这是为了避免 {{blank:q2-cold-misses}} 不命中带来的影响
@@ -247,11 +246,19 @@ Step #3: 多次实验取平均值以减小误差.作图并分析实验结果.
 
 (c) (2分)在(b)的条件下, 进一步推理可知该处理器的L1 d-cache的
 容量(capacity)为 {{blank:q2-capacity}}（用代数式表示，S1、S2、N0为已知量，下同。注意计算容量时不考虑有效位和标记位），相联度为 {{blank:q2-associativity}}。
+
+在线输入约定：可用 `*` 表示乘法，变量统一写作 `N0`、`S2`，或统一写作 `N_0`、`S_2`；乘积因子的顺序不影响含义。
 %%% reference
 答案：
 (1) ＜
 (2) 冷/强制性
 (3) L3
 (4) ＞
-(5) 2·N0·S2
-(6) N0
+(5) $2N_0S_2$
+(6) $N_0$
+
+1. FIFO逐次模拟：3路缓存9次Miss，4路缓存10次Miss，发生Belady异常，因此第1空选小于。暖身针对冷/强制性不命中。
+2. $T_3$ 是最高的访问延迟，对应L3。从 $N=2N_0$ 时 $S_1$ 已转入L3、$S_2$ 刚转入L2，得到 $S_1>S_2$。
+3. L1在步长 $S_2$、访问 $2N_0$ 个地址时达到容量转折，容量为 $C=2N_0S_2$。图中 $S=S_2$、$N=4N_0$ 时没有新的明显转折，说明 $S_1$ 至少为 $S_2$ 的4倍；但L1转折横坐标仅减半，意味着较大步长只落入部分组，最小转折为路数 $E=N_0$。
+
+这些分段推理保留了被合并候选稿中的实质解析；原纸卷对漏选、书写和部分分的说明不作为在线规范化练习计分规则。

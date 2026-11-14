@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-268e962dcaaba41a",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-7016510094998ec2",
   "paperOrder": 3,
   "number": {
@@ -92,6 +92,6 @@
 }
 +++
 %%% stem
-3. 在 x86-64/Linux 的约定中，函数传递参数的前两个分别放在{{blank:legacy-gap-0}}和{{blank:legacy-gap-1}}寄存器。
+3. 在 x86-64 Linux 的 System V ABI 中，按整数/指针寄存器类别传递的前两个参数分别放在{{blank:legacy-gap-0}}和{{blank:legacy-gap-1}}寄存器（可写带或不带 `%` 的64位寄存器名）。
 %%% reference
 答案：rdi；rsi

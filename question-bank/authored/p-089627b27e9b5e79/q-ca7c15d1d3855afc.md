@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-ca7c15d1d3855afc",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-089627b27e9b5e79",
   "paperOrder": 25,
   "number": {
@@ -81,13 +81,14 @@
 第六题（10分）ECF
 
 1.（5 分）以下程序运行时系统调用全部正确执行，`buffer.txt` 文件的内容为
-pekinguniv。请给出代码运行后打印输出的结果，并给出程序运行结束后
+`pekinguniv`。假设 `stdout` 连接终端并按行缓冲，`fork` 前的第一行已刷新。请给出代码运行后打印输出的结果，并给出程序运行结束后
 `buffer.txt`文件的内容。
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/wait.h>
 int main() {
     char c;
     int file1 = open("buffer.txt", O_RDWR);

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-bcf23ec71ae6c080",
-  "revision": 4,
+  "revision": 5,
   "paperId": "p-ffd1f5f688babe1b",
   "paperOrder": 21,
   "number": {
@@ -64,18 +64,6 @@
       "aliases": [],
       "provenance": "rewritten",
       "editorNote": "预测错误触发条件与流水线控制逻辑"
-    },
-    {
-      "legacyId": "q-46ca868fd841b060",
-      "document": "原文/期中/2021期中-带答案.md",
-      "lines": {
-        "start": 598,
-        "end": 633
-      },
-      "curated": "_curated/期中/2021期中-带答案/598.md",
-      "aliases": [],
-      "provenance": "rewritten",
-      "editorNote": "改造后 PIPE 上 foo 的周期数（分支/load-use）"
     }
   ],
   "type": "composite",
@@ -104,6 +92,7 @@
       "stem": {
         "format": "markdown",
         "blanks": [
+          {"id":"q1-cond","marker":"{{blank:q1-cond}}","occurrence":0,"width":"long"},
           {
             "id": "q1-decode",
             "marker": "{{blank:q1-decode}}",
@@ -144,20 +133,21 @@
         "blankAnswers": [
           {
             "blankId": "q1-decode",
-            "method": "self"
+            "method":"exact","acceptedAnswers":["R[rB]"],"normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           },
           {
             "blankId": "q1-execute",
-            "method": "self"
+            "method":"exact","acceptedAnswers":["valB+0","0+valB","valB"],"normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           },
           {
             "blankId": "q1-memory",
-            "method": "self"
+            "method":"exact","acceptedAnswers":["none","/","无"],"normalize":{"caseSensitive":false,"trimWhitespace":true}
           },
           {
             "blankId": "q1-writeback",
-            "method": "self"
-          }
+            "method":"exact","acceptedAnswers":["none","/","无"],"normalize":{"caseSensitive":false,"trimWhitespace":true}
+          },
+          {"blankId":"q1-cond","method":"exact","acceptedAnswers":["Cond(CC,ifun)"],"normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}}
         ]
       },
       "sources": [
@@ -280,11 +270,11 @@
           },
           {
             "blankId": "q2-hcl-condition",
-            "method": "self"
+            "method":"exact","acceptedAnswers":["D_icode==IJREGXX"],"normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           },
           {
             "blankId": "q2-hcl-value",
-            "method": "self"
+            "method":"exact","acceptedAnswers":["d_valB"],"normalize":{"caseSensitive":true,"trimWhitespace":true}
           },
           {
             "blankId": "q2-hcl-position",
@@ -350,25 +340,7 @@
             "id": "q3-f",
             "marker": "{{blank:q3-f}}",
             "occurrence": 0,
-            "width": "medium",
-            "input": {
-              "kind": "select",
-              "multiple": false,
-              "options": [
-                {
-                  "value": "normal",
-                  "label": "normal · 正常"
-                },
-                {
-                  "value": "stall",
-                  "label": "stall · 暂停"
-                },
-                {
-                  "value": "bubble",
-                  "label": "bubble · 气泡"
-                }
-              ]
-            }
+            "width": "medium"
           },
           {
             "id": "q3-d",
@@ -482,31 +454,31 @@
         "blankAnswers": [
           {
             "blankId": "q3-condition-a",
-            "method": "self"
+            "method":"exact","acceptedAnswers":["E_icode"],"normalize":{"caseSensitive":true,"trimWhitespace":true}
           },
           {
             "blankId": "q3-condition-b",
-            "method": "self"
+            "method":"exact","acceptedAnswers":["!e_Cnd"],"normalize":{"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
           },
           {
             "blankId": "q3-f",
-            "method": "self"
+            "method":"exact","acceptedAnswers":["normal","stall","正常","暂停"],"normalize":{"caseSensitive":false,"trimWhitespace":true}
           },
           {
             "blankId": "q3-d",
-            "method": "self"
+            "method":"selection","correctValues":["bubble"]
           },
           {
             "blankId": "q3-e",
-            "method": "self"
+            "method":"selection","correctValues":["bubble"]
           },
           {
             "blankId": "q3-m",
-            "method": "self"
+            "method":"selection","correctValues":["normal"]
           },
           {
             "blankId": "q3-w",
-            "method": "self"
+            "method":"selection","correctValues":["normal"]
           }
         ]
       },
@@ -522,89 +494,6 @@
           "aliases": [],
           "provenance": "rewritten",
           "editorNote": "预测错误触发条件与流水线控制逻辑"
-        }
-      ],
-      "issues": []
-    },
-    {
-      "id": "q-46ca868fd841b060",
-      "number": {
-        "display": "第四题 4",
-        "major": {
-          "display": "第四题",
-          "value": "4"
-        },
-        "minor": {
-          "display": "4",
-          "value": "4"
-        },
-        "parts": []
-      },
-      "type": "fill",
-      "moduleIds": [
-        "processor_arch"
-      ],
-      "stem": {
-        "format": "markdown",
-        "blanks": [
-          {
-            "id": "q4-n-negative-one",
-            "marker": "{{blank:q4-n-negative-one}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q4-n-zero",
-            "marker": "{{blank:q4-n-zero}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q4-n-two",
-            "marker": "{{blank:q4-n-two}}",
-            "occurrence": 0,
-            "width": "medium"
-          }
-        ]
-      },
-      "solution": {
-        "state": "available",
-        "grading": "blanks",
-        "reference": {
-          "format": "markdown"
-        },
-        "provenance": {
-          "origin": "unknown",
-          "crossChecked": null,
-          "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
-        },
-        "blankAnswers": [
-          {
-            "blankId": "q4-n-negative-one",
-            "method": "self"
-          },
-          {
-            "blankId": "q4-n-zero",
-            "method": "self"
-          },
-          {
-            "blankId": "q4-n-two",
-            "method": "self"
-          }
-        ]
-      },
-      "sources": [
-        {
-          "legacyId": "q-46ca868fd841b060",
-          "document": "原文/期中/2021期中-带答案.md",
-          "lines": {
-            "start": 598,
-            "end": 633
-          },
-          "curated": "_curated/期中/2021期中-带答案/598.md",
-          "aliases": [],
-          "provenance": "rewritten",
-          "editorNote": "改造后 PIPE 上 foo 的周期数（分支/load-use）"
         }
       ],
       "issues": []
@@ -624,17 +513,19 @@
 }
 +++
 %%% stem
-
-%%% reference
-
-%%% part-stem: q-b99c43e33a7b2e51
 第四题（15分）
+
+维护说明：原卷第4小问的示例程序只算出跳转表项的地址，没有读取表项中保存的跳转目标，直接跳入数据区，原周期键不能据此成立。本练习只保留第1—3问，第4问与原答案已完整存档，不纳入在线判分。
+
 请分析Y86-64 ISA中加入的一族间接跳转指令：jxx *rB，其格式如下：
 C  Fn  F  rB
 该指令的功能是跳转到寄存器 `R[rB]` 所存放的地址。类似于直接跳转指令，间
 接跳转指令也包括无条件跳转和条件跳转，通过不同的功能码Fn来指示。为了
 和直接跳转区别，`icode`为IJREGXX。时钟周期适当进行延长，在不修改原有
 的硬件线路和信号设置的前提下，只增加和新指令有关的逻辑，回答以下问题。
+%%% reference
+
+%%% part-stem: q-b99c43e33a7b2e51
 1. 在教材中的SEQ处理器上实现该指令，请补全下表中每个阶段的操作。需要
 说明的信号可能有：icode, ifun, rA, rB, valA, valB, valC, valE,
 valP, Cnd, R[], M[], PC, CC
@@ -642,8 +533,8 @@ valP, Cnd, R[], M[], PC, CC
 | 阶段 | `jxx *rB` 操作 |
 | --- | --- |
 | `Fetch` | `icode : ifun ← M1[PC]`；`rA : rB ← M1[PC+1]`；`valP ← PC+2` |
-| `Decode` | {{blank:q1-decode}} |
-| `Execute` | {{blank:q1-execute}} |
+| `Decode` | `valB ←` {{blank:q1-decode}} |
+| `Execute` | `valE ←` {{blank:q1-execute}}；`Cnd ←` {{blank:q1-cond}} |
 | `Memory` | {{blank:q1-memory}} |
 | Write Back | {{blank:q1-writeback}} |
 | Update PC | `PC ← Cnd ? valE : valP` |
@@ -672,21 +563,26 @@ Update PC  PC <- Cnd ? valE: valP
 
 ![增加 d_valB 到 Select PC 旁路通路后的流水线结构](assets/期中/2021期中-带答案/p17-bypass-path.png)
 
-Select PC的HCL代码如下图所示：
+Select PC 的 HCL 如下，注释①—④标出候选插入位置：
+
+```hcl
 word f_pc = [
- ①
+    # ①
+    (M_icode == IJXX || M_icode == IJREGXX) && !M_cnd : M_valA;
+    # ②
+    W_icode == IRET : W_valM;
+    # ③
+    1 : F_predPC;
+    # ④
+];
 ```
- (M_icode == IJXX || M_icode == IJREGXX) && !M_cnd :
-M_valA;
+为了预测下一条PC，需在 Select PC 中增加下面一行：
+
+```hcl
+{{blank:q2-hcl-condition}} : {{blank:q2-hcl-value}};
 ```
- ②
- `W_icode == IRET : W_valM`;
- ③
- 1 : F_predPC;
- ④
-]
-为了预测下一条PC，需要修改Select PC的HCL代码，增加一行 {{blank:q2-hcl-condition}} :
-{{blank:q2-hcl-value}}，增加的位置可以是 {{blank:q2-hcl-position}} （写出所有可能的位置，错填不得
+
+增加的位置可以是 {{blank:q2-hcl-position}} （写出所有可能的位置，错填不得
 分，漏填可得部分分）
 %%% part-reference: q-d5102c7a07230210
 答案：
@@ -708,8 +604,8 @@ D_icode == IJREGXX: d_valB;
 ]
 ```
 %%% part-stem: q-a0690be315dc71d3
-3. 请将该指令预测错误的触发条件，以及此时流水线的控制逻辑补充完整。
-触发条件：（如果有多种可能请任写一种）
+3. 在 E 阶段判断该指令是否预测错误，补全触发条件和控制逻辑。标识符区分大小写。
+触发条件：
 {{blank:q3-condition-a}} == IJREGXX && {{blank:q3-condition-b}}
 控制逻辑：（如果有多种可能请任写一种）
 
@@ -725,48 +621,3 @@ normal/stall bubble  bubble  normal  normal
 ```
 分析方法同IJXX。注意，触发条件是在E阶段，因为E阶段结束、M阶段开始
 时就要控制流水线寄存器。
-%%% part-stem: q-46ca868fd841b060
-4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。
-```
-# Array of 3 elements
-array:
-    .quad return
-    .quad L1
-    .quad L2
-# void foo(long n, long *arr)
-# n in %rdi, arr in %rsi
-foo:
-    rrmovq %rdi, %rdx           # line 1
-    addq %rdx, %rdx             # line 2
-    addq %rdx, %rdx             # line 3
-    addq %rdx, %rdx             # line 4
-    irmovq array, %rcx          # line 5
-    addq %rdx, %rcx             # line 6
-    andq %rdi, %rdi             # line 7
-    jge *%rcx                    # line 8
-return:                       #
-    ret                       # line 9
-L2: #
-    mrmovq 16(%rsi), %rcx      # line 10
-    rmmovq %rcx, 8(%rsi)       # line 11
-L1:                            #
-    mrmovq 8(%rsi), %rcx       # line 12
-    rmmovq %rcx, (%rsi)        # line 13
-    jmp return                   # line 14
-```
-
-
-在`foo`函数运行过程中，计算以下情况`foo`函数的执行周期数。（周期数计算从
-执行`foo`第一条指令开始，直到其返回指令`ret`完全通过流水线为止。另外假设
-`foo`函数开始的若干条指令不会和`foo`函数体外的指令形成冒险。）
-`n=-1`：{{blank:q4-n-negative-one}}；`n=0`：{{blank:q4-n-zero}}；`n=2`：{{blank:q4-n-two}}
-%%% part-reference: q-46ca868fd841b060
-答案：n=-1：15；n=0：13；n=2：20
-`n == -1: line 8`分支预测错误，惩罚2个周期。一共9 + 2 + 4
-(trailing cycles for ret) = 15。
-`n == 0`: 一共9 + 4 (trailing cycles for ret) = 13。
-`n == 1: line 12`和13发生load/use hazard （不考虑加载转发），惩
-罚1个周期。一共12 + 1 + 4 (trailing cycles for ret) = 17。
-`n == 2: line 12` 和 line 13，以及line 10 和 line 11 各发生一次
-load/use hazard，共惩罚2个周期。一共14 + 2 + 4 (trailing
-cycles for ret) = 20。

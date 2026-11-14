@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-6a3eb36fbdb2f308",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-e8f40973e2cc056e",
   "paperOrder": 18,
   "number": {
@@ -100,7 +100,7 @@
 }
 +++
 %%% stem
-18. 观察下面的 C 程序代码：
+18. 观察下面的 C 程序代码。假设两次 `fork` 均成功，没有无关子进程，且不考虑外部信号干扰：
 
 ```c
 volatile sig_atomic_t reap = 0;

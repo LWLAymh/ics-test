@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-af342c9ccb98e2cf",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-e3f869956fc29bd8",
   "paperOrder": 6,
   "number": {
@@ -101,6 +101,7 @@ dup2(3,2); dup2(0,3); dup2(1,10); dup2(10,4); dup2(4,0);
 ```
 
 关于得到的结果，说法正确的是：
+假设各次 `dup2` 均成功，描述符上限允许使用 10。
 %%% reference
 答案：A
 说明：一开始打开文件描述符(0,1,2,3,4)对应文件(A,B,C,D,E)，结束后打开描述

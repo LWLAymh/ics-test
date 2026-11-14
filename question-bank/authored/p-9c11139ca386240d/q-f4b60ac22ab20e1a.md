@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f4b60ac22ab20e1a",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-9c11139ca386240d",
   "paperOrder": 37,
   "number": {
@@ -62,7 +62,7 @@
       "note": "Explicitly registered in docs/AI_DERIVED_ANSWERS.md; not inferred from answer text."
     },
     "correctOptionIds": [
-      "D"
+      "A"
     ]
   },
   "options": [
@@ -94,12 +94,13 @@
 }
 +++
 %%% stem
-37. （2分）在ShellLab中，为了避免出现竞争（race），需要在特定的操作前屏蔽一
-些信号。下列关于屏蔽信号与解除屏蔽的时机，说法错误的一项是？
-%%% reference
-答案：D
+37.（2分）在 ShellLab 中，为了避免竞争，需要在特定操作前屏蔽相关信号。下列说法错误的一项是？
 
-解析：子进程会继承父进程屏蔽的信号，正确顺序是：子进程先 `setpgid(0,0)` 进入自己的进程组，再解除屏蔽，最后 `execve`。若在 `setpgid` 之前就解除屏蔽，这段窗口里子进程仍属于 shell 所在的前台进程组，用户此时按 Ctrl-C/Ctrl-Z 会直接打到它（而 shell 的转发又依赖它已经独立成组），故 D 是错误项。A 对（sigint_handler 只读 job_list 并发信号，不修改共享数据）；B、C 对（handler 和 eval 修改 job_list 时都必须先屏蔽信号，既保护数据结构，也避免子进程已被回收、父进程才 addjob 的竞争）。
+> 为消除原题时序描述的歧义，网页已根据实验规范重写D的操作顺序。具体勘误见答题后的解析。
+%%% reference
+答案：A。即使 `sigint_handler` 只读 `job_list`，其读取过程也可能被 `SIGCHLD` 处理函数打断并删除或更新相关条目，所以“只读就不需要保护”不成立。修改共享表的 `sigchld_handler` 和 `eval` 也需要屏蔽能并发访问它的相关信号。
+
+子进程继承父进程的屏蔽集合。D现在明确为：先建立独立进程组，再在 `execve` 前恢复原掩码。此顺序避免子进程尚属于shell进程组时就在原处理环境下接收终端信号。父进程则应在 `addjob` 后恢复掩码。原题D未要求这一先后次序，也存在不安全窗口；为使题目有唯一错误项，网页明确D的安全时序，并依据ShellLab原规范“Warnings/Hints”及教材信号同步规则改为按A判分。
 
 > ⚠️ 原卷及配套材料均无官方答案；本题由 AI 推导（deepseek v4.1 flash · 大肥鱼小姐），未与官方答案核对。
 %%% option: A
@@ -112,5 +113,4 @@ sigchld_handler中需要屏蔽信号，因为需要修改全局数据结构job_l
 eval 中需要屏蔽信号，因为需要修改全局数据结构 job_list，在创建新任务时
 添加新创建的job信息
 %%% option: D
-fork之后需要解除屏蔽信号，解除的时机可以在执行setpgid之前，也可以在执
-行setpgid 之后
+fork后的子进程先执行 `setpgid(0,0)` 建立独立进程组，再在 `execve` 之前恢复原信号掩码；父进程在 `addjob` 之后恢复原掩码

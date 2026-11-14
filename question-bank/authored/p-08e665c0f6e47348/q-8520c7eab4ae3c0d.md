@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-8520c7eab4ae3c0d",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-08e665c0f6e47348",
   "paperOrder": 6,
   "number": {
@@ -93,7 +93,7 @@
 }
 +++
 %%% stem
-6.  一段程序中阻塞了`SIGCHLD`和SIGUSR1信号。接下来，向它按顺序发送
+6. 单线程程序已为 `SIGCHLD` 和 `SIGUSR1` 安装会正常返回的处理程序，没有将它们忽略；这两种都是非实时信号。一段程序中阻塞了这两个信号。接下来，在持续阻塞期间向它按顺序发送
 `SIGCHLD`，SIGUSR1，`SIGCHLD`信号，当程序取消阻塞继续执行时，将处理
 这三个信号中的哪几个？
 %%% reference
