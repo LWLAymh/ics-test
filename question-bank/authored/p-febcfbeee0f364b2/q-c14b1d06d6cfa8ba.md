@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c14b1d06d6cfa8ba",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-febcfbeee0f364b2",
   "paperOrder": 17,
   "number": {
@@ -199,7 +199,7 @@ long call_bitnot() {
 }
 ```
 
-下列变量分别存放在寄存器还是内存中？
+按教材的常见优化模型作答：不内联两个被调用函数；需要取地址的变量有内存位置，其余局部值优先使用寄存器，并可利用被调用者保存寄存器跨调用保留。下列变量分别存放在寄存器还是内存中？本题不要求推断任意编译器、任意优化参数下的具体分配。
 `v0`：{{blank:q17-v0}}　`v1`：{{blank:q17-v1}}　`v2`：{{blank:q17-v2}}　`v3`：{{blank:q17-v3}}
 %%% reference
 `v0`：寄存器；`v1`：内存；`v2`：寄存器；`v3`：寄存器。

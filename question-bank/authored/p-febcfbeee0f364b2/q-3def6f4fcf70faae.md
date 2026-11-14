@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-3def6f4fcf70faae",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-febcfbeee0f364b2",
   "paperOrder": 1,
   "number": {
@@ -141,7 +141,7 @@
 }
 +++
 %%% stem
-1. 两个 8 位二进制数 `10110101` 和 `01011100`，分别记为 `a` 和 `b`。问：
+1. 两个8位无符号二进制数 `10110101` 和 `01011100`，分别记为 `a` 和 `b`。问：
 
 （1）`a` 转换为十进制表示为：{{blank:q1-a-decimal}}
 

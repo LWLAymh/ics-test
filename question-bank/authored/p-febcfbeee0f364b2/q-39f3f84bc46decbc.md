@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-39f3f84bc46decbc",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-febcfbeee0f364b2",
   "paperOrder": 12,
   "number": {
@@ -122,8 +122,9 @@
               "jg .L4"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "att-instruction"
             }
           },
           {
@@ -147,7 +148,8 @@
             ],
             "normalize": {
               "caseSensitive": false,
-              "trimWhitespace": true
+              "trimWhitespace": true,
+              "syntax": "att-instruction"
             }
           }
         ]
@@ -232,11 +234,7 @@
 }
 +++
 %%% stem
-
-%%% reference
-
-%%% part-stem: q-c62728deb08346bb
-12. 下面的 C 语言代码与汇编语言代码对应，补全汇编代码：
+12. 下面的 C 语言代码与各小问中的汇编语言代码对应：
 
 ```c
 long absdiff(long x, long y) {
@@ -248,7 +246,10 @@ long absdiff(long x, long y) {
     return result;
 }
 ```
+%%% reference
 
+%%% part-stem: q-c62728deb08346bb
+（1）补全条件跳转版本的汇编代码：
 ```asm
 absdiff:
     cmpq %rsi, %rdi

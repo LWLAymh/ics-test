@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-c7abd17adc9749bd",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-0fe6817c7f881573",
   "paperOrder": 11,
   "number": {
@@ -95,14 +95,14 @@
 %%% stem
 11.在Y86-64的SEQ实现中，对`mem_addr`和`mem_data`的HCL补全正确的
 是：
-```
+```hcl
 word mem_addr = [
-icode in {IRMMOVQ, IPUSHQ, ICALL, IMRMOVQ} :    ①   ；
-icode in {IPOPQ, IRET} :    ②   ；
+    icode in {IRMMOVQ, IPUSHQ, ICALL, IMRMOVQ} : ①;
+    icode in {IPOPQ, IRET} : ②;
 ];
 word mem_data = [
-icode in {IRMMOVQ, IPUSHQ} :    ③   ；
-icode == ICALL :    ④   ；
+    icode in {IRMMOVQ, IPUSHQ} : ③;
+    icode == ICALL : ④;
 ];
 ```
 %%% reference

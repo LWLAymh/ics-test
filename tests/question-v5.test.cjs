@@ -316,7 +316,7 @@ test('x86-64 near-return blanks explicitly accept ret and retq without changing 
     }
     assert.match(unit.solution.reference.text, /retq/);
   }
-  const y86 = bank.find(q=>q.id==='q-a340b29e1c78d56f').solution.blankAnswers.find(r=>r.blankId==='b');
+  const y86 = bank.find(q=>q.id==='q-a340b29e1c78d56f').solution.blankAnswers.find(r=>r.blankId==='b5');
   assert.equal(api.gradeBlank(y86.acceptedAnswers[0],y86),true);
   assert.equal(api.gradeBlank(y86.acceptedAnswers[0].replace(/\bret$/, 'retq'),y86),false);
 });
@@ -791,7 +791,8 @@ test('bounded comparison uses full candidates, while numeric/code answers stay t
 test('inline assembly underscores are not blanks; restored judgments include numeric output', () => {
   const question=bank.find(q=>q.id==='q-48830bbf91e759fa');
   const first=question.parts.find(p=>p.id==='q-49ad744352e4e33c');
-  assert.match(first.stem.text,/__asm__ __volatile__/);
+  assert.match(question.stem.text,/__asm__ __volatile__/);
+  assert.doesNotMatch(first.stem.text,/__asm__ __volatile__/);
   assert.deepEqual(first.stem.blanks.map(b=>b.id),['portable','equivalent','output']);
   assert.equal(api.gradeBlanks({portable:'no',equivalent:'yes',output:'3.75'},first.solution),true);
   assert.equal(api.gradeBlanks({portable:'no',equivalent:'yes'},first.solution),false);
