@@ -61,6 +61,7 @@ jobs:
           node tests/browser-favorites.cjs
           node tests/browser-layout.cjs
           node tests/browser-math-authoring.cjs
+          node tests/browser-mistake-practice.cjs
           node tests/browser-bank-audit.cjs
 
       - name: Configure Pages

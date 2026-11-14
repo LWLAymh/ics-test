@@ -40,6 +40,7 @@ jobs:
           node tests/browser-favorites.cjs
           node tests/browser-layout.cjs
           node tests/browser-math-authoring.cjs
+          node tests/browser-mistake-practice.cjs
           node tests/browser-bank-audit.cjs
       - name: Generated source must be committed
         run: git diff --exit-code -- question-bank/web-data

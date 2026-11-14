@@ -617,7 +617,7 @@ async function run() {
     assert.equal(await page.locator('.ics-blank-result').count(),0);
     await fixture(page,[single,multiple]);await page.click('#ics-skip');await page.click('#ics-previous');
     assert(await page.locator('#ics-submit').isVisible());
-    await page.evaluate(()=>{window.__rows={a:{question_id:'a',total_answers:10,correct_answers:1},b:{question_id:'b',total_answers:20,correct_answers:2}}});
+    await page.evaluate(()=>{window.__rows={a:{question_id:'a',total_answers:10,correct_answers:1},b:{question_id:'b',total_answers:20,correct_answers:2}};window.__test.state.siteStats=new Map(Object.entries(window.__rows));window.__test.state.siteStatsLoaded=true;window.__test.state.siteStatsLoadedAt=Date.now()});
     assert.deepEqual(await page.evaluate(async()=>{document.querySelector('#ics-min-attempts').value='5';return (await window.__test.rankByErrorRate([{id:'a'},{id:'b'}])).map(q=>q.id)}),['b','a']);
     // Real reported questions: corrected keys, restored references and explicit retirement.
     const deployedIds = await page.evaluate(async()=> (await (await fetch('./web-data/questions.json')).json()).questions.map(q=>q.id));

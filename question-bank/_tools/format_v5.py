@@ -27,10 +27,13 @@ def load_json(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
-def write_json(path, value):
+def write_json(path, value, *, compact=False):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
+    # Deployment formatting only; all Markdown strings remain byte-for-byte
+    # identical after JSON decoding. Canonical source payloads stay readable.
+    formatting = {"separators": (",", ":")} if compact else {"indent": 2}
+    path.write_text(json.dumps(value, ensure_ascii=False, **formatting) + "\n", encoding="utf-8", newline="\n")
 
 
 def validator(name):

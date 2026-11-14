@@ -43,6 +43,9 @@
     navigationStatus: $('ics-navigation-status'), questionHistory: $('ics-question-history'),
     minAttempts: $('ics-min-attempts'), minAttemptsField: $('ics-min-attempts-field'),
     practiceNote: $('ics-practice-note'),
+    mistakesRange: $('ics-mistakes-range'), mistakesRangeField: $('ics-mistakes-range-field'),
+    mistakesOrder: $('ics-mistakes-order'), mistakesOrderField: $('ics-mistakes-order-field'),
+    mistakesSkipMastered: $('ics-mistakes-skip-mastered'), mistakesMasteryField: $('ics-mistakes-mastery-field'),
     issueBoard: $('ics-issue-board'), issueCount: $('ics-issue-count'),
     issueBoardStatus: $('ics-issue-board-status'), issueList: $('ics-issue-list'),
     issueMessageStatus: $('ics-issue-message-status'),
@@ -57,7 +60,8 @@
     reportingQuestions: new Set(), issueDrafts: new Map(), issueFormQuestionId: '',
     mastered: new Set(), masteryPersistent: true,
     siteStats: new Map(), siteStatsLoaded: false, siteStatsChannel: null,
-    siteStatsLoad: null, siteStatsChanges: [],
+    siteStatsLoad: null, siteStatsChanges: [], siteStatsLoadedAt: 0,
+    questionGridMarkup: null,
     issueMessages: [], issueMessageLoad: 0,
     historyQuestions: null, historyLimit: 50, historySelected: new Set(),
   };
@@ -289,7 +293,7 @@
         // since withdrawn from publication, rather than just the current pool.
         for (let start = 0; ; start += pageSize) {
           const result = await state.supabase.from('ics_question_stats')
-            .select('question_id,total_answers').order('question_id').range(start, start + pageSize - 1);
+            .select('question_id,total_answers,correct_answers').order('question_id').range(start, start + pageSize - 1);
           if (result.error) throw result.error;
           (result.data || []).forEach(function (row) { rows.set(row.question_id, row); });
           if (!result.data || result.data.length < pageSize) break;
@@ -297,12 +301,15 @@
         state.siteStatsChanges.forEach(function (payload) { applySiteStatsChange(rows, payload); });
         state.siteStats = rows;
         state.siteStatsLoaded = true;
+        state.siteStatsLoadedAt = Date.now();
         renderSiteAttempts();
         ui.siteAttemptNote.textContent = '同一浏览器、同一道题只计一次；数据来自 Supabase。';
+        return true;
       } catch (_) {
         ui.siteAttemptNote.textContent = state.siteStatsLoaded
           ? '更新暂时失败，显示上次读到的累计数据。'
           : '全站统计暂不可用，请联网后重试。';
+        return false;
       } finally {
         state.siteStatsLoad = null;
         state.siteStatsChanges = [];
@@ -346,7 +353,7 @@
       ? '浏览器存储不可用，本次标记可能无法在刷新后保留。'
       : mastered ? '已保存，后续模块随机不再抽到本题。' : '';
     ui.masteryNote.textContent = state.masteryPersistent
-      ? '熟知进度仅保存在当前浏览器；模块随机会跳过已熟知的题，整卷、模块全练和高错题练习仍保留。'
+      ? '熟知进度仅保存在当前浏览器；模块随机跳过已熟知的题，高错题练习可选择跳过，整卷和模块全练仍保留。'
       : '浏览器存储不可用或数据损坏；当前熟知进度仅临时保留，建议检查浏览器存储设置。';
     if (!state.catalog) return;
     const sources = selectedSourceCollections();
@@ -1013,8 +1020,11 @@
     ui.practiceNote.hidden = isCommunity;
     community.show(isCommunity);
     ui.minAttemptsField.hidden = mode !== 'mistakes';
+    ui.mistakesRangeField.hidden = mode !== 'mistakes';
+    ui.mistakesOrderField.hidden = mode !== 'mistakes';
+    ui.mistakesMasteryField.hidden = mode !== 'mistakes';
     ui.practiceNote.textContent = mode === 'mistakes'
-      ? '按历史错误率降序排列；错误率相同时优先展示作答人数更多的题。没有达到最低人数的题不会入选，统计包含自评。'
+      ? '先按最低人数筛选有错题，再圈定错误率最高的范围；边界错误率并列时一并纳入。默认随机抽取指定题数，也可按排名练习；统计包含自评，不足题数时练完候选题。'
       : '选择题与已配置答案的填空题自动核对，简答题查看参考答案后自评。';
     ui.moduleLegend.textContent = isAll ? '选择一个知识模块' : '知识模块（可多选）';
 
@@ -1062,8 +1072,11 @@
       favoritesPanel.init({ catalog: state.catalog, papers: state.papers });
       renderSourceFilters();
       if (ui.practiceHistory.open) loadPracticeHistory();
-      await loadReportedIssues();
       startIssueSubscription();
+      loadReportedIssues().catch(function () {
+        ui.issueCount.textContent = '暂时不可用';
+        ui.issueBoardStatus.textContent = '报告列表暂时无法读取，不影响练习。';
+      });
       ui.start.disabled = false;
       updateModeUi();
       const sharedId = window.ICSCommunityPapers.sharedPaperId(location.href);
@@ -1083,30 +1096,15 @@
 
   async function rankByErrorRate(pool) {
     if (!state.supabase) throw new Error('答题统计暂时无法连接，请稍后重试。');
-    const stats = new Map();
-    // 先按当前题池 ID 分批查询，避免全表分页或超过 URL 长度限制。
-    for (let start = 0; start < pool.length; start += 100) {
-      const ids = pool.slice(start, start + 100).map(function (question) { return question.id; });
-      const result = await state.supabase.from('ics_question_stats')
-        .select('question_id,total_answers,correct_answers').in('question_id', ids);
-      if (result.error) throw new Error('无法读取历史错误率，请稍后重试。');
-      (result.data || []).forEach(function (row) { stats.set(row.question_id, row); });
+    // The homepage already loads the full paginated snapshot. Share that work
+    // and its realtime updates instead of issuing one request per 100 questions.
+    if (!state.siteStatsLoaded || Date.now() - state.siteStatsLoadedAt > 30000) {
+      if (!await loadSiteAttempts()) throw new Error('无法读取历史错误率，请稍后重试。');
     }
-    const minimum = Number(ui.minAttempts.value);
-    const ranked = pool.filter(function (question) {
-      const row = stats.get(question.id);
-      const total = row && Number(row.total_answers);
-      if (!row || !Number.isFinite(total) || total < minimum) return false;
-      const correct = Number(row.correct_answers);
-      if (!Number.isFinite(correct) || correct < 0 || correct > total) return false;
-      question.practiceStats = { total: total, errorRate: (total - correct) / total };
-      return true;
-    });
-    if (!ranked.length) throw new Error('当前范围内没有达到最低作答人数的题目，可降低人数门槛或扩大练习范围。');
-    return ranked.sort(function (a, b) {
-      return b.practiceStats.errorRate - a.practiceStats.errorRate ||
-        b.practiceStats.total - a.practiceStats.total || a.id.localeCompare(b.id);
-    });
+    const ranked = window.ICSMistakePractice.rankQuestions(pool, state.siteStats, Number(ui.minAttempts.value),
+      ui.mistakesSkipMastered.checked ? state.mastered : null);
+    if (!ranked.length) throw new Error('当前范围没有符合条件的有错题，可降低人数门槛、取消跳过熟知或扩大范围。');
+    return ranked;
   }
 
   async function startQuiz() {
@@ -1143,7 +1141,7 @@
       const count = mode === 'random' || mode === 'mistakes' ? Math.min(Number(ui.count.value), pool.length) : pool.length;
       state.questions = mode === 'exam'
         ? pool.sort(function (a, b) { return Number(a.paperOrder || 0) - Number(b.paperOrder || 0); })
-        : mode === 'mistakes' ? pool.slice(0, count) : secureShuffle(pool).slice(0, count);
+        : mode === 'mistakes' ? window.ICSMistakePractice.selectQuestions(pool, { coverage: ui.mistakesRange.value, count: count, order: ui.mistakesOrder.value }, secureShuffle) : secureShuffle(pool).slice(0, count);
       state.communityPaper = null;
       clearCommunityLink();
       state.index = 0; state.score = 0; state.records = []; state.drafts = [];
@@ -1201,7 +1199,7 @@
           : record && record.mode === 'skipped' ? '已跳过，可继续作答'
           : record && record.mode === 'unavailable' ? '答案待校对，未计分'
             : draftHasContent(draft) ? '草稿已保存' : '尚未作答';
-    ui.questionGrid.innerHTML = state.questions.map(function (question, index) {
+    const gridMarkup = state.questions.map(function (question, index) {
       const item = state.records[index];
       const saved = state.drafts[index];
       const status = item && typeof item.points === 'number' ? 'answered'
@@ -1213,6 +1211,10 @@
         (index === state.index ? ' aria-current="step"' : '') +
         ' aria-label="第 ' + (index + 1) + ' 题，' + label + '">' + (index + 1) + '</button>';
     }).join('');
+    if (state.questionGridMarkup !== gridMarkup) {
+      ui.questionGrid.innerHTML = gridMarkup;
+      state.questionGridMarkup = gridMarkup;
+    }
   }
 
   function highlightChoiceResults(question) {
@@ -1358,7 +1360,8 @@
         .filter(Boolean).map(function (item) { return '<span>' + escapeHtml(item) + '</span>'; }).join('');
     ui.questionHistory.hidden = !q.practiceStats;
     ui.questionHistory.textContent = q.practiceStats
-      ? '历史错误率 ' + Math.round(q.practiceStats.errorRate * 100) + '% · ' + q.practiceStats.total + ' 人作答 · 按错误率降序练习' : '';
+      ? '历史错误率 ' + Math.round(q.practiceStats.errorRate * 100) + '% · ' + q.practiceStats.total + ' 人作答 · ' + (q.practiceStats.order === 'random'
+        ? '从 ' + q.practiceStats.candidateCount + ' 道高错候选随机抽取 ' + q.practiceStats.selectedCount + ' 题' : '按错误率降序练习') : '';
     ui.questionContent.innerHTML = q.type === 'fill' ? renderFillQuestion(q.stem)
       : compositeQuestion ? renderCompositeQuestion(q) : renderContent(q.stem) + (q.type === 'short-answer' ? renderShortAnswer('root') : '');
 

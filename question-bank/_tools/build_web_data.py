@@ -73,6 +73,6 @@ if __name__ == "__main__":
         if destination != (BANK.parent / "_site" / "web-data").resolve():
             raise ValueError("deployment output must be _site/web-data")
         for filename, payload in deployed_payloads(*read_bank()).items():
-            write_json(destination / filename, payload)
+            write_json(destination / filename, payload, compact=True)
     else:
         main()
