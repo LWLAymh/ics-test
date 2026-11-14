@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-4521377acbabad7a",
-  "revision": 3,
+  "revision": 4,
   "paperId": "p-ea869cda0eb89689",
   "paperOrder": 19,
   "number": {
@@ -143,55 +143,68 @@
     "blankAnswers": [
       {
         "blankId": "legacy-gap-0",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["len"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-1",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["0"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-2",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["0"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-3",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["len-1"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-4",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["0"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-5",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["b"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-6",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["a"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-7",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["a"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-8",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["b"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-9",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["len"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-10",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["len"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-11",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["a"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       },
       {
         "blankId": "legacy-gap-12",
-        "method": "self"
+        "method": "exact", "acceptedAnswers": ["a"],
+        "normalize": {"caseSensitive":true,"trimWhitespace":true,"syntax":"c-tokens"}
       }
     ]
   }
@@ -200,6 +213,8 @@
 %%% stem
 1. The function below is hand-written assembly code for a sorting algorithm. Fill in the blanks
    on the next page by converting this assembly to C code　**(13pts)**
+
+Assume `len >= 0` and all array elements are distinct. Fill only the missing identifiers or expressions, using `a` and `b` for the shown loop variables. This restriction makes the original strict `>` C template agree with the assembly's tie handling.
 
 
 ```asm

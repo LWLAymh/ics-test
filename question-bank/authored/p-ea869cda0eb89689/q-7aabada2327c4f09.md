@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-7aabada2327c4f09",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-ea869cda0eb89689",
   "paperOrder": 1,
   "number": {
@@ -94,6 +94,8 @@
 +++
 %%% stem
 1. Let `int x = -31/8` and `int y = -31 >> 3`. What are the values of `x` and `y`?
+
+Assume integer division truncates toward zero and signed right shift is arithmetic, as in the course's x86 model.
 %%% reference
 **答案：C**
 %%% option: A
