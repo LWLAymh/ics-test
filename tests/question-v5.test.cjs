@@ -5,6 +5,7 @@ const api = require('../site/question-v5.js');
 const bank = require('../question-bank/web-data/questions.json').questions;
 require('./prompt-images.test.cjs');
 require('./math-authoring.test.cjs');
+require('./stage2-2025.test.cjs');
 
 test('inline reference display uses explicit exact/select keys, never a prose parser or grading mutation', () => {
   const exact = { method: 'exact', acceptedAnswers: ['x != 1', '1 != x'] };

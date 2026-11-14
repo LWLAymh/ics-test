@@ -4,7 +4,7 @@
     {
       "schemaVersion": "5",
       "id": "q-04fc7eaee2d05167",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 13,
       "number": {
@@ -50,7 +50,7 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "13.（4分）下图是一根 DDR3 SDRAM 内存条，数据位宽是 64-bit，总容量为 2GB，由 8 颗内存芯片构成。如果一个计算机系统只有这根内存条作为全部内存，那往地址 `0x01001000` 写一个 64-bit 数 `0x12345678`，这个数会放在内存条上从左向右数第几颗（或哪几颗）内存芯片中？并解释这样存放的原因。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png)"
+        "text": "13.（4分）下图是一根 DDR3 SDRAM 内存条，数据位宽是 64 bit，总容量为 2 GB，由 8 颗内存芯片构成。如果一个计算机系统仅用这根内存条，向地址 `0x01001000` **写入完整的 8 字节数值** `0x0000000012345678`，这个数分布在从左向右的哪几颗芯片中？解释这样存放的原因。\n\n这里将原卷 `0x12345678` 的高位零补全，以免把题目的 64 位写操作误解成 32 位写操作。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p7-dimm.png)"
       },
       "solution": {
         "state": "available",
@@ -218,7 +218,7 @@
     {
       "schemaVersion": "5",
       "id": "q-1193a85ee97e9eb7",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 20,
       "number": {
@@ -271,7 +271,7 @@
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：ADEG"
+          "text": "答案：**D、E、G**，即 `cnt`、`print_value`、`main`。\n\n`cnt` 和 `main` 是本目标模块定义的外部可见符号；`print_value` 是本模块引用、需由链接器解析的外部函数。`include` 是预处理指令的名字，`stdio.h` 是头文件名，`int` 是类型关键字；参数 `x` 和自动局部变量 `val` 也不是这里所问的链接器符号。\n\n**原卷勘误：**带答案卷标为 `ADEG`，其中 A 是误选。`#include` 在预处理阶段展开，不会把名字 `include` 作为符号交给链接器。这里明确更正判分键，不把原答案照抄为标准答案。参见 [GCC 的 include 处理说明](https://gcc.gnu.org/onlinedocs/cpp/Include-Operation.html)。"
         },
         "provenance": {
           "origin": "unknown",
@@ -279,7 +279,6 @@
           "note": "Migrated from v3; answer text and any attribution are preserved. Legacy verified did not establish official provenance."
         },
         "correctOptionIds": [
-          "A",
           "D",
           "E",
           "G"
@@ -347,7 +346,7 @@
     {
       "schemaVersion": "5",
       "id": "q-18521c5015bccc53",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 22,
       "number": {
@@ -393,14 +392,14 @@
       "type": "short-answer",
       "stem": {
         "format": "markdown",
-        "text": "22.（3分）整数运算中有可能会出现“除0异常”，如果这是属于Faults类型的异常，\n是否可以在异常处理程序中，将结果修改成某个特殊值，例如全为1的二进制数，然\n后继续执行该程序\n后续指令？"
+        "text": "22.（3分）整数除法触发除零 Fault。按课程讲授的默认返回机制，假设处理程序**只修改结果值，不改变除数等故障条件，也不修改保存的返回指令地址**，能否在结果里填入某个特殊值（例如全 1 的二进制数）后，就直接继续执行原程序的后续指令？请说明原因。"
       },
       "solution": {
         "state": "available",
         "grading": "self",
         "reference": {
           "format": "markdown",
-          "text": "（指整数运算那个程序）\n答：不可以（1分）。Faults类型的异常，从异常处理程序返回后，要重新执行这条\n“除0”指令，导致再次发生异常。所以只能终止该进程。（2分）注：如果一开始的结论\n就不对，后面如何解读都不得分。"
+          "text": "按题面限定条件，**不可以**。\n\nFault 保存的返回地址指向出错的那条指令，正常返回会重新执行除法，而不是自动跳到下一条。若除数仍为零，仅修改结果寄存器并不能消除故障，重试会再次触发异常。\n\n原卷把这一结论表述为“只能终止该进程”，范围过于绝对：如果处理程序能修复故障条件，或专门修改保存的执行上下文以模拟并跳过指令，则属于另一种处理方案。这里明确排除这些额外操作，不把“所有 Fault 都只能终止”作为一般结论。参见 [Linux sigreturn 的上下文恢复说明](https://man7.org/linux/man-pages/man2/sigreturn.2.html)。"
         },
         "provenance": {
           "origin": "unknown",
@@ -412,7 +411,7 @@
     {
       "schemaVersion": "5",
       "id": "q-26a096f3a94d2ea2",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 16,
       "number": {
@@ -465,7 +464,7 @@
         "grading": "self",
         "reference": {
           "format": "markdown",
-          "text": "答：三种名称各1分（中英文回答一种即可），把命中称为失效，也算对\n（1）冷启不命中（义务不命中），Cold(compulsory) miss\n（2）容量不命中，Capacity miss\n（3）冲突不命中，Conflict miss\n三种对应场景各1分（简要描述即可），详见第13讲课件第8页。"
+          "text": "1. **冷／强制性不命中（cold / compulsory miss）**：第一次访问某个内存块时，该块尚未装入 Cache。即使 Cache 很大且全相联，首次访问仍可能不命中。\n2. **容量不命中（capacity miss）**：工作集超过 Cache 容量，块被替换后再次访问而不命中；即使采用同容量的全相联 Cache，仍可能发生。\n3. **冲突不命中（conflict miss）**：不同块映射到同一组，在相联度限制下互相替换；即使 Cache 的其他组还有空间，也可能不命中。\n\n原卷评分要求三种名称各 1 分、对应场景各 1 分，中英文均可。这里补全了原解析仅写“详见课件”的场景说明。"
         },
         "provenance": {
           "origin": "unknown",
@@ -477,7 +476,7 @@
     {
       "schemaVersion": "5",
       "id": "q-2ad3c4cc427891fb",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 5,
       "number": {
@@ -579,14 +578,14 @@
             "width": "medium"
           }
         ],
-        "text": "5. （8分）Y86-64 的 `popq rA` 指令编码为 `b 0 rA 8`。根据 `popq` 指令的操作，补全下表（共需填 8 行 9 空）：\n\n| 阶段 | 计算（`popq rA`） |\n| --- | --- |\n| `Fetch` | `icode:ifun ← M1[PC]`（已给） |\n|  | `rA:rB ← M1[{{blank:q5-fetch-address}}]` |\n|  | `valP ← PC+2`（已给） |\n| `Decode` | `valA ← R[{{blank:q5-src-a}}]` |\n|  | `valB ← R[{{blank:q5-src-b}}]` |\n| `Execute` | `valE ← {{blank:q5-alu-a}} + {{blank:q5-alu-b}}` |\n| `Memory` | `{{blank:q5-memory-result}} ← M8[valA]` |\n| Write back | `R[{{blank:q5-dst-e}}] ← valE` |\n|  | `R[{{blank:q5-dst-m}}] ← valM` |\n| PC update | `PC ← {{blank:q5-next-pc}}` |"
+        "text": "5.（8分）Y86-64 的 `popq rA` 标准编码为两个字节 `B0 rAF`（四个半字节依次为 `B`、`0`、`rA`、`F`）。根据指令操作补全下表，共需填 8 行 9 空。Execute 行按 `valB + 8` 的顺序填写；寄存器 `%rsp` 也可不写 `%`。\n\n> 原卷编码图的末半字节印为 `8`，标准格式应为表示“不使用寄存器”的 `F`。这里按教材的标准编码更正；这不改变下面的 `popq` 操作步骤。\n\n| 阶段 | 计算（`popq rA`） |\n| --- | --- |\n| `Fetch` | `icode:ifun ← M1[PC]`（已给） |\n|  | `rA:rB ← M1[{{blank:q5-fetch-address}}]` |\n|  | `valP ← PC+2`（已给） |\n| `Decode` | `valA ← R[{{blank:q5-src-a}}]` |\n|  | `valB ← R[{{blank:q5-src-b}}]` |\n| `Execute` | `valE ← {{blank:q5-alu-a}} + {{blank:q5-alu-b}}` |\n| `Memory` | `{{blank:q5-memory-result}} ← M8[valA]` |\n| Write back | `R[{{blank:q5-dst-e}}] ← valE` |\n|  | `R[{{blank:q5-dst-m}}] ← valM` |\n| PC update | `PC ← {{blank:q5-next-pc}}` |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```text\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码：题面给出 `popq rA` 的字节序列为 `b 0 rA 8`，即第 1 字节 `icode:ifun = b:0`、第 2 字节 `rA:rB`（其中 `rB` 不用）、第 3 字节是功能码 8。`popq` 没有立即数/偏移量，所以指令长度固定 2 字节（icode:ifun 与 rA:rB）。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：`popq` 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+          "text": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```text\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码为两个字节：`icode:ifun = B:0` 与 `rA:F`。四个格子是半字节，不是四个字节；`F` 表示不使用 `rB`。`popq` 没有立即数／位移字段，**不存在所谓“第 3 字节的功能码 8”**。原卷末半字节印为 `8`，这里按标准格式纠正。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：`popq` 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
         },
         "provenance": {
           "origin": "unknown",
@@ -601,15 +600,17 @@
               "PC+1"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
             }
           },
           {
             "blankId": "q5-src-a",
             "method": "exact",
             "acceptedAnswers": [
-              "%rsp"
+              "%rsp",
+              "rsp"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -620,7 +621,8 @@
             "blankId": "q5-src-b",
             "method": "exact",
             "acceptedAnswers": [
-              "%rsp"
+              "%rsp",
+              "rsp"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -664,7 +666,8 @@
             "blankId": "q5-dst-e",
             "method": "exact",
             "acceptedAnswers": [
-              "%rsp"
+              "%rsp",
+              "rsp"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -699,7 +702,7 @@
     {
       "schemaVersion": "5",
       "id": "q-2d91d3370d28d2d1",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 24,
       "number": {
@@ -769,7 +772,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": ""
+        "text": "24.（6分）阅读下面的 C 程序。假定所有系统调用成功，标准输出连接终端且每次换行都会刷新。进程总数**包含最初运行程序的进程**；各进程的全局变量 `x` 在 `fork` 后分别保存。\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\n\nint x = 1;\n\nint main(void) {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```"
       },
       "parts": [
         {
@@ -802,7 +805,7 @@
                 "width": "medium"
               }
             ],
-            "text": "24.（6分）阅读下面这段程序：\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n#include <sys/wait.h>\n\nint x = 1;\n\nint main() {\n    printf(\"start: x = %d\\n\", x);\n    pid_t pid1 = fork();\n    if (pid1 == 0) {\n        x += 1;\n        printf(\"x = %d\\n\", x);\n        sleep(1);\n        pid_t pid2 = fork();\n        if (pid2 == 0) {\n            x += 2;\n            printf(\"x = %d\\n\", x);\n        } else {\n            x += 3;\n            printf(\"x = %d\\n\", x);\n            wait(NULL);\n        }\n    } else {\n        x += 4;\n        printf(\"x = %d\\n\", x);\n        wait(NULL);\n        printf(\"x = %d\\n\", x);\n    }\n    return 0;\n}\n```\n\n（1）（2分）这个程序正常运行，会产生几个进程？{{blank:q24-process-count}}"
+            "text": "（1）（2分）程序正常运行时的进程总数（包含最初进程）为 {{blank:q24-process-count}}。"
           },
           "solution": {
             "state": "available",
@@ -883,7 +886,7 @@
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "答案：6 行"
+              "text": "答案：6 行。依次计数：`start` 一行，原父进程两行，第一子进程两行，第二次 `fork` 创建的子进程一行。进程间具体交错可变，但总数不变。"
             },
             "provenance": {
               "origin": "unknown",
@@ -949,7 +952,7 @@
             "grading": "choice",
             "reference": {
               "format": "markdown",
-              "text": "答案：D"
+              "text": "答案：D，`x = 5`。第一子进程等待它创建的子进程结束，原父进程又等待第一子进程结束；最后执行的是原父进程 `wait` 后的那次打印。父进程自己的 `x` 从 1 加 4 得到 5，不会被其他进程修改。"
             },
             "provenance": {
               "origin": "unknown",
@@ -1026,7 +1029,7 @@
         "grading": "parts",
         "reference": {
           "format": "markdown",
-          "text": ""
+          "text": "两个 `fork()` 各创建一个子进程，进程总数为 3（不是仅计算新创建的 2 个子进程）。两个 `wait(NULL)` 保证原父进程的最后一次输出在全部后代输出之后。"
         },
         "provenance": {
           "origin": "unknown",
@@ -1174,7 +1177,7 @@
     {
       "schemaVersion": "5",
       "id": "q-60b2f52b1c77f356",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 8,
       "number": {
@@ -1292,14 +1295,14 @@
             "width": "medium"
           }
         ],
-        "text": "8. （6分）阅读下面这段Y86-64汇编代码\n```asm\n    1 irmovq $1,%rax\n    2 irmovq $2,%rax\n    3 irmovq $3,%rdx\n    4 addq %rax,%rdx\n```\n当这段代码在 PIPE 处理器上运行时，当 `addq` 指令在流水级 {{blank:q8-detect-stage}} 阶段时，会检测到数据冒险。此时运用了数据前递技术，其中在流水级 {{blank:q8-forward-stage}} 阶段的指令前递数据 {{blank:q8-forward-value}}，作为操作数 `%rax` 的值。"
+        "text": "8. （6分）阅读下面这段Y86-64汇编代码\n```asm\n    irmovq $1, %rax\n    irmovq $2, %rax\n    irmovq $3, %rdx\n    addq   %rax, %rdx\n```\n当这段代码在 PIPE 处理器上运行时，当 `addq` 指令在流水级 {{blank:q8-detect-stage}} 阶段时，会检测到数据冒险。此时运用了数据前递技术，其中在流水级 {{blank:q8-forward-stage}} 阶段的指令前递数据 {{blank:q8-forward-value}}，作为操作数 `%rax` 的值。"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "译码（D/Decode）；M；2"
+          "text": "依次为 **D（Decode／译码）**、**M**、**2**。\n\n当最后一条 `addq` 在 D 阶段时，第二条 `irmovq $2, %rax` 位于 M 阶段，第三条位于 E 阶段。译码前递取较新的 `%rax=2`，而不是第一条指令提供的旧值 1。"
         },
         "provenance": {
           "origin": "unknown",
@@ -1461,7 +1464,7 @@
     {
       "schemaVersion": "5",
       "id": "q-64726d17fa9d900c",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 18,
       "number": {
@@ -1507,14 +1510,14 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "18.（2分）Intel Core i7 CPU的L2 Cache容量，最有可能是下面哪种："
+        "text": "18.（2分）按本课程／教材介绍的经典 Intel Core i7 存储层次示例，**每个核心的 L2 Cache** 容量最有可能是下面哪种？本题不要求查询当前新型号的规格，也不是询问全芯片共享缓存的容量。"
       },
       "solution": {
         "state": "available",
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C"
+          "text": "答案：**C，256 kB**。这是题目所依据的经典教材示例；不同代际、不同型号的 Core i7 配置会变化，不能据此断言所有 i7 的 L2 容量都相同。"
         },
         "provenance": {
           "origin": "unknown",
@@ -1747,7 +1750,7 @@
     {
       "schemaVersion": "5",
       "id": "q-8ecabaa93552c5fd",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 21,
       "number": {
@@ -1794,14 +1797,14 @@
       "stem": {
         "format": "markdown",
         "blanks": [],
-        "text": "21.（8分）下面是一段C代码`main.c`和对应目标文件`main.o`反汇编得到的代码。\n\n```c\nint array[2] = {1, 2};\nint main(int argc, char** argv){\n    int val = sum(array, 2);\n    return val;\n}\n```\n\n```asm\n0000000000000000 <main>:\n0:   55                     push    %rbp\n1:   48 89 e5               mov     %rsp,%rbp\n4:   48 83 ec 20            sub     $0x20,%rsp\n8:   89 7d ec               mov     %edi,-0x14(%rbp)\nb:   48 89 75 e0            mov     %rsi,-0x20(%rbp)\nf:   be 02 00 00 00         mov     $0x2,%esi\n14:  bf 00 00 00 00         mov     $0x0,%edi\n19:  e8 00 00 00 00         callq   1e <main+0x1e>\n1e:  89 45 fc               mov     %eax,-0x4(%rbp)\n21:  8b 45 fc               mov     -0x4(%rbp),%eax\n24:  c9                     leaveq\n25:  c3                     retq\n```\n（1）地址14对应的`mov`指令，为什么要把0放到`edi`寄存器中?按源代码看，应该\n是要放什么数，这里为什么是0，后续还会有什么操作？\n\n\n（2）地址19对应的`callq`指令，看起来会转到地址1e，即下一条指令，这不合常\n理，为什么？"
+        "text": "21.（8分）下面是一段C代码`main.c`和对应目标文件`main.o`反汇编得到的代码。\n\n```c\nextern int sum(int *a, int n);  /* 原卷省略的函数声明 */\nint array[2] = {1, 2};\n\nint main(int argc, char **argv) {\n    int val = sum(array, 2);\n    return val;\n}\n```\n\n```asm\n0000000000000000 <main>:\n0:   55                     push    %rbp\n1:   48 89 e5               mov     %rsp,%rbp\n4:   48 83 ec 20            sub     $0x20,%rsp\n8:   89 7d ec               mov     %edi,-0x14(%rbp)\nb:   48 89 75 e0            mov     %rsi,-0x20(%rbp)\nf:   be 02 00 00 00         mov     $0x2,%esi\n14:  bf 00 00 00 00         mov     $0x0,%edi\n19:  e8 00 00 00 00         callq   1e <main+0x1e>\n1e:  89 45 fc               mov     %eax,-0x4(%rbp)\n21:  8b 45 fc               mov     -0x4(%rbp),%eax\n24:  c9                     leaveq\n25:  c3                     retq\n```\n（1）反汇编地址 `0x14` 对应的 `mov` 指令为什么把 0 放进 `%edi`？源代码本来需要传入什么值？这里为何是 0，之后还有什么处理？\n\n\n（2）地址 `0x19` 的 `callq` 看起来转到 `0x1e`，也就是下一条指令，为什么？"
       },
       "solution": {
         "state": "available",
         "grading": "self",
         "reference": {
           "format": "markdown",
-          "text": "答案（原卷参考答案）：\n（1）要放到`edi`中的数据是数组`array`的首地址（1分）；编译成目标文件时，`array`数组在内存中的位置还不确定，所以用0代替（1分）；后续由链接器（1分）进行重定位（1分），填上正确的数值。\n（2）`callq`指令要跳转到`sum`函数的起始地址（1分）；编译成目标文件时，`sum`函数在内存中的位置还不确定，所以用0代替（1分）；按照`callq`指令的编码规则，指令中保存的是`callq`下一条指令和要跳转的目标地址的差值，因为现在用0填充，所以反汇编显示成下一条指令的地址，即1e（2分）。\n\n解析：\n\n1. 先看源码与汇编的对应：`int val = sum(array, 2);` 要调用 `sum(a, n)`，x86-64 用 `%rdi` 传第一个参数（数组首地址 `array`）、`%esi` 传第二个参数（整数 2）。汇编里 `f: mov $0x2,%esi` 正是第二个参数，`14: mov $0x0,%edi` 就是第一个参数——**本应**是 `&array[0]`，但这里是 0。\n2. 为什么是 0：这份反汇编来自 **可重定位目标文件（`main.o`）**。此时链接还没发生，`array` 最终会被放在 `.data` 段的哪个地址、整个程序会被装载到哪个地址，编译器都不知道，因此它先在指令的立即数字段填 0 占位，并在目标文件里为这个位置产生一条**重定位记录**（relocation entry，指向符号 `array`）。\n3. 「后续还会有什么操作」：链接器（linker）在链接阶段做**重定位**——把 `array` 在运行时（或按 `-no-pie` 的固定地址）的最终地址填回这条 `mov` 指令的 4 字节立即数域；类似地，`sum` 的地址会被填进 `callq` 的位移域。所以最终可执行文件里 `14: bf xx xx xx xx mov $<array 的地址>,%edi`。\n4. 第（2）问的关键是 `callq` 的**相对寻址（PC-relative）**编码：`e8` 后面跟 4 字节有符号位移 rel32，目标地址 = **下一条指令的地址 + rel32**。目标文件里 rel32 全 0，反汇编器按公式算出「`1e + 0 = 1e`」，于是显示成 `callq 1e <main+0x1e>`，看起来像跳到自己下一条指令。链接器随后把这个 rel32 改成 `sum 的最终地址 − callq 下一条指令的地址`（重定位类型 `R_X86_64_PLT32`/`R_X86_64_PC32`），运行时才能真正跳到 `sum`。\n5. 顺带一提：`mov $0x0,%edi` 用的是绝对地址立即数（`R_X86_64_32` 类重定位），这也是链接时能直接「填数」的原因；而 `callq` 填的是相对位移，所以链接后的机器码会随 `sum` 与本指令的距离而变。两者都属于链接**重定位**阶段解决的问题。\n\n> 📌 答案有官方来源：原卷参考答案（原文/阶段测验/2025第2次阶段测验-带答案.md 第 280–294 行，红色答案逐条给出 1 分/1 分/1 分/1 分的评分点）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+          "text": "参考答案（依据原卷，并纠正相对位移方向）：\n（1）要放到`edi`中的数据是数组`array`的首地址（1分）；编译成目标文件时，`array`数组在内存中的位置还不确定，所以用0代替（1分）；后续由链接器（1分）进行重定位（1分），填上正确的数值。\n（2）`callq` 应跳到 `sum` 的起始地址。目标文件中的相对位移暂为 0，所以反汇编显示下一条指令地址 `0x1e`。链接后需填入的位移是**目标地址减去下一条指令地址**，不是相反方向。\n\n解析：\n\n1. 先看源码与汇编的对应：`int val = sum(array, 2);` 要调用 `sum(a, n)`，x86-64 用 `%rdi` 传第一个参数（数组首地址 `array`）、`%esi` 传第二个参数（整数 2）。汇编里 `f: mov $0x2,%esi` 正是第二个参数，`14: mov $0x0,%edi` 就是第一个参数——**本应**是 `&array[0]`，但这里是 0。\n2. 为什么是 0：这份反汇编来自 **可重定位目标文件（`main.o`）**。此时链接还没发生，`array` 最终会被放在 `.data` 段的哪个地址、整个程序会被装载到哪个地址，编译器都不知道，因此它先在指令的立即数字段填 0 占位，并在目标文件里为这个位置产生一条**重定位记录**（relocation entry，指向符号 `array`）。\n3. 「后续还会有什么操作」：链接器（linker）在链接阶段做**重定位**——把 `array` 的最终地址填回这条 `mov` 指令的 4 字节立即数域。`callq` 的位移域则填写 `sum` 的目标地址相对于下一条指令地址的位移。所以最终可执行文件里 `14: bf xx xx xx xx mov $<array 的地址>,%edi`。\n4. 第（2）问的关键是 `callq` 的**相对寻址（PC-relative）**编码：`e8` 后面跟 4 字节有符号位移 rel32，目标地址 = **下一条指令的地址 + rel32**。目标文件里 rel32 全 0，反汇编器按公式算出「`1e + 0 = 1e`」，于是显示成 `callq 1e <main+0x1e>`，看起来像跳到自己下一条指令。链接器随后把这个 rel32 改成 `sum 的最终地址 − callq 下一条指令的地址`（重定位类型 `R_X86_64_PLT32`/`R_X86_64_PC32`），运行时才能真正跳到 `sum`。\n5. 顺带一提：`mov $0x0,%edi` 用的是绝对地址立即数（`R_X86_64_32` 类重定位），这也是链接时能直接「填数」的原因；而 `callq` 填的是相对位移，所以链接后的机器码会随 `sum` 与本指令的距离而变。两者都属于链接**重定位**阶段解决的问题。\n\n> 📌 答案有官方来源：原卷参考答案（原文/阶段测验/2025第2次阶段测验-带答案.md 第 280–294 行，红色答案逐条给出 1 分/1 分/1 分/1 分的评分点）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
         },
         "provenance": {
           "origin": "unknown",
@@ -1878,7 +1881,7 @@
     {
       "schemaVersion": "5",
       "id": "q-9d862c1ae8d4b958",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 6,
       "number": {
@@ -1921,17 +1924,163 @@
           "editorNote": "SEQ 中 aluA 信号生成逻辑的 HCL 补全"
         }
       ],
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "6. （8分）以下是SEQ处理器中`ALU`的A口输入端信号（`aluA`）生成逻辑的分析，只列\n出了部分指令。根据各指令功能，并参考下面已经给出的信息，补全空缺（表格中2\n空，HCL代码中6空）。\n\n![图](assets/阶段测验/2025第2次阶段测验-带答案/p5-q6-aluseq-table.png)\n\n```c\nint aluA = [\n    icode in { IRRMOVQ,\n    } : valA;\n    icode in { IIRMOVQ,\n    , IMRMOVQ } : valC;\n    icode in {\n    ;\n    icode in {\n    ;\n    # Other instructions don't need ALU\n];\n```"
+        "blanks": [
+          {
+            "id": "q6-call-step",
+            "marker": "{{blank:q6-call-step}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "q6-ret-step",
+            "marker": "{{blank:q6-ret-step}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "q6-val-a-op",
+            "marker": "{{blank:q6-val-a-op}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "q6-val-c-op",
+            "marker": "{{blank:q6-val-c-op}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "q6-minus-op",
+            "marker": "{{blank:q6-minus-op}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "q6-minus-value",
+            "marker": "{{blank:q6-minus-value}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "q6-plus-op",
+            "marker": "{{blank:q6-plus-op}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "q6-plus-value",
+            "marker": "{{blank:q6-plus-value}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "6.（8分）以下是 SEQ 处理器 ALU 的 A 口输入信号 `aluA` 的分析，仅列出部分指令。根据指令功能，补全表格中的 2 空和 HCL 代码中的 6 空。每空只填缺少的名称或数值，不重复填写已有标点和指令名。\n\n| 指令 | Execute 阶段 |\n| --- | --- |\n| `OPq rA, rB` | `valE ← valB OP valA` |\n| `cmovXX rA, rB` | `valE ← 0 + valA` |\n| `rmmovq rA, D(rB)` | `valE ← valB + valC` |\n| `popq rA` | `valE ← valB + 8` |\n| `jXX Dest` | 不需要 ALU |\n| `call Dest` | `valE ← valB + (`{{blank:q6-call-step}}`)` |\n| `ret` | `valE ← valB + (`{{blank:q6-ret-step}}`)` |\n\n```hcl\nint aluA = [\n    icode in { IRRMOVQ, {{blank:q6-val-a-op}} } : valA;\n    icode in { IIRMOVQ, {{blank:q6-val-c-op}}, IMRMOVQ } : valC;\n    icode in { {{blank:q6-minus-op}}, IPUSHQ } : {{blank:q6-minus-value}};\n    icode in { {{blank:q6-plus-op}}, IPOPQ } : {{blank:q6-plus-value}};\n    # Other instructions don't need ALU\n];\n```"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "q6-call-step",
+            "method": "exact",
+            "acceptedAnswers": [
+              "-8"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "q6-ret-step",
+            "method": "exact",
+            "acceptedAnswers": [
+              "8",
+              "+8"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "q6-val-a-op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "IOPQ"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q6-val-c-op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "IRMMOVQ"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q6-minus-op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "ICALL"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q6-minus-value",
+            "method": "exact",
+            "acceptedAnswers": [
+              "-8"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "q6-plus-op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "IRET"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q6-plus-value",
+            "method": "exact",
+            "acceptedAnswers": [
+              "8",
+              "+8"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
+            }
+          }
+        ],
         "reference": {
           "format": "markdown",
-          "text": "```c\nIOPQ\nIRMMOVQ\nICALL, IPUSHQ } : -8\nIRET, IPOPQ } : 8\n```"
+          "text": "表格依次填 `-8`、`8`；HCL 代码依次填 `IOPQ`、`IRMMOVQ`、`ICALL`、`-8`、`IRET`、`8`。\n\n```hcl\nint aluA = [\n    icode in { IRRMOVQ, IOPQ } : valA;\n    icode in { IIRMOVQ, IRMMOVQ, IMRMOVQ } : valC;\n    icode in { ICALL, IPUSHQ } : -8;\n    icode in { IRET, IPOPQ } : 8;\n    # Other instructions don't need ALU\n];\n```\n\n算术指令与条件传送使用 `valA`；立即数和访存位移使用 `valC`；入栈／调用令栈指针减 8，出栈／返回令其加 8。代码与 [CS:APP 作者的 SEQ HCL](https://csapp.cs.cmu.edu/3e/waside/waside-hcl.pdf) 中 `aluA` 的四个分支一致。"
         },
         "provenance": {
           "origin": "unknown",
@@ -2073,7 +2222,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b12725a5ab3fa17b",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 4,
       "number": {
@@ -2116,17 +2265,123 @@
           "editorNote": "根据电路图补全时序图中 Out 信号值；按原 PDF 第 3 页提取完整电路和时序区域，恢复 In/Load 输入，排除上方被截断的正文及下方答案。"
         }
       ],
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "4. （2分）根据下面左边电路图，补全右边时序图里Out信号的值（In/Out均用10进\n制表示）\n\n![左侧组合逻辑电路及右侧 Clock、Load、In、Out 时序图](assets/阶段测验/2025第2次阶段测验-带答案/p3-q4-timing-prompt.png)"
+        "blanks": [
+          {
+            "id": "q4-out-1",
+            "marker": "{{blank:q4-out-1}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "q4-out-2",
+            "marker": "{{blank:q4-out-2}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "q4-out-3",
+            "marker": "{{blank:q4-out-3}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "q4-out-4",
+            "marker": "{{blank:q4-out-4}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "q4-out-5",
+            "marker": "{{blank:q4-out-5}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "q4-out-6",
+            "marker": "{{blank:q4-out-6}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "4.（2分）根据左侧电路补全右侧时序图中的 `Out`。图中 ALU 执行加法，寄存器在时钟上升沿更新，`In`、`Out` 都用十进制表示。请按图上从左至右的 6 个区间填写上升沿之后的 `Out`。\n\n![左侧组合逻辑电路及右侧 Clock、Load、In、Out 时序图](assets/阶段测验/2025第2次阶段测验-带答案/p3-q4-timing-prompt.png)\n\n| 区间（从左至右） | Out（上升沿之后） |\n| --- | --- |\n| 1 | {{blank:q4-out-1}} |\n| 2 | {{blank:q4-out-2}} |\n| 3 | {{blank:q4-out-3}} |\n| 4 | {{blank:q4-out-4}} |\n| 5 | {{blank:q4-out-5}} |\n| 6 | {{blank:q4-out-6}} |"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "q4-out-1",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q4-out-2",
+            "method": "exact",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q4-out-3",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q4-out-4",
+            "method": "exact",
+            "acceptedAnswers": [
+              "7"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q4-out-5",
+            "method": "exact",
+            "acceptedAnswers": [
+              "16"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
+          },
+          {
+            "blankId": "q4-out-6",
+            "method": "exact",
+            "acceptedAnswers": [
+              "27"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
+          }
+        ],
         "reference": {
           "format": "markdown",
-          "text": "答案：1 4 9 7 16 27"
+          "text": "答案：`1, 4, 9, 7, 16, 27`。\n\n`Load=1` 时装入当前 `In`；`Load=0` 时把原 `Out` 与当前 `In` 相加。各区间依次为 `1`、`1+3=4`、`4+5=9`、重新装入 `7`、`7+9=16`、`16+11=27`。"
         },
         "provenance": {
           "origin": "unknown",
@@ -2138,7 +2393,7 @@
     {
       "schemaVersion": "5",
       "id": "q-b3e737deacb5445a",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 3,
       "number": {
@@ -2185,7 +2440,7 @@
       "stem": {
         "format": "markdown",
         "blanks": [],
-        "text": "3. （各3分，共6分）根据HCL表达式补全电路图\n`(1)bool eq = (a&&b)||(!a&&!b)`\n\n![第（1）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part1-prompt.png)\n\n(2)bool out = (s&&a)||(!s&&b)\n\n![第（2）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part2-prompt.png)"
+        "text": "3.（各3分，共6分）根据 HCL 表达式补全电路图。\n\n（1）\n\n```hcl\nbool eq = (a && b) || (!a && !b);\n```\n\n![第（1）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part1-prompt.png)\n\n（2）\n\n```hcl\nbool out = (s && a) || (!s && b);\n```\n\n![第（2）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part2-prompt.png)"
       },
       "solution": {
         "state": "available",
@@ -2319,7 +2574,7 @@
     {
       "schemaVersion": "5",
       "id": "q-edd81cd422e2601c",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 17,
       "number": {
@@ -2431,34 +2686,26 @@
             "width": "medium"
           },
           {
-            "id": "set3-r4-c1",
-            "marker": "{{blank:set3-r4-c1}}",
+            "id": "q17-hits",
+            "marker": "{{blank:q17-hits}}",
             "occurrence": 0,
-            "width": "medium",
-            "input": {
-              "kind": "select",
-              "multiple": false,
-              "options": [
-                {
-                  "value": "0",
-                  "label": "0"
-                },
-                {
-                  "value": "1",
-                  "label": "1"
-                }
-              ]
-            }
+            "width": "short"
+          },
+          {
+            "id": "q17-misses",
+            "marker": "{{blank:q17-misses}}",
+            "occurrence": 0,
+            "width": "short"
           }
         ],
-        "text": "17.（8分）有一个计算机系统，存储地址空间为64字节；采用直接映射（Direct-mapped）\n的数据高速缓存（cache），其容量为16字节；每个高速缓存块（cache block）\n为 4 字节（`B=4Byte/block`）；采用写分配（write-allocate）、写返回\n（write-back）策略。Cache的当前状态如下表。\n|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | {{blank:set0-r1-c1}} | {{blank:set0-r1-c2}} | {{blank:set0-r1-c3}} |\n| set1 | 1 | 0 | `Mem[4-7]` |\n| set2 | {{blank:set2-r3-c1}} | {{blank:set2-r3-c2}} | {{blank:set2-r3-c3}} |\n| set3 | {{blank:set3-r4-c1}} |  |  |\n经过如下地址访问序列后（十进制表示，每次访问1个字节）：18 40 50 16 43 48，\n在上表中更新Cache的状态。这个序列过程中，该高速缓存发生\n次Miss。"
+        "text": "17.（8分）某系统的存储地址空间为 64 字节，采用直接映射（Direct-mapped）数据高速缓存。Cache 容量为 16 字节，每块 4 字节，采用写分配（write-allocate）、写返回（write-back）策略。\n\n**初始状态（已知条件）**\n\n表中 `v=0` 表示该组无有效块；Tag 按两位二进制表示，`Mem[a-b]` 表示字节地址 `a` 至 `b` 的内存块。\n\n| 组 | v | Tag（二进制） | Block |\n| --- | --- | --- | --- |\n| `set0` | 0 | — | — |\n| `set1` | 1 | `00` | `Mem[4-7]` |\n| `set2` | 0 | — | — |\n| `set3` | 0 | — | — |\n\n> 原卷勘误与约定：无答案卷把 set1 的 Tag 印为 `01`，但 `Mem[4-7]` 对应的 Tag 应为 `00`，带答案卷也已将它改为 `00`。这里采用修正值，并明确原表未给出有效内容的其他组初始均无效。\n\n依次访问字节地址 `18, 40, 50, 16, 43, 48`（均为十进制，每次访问 1 字节）。填写**全部访问结束后的状态**：Tag 填两位二进制；Block 可写 `Mem[a-b]` 或 `M[a-b]`。\n\n| 组 | v | Tag（二进制） | Block |\n| --- | --- | --- | --- |\n| `set0` | {{blank:set0-r1-c1}} | {{blank:set0-r1-c2}} | {{blank:set0-r1-c3}} |\n| `set1` | 1 | `00` | `Mem[4-7]` |\n| `set2` | {{blank:set2-r3-c1}} | {{blank:set2-r3-c2}} | {{blank:set2-r3-c3}} |\n| `set3` | 0 | — | — |\n\n该序列共发生 {{blank:q17-hits}} 次 Hit 和 {{blank:q17-misses}} 次 Miss。"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| set0 | 1 | 11 | `Mem[48-51]` |\n| set1 | 1 | 00 | `Mem[4-7]` |\n| set2 | 1 | 10 | `Mem[40-43]` |\n| set3 | 0 |  |  |\n\n该序列过程中，这个高速缓存发生2次Hit和4次Miss。\n（注：表格每行2分，一行全对才得分；填空每空2分）"
+          "text": "|  | v | Tag | Block |\n| --- | --- | --- | --- |\n| `set0` | 1 | `11` | `Mem[48-51]` |\n| `set1` | 1 | `00` | `Mem[4-7]` |\n| `set2` | 1 | `10` | `Mem[40-43]` |\n| `set3` | 0 |  |  |\n\n按题面明确的初始条件，该序列发生 **1 次 Hit、5 次 Miss**。最终 set0 为 `Mem[48-51]`，set2 为 `Mem[40-43]`；set1 未被访问，set3 仍无效。\n\n地址划分为 2 位 Tag、2 位组索引、2 位块内偏移。逐次访问如下：\n\n1. 地址 `18` → `set0`、Tag `01`：Miss，装入 `Mem[16-19]`。\n2. 地址 `40` → `set2`、Tag `10`：Miss，装入 `Mem[40-43]`。\n3. 地址 `50` → `set0`、Tag `11`：Miss，替换为 `Mem[48-51]`。\n4. 地址 `16` → `set0`、Tag `01`：Miss，替换为 `Mem[16-19]`。\n5. 地址 `43` → `set2`、Tag `10`：Hit。\n6. 地址 `48` → `set0`、Tag `11`：Miss，替换为 `Mem[48-51]`。\n\n**原卷计数说明**\n\n原卷答案写为 2 次 Hit、4 次 Miss，但原题没有明确其他组的有效初值。在本题明确其初始无效的条件下，逐次推演只能得到 1 次 Hit、5 次 Miss。若额外假定 set0 初始已装有 `Mem[16-19]`，第一次访问 18 才会命中，才得到原卷的 2/4；原卷并未给出这一初始块。题库按当前明确题面判分，不把缺失条件暗含在答案里。"
         },
         "provenance": {
           "origin": "unknown",
@@ -2488,11 +2735,13 @@
             "blankId": "set0-r1-c3",
             "method": "exact",
             "acceptedAnswers": [
-              "Mem[48-51]"
+              "Mem[48-51]",
+              "M[48-51]"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
             }
           },
           {
@@ -2517,7 +2766,20 @@
             "blankId": "set2-r3-c3",
             "method": "exact",
             "acceptedAnswers": [
-              "Mem[40-43]"
+              "Mem[40-43]",
+              "M[40-43]"
+            ],
+            "normalize": {
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "q17-hits",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1"
             ],
             "normalize": {
               "caseSensitive": false,
@@ -2525,11 +2787,15 @@
             }
           },
           {
-            "blankId": "set3-r4-c1",
-            "method": "selection",
-            "correctValues": [
-              "0"
-            ]
+            "blankId": "q17-misses",
+            "method": "exact",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "normalize": {
+              "caseSensitive": false,
+              "trimWhitespace": true
+            }
           }
         ]
       }
@@ -2537,7 +2803,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f0b98b6dbd158843",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 23,
       "number": {
@@ -2607,7 +2873,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": ""
+        "text": "23.（3分）阅读下面的 C 程序并回答三个小问。假定所有 `fork()` 均成功，标准输出连接终端且每次换行都会刷新，不考虑输出重定向产生的缓冲区复制。\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n\nint main(void) {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```"
       },
       "parts": [
         {
@@ -2640,7 +2906,7 @@
                 "width": "medium"
               }
             ],
-            "text": "23.（3分）阅读下面这段程序：\n\n```c\n#include <stdio.h>\n#include <unistd.h>\n\nint main() {\n    printf(\"A\\n\");\n    pid_t pid = fork();\n    if (pid == 0) {\n        printf(\"B\\n\");\n    } else {\n        printf(\"C\\n\");\n        fork();\n    }\n    printf(\"D\\n\");\n    return 0;\n}\n```\n\n（1）程序正常运行后，会输出几次 `D`？{{blank:q23-d-count}}"
+            "text": "（1）程序正常运行后，会输出几次 `D`？{{blank:q23-d-count}}"
           },
           "solution": {
             "state": "available",
@@ -2739,7 +3005,7 @@
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "答案：不确定"
+              "text": "不确定。`B` 在第一次创建的子进程中输出，`C` 在原父进程中输出，两者没有同步先后关系。"
             },
             "provenance": {
               "origin": "unknown",
@@ -2801,7 +3067,7 @@
             "grading": "choice",
             "reference": {
               "format": "markdown",
-              "text": "答案：A"
+              "text": "答案：A，可以。例如原父进程输出 `C` 并创建第二个子进程后，先由两个父系进程中的一个输出 `D`；再调度第一个子进程输出 `B`、`D`，最后另一个进程输出剩下的 `D`，即可得到 `ACDBDD`。"
             },
             "provenance": {
               "origin": "unknown",
@@ -2850,7 +3116,7 @@
         "grading": "parts",
         "reference": {
           "format": "markdown",
-          "text": ""
+          "text": "第一次 `fork` 产生一个子进程；只有原父进程执行第二次 `fork`，所以最后有三个进程。每个进程都执行末尾的 `printf(\"D\\n\")`。"
         },
         "provenance": {
           "origin": "unknown",

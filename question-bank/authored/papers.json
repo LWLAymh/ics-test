@@ -150,7 +150,7 @@
     {
       "schemaVersion": "5",
       "id": "p-0439188e8c4bdac1",
-      "revision": 2,
+      "revision": 3,
       "displayName": "2025阶段测验（第2次）",
       "title": null,
       "year": 2025,
@@ -185,8 +185,8 @@
         "q-2d91d3370d28d2d1"
       ],
       "coverage": {
-        "state": "unknown",
-        "note": "旧 complete 字段只表示有无答案，不能证明原卷收录完整。"
+        "state": "complete",
+        "note": "2026-11-14 对照无答案卷与带答案卷逐题核对，共24题，题序完整；第4、6题恢复自动判分，第17题明确空组初始无效并勘误为1 Hit/5 Miss，第20题纠正include不是链接符号。"
       },
       "sourceDocuments": [
         "原文/阶段测验/2025第2次阶段测验-带答案.md"

@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-b3e737deacb5445a",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-0439188e8c4bdac1",
   "paperOrder": 3,
   "number": {
@@ -65,12 +65,21 @@
 }
 +++
 %%% stem
-3. （各3分，共6分）根据HCL表达式补全电路图
-`(1)bool eq = (a&&b)||(!a&&!b)`
+3.（各3分，共6分）根据 HCL 表达式补全电路图。
+
+（1）
+
+```hcl
+bool eq = (a && b) || (!a && !b);
+```
 
 ![第（1）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part1-prompt.png)
 
-(2)bool out = (s&&a)||(!s&&b)
+（2）
+
+```hcl
+bool out = (s && a) || (!s && b);
+```
 
 ![第（2）问待补全的电路图](assets/阶段测验/2025第2次阶段测验-带答案/q3-part2-prompt.png)
 %%% reference
