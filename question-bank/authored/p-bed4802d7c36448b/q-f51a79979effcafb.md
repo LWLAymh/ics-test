@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-f51a79979effcafb",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-bed4802d7c36448b",
   "paperOrder": 8,
   "number": {
@@ -94,20 +94,22 @@
 +++
 %%% stem
 8.在x86-64架构、Linux操作系统下，有如下C定义。
+```c
+struct {
+    union {
+        short s1;
+        char c[3];
+    } u;
+    double d;
+    short s2;
+} s;
 ```
-  struct {
-  union {
-      short s1;
-      char c[3];
-  } u;
-  double d;
-  short s2;
-  } s;
-```
-考虑使用GCC默认选项进行编译，下列逻辑表达式为真的是：
+考虑使用 GCC 默认的 x86-64 System V 布局，下列逻辑表达式为真的是？
+
+> 题面约定：原卷 C、D 项用跨结构成员的 `short *` 相减考查偏移。这里把它理解为“两个成员的字节地址之差除以 `sizeof(short)`”，不把它当作合法 ISO C 指针相减程序来执行。
 %%% reference
 答案：C
-`sizeof s.u`应为4。
+`sizeof s.u` 为4；`s.d` 在偏移8，`s.s2` 在偏移16。按题面明确的地址差模型，`16 / sizeof(short) = 8`，故选 C。严格 ISO C 中，这两个成员不是同一数组元素，不能直接用跨成员指针相减得到可移植结论。
 %%% option: A
 `sizeof s.u == 3`
 %%% option: B

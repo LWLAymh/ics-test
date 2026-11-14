@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-31ee90deffa851b8",
-  "revision": 1,
+  "revision": 2,
   "paperId": "p-bed4802d7c36448b",
   "paperOrder": 18,
   "number": {
@@ -25,11 +25,11 @@
     "tags": []
   },
   "publication": {
-    "state": "published",
+    "state": "review",
     "basis": "legacy-migration",
     "reviewer": null,
     "reviewedAt": null,
-    "issues": []
+    "issues": ["retired-invalid-question", "source-question-withdrawn", "insufficient-disk-timing-model"]
   },
   "sources": [
     {
@@ -111,6 +111,12 @@ Average # sectors/track = 400
 
 （修订：本题不计分、所有人都给分）
 %%% reference
+维护复核（2026-11-14）：本题不再参与线上组卷，原题、选项和原答案保留备查。
+
+原卷已经注明“本题不计分、所有人都给分”。平均寻道时间9ms不能确定跨指定相邻轨道的最短寻道时间；题面未说明请求能否重排、缓存初值与重复请求是否命中，也未建立寻道与旋转重叠的计算模型。原参考把扇区时间先近似为0.02ms，再相加得到19.02ms，不能由现有条件唯一推出。若使用未舍入的每扇区时间 `60 / 7200 / 400` 秒，原简化算式本身也得到19.0625ms，而非19.02ms。因此不以原键A强制判分，也不补入多个人为前提来倒推原答案。
+
+以下为保留的原卷参考内容，不作为当前发布题的判分依据。
+
 答案：A
 正确答案：A
 Transfer time of a sector costs 60 / 7200 x 1 / 400 x 1000

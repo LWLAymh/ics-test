@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-a70c753abad8eb3c",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-12950876262955d9",
   "paperOrder": 22,
   "number": {
@@ -74,14 +74,14 @@
       {"blankId": "case-5", "method": "exact", "acceptedAnswers": ["3"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
       {"blankId": "case-6", "method": "exact", "acceptedAnswers": ["7"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
       {"blankId": "case-7", "method": "exact", "acceptedAnswers": ["6"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
-      {"blankId": "expr-8", "method": "exact", "acceptedAnswers": ["b ^ 31", "b^31"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
-      {"blankId": "expr-9", "method": "exact", "acceptedAnswers": ["c + 2022", "c+2022", "2022 + c", "2022+c"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
-      {"blankId": "expr-10", "method": "exact", "acceptedAnswers": ["c - 54", "c-54"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
-      {"blankId": "expr-11", "method": "exact", "acceptedAnswers": ["(c + b) * 3", "(c+b)*3", "(b + c) * 3", "(b+c)*3", "3 * (b + c)", "3*(b+c)", "3 * (c + b)", "3*(c+b)", "3 * b + 3 * c", "3*b+3*c", "3 * c + 3 * b", "3*c+3*b"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
-      {"blankId": "expr-12", "method": "exact", "acceptedAnswers": ["sp->s.x"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
-      {"blankId": "stmt-13", "method": "exact", "acceptedAnswers": ["sp->s.z = 1898", "sp->s.z=1898"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
-      {"blankId": "expr-14", "method": "exact", "acceptedAnswers": ["*(sp->p)", "*sp->p", "sp->p[0]"], "normalize": {"trimWhitespace": true, "caseSensitive": true}},
-      {"blankId": "stmt-15", "method": "exact", "acceptedAnswers": ["sp->next = sp", "sp->next=sp"], "normalize": {"trimWhitespace": true, "caseSensitive": true}}
+      {"blankId": "expr-8", "method": "exact", "acceptedAnswers": ["b ^ 31"], "normalize": {"trimWhitespace": true, "caseSensitive": true, "syntax":"c-tokens"}},
+      {"blankId": "expr-9", "method": "exact", "acceptedAnswers": ["c + 2022", "2022 + c"], "normalize": {"trimWhitespace": true, "caseSensitive": true, "syntax":"c-tokens"}},
+      {"blankId": "expr-10", "method": "exact", "acceptedAnswers": ["c - 54"], "normalize": {"trimWhitespace": true, "caseSensitive": true, "syntax":"c-tokens"}},
+      {"blankId": "expr-11", "method": "exact", "acceptedAnswers": ["(c + b) * 3", "(b + c) * 3", "3 * (b + c)", "3 * (c + b)", "3 * b + 3 * c", "3 * c + 3 * b"], "normalize": {"trimWhitespace": true, "caseSensitive": true, "syntax":"c-tokens"}},
+      {"blankId": "expr-12", "method": "exact", "acceptedAnswers": ["sp->s.x"], "normalize": {"trimWhitespace": true, "caseSensitive": true, "syntax":"c-tokens"}},
+      {"blankId": "stmt-13", "method": "exact", "acceptedAnswers": ["sp->s.z = 1898"], "normalize": {"trimWhitespace": true, "caseSensitive": true, "syntax":"c-tokens"}},
+      {"blankId": "expr-14", "method": "exact", "acceptedAnswers": ["*(sp->p)", "*sp->p", "sp->p[0]"], "normalize": {"trimWhitespace": true, "caseSensitive": true, "syntax":"c-tokens"}},
+      {"blankId": "stmt-15", "method": "exact", "acceptedAnswers": ["sp->next = sp"], "normalize": {"trimWhitespace": true, "caseSensitive": true, "syntax":"c-tokens"}}
     ],
     "reference": {
       "format": "markdown"
