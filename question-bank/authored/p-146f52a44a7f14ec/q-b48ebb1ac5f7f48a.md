@@ -1,6 +1,6 @@
 +++json
 {
-  "schemaVersion": "5", "id": "q-b48ebb1ac5f7f48a", "revision": 2, "paperId": "p-146f52a44a7f14ec", "paperOrder": 1,
+  "schemaVersion": "5", "id": "q-b48ebb1ac5f7f48a", "revision": 3, "paperId": "p-146f52a44a7f14ec", "paperOrder": 1,
   "number": {"display": "8.1", "major": {"display": "第 8 章", "value": "8"}, "minor": {"display": "8.1", "value": "1"}, "parts": []},
   "classification": {"primaryModuleId": "ecf_and_system_io", "moduleIds": ["ecf_and_system_io"], "tags": ["csapp", "practice", "chapter-8"]},
   "type": "fill", "stem": {"format": "markdown", "blanks": [{"id":"ab","marker":"{{blank:ab}}","occurrence":0,"width":"short","input":{"kind":"select","multiple":false,"options":[{"value":"yes","label":"是"},{"value":"no","label":"否"}]}},{"id":"ac","marker":"{{blank:ac}}","occurrence":0,"width":"short","input":{"kind":"select","multiple":false,"options":[{"value":"yes","label":"是"},{"value":"no","label":"否"}]}},{"id":"bc","marker":"{{blank:bc}}","occurrence":0,"width":"short","input":{"kind":"select","multiple":false,"options":[{"value":"yes","label":"是"},{"value":"no","label":"否"}]}}]},
@@ -13,7 +13,7 @@
 }
 +++
 %%% stem
-练习题 8.1：三个进程的起始和结束时间如下。若一个进程在另一个进程结束前开始，则称它们并发运行。对每对进程选择是否并发。
+练习题 8.1：三个进程的起始和结束时间如下。若两个进程的生存时间区间有重叠，即两者都在对方结束之前开始，则称它们并发运行。对每对进程选择是否并发。
 
 | 进程 | 起始时间 | 结束时间 |
 |---|---:|---:|

@@ -1,6 +1,6 @@
 +++json
 {
-  "schemaVersion":"5","id":"q-7ca21ebde142bd2e","revision":2,"paperId":"p-e8af86f345a050ee","paperOrder":1,
+  "schemaVersion":"5","id":"q-7ca21ebde142bd2e","revision":3,"paperId":"p-e8af86f345a050ee","paperOrder":1,
   "number":{"display":"7.1","major":{"display":"第 7 章","value":"7"},"minor":{"display":"7.1","value":"1"},"parts":[]},
   "classification":{"primaryModuleId":"compilation_linking","moduleIds":["compilation_linking"],"tags":["csapp","practice","chapter-7"]},
   "type":"fill","stem":{"format":"markdown","blanks":[
@@ -22,7 +22,7 @@
 }
 +++
 %%% stem
-练习题 7.1：根据以下两个模块，完成 `swap.o` 中每个定义或引用的符号表信息。每格填写“是/否”、符号类型、定义模块和节；没有符号表条目的字段填写“—”。
+练习题 7.1：根据以下两个模块，完成 `swap.o` 中每个定义或引用的符号表信息。每格填写“是/否”、符号类型、定义模块和节；没有符号表条目的字段填写“—”。采用教材的传统 ELF/common 模型（相当于 GCC `-fcommon`），未初始化的非 static 全局暂定定义放在 COMMON；不考虑优化删除符号。外部引用的“节”填写其在定义模块中的节。
 
 `m.c`：
 ```c

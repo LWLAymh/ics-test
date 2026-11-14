@@ -1,6 +1,6 @@
 +++json
 {
-  "schemaVersion":"5","id":"q-c3b66a69df1a6feb","revision":2,"paperId":"p-0854288fe48c1276","paperOrder":6,
+  "schemaVersion":"5","id":"q-c3b66a69df1a6feb","revision":3,"paperId":"p-0854288fe48c1276","paperOrder":6,
   "number":{"display":"12.6","major":{"display":"第 12 章","value":"12"},"minor":{"display":"12.6","value":"6"},"parts":[]},
   "classification":{"primaryModuleId":"concurrent_programming","moduleIds":["concurrent_programming"],"tags":["csapp","practice","chapter-12"]},
   "type":"fill","stem":{"format":"markdown","blanks":[
@@ -38,6 +38,40 @@
 +++
 %%% stem
 练习题 12.6：判断每个变量实例会被哪些线程引用，并指出哪些变量是共享的。
+
+图12-15的程序如下。按教材的源码变量引用模型回答；本题不要求预测未同步计数的运行结果。`v.t` 表示变量 `v` 在线程 `t` 中的实例，`m` 为主线程，`p0`、`p1` 分别为两个对等线程。
+
+```c
+#include "csapp.h"
+#define N 2
+
+void *thread(void *vargp);
+char **ptr;
+
+int main()
+{
+    int i;
+    pthread_t tid;
+    char *msgs[N] = {
+        "Hello from foo",
+        "Hello from bar"
+    };
+
+    ptr = msgs;
+    for (i = 0; i < N; i++)
+        Pthread_create(&tid, NULL, thread, (void *)i);
+    Pthread_exit(NULL);
+}
+
+void *thread(void *vargp)
+{
+    int myid = (int)vargp;
+    static int cnt = 0;
+
+    printf("[%d]: %s (cnt=%d)\n", myid, ptr[myid], ++cnt);
+    return NULL;
+}
+```
 
 | 变量实例 | 主线程 | 对等线程 0 | 对等线程 1 |
 | --- | --- | --- | --- |
