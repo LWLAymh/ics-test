@@ -20,6 +20,13 @@
       "version": "3.2.2",
       "source": "https://registry.npmjs.org/mathjax/-/mathjax-3.2.2.tgz",
       "sha256": "91b005503c5d1f0958bf4d73ada1a3be33596b2c4ab5da22277f1b0d3149b5a4"
+    },
+    {
+      "path": "html2canvas/html2canvas.min.js",
+      "package": "html2canvas",
+      "version": "1.4.1",
+      "source": "https://registry.npmjs.org/html2canvas/-/html2canvas-1.4.1.tgz",
+      "sha256": "e87e550794322e574a1fda0c1549a3c70dae5a93d9113417a429016838eab8cb"
     }
   ]
 }

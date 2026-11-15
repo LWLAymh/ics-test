@@ -80,7 +80,20 @@
   }
   const aiGrader = window.ICSAIGraderUI.create({ host: $('ics-api-config'), summary: $('ics-api-summary'),
     agentPanel: $('ics-agent-connection'), questionHost: ui.questionContent,
-    question: function () { return ui.quiz.hidden ? null : state.questions[state.index]; } });
+    question: function () { return ui.quiz.hidden ? null : state.questions[state.index]; }, currentAnswers: currentWrittenAnswers });
+  function currentWrittenAnswers() {
+    return JSON.stringify({ choices: ui.answer.value, blanks: Array.from(ui.questionContent.querySelectorAll('.ics-blank-input')).map(input => ({ scope: input.dataset.blankScope, id: input.dataset.blankId, value: input.value })),
+      choicesInParts: Array.from(ui.questionContent.querySelectorAll('[data-composite-choice].selected')).map(button => ({ part: button.closest('[data-part-index]').dataset.partIndex, choice: button.dataset.compositeChoice })),
+      shortAnswers: Array.from(ui.questionContent.querySelectorAll('[data-short-answer]')).map(input => ({ scope: input.dataset.shortAnswer, value: input.value })) });
+  }
+  const handwriting = window.ICSHandwriting.mount({ host: $('ics-handwriting'), surface: $('ics-ink-surface'), viewport: $('ics-ink-viewport'),
+    question: function () { return ui.quiz.hidden ? null : state.questions[state.index]; },
+    canReview: function () { return ui.feedback.hidden && !ui.quiz.hidden; },
+    review: function (review) { aiGrader.reviewImages(review); }, cancelReview: function () { aiGrader.stop(); }, selfGrade: reviewHandwrittenAnswer,
+    changed: function () { saveQuestionDraft(); updateNavigation(); } });
+  const searchPanel = window.ICSQuestionSearch.mount({ host: $('ics-question-search'), loadBank: loadQuestionBank, practice: practiceLocalQuestion });
+  $('ics-ink-surface').addEventListener('input', function () { aiGrader.stop(); });
+  $('ics-ink-surface').addEventListener('click', function (event) { if (event.target.closest('[data-choice],[data-composite-choice],[data-blank-choice],#ics-show-answer,#ics-submit')) aiGrader.stop(); });
   function exportPaper(load) {
     window.ICSPaperExport.open(load, { renderContent: renderContent, renderSolution: renderSolution, contract: contract,
       source: function (q) { return [paperFor(q).displayName, q.number.display, issueTypeLabel(q.type)].join(' · '); } });
@@ -1070,6 +1083,7 @@
       });
       community.init({ client: state.supabase, catalog: state.catalog, papers: state.papers });
       favoritesPanel.init({ catalog: state.catalog, papers: state.papers });
+      searchPanel.init({ catalog: state.catalog, papers: state.papers });
       renderSourceFilters();
       if (ui.practiceHistory.open) loadPracticeHistory();
       startIssueSubscription();
@@ -1172,13 +1186,15 @@
       submitted: !ui.feedback.hidden,
       needsSelfGrade: !ui.selfGrade.hidden,
       pendingCompositeGrade: state.pendingCompositeGrade,
+      handwrittenSelf: !!state.handwrittenSelf,
+      inkPresent: handwriting.hasInk(),
       verdict: ui.verdict.textContent,
       verdictClass: ui.verdict.className,
     };
   }
 
   function draftHasContent(draft) {
-    return draft && (draft.answer || draft.submitted || draft.blanks.some(function (blank) { return blank.value; }) ||
+    return draft && (draft.answer || draft.submitted || draft.inkPresent || draft.blanks.some(function (blank) { return blank.value; }) ||
       (draft.shortAnswers || []).some(function (item) { return item.value.trim(); }) || draft.compositeChoices.length);
   }
 
@@ -1226,7 +1242,7 @@
   }
 
   function highlightBlankResults(question) {
-    if (question.solution.state !== 'available') return;
+    if (question.solution.state !== 'available' || state.handwrittenSelf) return;
     ui.questionContent.querySelectorAll('.ics-blank-input').forEach(function (input) {
       const scope = input.dataset.blankScope;
       const unit = scope === 'root' ? question : question.parts[Number(scope)];
@@ -1294,6 +1310,7 @@
   function restoreQuestionDraft(question) {
     const draft = state.drafts[state.index];
     if (!draft) return;
+    state.handwrittenSelf = !!draft.handwrittenSelf;
     ui.answer.value = draft.answer;
     ui.questionContent.querySelectorAll('[data-short-answer]').forEach(function (input) {
       const saved = (draft.shortAnswers || []).find(function (item) { return item.scope === input.dataset.shortAnswer; });
@@ -1334,6 +1351,7 @@
 
   function renderQuestion() {
     aiGrader.stop();
+    state.handwrittenSelf = false;
     renderFavoriteButton();
     $('ics-community-current').hidden = !state.communityPaper;
     $('ics-community-title').textContent = state.communityPaper ? state.communityPaper.title : '';
@@ -1418,6 +1436,7 @@
     ui.verdict.className = 'ics-verdict'; ui.reference.innerHTML = '';
     restoreQuestionDraft(q);
     aiGrader.render();
+    handwriting.render();
     publishPracticeContext();
     updateNavigation();
     typeset(ui.questionContent);
@@ -1519,6 +1538,21 @@
       objectiveCount: objectiveCount,
       subjectiveCount: subjectiveCount,
     };
+  }
+
+  function reviewHandwrittenAnswer() {
+    const q = state.questions[state.index];
+    if (!q || q.solution.state !== 'available' || !ui.feedback.hidden) return;
+    if (!handwriting.hasInk()) { $('ics-handwriting').querySelector('[data-ink="status"]').textContent = '本题尚无笔迹；点选或填写的答案可直接提交自动核对。'; return; }
+    aiGrader.stop();
+    state.handwrittenSelf = true;
+    state.pendingCompositeGrade = null;
+    ui.answer.value = '手写作答（笔迹仅保存在本浏览器；由用户对照参考自评）';
+    ui.answer.disabled = true; ui.submit.disabled = true; ui.submit.hidden = true; ui.skip.hidden = true; ui.showAnswer.hidden = true;
+    ui.choiceList.querySelectorAll('button').forEach(button => { button.disabled = true; }); disableQuestionControls(ui.questionContent);
+    ui.feedback.hidden = false; ui.selfGrade.hidden = false; ui.verdict.className = 'ics-verdict';
+    ui.verdict.textContent = '请结合本题笔迹、点选和填写内容核对整题，自行确认成绩；AI 建议不会自动记分。';
+    ui.reference.innerHTML = renderSolution(q); typeset(ui.reference); saveQuestionDraft(); updateNavigation();
   }
 
   function submitAnswer(event) {
@@ -1951,7 +1985,7 @@
       ui.verdict.textContent = '已自评：本题 ' + points + ' 分。';
     }
     ui.verdict.className = 'ics-verdict ' + (finalPoints === 1 ? 'correct' : finalPoints === 0 ? 'incorrect' : '');
-    recordGrade(finalPoints, state.currentMode === 'composite' ? 'mixed' : 'self');
+    recordGrade(finalPoints, state.handwrittenSelf ? 'self' : state.currentMode === 'composite' ? 'mixed' : 'self');
   });
   ui.next.addEventListener('click', advanceQuestion);
   ui.previous.addEventListener('click', function () { navigateQuestion(state.index - 1); });

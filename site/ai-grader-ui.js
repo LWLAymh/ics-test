@@ -3,7 +3,7 @@
   const api = window.ICSAIGrader, CONFIRM_KEY = 'ics-ai-grader-confirm-v1';
   window.ICSAIGraderUI = { create(options) {
     const host = options.host, vault = api.vault(() => localStorage), cache = new Map();
-    let config = vault.load(), request = null, generation = 0, prompting = false, pendingConfirm = null, skip = {};
+    let config = vault.load(), request = null, generation = 0, prompting = false, pendingConfirm = null, skip = {}, visualReview = null, lastVisualPanel = null;
     try { const value = JSON.parse(localStorage.getItem(CONFIRM_KEY)); if (value && value.version === 1) skip = value; } catch (_) { /* Ask by default. */ }
     host.innerHTML = '<details id="ics-api-settings"><summary><strong>API 简答评测</strong><span>无需 MCP，手机也可使用</span></summary>' +
       '<p>仅当你主动评测时，浏览器才会直接调用所选官方 API。本站不收集、不代用你的 API Key，不用于其它用途；API 密钥和评测请求不经过本站服务器、Supabase、MCP 或 Cloudflare。如另行开启 MCP 填写共享，仍按该独立设置同步。</p>' +
@@ -16,11 +16,11 @@
       '<label class="ics-api-check"><input data-api="consent" type="checkbox" required> 我了解上述风险，同意仅在主动评测时发送当前题资料和回答，并承担 API 费用。</label>' +
       '<div class="ics-api-actions"><button class="ics-primary" type="submit">保存并启用</button><button class="ics-secondary" data-api="clear" type="button">停用并清除密钥</button></div></form>' +
       '<p data-api="status" role="status" aria-live="polite"></p><details class="ics-api-prompt"><summary>查看评测规则与发送范围</summary>' +
-      '<p>仅发送当前简答题（或当前简答小问与公共题面）、参考答案和本次填写。不发送作答历史、熟知进度或其它题的回答。不上传图片像素；依赖图片且文字资料不足时需人工复核。0–10 分仅作建议，仍需你确认自评。</p><pre data-api="prompt"></pre></details>' +
+      '<p>文字评测仅发送当前简答题（或当前简答小问与公共题面）、参考答案和本次填写，不上传图片。手写评测会另外预览并确认发送整题截图（含题图、当前填写和笔迹）及参考答案；可用于选择、填空和混合题。不发送作答历史、熟知进度或其它题的回答。0–10 分仅作建议，仍需你确认自评；请选择支持图片输入的模型。</p><pre data-api="prompt"></pre></details>' +
       '<p class="ics-api-links"><a href="https://developers.openai.com/api/reference/typescript#requirements" target="_blank" rel="noopener noreferrer">OpenAI 浏览器密钥风险说明 ↗</a></p></details>';
     const $ = key => host.querySelector('[data-api="' + key + '"]');
     const dialog = document.createElement('dialog'); dialog.className = 'ics-api-confirm'; dialog.id = 'ics-api-confirm';
-    dialog.innerHTML = '<h3>确认发送简答评测</h3><p data-confirm="scope"></p><p>会发送当前题面、参考答案和本次填写，可能产生 API 费用。不发送其它回答、作答历史或图片像素，不通过本站转发。</p><label class="ics-api-check"><input data-confirm="skip" type="checkbox"> 以后不再显示（仅此供应商；可在 API 设置恢复）</label><div class="ics-api-actions"><button class="ics-secondary" data-confirm="cancel" type="button">取消</button><button class="ics-primary" data-confirm="send" type="button">发送并评测</button></div>';
+    dialog.innerHTML = '<h3>确认发送简答评测</h3><p data-confirm="scope"></p><p data-confirm="description"></p><div data-confirm="images" class="ics-ink-preview"></div><label class="ics-api-check"><input data-confirm="skip" type="checkbox"> 以后不再显示（仅此供应商；可在 API 设置恢复）</label><div class="ics-api-actions"><button class="ics-secondary" data-confirm="cancel" type="button">取消</button><button class="ics-primary" data-confirm="send" type="button">发送并评测</button></div>';
     document.body.append(dialog); $('prompt').textContent = api.PROMPT;
     const confirmField = key => dialog.querySelector('[data-confirm="' + key + '"]');
     function remember(provider, value) {
@@ -29,17 +29,23 @@
       catch (_) { $('status').textContent = '发送确认偏好仅在当前页面生效，刷新后可能再次询问。'; }
       $('ask').checked = !value;
     }
-    function confirmation(used) {
-      if (skip[used.provider] === true) return Promise.resolve(true);
+    function confirmation(used, images) {
+      if (!images && skip[used.provider] === true) return Promise.resolve(true);
+      dialog.querySelector('h3').textContent = images ? '确认发送整题手写评测' : '确认发送简答评测';
+      confirmField('description').textContent = images ? '以下截图含当前整道题的题面、题图、已选选项、填写内容及笔迹；将连同本题参考答案直接发送给所选供应商，可能产生 API 费用。请检查所有截图是否完整清晰。不发送其它题、作答历史或密钥到本站。每次手写评测均需确认。' : '会发送当前题面、参考答案和本次填写，可能产生 API 费用。不发送其它回答、作答历史或图片像素，不通过本站转发。';
+      confirmField('images').replaceChildren();
+      (images || []).forEach((src, index) => { const img = document.createElement('img'); img.src = src; img.alt = '本题截图，第 ' + (index + 1) + ' 段'; confirmField('images').append(img); });
+      confirmField('skip').closest('label').hidden = !!images;
       confirmField('scope').textContent = '接收方：' + api.PROVIDERS[used.provider].name + ' · 模型：' + used.model;
       confirmField('skip').checked = false;
-      return new Promise(resolve => { pendingConfirm = { resolve, provider: used.provider }; dialog.showModal(); });
+      return new Promise(resolve => { pendingConfirm = { resolve, provider: used.provider, visual: !!images }; dialog.showModal(); });
     }
     dialog.addEventListener('close', () => {
       if (!pendingConfirm) return;
       const current = pendingConfirm; pendingConfirm = null;
       const accepted = dialog.returnValue === 'send';
-      if (accepted && confirmField('skip').checked) remember(current.provider, true);
+      if (accepted && !current.visual && confirmField('skip').checked) remember(current.provider, true);
+      confirmField('images').replaceChildren();
       current.resolve(accepted);
     });
     dialog.addEventListener('cancel', event => { event.preventDefault(); dialog.close('cancel'); });
@@ -48,8 +54,11 @@
     function label() { options.summary.textContent = config ? '已启用 ' + api.PROVIDERS[config.provider].name : '未启用'; }
     function stop(message) {
       generation++;
+      prompting = false;
+      if (lastVisualPanel) lastVisualPanel.hidden = true;
+      if (visualReview) { visualReview.cancel.hidden = true; if (message) visualReview.status.textContent = message; visualReview = null; }
       if (dialog.open) dialog.close('cancel');
-      if (request) { request.controller.abort(); if (request.status.isConnected && message) request.status.textContent = message; request = null; }
+      if (request) { request.controller.abort(); if (request.status.isConnected && message) request.status.textContent = message; if (request.cancel) request.cancel.hidden = true; request = null; }
       options.questionHost.querySelectorAll('[data-ai-cancel]').forEach(button => { button.hidden = true; });
     }
     function setFields(value) {
@@ -156,7 +165,27 @@
       $('status').textContent = '密钥存储在另一页面发生变化，已停用；请刷新后检查配置。';
     });
     return {
-      stop() { stop('已离开当前题，评测已取消。'); },
+      async reviewImages(review) {
+        if (!config) { review.status.textContent = '请先在 Agent 助手中保存 API 配置，并选择支持图片输入的模型。'; options.agentPanel.open = true; host.querySelector('details').open = true; host.scrollIntoView({ behavior: 'smooth' }); return; }
+        if (request || prompting) { review.status.textContent = '已有评测正在进行，请先取消。'; return; }
+        const token = ++generation, used = { ...config }, question = options.question(); let timeout;
+        try {
+          prompting = true; visualReview = review; lastVisualPanel = review.panel; refreshButtons(); review.panel.hidden = true; review.cancel.hidden = false; review.status.textContent = '正在本地生成整题预览，尚未发送…';
+          const images = await review.capture();
+          if (token !== generation || !review.isCurrent()) return;
+          const data = api.imagePayload(question, options.currentAnswers(), images);
+          const accepted = await confirmation(used, images);
+          if (!accepted || token !== generation || !review.isCurrent()) { review.status.textContent = '本次评测已取消，未发送。'; return; }
+          prompting = false; const controller = new AbortController(); request = { controller, status: review.status, cancel: review.cancel }; refreshButtons();
+          review.status.textContent = 'AI 正在评测本次整题作答…'; timeout = setTimeout(() => controller.abort(), 90000);
+          const result = await api.evaluate(used, data, controller.signal);
+          if (token !== generation || controller.signal.aborted || !review.isCurrent()) return;
+          output(review.panel, result, api.PROVIDERS[used.provider].name + ' / ' + used.model);
+          review.status.textContent = '评测完成，仅供参考；如需计入记录，请点击“核对手写答案并自评”，由你确认成绩。';
+        } catch (error) { if (token === generation) review.status.textContent = error.message || '手写评测失败，请人工自评。'; }
+        finally { clearTimeout(timeout); if (token === generation) { request = null; prompting = false; visualReview = null; review.cancel.hidden = true; refreshButtons(); } }
+      },
+      stop(message) { stop(message || '题目或作答已改变，先前评测已取消。'); },
       render() {
         stop();
         options.questionHost.querySelectorAll('.ics-short-answer').forEach(root => {

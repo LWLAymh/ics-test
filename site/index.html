@@ -119,6 +119,8 @@
   </section>
   </div>
 
+  <section id="ics-question-search" class="ics-panel ics-history-panel" aria-label="搜索题目"></section>
+
   <div class="ics-panel" id="ics-setup">
     <div class="ics-panel-head">
       <div><p class="ics-eyebrow">开始练习</p><h2>选择你的练习范围</h2><p id="ics-bank-summary">正在读取题库…</p></div>
@@ -200,6 +202,11 @@
     <div class="ics-progress-track" aria-hidden="true"><span id="ics-progress-bar"></span></div>
     <div class="ics-workspace">
     <div class="ics-workspace-main">
+    <nav class="ics-question-navigation" aria-label="题目导航">
+      <button class="ics-secondary" id="ics-previous" type="button">← 上一题</button>
+      <span id="ics-navigation-status" role="status"></span>
+      <button class="ics-secondary" id="ics-next" type="button">下一题 →</button>
+    </nav>
     <div class="ics-question-tools" aria-label="题目工具">
       <span class="ics-tools-label">题目工具</span>
       <div class="ics-question-utilities" role="group" aria-label="题目工具">
@@ -228,6 +235,8 @@
         <button class="ics-primary" id="ics-issue-send" type="submit">提交报告</button>
       </div>
     </form>
+    <section id="ics-handwriting" class="ics-handwriting" aria-label="作答方式与手写工具"></section>
+    <div id="ics-ink-viewport" class="ics-ink-viewport"><div id="ics-ink-surface" class="ics-ink-surface">
     <article class="ics-question">
       <div class="ics-question-meta" id="ics-question-meta"></div>
       <p class="ics-question-history" id="ics-question-history" hidden></p>
@@ -248,6 +257,8 @@
         </div>
       </div>
     </form>
+    <details class="ics-scratchpad" id="ics-scratchpad"><summary>展开草稿纸</summary><div data-ink-paper class="ics-ink-paper" aria-label="手写草稿纸"></div></details>
+    </div></div>
     <section class="ics-feedback" id="ics-feedback" hidden>
       <div id="ics-verdict"></div>
       <section class="ics-live-stats" id="ics-live-stats" hidden>
@@ -271,11 +282,7 @@
         </div>
       </div>
     </section>
-    <nav class="ics-question-navigation" aria-label="题目导航">
-      <button class="ics-secondary" id="ics-previous" type="button">← 上一题</button>
-      <span id="ics-navigation-status" role="status"></span>
-      <button class="ics-secondary" id="ics-next" type="button">下一题 →</button>
-    </nav>
+
     </div>
     <aside class="ics-session-sidebar" aria-label="本次练习概览">
       <details id="ics-question-map" open>
@@ -337,6 +344,8 @@
 <script src="./ai-grader.js" defer></script>
 <script src="./ai-grader-ui.js" defer></script>
 <script src="./mistake-practice.js" defer></script>
+<script src="./question-search.js" defer></script>
+<script src="./handwriting.js" defer></script>
 <script src="./ics-test.js" defer></script>
 <script src="./practice-connection.js" defer></script>
 </body>

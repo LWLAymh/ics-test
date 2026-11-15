@@ -42,7 +42,7 @@ test('Markdown and received print HTML pass through the same sanitizer', () => {
 
 test('vendored sanitization and formula assets match pinned upstream checksums', () => {
   const { files } = JSON.parse(read('vendor/security-manifest.json'));
-  assert.equal(files.length, 3);
+  assert.equal(files.length, 4);
   for (const file of files) {
     const digest = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'site/vendor', file.path))).digest('hex');
     assert.equal(digest, file.sha256, file.path);

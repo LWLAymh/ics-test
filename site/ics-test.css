@@ -306,7 +306,7 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 .ics-self-grade { margin-top: 18px; }
 .ics-self-grade p { margin-bottom: 10px; font-size: 13px; }
 .ics-grade-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
-.ics-question-navigation { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+.ics-question-navigation { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; margin: 0 0 20px; padding: 0 0 16px; border-bottom: 1px solid var(--border); }
 #ics-navigation-status { text-align: center; color: var(--text-muted); font-size: 12px; }
 .ics-question-utilities { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ics-question-tools { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
@@ -596,3 +596,43 @@ legend { padding: 0; font-size: 13px; font-weight: 650; }
 
 .ics-mistakes-preference { display: flex; align-items: center; gap: 7px; align-self: center; color: var(--text-muted); font-size: 12px; }
 .ics-mistakes-preference input { width: 16px; height: 16px; accent-color: var(--accent); }
+
+/* Search and browser-local handwritten work stay separate from question authoring. */
+#ics-question-search { margin-bottom: 20px; }
+.ics-search-form > div { display: flex; gap: 8px; margin-top: 8px; }
+.ics-search-form input { flex: 1; min-width: 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; }
+.ics-search-results { display: grid; gap: 12px; margin-bottom: 16px; }
+.ics-search-results article { border-top: 1px solid var(--border); padding-top: 16px; overflow-wrap: anywhere; }
+.ics-search-results strong { font-size: 13px; }
+.ics-search-results p { margin: 8px 0; color: var(--text-muted); font-size: 14px; }
+.ics-handwriting { margin: 0 0 24px; border-block: 1px solid var(--border); padding: 12px 0; }
+.ics-input-mode, .ics-ink-tools > div:first-child { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ics-input-mode > span { font-size: 13px; font-weight: 600; margin-right: 4px; }
+.ics-input-mode small, .ics-ink-tools p { color: var(--text-muted); font-size: 12px; }
+.ics-input-mode button, .ics-ink-tools button { min-height: 36px; padding: 7px 12px; font-size: 13px; }
+.ics-handwriting [aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.ics-ink-tools { padding-top: 12px; }
+.ics-ink-tools label { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; }
+.ics-ink-tools select { padding: 6px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 4px; font: inherit; }
+.ics-ink-touch { margin-top: 12px; }
+.ics-ink-touch input { width: 16px; height: 16px; }
+.ics-ink-viewport { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.ics-ink-surface { position: relative; min-width: 0; background: var(--surface); }
+.ics-ink-overlay { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; }
+.ics-ink-active { user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.ics-ink-active textarea { resize: none; user-select: text; -webkit-user-select: text; }
+.ics-ink-active input { user-select: text; -webkit-user-select: text; }
+.ics-ink-finger, .ics-ink-finger * { touch-action: none; }
+.ics-scratchpad { display: none; border: 1px solid var(--border); margin: 20px 0; border-radius: 4px; }
+.ics-ink-active .ics-scratchpad { display: block; }
+.ics-scratchpad summary { padding: 12px; cursor: pointer; font-size: 13px; }
+.ics-ink-paper { height: 420px; background-color: #fff; background-image: linear-gradient(#dce4ef 1px, transparent 1px); background-size: 100% 28px; border-top: 1px solid var(--border); }
+.ics-ink-preview { display: grid; gap: 8px; }
+.ics-ink-preview img { width: 100%; height: auto; border: 1px solid var(--border); }
+.ics-api-confirm:has(.ics-ink-preview img) { width: min(900px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); overflow: auto; }
+.ics-api-confirm .ics-api-actions { position: sticky; bottom: 0; background: var(--surface); padding: 12px 0; }
+@media (max-width: 600px) {
+  .ics-input-mode small { width: 100%; }
+  .ics-search-form > div { flex-wrap: wrap; }
+  .ics-search-form input { flex-basis: 200px; }
+}

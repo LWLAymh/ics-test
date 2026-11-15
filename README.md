@@ -217,3 +217,7 @@ npm run review-paper -- -Paper "2025期末"
 题目及参考材料主要整理自 [zhuozhiyongde/Introduction-to-Computer-System-2023Fall-PKU](https://github.com/zhuozhiyongde/Introduction-to-Computer-System-2023Fall-PKU)，感谢原仓库作者与贡献者的整理和分享。本仓库在此基础上进行分类、人工排版和交互练习开发，来源归属原作者及相关权利人，不代表北京大学官方题库。整理和参考答案可能存在错误，欢迎报告问题或提交 PR；转用材料请保留来源并遵守原材料的许可与使用要求。
 
 CSAPP 中文习题、章节材料及相关插图整理自 [SunnyMaria/csapp-zh-markdown](https://github.com/SunnyMaria/csapp-zh-markdown/tree/main)，感谢 SunnyMaria 及该仓库贡献者的转写、整理与校订。教材为 Randal E. Bryant 与 David R. O’Hallaron 所著《Computer Systems: A Programmer’s Perspective》。相关内容与图片权利归原作者及相应权利人，本项目仅提供学习练习整理，不代表教材作者、出版方或来源仓库的官方题库；使用与转载请保留来源并遵守相关权利要求。
+
+### 题目搜索与手写作答
+
+首页支持按题面、选项、试卷名和题号搜索；每题可切换并记住打字或手写模式。手写模式保留点选、填空交互，支持题面批注、默认折叠的草稿纸及主动确认后的整题 AI 评测。详见 [使用与隐私说明](docs/STUDY-TOOLS.md)。
