@@ -476,7 +476,7 @@
     {
       "schemaVersion": "5",
       "id": "q-2ad3c4cc427891fb",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 5,
       "number": {
@@ -542,14 +542,8 @@
             "width": "medium"
           },
           {
-            "id": "q5-alu-a",
-            "marker": "{{blank:q5-alu-a}}",
-            "occurrence": 0,
-            "width": "medium"
-          },
-          {
-            "id": "q5-alu-b",
-            "marker": "{{blank:q5-alu-b}}",
+            "id": "q5-alu-sum",
+            "marker": "{{blank:q5-alu-sum}}",
             "occurrence": 0,
             "width": "medium"
           },
@@ -578,14 +572,14 @@
             "width": "medium"
           }
         ],
-        "text": "5.（8分）Y86-64 的 `popq rA` 标准编码为两个字节 `B0 rAF`（四个半字节依次为 `B`、`0`、`rA`、`F`）。根据指令操作补全下表，共需填 8 行 9 空。Execute 行按 `valB + 8` 的顺序填写；寄存器 `%rsp` 也可不写 `%`。\n\n> 原卷编码图的末半字节印为 `8`，标准格式应为表示“不使用寄存器”的 `F`。这里按教材的标准编码更正；这不改变下面的 `popq` 操作步骤。\n\n| 阶段 | 计算（`popq rA`） |\n| --- | --- |\n| `Fetch` | `icode:ifun ← M1[PC]`（已给） |\n|  | `rA:rB ← M1[{{blank:q5-fetch-address}}]` |\n|  | `valP ← PC+2`（已给） |\n| `Decode` | `valA ← R[{{blank:q5-src-a}}]` |\n|  | `valB ← R[{{blank:q5-src-b}}]` |\n| `Execute` | `valE ← {{blank:q5-alu-a}} + {{blank:q5-alu-b}}` |\n| `Memory` | `{{blank:q5-memory-result}} ← M8[valA]` |\n| Write back | `R[{{blank:q5-dst-e}}] ← valE` |\n|  | `R[{{blank:q5-dst-m}}] ← valM` |\n| PC update | `PC ← {{blank:q5-next-pc}}` |"
+        "text": "5.（8分）Y86-64 的 `popq rA` 标准编码为两个字节 `B0 rAF`（四个半字节依次为 `B`、`0`、`rA`、`F`）。根据指令操作补全下表，共需填 8 行 8 空。Execute 行填写完整的加法表达式，两个加数的顺序均可；寄存器 `%rsp` 也可不写 `%`。\n\n> 原卷编码图的末半字节印为 `8`，标准格式应为表示“不使用寄存器”的 `F`。这里按教材的标准编码更正；这不改变下面的 `popq` 操作步骤。\n\n| 阶段 | 计算（`popq rA`） |\n| --- | --- |\n| `Fetch` | `icode:ifun ← M1[PC]`（已给） |\n|  | `rA:rB ← M1[{{blank:q5-fetch-address}}]` |\n|  | `valP ← PC+2`（已给） |\n| `Decode` | `valA ← R[{{blank:q5-src-a}}]` |\n|  | `valB ← R[{{blank:q5-src-b}}]` |\n| `Execute` | `valE ←` {{blank:q5-alu-sum}} |\n| `Memory` | `{{blank:q5-memory-result}} ← M8[valA]` |\n| Write back | `R[{{blank:q5-dst-e}}] ← valE` |\n|  | `R[{{blank:q5-dst-m}}] ← valM` |\n| PC update | `PC ← {{blank:q5-next-pc}}` |"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案（8 行 9 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB`　⑤ `8`　⑥ `valM`　⑦ `%rsp`　⑧ `rA`　⑨ `valP`\n\n补全后的表：\n\n```text\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码为两个字节：`icode:ifun = B:0` 与 `rA:F`。四个格子是半字节，不是四个字节；`F` 表示不使用 `rB`。`popq` 没有立即数／位移字段，**不存在所谓“第 3 字节的功能码 8”**。原卷末半字节印为 `8`，这里按标准格式纠正。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：`popq` 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`（ALU 做加法；题面写成 `valB + 8`，与 HCL 里 `aluA = 8, aluB = valB` 的加法可交换，等价）。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 📌 答案有官方来源：原卷红色参考答案即印刷在第 4 页上与题面同构的第二张表（见 `_audit/pages/阶段测验/2025第2次阶段测验-带答案/page-04.png`；原卷文字层的「答案：」是空的，答案只以红字表格形式存在）。解析由 AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
+          "text": "答案（8 行 8 空，按表格自上而下逐空填写）：\n\n① `PC+1`　② `%rsp`　③ `%rsp`　④ `valB+8` 或 `8+valB`　⑤ `valM`　⑥ `%rsp`　⑦ `rA`　⑧ `valP`\n\n补全后的表：\n\n```text\n阶段          计算（popq rA）\nFetch         icode:ifun ← M1[PC]          （已给）\n              rA:rB ← M1[PC+1]\n              valP ← PC+2                  （已给）\nDecode        valA ← R[%rsp]\n              valB ← R[%rsp]\nExecute       valE ← valB + 8\nMemory        valM ← M8[valA]\nWrite back    R[%rsp] ← valE\n              R[rA] ← valM\nPC update     PC ← valP\n```\n\n解析：\n\n1. 指令编码为两个字节：`icode:ifun = B:0` 与 `rA:F`。四个格子是半字节，不是四个字节；`F` 表示不使用 `rB`。`popq` 没有立即数／位移字段，**不存在所谓“第 3 字节的功能码 8”**。原卷末半字节印为 `8`，这里按标准格式纠正。\n2. **Fetch**：按 SEQ 的取指规则，先取指令第 1 字节放到 `icode:ifun`，再把下一个字节取到 `rA:rB`，于是空填 `PC+1`；同时 `valP = PC + 2`（已给），指向下一条指令。\n3. **Decode**：`popq` 需要「从栈顶取数」并且「把栈指针加 8」，这两件事都要用到老的 `%rsp`。SEQ 的寄存器堆只有 2 个读端口，所以 srcA 与 srcB **都读 `%rsp`**：`valA ← R[%rsp]`（后面当访存地址用）、`valB ← R[%rsp]`（后面当 ALU 操作数用）。\n4. **Execute**：`valE ← valB + 8`，即老栈指针加 8，得到新的 `%rsp`。加法可交换，`8 + valB` 同样正确。④填写整个表达式；空格与制表符不影响核对。教材 HCL 的输入选择是 `aluA = 8, aluB = valB`，而表中写的是完整加法表达式，无需限制两个加数的书写次序。\n5. **Memory**：`valM ← M8[valA]`，用 `valA`（老 `%rsp`）作地址从内存读出被弹出的 8 字节。\n6. **Write back**：SEQ 的寄存器堆有 2 个写端口，这一阶段同时写两个目的寄存器 —— `R[%rsp] ← valE`（更新栈指针）和 `R[rA] ← valM`（把弹出的值写入 `rA`）。注意 `%rsp` 用的是 `valE`（加 8 之后的值），`rA` 用的是 `valM`（内存读出的值），两者不能互换。\n7. **PC update**：`PC ← valP`，顺序取下一条指令。\n\n> 原卷第4页的红字表给出标准操作步骤。本题将 Execute 行合并为一个表达式空，额外接受交换加数顺序的等价写法。原解析署名：AI 整理（deepseek v4.1 flash · 大肥鱼小姐）。"
         },
         "provenance": {
           "origin": "unknown",
@@ -597,7 +591,8 @@
             "blankId": "q5-fetch-address",
             "method": "exact",
             "acceptedAnswers": [
-              "PC+1"
+              "PC+1",
+              "1+PC"
             ],
             "normalize": {
               "caseSensitive": true,
@@ -630,25 +625,18 @@
             }
           },
           {
-            "blankId": "q5-alu-a",
+            "blankId": "q5-alu-sum",
             "method": "exact",
             "acceptedAnswers": [
-              "valB"
+              "valB+8",
+              "8+valB",
+              "valB+0x8",
+              "0x8+valB"
             ],
             "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
-            }
-          },
-          {
-            "blankId": "q5-alu-b",
-            "method": "exact",
-            "acceptedAnswers": [
-              "8"
-            ],
-            "normalize": {
-              "caseSensitive": false,
-              "trimWhitespace": true
+              "caseSensitive": true,
+              "trimWhitespace": true,
+              "syntax": "c-tokens"
             }
           },
           {
@@ -1040,7 +1028,7 @@
     {
       "schemaVersion": "5",
       "id": "q-597397d33a06c55a",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-0439188e8c4bdac1",
       "paperOrder": 7,
       "number": {
@@ -1119,7 +1107,7 @@
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "三级流水线：单条指令延迟 340 ps；满负荷时每 180 ps 完成一条指令。\n若进一步理想化细分为均衡流水线：单条指令延迟 420 ps；满负荷时每 60 ps 完成一条指令。"
+          "text": "四空依次为 **540、180、420、60**，单位均为 ps。\n\n原三级流水线的统一时钟周期由最慢一级决定：`T = max(40, 160, 80) + 20 = 180 ps`。一条指令依次经过3级，需要3个完整周期，因此单条指令延迟为 `3 × 180 = 540 ps`；流水线充满后，每180 ps完成一条指令。\n\n**勘误：此前第一空340 ps有误。** `40+20+160+20+80+20=340 ps` 只是各段组合逻辑与寄存器开销的总和，没有计算较快流水级等待统一时钟沿的时间。第1级占用0—180 ps，第2级占用180—360 ps，第3级占用360—540 ps；不能把各级当成可随到随走的异步电路。\n\n按题面“不过度细分”的约定，均衡阶段取最大的共同组合逻辑时长40 ps：A保留1级，B拆成4级，C拆成2级，共7级。每级含20 ps寄存器开销，周期为 `40+20=60 ps`，单条指令延迟为 `7×60=420 ps`；充满后每60 ps完成一条指令。这里仍按理想化可拆分的前提计算。"
         },
         "provenance": {
           "origin": "unknown",
@@ -1131,7 +1119,7 @@
             "blankId": "q7-delay",
             "method": "exact",
             "acceptedAnswers": [
-              "340"
+              "540"
             ],
             "normalize": {
               "caseSensitive": false,

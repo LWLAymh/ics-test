@@ -33,9 +33,53 @@ test('register feedback and SEQ HCL blanks use independently derived values', ()
   assert.match(restored, /IRET, IPOPQ \} : 8/);
   assert.match(q(5).stem.text, /B0 rAF/);
   assert.ok(api.gradeBlank('PC + 1', q(5).solution.blankAnswers[0]));
+  assert.ok(api.gradeBlank('1 + PC', q(5).solution.blankAnswers[0]));
   assert.ok(api.gradeBlank('rsp', q(5).solution.blankAnswers[1]));
-  assert.deepEqual(q(7).solution.blankAnswers.map(r => Number(r.acceptedAnswers[0])), [40 + 160 + 80 + 3 * 20, 160 + 20, 7 * (40 + 20), 40 + 20]);
   assert.doesNotMatch(q(8).stem.text, /^\d+\s+(?:irmovq|rmmovq|mrmovq|addq)/m);
+});
+
+test('popq sums accept either operand order as a whole, never two independent permissive blanks', () => {
+  const question = q(5), rule = question.solution.blankAnswers.find(r => r.blankId === 'q5-alu-sum');
+  assert.equal(question.stem.blanks.length, 8);
+  assert.doesNotMatch(question.stem.text, /q5-alu-[ab]/);
+  const values = Object.fromEntries(question.solution.blankAnswers.map(r => [r.blankId, r.acceptedAnswers[0]]));
+  for (const sum of ['valB+8', '8 + valB', ' valB \t+ 8 ', '0x8 + valB']) {
+    assert.ok(api.gradeBlank(sum, rule), sum);
+    assert.equal(api.gradeBlanks({ ...values, 'q5-alu-sum': sum }, question.solution), true);
+  }
+  for (const sum of ['8+8', 'valB+valB', 'valB-8', 'valB+4', 'valE=valB+8', 'valB', '8']) {
+    assert.equal(api.gradeBlank(sum, rule), false, sum);
+    assert.equal(api.gradeBlanks({ ...values, 'q5-alu-sum': sum }, question.solution), false);
+  }
+});
+
+// Latches only capture on the shared clock edges. A faster stage waits; it
+// cannot send an instruction straight through the next combinational block.
+function clockedOutputs(logicDelays, registerDelay, count) {
+  const period = Math.max(...logicDelays) + registerDelay;
+  const available = logicDelays.map(() => 0), outputs = [];
+  for (let job = 0; job < count; ++job) {
+    let ready = job * period;
+    logicDelays.forEach((delay, stage) => {
+      const start = Math.max(ready, available[stage]);
+      ready = Math.ceil((start + delay + registerDelay) / period) * period;
+      available[stage] = ready;
+    });
+    outputs.push(ready);
+  }
+  return outputs;
+}
+test('stage test pipeline latency follows clocked captures, including waiting in faster stages', () => {
+  const original = clockedOutputs([40, 160, 80], 20, 4);
+  const balanced = clockedOutputs([40, 40, 40, 40, 40, 40, 40], 20, 4);
+  assert.deepEqual(original, [540, 720, 900, 1080]);
+  assert.deepEqual(balanced, [420, 480, 540, 600]);
+  assert.deepEqual(q(7).solution.blankAnswers.map(r => Number(r.acceptedAnswers[0])),
+    [original[0], original[1] - original[0], balanced[0], balanced[1] - balanced[0]]);
+  const rule = q(7).solution.blankAnswers.find(r => r.blankId === 'q7-delay');
+  assert.ok(api.gradeBlank('540', rule)); assert.equal(api.gradeBlank('340', rule), false);
+  // Same model also covers the textbook's unequal-stage example.
+  assert.equal(clockedOutputs([50, 150, 100], 20, 1)[0], 510);
 });
 test('cache trace starts with explicitly invalid groups and distinguishes tag bits from decimal', () => {
   const cache = [null, 1, null, null]; // block number, initially only Mem[4-7]

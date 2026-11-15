@@ -30,12 +30,12 @@ async function images(page) {
   })));
   for (const result of results) assert.ok(result.ok, result.src);
 }
-async function answer(page, q, wrong = false) {
+async function answer(page, q, wrong = false, overrides = {}) {
   for (const [index, unit] of (q.parts || [q]).entries()) {
     const scope = q.parts ? page.locator('[data-composite-part="' + index + '"]') : page.locator('#ics-app');
     for (const rule of unit.solution.blankAnswers || []) {
       const input = scope.locator('[data-blank-id="' + rule.blankId + '"]').first();
-      const value = wrong ? rule.method === 'selection' ? unit.stem.blanks.find(b => b.id === rule.blankId).input.options.find(o => !rule.correctValues.includes(o.value)).value : 'WRONG_VALUE' : rule.acceptedAnswers?.[0] || rule.correctValues[0];
+      const value = wrong ? rule.method === 'selection' ? unit.stem.blanks.find(b => b.id === rule.blankId).input.options.find(o => !rule.correctValues.includes(o.value)).value : 'WRONG_VALUE' : (overrides[rule.blankId] ?? rule.acceptedAnswers?.[0] ?? rule.correctValues[0]);
       if (rule.method === 'selection') await input.selectOption(value); else await input.fill(value);
     }
     for (const id of unit.solution.correctOptionIds || []) await scope.locator('[' + (q.parts ? 'data-composite-choice' : 'data-choice') + '="' + id + '"]').click();
@@ -84,7 +84,7 @@ async function run() {
       for (const width of [1280, 390]) {
         await page.setViewportSize({ width, height: 950 });
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), q.id + ' width ' + width);
-        if (process.env.ICS_SCREENSHOTS && [4, 6, 17, 23, 24].includes(q.paperOrder)) {
+        if (process.env.ICS_SCREENSHOTS && [4, 5, 6, 7, 17, 23, 24].includes(q.paperOrder)) {
           fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true });
           await page.locator('#ics-quiz').screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, 'q' + q.paperOrder + '-' + width + '.png') });
         }
@@ -95,6 +95,15 @@ async function run() {
       assert.equal(await page.evaluate(() => window.__test.state.records[0].points), 0, q.number.display);
       assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"]').count(), q.stem.blanks.length);
     }
+    const pop = questions[4];
+    for (const [expression, correct] of [['8 + valB', true], ['valB + 8', true], ['8 + 8', false], ['valB + valB', false]]) {
+      await fixture(page, pop); await answer(page, pop, false, { 'q5-alu-sum': expression });
+      assert.equal(await page.evaluate(() => window.__test.state.records[0].points), correct ? 1 : 0, expression);
+      assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"]').count(), correct ? 0 : 1);
+    }
+    await fixture(page, questions[6]); await answer(page, questions[6], false, { 'q7-delay': '340' });
+    assert.equal(await page.evaluate(() => window.__test.state.records[0].points), 0, 'old 340ps answer must not pass');
+    assert.equal(await page.locator('.ics-inline-blank[data-result="incorrect"]').count(), 1);
     assert.deepEqual(errors, []); assert.deepEqual(remote, []);
     console.log(JSON.stringify({ success: true, paper: paper.displayName, questions: questions.length, blanks, remoteRequests: 0 }));
   } finally { await browser.close(); }
