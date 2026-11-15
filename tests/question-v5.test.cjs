@@ -8,6 +8,7 @@ require('./math-authoring.test.cjs');
 require('./stage2-2025.test.cjs');
 require('./audit-2026-11.test.cjs');
 require('./followup-audit.test.cjs');
+require('./issues-2026-11-15.test.cjs');
 
 test('inline reference display uses explicit exact/select keys, never a prose parser or grading mutation', () => {
   const exact = { method: 'exact', acceptedAnswers: ['x != 1', '1 != x'] };

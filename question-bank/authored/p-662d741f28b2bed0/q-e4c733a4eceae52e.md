@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-e4c733a4eceae52e",
-  "revision": 4,
+  "revision": 5,
   "paperId": "p-662d741f28b2bed0",
   "paperOrder": 21,
   "number": {
@@ -311,6 +311,7 @@ double dz = (double)z;
 | `dx + dy == (double) (y+x)` | {{blank:q6}} |
 | `dx + dy + dz == dz + dy + dx` | {{blank:q7}} |
 | `(int)((lx+ly)>>1) == ((x&y) + ((x^y)>>1))` | {{blank:q8}} |
+
 （前6题每题1分; 7、8两题每题2分; 共10分）
 %%% reference
 答案：1. N（取32位整数 `x = -1073741824`，则 `3*x`截断后为正，两个或项都为假。）

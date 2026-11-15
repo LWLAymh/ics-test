@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-4d4da7a8daaab375",
-  "revision": 2,
+  "revision": 3,
   "paperId": "p-08e665c0f6e47348",
   "paperOrder": 20,
   "number": {
@@ -108,6 +108,7 @@
 | 8 | `V(a)` | `V(b)` | `V(d)` |
 | 9 | — | `V(c)` | — |
 | 10 | — | `V(d)` | — |
+
 下列哪两个线程并发执行时，一定不会发生死锁？
 %%% reference
 答案：D

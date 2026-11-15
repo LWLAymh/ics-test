@@ -10043,7 +10043,7 @@
     {
       "schemaVersion": "5",
       "id": "q-4c2ab0e8b67755ee",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 23,
       "number": {
@@ -10369,7 +10369,7 @@
                 }
               }
             ],
-            "text": "1. 对于每个符号，给出局部/全局及强/弱定义属性；局部符号和未定义外部引用的强弱栏选 X。`foo.c` 的全局暂定定义 `a` 按本题明确启用的 `-fcommon` 规则处理。\n\n> 原卷勘误：`main.c` 中的 `foo` 是普通未定义全局引用，不是弱定义，其强弱栏改为 X。现代 GCC 默认 `-fno-common` 会使两个 `a` 都成为强定义并链接失败，所以本题特别明确 `-fcommon`。\n\n`main.c`\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| `a` | {{blank:q4-maina-scope}} | {{blank:q4-maina-binding}} |\n| `foo` | {{blank:q4-mainfoo-scope}} | {{blank:q4-mainfoo-binding}} |\n\n`foo.c`\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| `a` | {{blank:q4-fooa-scope}} | {{blank:q4-fooa-binding}} |\n| `foo` | {{blank:q4-foofoo-scope}} | {{blank:q4-foofoo-binding}} |\n| `out_buf` | {{blank:q4-outbuf-scope}} | {{blank:q4-outbuf-binding}} |\n2. 根据以下结果补全公共程序的 A、B 两处，只填缺失内容，不重复题面前缀和分号。\n\n```c\nlong long {{blank:q4-global-a}};\nsprintf(out_buf, \"%x\\n\", {{blank:q4-sprintf-value}});\n```\n```\n$ gcc -o test main.c foo.c\n$ ./test 1\nbffedead\ncafebffedeadbeef\n$ ./test 2\nbeefcafe\ndeadbeefcafebffe\n```"
+            "text": "1. 对于每个符号，给出局部/全局及强/弱定义属性；局部符号和未定义外部引用的强弱栏选 X。`foo.c` 的全局暂定定义 `a` 按本题明确启用的 `-fcommon` 规则处理。\n\n> 原卷勘误：`main.c` 中的 `foo` 是普通未定义全局引用，不是弱定义，其强弱栏改为 X。现代 GCC 默认 `-fno-common` 会使两个 `a` 都成为强定义并链接失败，所以本题特别明确 `-fcommon`。\n\n`main.c`\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| `a` | {{blank:q4-maina-scope}} | {{blank:q4-maina-binding}} |\n| `foo` | {{blank:q4-mainfoo-scope}} | {{blank:q4-mainfoo-binding}} |\n\n`foo.c`\n| 符号 | 局部或全局 | 强或弱 |\n| --- | --- | --- |\n| `a` | {{blank:q4-fooa-scope}} | {{blank:q4-fooa-binding}} |\n| `foo` | {{blank:q4-foofoo-scope}} | {{blank:q4-foofoo-binding}} |\n| `out_buf` | {{blank:q4-outbuf-scope}} | {{blank:q4-outbuf-binding}} |\n\n2. 根据以下结果补全公共程序的 A、B 两处，只填缺失内容，不重复题面前缀和分号。\n\n```c\nlong long {{blank:q4-global-a}};\nsprintf(out_buf, \"%x\\n\", {{blank:q4-sprintf-value}});\n```\n```\n$ gcc -o test main.c foo.c\n$ ./test 1\nbffedead\ncafebffedeadbeef\n$ ./test 2\nbeefcafe\ndeadbeefcafebffe\n```"
           },
           "solution": {
             "state": "available",
@@ -10541,7 +10541,7 @@
     {
       "schemaVersion": "5",
       "id": "q-4d4da7a8daaab375",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-08e665c0f6e47348",
       "paperOrder": 20,
       "number": {
@@ -10587,7 +10587,7 @@
       "type": "single-choice",
       "stem": {
         "format": "markdown",
-        "text": "20. 有四个信号量，初值分别为：`a=1`，`b=1`，`c=1`，`d=1`。\n各线程按以下各列从上到下执行，空单元格表示该线程没有对应步骤。\n\n| 步骤 | 线程① | 线程② | 线程③ |\n| --- | --- | --- | --- |\n| 1 | `P(a)` | `P(d)` | `P(d)` |\n| 2 | `P(d)` | `P(a)` | `P(c)` |\n| 3 | `P(c)` | `P(c)` | `P(b)` |\n| 4 | `P(b)` | `P(b)` | `P(a)` |\n| 5 | `V(c)` | `V(d)` | `V(c)` |\n| 6 | `V(b)` | `P(d)` | `V(b)` |\n| 7 | `V(d)` | `V(a)` | `V(a)` |\n| 8 | `V(a)` | `V(b)` | `V(d)` |\n| 9 | — | `V(c)` | — |\n| 10 | — | `V(d)` | — |\n下列哪两个线程并发执行时，一定不会发生死锁？"
+        "text": "20. 有四个信号量，初值分别为：`a=1`，`b=1`，`c=1`，`d=1`。\n各线程按以下各列从上到下执行，空单元格表示该线程没有对应步骤。\n\n| 步骤 | 线程① | 线程② | 线程③ |\n| --- | --- | --- | --- |\n| 1 | `P(a)` | `P(d)` | `P(d)` |\n| 2 | `P(d)` | `P(a)` | `P(c)` |\n| 3 | `P(c)` | `P(c)` | `P(b)` |\n| 4 | `P(b)` | `P(b)` | `P(a)` |\n| 5 | `V(c)` | `V(d)` | `V(c)` |\n| 6 | `V(b)` | `P(d)` | `V(b)` |\n| 7 | `V(d)` | `V(a)` | `V(a)` |\n| 8 | `V(a)` | `V(b)` | `V(d)` |\n| 9 | — | `V(c)` | — |\n| 10 | — | `V(d)` | — |\n\n下列哪两个线程并发执行时，一定不会发生死锁？"
       },
       "solution": {
         "state": "available",
@@ -18765,7 +18765,7 @@
     {
       "schemaVersion": "5",
       "id": "q-398fe9f606ec567b",
-      "revision": 5,
+      "revision": 6,
       "paperId": "p-12950876262955d9",
       "paperOrder": 24,
       "number": {
@@ -18903,7 +18903,7 @@
                 "width": "medium"
               }
             ],
-            "text": "1.在一个8-bit地址空间的机器上，考虑如下的高速缓存：此高速缓存共有4组\n（`S=4`），为二路组相联（`E=2`），`Tag`段的大小为3-bit（`t=3`），替换策略为LRU。\n初始状态下各组的有效位（V）和`Tag`位如下表所示：\n\n| Set | Way 0 V | Way 0 Tag | Way 1 V | Way 1 Tag |\n| --- | --- | --- | --- | --- |\n| `set0` | 1 | `000` | 0 | `001` |\n| `set1` | 0 | `001` | 1 | `110` |\n| `set2` | 0 | `110` | 1 | `101` |\n| `set3` | 1 | `010` | 0 | `001` |\n（1）此 cache 所能存储的数据总容量为 `C = {{blank:legacy-gap-0}} Bytes`。（3 分）\n\n（2）现要读取地址空间 `0xd2` 处的一个字节，此访存是否命中 cache？{{blank:legacy-gap-1}}（填“是”或“否”）。（2分）以下为访问后的状态，除 `set2` 的 Way 0 有效位外，其余单元均已给出，请补全。（原卷状态更新2分）\n\n| Set | Way 0 V | Way 0 Tag | Way 1 V | Way 1 Tag |\n| --- | --- | --- | --- | --- |\n| `set0` | 1 | `000` | 0 | `001` |\n| `set1` | 0 | `001` | 1 | `110` |\n| `set2` | {{blank:updated-set2-valid}} | `110` | 1 | `101` |\n| `set3` | 1 | `010` | 0 | `001` |\n\n（3）在（2）访存的基础上，考虑如下访存序列：`0xc8, 0x16, 0x01, 0xb5`（均读取一个字节）。这四次数据访问的命中率（hit rate）为{{blank:legacy-gap-2}}。（2 分）假设 cache 的命中时间（hit time）为 10 个周期，不命中处罚（miss penalty）为 190 个周期，则总延迟为{{blank:legacy-gap-3}}周期。（2 分）"
+            "text": "1.在一个8-bit地址空间的机器上，考虑如下的高速缓存：此高速缓存共有4组\n（`S=4`），为二路组相联（`E=2`），`Tag`段的大小为3-bit（`t=3`），替换策略为LRU。\n初始状态下各组的有效位（V）和`Tag`位如下表所示：\n\n| Set | Way 0 V | Way 0 Tag | Way 1 V | Way 1 Tag |\n| --- | --- | --- | --- | --- |\n| `set0` | 1 | `000` | 0 | `001` |\n| `set1` | 0 | `001` | 1 | `110` |\n| `set2` | 0 | `110` | 1 | `101` |\n| `set3` | 1 | `010` | 0 | `001` |\n\n（1）此 cache 所能存储的数据总容量为 `C = {{blank:legacy-gap-0}} Bytes`。（3 分）\n\n（2）现要读取地址空间 `0xd2` 处的一个字节，此访存是否命中 cache？{{blank:legacy-gap-1}}（填“是”或“否”）。（2分）以下为访问后的状态，除 `set2` 的 Way 0 有效位外，其余单元均已给出，请补全。（原卷状态更新2分）\n\n| Set | Way 0 V | Way 0 Tag | Way 1 V | Way 1 Tag |\n| --- | --- | --- | --- | --- |\n| `set0` | 1 | `000` | 0 | `001` |\n| `set1` | 0 | `001` | 1 | `110` |\n| `set2` | {{blank:updated-set2-valid}} | `110` | 1 | `101` |\n| `set3` | 1 | `010` | 0 | `001` |\n\n（3）在（2）访存的基础上，考虑如下访存序列：`0xc8, 0x16, 0x01, 0xb5`（均读取一个字节）。这四次数据访问的命中率（hit rate）为{{blank:legacy-gap-2}}。（2 分）假设 cache 的命中时间（hit time）为 10 个周期，不命中处罚（miss penalty）为 190 个周期，则总延迟为{{blank:legacy-gap-3}}周期。（2 分）"
           },
           "solution": {
             "state": "available",
@@ -19218,7 +19218,7 @@
     {
       "schemaVersion": "5",
       "id": "q-67ee13bfb461a052",
-      "revision": 5,
+      "revision": 6,
       "paperId": "p-12950876262955d9",
       "paperOrder": 23,
       "number": {
@@ -19425,7 +19425,7 @@
             }
           }
         ],
-        "text": "第四题 请分析 Y86-64 ISA 中新加入的一组条件 `POP` 指令 `cpopqXX`。`cpopqXX` 和 `popq` 指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组`cpopqXX`指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器`rA`中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对`rA`、栈指针都无影响。\n\n记号约定：`IPOPQ` 表示指令码 `0xB`，`ICPOPQXX` 可作为同一指令码的别名；条件由功能码 `ifun` 决定。`Cond(CC, ifun)` 返回条件是否成立。HCL 标识符区分大小写。每空只填写缺少的表达式，表格已给出赋值目标和条件。\n\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`；`rA:rB ← M1[PC+1]`；`valP ← PC+2`（已给） |\n| Decode | `valB ←` {{blank:seq-valb}}；`valA ←` {{blank:seq-vala}} |\n| Execute | `valE ←` {{blank:seq-vale}}；`Cnd ←` {{blank:seq-cnd}} |\n| Memory | `valM ←` {{blank:seq-valm}} |\n| Write back | 若 `Cnd`，`R[%rsp] ←` {{blank:seq-write-e}}；若 `Cnd`，`R[rA] ←` {{blank:seq-write-m}} |\n| PC update | `PC ← valP`（已给） |\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\n`rA`和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```hcl\nword e_dstE = [\n    (E_icode in {IRRMOVQ, {{blank:hcl-pop-e}}} && {{blank:hcl-cond-e}}) : RNONE;\n    1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == {{blank:hcl-pop-m}} && {{blank:hcl-cond-m}}) : RNONE;\n    1 : E_dstM;\n];\n```\n3.和`popq`与`mrmovq`相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了`cpopqXX` 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件（两个源寄存器按源 A、源 B 的顺序填写）：\n\n```hcl\nE_icode in {IMRMOVQ, IPOPQ} && e_dstM in { {{blank:hazard-src-a}}, {{blank:hazard-src-b}} }\n```\n\n控制逻辑：（选填stall, bubble和`normal`）\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:control-f}} | {{blank:control-d}} | {{blank:control-e}} | normal | normal |\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xorq  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n    jne  L1  # Line 9\n    ret    # Line 10\n```\n假设条件分支总是预测跳转，按教材带前递、加载-使用暂停和误预测气泡的 PIPE 处理器计算。周期数从 `foo` 的第一条指令开始取指，到返回指令 `ret` 完全通过流水线为止；调用前已执行足够多的 `nop`，忽略缓存未命中。\n\n`n=1` 时需要 {{blank:cycles-1}} 个周期；`n=3` 时需要 {{blank:cycles-3}} 个周期。\n\n> 排版勘误：原卷跨页程序已连接，首条 `xor` 按 Y86-64 助记符写为 `xorq`，运算功能不变。"
+        "text": "第四题 请分析 Y86-64 ISA 中新加入的一组条件 `POP` 指令 `cpopqXX`。`cpopqXX` 和 `popq` 指令的机器码格式如下。\n```\ncpopqXX  B  fun  rA  F\npopq  B  0  rA  F\n```\n类似cmovXX，该组`cpopqXX`指令在条件码(Cnd)满足时，会将栈顶的8字节数据\n读入到寄存器`rA`中，并且使栈指针增加8；如果条件不满足，则不执行该指令，即\n对`rA`、栈指针都无影响。\n\n记号约定：`IPOPQ` 表示指令码 `0xB`，`ICPOPQXX` 可作为同一指令码的别名；条件由功能码 `ifun` 决定。`Cond(CC, ifun)` 返回条件是否成立。HCL 标识符区分大小写。每空只填写缺少的表达式，表格已给出赋值目标和条件。\n\n1.若在教材所描述的SEQ处理器上实现该指令，请按下表补全每个阶段的操作。需\n说明的信号可能会包括：icode, ifun, rA, rB, valA, valB, valC, valE,\nvalP, Cnd；the register file R[], data memory M[], Program\ncounter PC, condition codes CC。其中对存储器的引用必须标明字节数。\n如果在某一阶段没有任何操作，请填写none指明。\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]`；`rA:rB ← M1[PC+1]`；`valP ← PC+2`（已给） |\n| Decode | `valB ←` {{blank:seq-valb}}；`valA ←` {{blank:seq-vala}} |\n| Execute | `valE ←` {{blank:seq-vale}}；`Cnd ←` {{blank:seq-cnd}} |\n| Memory | `valM ←` {{blank:seq-valm}} |\n| Write back | 若 `Cnd`，`R[%rsp] ←` {{blank:seq-write-e}}；若 `Cnd`，`R[rA] ←` {{blank:seq-write-m}} |\n| PC update | `PC ← valP`（已给） |\n\n\n2.考虑在教材中的Pipeline处理器上实现该指令，需要改进教材所描述的PIPE\n处理器在执行（E:Execute）阶段的处理逻辑，使其能够在条件不满足时不修改\n`rA`和栈指针的值。请依据改进后的处理器，补全执行阶段的部分HCL代码：\n```hcl\nword e_dstE = [\n    (E_icode in {IRRMOVQ, {{blank:hcl-pop-e}}} && {{blank:hcl-cond-e}}) : RNONE;\n    1 : E_dstE;\n];\nword e_dstM = [\n    (E_icode == {{blank:hcl-pop-m}} && {{blank:hcl-cond-m}}) : RNONE;\n    1 : E_dstM;\n];\n```\n3.和`popq`与`mrmovq`相同，在执行该指令的过程中有可能会引发加载-使用冒险\n（load-use hazard）。请将在引入了`cpopqXX` 指令后的Y86-64 PIPE处理\n器中，加载-使用冒险的触发条件以及处理冒险的控制逻辑补充完整。如有多种可\n能，任写一种即可：\n触发条件（两个源寄存器按源 A、源 B 的顺序填写）：\n\n```hcl\nE_icode in {IMRMOVQ, IPOPQ} && e_dstM in { {{blank:hazard-src-a}}, {{blank:hazard-src-b}} }\n```\n\n控制逻辑：（选填stall, bubble和`normal`）\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| {{blank:control-f}} | {{blank:control-d}} | {{blank:control-e}} | normal | normal |\n\n4. 基于改造后的Y86-64 PIPE考虑如下代码片段，回答问题。\n```\n# long foo(long n)\n# n in %rdi\nfoo:\n    xorq  %rax, %rax  # Line 1\n    pushq  %rsp  # Line 2\n    irmovq  $1, %rsi  # Line 3\nL1:\n    subq  %rsi, %rdi  # Line 4\n    andq  %rdi, %rdi  # Line 5\n    cpopqe  %rsi  # Line 6\n    addq  %rsi, %rax  # Line 7\n    andq  %rdi, %rdi  # Line 8\n    jne  L1  # Line 9\n    ret    # Line 10\n```\n假设条件分支总是预测跳转，按教材带前递、加载-使用暂停和误预测气泡的 PIPE 处理器计算。周期数从 `foo` 的第一条指令开始取指，到返回指令 `ret` 完全通过流水线为止；调用前已执行足够多的 `nop`，忽略缓存未命中。\n\n`n=1` 时需要 {{blank:cycles-1}} 个周期；`n=3` 时需要 {{blank:cycles-3}} 个周期。\n\n> 排版勘误：原卷跨页程序已连接，首条 `xor` 按 Y86-64 助记符写为 `xorq`，运算功能不变。"
       },
       "solution": {
         "state": "available",
@@ -19742,7 +19742,7 @@
     {
       "schemaVersion": "5",
       "id": "q-808ef382fdee45fc",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-12950876262955d9",
       "paperOrder": 14,
       "number": {
@@ -19795,7 +19795,7 @@
         "grading": "choice",
         "reference": {
           "format": "markdown",
-          "text": "答案：C。不仅要在执行阶段让 `valE = valC`，还需要在取指阶段识别新指令与长度，并按条件控制目的寄存器写回。\n\n原解析声称“可以和 rrmovq 共用一个 icode”，没有给出如何区分2字节寄存器传送与10字节立即数传送的完整编码方案。本题现在明确采用独立 `icode` 的实现，A、B、D均与此方案一致；不把它说成唯一可能的 ISA 编码设计。"
+          "text": "答案：**C**。按本题已明确的“独立 `icode`”编码方案，A为真；编码长 `1+1+8=10` 字节，B为真；沿用立即数传送的数据通路可令 `valE = valC`，D也为真。不仅要设置执行阶段的数据通路，还要让取指逻辑识别新 `icode` 和指令长度、译码得到目的寄存器，并根据条件决定是否写回，所以C为假。\n\n**共用 `irmovq` 的 `icode` 是另一种可行的设计。** 标准 `irmovq` 的 `icode=3`、`ifun=0`，后接 `F:rB` 和8字节立即数。可以保留 `ifun=0` 表示无条件传送，把未使用的 `ifun=1…6` 分配给6种条件传送。例如，使用 `0x31` 作为首字节表示条件“小于等于”，随后仍是寄存器字段和立即数，长度仍为10字节；用当前条件码决定 `dstE` 是 `rB` 还是 `RNONE`。这种设计不需要新 `icode`，但仍需扩展 `ifun` 识别和条件写回逻辑，不能仅改执行阶段。\n\n因此，“新增指令一定要新增 `icode`”不是普遍结论；A只在当前题面指定的实现方案下成立。若去掉这一方案限定，采用上述共用编码时A也不成立，原卷将C作为唯一错误项便有歧义。原卷解析称“可以和 `rrmovq` 共用”，却未说明2字节寄存器传送与10字节立即数传送如何区分；上面的 `irmovq` 方案给出了完整的替代例子。本次保留当前题面和选项，只补充这一区别。"
         },
         "provenance": {
           "origin": "unknown",
@@ -26412,7 +26412,7 @@
     {
       "schemaVersion": "5",
       "id": "q-53b7581785c41178",
-      "revision": 5,
+      "revision": 6,
       "paperId": "p-2c2b56c4452255b1",
       "paperOrder": 22,
       "number": {
@@ -26863,7 +26863,7 @@
             }
           }
         ],
-        "text": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有头文件 `hd.h` 和两个 C 源文件 `f1.c`、`f2.c`，使用 `gcc -O0 -c f1.c f2.c`、`gcc f1.o f2.o` 得到普通、未剥除符号的 ELF 可执行文件 `a.out`。不使用LTO。Part A 指 `.symtab`，按标识符所对应的存储对象判断，允许编译器为静态局部对象生成 `seed.0` 等修饰名；不是要求链接名称必须逐字等于C标识符，也不是查询 `.dynsym`。本题无需运行计算循环。\n\n`hd.h`：\n\n```c\ntypedef struct {\n    double x;\n    double y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\n```\n\n`f1.c`：\n\n```c\n#include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\n    for (iter = 0; iter < total; ++iter) {\n        rand_point(&pnt);\n        count += if_inside(&pnt);\n    }\n    printf(\"Integral on [0,1] is %lf.\\n\",\n        1.0 * count / total);\n}\n```\n\n`f2.c`：\n\n```c\n#include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\n    static int seed = 0;\n    if (!seed) {\n        srand((unsigned)time(NULL));\n        seed = 1;\n    }\n    ptr->x = 1.0 * rand() / RAND_MAX;\n    ptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\n    return 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n| 项目 | `iter` | `pnt` | `Point` | `total` | `seed` |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？（填是/否） | {{blank:q3-A-iter-present}} | {{blank:q3-A-pnt-present}} | {{blank:q3-A-Point-present}} | {{blank:q3-A-total-present}} | {{blank:q3-A-seed-present}} |\n| 定义所在节 | {{blank:q3-A-iter-section}} | {{blank:q3-A-pnt-section}} | {{blank:q3-A-Point-section}} | {{blank:q3-A-total-section}} | {{blank:q3-A-seed-section}} |\nPart B. (每空1分，共3分) 使用 `objdump -dx f1.o f2.o` 看到如下\n几条代码。这里可以将重定位类型 `R_X86_64_PLT32`和 `R_X86_64_PC32` 同\n等看待。\n`objdump` 重定位条目格式：\n\n```text\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n所有数值均以十六进制表示：\n\n```asm\n# f1.o\n0000000000000000 <main>:\n... # 省略无关代码\n17:  e8 00 00 00 00        callq  1c <main+0x1c>\n18:                        R_X86_64_PLT32      rand_point-0x4\n1c:  48 8d 3d 00 00 00 00  lea 0x0(%rip),%rdi\n1f:                        R_X86_64_PC32       .bss+0xc\n23:  e8 00 00 00 00        callq  28 <main+0x28>\n24:                        R_X86_64_PLT32      if_inside-0x4\n28:  89 c2                 mov %eax,%edx\n... # 省略无关代码\n# f2.o\n0000000000000000 <rand_point>:\n... # 省略无关代码\n0000000000000074 <if_inside>:\n... # 省略无关代码\n```\n据此可以确定  <`main+0x1f>`  处的重定位条目是针对符号\n{{blank:q3-B-relocation-symbol}}（填写符号名，不要填写 .bss 这个节名）的重定位。同时该\n符号定义的位置在 `f1.o` 中相对于 .bss 节的偏移量是\n0x{{blank:q3-B-bss-offset}}。\n现已知 a.out 文件中 <`main+0x17>` 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <`main+0x23>` 行将变成\n```\n11ad: e8 {{blank:q3-B-call-displacement}}          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 对使用默认C运行时入口的 `a.out`，其ELF程序本体入口（不含动态加载器先执行的代码）默认是 {{blank:q3-C-entry-function}}（单选）函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在 {{blank:q3-C-mode}} 态下\n(填用户/内核)。\n\nA. _init     B.main     C.__libc_start_main    D._start"
+        "text": "第三题. 请结合教材第七章“链接”的有关知识回答问题(10分)\n有头文件 `hd.h` 和两个 C 源文件 `f1.c`、`f2.c`，使用 `gcc -O0 -c f1.c f2.c`、`gcc f1.o f2.o` 得到普通、未剥除符号的 ELF 可执行文件 `a.out`。不使用LTO。Part A 指 `.symtab`，按标识符所对应的存储对象判断，允许编译器为静态局部对象生成 `seed.0` 等修饰名；不是要求链接名称必须逐字等于C标识符，也不是查询 `.dynsym`。本题无需运行计算循环。\n\n`hd.h`：\n\n```c\ntypedef struct {\n    double x;\n    double y;\n} Point;\nvoid rand_point(Point *);\nint if_inside(Point *);\n```\n\n`f1.c`：\n\n```c\n#include \"hd.h\"\n#include <stdio.h>\nconst int total = 1 << 30;\nstatic int count = 0;\nstatic Point pnt;\nint iter;\nint main() {\n    for (iter = 0; iter < total; ++iter) {\n        rand_point(&pnt);\n        count += if_inside(&pnt);\n    }\n    printf(\"Integral on [0,1] is %lf.\\n\",\n        1.0 * count / total);\n}\n```\n\n`f2.c`：\n\n```c\n#include \"hd.h\"\n#include <stdlib.h>\n#include <time.h>\nvoid rand_point(Point *ptr) {\n    static int seed = 0;\n    if (!seed) {\n        srand((unsigned)time(NULL));\n        seed = 1;\n    }\n    ptr->x = 1.0 * rand() / RAND_MAX;\n    ptr->y = 1.0 * rand() / RAND_MAX;\n}\nint if_inside(Point *p) {\n    return 1 / (1 + p->x) >= p->y;\n}\n```\nPart A. (每个符号1分，共5分) 请说明以下符号是否在a.out的符号表\n中。如果是，请进一步指出符号定义所在的节，可能的选择\n有.text、.data、.bss、.rodata、COM、UNDEF、ABS。\n\n\n| 项目 | `iter` | `pnt` | `Point` | `total` | `seed` |\n| --- | --- | --- | --- | --- | --- |\n| 在符号表中？（填是/否） | {{blank:q3-A-iter-present}} | {{blank:q3-A-pnt-present}} | {{blank:q3-A-Point-present}} | {{blank:q3-A-total-present}} | {{blank:q3-A-seed-present}} |\n| 定义所在节 | {{blank:q3-A-iter-section}} | {{blank:q3-A-pnt-section}} | {{blank:q3-A-Point-section}} | {{blank:q3-A-total-section}} | {{blank:q3-A-seed-section}} |\n\nPart B. (每空1分，共3分) 使用 `objdump -dx f1.o f2.o` 看到如下\n几条代码。这里可以将重定位类型 `R_X86_64_PLT32`和 `R_X86_64_PC32` 同\n等看待。\n`objdump` 重定位条目格式：\n\n```text\n#           OFFSET: TYPE              VALUE\n# e.g.          18: R_X86_64_PLT32    rand_point-0x4\n```\n所有数值均以十六进制表示：\n\n```asm\n# f1.o\n0000000000000000 <main>:\n... # 省略无关代码\n17:  e8 00 00 00 00        callq  1c <main+0x1c>\n18:                        R_X86_64_PLT32      rand_point-0x4\n1c:  48 8d 3d 00 00 00 00  lea 0x0(%rip),%rdi\n1f:                        R_X86_64_PC32       .bss+0xc\n23:  e8 00 00 00 00        callq  28 <main+0x28>\n24:                        R_X86_64_PLT32      if_inside-0x4\n28:  89 c2                 mov %eax,%edx\n... # 省略无关代码\n# f2.o\n0000000000000000 <rand_point>:\n... # 省略无关代码\n0000000000000074 <if_inside>:\n... # 省略无关代码\n```\n据此可以确定  <`main+0x1f>`  处的重定位条目是针对符号\n{{blank:q3-B-relocation-symbol}}（填写符号名，不要填写 .bss 这个节名）的重定位。同时该\n符号定义的位置在 `f1.o` 中相对于 .bss 节的偏移量是\n0x{{blank:q3-B-bss-offset}}。\n现已知 a.out 文件中 <`main+0x17>` 行变成\n```\n11a1: e8 69 00 00 00          callq  <rand_point>\n```\n那么 a.out 中 <`main+0x23>` 行将变成\n```\n11ad: e8 {{blank:q3-B-call-displacement}}          callq  <if_inside>\n```\nPart C. (每空1分，共2分) 对使用默认C运行时入口的 `a.out`，其ELF程序本体入口（不含动态加载器先执行的代码）默认是 {{blank:q3-C-entry-function}}（单选）函数的开头。已知 gcc -e 可以修\n改该默认行为到一个程序指定的函数，据此推断该函数执行在 {{blank:q3-C-mode}} 态下\n(填用户/内核)。\n\nA. _init     B.main     C.__libc_start_main    D._start"
       },
       "solution": {
         "state": "available",
@@ -50136,7 +50136,7 @@
     {
       "schemaVersion": "5",
       "id": "q-186b708735f7569c",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 26,
       "number": {
@@ -50349,7 +50349,7 @@
             "width": "medium"
           }
         ],
-        "text": "（孙广宇，陆俊林）\nCache可存储4个块，每块2字节（`B=2`），按低位组索引，组数 `S=2`，每组行数 `E=2`。内存字节地址范围0～31，即5位地址。访问序列均为单字节需求读取：\n\n```text\n2, 23, 10, 9, 9, 11, 3\n```\n\n各小问从空Cache独立重放完整序列，不继承上一问的最终内容。先使用无效行，再按指定策略替换；需求访问和预取载入均更新替换次序。预取本身不计为本题需求访问的Hit。3、4问所说“不缓存”指访问相应块不查命中、不填充，且4问的地址8预取仍可正常填充。\n\n填写状态表时，每组的有效行按块起始地址升序排列，无效行放最后；这只是答案排列约定，不表示物理路号。有效位填0/1，TAG填完整3位二进制，块列只填其起始字节地址的十进制整数（例如 `M[6-7]` 填6）；无效行的TAG和块列填 `-`。\n\n1. 使用LRU替换策略，填写最终Cache状态：\n\n| 组 | 行（按上述约定排序） | V | TAG | 块起始地址 |\n| --- | --- | --- | --- | --- |\n| set0 | 1 | {{blank:l00v}} | {{blank:l00t}} | {{blank:l00b}} |\n| set0 | 2 | {{blank:l01v}} | {{blank:l01t}} | {{blank:l01b}} |\n| set1 | 1 | {{blank:l10v}} | {{blank:l10t}} | {{blank:l10b}} |\n| set1 | 2 | {{blank:l11v}} | {{blank:l11t}} | {{blank:l11b}} |\n上述数据访问一共产生了多少次Hit: {{blank:hits-lru}}（2 分）\n2. 改为MRU（Most Recently Used，替换最近使用的有效行），填写最终Cache状态：\n\n| 组 | 行（按上述约定排序） | V | TAG | 块起始地址 |\n| --- | --- | --- | --- | --- |\n| set0 | 1 | {{blank:m00v}} | {{blank:m00t}} | {{blank:m00b}} |\n| set0 | 2 | {{blank:m01v}} | {{blank:m01t}} | {{blank:m01b}} |\n| set1 | 1 | {{blank:m10v}} | {{blank:m10t}} | {{blank:m10b}} |\n| set1 | 2 | {{blank:m11v}} | {{blank:m11t}} | {{blank:m11b}} |\n上述数据访问一共产生了多少次Hit：{{blank:hits-mru}}（2 分）\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit {{blank:hits-no-cache}}（2 分）\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n{{blank:hits-prefetch}}（2 分）"
+        "text": "（孙广宇，陆俊林）\nCache可存储4个块，每块2字节（`B=2`），按低位组索引，组数 `S=2`，每组行数 `E=2`。内存字节地址范围0～31，即5位地址。访问序列均为单字节需求读取：\n\n```text\n2, 23, 10, 9, 9, 11, 3\n```\n\n各小问从空Cache独立重放完整序列，不继承上一问的最终内容。先使用无效行，再按指定策略替换；需求访问和预取载入均更新替换次序。预取本身不计为本题需求访问的Hit。3、4问所说“不缓存”指访问相应块不查命中、不填充，且4问的地址8预取仍可正常填充。\n\n填写状态表时，每组的有效行按块起始地址升序排列，无效行放最后；这只是答案排列约定，不表示物理路号。有效位填0/1，TAG填完整3位二进制，块列只填其起始字节地址的十进制整数（例如 `M[6-7]` 填6）；无效行的TAG和块列填 `-`。\n\n1. 使用LRU替换策略，填写最终Cache状态：\n\n| 组 | 行（按上述约定排序） | V | TAG | 块起始地址 |\n| --- | --- | --- | --- | --- |\n| set0 | 1 | {{blank:l00v}} | {{blank:l00t}} | {{blank:l00b}} |\n| set0 | 2 | {{blank:l01v}} | {{blank:l01t}} | {{blank:l01b}} |\n| set1 | 1 | {{blank:l10v}} | {{blank:l10t}} | {{blank:l10b}} |\n| set1 | 2 | {{blank:l11v}} | {{blank:l11t}} | {{blank:l11b}} |\n\n上述数据访问一共产生了多少次Hit: {{blank:hits-lru}}（2 分）\n\n2. 改为MRU（Most Recently Used，替换最近使用的有效行），填写最终Cache状态：\n\n| 组 | 行（按上述约定排序） | V | TAG | 块起始地址 |\n| --- | --- | --- | --- | --- |\n| set0 | 1 | {{blank:m00v}} | {{blank:m00t}} | {{blank:m00b}} |\n| set0 | 2 | {{blank:m01v}} | {{blank:m01t}} | {{blank:m01b}} |\n| set1 | 1 | {{blank:m10v}} | {{blank:m10t}} | {{blank:m10b}} |\n| set1 | 2 | {{blank:m11v}} | {{blank:m11t}} | {{blank:m11b}} |\n\n上述数据访问一共产生了多少次Hit：{{blank:hits-mru}}（2 分）\n\n3. 现增加一条新规则：地址区间包含5的倍数的block将不会被缓存，仍旧使\n用 MRU 替换策略，这7次数据访问一共产生了多少次Hit {{blank:hits-no-cache}}（2 分）\n4. 在第3小题的基础上，现又增加一条数据预取规则：每当地址为10的数据被\n访问时，地址为8的数据将会被放入缓存，这7次数据访问一共产生了多少次Hit\n{{blank:hits-prefetch}}（2 分）"
       },
       "solution": {
         "state": "available",
@@ -52945,7 +52945,7 @@
     {
       "schemaVersion": "5",
       "id": "q-d96a81c92222abf6",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 22,
       "number": {
@@ -53023,7 +53023,7 @@
             "width": "medium"
           }
         ],
-        "text": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，偏置为31，所有转换和运算均向最近值舍入、恰好居中时向偶数舍入；溢出按IEEE规则处理。字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为 {{blank:min-diff}}\n相邻两数之间差值的最大值为 {{blank:max-diff}}\n2) 现定义了如下变量：\n```c\nT a = -15.875;\nT b = (1<<28) + (1<<24) + (1<<22);\nT c = a*b;\n```\n请写出各变量完整的 12 位二进制表示（可连续填写，也可在符号位、阶码、小数三个字段之间用一个空格分隔；前导零需保留）：\n\n| 变量 | 二进制表示 |\n| --- | --- |\n| `a` | {{blank:a}} |\n| `b` | {{blank:b}} |\n| `c` | {{blank:c}} |\n（每空2分; 共10分）"
+        "text": "2. 假设C语言中新定义了一种数据类型T,该类型为12-bit长的浮点数，此浮\n点数遵循IEEE浮点数格式，偏置为31，所有转换和运算均向最近值舍入、恰好居中时向偶数舍入；溢出按IEEE规则处理。字段划分如下：\n符号位（s）：1-bit；阶码字段（exp）：6-bit；小数字段（frac）：5-bit。\n1) 若将该格式下能表示的所有正规格数从小到大依次排列，则\n相邻两数之间差值的最小值为 {{blank:min-diff}}\n相邻两数之间差值的最大值为 {{blank:max-diff}}\n2) 现定义了如下变量：\n```c\nT a = -15.875;\nT b = (1<<28) + (1<<24) + (1<<22);\nT c = a*b;\n```\n请写出各变量完整的 12 位二进制表示（可连续填写，也可在符号位、阶码、小数三个字段之间用一个空格分隔；前导零需保留）：\n\n| 变量 | 二进制表示 |\n| --- | --- |\n| `a` | {{blank:a}} |\n| `b` | {{blank:b}} |\n| `c` | {{blank:c}} |\n\n（每空2分; 共10分）"
       },
       "solution": {
         "state": "available",
@@ -53205,7 +53205,7 @@
     {
       "schemaVersion": "5",
       "id": "q-e4c733a4eceae52e",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-662d741f28b2bed0",
       "paperOrder": 21,
       "number": {
@@ -53413,7 +53413,7 @@
             }
           }
         ],
-        "text": "第二题（20分）\n（边凯归，周明辉）\n\n1. 在教材的x86-64位运算模型上，判断下列等式是否恒成立。`int`和`unsigned`为32位，`long`为64位，`double`为IEEE binary64；有符号右移为算术右移，整数加减乘和左移按对应字长截断，超范围类型转换保留位模式。本题按该模型分析，不按严格ISO C有符号溢出/负数左移的未定义行为作答。\n```c\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\n```\n\n| 表达式 | 是否恒成立 |\n| --- | --- |\n| `(x >= 0) \\|\\| (3*x < 0)` | {{blank:q1}} |\n| `(x >= 0) \\|\\| (x < ux)` | {{blank:q2}} |\n| `((x >> 1) << 1) <= x` | {{blank:q3}} |\n| `((x-y)<<3) + (x>>1) - y == 8*x - 9*y + x/2` | {{blank:q4}} |\n| `(x - y > 0) == ((y+~x+1)>>31 == 1)` | {{blank:q5}} |\n| `dx + dy == (double) (y+x)` | {{blank:q6}} |\n| `dx + dy + dz == dz + dy + dx` | {{blank:q7}} |\n| `(int)((lx+ly)>>1) == ((x&y) + ((x^y)>>1))` | {{blank:q8}} |\n（前6题每题1分; 7、8两题每题2分; 共10分）"
+        "text": "第二题（20分）\n（边凯归，周明辉）\n\n1. 在教材的x86-64位运算模型上，判断下列等式是否恒成立。`int`和`unsigned`为32位，`long`为64位，`double`为IEEE binary64；有符号右移为算术右移，整数加减乘和左移按对应字长截断，超范围类型转换保留位模式。本题按该模型分析，不按严格ISO C有符号溢出/负数左移的未定义行为作答。\n```c\n/* random_int()函数返回一个随机的int类型值 */\nint x = random_int();\nint y = random_int();\nint z = random_int();\nunsigned ux = (unsigned)x;\nlong lx = (long)x;  /* long为64位 */\nlong ly = (long)y;\ndouble dx = (double)x;\ndouble dy = (double)y;\ndouble dz = (double)z;\n```\n\n| 表达式 | 是否恒成立 |\n| --- | --- |\n| `(x >= 0) \\|\\| (3*x < 0)` | {{blank:q1}} |\n| `(x >= 0) \\|\\| (x < ux)` | {{blank:q2}} |\n| `((x >> 1) << 1) <= x` | {{blank:q3}} |\n| `((x-y)<<3) + (x>>1) - y == 8*x - 9*y + x/2` | {{blank:q4}} |\n| `(x - y > 0) == ((y+~x+1)>>31 == 1)` | {{blank:q5}} |\n| `dx + dy == (double) (y+x)` | {{blank:q6}} |\n| `dx + dy + dz == dz + dy + dx` | {{blank:q7}} |\n| `(int)((lx+ly)>>1) == ((x&y) + ((x^y)>>1))` | {{blank:q8}} |\n\n（前6题每题1分; 7、8两题每题2分; 共10分）"
       },
       "solution": {
         "state": "available",
@@ -60812,7 +60812,7 @@
     {
       "schemaVersion": "5",
       "id": "q-61bd7ec829d2642e",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-89e8b793519e36c6",
       "paperOrder": 25,
       "number": {
@@ -61270,7 +61270,7 @@
                 }
               }
             ],
-            "text": "3.教材PIPE对原JXX预测错误的条件及寄存器动作如下：\n\n| Condition | Trigger |\n| --- | --- |\n| Mispredicted Branch | `E_icode == IJXX && !e_Cnd` |\n\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| normal | bubble | bubble | normal | normal |\n在第（2）小题所述的改进后的处理器上执行 NewJE 指令，发生转移预测错误的判断条件和各级流水线寄存器的控制信号应如何设置？（每空 1 分，共 5 分）\n\n| `Condition` | `Trigger` |\n| --- | --- |\n| Mispredicted Branch | {{blank:trigger}} |\n\n| `Condition` | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Mispredicted Branch | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | {{blank:memory-control}} | `normal` |"
+            "text": "3.教材PIPE对原JXX预测错误的条件及寄存器动作如下：\n\n| Condition | Trigger |\n| --- | --- |\n| Mispredicted Branch | `E_icode == IJXX && !e_Cnd` |\n\n| F | D | E | M | W |\n| --- | --- | --- | --- | --- |\n| normal | bubble | bubble | normal | normal |\n\n在第（2）小题所述的改进后的处理器上执行 NewJE 指令，发生转移预测错误的判断条件和各级流水线寄存器的控制信号应如何设置？（每空 1 分，共 5 分）\n\n| `Condition` | `Trigger` |\n| --- | --- |\n| Mispredicted Branch | {{blank:trigger}} |\n\n| `Condition` | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| Mispredicted Branch | {{blank:fetch-control}} | {{blank:decode-control}} | {{blank:execute-control}} | {{blank:memory-control}} | `normal` |"
           },
           "solution": {
             "state": "available",
@@ -66018,7 +66018,7 @@
     {
       "schemaVersion": "5",
       "id": "q-7429c141baec19f7",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-98acf19964247e22",
       "paperOrder": 26,
       "number": {
@@ -66061,7 +66061,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": "解决第一类读者-写者问题的代码如下：\n```\nint readcnt;    /* Initially 0 */\nsem_t mutex, w; /* Both initially 1 */\nvoid reader(void)\n{\n(1)    while (1) {\n(2)      P(&mutex);\n(3)      readcnt++;\n(4)      if (readcnt == 1) /* First in */\n(5)        P(&w);\n(6)      V(&mutex);\n(7)         /* Reading happens here, need 7 time unit */\n(8)      P(&mutex);\n(9)      readcnt--;\n(10)     if (readcnt == 0) /* Last out */\n(11)        V(&w);\n(12)     V(&mutex);\n        }\n}\nvoid writer(void)\n{\n(13)  while (1) {\n(14)    P(&w);\n(15)       /* Writing here, need 8 time unit */\n(16)    V(&w);\n      }\n}\n```\n假设有5个读者或写者到来，到达时刻和所需的时间如下：\n| 线程 | 到达时刻 | 读写时间 |\n| --- | --- | --- |\n| R1 | 0 | 7 |\n| W1 | 1 | 8 |\n| R2 | 2 | 7 |\n| W2 | 4 | 8 |\n| R3 | 5 | 7 |\n注意，为简单起见，只考虑读写时间，忽略所有其他时间（包括代码中其\n他语句的执行时间、线程切换、调度等等），亦假设没有更多的读者或写者或\n其他线程。\n"
+        "text": "解决第一类读者-写者问题的代码如下：\n```\nint readcnt;    /* Initially 0 */\nsem_t mutex, w; /* Both initially 1 */\nvoid reader(void)\n{\n(1)    while (1) {\n(2)      P(&mutex);\n(3)      readcnt++;\n(4)      if (readcnt == 1) /* First in */\n(5)        P(&w);\n(6)      V(&mutex);\n(7)         /* Reading happens here, need 7 time unit */\n(8)      P(&mutex);\n(9)      readcnt--;\n(10)     if (readcnt == 0) /* Last out */\n(11)        V(&w);\n(12)     V(&mutex);\n        }\n}\nvoid writer(void)\n{\n(13)  while (1) {\n(14)    P(&w);\n(15)       /* Writing here, need 8 time unit */\n(16)    V(&w);\n      }\n}\n```\n假设有5个读者或写者到来，到达时刻和所需的时间如下：\n| 线程 | 到达时刻 | 读写时间 |\n| --- | --- | --- |\n| R1 | 0 | 7 |\n| W1 | 1 | 8 |\n| R2 | 2 | 7 |\n| W2 | 4 | 8 |\n| R3 | 5 | 7 |\n\n注意，为简单起见，只考虑读写时间，忽略所有其他时间（包括代码中其\n他语句的执行时间、线程切换、调度等等），亦假设没有更多的读者或写者或\n其他线程。\n"
       },
       "parts": [
         {
@@ -81199,7 +81199,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0324b364e9cc3917",
-      "revision": 6,
+      "revision": 7,
       "paperId": "p-ae9ab20d09974cf3",
       "paperOrder": 16,
       "number": {
@@ -81271,7 +81271,7 @@
             "id": "cycles-x0",
             "marker": "{{blank:cycles-x0}}",
             "occurrence": 0,
-            "width": "medium"
+            "width": "long"
           },
           {
             "id": "cycles-x3",
@@ -81298,14 +81298,14 @@
             "width": "medium"
           }
         ],
-        "text": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\n`C  Fn  0xF  rB`\n4位  4位  4位  4位\n考虑教材中的 SEQ 处理器，使该指令根据先前指令产生的条件码决定是否写回，并按减一结果设置新的条件码。补全下表4空，仅填空中缺少的表达式，不重复已有操作前缀。（每空2分，共8分）\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]` |\n| Fetch | `rA:rB ← M1[`{{blank:cdecl-fetch-a}}`]` |\n| Fetch | `valP ←` {{blank:cdecl-fetch-b}} |\n| Decode | `valB ← R[rB]` |\n| Execute | `valE ←` {{blank:cdecl-execute}} |\n| Execute | `Cnd ← Cond(CC, ifun)`（使用此前条件码）；按运算结果更新条件码 |\n| Memory | 无 |\n| Write back | `if (Cnd)` {{blank:cdecl-writeback}} `← valE` |\n| PC Update | `PC ← valP` |\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```hcl\nword f_pc = [\n    M_icode == IJXX && {{blank:pc-condition}} : {{blank:pc-mispredict}};\n    W_icode == IRET : {{blank:pc-return}};\n    1 : F_predPC;\n];\n```\n\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```asm\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\n    jne     Lo\n    ret\n```\n周期数计算从执行`bar`第一条指令开始，直到其返回指令`ret`完全通过流水线为\n止。在调用`bar`之前，处理器已经执行过足够多的`nop`指令。\n当函数`bar`的参数 `x=0` 时，需要执行{{blank:cycles-x0}}个周期；`x=3` 时需要执行{{blank:cycles-x3}}\n个周期。（每空2分，共4分）"
+        "text": "第二题（15分）\n请结合教材第四章“处理器体系结构”的有关知识回答问题。\n\n1） 现在Y86-64 ISA中加入一条新指令：cdeclXX，条件减一。其功能和用法\n为，如果条件码满足条件（同cmovXX系列指令），则将寄存器数据减1。cdeclXX\n编码如下：\n`C  Fn  0xF  rB`\n4位  4位  4位  4位\n考虑教材中的 SEQ 处理器，使该指令根据先前指令产生的条件码决定是否写回，并按减一结果设置新的条件码。补全下表4空，仅填空中缺少的表达式，不重复已有操作前缀。（每空2分，共8分）\n\n| 阶段 | 操作 |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]` |\n| Fetch | `rA:rB ← M1[`{{blank:cdecl-fetch-a}}`]` |\n| Fetch | `valP ←` {{blank:cdecl-fetch-b}} |\n| Decode | `valB ← R[rB]` |\n| Execute | `valE ←` {{blank:cdecl-execute}} |\n| Execute | `Cnd ← Cond(CC, ifun)`（使用此前条件码）；按运算结果更新条件码 |\n| Memory | 无 |\n| Write back | `if (Cnd)` {{blank:cdecl-writeback}} `← valE` |\n| PC Update | `PC ← valP` |\n\n2） 考虑教材中的PIPE处理器，部分如下图所示。在取指阶段，PC选择逻辑从\n三个程序计数器源中进行选择。请根据PIPE 处理器的实现，补全下面的HCL 代\n码。（每空1分，共3分）\n\n![PIPE 处理器局部（W/M/E 级数据通路）](assets/期末/2024期末-带答案/p13-pipe-diagram.png)\n\n```hcl\nword f_pc = [\n    M_icode == IJXX && {{blank:pc-condition}} : {{blank:pc-mispredict}};\n    W_icode == IRET : {{blank:pc-return}};\n    1 : F_predPC;\n];\n```\n\n3） 在教材中的PIPE处理器增加cdeclXX指令，分支预测的策略为“总是跳转”。\n考虑如下代码片段，回答以下问题。\n```asm\n# long bar(long x)\n# x in %rdi\nbar:\n    xorq    %rax, %rax\n    irmovq  $1, %rsi\n    rrmovq  %rsi, %r9\nLo:\n    xorq    %r9, %rsi\n    cdecle  %rdi\n    addq    %rdi, %rax\n    andq    %rdi, %rdi\n    jne     Lo\n    ret\n```\n周期数计算从执行`bar`第一条指令开始，直到其返回指令`ret`完全通过流水线为\n止。在调用`bar`之前，处理器已经执行过足够多的`nop`指令。\n当函数`bar`的参数 `x=0` 时，需要执行{{blank:cycles-x0}}个周期；`x=3` 时需要执行{{blank:cycles-x3}}\n个周期。（每空2分，共4分）"
       },
       "solution": {
         "state": "available",
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "1）四空依次为 `PC + 1`、`PC + 2`、`(-1) + valB`、`R[rB]`。完整操作分别是 `rA:rB ← M1[PC + 1]`、`valP ← PC + 2`、`valE ← (-1) + valB`、`if (Cnd) R[rB] ← valE`。网页已把前缀写在题面，只填写缺少的部分；按功能等价也接受 `valB - 1`，不模拟原卷对此写法的部分扣分。\n2）① `!M_Cnd`；② `M_valA`；③ `W_valM`。\n3）`x=0` 时15个周期；`x=3` 时35个周期。前3条初始化指令只执行一次，每次循环执行5条指令，末尾再执行1条 `ret`。`cdecle` 在第1、3、5……次迭代减一，因此分别执行1次或5次循环。再加4个流水线填充／排空周期和最后一次条件跳转预测失败的2个气泡，分别为 `3+5+1+4+2=15` 和 `3+25+1+4+2=35`。"
+          "text": "1）四空依次为 `PC + 1`、`PC + 2`、`(-1) + valB`、`R[rB]`。完整操作分别是 `rA:rB ← M1[PC + 1]`、`valP ← PC + 2`、`valE ← (-1) + valB`、`if (Cnd) R[rB] ← valE`。网页已把前缀写在题面，只填写缺少的部分；按功能等价也接受 `valB - 1`，不模拟原卷对此写法的部分扣分。\n2）① `!M_Cnd`；② `M_valA`；③ `W_valM`。\n3）**勘误：原卷给出的 `x=0` 时15个周期不符合题中程序。** 按 Y86-64 的64位运算规则，正确答案是 $10\\times 2^{64}+5=184467440737095516165$ 个周期；`x=3` 时仍为35个周期。第一空也接受 `10*2^64+5` 或 `5*(2^65-1)+10`（此处 `^` 表示数学乘方），可在运算符两边加空格。\n\n初始化后 `%rsi=1`、`%r9=1`。循环首条 `xorq` 使 `%rsi` 依次为0、1、0、1……，因此 `cdecle` 只在第1、3、5……次循环满足条件并将 `%rdi` 减一。后面的 `andq` 重新设置条件码；`jne` 仅在 `%rdi` 为0时退出。\n\n- `x=3`：每轮结束时 `%rdi` 依次为2、2、1、1、0，共5轮。\n- `x=0`：第一轮将0减成 `0xffffffffffffffff`（有符号解释为−1），不会退出。64位寄存器按模 $2^{64}$ 回绕，累计减一 $2^{64}$ 次才再次得到0；每两轮减一次，最后一次减法发生在第 $2^{65}-1$ 轮。因此循环极长，但在题设的 Y86-64 模型中并非无限循环。不能把寄存器当作无限精度的负整数。\n\n设循环轮数为 $I$。前3条初始化指令、每轮5条指令和末尾1条 `ret` 共 $3+5I+1$ 条；加4个流水线填充／排空周期，以及最后一次 `jne` 预测失败的2个周期，总数为 $5I+10$。数据相关由转发处理；`ret` 对后继取指的阻塞不应再加到它自身通过W阶段的时间上。代入上述轮数即得两个答案。15个周期对应的是 `x=1`，不是原题的 `x=0`。"
         },
         "provenance": {
           "origin": "unknown",
@@ -81370,11 +81370,15 @@
             "blankId": "cycles-x0",
             "method": "exact",
             "acceptedAnswers": [
-              "15"
+              "184467440737095516165",
+              "10*2^64+5",
+              "5*(2^65-1)+10",
+              "10*2**64+5"
             ],
             "normalize": {
               "trimWhitespace": true,
-              "caseSensitive": true
+              "caseSensitive": true,
+              "syntax": "c-tokens"
             }
           },
           {
@@ -159225,7 +159229,7 @@
     {
       "schemaVersion": "5",
       "id": "q-36cdda52cd922bd2",
-      "revision": 3,
+      "revision": 4,
       "paperId": "p-f99ca20e1a729e32",
       "paperOrder": 29,
       "number": {
@@ -159445,7 +159449,7 @@
         "grading": "blanks",
         "reference": {
           "format": "markdown",
-          "text": "答案：缺页次数依次为 1、2、24、1536；dTLB 失效次数见下表。\n| `n` | 缺页次数 | dTLB 失效次数 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |\n| 16 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |\n| 64 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |\n| 512 | 1536 | 134480384 | 134742016 | 268697600 | 268697600 | 524800 | 263168 |\n解析：缺页次数只与矩阵占用的页数有关，为 ceil(3n²×8/2¹²)，即 1、2、24、1536；TLB 失效次数等价于一个「块 4KB、64 行、全相联」高速缓存的 miss 次数，前三行因为 TLB 未满而恰好等于页面数。\n当n=512，每个矩阵恰占512页，每页恰好一整行；64项TLB无法同时容纳512个行页。令n=512，各版本分项如下：\n\n| 版本 | A失效 | B失效 | C失效 | 合计 |\n| --- | --- | --- | --- | --- |\n| ijk | n | n³ | n² | 134480384 |\n| jik | n² | n³ | n² | 134742016 |\n| jki/kji | n³ | n² | n³ | 268697600 |\n| kij | n² | n | n² | 524800 |\n| ikj | n | n² | n | 263168 |\n\nijk每轮k不断复用同一A行，B跨512行每次失效，C每个j结束时才访问、下轮k遍历会驱逐它。jik还使A行随每个i变化。jki/kji内层i同时跨A/C行，两者逐次失效，B每次外层组合才读一次。kij在固定k下B行始终热驻；ikj固定i下A/C行始终热驻。\n\n原二次解析给出的六值依次为266436157、268661500、252182591、252182591、235241284、521528；保留此出处备查，不沿用不符合明确模型的数值。新值由逐次页访问的全相联LRU模拟和上述闭式分别核对；验证源码保存在 `question-bank/backups/2020-final-tlb-validation.cpp`，仅验证数值，不用于生成或改写题面。"
+          "text": "答案：缺页次数依次为 1、2、24、1536；dTLB 失效次数见下表。\n| `n` | 缺页次数 | dTLB 失效次数 1-ijk | 2-jik | 3-jki | 4-kji | 5-kij | 6-ikj |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| 8 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |\n| 16 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |\n| 64 | 24 | 24 | 24 | 24 | 24 | 24 | 24 |\n| 512 | 1536 | 134480384 | 134742016 | 268697600 | 268697600 | 524800 | 263168 |\n\n解析：缺页次数只与矩阵占用的页数有关，为 ceil(3n²×8/2¹²)，即 1、2、24、1536；TLB 失效次数等价于一个「块 4KB、64 行、全相联」高速缓存的 miss 次数，前三行因为 TLB 未满而恰好等于页面数。\n当n=512，每个矩阵恰占512页，每页恰好一整行；64项TLB无法同时容纳512个行页。令n=512，各版本分项如下：\n\n| 版本 | A失效 | B失效 | C失效 | 合计 |\n| --- | --- | --- | --- | --- |\n| ijk | n | n³ | n² | 134480384 |\n| jik | n² | n³ | n² | 134742016 |\n| jki/kji | n³ | n² | n³ | 268697600 |\n| kij | n² | n | n² | 524800 |\n| ikj | n | n² | n | 263168 |\n\nijk每轮k不断复用同一A行，B跨512行每次失效，C每个j结束时才访问、下轮k遍历会驱逐它。jik还使A行随每个i变化。jki/kji内层i同时跨A/C行，两者逐次失效，B每次外层组合才读一次。kij在固定k下B行始终热驻；ikj固定i下A/C行始终热驻。\n\n原二次解析给出的六值依次为266436157、268661500、252182591、252182591、235241284、521528；保留此出处备查，不沿用不符合明确模型的数值。新值由逐次页访问的全相联LRU模拟和上述闭式分别核对；验证源码保存在 `question-bank/backups/2020-final-tlb-validation.cpp`，仅验证数值，不用于生成或改写题面。"
         },
         "provenance": {
           "origin": "unknown",
