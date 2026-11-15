@@ -86813,7 +86813,7 @@
     {
       "schemaVersion": "5",
       "id": "q-5d9ff50c3d2ec4b1",
-      "revision": 4,
+      "revision": 5,
       "paperId": "p-bc69f9ea3beff7ee",
       "paperOrder": 21,
       "number": {
@@ -86869,17 +86869,143 @@
               "1"
             ]
           },
-          "type": "short-answer",
+          "type": "fill",
           "moduleIds": [
             "machine_prog"
           ],
           "stem": {
             "format": "markdown",
-            "text": "1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。注意，每行一\n条语句；不能定义新的变量。\n```c\nint myfunction(int a[], int b[], int c[], int d) {\n  int i;\n  for (i = 0; i <       ; i++) {\n              =                                        ;\n              =                                        ;\n              =                                        ;\n  }\n  return       ;\n}\n```"
+            "blanks": [
+              {
+                "id": "limit",
+                "marker": "{{blank:limit}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "lhs1",
+                "marker": "{{blank:lhs1}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "rhs1",
+                "marker": "{{blank:rhs1}}",
+                "occurrence": 0,
+                "width": "long"
+              },
+              {
+                "id": "lhs2",
+                "marker": "{{blank:lhs2}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "rhs2",
+                "marker": "{{blank:rhs2}}",
+                "occurrence": 0,
+                "width": "long"
+              },
+              {
+                "id": "lhs3",
+                "marker": "{{blank:lhs3}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "rhs3",
+                "marker": "{{blank:rhs3}}",
+                "occurrence": 0,
+                "width": "long"
+              },
+              {
+                "id": "return",
+                "marker": "{{blank:return}}",
+                "occurrence": 0,
+                "width": "short"
+              }
+            ],
+            "text": "1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。每行一条赋值语句，不能定义新的变量；只填缺失部分，不重复等号、分号和 `return`。三个赋值右侧允许等价表达，提交后对照解析自评；其它空自动核对。\n```c\nint myfunction(int a[], int b[], int c[], int d) {\n  int i;\n  for (i = 0; i < {{blank:limit}}; i++) {\n    {{blank:lhs1}} = {{blank:rhs1}};\n    {{blank:lhs2}} = {{blank:rhs2}};\n    {{blank:lhs3}} = {{blank:rhs3}};\n  }\n  return {{blank:return}};\n}\n```"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "limit",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "2"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
+              },
+              {
+                "blankId": "lhs1",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "c[2*i]",
+                  "c[i*2]",
+                  "c[i+i]"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
+                }
+              },
+              {
+                "blankId": "rhs1",
+                "method": "self"
+              },
+              {
+                "blankId": "lhs2",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "c[2*i+1]",
+                  "c[i*2+1]",
+                  "c[i+i+1]",
+                  "c[1+2*i]"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
+                }
+              },
+              {
+                "blankId": "rhs2",
+                "method": "self"
+              },
+              {
+                "blankId": "lhs3",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "d"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
+              },
+              {
+                "blankId": "rhs3",
+                "method": "self"
+              },
+              {
+                "blankId": "return",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "d"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
+              }
+            ],
             "reference": {
               "format": "markdown",
               "text": "1. 完整函数如下：\n\n```c\nint myfunction(int a[], int b[], int c[], int d) {\n    int i;\n    for (i = 0; i < 2; i++) {\n        c[2*i] = b[0] * a[2*i] + b[2] * a[2*i+1];\n        c[2*i+1] = b[1] * a[2*i] + b[3] * a[2*i+1];\n        d = d + c[2*i] + c[2*i+1];\n    }\n    return d;\n}\n```\n\n原卷评分：循环上界 1 分；前两个赋值左侧共同 1 分，第三个赋值左侧 1 分；前两个右侧的乘、加、乘序列各 1 分，三个右侧的 `2*i` 与 `2*i+1` 各 1 分；第三个右侧的两个加号 1 分；返回值 1 分。\n"
@@ -86887,7 +87013,7 @@
             "provenance": {
               "origin": "unknown",
               "crossChecked": null,
-              "note": "源卷第9–10页，完整代码有多种等价表达，保留自评。"
+              "note": "源卷第9–10页，右侧表达式有多种等价写法，保留自评；循环上界、赋值目标和返回值可核对。"
             }
           },
           "sources": [
@@ -144411,7 +144537,7 @@
     {
       "schemaVersion": "5",
       "id": "q-f056683b1b65eedc",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f4835e390ee6ce49",
       "paperOrder": 86,
       "number": {
@@ -144437,14 +144563,134 @@
           "chapter-2"
         ]
       },
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "Intel 兼容处理器的扩展精度浮点格式有 80 位：1 个符号位、15 个阶码位、1 个显式整数位、63 个小数位。整数位在规格化数中为 1，在非规格化数中为 0。填写下表，给出用该格式表示的数值公式和十进制近似值。\n\n| 描述 | 值（公式） | 十进制近似 |\n| --- | --- | --- |\n| 最小正非规格化数 | 待填写 | 待填写 |\n| 最小正规格化数 | 待填写 | 待填写 |\n| 最大规格化数 | 待填写 | 待填写 |\n\n本题涉及十进制近似，作答后对照解析自评。"
+        "blanks": [
+          {
+            "id": "subnormal-formula",
+            "marker": "{{blank:subnormal-formula}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "subnormal-decimal",
+            "marker": "{{blank:subnormal-decimal}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "normal-formula",
+            "marker": "{{blank:normal-formula}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "normal-decimal",
+            "marker": "{{blank:normal-decimal}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "maximum-formula",
+            "marker": "{{blank:maximum-formula}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "maximum-decimal",
+            "marker": "{{blank:maximum-decimal}}",
+            "occurrence": 0,
+            "width": "medium"
+          }
+        ],
+        "text": "Intel 兼容处理器的扩展精度浮点格式有 80 位：1 个符号位、15 个阶码位、1 个显式整数位、63 个小数位。整数位在规格化数中为 1，在非规格化数中为 0。填写下表，给出用该格式表示的数值公式和十进制近似值。公式用 `^` 表示乘方、`*` 表示乘法；十进制近似四舍五入保留 **5位有效数字**，采用 `1.2345e-100` 这样的科学记数法。\n\n| 描述 | 值（公式） | 十进制近似 |\n| --- | --- | --- |\n| 最小正非规格化数 | {{blank:subnormal-formula}} | {{blank:subnormal-decimal}} |\n| 最小正规格化数 | {{blank:normal-formula}} | {{blank:normal-decimal}} |\n| 最大规格化数 | {{blank:maximum-formula}} | {{blank:maximum-decimal}} |"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "subnormal-formula",
+            "method": "exact",
+            "acceptedAnswers": [
+              "2^-16445",
+              "2^(-16445)",
+              "2**(-16445)",
+              "2^(1-16383)*2^-63",
+              "2^(-16382)*2^(-63)"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "subnormal-decimal",
+            "method": "exact",
+            "acceptedAnswers": [
+              "3.6452e-4951"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "normal-formula",
+            "method": "exact",
+            "acceptedAnswers": [
+              "2^-16382",
+              "2^(-16382)",
+              "2**(-16382)",
+              "2^(1-16383)"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "normal-decimal",
+            "method": "exact",
+            "acceptedAnswers": [
+              "3.3621e-4932"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "maximum-formula",
+            "method": "exact",
+            "acceptedAnswers": [
+              "(2-2^-63)*2^16383",
+              "(2-2^(-63))*2^16383",
+              "(2-2**(-63))*2**16383",
+              "2^16384-2^16320"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "maximum-decimal",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1.1897e4932",
+              "1.1897e+4932"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
         "reference": {
           "format": "markdown",
           "text": "偏置量为 $2^{14}-1=16383$。\n\n| 描述 | 值（公式） | 十进制近似 |\n| --- | --- | --- |\n| 最小正非规格化数 | $2^{1-16383}2^{-63}=2^{-16445}$ | $3.6452\\times10^{-4951}$ |\n| 最小正规格化数 | $2^{-16382}$ | $3.3621\\times10^{-4932}$ |\n| 最大规格化数 | $(2-2^{-63})2^{16383}$ | $1.1897\\times10^{4932}$ |\n\n最小非规格化数仅最低小数位为 1；最小规格化数的阶码字段为 1、小数为零；最大有限数的阶码字段为 32766、小数全 1。"
@@ -144466,7 +144712,7 @@
         {
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第02章-信息的表示和处理/homework/2.82-2.91-floating-point-basics.md#L67",
           "provenance": "rewritten",
-          "editorNote": "CSAPP3e家庭作业；十进制近似无容差判分接口，表格采用自评；非官方解析。"
+          "editorNote": "CSAPP3e家庭作业；逐格输入，十进制近似明确保留5位有效数字并使用e记法；非官方解析。"
         }
       ]
     },
@@ -144831,7 +145077,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0300000000000004",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f7485360f6c6060d",
       "paperOrder": 4,
       "number": {
@@ -144857,14 +145103,78 @@
           "chapter-3"
         ]
       },
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "练习题 3.4。`src_t`、`dest_t`是用`typedef`声明的数据类型，指针`sp`和`dp`的值分别在`%rdi`和`%rsi`中。为每行给出实现`*dp = (dest_t) *sp;`的两条数据传送指令：第一条从内存读取并完成必要的扩展/截断，写入`%rax`适当部分；第二条把适当部分存到目的内存。大小变化与符号变化同时出现时，先按C类型转换规则处理大小变化。\n\n采用教材x86-64 System V的LP64模型：`char` 为有符号8位，`short` 为16位，`int`/`unsigned` 为32位，`long` 为64位。允许满足要求的等价指令序列，填写完整答案后对照参考自评。\n\n| `src_t` | `dest_t` | 两条指令 |\n| --- | --- | --- |\n| `long` | `long` | `movq (%rdi), %rax`；`movq %rax, (%rsi)` |\n| `char` | `int` |  |\n| `char` | `unsigned` |  |\n| `unsigned char` | `long` |  |\n| `int` | `char` |  |\n| `unsigned` | `unsigned char` |  |\n| `char` | `short` |  |"
+        "blanks": [
+          {
+            "id": "char-int",
+            "marker": "{{blank:char-int}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "char-unsigned",
+            "marker": "{{blank:char-unsigned}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "uchar-long",
+            "marker": "{{blank:uchar-long}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "int-char",
+            "marker": "{{blank:int-char}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "unsigned-uchar",
+            "marker": "{{blank:unsigned-uchar}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "char-short",
+            "marker": "{{blank:char-short}}",
+            "occurrence": 0,
+            "width": "long"
+          }
+        ],
+        "text": "练习题 3.4。`src_t`、`dest_t`是用`typedef`声明的数据类型，指针`sp`和`dp`的值分别在`%rdi`和`%rsi`中。为每行给出实现`*dp = (dest_t) *sp;`的两条数据传送指令：第一条从内存读取并完成必要的扩展/截断，写入`%rax`适当部分；第二条把适当部分存到目的内存。大小变化与符号变化同时出现时，先按C类型转换规则处理大小变化。\n\n采用教材x86-64 System V的LP64模型：`char` 为有符号8位，`short` 为16位，`int`/`unsigned` 为32位，`long` 为64位。每行的输入框填写两条指令，用分号隔开。允许满足要求的等价指令序列，各行对照参考自评。\n\n| `src_t` | `dest_t` | 两条指令 |\n| --- | --- | --- |\n| `long` | `long` | `movq (%rdi), %rax`；`movq %rax, (%rsi)` |\n| `char` | `int` | {{blank:char-int}} |\n| `char` | `unsigned` | {{blank:char-unsigned}} |\n| `unsigned char` | `long` | {{blank:uchar-long}} |\n| `int` | `char` | {{blank:int-char}} |\n| `unsigned` | `unsigned char` | {{blank:unsigned-uchar}} |\n| `char` | `short` | {{blank:char-short}} |"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "char-int",
+            "method": "self"
+          },
+          {
+            "blankId": "char-unsigned",
+            "method": "self"
+          },
+          {
+            "blankId": "uchar-long",
+            "method": "self"
+          },
+          {
+            "blankId": "int-char",
+            "method": "self"
+          },
+          {
+            "blankId": "unsigned-uchar",
+            "method": "self"
+          },
+          {
+            "blankId": "char-short",
+            "method": "self"
+          }
+        ],
         "reference": {
           "format": "markdown",
           "text": "| `src_t` | `dest_t` | 指令 |\n| --- | --- | --- |\n| `long` | `long` | `movq (%rdi),%rax`；`movq %rax,(%rsi)` |\n| `char` | `int` | `movsbl (%rdi),%eax`；`movl %eax,(%rsi)` |\n| `char` | `unsigned` | `movsbl (%rdi),%eax`；`movl %eax,(%rsi)` |\n| `unsigned char` | `long` | `movzbl (%rdi),%eax`；`movq %rax,(%rsi)` |\n| `int` | `char` | `movl (%rdi),%eax`；`movb %al,(%rsi)` |\n| `unsigned` | `unsigned char` | `movl (%rdi),%eax`；`movb %al,(%rsi)` |\n| `char` | `short` | `movsbw (%rdi),%ax`；`movw %ax,(%rsi)` |"
@@ -149433,7 +149743,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0300000000000041",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f7485360f6c6060d",
       "paperOrder": 41,
       "number": {
@@ -149462,7 +149772,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": "练习题 3.41 考虑下面的结构声明：\n\n采用x86-64 System V LP64的自然对齐布局：`int`的大小及对齐为4字节，指针的大小及对齐为8字节，不使用紧凑打包或额外对齐属性。\n\n```c\nstruct prob {\n    int *p;\n    struct {\n        int x;\n        int y;\n    } s;\n    struct prob *next;\n};\n```\n\n这个声明说明一个结构可以嵌套在另一个结构中，就像数组可以嵌套在结构中、数组可以嵌套在数组中一样。\n\n下面的过程（省略了某些表达式）对这个结构进行操作：\n\n```c\nvoid sp_init(struct prob *sp) {\n    sp->s.x = ________;\n    sp->p = ________;\n    sp->next = ________;\n}\n```"
+        "text": "练习题 3.41 考虑下面的结构声明：\n\n采用x86-64 System V LP64的自然对齐布局：`int`的大小及对齐为4字节，指针的大小及对齐为8字节，不使用紧凑打包或额外对齐属性。\n\n```c\nstruct prob {\n    int *p;\n    struct {\n        int x;\n        int y;\n    } s;\n    struct prob *next;\n};\n```\n\n这个声明说明一个结构可以嵌套在另一个结构中，就像数组可以嵌套在结构中、数组可以嵌套在数组中一样。\n\n下面的过程（省略了某些表达式）对这个结构进行操作；各表达式在 C 小问重现的代码输入框中填写：\n\n```c\nvoid sp_init(struct prob *sp) {\n    sp->s.x = ________;\n    sp->p = ________;\n    sp->next = ________;\n}\n```"
       },
       "parts": [
         {
@@ -149659,17 +149969,86 @@
               "C"
             ]
           },
-          "type": "short-answer",
+          "type": "fill",
           "moduleIds": [
             "machine_prog"
           ],
           "stem": {
             "format": "markdown",
-            "text": "C. 编译器为 `sp_init` 的主体产生的汇编代码如下：\n\n```text\nvoid sp_init(struct prob *sp)\nsp in %rdi\n\n1  sp_init:\n2      movl 12(%rdi), %eax\n3      movl %eax, 8(%rdi)\n4      leaq 8(%rdi), %rax\n5      movq %rax, (%rdi)\n6      movq %rdi, 16(%rdi)\n7      ret\n```\n\n根据这些信息，填写 `sp_init` 代码中缺失的表达式，并逐条说明这些指令的作用。"
+            "blanks": [
+              {
+                "id": "init-x",
+                "marker": "{{blank:init-x}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "init-p",
+                "marker": "{{blank:init-p}}",
+                "occurrence": 0,
+                "width": "medium"
+              },
+              {
+                "id": "init-next",
+                "marker": "{{blank:init-next}}",
+                "occurrence": 0,
+                "width": "short"
+              },
+              {
+                "id": "instruction-meaning",
+                "marker": "{{blank:instruction-meaning}}",
+                "occurrence": 0,
+                "width": "long"
+              }
+            ],
+            "text": "C. 编译器为 `sp_init` 的主体产生的汇编代码如下：\n\n```text\nvoid sp_init(struct prob *sp)\nsp in %rdi\n\n1  sp_init:\n2      movl 12(%rdi), %eax\n3      movl %eax, 8(%rdi)\n4      leaq 8(%rdi), %rax\n5      movq %rax, (%rdi)\n6      movq %rdi, 16(%rdi)\n7      ret\n```\n\n根据这些信息，在下方代码中填写缺失的表达式。只填等号右侧，不重复分号；前三空自动核对，最后的指令说明对照解析自评。\n\n```c\nvoid sp_init(struct prob *sp) {\n    sp->s.x = {{blank:init-x}};\n    sp->p = {{blank:init-p}};\n    sp->next = {{blank:init-next}};\n}\n```\n\n逐条说明上述汇编指令的作用：{{blank:instruction-meaning}}"
           },
           "solution": {
             "state": "available",
-            "grading": "self",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "init-x",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "sp->s.y"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
+                }
+              },
+              {
+                "blankId": "init-p",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "&(sp->s.x)",
+                  "&sp->s.x",
+                  "(int *)((char *)sp+8)"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true,
+                  "syntax": "c-tokens"
+                }
+              },
+              {
+                "blankId": "init-next",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "sp"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
+              },
+              {
+                "blankId": "instruction-meaning",
+                "method": "self"
+              }
+            ],
             "reference": {
               "format": "markdown",
               "text": "同平时一样，我们从给汇编代码加注释开始：\n\n```text\nvoid sp_init(struct prob *sp)\nsp in %rdi\n1 sp_init:\n2     movl 12(%rdi), %eax    Get sp->s.y\n3     movl %eax, 8(%rdi)     Save in sp->s.x\n4     leaq 8(%rdi), %rax     Compute &(sp->s.x)\n5     movq %rax, (%rdi)      Store in sp->p\n6     movq %rdi, 16(%rdi)    Store sp in sp->next\n7     ret\n```\n\n由此可以产生如下 C 代码：\n\n```c\nvoid sp_init(struct prob *sp)\n{\n    sp->s.x  = sp->s.y;\n    sp->p    = &(sp->s.x);\n    sp->next = sp;\n}\n```\n\n即三个缺失的表达式依次为 `sp->s.y`、`&(sp->s.x)`、`sp`。第 2 行按偏移 12 取出 `s.y`，第 3 行把它写到偏移 8 的 `s.x`；第 4、5 行用 `leaq` 算出 `s.x` 的地址并存进偏移 0 的 `p`；第 6 行把参数 `sp` 本身存进偏移 16 的 `next`。"
@@ -149683,7 +150062,7 @@
           "sources": [
             {
               "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/chapter.md#L3689",
-              "provenance": "verbatim"
+              "provenance": "rewritten"
             },
             {
               "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/练习题答案.md#L762",
@@ -149880,7 +150259,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0300000000000043",
-      "revision": 2,
+      "revision": 3,
       "paperId": "p-f7485360f6c6060d",
       "paperOrder": 43,
       "number": {
@@ -149909,7 +150288,7 @@
       "type": "composite",
       "stem": {
         "format": "markdown",
-        "text": "练习题 3.43 假设给你一个任务，检查一下 C 编译器为结构和联合的访问产生正确的代码。你写了下面的结构声明：\n\n采用x86-64 System V LP64的自然对齐布局：`char`、`short`、`int`、`long`和指针的大小及对齐分别为1、2、4、8、8字节，不使用紧凑打包或额外对齐属性。\n\n```c\ntypedef union {\n    struct {\n        long u;\n        short v;\n        char w;\n    } t1;\n    struct {\n        int a[2];\n        char *p;\n    } t2;\n} u_type;\n```\n\n你写了一组具有下面这种形式的函数：\n\n```c\nvoid get(u_type *up, type *dest) {\n    *dest = expr;\n}\n```\n\n这组函数有不一样的访问表达式 `expr`，而且根据 `expr` 的类型来设置目的数据类型 `type`。然后再检查编译这些函数时产生的代码，看看它们是否与你预期的一样。\n\n假设在这些函数中，`up` 和 `dest` 分别被加载到寄存器 `%rdi` 和 `%rsi` 中。填写下表中的数据类型 `type`，并用 1～3 条指令序列来计算表达式，并将结果存储到 `dest` 中。\n\n| expr | type | 代码 |\n| --- | --- | --- |\n| `up->t1.u` | `long` | `movq (%rdi), %rax`；`movq %rax, (%rsi)` |\n| `up->t1.v` |  |  |\n| `&up->t1.w` |  |  |\n| `up->t2.a` |  |  |\n| `up->t2.a[up->t1.u]` |  |  |\n| `*up->t2.p` |  |  |"
+        "text": "练习题 3.43 假设给你一个任务，检查一下 C 编译器为结构和联合的访问产生正确的代码。你写了下面的结构声明：\n\n采用x86-64 System V LP64的自然对齐布局：`char`、`short`、`int`、`long`和指针的大小及对齐分别为1、2、4、8、8字节，不使用紧凑打包或额外对齐属性。\n\n```c\ntypedef union {\n    struct {\n        long u;\n        short v;\n        char w;\n    } t1;\n    struct {\n        int a[2];\n        char *p;\n    } t2;\n} u_type;\n```\n\n你写了一组具有下面这种形式的函数：\n\n```c\nvoid get(u_type *up, type *dest) {\n    *dest = expr;\n}\n```\n\n这组函数有不一样的访问表达式 `expr`，而且根据 `expr` 的类型来设置目的数据类型 `type`。然后再检查编译这些函数时产生的代码，看看它们是否与你预期的一样。\n\n假设在这些函数中，`up` 和 `dest` 分别被加载到寄存器 `%rdi` 和 `%rsi` 中。下表列出需要分析的表达式；请在 A 小问的类型表、B 小问的代码表中分别填写对应输入框，用 1～3 条指令计算表达式并将结果存储到 `dest` 中。\n\n| expr | type | 代码 |\n| --- | --- | --- |\n| `up->t1.u` | `long` | `movq (%rdi), %rax`；`movq %rax, (%rsi)` |\n| `up->t1.v` | 见 A 小问 | 见 B 小问 |\n| `&up->t1.w` | 见 A 小问 | 见 B 小问 |\n| `up->t2.a` | 见 A 小问 | 见 B 小问 |\n| `up->t2.a[up->t1.u]` | 见 A 小问 | 见 B 小问 |\n| `*up->t2.p` | 见 A 小问 | 见 B 小问 |"
       },
       "parts": [
         {
@@ -155891,7 +156270,7 @@
     {
       "schemaVersion": "5",
       "id": "q-7c3a0e945bd1682f",
-      "revision": 1,
+      "revision": 2,
       "paperId": "p-f7485360f6c6060d",
       "paperOrder": 32,
       "number": {
@@ -155917,14 +156296,1144 @@
           "chapter-3"
         ]
       },
-      "type": "short-answer",
+      "type": "fill",
       "stem": {
         "format": "markdown",
-        "text": "练习题 3.32 下面列出 `last`、`first` 的反汇编代码，以及 `main` 中调用 `first` 的代码。从 `main` 调用 `first(10)` 开始，直到返回 `main` 为止，填写执行轨迹表。表中每行的寄存器/栈状态均为该行指令执行前的状态。\n\n```text\nDisassembly of last(long u, long v)\nu in %rdi, v in %rsi\n1  0000000000400540 <last>:\n2    400540: 48 89 f8           mov   %rdi,%rax         L1\n3    400543: 48 0f af c6        imul  %rsi,%rax         L2\n4    400547: c3                 retq                    L3\n\nDisassembly of first(long x)\nx in %rdi\n5  0000000000400548 <first>:\n6    400548: 48 8d 77 01        lea   0x1(%rdi),%rsi    F1\n7    40054c: 48 83 ef 01        sub   $0x1,%rdi         F2\n8    400550: e8 eb ff ff ff     callq 400540 <last>     F3\n9    400555: f3 c3              repz retq               F4\n     ...\n10   400560: e8 e3 ff ff ff     callq 400548 <first>    M1\n11   400565: 48 89 c2           mov   %rax,%rdx         M2\n```\n\n| 标号 | PC | 指令 | `%rdi` | `%rsi` | `%rax` | `%rsp` | `*%rsp` | 描述 |\n|---|---|---|---:|---:|---:|---|---|---|\n| M1 | `0x400560` | `callq` | 10 | — | — | `0x7fffffffe820` | — | 调用 `first(10)` |\n| F1 |  |  |  |  |  |  |  |  |\n| F2 |  |  |  |  |  |  |  |  |\n| F3 |  |  |  |  |  |  |  |  |\n| L1 |  |  |  |  |  |  |  |  |\n| L2 |  |  |  |  |  |  |  |  |\n| L3 |  |  |  |  |  |  |  |  |\n| F4 |  |  |  |  |  |  |  |  |\n| M2 |  |  |  |  |  |  |  |  |"
+        "blanks": [
+          {
+            "id": "f1pc",
+            "marker": "{{blank:f1pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f1op",
+            "marker": "{{blank:f1op}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f1di",
+            "marker": "{{blank:f1di}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f1si",
+            "marker": "{{blank:f1si}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f1ax",
+            "marker": "{{blank:f1ax}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f1sp",
+            "marker": "{{blank:f1sp}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "f1top",
+            "marker": "{{blank:f1top}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f1note",
+            "marker": "{{blank:f1note}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "f2pc",
+            "marker": "{{blank:f2pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f2op",
+            "marker": "{{blank:f2op}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f2di",
+            "marker": "{{blank:f2di}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f2si",
+            "marker": "{{blank:f2si}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f2ax",
+            "marker": "{{blank:f2ax}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f2sp",
+            "marker": "{{blank:f2sp}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "f2top",
+            "marker": "{{blank:f2top}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f2note",
+            "marker": "{{blank:f2note}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "f3pc",
+            "marker": "{{blank:f3pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f3op",
+            "marker": "{{blank:f3op}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f3di",
+            "marker": "{{blank:f3di}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f3si",
+            "marker": "{{blank:f3si}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f3ax",
+            "marker": "{{blank:f3ax}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f3sp",
+            "marker": "{{blank:f3sp}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "f3top",
+            "marker": "{{blank:f3top}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f3note",
+            "marker": "{{blank:f3note}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "l1pc",
+            "marker": "{{blank:l1pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "l1op",
+            "marker": "{{blank:l1op}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l1di",
+            "marker": "{{blank:l1di}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l1si",
+            "marker": "{{blank:l1si}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l1ax",
+            "marker": "{{blank:l1ax}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l1sp",
+            "marker": "{{blank:l1sp}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "l1top",
+            "marker": "{{blank:l1top}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "l1note",
+            "marker": "{{blank:l1note}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "l2pc",
+            "marker": "{{blank:l2pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "l2op",
+            "marker": "{{blank:l2op}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l2di",
+            "marker": "{{blank:l2di}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l2si",
+            "marker": "{{blank:l2si}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l2ax",
+            "marker": "{{blank:l2ax}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l2sp",
+            "marker": "{{blank:l2sp}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "l2top",
+            "marker": "{{blank:l2top}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "l2note",
+            "marker": "{{blank:l2note}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "l3pc",
+            "marker": "{{blank:l3pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "l3op",
+            "marker": "{{blank:l3op}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l3di",
+            "marker": "{{blank:l3di}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l3si",
+            "marker": "{{blank:l3si}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l3ax",
+            "marker": "{{blank:l3ax}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "l3sp",
+            "marker": "{{blank:l3sp}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "l3top",
+            "marker": "{{blank:l3top}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "l3note",
+            "marker": "{{blank:l3note}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "f4pc",
+            "marker": "{{blank:f4pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f4op",
+            "marker": "{{blank:f4op}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f4di",
+            "marker": "{{blank:f4di}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f4si",
+            "marker": "{{blank:f4si}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f4ax",
+            "marker": "{{blank:f4ax}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "f4sp",
+            "marker": "{{blank:f4sp}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "f4top",
+            "marker": "{{blank:f4top}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "f4note",
+            "marker": "{{blank:f4note}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "m2pc",
+            "marker": "{{blank:m2pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "m2op",
+            "marker": "{{blank:m2op}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "m2di",
+            "marker": "{{blank:m2di}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "m2si",
+            "marker": "{{blank:m2si}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "m2ax",
+            "marker": "{{blank:m2ax}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "m2sp",
+            "marker": "{{blank:m2sp}}",
+            "occurrence": 0,
+            "width": "long"
+          },
+          {
+            "id": "m2top",
+            "marker": "{{blank:m2top}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "m2note",
+            "marker": "{{blank:m2note}}",
+            "occurrence": 0,
+            "width": "long"
+          }
+        ],
+        "text": "练习题 3.32 下面列出 `last`、`first` 的反汇编代码，以及 `main` 中调用 `first` 的代码。从 `main` 调用 `first(10)` 开始，直到返回 `main` 为止，逐格填写执行轨迹表。表中每行的寄存器/栈状态均为该行指令执行前的状态。PC和栈地址用十六进制，寄存器数值可用十进制；不能由题面确定的值填 `—` 或 `-`，不要假定为0。指令列填写助记符（不带操作数），描述列对照解析自评，无补充描述可填 `—`；M1行已给出。\n\n```text\nDisassembly of last(long u, long v)\nu in %rdi, v in %rsi\n1  0000000000400540 <last>:\n2    400540: 48 89 f8           mov   %rdi,%rax         L1\n3    400543: 48 0f af c6        imul  %rsi,%rax         L2\n4    400547: c3                 retq                    L3\n\nDisassembly of first(long x)\nx in %rdi\n5  0000000000400548 <first>:\n6    400548: 48 8d 77 01        lea   0x1(%rdi),%rsi    F1\n7    40054c: 48 83 ef 01        sub   $0x1,%rdi         F2\n8    400550: e8 eb ff ff ff     callq 400540 <last>     F3\n9    400555: f3 c3              repz retq               F4\n     ...\n10   400560: e8 e3 ff ff ff     callq 400548 <first>    M1\n11   400565: 48 89 c2           mov   %rax,%rdx         M2\n```\n\n| 标号 | PC | 指令 | `%rdi` | `%rsi` | `%rax` | `%rsp` | `*%rsp` | 描述 |\n|---|---|---|---:|---:|---:|---|---|---|\n| M1 | `0x400560` | `callq` | 10 | — | — | `0x7fffffffe820` | — | 调用 `first(10)` |\n| F1 | {{blank:f1pc}} | {{blank:f1op}} | {{blank:f1di}} | {{blank:f1si}} | {{blank:f1ax}} | {{blank:f1sp}} | {{blank:f1top}} | {{blank:f1note}} |\n| F2 | {{blank:f2pc}} | {{blank:f2op}} | {{blank:f2di}} | {{blank:f2si}} | {{blank:f2ax}} | {{blank:f2sp}} | {{blank:f2top}} | {{blank:f2note}} |\n| F3 | {{blank:f3pc}} | {{blank:f3op}} | {{blank:f3di}} | {{blank:f3si}} | {{blank:f3ax}} | {{blank:f3sp}} | {{blank:f3top}} | {{blank:f3note}} |\n| L1 | {{blank:l1pc}} | {{blank:l1op}} | {{blank:l1di}} | {{blank:l1si}} | {{blank:l1ax}} | {{blank:l1sp}} | {{blank:l1top}} | {{blank:l1note}} |\n| L2 | {{blank:l2pc}} | {{blank:l2op}} | {{blank:l2di}} | {{blank:l2si}} | {{blank:l2ax}} | {{blank:l2sp}} | {{blank:l2top}} | {{blank:l2note}} |\n| L3 | {{blank:l3pc}} | {{blank:l3op}} | {{blank:l3di}} | {{blank:l3si}} | {{blank:l3ax}} | {{blank:l3sp}} | {{blank:l3top}} | {{blank:l3note}} |\n| F4 | {{blank:f4pc}} | {{blank:f4op}} | {{blank:f4di}} | {{blank:f4si}} | {{blank:f4ax}} | {{blank:f4sp}} | {{blank:f4top}} | {{blank:f4note}} |\n| M2 | {{blank:m2pc}} | {{blank:m2op}} | {{blank:m2di}} | {{blank:m2si}} | {{blank:m2ax}} | {{blank:m2sp}} | {{blank:m2top}} | {{blank:m2note}} |"
       },
       "solution": {
         "state": "available",
-        "grading": "self",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "f1pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400548",
+              "400548",
+              "0x0000000000400548"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f1op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "lea",
+              "leaq"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f1di",
+            "method": "exact",
+            "acceptedAnswers": [
+              "10",
+              "0xa"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f1si",
+            "method": "exact",
+            "acceptedAnswers": [
+              "—",
+              "-",
+              "未知",
+              "不确定"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f1ax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "—",
+              "-",
+              "未知",
+              "不确定"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f1sp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x7fffffffe818",
+              "7fffffffe818",
+              "0x00007fffffffe818"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f1top",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400565",
+              "400565",
+              "0x0000000000400565"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f1note",
+            "method": "self"
+          },
+          {
+            "blankId": "f2pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x40054c",
+              "40054c",
+              "0x000000000040054c"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f2op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "sub",
+              "subq"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f2di",
+            "method": "exact",
+            "acceptedAnswers": [
+              "10",
+              "0xa"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f2si",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11",
+              "0xb"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f2ax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "—",
+              "-",
+              "未知",
+              "不确定"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f2sp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x7fffffffe818",
+              "7fffffffe818",
+              "0x00007fffffffe818"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f2top",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400565",
+              "400565",
+              "0x0000000000400565"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f2note",
+            "method": "self"
+          },
+          {
+            "blankId": "f3pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400550",
+              "400550",
+              "0x0000000000400550"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f3op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "call",
+              "callq"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f3di",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9",
+              "0x9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f3si",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11",
+              "0xb"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f3ax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "—",
+              "-",
+              "未知",
+              "不确定"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f3sp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x7fffffffe818",
+              "7fffffffe818",
+              "0x00007fffffffe818"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f3top",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400565",
+              "400565",
+              "0x0000000000400565"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f3note",
+            "method": "self"
+          },
+          {
+            "blankId": "l1pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400540",
+              "400540",
+              "0x0000000000400540"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l1op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "mov",
+              "movq"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l1di",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9",
+              "0x9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l1si",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11",
+              "0xb"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l1ax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "—",
+              "-",
+              "未知",
+              "不确定"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l1sp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x7fffffffe810",
+              "7fffffffe810",
+              "0x00007fffffffe810"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l1top",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400555",
+              "400555",
+              "0x0000000000400555"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l1note",
+            "method": "self"
+          },
+          {
+            "blankId": "l2pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400543",
+              "400543",
+              "0x0000000000400543"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l2op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "imul",
+              "imulq"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l2di",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9",
+              "0x9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l2si",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11",
+              "0xb"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l2ax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9",
+              "0x9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l2sp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x7fffffffe810",
+              "7fffffffe810",
+              "0x00007fffffffe810"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l2top",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400555",
+              "400555",
+              "0x0000000000400555"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l2note",
+            "method": "self"
+          },
+          {
+            "blankId": "l3pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400547",
+              "400547",
+              "0x0000000000400547"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l3op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "ret",
+              "retq"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l3di",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9",
+              "0x9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l3si",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11",
+              "0xb"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l3ax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "99",
+              "0x63"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l3sp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x7fffffffe810",
+              "7fffffffe810",
+              "0x00007fffffffe810"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l3top",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400555",
+              "400555",
+              "0x0000000000400555"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "l3note",
+            "method": "self"
+          },
+          {
+            "blankId": "f4pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400555",
+              "400555",
+              "0x0000000000400555"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f4op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "repz retq",
+              "repz ret",
+              "rep retq",
+              "rep ret"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "f4di",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9",
+              "0x9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f4si",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11",
+              "0xb"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f4ax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "99",
+              "0x63"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f4sp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x7fffffffe818",
+              "7fffffffe818",
+              "0x00007fffffffe818"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f4top",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400565",
+              "400565",
+              "0x0000000000400565"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "f4note",
+            "method": "self"
+          },
+          {
+            "blankId": "m2pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400565",
+              "400565",
+              "0x0000000000400565"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "m2op",
+            "method": "exact",
+            "acceptedAnswers": [
+              "mov",
+              "movq"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "m2di",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9",
+              "0x9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "m2si",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11",
+              "0xb"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "m2ax",
+            "method": "exact",
+            "acceptedAnswers": [
+              "99",
+              "0x63"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "m2sp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x7fffffffe820",
+              "7fffffffe820",
+              "0x00007fffffffe820"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "m2top",
+            "method": "exact",
+            "acceptedAnswers": [
+              "—",
+              "-",
+              "未知",
+              "不确定"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "m2note",
+            "method": "self"
+          }
+        ],
         "reference": {
           "format": "markdown",
           "text": "| 标号 | PC | 指令 | `%rdi` | `%rsi` | `%rax` | `%rsp` | `*%rsp` | 描述 |\n|---|---|---|---:|---:|---:|---|---|---|\n| M1 | `0x400560` | `callq` | 10 | — | — | `0x7fffffffe820` | — | 调用 `first(10)` |\n| F1 | `0x400548` | `lea` | 10 | — | — | `0x7fffffffe818` | `0x400565` | first 的入口 |\n| F2 | `0x40054c` | `sub` | 10 | 11 | — | `0x7fffffffe818` | `0x400565` | |\n| F3 | `0x400550` | `callq` | 9 | 11 | — | `0x7fffffffe818` | `0x400565` | 调用 `last(9,11)` |\n| L1 | `0x400540` | `mov` | 9 | 11 | — | `0x7fffffffe810` | `0x400555` | last 的入口 |\n| L2 | `0x400543` | `imul` | 9 | 11 | 9 | `0x7fffffffe810` | `0x400555` | |\n| L3 | `0x400547` | `retq` | 9 | 11 | 99 | `0x7fffffffe810` | `0x400555` | 从 last 返回 99 |\n| F4 | `0x400555` | `repz retq` | 9 | 11 | 99 | `0x7fffffffe818` | `0x400565` | 从 first 返回 99 |\n| M2 | `0x400565` | `mov` | 9 | 11 | 99 | `0x7fffffffe820` | — | 继续执行 main |"
@@ -155932,7 +157441,7 @@
         "provenance": {
           "origin": "unknown",
           "crossChecked": null,
-          "note": "执行轨迹据固定版本来源仓库参考答案文本录入。"
+          "note": "执行轨迹据固定版本来源仓库参考答案文本录入；逐格输入，状态及指令自动核对，描述自评。"
         }
       },
       "publication": {
@@ -155945,7 +157454,7 @@
       "sources": [
         {
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/chapter.md#L2795",
-          "provenance": "verbatim"
+          "provenance": "rewritten"
         },
         {
           "document": "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第03章-程序的机器级表示/练习题答案.md#L605",

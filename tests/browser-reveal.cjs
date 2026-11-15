@@ -41,8 +41,15 @@ async function run() {
       solution: { state: 'available', grading: 'parts', reference: { format: 'markdown', text: '' } },
       parts: [single, fill, select, short].map((q, i) => ({ ...q, id: 'reveal-part-' + i, number: { display: '(' + (i + 1) + ')' } })) };
     const relocationQuestions = ['q-c448153415e0dd8d', 'q-c799f2158ed1e841'].map(id => bank.find(q => q.id === id));
-    for (const question of [single, multiple, fill, select, fork, composite, ...relocationQuestions]) {
+    const sweptQuestions = ['q-5d9ff50c3d2ec4b1', 'q-f056683b1b65eedc', 'q-0300000000000004',
+      'q-0300000000000041', 'q-0300000000000043', 'q-7c3a0e945bd1682f'].map(id => bank.find(q => q.id === id));
+    for (const question of [single, multiple, fill, select, fork, composite, ...relocationQuestions, ...sweptQuestions]) {
       await fixture(page, [question, single]);
+      if (sweptQuestions.includes(question)) {
+        const blanks = [question, ...(question.parts || [])].reduce((n, u) => n + (u.stem.blanks?.length || 0), 0);
+        assert.equal(await page.locator('.ics-blank-input').count(), blanks);
+        assert.ok(await page.locator('.ics-blank-input').evaluateAll(inputs => inputs.every(input => !input.hidden && !input.disabled)));
+      }
       if (relocationQuestions.includes(question)) {
         const fields = question.parts[1].stem.blanks.filter(b => b.id.startsWith('relocation-'));
         assert.equal(fields.length, 2);
@@ -69,6 +76,20 @@ async function run() {
       assert.ok(await page.locator('.ics-blank-input').evaluateAll(nodes => nodes.every(n => n.hidden && n.disabled)));
       assert.equal(await page.evaluate(() => window.__test.state.records[0].mode), 'skipped');
       assert.equal(await page.locator('#ics-self-grade').isVisible(), false);
+      if (sweptQuestions.includes(question)) {
+        if (process.env.ICS_SCREENSHOTS) fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true });
+        for (const width of [1280, 390]) {
+          await page.setViewportSize({ width, height: 950 });
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+          assert.ok(await page.locator('#ics-question-content td .ics-blank-reference').evaluateAll(nodes => nodes.every(node => {
+            if (node.textContent.includes('\n')) return true;
+            const range = document.createRange(); range.selectNodeContents(node);
+            return range.getClientRects().length === 1;
+          })), 'literal numbers, exponents and instruction names must not split across lines');
+          if (process.env.ICS_SCREENSHOTS) await page.locator('#ics-question-content').screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, question.id + '-sweep-' + width + '.png') });
+        }
+        await page.setViewportSize({ width: 1280, height: 950 });
+      }
       if (relocationQuestions.includes(question) && process.env.ICS_SCREENSHOTS) {
         fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true });
         for (const width of [1280, 390]) {

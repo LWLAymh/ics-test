@@ -2,7 +2,7 @@
 {
   "schemaVersion": "5",
   "id": "q-5d9ff50c3d2ec4b1",
-  "revision": 4,
+  "revision": 5,
   "paperId": "p-bc69f9ea3beff7ee",
   "paperOrder": 21,
   "number": {
@@ -47,7 +47,25 @@
     "format": "markdown"
   },
   "parts":[
-    {"id":"q-5d9ff50c3d2ec4b1-A","number":{"display":"1","major":null,"minor":null,"parts":["1"]},"type":"short-answer","moduleIds":["machine_prog"],"stem":{"format":"markdown"},"solution":{"state":"available","grading":"self","reference":{"format":"markdown"},"provenance":{"origin":"unknown","crossChecked":null,"note":"源卷第9–10页，完整代码有多种等价表达，保留自评。"}},"sources":[{"document":"原文/期末/2016期末-带答案.md","lines":{"start":323,"end":409},"provenance":"reflow"}],"issues":[]},
+    {"id":"q-5d9ff50c3d2ec4b1-A","number":{"display":"1","major":null,"minor":null,"parts":["1"]},"type":"fill","moduleIds":["machine_prog"],"stem":{"format":"markdown","blanks":[
+      {"id":"limit","marker":"{{blank:limit}}","occurrence":0,"width":"short"},
+      {"id":"lhs1","marker":"{{blank:lhs1}}","occurrence":0,"width":"medium"},
+      {"id":"rhs1","marker":"{{blank:rhs1}}","occurrence":0,"width":"long"},
+      {"id":"lhs2","marker":"{{blank:lhs2}}","occurrence":0,"width":"medium"},
+      {"id":"rhs2","marker":"{{blank:rhs2}}","occurrence":0,"width":"long"},
+      {"id":"lhs3","marker":"{{blank:lhs3}}","occurrence":0,"width":"short"},
+      {"id":"rhs3","marker":"{{blank:rhs3}}","occurrence":0,"width":"long"},
+      {"id":"return","marker":"{{blank:return}}","occurrence":0,"width":"short"}
+    ]},"solution":{"state":"available","grading":"blanks","blankAnswers":[
+      {"blankId":"limit","method":"exact","acceptedAnswers":["2"],"normalize":{"trimWhitespace":true,"caseSensitive":true}},
+      {"blankId":"lhs1","method":"exact","acceptedAnswers":["c[2*i]","c[i*2]","c[i+i]"],"normalize":{"trimWhitespace":true,"caseSensitive":true,"syntax":"c-tokens"}},
+      {"blankId":"rhs1","method":"self"},
+      {"blankId":"lhs2","method":"exact","acceptedAnswers":["c[2*i+1]","c[i*2+1]","c[i+i+1]","c[1+2*i]"],"normalize":{"trimWhitespace":true,"caseSensitive":true,"syntax":"c-tokens"}},
+      {"blankId":"rhs2","method":"self"},
+      {"blankId":"lhs3","method":"exact","acceptedAnswers":["d"],"normalize":{"trimWhitespace":true,"caseSensitive":true}},
+      {"blankId":"rhs3","method":"self"},
+      {"blankId":"return","method":"exact","acceptedAnswers":["d"],"normalize":{"trimWhitespace":true,"caseSensitive":true}}
+    ],"reference":{"format":"markdown"},"provenance":{"origin":"unknown","crossChecked":null,"note":"源卷第9–10页，右侧表达式有多种等价写法，保留自评；循环上界、赋值目标和返回值可核对。"}},"sources":[{"document":"原文/期末/2016期末-带答案.md","lines":{"start":323,"end":409},"provenance":"reflow"}],"issues":[]},
     {"id":"q-5d9ff50c3d2ec4b1-B","number":{"display":"2","major":null,"minor":null,"parts":["2"]},"type":"fill","moduleIds":["machine_prog"],"stem":{"format":"markdown","blanks":[{"id":"output","marker":"{{blank:output}}","occurrence":0,"width":"short"}]},"solution":{"state":"available","grading":"blanks","blankAnswers":[{"blankId":"output","method":"exact","acceptedAnswers":["139"],"normalize":{"trimWhitespace":true,"caseSensitive":true}}],"reference":{"format":"markdown"},"provenance":{"origin":"unknown","crossChecked":null,"note":"源卷答案139，独立计算四个c元素核对。"}},"sources":[{"document":"原文/期末/2016期末-带答案.md","lines":{"start":323,"end":409},"provenance":"reflow"}],"issues":[]}
   ],
   "solution": {
@@ -114,17 +132,16 @@ myfunction:
 %%% reference
 
 %%% part-stem: q-5d9ff50c3d2ec4b1-A
-1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。注意，每行一
-条语句；不能定义新的变量。
+1. 请根据上述汇编代码，根据提示，补全 `myfunction` 的代码。每行一条赋值语句，不能定义新的变量；只填缺失部分，不重复等号、分号和 `return`。三个赋值右侧允许等价表达，提交后对照解析自评；其它空自动核对。
 ```c
 int myfunction(int a[], int b[], int c[], int d) {
   int i;
-  for (i = 0; i <       ; i++) {
-              =                                        ;
-              =                                        ;
-              =                                        ;
+  for (i = 0; i < {{blank:limit}}; i++) {
+    {{blank:lhs1}} = {{blank:rhs1}};
+    {{blank:lhs2}} = {{blank:rhs2}};
+    {{blank:lhs3}} = {{blank:rhs3}};
   }
-  return       ;
+  return {{blank:return}};
 }
 ```
 %%% part-stem: q-5d9ff50c3d2ec4b1-B
