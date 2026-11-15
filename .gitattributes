@@ -2,3 +2,4 @@
 site/vendor/dompurify/purify.min.js -text
 site/vendor/mathjax/tex-chtml-full.js -text
 site/vendor/mathjax/ui/safe.js -text
+site/vendor/html2canvas/html2canvas.min.js -text
