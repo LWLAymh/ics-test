@@ -40,8 +40,18 @@ async function run() {
     const composite = { ...single, type: 'composite', options: undefined, stem: { format: 'markdown', text: '公共题面。' },
       solution: { state: 'available', grading: 'parts', reference: { format: 'markdown', text: '' } },
       parts: [single, fill, select, short].map((q, i) => ({ ...q, id: 'reveal-part-' + i, number: { display: '(' + (i + 1) + ')' } })) };
-    for (const question of [single, multiple, fill, select, fork, composite]) {
+    const relocationQuestions = ['q-c448153415e0dd8d', 'q-c799f2158ed1e841'].map(id => bank.find(q => q.id === id));
+    for (const question of [single, multiple, fill, select, fork, composite, ...relocationQuestions]) {
       await fixture(page, [question, single]);
+      if (relocationQuestions.includes(question)) {
+        const fields = question.parts[1].stem.blanks.filter(b => b.id.startsWith('relocation-'));
+        assert.equal(fields.length, 2);
+        for (const blank of fields) {
+          const input = page.locator('[data-composite-part="1"] table [data-blank-id="' + blank.id + '"]');
+          assert.equal(await input.count(), 1, 'relocation reference value must have a real table input');
+          assert.ok(await input.isEditable());
+        }
+      }
       for (const input of await page.locator('input.ics-blank-input:not([type="hidden"])').all()) await input.fill('USER_DRAFT');
       const before = await page.locator('.ics-blank-input').evaluateAll(nodes => nodes.map(n => n.value));
       if (question.type === 'single-choice') await page.locator('[data-choice="' + question.options.find(o => !question.solution.correctOptionIds.includes(o.id)).id + '"]').click();
@@ -49,7 +59,7 @@ async function run() {
       for (const unit of question.parts || [question]) {
         const scope = question.parts ? '#ics-question-content [data-composite-part="' + question.parts.indexOf(unit) + '"]' : '#ics-app';
         if (unit.type === 'fill') {
-          const expected = unit.stem.blanks.map(b => contract.blankReferenceText(unit.solution.blankAnswers.find(r => r.blankId === b.id), b));
+          const expected = unit.stem.blanks.map(b => contract.blankReferenceText(unit.solution.blankAnswers.find(r => r.blankId === b.id), b) ?? '见下方解析');
           assert.deepEqual(await page.locator(scope + ' .ics-blank-reference').allTextContents(), expected);
         }
         if (unit.solution.grading === 'choice') assert.equal(await page.locator(scope + ' .ics-choice.is-correct').count(), unit.solution.correctOptionIds.length);
@@ -59,6 +69,15 @@ async function run() {
       assert.ok(await page.locator('.ics-blank-input').evaluateAll(nodes => nodes.every(n => n.hidden && n.disabled)));
       assert.equal(await page.evaluate(() => window.__test.state.records[0].mode), 'skipped');
       assert.equal(await page.locator('#ics-self-grade').isVisible(), false);
+      if (relocationQuestions.includes(question) && process.env.ICS_SCREENSHOTS) {
+        fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true });
+        for (const width of [1280, 390]) {
+          await page.setViewportSize({ width, height: 950 });
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+          await page.locator('[data-composite-part="1"] table').screenshot({ path: path.join(process.env.ICS_SCREENSHOTS, question.id + '-relocation-' + width + '.png') });
+        }
+        await page.setViewportSize({ width: 1280, height: 950 });
+      }
       if (process.env.ICS_SCREENSHOTS && question.type === 'composite') {
         fs.mkdirSync(process.env.ICS_SCREENSHOTS, { recursive: true });
         for (const width of [1280, 390]) {
