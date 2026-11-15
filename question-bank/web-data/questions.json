@@ -53763,7 +53763,7 @@
     {
       "schemaVersion": "5",
       "id": "q-0534efd83d6a6a83",
-      "revision": 6,
+      "revision": 7,
       "paperId": "p-7016510094998ec2",
       "paperOrder": 18,
       "number": {
@@ -53898,7 +53898,7 @@
             "grading": "blanks",
             "reference": {
               "format": "markdown",
-              "text": "答案：\nA: 0\nB: 1\nC: Sigprocmask\nD: &mask_all\nE: Sigsuspend\nF: `1U`（原卷写1，按32位机器位移模型也接受；`1U`可避免符号位左移的C语言问题。）"
+              "text": "答案：\nA: 0\nB: 1\nC: Sigprocmask\nD: &mask_all\nE: Sigsuspend\nF: `1U`（原卷写1，按32位机器位移模型也接受；`1U`可避免符号位左移的C语言问题。）\n\n函数名说明：E 填 `Sigsuspend` 或 `sigsuspend` 均可，C 填 `Sigprocmask` 或 `sigprocmask` 也均可。小写形式是 POSIX 接口；首字母大写的形式是教材 `csapp.h` 提供的错误处理封装。本题已经包含 `csapp.h`，因此参考答案的大写形式不是拼写错误，两种写法在本题的使用方式下都接受。C 标识符通常区分大小写，这里接受的是两个确实存在的函数名，并非任意大小写混写都有效。参见教材的 [csapp.h 声明](https://csapp.cs.cmu.edu/3e/ics3/code/include/csapp.h) 与 [csapp.c 实现](https://csapp.cs.cmu.edu/3e/ics3/code/src/csapp.c)。"
             },
             "provenance": {
               "origin": "unknown",
