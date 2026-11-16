@@ -494,6 +494,19 @@
         "q-3bcc0cbc2e2f23b2",
         "q-8cd15b31d0abb950",
         "q-e58a325b954a5069",
+        "q-2dca73d5dccf444f",
+        "q-3844c33cd8564bfa",
+        "q-3b5e9dc1765d4d21",
+        "q-41c0e71dc3cb41d5",
+        "q-537d0149e5cc488f",
+        "q-5c2f54e1136f4132",
+        "q-6b6b37b165864bfb",
+        "q-755afbf8b71b46a8",
+        "q-9a77d7cdffb04e4d",
+        "q-9d68b7a08e3a4315",
+        "q-c5df74c85e86478d",
+        "q-dfa03ba70b524f0c",
+        "q-ff636cc799254d87",
         "q-009287a72e8753be",
         "q-3b2b40ee8bf7ecfe",
         "q-9acce0371658f35f",
@@ -549,9 +562,9 @@
         "q-d36537e61267ceb5",
         "q-f2c81089030ddaa5"
       ],
-      "questionCount": 114,
-      "publishedQuestionCount": 109,
-      "quizQuestionCount": 109
+      "questionCount": 127,
+      "publishedQuestionCount": 122,
+      "quizQuestionCount": 122
     },
     {
       "id": "memory_hierarchy",
@@ -610,6 +623,15 @@
         "q-283628a3a21cdd36",
         "q-b2c0b969859e9433",
         "q-cf70532bca0c53ff",
+        "q-273ccc8a592a4e5e",
+        "q-275f293190444a35",
+        "q-5f3994d0430840f9",
+        "q-63665aa88179403b",
+        "q-704944eff03c402a",
+        "q-76fe8f81ad58483c",
+        "q-8822d01d9bd945c4",
+        "q-dd7b1589e59244c4",
+        "q-df84b8e5812b4ff1",
         "q-09e5c0e61848d20a",
         "q-466ff9807966964b",
         "q-e9162b5ebf244c22",
@@ -695,9 +717,9 @@
         "q-410e91810503c521",
         "q-561fcc94e43aae14"
       ],
-      "questionCount": 135,
-      "publishedQuestionCount": 131,
-      "quizQuestionCount": 131
+      "questionCount": 144,
+      "publishedQuestionCount": 140,
+      "quizQuestionCount": 140
     },
     {
       "id": "compilation_linking",
@@ -755,6 +777,11 @@
         "q-480fe60a4c64c7f7",
         "q-9baf4c7d5891e241",
         "q-af15b288b84a74cd",
+        "q-6f021df5671a4d6d",
+        "q-70be096525ba48ab",
+        "q-9e953a2f15464bf4",
+        "q-ec6d93d31d3e4b20",
+        "q-f8a4beaf623e4fd5",
         "q-513303aa4f7c0478",
         "q-a307edd25559ab25",
         "q-0bc6b1b75062d552",
@@ -795,9 +822,9 @@
         "q-785518f2a1305196",
         "q-b0ef359a9e930155"
       ],
-      "questionCount": 89,
-      "publishedQuestionCount": 84,
-      "quizQuestionCount": 84
+      "questionCount": 94,
+      "publishedQuestionCount": 89,
+      "quizQuestionCount": 89
     },
     {
       "id": "ecf_and_system_io",
@@ -876,6 +903,11 @@
         "q-ce84bad024e67186",
         "q-f4b60ac22ab20e1a",
         "q-f9a06f7e2d9d3ac3",
+        "q-119ff05a8f3b4db4",
+        "q-32cbf14686394a86",
+        "q-6825ab7716f745a2",
+        "q-8d38bd4699264b6a",
+        "q-cad504128e474aa5",
         "q-7e030ca4847f5c97",
         "q-9b2f8dcfd7a389fd",
         "q-a694e52c9a6493d6",
@@ -914,9 +946,9 @@
         "q-5d574996f3b93516",
         "q-d476fa89c01aa623"
       ],
-      "questionCount": 108,
-      "publishedQuestionCount": 102,
-      "quizQuestionCount": 102
+      "questionCount": 113,
+      "publishedQuestionCount": 107,
+      "quizQuestionCount": 107
     },
     {
       "id": "virtual_memory_and_malloc",
@@ -1173,11 +1205,11 @@
     ]
   },
   "stats": {
-    "questions": 1026,
-    "publishedQuestions": 990,
-    "quizQuestions": 990,
+    "questions": 1058,
+    "publishedQuestions": 1022,
+    "quizQuestions": 1022,
     "withheldQuestions": 36,
-    "papers": 41,
-    "quizGroups": 117
+    "papers": 42,
+    "quizGroups": 119
   }
 }

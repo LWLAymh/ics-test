@@ -5,9 +5,10 @@ const question = { id: 'q-a', revision: 1, paperId: 'p', type: 'fill', number: {
   solution: { state: 'available', reference: { text: 'SECRET_REFERENCE' }, provenance: { origin: 'official' } },
   parts: [{ type: 'short-answer', stem: { text: '公共小问' }, solution: { state: 'available', reference: { text: 'PART_KEY' }, provenance: { origin: 'official' } } }] };
 test('search combines terms and indexes nested prompts, options, metadata without answer spoilers', () => {
-  const rows = search.index([question], [{ id: 'p', displayName: '2025阶段测验' }], [{ id: 'm', title: '信息表示' }]);
+  const rows = search.index([question], [{ id: 'p', displayName: '2025阶段测验', title: '第一次阶段测试' }], [{ id: 'm', title: '信息表示' }]);
   assert.equal(search.search(rows, '２０２５ 比较').length, 1);
   assert.equal(search.search(rows, '公共小问 信息表示').length, 1);
+  assert.equal(search.search(rows, '第一次 阶段测试').length, 1);
   assert.equal(search.search(rows, 'secret_reference').length, 0);
   assert.equal(search.search(rows, 'q-a 第二题').length, 1);
   assert.equal(search.search(rows, '[.*').length, 0);
@@ -17,6 +18,12 @@ test('stored ink rejects malformed, oversized or executable document data', () =
   const valid = { version: 1, width: 800, strokes: [{ tool: 'pen', color: '#125dcc', size: 3, anchor: 'a1', points: [[1, 2, 0.5]] }] };
   assert.equal(ink.validDocument(valid), valid);
   for (const change of [{ width: 0 }, { strokes: [{ ...valid.strokes[0], anchor: '" onclick="x' }] }, { strokes: [{ ...valid.strokes[0], points: [[NaN, 2, 0.5]] }] }, { strokes: [{ ...valid.strokes[0], points: Array(100001).fill([1, 1, 1]) }] }]) assert.equal(ink.validDocument({ ...valid, ...change }), null);
+});
+test('search previews hide declared blank markers, preserve code operators and follow paper order', () => {
+  const q = { ...question, paperOrder: 2, stem: { text: '### 小题\n```c\nx = 3*2*4;\n```\n填写 {{blank:x}}', blanks: [{ marker: '{{blank:x}}' }] } };
+  const rows = search.index([q, { ...question, id: 'q-earlier', paperOrder: 1 }], [{ id: 'p', displayName: '试卷' }], []);
+  assert.equal(rows[0].question.id, 'q-earlier');
+  assert.match(rows[1].excerpt, /3\*2\*4/); assert.match(rows[1].excerpt, /____/); assert.doesNotMatch(rows[1].excerpt, /\{\{blank|```/);
 });
 test('whole-question image requests use only official direct endpoints and correctly shaped multimodal data', () => {
   const image = 'data:image/png;base64,iVBORw0KGgo=';

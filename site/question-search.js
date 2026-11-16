@@ -8,15 +8,18 @@
   const normalize = value => String(value || '').normalize('NFKC').toLowerCase().replace(/\s+/g, ' ').trim();
   function index(questions, papers, modules) {
     const paperMap = new Map(papers.map(p => [p.id, p]));
+    const paperRank = new Map(papers.map((p, index) => [p.id, index]));
     const moduleMap = new Map(modules.map(m => [m.id, m.title]));
     return questions.map(question => {
       const paper = paperMap.get(question.paperId), label = [paper?.displayName, question.number.display, question.id].filter(Boolean).join(' · ');
       const units = [question, ...(question.parts || [])];
       // Deliberately exclude solutions: searching should never reveal an answer.
       const body = units.flatMap(unit => [unit.stem.text, ...(unit.options || []).map(option => option.content.text)]).join('\n');
-      return { question, label, excerpt: question.stem.text.replace(/!\[[^\]]*\]\([^)]*\)/g, '[图片]').replace(/[`#|*]/g, '').replace(/\s+/g, ' ').slice(0, 200),
-        text: normalize(label + ' ' + body + ' ' + question.classification.moduleIds.map(id => moduleMap.get(id)).join(' ')) };
-    });
+      let preview = question.stem.text;
+      for (const blank of question.stem.blanks || []) preview = preview.split(blank.marker).join('____');
+      return { question, label, excerpt: preview.replace(/!\[[^\]]*\]\([^)]*\)/g, '[图片]').replace(/^```[^\n]*$/gm, '').replace(/^#{1,6}\s+/gm, '').replace(/`/g, '').replace(/\s+/g, ' ').trim().slice(0, 200),
+        text: normalize(label + ' ' + (paper?.title || '') + ' ' + body + ' ' + question.classification.moduleIds.map(id => moduleMap.get(id)).join(' ')) };
+    }).sort((a, b) => (paperRank.get(a.question.paperId) ?? Number.MAX_SAFE_INTEGER) - (paperRank.get(b.question.paperId) ?? Number.MAX_SAFE_INTEGER) || a.question.paperOrder - b.question.paperOrder);
   }
   function search(rows, query) {
     const terms = normalize(query).split(' ').filter(Boolean);
@@ -24,7 +27,7 @@
   }
   function mount(options) {
     const host = options.host;
-    host.innerHTML = '<details><summary><strong>搜索题目</strong><span>题面、选项、试卷名或题号</span></summary><div class="ics-history-body"><form class="ics-search-form"><label for="ics-search-query">搜索题库</label><div><input id="ics-search-query" type="search" maxlength="200" placeholder="例如：2025 阶段测验、浮点数、题目编号" autocomplete="off"><button class="ics-secondary" type="submit">搜索</button></div></form><p data-search="status" role="status" aria-live="polite"></p><div data-search="results" class="ics-search-results"></div><button data-search="more" class="ics-secondary" type="button" hidden>显示更多</button></div></details>';
+    host.innerHTML = '<details><summary><strong>搜索题目</strong><span>PKU 真题 · CSAPP 习题</span></summary><div class="ics-search-body"><form class="ics-search-form"><label class="ics-search-label" for="ics-search-query">搜索题面、选项、试卷名或题号</label><div class="ics-search-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg><input id="ics-search-query" type="search" maxlength="200" placeholder="输入关键词、试卷名或题号" autocomplete="off" aria-describedby="ics-search-help"><button class="ics-primary" type="submit">搜索</button></div></form><p id="ics-search-help" class="ics-search-help">多个关键词用空格分隔 · 不搜索参考答案</p><p data-search="status" role="status" aria-live="polite"></p><div data-search="results" class="ics-search-results"></div><button data-search="more" class="ics-secondary" type="button" hidden>显示更多</button></div></details>';
     const input = host.querySelector('input'), status = host.querySelector('[data-search="status"]'), results = host.querySelector('[data-search="results"]'), more = host.querySelector('[data-search="more"]');
     let meta = null, rows = null, pending = null, matches = [], limit = 20, generation = 0, timer;
     function render() {

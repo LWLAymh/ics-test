@@ -73265,6 +73265,3791 @@
     },
     {
       "schemaVersion": "5",
+      "id": "q-119ff05a8f3b4db4",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 29,
+      "number": {
+        "display": "第16/17讲 16.2",
+        "major": {
+          "display": "第16/17讲",
+          "value": "16/17"
+        },
+        "minor": {
+          "display": "16.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "ecf_and_system_io",
+        "moduleIds": [
+          "ecf_and_system_io"
+        ],
+        "tags": [
+          "fork",
+          "execve"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 16.2（2 分）\n\n父进程调用 `fork` 创建了 PID 为 `401` 的子进程。子进程随后调用 `execve`，并成功加载另一个程序。下列哪项正确？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "子进程获得新 PID，并回到原 `execve` 调用的下一条语句。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "子进程获得新 PID，但不回到原 `execve` 调用点。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "子进程 PID 仍为 `401`，且不回到原 `execve` 调用点。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "子进程 PID 仍为 `401`，并回到原 `execve` 调用的下一条语句。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：C。`execve` 用新程序替换当前进程的程序映像，不创建新的进程；成功时不返回旧程序的调用点。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第11页，16.2。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7页，16.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-273ccc8a592a4e5e",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 20,
+      "number": {
+        "display": "第13讲 13.3",
+        "major": {
+          "display": "第13讲",
+          "value": "13"
+        },
+        "minor": {
+          "display": "13.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "cache",
+          "conflict-miss"
+        ]
+      },
+      "type": "multiple-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 13.3（3 分，不定项选择）\n\n某直接映射（direct mapped）Cache 有 4 行（line），块号 `b` 映射到第 `b mod 4` 组（set）。Cache 最初为空，程序只反复读取主存块（block）`0、4、0、4……`，没有其他访问。以下说法哪些正确？\n\n原卷多选允许少选部分分；网站须集合完全一致才算正确。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "第一次读取块 0 产生冷启动（compulsory）未命中。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "此后反复访问两个块的未命中，主要是 Cache 总容量不足造成的。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "容量和块大小不变，改为 2 路组相联，首次装入两块后即可全部命中。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "块大小不变，改为有 8 行的直接映射 Cache，首次装入两块后即可全部命中。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A",
+          "C",
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A、C、D。\n\n两个块的工作集只有 2 块，小于原 Cache 的 4 块容量；反复未命中源于映射冲突。2 路组相联可在同一组容纳两块；8 行直接映射时，块 0 和块 4 映射到不同的组。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第8页，13.3。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，13.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-275f293190444a35",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 18,
+      "number": {
+        "display": "第13讲 13.1",
+        "major": {
+          "display": "第13讲",
+          "value": "13"
+        },
+        "minor": {
+          "display": "13.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "cache",
+          "associativity"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 13.1（2 分）\n\n某 Cache 的数据容量为 1024 字节，每块 16 字节，采用 2 路（way）组相联。它共有多少个组（set）？数据容量不包括有效位、标记位和脏位等开销。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`16`"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "`32`"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "`64`"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`128`"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：B。\n\n由 `C = S * E * B`，组数 `S = 1024 / (2 * 16) = 32`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第8页，13.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，13.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-2dca73d5dccf444f",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 4,
+      "number": {
+        "display": "第9讲 9.4",
+        "major": {
+          "display": "第9讲",
+          "value": "9"
+        },
+        "minor": {
+          "display": "9.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "timing",
+          "register"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "sum1",
+            "marker": "{{blank:sum1}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "sum2",
+            "marker": "{{blank:sum2}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "out1",
+            "marker": "{{blank:out1}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "out2",
+            "marker": "{{blank:out2}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 9.4（4 分）\n\n分析如下电路和对应的时序图。其中：\n\n- `Reg` 是上升沿触发的寄存器，输出 `Out` 初值为 `2`。\n- `ALU` 计算 `sum = Out + In`。\n- `MUX` 是多选器，根据 `Load` 的值，选择对应编号的输入通道输出到 `Next`。\n\n![累加器电路与反馈通路](assets/2026-stage2/accumulator-circuit.png)\n\n![待补全的 Clock、Load、In、sum、Out 时序图](assets/2026-stage2/accumulator-timing.png)\n\n根据时序图中已有信息，缺失的信号值依次是（同一行从左到右，每空 1 分）：\n\n- `sum`：{{blank:sum1}} 和 {{blank:sum2}}。\n- `Out`：{{blank:out1}} 和 {{blank:out2}}。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "sum1",
+            "method": "exact",
+            "acceptedAnswers": [
+              "6"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "sum2",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "out1",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "out2",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "`sum` 两空为 `6`、`11`；`Out` 两空为 `9`、`11`。\n\n`sum` 始终等于 `In + Out`。在 T3 上升沿前 `Load = 1`，寄存器采样 `sum = 9` 输出到 `Out`；在 T6 上升沿前 `Load = 0`，寄存器采样反馈的 `Out = 11`，保持输出 `11`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，9.4；电路与波形各裁成一张图，四空依原图顺序。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，9.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-32cbf14686394a86",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 31,
+      "number": {
+        "display": "第16/17讲 16.4",
+        "major": {
+          "display": "第16/17讲",
+          "value": "16/17"
+        },
+        "minor": {
+          "display": "16.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "ecf_and_system_io",
+        "moduleIds": [
+          "ecf_and_system_io"
+        ],
+        "tags": [
+          "fork",
+          "waitpid",
+          "output-order"
+        ]
+      },
+      "type": "composite",
+      "stem": {
+        "format": "markdown",
+        "text": "### 16.4（4 分）\n\n阅读以下程序，必要头文件已包含。所有 `fork` 成功，`waitpid` 均正常等待指定子进程；未安装 `SIGCHLD` 处理函数。每次 `printf` 返回前已完成一整行输出，行与行不会交错，忽略输出缓冲的复制或延迟。\n\n```c\nint main(void)\n{\n    int x = 1;\n    pid_t p = fork();\n    if (p == 0) {\n        x += 2;\n        printf(\"A%d\\n\", x);\n    } else {\n        pid_t q = fork();\n        if (q == 0) {\n            x += 4;\n            printf(\"B%d\\n\", x);\n        } else {\n            waitpid(p, NULL, 0);\n            printf(\"C%d\\n\", x);\n            waitpid(q, NULL, 0);\n            printf(\"D%d\\n\", x);\n        }\n    }\n    return 0;\n}\n```"
+      },
+      "parts": [
+        {
+          "id": "part-32cbf14686394a86-count",
+          "number": {
+            "display": "（1）",
+            "major": null,
+            "minor": null,
+            "parts": [
+              "1"
+            ]
+          },
+          "type": "fill",
+          "stem": {
+            "format": "markdown",
+            "blanks": [
+              {
+                "id": "processes",
+                "marker": "{{blank:processes}}",
+                "occurrence": 0,
+                "width": "short"
+              }
+            ],
+            "text": "包括最初的父进程在内，整个程序共有 {{blank:processes}} 个进程执行。（1 分）"
+          },
+          "solution": {
+            "state": "available",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "processes",
+                "method": "exact",
+                "acceptedAnswers": [
+                  "3"
+                ],
+                "normalize": {
+                  "trimWhitespace": true,
+                  "caseSensitive": true
+                }
+              }
+            ],
+            "reference": {
+              "format": "markdown",
+              "text": "`3`。原父进程创建两个直接子进程，两个子进程均不会执行另一次 `fork`。"
+            },
+            "provenance": {
+              "origin": "official",
+              "crossChecked": null
+            }
+          },
+          "moduleIds": [
+            "ecf_and_system_io"
+          ],
+          "sources": [
+            {
+              "document": "原文/阶段测验/2026-stage2/exam.pdf",
+              "provenance": "reflow",
+              "editorNote": "第12页，16.4；进程计数与输出多选共用程序，保持为完整综合题。"
+            },
+            {
+              "document": "原文/阶段测验/2026-stage2/answers.pdf",
+              "provenance": "reflow",
+              "editorNote": "第7页，16.4。"
+            }
+          ],
+          "issues": []
+        },
+        {
+          "id": "part-32cbf14686394a86-outputs",
+          "number": {
+            "display": "（2）",
+            "major": null,
+            "minor": null,
+            "parts": [
+              "2"
+            ]
+          },
+          "type": "multiple-choice",
+          "stem": {
+            "format": "markdown",
+            "text": "以下完整输出序列哪些可能出现？每个空格代表换行。（不定项选择，3 分）\n\n原卷多选允许少选部分分；网站须集合完全一致才算本小问正确。"
+          },
+          "options": [
+            {
+              "id": "A",
+              "content": {
+                "format": "markdown",
+                "text": "`A3 C1 B5 D1`"
+              }
+            },
+            {
+              "id": "B",
+              "content": {
+                "format": "markdown",
+                "text": "`B5 C1 A3 D1`"
+              }
+            },
+            {
+              "id": "C",
+              "content": {
+                "format": "markdown",
+                "text": "`A3 B5 C3 D3`"
+              }
+            },
+            {
+              "id": "D",
+              "content": {
+                "format": "markdown",
+                "text": "`B5 A3 C1 D1`"
+              }
+            }
+          ],
+          "solution": {
+            "state": "available",
+            "grading": "choice",
+            "correctOptionIds": [
+              "A",
+              "D"
+            ],
+            "reference": {
+              "format": "markdown",
+              "text": "正确选项：A、D。\n\n各进程的 `x` 副本相互独立，原父进程始终 `x = 1`。`waitpid` 强制 A 先于 C、C 先于 D、B 先于 D，但不固定 B 与 A、C 之间的次序。B 选项违反 A 先于 C，C 选项错误地让子进程修改影响父进程 `x`。"
+            },
+            "provenance": {
+              "origin": "official",
+              "crossChecked": null
+            }
+          },
+          "moduleIds": [
+            "ecf_and_system_io"
+          ],
+          "sources": [
+            {
+              "document": "原文/阶段测验/2026-stage2/exam.pdf",
+              "provenance": "reflow",
+              "editorNote": "第12页，16.4；进程计数与输出多选共用程序，保持为完整综合题。"
+            },
+            {
+              "document": "原文/阶段测验/2026-stage2/answers.pdf",
+              "provenance": "reflow",
+              "editorNote": "第7页，16.4。"
+            }
+          ],
+          "issues": []
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "parts",
+        "reference": {
+          "format": "markdown",
+          "text": "本题进程计数与输出序列保持在同一综合题内。网站按两个小问核对并归一化计分，不模拟纸卷多选少选的部分分。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第12页，16.4；进程计数与输出多选共用程序，保持为完整综合题。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7页，16.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-3844c33cd8564bfa",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 11,
+      "number": {
+        "display": "第11讲 11.3",
+        "major": {
+          "display": "第11讲",
+          "value": "11"
+        },
+        "minor": {
+          "display": "11.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "pipe",
+          "forwarding"
+        ]
+      },
+      "type": "multiple-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 11.3（3 分，不定项选择）\n\n在初始为空的课程完整 Y86-64 PIPE 处理器中执行以下代码，执行前 `%rbx = 5`：\n\n```asm\nI1: irmovq $3, %rax\nI2: irmovq $7, %rax\nI3: addq %rax, %rbx\nI4: rrmovq %rbx, %rcx\n```\n\n当 I3 处于 D 阶段时，下列说法哪些正确？\n\n原卷多选允许少选部分分；网站须集合完全一致才算正确。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "I3 应从 M 阶段的 I1 取得操作数 `%rax` 的值 `3`。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "I3 应从 E 阶段的 I2 取得操作数 `%rax` 的值 `7`。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "按程序顺序执行，I3 将把数值 `12` 写入 `%rbx`。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "I4 必须停顿到 I3 完成寄存器写回后，才能继续。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B",
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：B、C。\n\n此时 I2 在 E、I1 在 M，必须优先采用较新的 I2 结果 `7`。I3 计算 `5 + 7 = 12`。I4 可从 I3 的数据通路前递取得该值，不必等待写回。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第6页，11.3。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，11.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-3b5e9dc1765d4d21",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 1,
+      "number": {
+        "display": "第9讲 9.1",
+        "major": {
+          "display": "第9讲",
+          "value": "9"
+        },
+        "minor": {
+          "display": "9.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "isa"
+        ]
+      },
+      "type": "multiple-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 9.1（3 分，不定项选择）\n\n以下规定中，哪些属于指令集体系结构（ISA）规定的内容，而不是软件调用约定或处理器的内部实现方式？\n\n原卷多选计分：全对 3 分；少选且无错选 1 分；错选或不选 0 分。网站按现有多选规则核对，须集合完全一致才算正确。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "算术指令执行后，条件码如何根据运算结果改变。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "过程调用前后，哪些通用寄存器由被调用者保存。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "条件跳转成立时，程序计数器应更新为何种地址。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "实现一条指令时，内部数据需要经过几级流水线。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A",
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A、C。\n\nA 规定指令如何改变条件码，C 规定指令如何更新 PC，均属于 ISA 语义。B 是软件调用约定；D 是具体处理器的实现方式。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，9.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，9.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-41c0e71dc3cb41d5",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 12,
+      "number": {
+        "display": "第11讲 11.4",
+        "major": {
+          "display": "第11讲",
+          "value": "11"
+        },
+        "minor": {
+          "display": "11.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "pipe",
+          "load-use",
+          "ret"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 11.4（3 分）\n\n课程修正后的完整 Y86-64 PIPE 处理器运行时，某周期 E 阶段是 `mrmovq 8(%rbx), %rsp`，D 阶段是紧随其后的 `ret`，其他阶段没有异常或错误分支预测。正确的控制动作应是哪一组？动作在下一周期生效。\n\n各选项依次列出 F、D、E 三个流水线寄存器的动作。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "F：`stall`；D：`stall`；E：`bubble`。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "F：`stall`；D：`bubble`；E：`normal`。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "F：`normal`；D：`bubble`；E：`bubble`。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "F：`stall`；D：`stall`；E：`normal`。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A。\n\n`ret` 需要读取尚未取回的新 `%rsp`，首先必须按 load-use 处理：保留 F 和 D 中的指令，向 E 注入气泡。不能把仍待执行的 `ret` 冲掉，也不能让它使用旧 `%rsp` 进入 E。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第6页，11.4；表格各行写为独立选择项。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，11.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-537d0149e5cc488f",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 5,
+      "number": {
+        "display": "第10讲 10.1",
+        "major": {
+          "display": "第10讲",
+          "value": "10"
+        },
+        "minor": {
+          "display": "10.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "seq"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 10.1（2 分）\n\n在课程中的 Y86-64 SEQ 处理器中，从寄存器文件（RegFile）读出指令所需源操作数，属于哪个阶段的工作？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "取指（Fetch）"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "译码（Decode）"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "执行（Execute）"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "访存（Memory）"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：B。SEQ 的译码阶段读取源寄存器；执行阶段使用 ALU 进行运算或地址计算。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，10.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，10.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-5c2f54e1136f4132",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 2,
+      "number": {
+        "display": "第9讲 9.2",
+        "major": {
+          "display": "第9讲",
+          "value": "9"
+        },
+        "minor": {
+          "display": "9.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "datapath",
+          "multiplexer"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 9.2（2 分）\n\n某个类似本课程教学用的处理器，两条访存指令定义如下表。`rA`、`rB` 是两个寄存器编号字段，`D` 是位移；`R[r]` 表示寄存器 `r` 中的值，`M[x]` 表示内存地址 `x` 处的数据。\n\n| 指令 | 执行功能 |\n| --- | --- |\n| 取数指令 | `R[rB] ← M[R[rA] + D]` |\n| 存数指令 | `M[R[rB] + D] ← R[rA]` |\n\n寄存器文件（RegFile）的两个读端口固定输出 `valA = R[rA]`、`valB = R[rB]`。两条指令共用一个地址加法器：一个输入接 `D`，另一个输入由数据选择器从 `valA`、`valB` 中选择。要让两条指令都能正确计算访存地址，数据选择器应采用哪种选择规则？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "取数和存数时都选 `valA`，然后与位移 `D` 相加。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "取数时选 `valA`，存数时选 `valB`，然后与 `D` 相加。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "取数时选 `valB`，存数时选 `valA`，然后与 `D` 相加。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "取数和存数时都选 `valB`，然后与位移 `D` 相加。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：B。\n\n取数指令的基址是 `R[rA]`，应选 `valA`；存数指令的基址是 `R[rB]`，应选 `valB`。两类指令的基址来自不同字段，因此需要在共享加法器前选择数据来源。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2–3页，9.2；跨页选项完整合并。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，9.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-5f3994d0430840f9",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 17,
+      "number": {
+        "display": "第12讲 12.4",
+        "major": {
+          "display": "第12讲",
+          "value": "12"
+        },
+        "minor": {
+          "display": "12.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "disk",
+          "latency"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "sequential",
+            "marker": "{{blank:sequential}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "random",
+            "marker": "{{blank:random}}",
+            "occurrence": 0,
+            "width": "medium"
+          }
+        ],
+        "text": "### 12.4（4 分）\n\n某机械硬盘转速为 6000 转/分钟，平均寻道时间 `4 ms`，目标磁道恰有 500 个等大小扇区。每次独立随机读取的起始转动位置均匀分布。忽略控制器、总线、命令处理和扇区间隙开销，按课件的“寻道＋旋转等待＋传输”模型计算。\n\n1. 一次读取同一磁道上连续的 8 个扇区，只需一次寻道和一次平均旋转等待；总平均用时为 {{blank:sequential}} ms。（2 分）\n2. 分 8 次独立随机读取，每次读取 1 个扇区，每次都需平均寻道和平均旋转等待；总平均用时为 {{blank:random}} ms。（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "sequential",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9.16",
+              "9.160"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "random",
+            "method": "exact",
+            "acceptedAnswers": [
+              "72.16",
+              "72.160"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空为 `9.16`、`72.16`。\n\n一圈为 `10 ms`，平均旋转等待为 `5 ms`，每扇区传输为 `10 / 500 = 0.02 ms`。\n\n- 连续读取：`4 + 5 + 8 * 0.02 = 9.16 ms`。\n- 独立随机读取：`8 * (4 + 5 + 0.02) = 72.16 ms`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7–8页，12.4；题面与两个作答项合并。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，12.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-63665aa88179403b",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 22,
+      "number": {
+        "display": "第13讲 13.5",
+        "major": {
+          "display": "第13讲",
+          "value": "13"
+        },
+        "minor": {
+          "display": "13.5",
+          "value": "5"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "cache",
+          "array",
+          "conflict-miss"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "eight",
+            "marker": "{{blank:eight}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "twelve",
+            "marker": "{{blank:twelve}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 13.5（4 分）\n\n某直接映射数据 Cache 容量为 64 字节、块大小为 16 字节。数组 `int a[4][K]` 按行优先存储，起始地址为 `0x1000`，`sizeof(int) = 4`。分别取 `K = 8` 与 `K = 12` 进行两次独立实验；每次数组均已初始化，开始测量时 Cache 为空，不计初始化过程的访问。\n\n只统计下列循环对 `a` 的读取，`sum`、`i`、`j` 均放在寄存器中；不考虑预取、其他数据或指令访问，也不改变所列访问顺序。\n\n```c\nlong sum = 0;\nfor (int j = 0; j < 4; j++)\n    for (int i = 0; i < 4; i++)\n        sum += a[i][j];\n```\n\n1. `K = 8` 时，16 次数组读取共发生 {{blank:eight}} 次未命中。（2 分）\n2. `K = 12` 时，16 次数组读取共发生 {{blank:twelve}} 次未命中。（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "eight",
+            "method": "exact",
+            "acceptedAnswers": [
+              "16"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "twelve",
+            "method": "exact",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空为 `16`、`4`。\n\n本题只访问每行前 4 个 `int`，它们恰好位于一个块内。`K = 8` 时相邻行相距 32 字节，4 行依次映射到组 `0、2、0、2`，反复冲突，16 次读取均未命中。`K = 12` 时相邻行相距 48 字节，依次映射到组 `0、3、2、1`，首次读入后均可命中，共 4 次未命中。数组总空间更大，不等于此次访问的工作集更大。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第9页，13.5。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，13.5。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-6825ab7716f745a2",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 30,
+      "number": {
+        "display": "第16/17讲 16.3",
+        "major": {
+          "display": "第16/17讲",
+          "value": "16/17"
+        },
+        "minor": {
+          "display": "16.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "ecf_and_system_io",
+        "moduleIds": [
+          "ecf_and_system_io"
+        ],
+        "tags": [
+          "signals",
+          "sigchld",
+          "waitpid"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "pending",
+            "marker": "{{blank:pending}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "0",
+                  "label": "0"
+                },
+                {
+                  "value": "1",
+                  "label": "1"
+                }
+              ]
+            }
+          },
+          {
+            "id": "zombies",
+            "marker": "{{blank:zombies}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "positive",
+            "marker": "{{blank:positive}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "calls",
+            "marker": "{{blank:calls}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 16.3（4 分）\n\n某父进程已安装 `SIGCHLD` 信号处理函数，并阻塞了 `SIGCHLD`。该父进程共有 3 个子进程。在解除阻塞前，3 个子进程均已终止，相应的 `SIGCHLD` 均已产生，但父进程尚未调用 `wait` 或 `waitpid`，也未启用自动回收。\n\n考虑以下两种不同的信号处理函数（两种方案分别独立执行，初始条件完全相同）。\n\n方案 A：\n\n```c\nvoid handler(int sig) {\n    waitpid(-1, NULL, 0);\n}\n```\n\n方案 B：\n\n```c\nvoid handler(int sig) {\n    while (waitpid(-1, NULL, 0) > 0)\n        ;\n}\n```\n\n父进程解除 `SIGCHLD` 阻塞。假设此后没有新的子进程状态变化，也没有其他相关信号或系统调用错误。只讨论课件中的普通信号。\n\n1. 解除阻塞前，父进程的 `pending` 向量中，`SIGCHLD` 对应位的数值为 {{blank:pending}}。（1 分）\n2. 方案 A 的处理函数执行结束后，仍有 {{blank:zombies}} 个已终止但尚未被回收的子进程。（1 分）\n3. 方案 B 的处理函数中，`waitpid` 返回正 PID 的次数为 {{blank:positive}}。（1 分）\n4. 方案 B 的处理函数中，`waitpid` 总共被调用 {{blank:calls}} 次。（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "pending",
+            "method": "selection",
+            "correctValues": [
+              "1"
+            ]
+          },
+          {
+            "blankId": "zombies",
+            "method": "exact",
+            "acceptedAnswers": [
+              "2"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "positive",
+            "method": "exact",
+            "acceptedAnswers": [
+              "3"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "calls",
+            "method": "exact",
+            "acceptedAnswers": [
+              "4"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "四空依次为 `1`、`2`、`3`、`4`。\n\n三个 `SIGCHLD` 发生时均处于阻塞状态，同类普通信号不排队，因此只保留一个 pending 标记。解除阻塞后，该未决信号触发一次处理函数调用。方案 A 只回收一个子进程，另外两个仍处于僵尸状态。\n\n方案 B 通过循环依次成功回收三个子进程。三次成功回收之后，第四次 `waitpid` 返回 `-1`（`errno = ECHILD`），循环终止，所以正 PID 返回 3 次、调用总数为 4 次。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第11页，16.3；两种方案独立，普通信号不排队。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7页，16.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-6b6b37b165864bfb",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 9,
+      "number": {
+        "display": "第11讲 11.1",
+        "major": {
+          "display": "第11讲",
+          "value": "11"
+        },
+        "minor": {
+          "display": "11.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "pipeline",
+          "throughput"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 11.1（2 分）\n\n与完成相同功能的单周期顺序处理器实现相比，流水线处理器在理想稳态下最直接提高的是哪项指标？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "指令的编码密度"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "寄存器的数据位宽"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "单条指令的运算精度"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "单位时间完成的指令数"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：D。流水线让多条指令的不同阶段重叠，主要改善吞吐率；单条指令从进入到完成的延迟并不保证缩短。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，11.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，11.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-6f021df5671a4d6d",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 23,
+      "number": {
+        "display": "第14/15讲 14.1",
+        "major": {
+          "display": "第14/15讲",
+          "value": "14/15"
+        },
+        "minor": {
+          "display": "14.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "code-motion"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 14.1（2 分）\n\n在某个内层循环中，`n` 和外层循环变量 `i` 均保持不变。将每次都计算的 `n*i` 提前到进入该内层循环之前，只计算一次。这属于哪种优化？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "代码移动（code motion）"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "循环展开（loop unrolling）"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "多累积变量（multiple accumulators）"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "强度削减（strength reduction）"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A。没有用另一种运算替代乘法，也没有复制循环体；变化是将不变计算移出循环，降低执行频率。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第9页，14.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第6页，14.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-704944eff03c402a",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 21,
+      "number": {
+        "display": "第13讲 13.4",
+        "major": {
+          "display": "第13讲",
+          "value": "13"
+        },
+        "minor": {
+          "display": "13.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "cache",
+          "lru",
+          "write-back"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "misses",
+            "marker": "{{blank:misses}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "writebacks",
+            "marker": "{{blank:writebacks}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "low",
+            "marker": "{{blank:low}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "high",
+            "marker": "{{blank:high}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "dirty",
+            "marker": "{{blank:dirty}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 13.4（5 分）\n\n某数据 Cache 有 2 组、每组 2 行、每块 8 字节，使用中间地址位作组索引。采用 LRU 替换、写分配（write-allocate）和写回（write-back）。初始所有行均无效；读写命中都会更新 LRU 次序，新装入块视为最近使用。\n\nLRU（Least Recently Used，最近最少使用）替换策略：当 Cache 某组已满且需要替换时，淘汰该组中最长时间未被访问的缓存行。\n\n按下列顺序访问，每次只读或写 1 个字节，地址均为十进制；`W` 表示一次普通的字节写入。只统计此序列，没有其他访问，也不在序列结束时主动清空 Cache。\n\n```text\nR 0, W 1, R 16, R 8, R 0, W 32, R 16, R 40\n```\n\n以下均填十进制数，每空 1 分：\n\n1. 8 次 CPU 访问共发生 {{blank:misses}} 次未命中。\n2. 因替换脏（dirty）块而向主存写回整块数据，共发生 {{blank:writebacks}} 次。\n3. 序列结束时，第 0 组中保留的两个主存块，其起始地址按从小到大为 {{blank:low}}、{{blank:high}}。\n4. 序列结束时，第 0 组中的脏块，其主存起始地址为 {{blank:dirty}}。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "misses",
+            "method": "exact",
+            "acceptedAnswers": [
+              "6"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "writebacks",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "low",
+            "method": "exact",
+            "acceptedAnswers": [
+              "16"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "high",
+            "method": "exact",
+            "acceptedAnswers": [
+              "32"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "dirty",
+            "method": "exact",
+            "acceptedAnswers": [
+              "32"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "五空依次为 `6`、`1`、`16`、`32`、`32`。\n\n访问结果依次为 `M、H、M、M、H、M、M、M`。`W 32` 替换的是干净块 `[16, 23]`；随后 `R 16` 替换脏块 `[0, 7]`，发生唯一一次写回。最后第 0 组保留 `[16, 23]`（干净）与 `[32, 39]`（脏）。最后 `R 40` 属于第 1 组，不改变第 0 组状态。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第8–9页，13.4；跨页最后一问保留，空组初始均无效。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，13.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-70be096525ba48ab",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 26,
+      "number": {
+        "display": "第14/15讲 14.4",
+        "major": {
+          "display": "第14/15讲",
+          "value": "14/15"
+        },
+        "minor": {
+          "display": "14.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "static-linking",
+          "dynamic-linking"
+        ]
+      },
+      "type": "multiple-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 14.4（3 分，不定项选择）\n\n按照课件中的链接模型，下列说法哪些正确？原卷多选允许少选部分分；网站须集合完全一致才算正确。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "程序运行中可通过 `dlopen` 打开共享库，再用 `dlsym` 取得其中函数的地址。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "使用共享库时，只要库文件更新，主程序就必须重新编译。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "链接静态库时，把所有库放在引用它们的目标文件之前，总能正确解析符号。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "共享库中的同一份代码可以被多个进程共享。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A",
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A、D。\n\n运行时动态链接由程序主动请求；共享库不必把代码复制进每个可执行文件。静态归档的处理次序会影响符号解析。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第10页，14.4。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第6页，14.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-755afbf8b71b46a8",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 3,
+      "number": {
+        "display": "第9讲 9.3",
+        "major": {
+          "display": "第9讲",
+          "value": "9"
+        },
+        "minor": {
+          "display": "9.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "hcl",
+          "logic-gates"
+        ]
+      },
+      "type": "short-answer",
+      "stem": {
+        "format": "markdown",
+        "text": "### 9.3（3 分）\n\n根据 HCL 表达式补全电路图，要采用本课程使用的逻辑门电路符号。\n\n```hcl\nbool out = (s&&a)||(!s&&b)\n```\n\n![待补全的 Bit MUX 电路，已有一个与门](assets/2026-stage2/mux-incomplete.png)\n\n可在手写模式中直接补图；使用打字模式时也可描述各逻辑门及其连接关系，本题对照参考图自评。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "self",
+        "reference": {
+          "format": "markdown",
+          "text": "![补全后的 Bit MUX 参考电路](assets/2026-stage2/mux-reference.png)\n\n原图已有产生 `s && a` 的与门，还需补画三个门：对 `s` 取反的非门、计算 `!s && b` 的与门，以及把两路与门结果合并输出 `out` 的或门。\n\n随卷评分说明：每个需补画的逻辑门对应 1 分；两个门之间连线不对，按其中一个逻辑门错误扣分。网站不自动识别画图，需人工自评，或主动使用手写 AI 建议评测。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，9.3；只裁出待补全电路，不用整页截图。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第1页，9.3；参考图仅放答案区。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-76fe8f81ad58483c",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 14,
+      "number": {
+        "display": "第12讲 12.1",
+        "major": {
+          "display": "第12讲",
+          "value": "12"
+        },
+        "minor": {
+          "display": "12.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "sram",
+          "dram"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 12.1（2 分）\n\n下列关于课程所讲 SRAM 与 DRAM 的描述，哪项正确？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "SRAM 需要周期性刷新，DRAM 不需要。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "SRAM 与 DRAM 都能在掉电后长期保存数据。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "SRAM 与 DRAM 都用一个晶体管和一个电容存储一位。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "SRAM 不需要周期性刷新，DRAM 需要；两者均易失。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：D。课程中的 SRAM 采用保持状态的电路，DRAM 依靠电容存储电荷并需要刷新；二者都需要供电才能保持数据。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7页，12.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，12.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-8822d01d9bd945c4",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 15,
+      "number": {
+        "display": "第12讲 12.2",
+        "major": {
+          "display": "第12讲",
+          "value": "12"
+        },
+        "minor": {
+          "display": "12.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "dram",
+          "memory-module"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "capacity",
+            "marker": "{{blank:capacity}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "chips",
+            "marker": "{{blank:chips}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "byte",
+            "marker": "{{blank:byte}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 12.2（3 分）\n\n一条内存模块由 8 颗规格为 `16M × 8`（16M 个内存单元，每个单元存 8 位数据）的 DRAM 芯片并行组成，无 ECC 校验纠错。此处 `M = 2^20`，`MiB = 2^20` 字节。\n\n每次访问时 8 颗芯片选择相同的 supercell 地址，各提供 8 位数据，共组成一个 64 位数据字。约定芯片 0 提供该数据字的位 7–0，芯片 1 提供位 15–8，依此类推。\n\n![原卷中的内存模块示意照片](assets/2026-stage2/dram-module.png)\n\n1. 该内存模块的数据容量为 {{blank:capacity}} MiB。（1 分）\n2. 一次对齐的 64 位数据写入，需要同时使用 {{blank:chips}} 颗芯片。（1 分）\n3. 写入数值 `0x0123456789ABCDEF` 时，芯片 3 接收数据为（十六进制，可带或不带 `0x`）：{{blank:byte}}（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "capacity",
+            "method": "exact",
+            "acceptedAnswers": [
+              "128"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "chips",
+            "method": "exact",
+            "acceptedAnswers": [
+              "8"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "byte",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x89",
+              "89"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "三空依次为 `128`、`8`、`0x89`。\n\n单片容量为 `16M * 8` 位，即 `16 MiB`，8 片共 `128 MiB`。它们按数据位宽并行组合，而不是由其中一片独占一个 64 位数据字。芯片 3 对应位 31–24，值为 `0x89`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7页，12.2；内存条图片单独裁切。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，12.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-8d38bd4699264b6a",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 28,
+      "number": {
+        "display": "第16/17讲 16.1",
+        "major": {
+          "display": "第16/17讲",
+          "value": "16/17"
+        },
+        "minor": {
+          "display": "16.1",
+          "value": "1"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "ecf_and_system_io",
+        "moduleIds": [
+          "ecf_and_system_io"
+        ],
+        "tags": [
+          "exception",
+          "page-fault"
+        ]
+      },
+      "type": "single-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 16.1（2 分）\n\n某条访存指令因所需页面尚未驻留内存而产生可恢复的缺页故障（Page Fault）。内核成功调入页面后，按课件描述的模型，控制返回到哪里？"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "重新执行产生故障的那条指令。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "执行产生故障指令的下一条指令。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "从当前程序的 `main` 函数入口重新开始。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "执行当前函数的 `ret` 指令并返回调用者。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A。可恢复的 fault 处理完原因后重新执行故障指令，不是跳过原来的访存操作。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第11页，16.1。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7页，16.1。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-9a77d7cdffb04e4d",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 7,
+      "number": {
+        "display": "第10讲 10.3",
+        "major": {
+          "display": "第10讲",
+          "value": "10"
+        },
+        "minor": {
+          "display": "10.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "seq",
+          "rmmovq"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "valp",
+            "marker": "{{blank:valp}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "rb",
+            "marker": "{{blank:rb}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "rA",
+                  "label": "rA"
+                },
+                {
+                  "value": "rB",
+                  "label": "rB"
+                },
+                {
+                  "value": "RRSP",
+                  "label": "RRSP"
+                },
+                {
+                  "value": "RNONE",
+                  "label": "RNONE"
+                }
+              ]
+            }
+          },
+          {
+            "id": "alu",
+            "marker": "{{blank:alu}}",
+            "occurrence": 0,
+            "width": "short",
+            "input": {
+              "kind": "select",
+              "multiple": false,
+              "options": [
+                {
+                  "value": "valA",
+                  "label": "valA"
+                },
+                {
+                  "value": "valB",
+                  "label": "valB"
+                },
+                {
+                  "value": "valC",
+                  "label": "valC"
+                },
+                {
+                  "value": "0",
+                  "label": "0"
+                }
+              ]
+            }
+          },
+          {
+            "id": "address",
+            "marker": "{{blank:address}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "writeback",
+            "marker": "{{blank:writeback}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "pc",
+            "marker": "{{blank:pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          }
+        ],
+        "text": "### 10.3（6 分）\n\nY86-64 的 `rmmovq` 指令编码格式如下。第一个字节的两个半字节为 `4`、`0`，第二个字节为 `rA:rB`，后接 8 字节位移 `D`。\n\n```asm\n    rmmovq rA, D(rB)\n```\n\n根据该指令的操作，补全下表（共 6 空，每空 1 分）。若无需任何操作，则填“无”。`M1`、`M8` 分别表示读取或写入 1、8 字节。\n\n| 阶段 | `rmmovq rA, D(rB)` |\n| --- | --- |\n| Fetch | `icode:ifun ← M1[PC]` |\n| Fetch | `rA:rB ← M1[PC+1]` |\n| Fetch | `valC ← M8[PC+2]` |\n| Fetch | `valP ←` {{blank:valp}} |\n| Decode | `valA ← R[rA]` |\n| Decode | `valB ← R[`{{blank:rb}}`]` |\n| Execute | `valE ←` {{blank:alu}} `+ valC` |\n| Memory | `M8[`{{blank:address}}`] ← valA` |\n| Write back | {{blank:writeback}} |\n| PC update | {{blank:pc}} |\n\n最后一空填写完整的更新操作，例如用 `←`、`<-` 或 `=` 表示赋值。"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "valp",
+            "method": "exact",
+            "acceptedAnswers": [
+              "PC+10",
+              "10+PC"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true,
+              "syntax": "c-tokens"
+            }
+          },
+          {
+            "blankId": "rb",
+            "method": "selection",
+            "correctValues": [
+              "rB"
+            ]
+          },
+          {
+            "blankId": "alu",
+            "method": "selection",
+            "correctValues": [
+              "valB"
+            ]
+          },
+          {
+            "blankId": "address",
+            "method": "exact",
+            "acceptedAnswers": [
+              "valE"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "writeback",
+            "method": "exact",
+            "acceptedAnswers": [
+              "无",
+              "none",
+              "无需操作",
+              "无操作"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "PC←valP",
+              "PC ← valP",
+              "PC=valP",
+              "PC = valP",
+              "PC <- valP",
+              "PC<-valP"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "六空依次为 `PC+10`、`rB`、`valB`、`valE`、无、`PC ← valP`。\n\n指令共 10 字节，基址来自 `rB`，地址为 `valB + valC`；访存阶段将 `valA` 写入该地址。不写回寄存器，PC 更新为顺序后继 `valP`。最后一空需要包含 `PC` 及赋值符号，不能只填右侧。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，10.3；原卷表格手写为Markdown表格，六个空位保留原始边界。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，10.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-9d68b7a08e3a4315",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 13,
+      "number": {
+        "display": "第11讲 11.5",
+        "major": {
+          "display": "第11讲",
+          "value": "11"
+        },
+        "minor": {
+          "display": "11.5",
+          "value": "5"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "pipe",
+          "load-use",
+          "branch-prediction"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "execute",
+            "marker": "{{blank:execute}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "writeback",
+            "marker": "{{blank:writeback}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 11.5（4 分）\n\n课程修正后的完整 Y86-64 PIPE 处理器的流水线初始为空，I1 在第 1 个周期取指。已知 `M8[R[%rdi]] = 5`，初始 `%rbx = 0`、`%rcx = 10`。执行下列程序；I5 之后均为 `nop`，不会产生异常。\n\n```asm\nI1: mrmovq 0(%rdi), %rax\nI2: andq %rax, %rax\nI3: je L\nI4: irmovq $1, %rbx\nL:\nI5: addq %rbx, %rcx\n```\n\n1. I2 实际进入 E 阶段是在第 {{blank:execute}} 个周期。（2 分）\n2. 最终按正确路径执行的 I5 到达 W 阶段是在第 {{blank:writeback}} 个周期。（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "execute",
+            "method": "exact",
+            "acceptedAnswers": [
+              "5"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "writeback",
+            "method": "exact",
+            "acceptedAnswers": [
+              "12"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空为 `5`、`12`。\n\nI1 到 I2 产生一次 load-use 停顿。I2 得到非零结果，使 `je` 实际不跳转，而 PIPE 曾预测跳转，因此还需取消两条错误路径指令。正确路径的 I5 在第 8 周期取指，第 12 周期到达 W。\n\n| 指令 | F | D | E | M | W |\n| --- | --- | --- | --- | --- | --- |\n| I1 | 1 | 2 | 3 | 4 | 5 |\n| I2 | 2 | 3、4 | 5 | 6 | 7 |\n| I3 | 3、4 | 5 | 6 | 7 | 8 |\n| I4 | 7 | 8 | 9 | 10 | 11 |\n| I5（正确路径） | 8 | 9 | 10 | 11 | 12 |\n\n第 5 周期曾取到一次错误路径的 I5；它在第 6 周期处于 D，随后被取消，不能算作题问中最终执行的 I5。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第6页，11.5。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，11.5；时序表人工转写。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-9e953a2f15464bf4",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 25,
+      "number": {
+        "display": "第14/15讲 14.3",
+        "major": {
+          "display": "第14/15讲",
+          "value": "14/15"
+        },
+        "minor": {
+          "display": "14.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "aliasing",
+          "optimization"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "f",
+            "marker": "{{blank:f}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "g",
+            "marker": "{{blank:g}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 14.3（2 分）\n\n有以下两个函数。每次试验都独立地从 `long x = 3` 开始，且计算不溢出。填写相应调用结束后的 `x` 值，均为十进制。\n\n```c\nvoid f(long *p, long *q)\n{\n    *p += *q;\n    *p += *q;\n}\n\nvoid g(long *p, long *q)\n{\n    *p += 2 * (*q);\n}\n```\n\n1. `f(&x, &x)` 之后，`x =` {{blank:f}}。（1 分）\n2. `g(&x, &x)` 之后，`x =` {{blank:g}}。（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "f",
+            "method": "exact",
+            "acceptedAnswers": [
+              "12"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "g",
+            "method": "exact",
+            "acceptedAnswers": [
+              "9"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空为 `12`、`9`。\n\n`p` 与 `q` 都指向 `x` 时，`f` 先把 `x` 改为 `6`，第二次读取 `*q` 也得到 `6`，结果为 `12`。`g` 的同一条赋值读取原 `x = 3`，得到 `3 + 2 * 3 = 9`，因此不能不加条件地把 `f` 替换为 `g`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第10页，14.3；两个试验独立。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第6页，14.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-c5df74c85e86478d",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 10,
+      "number": {
+        "display": "第11讲 11.2",
+        "major": {
+          "display": "第11讲",
+          "value": "11"
+        },
+        "minor": {
+          "display": "11.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "pipeline",
+          "latency"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "cycle",
+            "marker": "{{blank:cycle}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "latency",
+            "marker": "{{blank:latency}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "total",
+            "marker": "{{blank:total}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "split",
+            "marker": "{{blank:split}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 11.2（4 分）\n\n某三级流水线处理器的组合逻辑延迟依次为 `60 ps`、`100 ps`、`140 ps`，每级末端寄存器均带来 `20 ps` 开销。时钟周期取允许的最小值。无数据相关、无停顿。\n\n| 流水级 | A | B | C |\n| --- | --- | --- | --- |\n| 组合逻辑延迟（ps） | 60 | 100 | 140 |\n| 寄存器开销（ps） | 20 | 20 | 20 |\n\n1. 该流水线可设置的最小时钟周期为 {{blank:cycle}} ps。（1 分）\n2. 1 条指令的操作在流水线中的总延迟为 {{blank:latency}} ps。（1 分）\n3. 从空流水线开始，连续完成 8 条指令的操作共需 {{blank:total}} ps。（1 分）\n4. 只把 C 级的 `140 ps` 组合逻辑均分为两个 `70 ps` 级，各级仍有 `20 ps` 寄存器开销；其他级不变。新流水线的最小时钟周期为 {{blank:split}} ps。（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "cycle",
+            "method": "exact",
+            "acceptedAnswers": [
+              "160"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "latency",
+            "method": "exact",
+            "acceptedAnswers": [
+              "480"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "total",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1600"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "split",
+            "method": "exact",
+            "acceptedAnswers": [
+              "120"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "四空依次为 `160`、`480`、`1600`、`120`。\n\n周期由最慢级决定：`140 + 20 = 160 ps`。同步流水线中的单条指令需完整经过 3 个周期，延迟为 `3 * 160 = 480 ps`，不是直接相加组合逻辑延迟。8 条指令需 `3 + 8 - 1 = 10` 个周期，即 `1600 ps`。细分后最慢级变为原 B 级，周期下界为 `100 + 20 = 120 ps`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5–6页，11.2；跨页第四问合并。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第3页，11.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-cad504128e474aa5",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 32,
+      "number": {
+        "display": "第16/17讲 16.5",
+        "major": {
+          "display": "第16/17讲",
+          "value": "16/17"
+        },
+        "minor": {
+          "display": "16.5",
+          "value": "5"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "ecf_and_system_io",
+        "moduleIds": [
+          "ecf_and_system_io"
+        ],
+        "tags": [
+          "setjmp",
+          "longjmp"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "output",
+            "marker": "{{blank:output}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 16.5（2 分）\n\n阅读下列程序，必要头文件已包含，`env` 和 `x` 均为全局变量。下列程序正常运行，最后 `printf` 输出的十进制数为 {{blank:output}}。\n\n```c\njmp_buf env;\nint x = 0;\n\nvoid f(void)\n{\n    x = 7;\n    longjmp(env, 2);\n    x = 9;\n}\n\nint main(void)\n{\n    switch (setjmp(env)) {\n    case 0:\n        x = 1;\n        f();\n        x = 3;\n        break;\n    case 2:\n        x += 4;\n        break;\n    }\n    printf(\"%d\\n\", x);\n    return 0;\n}\n```"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "output",
+            "method": "exact",
+            "acceptedAnswers": [
+              "11"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "答案：`11`。\n\n第一次 `setjmp` 返回 `0`，`f` 将全局 `x` 改为 `7`；`longjmp(env, 2)` 使 `setjmp` 再次返回 `2`，于是执行 `x += 4`。`longjmp` 后面的 `x = 9` 和原调用路径上的 `x = 3` 均不会执行。这里使用全局 `x`，不涉及被修改的非 `volatile` 自动变量问题。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第12–13页，16.5；跨页程序合为一个连续代码块，不保留提取时混入语句的括号。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7页，16.5。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-dd7b1589e59244c4",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 16,
+      "number": {
+        "display": "第12讲 12.3",
+        "major": {
+          "display": "第12讲",
+          "value": "12"
+        },
+        "minor": {
+          "display": "12.3",
+          "value": "3"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "locality",
+          "array"
+        ]
+      },
+      "type": "multiple-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 12.3（3 分，不定项选择）\n\n数组 `a` 按 C 语言的行优先方式连续存储，`sizeof(int) = 4`。只讨论下列代码规定的访问次序，不考虑编译器改变循环。\n\n```c\nint a[32][32]; /* initialized */\nlong sum = 0;\nfor (int i = 0; i < 32; i++)\n    for (int j = 0; j < 32; j++)\n        sum += a[j][i];\n```\n\n下列说法哪些正确？原卷多选允许少选部分分；网站须集合完全一致才算正确。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "内层循环相邻两次数组访问的地址相差 32 字节。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "交换 `i`、`j` 两层循环且保持 `a[j][i]` 不变，可改善空间局部性。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "循环体中同一组指令被反复执行，体现时间局部性。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "按行连续读取不同数组元素，主要利用数组的时间局部性。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "B",
+          "C"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：B、C。\n\n原内层循环跨行访问，步长为 `32 * 4 = 128` 字节。交换两层循环后 `i` 在内层变化，数组按行连续访问，改善空间局部性。重复执行循环指令体现时间局部性。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第7页，12.3。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4页，12.3。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-df84b8e5812b4ff1",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 19,
+      "number": {
+        "display": "第13讲 13.2",
+        "major": {
+          "display": "第13讲",
+          "value": "13"
+        },
+        "minor": {
+          "display": "13.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "memory_hierarchy",
+        "moduleIds": [
+          "memory_hierarchy"
+        ],
+        "tags": [
+          "cache",
+          "amat"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "first",
+            "marker": "{{blank:first}}",
+            "occurrence": 0,
+            "width": "short"
+          },
+          {
+            "id": "second",
+            "marker": "{{blank:second}}",
+            "occurrence": 0,
+            "width": "short"
+          }
+        ],
+        "text": "### 13.2（2 分）\n\n某一级 Cache 的命中时间为 1 周期，未命中罚时（Penalty）为额外的 80 周期。按课件的平均访问时间模型计算：\n\n1. 未命中率为 5% 时，平均访问时间为 {{blank:first}} 周期。（1 分）\n2. 未命中率降为 1% 时，平均访问时间为 {{blank:second}} 周期。（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "first",
+            "method": "exact",
+            "acceptedAnswers": [
+              "5",
+              "5.0"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          },
+          {
+            "blankId": "second",
+            "method": "exact",
+            "acceptedAnswers": [
+              "1.8",
+              "1.80"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": true
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空为 `5`、`1.8`。\n\n平均访问时间为“命中时间＋未命中率×额外罚时”，分别为 `1 + 0.05 * 80 = 5` 和 `1 + 0.01 * 80 = 1.8`。罚时是额外开销，不再减去命中时间。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第8页，13.2。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第5页，13.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-dfa03ba70b524f0c",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 8,
+      "number": {
+        "display": "第10讲 10.4",
+        "major": {
+          "display": "第10讲",
+          "value": "10"
+        },
+        "minor": {
+          "display": "10.4",
+          "value": "4"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "seq",
+          "iaddq",
+          "control"
+        ]
+      },
+      "type": "composite",
+      "stem": {
+        "format": "markdown",
+        "text": "### 10.4（6 分）\n\n拟在课程中的原始 Y86-64 SEQ 处理器上增加指令 `iaddq V, rB`。\n\n- 功能：把 64 位立即数 `V` 与寄存器 `rB` 中的值相加，将结果写回 `rB`，并按 `OPq` 的规则更新条件码。\n- 编码为 `C0 | F:rB | 8 字节 V`，共 10 字节，控制常量记为 `IIADDQ`。\n\n计划只扩展控制逻辑，不改动现有数据通路；固定采用 `valE = valB + valC`：立即数送 ALU 的 A 端，寄存器值经 B 读端口送 ALU 的 B 端，结果经 E 写端口写回。\n\n附：控制逻辑的部分相关信息。\n\n![SEQ 取指阶段的部分控制通路](assets/2026-stage2/seq-control.png)"
+      },
+      "parts": [
+        {
+          "id": "part-dfa03ba70b524f0c-signals",
+          "number": {
+            "display": "（1）",
+            "major": null,
+            "minor": null,
+            "parts": [
+              "1"
+            ]
+          },
+          "type": "fill",
+          "stem": {
+            "format": "markdown",
+            "blanks": [
+              {
+                "id": "a",
+                "marker": "{{blank:a}}",
+                "occurrence": 0,
+                "width": "short",
+                "input": {
+                  "kind": "select",
+                  "multiple": false,
+                  "options": [
+                    {
+                      "value": "valA",
+                      "label": "valA"
+                    },
+                    {
+                      "value": "valB",
+                      "label": "valB"
+                    },
+                    {
+                      "value": "valC",
+                      "label": "valC"
+                    },
+                    {
+                      "value": "0",
+                      "label": "0"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "b",
+                "marker": "{{blank:b}}",
+                "occurrence": 0,
+                "width": "short",
+                "input": {
+                  "kind": "select",
+                  "multiple": false,
+                  "options": [
+                    {
+                      "value": "valA",
+                      "label": "valA"
+                    },
+                    {
+                      "value": "valB",
+                      "label": "valB"
+                    },
+                    {
+                      "value": "valC",
+                      "label": "valC"
+                    },
+                    {
+                      "value": "0",
+                      "label": "0"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "dst",
+                "marker": "{{blank:dst}}",
+                "occurrence": 0,
+                "width": "short",
+                "input": {
+                  "kind": "select",
+                  "multiple": false,
+                  "options": [
+                    {
+                      "value": "rA",
+                      "label": "rA"
+                    },
+                    {
+                      "value": "rB",
+                      "label": "rB"
+                    },
+                    {
+                      "value": "RRSP",
+                      "label": "RRSP"
+                    },
+                    {
+                      "value": "RNONE",
+                      "label": "RNONE"
+                    }
+                  ]
+                }
+              }
+            ],
+            "text": "从下拉候选项中填写该指令对应的信号值（每空 1 分，共 3 分）。`aluA`、`aluB` 的候选为 `valA`、`valB`、`valC`、`0`；`dstE` 的候选为 `rA`、`rB`、`RRSP`、`RNONE`。\n\n| 信号 | 回答 |\n| --- | --- |\n| `aluA` | {{blank:a}} |\n| `aluB` | {{blank:b}} |\n| `dstE` | {{blank:dst}} |"
+          },
+          "solution": {
+            "state": "available",
+            "grading": "blanks",
+            "blankAnswers": [
+              {
+                "blankId": "a",
+                "method": "selection",
+                "correctValues": [
+                  "valC"
+                ]
+              },
+              {
+                "blankId": "b",
+                "method": "selection",
+                "correctValues": [
+                  "valB"
+                ]
+              },
+              {
+                "blankId": "dst",
+                "method": "selection",
+                "correctValues": [
+                  "rB"
+                ]
+              }
+            ],
+            "reference": {
+              "format": "markdown",
+              "text": "依次为 `valC`、`valB`、`rB`。题面已固定 ALU 两端及寄存器端口的通路，不能交换 A、B 端信号。"
+            },
+            "provenance": {
+              "origin": "official",
+              "crossChecked": null
+            }
+          },
+          "moduleIds": [
+            "processor_arch"
+          ],
+          "sources": [
+            {
+              "document": "原文/阶段测验/2026-stage2/exam.pdf",
+              "provenance": "reflow",
+              "editorNote": "第4–5页，10.4；跨页填空与多选保持一整题，控制图单独裁切。"
+            },
+            {
+              "document": "原文/阶段测验/2026-stage2/answers.pdf",
+              "provenance": "reflow",
+              "editorNote": "第2页，10.4。"
+            }
+          ],
+          "issues": []
+        },
+        {
+          "id": "part-dfa03ba70b524f0c-control",
+          "number": {
+            "display": "（2）",
+            "major": null,
+            "minor": null,
+            "parts": [
+              "2"
+            ]
+          },
+          "type": "multiple-choice",
+          "stem": {
+            "format": "markdown",
+            "text": "为了正确执行该指令，下列控制逻辑的修改哪些必需？（不定项选择，3 分）\n\n原卷全对 3 分，少选且无错选 1 分，错选或不选 0 分；网站须集合完全一致才算本小问正确。"
+          },
+          "options": [
+            {
+              "id": "A",
+              "content": {
+                "format": "markdown",
+                "text": "`need_regids` 的成立条件中加入 `IIADDQ`。"
+              }
+            },
+            {
+              "id": "B",
+              "content": {
+                "format": "markdown",
+                "text": "`need_valC` 的成立条件中加入 `IIADDQ`。"
+              }
+            },
+            {
+              "id": "C",
+              "content": {
+                "format": "markdown",
+                "text": "执行 `IIADDQ` 时，使数据存储器（Data Memory）写使能信号为 `1`。"
+              }
+            },
+            {
+              "id": "D",
+              "content": {
+                "format": "markdown",
+                "text": "设置条件码信号（`set_cc`）的成立条件中加入 `IIADDQ`。"
+              }
+            }
+          ],
+          "solution": {
+            "state": "available",
+            "grading": "choice",
+            "correctOptionIds": [
+              "A",
+              "B",
+              "D"
+            ],
+            "reference": {
+              "format": "markdown",
+              "text": "正确选项：A、B、D。指令需要寄存器字节和立即数字段，要更新寄存器和条件码，但不读写数据内存。"
+            },
+            "provenance": {
+              "origin": "official",
+              "crossChecked": null
+            }
+          },
+          "moduleIds": [
+            "processor_arch"
+          ],
+          "sources": [
+            {
+              "document": "原文/阶段测验/2026-stage2/exam.pdf",
+              "provenance": "reflow",
+              "editorNote": "第4–5页，10.4；跨页填空与多选保持一整题，控制图单独裁切。"
+            },
+            {
+              "document": "原文/阶段测验/2026-stage2/answers.pdf",
+              "provenance": "reflow",
+              "editorNote": "第2页，10.4。"
+            }
+          ],
+          "issues": []
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "parts",
+        "reference": {
+          "format": "markdown",
+          "text": "本题两个小问共用上述指令定义；信号取值和控制项分别见小问解析。网站综合题按小问核对后归一化计分，不模拟纸卷多选少选的部分分。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第4–5页，10.4；跨页填空与多选保持一整题，控制图单独裁切。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，10.4。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-ec6d93d31d3e4b20",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 27,
+      "number": {
+        "display": "第14/15讲 14.5",
+        "major": {
+          "display": "第14/15讲",
+          "value": "14/15"
+        },
+        "minor": {
+          "display": "14.5",
+          "value": "5"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "relocation",
+          "pc-relative"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "absolute",
+            "marker": "{{blank:absolute}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "relative",
+            "marker": "{{blank:relative}}",
+            "occurrence": 0,
+            "width": "medium"
+          }
+        ],
+        "text": "### 14.5（4 分）\n\n某可重定位目标文件中，只列出以下两条需要修补的 x86-64 指令；左列是相对于该输入文件 `.text` 节起点的偏移。其他指令省略，符号名按重定位信息标注。\n\n```asm\n10: bf 00 00 00 00    movl $0, %edi\n20: e8 00 00 00 00    callq helper\n```\n\n| `r_offset` | 重定位类型 | 目标符号 | `r_addend` |\n| --- | --- | --- | --- |\n| `0x11` | `R_X86_64_32` | `buf` | `+8` |\n| `0x21` | `R_X86_64_PC32` | `helper` | `-4` |\n\n链接后，该输入文件 `.text` 节起点为 `0x400500`；`buf` 的地址为 `0x601080`；`helper` 的地址为 `0x4004E0`。两条指令的长度均为 5 字节，需修补的字段均为 32 位。\n\n以下均填写 32 位数值的十六进制表示，可带或不带 `0x`；不是按小端序排列的字节串。\n\n1. 偏移 `0x11` 处应写入：{{blank:absolute}}（2 分）\n2. 偏移 `0x21` 处应写入：{{blank:relative}}（2 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "absolute",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x00601088",
+              "00601088",
+              "0x601088",
+              "601088"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "relative",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0xFFFFFFBB",
+              "FFFFFFBB"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空为 `0x00601088`、`0xFFFFFFBB`。\n\n绝对引用为 `buf + 8 = 0x601088`。\n\nPC 相对字段的位置 `P = 0x400500 + 0x21 = 0x400521`，因此 `S + A - P = 0x4004E0 - 4 - 0x400521 = -0x45 = -69`，其 32 位补码为 `0xFFFFFFBB`。等价地，目标地址减去 `call` 下一条指令地址 `0x400525`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "rewritten",
+          "editorNote": "第10页，14.5；明确填数值而不是小端字节串，0x前缀写入说明。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第6页，14.5。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-f8a4beaf623e4fd5",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 24,
+      "number": {
+        "display": "第14/15讲 14.2",
+        "major": {
+          "display": "第14/15讲",
+          "value": "14/15"
+        },
+        "minor": {
+          "display": "14.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "compilation_linking",
+        "moduleIds": [
+          "compilation_linking"
+        ],
+        "tags": [
+          "linker-symbols"
+        ]
+      },
+      "type": "multiple-choice",
+      "stem": {
+        "format": "markdown",
+        "text": "### 14.2（3 分，不定项选择）\n\n考虑以下源文件 `module.c`，编译生成未优化的可重定位目标文件，不含调试信息。\n\n```c\nstatic int bias = 3;\nextern int helper(int);\n\nint run(int x)\n{\n    int tmp = x + bias;\n    return helper(tmp);\n}\n```\n\n按课件中的链接器符号分类讨论，下列说法哪些正确？原卷多选允许少选部分分；网站须集合完全一致才算正确。"
+      },
+      "options": [
+        {
+          "id": "A",
+          "content": {
+            "format": "markdown",
+            "text": "`bias` 对应本模块的局部链接器符号。"
+          }
+        },
+        {
+          "id": "B",
+          "content": {
+            "format": "markdown",
+            "text": "形参 `x` 和变量 `tmp` 都是需要跨模块解析的外部符号。"
+          }
+        },
+        {
+          "id": "C",
+          "content": {
+            "format": "markdown",
+            "text": "本模块对 `helper` 的引用，需要与其定义关联。"
+          }
+        },
+        {
+          "id": "D",
+          "content": {
+            "format": "markdown",
+            "text": "`run` 是可被其他模块引用的全局链接器符号。"
+          }
+        }
+      ],
+      "solution": {
+        "state": "available",
+        "grading": "choice",
+        "correctOptionIds": [
+          "A",
+          "C",
+          "D"
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "正确选项：A、C、D。\n\n文件作用域 `static` 对象具有局部链接器符号；普通形参和自动变量不是这里讨论的链接器符号。`helper` 在本模块中是外部引用，`run` 提供全局函数定义。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "reflow",
+          "editorNote": "第9–10页，14.2；跨页选项合并。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第6页，14.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
+      "id": "q-ff636cc799254d87",
+      "revision": 1,
+      "paperId": "p-9c26b17e83af42d0",
+      "paperOrder": 6,
+      "number": {
+        "display": "第10讲 10.2",
+        "major": {
+          "display": "第10讲",
+          "value": "10"
+        },
+        "minor": {
+          "display": "10.2",
+          "value": "2"
+        },
+        "parts": []
+      },
+      "classification": {
+        "primaryModuleId": "processor_arch",
+        "moduleIds": [
+          "processor_arch"
+        ],
+        "tags": [
+          "seq",
+          "call"
+        ]
+      },
+      "type": "fill",
+      "stem": {
+        "format": "markdown",
+        "blanks": [
+          {
+            "id": "stack",
+            "marker": "{{blank:stack}}",
+            "occurrence": 0,
+            "width": "medium"
+          },
+          {
+            "id": "pc",
+            "marker": "{{blank:pc}}",
+            "occurrence": 0,
+            "width": "medium"
+          }
+        ],
+        "text": "### 10.2（2 分）\n\n课程中的 Y86-64 SEQ 处理器运行时，当前 `PC = 0x120`、`%rsp = 0x1000`，正在执行 `call 0x400`。Y86-64 的 `call` 指令长 9 字节。以下答案均用十六进制表示，可带或不带 `0x`。\n\n1. `call` 向数据内存写入返回地址时，写入地址为：{{blank:stack}}（1 分）\n2. `call` 执行结束后，`PC` 为：{{blank:pc}}（1 分）"
+      },
+      "solution": {
+        "state": "available",
+        "grading": "blanks",
+        "blankAnswers": [
+          {
+            "blankId": "stack",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0xFF8",
+              "FF8"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          },
+          {
+            "blankId": "pc",
+            "method": "exact",
+            "acceptedAnswers": [
+              "0x400",
+              "400"
+            ],
+            "normalize": {
+              "trimWhitespace": true,
+              "caseSensitive": false
+            }
+          }
+        ],
+        "reference": {
+          "format": "markdown",
+          "text": "两空为 `0xFF8`、`0x400`。\n\n`call` 计算顺序后继地址 `0x120 + 9 = 0x129`，将其写入新栈顶 `0x1000 - 8 = 0xFF8`，并转到 `0x400`。"
+        },
+        "provenance": {
+          "origin": "official",
+          "crossChecked": null
+        }
+      },
+      "publication": {
+        "state": "published",
+        "basis": "source-import",
+        "reviewer": null,
+        "reviewedAt": null,
+        "issues": []
+      },
+      "sources": [
+        {
+          "document": "原文/阶段测验/2026-stage2/exam.pdf",
+          "provenance": "rewritten",
+          "editorNote": "第4页，10.2；十六进制前缀移入填写说明，接受带或不带0x。"
+        },
+        {
+          "document": "原文/阶段测验/2026-stage2/answers.pdf",
+          "provenance": "reflow",
+          "editorNote": "第2页，10.2。"
+        }
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "q-009287a72e8753be",
       "revision": 1,
       "paperId": "p-a12b4c73bf0c30d2",

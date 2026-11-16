@@ -3,6 +3,61 @@
   "papers": [
     {
       "schemaVersion": "5",
+      "id": "p-9c26b17e83af42d0",
+      "revision": 1,
+      "displayName": "2026阶段测验（第2次）",
+      "sourceCollection": "pku-exam",
+      "title": "ICS2026 第二次阶段测试",
+      "year": 2026,
+      "academicYear": "2026-2027",
+      "term": "fall",
+      "examKind": "stage-test",
+      "sequence": 2,
+      "questionIds": [
+        "q-3b5e9dc1765d4d21",
+        "q-5c2f54e1136f4132",
+        "q-755afbf8b71b46a8",
+        "q-2dca73d5dccf444f",
+        "q-537d0149e5cc488f",
+        "q-ff636cc799254d87",
+        "q-9a77d7cdffb04e4d",
+        "q-dfa03ba70b524f0c",
+        "q-6b6b37b165864bfb",
+        "q-c5df74c85e86478d",
+        "q-3844c33cd8564bfa",
+        "q-41c0e71dc3cb41d5",
+        "q-9d68b7a08e3a4315",
+        "q-76fe8f81ad58483c",
+        "q-8822d01d9bd945c4",
+        "q-dd7b1589e59244c4",
+        "q-5f3994d0430840f9",
+        "q-275f293190444a35",
+        "q-df84b8e5812b4ff1",
+        "q-273ccc8a592a4e5e",
+        "q-704944eff03c402a",
+        "q-63665aa88179403b",
+        "q-6f021df5671a4d6d",
+        "q-f8a4beaf623e4fd5",
+        "q-9e953a2f15464bf4",
+        "q-70be096525ba48ab",
+        "q-ec6d93d31d3e4b20",
+        "q-8d38bd4699264b6a",
+        "q-119ff05a8f3b4db4",
+        "q-6825ab7716f745a2",
+        "q-32cbf14686394a86",
+        "q-cad504128e474aa5"
+      ],
+      "coverage": {
+        "state": "complete",
+        "note": "按2026-11-16打印版及随卷纯答案逐题录入32道完整题，含2道混合综合题、45个可判分空位和1道画图自评题。跨页程序、表格及选项合并，保留第9至16/17讲原题号。网站沿用归一化计分，多选须集合全对，不模拟纸卷少选部分分。"
+      },
+      "sourceDocuments": [
+        "原文/阶段测验/2026-stage2/exam.pdf",
+        "原文/阶段测验/2026-stage2/answers.pdf"
+      ]
+    },
+    {
+      "schemaVersion": "5",
       "id": "p-3eac9aa5d6f749a1",
       "revision": 1,
       "displayName": "2026阶段测验（第1次）",
@@ -14,13 +69,31 @@
       "examKind": "stage-test",
       "sequence": 1,
       "questionIds": [
-        "q-545e969fd78020ac", "q-1eaa764ebd7d7271", "q-e1e5e6eb91e7c377",
-        "q-59b10751544638bb", "q-b4b322fffd67b4fe", "q-9174361046a04977", "q-6869d8ba04c0973d", "q-e41402b74638e0ba",
-        "q-8f0ed4dbad2e3cc2", "q-2bf5dfc21d5979d3", "q-d573b16f5390f647", "q-36d78baae81e88e4", "q-41d07aedb2ec62ce",
-        "q-21e8720cfb433665", "q-c6e96a18c6cfe64a", "q-9d421c3e0a8da37e", "q-6aff8e001b381e61",
-        "q-317ba6faaa5757a0", "q-07314046856eeefb", "q-8a1b23001222404d",
-        "q-25908478f8bc91e4", "q-597ae48bbeb3fdc8",
-        "q-85848e9b20b9f521", "q-d71b79d96b862558", "q-87169ced45da2981"
+        "q-545e969fd78020ac",
+        "q-1eaa764ebd7d7271",
+        "q-e1e5e6eb91e7c377",
+        "q-59b10751544638bb",
+        "q-b4b322fffd67b4fe",
+        "q-9174361046a04977",
+        "q-6869d8ba04c0973d",
+        "q-e41402b74638e0ba",
+        "q-8f0ed4dbad2e3cc2",
+        "q-2bf5dfc21d5979d3",
+        "q-d573b16f5390f647",
+        "q-36d78baae81e88e4",
+        "q-41d07aedb2ec62ce",
+        "q-21e8720cfb433665",
+        "q-c6e96a18c6cfe64a",
+        "q-9d421c3e0a8da37e",
+        "q-6aff8e001b381e61",
+        "q-317ba6faaa5757a0",
+        "q-07314046856eeefb",
+        "q-8a1b23001222404d",
+        "q-25908478f8bc91e4",
+        "q-597ae48bbeb3fdc8",
+        "q-85848e9b20b9f521",
+        "q-d71b79d96b862558",
+        "q-87169ced45da2981"
       ],
       "coverage": {
         "state": "complete",
@@ -43,8 +116,14 @@
       "term": "unknown",
       "examKind": "practice",
       "sequence": null,
-      "questionIds": ["q-1b847eca035d269f", "q-f5219ac4de073b68"],
-      "coverage": {"state": "complete", "note": "已逐题收录章节内练习 1.1、1.2；1.1 中 1.67 的近似约定明确写入题面。"},
+      "questionIds": [
+        "q-1b847eca035d269f",
+        "q-f5219ac4de073b68"
+      ],
+      "coverage": {
+        "state": "complete",
+        "note": "已逐题收录章节内练习 1.1、1.2；1.1 中 1.67 的近似约定明确写入题面。"
+      },
       "sourceDocuments": [
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第01章-计算机系统漫游/1.9/1.9.1-amdahls-law.md",
         "https://github.com/SunnyMaria/csapp-zh-markdown/blob/7fe0d4f79d65ba63cc3c8723c24d2d2e99b84c66/第01章-计算机系统漫游/练习题答案.md"
