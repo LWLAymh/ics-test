@@ -128,16 +128,19 @@ async function run() {
     assert.equal(await preview.locator('#paper-answers script, #paper-answers [onload]').count(), 0);
 
     // Deliberately bypass app sanitization to prove CSP is a second, independent layer.
+    const blockedRules = ['script-src-elem', 'script-src-attr', 'script-src', 'connect-src', 'frame-src'];
     for (const surface of [page, preview]) {
       await surface.evaluate(() => {
         const probe = document.createElement('script'); probe.src = './xss-csp-probe.js'; document.body.append(probe);
       });
-      await surface.waitForFunction(() => window.__probeFinished && window.__violations.length >= 5, null, { timeout: 5000 }).catch(async error => {
+      // Violations arrive asynchronously. Multiple inline-attribute violations can
+      // satisfy a raw count before the iframe navigation has reported frame-src.
+      await surface.waitForFunction(rules => window.__probeFinished && rules.every(rule => window.__violations.some(v => v.directive === rule)), blockedRules, { timeout: 5000 }).catch(async error => {
         throw new Error(error.message + ' ' + JSON.stringify(await surface.evaluate(() => ({ started: window.__probeStarted, pwned: window.__pwned, violations: window.__violations }))));
       });
       const state = await surface.evaluate(() => ({ pwned: window.__pwned, violations: window.__violations }));
       assert.equal(state.pwned, undefined, JSON.stringify(state));
-      for (const rule of ['script-src-elem', 'script-src-attr', 'script-src', 'connect-src', 'frame-src'])
+      for (const rule of blockedRules)
         assert.ok(state.violations.some(v => v.directive === rule), rule + ' blocked on both pages: ' + JSON.stringify(state));
     }
     assert.deepEqual(unexpected, []); assert.deepEqual(errors, []);
